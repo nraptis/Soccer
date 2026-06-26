@@ -10,14 +10,14 @@ public:
 
     void KDF_A(std::uint64_t pNonce,
                TwistDomainConstants *pConstants,
-               TwistDomainSaltSet *pDomainSaltSet) override;
+               TwistDomainSaltSet *pDomainSaltSet,
+               std::uint8_t *pSnow) override;
     void KDF_B(std::uint64_t pNonce,
                TwistDomainConstants *pConstants,
                TwistDomainSaltSet *pDomainSaltSet) override;
     void Seed(TwistWorkSpace *pWorkSpace,
               TwistFarmSalt *pFarmSalt,
               std::uint64_t pNonce,
-              std::uint8_t *pSourceInput,
               std::uint8_t *pPassword,
               unsigned int pPasswordByteLength,
               std::uint8_t *pDestination) override;
