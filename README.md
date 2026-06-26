@@ -4,12 +4,11 @@ This is the 19th generation 'password expander' for offline file encryption.</br
 This is still being studied, but it contains the final structure of the key expander. There are two conflicting philosophies about the importance of side channels, side channel handling, and online versus offline scope. However, it's probably fine. U need the pwrd to crackit.</br></br>
 
 ![alt text](https://raw.githubusercontent.com/nraptis/Soccer/refs/heads/main/image.png)</br></br>
-
 ```
 #include "TwistExpander_Soccer.hpp"
 #include "TwistFarmSalt.hpp"
 ```
-
+</br></br>
 ```
 TwistExpander_Soccer aSoccer;
 
@@ -33,7 +32,7 @@ aSoccer.Seed(&aWorkSpace,
              2, // password length
              aDest);
 ```
-
+</br></br>
 ```
 for (int aBlockIndex=1; aBlockIndex<aBlockCount; aBlockIndex++) {
     aSoccer.TwistBlock(&aWorkSpace,
@@ -44,3 +43,5 @@ for (int aBlockIndex=1; aBlockIndex<aBlockCount; aBlockIndex++) {
                        &aDest[(aBlockIndex) * S_BLOCK]); // dest
 }
 ```
+</br></br>
+![alt text](https://raw.githubusercontent.com/nraptis/Soccer/refs/heads/main/snow.png)</br></br>
