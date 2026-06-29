@@ -21,25 +21,25 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     // Insert code here to initialize your application
     
-    TwistExpander_Soccer aSoccer;
+TwistExpander_Soccer aSoccer;
 
-    std::uint8_t aTinyPassword[2];
-    aTinyPassword[0] = 'a';
-    aTinyPassword[1] = 'Z';
+std::uint8_t aTinyPassword[2];
+aTinyPassword[0] = 'a';
+aTinyPassword[1] = 'Z';
 
-    const int aBlockCount = 32;
+const int aBlockCount = 32;
 
-    TwistWorkSpace aWorkSpace;
-    TwistFarmSalt aFarmSalt;
-    std::uint64_t aNonce = 17;
-    std::uint8_t aDest[S_BLOCK * aBlockCount];
+TwistWorkSpace aWorkSpace;
+TwistFarmSalt aFarmSalt;
+std::uint64_t aNonce = 17;
+std::uint8_t aDest[S_BLOCK * aBlockCount];
 
-    aSoccer.Seed(&aWorkSpace,
-                 &aFarmSalt,
-                 aNonce,
-                 aTinyPassword, // password
-                 2, // password length
-                 aDest);
+aSoccer.Seed(&aWorkSpace,
+             &aFarmSalt,
+             aNonce,
+             aTinyPassword, // password
+             2, // password length
+             aDest);
     for (int aBlockIndex=1; aBlockIndex<aBlockCount; aBlockIndex++) {
         aSoccer.TwistBlock(&aWorkSpace,
                            aNonce,

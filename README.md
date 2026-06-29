@@ -8,7 +8,7 @@ This is still being studied, but it contains the final structure of the key expa
 #include "TwistExpander_Soccer.hpp"
 #include "TwistFarmSalt.hpp"
 ```
-</br></br>
+</br>
 ```
 TwistExpander_Soccer aSoccer;
 
@@ -21,18 +21,16 @@ const int aBlockCount = 32;
 TwistWorkSpace aWorkSpace;
 TwistFarmSalt aFarmSalt;
 std::uint64_t aNonce = 17;
-std::uint8_t aSource[S_BLOCK];
 std::uint8_t aDest[S_BLOCK * aBlockCount];
 
 aSoccer.Seed(&aWorkSpace,
              &aFarmSalt,
              aNonce,
-             aSource,
              aTinyPassword, // password
              2, // password length
              aDest);
 ```
-</br></br>
+</br>
 ```
 for (int aBlockIndex=1; aBlockIndex<aBlockCount; aBlockIndex++) {
     aSoccer.TwistBlock(&aWorkSpace,
@@ -43,5 +41,15 @@ for (int aBlockIndex=1; aBlockIndex<aBlockCount; aBlockIndex++) {
                        &aDest[(aBlockIndex) * S_BLOCK]); // dest
 }
 ```
+</br>
+![alt text](https://raw.githubusercontent.com/nraptis/Soccer/refs/heads/main/diagram_KDFA.png)</br></br>
+</br>
+![alt text](https://raw.githubusercontent.com/nraptis/Soccer/refs/heads/main/diagram_KDFB.png)</br></br>
+</br>
+![alt text](https://raw.githubusercontent.com/nraptis/Soccer/refs/heads/main/diagram_SEED.png)</br></br>
+</br>
+![alt text](https://raw.githubusercontent.com/nraptis/Soccer/refs/heads/main/diagram_TWIST.png)</br></br>
+
+
 </br></br>
 ![alt text](https://raw.githubusercontent.com/nraptis/Soccer/refs/heads/main/snow.png)</br></br>
