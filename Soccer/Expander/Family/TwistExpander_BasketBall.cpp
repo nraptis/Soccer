@@ -60,11 +60,11 @@ void TwistExpander_BasketBall::KDF_A(std::uint64_t pNonce,
     [[maybe_unused]] std::size_t *aIndexList256B = mIndexList256B;
     [[maybe_unused]] std::size_t *aIndexList256C = mIndexList256C;
     [[maybe_unused]] std::size_t *aIndexList256D = mIndexList256D;
-    std::uint64_t aPrevious = 0xA925F20F2FCFA91AULL; std::uint64_t aIngress = 0xEABF72E7D23B931CULL; std::uint64_t aCarry = 0xA948DB61843E51C9ULL;
+    std::uint64_t aPrevious = 0xCEF88C3ECC453E48ULL; std::uint64_t aIngress = 0x8E82B0A6CCCB3E21ULL; std::uint64_t aCarry = 0xB29BD1B4E70597DBULL;
 
-    std::uint64_t aWandererA = 0xA58F6EBD47238B12ULL; std::uint64_t aWandererB = 0xD69B7DDEF3085814ULL; std::uint64_t aWandererC = 0xB00CC45CCBB9D3DCULL; std::uint64_t aWandererD = 0xCA022BB2DCEFCE5DULL;
-    std::uint64_t aWandererE = 0xEFCC46BAEFD38F58ULL; std::uint64_t aWandererF = 0xA3AF017DD30F37C4ULL; std::uint64_t aWandererG = 0xB66B6A6933A5124AULL; std::uint64_t aWandererH = 0xD431EC465963625FULL;
-    std::uint64_t aWandererI = 0x960DBF16C9A3FB6CULL; std::uint64_t aWandererJ = 0xBE141DEA313F78B8ULL; std::uint64_t aWandererK = 0x8E92B93AE97DBD6DULL;
+    std::uint64_t aWandererA = 0x872413963373F6F9ULL; std::uint64_t aWandererB = 0x931B36AD9F772232ULL; std::uint64_t aWandererC = 0xF0170F270EDCDB9AULL; std::uint64_t aWandererD = 0xAA730E757ACFE983ULL;
+    std::uint64_t aWandererE = 0xF7925A8C49500404ULL; std::uint64_t aWandererF = 0xC7EEB50F3C7DB011ULL; std::uint64_t aWandererG = 0xA595BF85524C7907ULL; std::uint64_t aWandererH = 0xED4FB82620F2C405ULL;
+    std::uint64_t aWandererI = 0xF2EC529342C1155FULL; std::uint64_t aWandererJ = 0xD459113FAC673E1FULL; std::uint64_t aWandererK = 0xFAAA793A90EDB9A9ULL;
 
     // [kdf-a]
     std::uint64_t aDomainWordMatrixSelectA = pConstants->mMatrixSelectA;
@@ -76,19 +76,19 @@ void TwistExpander_BasketBall::KDF_A(std::uint64_t pNonce,
     std::uint8_t aDomainWordMatrixArgC = pConstants->mMatrixArgC;
     std::uint8_t aDomainWordMatrixArgD = pConstants->mMatrixArgD;
     {
-        aPrevious = 10999616136972731751U;
-        aCarry = 10426171822121799708U;
-        aWandererA = 13939710679966084877U;
-        aWandererB = 13636274055499830140U;
-        aWandererC = 17476022643709160496U;
-        aWandererD = 16041966639205341921U;
-        aWandererE = 18394991883955500455U;
-        aWandererF = 16568166803336512403U;
-        aWandererG = 17439992613875006776U;
-        aWandererH = 9953822277736070517U;
-        aWandererI = 15271704038618952127U;
-        aWandererJ = 15341484995864248158U;
-        aWandererK = 12800147434308550885U;
+        aPrevious = 16172342680880192813U;
+        aCarry = 15155723001533606458U;
+        aWandererA = 14254960177119198028U;
+        aWandererB = 10103019281110134884U;
+        aWandererC = 15701654851275608540U;
+        aWandererD = 15062486258418440427U;
+        aWandererE = 12150195351036217175U;
+        aWandererF = 17801811833917605913U;
+        aWandererG = 11697114662215937863U;
+        aWandererH = 14203433751430714664U;
+        aWandererI = 15090968202353128843U;
+        aWandererJ = 9249188142023590192U;
+        aWandererK = 13323626423725341592U;
     }
     //
     // ---------------------------------------------------
@@ -252,11 +252,11 @@ void TwistExpander_BasketBall::KDF_B(std::uint64_t pNonce,
     [[maybe_unused]] std::size_t *aIndexList256B = mIndexList256B;
     [[maybe_unused]] std::size_t *aIndexList256C = mIndexList256C;
     [[maybe_unused]] std::size_t *aIndexList256D = mIndexList256D;
-    std::uint64_t aPrevious = 0xCAD93930EB993319ULL; std::uint64_t aIngress = 0xB55F845586101928ULL; std::uint64_t aCarry = 0xDBEDA43B4EFB834BULL;
+    std::uint64_t aPrevious = 0x8E54A178DDBBEB69ULL; std::uint64_t aIngress = 0xA8D3DA3696508DE2ULL; std::uint64_t aCarry = 0xC0DDD5973B926C70ULL;
 
-    std::uint64_t aWandererA = 0xF0631DA185F26011ULL; std::uint64_t aWandererB = 0xC2DB319A3126B319ULL; std::uint64_t aWandererC = 0x92039CBC46131B59ULL; std::uint64_t aWandererD = 0xE0F48032BE1FC57CULL;
-    std::uint64_t aWandererE = 0xA42D5A7E3D9B7C38ULL; std::uint64_t aWandererF = 0xFD69E1DF7B85664EULL; std::uint64_t aWandererG = 0xB1014BF014BAE235ULL; std::uint64_t aWandererH = 0xC4CB265C935221C3ULL;
-    std::uint64_t aWandererI = 0xC3615DE6D30842C0ULL; std::uint64_t aWandererJ = 0xCD25FBF8DDF60FF6ULL; std::uint64_t aWandererK = 0xBE99B8119E900357ULL;
+    std::uint64_t aWandererA = 0x8E8D384A5DA14EA4ULL; std::uint64_t aWandererB = 0x9829DE0033F4B214ULL; std::uint64_t aWandererC = 0x9F270BFFF87DEF4FULL; std::uint64_t aWandererD = 0xBA0D49F5A7351E72ULL;
+    std::uint64_t aWandererE = 0xCB72C561E6B26AF5ULL; std::uint64_t aWandererF = 0xC434CC0FF5E539BBULL; std::uint64_t aWandererG = 0xA32352E23A762368ULL; std::uint64_t aWandererH = 0xD0BBEDF084AC4926ULL;
+    std::uint64_t aWandererI = 0xB6D83A94D4708F73ULL; std::uint64_t aWandererJ = 0xBE4191C8CEAC1875ULL; std::uint64_t aWandererK = 0x83115CC1A9DB0E9DULL;
 
     // [kdf-b]
     std::uint64_t aDomainWordMatrixSelectA = pConstants->mMatrixSelectA;
@@ -268,19 +268,19 @@ void TwistExpander_BasketBall::KDF_B(std::uint64_t pNonce,
     std::uint8_t aDomainWordMatrixArgC = pConstants->mMatrixArgC;
     std::uint8_t aDomainWordMatrixArgD = pConstants->mMatrixArgD;
     {
-        aPrevious = 12044649426904460407U;
-        aCarry = 11800463015725385973U;
-        aWandererA = 17936748220740782422U;
-        aWandererB = 10531836142015709938U;
-        aWandererC = 18019443502708969744U;
-        aWandererD = 15695379578583942734U;
-        aWandererE = 10145972239592015547U;
-        aWandererF = 14154506484345852275U;
-        aWandererG = 11270035499384827081U;
-        aWandererH = 11404347838051045869U;
-        aWandererI = 15583400214699245542U;
-        aWandererJ = 15080764077294542531U;
-        aWandererK = 15585060111861310122U;
+        aPrevious = 16056861805437013325U;
+        aCarry = 15949905951855938949U;
+        aWandererA = 15103953633950998096U;
+        aWandererB = 15005253794945088959U;
+        aWandererC = 17281766071629317579U;
+        aWandererD = 12476332336044127475U;
+        aWandererE = 16523751949610955904U;
+        aWandererF = 11426081615427688518U;
+        aWandererG = 15818482240557753711U;
+        aWandererH = 17665133235460788599U;
+        aWandererI = 16998588354857006557U;
+        aWandererJ = 11374334186603285988U;
+        aWandererK = 14813192088374642098U;
     }
     //
     // ---------------------------------------------------
@@ -458,59 +458,59 @@ void TwistExpander_BasketBall::Seed(TwistWorkSpace *pWorkSpace,
     [[maybe_unused]] std::size_t *aIndexList256B = mIndexList256B;
     [[maybe_unused]] std::size_t *aIndexList256C = mIndexList256C;
     [[maybe_unused]] std::size_t *aIndexList256D = mIndexList256D;
-    std::uint64_t aPrevious = 0xCCB6CB2C1423A973ULL;
-    std::uint64_t aIngress = 0x889BC75DFD01AB35ULL;
-    std::uint64_t aCarry = 0x99DC212A094F411CULL;
+    std::uint64_t aPrevious = 0x89EC6A6E74EAA08FULL;
+    std::uint64_t aIngress = 0xB632DF11CF573E01ULL;
+    std::uint64_t aCarry = 0xC71B698E8B109387ULL;
 
-    std::uint64_t aWandererA = 0xA7C5707235A8C8CCULL;
-    std::uint64_t aWandererB = 0xDC5FF8D13E0F9C33ULL;
-    std::uint64_t aWandererC = 0xEFB375B925E5926FULL;
-    std::uint64_t aWandererD = 0x981A289E1153EC83ULL;
-    std::uint64_t aWandererE = 0xB7E3CD66C2FB5D22ULL;
-    std::uint64_t aWandererF = 0xA10B44F5381FE82CULL;
-    std::uint64_t aWandererG = 0xEE571CBB7B23301FULL;
-    std::uint64_t aWandererH = 0xCAB4A7FFF4A08A07ULL;
-    std::uint64_t aWandererI = 0xC4E93C1AFE52BA4CULL;
-    std::uint64_t aWandererJ = 0xFF93451B28DF4A5EULL;
-    std::uint64_t aWandererK = 0xE0022081DFFEF11DULL;
+    std::uint64_t aWandererA = 0xCDDCE802296B27B7ULL;
+    std::uint64_t aWandererB = 0xCC7E4D32CB001DB0ULL;
+    std::uint64_t aWandererC = 0xFE261B366DAF842BULL;
+    std::uint64_t aWandererD = 0xDD1C062ED8806F50ULL;
+    std::uint64_t aWandererE = 0xA1CED304B7CE832FULL;
+    std::uint64_t aWandererF = 0xA7CE0334F4E9F99AULL;
+    std::uint64_t aWandererG = 0xB365522253725F2FULL;
+    std::uint64_t aWandererH = 0xE5E19E80E2EACBD1ULL;
+    std::uint64_t aWandererI = 0xE80B229C73E43526ULL;
+    std::uint64_t aWandererJ = 0xD6788704F80947DCULL;
+    std::uint64_t aWandererK = 0xDD9235F2D7EFAB00ULL;
 
     // [seed]
-        TwistSnow::Aria256Counter(mSource, aSnowLaneA);
-        TwistSnow::AES256Counter(mSource, aSnowLaneB);
-        TwistSnow::ChaCha20Counter(mSource, aSnowLaneC);
-        TwistSnow::Sha256Counter(mSource, aSnowLaneD);
+        TwistSnow::Sha256Counter(mSource, aSnowLaneA);
+        TwistSnow::ChaCha20Counter(mSource, aSnowLaneB);
+        TwistSnow::AES256Counter(mSource, aSnowLaneC);
+        TwistSnow::Aria256Counter(mSource, aSnowLaneD);
     ////////////////////////////////////////////////////////
     ////////        Phase A
     ////////
-    KDF_A(pNonce, &(mDomainBundleInbuilt.mPhaseAConstants), &(mDomainBundleInbuilt.mPhaseASalts), aSnowLaneC, 0);
-    pFarmSalt->Derive(aExpandLaneD, mDomainBundleEphemeral.mPhaseASalts.mOrbiterAssign.mSaltA,
+    KDF_A(pNonce, &(mDomainBundleInbuilt.mPhaseAConstants), &(mDomainBundleInbuilt.mPhaseASalts), aSnowLaneB, 0);
+    pFarmSalt->Derive(aExpandLaneB, mDomainBundleEphemeral.mPhaseASalts.mOrbiterAssign.mSaltA,
                       mDomainBundleEphemeral.mPhaseASalts.mOrbiterAssign.mSaltB, mDomainBundleEphemeral.mPhaseASalts.mOrbiterAssign.mSaltC,
                       mDomainBundleEphemeral.mPhaseASalts.mOrbiterAssign.mSaltD, mDomainBundleEphemeral.mPhaseASalts.mOrbiterAssign.mSaltE,
                       mDomainBundleEphemeral.mPhaseASalts.mOrbiterAssign.mSaltF);
-    pFarmSalt->Derive(aExpandLaneC, mDomainBundleEphemeral.mPhaseASalts.mOrbiterUpdate.mSaltA,
+    pFarmSalt->Derive(aExpandLaneA, mDomainBundleEphemeral.mPhaseASalts.mOrbiterUpdate.mSaltA,
                       mDomainBundleEphemeral.mPhaseASalts.mOrbiterUpdate.mSaltB, mDomainBundleEphemeral.mPhaseASalts.mOrbiterUpdate.mSaltC,
                       mDomainBundleEphemeral.mPhaseASalts.mOrbiterUpdate.mSaltD, mDomainBundleEphemeral.mPhaseASalts.mOrbiterUpdate.mSaltE,
                       mDomainBundleEphemeral.mPhaseASalts.mOrbiterUpdate.mSaltF);
-    pFarmSalt->Derive(aExpandLaneA, mDomainBundleEphemeral.mPhaseASalts.mWandererUpdate.mSaltA,
+    pFarmSalt->Derive(aExpandLaneD, mDomainBundleEphemeral.mPhaseASalts.mWandererUpdate.mSaltA,
                       mDomainBundleEphemeral.mPhaseASalts.mWandererUpdate.mSaltB, mDomainBundleEphemeral.mPhaseASalts.mWandererUpdate.mSaltC,
                       mDomainBundleEphemeral.mPhaseASalts.mWandererUpdate.mSaltD, mDomainBundleEphemeral.mPhaseASalts.mWandererUpdate.mSaltE,
                       mDomainBundleEphemeral.mPhaseASalts.mWandererUpdate.mSaltF);
-    TwistFarmConstants::Derive(aExpandLaneB, &(mDomainBundleEphemeral.mPhaseAConstants));
+    TwistFarmConstants::Derive(aExpandLaneC, &(mDomainBundleEphemeral.mPhaseAConstants));
     KDF_B(pNonce, &(mDomainBundleEphemeral.mPhaseAConstants), &(mDomainBundleEphemeral.mPhaseASalts), 0);
-        TwistSquash::SquashB(aExpandLaneD, aExpandLaneC, aExpandLaneA, aExpandLaneB, aInvestLaneF);
-    pFarmSalt->Derive(aExpandLaneD, pWorkSpace->mDomainBundle.mPhaseASalts.mOrbiterAssign.mSaltA,
+        TwistSquash::SquashA(aExpandLaneB, aExpandLaneA, aExpandLaneD, aExpandLaneC, aInvestLaneH);
+    pFarmSalt->Derive(aExpandLaneB, pWorkSpace->mDomainBundle.mPhaseASalts.mOrbiterAssign.mSaltA,
                       pWorkSpace->mDomainBundle.mPhaseASalts.mOrbiterAssign.mSaltB, pWorkSpace->mDomainBundle.mPhaseASalts.mOrbiterAssign.mSaltC,
                       pWorkSpace->mDomainBundle.mPhaseASalts.mOrbiterAssign.mSaltD, pWorkSpace->mDomainBundle.mPhaseASalts.mOrbiterAssign.mSaltE,
                       pWorkSpace->mDomainBundle.mPhaseASalts.mOrbiterAssign.mSaltF);
-    pFarmSalt->Derive(aExpandLaneC, pWorkSpace->mDomainBundle.mPhaseASalts.mOrbiterUpdate.mSaltA,
+    pFarmSalt->Derive(aExpandLaneA, pWorkSpace->mDomainBundle.mPhaseASalts.mOrbiterUpdate.mSaltA,
                       pWorkSpace->mDomainBundle.mPhaseASalts.mOrbiterUpdate.mSaltB, pWorkSpace->mDomainBundle.mPhaseASalts.mOrbiterUpdate.mSaltC,
                       pWorkSpace->mDomainBundle.mPhaseASalts.mOrbiterUpdate.mSaltD, pWorkSpace->mDomainBundle.mPhaseASalts.mOrbiterUpdate.mSaltE,
                       pWorkSpace->mDomainBundle.mPhaseASalts.mOrbiterUpdate.mSaltF);
-    pFarmSalt->Derive(aExpandLaneA, pWorkSpace->mDomainBundle.mPhaseASalts.mWandererUpdate.mSaltA,
+    pFarmSalt->Derive(aExpandLaneD, pWorkSpace->mDomainBundle.mPhaseASalts.mWandererUpdate.mSaltA,
                       pWorkSpace->mDomainBundle.mPhaseASalts.mWandererUpdate.mSaltB, pWorkSpace->mDomainBundle.mPhaseASalts.mWandererUpdate.mSaltC,
                       pWorkSpace->mDomainBundle.mPhaseASalts.mWandererUpdate.mSaltD, pWorkSpace->mDomainBundle.mPhaseASalts.mWandererUpdate.mSaltE,
                       pWorkSpace->mDomainBundle.mPhaseASalts.mWandererUpdate.mSaltF);
-    TwistFarmConstants::Derive(aExpandLaneB, &(pWorkSpace->mDomainBundle.mPhaseAConstants));
+    TwistFarmConstants::Derive(aExpandLaneC, &(pWorkSpace->mDomainBundle.mPhaseAConstants));
     ////////
     ////////
     ////////////////////////////////////////////////////////
@@ -518,34 +518,34 @@ void TwistExpander_BasketBall::Seed(TwistWorkSpace *pWorkSpace,
     ////////        Phase B
     ////////
     KDF_A(pNonce, &(mDomainBundleInbuilt.mPhaseBConstants), &(mDomainBundleInbuilt.mPhaseBSalts), aSnowLaneD, 1);
-    pFarmSalt->Derive(aExpandLaneB, mDomainBundleEphemeral.mPhaseBSalts.mOrbiterAssign.mSaltA,
+    pFarmSalt->Derive(aExpandLaneC, mDomainBundleEphemeral.mPhaseBSalts.mOrbiterAssign.mSaltA,
                       mDomainBundleEphemeral.mPhaseBSalts.mOrbiterAssign.mSaltB, mDomainBundleEphemeral.mPhaseBSalts.mOrbiterAssign.mSaltC,
                       mDomainBundleEphemeral.mPhaseBSalts.mOrbiterAssign.mSaltD, mDomainBundleEphemeral.mPhaseBSalts.mOrbiterAssign.mSaltE,
                       mDomainBundleEphemeral.mPhaseBSalts.mOrbiterAssign.mSaltF);
-    pFarmSalt->Derive(aExpandLaneC, mDomainBundleEphemeral.mPhaseBSalts.mOrbiterUpdate.mSaltA,
+    pFarmSalt->Derive(aExpandLaneD, mDomainBundleEphemeral.mPhaseBSalts.mOrbiterUpdate.mSaltA,
                       mDomainBundleEphemeral.mPhaseBSalts.mOrbiterUpdate.mSaltB, mDomainBundleEphemeral.mPhaseBSalts.mOrbiterUpdate.mSaltC,
                       mDomainBundleEphemeral.mPhaseBSalts.mOrbiterUpdate.mSaltD, mDomainBundleEphemeral.mPhaseBSalts.mOrbiterUpdate.mSaltE,
                       mDomainBundleEphemeral.mPhaseBSalts.mOrbiterUpdate.mSaltF);
-    pFarmSalt->Derive(aExpandLaneD, mDomainBundleEphemeral.mPhaseBSalts.mWandererUpdate.mSaltA,
+    pFarmSalt->Derive(aExpandLaneA, mDomainBundleEphemeral.mPhaseBSalts.mWandererUpdate.mSaltA,
                       mDomainBundleEphemeral.mPhaseBSalts.mWandererUpdate.mSaltB, mDomainBundleEphemeral.mPhaseBSalts.mWandererUpdate.mSaltC,
                       mDomainBundleEphemeral.mPhaseBSalts.mWandererUpdate.mSaltD, mDomainBundleEphemeral.mPhaseBSalts.mWandererUpdate.mSaltE,
                       mDomainBundleEphemeral.mPhaseBSalts.mWandererUpdate.mSaltF);
-    TwistFarmConstants::Derive(aExpandLaneA, &(mDomainBundleEphemeral.mPhaseBConstants));
+    TwistFarmConstants::Derive(aExpandLaneB, &(mDomainBundleEphemeral.mPhaseBConstants));
     KDF_B(pNonce, &(mDomainBundleEphemeral.mPhaseBConstants), &(mDomainBundleEphemeral.mPhaseBSalts), 1);
-        TwistSquash::SquashB(aExpandLaneB, aExpandLaneC, aExpandLaneD, aExpandLaneA, aInvestLaneD);
-    pFarmSalt->Derive(aExpandLaneB, pWorkSpace->mDomainBundle.mPhaseBSalts.mOrbiterAssign.mSaltA,
+        TwistSquash::SquashC(aExpandLaneC, aExpandLaneD, aExpandLaneA, aExpandLaneB, aInvestLaneF);
+    pFarmSalt->Derive(aExpandLaneC, pWorkSpace->mDomainBundle.mPhaseBSalts.mOrbiterAssign.mSaltA,
                       pWorkSpace->mDomainBundle.mPhaseBSalts.mOrbiterAssign.mSaltB, pWorkSpace->mDomainBundle.mPhaseBSalts.mOrbiterAssign.mSaltC,
                       pWorkSpace->mDomainBundle.mPhaseBSalts.mOrbiterAssign.mSaltD, pWorkSpace->mDomainBundle.mPhaseBSalts.mOrbiterAssign.mSaltE,
                       pWorkSpace->mDomainBundle.mPhaseBSalts.mOrbiterAssign.mSaltF);
-    pFarmSalt->Derive(aExpandLaneC, pWorkSpace->mDomainBundle.mPhaseBSalts.mOrbiterUpdate.mSaltA,
+    pFarmSalt->Derive(aExpandLaneD, pWorkSpace->mDomainBundle.mPhaseBSalts.mOrbiterUpdate.mSaltA,
                       pWorkSpace->mDomainBundle.mPhaseBSalts.mOrbiterUpdate.mSaltB, pWorkSpace->mDomainBundle.mPhaseBSalts.mOrbiterUpdate.mSaltC,
                       pWorkSpace->mDomainBundle.mPhaseBSalts.mOrbiterUpdate.mSaltD, pWorkSpace->mDomainBundle.mPhaseBSalts.mOrbiterUpdate.mSaltE,
                       pWorkSpace->mDomainBundle.mPhaseBSalts.mOrbiterUpdate.mSaltF);
-    pFarmSalt->Derive(aExpandLaneD, pWorkSpace->mDomainBundle.mPhaseBSalts.mWandererUpdate.mSaltA,
+    pFarmSalt->Derive(aExpandLaneA, pWorkSpace->mDomainBundle.mPhaseBSalts.mWandererUpdate.mSaltA,
                       pWorkSpace->mDomainBundle.mPhaseBSalts.mWandererUpdate.mSaltB, pWorkSpace->mDomainBundle.mPhaseBSalts.mWandererUpdate.mSaltC,
                       pWorkSpace->mDomainBundle.mPhaseBSalts.mWandererUpdate.mSaltD, pWorkSpace->mDomainBundle.mPhaseBSalts.mWandererUpdate.mSaltE,
                       pWorkSpace->mDomainBundle.mPhaseBSalts.mWandererUpdate.mSaltF);
-    TwistFarmConstants::Derive(aExpandLaneA, &(pWorkSpace->mDomainBundle.mPhaseBConstants));
+    TwistFarmConstants::Derive(aExpandLaneB, &(pWorkSpace->mDomainBundle.mPhaseBConstants));
     ////////
     ////////
     ////////////////////////////////////////////////////////
@@ -553,46 +553,46 @@ void TwistExpander_BasketBall::Seed(TwistWorkSpace *pWorkSpace,
     ////////        Phase C
     ////////
     KDF_A(pNonce, &(mDomainBundleInbuilt.mPhaseCConstants), &(mDomainBundleInbuilt.mPhaseCSalts), aSnowLaneA, 2);
-    pFarmSalt->Derive(aExpandLaneA, mDomainBundleEphemeral.mPhaseCSalts.mOrbiterAssign.mSaltA,
+    pFarmSalt->Derive(aExpandLaneD, mDomainBundleEphemeral.mPhaseCSalts.mOrbiterAssign.mSaltA,
                       mDomainBundleEphemeral.mPhaseCSalts.mOrbiterAssign.mSaltB, mDomainBundleEphemeral.mPhaseCSalts.mOrbiterAssign.mSaltC,
                       mDomainBundleEphemeral.mPhaseCSalts.mOrbiterAssign.mSaltD, mDomainBundleEphemeral.mPhaseCSalts.mOrbiterAssign.mSaltE,
                       mDomainBundleEphemeral.mPhaseCSalts.mOrbiterAssign.mSaltF);
-    pFarmSalt->Derive(aExpandLaneB, mDomainBundleEphemeral.mPhaseCSalts.mOrbiterUpdate.mSaltA,
+    pFarmSalt->Derive(aExpandLaneC, mDomainBundleEphemeral.mPhaseCSalts.mOrbiterUpdate.mSaltA,
                       mDomainBundleEphemeral.mPhaseCSalts.mOrbiterUpdate.mSaltB, mDomainBundleEphemeral.mPhaseCSalts.mOrbiterUpdate.mSaltC,
                       mDomainBundleEphemeral.mPhaseCSalts.mOrbiterUpdate.mSaltD, mDomainBundleEphemeral.mPhaseCSalts.mOrbiterUpdate.mSaltE,
                       mDomainBundleEphemeral.mPhaseCSalts.mOrbiterUpdate.mSaltF);
-    pFarmSalt->Derive(aExpandLaneD, mDomainBundleEphemeral.mPhaseCSalts.mWandererUpdate.mSaltA,
+    pFarmSalt->Derive(aExpandLaneA, mDomainBundleEphemeral.mPhaseCSalts.mWandererUpdate.mSaltA,
                       mDomainBundleEphemeral.mPhaseCSalts.mWandererUpdate.mSaltB, mDomainBundleEphemeral.mPhaseCSalts.mWandererUpdate.mSaltC,
                       mDomainBundleEphemeral.mPhaseCSalts.mWandererUpdate.mSaltD, mDomainBundleEphemeral.mPhaseCSalts.mWandererUpdate.mSaltE,
                       mDomainBundleEphemeral.mPhaseCSalts.mWandererUpdate.mSaltF);
-    TwistFarmConstants::Derive(aExpandLaneC, &(mDomainBundleEphemeral.mPhaseCConstants));
+    TwistFarmConstants::Derive(aExpandLaneB, &(mDomainBundleEphemeral.mPhaseCConstants));
     KDF_B(pNonce, &(mDomainBundleEphemeral.mPhaseCConstants), &(mDomainBundleEphemeral.mPhaseCSalts), 2);
-        TwistSquash::SquashA(aExpandLaneA, aExpandLaneB, aExpandLaneD, aExpandLaneC, aInvestLaneC);
-    pFarmSalt->Derive(aExpandLaneA, pWorkSpace->mDomainBundle.mPhaseCSalts.mOrbiterAssign.mSaltA,
+        TwistSquash::SquashC(aExpandLaneD, aExpandLaneC, aExpandLaneA, aExpandLaneB, aInvestLaneD);
+    pFarmSalt->Derive(aExpandLaneD, pWorkSpace->mDomainBundle.mPhaseCSalts.mOrbiterAssign.mSaltA,
                       pWorkSpace->mDomainBundle.mPhaseCSalts.mOrbiterAssign.mSaltB, pWorkSpace->mDomainBundle.mPhaseCSalts.mOrbiterAssign.mSaltC,
                       pWorkSpace->mDomainBundle.mPhaseCSalts.mOrbiterAssign.mSaltD, pWorkSpace->mDomainBundle.mPhaseCSalts.mOrbiterAssign.mSaltE,
                       pWorkSpace->mDomainBundle.mPhaseCSalts.mOrbiterAssign.mSaltF);
-    pFarmSalt->Derive(aExpandLaneB, pWorkSpace->mDomainBundle.mPhaseCSalts.mOrbiterUpdate.mSaltA,
+    pFarmSalt->Derive(aExpandLaneC, pWorkSpace->mDomainBundle.mPhaseCSalts.mOrbiterUpdate.mSaltA,
                       pWorkSpace->mDomainBundle.mPhaseCSalts.mOrbiterUpdate.mSaltB, pWorkSpace->mDomainBundle.mPhaseCSalts.mOrbiterUpdate.mSaltC,
                       pWorkSpace->mDomainBundle.mPhaseCSalts.mOrbiterUpdate.mSaltD, pWorkSpace->mDomainBundle.mPhaseCSalts.mOrbiterUpdate.mSaltE,
                       pWorkSpace->mDomainBundle.mPhaseCSalts.mOrbiterUpdate.mSaltF);
-    pFarmSalt->Derive(aExpandLaneD, pWorkSpace->mDomainBundle.mPhaseCSalts.mWandererUpdate.mSaltA,
+    pFarmSalt->Derive(aExpandLaneA, pWorkSpace->mDomainBundle.mPhaseCSalts.mWandererUpdate.mSaltA,
                       pWorkSpace->mDomainBundle.mPhaseCSalts.mWandererUpdate.mSaltB, pWorkSpace->mDomainBundle.mPhaseCSalts.mWandererUpdate.mSaltC,
                       pWorkSpace->mDomainBundle.mPhaseCSalts.mWandererUpdate.mSaltD, pWorkSpace->mDomainBundle.mPhaseCSalts.mWandererUpdate.mSaltE,
                       pWorkSpace->mDomainBundle.mPhaseCSalts.mWandererUpdate.mSaltF);
-    TwistFarmConstants::Derive(aExpandLaneC, &(pWorkSpace->mDomainBundle.mPhaseCConstants));
+    TwistFarmConstants::Derive(aExpandLaneB, &(pWorkSpace->mDomainBundle.mPhaseCConstants));
     ////////
     ////////
     ////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////
     ////////        Phase D
     ////////
-    KDF_A(pNonce, &(mDomainBundleInbuilt.mPhaseDConstants), &(mDomainBundleInbuilt.mPhaseDSalts), aSnowLaneB, 3);
-    pFarmSalt->Derive(aExpandLaneD, mDomainBundleEphemeral.mPhaseDSalts.mOrbiterAssign.mSaltA,
+    KDF_A(pNonce, &(mDomainBundleInbuilt.mPhaseDConstants), &(mDomainBundleInbuilt.mPhaseDSalts), aSnowLaneC, 3);
+    pFarmSalt->Derive(aExpandLaneB, mDomainBundleEphemeral.mPhaseDSalts.mOrbiterAssign.mSaltA,
                       mDomainBundleEphemeral.mPhaseDSalts.mOrbiterAssign.mSaltB, mDomainBundleEphemeral.mPhaseDSalts.mOrbiterAssign.mSaltC,
                       mDomainBundleEphemeral.mPhaseDSalts.mOrbiterAssign.mSaltD, mDomainBundleEphemeral.mPhaseDSalts.mOrbiterAssign.mSaltE,
                       mDomainBundleEphemeral.mPhaseDSalts.mOrbiterAssign.mSaltF);
-    pFarmSalt->Derive(aExpandLaneB, mDomainBundleEphemeral.mPhaseDSalts.mOrbiterUpdate.mSaltA,
+    pFarmSalt->Derive(aExpandLaneC, mDomainBundleEphemeral.mPhaseDSalts.mOrbiterUpdate.mSaltA,
                       mDomainBundleEphemeral.mPhaseDSalts.mOrbiterUpdate.mSaltB, mDomainBundleEphemeral.mPhaseDSalts.mOrbiterUpdate.mSaltC,
                       mDomainBundleEphemeral.mPhaseDSalts.mOrbiterUpdate.mSaltD, mDomainBundleEphemeral.mPhaseDSalts.mOrbiterUpdate.mSaltE,
                       mDomainBundleEphemeral.mPhaseDSalts.mOrbiterUpdate.mSaltF);
@@ -600,14 +600,14 @@ void TwistExpander_BasketBall::Seed(TwistWorkSpace *pWorkSpace,
                       mDomainBundleEphemeral.mPhaseDSalts.mWandererUpdate.mSaltB, mDomainBundleEphemeral.mPhaseDSalts.mWandererUpdate.mSaltC,
                       mDomainBundleEphemeral.mPhaseDSalts.mWandererUpdate.mSaltD, mDomainBundleEphemeral.mPhaseDSalts.mWandererUpdate.mSaltE,
                       mDomainBundleEphemeral.mPhaseDSalts.mWandererUpdate.mSaltF);
-    TwistFarmConstants::Derive(aExpandLaneC, &(mDomainBundleEphemeral.mPhaseDConstants));
+    TwistFarmConstants::Derive(aExpandLaneD, &(mDomainBundleEphemeral.mPhaseDConstants));
     KDF_B(pNonce, &(mDomainBundleEphemeral.mPhaseDConstants), &(mDomainBundleEphemeral.mPhaseDSalts), 3);
-        TwistSquash::SquashB(aExpandLaneD, aExpandLaneB, aExpandLaneA, aExpandLaneC, aInvestLaneH);
-    pFarmSalt->Derive(aExpandLaneD, pWorkSpace->mDomainBundle.mPhaseDSalts.mOrbiterAssign.mSaltA,
+        TwistSquash::SquashA(aExpandLaneB, aExpandLaneC, aExpandLaneA, aExpandLaneD, aInvestLaneE);
+    pFarmSalt->Derive(aExpandLaneB, pWorkSpace->mDomainBundle.mPhaseDSalts.mOrbiterAssign.mSaltA,
                       pWorkSpace->mDomainBundle.mPhaseDSalts.mOrbiterAssign.mSaltB, pWorkSpace->mDomainBundle.mPhaseDSalts.mOrbiterAssign.mSaltC,
                       pWorkSpace->mDomainBundle.mPhaseDSalts.mOrbiterAssign.mSaltD, pWorkSpace->mDomainBundle.mPhaseDSalts.mOrbiterAssign.mSaltE,
                       pWorkSpace->mDomainBundle.mPhaseDSalts.mOrbiterAssign.mSaltF);
-    pFarmSalt->Derive(aExpandLaneB, pWorkSpace->mDomainBundle.mPhaseDSalts.mOrbiterUpdate.mSaltA,
+    pFarmSalt->Derive(aExpandLaneC, pWorkSpace->mDomainBundle.mPhaseDSalts.mOrbiterUpdate.mSaltA,
                       pWorkSpace->mDomainBundle.mPhaseDSalts.mOrbiterUpdate.mSaltB, pWorkSpace->mDomainBundle.mPhaseDSalts.mOrbiterUpdate.mSaltC,
                       pWorkSpace->mDomainBundle.mPhaseDSalts.mOrbiterUpdate.mSaltD, pWorkSpace->mDomainBundle.mPhaseDSalts.mOrbiterUpdate.mSaltE,
                       pWorkSpace->mDomainBundle.mPhaseDSalts.mOrbiterUpdate.mSaltF);
@@ -615,19 +615,19 @@ void TwistExpander_BasketBall::Seed(TwistWorkSpace *pWorkSpace,
                       pWorkSpace->mDomainBundle.mPhaseDSalts.mWandererUpdate.mSaltB, pWorkSpace->mDomainBundle.mPhaseDSalts.mWandererUpdate.mSaltC,
                       pWorkSpace->mDomainBundle.mPhaseDSalts.mWandererUpdate.mSaltD, pWorkSpace->mDomainBundle.mPhaseDSalts.mWandererUpdate.mSaltE,
                       pWorkSpace->mDomainBundle.mPhaseDSalts.mWandererUpdate.mSaltF);
-    TwistFarmConstants::Derive(aExpandLaneC, &(pWorkSpace->mDomainBundle.mPhaseDConstants));
+    TwistFarmConstants::Derive(aExpandLaneD, &(pWorkSpace->mDomainBundle.mPhaseDConstants));
     ////////
     ////////
     ////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////
     ////////        Phase E
     ////////
-    KDF_A(pNonce, &(mDomainBundleInbuilt.mPhaseEConstants), &(mDomainBundleInbuilt.mPhaseESalts), aSnowLaneC, 4);
-    pFarmSalt->Derive(aExpandLaneD, mDomainBundleEphemeral.mPhaseESalts.mOrbiterAssign.mSaltA,
+    KDF_A(pNonce, &(mDomainBundleInbuilt.mPhaseEConstants), &(mDomainBundleInbuilt.mPhaseESalts), aSnowLaneB, 4);
+    pFarmSalt->Derive(aExpandLaneC, mDomainBundleEphemeral.mPhaseESalts.mOrbiterAssign.mSaltA,
                       mDomainBundleEphemeral.mPhaseESalts.mOrbiterAssign.mSaltB, mDomainBundleEphemeral.mPhaseESalts.mOrbiterAssign.mSaltC,
                       mDomainBundleEphemeral.mPhaseESalts.mOrbiterAssign.mSaltD, mDomainBundleEphemeral.mPhaseESalts.mOrbiterAssign.mSaltE,
                       mDomainBundleEphemeral.mPhaseESalts.mOrbiterAssign.mSaltF);
-    pFarmSalt->Derive(aExpandLaneC, mDomainBundleEphemeral.mPhaseESalts.mOrbiterUpdate.mSaltA,
+    pFarmSalt->Derive(aExpandLaneD, mDomainBundleEphemeral.mPhaseESalts.mOrbiterUpdate.mSaltA,
                       mDomainBundleEphemeral.mPhaseESalts.mOrbiterUpdate.mSaltB, mDomainBundleEphemeral.mPhaseESalts.mOrbiterUpdate.mSaltC,
                       mDomainBundleEphemeral.mPhaseESalts.mOrbiterUpdate.mSaltD, mDomainBundleEphemeral.mPhaseESalts.mOrbiterUpdate.mSaltE,
                       mDomainBundleEphemeral.mPhaseESalts.mOrbiterUpdate.mSaltF);
@@ -637,12 +637,12 @@ void TwistExpander_BasketBall::Seed(TwistWorkSpace *pWorkSpace,
                       mDomainBundleEphemeral.mPhaseESalts.mWandererUpdate.mSaltF);
     TwistFarmConstants::Derive(aExpandLaneB, &(mDomainBundleEphemeral.mPhaseEConstants));
     KDF_B(pNonce, &(mDomainBundleEphemeral.mPhaseEConstants), &(mDomainBundleEphemeral.mPhaseESalts), 4);
-        TwistSquash::SquashB(aExpandLaneD, aExpandLaneC, aExpandLaneA, aExpandLaneB, aInvestLaneG);
-    pFarmSalt->Derive(aExpandLaneD, pWorkSpace->mDomainBundle.mPhaseESalts.mOrbiterAssign.mSaltA,
+        TwistSquash::SquashC(aExpandLaneC, aExpandLaneD, aExpandLaneA, aExpandLaneB, aInvestLaneA);
+    pFarmSalt->Derive(aExpandLaneC, pWorkSpace->mDomainBundle.mPhaseESalts.mOrbiterAssign.mSaltA,
                       pWorkSpace->mDomainBundle.mPhaseESalts.mOrbiterAssign.mSaltB, pWorkSpace->mDomainBundle.mPhaseESalts.mOrbiterAssign.mSaltC,
                       pWorkSpace->mDomainBundle.mPhaseESalts.mOrbiterAssign.mSaltD, pWorkSpace->mDomainBundle.mPhaseESalts.mOrbiterAssign.mSaltE,
                       pWorkSpace->mDomainBundle.mPhaseESalts.mOrbiterAssign.mSaltF);
-    pFarmSalt->Derive(aExpandLaneC, pWorkSpace->mDomainBundle.mPhaseESalts.mOrbiterUpdate.mSaltA,
+    pFarmSalt->Derive(aExpandLaneD, pWorkSpace->mDomainBundle.mPhaseESalts.mOrbiterUpdate.mSaltA,
                       pWorkSpace->mDomainBundle.mPhaseESalts.mOrbiterUpdate.mSaltB, pWorkSpace->mDomainBundle.mPhaseESalts.mOrbiterUpdate.mSaltC,
                       pWorkSpace->mDomainBundle.mPhaseESalts.mOrbiterUpdate.mSaltD, pWorkSpace->mDomainBundle.mPhaseESalts.mOrbiterUpdate.mSaltE,
                       pWorkSpace->mDomainBundle.mPhaseESalts.mOrbiterUpdate.mSaltF);
@@ -658,34 +658,34 @@ void TwistExpander_BasketBall::Seed(TwistWorkSpace *pWorkSpace,
     ////////        Phase F
     ////////
     KDF_A(pNonce, &(mDomainBundleInbuilt.mPhaseFConstants), &(mDomainBundleInbuilt.mPhaseFSalts), aSnowLaneD, 5);
-    pFarmSalt->Derive(aExpandLaneB, mDomainBundleEphemeral.mPhaseFSalts.mOrbiterAssign.mSaltA,
+    pFarmSalt->Derive(aExpandLaneD, mDomainBundleEphemeral.mPhaseFSalts.mOrbiterAssign.mSaltA,
                       mDomainBundleEphemeral.mPhaseFSalts.mOrbiterAssign.mSaltB, mDomainBundleEphemeral.mPhaseFSalts.mOrbiterAssign.mSaltC,
                       mDomainBundleEphemeral.mPhaseFSalts.mOrbiterAssign.mSaltD, mDomainBundleEphemeral.mPhaseFSalts.mOrbiterAssign.mSaltE,
                       mDomainBundleEphemeral.mPhaseFSalts.mOrbiterAssign.mSaltF);
-    pFarmSalt->Derive(aExpandLaneC, mDomainBundleEphemeral.mPhaseFSalts.mOrbiterUpdate.mSaltA,
+    pFarmSalt->Derive(aExpandLaneB, mDomainBundleEphemeral.mPhaseFSalts.mOrbiterUpdate.mSaltA,
                       mDomainBundleEphemeral.mPhaseFSalts.mOrbiterUpdate.mSaltB, mDomainBundleEphemeral.mPhaseFSalts.mOrbiterUpdate.mSaltC,
                       mDomainBundleEphemeral.mPhaseFSalts.mOrbiterUpdate.mSaltD, mDomainBundleEphemeral.mPhaseFSalts.mOrbiterUpdate.mSaltE,
                       mDomainBundleEphemeral.mPhaseFSalts.mOrbiterUpdate.mSaltF);
-    pFarmSalt->Derive(aExpandLaneD, mDomainBundleEphemeral.mPhaseFSalts.mWandererUpdate.mSaltA,
+    pFarmSalt->Derive(aExpandLaneA, mDomainBundleEphemeral.mPhaseFSalts.mWandererUpdate.mSaltA,
                       mDomainBundleEphemeral.mPhaseFSalts.mWandererUpdate.mSaltB, mDomainBundleEphemeral.mPhaseFSalts.mWandererUpdate.mSaltC,
                       mDomainBundleEphemeral.mPhaseFSalts.mWandererUpdate.mSaltD, mDomainBundleEphemeral.mPhaseFSalts.mWandererUpdate.mSaltE,
                       mDomainBundleEphemeral.mPhaseFSalts.mWandererUpdate.mSaltF);
-    TwistFarmConstants::Derive(aExpandLaneA, &(mDomainBundleEphemeral.mPhaseFConstants));
+    TwistFarmConstants::Derive(aExpandLaneC, &(mDomainBundleEphemeral.mPhaseFConstants));
     KDF_B(pNonce, &(mDomainBundleEphemeral.mPhaseFConstants), &(mDomainBundleEphemeral.mPhaseFSalts), 5);
-        TwistSquash::SquashC(aExpandLaneB, aExpandLaneC, aExpandLaneD, aExpandLaneA, aInvestLaneE);
-    pFarmSalt->Derive(aExpandLaneB, pWorkSpace->mDomainBundle.mPhaseFSalts.mOrbiterAssign.mSaltA,
+        TwistSquash::SquashC(aExpandLaneD, aExpandLaneB, aExpandLaneA, aExpandLaneC, aInvestLaneC);
+    pFarmSalt->Derive(aExpandLaneD, pWorkSpace->mDomainBundle.mPhaseFSalts.mOrbiterAssign.mSaltA,
                       pWorkSpace->mDomainBundle.mPhaseFSalts.mOrbiterAssign.mSaltB, pWorkSpace->mDomainBundle.mPhaseFSalts.mOrbiterAssign.mSaltC,
                       pWorkSpace->mDomainBundle.mPhaseFSalts.mOrbiterAssign.mSaltD, pWorkSpace->mDomainBundle.mPhaseFSalts.mOrbiterAssign.mSaltE,
                       pWorkSpace->mDomainBundle.mPhaseFSalts.mOrbiterAssign.mSaltF);
-    pFarmSalt->Derive(aExpandLaneC, pWorkSpace->mDomainBundle.mPhaseFSalts.mOrbiterUpdate.mSaltA,
+    pFarmSalt->Derive(aExpandLaneB, pWorkSpace->mDomainBundle.mPhaseFSalts.mOrbiterUpdate.mSaltA,
                       pWorkSpace->mDomainBundle.mPhaseFSalts.mOrbiterUpdate.mSaltB, pWorkSpace->mDomainBundle.mPhaseFSalts.mOrbiterUpdate.mSaltC,
                       pWorkSpace->mDomainBundle.mPhaseFSalts.mOrbiterUpdate.mSaltD, pWorkSpace->mDomainBundle.mPhaseFSalts.mOrbiterUpdate.mSaltE,
                       pWorkSpace->mDomainBundle.mPhaseFSalts.mOrbiterUpdate.mSaltF);
-    pFarmSalt->Derive(aExpandLaneD, pWorkSpace->mDomainBundle.mPhaseFSalts.mWandererUpdate.mSaltA,
+    pFarmSalt->Derive(aExpandLaneA, pWorkSpace->mDomainBundle.mPhaseFSalts.mWandererUpdate.mSaltA,
                       pWorkSpace->mDomainBundle.mPhaseFSalts.mWandererUpdate.mSaltB, pWorkSpace->mDomainBundle.mPhaseFSalts.mWandererUpdate.mSaltC,
                       pWorkSpace->mDomainBundle.mPhaseFSalts.mWandererUpdate.mSaltD, pWorkSpace->mDomainBundle.mPhaseFSalts.mWandererUpdate.mSaltE,
                       pWorkSpace->mDomainBundle.mPhaseFSalts.mWandererUpdate.mSaltF);
-    TwistFarmConstants::Derive(aExpandLaneA, &(pWorkSpace->mDomainBundle.mPhaseFConstants));
+    TwistFarmConstants::Derive(aExpandLaneC, &(pWorkSpace->mDomainBundle.mPhaseFConstants));
     ////////
     ////////
     ////////////////////////////////////////////////////////
@@ -693,11 +693,11 @@ void TwistExpander_BasketBall::Seed(TwistWorkSpace *pWorkSpace,
     ////////        Phase G
     ////////
     KDF_A(pNonce, &(mDomainBundleInbuilt.mPhaseGConstants), &(mDomainBundleInbuilt.mPhaseGSalts), aSnowLaneA, 6);
-    pFarmSalt->Derive(aExpandLaneB, mDomainBundleEphemeral.mPhaseGSalts.mOrbiterAssign.mSaltA,
+    pFarmSalt->Derive(aExpandLaneC, mDomainBundleEphemeral.mPhaseGSalts.mOrbiterAssign.mSaltA,
                       mDomainBundleEphemeral.mPhaseGSalts.mOrbiterAssign.mSaltB, mDomainBundleEphemeral.mPhaseGSalts.mOrbiterAssign.mSaltC,
                       mDomainBundleEphemeral.mPhaseGSalts.mOrbiterAssign.mSaltD, mDomainBundleEphemeral.mPhaseGSalts.mOrbiterAssign.mSaltE,
                       mDomainBundleEphemeral.mPhaseGSalts.mOrbiterAssign.mSaltF);
-    pFarmSalt->Derive(aExpandLaneC, mDomainBundleEphemeral.mPhaseGSalts.mOrbiterUpdate.mSaltA,
+    pFarmSalt->Derive(aExpandLaneA, mDomainBundleEphemeral.mPhaseGSalts.mOrbiterUpdate.mSaltA,
                       mDomainBundleEphemeral.mPhaseGSalts.mOrbiterUpdate.mSaltB, mDomainBundleEphemeral.mPhaseGSalts.mOrbiterUpdate.mSaltC,
                       mDomainBundleEphemeral.mPhaseGSalts.mOrbiterUpdate.mSaltD, mDomainBundleEphemeral.mPhaseGSalts.mOrbiterUpdate.mSaltE,
                       mDomainBundleEphemeral.mPhaseGSalts.mOrbiterUpdate.mSaltF);
@@ -705,14 +705,14 @@ void TwistExpander_BasketBall::Seed(TwistWorkSpace *pWorkSpace,
                       mDomainBundleEphemeral.mPhaseGSalts.mWandererUpdate.mSaltB, mDomainBundleEphemeral.mPhaseGSalts.mWandererUpdate.mSaltC,
                       mDomainBundleEphemeral.mPhaseGSalts.mWandererUpdate.mSaltD, mDomainBundleEphemeral.mPhaseGSalts.mWandererUpdate.mSaltE,
                       mDomainBundleEphemeral.mPhaseGSalts.mWandererUpdate.mSaltF);
-    TwistFarmConstants::Derive(aExpandLaneA, &(mDomainBundleEphemeral.mPhaseGConstants));
+    TwistFarmConstants::Derive(aExpandLaneB, &(mDomainBundleEphemeral.mPhaseGConstants));
     KDF_B(pNonce, &(mDomainBundleEphemeral.mPhaseGConstants), &(mDomainBundleEphemeral.mPhaseGSalts), 6);
-        TwistSquash::SquashC(aExpandLaneB, aExpandLaneC, aExpandLaneD, aExpandLaneA, aInvestLaneB);
-    pFarmSalt->Derive(aExpandLaneB, pWorkSpace->mDomainBundle.mPhaseGSalts.mOrbiterAssign.mSaltA,
+        TwistSquash::SquashA(aExpandLaneC, aExpandLaneA, aExpandLaneD, aExpandLaneB, aInvestLaneG);
+    pFarmSalt->Derive(aExpandLaneC, pWorkSpace->mDomainBundle.mPhaseGSalts.mOrbiterAssign.mSaltA,
                       pWorkSpace->mDomainBundle.mPhaseGSalts.mOrbiterAssign.mSaltB, pWorkSpace->mDomainBundle.mPhaseGSalts.mOrbiterAssign.mSaltC,
                       pWorkSpace->mDomainBundle.mPhaseGSalts.mOrbiterAssign.mSaltD, pWorkSpace->mDomainBundle.mPhaseGSalts.mOrbiterAssign.mSaltE,
                       pWorkSpace->mDomainBundle.mPhaseGSalts.mOrbiterAssign.mSaltF);
-    pFarmSalt->Derive(aExpandLaneC, pWorkSpace->mDomainBundle.mPhaseGSalts.mOrbiterUpdate.mSaltA,
+    pFarmSalt->Derive(aExpandLaneA, pWorkSpace->mDomainBundle.mPhaseGSalts.mOrbiterUpdate.mSaltA,
                       pWorkSpace->mDomainBundle.mPhaseGSalts.mOrbiterUpdate.mSaltB, pWorkSpace->mDomainBundle.mPhaseGSalts.mOrbiterUpdate.mSaltC,
                       pWorkSpace->mDomainBundle.mPhaseGSalts.mOrbiterUpdate.mSaltD, pWorkSpace->mDomainBundle.mPhaseGSalts.mOrbiterUpdate.mSaltE,
                       pWorkSpace->mDomainBundle.mPhaseGSalts.mOrbiterUpdate.mSaltF);
@@ -720,19 +720,19 @@ void TwistExpander_BasketBall::Seed(TwistWorkSpace *pWorkSpace,
                       pWorkSpace->mDomainBundle.mPhaseGSalts.mWandererUpdate.mSaltB, pWorkSpace->mDomainBundle.mPhaseGSalts.mWandererUpdate.mSaltC,
                       pWorkSpace->mDomainBundle.mPhaseGSalts.mWandererUpdate.mSaltD, pWorkSpace->mDomainBundle.mPhaseGSalts.mWandererUpdate.mSaltE,
                       pWorkSpace->mDomainBundle.mPhaseGSalts.mWandererUpdate.mSaltF);
-    TwistFarmConstants::Derive(aExpandLaneA, &(pWorkSpace->mDomainBundle.mPhaseGConstants));
+    TwistFarmConstants::Derive(aExpandLaneB, &(pWorkSpace->mDomainBundle.mPhaseGConstants));
     ////////
     ////////
     ////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////
     ////////        Phase H
     ////////
-    KDF_A(pNonce, &(mDomainBundleInbuilt.mPhaseHConstants), &(mDomainBundleInbuilt.mPhaseHSalts), aSnowLaneB, 7);
+    KDF_A(pNonce, &(mDomainBundleInbuilt.mPhaseHConstants), &(mDomainBundleInbuilt.mPhaseHSalts), aSnowLaneC, 7);
     pFarmSalt->Derive(aExpandLaneD, mDomainBundleEphemeral.mPhaseHSalts.mOrbiterAssign.mSaltA,
                       mDomainBundleEphemeral.mPhaseHSalts.mOrbiterAssign.mSaltB, mDomainBundleEphemeral.mPhaseHSalts.mOrbiterAssign.mSaltC,
                       mDomainBundleEphemeral.mPhaseHSalts.mOrbiterAssign.mSaltD, mDomainBundleEphemeral.mPhaseHSalts.mOrbiterAssign.mSaltE,
                       mDomainBundleEphemeral.mPhaseHSalts.mOrbiterAssign.mSaltF);
-    pFarmSalt->Derive(aExpandLaneC, mDomainBundleEphemeral.mPhaseHSalts.mOrbiterUpdate.mSaltA,
+    pFarmSalt->Derive(aExpandLaneB, mDomainBundleEphemeral.mPhaseHSalts.mOrbiterUpdate.mSaltA,
                       mDomainBundleEphemeral.mPhaseHSalts.mOrbiterUpdate.mSaltB, mDomainBundleEphemeral.mPhaseHSalts.mOrbiterUpdate.mSaltC,
                       mDomainBundleEphemeral.mPhaseHSalts.mOrbiterUpdate.mSaltD, mDomainBundleEphemeral.mPhaseHSalts.mOrbiterUpdate.mSaltE,
                       mDomainBundleEphemeral.mPhaseHSalts.mOrbiterUpdate.mSaltF);
@@ -740,14 +740,14 @@ void TwistExpander_BasketBall::Seed(TwistWorkSpace *pWorkSpace,
                       mDomainBundleEphemeral.mPhaseHSalts.mWandererUpdate.mSaltB, mDomainBundleEphemeral.mPhaseHSalts.mWandererUpdate.mSaltC,
                       mDomainBundleEphemeral.mPhaseHSalts.mWandererUpdate.mSaltD, mDomainBundleEphemeral.mPhaseHSalts.mWandererUpdate.mSaltE,
                       mDomainBundleEphemeral.mPhaseHSalts.mWandererUpdate.mSaltF);
-    TwistFarmConstants::Derive(aExpandLaneB, &(mDomainBundleEphemeral.mPhaseHConstants));
+    TwistFarmConstants::Derive(aExpandLaneC, &(mDomainBundleEphemeral.mPhaseHConstants));
     KDF_B(pNonce, &(mDomainBundleEphemeral.mPhaseHConstants), &(mDomainBundleEphemeral.mPhaseHSalts), 7);
-        TwistSquash::SquashC(aExpandLaneD, aExpandLaneC, aExpandLaneA, aExpandLaneB, aInvestLaneA);
+        TwistSquash::SquashA(aExpandLaneD, aExpandLaneB, aExpandLaneA, aExpandLaneC, aInvestLaneB);
     pFarmSalt->Derive(aExpandLaneD, pWorkSpace->mDomainBundle.mPhaseHSalts.mOrbiterAssign.mSaltA,
                       pWorkSpace->mDomainBundle.mPhaseHSalts.mOrbiterAssign.mSaltB, pWorkSpace->mDomainBundle.mPhaseHSalts.mOrbiterAssign.mSaltC,
                       pWorkSpace->mDomainBundle.mPhaseHSalts.mOrbiterAssign.mSaltD, pWorkSpace->mDomainBundle.mPhaseHSalts.mOrbiterAssign.mSaltE,
                       pWorkSpace->mDomainBundle.mPhaseHSalts.mOrbiterAssign.mSaltF);
-    pFarmSalt->Derive(aExpandLaneC, pWorkSpace->mDomainBundle.mPhaseHSalts.mOrbiterUpdate.mSaltA,
+    pFarmSalt->Derive(aExpandLaneB, pWorkSpace->mDomainBundle.mPhaseHSalts.mOrbiterUpdate.mSaltA,
                       pWorkSpace->mDomainBundle.mPhaseHSalts.mOrbiterUpdate.mSaltB, pWorkSpace->mDomainBundle.mPhaseHSalts.mOrbiterUpdate.mSaltC,
                       pWorkSpace->mDomainBundle.mPhaseHSalts.mOrbiterUpdate.mSaltD, pWorkSpace->mDomainBundle.mPhaseHSalts.mOrbiterUpdate.mSaltE,
                       pWorkSpace->mDomainBundle.mPhaseHSalts.mOrbiterUpdate.mSaltF);
@@ -755,7 +755,7 @@ void TwistExpander_BasketBall::Seed(TwistWorkSpace *pWorkSpace,
                       pWorkSpace->mDomainBundle.mPhaseHSalts.mWandererUpdate.mSaltB, pWorkSpace->mDomainBundle.mPhaseHSalts.mWandererUpdate.mSaltC,
                       pWorkSpace->mDomainBundle.mPhaseHSalts.mWandererUpdate.mSaltD, pWorkSpace->mDomainBundle.mPhaseHSalts.mWandererUpdate.mSaltE,
                       pWorkSpace->mDomainBundle.mPhaseHSalts.mWandererUpdate.mSaltF);
-    TwistFarmConstants::Derive(aExpandLaneB, &(pWorkSpace->mDomainBundle.mPhaseHConstants));
+    TwistFarmConstants::Derive(aExpandLaneC, &(pWorkSpace->mDomainBundle.mPhaseHConstants));
     ////////
     ////////
     ////////////////////////////////////////////////////////
@@ -1013,7 +1013,7 @@ void TwistExpander_BasketBall::Seed(TwistWorkSpace *pWorkSpace,
                  &aWandererJ,
                  &aWandererK);
 
-        TwistSquash::SquashA(aExpandLaneA, aExpandLaneB, aExpandLaneC, aExpandLaneD, pDestination);
+        TwistSquash::SquashB(aExpandLaneA, aExpandLaneB, aExpandLaneC, aExpandLaneD, pDestination);
     //
     // ---------------------------------------------------
     // GROW_A grow_key_a:
@@ -1083,272 +1083,272 @@ void TwistExpander_BasketBall::SquashInvestToKeyBoxes() {
 
     // key_box_a row 0
     {
-        std::uint8_t *aFragmentA = aInvestLaneA + (W_KEY * 12U), *aFragmentB = aInvestLaneB + (W_KEY * 10U);
-        std::uint8_t *aFragmentC = aInvestLaneC + (W_KEY * 5U), *aFragmentD = aInvestLaneD + (W_KEY * 7U);
-        std::uint8_t *aFragmentE = aInvestLaneE + (W_KEY * 0U), *aFragmentF = aInvestLaneF + (W_KEY * 11U);
-        std::uint8_t *aFragmentG = aInvestLaneG + (W_KEY * 14U), *aFragmentH = aInvestLaneH + (W_KEY * 4U);
+        std::uint8_t *aFragmentA = aInvestLaneA + (W_KEY * 12U), *aFragmentB = aInvestLaneB + (W_KEY * 7U);
+        std::uint8_t *aFragmentC = aInvestLaneC + (W_KEY * 12U), *aFragmentD = aInvestLaneD + (W_KEY * 14U);
+        std::uint8_t *aFragmentE = aInvestLaneE + (W_KEY * 14U), *aFragmentF = aInvestLaneF + (W_KEY * 9U);
+        std::uint8_t *aFragmentG = aInvestLaneG + (W_KEY * 4U), *aFragmentH = aInvestLaneH + (W_KEY * 8U);
         std::uint8_t *aKeyRow = &(pWorkSpace->mKeyBoxA[0][0]);
         for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(W_KEY); aIndex += 1U) {
             std::uint64_t aSquash =
-                (static_cast<std::uint64_t>(aFragmentA[aIndex]) << 40U) | (static_cast<std::uint64_t>(aFragmentB[aIndex]) << 0U) |
-                (static_cast<std::uint64_t>(aFragmentC[aIndex]) << 56U) | (static_cast<std::uint64_t>(aFragmentD[aIndex]) << 8U) |
-                (static_cast<std::uint64_t>(aFragmentE[aIndex]) << 48U) | (static_cast<std::uint64_t>(aFragmentF[aIndex]) << 24U) |
-                (static_cast<std::uint64_t>(aFragmentG[aIndex]) << 32U) | (static_cast<std::uint64_t>(aFragmentH[aIndex]) << 16U);
-            aKeyRow[aIndex] = static_cast<std::uint8_t>(TwistMix64::DiffuseB(aSquash));
+                (static_cast<std::uint64_t>(aFragmentA[aIndex]) << 32U) | (static_cast<std::uint64_t>(aFragmentB[aIndex]) << 8U) |
+                (static_cast<std::uint64_t>(aFragmentC[aIndex]) << 40U) | (static_cast<std::uint64_t>(aFragmentD[aIndex]) << 0U) |
+                (static_cast<std::uint64_t>(aFragmentE[aIndex]) << 24U) | (static_cast<std::uint64_t>(aFragmentF[aIndex]) << 16U) |
+                (static_cast<std::uint64_t>(aFragmentG[aIndex]) << 48U) | (static_cast<std::uint64_t>(aFragmentH[aIndex]) << 56U);
+            aKeyRow[aIndex] = static_cast<std::uint8_t>(TwistMix64::DiffuseC(aSquash));
         }
     }
 
     // key_box_a row 1
     {
-        std::uint8_t *aFragmentA = aInvestLaneA + (W_KEY * 4U), *aFragmentB = aInvestLaneB + (W_KEY * 0U);
-        std::uint8_t *aFragmentC = aInvestLaneC + (W_KEY * 11U), *aFragmentD = aInvestLaneD + (W_KEY * 12U);
-        std::uint8_t *aFragmentE = aInvestLaneE + (W_KEY * 7U), *aFragmentF = aInvestLaneF + (W_KEY * 3U);
-        std::uint8_t *aFragmentG = aInvestLaneG + (W_KEY * 15U), *aFragmentH = aInvestLaneH + (W_KEY * 3U);
+        std::uint8_t *aFragmentA = aInvestLaneA + (W_KEY * 8U), *aFragmentB = aInvestLaneB + (W_KEY * 3U);
+        std::uint8_t *aFragmentC = aInvestLaneC + (W_KEY * 11U), *aFragmentD = aInvestLaneD + (W_KEY * 15U);
+        std::uint8_t *aFragmentE = aInvestLaneE + (W_KEY * 0U), *aFragmentF = aInvestLaneF + (W_KEY * 14U);
+        std::uint8_t *aFragmentG = aInvestLaneG + (W_KEY * 7U), *aFragmentH = aInvestLaneH + (W_KEY * 4U);
         std::uint8_t *aKeyRow = &(pWorkSpace->mKeyBoxA[1][0]);
         for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(W_KEY); aIndex += 1U) {
             std::uint64_t aSquash =
-                (static_cast<std::uint64_t>(aFragmentA[aIndex]) << 8U) | (static_cast<std::uint64_t>(aFragmentB[aIndex]) << 0U) |
-                (static_cast<std::uint64_t>(aFragmentC[aIndex]) << 16U) | (static_cast<std::uint64_t>(aFragmentD[aIndex]) << 32U) |
-                (static_cast<std::uint64_t>(aFragmentE[aIndex]) << 40U) | (static_cast<std::uint64_t>(aFragmentF[aIndex]) << 48U) |
-                (static_cast<std::uint64_t>(aFragmentG[aIndex]) << 56U) | (static_cast<std::uint64_t>(aFragmentH[aIndex]) << 24U);
-            aKeyRow[aIndex] = static_cast<std::uint8_t>(TwistMix64::DiffuseB(aSquash));
+                (static_cast<std::uint64_t>(aFragmentA[aIndex]) << 24U) | (static_cast<std::uint64_t>(aFragmentB[aIndex]) << 56U) |
+                (static_cast<std::uint64_t>(aFragmentC[aIndex]) << 8U) | (static_cast<std::uint64_t>(aFragmentD[aIndex]) << 0U) |
+                (static_cast<std::uint64_t>(aFragmentE[aIndex]) << 16U) | (static_cast<std::uint64_t>(aFragmentF[aIndex]) << 32U) |
+                (static_cast<std::uint64_t>(aFragmentG[aIndex]) << 40U) | (static_cast<std::uint64_t>(aFragmentH[aIndex]) << 48U);
+            aKeyRow[aIndex] = static_cast<std::uint8_t>(TwistMix64::DiffuseA(aSquash));
         }
     }
 
     // key_box_a row 2
     {
-        std::uint8_t *aFragmentA = aInvestLaneA + (W_KEY * 15U), *aFragmentB = aInvestLaneB + (W_KEY * 1U);
-        std::uint8_t *aFragmentC = aInvestLaneC + (W_KEY * 8U), *aFragmentD = aInvestLaneD + (W_KEY * 9U);
-        std::uint8_t *aFragmentE = aInvestLaneE + (W_KEY * 2U), *aFragmentF = aInvestLaneF + (W_KEY * 4U);
-        std::uint8_t *aFragmentG = aInvestLaneG + (W_KEY * 2U), *aFragmentH = aInvestLaneH + (W_KEY * 5U);
+        std::uint8_t *aFragmentA = aInvestLaneA + (W_KEY * 15U), *aFragmentB = aInvestLaneB + (W_KEY * 8U);
+        std::uint8_t *aFragmentC = aInvestLaneC + (W_KEY * 0U), *aFragmentD = aInvestLaneD + (W_KEY * 12U);
+        std::uint8_t *aFragmentE = aInvestLaneE + (W_KEY * 6U), *aFragmentF = aInvestLaneF + (W_KEY * 4U);
+        std::uint8_t *aFragmentG = aInvestLaneG + (W_KEY * 10U), *aFragmentH = aInvestLaneH + (W_KEY * 6U);
         std::uint8_t *aKeyRow = &(pWorkSpace->mKeyBoxA[2][0]);
         for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(W_KEY); aIndex += 1U) {
             std::uint64_t aSquash =
-                (static_cast<std::uint64_t>(aFragmentA[aIndex]) << 48U) | (static_cast<std::uint64_t>(aFragmentB[aIndex]) << 24U) |
-                (static_cast<std::uint64_t>(aFragmentC[aIndex]) << 56U) | (static_cast<std::uint64_t>(aFragmentD[aIndex]) << 16U) |
-                (static_cast<std::uint64_t>(aFragmentE[aIndex]) << 32U) | (static_cast<std::uint64_t>(aFragmentF[aIndex]) << 40U) |
-                (static_cast<std::uint64_t>(aFragmentG[aIndex]) << 8U) | (static_cast<std::uint64_t>(aFragmentH[aIndex]) << 0U);
-            aKeyRow[aIndex] = static_cast<std::uint8_t>(TwistMix64::DiffuseB(aSquash));
+                (static_cast<std::uint64_t>(aFragmentA[aIndex]) << 24U) | (static_cast<std::uint64_t>(aFragmentB[aIndex]) << 56U) |
+                (static_cast<std::uint64_t>(aFragmentC[aIndex]) << 0U) | (static_cast<std::uint64_t>(aFragmentD[aIndex]) << 16U) |
+                (static_cast<std::uint64_t>(aFragmentE[aIndex]) << 48U) | (static_cast<std::uint64_t>(aFragmentF[aIndex]) << 40U) |
+                (static_cast<std::uint64_t>(aFragmentG[aIndex]) << 8U) | (static_cast<std::uint64_t>(aFragmentH[aIndex]) << 32U);
+            aKeyRow[aIndex] = static_cast<std::uint8_t>(TwistMix64::DiffuseC(aSquash));
         }
     }
 
     // key_box_a row 3
     {
-        std::uint8_t *aFragmentA = aInvestLaneA + (W_KEY * 9U), *aFragmentB = aInvestLaneB + (W_KEY * 8U);
-        std::uint8_t *aFragmentC = aInvestLaneC + (W_KEY * 4U), *aFragmentD = aInvestLaneD + (W_KEY * 11U);
-        std::uint8_t *aFragmentE = aInvestLaneE + (W_KEY * 11U), *aFragmentF = aInvestLaneF + (W_KEY * 15U);
-        std::uint8_t *aFragmentG = aInvestLaneG + (W_KEY * 4U), *aFragmentH = aInvestLaneH + (W_KEY * 11U);
+        std::uint8_t *aFragmentA = aInvestLaneA + (W_KEY * 1U), *aFragmentB = aInvestLaneB + (W_KEY * 6U);
+        std::uint8_t *aFragmentC = aInvestLaneC + (W_KEY * 7U), *aFragmentD = aInvestLaneD + (W_KEY * 11U);
+        std::uint8_t *aFragmentE = aInvestLaneE + (W_KEY * 1U), *aFragmentF = aInvestLaneF + (W_KEY * 13U);
+        std::uint8_t *aFragmentG = aInvestLaneG + (W_KEY * 12U), *aFragmentH = aInvestLaneH + (W_KEY * 7U);
         std::uint8_t *aKeyRow = &(pWorkSpace->mKeyBoxA[3][0]);
         for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(W_KEY); aIndex += 1U) {
             std::uint64_t aSquash =
-                (static_cast<std::uint64_t>(aFragmentA[aIndex]) << 56U) | (static_cast<std::uint64_t>(aFragmentB[aIndex]) << 48U) |
-                (static_cast<std::uint64_t>(aFragmentC[aIndex]) << 40U) | (static_cast<std::uint64_t>(aFragmentD[aIndex]) << 24U) |
-                (static_cast<std::uint64_t>(aFragmentE[aIndex]) << 16U) | (static_cast<std::uint64_t>(aFragmentF[aIndex]) << 8U) |
-                (static_cast<std::uint64_t>(aFragmentG[aIndex]) << 32U) | (static_cast<std::uint64_t>(aFragmentH[aIndex]) << 0U);
-            aKeyRow[aIndex] = static_cast<std::uint8_t>(TwistMix64::DiffuseC(aSquash));
+                (static_cast<std::uint64_t>(aFragmentA[aIndex]) << 48U) | (static_cast<std::uint64_t>(aFragmentB[aIndex]) << 56U) |
+                (static_cast<std::uint64_t>(aFragmentC[aIndex]) << 0U) | (static_cast<std::uint64_t>(aFragmentD[aIndex]) << 24U) |
+                (static_cast<std::uint64_t>(aFragmentE[aIndex]) << 16U) | (static_cast<std::uint64_t>(aFragmentF[aIndex]) << 40U) |
+                (static_cast<std::uint64_t>(aFragmentG[aIndex]) << 32U) | (static_cast<std::uint64_t>(aFragmentH[aIndex]) << 8U);
+            aKeyRow[aIndex] = static_cast<std::uint8_t>(TwistMix64::DiffuseB(aSquash));
         }
     }
 
     // key_box_a row 4
     {
-        std::uint8_t *aFragmentA = aInvestLaneA + (W_KEY * 7U), *aFragmentB = aInvestLaneB + (W_KEY * 15U);
-        std::uint8_t *aFragmentC = aInvestLaneC + (W_KEY * 9U), *aFragmentD = aInvestLaneD + (W_KEY * 1U);
-        std::uint8_t *aFragmentE = aInvestLaneE + (W_KEY * 15U), *aFragmentF = aInvestLaneF + (W_KEY * 8U);
-        std::uint8_t *aFragmentG = aInvestLaneG + (W_KEY * 5U), *aFragmentH = aInvestLaneH + (W_KEY * 7U);
+        std::uint8_t *aFragmentA = aInvestLaneA + (W_KEY * 2U), *aFragmentB = aInvestLaneB + (W_KEY * 14U);
+        std::uint8_t *aFragmentC = aInvestLaneC + (W_KEY * 9U), *aFragmentD = aInvestLaneD + (W_KEY * 6U);
+        std::uint8_t *aFragmentE = aInvestLaneE + (W_KEY * 8U), *aFragmentF = aInvestLaneF + (W_KEY * 7U);
+        std::uint8_t *aFragmentG = aInvestLaneG + (W_KEY * 6U), *aFragmentH = aInvestLaneH + (W_KEY * 3U);
         std::uint8_t *aKeyRow = &(pWorkSpace->mKeyBoxA[4][0]);
         for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(W_KEY); aIndex += 1U) {
             std::uint64_t aSquash =
-                (static_cast<std::uint64_t>(aFragmentA[aIndex]) << 16U) | (static_cast<std::uint64_t>(aFragmentB[aIndex]) << 40U) |
-                (static_cast<std::uint64_t>(aFragmentC[aIndex]) << 48U) | (static_cast<std::uint64_t>(aFragmentD[aIndex]) << 24U) |
-                (static_cast<std::uint64_t>(aFragmentE[aIndex]) << 56U) | (static_cast<std::uint64_t>(aFragmentF[aIndex]) << 0U) |
-                (static_cast<std::uint64_t>(aFragmentG[aIndex]) << 8U) | (static_cast<std::uint64_t>(aFragmentH[aIndex]) << 32U);
+                (static_cast<std::uint64_t>(aFragmentA[aIndex]) << 16U) | (static_cast<std::uint64_t>(aFragmentB[aIndex]) << 32U) |
+                (static_cast<std::uint64_t>(aFragmentC[aIndex]) << 56U) | (static_cast<std::uint64_t>(aFragmentD[aIndex]) << 24U) |
+                (static_cast<std::uint64_t>(aFragmentE[aIndex]) << 8U) | (static_cast<std::uint64_t>(aFragmentF[aIndex]) << 0U) |
+                (static_cast<std::uint64_t>(aFragmentG[aIndex]) << 40U) | (static_cast<std::uint64_t>(aFragmentH[aIndex]) << 48U);
             aKeyRow[aIndex] = static_cast<std::uint8_t>(TwistMix64::DiffuseA(aSquash));
         }
     }
 
     // key_box_a row 5
     {
-        std::uint8_t *aFragmentA = aInvestLaneA + (W_KEY * 3U), *aFragmentB = aInvestLaneB + (W_KEY * 12U);
-        std::uint8_t *aFragmentC = aInvestLaneC + (W_KEY * 1U), *aFragmentD = aInvestLaneD + (W_KEY * 13U);
-        std::uint8_t *aFragmentE = aInvestLaneE + (W_KEY * 1U), *aFragmentF = aInvestLaneF + (W_KEY * 0U);
-        std::uint8_t *aFragmentG = aInvestLaneG + (W_KEY * 11U), *aFragmentH = aInvestLaneH + (W_KEY * 2U);
+        std::uint8_t *aFragmentA = aInvestLaneA + (W_KEY * 11U), *aFragmentB = aInvestLaneB + (W_KEY * 12U);
+        std::uint8_t *aFragmentC = aInvestLaneC + (W_KEY * 10U), *aFragmentD = aInvestLaneD + (W_KEY * 0U);
+        std::uint8_t *aFragmentE = aInvestLaneE + (W_KEY * 5U), *aFragmentF = aInvestLaneF + (W_KEY * 6U);
+        std::uint8_t *aFragmentG = aInvestLaneG + (W_KEY * 8U), *aFragmentH = aInvestLaneH + (W_KEY * 11U);
         std::uint8_t *aKeyRow = &(pWorkSpace->mKeyBoxA[5][0]);
         for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(W_KEY); aIndex += 1U) {
             std::uint64_t aSquash =
-                (static_cast<std::uint64_t>(aFragmentA[aIndex]) << 16U) | (static_cast<std::uint64_t>(aFragmentB[aIndex]) << 56U) |
-                (static_cast<std::uint64_t>(aFragmentC[aIndex]) << 8U) | (static_cast<std::uint64_t>(aFragmentD[aIndex]) << 32U) |
-                (static_cast<std::uint64_t>(aFragmentE[aIndex]) << 24U) | (static_cast<std::uint64_t>(aFragmentF[aIndex]) << 0U) |
-                (static_cast<std::uint64_t>(aFragmentG[aIndex]) << 48U) | (static_cast<std::uint64_t>(aFragmentH[aIndex]) << 40U);
+                (static_cast<std::uint64_t>(aFragmentA[aIndex]) << 56U) | (static_cast<std::uint64_t>(aFragmentB[aIndex]) << 0U) |
+                (static_cast<std::uint64_t>(aFragmentC[aIndex]) << 40U) | (static_cast<std::uint64_t>(aFragmentD[aIndex]) << 32U) |
+                (static_cast<std::uint64_t>(aFragmentE[aIndex]) << 8U) | (static_cast<std::uint64_t>(aFragmentF[aIndex]) << 24U) |
+                (static_cast<std::uint64_t>(aFragmentG[aIndex]) << 16U) | (static_cast<std::uint64_t>(aFragmentH[aIndex]) << 48U);
             aKeyRow[aIndex] = static_cast<std::uint8_t>(TwistMix64::DiffuseB(aSquash));
         }
     }
 
     // key_box_a row 6
     {
-        std::uint8_t *aFragmentA = aInvestLaneA + (W_KEY * 5U), *aFragmentB = aInvestLaneB + (W_KEY * 9U);
-        std::uint8_t *aFragmentC = aInvestLaneC + (W_KEY * 10U), *aFragmentD = aInvestLaneD + (W_KEY * 5U);
-        std::uint8_t *aFragmentE = aInvestLaneE + (W_KEY * 3U), *aFragmentF = aInvestLaneF + (W_KEY * 7U);
-        std::uint8_t *aFragmentG = aInvestLaneG + (W_KEY * 10U), *aFragmentH = aInvestLaneH + (W_KEY * 14U);
+        std::uint8_t *aFragmentA = aInvestLaneA + (W_KEY * 10U), *aFragmentB = aInvestLaneB + (W_KEY * 2U);
+        std::uint8_t *aFragmentC = aInvestLaneC + (W_KEY * 15U), *aFragmentD = aInvestLaneD + (W_KEY * 5U);
+        std::uint8_t *aFragmentE = aInvestLaneE + (W_KEY * 2U), *aFragmentF = aInvestLaneF + (W_KEY * 10U);
+        std::uint8_t *aFragmentG = aInvestLaneG + (W_KEY * 9U), *aFragmentH = aInvestLaneH + (W_KEY * 14U);
         std::uint8_t *aKeyRow = &(pWorkSpace->mKeyBoxA[6][0]);
         for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(W_KEY); aIndex += 1U) {
             std::uint64_t aSquash =
-                (static_cast<std::uint64_t>(aFragmentA[aIndex]) << 48U) | (static_cast<std::uint64_t>(aFragmentB[aIndex]) << 16U) |
-                (static_cast<std::uint64_t>(aFragmentC[aIndex]) << 56U) | (static_cast<std::uint64_t>(aFragmentD[aIndex]) << 0U) |
-                (static_cast<std::uint64_t>(aFragmentE[aIndex]) << 40U) | (static_cast<std::uint64_t>(aFragmentF[aIndex]) << 32U) |
-                (static_cast<std::uint64_t>(aFragmentG[aIndex]) << 24U) | (static_cast<std::uint64_t>(aFragmentH[aIndex]) << 8U);
+                (static_cast<std::uint64_t>(aFragmentA[aIndex]) << 0U) | (static_cast<std::uint64_t>(aFragmentB[aIndex]) << 16U) |
+                (static_cast<std::uint64_t>(aFragmentC[aIndex]) << 48U) | (static_cast<std::uint64_t>(aFragmentD[aIndex]) << 8U) |
+                (static_cast<std::uint64_t>(aFragmentE[aIndex]) << 56U) | (static_cast<std::uint64_t>(aFragmentF[aIndex]) << 32U) |
+                (static_cast<std::uint64_t>(aFragmentG[aIndex]) << 40U) | (static_cast<std::uint64_t>(aFragmentH[aIndex]) << 24U);
             aKeyRow[aIndex] = static_cast<std::uint8_t>(TwistMix64::DiffuseA(aSquash));
         }
     }
 
     // key_box_a row 7
     {
-        std::uint8_t *aFragmentA = aInvestLaneA + (W_KEY * 11U), *aFragmentB = aInvestLaneB + (W_KEY * 14U);
-        std::uint8_t *aFragmentC = aInvestLaneC + (W_KEY * 13U), *aFragmentD = aInvestLaneD + (W_KEY * 2U);
-        std::uint8_t *aFragmentE = aInvestLaneE + (W_KEY * 9U), *aFragmentF = aInvestLaneF + (W_KEY * 14U);
-        std::uint8_t *aFragmentG = aInvestLaneG + (W_KEY * 13U), *aFragmentH = aInvestLaneH + (W_KEY * 6U);
+        std::uint8_t *aFragmentA = aInvestLaneA + (W_KEY * 6U), *aFragmentB = aInvestLaneB + (W_KEY * 0U);
+        std::uint8_t *aFragmentC = aInvestLaneC + (W_KEY * 4U), *aFragmentD = aInvestLaneD + (W_KEY * 8U);
+        std::uint8_t *aFragmentE = aInvestLaneE + (W_KEY * 7U), *aFragmentF = aInvestLaneF + (W_KEY * 15U);
+        std::uint8_t *aFragmentG = aInvestLaneG + (W_KEY * 11U), *aFragmentH = aInvestLaneH + (W_KEY * 12U);
         std::uint8_t *aKeyRow = &(pWorkSpace->mKeyBoxA[7][0]);
         for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(W_KEY); aIndex += 1U) {
             std::uint64_t aSquash =
-                (static_cast<std::uint64_t>(aFragmentA[aIndex]) << 40U) | (static_cast<std::uint64_t>(aFragmentB[aIndex]) << 0U) |
-                (static_cast<std::uint64_t>(aFragmentC[aIndex]) << 24U) | (static_cast<std::uint64_t>(aFragmentD[aIndex]) << 16U) |
-                (static_cast<std::uint64_t>(aFragmentE[aIndex]) << 56U) | (static_cast<std::uint64_t>(aFragmentF[aIndex]) << 32U) |
-                (static_cast<std::uint64_t>(aFragmentG[aIndex]) << 48U) | (static_cast<std::uint64_t>(aFragmentH[aIndex]) << 8U);
+                (static_cast<std::uint64_t>(aFragmentA[aIndex]) << 40U) | (static_cast<std::uint64_t>(aFragmentB[aIndex]) << 56U) |
+                (static_cast<std::uint64_t>(aFragmentC[aIndex]) << 32U) | (static_cast<std::uint64_t>(aFragmentD[aIndex]) << 0U) |
+                (static_cast<std::uint64_t>(aFragmentE[aIndex]) << 48U) | (static_cast<std::uint64_t>(aFragmentF[aIndex]) << 24U) |
+                (static_cast<std::uint64_t>(aFragmentG[aIndex]) << 16U) | (static_cast<std::uint64_t>(aFragmentH[aIndex]) << 8U);
             aKeyRow[aIndex] = static_cast<std::uint8_t>(TwistMix64::DiffuseC(aSquash));
         }
     }
 
     // key_box_b row 0
     {
-        std::uint8_t *aFragmentA = aInvestLaneA + (W_KEY * 1U), *aFragmentB = aInvestLaneB + (W_KEY * 2U);
-        std::uint8_t *aFragmentC = aInvestLaneC + (W_KEY * 6U), *aFragmentD = aInvestLaneD + (W_KEY * 3U);
-        std::uint8_t *aFragmentE = aInvestLaneE + (W_KEY * 5U), *aFragmentF = aInvestLaneF + (W_KEY * 2U);
-        std::uint8_t *aFragmentG = aInvestLaneG + (W_KEY * 0U), *aFragmentH = aInvestLaneH + (W_KEY * 13U);
+        std::uint8_t *aFragmentA = aInvestLaneA + (W_KEY * 13U), *aFragmentB = aInvestLaneB + (W_KEY * 4U);
+        std::uint8_t *aFragmentC = aInvestLaneC + (W_KEY * 6U), *aFragmentD = aInvestLaneD + (W_KEY * 1U);
+        std::uint8_t *aFragmentE = aInvestLaneE + (W_KEY * 12U), *aFragmentF = aInvestLaneF + (W_KEY * 11U);
+        std::uint8_t *aFragmentG = aInvestLaneG + (W_KEY * 2U), *aFragmentH = aInvestLaneH + (W_KEY * 0U);
         std::uint8_t *aKeyRow = &(pWorkSpace->mKeyBoxB[0][0]);
         for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(W_KEY); aIndex += 1U) {
             std::uint64_t aSquash =
-                (static_cast<std::uint64_t>(aFragmentA[aIndex]) << 40U) | (static_cast<std::uint64_t>(aFragmentB[aIndex]) << 24U) |
-                (static_cast<std::uint64_t>(aFragmentC[aIndex]) << 0U) | (static_cast<std::uint64_t>(aFragmentD[aIndex]) << 56U) |
-                (static_cast<std::uint64_t>(aFragmentE[aIndex]) << 48U) | (static_cast<std::uint64_t>(aFragmentF[aIndex]) << 8U) |
-                (static_cast<std::uint64_t>(aFragmentG[aIndex]) << 16U) | (static_cast<std::uint64_t>(aFragmentH[aIndex]) << 32U);
+                (static_cast<std::uint64_t>(aFragmentA[aIndex]) << 0U) | (static_cast<std::uint64_t>(aFragmentB[aIndex]) << 16U) |
+                (static_cast<std::uint64_t>(aFragmentC[aIndex]) << 8U) | (static_cast<std::uint64_t>(aFragmentD[aIndex]) << 56U) |
+                (static_cast<std::uint64_t>(aFragmentE[aIndex]) << 24U) | (static_cast<std::uint64_t>(aFragmentF[aIndex]) << 32U) |
+                (static_cast<std::uint64_t>(aFragmentG[aIndex]) << 48U) | (static_cast<std::uint64_t>(aFragmentH[aIndex]) << 40U);
             aKeyRow[aIndex] = static_cast<std::uint8_t>(TwistMix64::DiffuseB(aSquash));
         }
     }
 
     // key_box_b row 1
     {
-        std::uint8_t *aFragmentA = aInvestLaneA + (W_KEY * 14U), *aFragmentB = aInvestLaneB + (W_KEY * 13U);
-        std::uint8_t *aFragmentC = aInvestLaneC + (W_KEY * 2U), *aFragmentD = aInvestLaneD + (W_KEY * 10U);
-        std::uint8_t *aFragmentE = aInvestLaneE + (W_KEY * 13U), *aFragmentF = aInvestLaneF + (W_KEY * 1U);
-        std::uint8_t *aFragmentG = aInvestLaneG + (W_KEY * 7U), *aFragmentH = aInvestLaneH + (W_KEY * 15U);
+        std::uint8_t *aFragmentA = aInvestLaneA + (W_KEY * 9U), *aFragmentB = aInvestLaneB + (W_KEY * 15U);
+        std::uint8_t *aFragmentC = aInvestLaneC + (W_KEY * 2U), *aFragmentD = aInvestLaneD + (W_KEY * 2U);
+        std::uint8_t *aFragmentE = aInvestLaneE + (W_KEY * 13U), *aFragmentF = aInvestLaneF + (W_KEY * 0U);
+        std::uint8_t *aFragmentG = aInvestLaneG + (W_KEY * 3U), *aFragmentH = aInvestLaneH + (W_KEY * 10U);
         std::uint8_t *aKeyRow = &(pWorkSpace->mKeyBoxB[1][0]);
         for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(W_KEY); aIndex += 1U) {
             std::uint64_t aSquash =
-                (static_cast<std::uint64_t>(aFragmentA[aIndex]) << 8U) | (static_cast<std::uint64_t>(aFragmentB[aIndex]) << 16U) |
-                (static_cast<std::uint64_t>(aFragmentC[aIndex]) << 0U) | (static_cast<std::uint64_t>(aFragmentD[aIndex]) << 56U) |
-                (static_cast<std::uint64_t>(aFragmentE[aIndex]) << 32U) | (static_cast<std::uint64_t>(aFragmentF[aIndex]) << 48U) |
-                (static_cast<std::uint64_t>(aFragmentG[aIndex]) << 40U) | (static_cast<std::uint64_t>(aFragmentH[aIndex]) << 24U);
-            aKeyRow[aIndex] = static_cast<std::uint8_t>(TwistMix64::DiffuseA(aSquash));
+                (static_cast<std::uint64_t>(aFragmentA[aIndex]) << 48U) | (static_cast<std::uint64_t>(aFragmentB[aIndex]) << 40U) |
+                (static_cast<std::uint64_t>(aFragmentC[aIndex]) << 8U) | (static_cast<std::uint64_t>(aFragmentD[aIndex]) << 56U) |
+                (static_cast<std::uint64_t>(aFragmentE[aIndex]) << 32U) | (static_cast<std::uint64_t>(aFragmentF[aIndex]) << 24U) |
+                (static_cast<std::uint64_t>(aFragmentG[aIndex]) << 16U) | (static_cast<std::uint64_t>(aFragmentH[aIndex]) << 0U);
+            aKeyRow[aIndex] = static_cast<std::uint8_t>(TwistMix64::DiffuseC(aSquash));
         }
     }
 
     // key_box_b row 2
     {
-        std::uint8_t *aFragmentA = aInvestLaneA + (W_KEY * 13U), *aFragmentB = aInvestLaneB + (W_KEY * 6U);
-        std::uint8_t *aFragmentC = aInvestLaneC + (W_KEY * 0U), *aFragmentD = aInvestLaneD + (W_KEY * 14U);
-        std::uint8_t *aFragmentE = aInvestLaneE + (W_KEY * 14U), *aFragmentF = aInvestLaneF + (W_KEY * 9U);
-        std::uint8_t *aFragmentG = aInvestLaneG + (W_KEY * 1U), *aFragmentH = aInvestLaneH + (W_KEY * 12U);
+        std::uint8_t *aFragmentA = aInvestLaneA + (W_KEY * 4U), *aFragmentB = aInvestLaneB + (W_KEY * 5U);
+        std::uint8_t *aFragmentC = aInvestLaneC + (W_KEY * 14U), *aFragmentD = aInvestLaneD + (W_KEY * 13U);
+        std::uint8_t *aFragmentE = aInvestLaneE + (W_KEY * 3U), *aFragmentF = aInvestLaneF + (W_KEY * 12U);
+        std::uint8_t *aFragmentG = aInvestLaneG + (W_KEY * 1U), *aFragmentH = aInvestLaneH + (W_KEY * 5U);
         std::uint8_t *aKeyRow = &(pWorkSpace->mKeyBoxB[2][0]);
         for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(W_KEY); aIndex += 1U) {
             std::uint64_t aSquash =
-                (static_cast<std::uint64_t>(aFragmentA[aIndex]) << 56U) | (static_cast<std::uint64_t>(aFragmentB[aIndex]) << 40U) |
-                (static_cast<std::uint64_t>(aFragmentC[aIndex]) << 48U) | (static_cast<std::uint64_t>(aFragmentD[aIndex]) << 32U) |
-                (static_cast<std::uint64_t>(aFragmentE[aIndex]) << 16U) | (static_cast<std::uint64_t>(aFragmentF[aIndex]) << 0U) |
-                (static_cast<std::uint64_t>(aFragmentG[aIndex]) << 8U) | (static_cast<std::uint64_t>(aFragmentH[aIndex]) << 24U);
-            aKeyRow[aIndex] = static_cast<std::uint8_t>(TwistMix64::DiffuseA(aSquash));
+                (static_cast<std::uint64_t>(aFragmentA[aIndex]) << 56U) | (static_cast<std::uint64_t>(aFragmentB[aIndex]) << 24U) |
+                (static_cast<std::uint64_t>(aFragmentC[aIndex]) << 32U) | (static_cast<std::uint64_t>(aFragmentD[aIndex]) << 16U) |
+                (static_cast<std::uint64_t>(aFragmentE[aIndex]) << 40U) | (static_cast<std::uint64_t>(aFragmentF[aIndex]) << 8U) |
+                (static_cast<std::uint64_t>(aFragmentG[aIndex]) << 0U) | (static_cast<std::uint64_t>(aFragmentH[aIndex]) << 48U);
+            aKeyRow[aIndex] = static_cast<std::uint8_t>(TwistMix64::DiffuseC(aSquash));
         }
     }
 
     // key_box_b row 3
     {
-        std::uint8_t *aFragmentA = aInvestLaneA + (W_KEY * 6U), *aFragmentB = aInvestLaneB + (W_KEY * 5U);
-        std::uint8_t *aFragmentC = aInvestLaneC + (W_KEY * 7U), *aFragmentD = aInvestLaneD + (W_KEY * 15U);
-        std::uint8_t *aFragmentE = aInvestLaneE + (W_KEY * 6U), *aFragmentF = aInvestLaneF + (W_KEY * 6U);
-        std::uint8_t *aFragmentG = aInvestLaneG + (W_KEY * 6U), *aFragmentH = aInvestLaneH + (W_KEY * 10U);
+        std::uint8_t *aFragmentA = aInvestLaneA + (W_KEY * 7U), *aFragmentB = aInvestLaneB + (W_KEY * 9U);
+        std::uint8_t *aFragmentC = aInvestLaneC + (W_KEY * 1U), *aFragmentD = aInvestLaneD + (W_KEY * 4U);
+        std::uint8_t *aFragmentE = aInvestLaneE + (W_KEY * 11U), *aFragmentF = aInvestLaneF + (W_KEY * 1U);
+        std::uint8_t *aFragmentG = aInvestLaneG + (W_KEY * 15U), *aFragmentH = aInvestLaneH + (W_KEY * 9U);
         std::uint8_t *aKeyRow = &(pWorkSpace->mKeyBoxB[3][0]);
         for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(W_KEY); aIndex += 1U) {
             std::uint64_t aSquash =
-                (static_cast<std::uint64_t>(aFragmentA[aIndex]) << 16U) | (static_cast<std::uint64_t>(aFragmentB[aIndex]) << 40U) |
-                (static_cast<std::uint64_t>(aFragmentC[aIndex]) << 24U) | (static_cast<std::uint64_t>(aFragmentD[aIndex]) << 56U) |
-                (static_cast<std::uint64_t>(aFragmentE[aIndex]) << 32U) | (static_cast<std::uint64_t>(aFragmentF[aIndex]) << 48U) |
-                (static_cast<std::uint64_t>(aFragmentG[aIndex]) << 8U) | (static_cast<std::uint64_t>(aFragmentH[aIndex]) << 0U);
+                (static_cast<std::uint64_t>(aFragmentA[aIndex]) << 56U) | (static_cast<std::uint64_t>(aFragmentB[aIndex]) << 48U) |
+                (static_cast<std::uint64_t>(aFragmentC[aIndex]) << 40U) | (static_cast<std::uint64_t>(aFragmentD[aIndex]) << 24U) |
+                (static_cast<std::uint64_t>(aFragmentE[aIndex]) << 0U) | (static_cast<std::uint64_t>(aFragmentF[aIndex]) << 8U) |
+                (static_cast<std::uint64_t>(aFragmentG[aIndex]) << 32U) | (static_cast<std::uint64_t>(aFragmentH[aIndex]) << 16U);
             aKeyRow[aIndex] = static_cast<std::uint8_t>(TwistMix64::DiffuseB(aSquash));
         }
     }
 
     // key_box_b row 4
     {
-        std::uint8_t *aFragmentA = aInvestLaneA + (W_KEY * 8U), *aFragmentB = aInvestLaneB + (W_KEY * 4U);
-        std::uint8_t *aFragmentC = aInvestLaneC + (W_KEY * 15U), *aFragmentD = aInvestLaneD + (W_KEY * 6U);
-        std::uint8_t *aFragmentE = aInvestLaneE + (W_KEY * 4U), *aFragmentF = aInvestLaneF + (W_KEY * 12U);
-        std::uint8_t *aFragmentG = aInvestLaneG + (W_KEY * 9U), *aFragmentH = aInvestLaneH + (W_KEY * 0U);
+        std::uint8_t *aFragmentA = aInvestLaneA + (W_KEY * 0U), *aFragmentB = aInvestLaneB + (W_KEY * 13U);
+        std::uint8_t *aFragmentC = aInvestLaneC + (W_KEY * 3U), *aFragmentD = aInvestLaneD + (W_KEY * 3U);
+        std::uint8_t *aFragmentE = aInvestLaneE + (W_KEY * 9U), *aFragmentF = aInvestLaneF + (W_KEY * 2U);
+        std::uint8_t *aFragmentG = aInvestLaneG + (W_KEY * 0U), *aFragmentH = aInvestLaneH + (W_KEY * 2U);
         std::uint8_t *aKeyRow = &(pWorkSpace->mKeyBoxB[4][0]);
         for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(W_KEY); aIndex += 1U) {
             std::uint64_t aSquash =
-                (static_cast<std::uint64_t>(aFragmentA[aIndex]) << 40U) | (static_cast<std::uint64_t>(aFragmentB[aIndex]) << 24U) |
-                (static_cast<std::uint64_t>(aFragmentC[aIndex]) << 32U) | (static_cast<std::uint64_t>(aFragmentD[aIndex]) << 8U) |
-                (static_cast<std::uint64_t>(aFragmentE[aIndex]) << 56U) | (static_cast<std::uint64_t>(aFragmentF[aIndex]) << 48U) |
-                (static_cast<std::uint64_t>(aFragmentG[aIndex]) << 0U) | (static_cast<std::uint64_t>(aFragmentH[aIndex]) << 16U);
+                (static_cast<std::uint64_t>(aFragmentA[aIndex]) << 24U) | (static_cast<std::uint64_t>(aFragmentB[aIndex]) << 16U) |
+                (static_cast<std::uint64_t>(aFragmentC[aIndex]) << 56U) | (static_cast<std::uint64_t>(aFragmentD[aIndex]) << 32U) |
+                (static_cast<std::uint64_t>(aFragmentE[aIndex]) << 0U) | (static_cast<std::uint64_t>(aFragmentF[aIndex]) << 40U) |
+                (static_cast<std::uint64_t>(aFragmentG[aIndex]) << 8U) | (static_cast<std::uint64_t>(aFragmentH[aIndex]) << 48U);
             aKeyRow[aIndex] = static_cast<std::uint8_t>(TwistMix64::DiffuseB(aSquash));
         }
     }
 
     // key_box_b row 5
     {
-        std::uint8_t *aFragmentA = aInvestLaneA + (W_KEY * 10U), *aFragmentB = aInvestLaneB + (W_KEY * 3U);
-        std::uint8_t *aFragmentC = aInvestLaneC + (W_KEY * 3U), *aFragmentD = aInvestLaneD + (W_KEY * 8U);
-        std::uint8_t *aFragmentE = aInvestLaneE + (W_KEY * 8U), *aFragmentF = aInvestLaneF + (W_KEY * 10U);
-        std::uint8_t *aFragmentG = aInvestLaneG + (W_KEY * 3U), *aFragmentH = aInvestLaneH + (W_KEY * 8U);
+        std::uint8_t *aFragmentA = aInvestLaneA + (W_KEY * 3U), *aFragmentB = aInvestLaneB + (W_KEY * 10U);
+        std::uint8_t *aFragmentC = aInvestLaneC + (W_KEY * 8U), *aFragmentD = aInvestLaneD + (W_KEY * 7U);
+        std::uint8_t *aFragmentE = aInvestLaneE + (W_KEY * 4U), *aFragmentF = aInvestLaneF + (W_KEY * 8U);
+        std::uint8_t *aFragmentG = aInvestLaneG + (W_KEY * 13U), *aFragmentH = aInvestLaneH + (W_KEY * 15U);
         std::uint8_t *aKeyRow = &(pWorkSpace->mKeyBoxB[5][0]);
         for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(W_KEY); aIndex += 1U) {
             std::uint64_t aSquash =
-                (static_cast<std::uint64_t>(aFragmentA[aIndex]) << 48U) | (static_cast<std::uint64_t>(aFragmentB[aIndex]) << 32U) |
-                (static_cast<std::uint64_t>(aFragmentC[aIndex]) << 24U) | (static_cast<std::uint64_t>(aFragmentD[aIndex]) << 56U) |
-                (static_cast<std::uint64_t>(aFragmentE[aIndex]) << 0U) | (static_cast<std::uint64_t>(aFragmentF[aIndex]) << 8U) |
-                (static_cast<std::uint64_t>(aFragmentG[aIndex]) << 16U) | (static_cast<std::uint64_t>(aFragmentH[aIndex]) << 40U);
-            aKeyRow[aIndex] = static_cast<std::uint8_t>(TwistMix64::DiffuseB(aSquash));
+                (static_cast<std::uint64_t>(aFragmentA[aIndex]) << 40U) | (static_cast<std::uint64_t>(aFragmentB[aIndex]) << 8U) |
+                (static_cast<std::uint64_t>(aFragmentC[aIndex]) << 32U) | (static_cast<std::uint64_t>(aFragmentD[aIndex]) << 56U) |
+                (static_cast<std::uint64_t>(aFragmentE[aIndex]) << 0U) | (static_cast<std::uint64_t>(aFragmentF[aIndex]) << 48U) |
+                (static_cast<std::uint64_t>(aFragmentG[aIndex]) << 24U) | (static_cast<std::uint64_t>(aFragmentH[aIndex]) << 16U);
+            aKeyRow[aIndex] = static_cast<std::uint8_t>(TwistMix64::DiffuseA(aSquash));
         }
     }
 
     // key_box_b row 6
     {
-        std::uint8_t *aFragmentA = aInvestLaneA + (W_KEY * 0U), *aFragmentB = aInvestLaneB + (W_KEY * 7U);
-        std::uint8_t *aFragmentC = aInvestLaneC + (W_KEY * 14U), *aFragmentD = aInvestLaneD + (W_KEY * 0U);
-        std::uint8_t *aFragmentE = aInvestLaneE + (W_KEY * 10U), *aFragmentF = aInvestLaneF + (W_KEY * 5U);
-        std::uint8_t *aFragmentG = aInvestLaneG + (W_KEY * 8U), *aFragmentH = aInvestLaneH + (W_KEY * 9U);
+        std::uint8_t *aFragmentA = aInvestLaneA + (W_KEY * 5U), *aFragmentB = aInvestLaneB + (W_KEY * 1U);
+        std::uint8_t *aFragmentC = aInvestLaneC + (W_KEY * 5U), *aFragmentD = aInvestLaneD + (W_KEY * 9U);
+        std::uint8_t *aFragmentE = aInvestLaneE + (W_KEY * 15U), *aFragmentF = aInvestLaneF + (W_KEY * 3U);
+        std::uint8_t *aFragmentG = aInvestLaneG + (W_KEY * 5U), *aFragmentH = aInvestLaneH + (W_KEY * 13U);
         std::uint8_t *aKeyRow = &(pWorkSpace->mKeyBoxB[6][0]);
         for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(W_KEY); aIndex += 1U) {
             std::uint64_t aSquash =
-                (static_cast<std::uint64_t>(aFragmentA[aIndex]) << 0U) | (static_cast<std::uint64_t>(aFragmentB[aIndex]) << 8U) |
-                (static_cast<std::uint64_t>(aFragmentC[aIndex]) << 56U) | (static_cast<std::uint64_t>(aFragmentD[aIndex]) << 16U) |
-                (static_cast<std::uint64_t>(aFragmentE[aIndex]) << 40U) | (static_cast<std::uint64_t>(aFragmentF[aIndex]) << 24U) |
-                (static_cast<std::uint64_t>(aFragmentG[aIndex]) << 32U) | (static_cast<std::uint64_t>(aFragmentH[aIndex]) << 48U);
-            aKeyRow[aIndex] = static_cast<std::uint8_t>(TwistMix64::DiffuseC(aSquash));
+                (static_cast<std::uint64_t>(aFragmentA[aIndex]) << 16U) | (static_cast<std::uint64_t>(aFragmentB[aIndex]) << 24U) |
+                (static_cast<std::uint64_t>(aFragmentC[aIndex]) << 8U) | (static_cast<std::uint64_t>(aFragmentD[aIndex]) << 32U) |
+                (static_cast<std::uint64_t>(aFragmentE[aIndex]) << 40U) | (static_cast<std::uint64_t>(aFragmentF[aIndex]) << 0U) |
+                (static_cast<std::uint64_t>(aFragmentG[aIndex]) << 56U) | (static_cast<std::uint64_t>(aFragmentH[aIndex]) << 48U);
+            aKeyRow[aIndex] = static_cast<std::uint8_t>(TwistMix64::DiffuseA(aSquash));
         }
     }
 
     // key_box_b row 7
     {
-        std::uint8_t *aFragmentA = aInvestLaneA + (W_KEY * 2U), *aFragmentB = aInvestLaneB + (W_KEY * 11U);
-        std::uint8_t *aFragmentC = aInvestLaneC + (W_KEY * 12U), *aFragmentD = aInvestLaneD + (W_KEY * 4U);
-        std::uint8_t *aFragmentE = aInvestLaneE + (W_KEY * 12U), *aFragmentF = aInvestLaneF + (W_KEY * 13U);
-        std::uint8_t *aFragmentG = aInvestLaneG + (W_KEY * 12U), *aFragmentH = aInvestLaneH + (W_KEY * 1U);
+        std::uint8_t *aFragmentA = aInvestLaneA + (W_KEY * 14U), *aFragmentB = aInvestLaneB + (W_KEY * 11U);
+        std::uint8_t *aFragmentC = aInvestLaneC + (W_KEY * 13U), *aFragmentD = aInvestLaneD + (W_KEY * 10U);
+        std::uint8_t *aFragmentE = aInvestLaneE + (W_KEY * 10U), *aFragmentF = aInvestLaneF + (W_KEY * 5U);
+        std::uint8_t *aFragmentG = aInvestLaneG + (W_KEY * 14U), *aFragmentH = aInvestLaneH + (W_KEY * 1U);
         std::uint8_t *aKeyRow = &(pWorkSpace->mKeyBoxB[7][0]);
         for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(W_KEY); aIndex += 1U) {
             std::uint64_t aSquash =
-                (static_cast<std::uint64_t>(aFragmentA[aIndex]) << 0U) | (static_cast<std::uint64_t>(aFragmentB[aIndex]) << 40U) |
-                (static_cast<std::uint64_t>(aFragmentC[aIndex]) << 56U) | (static_cast<std::uint64_t>(aFragmentD[aIndex]) << 8U) |
-                (static_cast<std::uint64_t>(aFragmentE[aIndex]) << 16U) | (static_cast<std::uint64_t>(aFragmentF[aIndex]) << 32U) |
-                (static_cast<std::uint64_t>(aFragmentG[aIndex]) << 24U) | (static_cast<std::uint64_t>(aFragmentH[aIndex]) << 48U);
+                (static_cast<std::uint64_t>(aFragmentA[aIndex]) << 40U) | (static_cast<std::uint64_t>(aFragmentB[aIndex]) << 24U) |
+                (static_cast<std::uint64_t>(aFragmentC[aIndex]) << 56U) | (static_cast<std::uint64_t>(aFragmentD[aIndex]) << 16U) |
+                (static_cast<std::uint64_t>(aFragmentE[aIndex]) << 32U) | (static_cast<std::uint64_t>(aFragmentF[aIndex]) << 0U) |
+                (static_cast<std::uint64_t>(aFragmentG[aIndex]) << 8U) | (static_cast<std::uint64_t>(aFragmentH[aIndex]) << 48U);
             aKeyRow[aIndex] = static_cast<std::uint8_t>(TwistMix64::DiffuseC(aSquash));
         }
     }
@@ -1366,27 +1366,27 @@ void TwistExpander_BasketBall::TwistBlock(TwistWorkSpace *pWorkSpace,
     [[maybe_unused]] std::uint8_t *aWorkLaneB = pWorkSpace->mWorkLaneB;
     [[maybe_unused]] std::uint8_t *aWorkLaneC = pWorkSpace->mWorkLaneC;
     [[maybe_unused]] std::uint8_t *aWorkLaneD = pWorkSpace->mWorkLaneD;
-    std::uint64_t aPrevious = 0xA822C852A7A01763ULL; std::uint64_t aIngress = 0xDFD76DF4A219B7ABULL; std::uint64_t aCarry = 0x959F07006A4723E4ULL;
+    std::uint64_t aPrevious = 0xF12F5642A990A231ULL; std::uint64_t aIngress = 0xD648DA9D51E43406ULL; std::uint64_t aCarry = 0xDE68F52AF17814FDULL;
 
-    std::uint64_t aWandererA = 0xD0A7A99C3167FBF3ULL; std::uint64_t aWandererB = 0xEF6F348B2767BD46ULL; std::uint64_t aWandererC = 0xF1B0153493D4455DULL; std::uint64_t aWandererD = 0xB26C9D17F0C24687ULL;
-    std::uint64_t aWandererE = 0x81FF73B8C46E393AULL; std::uint64_t aWandererF = 0xAB43642893B87170ULL; std::uint64_t aWandererG = 0xC5D6E5557AB85036ULL; std::uint64_t aWandererH = 0xADB25F056020404BULL;
-    std::uint64_t aWandererI = 0xF3994F1F9B9940CFULL; std::uint64_t aWandererJ = 0x8AFED1454C4B75D4ULL; std::uint64_t aWandererK = 0xA4DEAAD5077887A4ULL;
+    std::uint64_t aWandererA = 0x989EBFE61619DF7AULL; std::uint64_t aWandererB = 0xE523AAF2C72A7F31ULL; std::uint64_t aWandererC = 0xD87AC6EFC506534AULL; std::uint64_t aWandererD = 0xC1D8B46FE16094E4ULL;
+    std::uint64_t aWandererE = 0xD495AE30228EFF46ULL; std::uint64_t aWandererF = 0xE9A8A1936539E603ULL; std::uint64_t aWandererG = 0x85B8E64A5E8495ABULL; std::uint64_t aWandererH = 0xA95C06C785D91F71ULL;
+    std::uint64_t aWandererI = 0xEBC791B9C9F54253ULL; std::uint64_t aWandererJ = 0xAA63A3EF0CCC51EBULL; std::uint64_t aWandererK = 0xCF10666B58174B5DULL;
 
     // [seed]
     {
-        aPrevious = 15656037436495135448U;
-        aCarry = 15966987754156067593U;
-        aWandererA = 10365990340640463013U;
-        aWandererB = 11599389880086312393U;
-        aWandererC = 9542132352705906427U;
-        aWandererD = 11102838907748760534U;
-        aWandererE = 9417725051623542416U;
-        aWandererF = 12839552326494085347U;
-        aWandererG = 18374494216361718183U;
-        aWandererH = 13433495999842014857U;
-        aWandererI = 14452725350022713541U;
-        aWandererJ = 12019366166209267211U;
-        aWandererK = 11739481007865727115U;
+        aPrevious = 16478756170567344042U;
+        aCarry = 11750881731665975971U;
+        aWandererA = 18240994142234026992U;
+        aWandererB = 14854208664463448918U;
+        aWandererC = 12132144951352187539U;
+        aWandererD = 9294129221900605025U;
+        aWandererE = 12074207543426713977U;
+        aWandererF = 12081817374786392863U;
+        aWandererG = 14887541232429624414U;
+        aWandererH = 12146321375935767640U;
+        aWandererI = 13328580016124220343U;
+        aWandererJ = 11042526637229475919U;
+        aWandererK = 14823671249742453425U;
     }
     //
     // ---------------------------------------------------
@@ -1470,7 +1470,7 @@ void TwistExpander_BasketBall::TwistBlock(TwistWorkSpace *pWorkSpace,
                  &aWandererK);
 
     //
-        TwistSquash::SquashA(aWorkLaneA, aWorkLaneB, aWorkLaneC, aWorkLaneD, pDestination);
+        TwistSquash::SquashC(aWorkLaneA, aWorkLaneB, aWorkLaneC, aWorkLaneD, pDestination);
     if ((pBlockCount - pBlockIndex) > static_cast<std::size_t>(H_KEY)) {
         //
         // ---------------------------------------------------
@@ -1556,190 +1556,190 @@ void TwistExpander_BasketBall::GrowKeyA(TwistWorkSpace *pWorkSpace) {
     TwistShiftBox::ShiftKeyBoxA(pWorkSpace);
     {
         // read from: aExpandLaneA, aExpandLaneB, aExpandLaneC, aExpandLaneD
-        // byte shifts: 0U, 8U, 16U, 24U; diffuse: DiffuseC
+        // byte shifts: 16U, 8U, 24U, 0U; diffuse: DiffuseB
         // write to: aOperationLaneA
         for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
             std::uint32_t aFoldWord =
-                (static_cast<std::uint32_t>(aExpandLaneA[aIndex]) << 0U) | (static_cast<std::uint32_t>(aExpandLaneB[aIndex]) << 8U) |
-                (static_cast<std::uint32_t>(aExpandLaneC[aIndex]) << 16U) | (static_cast<std::uint32_t>(aExpandLaneD[aIndex]) << 24U);
-            aFoldWord = TwistMix32::DiffuseC(aFoldWord);
+                (static_cast<std::uint32_t>(aExpandLaneA[aIndex]) << 16U) | (static_cast<std::uint32_t>(aExpandLaneB[aIndex]) << 8U) |
+                (static_cast<std::uint32_t>(aExpandLaneC[aIndex]) << 24U) | (static_cast<std::uint32_t>(aExpandLaneD[aIndex]) << 0U);
+            aFoldWord = TwistMix32::DiffuseB(aFoldWord);
             aOperationLaneA[aIndex] = aFoldWord;
         }
     }
     {
-        // read from: aOperationLaneA source quarters 1, 1, 3, 0 with offsets 1007U, 5172U, 7741U, 1704U
-        // byte shifts: 0U, 16U, 24U, 8U; diffuse: DiffuseC
+        // read from: aOperationLaneA source quarters 1, 2, 0, 2 with offsets 772U, 788U, 8124U, 2787U
+        // byte shifts: 24U, 8U, 0U, 16U; diffuse: DiffuseA
         // write to: aWorkLaneA [0..<(S_BLOCK >> 2U)]
         const std::size_t aFoldBaseA = 1U * (S_BLOCK >> 2U);
-        const std::size_t aFoldBaseB = 1U * (S_BLOCK >> 2U);
-        const std::size_t aFoldBaseC = 3U * (S_BLOCK >> 2U);
-        const std::size_t aFoldBaseD = 0U * (S_BLOCK >> 2U);
+        const std::size_t aFoldBaseB = 2U * (S_BLOCK >> 2U);
+        const std::size_t aFoldBaseC = 0U * (S_BLOCK >> 2U);
+        const std::size_t aFoldBaseD = 2U * (S_BLOCK >> 2U);
         for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK >> 2U); aIndex += 1U) {
-            const std::size_t aFoldIndexA = aFoldBaseA + ((aIndex + 1007U) & ((S_BLOCK >> 2U) - 1U));
-            const std::size_t aFoldIndexB = aFoldBaseB + ((aIndex + 5172U) & ((S_BLOCK >> 2U) - 1U));
-            const std::size_t aFoldIndexC = aFoldBaseC + ((aIndex + 7741U) & ((S_BLOCK >> 2U) - 1U));
-            const std::size_t aFoldIndexD = aFoldBaseD + ((aIndex + 1704U) & ((S_BLOCK >> 2U) - 1U));
+            const std::size_t aFoldIndexA = aFoldBaseA + ((aIndex + 772U) & ((S_BLOCK >> 2U) - 1U));
+            const std::size_t aFoldIndexB = aFoldBaseB + ((aIndex + 788U) & ((S_BLOCK >> 2U) - 1U));
+            const std::size_t aFoldIndexC = aFoldBaseC + ((aIndex + 8124U) & ((S_BLOCK >> 2U) - 1U));
+            const std::size_t aFoldIndexD = aFoldBaseD + ((aIndex + 2787U) & ((S_BLOCK >> 2U) - 1U));
             std::uint32_t aFoldWord =
-                (static_cast<std::uint32_t>(aOperationLaneA[aFoldIndexA]) << 0U) | (static_cast<std::uint32_t>(aOperationLaneA[aFoldIndexB]) << 16U) |
-                (static_cast<std::uint32_t>(aOperationLaneA[aFoldIndexC]) << 24U) | (static_cast<std::uint32_t>(aOperationLaneA[aFoldIndexD]) << 8U);
-            aFoldWord = TwistMix32::DiffuseC(aFoldWord);
+                (static_cast<std::uint32_t>(aOperationLaneA[aFoldIndexA]) << 24U) | (static_cast<std::uint32_t>(aOperationLaneA[aFoldIndexB]) << 8U) |
+                (static_cast<std::uint32_t>(aOperationLaneA[aFoldIndexC]) << 0U) | (static_cast<std::uint32_t>(aOperationLaneA[aFoldIndexD]) << 16U);
+            aFoldWord = TwistMix32::DiffuseA(aFoldWord);
             aWorkLaneA[aIndex] = aFoldWord;
         }
     }
     {
-        // read from: aOperationLaneA source quarters 3, 2, 1, 1 with offsets 6334U, 4849U, 4910U, 462U
-        // byte shifts: 0U, 24U, 16U, 8U; diffuse: DiffuseA
+        // read from: aOperationLaneA source quarters 2, 3, 2, 0 with offsets 6693U, 3733U, 1735U, 3273U
+        // byte shifts: 24U, 16U, 8U, 0U; diffuse: DiffuseC
         // write to: aWorkLaneB [0..<(S_BLOCK >> 2U)]
-        const std::size_t aFoldBaseA = 3U * (S_BLOCK >> 2U);
-        const std::size_t aFoldBaseB = 2U * (S_BLOCK >> 2U);
-        const std::size_t aFoldBaseC = 1U * (S_BLOCK >> 2U);
-        const std::size_t aFoldBaseD = 1U * (S_BLOCK >> 2U);
+        const std::size_t aFoldBaseA = 2U * (S_BLOCK >> 2U);
+        const std::size_t aFoldBaseB = 3U * (S_BLOCK >> 2U);
+        const std::size_t aFoldBaseC = 2U * (S_BLOCK >> 2U);
+        const std::size_t aFoldBaseD = 0U * (S_BLOCK >> 2U);
         for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK >> 2U); aIndex += 1U) {
-            const std::size_t aFoldIndexA = aFoldBaseA + ((aIndex + 6334U) & ((S_BLOCK >> 2U) - 1U));
-            const std::size_t aFoldIndexB = aFoldBaseB + ((aIndex + 4849U) & ((S_BLOCK >> 2U) - 1U));
-            const std::size_t aFoldIndexC = aFoldBaseC + ((aIndex + 4910U) & ((S_BLOCK >> 2U) - 1U));
-            const std::size_t aFoldIndexD = aFoldBaseD + ((aIndex + 462U) & ((S_BLOCK >> 2U) - 1U));
+            const std::size_t aFoldIndexA = aFoldBaseA + ((aIndex + 6693U) & ((S_BLOCK >> 2U) - 1U));
+            const std::size_t aFoldIndexB = aFoldBaseB + ((aIndex + 3733U) & ((S_BLOCK >> 2U) - 1U));
+            const std::size_t aFoldIndexC = aFoldBaseC + ((aIndex + 1735U) & ((S_BLOCK >> 2U) - 1U));
+            const std::size_t aFoldIndexD = aFoldBaseD + ((aIndex + 3273U) & ((S_BLOCK >> 2U) - 1U));
             std::uint32_t aFoldWord =
-                (static_cast<std::uint32_t>(aOperationLaneA[aFoldIndexA]) << 0U) | (static_cast<std::uint32_t>(aOperationLaneA[aFoldIndexB]) << 24U) |
-                (static_cast<std::uint32_t>(aOperationLaneA[aFoldIndexC]) << 16U) | (static_cast<std::uint32_t>(aOperationLaneA[aFoldIndexD]) << 8U);
-            aFoldWord = TwistMix32::DiffuseA(aFoldWord);
+                (static_cast<std::uint32_t>(aOperationLaneA[aFoldIndexA]) << 24U) | (static_cast<std::uint32_t>(aOperationLaneA[aFoldIndexB]) << 16U) |
+                (static_cast<std::uint32_t>(aOperationLaneA[aFoldIndexC]) << 8U) | (static_cast<std::uint32_t>(aOperationLaneA[aFoldIndexD]) << 0U);
+            aFoldWord = TwistMix32::DiffuseC(aFoldWord);
             aWorkLaneB[aIndex] = aFoldWord;
         }
     }
     {
-        // read from: aOperationLaneA source quarters 0, 0, 2, 3 with offsets 6897U, 5637U, 2068U, 7456U
-        // byte shifts: 16U, 24U, 0U, 8U; diffuse: DiffuseB
+        // read from: aOperationLaneA source quarters 3, 0, 3, 1 with offsets 6603U, 6435U, 4213U, 3298U
+        // byte shifts: 0U, 24U, 16U, 8U; diffuse: DiffuseA
         // write to: aWorkLaneC [0..<(S_BLOCK >> 2U)]
-        const std::size_t aFoldBaseA = 0U * (S_BLOCK >> 2U);
+        const std::size_t aFoldBaseA = 3U * (S_BLOCK >> 2U);
         const std::size_t aFoldBaseB = 0U * (S_BLOCK >> 2U);
-        const std::size_t aFoldBaseC = 2U * (S_BLOCK >> 2U);
-        const std::size_t aFoldBaseD = 3U * (S_BLOCK >> 2U);
+        const std::size_t aFoldBaseC = 3U * (S_BLOCK >> 2U);
+        const std::size_t aFoldBaseD = 1U * (S_BLOCK >> 2U);
         for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK >> 2U); aIndex += 1U) {
-            const std::size_t aFoldIndexA = aFoldBaseA + ((aIndex + 6897U) & ((S_BLOCK >> 2U) - 1U));
-            const std::size_t aFoldIndexB = aFoldBaseB + ((aIndex + 5637U) & ((S_BLOCK >> 2U) - 1U));
-            const std::size_t aFoldIndexC = aFoldBaseC + ((aIndex + 2068U) & ((S_BLOCK >> 2U) - 1U));
-            const std::size_t aFoldIndexD = aFoldBaseD + ((aIndex + 7456U) & ((S_BLOCK >> 2U) - 1U));
+            const std::size_t aFoldIndexA = aFoldBaseA + ((aIndex + 6603U) & ((S_BLOCK >> 2U) - 1U));
+            const std::size_t aFoldIndexB = aFoldBaseB + ((aIndex + 6435U) & ((S_BLOCK >> 2U) - 1U));
+            const std::size_t aFoldIndexC = aFoldBaseC + ((aIndex + 4213U) & ((S_BLOCK >> 2U) - 1U));
+            const std::size_t aFoldIndexD = aFoldBaseD + ((aIndex + 3298U) & ((S_BLOCK >> 2U) - 1U));
             std::uint32_t aFoldWord =
-                (static_cast<std::uint32_t>(aOperationLaneA[aFoldIndexA]) << 16U) | (static_cast<std::uint32_t>(aOperationLaneA[aFoldIndexB]) << 24U) |
-                (static_cast<std::uint32_t>(aOperationLaneA[aFoldIndexC]) << 0U) | (static_cast<std::uint32_t>(aOperationLaneA[aFoldIndexD]) << 8U);
-            aFoldWord = TwistMix32::DiffuseB(aFoldWord);
+                (static_cast<std::uint32_t>(aOperationLaneA[aFoldIndexA]) << 0U) | (static_cast<std::uint32_t>(aOperationLaneA[aFoldIndexB]) << 24U) |
+                (static_cast<std::uint32_t>(aOperationLaneA[aFoldIndexC]) << 16U) | (static_cast<std::uint32_t>(aOperationLaneA[aFoldIndexD]) << 8U);
+            aFoldWord = TwistMix32::DiffuseA(aFoldWord);
             aWorkLaneC[aIndex] = aFoldWord;
         }
     }
     {
-        // read from: aOperationLaneA source quarters 2, 3, 0, 2 with offsets 8041U, 3276U, 6U, 1607U
-        // byte shifts: 8U, 0U, 24U, 16U; diffuse: DiffuseC
+        // read from: aOperationLaneA source quarters 0, 1, 1, 3 with offsets 7888U, 2957U, 1230U, 3309U
+        // byte shifts: 8U, 0U, 24U, 16U; diffuse: DiffuseB
         // write to: aWorkLaneD [0..<(S_BLOCK >> 2U)]
-        const std::size_t aFoldBaseA = 2U * (S_BLOCK >> 2U);
-        const std::size_t aFoldBaseB = 3U * (S_BLOCK >> 2U);
-        const std::size_t aFoldBaseC = 0U * (S_BLOCK >> 2U);
-        const std::size_t aFoldBaseD = 2U * (S_BLOCK >> 2U);
+        const std::size_t aFoldBaseA = 0U * (S_BLOCK >> 2U);
+        const std::size_t aFoldBaseB = 1U * (S_BLOCK >> 2U);
+        const std::size_t aFoldBaseC = 1U * (S_BLOCK >> 2U);
+        const std::size_t aFoldBaseD = 3U * (S_BLOCK >> 2U);
         for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK >> 2U); aIndex += 1U) {
-            const std::size_t aFoldIndexA = aFoldBaseA + ((aIndex + 8041U) & ((S_BLOCK >> 2U) - 1U));
-            const std::size_t aFoldIndexB = aFoldBaseB + ((aIndex + 3276U) & ((S_BLOCK >> 2U) - 1U));
-            const std::size_t aFoldIndexC = aFoldBaseC + ((aIndex + 6U) & ((S_BLOCK >> 2U) - 1U));
-            const std::size_t aFoldIndexD = aFoldBaseD + ((aIndex + 1607U) & ((S_BLOCK >> 2U) - 1U));
+            const std::size_t aFoldIndexA = aFoldBaseA + ((aIndex + 7888U) & ((S_BLOCK >> 2U) - 1U));
+            const std::size_t aFoldIndexB = aFoldBaseB + ((aIndex + 2957U) & ((S_BLOCK >> 2U) - 1U));
+            const std::size_t aFoldIndexC = aFoldBaseC + ((aIndex + 1230U) & ((S_BLOCK >> 2U) - 1U));
+            const std::size_t aFoldIndexD = aFoldBaseD + ((aIndex + 3309U) & ((S_BLOCK >> 2U) - 1U));
             std::uint32_t aFoldWord =
                 (static_cast<std::uint32_t>(aOperationLaneA[aFoldIndexA]) << 8U) | (static_cast<std::uint32_t>(aOperationLaneA[aFoldIndexB]) << 0U) |
                 (static_cast<std::uint32_t>(aOperationLaneA[aFoldIndexC]) << 24U) | (static_cast<std::uint32_t>(aOperationLaneA[aFoldIndexD]) << 16U);
-            aFoldWord = TwistMix32::DiffuseC(aFoldWord);
+            aFoldWord = TwistMix32::DiffuseB(aFoldWord);
             aWorkLaneD[aIndex] = aFoldWord;
         }
     }
     {
-        // read from: aWorkLaneA fragments 1, 0, 3, 2 with offsets 1370U, 1824U, 1349U, 2030U
-        // byte shifts: 0U, 8U, 24U, 16U; diffuse: DiffuseC
+        // read from: aWorkLaneA fragments 2, 0, 1, 3 with offsets 1197U, 1720U, 2003U, 558U
+        // byte shifts: 0U, 16U, 24U, 8U; diffuse: DiffuseA
         // write to: aOperationLaneA [0..<W_KEY]
-        const std::size_t aFoldBaseA = 1U * W_KEY;
+        const std::size_t aFoldBaseA = 2U * W_KEY;
         const std::size_t aFoldBaseB = 0U * W_KEY;
-        const std::size_t aFoldBaseC = 3U * W_KEY;
-        const std::size_t aFoldBaseD = 2U * W_KEY;
+        const std::size_t aFoldBaseC = 1U * W_KEY;
+        const std::size_t aFoldBaseD = 3U * W_KEY;
         for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(W_KEY); aIndex += 1U) {
-            const std::size_t aFoldIndexA = aFoldBaseA + ((aIndex + 1370U) & W_KEY1);
-            const std::size_t aFoldIndexB = aFoldBaseB + ((aIndex + 1824U) & W_KEY1);
-            const std::size_t aFoldIndexC = aFoldBaseC + ((aIndex + 1349U) & W_KEY1);
-            const std::size_t aFoldIndexD = aFoldBaseD + ((aIndex + 2030U) & W_KEY1);
+            const std::size_t aFoldIndexA = aFoldBaseA + ((aIndex + 1197U) & W_KEY1);
+            const std::size_t aFoldIndexB = aFoldBaseB + ((aIndex + 1720U) & W_KEY1);
+            const std::size_t aFoldIndexC = aFoldBaseC + ((aIndex + 2003U) & W_KEY1);
+            const std::size_t aFoldIndexD = aFoldBaseD + ((aIndex + 558U) & W_KEY1);
             std::uint32_t aFoldWord =
-                (static_cast<std::uint32_t>(aWorkLaneA[aFoldIndexA]) << 0U) | (static_cast<std::uint32_t>(aWorkLaneA[aFoldIndexB]) << 8U) |
-                (static_cast<std::uint32_t>(aWorkLaneA[aFoldIndexC]) << 24U) | (static_cast<std::uint32_t>(aWorkLaneA[aFoldIndexD]) << 16U);
-            aFoldWord = TwistMix32::DiffuseC(aFoldWord);
+                (static_cast<std::uint32_t>(aWorkLaneA[aFoldIndexA]) << 0U) | (static_cast<std::uint32_t>(aWorkLaneA[aFoldIndexB]) << 16U) |
+                (static_cast<std::uint32_t>(aWorkLaneA[aFoldIndexC]) << 24U) | (static_cast<std::uint32_t>(aWorkLaneA[aFoldIndexD]) << 8U);
+            aFoldWord = TwistMix32::DiffuseA(aFoldWord);
             aOperationLaneA[aIndex] = aFoldWord;
         }
     }
     {
-        // read from: aWorkLaneB fragments 0, 1, 3, 2 with offsets 1630U, 835U, 1551U, 170U
-        // byte shifts: 16U, 0U, 8U, 24U; diffuse: DiffuseC
+        // read from: aWorkLaneB fragments 0, 3, 1, 2 with offsets 1454U, 1306U, 619U, 1247U
+        // byte shifts: 16U, 8U, 0U, 24U; diffuse: DiffuseA
         // write to: aOperationLaneB [0..<W_KEY]
         const std::size_t aFoldBaseA = 0U * W_KEY;
-        const std::size_t aFoldBaseB = 1U * W_KEY;
-        const std::size_t aFoldBaseC = 3U * W_KEY;
+        const std::size_t aFoldBaseB = 3U * W_KEY;
+        const std::size_t aFoldBaseC = 1U * W_KEY;
         const std::size_t aFoldBaseD = 2U * W_KEY;
         for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(W_KEY); aIndex += 1U) {
-            const std::size_t aFoldIndexA = aFoldBaseA + ((aIndex + 1630U) & W_KEY1);
-            const std::size_t aFoldIndexB = aFoldBaseB + ((aIndex + 835U) & W_KEY1);
-            const std::size_t aFoldIndexC = aFoldBaseC + ((aIndex + 1551U) & W_KEY1);
-            const std::size_t aFoldIndexD = aFoldBaseD + ((aIndex + 170U) & W_KEY1);
+            const std::size_t aFoldIndexA = aFoldBaseA + ((aIndex + 1454U) & W_KEY1);
+            const std::size_t aFoldIndexB = aFoldBaseB + ((aIndex + 1306U) & W_KEY1);
+            const std::size_t aFoldIndexC = aFoldBaseC + ((aIndex + 619U) & W_KEY1);
+            const std::size_t aFoldIndexD = aFoldBaseD + ((aIndex + 1247U) & W_KEY1);
             std::uint32_t aFoldWord =
-                (static_cast<std::uint32_t>(aWorkLaneB[aFoldIndexA]) << 16U) | (static_cast<std::uint32_t>(aWorkLaneB[aFoldIndexB]) << 0U) |
-                (static_cast<std::uint32_t>(aWorkLaneB[aFoldIndexC]) << 8U) | (static_cast<std::uint32_t>(aWorkLaneB[aFoldIndexD]) << 24U);
-            aFoldWord = TwistMix32::DiffuseC(aFoldWord);
+                (static_cast<std::uint32_t>(aWorkLaneB[aFoldIndexA]) << 16U) | (static_cast<std::uint32_t>(aWorkLaneB[aFoldIndexB]) << 8U) |
+                (static_cast<std::uint32_t>(aWorkLaneB[aFoldIndexC]) << 0U) | (static_cast<std::uint32_t>(aWorkLaneB[aFoldIndexD]) << 24U);
+            aFoldWord = TwistMix32::DiffuseA(aFoldWord);
             aOperationLaneB[aIndex] = aFoldWord;
         }
     }
     {
-        // read from: aWorkLaneC fragments 0, 2, 3, 1 with offsets 804U, 1672U, 1034U, 1636U
-        // byte shifts: 16U, 8U, 24U, 0U; diffuse: DiffuseC
+        // read from: aWorkLaneC fragments 1, 2, 0, 3 with offsets 874U, 1122U, 1310U, 1652U
+        // byte shifts: 24U, 8U, 16U, 0U; diffuse: DiffuseB
         // write to: aOperationLaneC [0..<W_KEY]
-        const std::size_t aFoldBaseA = 0U * W_KEY;
+        const std::size_t aFoldBaseA = 1U * W_KEY;
         const std::size_t aFoldBaseB = 2U * W_KEY;
-        const std::size_t aFoldBaseC = 3U * W_KEY;
-        const std::size_t aFoldBaseD = 1U * W_KEY;
+        const std::size_t aFoldBaseC = 0U * W_KEY;
+        const std::size_t aFoldBaseD = 3U * W_KEY;
         for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(W_KEY); aIndex += 1U) {
-            const std::size_t aFoldIndexA = aFoldBaseA + ((aIndex + 804U) & W_KEY1);
-            const std::size_t aFoldIndexB = aFoldBaseB + ((aIndex + 1672U) & W_KEY1);
-            const std::size_t aFoldIndexC = aFoldBaseC + ((aIndex + 1034U) & W_KEY1);
-            const std::size_t aFoldIndexD = aFoldBaseD + ((aIndex + 1636U) & W_KEY1);
+            const std::size_t aFoldIndexA = aFoldBaseA + ((aIndex + 874U) & W_KEY1);
+            const std::size_t aFoldIndexB = aFoldBaseB + ((aIndex + 1122U) & W_KEY1);
+            const std::size_t aFoldIndexC = aFoldBaseC + ((aIndex + 1310U) & W_KEY1);
+            const std::size_t aFoldIndexD = aFoldBaseD + ((aIndex + 1652U) & W_KEY1);
             std::uint32_t aFoldWord =
-                (static_cast<std::uint32_t>(aWorkLaneC[aFoldIndexA]) << 16U) | (static_cast<std::uint32_t>(aWorkLaneC[aFoldIndexB]) << 8U) |
-                (static_cast<std::uint32_t>(aWorkLaneC[aFoldIndexC]) << 24U) | (static_cast<std::uint32_t>(aWorkLaneC[aFoldIndexD]) << 0U);
-            aFoldWord = TwistMix32::DiffuseC(aFoldWord);
+                (static_cast<std::uint32_t>(aWorkLaneC[aFoldIndexA]) << 24U) | (static_cast<std::uint32_t>(aWorkLaneC[aFoldIndexB]) << 8U) |
+                (static_cast<std::uint32_t>(aWorkLaneC[aFoldIndexC]) << 16U) | (static_cast<std::uint32_t>(aWorkLaneC[aFoldIndexD]) << 0U);
+            aFoldWord = TwistMix32::DiffuseB(aFoldWord);
             aOperationLaneC[aIndex] = aFoldWord;
         }
     }
     {
-        // read from: aWorkLaneD fragments 2, 3, 0, 1 with offsets 703U, 1963U, 1078U, 1791U
-        // byte shifts: 8U, 16U, 24U, 0U; diffuse: DiffuseB
+        // read from: aWorkLaneD fragments 3, 2, 1, 0 with offsets 1194U, 1650U, 1624U, 468U
+        // byte shifts: 8U, 0U, 24U, 16U; diffuse: DiffuseC
         // write to: aOperationLaneD [0..<W_KEY]
-        const std::size_t aFoldBaseA = 2U * W_KEY;
-        const std::size_t aFoldBaseB = 3U * W_KEY;
-        const std::size_t aFoldBaseC = 0U * W_KEY;
-        const std::size_t aFoldBaseD = 1U * W_KEY;
+        const std::size_t aFoldBaseA = 3U * W_KEY;
+        const std::size_t aFoldBaseB = 2U * W_KEY;
+        const std::size_t aFoldBaseC = 1U * W_KEY;
+        const std::size_t aFoldBaseD = 0U * W_KEY;
         for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(W_KEY); aIndex += 1U) {
-            const std::size_t aFoldIndexA = aFoldBaseA + ((aIndex + 703U) & W_KEY1);
-            const std::size_t aFoldIndexB = aFoldBaseB + ((aIndex + 1963U) & W_KEY1);
-            const std::size_t aFoldIndexC = aFoldBaseC + ((aIndex + 1078U) & W_KEY1);
-            const std::size_t aFoldIndexD = aFoldBaseD + ((aIndex + 1791U) & W_KEY1);
+            const std::size_t aFoldIndexA = aFoldBaseA + ((aIndex + 1194U) & W_KEY1);
+            const std::size_t aFoldIndexB = aFoldBaseB + ((aIndex + 1650U) & W_KEY1);
+            const std::size_t aFoldIndexC = aFoldBaseC + ((aIndex + 1624U) & W_KEY1);
+            const std::size_t aFoldIndexD = aFoldBaseD + ((aIndex + 468U) & W_KEY1);
             std::uint32_t aFoldWord =
-                (static_cast<std::uint32_t>(aWorkLaneD[aFoldIndexA]) << 8U) | (static_cast<std::uint32_t>(aWorkLaneD[aFoldIndexB]) << 16U) |
-                (static_cast<std::uint32_t>(aWorkLaneD[aFoldIndexC]) << 24U) | (static_cast<std::uint32_t>(aWorkLaneD[aFoldIndexD]) << 0U);
-            aFoldWord = TwistMix32::DiffuseB(aFoldWord);
+                (static_cast<std::uint32_t>(aWorkLaneD[aFoldIndexA]) << 8U) | (static_cast<std::uint32_t>(aWorkLaneD[aFoldIndexB]) << 0U) |
+                (static_cast<std::uint32_t>(aWorkLaneD[aFoldIndexC]) << 24U) | (static_cast<std::uint32_t>(aWorkLaneD[aFoldIndexD]) << 16U);
+            aFoldWord = TwistMix32::DiffuseC(aFoldWord);
             aOperationLaneD[aIndex] = aFoldWord;
         }
     }
     {
         // read from: aOperationLaneA, aOperationLaneB, aOperationLaneC, aOperationLaneD [0..<W_KEY]
-        // offsets: 1502U, 1825U, 230U, 1899U
-        // byte shifts: 8U, 0U, 24U, 16U; diffuse: DiffuseA
+        // offsets: 1399U, 1952U, 1677U, 517U
+        // byte shifts: 0U, 24U, 8U, 16U; diffuse: DiffuseC
         // write to: aKeyRowWriteA
         for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(W_KEY); aIndex += 1U) {
-            const std::size_t aFoldIndexA = (aIndex + 1502U) & W_KEY1;
-            const std::size_t aFoldIndexB = (aIndex + 1825U) & W_KEY1;
-            const std::size_t aFoldIndexC = (aIndex + 230U) & W_KEY1;
-            const std::size_t aFoldIndexD = (aIndex + 1899U) & W_KEY1;
+            const std::size_t aFoldIndexA = (aIndex + 1399U) & W_KEY1;
+            const std::size_t aFoldIndexB = (aIndex + 1952U) & W_KEY1;
+            const std::size_t aFoldIndexC = (aIndex + 1677U) & W_KEY1;
+            const std::size_t aFoldIndexD = (aIndex + 517U) & W_KEY1;
             std::uint32_t aFoldWord =
-                (static_cast<std::uint32_t>(aOperationLaneA[aFoldIndexA]) << 8U) | (static_cast<std::uint32_t>(aOperationLaneB[aFoldIndexB]) << 0U) |
-                (static_cast<std::uint32_t>(aOperationLaneC[aFoldIndexC]) << 24U) | (static_cast<std::uint32_t>(aOperationLaneD[aFoldIndexD]) << 16U);
-            aFoldWord = TwistMix32::DiffuseA(aFoldWord);
+                (static_cast<std::uint32_t>(aOperationLaneA[aFoldIndexA]) << 0U) | (static_cast<std::uint32_t>(aOperationLaneB[aFoldIndexB]) << 24U) |
+                (static_cast<std::uint32_t>(aOperationLaneC[aFoldIndexC]) << 8U) | (static_cast<std::uint32_t>(aOperationLaneD[aFoldIndexD]) << 16U);
+            aFoldWord = TwistMix32::DiffuseC(aFoldWord);
             aKeyRowWriteA[aIndex] = aFoldWord;
         }
     }
@@ -1765,192 +1765,192 @@ void TwistExpander_BasketBall::GrowKeyB(TwistWorkSpace *pWorkSpace) {
     static_assert((S_BLOCK / W_KEY) == 16, "GKeyFoldB expects 16 key-row chunks.");
     TwistShiftBox::ShiftKeyBoxB(pWorkSpace);
     {
-        // read from: aWorkLaneA, aWorkLaneB, aWorkLaneC, aWorkLaneD source quarters 1, 2, 1, 3 with offsets 5296U, 3558U, 2651U, 4774U
-        // byte shifts: 0U, 16U, 8U, 24U; diffuse: DiffuseA
+        // read from: aWorkLaneA, aWorkLaneB, aWorkLaneC, aWorkLaneD source quarters 1, 3, 3, 2 with offsets 2891U, 1203U, 3473U, 4813U
+        // byte shifts: 16U, 24U, 8U, 0U; diffuse: DiffuseA
         // write to: aExpandLaneA [0..<(S_BLOCK >> 2U)]
         const std::size_t aFoldBaseA = 1U * (S_BLOCK >> 2U);
-        const std::size_t aFoldBaseB = 2U * (S_BLOCK >> 2U);
-        const std::size_t aFoldBaseC = 1U * (S_BLOCK >> 2U);
-        const std::size_t aFoldBaseD = 3U * (S_BLOCK >> 2U);
+        const std::size_t aFoldBaseB = 3U * (S_BLOCK >> 2U);
+        const std::size_t aFoldBaseC = 3U * (S_BLOCK >> 2U);
+        const std::size_t aFoldBaseD = 2U * (S_BLOCK >> 2U);
         for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK >> 2U); aIndex += 1U) {
-            const std::size_t aFoldIndexA = aFoldBaseA + ((aIndex + 5296U) & ((S_BLOCK >> 2U) - 1U));
-            const std::size_t aFoldIndexB = aFoldBaseB + ((aIndex + 3558U) & ((S_BLOCK >> 2U) - 1U));
-            const std::size_t aFoldIndexC = aFoldBaseC + ((aIndex + 2651U) & ((S_BLOCK >> 2U) - 1U));
-            const std::size_t aFoldIndexD = aFoldBaseD + ((aIndex + 4774U) & ((S_BLOCK >> 2U) - 1U));
+            const std::size_t aFoldIndexA = aFoldBaseA + ((aIndex + 2891U) & ((S_BLOCK >> 2U) - 1U));
+            const std::size_t aFoldIndexB = aFoldBaseB + ((aIndex + 1203U) & ((S_BLOCK >> 2U) - 1U));
+            const std::size_t aFoldIndexC = aFoldBaseC + ((aIndex + 3473U) & ((S_BLOCK >> 2U) - 1U));
+            const std::size_t aFoldIndexD = aFoldBaseD + ((aIndex + 4813U) & ((S_BLOCK >> 2U) - 1U));
             std::uint32_t aFoldWord =
-                (static_cast<std::uint32_t>(aWorkLaneA[aFoldIndexA]) << 0U) | (static_cast<std::uint32_t>(aWorkLaneB[aFoldIndexB]) << 16U) |
-                (static_cast<std::uint32_t>(aWorkLaneC[aFoldIndexC]) << 8U) | (static_cast<std::uint32_t>(aWorkLaneD[aFoldIndexD]) << 24U);
+                (static_cast<std::uint32_t>(aWorkLaneA[aFoldIndexA]) << 16U) | (static_cast<std::uint32_t>(aWorkLaneB[aFoldIndexB]) << 24U) |
+                (static_cast<std::uint32_t>(aWorkLaneC[aFoldIndexC]) << 8U) | (static_cast<std::uint32_t>(aWorkLaneD[aFoldIndexD]) << 0U);
             aFoldWord = TwistMix32::DiffuseA(aFoldWord);
             aExpandLaneA[aIndex] = aFoldWord;
         }
     }
     {
-        // read from: aWorkLaneA, aWorkLaneB, aWorkLaneC, aWorkLaneD source quarters 2, 1, 2, 0 with offsets 7170U, 4427U, 1509U, 5134U
-        // byte shifts: 16U, 24U, 8U, 0U; diffuse: DiffuseC
+        // read from: aWorkLaneA, aWorkLaneB, aWorkLaneC, aWorkLaneD source quarters 3, 0, 2, 0 with offsets 2690U, 8106U, 5962U, 7984U
+        // byte shifts: 24U, 0U, 16U, 8U; diffuse: DiffuseA
         // write to: aExpandLaneB [0..<(S_BLOCK >> 2U)]
-        const std::size_t aFoldBaseA = 2U * (S_BLOCK >> 2U);
-        const std::size_t aFoldBaseB = 1U * (S_BLOCK >> 2U);
+        const std::size_t aFoldBaseA = 3U * (S_BLOCK >> 2U);
+        const std::size_t aFoldBaseB = 0U * (S_BLOCK >> 2U);
         const std::size_t aFoldBaseC = 2U * (S_BLOCK >> 2U);
         const std::size_t aFoldBaseD = 0U * (S_BLOCK >> 2U);
         for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK >> 2U); aIndex += 1U) {
-            const std::size_t aFoldIndexA = aFoldBaseA + ((aIndex + 7170U) & ((S_BLOCK >> 2U) - 1U));
-            const std::size_t aFoldIndexB = aFoldBaseB + ((aIndex + 4427U) & ((S_BLOCK >> 2U) - 1U));
-            const std::size_t aFoldIndexC = aFoldBaseC + ((aIndex + 1509U) & ((S_BLOCK >> 2U) - 1U));
-            const std::size_t aFoldIndexD = aFoldBaseD + ((aIndex + 5134U) & ((S_BLOCK >> 2U) - 1U));
+            const std::size_t aFoldIndexA = aFoldBaseA + ((aIndex + 2690U) & ((S_BLOCK >> 2U) - 1U));
+            const std::size_t aFoldIndexB = aFoldBaseB + ((aIndex + 8106U) & ((S_BLOCK >> 2U) - 1U));
+            const std::size_t aFoldIndexC = aFoldBaseC + ((aIndex + 5962U) & ((S_BLOCK >> 2U) - 1U));
+            const std::size_t aFoldIndexD = aFoldBaseD + ((aIndex + 7984U) & ((S_BLOCK >> 2U) - 1U));
             std::uint32_t aFoldWord =
-                (static_cast<std::uint32_t>(aWorkLaneA[aFoldIndexA]) << 16U) | (static_cast<std::uint32_t>(aWorkLaneB[aFoldIndexB]) << 24U) |
-                (static_cast<std::uint32_t>(aWorkLaneC[aFoldIndexC]) << 8U) | (static_cast<std::uint32_t>(aWorkLaneD[aFoldIndexD]) << 0U);
-            aFoldWord = TwistMix32::DiffuseC(aFoldWord);
+                (static_cast<std::uint32_t>(aWorkLaneA[aFoldIndexA]) << 24U) | (static_cast<std::uint32_t>(aWorkLaneB[aFoldIndexB]) << 0U) |
+                (static_cast<std::uint32_t>(aWorkLaneC[aFoldIndexC]) << 16U) | (static_cast<std::uint32_t>(aWorkLaneD[aFoldIndexD]) << 8U);
+            aFoldWord = TwistMix32::DiffuseA(aFoldWord);
             aExpandLaneB[aIndex] = aFoldWord;
         }
     }
     {
-        // read from: aWorkLaneA, aWorkLaneB, aWorkLaneC, aWorkLaneD source quarters 0, 3, 3, 2 with offsets 5447U, 795U, 4318U, 5906U
-        // byte shifts: 0U, 8U, 24U, 16U; diffuse: DiffuseB
+        // read from: aWorkLaneA, aWorkLaneB, aWorkLaneC, aWorkLaneD source quarters 2, 1, 0, 1 with offsets 2371U, 2739U, 6818U, 7158U
+        // byte shifts: 8U, 16U, 24U, 0U; diffuse: DiffuseC
         // write to: aExpandLaneC [0..<(S_BLOCK >> 2U)]
-        const std::size_t aFoldBaseA = 0U * (S_BLOCK >> 2U);
-        const std::size_t aFoldBaseB = 3U * (S_BLOCK >> 2U);
-        const std::size_t aFoldBaseC = 3U * (S_BLOCK >> 2U);
-        const std::size_t aFoldBaseD = 2U * (S_BLOCK >> 2U);
+        const std::size_t aFoldBaseA = 2U * (S_BLOCK >> 2U);
+        const std::size_t aFoldBaseB = 1U * (S_BLOCK >> 2U);
+        const std::size_t aFoldBaseC = 0U * (S_BLOCK >> 2U);
+        const std::size_t aFoldBaseD = 1U * (S_BLOCK >> 2U);
         for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK >> 2U); aIndex += 1U) {
-            const std::size_t aFoldIndexA = aFoldBaseA + ((aIndex + 5447U) & ((S_BLOCK >> 2U) - 1U));
-            const std::size_t aFoldIndexB = aFoldBaseB + ((aIndex + 795U) & ((S_BLOCK >> 2U) - 1U));
-            const std::size_t aFoldIndexC = aFoldBaseC + ((aIndex + 4318U) & ((S_BLOCK >> 2U) - 1U));
-            const std::size_t aFoldIndexD = aFoldBaseD + ((aIndex + 5906U) & ((S_BLOCK >> 2U) - 1U));
+            const std::size_t aFoldIndexA = aFoldBaseA + ((aIndex + 2371U) & ((S_BLOCK >> 2U) - 1U));
+            const std::size_t aFoldIndexB = aFoldBaseB + ((aIndex + 2739U) & ((S_BLOCK >> 2U) - 1U));
+            const std::size_t aFoldIndexC = aFoldBaseC + ((aIndex + 6818U) & ((S_BLOCK >> 2U) - 1U));
+            const std::size_t aFoldIndexD = aFoldBaseD + ((aIndex + 7158U) & ((S_BLOCK >> 2U) - 1U));
             std::uint32_t aFoldWord =
-                (static_cast<std::uint32_t>(aWorkLaneA[aFoldIndexA]) << 0U) | (static_cast<std::uint32_t>(aWorkLaneB[aFoldIndexB]) << 8U) |
-                (static_cast<std::uint32_t>(aWorkLaneC[aFoldIndexC]) << 24U) | (static_cast<std::uint32_t>(aWorkLaneD[aFoldIndexD]) << 16U);
-            aFoldWord = TwistMix32::DiffuseB(aFoldWord);
+                (static_cast<std::uint32_t>(aWorkLaneA[aFoldIndexA]) << 8U) | (static_cast<std::uint32_t>(aWorkLaneB[aFoldIndexB]) << 16U) |
+                (static_cast<std::uint32_t>(aWorkLaneC[aFoldIndexC]) << 24U) | (static_cast<std::uint32_t>(aWorkLaneD[aFoldIndexD]) << 0U);
+            aFoldWord = TwistMix32::DiffuseC(aFoldWord);
             aExpandLaneC[aIndex] = aFoldWord;
         }
     }
     {
-        // read from: aWorkLaneA, aWorkLaneB, aWorkLaneC, aWorkLaneD source quarters 3, 0, 0, 1 with offsets 925U, 6993U, 5544U, 4375U
-        // byte shifts: 8U, 24U, 0U, 16U; diffuse: DiffuseB
+        // read from: aWorkLaneA, aWorkLaneB, aWorkLaneC, aWorkLaneD source quarters 0, 2, 1, 3 with offsets 4097U, 1053U, 123U, 3667U
+        // byte shifts: 8U, 16U, 24U, 0U; diffuse: DiffuseA
         // write to: aExpandLaneD [0..<(S_BLOCK >> 2U)]
-        const std::size_t aFoldBaseA = 3U * (S_BLOCK >> 2U);
-        const std::size_t aFoldBaseB = 0U * (S_BLOCK >> 2U);
-        const std::size_t aFoldBaseC = 0U * (S_BLOCK >> 2U);
-        const std::size_t aFoldBaseD = 1U * (S_BLOCK >> 2U);
+        const std::size_t aFoldBaseA = 0U * (S_BLOCK >> 2U);
+        const std::size_t aFoldBaseB = 2U * (S_BLOCK >> 2U);
+        const std::size_t aFoldBaseC = 1U * (S_BLOCK >> 2U);
+        const std::size_t aFoldBaseD = 3U * (S_BLOCK >> 2U);
         for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK >> 2U); aIndex += 1U) {
-            const std::size_t aFoldIndexA = aFoldBaseA + ((aIndex + 925U) & ((S_BLOCK >> 2U) - 1U));
-            const std::size_t aFoldIndexB = aFoldBaseB + ((aIndex + 6993U) & ((S_BLOCK >> 2U) - 1U));
-            const std::size_t aFoldIndexC = aFoldBaseC + ((aIndex + 5544U) & ((S_BLOCK >> 2U) - 1U));
-            const std::size_t aFoldIndexD = aFoldBaseD + ((aIndex + 4375U) & ((S_BLOCK >> 2U) - 1U));
+            const std::size_t aFoldIndexA = aFoldBaseA + ((aIndex + 4097U) & ((S_BLOCK >> 2U) - 1U));
+            const std::size_t aFoldIndexB = aFoldBaseB + ((aIndex + 1053U) & ((S_BLOCK >> 2U) - 1U));
+            const std::size_t aFoldIndexC = aFoldBaseC + ((aIndex + 123U) & ((S_BLOCK >> 2U) - 1U));
+            const std::size_t aFoldIndexD = aFoldBaseD + ((aIndex + 3667U) & ((S_BLOCK >> 2U) - 1U));
             std::uint32_t aFoldWord =
-                (static_cast<std::uint32_t>(aWorkLaneA[aFoldIndexA]) << 8U) | (static_cast<std::uint32_t>(aWorkLaneB[aFoldIndexB]) << 24U) |
-                (static_cast<std::uint32_t>(aWorkLaneC[aFoldIndexC]) << 0U) | (static_cast<std::uint32_t>(aWorkLaneD[aFoldIndexD]) << 16U);
-            aFoldWord = TwistMix32::DiffuseB(aFoldWord);
+                (static_cast<std::uint32_t>(aWorkLaneA[aFoldIndexA]) << 8U) | (static_cast<std::uint32_t>(aWorkLaneB[aFoldIndexB]) << 16U) |
+                (static_cast<std::uint32_t>(aWorkLaneC[aFoldIndexC]) << 24U) | (static_cast<std::uint32_t>(aWorkLaneD[aFoldIndexD]) << 0U);
+            aFoldWord = TwistMix32::DiffuseA(aFoldWord);
             aExpandLaneD[aIndex] = aFoldWord;
         }
     }
     {
         // read from: aExpandLaneA, aExpandLaneB, aExpandLaneC, aExpandLaneD [0..<(S_BLOCK >> 2U)]
-        // offsets: 6861U, 4430U, 3352U, 837U
-        // byte shifts: 8U, 0U, 24U, 16U; diffuse: DiffuseB
+        // offsets: 4843U, 2456U, 2540U, 1942U
+        // byte shifts: 0U, 8U, 16U, 24U; diffuse: DiffuseC
         // write to: aOperationLaneA [0..<(S_BLOCK >> 2U)]
         for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK >> 2U); aIndex += 1U) {
-            const std::size_t aFoldIndexA = (aIndex + 6861U) & ((S_BLOCK >> 2U) - 1U);
-            const std::size_t aFoldIndexB = (aIndex + 4430U) & ((S_BLOCK >> 2U) - 1U);
-            const std::size_t aFoldIndexC = (aIndex + 3352U) & ((S_BLOCK >> 2U) - 1U);
-            const std::size_t aFoldIndexD = (aIndex + 837U) & ((S_BLOCK >> 2U) - 1U);
+            const std::size_t aFoldIndexA = (aIndex + 4843U) & ((S_BLOCK >> 2U) - 1U);
+            const std::size_t aFoldIndexB = (aIndex + 2456U) & ((S_BLOCK >> 2U) - 1U);
+            const std::size_t aFoldIndexC = (aIndex + 2540U) & ((S_BLOCK >> 2U) - 1U);
+            const std::size_t aFoldIndexD = (aIndex + 1942U) & ((S_BLOCK >> 2U) - 1U);
             std::uint32_t aFoldWord =
-                (static_cast<std::uint32_t>(aExpandLaneA[aFoldIndexA]) << 8U) | (static_cast<std::uint32_t>(aExpandLaneB[aFoldIndexB]) << 0U) |
-                (static_cast<std::uint32_t>(aExpandLaneC[aFoldIndexC]) << 24U) | (static_cast<std::uint32_t>(aExpandLaneD[aFoldIndexD]) << 16U);
-            aFoldWord = TwistMix32::DiffuseB(aFoldWord);
+                (static_cast<std::uint32_t>(aExpandLaneA[aFoldIndexA]) << 0U) | (static_cast<std::uint32_t>(aExpandLaneB[aFoldIndexB]) << 8U) |
+                (static_cast<std::uint32_t>(aExpandLaneC[aFoldIndexC]) << 16U) | (static_cast<std::uint32_t>(aExpandLaneD[aFoldIndexD]) << 24U);
+            aFoldWord = TwistMix32::DiffuseC(aFoldWord);
             aOperationLaneA[aIndex] = aFoldWord;
         }
     }
     {
-        // read from: aOperationLaneA fragment 3 with offsets 261U, 1030U, 1963U, 783U
-        // byte shifts: 8U, 24U, 16U, 0U; diffuse: DiffuseB
-        // write to: aWorkLaneA fragment 0
-        const std::size_t aReadBase = 3U * W_KEY;
-        const std::size_t aWriteBase = 0U * W_KEY;
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(W_KEY); aIndex += 1U) {
-            const std::size_t aFoldIndexA = aReadBase + ((aIndex + 261U) & W_KEY1);
-            const std::size_t aFoldIndexB = aReadBase + ((aIndex + 1030U) & W_KEY1);
-            const std::size_t aFoldIndexC = aReadBase + ((aIndex + 1963U) & W_KEY1);
-            const std::size_t aFoldIndexD = aReadBase + ((aIndex + 783U) & W_KEY1);
-            std::uint32_t aFoldWord =
-                (static_cast<std::uint32_t>(aOperationLaneA[aFoldIndexA]) << 8U) | (static_cast<std::uint32_t>(aOperationLaneA[aFoldIndexB]) << 24U) |
-                (static_cast<std::uint32_t>(aOperationLaneA[aFoldIndexC]) << 16U) | (static_cast<std::uint32_t>(aOperationLaneA[aFoldIndexD]) << 0U);
-            aFoldWord = TwistMix32::DiffuseB(aFoldWord);
-            aWorkLaneA[aWriteBase + aIndex] = aFoldWord;
-        }
-    }
-    {
-        // read from: aOperationLaneA fragment 0 with offsets 1691U, 155U, 913U, 1836U
-        // byte shifts: 8U, 24U, 16U, 0U; diffuse: DiffuseB
-        // write to: aWorkLaneA fragment 2
-        const std::size_t aReadBase = 0U * W_KEY;
-        const std::size_t aWriteBase = 2U * W_KEY;
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(W_KEY); aIndex += 1U) {
-            const std::size_t aFoldIndexA = aReadBase + ((aIndex + 1691U) & W_KEY1);
-            const std::size_t aFoldIndexB = aReadBase + ((aIndex + 155U) & W_KEY1);
-            const std::size_t aFoldIndexC = aReadBase + ((aIndex + 913U) & W_KEY1);
-            const std::size_t aFoldIndexD = aReadBase + ((aIndex + 1836U) & W_KEY1);
-            std::uint32_t aFoldWord =
-                (static_cast<std::uint32_t>(aOperationLaneA[aFoldIndexA]) << 8U) | (static_cast<std::uint32_t>(aOperationLaneA[aFoldIndexB]) << 24U) |
-                (static_cast<std::uint32_t>(aOperationLaneA[aFoldIndexC]) << 16U) | (static_cast<std::uint32_t>(aOperationLaneA[aFoldIndexD]) << 0U);
-            aFoldWord = TwistMix32::DiffuseB(aFoldWord);
-            aWorkLaneA[aWriteBase + aIndex] = aFoldWord;
-        }
-    }
-    {
-        // read from: aOperationLaneA fragment 2 with offsets 105U, 1026U, 181U, 358U
-        // byte shifts: 16U, 8U, 24U, 0U; diffuse: DiffuseA
+        // read from: aOperationLaneA fragment 2 with offsets 393U, 538U, 183U, 1874U
+        // byte shifts: 0U, 8U, 24U, 16U; diffuse: DiffuseB
         // write to: aWorkLaneA fragment 1
         const std::size_t aReadBase = 2U * W_KEY;
         const std::size_t aWriteBase = 1U * W_KEY;
         for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(W_KEY); aIndex += 1U) {
-            const std::size_t aFoldIndexA = aReadBase + ((aIndex + 105U) & W_KEY1);
-            const std::size_t aFoldIndexB = aReadBase + ((aIndex + 1026U) & W_KEY1);
-            const std::size_t aFoldIndexC = aReadBase + ((aIndex + 181U) & W_KEY1);
-            const std::size_t aFoldIndexD = aReadBase + ((aIndex + 358U) & W_KEY1);
+            const std::size_t aFoldIndexA = aReadBase + ((aIndex + 393U) & W_KEY1);
+            const std::size_t aFoldIndexB = aReadBase + ((aIndex + 538U) & W_KEY1);
+            const std::size_t aFoldIndexC = aReadBase + ((aIndex + 183U) & W_KEY1);
+            const std::size_t aFoldIndexD = aReadBase + ((aIndex + 1874U) & W_KEY1);
             std::uint32_t aFoldWord =
-                (static_cast<std::uint32_t>(aOperationLaneA[aFoldIndexA]) << 16U) | (static_cast<std::uint32_t>(aOperationLaneA[aFoldIndexB]) << 8U) |
-                (static_cast<std::uint32_t>(aOperationLaneA[aFoldIndexC]) << 24U) | (static_cast<std::uint32_t>(aOperationLaneA[aFoldIndexD]) << 0U);
+                (static_cast<std::uint32_t>(aOperationLaneA[aFoldIndexA]) << 0U) | (static_cast<std::uint32_t>(aOperationLaneA[aFoldIndexB]) << 8U) |
+                (static_cast<std::uint32_t>(aOperationLaneA[aFoldIndexC]) << 24U) | (static_cast<std::uint32_t>(aOperationLaneA[aFoldIndexD]) << 16U);
+            aFoldWord = TwistMix32::DiffuseB(aFoldWord);
+            aWorkLaneA[aWriteBase + aIndex] = aFoldWord;
+        }
+    }
+    {
+        // read from: aOperationLaneA fragment 1 with offsets 1121U, 715U, 727U, 1264U
+        // byte shifts: 16U, 0U, 8U, 24U; diffuse: DiffuseB
+        // write to: aWorkLaneA fragment 3
+        const std::size_t aReadBase = 1U * W_KEY;
+        const std::size_t aWriteBase = 3U * W_KEY;
+        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(W_KEY); aIndex += 1U) {
+            const std::size_t aFoldIndexA = aReadBase + ((aIndex + 1121U) & W_KEY1);
+            const std::size_t aFoldIndexB = aReadBase + ((aIndex + 715U) & W_KEY1);
+            const std::size_t aFoldIndexC = aReadBase + ((aIndex + 727U) & W_KEY1);
+            const std::size_t aFoldIndexD = aReadBase + ((aIndex + 1264U) & W_KEY1);
+            std::uint32_t aFoldWord =
+                (static_cast<std::uint32_t>(aOperationLaneA[aFoldIndexA]) << 16U) | (static_cast<std::uint32_t>(aOperationLaneA[aFoldIndexB]) << 0U) |
+                (static_cast<std::uint32_t>(aOperationLaneA[aFoldIndexC]) << 8U) | (static_cast<std::uint32_t>(aOperationLaneA[aFoldIndexD]) << 24U);
+            aFoldWord = TwistMix32::DiffuseB(aFoldWord);
+            aWorkLaneA[aWriteBase + aIndex] = aFoldWord;
+        }
+    }
+    {
+        // read from: aOperationLaneA fragment 3 with offsets 2010U, 2033U, 1385U, 1312U
+        // byte shifts: 0U, 24U, 16U, 8U; diffuse: DiffuseA
+        // write to: aWorkLaneA fragment 0
+        const std::size_t aReadBase = 3U * W_KEY;
+        const std::size_t aWriteBase = 0U * W_KEY;
+        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(W_KEY); aIndex += 1U) {
+            const std::size_t aFoldIndexA = aReadBase + ((aIndex + 2010U) & W_KEY1);
+            const std::size_t aFoldIndexB = aReadBase + ((aIndex + 2033U) & W_KEY1);
+            const std::size_t aFoldIndexC = aReadBase + ((aIndex + 1385U) & W_KEY1);
+            const std::size_t aFoldIndexD = aReadBase + ((aIndex + 1312U) & W_KEY1);
+            std::uint32_t aFoldWord =
+                (static_cast<std::uint32_t>(aOperationLaneA[aFoldIndexA]) << 0U) | (static_cast<std::uint32_t>(aOperationLaneA[aFoldIndexB]) << 24U) |
+                (static_cast<std::uint32_t>(aOperationLaneA[aFoldIndexC]) << 16U) | (static_cast<std::uint32_t>(aOperationLaneA[aFoldIndexD]) << 8U);
             aFoldWord = TwistMix32::DiffuseA(aFoldWord);
             aWorkLaneA[aWriteBase + aIndex] = aFoldWord;
         }
     }
     {
-        // read from: aOperationLaneA fragment 1 with offsets 957U, 928U, 1449U, 504U
-        // byte shifts: 0U, 16U, 24U, 8U; diffuse: DiffuseC
-        // write to: aWorkLaneA fragment 3
-        const std::size_t aReadBase = 1U * W_KEY;
-        const std::size_t aWriteBase = 3U * W_KEY;
+        // read from: aOperationLaneA fragment 0 with offsets 1917U, 847U, 1170U, 1818U
+        // byte shifts: 16U, 0U, 8U, 24U; diffuse: DiffuseC
+        // write to: aWorkLaneA fragment 2
+        const std::size_t aReadBase = 0U * W_KEY;
+        const std::size_t aWriteBase = 2U * W_KEY;
         for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(W_KEY); aIndex += 1U) {
-            const std::size_t aFoldIndexA = aReadBase + ((aIndex + 957U) & W_KEY1);
-            const std::size_t aFoldIndexB = aReadBase + ((aIndex + 928U) & W_KEY1);
-            const std::size_t aFoldIndexC = aReadBase + ((aIndex + 1449U) & W_KEY1);
-            const std::size_t aFoldIndexD = aReadBase + ((aIndex + 504U) & W_KEY1);
+            const std::size_t aFoldIndexA = aReadBase + ((aIndex + 1917U) & W_KEY1);
+            const std::size_t aFoldIndexB = aReadBase + ((aIndex + 847U) & W_KEY1);
+            const std::size_t aFoldIndexC = aReadBase + ((aIndex + 1170U) & W_KEY1);
+            const std::size_t aFoldIndexD = aReadBase + ((aIndex + 1818U) & W_KEY1);
             std::uint32_t aFoldWord =
-                (static_cast<std::uint32_t>(aOperationLaneA[aFoldIndexA]) << 0U) | (static_cast<std::uint32_t>(aOperationLaneA[aFoldIndexB]) << 16U) |
-                (static_cast<std::uint32_t>(aOperationLaneA[aFoldIndexC]) << 24U) | (static_cast<std::uint32_t>(aOperationLaneA[aFoldIndexD]) << 8U);
+                (static_cast<std::uint32_t>(aOperationLaneA[aFoldIndexA]) << 16U) | (static_cast<std::uint32_t>(aOperationLaneA[aFoldIndexB]) << 0U) |
+                (static_cast<std::uint32_t>(aOperationLaneA[aFoldIndexC]) << 8U) | (static_cast<std::uint32_t>(aOperationLaneA[aFoldIndexD]) << 24U);
             aFoldWord = TwistMix32::DiffuseC(aFoldWord);
             aWorkLaneA[aWriteBase + aIndex] = aFoldWord;
         }
     }
     {
-        // read from: aWorkLaneA fragments 1, 3, 2, 0 [0..<W_KEY]
-        // offsets: 431U, 43U, 863U, 409U
-        // byte shifts: 0U, 8U, 16U, 24U; diffuse: DiffuseB
+        // read from: aWorkLaneA fragments 2, 3, 0, 1 [0..<W_KEY]
+        // offsets: 1940U, 703U, 1873U, 1247U
+        // byte shifts: 16U, 8U, 24U, 0U; diffuse: DiffuseA
         // write to: aKeyRowWriteB
-        const std::size_t aFoldBaseA = 1U * W_KEY;
+        const std::size_t aFoldBaseA = 2U * W_KEY;
         const std::size_t aFoldBaseB = 3U * W_KEY;
-        const std::size_t aFoldBaseC = 2U * W_KEY;
-        const std::size_t aFoldBaseD = 0U * W_KEY;
+        const std::size_t aFoldBaseC = 0U * W_KEY;
+        const std::size_t aFoldBaseD = 1U * W_KEY;
         for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(W_KEY); aIndex += 1U) {
-            const std::size_t aFoldIndexA = aFoldBaseA + ((aIndex + 431U) & W_KEY1);
-            const std::size_t aFoldIndexB = aFoldBaseB + ((aIndex + 43U) & W_KEY1);
-            const std::size_t aFoldIndexC = aFoldBaseC + ((aIndex + 863U) & W_KEY1);
-            const std::size_t aFoldIndexD = aFoldBaseD + ((aIndex + 409U) & W_KEY1);
+            const std::size_t aFoldIndexA = aFoldBaseA + ((aIndex + 1940U) & W_KEY1);
+            const std::size_t aFoldIndexB = aFoldBaseB + ((aIndex + 703U) & W_KEY1);
+            const std::size_t aFoldIndexC = aFoldBaseC + ((aIndex + 1873U) & W_KEY1);
+            const std::size_t aFoldIndexD = aFoldBaseD + ((aIndex + 1247U) & W_KEY1);
             std::uint32_t aFoldWord =
-                (static_cast<std::uint32_t>(aWorkLaneA[aFoldIndexA]) << 0U) | (static_cast<std::uint32_t>(aWorkLaneA[aFoldIndexB]) << 8U) |
-                (static_cast<std::uint32_t>(aWorkLaneA[aFoldIndexC]) << 16U) | (static_cast<std::uint32_t>(aWorkLaneA[aFoldIndexD]) << 24U);
-            aFoldWord = TwistMix32::DiffuseB(aFoldWord);
+                (static_cast<std::uint32_t>(aWorkLaneA[aFoldIndexA]) << 16U) | (static_cast<std::uint32_t>(aWorkLaneA[aFoldIndexB]) << 8U) |
+                (static_cast<std::uint32_t>(aWorkLaneA[aFoldIndexC]) << 24U) | (static_cast<std::uint32_t>(aWorkLaneA[aFoldIndexD]) << 0U);
+            aFoldWord = TwistMix32::DiffuseA(aFoldWord);
             aKeyRowWriteB[aIndex] = aFoldWord;
         }
     }
@@ -1960,1664 +1960,1664 @@ void TwistExpander_BasketBall::GrowKeyB(TwistWorkSpace *pWorkSpace) {
 const TwistDomainSaltSet TwistExpander_BasketBall::kPhaseASalts = {
     {
         {
-            0xC23ED64D5C956F98ULL, 0x84E5A0BDA6F11570ULL, 0xD4823E87D93843F6ULL, 0x8221FFEAE14E4C03ULL, 
-            0x947B2235B744B8BFULL, 0x8EEF0CF6DC945E1DULL, 0x5A1EFFC9647ED5DDULL, 0xCAEB16664681A87CULL, 
-            0xD615819A8EC81041ULL, 0x26CEBFCBAD44E706ULL, 0x3A5FBECF3BB0309BULL, 0x3E20F593BB7D2E17ULL, 
-            0x1C215CC6125EAFABULL, 0x4D2A28C2322E58C9ULL, 0x6AA0900DEF106C17ULL, 0x93075FE07CCB81C8ULL, 
-            0x0BBC2DBBAE660118ULL, 0x4BC4F61610AA0F2BULL, 0x5E9163D4E44FA166ULL, 0xE87D99A5C1450ACDULL, 
-            0xD68243C0CC478808ULL, 0xEADF0F3AACB46912ULL, 0xEBE3D5B62F1EBF78ULL, 0x725608EC8FDFA3B0ULL, 
-            0xE02D32E4CE7BD4A7ULL, 0x6A1C011137084C24ULL, 0x66BAFB98222669AAULL, 0x5F09C7A1ECB683CCULL, 
-            0x7B886040CADD6E63ULL, 0x4F6563FDCA7A9DFEULL, 0xC65DA9C3C24D33ABULL, 0xC34DAE2AE56268FEULL
+            0x34A5EF292492A0B4ULL, 0xE6C3E08AD41B0AC3ULL, 0x25DA98ECD7AC0441ULL, 0x61113D0A80394049ULL, 
+            0x7FE666B737E8B735ULL, 0xD6ABE8364BFEAB9EULL, 0xF741A0E4416D6727ULL, 0xD743C8C326B217EEULL, 
+            0xC469BED15FC5AEA1ULL, 0x22C7D80400C9E12CULL, 0x17A88E94E4629563ULL, 0x0A37A43C0DDCE3B4ULL, 
+            0x1FE151CE0E12CF60ULL, 0x108D1D1D6547EAF3ULL, 0xEDD9283DC2B4A7D6ULL, 0xB5A0B9333DE06CF6ULL, 
+            0x05D2E4B4F3E73A31ULL, 0x9EC49FB3279440D3ULL, 0x5DE8872AD3B68056ULL, 0x3AF6ADA4FE01B475ULL, 
+            0xAEFA397E1815CAB1ULL, 0xA4719AA87DA640ECULL, 0xCA1507657E46E0FCULL, 0x76673028E39B094BULL, 
+            0x79AB1448A33D0476ULL, 0xF4454E0DA0422CBEULL, 0x350D5C0DCBC4807BULL, 0xEEC8C274617AEDFEULL, 
+            0x8A6317417F2819D2ULL, 0x6BB71B595B558015ULL, 0xCD9362B16B879981ULL, 0x301A507C0CCFF6C1ULL
         },
         {
-            0x335157E29F49E31AULL, 0xD1DDD50E33FC27B9ULL, 0x12F39EBD6F3E1F0FULL, 0x555FAA74ABDCAEEEULL, 
-            0x9D2CB59E8B8DC170ULL, 0xA5E484E298FA0B2DULL, 0xDC50F36869BA350AULL, 0xF4769CBFAD6CFC2DULL, 
-            0xC5000ADCA3AC7FB2ULL, 0xD3DC70C02888C225ULL, 0x7FE417004FD174ADULL, 0xAFCA61CA15ECCD05ULL, 
-            0xA960F6D07B022D26ULL, 0x29035D23EBBC1774ULL, 0x80567684A9BA95D6ULL, 0x77BBBB17AB9B5B42ULL, 
-            0x8A0C5719A1783509ULL, 0xB437DC65AE965CE2ULL, 0xE39E2751C2A35DE6ULL, 0x0D41970B121011F3ULL, 
-            0xC6CB526B0DC470EFULL, 0x8465ED95168B8696ULL, 0x58D11D653E6863EDULL, 0xE429B10BA6908E31ULL, 
-            0x66BEE163C24663CCULL, 0xA7946F807001ABF5ULL, 0x9279D04D15F69EC1ULL, 0x72BBA194E69335B7ULL, 
-            0x7E636FFA4340FAC8ULL, 0xC9DE7272391311E3ULL, 0x6C39281FCCB2F8E2ULL, 0xD2DD66978E213ED5ULL
+            0xD890971792F6FD96ULL, 0xB0FF9A2B5D06A2CEULL, 0xF1C4A21C627FDF7AULL, 0x2869B97EF6E423CFULL, 
+            0xC4119068D908BBFBULL, 0xD46581C56FE7BBB5ULL, 0xAA62073E0C38D33BULL, 0xDAC8DE2981D3119CULL, 
+            0x2C4EE34B057C2127ULL, 0x94ECFD8390047F82ULL, 0x3EFA74F70B5394FCULL, 0x29377D842C5DF5AFULL, 
+            0xEF27FC52C8CDE01DULL, 0x74C6B7F0FDA0A6E0ULL, 0xD80EA47457D87EC8ULL, 0xE3380D2486DA1A48ULL, 
+            0x6EFB77066263C89EULL, 0x8E38048EF02B0E0DULL, 0xCBA3DC3E64A05794ULL, 0xDBC1D21D2D333AC2ULL, 
+            0xE59EAC8A4BDF0FFCULL, 0x71E0D37807346FAEULL, 0xE05F2ED15FE0D73AULL, 0x76B4F5BB6C530B09ULL, 
+            0x18C0625F5E1A1A33ULL, 0x8FC2EC09AFE27244ULL, 0x143B049D507AA6ACULL, 0xC0F5D306D49FE6B9ULL, 
+            0x60C09DC31C56E989ULL, 0x60F48E57BB80F2DDULL, 0x7FC57778177EDF31ULL, 0x5ECAE2C4465B25CDULL
         },
         {
-            0x9A4A37877BB0C3DDULL, 0xF9B6736AAC54348AULL, 0x43C18F2FC24A31A7ULL, 0xF291AFF59D253D7AULL, 
-            0x1AD9245377FC2687ULL, 0x0953820506BF9ACAULL, 0x07731B824A3F7E10ULL, 0xA0FBA1B8E1E28289ULL, 
-            0xA9909B46CA54CF65ULL, 0x5AFA82E535FED929ULL, 0x285A26DE54EE70F7ULL, 0xE0198DC167E7EF9BULL, 
-            0x8390AE7840614573ULL, 0x5542B8E03E339B06ULL, 0x15A3DC58F5CDF4B5ULL, 0x29C1C7CB76AD3A6FULL, 
-            0x5120E8CDDBB658E3ULL, 0x57FA1F33B47EC456ULL, 0xB2092ADB3DE88C80ULL, 0x6764B2A571907404ULL, 
-            0x55784D8B94E30857ULL, 0x1F0F3426418D0627ULL, 0xC16472BF73547BF6ULL, 0x3E1DF5086D4B4BAEULL, 
-            0x108A5F08F50EB5E9ULL, 0x0DABBE343FE7BF71ULL, 0x976B371C6B78AE11ULL, 0x5F4131F35980B5BCULL, 
-            0x62BEF85F549AFD7CULL, 0x672D29D246636159ULL, 0xDD8BAB673D78CD32ULL, 0x70E514FAC788C42BULL
+            0x10E980D864923D51ULL, 0x1E3ABCD8A61B274AULL, 0x6C12C68EB81C7EAEULL, 0x430A541EA6308815ULL, 
+            0x52116F03F7B0A5F7ULL, 0x69FDEC93C60041A6ULL, 0x2FE2755B1DC037C9ULL, 0xFA54CAF95AC5B65EULL, 
+            0x1E0F5BABF285E3A2ULL, 0x006FC9A8F43EB4D9ULL, 0xC5CC9D30493E8603ULL, 0x4A3F3BD8E93B97B2ULL, 
+            0x1CBB357274519ACDULL, 0x23187097747C085DULL, 0x3A67FD2B69A9B411ULL, 0xF6B947917C27F616ULL, 
+            0xC7502FBCF2DA73E0ULL, 0x13BC95B5CCC3ACB7ULL, 0xEA6E2B7A4FCA0213ULL, 0xFEAD3EF018570E26ULL, 
+            0x5F0A097F2D7BD4B7ULL, 0x0F9FA8E6789B3C97ULL, 0xD7C17A2FDDB90C31ULL, 0x862654012FC2DA05ULL, 
+            0xA61452A2A2A25088ULL, 0x47C676CB0A5E9FB2ULL, 0xF84495FAEE506547ULL, 0xEA4A9C44B0E5E7D7ULL, 
+            0x949ECEE21F1405D6ULL, 0xCC8EB9E59D705F6CULL, 0x2335D2F286FBEB1AULL, 0x6F8C96D8E8775111ULL
         },
         {
-            0x47E6E261D8E8076FULL, 0x26419BC7ED4C37D9ULL, 0x1D69A7D77F22643CULL, 0xA11F199E7CB3F4ADULL, 
-            0x1CD157AA936BEE3FULL, 0x2CA1C7172C4FA5EBULL, 0x21C034C28CD431B6ULL, 0x477F0E90E3FDAB01ULL, 
-            0x366C6FDE9FABFA47ULL, 0x4E5DBC046B40AF1EULL, 0xCDBB452327FA6D5CULL, 0xD7000A9095ECC192ULL, 
-            0xA0B09989610C0ECEULL, 0xC0B504C7BE0B4E10ULL, 0x3D40E449FC8E97BCULL, 0xE11ADB2C8BDD6BAAULL, 
-            0x965F4C8BB4B5F0BDULL, 0x4C5FF1062132B945ULL, 0x97E5AB6D1DE6B212ULL, 0xE483B11E173B4A3BULL, 
-            0xF95709928886C4AEULL, 0xC993D3F594A320F7ULL, 0x0E8F1A8C3528D917ULL, 0x8146C3159AB41614ULL, 
-            0x28DF64677D787F85ULL, 0xB866BD92FEF81CA1ULL, 0x8D366B994CE9934CULL, 0xDFDDEA15FA46EDF9ULL, 
-            0xF9CA808FA1F207B8ULL, 0x1A87401F0F852C41ULL, 0x2C1DA4DF6727FD14ULL, 0xDEB4CDAEDCDC0992ULL
+            0x1BF59655DA8E6489ULL, 0xF43850BE054FE8E3ULL, 0xC3D330DEEF6DCE24ULL, 0x66A56FFB26BDDCA9ULL, 
+            0xA7E6A256981663D6ULL, 0xF41F6154032D1F1EULL, 0xABD881D9538F2B9EULL, 0x4F4F08950960F263ULL, 
+            0xA2A85948488809ACULL, 0x0CEB42EDE257D62EULL, 0x8408D779976959F9ULL, 0xCCCF6B37CC908F9EULL, 
+            0x2BAEBF22BB458332ULL, 0x3827E12B0D754C20ULL, 0x4AA6AE3C58724F23ULL, 0xE325E1DAF31CF4B5ULL, 
+            0x6C816DAB1DF501E9ULL, 0xF0230DA8D0D60A47ULL, 0x7ED8896BF7A18824ULL, 0xDB0CBE81C6704DAEULL, 
+            0x69BF4F2D2361C8AEULL, 0x1FBE544A09A2F8A0ULL, 0x94D636689F662092ULL, 0x68411C706CE1683CULL, 
+            0x3B536E1D50DC3592ULL, 0xF46F624AF0A60861ULL, 0xAA65639071F7244FULL, 0x73B18BBB88765FE7ULL, 
+            0xDAEA696DE3F6C044ULL, 0x732B7CE4582C2748ULL, 0x64180E772ADDD892ULL, 0x80193D0D89B14D9AULL
         },
         {
-            0xAB96193F42F7C5EAULL, 0xF2124003425667B9ULL, 0x84DF3F680436CB4AULL, 0x4A2B09650C871C50ULL, 
-            0x64B8BF8318AC26A3ULL, 0x4CE9A657CB0F1FE5ULL, 0x920737DDBFBC32A8ULL, 0x0878D79B249DA180ULL, 
-            0xF997F61514DEDBF2ULL, 0xE9F2BA5216FA7387ULL, 0x56936251FC27A0B8ULL, 0xBF95C338ECC49807ULL, 
-            0x194FE711F5D651DFULL, 0x5CC25A7A285DE2E4ULL, 0xBA7556DE78EC735DULL, 0x848127D0E524E2CDULL, 
-            0x5AECCC4A0F3C039FULL, 0x31005DBC81DBC036ULL, 0x3B1D8D24039B5423ULL, 0xB6EF64AFDB48C203ULL, 
-            0x0BFA1343E835B94CULL, 0x3C2E8AEDFC49D148ULL, 0x7333D68154707A23ULL, 0xE97F04D8C11EB900ULL, 
-            0x2E0951730C69D629ULL, 0x055B9706F7B75EF0ULL, 0x2FC387C219CB4C96ULL, 0x1C62B8FD0B29A0B1ULL, 
-            0x23EDBDD18DC93C04ULL, 0x4B39FACC241B965DULL, 0x39C3A7006053CBE3ULL, 0x36D495B798D2B88BULL
+            0x25D6FD850EBDBA28ULL, 0xD846C420317E0F2DULL, 0x4A76D491C276150BULL, 0xC09C130084A44852ULL, 
+            0x6E874F802BA6D60DULL, 0xDFB05C70E2FE34A5ULL, 0x3342D5EA99A3AAD2ULL, 0x62E5EC9BC3C3CD7BULL, 
+            0x7A26A78263521EABULL, 0x9BE1953F872B5BB1ULL, 0x0C1675782BD4F529ULL, 0xA39449419B617CA3ULL, 
+            0xA268A8E98E3F5A04ULL, 0x865C0B4BEBEF4ACDULL, 0x4B5C084B09E30765ULL, 0x7B874F5EC8AE1D06ULL, 
+            0xA1D36D5795F7F4BAULL, 0xE6F397F63019BDAEULL, 0x9DFBC4D14839762DULL, 0x6F95ECE4FC463451ULL, 
+            0xE251061BD8F0E305ULL, 0x1933C6683E87FB76ULL, 0xC661FF69D918466CULL, 0x388E2F12FFE33BD8ULL, 
+            0xDCF945094BE59F8EULL, 0x599AE14328700A8FULL, 0x7AF7E0EEC2E1BACCULL, 0x6CCCCA97203732B5ULL, 
+            0xEF48633BDD481BB1ULL, 0x7D18521EAA1797D2ULL, 0xACBE88BAC42DD463ULL, 0xCD136E29DC2AB3D3ULL
         },
         {
-            0x5F45CCD8E51260D0ULL, 0xB1691D4A0D462062ULL, 0x7F0F10A94A37563AULL, 0xDA2A1B653B827003ULL, 
-            0x3B89E3F8EC0B0CD1ULL, 0x18EFB4D3405236BAULL, 0xC6D5F2D950F6281DULL, 0xF7ED42D7872003BCULL, 
-            0xF5B4270DA30E2C8EULL, 0x80E38F658D17AE60ULL, 0x8BAB59661FB6CFD8ULL, 0x86AAB5C65CB4E3C6ULL, 
-            0x5A5D81F919222493ULL, 0xFB153D7CA2D284EFULL, 0x14E99DB80DCA98F7ULL, 0x17B8E78598485A5CULL, 
-            0xB1DC4F220D162AF4ULL, 0x457A88DA954D6292ULL, 0xAD2046FF8F4336D5ULL, 0x42953F179DF7ED27ULL, 
-            0xC49362749486B2C0ULL, 0x57B2057A0A8D4553ULL, 0x6ECFEA117026F20DULL, 0xEBEF86505974265AULL, 
-            0x51810F1A3CD8AEF6ULL, 0x4004EE77E43C3BD4ULL, 0xFA5F9F3B09868A19ULL, 0x0D8D4D2FF33AD1D8ULL, 
-            0x1C03CB1A08E21E85ULL, 0xCBF5FA1C6D88E664ULL, 0xC6EB7A3FDDE54DBEULL, 0x71CE38695EE762D9ULL
+            0x465460987A0FD114ULL, 0xAAB696A797CD7AA2ULL, 0xE3E0F5F0D1857FA6ULL, 0xD0CE807C16356F8EULL, 
+            0x83E1BE1174E5E57EULL, 0xC91C85E95EFEF73AULL, 0xA9E466AB26877CE4ULL, 0xAF3703D6C12EF0C5ULL, 
+            0x71E2BD3336E9C2B0ULL, 0xC1FA1B0D1F912D76ULL, 0x9789A4837364C60CULL, 0x6E4329E94C3156B2ULL, 
+            0x82E651CAC5C3BEFAULL, 0x12F3170213D1F70EULL, 0xC21D0E4FED412F91ULL, 0x71D66C02651CD5F1ULL, 
+            0x7F54F09E826180FEULL, 0xA9C0D23272324F4AULL, 0x62AE6C0CC9CDDD75ULL, 0xF430622C870418BDULL, 
+            0x17F6325EC62AED9BULL, 0xCCA9E588E2702AD5ULL, 0x8B071B4A04E638A1ULL, 0xEC7031581DB91AFBULL, 
+            0xAC7F424B332B5414ULL, 0x9D91769BF1FC7F9DULL, 0xB7C45F5256372312ULL, 0xCB81110ED19C8074ULL, 
+            0xBF87C5DBB5EADA01ULL, 0xD1E19AE61227E405ULL, 0x8AB7F749D4ACBD3BULL, 0xBA268A4AF607C0E2ULL
         }
     },
     {
         {
-            0x81DF39EA2AFCC124ULL, 0xAD0429EC3781CB6AULL, 0xF0F1798A174A4178ULL, 0xBA17F6DE35829C77ULL, 
-            0x91C3ED3654D45D67ULL, 0xC2F3737179DC3F39ULL, 0x4DFBCDFE302419F8ULL, 0x07FC2A2C959A4026ULL, 
-            0x11E5796A03416B41ULL, 0x704335E0172B14F3ULL, 0x27D4E2872C354CA3ULL, 0xE70501A782970214ULL, 
-            0xBC4794E4A703CF37ULL, 0x559759DD50AEC761ULL, 0x9D87D60D5B198C67ULL, 0xB2084C69CF81ED7BULL, 
-            0x3DBC9D92A69CB305ULL, 0xC118AF9FED103A0EULL, 0x6ADD0C72BE82BE22ULL, 0x36A0C1A4F9F01612ULL, 
-            0xD8A841CC8047E716ULL, 0xAB67F10AE724DD3CULL, 0xDC35860C858877EBULL, 0x778BC8A6E2B7A30BULL, 
-            0x6059AE8E94E84F06ULL, 0xE44FB37AA8958E64ULL, 0xB47754B5B0386EC1ULL, 0xBD10393859A1B3E8ULL, 
-            0x352F548F26891105ULL, 0xCF605B516045D5E5ULL, 0xC6A78C951E0B2228ULL, 0xD8105F2084B629F7ULL
+            0x881452CE9E3FBE16ULL, 0x86BE84146C689145ULL, 0xFB317774376ED176ULL, 0x788E1F3EAD75279EULL, 
+            0x0D778822098C2BBBULL, 0xCF36EB56D4D7B258ULL, 0x510AF7A9E1AAF66CULL, 0x03A7574A5CFB95F9ULL, 
+            0x202D82E9D5F7B51BULL, 0xC192FF2C49243483ULL, 0x4799DB7A7F550522ULL, 0xDF964BB28895F3A5ULL, 
+            0x571AD7E88267EFA2ULL, 0xA44F62AB0E0161D7ULL, 0x8DBBD6FF0A925E8DULL, 0x779FD7C5EE5FA8F3ULL, 
+            0xF39A82A9E7549440ULL, 0x2F75EE3FF54469D3ULL, 0x2CCBE669A0C4093CULL, 0x04F280525627682BULL, 
+            0x54D70FEFE7900351ULL, 0xBB8010C5C77B8A53ULL, 0xF4257DDD0DD8881CULL, 0x374E8CD8BF81BB75ULL, 
+            0xBE3E7E8F6EBDAFDAULL, 0x2D89FB858B7F8B69ULL, 0x4D35ED95C321FAA3ULL, 0xA1FA7FC6DF597D37ULL, 
+            0xF5FDA6EC6B5CF830ULL, 0x319CC29EAA786943ULL, 0xA096B946B2CD86E0ULL, 0xFB21A143A6821F81ULL
         },
         {
-            0x099F0E1BB976D41FULL, 0x40CE5BE4714B55A0ULL, 0x14EF1F15D3999727ULL, 0x56AA4C76B072B77FULL, 
-            0xE41278A8D54BEE4DULL, 0x8D36E3DD75CAEA8CULL, 0xE7DE8940E2AE989EULL, 0x7EFA3EDD30FA890BULL, 
-            0x9FDB7457A4D124D1ULL, 0x2E52F461ABC8ED73ULL, 0x06ADF5FFA9031DB1ULL, 0xB13E6C86C014C79FULL, 
-            0x42DC619E26FE8E7AULL, 0xEF595F7AB91AC492ULL, 0xD284E36611F30F9DULL, 0xE0301E88B36651D9ULL, 
-            0x8FA0DCBA886C15AAULL, 0x95CE68D548546DC6ULL, 0xD75B782A112A8255ULL, 0xB347B77EED874B27ULL, 
-            0x480733E7A1E11EDAULL, 0x50D33A52581E5449ULL, 0x31CD3AB5BE36F0D5ULL, 0x0229FB5FDE06476BULL, 
-            0x6295E31ED58FC054ULL, 0x65B0B01289096906ULL, 0x46B17D6B717E2A12ULL, 0x2F969E551B9FF9E4ULL, 
-            0xA3E531BCF2FAC4F9ULL, 0x7EA4734DF6A19595ULL, 0x98E163E0682902AFULL, 0x1B69252F08DBD02DULL
+            0xF912C04CE4905DA0ULL, 0xD7E1FD23045C7F35ULL, 0x4E3531EF03C2A747ULL, 0x28C0A64186BFC969ULL, 
+            0x3DDED607DA2052D5ULL, 0xC0C35BABEFFF5FE7ULL, 0x03C777932BFACDCDULL, 0x7CB19B65081A4F61ULL, 
+            0xC85C7890C6039189ULL, 0x839C0E9AA60E26B4ULL, 0x590062306DDE39A5ULL, 0x4E98A384A41BFE1EULL, 
+            0xF8210BD667C13DE6ULL, 0x1215725F1627D02FULL, 0x84EDE5728E1DDECFULL, 0xE0D7B43846B45C0CULL, 
+            0x63B9225F76A2BF36ULL, 0x5155994154C77864ULL, 0x63ECF8110130AD42ULL, 0xE486A03FF54373E7ULL, 
+            0xAD348A182F3072C5ULL, 0x0C613C7B5D1BDFEEULL, 0xD0CC7A79D72F1ACEULL, 0x5AA11EEB035FAAFFULL, 
+            0xC20839AFA3BAA454ULL, 0xA77D1EF318B9D9FBULL, 0x094C864BCDE127A8ULL, 0x85C6D00107237A3BULL, 
+            0x3C037750B64E7433ULL, 0xA4A9FFD9D4B1E866ULL, 0xAB8298B435D5348EULL, 0xA0617F31EB26A710ULL
         },
         {
-            0x7427F9BA63F67BCDULL, 0x9A1B1F24DD3C6CEEULL, 0x49F5462FCB295824ULL, 0x81DC0039B85E14CCULL, 
-            0xB6990DB7AC10D833ULL, 0xDC7C1983DE7CBB90ULL, 0xA436F97BF9BD08A8ULL, 0xA269B920CDEF3447ULL, 
-            0x87574504540A9E85ULL, 0xD895BE2033606994ULL, 0x1047C38C89006BA1ULL, 0x6B946553BE13953EULL, 
-            0xC8AD677AC5408A44ULL, 0x224FFC281AE734DEULL, 0x2DC60DDE92E5E3F6ULL, 0xAE0810928C4B3010ULL, 
-            0x9A50340A566BD5BEULL, 0x35644CC0A8C31101ULL, 0xAAD6B24AFE71C569ULL, 0xCC6294B50454E73BULL, 
-            0xC4E0A87ACEB76DDEULL, 0xBA3CE553DB8F9937ULL, 0xF29AF6275FCBACF7ULL, 0xB06C1D509926888BULL, 
-            0x44A0AC318E2AFF4FULL, 0xA8ED8D2B3D4321F8ULL, 0xDB9C0B7F23F35EA3ULL, 0x7F58F46CB02A709DULL, 
-            0x3933F354A7BB59CCULL, 0x756F80046652F393ULL, 0x94FEFA430B3AECDCULL, 0x978731601C519CACULL
+            0x283592377DCF3D6FULL, 0x965A3C14625C0446ULL, 0x8108ED55DEA0ECE7ULL, 0x08731DDF372A7F37ULL, 
+            0xB0A1EAAA99B80F2AULL, 0x4D6D730E7EC823E6ULL, 0xC4D1979F741DE445ULL, 0xA1B177B8C5906557ULL, 
+            0x30AB85B6C3955819ULL, 0x4DFB53A220A4B9A9ULL, 0xDDAE2A220A273D99ULL, 0xAF6571EB776C514FULL, 
+            0xAB8CFBE2D59A5DEFULL, 0x4761FF36DF0EBCA0ULL, 0x05F057E046427896ULL, 0x3D1964287F778961ULL, 
+            0x952A39DDDC445AB5ULL, 0x0115D3E2CDB2C1E5ULL, 0xC85049A2AAB393C2ULL, 0x5F95A3E85A5BFF0AULL, 
+            0x45C625384A7C7A45ULL, 0xBFD8C1ABBE4BF790ULL, 0xBABC81DF86F6BC90ULL, 0xDDE6312E5AE0E180ULL, 
+            0x538F1DDFEF7463AFULL, 0x1674F4D05C794BA2ULL, 0x2D2C8E9293C3D1E9ULL, 0x5D43686EDCE722B3ULL, 
+            0x9AFE30B255469CC8ULL, 0xB8736F743A04EEA0ULL, 0x4E8A0E86D9E7BF17ULL, 0x74E72BEF5BD2F2F0ULL
         },
         {
-            0xDF83606EDAB93A04ULL, 0x3DBC8E0794ACEDC1ULL, 0xD47269D4B2BE550AULL, 0x8B045FE226A2756BULL, 
-            0x0CC7B7425CE1F6C3ULL, 0x535FF0D87940B557ULL, 0x8FC13A1F53D2F58CULL, 0x275EDAD5C3380C1CULL, 
-            0x015D4AC4F8E5352BULL, 0xAA22C299F4C7B734ULL, 0x50A3610B032056B0ULL, 0xAA776B0E8E1A0948ULL, 
-            0x22CDE7FB4650C48AULL, 0xA88E253718E88D78ULL, 0x589059C49AD71A64ULL, 0xC8EC759375F94328ULL, 
-            0x9121D6D967591E0FULL, 0x06CAE01EC76EF30BULL, 0x54ADE4994B0BD27FULL, 0xE4062EA507F75EDDULL, 
-            0x16A4A60BB2AAD4ADULL, 0xCF28BD85C837DB48ULL, 0x7A614720868CDCA4ULL, 0xF13C019FE0895925ULL, 
-            0xCC208E3674EEB80DULL, 0x87FB18121983D99AULL, 0x6587506160A12A8CULL, 0xF275604B8278E0EBULL, 
-            0x08193E448AC0B8A0ULL, 0xA64759D56C9E5A5DULL, 0xF502DC29B4EE1BD3ULL, 0x40AEE607E8E3CF96ULL
+            0x6E94C63C8D184732ULL, 0xB06B15C8CEAA92E0ULL, 0x39022B59BC1E8524ULL, 0xC533B3B93E2AE998ULL, 
+            0x51417D1AB8CD1D91ULL, 0x26E6C3143AA084FEULL, 0xF6A3526B2B7B59DDULL, 0x75DAE2BFDD5AF486ULL, 
+            0x4DC4D1C5FD98AB0AULL, 0x13FF996BA425F7E5ULL, 0x482CE3473F23D279ULL, 0xA3DE32E73650D775ULL, 
+            0x78E6B83349441DECULL, 0x61731F390470D283ULL, 0x3635E72D36EBD847ULL, 0xFACCB4F2F2B95458ULL, 
+            0xD2974A7D70D827C6ULL, 0xB79F586890F6432DULL, 0x269D5CE61F0C31C9ULL, 0x5D652397F925FF5AULL, 
+            0xC782E1014F8F5D44ULL, 0x2085C20E9BA14A9FULL, 0xBF00101B38273A37ULL, 0xBDF0CC00E1F9FBFAULL, 
+            0x9110A1AF4D0CB7D6ULL, 0xD54806FEE0A1D218ULL, 0x8101049F856A3F0AULL, 0xB90A86771272D239ULL, 
+            0xCE8007904996DB3BULL, 0x8D42026EA589C9C5ULL, 0xB8C2A095380E8DB1ULL, 0x5C89073EFC46E14DULL
         },
         {
-            0x02F29031954F10DEULL, 0x04ADB9C425C4380AULL, 0x3E6A72BFCA2DA89EULL, 0xFF4939D7D3A84DF1ULL, 
-            0xE08FA497BE68900FULL, 0xAE654DA107A6E5A1ULL, 0x841F42645564B693ULL, 0x05A30CED9146D536ULL, 
-            0xDE1A4EB1CD40F359ULL, 0xB83B2083C7492316ULL, 0x91029213500D5E53ULL, 0xDF9BE1C909B58E97ULL, 
-            0x894CEB44E0C68775ULL, 0x03B44421EB18190FULL, 0xAA0E43212CF8BC85ULL, 0x672AE918456EB483ULL, 
-            0x1C5B9324D91CB7DDULL, 0x4D8A7B64E1A2F0F4ULL, 0x5AD159697698B0BEULL, 0x626CD1FBBDEF6B70ULL, 
-            0x7B95DB95AF3687FFULL, 0x1B278B7B48FBE729ULL, 0xFA2BCF2C55D17310ULL, 0xADBD8E5726E31363ULL, 
-            0x4427C4C193D742A5ULL, 0x124090702185A97AULL, 0x71B6FC792D16A559ULL, 0x2B55B92219459123ULL, 
-            0xE2AD52E840B5BD0BULL, 0xC0AC3725FAED5025ULL, 0x03CCE240064208EEULL, 0x1C680BBABF953ADDULL
+            0x4112884686237C10ULL, 0xC1E2D89802D8BF20ULL, 0x0768D32898D7D864ULL, 0xECCA6A1B6D9DAE1BULL, 
+            0xE54718643D8F4474ULL, 0x29E554C238642C9FULL, 0x2E038789F751F5C4ULL, 0xFC1DAA39A48100B1ULL, 
+            0x631360AB75C84994ULL, 0x787ABDAE13DA0646ULL, 0xEB30D149285C5CBCULL, 0x068A478564D4EBA4ULL, 
+            0x5308C35A65142B7CULL, 0x7B0517E7DD094A3AULL, 0xD81AA47F0344A418ULL, 0x6E90B4DB28EF2775ULL, 
+            0xA26619022B1A882CULL, 0xEDE5987B539C064DULL, 0x6BFB6E75C993AFECULL, 0xA8F8B2FF4E2F3017ULL, 
+            0x2484EF63B63BDDFAULL, 0xD534E2DEE4608DBAULL, 0x4FB9CB47E4C71A19ULL, 0xC6DB1652B36C34DEULL, 
+            0x095F5D6B78D19A45ULL, 0xCDE0E58B58714750ULL, 0x6CD62E374D563C9DULL, 0x414CF53CE1FAA142ULL, 
+            0x5C256D462AFD90E8ULL, 0x013C0C65DCEFADF5ULL, 0x29ED6B774B0BD7E5ULL, 0xA9EF7507A7319D39ULL
         },
         {
-            0xFA3C4D7B4D5F5983ULL, 0xCAD01E1A12B2BC08ULL, 0x922E4BA3ECA56D2BULL, 0xECA3B63302D11C16ULL, 
-            0x7D56A51162D24C51ULL, 0x302CCB4EB4543BD0ULL, 0xB7D5E532FA446743ULL, 0xF26AD6DF792064C1ULL, 
-            0x5D76342C96526F9EULL, 0x7A93411D21560971ULL, 0xE89D69619083FD28ULL, 0xB9386F834A380034ULL, 
-            0xA8A214BDD9108DDCULL, 0xEEF70A758805D566ULL, 0x0BD380049AEC9997ULL, 0x5068F2646AE11710ULL, 
-            0xE1938A6759024401ULL, 0xB8F976797A315286ULL, 0xC8ABA0E83C8D89FDULL, 0x7C19349AC6F6F0FDULL, 
-            0x46CE8E50CF85643CULL, 0x741D5AF710B0DF80ULL, 0x93EF7EFB2946A64AULL, 0xEDC5EEFD7DC6240DULL, 
-            0x5C2240C80A2974A4ULL, 0x92280EC8232223FBULL, 0xD7DD868149577B6BULL, 0xFDC751F02492020EULL, 
-            0x91135671DEBA05B9ULL, 0xC1C65F34D40F6CF3ULL, 0x548A6CF10D784308ULL, 0xC5F1EDAFE8C04EF5ULL
+            0x6FFC51C8C52172FCULL, 0x1582257132E3C1B8ULL, 0x359BDCB3998E5CCCULL, 0xB0775C732B9622F5ULL, 
+            0xB9BE6B5F2FE1EDEAULL, 0xA9C20568E45199D0ULL, 0xA0CDC988936B1E54ULL, 0xD0BB595214E045A4ULL, 
+            0x3BA995F46B2A012AULL, 0x91C26D2D1F6BA007ULL, 0x8A3AF51C6C8AA909ULL, 0x1549BFB4B47949CEULL, 
+            0xFA1BF78045EF5F2EULL, 0x0CF5F92D0896C68EULL, 0x7E62AE93C40D9471ULL, 0x8141AC8CE091E3CCULL, 
+            0x9686947AF2304AB9ULL, 0x021F76F830406C3FULL, 0xE4DD964165371909ULL, 0x5F25463AE7277251ULL, 
+            0x6930DC0390E89D93ULL, 0xED65B7BA858CE72CULL, 0x2B0C981D05E8DDDEULL, 0xF5FC0D46714E3CCEULL, 
+            0x0448F867F71B1E7CULL, 0x5056EAA28B643B9DULL, 0x5A3E128EFE9B69B9ULL, 0x6E1D70B5FE13F93CULL, 
+            0x7C3F67E76E94706EULL, 0x096A485ABA46215FULL, 0xA2B2E08E80082A1DULL, 0x5E48D6B78311BC79ULL
         }
     },
     {
         {
-            0xA4F2FFE214C67B21ULL, 0xFC18FC1DE3F0C8C3ULL, 0x9A691AF70BC0F560ULL, 0xC1152BBCA593EB13ULL, 
-            0x2F098440DBD288E5ULL, 0xA3DD0C9B2639FFDEULL, 0x2794336E39DB3BAAULL, 0xC1AAC34AE83E86A1ULL, 
-            0xB065116B1741AD0AULL, 0xE80B5EEE5C08F1B0ULL, 0x57C7A44DD2481B54ULL, 0x1A60AE2B77F9EF61ULL, 
-            0x7D216ED406E8B0FAULL, 0x9C079533689EB9D2ULL, 0x710F5606FA2D1A1CULL, 0x91F616AD68AF5FABULL, 
-            0x96F7516A32F1362EULL, 0xA815CFF11567A2C6ULL, 0x417D9C34351E551EULL, 0xDFED625C6F465EFCULL, 
-            0xBAC55EB90A2AE474ULL, 0xF86402C41C0CBBCFULL, 0x83121C03C75ECA7CULL, 0x878F22CC66B12931ULL, 
-            0xAFA83107096ED582ULL, 0x3C5B3865E42FACB9ULL, 0xF8767D56AEAEE95CULL, 0xAFDA356D16602C77ULL, 
-            0x06C8D7444B0D8976ULL, 0xFCC203EAF6D19FA0ULL, 0x28D430F11B0DF470ULL, 0x490617443D8B71F7ULL
+            0x03C1626C9A12542BULL, 0x6AF83A03BAC5F6E6ULL, 0xF78814EF9153F92DULL, 0x9B77FE6101A1C119ULL, 
+            0xF23625084225FC91ULL, 0xE7A2177901468F61ULL, 0xB800D554EEEE8B58ULL, 0x359F9054428A9EEEULL, 
+            0xB5EEB5ED8E306FC7ULL, 0xDAF6BCA3DB5E0579ULL, 0x69A2C07552486785ULL, 0xC4F1C1B9C72736AEULL, 
+            0x76B9B2ACE39A5A59ULL, 0x1D569490CC03D1CFULL, 0x112C210FF4F3D421ULL, 0x72F801BE962C9FEAULL, 
+            0x1659A2E9B1B36B44ULL, 0x50DF7559D54E8973ULL, 0x957BECF665A9A3FCULL, 0xD65B4FF7B0866665ULL, 
+            0x3843A90FCF0CA1FFULL, 0x026A8E0DAA45FDF1ULL, 0xC17055B78AA20604ULL, 0x72F94ECC64BF231CULL, 
+            0x738BD56BDCD5DF94ULL, 0x3B464F775A495D93ULL, 0x3F0AC017CD06E8DAULL, 0xF3E6AD61A066F04DULL, 
+            0x50359FDE8D96CCF0ULL, 0x927C9CE4A1D1FAC6ULL, 0x1A0BEA18DB017955ULL, 0x61212ECCBA5659D8ULL
         },
         {
-            0x63845F602184B159ULL, 0xAA2C55A7C107B8A8ULL, 0x98F0CD29C985542EULL, 0x815F0506E4FFC1CBULL, 
-            0x65515D219897EEFEULL, 0xE257A2B914438EBBULL, 0xA634548BBBB6C1DEULL, 0x0235F1E37F5D1BC3ULL, 
-            0xD838C05D88BD483BULL, 0xE5422F1A24894A4FULL, 0x52E946E4CCD39EA4ULL, 0x298815CA0D80CD3FULL, 
-            0x940E7A86A1C5D81EULL, 0xC60622F637D1C709ULL, 0x34653D8A67060BD2ULL, 0x10B548F536E1DCEBULL, 
-            0xF010ED1024C09740ULL, 0xB0D7CA374C01E92DULL, 0xEDFC603207469B66ULL, 0x620760B59425D26CULL, 
-            0x59A27D364CD047DFULL, 0x48816479EDFE510DULL, 0x92D44226D66B91D9ULL, 0x40BF5E1E56B9D7DFULL, 
-            0xABB13A77115168A0ULL, 0x77087A4A0B61C28FULL, 0xD3A450E8B2AE3157ULL, 0xFF1ADE195EDDBBA5ULL, 
-            0x87DECB3E569099ACULL, 0x466482DC97F8FB50ULL, 0x06953BAA637A74E1ULL, 0xD22C26ABE7AB09E7ULL
+            0x4864B4E8FDDFA770ULL, 0x3A03B5C7B993C3C7ULL, 0x1C3E7C58C05ED50CULL, 0xBE9869F854DDC125ULL, 
+            0x077C1FEBA9E9904FULL, 0xEA14230C34F5EAFBULL, 0x738BD2EE5C765222ULL, 0xA71BE892B3D68454ULL, 
+            0x831FB6AD23B01E92ULL, 0xAE7289F65E12C208ULL, 0x2D6ED75E2D1A2E55ULL, 0x08AAA64EE1B6DBECULL, 
+            0x7F8086FB449C5970ULL, 0x42F8F0C0BE646713ULL, 0xAD53C51EC910641BULL, 0xFE2DDBCADDCF21FEULL, 
+            0xC694356D16BC6A7BULL, 0x5CC31A8CFC7717D1ULL, 0x996882E666D6C370ULL, 0x7B5F3633F7DA06BDULL, 
+            0xDB751BE5D07A925EULL, 0xDD2CA1C4403F7455ULL, 0xBCDFE0DB38B407E4ULL, 0x97135F38DD3C9C90ULL, 
+            0xBBCA8426EBF99526ULL, 0x7520E3CF2CD524CCULL, 0x75583AC2D3F6A1ABULL, 0x0A114CF7A3840FA6ULL, 
+            0x651C17EA0144916FULL, 0xF11584E291881104ULL, 0x75BB6727C82865CEULL, 0x5FE4FE9B5003E1DEULL
         },
         {
-            0xFB827A86DD352641ULL, 0x7B97C203BAED2AE7ULL, 0x6474F877520B01BDULL, 0xA22232B8E1A16B70ULL, 
-            0x99B4BC494734AB0FULL, 0xC5E7B37C3843BF68ULL, 0xD34FD22831331F60ULL, 0x4107848DF22851D6ULL, 
-            0x2AC1FEA470955D05ULL, 0xF819EC4BD608DBACULL, 0x12154417B71C1E48ULL, 0x329D3E88A6FB06C4ULL, 
-            0x9323D941B9169485ULL, 0x7FE6955D88FF59EBULL, 0xD43A09C2B7660510ULL, 0xB6124748197DD879ULL, 
-            0x7BB9AB205140C3DBULL, 0xC06BB44B5AAA2402ULL, 0x331CF1F397826328ULL, 0x840B013A31D327F1ULL, 
-            0xC035CC3EAD2A8103ULL, 0x4F94E5A758166BDDULL, 0x6B0C418AD03DC29AULL, 0xC69591DF02E5B507ULL, 
-            0xD5A46878D4640560ULL, 0xA4D9AC85071AF1D1ULL, 0xDFE2C25FC64D63E0ULL, 0x582846CB99CAF26EULL, 
-            0x7807A0169D58325EULL, 0x5956EC85F9FCE524ULL, 0x7D940CBEBDCA8CD1ULL, 0x31AE836E61B1DBF2ULL
+            0x2DD509716EC2DBECULL, 0x62CB463BE4C44D57ULL, 0x2970E052DAAD1498ULL, 0x35D6730830AF690CULL, 
+            0x1A8D0F1AAE234EEDULL, 0xB6556B54814C4B65ULL, 0x8F708C932A985902ULL, 0xE829D7DB98DCD812ULL, 
+            0x03AD5BDA7E97DD53ULL, 0x1FFA2175C1B895A0ULL, 0x05B04D98C3F05E9EULL, 0x1FBD866F6C816316ULL, 
+            0x5387851BE52E2F36ULL, 0xB54DFC4451E00C22ULL, 0x9A7C247B0048732BULL, 0xCA398CDF8451D46FULL, 
+            0x85EAA2C2A877F447ULL, 0xB7EAA70C50A49FD7ULL, 0xE09A00AC60C596BBULL, 0x28D94CD57D762EC8ULL, 
+            0x11CA3D77625CB02DULL, 0xD6FBAE1603434FC7ULL, 0x2BA675EDCB11659DULL, 0x0EC0423A0F28A6D3ULL, 
+            0x1B2AA1FF715F85BBULL, 0x1C95589D1C91716CULL, 0xE0B71E56D842C811ULL, 0xC4560C7FF4F9CD7AULL, 
+            0x25E295E0ED625B69ULL, 0x51A4FC4177A473C5ULL, 0x37F1D6A96F95C515ULL, 0x31CF5F10C87B9097ULL
         },
         {
-            0x5BA841C6A7C6EAD3ULL, 0x2B84CE82C968B312ULL, 0x10B9B7B2BC592349ULL, 0xD787B2B4EC330BBDULL, 
-            0xA7DAA4C87217E892ULL, 0x4CD892B0811D4A9DULL, 0xBB9EF3C83D5D5866ULL, 0xA37B363FCE5DCDFFULL, 
-            0xF70F9B6BEE30CC3EULL, 0x4D708D49ECD3B250ULL, 0x0F9FF6F45533E1D8ULL, 0xA7315D7E74121CCEULL, 
-            0xA707597D93C52CF8ULL, 0x5B253FBAD7DA166CULL, 0x0338B02EAEEC7B8AULL, 0x5B040DF7C62D6B4BULL, 
-            0x4A066DDC35F28D67ULL, 0x4735224A4CFA0004ULL, 0x34510E4252A9AE84ULL, 0x85B37457AFB88F8DULL, 
-            0x58552770947D646BULL, 0x4B2AC03D4BF8A502ULL, 0xD45A5E03F3A8EB29ULL, 0x4D2CE26D409EC8B5ULL, 
-            0x5CABDD7D94C0EE48ULL, 0xBC854EE06636FC08ULL, 0xEC601B3D78F7E594ULL, 0xC7A8A6369FE83E81ULL, 
-            0xC93C4D70ACC1C4EDULL, 0xEE1ECD2E7BF3B035ULL, 0x878678D9AFA7A8CBULL, 0x3B15E12AB26BCFF9ULL
+            0x4E7C632E9DCF8FE1ULL, 0xDAE971755632473BULL, 0x0E8DF33DD82DE7C2ULL, 0xC37E07DE20DF8738ULL, 
+            0xE096D68ACCF5ACC0ULL, 0x5CA3446C63D79B3EULL, 0x82B152E52CF0FD70ULL, 0xA6F8650A5AD197D8ULL, 
+            0x88EF1C53DC90DB6BULL, 0x5787CAF829BF701CULL, 0x1146AC99E789E338ULL, 0x4478A20E895E429DULL, 
+            0xCC0C9A0D2CB00056ULL, 0x00F801433323BC41ULL, 0x1093EA1DE1AC4718ULL, 0x8FBBF712685F7115ULL, 
+            0x6C7FA579C92A9116ULL, 0x1ADF69986C80B52FULL, 0xC12F5D6057AE902DULL, 0xA5387ADC53DD2AFDULL, 
+            0x24747EAAB5F6CDA4ULL, 0xA225E747CC75856AULL, 0x94324F28EBBEE2BEULL, 0x96FB5EA4D65E1994ULL, 
+            0xE540BDC3A6C21234ULL, 0x303FDCC3942061E9ULL, 0xB4238F11A0553085ULL, 0x3A18D14742C90C72ULL, 
+            0x0C5B90AE7381E254ULL, 0x0B55C7D82FBD8292ULL, 0x5334B7BB7DAD1C61ULL, 0x24321AF701115B91ULL
         },
         {
-            0xF56D7285A08DDA48ULL, 0xAEA858D551FB58BAULL, 0xF2ED559CDCD8F389ULL, 0xE2F120437A38DDBFULL, 
-            0xAB20515CA2623061ULL, 0x951611482933EEDAULL, 0x42B1A613F5D74D31ULL, 0xB68AD923CCC29AB9ULL, 
-            0x95EB3EF346FE4A4DULL, 0x90716399C7863E9FULL, 0x08FFBE325B4273E4ULL, 0xCA414A69BE10CAC9ULL, 
-            0x9A83084B28EDE9CCULL, 0x474B6C6CF1998C5AULL, 0x033CA4EA1BD34609ULL, 0x3822FB58937EF5B8ULL, 
-            0x52897E5227E838F9ULL, 0xF89FDC60C0976EA3ULL, 0x555E22AB85328D3FULL, 0x7594C518944A98CCULL, 
-            0xF89C306F52DAD2DDULL, 0x85453CEFCC015FB6ULL, 0xEBF062E437A8DABDULL, 0xFFA133081D662C35ULL, 
-            0x991024F740601BF9ULL, 0x5BD1814641C5BE39ULL, 0x0FDD7C40C1A0F7DDULL, 0xD08885C929DA6985ULL, 
-            0xCC6AFDE5B141EC28ULL, 0x6AF1A5275FDDAFC1ULL, 0x638CFFEFB508120FULL, 0x8ABE0CA4D5606CF2ULL
+            0xB5229FDC8453158CULL, 0x2871F85D38A983BEULL, 0x54E7448EE41532B3ULL, 0x6FBB2853C6411B9EULL, 
+            0xE18ABFB183F3C751ULL, 0x8879749631FDEA11ULL, 0x8F3F3DD0B727414EULL, 0x3AAC250DAA9ACA8FULL, 
+            0xA6430A5694710B5AULL, 0x2BE92295629BF6B7ULL, 0x87F316DE7490385CULL, 0xD8E34ECEFC5C5D17ULL, 
+            0xA85A9E8CE6491A57ULL, 0xF431C3AA0EFEF505ULL, 0x51C1ED493F6E4821ULL, 0x3CDBC918300236F6ULL, 
+            0xAD7046B19262F2B3ULL, 0x1FADBD2B1A4AA8A3ULL, 0x7269784074142F91ULL, 0xDB1BEEB88360370AULL, 
+            0xEF2A1BF8BEBA4C2AULL, 0x0996CD0F9A55CE41ULL, 0x15F2D2CBFF0206A7ULL, 0x9E625A93F8ABCDE8ULL, 
+            0x5B758C9A1C0A47D3ULL, 0xA87F181B889CAB21ULL, 0x567931F9876FC252ULL, 0xA69EB3C16D641385ULL, 
+            0x063A2B7C306AB2A6ULL, 0x2CA77B6BC0DA154AULL, 0x68EFF237BC225549ULL, 0x2EF1384BC89B0A8EULL
         },
         {
-            0x949CD6CEF6D6578BULL, 0x91F3774F0D554B0CULL, 0x6A029CEEB61D3B8AULL, 0x012DB70B7B9A2552ULL, 
-            0x75A7ACD11C0125D4ULL, 0x167FA2AE049FC473ULL, 0xD4FFB5C508B1CF51ULL, 0xB0952742870FA03EULL, 
-            0x48FAC9D008C4203CULL, 0xDAAFC2A3471CD659ULL, 0x1BB010F129CC6E09ULL, 0x5D5B92DD52E9BC98ULL, 
-            0x1A22627C14AC6DA2ULL, 0x0768DA34E7DBF4AEULL, 0x8CB39E24E6152D29ULL, 0xAD7EEB423B1A6776ULL, 
-            0x5A5EE2C320184B27ULL, 0xF781797322FF24BDULL, 0x0834331E8F486C77ULL, 0x5F174F031E0C6268ULL, 
-            0x2E7A750C8EFE1116ULL, 0x4EE183FF069316DCULL, 0x7D53ABAE1546CD45ULL, 0xFE4BF9420FA86693ULL, 
-            0xE726742881E9E8B4ULL, 0x92F1F4E1FD62988BULL, 0x0899E279AA4681ADULL, 0x0F613E51A5A7818DULL, 
-            0x202A9E7DFA30DD97ULL, 0xC3FD944F7A674D2DULL, 0x1B56E280B2A1BAE3ULL, 0x527E2C1BF1CBEB3EULL
+            0x41663512267E1F7BULL, 0x1736192A7785463BULL, 0x17878E53273F1BFEULL, 0x984B031DE480306FULL, 
+            0x1189BCADEE44B547ULL, 0xE58EDC2487D2EC28ULL, 0x92BCF8D6C426391AULL, 0xD21A51DAB7448690ULL, 
+            0x3E286A2CEB5F74D4ULL, 0x9B30A05BBDB4B4C8ULL, 0x3BBE8AF3409115C8ULL, 0x4A8FF5347E22B026ULL, 
+            0x492EE81345EAC46DULL, 0xBF7B5AB398313AAAULL, 0xC33831893D23DD85ULL, 0xA76652E47D7087A8ULL, 
+            0x3F1CBB4B9E2E34F8ULL, 0x260C4E412B76B8BEULL, 0xDC5DBA632376D880ULL, 0x102D7C34BC27E4E2ULL, 
+            0x2C6CB3394E9C9141ULL, 0xC5FB8FF7D0C02BE0ULL, 0x0CF3E79FB965A822ULL, 0x7BF44A746950ED3CULL, 
+            0xA3707C3960BE56CDULL, 0xC9BABEFE5FF7D0A7ULL, 0x70761CCB19CE3237ULL, 0x883F47DA34F1A123ULL, 
+            0xB86ABDEC6C32EFB3ULL, 0xD748C50854E47B90ULL, 0x1AA9DB15C09FC633ULL, 0x7BBD0708C99B259DULL
         }
     }
 };
 
 const TwistDomainConstants TwistExpander_BasketBall::kPhaseAConstants = {
-    0x937CAEC63BF1A95EULL,
-    0xFBE9D885D03801E5ULL,
-    0x0248C811F5D94F70ULL,
-    0x937CAEC63BF1A95EULL,
-    0xFBE9D885D03801E5ULL,
-    0x0248C811F5D94F70ULL,
-    0xA4F2ACDBC9C823A3ULL,
-    0xBD76F4BBC3AD3017ULL,
+    0x33667B408FAB5C71ULL,
+    0x9603D20427B0AAE1ULL,
+    0x8E4D50E1B50078B0ULL,
+    0x33667B408FAB5C71ULL,
+    0x9603D20427B0AAE1ULL,
+    0x8E4D50E1B50078B0ULL,
+    0xB8786F7EAC706B2EULL,
+    0xBF40761A0474EDD4ULL,
+    0x51,
+    0xC7,
     0xD1,
-    0x23,
-    0x64,
-    0xDC,
-    0x7C,
-    0x1A,
-    0xF3,
-    0x57
+    0xA7,
+    0x30,
+    0x41,
+    0xD6,
+    0xF5
 };
 
 const TwistDomainSaltSet TwistExpander_BasketBall::kPhaseBSalts = {
     {
         {
-            0x5E016F872170A78AULL, 0x3B8180D0CC908ABEULL, 0x97DD2EC5EFF059CCULL, 0xD8E1565D7997A609ULL, 
-            0xEF139DF1900BEFF8ULL, 0xB4B6607EFECE1AA0ULL, 0xD572632A85AA8CF7ULL, 0xF0D0C54683F73443ULL, 
-            0xDAB71B2E132A6C0EULL, 0xAC4683F409ACE12EULL, 0x922D2421B15F8326ULL, 0x5DC02F31A50E111DULL, 
-            0xCBACEC8830FA98F9ULL, 0xC229929EACAA4EBBULL, 0xA4CDBADD8F711A6EULL, 0xEEEA33787AC9359BULL, 
-            0x1B5A31A908A7A5FEULL, 0x1D154AD3019ED727ULL, 0xF72F8B471E297D2AULL, 0xF672A55FBB473793ULL, 
-            0x3DADCA2D7C38C447ULL, 0x7FC6B4118F60D0AAULL, 0x6DC2304300D3480BULL, 0x06558A0F9FCAC4BAULL, 
-            0x15F398826B63859DULL, 0x9154C9B29492FA11ULL, 0x909CB2BEE6061899ULL, 0x8AF186D5E9AEE734ULL, 
-            0xE3FA5F13834A837AULL, 0x0B0F33EADD531D4CULL, 0x7F090B4EE335F554ULL, 0x9E99CCBFB707194AULL
+            0xC137DE3F120B4423ULL, 0x9CFB1EFAC8B9E5EAULL, 0x52F4DA94693D3DD8ULL, 0x4756293D6E801681ULL, 
+            0x8895645C5E7920EAULL, 0xB2716115C252C8F8ULL, 0xE34FE69FFC6C4D26ULL, 0x370F066E77E46B66ULL, 
+            0x52A97D38E79A2B99ULL, 0xE06330C3EA7D6FDCULL, 0xB2E5733DAF3A3C2BULL, 0x7B3EC379F977F370ULL, 
+            0x0F4B91706274FCD0ULL, 0x928CB831E5BD5CDFULL, 0x79798C7168A1EF1EULL, 0x897A6E3E872D4483ULL, 
+            0x1D605D1A0486A487ULL, 0x75A7330CEF735226ULL, 0x87C45BB018E0C2D6ULL, 0x81B59225449AD8F8ULL, 
+            0x2754880667181298ULL, 0x9B1A58E946656A17ULL, 0x60BA5E3D23C6E7C6ULL, 0x4BB5CDC8F16AC12DULL, 
+            0xE59BAB0B6CEEE29EULL, 0xA4ADC08D1CFD05C7ULL, 0x252751A22F2E4DBDULL, 0xA130676AC4E82E06ULL, 
+            0x0FA8649FAB84BD84ULL, 0xCD0C1464F4F46AA7ULL, 0xAC3DC15B83C16600ULL, 0x402FB03318215C88ULL
         },
         {
-            0xF2E411ACF6332064ULL, 0x5CE4CA73FE589323ULL, 0x982F66E67A761D53ULL, 0x376C588C111C0FA4ULL, 
-            0x9A4B7A651FB21069ULL, 0x5BC01349593AAE7BULL, 0xDE7AE80D848C440AULL, 0x0F03253536DE0916ULL, 
-            0x55B96D8A2FCA01E9ULL, 0x3FEE2EACFCE51DA6ULL, 0x72EA2985A81D0C98ULL, 0x248E9EA05CC74BF4ULL, 
-            0xF846BF06F0545C5DULL, 0xE081403BEE112DBBULL, 0xCE778DFB45D0E76FULL, 0x0E59CFDF92610288ULL, 
-            0xBF63872A2CFEAB13ULL, 0xAFA750190FD70238ULL, 0x58044077EE8B5C6FULL, 0xB3C2E75919B5CBCEULL, 
-            0xA7BC192633F1271FULL, 0x929F105585AF86F4ULL, 0x98ED3B7E590A5CCEULL, 0x0D011FFFD58EC9ABULL, 
-            0x38DFA764BE607F14ULL, 0x7D7072A525DDBFE0ULL, 0x0A8E62B4CE0A27DBULL, 0x5479E6B9C1C72724ULL, 
-            0xB67840889242009DULL, 0xED0C95DF1FE5DC78ULL, 0xFB1DD9F4B98E0B27ULL, 0x0B69BC8A4341BA0AULL
+            0x2DE7589CCC750E55ULL, 0x4F68AD8D5745437BULL, 0x71F146FA338A2EAFULL, 0x548FBC14F905C20EULL, 
+            0xBCAF0F26E204F77AULL, 0xD166D8CB405F764FULL, 0x40C268D918C091D3ULL, 0xA94D57840EEC41B1ULL, 
+            0x413274AEB9AD2DEAULL, 0x96BC66361015063DULL, 0x1E49EF96F4E5C482ULL, 0xF41A6F70325CE28AULL, 
+            0x6745D24AF1DBE9B7ULL, 0xA287479B819DF48CULL, 0xC72218C3AB72DAD2ULL, 0x9EDB4DE519BA10A1ULL, 
+            0xD59E895499D905E5ULL, 0xA8BDABD755E48B20ULL, 0x0B5993FBC6693349ULL, 0x600D382800423EEDULL, 
+            0x444F5A9C110361A6ULL, 0xC37E8D6FE7E6DD92ULL, 0x930D38423C1AD0FEULL, 0xC868CA26B4191DB4ULL, 
+            0x0AA8336D059AAD6BULL, 0x7CE0CCC2C93634E1ULL, 0x9DE68FFE387C6DFCULL, 0x7BA460B53678158DULL, 
+            0x53306CBC0DA96269ULL, 0x5101C9594C840789ULL, 0x68D08DD7CD36EE30ULL, 0x044CBF4647E3EC12ULL
         },
         {
-            0xB269B6C57FDA3BC9ULL, 0x389408C484D0E10EULL, 0x394CAF77B6216ABDULL, 0x7C1815512412BBBBULL, 
-            0xA258046F9834976CULL, 0x2A750F6F7DF113A1ULL, 0x228B9D5FA37E3A65ULL, 0x5A7E28D61886D468ULL, 
-            0xB8B7FE0461AD08D5ULL, 0x40D9EC0EC5B47E64ULL, 0x313F693E6A42222CULL, 0x89CA6DBE1F9EFA2FULL, 
-            0x1E829A25221F5D9FULL, 0x465C6EBAFD82C278ULL, 0xAC2A9A28C4725DEDULL, 0x54AE03D25B3F65AEULL, 
-            0x34FEE522D51381E8ULL, 0x764C15D05B25E859ULL, 0xF727EA093D6EF812ULL, 0x8F8C6B65B9AE51D0ULL, 
-            0xADAE192439A99683ULL, 0x357D4ED37B92E5E1ULL, 0x0D793566450974B3ULL, 0x6EE0FEE1FF919EDEULL, 
-            0xBA5363F46C6DEE39ULL, 0x17F0C7990DE2FEA8ULL, 0xFE74763FC6AFF4FEULL, 0xF360AAF4FF1BEB09ULL, 
-            0x3DA3363102FB86BAULL, 0xBE15AA96FB6FECC1ULL, 0x96654DCA4CE147AEULL, 0x12F68D08142808B3ULL
+            0x8F18CBE1B6F6C235ULL, 0x28862D27401C4EF1ULL, 0x75DBD72C380F597AULL, 0xCE2B103B1188C3E9ULL, 
+            0xAD5764E757C86267ULL, 0xF7B1DB7DE6F897E6ULL, 0xFAAC86E79B0CE3EEULL, 0x98FE142E471E76F2ULL, 
+            0x0D0C6483F3E3D772ULL, 0xEFA96B4871D87DD9ULL, 0xB68C4C5785D1278CULL, 0xEBBD63E3B706F260ULL, 
+            0xDDEA6BBF15A147AAULL, 0xD9F3E744552DDB94ULL, 0x635EDFB23F1402D7ULL, 0xE358263536FA8718ULL, 
+            0x48260021F3B5AD61ULL, 0xEC6A93F6668A82A7ULL, 0x5992ED5ACC02D522ULL, 0x63F842F902F67223ULL, 
+            0xFAC16178CB3ED2EAULL, 0xD3B4340A490B69C4ULL, 0x60E399A1979C546BULL, 0x36CDC4A785FA786FULL, 
+            0x0FF97DD246B3F09BULL, 0xDE25B30EC7C7F006ULL, 0x3AE7A99F5DDFFD9AULL, 0xB07F903F448BB7F5ULL, 
+            0x55EBE88021DE6B3FULL, 0x85BB3F141C8A74EBULL, 0xFBEECE7F6EF48BB2ULL, 0x700801325BEE4168ULL
         },
         {
-            0x25D5E1E2249F5B48ULL, 0x9D027302103837D9ULL, 0xCD3696CCD2BDF2DBULL, 0xCBFFB0E12AADFA9AULL, 
-            0x9E76DA7E2A623A60ULL, 0x13F56296E177B018ULL, 0x3070E26A128492DBULL, 0x35059F8BFE53E033ULL, 
-            0xD7CB7FB6B91F2404ULL, 0xF7703EA906CDBEB5ULL, 0xB5A1E0BF3789C4EFULL, 0xE7727257E1171598ULL, 
-            0xAF92457721C50C6EULL, 0x04CBC86FB7A8920DULL, 0xFD97A48F67047AC0ULL, 0x75F27F498795493FULL, 
-            0x54875F08453A4FC1ULL, 0xB6F0AFEB6298DBB3ULL, 0x7D63322DAE5614C8ULL, 0xCACA40F33F09ADB7ULL, 
-            0xF5C9813BCB7EC3C7ULL, 0x1C8885EE18658AF8ULL, 0x24A2B2390D43C1DCULL, 0x2158E7DB7E2C2552ULL, 
-            0xF18FB7D9192805FCULL, 0xD92CF181CD5B832EULL, 0x25336C89E8097132ULL, 0xBB360D01B17762FFULL, 
-            0x8B0573E9291AAE32ULL, 0xE0ADAE781055582DULL, 0xAEE04997999290A5ULL, 0x963BA6462F730F6BULL
+            0xFD105759827C75F2ULL, 0xEBA135A2C6F222E5ULL, 0xC708EC38BF80D15DULL, 0x17AB5E2BB5C3878AULL, 
+            0x6B9110FB9C49A9D4ULL, 0x6E8C83A2EEC4C78CULL, 0xDCC9598432F70520ULL, 0x2E779E9DE6C5A6FEULL, 
+            0x472D728F91601DCCULL, 0xC77F1D7D91EF5EA1ULL, 0xDE77A4AF337CEDCAULL, 0x6F810AB6815FCAAAULL, 
+            0xA83337315CD23D8DULL, 0x26F6421057062AB6ULL, 0x08D77305EEB236C5ULL, 0x03605D5B23144D7EULL, 
+            0x92F44B16774BC62DULL, 0x39E866E053B88650ULL, 0xDBB05D080EF21028ULL, 0x6B168C6BCF9CA1D6ULL, 
+            0x2795FA5E51DF93BFULL, 0x97A137E72C3B6842ULL, 0x7CA7D3067B9DC0F4ULL, 0x0A889252F2042CBBULL, 
+            0x90349465BF922073ULL, 0x92D180D9885F18DCULL, 0x2F903592F23A8E1FULL, 0x532E759462CC6EA5ULL, 
+            0xB1EC2AE0D52C7D7DULL, 0x253C6B7F743ABA9EULL, 0x2E8C0A0473823538ULL, 0x9CC8D5EFDCA39676ULL
         },
         {
-            0x69DFB9AE960BE8FAULL, 0x5D5C210C96662591ULL, 0x1FDBC95C63F58E4FULL, 0x4494AD2373D9361AULL, 
-            0x5ABCF742C733C112ULL, 0xFF1145C3119F52B4ULL, 0x292CC6176E0C3644ULL, 0x2AAD3E5A6C56206FULL, 
-            0x3ECAC0665EE6FE73ULL, 0x9BBBBC763C3B58A8ULL, 0xFD883384964B80F3ULL, 0xA54CA6BB080FDB39ULL, 
-            0xEA9759CF2E49CA7BULL, 0x4A61FA72F63B9A73ULL, 0xD758B5DC9D491333ULL, 0xC5453F1FB6703E05ULL, 
-            0xD24B451E7A13598FULL, 0x0115344253170605ULL, 0xA7F7699B686F06ACULL, 0x32CF01FBBB1047D6ULL, 
-            0xF62540F547C22306ULL, 0x6A8F87CF3F4F9B7AULL, 0xE7C2116566F57AA8ULL, 0x39C9D0E9ACA79024ULL, 
-            0x9162370178477A42ULL, 0x164C24B9DB25D496ULL, 0xFFD4231A46998F33ULL, 0xD078814505E19A48ULL, 
-            0xC0A3961AF5D48267ULL, 0xAA46801B4DF0E2BBULL, 0x9D58C477708E23F0ULL, 0xF095678ED6761AADULL
+            0x4AE7365835E0209DULL, 0xA78DA577E610A889ULL, 0x8827FAF069ACB793ULL, 0xAAE7062BF2A2DDD8ULL, 
+            0xEA0173C3B6F49A45ULL, 0xA99FFE7281219453ULL, 0x8AAE136D4F49A8FBULL, 0xA75EAE99007E978BULL, 
+            0xAC5ED110B23382FBULL, 0x94B13231676CB1D8ULL, 0x92F632ABA2FF0D79ULL, 0x060B6DF1989C1422ULL, 
+            0x113CA8A09BD26C8EULL, 0xFA493CC274913152ULL, 0x0BDB93CBE120F879ULL, 0xC20947775810AAB8ULL, 
+            0x4DEA69BDA2074282ULL, 0xC83419FE0F128D1BULL, 0x81570E48D30C73CFULL, 0x4D0E8C5D12332353ULL, 
+            0x4012AB6257CB1AC5ULL, 0x9191A4E35DF3FCBCULL, 0xED03E15965C2D163ULL, 0xE3BE2BB6C93E5A51ULL, 
+            0x35E77F7F220EBB3CULL, 0x173A55E53628B96FULL, 0xF450AE0883D0AD5DULL, 0x949A5BE9BB48F902ULL, 
+            0xFE90E16B0FA59FE6ULL, 0x3E063CC52F518A47ULL, 0x1846FDD2F98708D3ULL, 0x673072C3AEA00063ULL
         },
         {
-            0x1D574682620F2C1BULL, 0xB53F894C96977AB0ULL, 0x9F20759F7DA865E5ULL, 0x95588E21C639FC02ULL, 
-            0x2091DD6E145B47D5ULL, 0xF6BFC81DF232BB26ULL, 0x3CF7AB29F1277EDDULL, 0xB5252EDFB1BFDA78ULL, 
-            0xB86B588286E1C19BULL, 0x78BF401BE46ABEE6ULL, 0xD73C659B04581A75ULL, 0x6451D037867979A1ULL, 
-            0x74D139B096B18259ULL, 0x524B590CCC0FF34CULL, 0x6607C7E0FC5438CFULL, 0x0B4DD807B8C0CE8CULL, 
-            0xD87B7DD5255B3A51ULL, 0xBE3DAA2399158AA1ULL, 0x7C8796B6BDC5DC47ULL, 0x732CC103B40E0735ULL, 
-            0x4F8F8F96AB15BA27ULL, 0x05EAB61364517E02ULL, 0x377B72DBA46482F2ULL, 0x8CEE52EC7E139252ULL, 
-            0xC92EF5688C7B0991ULL, 0x709D767922F7536CULL, 0xBCD5542F573B766BULL, 0xD1AD3CF173267E53ULL, 
-            0x4B8751757CACE4F4ULL, 0xBF85835C974EB7EFULL, 0x6B81B97339411779ULL, 0x3DCBD1F747C15061ULL
+            0x4DC745A5900CE53BULL, 0x4E94268A6567CD59ULL, 0x1CD87EFE038DFC49ULL, 0xC75F431DECF4F5F0ULL, 
+            0x1B8DF61196A3DEE6ULL, 0xA046F4375F66BCE7ULL, 0x623F39B4B7933C2BULL, 0xE339BF8AA3A6BF94ULL, 
+            0x0787A6C83A86591AULL, 0xC5E9A8379F29EEAEULL, 0x9B881010E5A1F380ULL, 0x6F73388E2E944D8FULL, 
+            0x0C5AD554D516D865ULL, 0x6E21DEDBB47FD41EULL, 0xB21740416E2F819DULL, 0x4C77EF19F5407C7FULL, 
+            0x9F08037A4B9928C1ULL, 0x1918CC0580AAA1E0ULL, 0x068EFC77C14ECEB6ULL, 0x33BC08B7E12680C4ULL, 
+            0xEC8E2869007A27B6ULL, 0xA064BC4C579BA530ULL, 0x164072D5CCB0DF33ULL, 0xCF35E207166EB0BEULL, 
+            0x82E63E1D6DEF6368ULL, 0xD3297DD06BFA765BULL, 0xD70365FA79348F23ULL, 0x482A1C59C0C7FE45ULL, 
+            0x088FBCC8E4D543BBULL, 0xF458C187B2E2B850ULL, 0x63B8E83BDFAAD6A4ULL, 0xFCB986A424142448ULL
         }
     },
     {
         {
-            0xE7BF362689D7B243ULL, 0x0E61A0BCF432B025ULL, 0x92FF7E26C71BCAAFULL, 0x2FD93F34CCAA058DULL, 
-            0xFFF9EF8005A21555ULL, 0x336237E5109EFD82ULL, 0x2A3C3EF4B1643079ULL, 0x5F6ECB2504A54B25ULL, 
-            0x0392289BA12911A1ULL, 0x092554D95CEE365FULL, 0x9232453D958A70F9ULL, 0x351B9330DFEFA24EULL, 
-            0x961477C732927F27ULL, 0xAEFB00D7BDD94E10ULL, 0x2F8F68EDE6B7F851ULL, 0x1061B51BFB0CB29AULL, 
-            0x7B6D710FA2FDAF71ULL, 0xE975945900872046ULL, 0x2B145BBAA392ACA0ULL, 0xE9ACF310CCCCDC05ULL, 
-            0x4922C262F1C3D4D8ULL, 0x45D75CBA6D60D649ULL, 0x6B7C295C7B5A083CULL, 0x8A5FD7915CCEE723ULL, 
-            0x6DDAC9B537A9912CULL, 0x5B9C1C2B32F75C36ULL, 0x422D6D30D7C13F88ULL, 0xF7C683241A3C6E15ULL, 
-            0xDA5BB9E989F0567CULL, 0xA2CBF2E2D162838DULL, 0x0E0A3DBC243ACA6EULL, 0x42C97DC5C1FE206AULL
+            0x7BB56F1C201ED113ULL, 0x914FF3CF73780507ULL, 0x0C0ECAB2DA525D4CULL, 0xC66B2EC820563C00ULL, 
+            0x2F212ADF920EB973ULL, 0x82D5A0A352D844AFULL, 0xC2498290CDE4488AULL, 0x3F39CBA87034DE2EULL, 
+            0x506B621E093EBBC4ULL, 0x993ADB29092E521DULL, 0x801A9E39D8E70C50ULL, 0xB98545F7E6A61B97ULL, 
+            0x77924BE888807CB2ULL, 0x77375DCF6E6326E3ULL, 0x328834500D39AE08ULL, 0xE3133B9AD4FF7AFCULL, 
+            0x719B2E34EA3780F0ULL, 0xF46F4B61ECF0535AULL, 0x5A020C5E37CBC206ULL, 0x13FFE8251D6BB575ULL, 
+            0xDDB9863A25E7E8FEULL, 0xC55D065B68D1C545ULL, 0x658D14FA94DF83CCULL, 0x6C72C44DD6B94E94ULL, 
+            0x4D805F06D1D7C42AULL, 0xFF3B0DE867858705ULL, 0x9DCE53DE66A238E5ULL, 0x62E5A132234831E2ULL, 
+            0x72D0F40B94D16375ULL, 0x8DA606F85675C023ULL, 0xE3DE6398F6C55013ULL, 0xCCC679F9F4F40398ULL
         },
         {
-            0xDC2A416500D44C4CULL, 0x75AD4220D641A90BULL, 0x9EE0C7F49D727082ULL, 0xB33A974A5F2357AEULL, 
-            0x02A7ED6C21199A6FULL, 0x2B26D047FA3F558CULL, 0x92AE961FCF0D47B3ULL, 0x56D405BF25D27149ULL, 
-            0xF104936B43036A3AULL, 0xF8EA583F9A03F546ULL, 0xCCEB199D58838DBBULL, 0x2811AB61387ED7FAULL, 
-            0xE5AC95BAACF6084CULL, 0x5596BC2C4EF60611ULL, 0x4AB674B5AFB7435CULL, 0x5EE16EED0901F155ULL, 
-            0x9BC917EA193BBBECULL, 0xA9FE56C7D683AACFULL, 0x56A6ABDF0279E6ABULL, 0x63A2223581479E15ULL, 
-            0x89E72119D9D6C7B1ULL, 0xF87E5015CBD95CD0ULL, 0xB05A81328E31D5CDULL, 0x6470D1269A77C1C7ULL, 
-            0x1FAD03E92C1408F0ULL, 0x875C32B30F3EBB4AULL, 0xE4176166536029B5ULL, 0xD5E9108B67FD7E5BULL, 
-            0x962CCBB861307C3BULL, 0xCDEA55B9070F25FDULL, 0x75C533A76AEA399DULL, 0x5948143417311850ULL
+            0x7BDF8C24E4F2A8B4ULL, 0x93ECCDD7D5919F25ULL, 0x69A7B51FD2AD9854ULL, 0x3B17C9E7C1809D89ULL, 
+            0xBBB46BA058417257ULL, 0x548F38CE49410FF9ULL, 0xA9824044240E5DAEULL, 0x1EF2C2CBD43CE788ULL, 
+            0xAFEC4A13EF438FF7ULL, 0x5428329B98413683ULL, 0xB21EA18927A3666AULL, 0x9CB3E84E37B9AA48ULL, 
+            0x337D19DABE6A0ECBULL, 0xC84BA31FE7B80A65ULL, 0xB3BFF7F7DD821EACULL, 0x86A30FDBBFA42FFEULL, 
+            0xA1113A9F3F2CCFD0ULL, 0x9BC0F4A10414A412ULL, 0x325D6CEC69539631ULL, 0x6A09BF2523B7F5B4ULL, 
+            0x442100E26703FB8FULL, 0xE80FFD493CB225DCULL, 0x8CC666BAC2D7E132ULL, 0xE490C58539970DB6ULL, 
+            0xF4D32BED0859DFEAULL, 0x97EC6B77C9589B0AULL, 0x3A68002549BA2B27ULL, 0x16AE8809D046ABE2ULL, 
+            0xF73570D6BADF7EC1ULL, 0x4CDD56BD4C6CD74CULL, 0x4B5EBC65B826F035ULL, 0x5566C54D104A6790ULL
         },
         {
-            0xBBF18C7A87F60E28ULL, 0xB17331D7E647A70AULL, 0x676ECFEA3404E1A8ULL, 0x5F3A834E621D5B24ULL, 
-            0x21D26FD263AB04E1ULL, 0x2DEDF7280829D948ULL, 0x0EB1336183849B29ULL, 0xD3E8B16CEE9DF6BAULL, 
-            0x1E62F51F9D5F25AFULL, 0x3C9B35B07843BAD9ULL, 0xD93A9B2C80F5C72DULL, 0x00CE2885C44CF063ULL, 
-            0x87567719726D8ECFULL, 0xF310DC78172144BDULL, 0x11FA1E28AC56B33FULL, 0x00688B9904AB3F45ULL, 
-            0x7C9EC6FF95F1F46BULL, 0xF6ADDF6CED829D68ULL, 0x08F6D7EC349D2536ULL, 0xFFED2F14E2289374ULL, 
-            0xAD31485CDD66E13FULL, 0x5C7B066B704068CFULL, 0xEB1DCEDCE53D0369ULL, 0x61919F534157699DULL, 
-            0x9E3CE1B0B38D8FC8ULL, 0x184E3F3DD7C9312AULL, 0x19B5750631AF9712ULL, 0xA5DD8A2E2885E034ULL, 
-            0xD2FC8FFADB903704ULL, 0xAF02E5CD08E1B802ULL, 0x9C484CF05E3EF0B8ULL, 0xAEE2E88FCB208589ULL
+            0x8AF8F6D27A0142EBULL, 0x25615494D0624B20ULL, 0x198F6F8D97E3C707ULL, 0x5420EE07E16C1E2EULL, 
+            0x2E04C94C5E6DDB7AULL, 0x8BFC168CF1B80FFFULL, 0xA90D8940262F13DAULL, 0xF28D942E1346EBD5ULL, 
+            0x777B69D987705358ULL, 0xA5C0B1B52A72B6ADULL, 0x2568BF1CBE5B7A88ULL, 0x58EE34D0BA45E48DULL, 
+            0x4532E88AE037AA50ULL, 0x0C6D3B334A1C0056ULL, 0x17343C96E1758832ULL, 0xF7D6B06A12C53479ULL, 
+            0x680D0094E65DD2BBULL, 0xAA6828307D83AA8AULL, 0x6638E45B3A9B22FAULL, 0x799219545E3E74F6ULL, 
+            0x4ADDF070DBAB8CFEULL, 0x3479613ED3FE9C61ULL, 0x16DEEB91886BF0BDULL, 0x1BF432BDCBB74906ULL, 
+            0x1AD0AEC93602A8D1ULL, 0x26BFF217D18BBD23ULL, 0x0DE814562817FD24ULL, 0xBABB6C1EAF37F87FULL, 
+            0x8E7B4D5E3EF3A3A2ULL, 0xA4C87EAE38F82C2CULL, 0xC0BBAE68C6AB7125ULL, 0x69B16FD8317C5879ULL
         },
         {
-            0x5A4A0127D31368F5ULL, 0x91A24F2D5BFF9A60ULL, 0xCD6240143CE1B0DDULL, 0x6FD3CDBD3AF80A8AULL, 
-            0xDEA4E63D4544E325ULL, 0xF816318C204804D8ULL, 0xAB5B2A569F26CC21ULL, 0xBA07914C3475D858ULL, 
-            0x34CFB75361A808EAULL, 0x83827E4717D66A8DULL, 0xCDF35B1C16B21D99ULL, 0x426BA359450E47FAULL, 
-            0x26F860F5DEA358E1ULL, 0xB04D8D3D46F9F4BBULL, 0x4DE14576DCBD6236ULL, 0x39446511444F178BULL, 
-            0x9F4BF98F8AC54B1EULL, 0x6FE0F1EF1A9B4ECEULL, 0xC8C1FA02DEB89391ULL, 0x62A4A01DEA2331E8ULL, 
-            0x86096B5AA7CF2C94ULL, 0xD8F46A6F37D2ED10ULL, 0x0D6C04670CBE6A60ULL, 0x32C9C060C37FA4F0ULL, 
-            0x4A0C0A9262AE07E0ULL, 0x869F8BB7844BC76EULL, 0x2A332E6800A0CC6CULL, 0xF140E7168F19BED1ULL, 
-            0xC23AFD71809290E4ULL, 0xF9A8CFB8509EA820ULL, 0xC865ECD33BAF810DULL, 0x960345C7157E98CBULL
+            0x7187CE11247032FEULL, 0x6EBDC19491818651ULL, 0x6217205ABAB6D5A5ULL, 0x51EB8FB8325B3DDEULL, 
+            0xA04D104ADC4AD4E6ULL, 0x35832EA45C749E2EULL, 0x4EFD0ADCBBBDD43AULL, 0x49AB5792B301F91FULL, 
+            0x1E70B81EC830392FULL, 0x615F314494B4501FULL, 0xB9E95BAEC4104F23ULL, 0xA09FBCC9F694A7D1ULL, 
+            0xD6B9F93EBDFEE310ULL, 0xCD298D6A222E5065ULL, 0xC29C89F688FBBA71ULL, 0x1FF24193F85783BBULL, 
+            0x7EA2A879E8F0C293ULL, 0x43F66D6022B3A23AULL, 0x676E193252F2782DULL, 0x33B1C593F022318CULL, 
+            0xC795FBF756B24183ULL, 0x85F4E16DB3525FE2ULL, 0x247D41AA8A1BC222ULL, 0x57EF7CDF72F0B872ULL, 
+            0xDECAB697EB119CABULL, 0x0A0EB0F6640D0AE7ULL, 0x0D27A9E5B8035E53ULL, 0x261B52E20E608413ULL, 
+            0xE332B198E7CAE046ULL, 0xFB5E643DD75EF593ULL, 0xB349EED10EEEE256ULL, 0xD0435848D6127687ULL
         },
         {
-            0x2503E75D910DDE2FULL, 0x56660898047569BEULL, 0xF3AB06006DC17B91ULL, 0x65AFC2AD7DF56AE3ULL, 
-            0xB41D15C840F1BC27ULL, 0x62DF36DC0E6AF27AULL, 0x500647894F7F30A0ULL, 0xC62C4EF8629E322BULL, 
-            0x202BD0130F3AB0D1ULL, 0x927E52AA8CBF23B5ULL, 0x2882434B52255A31ULL, 0x0130C261B74EB867ULL, 
-            0xE05BE66102064E78ULL, 0x7D4F62BD168A0F61ULL, 0xBA4056C8EC4A81B1ULL, 0x1613BCD4690F67E5ULL, 
-            0x9614DC3DC18DF2BBULL, 0x879FF80D88E17888ULL, 0xFB5B972C09C714C6ULL, 0xB97504AEC894A417ULL, 
-            0xAA76B0D4ABFAB4B5ULL, 0x4F719F1639630FC1ULL, 0xADF589FF07C430F4ULL, 0x88C8C9255AC56F7BULL, 
-            0xF49398492B4EAE2CULL, 0x6A84BD867DBFEA20ULL, 0x93829CBFC2CC907EULL, 0xE4D6DF5778C18EC5ULL, 
-            0x96DF2532ED852D29ULL, 0xB5B6519B0CC39403ULL, 0xA2A4D65568D75E56ULL, 0xFB1F6246BA601341ULL
+            0xEBB04C4E58E82C0DULL, 0x2703B8B57F36CCFAULL, 0x75560789C148DF0FULL, 0xBD7821CCD2BB3B20ULL, 
+            0xFB7EDC20475A07CBULL, 0xAA72384B6E7C740BULL, 0xBDD25860F0BDDBB0ULL, 0xE5F349590234CD61ULL, 
+            0xC166975F3CD95EDAULL, 0x363BDD95EC85BE3DULL, 0x53D6F8B7FABCDE6EULL, 0x9E4AD776368C6FA0ULL, 
+            0x72D12203AB44DABCULL, 0x2963C2126757093DULL, 0x98A1494122F59A9EULL, 0xB7F15ED5DABF37F4ULL, 
+            0x19B05EF0B337F2E4ULL, 0x0BA659CEBDDD28DAULL, 0x04CEB125E675F7BDULL, 0xA7727A0D1EACC1D1ULL, 
+            0xFD615E62C93425DEULL, 0x04A1A624E736F43AULL, 0x5777797A4D9B8FC2ULL, 0x71363E8148F457EDULL, 
+            0x1D628B7ABEF7DB04ULL, 0x600365F56A3CFF36ULL, 0x9EE60114D85983B5ULL, 0x4C1BBD793A87BC7DULL, 
+            0x5BAF2BD1A098CFAFULL, 0xE0510B100BBD35A9ULL, 0xD58FCC2433E27AF4ULL, 0xAA2AFD9FE18B83F1ULL
         },
         {
-            0x5A41F4B1B4332049ULL, 0xE1208BC2B4A9EC58ULL, 0x7D397BFA01250666ULL, 0x2D09DFA6F2566A44ULL, 
-            0x3E933E501A59CFC0ULL, 0x55FAD13101799359ULL, 0xF38107014C640567ULL, 0xD02D32FFEA307E1CULL, 
-            0x2D8DBB69081BCE85ULL, 0x053AEB0EF9757DA6ULL, 0xA0A4630A0D91C2BEULL, 0xB3A23DC3C09264C3ULL, 
-            0xAF5D87E17295294AULL, 0x63974D8DA9BE7AC0ULL, 0x16C361880F2A1B30ULL, 0xDB4FD62CBD93A506ULL, 
-            0x38AA5B089D4243FDULL, 0xC29912E1D89AD00AULL, 0xF355C8AE41A511DEULL, 0x20E96408404466A1ULL, 
-            0x93ACDF1C7A970A4EULL, 0xDDD8E4D1E7C55E35ULL, 0x11ED82ED8E6C921DULL, 0x49D32AE5C718AF9DULL, 
-            0x4A91A4D441EA2A0FULL, 0x8156B8D54F07CEF7ULL, 0x13C45F87322A42A2ULL, 0x4EA55FBEA14FEE4DULL, 
-            0x590AFCF6E61CDC74ULL, 0xADD09AA936A1B265ULL, 0x3BE9D3900161193BULL, 0xE182270A21E7335CULL
+            0xCD1293F6A58A2400ULL, 0x0694F67BA6E76E30ULL, 0x0F868121E5CF3F5AULL, 0xCF13AEBD46709DC5ULL, 
+            0xE6D64B76D040C9A9ULL, 0xA792960C8D161D24ULL, 0x412DF49E1F28C904ULL, 0x7057E1C9FC996540ULL, 
+            0xB0D9832834C8EE72ULL, 0xD58EA3634646DB6BULL, 0x8D898A58E9004585ULL, 0xB296CDF2848288CCULL, 
+            0xE6FD999FDB11F747ULL, 0x0041AECDAEA79C1CULL, 0xDDF5A11A140175CFULL, 0xC79691B29D2AFFDDULL, 
+            0xBCBC4A5AC7D69DB7ULL, 0xE1A123E3EB161BC4ULL, 0xDF7A7C1FB7FF89BDULL, 0x2F29A05373B2A13BULL, 
+            0xB29952CE98A0FF4FULL, 0x8490DDF2404FCDAAULL, 0x5427BEDC4CBC0939ULL, 0x38A3E942B0EFEBADULL, 
+            0x62771CAABDD9AD3FULL, 0xEAF819E95C8C259CULL, 0x91D20BD9E7B71F43ULL, 0xBACA372F617C2813ULL, 
+            0x1C099FDAD0C0CF09ULL, 0x972B07706F236019ULL, 0xE4F0F029AFD442E9ULL, 0x562B3E264FF2B4DEULL
         }
     },
     {
         {
-            0x175CCE804416BB20ULL, 0xF83270909AADC352ULL, 0xD3946C78B2689D80ULL, 0x11AFA10B308326B2ULL, 
-            0x87BE4D9DA48543F1ULL, 0xA5AE4DE5EA0B290FULL, 0x6E3D37EC819567C8ULL, 0xB89F446111B33258ULL, 
-            0x54793F40E2212461ULL, 0x37A73FF71724EB2EULL, 0xE6B2F78DD6761218ULL, 0xD4543E21DAA06F46ULL, 
-            0x69E914EF0244EAB5ULL, 0xCFDCC0E8C3174735ULL, 0xC5EF02664BA15E35ULL, 0x42D4186F015EBD45ULL, 
-            0x55A930BE546C1334ULL, 0x2CF9909FA00F9FCDULL, 0xAAB142EE564BDD61ULL, 0x12CC86D12756148AULL, 
-            0x36200493B8FF2699ULL, 0x7D5448FA7E3362DDULL, 0xD524678DA38A89FCULL, 0x3F5FE926336E7B3BULL, 
-            0x553D7D009FD99786ULL, 0x8FFA8DBD44F2673CULL, 0x4D76C56CA3C02A0AULL, 0xCDCEDADDC0BC17C9ULL, 
-            0xE189BCA198E15D19ULL, 0x15D57F926AB8D2FCULL, 0x00059DFE170C2300ULL, 0x7DEFDFB6BB5E58A7ULL
+            0xC5846BBF68AB12C1ULL, 0xC6CCE204F6BA5D82ULL, 0x04F17F894735610DULL, 0x5E3117C8C5F8563DULL, 
+            0x7FE55E4EC779344CULL, 0xBB6749797076E446ULL, 0x0F8D64BCAA96E8A7ULL, 0x35CEEEA078C0B096ULL, 
+            0x9CA975A391B2C499ULL, 0x507B149D7A0E1B66ULL, 0xF8089A561B665C22ULL, 0x8BE361E6120CB22BULL, 
+            0x71545CC6438366B5ULL, 0xD62E1169AF5735FBULL, 0x9C79033C94B5767CULL, 0x4D69B973626E1946ULL, 
+            0x683732A1EC71EE1EULL, 0xE3C329BA0E699596ULL, 0x37ACBAD3F1DE95DDULL, 0xEBF7234AAD4076D3ULL, 
+            0xDB642E1CAFCE7BBCULL, 0xE4F8269D6D41DCB7ULL, 0x30B581AD2B3D870AULL, 0x27D8922E269428CCULL, 
+            0x0BCE91965187DA72ULL, 0xF01958217A3402EDULL, 0xCF410D968AA39F49ULL, 0x744093D1939F94FCULL, 
+            0x11AD3FFB7DDD240AULL, 0x0A411181264FC4E3ULL, 0x58C84B5F896445E1ULL, 0xBD12F4E4F654712BULL
         },
         {
-            0xA4A588FB84577F47ULL, 0x52C22D4DEDC3294BULL, 0xE1D23E5EE822F7E3ULL, 0x6DFC0B912B554E7DULL, 
-            0x2A09E0D4E09ACB10ULL, 0x50E6F3D0AB80CC62ULL, 0xF7485186E522F534ULL, 0xF711CEAE529E233BULL, 
-            0xD0954553E8D3836EULL, 0x07D688D95BF2D38CULL, 0x7937DF483943F10CULL, 0xCA1C3DE7C8619F17ULL, 
-            0x667B37D609CBD74BULL, 0xC8C371512B659D12ULL, 0xEB0B0D070770C1F1ULL, 0xCE955175D9D83796ULL, 
-            0xC6F25734DE3BDFB8ULL, 0xD36BFE329BF6907AULL, 0xF4254A2D55501550ULL, 0x87176AA215960902ULL, 
-            0x6F2CCD26A1C9E66CULL, 0xC8EB0F999FAD3FABULL, 0x0918249A9EF393B5ULL, 0x302846EF63BCE57BULL, 
-            0x950C6D4C0FB52E77ULL, 0x6E49445150282D77ULL, 0x61699E43B81DB939ULL, 0xDE3C7C6DA8C9B77CULL, 
-            0xF7FF74B8C1E74C10ULL, 0xD1C29D7A7E9FC00EULL, 0x42E03CEC43558F27ULL, 0x6F5B3C76BAF8D09FULL
+            0x39EC8448AA2B693EULL, 0xBA6828E74DEE2F71ULL, 0x7705B9ED36D1EBB6ULL, 0xACE0CB1CBDB0CA00ULL, 
+            0x881551E8779917F3ULL, 0x170099236DFF7B2EULL, 0xCA37C661070AE903ULL, 0x975720BED18CE62CULL, 
+            0xAE306D6DA95C7AA5ULL, 0x9157A0C6DEE7FA69ULL, 0xE04603F64E93EF7FULL, 0xC7BBF6AFB2D5EC91ULL, 
+            0x1506A75F46C8FD9FULL, 0xB11AAA7EBB3548ABULL, 0xAF43C95A6787DC46ULL, 0xFFE8AA9D48CB1E65ULL, 
+            0x450FEF7CBE7645C4ULL, 0xBE8F936294667EFDULL, 0x58EE1B7B846354E2ULL, 0x10C07F78D82F66E8ULL, 
+            0xCF1F988F896A2D89ULL, 0x5387B678828B2827ULL, 0xE921782637F7517CULL, 0x65475A507066B302ULL, 
+            0x3034D033F7815067ULL, 0x0365EBC020A30449ULL, 0x93CBEFD135406B2DULL, 0x0ACEAB3849F3E97AULL, 
+            0x484C568667C4F7D3ULL, 0x821360B6C177A78BULL, 0x8E48EAA75750B510ULL, 0xF6E94166E69E6F53ULL
         },
         {
-            0xD4285FA7E4127248ULL, 0x19396DF0F38083DBULL, 0x8C40F410DA08C24AULL, 0xDE208D043E7A163BULL, 
-            0x679692B5FB6FA6A4ULL, 0x9B8D3834FCFCAEDEULL, 0x5696F3F8A6869BAAULL, 0x29F5D518DEC6B567ULL, 
-            0xCE042E2B25F41377ULL, 0x14B7B80943FB04CFULL, 0xB1DBEAFBDDBB0069ULL, 0x9E27EB4683C07565ULL, 
-            0xC156535B5293CC89ULL, 0x13B8B15FAFBA95DBULL, 0x1F659A4E01A3965FULL, 0x4A8ABD4433B20B11ULL, 
-            0x280B95C5DF135293ULL, 0x6F938ECDE5BE99B0ULL, 0x4A53171E4B611FB6ULL, 0x8569DEE71F97DF44ULL, 
-            0xC516BB751EE695B7ULL, 0x7A571B87BF4A4378ULL, 0x0E4CC1CC6972BB1BULL, 0x60D713063549A401ULL, 
-            0x2C50275B8FB6ACF0ULL, 0x5F4FE96B742A3664ULL, 0x0C1976F906B02C4EULL, 0xB3A9E3546A8AFB8DULL, 
-            0x341385D99A2077FFULL, 0x383B2EC0E5D97DBFULL, 0x6951FBF07B41972EULL, 0xCF1AE69F0D71BB43ULL
+            0xBD6BADCF5229FD39ULL, 0xC5D1E0565FDA92A9ULL, 0xD156B164BD60B02EULL, 0xDD27133FBD4717A8ULL, 
+            0x1BDFD55D75531FBBULL, 0x245A5283BCA43955ULL, 0x7A30D4DB4307AF11ULL, 0x85ACF3F749A3297FULL, 
+            0xB84737B4DC9A8051ULL, 0xA917FD9890204F40ULL, 0x5365354DD18E41A6ULL, 0xF32DE0C8B58D46D7ULL, 
+            0x7E24DF2D7D6223BEULL, 0x8CF17AC615FAB807ULL, 0x44EBEC9BCD344A60ULL, 0xE226579651F57E02ULL, 
+            0xE0E1582A5684F4C0ULL, 0x762E1835B95C938FULL, 0x0C1A83D2E905FA2EULL, 0x093DE355894B1FACULL, 
+            0x147E1A1BD7671867ULL, 0xCF9158C11F85DB8BULL, 0xA75485D922BBCF51ULL, 0xEC6E4B3AEF455847ULL, 
+            0x5AD69DE27726B3FFULL, 0x881D4310D39C3AC0ULL, 0x63C7ADF50E8BA1BDULL, 0xBFB9BDD2CBD42350ULL, 
+            0x365C603B5E99433DULL, 0x25A3639A928DB1E5ULL, 0x078A6560C4AEA4CDULL, 0xFF4AD1651265B067ULL
         },
         {
-            0xBBECB8D58CBE7657ULL, 0xDAA527D629BB0FF8ULL, 0x7EB3C44EF65DFA14ULL, 0xBA949D8EEDBD8821ULL, 
-            0xA8BE6A69779CB724ULL, 0x0E871A2D3EFE9303ULL, 0xF0D6BBD44D88566FULL, 0x6DA274ACFCF8EE87ULL, 
-            0xD4B2E15623CD11F5ULL, 0xA78EB9FDC03F70CBULL, 0x755A5204B2A7AEB9ULL, 0x3208EC3B39CF1888ULL, 
-            0x060E588C9EA614C5ULL, 0xB3CBBA145F4F4608ULL, 0x4E353E128DAF246CULL, 0x73ECA4533AB35804ULL, 
-            0x4243F7A0A7BB68A6ULL, 0xDF1F719F8298A95BULL, 0x1F122FCAADACE8ECULL, 0xE7328280D97B2DC8ULL, 
-            0xCEA5331EEF7CEAB0ULL, 0x04290E5DBEAE6D5CULL, 0x58FEDB5DCC3113E0ULL, 0x09BA9219F50215F0ULL, 
-            0xBDE1350DF92040ACULL, 0x7D987AD95D753276ULL, 0x487AAA465269289EULL, 0x1BDDEF22D0E95FB7ULL, 
-            0xFAD8E85A97D7EB25ULL, 0x8C3246A3FFCE3E9DULL, 0x5D6DD45BBF647129ULL, 0x7A354E1CF1AD2765ULL
+            0x416FF48DE04C29E5ULL, 0x5D04A6FF1D50F522ULL, 0xFACFC3725A08E7B9ULL, 0x4142D34D080B3F20ULL, 
+            0xEDEEBED3CCD76CC9ULL, 0x3ED2E6756F1BE5F7ULL, 0xBC5F5BF0A4674EE0ULL, 0xC051B3116140E133ULL, 
+            0x78BDAC1DDF8587C1ULL, 0x14FD4C09143F1836ULL, 0x49D081B714EDC617ULL, 0x057775640885B33AULL, 
+            0x6674F784ABB7B80CULL, 0x1DBAD06BE1D2847DULL, 0xB1F89964892E571AULL, 0xFFED8E628A325A7BULL, 
+            0x03C12708B86295B4ULL, 0x8EB90329F24295F7ULL, 0xF911679BC4507FCBULL, 0x1BF79B408916CB67ULL, 
+            0x084921B7245A2E62ULL, 0xE9A17A61E0A70505ULL, 0xFD913526267585A8ULL, 0x43D37D24A64739C7ULL, 
+            0x7778BE4C0ED34ADEULL, 0xE6EF7049207F8E0BULL, 0x797D75B527F3543BULL, 0x2388A365C0227B6FULL, 
+            0x8257770A16B27049ULL, 0x1658C7ACF1255EB3ULL, 0xA43E395433EB4FA6ULL, 0xD62FCE798A86E8B7ULL
         },
         {
-            0x28A1D05B045295A9ULL, 0xA27418DD143C6539ULL, 0xD50ED1AC7959E396ULL, 0x0A958D700D28A4E5ULL, 
-            0x7CE8C80CA1A7DF03ULL, 0xF2301AF9EF0332E8ULL, 0x2032359E34622D1EULL, 0x6F8FE62C27BC23F0ULL, 
-            0x9A0E84D8B4F4D38CULL, 0xE8F99B81F6E4C397ULL, 0x0A154BD998B39624ULL, 0x7410503AABED0A7BULL, 
-            0xFEF4BD365F4C0152ULL, 0x4A1F66FEF7D8D131ULL, 0xBFD63F6742DC7DA9ULL, 0x1A6D58CBFAB2F59AULL, 
-            0x4D7297E1C6AA5D23ULL, 0x6315F5D819C51601ULL, 0x253F5576F281559EULL, 0x61BFF1D31AA58EDFULL, 
-            0xD58D2AD050549F41ULL, 0x4A8DD631776C2FEDULL, 0x7C1AB85F3439BE5AULL, 0x7744048816EB6930ULL, 
-            0xDA2F90CA1D0FA37EULL, 0x7F7B5D17464985D8ULL, 0x2E5A490A6CB2DB86ULL, 0x0972456F2857A624ULL, 
-            0x5C90F83F6D0439FAULL, 0xB07645488FE00BA4ULL, 0xEB41CC0FC90A2561ULL, 0x69A75B4F8E177D11ULL
+            0xD57A0CA85CE23597ULL, 0x734BB315E51275D2ULL, 0xD416CC3F7EFB9C46ULL, 0x8BBA4D3CD084BFB2ULL, 
+            0x842014B11E1556BDULL, 0x59FB1C55638C5563ULL, 0x87680A69F2EED141ULL, 0x1BEF3ABB5875149CULL, 
+            0xD13224AA5D1E862BULL, 0xEB2F8540DDB08073ULL, 0x35D18A19C868DF8FULL, 0xA1809F07844894E9ULL, 
+            0x91A24E5CCEFEB3F0ULL, 0x6C779E2EE0E15FACULL, 0x47A6C95FC5F7569CULL, 0x0752B98959D88E9DULL, 
+            0x490FF0BC3C88ECEFULL, 0x9850AB2BBF0F0CDBULL, 0xFBD9F146A70B4A1FULL, 0x565E429B1DB1C6D2ULL, 
+            0xF08B8BFD93292CD2ULL, 0x820E76D772768519ULL, 0x2AE6A55D13594798ULL, 0x2DAE636B3A5B68A1ULL, 
+            0x5E69DDC8CF556248ULL, 0x7E82C7B568A0CA73ULL, 0xA372F379D8DA34CCULL, 0x39C2A9F5A8290F3AULL, 
+            0x99EE3286E5CC5489ULL, 0x076A5233FAB7C200ULL, 0x311E64739701F2A7ULL, 0x7740A47DBDBA9BA7ULL
         },
         {
-            0xAC0DE7A803BB291AULL, 0x4873E3C0B21072C2ULL, 0xC8A4F1CFE0B6CE75ULL, 0xBACD4FDE24A08DFFULL, 
-            0xFE5029A43B35C7E2ULL, 0x432D0780C17592D1ULL, 0xE07EF62A311B2CADULL, 0xB37505ADF9428A40ULL, 
-            0x5B4784E1A8FD78EEULL, 0x0C4EC71AC5E675A6ULL, 0x7D174027F42F92E3ULL, 0xB5FC459B26845F1DULL, 
-            0xFF513F1A37EC6BB6ULL, 0x3C7C1B6CE2E0BF2EULL, 0x286402FB8852E751ULL, 0x5AB3907C9579FDA1ULL, 
-            0xD11BD30AD3D58A41ULL, 0x9394B61B02D382F7ULL, 0x9A751684B42BE2E1ULL, 0xCA79E0C2A59E3E08ULL, 
-            0xCCFB69D7EDEFF4D1ULL, 0xD27AEDFE688C0394ULL, 0xE876A7635B3D10A6ULL, 0x8EF8EE21139A976DULL, 
-            0x5085AD0F68929C1DULL, 0xAAF599C2C402C0CEULL, 0x91D2B86FBBD218A8ULL, 0x8770C9B8DCFEF3F9ULL, 
-            0x54C352A4F299A593ULL, 0x5746B63D68D5AA93ULL, 0x64269FBAFB68785AULL, 0x27652645B61A8679ULL
+            0xFE15C40383ECD27FULL, 0xCDEF2D2E1A31EB77ULL, 0x8CD269AAAAC285ADULL, 0x33B24715A837F7D3ULL, 
+            0x29229939C00E9B32ULL, 0xF64E7E533CEA0B7EULL, 0x9D2449BC0E96BCAEULL, 0xBF4FBFF9564F137EULL, 
+            0xB33582C48DB05AD0ULL, 0x69C8FAC039EE9BB0ULL, 0x42B3B61C2EA5C619ULL, 0xFD67B54CC9206806ULL, 
+            0xF5DCEAC153BAB8FDULL, 0x31AE7EA455EE525AULL, 0x5AC8D0FCF5CDF1D1ULL, 0x77C3AD4AD0364653ULL, 
+            0xE7D1A5761D5AB6D5ULL, 0x7A92787370E5377BULL, 0xB54F565F99B24364ULL, 0x0477A3BBE61E09C9ULL, 
+            0xF2EF8904B4C45207ULL, 0x9D8597BDC9BFB9B6ULL, 0x76EEE4AF55967BB0ULL, 0x6DAA9433AE9FC71EULL, 
+            0xE74DA2B9E41D692DULL, 0x9F4D1875713FEA31ULL, 0x4F0D22054ABA85BCULL, 0xEA7FA22D916A5DD4ULL, 
+            0x00FA8A074416574AULL, 0xB951CD2F3803755FULL, 0x6EA5EC210C7A5CA3ULL, 0x00EDD439BAC2DF30ULL
         }
     }
 };
 
 const TwistDomainConstants TwistExpander_BasketBall::kPhaseBConstants = {
-    0x353A1F8A7BBABE4DULL,
-    0xA8911D6958E14CD3ULL,
-    0xF6C846B95FEFDEECULL,
-    0x353A1F8A7BBABE4DULL,
-    0xA8911D6958E14CD3ULL,
-    0xF6C846B95FEFDEECULL,
-    0x9EF38AC59809C49CULL,
-    0x9ECA509A1A6B3664ULL,
-    0x65,
-    0xF3,
-    0xD8,
-    0xDC,
-    0xE2,
+    0x5DD66D9B8F7D9001ULL,
+    0x3288A2848FB8055FULL,
+    0x02E3A6F28E0EE854ULL,
+    0x5DD66D9B8F7D9001ULL,
+    0x3288A2848FB8055FULL,
+    0x02E3A6F28E0EE854ULL,
+    0xBC1970761AF73602ULL,
+    0x1E8C875D8919845DULL,
+    0x46,
     0x6E,
-    0xBA,
-    0x93
+    0xB1,
+    0x82,
+    0x02,
+    0x3E,
+    0xA6,
+    0x38
 };
 
 const TwistDomainSaltSet TwistExpander_BasketBall::kPhaseCSalts = {
     {
         {
-            0x050BE6B37D93CCE4ULL, 0xE1F210ADEBB337CAULL, 0x90F6831D7931A800ULL, 0xBB0A7F6494411084ULL, 
-            0x83D84EAD0360D662ULL, 0x44A52D6768C8BED9ULL, 0x74E14633CB42CC7FULL, 0x3B91C517301DCBA6ULL, 
-            0x785AE4D8DB22DE13ULL, 0xDFC5423CF421FC1BULL, 0x7BF4684A3BC5315BULL, 0xFE1662FACB6E60D8ULL, 
-            0x0D164F6418F9888DULL, 0xF510985A9E838A40ULL, 0x1937979030C2D57CULL, 0x2D66E53DB498D649ULL, 
-            0x5F3ACC9AACAAFEDBULL, 0x373CCA4567B8F930ULL, 0xF06DB3689FE12159ULL, 0x7AFCB8EFAAD221CFULL, 
-            0x57D7CFED7784B4FFULL, 0xBDC27386FEECA633ULL, 0xBB5534413CDEC775ULL, 0xD3760AA19A82B9BCULL, 
-            0x017FDC1157AD711DULL, 0xCEC5F4820E7394F0ULL, 0x6AEC56A73A9EE1B6ULL, 0xB07E189664BCAFA9ULL, 
-            0x6E19CCC087D47B0AULL, 0xDE709F53D9A440C8ULL, 0x0845CD44B1106A67ULL, 0x3C7FE99FB2E69E36ULL
+            0xCD52DC145D9DCEC1ULL, 0x1095BF11704B2586ULL, 0x32DCDD41260B69B5ULL, 0x60CC186E383A91F6ULL, 
+            0xF78474D0C0121665ULL, 0x772362FD50555B62ULL, 0xFDCB1ED8A9A2E4D8ULL, 0x597D74104E631783ULL, 
+            0xE23C5E981B5A0CECULL, 0x05B81674FC1B50FFULL, 0x6B08F65AFC0D0800ULL, 0x9C71A5C9CE700979ULL, 
+            0x229202583121396AULL, 0xDE12A1F5016F873FULL, 0xDF3622E4ACF5B532ULL, 0x5F78BB48AD60F889ULL, 
+            0x147676B7FEF6F061ULL, 0x266AAEA4B127E3C5ULL, 0x923BBF69FBC81A83ULL, 0x7D403DC679FCD3E7ULL, 
+            0x8C14F0793CA45963ULL, 0xA91C229BB2D74801ULL, 0x052307B884ECFC7CULL, 0x313842C2E89610D0ULL, 
+            0xE5A64EA0B05D925AULL, 0x658B21E9649879FAULL, 0xA3D6D995F6791DBBULL, 0xBD5C083035821673ULL, 
+            0x44CA6CAD09B9B836ULL, 0x541D97EEBD7ABF76ULL, 0x903EC6B35A756EEDULL, 0xA982520998813F70ULL
         },
         {
-            0x95CE2247C249313FULL, 0xDF16F20F883A3A06ULL, 0xB9E449594FE0061FULL, 0x53F37E2F7085281DULL, 
-            0x44ECCE3586A9FBB2ULL, 0x89F99800872332C0ULL, 0xF6E44F6FD39F1B42ULL, 0x135FAD1EA8329B61ULL, 
-            0xE40239CA06B53DE1ULL, 0x75EFEA22DE639B20ULL, 0x1A7584DC86A1F5A7ULL, 0xBB9C9314A49A1745ULL, 
-            0xDD100685A565B85DULL, 0xDAAE022054D1B755ULL, 0x2F5EA668DC201C48ULL, 0x8A10A1061152A59DULL, 
-            0x6A1958107D56718CULL, 0xDEE1AB186F82CD92ULL, 0x93B8C4AF0D585EDEULL, 0x07C357D8A2A1EE59ULL, 
-            0x2881BCC381736155ULL, 0xA29484D922CC9FC5ULL, 0x92EF56ACF97B811DULL, 0xC78DEB373045D5C6ULL, 
-            0x2FAEF7F53A16EDBBULL, 0x9F4573BC6A662BCAULL, 0x93C20FC4B032EF4DULL, 0x6E16A152AA35DD4FULL, 
-            0x7DB60B457E3508B6ULL, 0xD859B569221C29C1ULL, 0xB6056DA77B6987C5ULL, 0xA1AD2AD0F79D1EDCULL
+            0x3A7DD377D2E5EA21ULL, 0x834DCA36E54C0EBCULL, 0x8200B66C30BF4A49ULL, 0xBB2C25C75890FDCCULL, 
+            0xD6A2761BF3BCE901ULL, 0x639A7519F467FB19ULL, 0x1F6FAA03BE7EE8B1ULL, 0xD7C3F60F00A2603EULL, 
+            0x26345B294B9FB105ULL, 0xE8852FE4D401DFADULL, 0x6132452F2B2C4D46ULL, 0x8C6AA6D5FD1BD3A4ULL, 
+            0x4350C3F0844B74A4ULL, 0x12B71A7FB3B1C2DDULL, 0x1659B0ED011BEBFFULL, 0x75B57FB4246F7A46ULL, 
+            0x408E38105F8F4C10ULL, 0x30B67DD8368A3138ULL, 0x6A35377B9DDFD951ULL, 0x4FEF96DEBFE2FDB6ULL, 
+            0x7EB5EF22CDB1837FULL, 0x24C568D1F057E00DULL, 0x1C8763D6537936ADULL, 0xA6E2664649446234ULL, 
+            0xC232959A66CBEEECULL, 0x6739265B6BCF285FULL, 0x2BAE8D94E3719AA7ULL, 0x4853F959E4F95A20ULL, 
+            0x3FF53C0F9661B876ULL, 0xFFD64A8A520DDF84ULL, 0xF48E08C5E161A781ULL, 0x49D25407437B0A29ULL
         },
         {
-            0x8446237D9B332404ULL, 0x6235253B3E093745ULL, 0x39DA47FDD3088597ULL, 0xD709A752715F9C0AULL, 
-            0x3408B8D347F69C09ULL, 0xBD86A9ADAC0D9A1CULL, 0xC8072285168B78ACULL, 0xB8B07306FDC3D735ULL, 
-            0x844790205C149899ULL, 0xD7736A6B914A74D5ULL, 0x04765660E5A45BEFULL, 0x8EC130987A5D8BBFULL, 
-            0xE5EF9BCD629E1BF7ULL, 0x30F72514E20B524AULL, 0xD5C1952E7C6923D7ULL, 0x72BD3B983E75841FULL, 
-            0x86D6965A0FD4F1C3ULL, 0xE2C6B6A020102076ULL, 0xCB1C551AA7F1F5B7ULL, 0x742AA0BB298544CCULL, 
-            0xCB0C457021301648ULL, 0xF334B3D9F0C710A2ULL, 0xFACABDE93B99ED47ULL, 0xD775E061D393BC44ULL, 
-            0x4AF0884FB4748569ULL, 0x7F3CFD0E9E67D623ULL, 0xF6C9EA0AA2B77BC5ULL, 0x655568A1D867AECCULL, 
-            0x88AB31D0A7E1A1B5ULL, 0xC430449BD66CF91DULL, 0xC9C74C5489BE9C4BULL, 0x1CCC2E7599FD82F7ULL
+            0x251ADE228BAD25EAULL, 0xEB0098A3AA5B4BCAULL, 0x75A6C185DC104FDCULL, 0xC8D7B67875721ACDULL, 
+            0xC380ADB7276BDBFAULL, 0x85B2FD8715A119BAULL, 0xAC4D77C6CD3292ACULL, 0x78A16DDD946631E1ULL, 
+            0xCD71D5FEEC2B89CAULL, 0xB481B9AC24E64E09ULL, 0x95B282FAD9D24A4CULL, 0xABA2E5669155659EULL, 
+            0x6C645509D3ABF52EULL, 0x78CB6F8B530A8A48ULL, 0x79F9DD9CCFFEC44DULL, 0xF17FF0FC3B866DB2ULL, 
+            0xFB561C870B3990AFULL, 0xFF14C6A996F250EAULL, 0xFA71F51FD7F7AC2DULL, 0xA906000A19D5AF97ULL, 
+            0x647966D910F226ADULL, 0xD596DBB280439126ULL, 0x88D7D034D4A5BF99ULL, 0x5EBF5F551F59C1ADULL, 
+            0x63D71D379A4F9A76ULL, 0xDACB77B8FB8E165EULL, 0x2F589453EEABC8FDULL, 0x6E09B4026F0B6E76ULL, 
+            0xA68359B91B2F5332ULL, 0x31F512754105666AULL, 0x6531F15F1C0C79EDULL, 0x6053440CFE110542ULL
         },
         {
-            0x93652F6BC4D8EEC4ULL, 0xEB565FD464D1E8EAULL, 0xE62B5170FDD11EF3ULL, 0xE29475E17C2B1402ULL, 
-            0xA15FFE784DBEA2E1ULL, 0x5AD66273EE1C10CEULL, 0xB0518167485406FDULL, 0x325FF2A9E791DBEFULL, 
-            0x989E6B60181CCFB5ULL, 0x68051FF301E4A5C1ULL, 0xF15238483B28C6CFULL, 0xDE9D58351C76A0EAULL, 
-            0xBD0D1738F85EDF6FULL, 0xAFB7BEF97093C7AFULL, 0xE9E26B8348C31C38ULL, 0x5D5920895E922D67ULL, 
-            0xF92EE0E10AC65FA0ULL, 0xF75FE8811160706DULL, 0xEA027FBD45D7920DULL, 0xDFE4C298F71B6B95ULL, 
-            0x4DCDD448E53FA1CFULL, 0x0358741DCA95AB8BULL, 0x133364E2E91E9281ULL, 0xA1FC0C79EF528B13ULL, 
-            0x4238DE1B781BA0E5ULL, 0x3EB780925A92A607ULL, 0xC67090AF3997E0DEULL, 0xBB1CC9EC3A4375F6ULL, 
-            0x4A69461B7349D2E3ULL, 0x93739ECAD8178724ULL, 0x03FC02FD146973E8ULL, 0xEB40B592EC0E800EULL
+            0xFFDE57C9023038F1ULL, 0x074F0728F6A841CCULL, 0x8C64301DC0E9741EULL, 0x9C8B222FE7AFD2A3ULL, 
+            0xE7CD29FBA7107B2DULL, 0xEFB254BE72EA8BEFULL, 0xF1CE1357A2F18E0DULL, 0xD89273914336A75BULL, 
+            0xB680BF820FEAEDC5ULL, 0x8FB4E308D7E50895ULL, 0x8BAD405077EF1EFFULL, 0xDF3A3AAF5A2ADF16ULL, 
+            0x4288ACFCE0CA0648ULL, 0x758D0B7FD40C5B39ULL, 0xA8137546FF9E3DE2ULL, 0xA373E074E00EECE4ULL, 
+            0x4BE2D4291A692944ULL, 0xD6F800F6B3FE0A38ULL, 0x8A3C2FF9D5BE0DD4ULL, 0xA4A5CC970D8F6F70ULL, 
+            0x75EC259AC4E28099ULL, 0xA22D7E41AAED4A5FULL, 0x59F9A06737EAEF44ULL, 0x34BEE50820D1D0B8ULL, 
+            0xDBE89420EBE2F71BULL, 0xA0B58A47DDDC01FAULL, 0xBB2DD84AF0685928ULL, 0xF158D498E16C4BC0ULL, 
+            0x241B79C1102214D4ULL, 0x338A03AC1FC7E92EULL, 0x10A572844BFC0EAEULL, 0xE417646C40A6079AULL
         },
         {
-            0x91C75CD9E4FC3CFDULL, 0xED35F4220568B798ULL, 0xCFB55ED29550B887ULL, 0x1A3EF5B7D8BBE13EULL, 
-            0x8398C6724E6C1A17ULL, 0x8E108EF9D66680DEULL, 0xB41AAE50D3AEA714ULL, 0xD3900EEC1869C17CULL, 
-            0x818F964D16DC3CC9ULL, 0xDB5F6853B4473114ULL, 0x303D0FAF0FDF7928ULL, 0x381D14A1B936294DULL, 
-            0xA8E097D7533D93CBULL, 0x20E73E64CDBD3342ULL, 0xDE3FB7E739EE6300ULL, 0xB400C759EB00467FULL, 
-            0x1C333726FAF82FFAULL, 0x040C1A26AF3CF1B4ULL, 0x37599D29613163F2ULL, 0x9569C8F27E416D65ULL, 
-            0x64B976C690AEB922ULL, 0xB129854A0DEB3175ULL, 0x1AAF5FD8FF777888ULL, 0x46F5034D6242E73EULL, 
-            0x3E466078BF437721ULL, 0xDCA339629FDD959AULL, 0x897597778CB615D5ULL, 0x73929536906311B5ULL, 
-            0x033792CAA1B0E1A1ULL, 0x80C1A251B8967064ULL, 0x7EC0DF433B4C98CFULL, 0x69D1A71E2D698A45ULL
+            0xF68A3E3025D2A7B6ULL, 0xE3D45C0DBD272523ULL, 0xA0E5B5D50E4AB199ULL, 0x7609AB55DDA939C6ULL, 
+            0x476012FB812AAF4CULL, 0x7C06FDF55DE56CAAULL, 0x9186347895696AD3ULL, 0xF4E79CDB96E86E80ULL, 
+            0xD39493FA1C186126ULL, 0xAA6FC02C46E3DE06ULL, 0xE3FC83CEE893E9E5ULL, 0x74497BCFD5B0032DULL, 
+            0xED9E9442D6999735ULL, 0x03188A9CCBBC2D03ULL, 0xA36F5F616C689B60ULL, 0x09AD09F15DF35D9CULL, 
+            0x897A718A25118792ULL, 0x5B2988EF63C39D6AULL, 0xE0622438E1BF34D7ULL, 0x080387B87506D300ULL, 
+            0x69684009A3D505C4ULL, 0xFF90FE64C7ECCCA3ULL, 0xCD5DE206624723F2ULL, 0xF1F87B576B0FEB0FULL, 
+            0x2328DFA780227EABULL, 0x64286C8AD9FAE2B4ULL, 0x5D27E4ACC2D2E4D5ULL, 0x942D85615B3174A7ULL, 
+            0x0D009571832BDA88ULL, 0x0DE998F79116D78CULL, 0x0F553DC18AFB5049ULL, 0x4EBB0181AB3A728CULL
         },
         {
-            0xC27BE86066CB307FULL, 0xA4799EA958EEEE83ULL, 0xCF2DC16A54706ED4ULL, 0xE00F5543C2838C4DULL, 
-            0x428E4417048B703AULL, 0xCFD789AEE4B84B86ULL, 0x922FC07D0DC38F5EULL, 0x52A0312544F4E464ULL, 
-            0xEDE726AB612CC200ULL, 0xDEEB7201307F2671ULL, 0x9DD1DCEF4FBBD697ULL, 0xCE7489B8C0417A92ULL, 
-            0xB1786A0760972F92ULL, 0xF283E2AB9657042DULL, 0x7A854379F897D971ULL, 0x6F76877394E009C0ULL, 
-            0xE5FA421E88950B91ULL, 0x87400ED4B327502BULL, 0x545D31C5233909A3ULL, 0x6B1B04CFC4807E0DULL, 
-            0x66CEEA8C917DF8EDULL, 0xEEB8B35F83AAFB78ULL, 0xC69CA555B8D4FBBEULL, 0xE502551E6DD2B857ULL, 
-            0xBE3E8097AE2C4392ULL, 0xE3129B818D44111DULL, 0x5B8E39A3F1878CA1ULL, 0x46030E1DB81B3671ULL, 
-            0x0A23AE077585B5E3ULL, 0x064E285AC08606D4ULL, 0x28779E8B1E849BBBULL, 0x80CB0C38462C00AAULL
+            0x7D634964E842EDE4ULL, 0xDCF83D314B9E1F72ULL, 0x73CDF4BE06A83218ULL, 0xDC9F4FA423E47E2AULL, 
+            0xA578A4EDF243E1FBULL, 0x03EA8EC450729D71ULL, 0xACC098E1610FACABULL, 0xB3B6F1D9F2D8A505ULL, 
+            0x551F2FEE2397153FULL, 0x751ECD78E0542007ULL, 0x87E5713FD1F05D19ULL, 0xB5626F959F0170EFULL, 
+            0x9D92796F911CC0D8ULL, 0x1B9C15FF4DBF951AULL, 0x07E52E7F43638B37ULL, 0x839A7A2E681BFF7BULL, 
+            0x4424D6FC7AE814D7ULL, 0x557D2D8BB4BD1C7BULL, 0x47A103FAFE16E6C2ULL, 0x2A03038DABA945D3ULL, 
+            0xC4979598C941C9C3ULL, 0x48311939AAD48695ULL, 0x8B4F990C3BE7966DULL, 0x11B0704F14FCDDC5ULL, 
+            0xDB1C8482DCE59D15ULL, 0xED78D31CC14AE227ULL, 0x4ECD98CBC4A4D255ULL, 0x20C103B70C4B3BFAULL, 
+            0x5FAC8674F5E4A104ULL, 0xD7CB8508B9BBA25BULL, 0xBBC8CE0621D273B4ULL, 0x5FDF2F645A464CECULL
         }
     },
     {
         {
-            0xCD5EF13FA4DFB551ULL, 0x628AD7463AEB792BULL, 0x09CB5E2436D1D567ULL, 0xA5D2B4DC41556A0BULL, 
-            0x3BE07FC721672802ULL, 0x17965AFCCD22DC3BULL, 0xC9CAFAF874EA7FBBULL, 0x5E2478CE90428628ULL, 
-            0x81BBFCDDA5CADB21ULL, 0x2763D81B3CDE5E57ULL, 0x50ABD758167FF36BULL, 0xBB66CE917A9AA02BULL, 
-            0xC6EE84DF13631B13ULL, 0x4218AC9759A0FB68ULL, 0xD9A9B917C7EF1BD5ULL, 0xFF302A89638956FDULL, 
-            0x9CB4F896D47B1896ULL, 0xC881AFF841C5240EULL, 0xF79C11CDD11FD219ULL, 0x3F2F39DC9DE62594ULL, 
-            0x7F325AEE4BC3CE97ULL, 0x5598399EDF3B2207ULL, 0x660D1E4E43B1D17EULL, 0xC01BFFCF6F54A1BBULL, 
-            0x503A8761F64114ABULL, 0x84D68A72720A534CULL, 0x5DDDDD5D3C6B70D7ULL, 0xD06E7C1179CC0FADULL, 
-            0xD09F10EDEE37FF67ULL, 0xF9A81461A5F2F3A5ULL, 0x1D10F891D2BC9FE6ULL, 0x7544613249112CBFULL
+            0x2DB021B469BECBECULL, 0x4897D481EAD5E8E6ULL, 0x0B4E7F09D8180BC4ULL, 0x8B88E8D44DBE1804ULL, 
+            0x4C1C40D03400B0D7ULL, 0x5089D17C18E447A6ULL, 0x6CA852B182A1C576ULL, 0xDAF2FFBE67846EE3ULL, 
+            0x1484BA575001B131ULL, 0x149BA80FBA4AED7EULL, 0x4A95F9434188D920ULL, 0x431B2D94712EC0DEULL, 
+            0xE6B927D24B29F9EAULL, 0x020C8E881A3AC4A5ULL, 0xE1B405F174F0F550ULL, 0xEDF2613BFA185963ULL, 
+            0xBD79A8CD5F370DC1ULL, 0x20FDA178575B3650ULL, 0x3856FA7F5C80A049ULL, 0xF9936F3151484249ULL, 
+            0x8C92EE7EA35C03F8ULL, 0xDFD955B455792A4CULL, 0xFD05C25392599929ULL, 0x8BE1BBEC3AC6A7E0ULL, 
+            0x03DAB4B0871AAACCULL, 0x3BC4D5ED81E33BE6ULL, 0xC4A340EDD74914D4ULL, 0x1702374C9ACAEE13ULL, 
+            0x2A52DB91A930A603ULL, 0xD8EA5546B66D2C8EULL, 0x5F1327F47087B2B5ULL, 0x497E31C7E52F93D7ULL
         },
         {
-            0xEE88EE8D93DF589AULL, 0xAFA8C1D64E3AC4C6ULL, 0xD57802D53893D4FAULL, 0x53F4DF63DE4D6D62ULL, 
-            0xAD69C33B76CF8505ULL, 0x4C03DA1034FB5C11ULL, 0x33B45BEBF1A0ED6AULL, 0x6ABD31F6C1F809FCULL, 
-            0x77DCDF8036E8820AULL, 0x49EFFBC0F6BB9181ULL, 0x0A241D2FFF70A0CEULL, 0x8818A7DA05191458ULL, 
-            0x8F717539A7308672ULL, 0x45F142C1173E4200ULL, 0x063FC9A74EE1F51AULL, 0xB740A804392F0C8EULL, 
-            0xD6D0D3365CE135AEULL, 0x5F8D8DC2C0E071B9ULL, 0x1887760F604F1D39ULL, 0x19241DF580067246ULL, 
-            0x3C9A2D8E9EBAD0CAULL, 0x8CF4DBA98220958BULL, 0x97E4D7286BD77A34ULL, 0x84041D02480AAC03ULL, 
-            0x16E2DFCD8731BC4DULL, 0xA556C7054D113FE9ULL, 0xE829C9FDB84A95FFULL, 0x35D0BC1736EEC3F2ULL, 
-            0x414B1524910A2B14ULL, 0x4FD2DCE6E5362C99ULL, 0x6F5CEF6888AC9C61ULL, 0xC9086FB414D1A0D1ULL
+            0xCB1A8CA936DD3699ULL, 0x6DBE874B1969BF29ULL, 0x95261C268CE75409ULL, 0x1EF4AA485D82E81EULL, 
+            0xC3E417C808108A7EULL, 0xDC1FF231B5A25DF5ULL, 0xB1ED11EB70A1D26AULL, 0x4A0655B001D9689BULL, 
+            0xEC83B511C38977BFULL, 0x037B8BC5E9F36458ULL, 0x63B574246F6AF7AAULL, 0x4E05A240BFF4C42BULL, 
+            0xE4B53305C3F77E85ULL, 0x7E33930BD8F759E0ULL, 0xC9FE87320AEC457CULL, 0xC84079D204944194ULL, 
+            0xB463E69A786A638FULL, 0x9D896F18A74FCF93ULL, 0x02478278EF1A6F60ULL, 0x42F3D69E1A2517A9ULL, 
+            0x4C2C9A9CE3850AB5ULL, 0x80B813C4EA08D320ULL, 0x5774FFF470DA30BCULL, 0x029EDC240AD9ABD5ULL, 
+            0xEC9BF7F1CACA5484ULL, 0x01A362BEC884205EULL, 0xDD56C181A475D2E4ULL, 0x8019C652C88DEE92ULL, 
+            0xA694502CCCDD0413ULL, 0xCA7D61AAE4F4FCFBULL, 0x1B21590AA581109FULL, 0xB202EFB063496F89ULL
         },
         {
-            0xD657ED7C9B02E8C0ULL, 0xAD6424A29AE3D3F3ULL, 0x79C9C1D1C911F822ULL, 0x9F9A6CB2ACF4822FULL, 
-            0x3324311033C304F7ULL, 0xA15BDEB7B68C358CULL, 0xD01FC3FA777EFEC8ULL, 0xB03F21648B8F969EULL, 
-            0x0D650DC7DB3D6372ULL, 0xC440A239CC0AE9F8ULL, 0xED6868C43ED9122BULL, 0x4EE690264E97DD89ULL, 
-            0xB56F4BAD38F7A6D5ULL, 0xDED33093FE38E1C3ULL, 0xEE89344FF7E7B9CCULL, 0x787B055AD03587FBULL, 
-            0xC2E8583C2EF3E320ULL, 0xE8C5D3CFCB27A1AAULL, 0x6F97FD426D0CF5B0ULL, 0x01D26916701688BEULL, 
-            0xAD34E15F135AA692ULL, 0x05F61D3497EBEC62ULL, 0x204F88F4FBEA5173ULL, 0x6A72B60DFD391097ULL, 
-            0x409562ABA6FFEB8FULL, 0x4E6D3264BF785AC3ULL, 0x3069FAF5A1AD457EULL, 0x08DCB98468620E0FULL, 
-            0x767D1459A813FD13ULL, 0x6721EC6EE07A8C1EULL, 0x998451DF7A124171ULL, 0x2B484358B5BF805AULL
+            0xDC8A77E2BA4DDC61ULL, 0x821466F7BF390AFEULL, 0x2D270A5E5AD27955ULL, 0x90325BB80E4F9CC9ULL, 
+            0x0DD75A745940B0EDULL, 0x54F9FF1B5397A654ULL, 0xD127CED535C188DAULL, 0x9C6B378A5685AE52ULL, 
+            0xA126B2859873C6CEULL, 0x78C5B6DD05D8AD78ULL, 0xC171504E43C72CCDULL, 0xBBA5590B6D4B3129ULL, 
+            0xCE0AF89B7396BF08ULL, 0xBEFDB8AE99F7764EULL, 0x70BCA84562C3B4A1ULL, 0x40974CDD7DA23D9FULL, 
+            0xD06EBFFF4A2D604DULL, 0x5404245D9AF8812AULL, 0x21A2FF3AA5E96205ULL, 0x462515123D6BB0DBULL, 
+            0x91BE69E640E63A9AULL, 0x224A547A8AF91A21ULL, 0x801713227933943FULL, 0x1D799AAF8641A07DULL, 
+            0xE0F42E1547902810ULL, 0x315855E2925743BDULL, 0x5AE6F02A1CCAF435ULL, 0xC495BAAB5C09BF42ULL, 
+            0xD5335C4AB8756C89ULL, 0xC69DA5DEA07D3A02ULL, 0xDAAD97FFE110AC0FULL, 0x9457079E1E9F25B0ULL
         },
         {
-            0xC1056FDE3D1A7BEFULL, 0xA39AACD479E17180ULL, 0xAF5096FCB07D4C5DULL, 0xAD2AFC369BD4EBE3ULL, 
-            0xDA192F8E94FE5003ULL, 0x1FB1BE7269076C4EULL, 0xC251F54AB99C326BULL, 0x347AC449217A8C4EULL, 
-            0xBC95CF98520FE35BULL, 0xBF8102058F848639ULL, 0x93ECF2D6E159001CULL, 0xFEF071AB5C037E0CULL, 
-            0xFEDD93AA789FC691ULL, 0xE79BC4C30E6C29DCULL, 0x3D1A45668AEC780AULL, 0x9FC17EE9E8CAA0A8ULL, 
-            0xDAEB6002298CE478ULL, 0xD73C379E70745FE0ULL, 0x988365E88C71C790ULL, 0x214EDA2DDAB3AD77ULL, 
-            0xD340A5AF16B2DBF1ULL, 0x602EDD2BEC7E6AC6ULL, 0xEEC933744DA83C71ULL, 0x21CBEFCF76B46945ULL, 
-            0xE122129D8D6014FFULL, 0xE0628EDA75B2D35AULL, 0x6836FF0B69B380ADULL, 0xF6484A399F55E51DULL, 
-            0x3678AAA4B9CE8370ULL, 0x20F066BA40A1B485ULL, 0x58286FC5965884B4ULL, 0xD10FC9CE738AD562ULL
+            0xB3F60A8101357971ULL, 0xB3068385F76BF9F0ULL, 0x9711D43BD6BC0000ULL, 0x967A09C0C9452E79ULL, 
+            0x4F314AEE369D422FULL, 0xF66CF510B55A6983ULL, 0x9C3032C9F5FFBC68ULL, 0x917F17DCF3A00659ULL, 
+            0x6B36858E1A782443ULL, 0x50696EB6F98CCF91ULL, 0xFC0A18BC606B6017ULL, 0x235452E417C5DA75ULL, 
+            0xA06C3CB0462EE98AULL, 0x2669FB40475D4367ULL, 0x4A2FE01DE8CF2A49ULL, 0x23C319310B2941A7ULL, 
+            0xDF7FF025794BADEFULL, 0x0693CA35D368243CULL, 0xFF0B2BB7CB3F18DFULL, 0xAD8AECEA994CE12CULL, 
+            0x029F68972BC51668ULL, 0x9020BF8D6FABF09BULL, 0xFD89ACF6D7998CABULL, 0xD53959E9ED518ADAULL, 
+            0x56FB5FB80463CECAULL, 0x5AF09B5F21178FF4ULL, 0x6A1A6F0AFCAFC168ULL, 0xDC935E5874528D62ULL, 
+            0xA5DC9E632F77D0E6ULL, 0x62B9E6BE814BEBE5ULL, 0x58B171F4DAB8F9E9ULL, 0xA0094D1B4260E593ULL
         },
         {
-            0x08F423657B0D3854ULL, 0x044ACC7AD5AA4D18ULL, 0x72781424939D40DBULL, 0x22F39C8C691F4713ULL, 
-            0xF6CA9956BA909E83ULL, 0x6E14D85AA04FEACBULL, 0x06AE1009E52446DEULL, 0x4983313E6CF030EFULL, 
-            0xD3BD13E6B74F4662ULL, 0x5EF7B2327010E074ULL, 0xDD9D6B495272F473ULL, 0x9DF20108E4AE1FF1ULL, 
-            0xA2F5AF50BCF21D34ULL, 0x4A3C06786C883433ULL, 0xC35A0041809B1926ULL, 0x0839867CC15FEDC2ULL, 
-            0xEACFA19B0D33C86CULL, 0x6572F43C0912C7AFULL, 0xDCEB824EBB6A317AULL, 0x337DDCF194207CF7ULL, 
-            0xC45368E6CE08D39EULL, 0x939F8200724F6C4BULL, 0xEEA9ADABD29722B7ULL, 0xF12BFF4B6944A4EEULL, 
-            0x122B11E03CC9B4DFULL, 0xC8406CBEEE8331A5ULL, 0xDF652376BFAD893BULL, 0x475788387C84BE3CULL, 
-            0x3428364874BCC1C6ULL, 0xE240700527541387ULL, 0x43D8B08C6E00F6DCULL, 0xDFBEFE61615347F4ULL
+            0x163B918BF6FCB05AULL, 0x381607BC004C1D63ULL, 0x2B4012AEDAF48F6EULL, 0x1C4B51C471280089ULL, 
+            0xAABF1F142E953D05ULL, 0x5EFBD9682F5CAE9DULL, 0x7E14BE671E943C7CULL, 0x8488EA3F6FDF0207ULL, 
+            0x5ACC0A43A976D8CEULL, 0x4D9E55C9BC96A745ULL, 0x8295C4E4161C41C0ULL, 0x34B349777B470B62ULL, 
+            0xB8C3E57083293B16ULL, 0x1E179805CD1BBC3EULL, 0xA035D0BE3C9C2C9CULL, 0x6E4D27BDAC4B8E17ULL, 
+            0x02ADEB1C2B9ABFCFULL, 0x53F75D276E3FF7B9ULL, 0x9384D5274BB78361ULL, 0x46B4C15A2AD7EC2FULL, 
+            0x0EED5CC260B1C108ULL, 0xD66AD3EC9140C73AULL, 0x9E6C1CB0BA4EE00CULL, 0x4B441C8FF19F1167ULL, 
+            0x6682EF95211BA424ULL, 0x1E201C5EC9996FD7ULL, 0x148C456FC827EA6AULL, 0x36E2825A4C357724ULL, 
+            0x9637D616C71DE11FULL, 0xAB19E0A08BF12746ULL, 0xF1041CD3E6D40FFBULL, 0x22A373AB6C2BFF34ULL
         },
         {
-            0xFE1F1B5D6919677DULL, 0x07EC2FFC92F1EDE2ULL, 0x0465E6A2E091FB19ULL, 0xA13D48379C2A1830ULL, 
-            0xC57FA14DD47B23BFULL, 0x97E9FF1A77B2A969ULL, 0xE923ECCD408CDAD7ULL, 0xABBE75927601E124ULL, 
-            0x5D0D9B98CD44432EULL, 0x7F5EA18257A7324CULL, 0xF6C59A5F27AB924BULL, 0xD47CB4DD87B33B9AULL, 
-            0x5A8F2473B8B0F0DFULL, 0x8507BA10CAA2BB4FULL, 0x399FADE7A9C9EDD3ULL, 0xB2CDA1CE8BDCDD8EULL, 
-            0x7735E77227817879ULL, 0xC9B894CB33065328ULL, 0x41603FD3D4DE380FULL, 0xBABE6D74B0F4AF26ULL, 
-            0xD829307313CA956FULL, 0xA901B91DE49DC03CULL, 0x0DFE8FCFE5B2C739ULL, 0xFA2F1AF205C5EF44ULL, 
-            0xCFD612ED5378F4EFULL, 0xE6C9C60933F5D61EULL, 0x22A15C857C4B25A4ULL, 0xEE7C7009581DE10DULL, 
-            0x9F1B8A53FC88C90FULL, 0x84F14F5B98C6C799ULL, 0x2D2F144C305C66DCULL, 0xB75482D45CB69E28ULL
+            0x82BFC58E3E3B149AULL, 0x643CB7D7C304B402ULL, 0xB7044767D07FA55FULL, 0x5C6CB7CEA1BAE074ULL, 
+            0x9340E803EE6FCA40ULL, 0x95C593C1F698EE35ULL, 0xAD25A52CD41D4D2EULL, 0x333A65DEA6163054ULL, 
+            0xA70E9A2E9A8B7329ULL, 0xDAFC12334E36BB22ULL, 0xF4B34F0C3C28F763ULL, 0xA310920638BCC586ULL, 
+            0x74A4FDA7A509EB10ULL, 0xF656BFB4AAB5AB4AULL, 0xBF9BCD3556A03415ULL, 0xAE4C4060E1C8872EULL, 
+            0xE390F2A9F4889232ULL, 0xCDD13ABD04097C53ULL, 0x38421F500CAB8F0BULL, 0x86CBF0B5234F19CDULL, 
+            0x9322CFFDE98A5F93ULL, 0x89431BF8E4D5C8DAULL, 0x40C19AE088AA6DF7ULL, 0x7BBF2B272788A077ULL, 
+            0xE92BE629238CD787ULL, 0xBC41F1AE64C46629ULL, 0x5817E688CF2EEB36ULL, 0xB9A3D1022D65F259ULL, 
+            0x9FB4A344CAB7F4B8ULL, 0xEE51AFF70CEE69DCULL, 0x0551EC031D550D7FULL, 0xF8453022EEAFEF3AULL
         }
     },
     {
         {
-            0x50435CF699C373CDULL, 0xFE155D13E60ED26AULL, 0x9B8A505ED32519B7ULL, 0x16EA941BFB6270D3ULL, 
-            0x0058436759FE0024ULL, 0x6366434F764743ABULL, 0x15D6AE50D91F3632ULL, 0x3A3D62B0FDF60251ULL, 
-            0x1BA226F0728454C9ULL, 0x6F8F51BDB36E494DULL, 0x9944A2F2DCB85ADBULL, 0x7C62BFEB9D4115A1ULL, 
-            0x233E894BF8D7E0C5ULL, 0xC3591F17A515E5A5ULL, 0xF97A7FB4C81804AFULL, 0x5D3E9FA5636B13F2ULL, 
-            0xF2B8B3E952974A46ULL, 0x431FC1047BEA1176ULL, 0x5A03812672BB90A2ULL, 0x13301F1CE0BB03A3ULL, 
-            0x7288D7C56958B121ULL, 0x3FA84CA2E330A840ULL, 0xFEDA4624885891F3ULL, 0xCD5F4371BD830695ULL, 
-            0x72CF43D6F10A138CULL, 0x41542508E242F83DULL, 0x191924FBDC6E9512ULL, 0xA561B2780B500C97ULL, 
-            0x459718A17B03E5BAULL, 0x41F3214D409AFE49ULL, 0xFB5C7406BAA6599FULL, 0x821E18E89443036EULL
+            0xF40AA58F189A3E4FULL, 0x75F364F54C39A6AEULL, 0x3680B89999A16323ULL, 0xDEE68BC7665F82B3ULL, 
+            0x7D6AB73324760EBEULL, 0x30E4CA26A91AD1C7ULL, 0xFCA76592C84BFE7DULL, 0x2C6426A4F7CED5AEULL, 
+            0x90F41CC5CEE55E3CULL, 0x091B6886A277AD46ULL, 0x996A275AE5A4C8BBULL, 0xAD2F40FF7E2727B9ULL, 
+            0x94B6A3D1E1AD24B4ULL, 0xDF01C00EADFFA2D5ULL, 0xD71E1F34E5ECC00EULL, 0x8DD21174C4041476ULL, 
+            0x9634611B7C4C5289ULL, 0x0129DEF33F0BA9AEULL, 0xA4D57ADFEB94EDD0ULL, 0x0D556E8276C3FB6CULL, 
+            0xFA44835E53BA9930ULL, 0x4A55A4D5AE72FB77ULL, 0x548D3EDFE4E007DFULL, 0x47536DC2C6215A90ULL, 
+            0xCFD753D51655B75DULL, 0x365E30CFE120232BULL, 0x8950BF421C68CF85ULL, 0x7A31A825D1E09111ULL, 
+            0xB87A11E45CC3F6C8ULL, 0x2E9FE9A3D9CEDD91ULL, 0x0A79E5B95182ABF2ULL, 0x0924820C16378D6FULL
         },
         {
-            0x9CB64C81006405C4ULL, 0x26591360BBCE342DULL, 0xD8271B85AB20B8DEULL, 0x0D9CBB3401E77473ULL, 
-            0x94A2BFBE26F06942ULL, 0xE942F4784BB21AD9ULL, 0xF7A8EF8CA3F26F37ULL, 0xA735432A80C96A02ULL, 
-            0x4C3D4554988EE9B0ULL, 0x378E431CCC6E29C9ULL, 0xF72FFBDE7E873B7AULL, 0xB38878ABAE3582C6ULL, 
-            0xEEBA560DC9158435ULL, 0x4DF14F76FD406762ULL, 0xFA1545B6C3BE1C79ULL, 0xC9D0037B46F41CA6ULL, 
-            0xE1D796573CCB2D1AULL, 0xC79FBCE11676077FULL, 0xB9003A74D57C76F4ULL, 0x4913FE28E8B9135FULL, 
-            0x85B298844B6318AAULL, 0xC5258EB11BD530E8ULL, 0x4576D52A798E7E6AULL, 0x633BB5BA46AC6DD3ULL, 
-            0x354F4C7FE37425DCULL, 0xBAB551322E8BB9CEULL, 0x91D261CC839F151CULL, 0x150E913F4BFA927EULL, 
-            0x7D468DF01A9A6D6BULL, 0x15183D54624AD58BULL, 0xA7378C40BE7F0D1EULL, 0x15D7EE3CAB9A03B3ULL
+            0x082A343D1D0A6CE8ULL, 0x272339B8F1CABDD3ULL, 0xC6C0AB607A1A5181ULL, 0x733769C5BF8B596DULL, 
+            0x198402A8D1880CC3ULL, 0x6EA440E8F2D5AFF6ULL, 0x6A1C8955AF4A958BULL, 0x284218B1639110BAULL, 
+            0x2C28C63DC5D3D28FULL, 0x4AA720D51705C79CULL, 0x6569DFB860723E79ULL, 0x592532F39BF79A25ULL, 
+            0x469DE6E5DAF207EAULL, 0x6FFAE61D00B34FF2ULL, 0xE24D2B1729370BD8ULL, 0x6AFABB8E19A43AA6ULL, 
+            0x5F4AA83B93B31720ULL, 0xB55DF5C2F53F76DCULL, 0x991271B6D33F019EULL, 0x30B3878DEAC53AB2ULL, 
+            0xE6F5559B4DCB679FULL, 0x16ABC190391CC3ABULL, 0xB70A1ABEAF49431DULL, 0x42B0E537D76B00ECULL, 
+            0x454846E6B464AD3FULL, 0xA706C9F6766C4A70ULL, 0x4FEB83C9BA731ECDULL, 0xA68D76F322B4AA38ULL, 
+            0x2621F164739E8D5EULL, 0x835FD270431BC539ULL, 0xD2F0EAD558036EE8ULL, 0x0D6A80EC9CD342FFULL
         },
         {
-            0x046E654C25A19F86ULL, 0xBEBF292562539CFEULL, 0x2A42900A26ED04BBULL, 0xCCFF54C7950A1A7EULL, 
-            0x61EDE1845AC44896ULL, 0x6362744753E5F672ULL, 0x04D8BF23830BAADBULL, 0x2FD446F86CA56EBAULL, 
-            0x68DCEF47F564AD29ULL, 0xE79C3928D5BD0F19ULL, 0x95F866C6DB088899ULL, 0x863B99E54FF9977BULL, 
-            0x7AE87071CC175646ULL, 0x06B0E41E7284B81BULL, 0x90B1D7517A4ACFF9ULL, 0xE215F32D40D33EB9ULL, 
-            0x5FC7A3846DFD794DULL, 0x385EA39725F7DC22ULL, 0xFB091DBDF3421CD5ULL, 0xAD01A9B53FD24443ULL, 
-            0x03558CFB1AD47355ULL, 0x0F3C756D56BA7E74ULL, 0x6A3AF72E72F57837ULL, 0xCF758324940CDBF8ULL, 
-            0xD3084473238797EEULL, 0x5DAB6F3288FB4417ULL, 0x1D658951BFDB41B6ULL, 0x907C7AC955548088ULL, 
-            0x1EDA9E0B653AB06DULL, 0x354AF3C882AFF480ULL, 0xF24F534F3B94F650ULL, 0x8269EAA7FFC6A8B6ULL
+            0xFBA02CD367337CE8ULL, 0x92619AFF02764369ULL, 0x315F50EB8B9DCB06ULL, 0x0FB4D77E01F147C2ULL, 
+            0xF37F094CE410B114ULL, 0xFE7CED1D97E18ECAULL, 0x0E3CFA93DDC1266DULL, 0xCC33AA55CCD92A0CULL, 
+            0x72B2DF07AD93F06AULL, 0xCE22BE44EB188F6DULL, 0x339DE3526BB7203EULL, 0x191BE41CBCEF28D8ULL, 
+            0xA3F178FD4F0C5BC7ULL, 0xADAA40ACA4E9E1F7ULL, 0x4F196B1F2017DD0DULL, 0xA57C6569AC6710B1ULL, 
+            0x795E685C1A7F4443ULL, 0x2302A75A40EF5979ULL, 0x6FBD122930F81E9DULL, 0x2258FCE66876DA7DULL, 
+            0x75FF405AEA563841ULL, 0x0A567EE0249F3570ULL, 0xBDCCFD9D94618B8CULL, 0xA232770FCC3B1086ULL, 
+            0x21F3E10AD58636B0ULL, 0xC28DD98766B3967FULL, 0x0C8879D8BF1CDEBCULL, 0xF0434152CD1799EDULL, 
+            0x63C344A08F8C5540ULL, 0xE5D18606F273AA2DULL, 0xBB4E82DEAD88A256ULL, 0x501A23F624BE7A47ULL
         },
         {
-            0x971D7ABFA574EA37ULL, 0x1B0E79325917EC41ULL, 0xD0990D8562FD7AB8ULL, 0x32B1530DB2BA83BCULL, 
-            0x9012EE5696DCA9F4ULL, 0x1E8C048E53A4010FULL, 0x1571DB07E7FC1A13ULL, 0x9D2F1A72E8BF1F9EULL, 
-            0x316D45DE06BB5D3BULL, 0x826BBEF53AD306F7ULL, 0xD798BB16B5D12CC1ULL, 0x9989D75663319927ULL, 
-            0x3BBC22E4A0A55153ULL, 0x8FD6FE6923AC8A69ULL, 0xDC0580DA6D7E255FULL, 0x2AABF550A7D2F6B4ULL, 
-            0xCDAE35E61EECAE47ULL, 0xDFBFF4450ECA8FB9ULL, 0xE9A8226DD1820331ULL, 0x73D35399C05BBF9DULL, 
-            0xA17CFD93364360BEULL, 0x88AA3B101FB7BD36ULL, 0xF0F79D91B0B1E505ULL, 0xB74625E1BA3A1BEEULL, 
-            0x37F7A2867AA8E162ULL, 0x1BC86CF3604425EAULL, 0xA85C61674D348BCBULL, 0xF0ADE39E3043E2A2ULL, 
-            0x43F80A002A11CF19ULL, 0xB64AF4FD042735FFULL, 0x91B40741C53AC1AAULL, 0xAD08B01C33FEA856ULL
+            0xDB05723BD1C9BA97ULL, 0x94B5D6B303BF7D29ULL, 0x9C2ADC236884C23EULL, 0x5EE88F584FF36BD6ULL, 
+            0x94FC9712C329C4CAULL, 0x22687BB3D0AA0D69ULL, 0x44409BEC7F492B5FULL, 0xAB06394008B0D8B6ULL, 
+            0x693C28057370222DULL, 0x42D738351AA053F0ULL, 0xC6D6DFD96CD4C014ULL, 0x7B16EC325AABE703ULL, 
+            0x60CCC9963D218195ULL, 0x613B723C4D6307F9ULL, 0xBFF851FC29570B78ULL, 0x30F3B505A7BCDA2FULL, 
+            0xF1443C7D5BB2DD64ULL, 0x7DD9D0A265BDFBECULL, 0x7437277E22611811ULL, 0x90BD4B9DE54AC772ULL, 
+            0xE1DE4056A07AF4ADULL, 0xB1A2D1A38B4414F3ULL, 0x511DFBBAC0D4A056ULL, 0x8DE029EA2A979423ULL, 
+            0xF819609C1220C4B8ULL, 0x77CE8A9FBB6DF97AULL, 0xED3E5B044A3EE4F1ULL, 0xE640F7F1AB9B0BA4ULL, 
+            0x72624BF20B370B69ULL, 0xBCB7F492C9316E44ULL, 0xC516A510D74D6799ULL, 0xDA76A706E02BDD92ULL
         },
         {
-            0xFEC9758171B3AD06ULL, 0x53026012BE6F897EULL, 0x2E20FDDB8F33B9D6ULL, 0xDF931C56D08D7B2AULL, 
-            0x0A3013DEE27A5EB0ULL, 0x9076973F324F59DBULL, 0xA811EFD30C1D4D64ULL, 0x9FA0778D942D98CCULL, 
-            0xC89DF60FDB3E263BULL, 0x701723C582EB9250ULL, 0x121D7C344713CCF6ULL, 0x8813393F7F5D2F0CULL, 
-            0x4432606DC9BD7781ULL, 0x78B9D9D6334E8739ULL, 0xC4A02D585E7F7E5DULL, 0x06D9AEE36B06114BULL, 
-            0xAE8D655D261E65F7ULL, 0x4DBFD9C2F7B07860ULL, 0xD44DB214F93DCC74ULL, 0xFDD1323970C95AAAULL, 
-            0xFA0795CB3E42D0F2ULL, 0x63E7F38C5F12C072ULL, 0xD1F496AA735C976AULL, 0xC32563136F28FC58ULL, 
-            0x068757DC333B0989ULL, 0xF27CD5D17524A3A3ULL, 0xDEE8CDC1200665B9ULL, 0x2D11D603E080E131ULL, 
-            0x99A316261AD700B3ULL, 0xFC0089B7FBD4D8D2ULL, 0xD7C056C2D2B471B3ULL, 0x5C2F8B39075C336EULL
+            0xDF2DAEBE49D56FECULL, 0x887616F0B220BDC8ULL, 0x705A5077532CA939ULL, 0x6456AF7577E5F82AULL, 
+            0xCCE08DF8F4D7FFF5ULL, 0x5B51580842175414ULL, 0xF50B5244C5B62FA5ULL, 0xC3B30EEF0D297D5AULL, 
+            0xB941D6F47B81F6ADULL, 0x9CD9556E7BE42FA2ULL, 0x6E9F2926FC8510C1ULL, 0x459F9B51E2CCB43BULL, 
+            0x8566E60E22C0F0AEULL, 0x5C472E2EC6A16E5FULL, 0x450541025735A82AULL, 0xA3FC915145843516ULL, 
+            0x173B15FBBC9346C2ULL, 0x37D19CC702F3C881ULL, 0x583A4ED5464B2241ULL, 0xE1EE41FE81FE343FULL, 
+            0xF90EE234C4C3785CULL, 0x9F68F6FF88BD9130ULL, 0x3EEA5B4062568DE1ULL, 0x840F115E2C7D9FF3ULL, 
+            0x4C30468D70D6C0ABULL, 0xD1D2FA34F0F6F456ULL, 0x9062C8066F0477DBULL, 0x6E2B642113C30964ULL, 
+            0xE6265C1751AB55A9ULL, 0x7324E6B146D9129DULL, 0x79062DCFA39E3334ULL, 0x66ADC4AB62D3BC22ULL
         },
         {
-            0x30CA088E20E5B99EULL, 0xA709CB892F397DF6ULL, 0x31AA6A9C8FD1CFE7ULL, 0xEE7D876C804B4117ULL, 
-            0xFC63160D2B981CAFULL, 0x2D238F4A5B64E4A3ULL, 0x692226B3C0F2AB0FULL, 0xCF2C7EA75BE12575ULL, 
-            0xC14DC3D6B3BEC573ULL, 0x812B6A6C29AD5FA9ULL, 0xCA77E24AE72B18EFULL, 0x7505785F7128AC36ULL, 
-            0x40A4D1E6992D1551ULL, 0x400D54AF7D99605CULL, 0x3B64B24FD0EA44EFULL, 0x0425A0F33592A111ULL, 
-            0x6E989B837638024DULL, 0x3B8475E077F66D58ULL, 0x5A180D754C0D1A2EULL, 0xB3219D4DA57B3C19ULL, 
-            0xC699AEE0AC3F8D0DULL, 0x82BB77B119CB29CFULL, 0x0D914F2C3EC5F0EFULL, 0x88CDAEACE061CC7EULL, 
-            0xF817E7FF8C2ADEF2ULL, 0x650AC1870DA69644ULL, 0x15114EAD1976CF9FULL, 0x11757C0C5A1AB6DCULL, 
-            0x5CA195B16770AF1AULL, 0xC83328470E88B9DFULL, 0xD9C16286CE3DC05AULL, 0x0122995C21225395ULL
+            0xF34862A095A629BCULL, 0x4CF7CED6D1F0FF24ULL, 0x29DED561127F52D0ULL, 0x672C82AA86B1CD03ULL, 
+            0xE956D21E4EAA20A4ULL, 0xC2E967587E78E1BCULL, 0x47F8553E8F7410FAULL, 0x3E7DE91E37B6C970ULL, 
+            0x2F9E68D4355647B7ULL, 0x8C2F4E9AED857CEBULL, 0x03DAC2A568E989FCULL, 0x1E35502FEE43321BULL, 
+            0x4A028115E506F69AULL, 0x720A2D6267F9D1E7ULL, 0xB991834F824FAB57ULL, 0x9898B29E825D512EULL, 
+            0x6D73DF734A97EB46ULL, 0x99852D43E1458EDBULL, 0x63871948AC71E66FULL, 0x07961ADE54C3E570ULL, 
+            0xA35DC81C9546B6E9ULL, 0x265D2150AA3E989FULL, 0x281644693E29299BULL, 0x25BD9F444895DDECULL, 
+            0xE0D6F27419E3D08FULL, 0xD6C195B72B5D8AEDULL, 0x8747B88C644F71D3ULL, 0xA644B291DCB8A000ULL, 
+            0x9BB014BB9E254D95ULL, 0xE505432862BF5573ULL, 0xF35FF410FADC8A39ULL, 0xE53E4AC3C30C0F32ULL
         }
     }
 };
 
 const TwistDomainConstants TwistExpander_BasketBall::kPhaseCConstants = {
-    0x29136FD330EB8499ULL,
-    0x9C761790D9B4BF44ULL,
-    0x7CE68D617B01FB2AULL,
-    0x29136FD330EB8499ULL,
-    0x9C761790D9B4BF44ULL,
-    0x7CE68D617B01FB2AULL,
-    0xC2D9318EE9443B89ULL,
-    0x0AED6FCB975AF850ULL,
-    0x3E,
-    0xB2,
-    0x5C,
-    0x64,
-    0x75,
-    0x10,
-    0x4A,
-    0x71
+    0xBC2B303DA1AD7D42ULL,
+    0xDE994CB68331D6C3ULL,
+    0xB97138EA91F2B31AULL,
+    0xBC2B303DA1AD7D42ULL,
+    0xDE994CB68331D6C3ULL,
+    0xB97138EA91F2B31AULL,
+    0xAE50A3275F5C7B28ULL,
+    0x00ED722B278337E8ULL,
+    0xD0,
+    0x02,
+    0x47,
+    0x81,
+    0x49,
+    0x87,
+    0x5E,
+    0x7F
 };
 
 const TwistDomainSaltSet TwistExpander_BasketBall::kPhaseDSalts = {
     {
         {
-            0x7EE5C7841734684BULL, 0xB2E7B4884FE404EEULL, 0xB1A0D0F83517DC49ULL, 0xDB78DECD791D2DB0ULL, 
-            0x74008D603F0E2220ULL, 0xC7AAA54D0C03C9EBULL, 0xA0B455C195D4AC71ULL, 0x010491FBF115090DULL, 
-            0x5865342C57189E43ULL, 0x9555127848850A94ULL, 0x65970A32692C3451ULL, 0xC56EDDD2DAB662C6ULL, 
-            0x434F4E315319BDC0ULL, 0x76093427D466AF38ULL, 0xA5EA4ACE941CC552ULL, 0x4123D89CF0C2D2B9ULL, 
-            0x765F01568DE8CAF2ULL, 0x3D9F829DCC428561ULL, 0x6DFE8A3758727868ULL, 0x7D7406B765ACBA31ULL, 
-            0x9F9EA0CED96BF59FULL, 0x5A37DF38F41DD9D7ULL, 0xDDFA3BB36B0F5083ULL, 0xCB49BBB53474C6A3ULL, 
-            0x118B92B18E81A862ULL, 0x0640F08217B9D878ULL, 0x4F29E6BA76F42407ULL, 0x9B07AD9833D5A4A1ULL, 
-            0x03ACD3C323A39C9DULL, 0xF6048F7EE7D724FEULL, 0x3D624758150335E2ULL, 0x91ACB20B252DADB6ULL
+            0x478662D3B4273580ULL, 0x22943CC8B8963E44ULL, 0x5DFA1029856576A6ULL, 0x36271E4F2757EF79ULL, 
+            0x43D30803924E4F7EULL, 0x58056EEF0230C5B2ULL, 0xBDF0319F2859E326ULL, 0xD7BE3566231C8FEAULL, 
+            0xA98D11C3C8DF9F09ULL, 0xA79FDE01449F76A8ULL, 0x0197C010413657DAULL, 0x0010396430C05413ULL, 
+            0x5D4609E372D4850FULL, 0x23DBB2F0F61A90BBULL, 0x52BE2B2CE19AD693ULL, 0x18E5FF53C9424D51ULL, 
+            0xB15259372DCF19A1ULL, 0x83A572D029AEF71DULL, 0xD05848FEA14E1169ULL, 0xA69D359F16DD85FFULL, 
+            0x76F505C7425EE15AULL, 0x9F54A6E6EA78FEDBULL, 0x6D1F4F3E01A9CCBAULL, 0x4528347FD95C3541ULL, 
+            0x3AE173788FE7B6D9ULL, 0x02F6EA91850FE339ULL, 0x2EED86404B0EFFCCULL, 0xD19EA09164386771ULL, 
+            0xF3D3D0639099DB0EULL, 0x1819A3FEA4665A08ULL, 0x8E3DBF7096F4D2F5ULL, 0x8769D01E48CE74F6ULL
         },
         {
-            0x4CCA6D488465D775ULL, 0xFBD1AA3B4F285DA8ULL, 0xECDEC35402BB4B9FULL, 0xD932D4819410C8EDULL, 
-            0x1D00E813149DC659ULL, 0x9F31160D4AD109C3ULL, 0x614F12E0A7CD54DEULL, 0xBF186B6E406735B0ULL, 
-            0x0F600892DAA57999ULL, 0xFFE9850D3D5118FCULL, 0x5D060A1BD5755BF4ULL, 0xFEB7C0942916CED2ULL, 
-            0xD4C853EF5A96AE7AULL, 0x78E582B3FAEB91BFULL, 0x6116CF13E69A3B37ULL, 0x4792EDC4E3BD5178ULL, 
-            0x4D0A308928A4DA6EULL, 0xCA33D39AAC8D9790ULL, 0x353A37E0D32C1586ULL, 0xD3B6AD239851DE00ULL, 
-            0x1A7B3B3CB4556D77ULL, 0xFAD05FA46B69FCE5ULL, 0xB9498CA4170D15A9ULL, 0xAA616B76BE8129B9ULL, 
-            0x2C15DC806B8C5B2DULL, 0x036B1962434B5E09ULL, 0x7C201BDF9F5F800FULL, 0xBC72F7D5950F95C1ULL, 
-            0x4F8DBB212C2C5659ULL, 0xED567950F5180334ULL, 0xCAEEAC9CDEEEB586ULL, 0x1BF31FF7274E2FEFULL
+            0x971AC036E2E8C217ULL, 0xC4F85B39CA9CF903ULL, 0x058316BA1BEEF3EDULL, 0x8A5F28BA74FB72B6ULL, 
+            0xC753FC66062DEA52ULL, 0xB0C1E78A40A660FBULL, 0x1AE4683541B5B056ULL, 0x2112EAACD0BE3281ULL, 
+            0xB410B5B3F24454E2ULL, 0xE780DAF1E43FAF98ULL, 0xD808A766F91CB396ULL, 0x65B1D13062584406ULL, 
+            0xE94FA9807EB8D1B2ULL, 0x2EB84F95DB169A72ULL, 0xCE59F2C3DCF8BAEFULL, 0x732CE4CC0297E889ULL, 
+            0xAA12B2C66AE9889BULL, 0x924C671C2545DCB0ULL, 0x1D50DF2F27A94683ULL, 0xB0461C724B0EF8EEULL, 
+            0x9CD822BFD5D1E440ULL, 0x9DD8B98A30A5D829ULL, 0x0DF16452E6CF3C43ULL, 0xC9FFBD59D4084FAFULL, 
+            0xFB7F76E83223DA78ULL, 0x54B3D9F1EEAA0C25ULL, 0xB4F80D66740E02AAULL, 0x20143ED21E022F3EULL, 
+            0xB192A37DFCE9584BULL, 0x2FEE6B5D50A33C0DULL, 0xC3C6B7A11DED9069ULL, 0x84149CFAD68617E7ULL
         },
         {
-            0xAE0B7D0164555152ULL, 0x9598438E8A2032F8ULL, 0x73B68ED8B7879A4FULL, 0x7D9C0102FE6161C8ULL, 
-            0xF699F684D223051AULL, 0xD1FFD595A0D0F791ULL, 0x2B7B7ECBDB7D01C4ULL, 0x628E39BB85F43F94ULL, 
-            0xDF94F224BA35F779ULL, 0xC3E13EF466AC7E17ULL, 0x57AB70692D20BA91ULL, 0xD96F3017396BBF50ULL, 
-            0xAD0EFFF3765AB3EFULL, 0x1850BA5AA184AC5DULL, 0x6CA603309B983D6BULL, 0x6D45F035C966AC6BULL, 
-            0xF66DFCADB3EE0001ULL, 0xF72AC7427547E8E2ULL, 0x67F72C7205B1662EULL, 0x95F39BB7FF8924DFULL, 
-            0x6D4419BCCD29980EULL, 0x610DDEDA3A2C5EE5ULL, 0xABD30BA4A2246F14ULL, 0xE40C94FFAE6E9046ULL, 
-            0x9238392AC248DC48ULL, 0x1E434F8477472251ULL, 0xD0F09E57445D5119ULL, 0x76B4DD2B113A2BF4ULL, 
-            0x01DEC8DFB64EFAECULL, 0x39F82B10AC262F1BULL, 0x3AEDF59DC7129587ULL, 0xC483551A9963DC67ULL
+            0xC80B38BBAFB40449ULL, 0xD9EA04364719401BULL, 0xEC2A268DBD28AF43ULL, 0x24DD386FFAF27B63ULL, 
+            0x276A7DF5211DD4BAULL, 0x2CE77CF60AF91776ULL, 0x3427E8D08E42924FULL, 0x645D829B2C0F36B6ULL, 
+            0x68C000DF938DDD5AULL, 0x682331048C8200FCULL, 0xC14CDE755110B3C9ULL, 0x138B8ABEDF678FC2ULL, 
+            0x30D2E95A7E79B57FULL, 0x5A206D71EE06BA69ULL, 0x332499B487A76FF6ULL, 0x62D729DF58B20307ULL, 
+            0x29D75B205E68ABF3ULL, 0x2EC0D1DAF261BB82ULL, 0x5830041BA1111056ULL, 0xDE13C6346CC43AC3ULL, 
+            0xDA15AF35E0E7FC8CULL, 0x59BB1BAD5489B9EFULL, 0x1DEB606BF0E2D1D8ULL, 0xB421A36E137896A6ULL, 
+            0x349B0F8C2EE9A7ACULL, 0x0D4A7D2197467522ULL, 0x6FC8D42829784942ULL, 0xECCE73F5A8C1D14DULL, 
+            0x253AB060AAF35FDBULL, 0x2B5BD01E551C8ABEULL, 0x856A89CD58B547A4ULL, 0xE58806202137F85CULL
         },
         {
-            0x68E32BB668307425ULL, 0x2C06664448DA2ACEULL, 0x1A5AD3B478DF2B34ULL, 0x881113F9BBBDD613ULL, 
-            0x974FB5FC73EE1781ULL, 0xD39ADDA20704D134ULL, 0x3CFE7C9482F0A9FBULL, 0x4BDBF03AA6E186B2ULL, 
-            0x8C64801EC5BDD548ULL, 0x9CEAE848852C6036ULL, 0x3F2727BBC95C1815ULL, 0x45AB386BEA7AC3DFULL, 
-            0xF4536BFE65F1EC6AULL, 0xDE1EC83ED2A2C209ULL, 0xB654BAD01D9991CDULL, 0x669974DDDA766B38ULL, 
-            0xF2DC1D9B63AD2F5BULL, 0x9E33B7875BCA30E8ULL, 0x2E3F9C32FBE98EEEULL, 0x710AB261FF996BEEULL, 
-            0x28142FA256320335ULL, 0xABF57796062ECB7CULL, 0x0EB915E72939FD8FULL, 0xF4C3DBFF3AA4B76AULL, 
-            0x30FCDBBF8133D411ULL, 0xFDBDD07F28687553ULL, 0x0CF5B89B15DBBB18ULL, 0x6145D60C7C11879BULL, 
-            0x225344C2343DB379ULL, 0xC523D9BA157848BEULL, 0xF4F24CFD76F1D7DCULL, 0xB845D6578868249FULL
+            0xAEE670FE2774EF68ULL, 0xECECBF02855D4C3CULL, 0xE24C66AF2A1CA70DULL, 0x383DE2FFBD57768FULL, 
+            0x353540929044617EULL, 0xE50A24557CC502CBULL, 0x03DDC83C222EDD18ULL, 0x2623AB1AED645D98ULL, 
+            0xD3DFE7100E1D0542ULL, 0x7CB65814C65F60B4ULL, 0x31E06284BF715CAEULL, 0x5205AC0C9DBFCDC9ULL, 
+            0x60E5C252978D618FULL, 0x8F040E7F8DC08157ULL, 0xEBD0728ED557DD66ULL, 0xAB752017AC12F35BULL, 
+            0xBF58CC8E335C51D0ULL, 0x4658BD5019ED99BCULL, 0x1A67E6E3ABF1F2D0ULL, 0xA3CA5AA8CF2BAB29ULL, 
+            0x7B55695E748E8C6AULL, 0xFB0E1FE51E4CF90CULL, 0x0CF7366827498962ULL, 0xE267B896A48A36BBULL, 
+            0x17F76439237B55D1ULL, 0x2D581A15E34094C9ULL, 0xA66C60B7AE8195F0ULL, 0x9CDA8DDDEAC0E2F1ULL, 
+            0x45BDB9BA7557195EULL, 0xF8E03CA62E7675B5ULL, 0x0EF9A22CF62CBA2CULL, 0x711228516F21F570ULL
         },
         {
-            0x4066607A16829B77ULL, 0x77A09A09A55FF01FULL, 0xC3C1BE9B268C689DULL, 0x3A20E989754FBF4DULL, 
-            0xEE5BFB94EED92E96ULL, 0x206B0789C5657151ULL, 0xE40F8BD2195A79FBULL, 0x50288C843D80C6AEULL, 
-            0x853EDD2410BA974CULL, 0x872D1BABA0CFB610ULL, 0x611678E3F3710658ULL, 0x17AD13E0DC0C9E80ULL, 
-            0xEE0D6D41FC7CD38CULL, 0x31B6E01DE5CDDD13ULL, 0xD7E9434D10F0F92FULL, 0x08741E28222FFC75ULL, 
-            0x47D0CB97BA190D8BULL, 0x3E9974A4953B6DABULL, 0x651F5B52CC1E786EULL, 0x6859241EF0D1CDE4ULL, 
-            0xB716F22D1168CE55ULL, 0x07F5E7F69427BB66ULL, 0x7131A04F0E2BF6F4ULL, 0x55E486973D209526ULL, 
-            0x9EDCCEC73DBD0A0AULL, 0x921CDFA483A7AFEFULL, 0x7C34D0F1AFBF4432ULL, 0x357370D979464AD8ULL, 
-            0xC1F4278A805D9B17ULL, 0x4721C3E43953545BULL, 0x9BEA8C7966758C68ULL, 0x3AB17059F1EA775AULL
+            0xFFABAD07F3D4261EULL, 0xEC9FF2C081EF9066ULL, 0x0AF2E5B92BA2DDF5ULL, 0xB33786101BF8A143ULL, 
+            0xC15BB858A1F1F79EULL, 0x0927D3334A3E0F43ULL, 0xC92BE83B74DED971ULL, 0x921639DCA4FC6EB4ULL, 
+            0xEDF74A90B1311EA5ULL, 0xBD9837EC104397ACULL, 0xB794E188B7D959FFULL, 0x54D131CAF720DE10ULL, 
+            0x1A3C7B053515D265ULL, 0xA85D9A382A189AC4ULL, 0x3B04EEBD0E0A9582ULL, 0x2783B155431874D2ULL, 
+            0x1FBDD776FE590EFEULL, 0x560E9B20E0FE1E20ULL, 0xFD5778C436196AB9ULL, 0x3743409B01AA44C2ULL, 
+            0xCA557823FE7C3A92ULL, 0x5AFFFD94DDD8070EULL, 0xFF9A08B67EB00F48ULL, 0x3B46C046B3F0D66EULL, 
+            0xCC214A955F6F70A4ULL, 0xCD4146451968909EULL, 0xE7FBD37B3FF7CF10ULL, 0x030453F3E7D1C9A1ULL, 
+            0x3F8FACEDE6FBFCA7ULL, 0xFB74BA9867D30260ULL, 0x1B1E60202AFCFDC4ULL, 0xB354F57952F07DACULL
         },
         {
-            0x9A3DD192527484D9ULL, 0x6027C2195661FCBDULL, 0x47D4C515E36CEBDFULL, 0x68DD9ECB244813ABULL, 
-            0x72FBA55A6509C411ULL, 0x90421948717B67CCULL, 0xC442C0346F463F29ULL, 0xE1D2EB8041F476FDULL, 
-            0xF22C0AAED01F82C5ULL, 0xEED81F04F0C50884ULL, 0xCF03217295039214ULL, 0x781959C199572FC2ULL, 
-            0x5071E4A06ABF0412ULL, 0x7C65505ED95BF483ULL, 0xAEB0CB860EEDA866ULL, 0x1758D32B9ACE31C2ULL, 
-            0x0AEC7F4FADFF86D6ULL, 0xFB244DFCE73B54B6ULL, 0x6CF58984B3EEDD97ULL, 0x67E9751C8D72F657ULL, 
-            0x9FD3424D4B9C7D74ULL, 0xEBC49D10DAA3D964ULL, 0x79E70635662743C8ULL, 0x54D01C8724792ADBULL, 
-            0x59944AE7BC8E6AD5ULL, 0x0BFB6B4074847938ULL, 0x7110D62B10F1E5F3ULL, 0xFDC970BA8521614CULL, 
-            0xDC1A0C39A32BBAD1ULL, 0xB4635A521E905B69ULL, 0xD5E24640B6468549ULL, 0x352F9E7D8BFDB722ULL
+            0xB3D2318914B0DB51ULL, 0x626D718B0838B949ULL, 0x8CCE5D301E571A15ULL, 0x2ECA15D30D3B54D4ULL, 
+            0xA28CF4A6EAD3FD66ULL, 0x96222CA22EC2EF7DULL, 0x1A02774EF7531921ULL, 0x781C4EA3E7F55BCBULL, 
+            0xB17A5691AFD82809ULL, 0xF19F186AA0AFDB79ULL, 0xD6FF718503081EB7ULL, 0xC43CF5FB23CB4CB0ULL, 
+            0x42BCCA6EF2CC9457ULL, 0xC509AA46B21F902BULL, 0x8DEE75540B9340C1ULL, 0x26911BD9F6A6A4CFULL, 
+            0x8232E53C08786D34ULL, 0x4F84030AB51F56AEULL, 0x91A9726DE2EBD4FFULL, 0x904D519A40509699ULL, 
+            0xA39D1867A23B7783ULL, 0xA19A3B4E9C5C2121ULL, 0x62C72F4A862AD867ULL, 0x497400CB53F1CDAAULL, 
+            0x91361AE1D4BF679CULL, 0x1C7CAB7E222E8349ULL, 0x04B0C17143D645C7ULL, 0x5F4808FE8A90E5B0ULL, 
+            0x2D4EDF908DA7F823ULL, 0x51BD7E008320CEF9ULL, 0x93CCA0B04881BB59ULL, 0xA40171D3444F199AULL
         }
     },
     {
         {
-            0x5CA4E3F3D1B5AA0CULL, 0x52C69AAD0F55F2A0ULL, 0x341E043398624F23ULL, 0xAD01BE9B1B9AFD29ULL, 
-            0xC18D524F740727E2ULL, 0xF59132C07C4B0B42ULL, 0x71A750617AA14001ULL, 0xDDBF8A014A24430AULL, 
-            0x3135C0CD19CA5D08ULL, 0x154EE3439BF93C19ULL, 0x999F39CB701E26C6ULL, 0xA347B37D190CEB26ULL, 
-            0x28FA9399784660C7ULL, 0x53878E834FEFF728ULL, 0xFB1CE17BCAC59977ULL, 0x45E2E7456A34AFFAULL, 
-            0x0F1A681E2DADAFB8ULL, 0x8233D9333DAD8192ULL, 0x99200CC4F2851333ULL, 0x6907E98B1602A14BULL, 
-            0x89E581A1D48416D7ULL, 0xF5B0ED3AABF77867ULL, 0xFAC2ACB45084DD71ULL, 0x8576F9CD7B24ACBEULL, 
-            0x7705A31DC4FBCAC5ULL, 0x89A30E04B1EB5A81ULL, 0xDA7C128F20D653E1ULL, 0x3FB2319DA4F6C8DFULL, 
-            0xB3C6F171C783E51EULL, 0xEECEB566660A4527ULL, 0x33A87F0006C8C671ULL, 0x13CCF2014980B57AULL
+            0xD71513C91B2E4929ULL, 0xAB987CB91A4E6B34ULL, 0x2519287812FB72B1ULL, 0x01070AEE1D46A641ULL, 
+            0x7AA3DC25EFE20A3BULL, 0x2532EF110B4023B6ULL, 0x5ACE3C20AC48A422ULL, 0x004905A22DCF9DA0ULL, 
+            0xF9D9F5AFC9C87E97ULL, 0x8300189774E37016ULL, 0xE7747714D1DCCDABULL, 0x96D1177E261DF524ULL, 
+            0x28EC3C545B352983ULL, 0xA875404A36772F4FULL, 0xCB01D1D89C732DFDULL, 0x0144BD36B6114AD0ULL, 
+            0x42C31AE9C34F7DEAULL, 0xEE514D891711A553ULL, 0x8F5C85EA12257487ULL, 0xB5B28497CD4AC373ULL, 
+            0xDF93DD1573ACD668ULL, 0xC77A1010D9AEBEABULL, 0x9651B1FACE8B20D2ULL, 0x3F50E19AE8F368B6ULL, 
+            0x24B142AD570C1B89ULL, 0x3B70742151EE6EE5ULL, 0xD26D69A941F3FA1BULL, 0xF0287E576418504AULL, 
+            0x7EF59D63C60823E2ULL, 0x92BF7A1F10E8E086ULL, 0xADA24471EB0E4CA5ULL, 0x771E8B14EBD61035ULL
         },
         {
-            0xC38F90355852A1D1ULL, 0xB32C9E1F4B425184ULL, 0xE7160EF987F46FF9ULL, 0xD4B28CFA09224E2DULL, 
-            0xE4A2E0D89A518903ULL, 0xB34BE8E3CA20B8F1ULL, 0xF54CB669EC3FE8A2ULL, 0x02511311F5ADC9A9ULL, 
-            0x3392334EAA9095D5ULL, 0xE9CC64287A11F347ULL, 0xDEB91C6984EE1194ULL, 0xBAEB3397465D3970ULL, 
-            0x95B87B2F69B49473ULL, 0x1C7F5BA74B85E633ULL, 0xB0D8E9F5A9BDD0E6ULL, 0x70AF024529FA568BULL, 
-            0x5FD8C048F89D4D26ULL, 0x5C9B21120D60086CULL, 0x49CCD279477FD3DDULL, 0x9EE949F26871A2B2ULL, 
-            0x668AE2A36A070B1AULL, 0x21045DED9AED6B5BULL, 0xC81F810CFE0D1AB0ULL, 0x64D46223295E38D4ULL, 
-            0xD1DB2073C1625DB1ULL, 0xD0C73C62A7CA2792ULL, 0xD6AFAF44E5419670ULL, 0x5121E9C7C99FBF8AULL, 
-            0xA540469029A76B67ULL, 0x2E76C89D3710D187ULL, 0x5076385198AFF57EULL, 0xDAA3824F0DD4D141ULL
+            0x26E1EB5B18274EB6ULL, 0xD53AC80B06A88D81ULL, 0x76882744F46F17B8ULL, 0x2706F8762873456EULL, 
+            0x871666A20A2D569EULL, 0x8F7640F14814B45EULL, 0x5F835A2C5D00A39CULL, 0x54DCAC27C24E0CB3ULL, 
+            0x7C5939E0C4C4D21BULL, 0xB17B53531F01DCE4ULL, 0x11AE5BC4FB1BE5FDULL, 0x8CE328357027601CULL, 
+            0xB8F96CF4DE18FC61ULL, 0x1D24B58B31865977ULL, 0xD2784CAAD72944DAULL, 0xD3E74A22E06630CCULL, 
+            0x6B65800193401BCEULL, 0x93D5C49420521BC1ULL, 0x9D0B973E80FF9DB3ULL, 0x29DACDA6CC31B5DCULL, 
+            0xABC84E85FE85BFE4ULL, 0x1DCB3248FFC65DDCULL, 0x83DE1AE7622FA7E5ULL, 0x946914538A1FE79AULL, 
+            0x829B4CD88AF4D25DULL, 0x7B60796D2E4A37AEULL, 0x86CD09FA49E35A4DULL, 0x1D21CF3E9799B87BULL, 
+            0x2B882B0B4E9E9591ULL, 0xA5A726102EE16DE0ULL, 0xCA12F41752827F98ULL, 0xB3DF7D15764244B3ULL
         },
         {
-            0x3D37A41FF4F89564ULL, 0xE6D58670E30A93BEULL, 0x207AC19F9B4D653FULL, 0x301D8FBD40079D01ULL, 
-            0x40000B2E334B4CACULL, 0x37E712894FCEA10DULL, 0x32284B28E5A1841EULL, 0xD90D1403EF61BAD7ULL, 
-            0xEC221476BA9E7A7EULL, 0x41470C69F60FE476ULL, 0x6D25556D7A9B80F5ULL, 0xD47A956E9FC62B4CULL, 
-            0x9465C074024FE132ULL, 0xF0D026621E4F6C79ULL, 0x13B82A8AFE633CFBULL, 0x1F8F29CA339C0648ULL, 
-            0xD78179D609CAE1B0ULL, 0x3EC45DD9B388B351ULL, 0x5974E72B71EBCBB3ULL, 0x84C9B4470D51CAD8ULL, 
-            0xD3DBEC8D20CE8CC9ULL, 0xCD2A5823DB56327BULL, 0xE6DD95EDA59664F2ULL, 0xC834E3FFF6A3A219ULL, 
-            0xF2DDE7B7E965A2E7ULL, 0xCC9A9E8C57D8885DULL, 0x271FD45D1ECA8718ULL, 0xA7E28B74E1DCBEEFULL, 
-            0xA76D11B1D5328F04ULL, 0x623DC08A0A764D5BULL, 0xED9032AAB88689D5ULL, 0x50D9D16715811029ULL
+            0x6652E7709CF8DE3BULL, 0x48FA2C4305D549A2ULL, 0xA4106741570C31B0ULL, 0xCECBD742D50EAA90ULL, 
+            0xAACF5E4AA896EA6EULL, 0x3DDA747A74CF7DA5ULL, 0x74A44E3B2DD023A1ULL, 0x4D3E9FBDE60D6A7DULL, 
+            0x85FE1BDAB34523C4ULL, 0xE43A2ED68E315193ULL, 0x3E915E09E27C3B32ULL, 0xA0E55FC6B5DF0A25ULL, 
+            0x49B50BF5045DA21AULL, 0x22CB0D50705AD33CULL, 0xACB6FD933096AC82ULL, 0x4CB21A8B483D078AULL, 
+            0x638DED748B5F29E5ULL, 0x037211B8389D119CULL, 0x67894222CFB92BBDULL, 0xE2E98C436D1070BAULL, 
+            0x63C7664E737793EBULL, 0x9725491CCD93DE15ULL, 0x170EFFEDA634BB69ULL, 0xEC4EBAF5D2C4DE79ULL, 
+            0xC6C1CED355142ABFULL, 0xC0CE45E38B8E1F45ULL, 0x3CD3AF026F14695AULL, 0x76AA43AACDC5EE97ULL, 
+            0xCB4AAE2EB0EA0CD0ULL, 0x9DCC89BE8A35E826ULL, 0x31CD20FCEDEFAEA7ULL, 0x5D38F2372267DC65ULL
         },
         {
-            0x8E52894475BA5385ULL, 0x56E7E5E1768D8E62ULL, 0x01BB352D696CF7F1ULL, 0x74016B5723E75B1AULL, 
-            0x31CACA97828327A5ULL, 0xF3626686373EEC86ULL, 0x791FD093619F7CC8ULL, 0xCFC4A06B75F9E4F1ULL, 
-            0xA611CF9E16F96E5DULL, 0x9AC74663B1E635C5ULL, 0x9A9301BDC47883D5ULL, 0x20629A722EE9FF6EULL, 
-            0x93DC846ABE79AE77ULL, 0x07FB91611CD5D86EULL, 0xE4A69DAA11D13219ULL, 0x2132F1475F7B375CULL, 
-            0x46692B6A0796175CULL, 0x31F7B705917B19C3ULL, 0x13CF17B98068BF71ULL, 0xE6467F25AA701A23ULL, 
-            0xAD87369570ACEA6AULL, 0xBAC3BFA829ECC6E3ULL, 0x60A6DA999C376627ULL, 0x16948C51783835A2ULL, 
-            0x2B997DAB75073347ULL, 0x05060F914069955EULL, 0x668236F131FAE9FAULL, 0xB621CAC0B5E73E99ULL, 
-            0x10234C1D4C312570ULL, 0xE63D88385279208CULL, 0x2FB003B98CCABAE7ULL, 0xA0F6C5D393AF2470ULL
+            0x5DD7F51AD4413A04ULL, 0x8095B7984C81C617ULL, 0xF56539B6F2486814ULL, 0xE95844357F496D14ULL, 
+            0x41A12553A6154456ULL, 0x728D6F332F1C7863ULL, 0x459FCCA06BCB3FDDULL, 0x484754BD838BF3F3ULL, 
+            0xEC3C3B4DBC31953BULL, 0xDEC828322315A254ULL, 0x9FBFD6D77F222382ULL, 0x52F05EAE0D9DFFD5ULL, 
+            0x3B0DD405059951A7ULL, 0x17884F879D16CC2FULL, 0xEE9C9AD0164F7697ULL, 0x3F0B53E541A7BFE3ULL, 
+            0x0B2F5F864C81353AULL, 0x7F4951C270762A1BULL, 0x7D3E76EF03864027ULL, 0x53747611CA97A043ULL, 
+            0xD8D5A02920AC6DD4ULL, 0xCF3212417B2B9611ULL, 0xEBD552B28CF31113ULL, 0xA1DECB489BB3189FULL, 
+            0x199E691F18F7D056ULL, 0x44343F84F61B37DCULL, 0xCEECB30116E42F7AULL, 0xE86921E87A51074DULL, 
+            0xB1254BE57578DEC1ULL, 0xC132C07777F3860EULL, 0x0DFAC73F696BD059ULL, 0x689249AE3CA88788ULL
         },
         {
-            0x05087669039537DFULL, 0xB6453462CBCF0083ULL, 0x0D30A4B6F1845628ULL, 0x45076718CE103B08ULL, 
-            0xFE1C12E02277D709ULL, 0x5EB107BE3BB5183CULL, 0x2FC7977088B082F0ULL, 0x8C99940BD0240A3DULL, 
-            0xA8F5F0374116EC05ULL, 0x80D4DD62E7CA1BA8ULL, 0xDE5D6236D221740FULL, 0xE59EA2605201457FULL, 
-            0x9845AFC3A51C7C2FULL, 0x8437E0B115984104ULL, 0x0D0E756863CE2F24ULL, 0x03446CEF254159F4ULL, 
-            0x1A7FE0D78BF20CCDULL, 0xEA744569765120F6ULL, 0x54F0B2F0AD472BE4ULL, 0xF4B9490772D3A337ULL, 
-            0x29FEF4F221345557ULL, 0xB3F28B4BB4CB8199ULL, 0xEA180B65120F357FULL, 0x2702326D7E9015C2ULL, 
-            0x9B7F87CDD2582D5EULL, 0x1AD939650322A45FULL, 0x12DDCD64AFAE9337ULL, 0x889F31A756FD1FF7ULL, 
-            0x860030A65231F7C6ULL, 0xDEBB6345B17FE0E7ULL, 0xF74EC6DDE5737F39ULL, 0xEBFBC64DD2686617ULL
+            0xD939BE7AD4D91063ULL, 0x2B2CE8FD0337166FULL, 0x7B3D4AFDE0E3F518ULL, 0xD9744AD15F7BAFE7ULL, 
+            0xC5BF10CD1BAF0E02ULL, 0x710BA0DBB529B049ULL, 0x760CE71202500A99ULL, 0x08E494CDDECB24ABULL, 
+            0x1A3F341D51ACC3DDULL, 0x91950551A85A1662ULL, 0x21436793481A0C32ULL, 0x848F365502EC9355ULL, 
+            0xEB15DF4CF2C1F2EBULL, 0x5698BFF5B7D39F5CULL, 0x4D06E73B1A1A56C8ULL, 0xD523542F2AD67112ULL, 
+            0x55B4E0FBB4EF2340ULL, 0x70DAD7C382383D2BULL, 0x2306B91C13839B5BULL, 0x108E7397393D574EULL, 
+            0xA4025349216B33BEULL, 0x4F17802D46D9CA97ULL, 0xD3BB09B23D73E1DEULL, 0xC0488ACCD3384D89ULL, 
+            0x11104932B5DC1817ULL, 0x1546D4DFF746B7B7ULL, 0xE4C5BAE95F3169C0ULL, 0x30E1D1E06F65CB63ULL, 
+            0x7716375D7B38D21DULL, 0xFEFF1E0C7448BF63ULL, 0x08051839B8A2565FULL, 0xA8EC32CD2C091D47ULL
         },
         {
-            0x30B6AEC69D4C012DULL, 0x687C5EDC2EBB88FEULL, 0xDBD04F59E3876DA6ULL, 0x4235EE762567C535ULL, 
-            0x2923221306BB7FD8ULL, 0xF099E76992F07532ULL, 0xD5AEB2A0878CD4C1ULL, 0xD3EAA5F5A6489A57ULL, 
-            0x125457929C2E734AULL, 0x46A311506AD1B17AULL, 0x8D2CF0D869B90DDCULL, 0xE681411AA5C6434AULL, 
-            0xD8054AF1E63C7955ULL, 0xBA106172DA2E76EEULL, 0xDB1EEC09C653353FULL, 0x48941413E539337DULL, 
-            0xA48CEBFEB649DF58ULL, 0x63F3C9F5789A0D01ULL, 0x96927014B880DED5ULL, 0x04CBC16B69756B3CULL, 
-            0x820BE65A92BDE429ULL, 0x8AF9724FDB0A888AULL, 0x7B4F5180D40DB877ULL, 0xB27A3EDA2E542CEBULL, 
-            0xD89DF2E738A85E66ULL, 0xBEC7C65848B4BE73ULL, 0x13145407C9220783ULL, 0x8F0952ECC5522148ULL, 
-            0x31D60D9E1B0CB48CULL, 0x8E5242E45B1D7FA2ULL, 0xCF3665803398CAB6ULL, 0x54E35F9BC12CB127ULL
+            0xC35005A76CD7212FULL, 0x8189C9C435C39C2AULL, 0x3E3D36EFBBE512B6ULL, 0x76860E2D6B59E2EFULL, 
+            0xB47F5689B2003E00ULL, 0xE054CB07B8B7CE9FULL, 0x3BD616E428A04519ULL, 0x20DB53604BC28F99ULL, 
+            0xC629285CEFE0639BULL, 0xA2FCE11C9B35D46CULL, 0x71B5D74EBEBE3352ULL, 0x3E7AB720A6730F83ULL, 
+            0x6A962672F61F0763ULL, 0xC9092A2341A2417EULL, 0x3E29992CDCB76E4CULL, 0x0F15B084541D1F1BULL, 
+            0x22940993FEBCCCEAULL, 0x31BB1FF6FC7D99A6ULL, 0xB46AA84453CA111FULL, 0xC537A84774514F82ULL, 
+            0xC86A15160867B4A8ULL, 0x5FD666DC6BEE5D3DULL, 0x1B38304E5383A374ULL, 0xB5FBBA631AD5E76DULL, 
+            0x6A626C6462E68C0CULL, 0x62E05FCD500286F2ULL, 0xB9B9FD5A59943F3DULL, 0xCDC905338E74FA1BULL, 
+            0x32BFF63C1090E33BULL, 0x72C08564D270ACE6ULL, 0xA80BE7FE43959227ULL, 0x32114CA6D7B20F9CULL
         }
     },
     {
         {
-            0xC9D31CE7A2258FA8ULL, 0x7169F68CE905942AULL, 0x50F038BA80E7D505ULL, 0x174E4F7AA9284F42ULL, 
-            0xF9F1D7EFD6C1BFB2ULL, 0x32B1292FACD0AB57ULL, 0x7448A7C0DC5C26D6ULL, 0xF5AB4283C70190B3ULL, 
-            0x2A37EE3FA9A365BBULL, 0x1BACC4B5A79D0DB1ULL, 0x9ECC084A4C07FA1BULL, 0x86A04EB2D30FAC11ULL, 
-            0x9E39DE8DFCAC93C8ULL, 0x8045AB3ECD22986EULL, 0x3AE1AACBAF9E850CULL, 0x423A7DE56F9D7F5BULL, 
-            0x1B5941353ADD9B45ULL, 0x7FC787A1B61FA513ULL, 0x8E3DAB43249816D5ULL, 0x4CBE59227D085707ULL, 
-            0xF872624E9994CB35ULL, 0xD0C93B0BC106CC74ULL, 0x70DF5BB48F5A2159ULL, 0x92D7D23C47EA13B0ULL, 
-            0x46B0C344CFC923D2ULL, 0x9CA0DEEECA2AB27CULL, 0x29D6B29C7C3A6463ULL, 0xD0384146570ABA43ULL, 
-            0x871D22D62C02EECAULL, 0xEAB15C54BB9A4F69ULL, 0x02FCD2A8891C29D1ULL, 0x5CF88F2F351A1449ULL
+            0xCC322D679BA90AE2ULL, 0x648AE0648CDE5CDFULL, 0x3A8213132D7822B7ULL, 0x7B9CBA52A3DF6A8EULL, 
+            0x7972D8BD7C88B73FULL, 0xA68A2265FA191016ULL, 0x3A1BF5157BEBF14FULL, 0x0EFD588AC9E49CEDULL, 
+            0xB242D4BBB2AB9C2DULL, 0xD590BE58F6110D36ULL, 0xACD0C3A22785CC41ULL, 0x829BF2EDDCC9604BULL, 
+            0xE80B035305B19C52ULL, 0x2D7BBB2E910CDA3AULL, 0x99B2750F66E3F66EULL, 0x93609DA700C425FEULL, 
+            0xC4E8EEA8B64E18FCULL, 0xAC3B01EF57BA35D3ULL, 0x09A85AC1CA8EFC82ULL, 0x52FAB6763E0BF823ULL, 
+            0xF41F99D14FACABCBULL, 0xAB851448028AEF33ULL, 0xFA8CA21E2769F4FBULL, 0xF3520BEBE5B770BFULL, 
+            0x1CCB877F5AD2E6AEULL, 0x124C02994ADDB275ULL, 0x832CFD7C3FDA2419ULL, 0x86A341322C8F9AD1ULL, 
+            0xA8B698FC5560B9CFULL, 0x74EAB493045DE40CULL, 0x27232C455EF2C9BCULL, 0xDF917DE649C09C30ULL
         },
         {
-            0xBDF8996D8C240CA3ULL, 0xA70786740DD59D70ULL, 0x330CF5757FE9A6B7ULL, 0xF8BA27A2F2A3018AULL, 
-            0xAAF92E40CDEFB06FULL, 0x917D5192F8A83559ULL, 0x31FB7A9978ED91ECULL, 0xDBF32D7965B6B128ULL, 
-            0xCE82FF030262033AULL, 0xD781FF1A1B462D6CULL, 0x232767CA8340A27DULL, 0xD22AE6B45F6F1FEEULL, 
-            0x2C7D4FFF0B569090ULL, 0x968B4E87E9F5632DULL, 0x16FF54ECD183FF8BULL, 0x7F22A8326C69C306ULL, 
-            0xA60A50CBC7016985ULL, 0xB2FDEF3A2E406098ULL, 0x5FC020F9F5A5294DULL, 0xE5725EFD6B0603C0ULL, 
-            0x6A80A9FE1CAA1EE0ULL, 0xCA12E997297550F5ULL, 0x6ADFD893F4720D32ULL, 0x693F5609809F6085ULL, 
-            0x591372FF0905C675ULL, 0x4D87C7F2BDE46971ULL, 0x2913B2D83ABD3A6BULL, 0x9D69B4065B3EE71CULL, 
-            0x6E2DFA9920C1DDCDULL, 0xB7F3DA213E1E4332ULL, 0x8F8A408CD042BB44ULL, 0x36516455A8F22A97ULL
+            0xD6F1D600847B93E9ULL, 0x33701E25EE440440ULL, 0xB4FADBC8013A4013ULL, 0x08FD5B4D83A3DEADULL, 
+            0xA048518BBB80AB0BULL, 0x2792D8FCC88F325FULL, 0x32F745E72F11C907ULL, 0xDDC54A72E44B46DAULL, 
+            0x5CE9F5FD64BEA849ULL, 0x653C669F161F3BB0ULL, 0xA097E07804334BDEULL, 0x9E637B9E7EE1C61EULL, 
+            0xB47FDDE67A17D26BULL, 0xDDA458021E877CE9ULL, 0x04D160F7A444BB6CULL, 0xEE57CE17ED4000F7ULL, 
+            0x4A693D22E96942CAULL, 0x00E77A74A324D9DBULL, 0xA9B84DD32E771C33ULL, 0x410D66712CEFA874ULL, 
+            0xF5EE02C777A0595DULL, 0xA71A9A66FCB27169ULL, 0xEA08E94A1E1B1789ULL, 0x94A0827624F2D7CBULL, 
+            0x0DB7ADC9173040E8ULL, 0x78E4B9DF9F663E5AULL, 0x73C22C859E3CF66CULL, 0x9594E38B34DB7B03ULL, 
+            0xE12B2FCEA9CF4A1BULL, 0xE175BBA0DDD76EFAULL, 0xA0ACF0A5298D889DULL, 0x12B441E1D0974E40ULL
         },
         {
-            0x789D18A7AE591267ULL, 0x3C887B0D7C33A73BULL, 0x2F20C5B9FFC973ADULL, 0x54AA85DEF4D4324DULL, 
-            0x1B3F5E851B827FBEULL, 0xA21B4403C82EF023ULL, 0x002AA550920DBC29ULL, 0xE07D246476672097ULL, 
-            0x8A67753FC575A17CULL, 0x5123C9BB5EC5275BULL, 0xE26C2B171B426BDCULL, 0x5D6EB3248094630FULL, 
-            0xE96755470511D2AAULL, 0xD38CD72EDFDFC56EULL, 0x1B53388D392BE2BEULL, 0x8FC42AA8C9C42CFBULL, 
-            0xDEE12585562C4254ULL, 0xDB2BE4E06B015271ULL, 0x06FB4213FC4DB4A2ULL, 0x0751C308587594DBULL, 
-            0x937FF0A0A02B7230ULL, 0xD1CF223936A64EA8ULL, 0xEE43498BF994D6BDULL, 0x5A0ADC3C06A4D034ULL, 
-            0xEC38D5434F4E6C78ULL, 0xE9BFD01928EB2D82ULL, 0x95879025480AE914ULL, 0x1BB4811383BBD810ULL, 
-            0x4A3C463257B97DEAULL, 0xEA4081C55BE458E1ULL, 0x94407060F4241947ULL, 0x5B9704D2F1F2A499ULL
+            0x06A0C5735ACF0800ULL, 0x2F009B07212271D8ULL, 0x07B646D27580FD69ULL, 0xD342460C784C768EULL, 
+            0xEC06B5F5F678C7E9ULL, 0x2A920D488954AC91ULL, 0x9CA24C4DBBA267A1ULL, 0xB08C0D03CF903D1EULL, 
+            0x97CDE0F062DD21A4ULL, 0xD34B5AB6EC8C9405ULL, 0xE487BC4C4BE9B4CCULL, 0x2049805196C30E92ULL, 
+            0x9B4C3CA1F184B6D9ULL, 0xAB0BD613F0FCD375ULL, 0x6C05C37FFD9563B8ULL, 0x4B73EC9E2985F8D6ULL, 
+            0xE4D534DE9352EF1CULL, 0x48754485CDADCCE1ULL, 0x384E40C13CA1DC5EULL, 0x73BAE9B4C6A281C4ULL, 
+            0xD2B9B2DB5C4418ECULL, 0x059E94A736C0D9C6ULL, 0xDB33420254C674F9ULL, 0xC4793BC97EA6BFA4ULL, 
+            0x751DA5C1D04C2B17ULL, 0xC6AC92ACF7D0C470ULL, 0xA0D39F03B0DEB3BCULL, 0xDCE5FA5C766E826DULL, 
+            0xCAEADF8E8999D3DBULL, 0x4F63D195D62662DFULL, 0x3A0F7AAC745B8278ULL, 0xDFF07D11A4E413CDULL
         },
         {
-            0x8B0520F4B06D9620ULL, 0x5BA5426686AE9B0DULL, 0x65BA0B96A4D4567AULL, 0x46467D60BCDD9B83ULL, 
-            0xF70D95E78FE45D98ULL, 0xF5FCDB2B1FF6F771ULL, 0x08B94628C55564A2ULL, 0xECCB09DA76D31B4CULL, 
-            0x864BB459C6F8525BULL, 0xCD63B4AAF8BCEF05ULL, 0x772F2E610F07805CULL, 0x5494F6E65A7649DBULL, 
-            0x780478F569C37BEFULL, 0x741037370264AB3AULL, 0x6EAFDB042FBFF3F8ULL, 0xA25A7EA60FF324B7ULL, 
-            0x8AFBEB9E945AF9D0ULL, 0x729C7F6080B9721AULL, 0x100C1BAA37FC208AULL, 0x586488DB4C9EF86FULL, 
-            0x89C09652E14D340EULL, 0x388BF4A6222A4EDBULL, 0x598321E8E9FEF1B7ULL, 0xED91CB851B9BF89EULL, 
-            0x3C682C794E24CD41ULL, 0x5A9E2A1AE7EA3E4EULL, 0x5BF823C3DC83D365ULL, 0x5C69F0CBB4214030ULL, 
-            0x70C3B3F1CE58BCF6ULL, 0x21246CD65BF8A584ULL, 0x47C2082290EB712CULL, 0xE3D1AAD0D79D55E4ULL
+            0x052AEBE2943CBD5AULL, 0x04C4C01F1F2AFBBDULL, 0x11EB3A9A516C0A5AULL, 0x7D7E3E2C9B59CE79ULL, 
+            0x7B6A3C87F62BBA4BULL, 0x8951C067D88D1EC0ULL, 0xF57C54DBEA458714ULL, 0x4ED83D3525B58541ULL, 
+            0x02D4B4D8F9868E34ULL, 0xF2312B3C8407B1F3ULL, 0x071F43368BFC852AULL, 0xA4DB6511C1EB91E0ULL, 
+            0xEA3131CA43936ED7ULL, 0x77BF929A6F56FFAFULL, 0x388012DD57D72C2CULL, 0x53041BD87416701BULL, 
+            0x2BF24E6B936CADFCULL, 0x348CC9BC8973D21BULL, 0x4F1E552919964B01ULL, 0xCC9C946EEDC66428ULL, 
+            0x6D033F8BB841B8D1ULL, 0xD2F2B6DFD75CF820ULL, 0x3921D2EBEF5C51FDULL, 0x4373F97DF95DDB0BULL, 
+            0x3611E2C7A40DE93CULL, 0x0DA74257AC1558C7ULL, 0xBDD0517A5CCA40F6ULL, 0xAB69BA93BFE1D9EBULL, 
+            0xAF4349C2F5C78AEDULL, 0x329FC7A7E180D537ULL, 0x5B4782895A16BE39ULL, 0xE960846DEBE5C475ULL
         },
         {
-            0x86E19EF9535D5086ULL, 0xF2FF7B8A6D8FDE21ULL, 0xF0349DB56776A3EAULL, 0x56C09897D9D62276ULL, 
-            0x3E342D271BF9BC8AULL, 0x5FD48C77A1B1A31DULL, 0x5CADDAA318026CCEULL, 0x2B1FD436321627A6ULL, 
-            0x8A5A4558ACB21785ULL, 0xA6F935452F83A0F9ULL, 0x86F856530A805B9AULL, 0x444831AF826E660FULL, 
-            0x27009AD4EC3CD7B6ULL, 0xC89D5891A8422231ULL, 0x3A0792C43964EE9AULL, 0x491FC9E9A17C82BBULL, 
-            0xE994F7935EC10571ULL, 0xD20656314F501364ULL, 0x68DC84E570164AA0ULL, 0xF7758040F051E38BULL, 
-            0x77D42BB0F9987566ULL, 0x1AF61E95BE5015B0ULL, 0xD074060EE82C09CFULL, 0x095572BCEB758FF3ULL, 
-            0x1685D05F770E9C6DULL, 0xA8144DDD23E57389ULL, 0x834429CF99CE96CEULL, 0x45F0EE4BCE720778ULL, 
-            0xC602F63A37EFBB44ULL, 0xCEE0EDDE3D2D6F0DULL, 0x73E9C0A73FE13248ULL, 0x4B1A140F76ED9C30ULL
+            0x9DE9A9EC11FF6774ULL, 0xA6E66DCBB382B6F2ULL, 0xCBA2E1272BB7E6CEULL, 0xC2E92E5C13891F46ULL, 
+            0x045A7CFC0649559BULL, 0x7AA32812B4EA26FCULL, 0x6F6BFA97E35BF6BFULL, 0xDE941B56C9DA88D6ULL, 
+            0xE3E9BF678291D557ULL, 0x1F812C8197DEF9DDULL, 0xBD1236ABE353726CULL, 0x1DE39D823F565891ULL, 
+            0xCB0E36D2B52EE062ULL, 0x6091538D2EEB827BULL, 0xF5034160BA11286AULL, 0xDE575A655482E316ULL, 
+            0x3359B09F7716ECCCULL, 0x6CA1855510CD3210ULL, 0xB48223500535AA57ULL, 0x81665E16E9395F5AULL, 
+            0xC555A35AC3565FCAULL, 0x53C7F68A06700EFAULL, 0x22211A660EE06E34ULL, 0xE72AD8C8AFEEADF4ULL, 
+            0xE4066B13E729CA6DULL, 0xA7C72338597CEC1CULL, 0xB4170A512F2BF8BAULL, 0xABB5485315D0DFB4ULL, 
+            0x01E07318C6F6EB07ULL, 0xE1F8E2ECCD9ABF2CULL, 0x09FDFC033D71A679ULL, 0xC19365ECA17D04E4ULL
         },
         {
-            0x779C8D3FA9DC2822ULL, 0xE507E2D9473C2D11ULL, 0x6F5E7DA36E7AAF98ULL, 0x7474BE3EBFAFF2F2ULL, 
-            0x8FEBD17A48C0932BULL, 0x1D77666567AA91FAULL, 0xC19AB8C87859F3A0ULL, 0xF21A1073346B22D1ULL, 
-            0x93765553B7F7C1BDULL, 0x11B058AD5BF5CA1FULL, 0x80758E20C159EF20ULL, 0x2EA02D8C47A4A3B3ULL, 
-            0xC926BE7B6BCAF0DAULL, 0x072C092B1830CE77ULL, 0x6EB005562E95ED21ULL, 0xDFFA954241C1331CULL, 
-            0x78022EA352B42D1EULL, 0x6ABAE406A1C0860DULL, 0xB122F55E55EF1338ULL, 0x066082A97548BDEDULL, 
-            0x89EA8812A1ED0D85ULL, 0x86C0031A1D11C326ULL, 0x121999E0B777BC65ULL, 0xF90BDF06D2277984ULL, 
-            0x7798CB43D65E4E9AULL, 0x6DF5193B02168968ULL, 0x0FEB4E43C08A037CULL, 0xF17E54CB4368EED7ULL, 
-            0x87C87CCF926A13B3ULL, 0xEDA2815C37142A27ULL, 0x4ED175DA4779F338ULL, 0x51BB2F8EB486F731ULL
+            0x590C4CC1FDCE89AFULL, 0xDB0857A9BA84E2FBULL, 0xEB4EA4A6BDD5F84EULL, 0x26742FE885787441ULL, 
+            0xAB6A1A8D64892597ULL, 0x7434EFF8706A0608ULL, 0xF2094E3102ECB4A3ULL, 0x13A8FCE980418990ULL, 
+            0x0CF5ED16F7F55C8EULL, 0x2FC2DAB966B015EDULL, 0xC90E923EE7F37F95ULL, 0x2162BF1E20B06933ULL, 
+            0xBC89FCCA4EA8CC25ULL, 0x954ECDF4396E524EULL, 0x12C24CE0FB8F0A6EULL, 0x2F799FDE5299280BULL, 
+            0xA4F4259184E51CDBULL, 0xB8B07359E12551BBULL, 0xDD966215265E6317ULL, 0x02776C2E4C118C90ULL, 
+            0xE6D6ADE04D89B765ULL, 0x92A6677688191EBCULL, 0x6206B73763443BDBULL, 0x045B8DA8CCB315A1ULL, 
+            0x0FF1CAD646B2691BULL, 0xEEA140CADA841A7DULL, 0x69B01BE31982AB7EULL, 0x07637FC92C3A83FFULL, 
+            0xF05C6CE66974AA29ULL, 0x3720F4A850A6294AULL, 0x4FDAB14CC65B8868ULL, 0x214859144D5FA35CULL
         }
     }
 };
 
 const TwistDomainConstants TwistExpander_BasketBall::kPhaseDConstants = {
-    0x447E431375B37DFCULL,
-    0xC1C509093FCF6689ULL,
-    0x063B683A046B52B6ULL,
-    0x447E431375B37DFCULL,
-    0xC1C509093FCF6689ULL,
-    0x063B683A046B52B6ULL,
-    0xF59180343E351370ULL,
-    0x69527A2E24AD5635ULL,
-    0x62,
-    0x07,
-    0x62,
-    0xB6,
-    0xE0,
-    0x87,
-    0x87,
-    0xA5
+    0x5B836D9A40828984ULL,
+    0x93747448A9E1B061ULL,
+    0x434D52B74A624B3BULL,
+    0x5B836D9A40828984ULL,
+    0x93747448A9E1B061ULL,
+    0x434D52B74A624B3BULL,
+    0x6F94164A2959A2D3ULL,
+    0x4A3995C98BD5DEA2ULL,
+    0x91,
+    0x58,
+    0x4B,
+    0xA2,
+    0x58,
+    0xDC,
+    0x33,
+    0x23
 };
 
 const TwistDomainSaltSet TwistExpander_BasketBall::kPhaseESalts = {
     {
         {
-            0x29E1C0C90E85B54CULL, 0x53DF2B99295FE567ULL, 0x0106113FBB171F3FULL, 0x910FF88E5765A2D5ULL, 
-            0x4669E0AF8583C7D3ULL, 0x5945A606F2AABD8AULL, 0xB3195758D8EA6400ULL, 0xA60EB7052A5ECCB6ULL, 
-            0xCCB7E6A09CDFEE85ULL, 0x8A74D0FD0EB55ED6ULL, 0xEB70DA03F58B6AB2ULL, 0x45403DE222EDC34BULL, 
-            0x424104F9969A31D6ULL, 0xD724BB65660A3B48ULL, 0x2F0C9DD20C308487ULL, 0x1393F60D661BF851ULL, 
-            0xF235A0F903495F45ULL, 0xF8A5BC650843FE29ULL, 0x76DAD1B519AF8C5FULL, 0xF728A62EBDD60F48ULL, 
-            0x39EBDFA0D4A97F7EULL, 0x25E8F48D74CCA442ULL, 0xABA89BC241CA8517ULL, 0x2F2C495E27D99BF3ULL, 
-            0x23B102F44C2648C2ULL, 0x90E3569370E538DCULL, 0xBBA92D29FFC88B3EULL, 0x2075D3984819EC2BULL, 
-            0xFC9B45B6DD526773ULL, 0xD1AC7EA9FF4CD9FCULL, 0xDD4B6F86C4021119ULL, 0xCBD40132F4015883ULL
+            0x76A96721B2D110B3ULL, 0x5A2180AF1FB24F58ULL, 0x34C7E697F609B820ULL, 0x571460BEC3BAD798ULL, 
+            0x9EFDE5B2F47D054AULL, 0xF75324D99A9CA09AULL, 0x597B8CD65B363E6EULL, 0xF64EC461D2948C8CULL, 
+            0xB4956A625E5A11F0ULL, 0xED75BDEE4BD5DBEBULL, 0x85FA85CE9F98ACB3ULL, 0x294398ECB27185FFULL, 
+            0x30143ABA1E3B10B3ULL, 0xC732650C8CFB68CBULL, 0x1B121882D9865EBAULL, 0x4A57C042F44F0BDEULL, 
+            0x6390D0FCCC3BB373ULL, 0x8303EECBCB55B863ULL, 0x96561E8BA050CABDULL, 0xC97B77E0EBEF0773ULL, 
+            0xD99095BD45BD6993ULL, 0xDF985C2E9D8CE1F4ULL, 0x55557CF2C07E02D4ULL, 0x425E45FEB7D92F67ULL, 
+            0x11854B1C3BC217ACULL, 0x65FB01EFA1BA5B03ULL, 0xC7DC5345221A6B91ULL, 0x886E9CD2241657F6ULL, 
+            0x0024921781EB6542ULL, 0x591911FEC28CE58DULL, 0xC0FE6CEC40C8BAE1ULL, 0xCBC3BFCDB0162B02ULL
         },
         {
-            0xCFCD0CA1DFE9A472ULL, 0x7D27BEF7DEB9A93BULL, 0xC3D2B01FA374DF4FULL, 0xA0EA25630E59D3B8ULL, 
-            0xFB7DAC2811AB530CULL, 0x2ED904F09B695710ULL, 0x355028C3EB6948C0ULL, 0x6F0B60498C8C2060ULL, 
-            0xAEDB11AD29939385ULL, 0x1C1172C53BB0CF7AULL, 0xD71213ED3E2EF60DULL, 0xA7B6983B84A38AC2ULL, 
-            0x6BCFE7621A7FAF36ULL, 0xB5EE0870D8D6A0B1ULL, 0x062C3981D6B86024ULL, 0x8BC8486E94D892FEULL, 
-            0xDF5E7D20E65E45EAULL, 0xE58DA982EA93DC67ULL, 0xCD9B9D4CAFF9D5CAULL, 0x30C4417C125A75F0ULL, 
-            0xA32571FE1431E3D8ULL, 0xD409EB182CD5BC4BULL, 0x649DE894F7F43218ULL, 0xF958E5DDBF55ADBEULL, 
-            0x2A82480F106AC76FULL, 0xD251C724795CC95BULL, 0x7A0FE7B44128E7EBULL, 0x6DBCFB03805FC20CULL, 
-            0xBCA7F90CED39C348ULL, 0xC3E9EE6A0421715EULL, 0xB92B9163E070A205ULL, 0x7D61387134A1FC30ULL
+            0x2963444E92F32B7AULL, 0x1F273C62882C3CF1ULL, 0x14643978B4438B57ULL, 0x5C3C38DDA9D58C7DULL, 
+            0x98C3BD5BCE36FD71ULL, 0x9C9511A347BB7327ULL, 0xD0CC836BDC999D0EULL, 0xFE1781EE4C37A8E8ULL, 
+            0x98DBCA4BDA088909ULL, 0x6772A5845D2061EDULL, 0xC90DF4BD90A81B12ULL, 0xE30F95B263FE3C6CULL, 
+            0x5EAD0EA6C0FB7BD1ULL, 0x32522D82D754A1DAULL, 0x48144F1E1A210CA2ULL, 0xFDEAEC20F3E55C16ULL, 
+            0x573FB874B4070049ULL, 0x2411AF96391FBAA1ULL, 0x8923F2BF558C6F8EULL, 0x0A3F331C62FEEE19ULL, 
+            0x0390DFB9611FF168ULL, 0x26248C6BE25C56B1ULL, 0xBB5DF17BC6BB37E3ULL, 0x7E320F57F185B94BULL, 
+            0xCDA48AEC871AA1CAULL, 0xB7C66F1D8C85967CULL, 0x2F8653BB6F8275E7ULL, 0x1C87742D9F2C5D19ULL, 
+            0x16138ECF5C39DB78ULL, 0x38E4AA018B1EB52EULL, 0x1F060D977CC9065BULL, 0x3C3D9082ACA90DE3ULL
         },
         {
-            0xBD0F8D808E84AAC1ULL, 0x5A55B093D755EBCFULL, 0x37FEC8AD10A00418ULL, 0x63EFA6FDDCE990AAULL, 
-            0x435AF09DA1AB67CAULL, 0x3C98EC1B400F4439ULL, 0xBA919D77769E90C5ULL, 0xB929F1D140380671ULL, 
-            0x188AE2D4956E5643ULL, 0x199E007472F98F5AULL, 0x669C5C8E2EA9EE18ULL, 0xF0FF2A6014C4E07BULL, 
-            0xDCF6463788B3DDFFULL, 0x8264C4389A8C068FULL, 0x80CFA12C7D6BDC3AULL, 0x56D673D9F5A94117ULL, 
-            0x6E742E49A3284861ULL, 0xB7B64D29B418D6CFULL, 0xB265080A4CE3D403ULL, 0x156B7ACFCA85AC1FULL, 
-            0x5BE4432B3D62BE41ULL, 0x9CD7F79202CC7A86ULL, 0xD830D810A4DC8C81ULL, 0x2FD1CA5339E127F9ULL, 
-            0x23A927C1B7AE344DULL, 0x3FE029333349D968ULL, 0xD49704BEEBCFA800ULL, 0x8B7D3216A6D7F7EFULL, 
-            0xFE14357770B474C8ULL, 0x8EBE3BC90594CD48ULL, 0x3ECBA99B5AC01C28ULL, 0xBD5658EFF45F4C49ULL
+            0x55F42F2920D9A3F3ULL, 0x86DBBF7CF8605534ULL, 0xB3795FBC336AAE28ULL, 0xD5CED18D12635987ULL, 
+            0xB083CEEED2FB5C7CULL, 0x50FC878FB23F94CFULL, 0xDACE3A4C78389C7BULL, 0xB8CE64ECB0DBB563ULL, 
+            0xDC8C046A3E0D2A4AULL, 0xADBE9E0407E2F813ULL, 0x12BE6A65F0087B65ULL, 0x5F01BFF0877F63E5ULL, 
+            0x223CFD47D65EF423ULL, 0x5EC602E558536E0FULL, 0x8EEAC4566EBB04AEULL, 0xC938308562E7D14CULL, 
+            0xC9E39B94A37D19E3ULL, 0xF375C140A16E3F2AULL, 0xD5084F8874EE1AF3ULL, 0x94DD651AB6DAE487ULL, 
+            0x0FCDB31F2F79BF87ULL, 0xB4C7F208F85B0578ULL, 0x0CDDE91B9308185AULL, 0xAD9190BF986D88C1ULL, 
+            0x41CEADB0F7CD2DF6ULL, 0x7E99B1FA4CD9510DULL, 0xEDDB3F801D9BE1C6ULL, 0xD8CF0D96BB3B84ADULL, 
+            0x44AF5F13D12A16B1ULL, 0xFC6FD6E0F2A3CABCULL, 0x0E43134ABF8B6876ULL, 0x629A4945B628F44CULL
         },
         {
-            0x006FE2E84CDFDD49ULL, 0xB638B4F87614BA79ULL, 0xB3121BB4176E0673ULL, 0x431CBE8CB8438931ULL, 
-            0x30258D3702BDA6B3ULL, 0xD742095718AC94AAULL, 0xDD02BF59BD65F648ULL, 0x89023B135CA0C051ULL, 
-            0x81CEC6A2D46B7E2BULL, 0x497749013B44DFC6ULL, 0x607B584EF3ECE580ULL, 0x31874BAA17E2E060ULL, 
-            0x5CBD9B0B832449C4ULL, 0x6C7E49EC72D3A810ULL, 0x4E30718633DC3A32ULL, 0xF5000606512F57ECULL, 
-            0xE490BD2E0C0449FDULL, 0xCDE58D31EED5560EULL, 0xBE05BC9374A9EDD5ULL, 0xF313C85F99A26AE4ULL, 
-            0x7E1A2E8E11E95601ULL, 0xD9BE6F9423E09151ULL, 0x255383214A213AD6ULL, 0x70F94425729E20C5ULL, 
-            0x2BA0C28C72456139ULL, 0x29E7040A77E99E12ULL, 0x532E69803B88ACA5ULL, 0xAAAD1D9F6449E10FULL, 
-            0x9B780F25E3397CD3ULL, 0x7761FEE6AC9C7246ULL, 0x0211B91346B3D3C6ULL, 0x5A0F3BDA0578674CULL
+            0xC919608FC3FA6BA3ULL, 0x049D2D30D1865FCEULL, 0x6C5FCB0D71E3E934ULL, 0x0111996CAFBEACEAULL, 
+            0x4BE365D61B5D8DD2ULL, 0xBB1ACA1E45A0A058ULL, 0x1F963C4F525D7419ULL, 0x5B10930A46490C8DULL, 
+            0xCF3909D4D101926BULL, 0x208BE42A8580236DULL, 0xD94BEF6DFC2164CEULL, 0x3198EC1495333B96ULL, 
+            0x8C58AC627C7048FBULL, 0x0823CDD9DA33848DULL, 0x12664E1478CE6146ULL, 0xE00DEBCCFA4A8969ULL, 
+            0xA6B6CCD9E26AAF25ULL, 0xE5EECC1CF080CA11ULL, 0x1CCE8476A07C4C9BULL, 0xA4D0CFF671134CE7ULL, 
+            0x4405ED7DD08FC078ULL, 0x0B7BFBB218962859ULL, 0x88B121E1DA6D066CULL, 0x87641AF8C2BC46C9ULL, 
+            0x8E0554A940C3C568ULL, 0xD8144D8DEE2FB83FULL, 0xD7BFADE1E1603B9FULL, 0x8A86A6570D37800CULL, 
+            0x8F6AE8FD29689F0EULL, 0xCDE3E1ADCAD300B1ULL, 0xED11C04E563CD79CULL, 0x6C56818B6BB0205BULL
         },
         {
-            0xD72E1378B74BA29CULL, 0x4C5F4F162650079EULL, 0xF74B74DF2563D230ULL, 0x1617F6B7684E3E4AULL, 
-            0xC2AE3FE9FF245AB6ULL, 0x98D916E8DCFFBC01ULL, 0x5BA13C57A93D13C7ULL, 0x861AC69354B52EBEULL, 
-            0xB04678ED2BB6D2F7ULL, 0x9066EBCC920736CCULL, 0xE42E9639B5C63AECULL, 0x0A50E469C8B1C816ULL, 
-            0x830BA7F43036379CULL, 0x83A55CD7FDA9818AULL, 0x6B3033E2FF714607ULL, 0x6EC2FFB27E36767AULL, 
-            0xCB9DA9F1987E5680ULL, 0xCCABEE13ED1B6DB1ULL, 0x34A78B02136F1F60ULL, 0x3F274E4EFFC7F60CULL, 
-            0xB50E901CCFAE2E66ULL, 0xFA5CE28FEA16E077ULL, 0xB3A18CA16D790CC8ULL, 0xA583659F6F667C6FULL, 
-            0x4FCF36250B3A1E54ULL, 0x322EA210C731DE4EULL, 0x574FE3CC1FB61F35ULL, 0x581B98C99D67DD9AULL, 
-            0x53E46D8B3DD277D5ULL, 0xF41B80DC323951EAULL, 0xF67AA0BDA728D958ULL, 0xC176A4A5DBF4B38DULL
+            0xDA4A4D0202A53B5DULL, 0x05146EFB63F0B59EULL, 0x09BACD7DCACEC93EULL, 0x92BA28B8AFB3724EULL, 
+            0x80B545B901E8EC18ULL, 0xFB4FA75AEE36B444ULL, 0x1DFAD5741E72AF15ULL, 0x8F5BAAFA5BD3D65EULL, 
+            0xE44FD6C30FB65AE1ULL, 0xB61FF7A0F8CE7B75ULL, 0xEBB0A0AC9EABF0EAULL, 0xC1A2D9801F5E79FBULL, 
+            0xDF6859C3759FF5D5ULL, 0x1E6DD29124B8D1D9ULL, 0x34BC1806B1301975ULL, 0x7A124EB5AF07C0D2ULL, 
+            0x7F98689C9AA0C0A6ULL, 0x0CFA91E145A43A8AULL, 0xC01EDF8243876359ULL, 0xF373CAC82AE8EAABULL, 
+            0xE53E6300DF691F45ULL, 0x2093B667F2973F82ULL, 0x6DC92F249A180AC6ULL, 0xB03418DFF7287D10ULL, 
+            0xD3996669E06DAAFAULL, 0xBD57D2D056431BEAULL, 0xDF6972F428811C15ULL, 0xCB6E54BFDF151107ULL, 
+            0x42A21700909E26F9ULL, 0x59AAD97240625E06ULL, 0xB3EB989F8CCDFB1EULL, 0xCA11BA108D8F415DULL
         },
         {
-            0x5B045E1A4061072CULL, 0xFA3ED273FE05C348ULL, 0xA3FF05E438140BB0ULL, 0xC36D2A3A4429F645ULL, 
-            0x2055D85F3A7B77A4ULL, 0x540D47FC414EB6DCULL, 0xC8F07708B3756BECULL, 0x2547F122ED694AEDULL, 
-            0x85826EF297B783FCULL, 0xED7C4C0E8C2CB510ULL, 0x0EBDC4B2D9F9BA27ULL, 0xDDE6E36A1F77A727ULL, 
-            0x4344AABFC4C941F6ULL, 0xFC44ECBFCCEDDED3ULL, 0xDD89B4E0E7A4269CULL, 0xB311C6476F59D495ULL, 
-            0x0CFA9C85F97234B3ULL, 0xC32C47D083568EB4ULL, 0xF2473F2247A1C0B1ULL, 0xBA00161BAD6F7BD8ULL, 
-            0x5F46898848B68A57ULL, 0x98E96720E1CD0328ULL, 0x5F11A7D999CF04D3ULL, 0xFC4D3993EC18F61DULL, 
-            0x0C16884F52E1B9B7ULL, 0x09451616408EC4DCULL, 0xDDCA97BEE4100B94ULL, 0x9EC5CBDF200D54A9ULL, 
-            0x0BB88BB840FFAB70ULL, 0xD3076D63F826163DULL, 0x9A102E5A8CED52B4ULL, 0x13C997F4FC32EEADULL
+            0x6CDD3D7CB6B9270EULL, 0x76E4D09E68367338ULL, 0xF8F7A3EF8A8E071BULL, 0x4F9CBD18360F87EFULL, 
+            0x6DF4DC1FD0BBB911ULL, 0xF5D2FFB5D1939E0CULL, 0xB33546C7C8278AA6ULL, 0x795472156A57C178ULL, 
+            0x6A94E63E633888A2ULL, 0x12F1587D5F6672B1ULL, 0x214C0F489BA61CE2ULL, 0xE2C44F275F10A6E7ULL, 
+            0x0321D7EB64062455ULL, 0xD99863F09C2DC145ULL, 0xBD53229ACF52642DULL, 0xB937FB20DC6B21B7ULL, 
+            0x689831ADF17E303BULL, 0xC7040AFE00062C32ULL, 0xDE42A1EF87D26966ULL, 0x9FF6BE895A20F574ULL, 
+            0x6EFDE758F9B6DE5BULL, 0xF4473D7A6BC2FD16ULL, 0xE04C6D852120F0C7ULL, 0xC2491FC3634E3DAEULL, 
+            0x390670718869BEC0ULL, 0xA2AF80267EB012E0ULL, 0x1791D128BBAA11E7ULL, 0x3229AA26C2194F0BULL, 
+            0xEFA8195050B70C13ULL, 0x1CE58EB86548B86DULL, 0xDCDB124AF2F84D81ULL, 0x92EB57A15992F6C4ULL
         }
     },
     {
         {
-            0x46C98D0A798FDE60ULL, 0xEB1F7B20D9837CE7ULL, 0x60AA2C7EC03A0A33ULL, 0x253459224B78E730ULL, 
-            0x3801F9F6FBCFE93EULL, 0x7B9B832BAD835477ULL, 0xEB7745EAF8692866ULL, 0x1CA2DFD09B9F9485ULL, 
-            0x93CC23DBD0112261ULL, 0x6D62D45AE466D983ULL, 0xEF6D9680ABD14E4EULL, 0x7C59881DEB433FC2ULL, 
-            0x8FBA35915A890670ULL, 0x7EDF43A53F140A8EULL, 0x579DAE8B7490F5BAULL, 0xB37F3C31D8473A6AULL, 
-            0x547940ACA649EFB2ULL, 0x0FF584A52549EC7DULL, 0xB0F6E45F53D740B3ULL, 0x47CE8BF7F8841C10ULL, 
-            0x0C5EDBB999C119EEULL, 0x9D722E31C785AF17ULL, 0xD6F7165FD456F5FEULL, 0x4B4BFDB294EC388DULL, 
-            0x76107D49E36EB1E9ULL, 0xF54F8396886E75C4ULL, 0xA31DFDD6A34B515BULL, 0xE5BDF2C02EFD48DAULL, 
-            0xB346F1186AF3AFEEULL, 0xACA21EBBE0009406ULL, 0x250F06C2111340C7ULL, 0x3FB0B0813D9ACD7DULL
+            0x912450677B7ABC7EULL, 0x0590EBDF715B05B0ULL, 0x18298FB2DF674319ULL, 0xC04466CD42EE3510ULL, 
+            0x3D498A5935E6D85CULL, 0x84A208CD8959331DULL, 0x7249803165D6B086ULL, 0xCADEA5CB98607D0FULL, 
+            0xF19C7EE5C48CB4D1ULL, 0x6AC366B73D1776BBULL, 0x9602E49F004C9BE7ULL, 0xA9D014DD535AA8F4ULL, 
+            0xB4741B3215E462B6ULL, 0x5F43ABDBEB38300AULL, 0xE02840253AD0F04CULL, 0x0D26183CA9AF5CD4ULL, 
+            0xE18907D864BE7AD9ULL, 0x6DD3CAC79CB4342BULL, 0x988ACAB1ABCC1C48ULL, 0x2303C1925225D807ULL, 
+            0xB67938202B1108F8ULL, 0x45D903956276D322ULL, 0x4716C73EC90D6486ULL, 0xC4237C506251C2BDULL, 
+            0xA41AE2129C311AA5ULL, 0xE0D22E2C1DDC315EULL, 0xAE5D41E64E9D3938ULL, 0x2FD0C1DFE647EA55ULL, 
+            0x9D99712A0B83F18EULL, 0xB9C4D7BD7E40AF28ULL, 0xB3815DF932636DD8ULL, 0xB3E7AE7A03621898ULL
         },
         {
-            0x8976B569B8C5638BULL, 0xA4E7D84655075CE9ULL, 0xC46D70626A9C634DULL, 0x0F8016F3F656524AULL, 
-            0xCE5DDC74BB67080EULL, 0xE6BBC0276F9D50EEULL, 0x08CCE03F4EFFFC6AULL, 0x9533701EBCB2EB8BULL, 
-            0x951FAFC766314DD5ULL, 0xD704B95712BB7060ULL, 0xBEA10B6A9FD9ADF0ULL, 0x02FF092EBEFF40FBULL, 
-            0x326F73AE1D64515BULL, 0xE78E64346FBA9F15ULL, 0xD181673E2F3324CCULL, 0xC02632DB46041162ULL, 
-            0xA8420A75BD5E2E10ULL, 0x967CE52D1527F56EULL, 0x9028C21C55B4FD1CULL, 0xC08252D27F7A6C86ULL, 
-            0x88B3F2F073F43CC6ULL, 0xEC6084E626FE7BAFULL, 0x491F894BA52843B7ULL, 0x369FB430433C5032ULL, 
-            0x7CE02E662C97D4D1ULL, 0xD3E4B6E6F98C0FC5ULL, 0x10B573DE247E9045ULL, 0xFDC4EC34A344966BULL, 
-            0x665DBE2D72C294A9ULL, 0x8798E1EC5854DB42ULL, 0x57E03E07A7815E6AULL, 0xCC149A86410F1C53ULL
+            0x3315740A2A4F4CF2ULL, 0xC2F24B98680F0DCFULL, 0x4634BC982E236AB0ULL, 0x1ED46877ADF9C3BCULL, 
+            0xDCCA0894DD8BB1A9ULL, 0x415244AB40CF9BFDULL, 0x92F6632740059555ULL, 0x37433500D8FD2CC2ULL, 
+            0x49950055D47EC3A8ULL, 0xECFDD05E75FFD7D6ULL, 0xC54517EF82C2D71EULL, 0x758BDE2496800E62ULL, 
+            0x930EE49F13A5BD4DULL, 0xC400E78C5975C19EULL, 0xA2F057D486D7F8C5ULL, 0x38BA66776444EEB5ULL, 
+            0x4BD154051F6179C3ULL, 0x95D5155D260F5E63ULL, 0x008D78D4598CFE4BULL, 0xA8575EF4089893CAULL, 
+            0x612D0D060C1C387DULL, 0x3C3019C2B1AF01D6ULL, 0x95CBFF60BF07E924ULL, 0xD146A47C6FD4961BULL, 
+            0x58DB04F33D03C99AULL, 0x403D3DF61C950906ULL, 0xB49F70C4B62B7574ULL, 0x941A91D92645B634ULL, 
+            0x00586C1C20596A47ULL, 0x070626A2CED0E64FULL, 0xD5DCFDD89585CDB5ULL, 0xB0DBE839D067627CULL
         },
         {
-            0x28B3DAF6BDE1005AULL, 0xA5CB205C0A64DAAAULL, 0xBAC570CF7F61A73CULL, 0xFAC0ADBEB9143D37ULL, 
-            0xD8DBD536BFD8D277ULL, 0x3DA96C406C0674AEULL, 0xD30E3EEC236D1747ULL, 0x3E7F2B55B16B4413ULL, 
-            0xC982C1DE1CD3A207ULL, 0x4D9FE88E376BB7D1ULL, 0x3ECC64487760A6F4ULL, 0x73EEE39BEB509319ULL, 
-            0x39DB3A7265B4E9AFULL, 0xB1916850E44FF59EULL, 0x0A0B4D96F6A4F5C0ULL, 0x5A1A248C94033528ULL, 
-            0xF4532F9FC83C26D7ULL, 0x3FF9F40529E7C261ULL, 0x3CFCBB41B52A454DULL, 0x87E98C4F60BA29F1ULL, 
-            0x882242532D1C6E66ULL, 0x3634988130D21E2DULL, 0xB865981EAF1FBFA9ULL, 0x4E3FB7B34CC259D0ULL, 
-            0xF8228EDBA6233371ULL, 0x90C41A5E771AD7BAULL, 0x8B886D01C793E181ULL, 0x875811FE08288080ULL, 
-            0x99867EB1D6FA143DULL, 0xA1AC06DD733DFA9CULL, 0x91218CE1A002F0E3ULL, 0x821038CBDE6A0862ULL
+            0x78DC9218B57A3D86ULL, 0x718D628776B18A16ULL, 0xB9BE0CE37D61D861ULL, 0xC0A259D721D098D1ULL, 
+            0x583A6CA7CE5433D9ULL, 0x7A48FB90A437689DULL, 0x46018A46A2DA684CULL, 0x2193E4B9A1A6F0D0ULL, 
+            0x95679EB035460C34ULL, 0xA7975E3AB954681CULL, 0x1706AE0C1F66D6B6ULL, 0xD9211CA8547FE0E2ULL, 
+            0xC972369818A26119ULL, 0x6CF4B86C9319266BULL, 0xF9B2DB7A9998C3DDULL, 0x4AD3A2D926AED383ULL, 
+            0x8B26792BD6BA13F4ULL, 0xE09AB10A83B1B278ULL, 0xBEF6402EA52D92DBULL, 0x7D0915EF5A40328DULL, 
+            0xE957AA5692FBC2A8ULL, 0x37512BE895959A6EULL, 0xAA10DCF16FCFABE8ULL, 0x136FE708FEBC301BULL, 
+            0x4A723154EC729F6EULL, 0xD2168093BC755B77ULL, 0xAAEEB46E10A75AC3ULL, 0xC576DE032FC41DEAULL, 
+            0x5EA7BA49E9CE2B9CULL, 0x4C41CB5C88DBB621ULL, 0xD16EFAA2C90026B6ULL, 0x1BAA43E956ABEA87ULL
         },
         {
-            0xB0788F3B72009E1BULL, 0xE80E7E9F278F3DF0ULL, 0x9D7BB82CC7B0CAC9ULL, 0x01B0D13C9D85C261ULL, 
-            0x2BB920F4CF0E86D4ULL, 0x18837C765EF289C2ULL, 0x9B7702ED30D76106ULL, 0xD60AD62B7FB904E0ULL, 
-            0xFC0E7329013888DAULL, 0x56110D6B7AE02BA2ULL, 0x86CC01338ADE587DULL, 0x0710BA3E83BAF43BULL, 
-            0x3876DA9B1AA6657DULL, 0x3519E1A13E5CF91BULL, 0x113ABB36BD160950ULL, 0xF4CF6007CCB40872ULL, 
-            0xF14B7807A7795975ULL, 0x9CC8B58AC4B8BF79ULL, 0x644A08F3CFAD364BULL, 0xCCE83E9D487DB8E7ULL, 
-            0x8EA002543DC57B12ULL, 0x9197B1E774C29766ULL, 0x71834CA65475B891ULL, 0x7655001B6FB01706ULL, 
-            0xAAC3230F2D230380ULL, 0xAFA85725D9F5287BULL, 0x9CE11D4CAE597E3EULL, 0xBD878E0FD548506AULL, 
-            0x66CBF5FB6567D03EULL, 0x24D86F112541FC28ULL, 0xC59EC74EA125416DULL, 0xD573C1C5470CF8ACULL
+            0xDF719772019740A8ULL, 0x27604B2D3E4AC803ULL, 0x2422BB2A011A5D86ULL, 0x22E60BE048DAA429ULL, 
+            0x7F647DC6A044C21EULL, 0xE3E8D77120C28BD6ULL, 0xB53DDA13A6B9C8ACULL, 0x6C22654840683354ULL, 
+            0x279A2AC732AA99A7ULL, 0x15C52CAF8BCAB8BFULL, 0xE9A83C2F3B9A8F06ULL, 0xC50D06CA58E38FD2ULL, 
+            0x9DC5E887A9F9F6DCULL, 0xE56694A8584F7F3CULL, 0x40CBDB9FD3DA4FCDULL, 0xA30BF8D057769818ULL, 
+            0x898A78747CB35749ULL, 0xC98AEDF63C8B3E5FULL, 0x645611CAE4D0B1D7ULL, 0x45BD27988FBF5F53ULL, 
+            0xEBD41456E62FC8F1ULL, 0x04F7513657F0AF37ULL, 0x9294B94198A96123ULL, 0xA13FAFAA6F0E39F7ULL, 
+            0xC1A74AF52B2196BDULL, 0xFBCD7E354AC9FC76ULL, 0x44AA0D1F900BB98DULL, 0x56E256AEB075E86AULL, 
+            0xCAA2FC4205ACF506ULL, 0xE86892FDD60778C9ULL, 0x33E15EDE33FA588EULL, 0x99D753A608411F60ULL
         },
         {
-            0x20567F5C6712EC8BULL, 0x43AAA92E3916AA55ULL, 0x5AE63DFCCDFB73C9ULL, 0x1C932E9E6D4C256FULL, 
-            0xACB37C43DAE368C7ULL, 0x76F5DA15A1206D42ULL, 0x383B40D4A2259798ULL, 0xF2E8C396DE2C6B09ULL, 
-            0x48D172078A68DB4DULL, 0x8BDDB88123856A20ULL, 0x6EC8D1593CEE06A7ULL, 0xFD0DB38BC9BDB5A0ULL, 
-            0xF73C7AA08C572315ULL, 0x8E52D9F8925A04D2ULL, 0x87C13D1F364E71B0ULL, 0x636D71CED77E57DAULL, 
-            0x7DAF219D53DF8AFFULL, 0xFEA2FBE9870EF2D5ULL, 0xB4AF6DD2D2322490ULL, 0x5C9D7C24BDBD1365ULL, 
-            0x1184B2F77D2A776EULL, 0x791C5C7302D722BCULL, 0xB60E9BAAA356AF97ULL, 0xFFDBE579F46C0B2DULL, 
-            0x7A9532DFBDA2E12CULL, 0xD43B56CC6FCB1F07ULL, 0xA61EE9A475920C16ULL, 0xB09CF9B9AA62CE3FULL, 
-            0x6E7597D1CED988D1ULL, 0xAD7C90D1634AEBD5ULL, 0x43E8AB29D8C9A6D3ULL, 0x0A5A1B2E11D0E729ULL
+            0xA1234563BDFCC345ULL, 0xDECB6DDA800472A4ULL, 0x089DADE00D5F7E97ULL, 0xCA9172DB673B7AA8ULL, 
+            0xE753D4031F4289A0ULL, 0xBD7691A3C03A80F3ULL, 0xB5CF2DEE231C6D66ULL, 0xEAFC2A8761C2D289ULL, 
+            0xDC0CFDD4CD6A2902ULL, 0xD7764214C7D4DF51ULL, 0x5A1BD6CB1B753453ULL, 0x50BE9CED5743DBECULL, 
+            0xFC1BBD47CD79BFF8ULL, 0xC4EB8E53327F43F2ULL, 0x7A1499308A37D959ULL, 0xB1B3994EB1AD70E4ULL, 
+            0x9FCF863868590D52ULL, 0x90D56DB0526B830DULL, 0x8441B4336F71E01FULL, 0xFB38F4EA54B53DA7ULL, 
+            0x45E179A46F88EAC8ULL, 0x3C27E145E5BBA0ACULL, 0x3485A21373285DB0ULL, 0x77EE583C0F1AF8A9ULL, 
+            0x5E4E1C563CAA6AB1ULL, 0xB40EFBA2FAAA83F6ULL, 0x433FD54EC5FA934FULL, 0x26E873165445537AULL, 
+            0xBB8AF93902308FE4ULL, 0x3F13ED3F6B8AE219ULL, 0x2C8A35303E3D778DULL, 0x836ECB363B940486ULL
         },
         {
-            0xF79354826B9BADB6ULL, 0x7E5F382D6324109CULL, 0x8DD1B3DE10C31B40ULL, 0x718D533BD186FA67ULL, 
-            0x19072A461EF1A77BULL, 0x7F36F0FD6592254EULL, 0xD262C61495EEE02EULL, 0x2C48E62A92564336ULL, 
-            0xE0A9417D0E1EBD4CULL, 0x5703DAA510563F76ULL, 0x2B097B14574CCD51ULL, 0x44A44B48778CF3B6ULL, 
-            0x39D365BA7A20B02BULL, 0x9580060C9F1FE67EULL, 0x350C17DE080974E6ULL, 0x0822593B81581465ULL, 
-            0xF6DAC49C51BEDC4DULL, 0x15F40B9791357C1DULL, 0x07B99A89A759A030ULL, 0xFD50CF414F489322ULL, 
-            0x135DC01DAA88D42EULL, 0x84516FD6DE3D0BCDULL, 0xEA4319614D46AC1BULL, 0x6C5D9AC40EC0FDDFULL, 
-            0x1ABCE5052A79057DULL, 0xEC1105655E28A0E6ULL, 0x216B5F58F6A668D0ULL, 0xBFA0F5F03C1E1119ULL, 
-            0x55887D6570DB1C68ULL, 0x929F24BD320ED631ULL, 0xA95A16E408E7384FULL, 0xB18A87241160357FULL
+            0x459571105824C966ULL, 0x16954E73B5155E23ULL, 0xDFEC3DE66481088CULL, 0xADC10CE0A0132BE5ULL, 
+            0x565BA3A2EB26F13DULL, 0xCE995F6BE81E298AULL, 0x151393F6F6A6C8CEULL, 0xA4A746AB1A15B196ULL, 
+            0x7D23510A903AA76AULL, 0x62F98C0AACA1B4ADULL, 0xE0D4041040C79059ULL, 0x326A31AEE773899DULL, 
+            0xD6D99E2D27D393B7ULL, 0x7E6B40382593D3DCULL, 0x9CA2440158FF6196ULL, 0x4A9E3109DF70F260ULL, 
+            0xA90C977FC9918329ULL, 0x887A42781EBE71F8ULL, 0x5E1BC2A6EAD40936ULL, 0x223117520128C688ULL, 
+            0x0632CC3A43268565ULL, 0x441133C147D79BDCULL, 0xB3907A7A6C147AFBULL, 0x7FE0F7A929BD181DULL, 
+            0x2BB2E8EE3FFD2C69ULL, 0x4B72E8BDF98069FAULL, 0x3FEE8B180C7B0BEDULL, 0x88A497E67AEA0694ULL, 
+            0x4B54A69357891D6EULL, 0x805235D891F2D991ULL, 0x0CACAB55374887FCULL, 0xB588F7E527F0E8E3ULL
         }
     },
     {
         {
-            0x3EDF7BE913AD007EULL, 0xC18B0001861D3A09ULL, 0x16A31FCA6F1C9792ULL, 0xA47C160CCDCB1FA9ULL, 
-            0x53DA58F5D7A265EDULL, 0xF365F596D9BE1C05ULL, 0xA6F337F1BB958937ULL, 0xC6A13297BB352FAFULL, 
-            0xF037ECB28D458A64ULL, 0xD9D82AB8260DC5EEULL, 0xD0212C50D59DA3E2ULL, 0x45A3B18FFE4E47ADULL, 
-            0xE593160C8030B9D0ULL, 0xA8FAFDADA3A8188FULL, 0x0DF35D48044962B4ULL, 0x322FDF89599003C5ULL, 
-            0xA58D88AFAF6BE8D5ULL, 0x76A2A0586DD3CA9DULL, 0x6E46091007D0B216ULL, 0xDA691C2BD386FD5DULL, 
-            0x26E0635DB68C2A74ULL, 0x33B349B4C2A7E71FULL, 0x3D28E26E842D491AULL, 0x58E9ED34A4B370D7ULL, 
-            0x4C85458A1D654CB0ULL, 0x9FE8462B39254167ULL, 0xA07969A9D710AFAAULL, 0xF1A2DAFAAB3C5822ULL, 
-            0x9FC308ED123118DDULL, 0x00775006ADB84732ULL, 0xBADFD5C21C04F691ULL, 0x0514B7EBDBCF6C7CULL
+            0xC0C4072936975B87ULL, 0xEE65595FA061A1DFULL, 0x6BC3295741119ED4ULL, 0x9A6E634C98A48FA9ULL, 
+            0xAA8C6F4B7D06E514ULL, 0x075A73CD5F50AD5CULL, 0x6CD759F0F9FB63C1ULL, 0x5F931A3B62861FF2ULL, 
+            0xB42B7A1CE287D78BULL, 0x21F1618249338F01ULL, 0xBC4A60A9C8553D91ULL, 0x7E6CBFA2FE1DBDFEULL, 
+            0x032EB3B32B1E0FF9ULL, 0xDA100BD756D42F45ULL, 0x184367DF5DBBA727ULL, 0x1C48D5E3DA433FDBULL, 
+            0xC8CCA6826783E955ULL, 0xBB8A1F658147DC9BULL, 0xE346C4C8D2D0BB10ULL, 0x743237A6920AF68EULL, 
+            0xB3E54881BBC4B108ULL, 0x556899DAB32921B5ULL, 0xE42C1F0C02D88172ULL, 0xB59EC5A168832293ULL, 
+            0xD3D8401B461712A7ULL, 0xC2417E39C5D1C75CULL, 0x84D19EF08E6637CAULL, 0xB2C8DDCEF1ECA32BULL, 
+            0x2FD56BB1F2B451C9ULL, 0x76326CC8F15E67F0ULL, 0x52645FFBF9EA5DEAULL, 0xDC79033921F6604EULL
         },
         {
-            0xD52B878EEB53219EULL, 0x2B3821DD0591ABFDULL, 0x83EDB7A0B7BAF959ULL, 0xC805BC5C73F03F9DULL, 
-            0xB36AA38C7D2D5538ULL, 0x33FF7AB427A84C1AULL, 0x5E3B2632CD852BB8ULL, 0x87025CFBC7076F99ULL, 
-            0x49F4658C7820042CULL, 0x516767A31168400BULL, 0x2DE3E748A2787BBBULL, 0xDE7E32C3EDB75C30ULL, 
-            0x28A1F21C8304A715ULL, 0xB31ED13774A3E173ULL, 0x0F3182DD01738AD1ULL, 0xEDB4C0C8BCB3D2A2ULL, 
-            0x701152B008BC54F2ULL, 0x48B56DD0BEAEAAB4ULL, 0xFE26B04E2F7E6696ULL, 0x9BFA6070E8745024ULL, 
-            0x856064510F89CABDULL, 0x29DE69F5DD0BB9E5ULL, 0xC6935B15D58E72C4ULL, 0xC56EBCE324F097F6ULL, 
-            0x354E11E99D98FBA3ULL, 0x6043480583B56414ULL, 0xB00903DD6208FD3DULL, 0x1BBE3361A49BD3B2ULL, 
-            0x877BB558D8FFE00AULL, 0x0757218ABF0AF847ULL, 0x337BE8B392B2A07DULL, 0xEA5A2978166371FFULL
+            0x20CCE802DACFC60AULL, 0xEA0EB13C2165C380ULL, 0xE2EA5BC96430F5F3ULL, 0xAE3F46556CDF8D2FULL, 
+            0xADE0A3F6C01F84BCULL, 0x0B2E26F235FBF500ULL, 0x697C3ACF0CAE0D9BULL, 0xDFC38BCCBF2EF16FULL, 
+            0x93C76274B45B2E32ULL, 0xDE075DCA63E0796EULL, 0xE79FCCEB8B0B6A9DULL, 0x8DD04C57D919CD02ULL, 
+            0x3AE23374DE2645B7ULL, 0xEB7B1401733C6BD0ULL, 0xC66C84BE5B50EA71ULL, 0x80F64BF907120BEDULL, 
+            0x40A65FBECE04BB66ULL, 0x09493150CF84B351ULL, 0xD883DCF1EB80E1C7ULL, 0x1AA213E00C916E85ULL, 
+            0xBFEB0AEF80BBCAD5ULL, 0x03724316D7E40AB7ULL, 0x06D8DCB57C85C66DULL, 0x9DA438488B681D14ULL, 
+            0x76BC043F0C969093ULL, 0x920DD14A78041149ULL, 0x7D82160972E363F3ULL, 0x3064E551B1A6B16CULL, 
+            0xCD7C248C73BA1C0BULL, 0xEB1BC5AC906E71DBULL, 0x203678955285EDADULL, 0x1329F6BF529C28E8ULL
         },
         {
-            0x92AE2C0DDE1EFAFBULL, 0x8B06770991528FAFULL, 0x0807CDA792EB8EA7ULL, 0x074D7D0DFA0C29EAULL, 
-            0x70597FD068ECEFEBULL, 0x36C7DCE1FBE6473AULL, 0x490A2A3A0106B10FULL, 0xF50E022565366198ULL, 
-            0xF4CBAF5B847EB6C4ULL, 0xE32D8AA051271746ULL, 0x78FFDB5685644DF9ULL, 0xBDF2697DB9BE1885ULL, 
-            0xDF6E3034358BF67BULL, 0xF5A511BDB0B6FAD2ULL, 0x7A5D624112ECED41ULL, 0x230FF06F4DC4F049ULL, 
-            0x566264F8CCC8F7EBULL, 0xADEBDDD46D33FC2CULL, 0xB6CF86EC8B38C08FULL, 0x895588551DF88288ULL, 
-            0x0F1A690EBA9A2EE3ULL, 0x59CC646759EB9B3DULL, 0x3F11C05C97B8FA14ULL, 0x126F06EA0023B646ULL, 
-            0x666FF399A02D0361ULL, 0x2970E7EE391815C9ULL, 0x5B40F85B6F1DA581ULL, 0x70FC854A14BEC581ULL, 
-            0xAB1B26DE27C3FC3EULL, 0x1B25D4DB96928F3DULL, 0xD2227C320E700477ULL, 0xFB762B69D449453DULL
+            0x59062A476F1CD3B1ULL, 0xCF5A2DF6A999BE60ULL, 0x5E63A7B8C51AEF24ULL, 0x587E0990A97FED2FULL, 
+            0x518E023822D0DE2FULL, 0x6F969F3E97D27034ULL, 0x486E73AE9885A4D1ULL, 0x8460C34769A66383ULL, 
+            0xE22CFE6B69AB418DULL, 0x4FD9C1641D39D74DULL, 0x64FEE382AAC74C52ULL, 0xA07AA3BE0B00FEBCULL, 
+            0x5A6FFAE029210361ULL, 0x463C02E7816E28ACULL, 0x5202FA0E0894FFA4ULL, 0x8C11B2B1604A45EFULL, 
+            0xDEB720CC5B29803DULL, 0xE3DB8D4D34DFA2EFULL, 0x0BCCB992D5795FE8ULL, 0x6D89559179DF4790ULL, 
+            0xAAE8089B30B2F4D4ULL, 0x584382C970802DE3ULL, 0xCFCF27B63FD3486BULL, 0xF262DF778161BF13ULL, 
+            0xEB8CBFB01A600764ULL, 0xD9A702E9AC47F9F3ULL, 0xD6B49EC4E54C37C2ULL, 0x48BB197AE9708392ULL, 
+            0xE1A6A60D36BFEFCBULL, 0xF85710DF68B9D7A3ULL, 0x56A7CD4B94912E58ULL, 0x726E8987094D49D3ULL
         },
         {
-            0xBA76738F31E8793CULL, 0x6841B908493F7B30ULL, 0xCF25A51D35A9D3E3ULL, 0xFEC5A15C5473B8A6ULL, 
-            0xE456D4E869B12217ULL, 0x559953A24B604B03ULL, 0xB123DCC7BBCA5195ULL, 0x90C80ECD78179AFAULL, 
-            0xBC893D8E1A6149C0ULL, 0x06B02CB2BCDFB822ULL, 0xB49EBA1AB90E8FF0ULL, 0xA7DACBD6F4E7B8BDULL, 
-            0x56302C8670ECEBF3ULL, 0xBD0C5BC7337967B2ULL, 0xC0DED0AFCC56F710ULL, 0x90C87438E2FFA837ULL, 
-            0xF16AEE20D8CBE265ULL, 0xB555FFA1E256B15EULL, 0x0A92F8B80CF65C7DULL, 0xDAF188D8F72B2F95ULL, 
-            0xDC1B7B5C043EC9FFULL, 0x94711E7924F3C063ULL, 0xFBC00BE0810DA5E0ULL, 0x785E12C2BE74977EULL, 
-            0xD05443DB397655B5ULL, 0xBEBFDFFE92E432BCULL, 0xFB04E8A45F1F36CAULL, 0x7BA31319FFE7402AULL, 
-            0x600AC2FCC4DC7993ULL, 0x6B416F9D67BCBC93ULL, 0x3FAFE6392728D06DULL, 0x4EE76D1B21D78668ULL
+            0x5E5F66B37BC8AA65ULL, 0x9DE36A46D18957EFULL, 0x5C1DD75567D3F047ULL, 0xCCE258757C6CC2EEULL, 
+            0x67ADE6AD2D91A4ABULL, 0xE8DAFACA457B7A3AULL, 0x58A3A0CDAD0D1D84ULL, 0xF50CEB832F000A1FULL, 
+            0x0A17CAF4814019AEULL, 0x0650F08D5D80C2A5ULL, 0xA826FE64DDD25F38ULL, 0x62D53442B3E8B04EULL, 
+            0x9110C456988F866CULL, 0x9A5B93D7BA9CD039ULL, 0x63A53D9AB466AF06ULL, 0x5F48E4DF6A832E04ULL, 
+            0xAB6F4F40E740F578ULL, 0xE1395E56FD42FF0DULL, 0x57E473AF3C9FB455ULL, 0x023DC18FC5619B88ULL, 
+            0xDF59D2E6D623F167ULL, 0xC6A0F8C6E72F8C1CULL, 0xA91DF700EFAA7327ULL, 0x652EBAE658B6C879ULL, 
+            0xD99A7E717F16E021ULL, 0x640E9283A77B6A1FULL, 0xCCBEAF1CF67CB2C6ULL, 0xBFD800BEA57937B6ULL, 
+            0x493EB2ACBD5D1573ULL, 0x4E2FFD9930BD23AEULL, 0x5E71566BC2174AF5ULL, 0x6EA457E587C30C86ULL
         },
         {
-            0xA528053AABF6DA65ULL, 0xEFA8375943D1BB0BULL, 0x7163E2CBD0B229EFULL, 0x3085EFBCD4DAF42CULL, 
-            0x7FD540588B3C0BB2ULL, 0x30A6C36494F95CECULL, 0x33757B0B7FF3CC55ULL, 0x1D74F0A95CD41C28ULL, 
-            0x7D604552BE4DD81FULL, 0x1F8144673D93EC42ULL, 0x509FE734EA517658ULL, 0x1A473FB1E8AC7CC6ULL, 
-            0x43A929CAFF11698FULL, 0x351C9BBF2365D2A0ULL, 0x6857565B81C0A4C9ULL, 0x692AF8E915E4C4EBULL, 
-            0x6CCF08D3F0522B9BULL, 0x033806434728FABFULL, 0x497D6217424D619DULL, 0x6FB15F8F44412608ULL, 
-            0xF33D3C13A8052B4FULL, 0x0EBE4E817B4A5DF1ULL, 0x17073290A88936BDULL, 0xCA395777D4CB3AFCULL, 
-            0x5C312E901C245099ULL, 0xBF79BDF7811CA18EULL, 0xBC72D95C94647BEEULL, 0x79E8FDA98E44D936ULL, 
-            0x1487C5C299308D79ULL, 0xDD8A48DDCE5A62DEULL, 0x45A289C06B41D3F7ULL, 0xE7035AFAEDC43C62ULL
+            0x6D2B75D854F0CBA4ULL, 0x2C4F0327E9B37C30ULL, 0x35C36E5DE2D2AE63ULL, 0x79A396DE0910999DULL, 
+            0xD9DBD4DBCB798FECULL, 0xC1B4A75B5B02E8D4ULL, 0xA1BEA5675D3CB94AULL, 0x915B4FA524CE239CULL, 
+            0x9346A5F5F8230DB3ULL, 0x5E0D7EDFB273C5DDULL, 0x0225375925C243CFULL, 0xF5058BDF88764C1AULL, 
+            0x19E4649C9D759FDBULL, 0x5CE8A3FA1066715AULL, 0xB1260FCC984AD8CCULL, 0xDF8A39A5991D705FULL, 
+            0x07CB002716A8EF57ULL, 0x81C10EF3D4A672CFULL, 0x3AFCCCDB8070BA99ULL, 0x8CE24ADEA028797DULL, 
+            0xD9E6A3933DB3D4FFULL, 0x89CEDD62E1F720B6ULL, 0x2E69BC823A169FE1ULL, 0xC8640597AD6040E1ULL, 
+            0xE0832573C2FBE43FULL, 0xE45B13C13D423A7EULL, 0x01C2289FA9FB0648ULL, 0x721188EF535B63F3ULL, 
+            0x2815CED4AFF56CB7ULL, 0x9079E56BD7EEB589ULL, 0xD94ACD46ABB8341AULL, 0x4D7B0B07626A4408ULL
         },
         {
-            0xFA1FF6E2D657B27CULL, 0x91067AD999C551B5ULL, 0x197072BB7D2E27C5ULL, 0x606C80058B077ABDULL, 
-            0xA3635AC005D84E67ULL, 0xF975C75AB7E2DF98ULL, 0xC6674692BE0A75F2ULL, 0x10EE8FDB326EFBD4ULL, 
-            0xC07A67A148D2C3AFULL, 0xDFC27D916D9D09D0ULL, 0xE6779429D1FE2219ULL, 0x735FE312BA8BF0AEULL, 
-            0xC26A90F80DE4E7A9ULL, 0x6DFEC318692CDB3BULL, 0xCEED7EFB0D7F14E1ULL, 0x5AD20B7C8D23AA30ULL, 
-            0x2FFE7D791C4A5119ULL, 0x405D1F7C2A8E5D8FULL, 0x2671AF8CE3A46C3FULL, 0x26FED6188899EA17ULL, 
-            0xFA02F31F5F7B1BEEULL, 0xAAAF71F13FFF6B85ULL, 0x76427EA6F2442388ULL, 0x1F4A7598D7873B65ULL, 
-            0xB2FB6D43EA76D62CULL, 0x2531E57A93813175ULL, 0x1217671A1997BEFDULL, 0x322BD82A81155158ULL, 
-            0xBF6E5C3B2E97D150ULL, 0xEE31CF715168B24FULL, 0xE12F0D6ABC0BA2E0ULL, 0xEB2428D58DC2B510ULL
+            0xAA12FBC2915ADAD3ULL, 0x991D2DD9188D1EFCULL, 0x209A7A102DDA0AB5ULL, 0x94475BCB08CC6B8DULL, 
+            0x3C7EA5558C8AA36EULL, 0xEABF08D345ED4659ULL, 0x6DA135E07F7660E6ULL, 0xE163C0CF5D7FE26AULL, 
+            0x54C9B5DF8C812D9BULL, 0x1A9990437F6FBDE0ULL, 0x06988B1845DC18FCULL, 0x2D6F88B24AEDF56FULL, 
+            0x95C48C98C677111DULL, 0x73D895D7F19471F8ULL, 0x773407A16FDB1F38ULL, 0xCA050C4596BE9D5CULL, 
+            0x035385B2C0EDB0BCULL, 0x87CD44E34AD278CEULL, 0xE944E5E102ED694AULL, 0x6BAFDAD69B47B2A1ULL, 
+            0x99F6DB7EFE6D386EULL, 0x0B9B01FAEC792574ULL, 0x34DA13AB5F6A1A0EULL, 0xE3E9D114B808AF63ULL, 
+            0x6D6FE5CCEB6F75A7ULL, 0xFBF14F32631A9EACULL, 0x3F3A126F63B96889ULL, 0x2A445F705E489B1AULL, 
+            0xBE5A528F3799C2A0ULL, 0xA45893BB90EC3C4AULL, 0x63E08A5046656BFCULL, 0x89ABA269FAD348E4ULL
         }
     }
 };
 
 const TwistDomainConstants TwistExpander_BasketBall::kPhaseEConstants = {
-    0x4F29E4371700FB56ULL,
-    0x64619D5290B02B1CULL,
-    0x68A133144B3A8573ULL,
-    0x4F29E4371700FB56ULL,
-    0x64619D5290B02B1CULL,
-    0x68A133144B3A8573ULL,
-    0x966CAB7FBE8594A3ULL,
-    0xCE381A498DC842CBULL,
-    0xD6,
-    0x42,
-    0x0C,
-    0xF8,
-    0xDD,
-    0xE5,
-    0xF0,
-    0x64
+    0xBA7F954D9C91DCD4ULL,
+    0x8B82FD3269650B58ULL,
+    0x538152FC3351709FULL,
+    0xBA7F954D9C91DCD4ULL,
+    0x8B82FD3269650B58ULL,
+    0x538152FC3351709FULL,
+    0x50E89C87A101B46EULL,
+    0x0D8C50EFF1F041E5ULL,
+    0x27,
+    0xD7,
+    0x07,
+    0xB4,
+    0x44,
+    0xA6,
+    0x0D,
+    0xD9
 };
 
 const TwistDomainSaltSet TwistExpander_BasketBall::kPhaseFSalts = {
     {
         {
-            0x3285DAFE0B0FA60BULL, 0x1585BF346AD59675ULL, 0xBDC95958D32A59EEULL, 0x0BB7084F6AA4FDA8ULL, 
-            0x4CA7A8E67CDF762AULL, 0x9031E7089E25C9E3ULL, 0x1EFBBDB5F64F6A44ULL, 0xAF40E9CB6C1B1B5BULL, 
-            0xF005F2D6126858C0ULL, 0x442F20C940E11763ULL, 0x3AA88328485E0127ULL, 0x30BD2B29DED43121ULL, 
-            0x883EE3FE0AE293EBULL, 0xF947686BDD19D621ULL, 0xB02A7C23B41FB441ULL, 0xC1E32EDE886B21A5ULL, 
-            0xC635C8333BF4A9A2ULL, 0x239CEC01D806C3DAULL, 0x669F9C760F54D052ULL, 0x1212333AC2B0C279ULL, 
-            0x3D10EB0BEF03051BULL, 0xE2314ABC71AEE6D9ULL, 0xA799270234DEAD04ULL, 0xD8B23396473B976CULL, 
-            0x3038C55E28B87E51ULL, 0xCB1E80268FD7D87DULL, 0x6BD2789DB0BBD528ULL, 0x6F9EC1C7BF38B089ULL, 
-            0x46AD7EA1C70D8DE4ULL, 0xBA72C321D4086647ULL, 0x7BA405D01A3860EAULL, 0x3062C4FB499C4662ULL
+            0xB97E022A226AEDF4ULL, 0x7A2DA78A3FF498B0ULL, 0x1A7159B84F4F488DULL, 0xFB9E7373FF788DF9ULL, 
+            0x0AE52EBCE2BCAF8AULL, 0xBBDED998834B38A0ULL, 0x1FF31F2AF4797A65ULL, 0xF41D643EB1938E0FULL, 
+            0x4AFC2C51E24F2F03ULL, 0x275C05C8448FF0DAULL, 0x052C741DA02E6BA1ULL, 0x392B7AE330C5FB41ULL, 
+            0x97CC3307547AFA06ULL, 0x0F3615825AB6F758ULL, 0x4840CCA02C0B80E5ULL, 0x21EA6DEC5AACA952ULL, 
+            0xC56E6D4B91572E95ULL, 0x6F3FAD1AE8F65EAEULL, 0x2C49989C110A6784ULL, 0x376761033DC2EB45ULL, 
+            0x0168B1E54EF386A2ULL, 0x4C1A9C4C4CEF9DDFULL, 0x04485A786E0B94D5ULL, 0x29A78D2F71F83588ULL, 
+            0xB038D97F11C6D5F9ULL, 0x68C28F20DA99B974ULL, 0xB1D60663A4C44A79ULL, 0xC7D7B6072F74A12AULL, 
+            0x12A4FA78C941E003ULL, 0x7C1D29CBA373C7FBULL, 0x344E3521DC292F3AULL, 0x771837B20A9A48D4ULL
         },
         {
-            0x8661AA79D169A202ULL, 0xAE7E924D54F29640ULL, 0xF92E7069500574F3ULL, 0xE96058F4ECE209B7ULL, 
-            0x7F1FD8381E9F98CBULL, 0xC89EFC708D261F3FULL, 0x8A2020B64A64B03BULL, 0xA51740541A376921ULL, 
-            0xC28525DD7357D590ULL, 0x12D440349A5BD380ULL, 0xD688FAAB5EF1153FULL, 0x3ABCEC1472FBBF13ULL, 
-            0x43F4BCB747459FE3ULL, 0x4917695E5D4A661BULL, 0x628CBAFD522CF414ULL, 0x12EF7838A36E1954ULL, 
-            0xEEA344A55033C034ULL, 0xD306D17C47657C5FULL, 0xA227458F7FDD8243ULL, 0xB700AAD122DBBF02ULL, 
-            0xB8EDA20374B9E7FAULL, 0x4120C5AE0468B1FBULL, 0x7FC634111CB882C5ULL, 0xB775F3E8E84B6D7AULL, 
-            0x6B75819EE4949759ULL, 0xEB5A712B53FADF0EULL, 0x2FCD358DCC72F725ULL, 0x29DE44AADD5D4F7CULL, 
-            0x7425A47B6A043DD0ULL, 0xB9C14EA25506AAA2ULL, 0xBB5DA3B999A09EF9ULL, 0x76F75A5143315375ULL
+            0xDEA3622E6B45D12EULL, 0xE0E7709368C4920FULL, 0xA1BC749D7142626DULL, 0x421FE10781791032ULL, 
+            0xE5FD561BED8B1598ULL, 0x274F34306B7139D7ULL, 0x0D830215642AF0AFULL, 0x4E7CE5754566C087ULL, 
+            0x3FD173E3E4A8D66FULL, 0x800F4DE6184F5125ULL, 0x75CFEC8A24274978ULL, 0xA400021B7C01891FULL, 
+            0x186D8C43E116F842ULL, 0xACC9C892936396E4ULL, 0x7D6D33E456330653ULL, 0xDEBE86B442597609ULL, 
+            0xD0B41D1A95090A17ULL, 0x1B6B03E0AFDE0B10ULL, 0xD4C104F6F1B8C7DFULL, 0xA5C1E491682019EDULL, 
+            0x8D78FCFEE2416895ULL, 0x38EA85E6DE0311ADULL, 0x2BD2C0DF11035769ULL, 0x882E9521535013B2ULL, 
+            0x21CA6BD4A8BE0A4AULL, 0x23BE2E7DFE1B07D7ULL, 0x8AA95FE4ED826B24ULL, 0xA3F64CBA0E429F38ULL, 
+            0x345F90CFC37F805BULL, 0x432F162A411C5DD9ULL, 0xD5D86F9510D7CEF5ULL, 0x412E80D9DE0597AAULL
         },
         {
-            0x8999F3CC1080A8B6ULL, 0xD97FAFC6E06D30DCULL, 0xABA43828205B8AA9ULL, 0x5DEBE866BAADB03AULL, 
-            0x0512D5C754E71CC6ULL, 0x1A0F12D5A907800FULL, 0x6CFF2D159B892E73ULL, 0xEBFEC1E4C32726DAULL, 
-            0xBC074195C457F522ULL, 0xB20C5180F11D0880ULL, 0x65BE66A17468D5C4ULL, 0x81811499A5B0BCF5ULL, 
-            0xBA5FE3CF4DFBB738ULL, 0x7CA6B373E9B8694BULL, 0x83F77BDFAD28CE35ULL, 0x591F9707F7567356ULL, 
-            0x5E41AE3C4523B0FAULL, 0x5A196C7E62A753D9ULL, 0x593D1BB0B7D8DF4AULL, 0xBAFEC418FA289C3DULL, 
-            0x36C83A8D05E6FCF2ULL, 0xBDC166A858F1002AULL, 0x83F0A2C19EE9C837ULL, 0x908D852A0CDE227EULL, 
-            0xDE3F5F2F834163CFULL, 0x4AC4675B83A2D745ULL, 0xBF7773AA35F46C5BULL, 0xA6B26A7904E30610ULL, 
-            0x0C8FC5C04FF157D2ULL, 0x6485B911F1743FFCULL, 0x576723C85DFB87B9ULL, 0x39CD3942D75948FBULL
+            0xDA9828A40A55F16DULL, 0x936F2EA6CB14FE5BULL, 0x4E546CFABD372CAAULL, 0x31311283977650E2ULL, 
+            0xED9BC75CCC5EBA70ULL, 0xF992580792140D2CULL, 0xAC169DFCD04EFAD2ULL, 0xC93577CF0819BD31ULL, 
+            0xA9D7E42CAA2BFA80ULL, 0x1A46B4E60A118F76ULL, 0xD04F4806F38357A7ULL, 0x29B4FF04197B0277ULL, 
+            0x49904E5F681F347EULL, 0xC2C43F7F58D3F63FULL, 0xF0BC5631345715DFULL, 0x6B31E3649AA00C67ULL, 
+            0x54C942891D3C347DULL, 0xB2F805A724FD3843ULL, 0xDA825DDBC7B4BAE2ULL, 0x6CFB55A5592BE214ULL, 
+            0x422263E1267F912FULL, 0xED93AEAAB2A669E0ULL, 0xFED0353535E0C97AULL, 0x244C69E9C1A6F72DULL, 
+            0x5D558774F70D58CFULL, 0x3F1C99DB25F58492ULL, 0x29DFFA05309FE273ULL, 0x9F081EB801BB5B33ULL, 
+            0xE724F48B19DF2AECULL, 0x476FDF2238A19C87ULL, 0xC5D82BB8C70F2B93ULL, 0x5E0F9806350DE2C3ULL
         },
         {
-            0x3DCDCFEAD75D1651ULL, 0x5F6B843F9715031BULL, 0xCA38FB7F998CC422ULL, 0x1287529C706E9EF1ULL, 
-            0xD91CF801AE5FA759ULL, 0xEAFECB025C04D97DULL, 0xDFD9DAA00382175AULL, 0x89886A85705F3BAAULL, 
-            0x8A8BEE9F89048B38ULL, 0x0BAF305F4538B0E9ULL, 0x1FE521C0253832FAULL, 0xB2A2A54F8BA9F83EULL, 
-            0x3780429EACF145CDULL, 0xCC657A34B7EB6F72ULL, 0x30423597462E23DCULL, 0x14CD27760CFB0DECULL, 
-            0xBC582DB792BDF313ULL, 0x4B8725C7325344ADULL, 0x83D08A9696178A79ULL, 0x0ACAB1FE956D8147ULL, 
-            0x151E60BC2EF5C4DFULL, 0x6413111FCF602420ULL, 0x8569906A975B038FULL, 0xE4C617AB8BFCA791ULL, 
-            0xDC1C8EA85469C5A6ULL, 0xDBEC2A6E5CB4BC4FULL, 0x79DE4AC807CA5CC3ULL, 0x5C746DA8A7B34A06ULL, 
-            0x595F7B5C779EC985ULL, 0x330CB8E471E13BA4ULL, 0xAE2BC9DB3CB141CCULL, 0x291EA72D9CA5D921ULL
+            0x642CE667E5838923ULL, 0x9C5896A8CB1A10EAULL, 0xAF0BB51D8E33B7C0ULL, 0xB5EA6A9F6B80AA7BULL, 
+            0x10B3340E5F040499ULL, 0xAC2708FE7EAFD962ULL, 0x7C37578CDD2D50DCULL, 0xE0D2B0450D6F025EULL, 
+            0xD7EF5A33028A0146ULL, 0x118AC6C739792AE0ULL, 0xA38A1D69A1D3CFA6ULL, 0xED20FD19C8DC9F1FULL, 
+            0x48F2478EACE35733ULL, 0xA0DF5C7F3C56A8DEULL, 0xA4AAD7F97B972588ULL, 0xD8E23CBDAE4C2396ULL, 
+            0x56C589943C0D9722ULL, 0xB75C63D6F7038315ULL, 0x7E0AAA89E03522BEULL, 0x5EE95F7407D0A116ULL, 
+            0x94CB9467AD180B87ULL, 0xB4C8E469D6CAB6E6ULL, 0x7B755A88F908DCACULL, 0x61291FD67C328230ULL, 
+            0x29B1E855AEA416F0ULL, 0xDF71CE1C3241BF24ULL, 0x83300FBBB470680EULL, 0xC0A33E2A7CC1E858ULL, 
+            0xF428AD2C3583885BULL, 0x56B69CA5FC5B7492ULL, 0x94143E171BA4A66EULL, 0x2EC5C63A6092BE5FULL
         },
         {
-            0x4B871EDA219BD58EULL, 0x6A155E5FFE221F65ULL, 0x71AA3AD0CF5D7E23ULL, 0xA9B192830972A449ULL, 
-            0xD96040DB1483FED2ULL, 0x51A1844EE31614AEULL, 0x5864FEEE74C9EC54ULL, 0x52FFE84BE4065C17ULL, 
-            0x28EA7BB5738EB23BULL, 0x8B7B3CF15FC6836DULL, 0xDE9D6FF9033061B1ULL, 0x565B6CDAACD9EC95ULL, 
-            0x0B1F22649ED57318ULL, 0xB9F326FA6782DF1FULL, 0xD12A401204C59DC3ULL, 0x09B34EFFF7CB0965ULL, 
-            0xAF4587BFCAB93C7AULL, 0x44618099EDCF6103ULL, 0x3203A6E89CEFF798ULL, 0xF2489C97552D48C2ULL, 
-            0x22B1D96793DD3C55ULL, 0xAB799063508DB8C2ULL, 0x3BCC9A86195740A1ULL, 0xA424326611648F68ULL, 
-            0x6F772B2E44B1D1C3ULL, 0x58A46F9561343CCBULL, 0x20016F67EFC209EDULL, 0x83F412188BA61591ULL, 
-            0x2F96314559C0F176ULL, 0x25A4FCDE8F4572A4ULL, 0xA08856C6EA1CC15EULL, 0x8631E69240DEFD4DULL
+            0x97652536F108AC04ULL, 0x5D4F87554BB47FD3ULL, 0x4A9D6E88CE313433ULL, 0x1C6C3ADF5BE91E79ULL, 
+            0x8F892CDDB3F89614ULL, 0x5058AD3ED32A3195ULL, 0x563D19C25EBCD7B9ULL, 0xC36ED8F5E201F7B3ULL, 
+            0xBF8129633D35BCB3ULL, 0x9403F0315501A8D1ULL, 0xBBBD2FDDA20AAC15ULL, 0x891844C3685B8871ULL, 
+            0x32370A1E9587A093ULL, 0x8DE67B932B868A0AULL, 0x260FCB62B1B3FA0FULL, 0x5D5A355ECE02ABE1ULL, 
+            0x7F85E3BCADEC1C78ULL, 0xE24914B0B3C94D63ULL, 0x409288FD3729C2DEULL, 0xB79F6FB9E76BE334ULL, 
+            0xDB1A83008EC75A3AULL, 0xD55B89BC26C20DB5ULL, 0xAA51A99BEF3B41DDULL, 0x944D45A541DE9153ULL, 
+            0x8CC3C2AE44DD7BD3ULL, 0x3CAD0E1AE24B3C40ULL, 0xE888BD41CAFD45F8ULL, 0x0D03DCDA281380FDULL, 
+            0x467E9D59C93B611FULL, 0xF9B40EE77BC9BA67ULL, 0x59070CCBA444B7E3ULL, 0x9565B2E08E78237FULL
         },
         {
-            0xC3D6B59DC5409BCAULL, 0x31C941B3BD82979FULL, 0x1041DD56CF8B7FDDULL, 0x2E327050BC837CDFULL, 
-            0x565C8B1D64804FF9ULL, 0xDAB83158C595D93EULL, 0xD2FAE0A6E1D2A4CBULL, 0xFEA90D264939D220ULL, 
-            0x986C252895008C7EULL, 0xDB90781156764225ULL, 0xA5207CCBEC9CAA69ULL, 0x87A7CE13C95554BDULL, 
-            0xD3F22546AF4BE492ULL, 0xE32D0A7A8FC1E299ULL, 0xE4A02C0D424AD465ULL, 0x689BB6160511C694ULL, 
-            0xDED1485B0793F817ULL, 0x32ACCE7D2C2CBD80ULL, 0xD1C4B441799F2EA7ULL, 0xFEE25761C2E07F86ULL, 
-            0xD7F5BB0EFCF70A87ULL, 0x9186EA00391067DDULL, 0xE4BF4EF2D2453CD9ULL, 0x4C30DD93CA487598ULL, 
-            0x07A3660B5FB7261AULL, 0x46664858660F2E92ULL, 0x6BF1A7EE791BD635ULL, 0x8B6734C12BCAECDEULL, 
-            0xF20D87D386C082C6ULL, 0xAD4448AFA367B761ULL, 0xCAA1533FE5680CE0ULL, 0xD1F3603743E5D84EULL
+            0x148ED527DEF6B4C5ULL, 0x78E177795D7F9F1EULL, 0x183792FEACD99FD5ULL, 0x286A7227905D899EULL, 
+            0x2D26CA30336C5BB3ULL, 0x180CAA7575957AADULL, 0xA502DCF650E09300ULL, 0x1D46AE1332DB576EULL, 
+            0x37964C5600D281E6ULL, 0xD0183E80222225A6ULL, 0x58596ED6022FAFE3ULL, 0x8E6CE9A5DD842688ULL, 
+            0x15EE0E06872104A6ULL, 0xB40D39D759E98646ULL, 0x63C9D2C4FC03EA3DULL, 0x9D143FDA77BA804CULL, 
+            0x5A816679D1D95E97ULL, 0xE3A81528BC5449E8ULL, 0x506A1B28AEF40B66ULL, 0xFB381C6F5770F29CULL, 
+            0x92E520617B885344ULL, 0x8300A865D54CE23AULL, 0xD0CE34D9D3FC5FF6ULL, 0x82D692CA9565317CULL, 
+            0x08938865EB66056EULL, 0xB7CC2E9D847B4E55ULL, 0x7DB0DF5D1546D427ULL, 0xF4FCE74CB0BFDD60ULL, 
+            0x7901D8390DA12E41ULL, 0x387AF2E6CE4D45D0ULL, 0x40F5E81586ED0CABULL, 0x4B6D9BFBF9A92DEDULL
         }
     },
     {
         {
-            0x80E338C9A3AF6092ULL, 0x52D2833EB9A7A1C8ULL, 0xBDEAE3C27017D0B5ULL, 0xCB06323E4FA53488ULL, 
-            0xD831AACA469D77F3ULL, 0xFAB9BC7EF3586509ULL, 0x641DF91F287BD3EBULL, 0x43D7C695A86136FAULL, 
-            0x10C1C1F626675ECEULL, 0x6ED825BDCA9EE1AEULL, 0xEFF21DE6A8FC0BC6ULL, 0x5F475809B61D4C5AULL, 
-            0x6EE91C8E768C7B43ULL, 0x811E0CFCE8C8F0BEULL, 0x223471D8DF31C66BULL, 0xC26E81153AB1EACBULL, 
-            0x001ACC14EFA7DF4CULL, 0x3C4082B7C4618D1DULL, 0x8B9EF54D6B4031F6ULL, 0x9E00ED58321DA4EBULL, 
-            0xAB6D1996D1759D6FULL, 0x8B2FA76396F149F3ULL, 0x530BE690AB7EEDE6ULL, 0x7953EF75452FCE5CULL, 
-            0x01A8612423F959D0ULL, 0x2F1C92D186AAD3BBULL, 0x054D115426B02B25ULL, 0xAADF6573078BD564ULL, 
-            0x8E0134D58D0B7786ULL, 0xB787F0E4A6002E42ULL, 0x9B47CBF83738239BULL, 0x0DA6D07292735155ULL
+            0x309D0CF682258291ULL, 0xF051C100359A9619ULL, 0xA866039CEBB9E94EULL, 0x6980EED126D10C89ULL, 
+            0x094ABD87BD6E6A67ULL, 0x5525923489EAE724ULL, 0xD6331CFDD65CFD77ULL, 0x0B0C7D03B672BDADULL, 
+            0xD1B75F4081296BD9ULL, 0xAAE98A2394650128ULL, 0x0857375C8166AAB9ULL, 0xE8A39B642773D22EULL, 
+            0x2C4BEB7EDC008929ULL, 0xC8869E47D4F8B6E7ULL, 0x9D16A2D290BF8342ULL, 0x6FBCE0006FCD2B66ULL, 
+            0x4BA4746D5F520106ULL, 0x30236E90D2E08299ULL, 0xB7DD71045ABC7ED6ULL, 0x667214325CF6BC7FULL, 
+            0xE849CE2236C181EEULL, 0xC1017112A08F15C6ULL, 0x584DC49AC3BE0D2BULL, 0xE6F800D686E57F72ULL, 
+            0xF004D6C471DA4455ULL, 0x49A2F7CA5178C1B5ULL, 0xB20D2E78FA58D1C0ULL, 0x2E03AD872259E8CFULL, 
+            0x920BCCF74784A9E3ULL, 0xC25234B11BEE0DE5ULL, 0x01C9C2520A024360ULL, 0x656A98CA7C172DCFULL
         },
         {
-            0x334656B64742A7C0ULL, 0x67AFF69A9D0743C3ULL, 0x96C07198B010717DULL, 0x56A6E0B2480D01EEULL, 
-            0x450C1D77BA3E96D8ULL, 0x57227D5AD24917EEULL, 0x0887762717BA4F92ULL, 0x1005A68E68957DF4ULL, 
-            0x3339685501605A3DULL, 0x8559B6A112D1A9A3ULL, 0x192F09F885191D02ULL, 0xA6C12DF3BFEFC546ULL, 
-            0xCE7CC0DE5A704DEEULL, 0x1DDE468EE3E33732ULL, 0xF38A87EA73A4D4A2ULL, 0xFEB4AC1A8E9483E0ULL, 
-            0x9DDC90910BA32C36ULL, 0x36335EE6988BE602ULL, 0x49DA0C65C551F9E6ULL, 0x017FDF99640F1723ULL, 
-            0x7C3BDF8BF2ABA371ULL, 0x3D10B52746160BD9ULL, 0xA8728B1A48B9BB0FULL, 0x87EFFAD7112EED69ULL, 
-            0xF4A2090A0D0EA716ULL, 0xC455885B1312D737ULL, 0x7117599720FFAFFEULL, 0x2596D987ADA424E3ULL, 
-            0x4DA325F8A18283FDULL, 0x6A7A6CF187B9A59CULL, 0x7464DD51F7726569ULL, 0x53407CCF871AC019ULL
+            0xCD3A09105A5E3E56ULL, 0x0E71EC2CD62782ECULL, 0x0751BB27433678DFULL, 0xB5EC33A9F4899FF3ULL, 
+            0x8793AF4F27E748C5ULL, 0xA5747ACAA2DC02C4ULL, 0xD88190A62DC95B06ULL, 0xC57A87EC7B643A3EULL, 
+            0xBFA405A5DA4689FBULL, 0x1E79F2FA2CDD59A7ULL, 0xDA83775E0EA9B2CDULL, 0x3AF95E773EC08C9DULL, 
+            0xF7D74E9290A38832ULL, 0x8E529273392DF2EFULL, 0x27DD05DAC7AC9338ULL, 0xB17A9FA30D06EB89ULL, 
+            0x685E7C5EAC981F30ULL, 0x12177DFA045E86BCULL, 0xEFACB2A6F40353B5ULL, 0xC4678B9ED0D384E1ULL, 
+            0x5C7F8EE618DF4EE3ULL, 0x33E21F3DED86E893ULL, 0x49435185B15618AFULL, 0xBA52D6A81870D45CULL, 
+            0xCAC16CA2E475428BULL, 0x9149237FE442F152ULL, 0x2AC34931746C998DULL, 0x563FE4941CD0D0E4ULL, 
+            0xE3AA1D8BEF19DD88ULL, 0x6AEF5EB8D802A9FDULL, 0x59574FC07E657DD9ULL, 0xEE038D0864A34362ULL
         },
         {
-            0x4F8DE3660E8364FEULL, 0x47EC419B6E42C205ULL, 0xEA6317DA70B30E7FULL, 0xC9AD0D5ED8502A85ULL, 
-            0x8D05FD3A06D4BE66ULL, 0xC7B163E543135C8DULL, 0xAA21A617C885452AULL, 0xB7F942761BB801A0ULL, 
-            0x31196691254726CEULL, 0x27D85DCB441F02CBULL, 0xFF8F6952A5243761ULL, 0x48F8450D0A07D22EULL, 
-            0x9A54C3AA01D6AA68ULL, 0x6900B989140256C1ULL, 0x5F372E882373DABFULL, 0x86431C01552A7641ULL, 
-            0x1EAD7D63FBE0124AULL, 0xFC909FC7E55A3C73ULL, 0x0842B92480389CB2ULL, 0x71F87A0FFBC4405BULL, 
-            0xFB7D21DD7CE14698ULL, 0x2F494799F68C4CA7ULL, 0x0CBC7D935AA7DE8FULL, 0xF02E123F05389904ULL, 
-            0x9E2E6384915D4198ULL, 0xCCE3DC1621BC9D44ULL, 0xBF4FB4B2A8E13A34ULL, 0xBED0888F00CF479BULL, 
-            0xD86ED0152AC78488ULL, 0x5CDAB711055803E4ULL, 0x3956D405141B6CE6ULL, 0xF199251C352608D5ULL
+            0x6FAD243D12278AE3ULL, 0xB7D99D948E0921CEULL, 0xF59BE6D958E9BF88ULL, 0x304E0605960841B8ULL, 
+            0xD034B012689040A8ULL, 0x4AF20C2426C43B88ULL, 0x729FC084A85091E3ULL, 0xF423100D7E8772DAULL, 
+            0x296401C0ECD3FA51ULL, 0x7BFCB713A27DD984ULL, 0x2384B24EB9FC56BEULL, 0xD61A33EDBD59C969ULL, 
+            0xB390D2CA2D6911FCULL, 0x745A875B8698923DULL, 0x774E63204A647405ULL, 0x57122EEBB649E0A4ULL, 
+            0xAF5FD754AC8B9CD5ULL, 0xA82B27700FC10CC4ULL, 0xCF2649D7704FEBA4ULL, 0x75DACEBFA135138FULL, 
+            0x2657D60D73098A08ULL, 0x75452FD10A975CB9ULL, 0x3F7C1555D781331CULL, 0xF521E7091EE340EBULL, 
+            0x4170D8EB024EA5E1ULL, 0xC099D4BC40CE9E01ULL, 0x10A404231D7AE368ULL, 0x6453B0490F624938ULL, 
+            0xBC77EFE80000D9B0ULL, 0x6B649142BBAE80ECULL, 0x9FC014122F8EA8ACULL, 0xF4608D7FAEB21EBCULL
         },
         {
-            0x996CD4BCF59ADC7FULL, 0xA7BAC6D934E21F55ULL, 0x77CA4537212E99E2ULL, 0x6C137B5DCACFD347ULL, 
-            0x6444FE71F3EF433EULL, 0x0021A918EC4E32A7ULL, 0x4AD20A02568D63B9ULL, 0x29DCAD32B8A81644ULL, 
-            0x26A828D527049FD4ULL, 0x0616E734629D20AFULL, 0xEF8B7AA69B5EB2D9ULL, 0x901402D7ABE69637ULL, 
-            0x796E1B1D6D986D56ULL, 0x1769FB758EB95D3FULL, 0x847970FDB23C5F7DULL, 0x429DCE0E06CD62F0ULL, 
-            0x39BC69C499E556F0ULL, 0xDD1C1333A19AC54DULL, 0xBF0FA6FF24B63D0CULL, 0x2B82A6B03DC1C967ULL, 
-            0x4FBEA1EE9494A131ULL, 0x1DD59048138424AEULL, 0x75C37AB8B507153EULL, 0xA209C8BC7400C262ULL, 
-            0xE94A29382B886552ULL, 0x12DD568C21668A19ULL, 0x743733B8E79277E7ULL, 0x6C1313BE222502E3ULL, 
-            0x891C2F7EF3118341ULL, 0x2FC2E110D8B3B067ULL, 0x304CFCE0BB2A714AULL, 0xE264EDB898922681ULL
+            0x2D4F918EDD6536DAULL, 0x27882A3419171C3EULL, 0x0D64520C3E9857DCULL, 0x1215FB9239A0C754ULL, 
+            0xE8593395B5998E1CULL, 0x1416D0DE918CC953ULL, 0xCF3D57AEC1528544ULL, 0xF5AE82439A7B1FD5ULL, 
+            0x21F01B93B7BB446AULL, 0x766A9A36FB54DBE4ULL, 0x7A886EBDED141C3BULL, 0x2568CA03C994B9AFULL, 
+            0xF31414B5ADA58732ULL, 0x010243910F276476ULL, 0xB5C262C30EB4A16AULL, 0xE3D2FF633A0EC745ULL, 
+            0xC25E4699F8E0CD57ULL, 0x74ADBE911D1BD436ULL, 0x30DC2BA10ACAE3D5ULL, 0x2BE0A89368044495ULL, 
+            0x25EA75EC02511378ULL, 0x1E7B7F92CEFB5073ULL, 0x0B8790F5BDC92F20ULL, 0xC2C361059BF15CB3ULL, 
+            0x6BDBA095261B0D50ULL, 0x87FAAFD86FACE3C5ULL, 0xADCE8A4EC7CD2614ULL, 0xA5C4FB2A2D7F9318ULL, 
+            0x771235CBE1D5C199ULL, 0x2EACB94CA6DE784AULL, 0x205017EE2C1750CDULL, 0x1E9A859705FEF47DULL
         },
         {
-            0x9A3D561D1CD4C528ULL, 0xF9D8E2165801FD07ULL, 0xF2B64F6701F4A9B7ULL, 0xC04B235640B76669ULL, 
-            0xA23C9200F7C94885ULL, 0x5C9FC11DCE4BDB34ULL, 0x466DA44C0F745613ULL, 0x874B850F9B205E79ULL, 
-            0x57C65FFE2EA16FDDULL, 0x8560EE7DBE54467EULL, 0x2697F433E19BA6BDULL, 0x00E1777B0DBEB420ULL, 
-            0x3DDC2E3622BB8E65ULL, 0xCD1589AC49F48E88ULL, 0xCF913791F35A05CFULL, 0xDB323010BCA6EBDBULL, 
-            0xD51913E84F72B347ULL, 0x4F7359AAD6E551E1ULL, 0x53F33AC10D8DC849ULL, 0xF603C4DC439F48DCULL, 
-            0x6BD3E0286EE6CC65ULL, 0x5AC20797E1BA68A8ULL, 0xCFDE2CCE499862F0ULL, 0xA2A03A80FC87F2D3ULL, 
-            0x547465B13A5305ECULL, 0xE99B1735195631C7ULL, 0xC018ACAE0A5A025AULL, 0x1C13173E18B32137ULL, 
-            0xCFF52FC40166E1ABULL, 0xAB5957A1CEA6DEF1ULL, 0x2D6B459F3218A6FBULL, 0x39A8D6F81A8D5DDBULL
+            0x5E37038683CFD2D9ULL, 0x2C5B4FF60C3D7CA5ULL, 0x0A43BB388544C3EBULL, 0xFFDD439626DBFBDDULL, 
+            0xC57337C5CA949823ULL, 0x9EE9EE221934C66AULL, 0x27F08137A55A732AULL, 0x65006359065F3938ULL, 
+            0x95CE3344AD7186A3ULL, 0xFC28849B7301581DULL, 0x4CC681BE062D0DC8ULL, 0xBF2E9ED7A673F57AULL, 
+            0x269AEF1A46BAEA5DULL, 0xA5234DA4D60D9712ULL, 0x16939916AABEE69CULL, 0x7B18DB21D2CF47BBULL, 
+            0x35C4FF89CF1553CBULL, 0x7F14ADC405EF5225ULL, 0x61FFD6BB8F6E5E1FULL, 0xE9FB84F3872E1C0EULL, 
+            0x0AA56C9FCA1AA3ACULL, 0x0F1667CB6BECCDC6ULL, 0x33968CE76F3E11F1ULL, 0x4E7E112AEB16BF0CULL, 
+            0x715BA69841222C16ULL, 0xFBB73B3CEA2CE315ULL, 0x6D0C0E1C20C788E1ULL, 0xC4A8A2D795C2444FULL, 
+            0x70A8CB1F8D727351ULL, 0x56C9466231DDCA7FULL, 0x743A94D1D6467946ULL, 0xF79914FBBA246B49ULL
         },
         {
-            0xF240701F794136A0ULL, 0x1B2C7C2C1A339C90ULL, 0x695B7C6D95160A89ULL, 0xC7D3D9DCD53D0E2BULL, 
-            0x024B94529DEE1700ULL, 0xA94995D577D38A3DULL, 0x30B26232C5657385ULL, 0x95611EA15CBF8209ULL, 
-            0xF551B8F05ED042B1ULL, 0xDECF2C60554CA873ULL, 0xA60561991ACA518DULL, 0x0A00CB0DF79188A3ULL, 
-            0x2AAAF7FA631CBA13ULL, 0x0D861A04824E9CDAULL, 0xA58E1D6047704626ULL, 0xBDCDAD79F1934D11ULL, 
-            0xBF2B318C198F6039ULL, 0x3FA69E6BE36D41F8ULL, 0x185FEAF3509608F4ULL, 0x6B896E2AED07CF8CULL, 
-            0x8B5C613108194728ULL, 0x8274C8A0200B6436ULL, 0xF7C8F13803F0A5A4ULL, 0xBE9F195DF6CC48D2ULL, 
-            0x29C43E7C57AD354FULL, 0x922D5506A87B9485ULL, 0x5B014A6965F63970ULL, 0xF834EF7521EB83ECULL, 
-            0x042CC7CB6DBE5D95ULL, 0xE00A85F608185902ULL, 0x531D0F4A89925CF9ULL, 0xDB65FDE84FAE82B0ULL
+            0xCFD6E1F0257BDB16ULL, 0x4C9700E958E1C34FULL, 0xC2349CDDD55DDA43ULL, 0x61EB84486F124AFAULL, 
+            0xE5B2611799AD4F7FULL, 0x85BC2320189C783CULL, 0x78AA079836EA15A0ULL, 0x72917E77D3B1658AULL, 
+            0xC80DD50C5FCC7F4BULL, 0x0EBB1DB3D0D9D3C4ULL, 0x629B9C1B3EF4D60EULL, 0xBFCE9AB1ACF535E3ULL, 
+            0xF433DEB74359AFCCULL, 0xD8CEF51F96C7402FULL, 0xA1FC8E6AD04EB8F9ULL, 0xD4548C6602246483ULL, 
+            0xAA596204D3090C8BULL, 0x3FA334E9AD118CD9ULL, 0xCEE41CF2B7E89A73ULL, 0xE11F5BEF4F858F92ULL, 
+            0xB3A521FD9835B387ULL, 0xEC762A1BA9614FA2ULL, 0x0532071C026584F4ULL, 0x863F7826C497BF22ULL, 
+            0x415D9C459CDE9901ULL, 0xDAD98CE3FDFF1A3EULL, 0xDDEC169429BD0FCBULL, 0x7E4E8E33674D7774ULL, 
+            0x8329803D7FCAB7E5ULL, 0xC3C0298525A9A165ULL, 0x0A8929DBDF467D45ULL, 0x411387E318189718ULL
         }
     },
     {
         {
-            0x681A026C5C3645A1ULL, 0xB9E7D07888CAA1D8ULL, 0xFC46C41CB538BC1DULL, 0xAD71863231D63C51ULL, 
-            0x6BE9D52C70FEDCDAULL, 0x8DE849C86ECBC9BCULL, 0x6739C31217353DFBULL, 0xD19D4E6CD7552B63ULL, 
-            0x344410DB6B469418ULL, 0x4C53564875D11637ULL, 0x4380259685D3D36DULL, 0x34B8EBE046F64788ULL, 
-            0xE48B6E433D8F702AULL, 0xE0A74D6E8C1A0CDCULL, 0x1BE5FB6DEC792154ULL, 0x16B88A4D151EA698ULL, 
-            0x1A4A01AAECE88DAAULL, 0x83011D4C4909801FULL, 0xB552D81EA96A6D55ULL, 0x7B4DF676177589C3ULL, 
-            0x179271A4F4311B50ULL, 0x4C1E411AC7E16327ULL, 0x982C50996D9B72A3ULL, 0xFB9EA2CC208CD778ULL, 
-            0x9B5A41E5F5EE4E1CULL, 0xE74D3FA4A6426C51ULL, 0x711EBF2C7FFFA5F2ULL, 0x7C56F67928863331ULL, 
-            0x8146B05F2F3A939BULL, 0xA58CDDEEF5C910E3ULL, 0x105073286BDB6EDBULL, 0x215A4D3C0FA731AAULL
+            0xEB196EB758085B0CULL, 0xB77D198791F3C408ULL, 0x133DCD59785C053CULL, 0x7625100836BD3DECULL, 
+            0x0C96A99501EAA66BULL, 0x74BF9365694B9F90ULL, 0x387BC46BE0A02BECULL, 0x642534D171BC090AULL, 
+            0xE747C30AA2DC4C1BULL, 0x705D0E47E0129B5BULL, 0x660FFFBBAB3C2A66ULL, 0xC4F337910120D121ULL, 
+            0x729D17BAC362655EULL, 0x19113CE9EA49B0BAULL, 0x787B55462722D0E2ULL, 0x5BBC41A1EC36FDFDULL, 
+            0x767BD5DE8BD6B812ULL, 0x5FDE287FC945029DULL, 0xAE5C3E7E5AE97F82ULL, 0x301985A9769716F9ULL, 
+            0x4D2EACFB5A2F15F6ULL, 0x687D5A117AC37C9FULL, 0xB2FDC825FAF58F75ULL, 0x7D4928515C5B0433ULL, 
+            0xA4465AC719CF5AA1ULL, 0x681FFAFA6BBA0632ULL, 0x581B3C6ED2C696EAULL, 0x0AFCD09B3C40122DULL, 
+            0x00096C30D4311360ULL, 0x7D8BA71032B72F70ULL, 0x302A022962FEDBCEULL, 0x936CF07214D9CC23ULL
         },
         {
-            0x4C2245F5B88FAD44ULL, 0x21A02F0FD8D79169ULL, 0x747E07C8ACA1B691ULL, 0xF41DC4A7B04BEB29ULL, 
-            0x32C2A36F77DF4696ULL, 0x7CD69B488E6D2BF7ULL, 0xF420F4A719974079ULL, 0x4FABF77EDEA9D1E5ULL, 
-            0x206F47CFBDBC7EB0ULL, 0x81744C568605896CULL, 0x273F220D520D0D7EULL, 0x4CADF80B184E1158ULL, 
-            0x396EA19B18C573FBULL, 0xF2D44B51B2D97360ULL, 0xA0C48E5382823909ULL, 0x89D8AA0D855F53C2ULL, 
-            0x374A06D902D2171BULL, 0x6B4C75C7C891394EULL, 0x7AB8F552431C2AF8ULL, 0xB8D1AD3D7B9FBBF9ULL, 
-            0x9A0436BC70816139ULL, 0x3FB1DDBACC1A5F3FULL, 0x97870E03117F63F5ULL, 0x9E881595B5AD2A87ULL, 
-            0xC37908FCEA8B8EC8ULL, 0xBCF0BC69F3E9321CULL, 0xD3C6F51F6F9153E1ULL, 0xD79542EBBD295B03ULL, 
-            0x0E5990816F21DB18ULL, 0xF8E73486F4C4D07FULL, 0x9DE1E1D024626FDFULL, 0x9E1B1DA675F29E90ULL
+            0xE2F5CB9AA48876C6ULL, 0xAAC258BAD98C16CCULL, 0x5DB8E0979812E2D2ULL, 0x01381717E3E93D62ULL, 
+            0xBF2E5E93A6D99439ULL, 0xCA55C2BC6E28858BULL, 0x45C2B0A3FDDA7726ULL, 0x3078B73F535B7716ULL, 
+            0xDD83240EF791AC93ULL, 0x6E4A2C5354706D79ULL, 0xBFF4B6C0F3483BCAULL, 0x73EB85BE84587819ULL, 
+            0xA5D33DEBC80F993CULL, 0x8C3AFDBE87E8D98BULL, 0x5058A11376635DF0ULL, 0x3FA33E0F66F64B81ULL, 
+            0xE9E0D1EFFB86EE43ULL, 0x258A597A2596EF4CULL, 0xB252F208DFD6D4BEULL, 0xAF6E7A3F3839D624ULL, 
+            0xB20F7DCC9FD97435ULL, 0x3132CEDF19F04B35ULL, 0xC9AF2DA4F5E77764ULL, 0x6E37C8538F621BCBULL, 
+            0xBA43C4B51F96A033ULL, 0xEF6AA28A3A308301ULL, 0x1367DD32D23B66BAULL, 0xE16E8D3302FAC3B9ULL, 
+            0x41183393B5CA1BCEULL, 0xE13A5C3A67CDE56AULL, 0x3E7F9956BA12F51BULL, 0x3EBF716AE509BD34ULL
         },
         {
-            0x393E1BFE68F6FAC7ULL, 0xD2F0E28EF2C198A0ULL, 0x20476CB85DAE0904ULL, 0xB2F8AA11DE602A33ULL, 
-            0x7BFD9D6B9921B5F7ULL, 0x148A739D40572C84ULL, 0x09186B341F48EEF3ULL, 0xE1600E24DC501EB9ULL, 
-            0x1B3F925C160A7612ULL, 0xAC7263CE591315D0ULL, 0x4AD2676B773F94F3ULL, 0x359B8587E029F033ULL, 
-            0xB52E19EB183D8624ULL, 0x7F6DBE24EB4FC941ULL, 0x28116FBD78D8A8F5ULL, 0xE7710207C774E6D6ULL, 
-            0x8D5D077DF00604C2ULL, 0x53E4BF5BD5ED0241ULL, 0x66915D0F07F0F1BEULL, 0x26B9004FCD60A1E5ULL, 
-            0x0691CFEB714F764DULL, 0x6853169122C65B1DULL, 0x826483DB52EE61CEULL, 0xDEF594DF2DF815C8ULL, 
-            0x533DE3BAA85AEFA0ULL, 0x5A77B27F8E351864ULL, 0x39D5806BC17AB063ULL, 0x3540F6AEE54F4026ULL, 
-            0x32C1D046B45D2E24ULL, 0x6523F298A2195538ULL, 0x8F93E5933177DDA4ULL, 0x570FB36591A6CFA9ULL
+            0x40574D8CBABFEEACULL, 0xC8EAC73EF2925704ULL, 0xFD3249E6E43A7EABULL, 0xDD477675C4200B3DULL, 
+            0xB8AEF5E63BD9550EULL, 0x2E68D3B3475D6663ULL, 0xAB615A5EB71711D6ULL, 0x7AD522DCED49D961ULL, 
+            0x787D60CFEC178CB2ULL, 0x8D76933DCB6765E8ULL, 0x0993B58CAB753435ULL, 0x7158E5CAB604E6D5ULL, 
+            0xF4A1F77CC47ACE07ULL, 0x2E8B837153A2CB94ULL, 0x8133570BC4FAB9BCULL, 0xF4DA43EC9E667A15ULL, 
+            0x955F1380AA91C521ULL, 0x98B30B9F16A00FC9ULL, 0xFC4598B68C776547ULL, 0x93B134F6331A40DCULL, 
+            0xE91B0A0E8A5AD90EULL, 0x04E238FF9BB07D54ULL, 0xF03BE78422120734ULL, 0x2CC832DEED0131A3ULL, 
+            0x1381C271FC8CEB9AULL, 0xF478511AC566DA36ULL, 0x13062B4D0630F7FBULL, 0x313936598B4D4504ULL, 
+            0xAAAB4521E8C24EAEULL, 0x1C291371126DF004ULL, 0x173B1F51AB5A3176ULL, 0x8354072E13B3422AULL
         },
         {
-            0x8A6B056B6531D085ULL, 0xB6457E0D9353DD1FULL, 0x268F89A44A10696CULL, 0x15EC85BF502D666FULL, 
-            0x98FEED73F80AF41BULL, 0xE500599E2A2F5DE3ULL, 0x5A63C4F3FB38F7B9ULL, 0xB6920ABE936947C4ULL, 
-            0x3D9927941C54114EULL, 0xF50B1771CDB64545ULL, 0x010F51B45EF4CADCULL, 0x888BC21B50C2D1E5ULL, 
-            0x70B2E63286A98383ULL, 0x783CD3EE2D83C327ULL, 0x11A3F9185526371BULL, 0xC80EBAA6FFD4B42FULL, 
-            0xB597A5087F7888EAULL, 0x64FC7B017CFA79E3ULL, 0x9DFE9B4B76821ECBULL, 0x7134DE9B3C22905EULL, 
-            0xDD9023A5BDED835FULL, 0x95956795DE4A6DD2ULL, 0x915D17A1233B3C2AULL, 0x7CF910E5FEBE9EFAULL, 
-            0x14C66FE7F7FEF2C8ULL, 0x0A2CE03E65F21645ULL, 0xBB3B740789456838ULL, 0xEA3932DEDE17397DULL, 
-            0x849B3245ED220CBBULL, 0xCD50B08A51774DD0ULL, 0x8042E0D8DE4D673CULL, 0x32026409C74C49F3ULL
+            0x79A2F31534B69900ULL, 0xE6B3C4AE58029A69ULL, 0xFF22DAC8998D68FAULL, 0xBA4480D6EDD1B04CULL, 
+            0xE72EB56D98B22781ULL, 0xAD816C846CFAC46AULL, 0xCDF85EF36999170DULL, 0x2C4BB1DC1CA28154ULL, 
+            0xB134D7CED0A0536EULL, 0x761B9DC69CA8B64FULL, 0x3BFF7551F0632816ULL, 0x61CBDCC73E93C738ULL, 
+            0x3854181EB18992EBULL, 0xFC5EA8D5520587A6ULL, 0x327634A7F2256D36ULL, 0x273637535A8FA4DCULL, 
+            0x0E430ED46E853458ULL, 0x5540EBBD14FEA74CULL, 0x482E06AF47EB5B30ULL, 0x98A4D97ED388C31FULL, 
+            0x4C647C8EC8A5B514ULL, 0x6102BC9FF0331AF7ULL, 0x6A7433ED99F332E0ULL, 0x1B788875AAA85F8BULL, 
+            0x1303929D0081AC37ULL, 0xA3824CBF0F576A0DULL, 0xA3419CBCF16732C4ULL, 0x963BCDF3FCFBB6C1ULL, 
+            0xE523C8DB8C0E11ABULL, 0xDB44CBE0103B9D01ULL, 0xBABAE39C12161A54ULL, 0x24DC1E5D1AD399DCULL
         },
         {
-            0x0EDDA708A3691AA0ULL, 0x809C98FD50F63E7EULL, 0x2A757C93D2C2068CULL, 0xFA60CC67CC7B4B18ULL, 
-            0x7522318B3550FE69ULL, 0x2E542B4BB2101186ULL, 0x00B61333C2E39610ULL, 0x799FE4947D09A46CULL, 
-            0x37E096DC9E7F9C24ULL, 0xF5B076AED58544C5ULL, 0x34896DC526CB6D4BULL, 0x0F5BE6EBD4244FD9ULL, 
-            0x9AED41135D2F6EAFULL, 0xABCA0A94EE3494EDULL, 0x971FB30B8858B57FULL, 0x62938F51F08C9AF1ULL, 
-            0x8E937A6208BB0E56ULL, 0xD5D1EAF057C84CF7ULL, 0x53C3E0268B7E89B1ULL, 0xDC4EEF8E032DA11FULL, 
-            0x3DD1D5296E93A49BULL, 0x74F6E7C0702D2ABFULL, 0xE8E1ECEAF6FE2C32ULL, 0x649F0138EFDD4139ULL, 
-            0x1FC495535E29A917ULL, 0x24D7BEE85E3CEC86ULL, 0xE77EE520E1E05DFFULL, 0xFFC4D15E4A144A48ULL, 
-            0x9573479BB973AF8CULL, 0x689F4988D4230941ULL, 0x12EB4CE1C0854325ULL, 0x3B5EE45ED34323B5ULL
+            0x01A07CE4C0BAE082ULL, 0x8F993C3C7C912BEFULL, 0x54DE1C0D804BF85FULL, 0x31E89202A7B4D7A4ULL, 
+            0xCE829A3F971CA3F8ULL, 0xB5E56F91B512CEBCULL, 0x0374EFDF95512CDCULL, 0xEB8C7A44F7107F69ULL, 
+            0xB6FE7F3701F9A788ULL, 0xF1A8F5FBD9A4A887ULL, 0xDAA9DF80B5632EBDULL, 0x3A8EBE05413A596EULL, 
+            0xAC30F3854963B9A8ULL, 0x715945B07D25F5B4ULL, 0x1A7FAD63D6161CDEULL, 0x4A6A34B733E2FF62ULL, 
+            0xCFC428755915E381ULL, 0x80E9CA6494163E35ULL, 0xD9D788E3A7251E74ULL, 0xC503581877B6BF4CULL, 
+            0xDE9C2D47539C021FULL, 0xA95B12711FDA871AULL, 0xF56E46788C2D93ECULL, 0x6F38D4085D10D711ULL, 
+            0x69D3C2AAB620BA8FULL, 0x43CE7D139C7116AEULL, 0xBBB9CF779AFE01BDULL, 0x4BA49304F764BD45ULL, 
+            0x5E7240E1020EE4C2ULL, 0xBC676297407A408DULL, 0x431394C5FC0BD396ULL, 0xE2431331BDF6029EULL
         },
         {
-            0x8B91EEC1A771185DULL, 0xD6F0B2CA01970613ULL, 0xAE63C9676CE3842AULL, 0x498509B1F2CE2B61ULL, 
-            0x0E596613B68DA45CULL, 0x32022E972AB15200ULL, 0x9BA2AE1C86222C42ULL, 0xB5688A0C0BBB752AULL, 
-            0xAD4322F60AE1ED78ULL, 0x0070355395E164C4ULL, 0xBFC0ABCE3A784F85ULL, 0xAF034656947C6D97ULL, 
-            0x1E4EDFABFA6FE7D6ULL, 0xB76351086445B544ULL, 0xEBC6896D8A98703CULL, 0xF108865B0678AB33ULL, 
-            0x45A24E323DEBE03CULL, 0x4019C02B7473EC44ULL, 0x10BD6BEDDFDEDBD4ULL, 0xAC682BFA2DE55D22ULL, 
-            0x6A1441DC7716E5A5ULL, 0x19E3A328A9989409ULL, 0x627236A07BBE9C1EULL, 0x6780727994DC232DULL, 
-            0x2C94B01089A5C1FEULL, 0x766F8578BE8EFD07ULL, 0x00DE1D9824F2F12EULL, 0x674FF57FBF63BD4EULL, 
-            0x718A015A99AEE1A9ULL, 0xE68E46366D83B29BULL, 0xF9F9F77601072D45ULL, 0xBDCD3DA5DB41A4EBULL
+            0x0D630ED497D88466ULL, 0x390CBB79973BAA16ULL, 0xC8F21C572DD14BBAULL, 0x3882B91550FD1534ULL, 
+            0xFB20E198931D42D8ULL, 0x517713D348E55677ULL, 0x7056E1184B1FB4B8ULL, 0x74FEAF3BCEB030FFULL, 
+            0x2D0609B54B831A5EULL, 0x8D226B6F6109DF76ULL, 0xA9B1C83C2FF1060EULL, 0x8688AC18DCE8B56DULL, 
+            0x6BD4169D02ABAC42ULL, 0x44AFFFBA1DEECC46ULL, 0x90A039999B883BE1ULL, 0xC2D539B290C8C320ULL, 
+            0x466F24ACE232C501ULL, 0xFA4E8C6ECD1ADE15ULL, 0x47CEDFBE1CFC9AFBULL, 0x85613D06AF41ADB7ULL, 
+            0xD1CCB31ACC64D0B9ULL, 0xE651F0612B8C3F0BULL, 0x19E9AC879B04DF8DULL, 0x55177BBCE66B9EDEULL, 
+            0x59E5372051182FBFULL, 0xA43EB8BAD3D6549FULL, 0x2606C87266931369ULL, 0xA828070583B25712ULL, 
+            0xAE948312FC66DDF8ULL, 0x3A056F165666EF83ULL, 0x0F151799A1AD1D04ULL, 0x5B7D86A55103FDD0ULL
         }
     }
 };
 
 const TwistDomainConstants TwistExpander_BasketBall::kPhaseFConstants = {
-    0xAA96857182872D76ULL,
-    0xFFA848F6F490E9E8ULL,
-    0x2E5FADD9023DF511ULL,
-    0xAA96857182872D76ULL,
-    0xFFA848F6F490E9E8ULL,
-    0x2E5FADD9023DF511ULL,
-    0x5080DDAB4B41AE63ULL,
-    0xB6EA73E36CF2F8A0ULL,
-    0x67,
-    0x68,
-    0x30,
-    0x33,
-    0xFD,
-    0x5E,
-    0x43,
-    0xA9
+    0xCA2A95F3A6A546B6ULL,
+    0xCCF6F060F247C328ULL,
+    0x938341B292B66FA4ULL,
+    0xCA2A95F3A6A546B6ULL,
+    0xCCF6F060F247C328ULL,
+    0x938341B292B66FA4ULL,
+    0x292018D0BB132A6BULL,
+    0xF341857934B14AC4ULL,
+    0x3B,
+    0x7A,
+    0x84,
+    0x1C,
+    0x3B,
+    0x72,
+    0x7A,
+    0x86
 };
 
 const TwistDomainSaltSet TwistExpander_BasketBall::kPhaseGSalts = {
     {
         {
-            0xBF4B7A9321F13CDEULL, 0x3A09EDD190347A55ULL, 0x17B2E0ACD8C556E3ULL, 0xE34BB2191E4BE9CEULL, 
-            0x8B5A8F57E950FBEDULL, 0xA86A09389E60C601ULL, 0xB25A12598C29DABEULL, 0x2EF623592C9E7030ULL, 
-            0x010F0D110CF44B7BULL, 0x23729A4E2A179931ULL, 0xAED3909B54079DAFULL, 0x94FDED3AAFC2C6CCULL, 
-            0x82C5EBC682D85888ULL, 0xA41D8648D96F19BEULL, 0x4FAD565ECF5CAEACULL, 0x2B07B919803966B2ULL, 
-            0x716AE1FD3AC11F7BULL, 0xF11FD15EA861340EULL, 0x649E153A22FFC3A6ULL, 0x543E2D02AC65A4BFULL, 
-            0x0C379EC61DE42EA5ULL, 0x1462FDE589F92B9CULL, 0xD90C2FCAF3AE57A9ULL, 0x50E89D2A0AE44444ULL, 
-            0xA8EFC13D8780EE5DULL, 0x3DC19695F1F91779ULL, 0xEB2B14329D2F96A9ULL, 0x5F7930773B9841C2ULL, 
-            0xF7848C43154A4AB9ULL, 0xD3DC40833F680E64ULL, 0xFD68EBE71AEEACBEULL, 0xC6A718096AFD6508ULL
+            0x079D7E8CC14B21C2ULL, 0x86A108181651BD9BULL, 0xF34E7ABB0669C9FDULL, 0x3954A918236CC53CULL, 
+            0x5D11F54236EB0A29ULL, 0x6396B3F35CF3C305ULL, 0xCE2773BEAA081346ULL, 0xE9F981D4C6518040ULL, 
+            0x76FDC0EE7E420279ULL, 0x9470020A82349A4AULL, 0x67DF5E94F4BA1F9BULL, 0x543B8826E6795F96ULL, 
+            0xB3A739CC2897473CULL, 0x4AC4220182D7D354ULL, 0xE3A988AA4AB67615ULL, 0x92D5E175F66BD5C2ULL, 
+            0x2BC3CF6989FE788AULL, 0x54949C8FBA212D97ULL, 0x683E38A22229AA9CULL, 0x512CE766FC9A2CBAULL, 
+            0xFE847277458F2260ULL, 0x2A910358A14633B2ULL, 0xB667CA2020D46926ULL, 0x2DD7EE572604D287ULL, 
+            0x1D3FD3913E9FB820ULL, 0x98AFA7A4FCD63A5CULL, 0x8776AFC946CC7F71ULL, 0xC3852A2293B584A5ULL, 
+            0x6786613F4FCC74B8ULL, 0xB754CAB499AC45E5ULL, 0xFB287024379C21E2ULL, 0xC71C1B322D39783EULL
         },
         {
-            0xCCE895B79BDF21AAULL, 0x527B18B9D6562A1AULL, 0x33F436A3EA6D9C85ULL, 0xB935C8B6A356EB50ULL, 
-            0xBD609C25B238BC7EULL, 0xAAAA35B80CDBD4A3ULL, 0x54193739F604A019ULL, 0x1A2A76F83691B35FULL, 
-            0x5791CE055D543DD8ULL, 0x84B665419C173CEEULL, 0xC3B390529F62A8D6ULL, 0x251ADF5A6B541F7EULL, 
-            0x39E5C0195067C0CEULL, 0xA4BB040240E380D1ULL, 0x491F376FA7913293ULL, 0x49FCE873E6F27177ULL, 
-            0x9CA85CDD955BC6FBULL, 0x6087584CB7C268CEULL, 0x29DF27538ED32EEAULL, 0x446A50ED09AD538DULL, 
-            0xFCDEB24A4E5298E4ULL, 0x8B6DC74AC63F9D7BULL, 0x65903C213DCF71ACULL, 0x7AA8BCFC2411CA8FULL, 
-            0xF73472EB263DFA47ULL, 0xE138D3D808025962ULL, 0x48C1DDF69EA6D0B6ULL, 0x93C7671012BDB973ULL, 
-            0xC9A6447F6EEB0862ULL, 0xB990E24D70583C7AULL, 0x533D5891C17F9F2CULL, 0x497E7CB8C092FE79ULL
+            0x4237EBCA9A26074FULL, 0x30CEDD85BE87D33AULL, 0x8D80D198B28A6A56ULL, 0x6F8F2D398750CCBBULL, 
+            0xDCF780643D41807DULL, 0x7CCA6A1B0870841CULL, 0xB678122CEED6CC8CULL, 0xA6394934BF0AD822ULL, 
+            0xEC166E61C235C548ULL, 0xBA078D05CF49C8B2ULL, 0xD4F9DA67944EEF70ULL, 0x9919C3A2EADF4203ULL, 
+            0x49E27E220F770107ULL, 0x4E160B8ABD7108D3ULL, 0x8EB98AD50CF9E845ULL, 0x43CC1466C77590A7ULL, 
+            0x78B64C15E722EDB3ULL, 0x7E599F6451473AB0ULL, 0x2D2635C8CBD124F8ULL, 0x46742A04D60EE07BULL, 
+            0x2247045DABC0A654ULL, 0x4D1ECA3699899ADCULL, 0xDE61751D4B349E53ULL, 0x761B756FD8CB7FA4ULL, 
+            0x6FB387F6783D4ACDULL, 0xDCC6BD004BEEBC73ULL, 0xD1DDE403D62FBB92ULL, 0x4A6E7A2B697A4316ULL, 
+            0x03A32B430D913BADULL, 0x27AE83619A054C0FULL, 0x76BD8D8A804AE785ULL, 0xB138E96E3F6B00DEULL
         },
         {
-            0x1FF0B2C9B0B25997ULL, 0xBD3CF59520370C01ULL, 0x156D3E03A94180D7ULL, 0xE456FE5313F3AB68ULL, 
-            0x58D379F5D3423426ULL, 0x58737CC7EF650142ULL, 0x8B917019F62DA84DULL, 0x27CF2602FD0DC8D3ULL, 
-            0x4A8ADEB0C90C6FEDULL, 0x54B3D87B65254A57ULL, 0x6AB3919C304D17CEULL, 0x9F0F384A513ED265ULL, 
-            0x215E332B445AB3BBULL, 0x9D10BAA736F86447ULL, 0xE61DBEF24D9B6111ULL, 0x441BCC5EB3A5B9C3ULL, 
-            0x595E164978715A62ULL, 0xBEB42E9F141894E7ULL, 0x3F670CDE76DFCF87ULL, 0xE84E8CDBB17EFBA2ULL, 
-            0x945EC1AA6EF34F1AULL, 0xDC62FD9075DEF381ULL, 0x7A4C466AB87B9C9DULL, 0x165CDD0D8317D497ULL, 
-            0xF7CE9A55D4CB30D2ULL, 0xCDC072F9BCAA6C62ULL, 0x4808D39FA6A279CBULL, 0xF4C69CD1A8858E06ULL, 
-            0x83D0A2D3DD980BBDULL, 0x991DE5A26DEC8095ULL, 0x09420C039AC89C55ULL, 0x73E756D38F2F0B56ULL
+            0xE33CB221F6604FDBULL, 0xCF80279F965FCEE5ULL, 0x69C7DBB1925E6985ULL, 0x3076ABEDD656298EULL, 
+            0x2B75B962D4CB1DCFULL, 0x4026884524D35F55ULL, 0x4BC902931B56E340ULL, 0xBE74669E7EB0EF49ULL, 
+            0xD2C1364C3EECA3F0ULL, 0xE06F2ADA6F2C4CEBULL, 0xFDB7B152AC159E46ULL, 0x696849DE922311D6ULL, 
+            0xB1E855B58AA2174CULL, 0xB6FF09B34B79D88FULL, 0xA56A6921EE2AB525ULL, 0xCFB63AD5E01ED2CDULL, 
+            0x1D8336F987BC39EEULL, 0x5E47A2DE2F0F98D6ULL, 0x96912D0B282BD718ULL, 0x3967C940D4F4D789ULL, 
+            0x2BE4B04B4E66DB89ULL, 0xCC61269A44B1191BULL, 0xB15C5EF8DD85F537ULL, 0xC37C74F3063998A8ULL, 
+            0x914726A92020536AULL, 0xEAD97C74FB783E4AULL, 0xA692F229297309D1ULL, 0x5A79BE85D6F022F6ULL, 
+            0xEF0ECB937C3D6C13ULL, 0x8516B0AF9CB4B528ULL, 0x2F14F92572C71219ULL, 0x7591E0A32B64567FULL
         },
         {
-            0x39B3622E7D21F550ULL, 0xA349410693501BEAULL, 0x726097CE543D4D4FULL, 0x10F37377B31F2191ULL, 
-            0x33407E77576CAB89ULL, 0x9DB38304BDE07CA0ULL, 0x7E214ACC7515F12DULL, 0xB343049AAAA1983CULL, 
-            0x2D7FC4A4205733B1ULL, 0x03BECFB7A8D5C384ULL, 0xA7A889A122206129ULL, 0x35E3B5D9110EC737ULL, 
-            0xB1D13D4EBE051250ULL, 0x1492323A750DC981ULL, 0x1C69F082F9BEBC8DULL, 0xF767932AB651B461ULL, 
-            0xA410200AC0FB32F6ULL, 0xFC4FC8A4946A280BULL, 0x09465600494AA00FULL, 0xAA8DD7A6BFFA48F5ULL, 
-            0xE505AB87EDDBB359ULL, 0x239582E1A0E44753ULL, 0xCA9FA0B2F30C2D5CULL, 0xE99D2E96BA03E94DULL, 
-            0x25B141E6CCBED46CULL, 0xB0F0FD77ECE553DCULL, 0x73A33086594F6E86ULL, 0x91D8380E506B2CE6ULL, 
-            0x2DC3E5732BD40193ULL, 0x58126A3EB66CEFDEULL, 0xE681811F5F866C75ULL, 0x3D262DFE2F733C21ULL
+            0xD45F3CAA7651C302ULL, 0xC617041A9384B982ULL, 0x04CA683B14930515ULL, 0x164DFB644DBF0140ULL, 
+            0xDF52306395091371ULL, 0x087A6D5E923CFCF8ULL, 0x6AF9DEE09342C2CEULL, 0x5209C6393ECE1FF8ULL, 
+            0x03AE8F8F1EBC8A5FULL, 0x47D61AEB1D3E7842ULL, 0x72F70FF90F5EDED0ULL, 0x90E545E4B8C292DAULL, 
+            0x556E9E53527E2290ULL, 0x08A2F48E9FDC5D36ULL, 0x06AF31F116C6F829ULL, 0xB7C54E2A427AA73FULL, 
+            0x7F51A2BFB05AC46DULL, 0x7427B5FE7F958414ULL, 0xD1CFD13EDE90FF27ULL, 0x629839D4C362FE55ULL, 
+            0xAF8F618043B7DFAEULL, 0x350B0894FC4ADB3DULL, 0x73604F3FE8616C5FULL, 0x7D359062EA139A7AULL, 
+            0xC28BCC33B83983C6ULL, 0x38E6E1110C3DB6D2ULL, 0xE0F9E336756E5269ULL, 0x27A7622208E766D5ULL, 
+            0x2E20FF161514AB1AULL, 0x5517982EDC0A8822ULL, 0x7E0783B089DC84A9ULL, 0x8FF37AB097ABF5C4ULL
         },
         {
-            0x99FFDBE7317A9238ULL, 0x1AAFF097E2494947ULL, 0x76E24D3E8B342AB0ULL, 0x46C0EAF50F51661EULL, 
-            0xEF243C9BAB983CF6ULL, 0xFA4BA159D0770DC4ULL, 0x733B609B3C1A915DULL, 0x70710ECF0AB6242EULL, 
-            0xB47D307D83FD77CDULL, 0x3ACADF2C1B7EAB79ULL, 0x226071A106C6071EULL, 0x195DB23A04E5755EULL, 
-            0x81E9F323816A3981ULL, 0x89650F872F02F8B5ULL, 0x67D3FE4EC071ECABULL, 0x9A02BF24E90775FAULL, 
-            0x4C35707329C770E6ULL, 0x8D3AF4A6EDF6C360ULL, 0x307072BD9A902371ULL, 0x7F75A912B8E885DBULL, 
-            0x4F3BA1EBA148AC4BULL, 0x85A1787791B2BBECULL, 0xD3B9980023891341ULL, 0xB7F45098B1A77B9EULL, 
-            0x61971E8718B02CAAULL, 0x41FC9F59F5B93CB6ULL, 0x0A4BCDF49B1312B3ULL, 0x62502618996722B5ULL, 
-            0x75730DCF9E6478D3ULL, 0x4EC66DACAFC54208ULL, 0xFBDCA92A295D0928ULL, 0x237534A167C8420AULL
+            0x232C28554098F2F6ULL, 0x0530647843BCE98DULL, 0x89A50EDB55B0B4A1ULL, 0x55ADB1D7E9B1A45FULL, 
+            0x68244E7D73F4AF06ULL, 0xA859C27B07B794F4ULL, 0x20D8ED9440370DFBULL, 0xCC6278C59F34C524ULL, 
+            0x12632590EC859834ULL, 0xE3811A9A624CB40EULL, 0x81BAC0BADEEE58CAULL, 0xB9186E303920B21DULL, 
+            0xCA8BE5BE539004B1ULL, 0xFB270F8C9E9EE956ULL, 0x9B863DFA4B969BCFULL, 0xBCA8FE29FD9FFC2CULL, 
+            0x365FA3519E62454BULL, 0x2F434002A65CFB46ULL, 0x608D1D1C1361EA6BULL, 0xF852CFC8D3AF8A44ULL, 
+            0x411DCD102C49F311ULL, 0x37E81BA32EE44BDCULL, 0x9C5D08913D999CAEULL, 0xCC19E0DA21CF59F5ULL, 
+            0xAE9A6E101F7BBC4DULL, 0xB284623201605685ULL, 0xAF131CFDB37CD169ULL, 0x847AD981741DBB65ULL, 
+            0x612870686CAC43AFULL, 0x3898C263F902388AULL, 0xCDF15CF075BD515BULL, 0xF12A052733B3A17FULL
         },
         {
-            0x42F0639AC5A12D09ULL, 0x1803FEAC29C2E891ULL, 0x940EC219942A010EULL, 0xD1D12EFAAB463582ULL, 
-            0xC6FE5D1E16BE0FDEULL, 0x7DE904B0752AB606ULL, 0xF572263CEF6D9D7BULL, 0x3EAA431C8E7A1074ULL, 
-            0xCAB385A651D069CCULL, 0x1EFBED7122764DCDULL, 0xBF6E3D963A68AFCFULL, 0xBE684B1C5387AC8DULL, 
-            0xAFF847D04B2C7CF8ULL, 0x9E9B05EDC3C51508ULL, 0xDD8F272DD52733F0ULL, 0xF28345AE293DFF16ULL, 
-            0xABB8E78C4CB77111ULL, 0x45EAA29AB4218D64ULL, 0x0C86BEB1B12CF0DCULL, 0x21E6B4DBB8895334ULL, 
-            0x90AD7E5BDF70B2FEULL, 0x1CA73DA94ABAC686ULL, 0x15FFB8B4528C4DDBULL, 0xA0BA897A53264821ULL, 
-            0x8ADFD7B8AB3C6302ULL, 0x8B8E35E116A923C4ULL, 0xE71ADDEE348D5715ULL, 0xDEFFE5867D7B3D0CULL, 
-            0x3DB5742AC405EA90ULL, 0x1E2D6C3E68CF7603ULL, 0x5820C6985DEA307FULL, 0x30920631430F6621ULL
+            0xAAF26D6D192F0CE5ULL, 0x5E52F3E58E046A66ULL, 0x70EB0B124FE21FD9ULL, 0xBE4E3CCA65D64330ULL, 
+            0x47E9AB4F1B7C0801ULL, 0xCEE2108A2F256E1EULL, 0xE08A2929E18AC50AULL, 0xD1747D08C1C8CDA1ULL, 
+            0x86A3D21CA5FDF7CCULL, 0x50209C7997CEB1D2ULL, 0x41FF7052A5555C5FULL, 0x35FB56EC02B012AFULL, 
+            0x130E85129CB0C07AULL, 0x73FEAB1B33A01F33ULL, 0x5FD0F52B0F818843ULL, 0xF40B8B853B757897ULL, 
+            0x2C9157726B30F8D7ULL, 0x22B5D7950DE9557FULL, 0x8DD5382C88C2794CULL, 0xAA5607CBB23AAEF6ULL, 
+            0x8B1048DBDE5E4684ULL, 0x7109537A365A7700ULL, 0x248941BF9F37DACDULL, 0x8324A98A875CC3C8ULL, 
+            0xF59B3FEE6A50A100ULL, 0x42D4C20772D94A93ULL, 0x98C47FCB5B40FEC6ULL, 0xC0BDDFF8D0FC36FDULL, 
+            0xE3A8E6F920315FB6ULL, 0xE4ACE1361713D8E9ULL, 0xF5D9E91309BEC119ULL, 0x7BDBAB17668C10F5ULL
         }
     },
     {
         {
-            0x6620002CF35EA9CAULL, 0xC8FA651E1CB173A4ULL, 0x226C01B64524DF80ULL, 0xE645D85F36EB0951ULL, 
-            0x028A6B76096F2CF3ULL, 0x853B4C458E5F9C15ULL, 0xD19C07FF26D66DA6ULL, 0x4BE0B5CC71D7FFADULL, 
-            0xDBE07B8F9CC18362ULL, 0xEFFF0B47F4C232E5ULL, 0x2B54185CB53BC201ULL, 0xAC5319FDFB537D6FULL, 
-            0x5E40FB937C05DA2DULL, 0xF8B40BA215FCC317ULL, 0xD09A126BBDA9DC8CULL, 0x25D2E227B57E33EAULL, 
-            0xA9390286E1577850ULL, 0x93B99758D581C571ULL, 0x723A9DC7FCD3227DULL, 0xAC723731F04832ADULL, 
-            0x86590BD1B2BD891DULL, 0x6B54658FB5157292ULL, 0xC48F424CF8E3164CULL, 0xE1946352F60C8177ULL, 
-            0x74892AF7AED6B31DULL, 0x95FCDCA8C86B4255ULL, 0x6EFC1C9EB29536C6ULL, 0x89D4A9B1987C0EFAULL, 
-            0xF6C39C5C3746D25CULL, 0xD44E57EA7EA81431ULL, 0xDD9A39ECC1FC6F40ULL, 0x3CEE4BDFB86CE3A8ULL
+            0x8B8939A5A09C8204ULL, 0x22934F407916DF81ULL, 0xE3D59CF7D02EE497ULL, 0x838EFAC084620086ULL, 
+            0x75A15A4BEC86245BULL, 0xA08ED6EFA6427FC7ULL, 0xA1B693F36D4A4C64ULL, 0x2AF943126578036CULL, 
+            0xD2158F439278951BULL, 0x79D2A46686418148ULL, 0x029B616AB9875BFEULL, 0x150185CB3711B7D3ULL, 
+            0x3FF97C4B88821804ULL, 0x2345D4AC39C56CCFULL, 0x3DC4D367E1A7F1BFULL, 0x9872E34BDC4CB727ULL, 
+            0x2D9B6E2A82207019ULL, 0x46EC8B1D58CB6585ULL, 0xFB2C21713A9717F7ULL, 0xAB8E1AA0DF8DDAF2ULL, 
+            0x0A4CBAD2280EE1E6ULL, 0x3F045818972C20F0ULL, 0xAAB956809700764FULL, 0xDCBFEA06D0949A98ULL, 
+            0x1918F944186888F1ULL, 0x9F8841F2432BF163ULL, 0xF6090FDD69E93056ULL, 0x0162D2B807E335FAULL, 
+            0x743927C2B8FE3168ULL, 0xB2C793A438E1402BULL, 0x6D553CD06FD43EC9ULL, 0x663910F217D3AFF0ULL
         },
         {
-            0xC6D850D5AAE64DF4ULL, 0x83979D7168036652ULL, 0x1E0E123A7AAB980EULL, 0x5AC8AB9C93B1C89BULL, 
-            0x3A139FCC7F358EB8ULL, 0x4B581211F60598FCULL, 0xC5D0B583D60CE83EULL, 0x865D7971077E640AULL, 
-            0xAF9213B8A98B2439ULL, 0xFE1623577109DEF3ULL, 0xF67CF6481AB51438ULL, 0x08A902F7153100F0ULL, 
-            0x81AAC16BD2799010ULL, 0x3BB4C67D232C89D9ULL, 0x0FD31B4508388717ULL, 0x6E9C5CCED6D757FAULL, 
-            0x19585AB3D2360E33ULL, 0x8275BD5873165077ULL, 0xFE1C335F09FA1499ULL, 0x7B0FD6E7D2054F6EULL, 
-            0xEE3935423BD5F66CULL, 0x7D1406393D56CB9DULL, 0xF2801CFE401BE1ACULL, 0xAF44002E0A5E9F10ULL, 
-            0x1C4BB43E151FC52CULL, 0xF352D7E3D249A83DULL, 0x7FF16142EBDD46F8ULL, 0xB96B9B7CC3CC19CBULL, 
-            0xA0E1031305CFC8D6ULL, 0x4A34AF3C400A48E7ULL, 0x25FCAC9406A15549ULL, 0xD02853F598F8B5A9ULL
+            0xF0EBCD1AC9D4AA84ULL, 0x521C0450FABB7EA3ULL, 0x0EEE2CA7BDC623E3ULL, 0x51501FAEC8EC97C5ULL, 
+            0x53C2FA590251A323ULL, 0x980E7683E37919E6ULL, 0xB5638D473E0D9A1BULL, 0x451BB3EB94670C20ULL, 
+            0x1BBCC9C9A965FE24ULL, 0x43A0618D5A7D0CC6ULL, 0xD11E74B19A4A37E5ULL, 0x7334E83CAFCA0F36ULL, 
+            0xEAA674BDD9D2CC13ULL, 0x475ECD4F599BD19CULL, 0x0518B7AA5FFA9CC9ULL, 0xC72BD62127C56D5FULL, 
+            0xFBAED5863153B827ULL, 0xC47D197507AE4B5DULL, 0x73FECAAA3FA07C40ULL, 0x1B6D9B6022881894ULL, 
+            0x717F8F3CF6A0B00AULL, 0x8556D64A4B429B64ULL, 0x06F666D127CC3098ULL, 0x424CB97D5EEC205FULL, 
+            0xAAC12E9276B477CAULL, 0x8C9AA785FDF5E12CULL, 0x46496CD6F6726169ULL, 0xD0DBEF0342FBF55FULL, 
+            0x850647004C277CB9ULL, 0x72BDA3F717EA03CDULL, 0x7F03733682A14AEBULL, 0x05333B6CA4DEC900ULL
         },
         {
-            0x48697D19BD4532F8ULL, 0xE7ADB2C4D72F64B0ULL, 0x189AE951D3D1DFC0ULL, 0x409D1DA525CC7D80ULL, 
-            0x002ECD905F69BF15ULL, 0xDB0B15BCDFF006BEULL, 0x392B7C8B11F71F84ULL, 0x2FDAD052F42FEAE3ULL, 
-            0xB3EEB408AD4A2864ULL, 0xA4D173CCC4A6B25FULL, 0x225E594C62FE49EBULL, 0x9D31C33BA1981B93ULL, 
-            0xB265A564CD6C4F38ULL, 0xA31FC4F76E60F35BULL, 0xBE5295FBD67CE350ULL, 0xEE5825CBFEBEED5EULL, 
-            0x4FD4C94BCC41A137ULL, 0x64AC8C7A3F4C2574ULL, 0xF0F06DA79B796858ULL, 0xF5B2474FA7BF7B95ULL, 
-            0x5538BE70AFD6CCA3ULL, 0x41C68A17D8DF7EB4ULL, 0xC981B7BEB6884A00ULL, 0xAE9C8AA3EC4F6ED5ULL, 
-            0xD609973C53F2C695ULL, 0x243E46BF1A90A464ULL, 0x76DCFF04F61737F4ULL, 0xE75AE12A7B2F8C20ULL, 
-            0xABC3837688D877F8ULL, 0xDAA3A72FDEF7C138ULL, 0xD3C1D4311E157B82ULL, 0x8080C7CBA7E34472ULL
+            0x39AD116B7CE11E91ULL, 0x65E67A64723004AEULL, 0x62385F3F74BD0693ULL, 0xEC0C597C552B6BDFULL, 
+            0xA404FA6749908276ULL, 0xC88CC44A0CEFF752ULL, 0x36EB506C8991A6FEULL, 0xB22817C3CFADCE55ULL, 
+            0x0B4F3A0D30D3FE54ULL, 0x5872FE8149A1F4FFULL, 0x40F78728BBFACC99ULL, 0xA3D9C1D41FDA08CFULL, 
+            0xDA116EC827319C64ULL, 0x1A726B0253821C44ULL, 0x0AA9478224FAA267ULL, 0xDC82E978B4D0FC50ULL, 
+            0x174E7B641A2A6681ULL, 0x1E5872BA499ED2E8ULL, 0x992896F9B65A316BULL, 0x002A93B5BF1C5B4AULL, 
+            0xAEF3D58A7CC64A37ULL, 0x34F3F3DCB32DF138ULL, 0x2F62532DFA37FC38ULL, 0xC8676774FFCB57A1ULL, 
+            0x4042E1C2BFC596C3ULL, 0xCD9C45E6F74275C5ULL, 0x01C102CFD3950692ULL, 0x71F42BC702F7E823ULL, 
+            0xED3CEE7B4346A96AULL, 0x49C424A85AD30B76ULL, 0x85D53BA905E10223ULL, 0xF11C60FA3F00058DULL
         },
         {
-            0x219BDEB12229AFF0ULL, 0xE7EFD06189D57320ULL, 0x25C9A028F4516D13ULL, 0x91331EE09A4F85BDULL, 
-            0xB2D8CEF4FF1ABBE3ULL, 0x49C33318BE9030B8ULL, 0x7D28EBA2C84B77FCULL, 0x76FB7D145AAFB15AULL, 
-            0x1C421AD375D795BDULL, 0xACA06C83CC2D8180ULL, 0x48B6467DC48A53C3ULL, 0x0604497D62BDF650ULL, 
-            0x321762C92B39F2D6ULL, 0x9FE436F66A371976ULL, 0xC0BA7F5FAB91F984ULL, 0x5C76678945C7136AULL, 
-            0x913B335F89DAFB08ULL, 0x6639DBF56721D13FULL, 0xC3FF0C09BBB30F88ULL, 0x203E6C8EFF10D7CDULL, 
-            0x4F46DA7D5A1F5380ULL, 0x296C8F9F3042395FULL, 0x89BDC8EE024A44F5ULL, 0x84E2DB3460EFFA72ULL, 
-            0xBEDD6F6274107689ULL, 0x9C41BF96F286B090ULL, 0x5A688EC03FD6537BULL, 0xFEFD619F2A082147ULL, 
-            0x499583CBDEA52BFDULL, 0x6C1597792421CACEULL, 0x3B380F06E48FDE8AULL, 0x5FF0097C2FE1AD40ULL
+            0x4024695DE003063FULL, 0x598CE9EB4F1A380FULL, 0xF408BD6FB8546D0CULL, 0x7861FE369BC03045ULL, 
+            0xE1B5EA6FFAA91179ULL, 0xA475093EACBE8C53ULL, 0x13138C3AC03286BCULL, 0x04B71912D9A303D0ULL, 
+            0xBE0481722286E146ULL, 0xB470C378D4501872ULL, 0x0C474C73A9F4C6CAULL, 0xFB194D97811331B1ULL, 
+            0x63DB834C5487BAD2ULL, 0x39D8B7FABF39FA94ULL, 0xF53CFD1C1BF29C27ULL, 0x38E600F261D8EF27ULL, 
+            0x419514C47EA03B83ULL, 0xC30C0C6CC4DCD6A0ULL, 0x56B2255A50E7909BULL, 0xA6CB79F43E438FB0ULL, 
+            0x718659FEE4A0E8A3ULL, 0x93993B298AF4C9D8ULL, 0x6811F2DFE8F9AA10ULL, 0x930F9B74D1139A0DULL, 
+            0x749C8EB8701B18BAULL, 0xBCBCBD313D713166ULL, 0x55F9B70ECE9BCDDAULL, 0x604CDD11403E572EULL, 
+            0xAC7AC3BE3A313D57ULL, 0x9E6CE1F05602BF80ULL, 0xE3F93610B478DCADULL, 0x788DE8183013E256ULL
         },
         {
-            0x928CD7A207C8DB35ULL, 0x22865ECEAB9692E9ULL, 0x95CFBD0FD981A6F1ULL, 0x02E51FA9925C502BULL, 
-            0xCAE1B8D1D14620F8ULL, 0xBB394A1F7C83E298ULL, 0xCBFE84698227F9C4ULL, 0x589DA32BDDFC322EULL, 
-            0x9631CA845FC0DBC1ULL, 0x67C6ED21BA2304ADULL, 0x8BE6538993E72EC0ULL, 0x02CDA4E84AF0EB86ULL, 
-            0xFAFC36134DAAF68CULL, 0xCF6ABE52C37AABD4ULL, 0x138BDF8CE46F5896ULL, 0xA63306756F03C80FULL, 
-            0x9B7C4AC8F016593CULL, 0xAA470E295E241DC2ULL, 0x46C2441D78EE1A34ULL, 0xE060C07E2C8AF23AULL, 
-            0x05F5D6757B25A673ULL, 0x51298505CFAB442EULL, 0xF73E1B386BD834FCULL, 0x6D3697A96CC21197ULL, 
-            0xDA8A55BAB81A5BA6ULL, 0x4F0E68E58D166C02ULL, 0x6E19C6AC9E65D7D8ULL, 0x6B48556C4F1DB539ULL, 
-            0x29161F9E989A6A10ULL, 0x08A3958B5418B75FULL, 0x111B287A0A958627ULL, 0x5EBF903752D19BE9ULL
+            0xFFE3421B1FAC9A86ULL, 0x078F3BB9B42CF457ULL, 0x19F64C0CEC3CEDDFULL, 0x49E0BDF05D340BFFULL, 
+            0x6929EBC35615128EULL, 0xA8E91F8161D4EE31ULL, 0xED19BFE133307F38ULL, 0x5DFB79CC87CB0477ULL, 
+            0x63B82BCB9D4607D6ULL, 0x0734192F8C0BDAA4ULL, 0x0A5F4FC35221CE5CULL, 0x27AA0C0AA7CAE9F1ULL, 
+            0x292D1D202424E3ADULL, 0x8F81C414709F4C68ULL, 0x8340EBE9AF372D00ULL, 0x01D623A08436E7B6ULL, 
+            0x5DDE755D3BE91B1EULL, 0x29CD7B7E23A281C9ULL, 0x823D23845FAB8A96ULL, 0xD55BFC530901D1A1ULL, 
+            0x1F305936CAF235B2ULL, 0x325BB0A8149B18EBULL, 0x40ADBCC120BB509EULL, 0x3D13F1A12CB7136CULL, 
+            0xEC321B004A943ED2ULL, 0x9649453780207272ULL, 0xFB100A92B0C3EA39ULL, 0x65390006E6C23847ULL, 
+            0xCED6BE95890E7571ULL, 0xF812C88AA89D9BADULL, 0x2B0D810335CAC29DULL, 0xA186F1EC78443DC8ULL
         },
         {
-            0xAC0B96745525BA1BULL, 0x1104EDD669056F5FULL, 0x10AD1E799E9430ADULL, 0xA85798DF62D5ECC5ULL, 
-            0xE73C2F005B3A4283ULL, 0xAF408517487C953EULL, 0x0F5890A18C667B48ULL, 0xDA96AE607897E4ECULL, 
-            0xED49B43542A76332ULL, 0xEB4CA8CB6080C324ULL, 0x668BB344D17C122BULL, 0xE89CDF6CBF242C7CULL, 
-            0x8C720DC912008E48ULL, 0xD5DF55A43005F877ULL, 0x18884A0EFC1CD76FULL, 0xD68628CDDB6BCF09ULL, 
-            0xA43061319EB162C7ULL, 0x520291992A95CC61ULL, 0x01CFF700FA0D75F9ULL, 0x0F678EBA5D1C3D8DULL, 
-            0x4AE48CBF4CA1FCBFULL, 0x688941224BF6C057ULL, 0x2AD3E2127BC77FF2ULL, 0xC82226DC354DCE72ULL, 
-            0xD60F32EADDCCCCEEULL, 0x3E6C4C56586406C3ULL, 0x4215939E72F7C32DULL, 0xE29417C9959156D9ULL, 
-            0x6C23652A62866068ULL, 0xE0DAA567E21C334DULL, 0x6826A746C2F825C1ULL, 0x1F4F0EF4C27490F5ULL
+            0x6BDE7E3C0C914C59ULL, 0x95FC94F5AEA8E8C5ULL, 0xA40B7208600F21D5ULL, 0x2AE4AF9462BED3E3ULL, 
+            0x46290498C39C173BULL, 0xBFC6C1EB0DDB4273ULL, 0xB550E57EF8037699ULL, 0x4DFD7C2B2F12D4C8ULL, 
+            0x0952B2C67B66C625ULL, 0xDDD58040A32E81E6ULL, 0x2B2ECF0CD155D4DAULL, 0xCB000FFEA66945F7ULL, 
+            0x99D08930C01585EBULL, 0x49CA6348DFBC302EULL, 0xDF1CE4CC0BFB5F85ULL, 0xFD941FA2C240D71BULL, 
+            0x335783A0F106E7CBULL, 0x3403C7C5DB575259ULL, 0x057C8FE762B85928ULL, 0xF2A1D221D0B8D4ECULL, 
+            0xE57535F34506611CULL, 0x6314B939F57EC8CCULL, 0xB0B54C5658B2B210ULL, 0x7B8BA04D41A611A4ULL, 
+            0xDE076C6743111055ULL, 0x657BF971639F0914ULL, 0x3A473EE7A6088E60ULL, 0xCF6EBB61AD094C4CULL, 
+            0x20A366CFBFAFD7F7ULL, 0xBCEA34534B5CC27CULL, 0xFBAA6D0BD3E784D3ULL, 0x27A18DEC07A62F5FULL
         }
     },
     {
         {
-            0x0DFE4665A2286EA6ULL, 0x683E41BBD193ECEEULL, 0x84D68BD643678E48ULL, 0x775F6BB87F49B560ULL, 
-            0xDD1D3B2A1E4636B5ULL, 0x042ABBAAA64EAABEULL, 0x06F5780E8BE373F5ULL, 0x97E3562883F3B922ULL, 
-            0xC5A2E7FA393C2E8EULL, 0x755D3E797E02B6D4ULL, 0xF7CC940E0315E0E6ULL, 0x2F86B8565B1F2236ULL, 
-            0x523B093494B12F57ULL, 0xB453DE471464533FULL, 0x7209D3533BAED083ULL, 0xC1A81BCA07FC3267ULL, 
-            0x45AA872DDFBDA6F4ULL, 0xFA6DDE7843CE33D3ULL, 0xA0C0940FAAE3CA57ULL, 0x73E8DD6931C650FDULL, 
-            0x7E5A98F87230194CULL, 0x0BF68B6220AC9F20ULL, 0xDDDFB6BDA6D58A2FULL, 0x85856B1589E2537FULL, 
-            0x3BD0D94C4D3452A0ULL, 0x87693F341974D794ULL, 0x7A807C77275C1B21ULL, 0xB6D86C5803810922ULL, 
-            0x0A2F75BD5CAFB90DULL, 0xCF8000A7F2A9530AULL, 0x3391115A69A3B1A5ULL, 0x79D2AEF2E0FF2C3FULL
+            0xE2C3CA6FC3F9D45BULL, 0x2A1056BE960D886AULL, 0x7C9A58F6CB4D4AEAULL, 0xA5D2860590592DBDULL, 
+            0x740C2B37DD7D0E7BULL, 0x09DF9D548A0AFD96ULL, 0x420B139F06379768ULL, 0xD69949EF18961A30ULL, 
+            0x728E2770312F61F6ULL, 0x76DBEEEBA1EF72B1ULL, 0xE11DE1C7446AE222ULL, 0x16AD9E49ED555297ULL, 
+            0x635DD728791D15DBULL, 0x264C7E173217DC4CULL, 0x70B3B45E89DAA2A3ULL, 0x627C7654D6B857A9ULL, 
+            0x31262899CE72ACFEULL, 0x5BC89BAB32750B0DULL, 0x78CC21C2F15ED88AULL, 0xCB71BC211F75CC61ULL, 
+            0xF254525A36417BC4ULL, 0x790AC09EEA0F33CBULL, 0xB1F5B71E3928AEE9ULL, 0xF0556E18CBB67F14ULL, 
+            0x412F5ABEAA99D4E4ULL, 0x2971D35576F965E9ULL, 0xCE5D6621374A9A48ULL, 0x38E4BB99AB31D9F1ULL, 
+            0x4A0B923C5100CB99ULL, 0xB15CA36BA18BFC59ULL, 0x7E355329B45B604EULL, 0x9C1A6E99AE0BF8C0ULL
         },
         {
-            0xD3BA1B3C659E06D9ULL, 0xB6024BECCA59530DULL, 0x067405563ACC4D4CULL, 0x0E3EB89E23AC8B40ULL, 
-            0x89E0EEEC8E6B7498ULL, 0x4E79BD67B75286D7ULL, 0xE180945B82B45DEBULL, 0xD538E71C056C7822ULL, 
-            0x9BFCC9E9F4058047ULL, 0x558ADFC870934E8BULL, 0xED4FC776D10EC773ULL, 0xBCDF9BDACD705192ULL, 
-            0xBD4C7D9BF48BB35CULL, 0xC5625D5C0E05AC16ULL, 0xA9551DA735129C4AULL, 0xA421E975CE751358ULL, 
-            0x9063C5D4A90873B8ULL, 0x20A46598EAEB6305ULL, 0xB70608C6D1360DF8ULL, 0x93131954610C8A87ULL, 
-            0xBCFA259585E7DC69ULL, 0x0FA9480C7A18B01CULL, 0xA79358C7A2C74363ULL, 0xCCB4DE400488C667ULL, 
-            0x58E714CABD718ACDULL, 0xD1E87ADA55BF13DBULL, 0xEA1382BFD9CB5040ULL, 0x47EC049F3E4A13D6ULL, 
-            0x191687705BB95080ULL, 0x9B9647F57D8AC65BULL, 0x6813B768D0D4DD07ULL, 0xF3BF4E3E728845A7ULL
+            0x6F6053D37C8351BAULL, 0x5F1F4A68A33EC8EEULL, 0xEA43FF31B020EBD5ULL, 0x55DBE6876A30D9A1ULL, 
+            0x1938C6B22F5DE838ULL, 0x163D833C57FCFE47ULL, 0xC92AF798F97CB9D7ULL, 0x02795B3B031C0043ULL, 
+            0x8866091F2B66B18BULL, 0xBED15F2B5E519CC5ULL, 0xC77341DA06A5CB34ULL, 0xA28BD7F0A911F9CDULL, 
+            0x4A44D6EF0741AAEDULL, 0x3552974528EB156EULL, 0x8BA512FB4AEE9E00ULL, 0x355E3C0FFAD8DADBULL, 
+            0xE8D9CDD9D2D1C6E3ULL, 0x94EFB4EC8D7DBC33ULL, 0x2A32BFDFBB622252ULL, 0x06FCDEC0B6E01F4FULL, 
+            0xFACBB1DBF4E6EDF7ULL, 0xFD3FC6DBA7B1FA3DULL, 0x87D68224BCFC7B87ULL, 0xFADC1F87495026FDULL, 
+            0x6606844B9CA45361ULL, 0x4636668018928E76ULL, 0x3A24C76844A132C1ULL, 0xBF83527F30E9BBBEULL, 
+            0x372B9F02AB993F24ULL, 0x64816094BD39BC9AULL, 0x2555DBC1268E9FF6ULL, 0xEC4076DB12FA7646ULL
         },
         {
-            0x2AE9E4991BCCFB02ULL, 0x54AB4339E71FA387ULL, 0xF62DEFF645F50EA2ULL, 0x3FB6D753F86AA837ULL, 
-            0xDAF790722573E442ULL, 0x38A756FDA6609C78ULL, 0xD70EC0116F26B5C8ULL, 0x952001CA9C11E941ULL, 
-            0x29B88D7A25887EC6ULL, 0xA355A34FFEC5B6D6ULL, 0x4A84728055B1DEE1ULL, 0x18E5DC4804853711ULL, 
-            0xCE0A7E96B95002D4ULL, 0x0F5591D8FA3BCEE0ULL, 0xC86C9C4C954D25EEULL, 0x228BB13B15101665ULL, 
-            0xA2ADA855A045DBD1ULL, 0xB16A0AAF85581283ULL, 0x6A82C628ED47A5B8ULL, 0x39BFEB5BBB765055ULL, 
-            0x4DB0371570AFD3B8ULL, 0x3D9E0BD84C00E930ULL, 0x95BC7D1340006B1AULL, 0x186C2EF61B3A38A7ULL, 
-            0xFF9E195431129A91ULL, 0x3F96976B06B26A12ULL, 0x8004642831F8C909ULL, 0xB2744D2C499483ADULL, 
-            0x5EA4F15A325EC698ULL, 0x43FF43FADF48E346ULL, 0x78DBF2E157EF1392ULL, 0x2169F6C7374275A3ULL
+            0x767C4BBF8D9A06AEULL, 0xA679B1CF4D26E458ULL, 0x9019ED9CFC8632F8ULL, 0x645DA8F06D8F0E37ULL, 
+            0xCD0970D1695ED1CDULL, 0x4F17A1950F5F86DBULL, 0x2C8BA5E3EA279FE0ULL, 0x0CD7C11189DD8EA3ULL, 
+            0x895010914B622D8EULL, 0x4E76C2423C67257AULL, 0xD1C7E9575D8525B7ULL, 0x43F733A382363ED2ULL, 
+            0xFEC54FA9B5D6AAB7ULL, 0x17183FA4530EFEE4ULL, 0xB5BCDA574308CBE1ULL, 0x7DBD5C39A51398B6ULL, 
+            0x215206F14D3F1C5DULL, 0x68B03A7923261AB8ULL, 0x508320F4C336047CULL, 0xC612EF773B52D2FFULL, 
+            0xE6791FF3CE519DD6ULL, 0x4EDE77AB80032397ULL, 0xCC38FEAB19BAACBFULL, 0x06632E385068A83CULL, 
+            0xE347C076F3AF701FULL, 0xA36B13DB61F65E55ULL, 0x9494BFCBCA3F6EF3ULL, 0x5E634B078EF4E505ULL, 
+            0x0ADB31014C8457E8ULL, 0xD821522A00CA117FULL, 0x88F3A13F75C2E508ULL, 0xE0663EE62ABD2D0CULL
         },
         {
-            0xE131D622B94E4B20ULL, 0x32E0FC291023E76AULL, 0x8713B08A7C2236ACULL, 0x6DB35BEA09813724ULL, 
-            0xA7E741D20D7EEE8CULL, 0x008AE1F74F36E815ULL, 0x321868501BA7EB90ULL, 0x1F9DDF0240CF52B8ULL, 
-            0x7E92E7345BF3A2A4ULL, 0x4CF7972CD96ACB88ULL, 0xBDD75F1800534696ULL, 0xDC6B0CE1A6D88110ULL, 
-            0xD03B0AFD80E35E6EULL, 0x9D9981C8FF006753ULL, 0x11AC7FB548D5BE70ULL, 0x6D4454A7FA3D34EAULL, 
-            0xB1EBE0AB5C081B98ULL, 0x338B12AD5ACA66B3ULL, 0x1E1887BC32514B33ULL, 0xB4338582F467FD77ULL, 
-            0x4077052F9503DEA8ULL, 0x21D06117085DB4BCULL, 0x3AF8BD72055DD3C3ULL, 0x6AF77F3242A50420ULL, 
-            0x0D970250DE5888E9ULL, 0x540113E6D8D7FFE8ULL, 0x8EF0CD6F4C669CDBULL, 0x05428F5647368918ULL, 
-            0x9A86B9EAC433C672ULL, 0x6B138B5CA324F54EULL, 0x595B48807FAF8579ULL, 0xA79A5449E9A72D4EULL
+            0x222037D4D0906BF3ULL, 0x1F9E2517AF4E7A85ULL, 0xF1B527568F304C9DULL, 0x54FD32FEEBE1E60CULL, 
+            0xAE54E6CEA6B88321ULL, 0x6C9923B0ABBE7A27ULL, 0x88CF9D1076B0B50CULL, 0x45390FF6502FDDAEULL, 
+            0x2854EEBE7B9B982FULL, 0x53477EE40BC78C07ULL, 0x8A32441B30921679ULL, 0x275291BB04C79670ULL, 
+            0x5311A27CE50B1B27ULL, 0x938FE15D2F4F4DCAULL, 0xBF13F90CC81D9FD1ULL, 0x607A0F071144AD30ULL, 
+            0x7157CBB8D8CA1500ULL, 0x99FC312AA4CD35E9ULL, 0x64B9FC965FEB248BULL, 0x5BA602E0A81C3677ULL, 
+            0x742A095CB3B6BA11ULL, 0x3C910F6D372968BDULL, 0xA19F1027ACA582F9ULL, 0x3D30CEB1B53E470AULL, 
+            0x5EB8261616EF3C01ULL, 0xEE282E7902965EEEULL, 0x7841292A615C9F48ULL, 0xE7FFDFD7EAF64BAFULL, 
+            0xB8D7F1A2308FC092ULL, 0x8C3DB66DC69E010CULL, 0xD3BE054DCA4F6CD5ULL, 0x75D817E2D92D4FABULL
         },
         {
-            0x6BF46C5A737AE2AFULL, 0x9924AE512D206186ULL, 0x92D3E9E236DABA74ULL, 0x52A5FAB1A73E8B7EULL, 
-            0x7D4AA7E5F2885941ULL, 0xBDE09440BB60D946ULL, 0xB7E996BC9F1E3718ULL, 0x9A1E90EB656A6AA7ULL, 
-            0xEB33CEAFFAFA5E93ULL, 0x054FFD6004121701ULL, 0x805736D508F669D8ULL, 0xA94A53789CFBE336ULL, 
-            0xE3B84F476079E167ULL, 0x8AAE6784CFCD5CF1ULL, 0xA6CB31AA4EFFCCA1ULL, 0x55FE17D7C7E2B5CCULL, 
-            0x35C72985EAFE3FECULL, 0x2E47650BB3A04852ULL, 0xBBD6E7F890BD4917ULL, 0x66F8EE3FF8740199ULL, 
-            0x6052DC5CFD87D0F2ULL, 0x7B98D9868D3AAD0FULL, 0x952BE92C997C36B2ULL, 0xB2388C4045F0C47CULL, 
-            0xC32933D1EAC36AAFULL, 0x9E5A4BC379B036CDULL, 0xAB0E690AF7D918C4ULL, 0xAE91FA458B3083A3ULL, 
-            0xB2541D829A08E45CULL, 0x5E32A6CD4A9DFE37ULL, 0xA9496224AB3CAF0CULL, 0x287A3F538DF74FC1ULL
+            0x7DFE4DB6B9788119ULL, 0xC2E8083DE6FFADE6ULL, 0x2ABAAA7EDF28584FULL, 0x3E507B01D961A170ULL, 
+            0x983B12BD7E0ABE4BULL, 0x2970D894A8846FFEULL, 0xC425832A0A4DA5A0ULL, 0x36052035D09E4DEDULL, 
+            0x9D7CD79DC21DE9E6ULL, 0xC373921D5FA875D5ULL, 0x6247E4AE93E6B933ULL, 0x07A4247F0BCC9BF8ULL, 
+            0x980DFB48E646E3AAULL, 0xBF8B460818FDD976ULL, 0x4A2660EFD033FF91ULL, 0x01E4154F468CF14DULL, 
+            0x22BBC33F97EE3525ULL, 0x94AE1EEC1EB5A5B4ULL, 0xA000B5A18886373EULL, 0x3882E137DC2174C4ULL, 
+            0xADA8ADC5289ABB9CULL, 0xCA117C8988F765BAULL, 0xB3A15579EEBA0E3DULL, 0x8014BB2E6870A49CULL, 
+            0x7A3F2BF3DF8FB447ULL, 0x68650E52385DF7B6ULL, 0x5910478A76967469ULL, 0xAEDCEFAD9A74B4BEULL, 
+            0xEA4867DCF48E8E10ULL, 0x5F5EAF9D3B1C1D29ULL, 0xA86B433CB8213D41ULL, 0xB2E2DBF125D53D58ULL
         },
         {
-            0x1DE6E71FE6BC5A8EULL, 0x43B4B791260AE885ULL, 0x16A4DC0CFEDFE3C7ULL, 0x93563E78C11441A3ULL, 
-            0x2A3358FD330B1BF3ULL, 0x322F6AB22E4943EAULL, 0xBC562D2C029893CBULL, 0x03E7E2DC8A951FA6ULL, 
-            0xD8DF68C1E40EBE20ULL, 0x1103BAFE69ADE8A4ULL, 0x5B1958C54E6B141FULL, 0x5BCA2887F7A14476ULL, 
-            0xBC06C0FDEA39CA29ULL, 0x5FE16FC7B06C51EAULL, 0xDE8271D6237FFE26ULL, 0x17380CAE7A91D63FULL, 
-            0x7189713BDAB94070ULL, 0x58AC3D7D10E9C11DULL, 0xF85D5EC2FEA391B2ULL, 0x924F3A7497558C61ULL, 
-            0xE058914A8B09AED3ULL, 0x63E356EFCE61A862ULL, 0xDA464B2B157F57DAULL, 0xDE4F7028AD7FE863ULL, 
-            0x1A21E9909AC86E8CULL, 0xAE2929204C51B1F2ULL, 0xBE72C773F844AC67ULL, 0x4B5BA725CAA6DA99ULL, 
-            0xE25A11F059229E4EULL, 0x44569976D284C576ULL, 0xB8F58D69DF5743BEULL, 0x75516ED2A690DC29ULL
+            0x3F3FD4A2F321E123ULL, 0xFBEC433201220F30ULL, 0xD9AD30CF468A20E0ULL, 0xD5A371E0128E7152ULL, 
+            0x4133E483DA671440ULL, 0xEE4E03F16CFED976ULL, 0xC7D5BF6A5F029BE7ULL, 0x308710BB6CF9A366ULL, 
+            0x33124A90BCE88620ULL, 0xB52991DBDDEC70F8ULL, 0xA156DFD4504FA710ULL, 0x3A933A9B3C601F39ULL, 
+            0x06503AFEC6022403ULL, 0x2345380EE860DEF4ULL, 0x87653DE44FA54E0CULL, 0xAB2BDA374BAF228EULL, 
+            0x6B0E0D19A01C77F2ULL, 0x50CC0EE26018FB75ULL, 0xA96E197A764151D4ULL, 0x86B409B105906B8DULL, 
+            0x3FAA2BFB91E1D71EULL, 0x657D1B6C2650B29DULL, 0x1D6DFF0A45CEFCF6ULL, 0xC5A114F4FB91545BULL, 
+            0x6106CEBDB46614FDULL, 0x1D6350953F739D1FULL, 0x30AFEB42695AA2E1ULL, 0xC2FFFE6A0AB7582FULL, 
+            0x0FF6426B61BA5DBDULL, 0x4C67BE0D68E76959ULL, 0xC9362E0730918502ULL, 0xBDD586FA6C63E1B6ULL
         }
     }
 };
 
 const TwistDomainConstants TwistExpander_BasketBall::kPhaseGConstants = {
-    0xF656CC7D586995D6ULL,
-    0xCA07B52EEF594482ULL,
-    0x4392474018B13D14ULL,
-    0xF656CC7D586995D6ULL,
-    0xCA07B52EEF594482ULL,
-    0x4392474018B13D14ULL,
-    0x59FACC0F09976E4FULL,
-    0x6EBF40F65AEB9A9DULL,
-    0x57,
-    0x5E,
-    0x68,
-    0xA3,
-    0x2A,
-    0x90,
-    0x78,
-    0x41
+    0x9FA12D83F640C1F9ULL,
+    0x2263F10E584460CFULL,
+    0x5DD97215229B9623ULL,
+    0x9FA12D83F640C1F9ULL,
+    0x2263F10E584460CFULL,
+    0x5DD97215229B9623ULL,
+    0x7ACB25B4AD6F5C4EULL,
+    0x7114ECE1D32C25B8ULL,
+    0x11,
+    0x5C,
+    0xDB,
+    0xF5,
+    0x3B,
+    0x91,
+    0xF5,
+    0xB4
 };
 
 const TwistDomainSaltSet TwistExpander_BasketBall::kPhaseHSalts = {
     {
         {
-            0x6AD2ECCE16BB2CD8ULL, 0x8483DE32376A39DEULL, 0xB48066E936ABC65DULL, 0xCA4F6BBE4F8ED006ULL, 
-            0x68839AAAE93D5ADBULL, 0xF843C89252F97D6AULL, 0x57201C3E7AA060BFULL, 0x31843B631C7986DCULL, 
-            0x2E341B9C55BC90E2ULL, 0x3973CF6682CF4E5AULL, 0x5B94B50C619DA0F8ULL, 0x33CDE419756A72E1ULL, 
-            0x8B238101CF2BB636ULL, 0x70C7F11A07A3EA01ULL, 0xD828D03068124D02ULL, 0x0026FA88F8033575ULL, 
-            0xA744C621FC1044FBULL, 0x05CB89173113329CULL, 0xAB865F4B969D7085ULL, 0x04B4FE230F434F02ULL, 
-            0x45E4851AB950E5AAULL, 0x3D99CBF2A358EC73ULL, 0xE358CE4417D60747ULL, 0x43D624D3B468E909ULL, 
-            0x55C26A06D39382EAULL, 0xE2C08329A036C6A1ULL, 0xCD35E4C75ADA8E60ULL, 0x3AF4ACE1A029C4BDULL, 
-            0x62559BD498D05ED3ULL, 0x8D4CE44EFEAA6BDFULL, 0x39884D1E60AA01FCULL, 0x0E97640D0A104191ULL
+            0x7C0EE131DA62B029ULL, 0x90630009ED9DF4BFULL, 0x1E90F101B82BD010ULL, 0x920BB6AFA8268F83ULL, 
+            0x3C430FE2A130FAA9ULL, 0x6B5A46E19ADB32AFULL, 0xDE20A71240786353ULL, 0x4482D252DBD7B487ULL, 
+            0x4F92956D59CAD336ULL, 0xE44B083068370D1CULL, 0x34DDBB065D25498FULL, 0x1A11DBAD374CF7C5ULL, 
+            0x022B1B2FD3644E3CULL, 0x3ED3B0AC1CB563FFULL, 0x4A9CE1A5F0BD9D68ULL, 0x9003B403D517F24EULL, 
+            0x5614149EDB5889E0ULL, 0xFFF3A00F99226527ULL, 0x8CE198288CD1FF2CULL, 0xCD71740750B028A4ULL, 
+            0x71A7C4E1BB79FC73ULL, 0xA8509358755C49F9ULL, 0x07719289DFC83F05ULL, 0x6E26B55DD921F315ULL, 
+            0xDC0DDD3964F85AF1ULL, 0x7603DBB020FA43D3ULL, 0x172C7A6A7B3C9B6AULL, 0xA586D5F77953C7D4ULL, 
+            0xBFA5F9BA732BF7C5ULL, 0x509D9A0CFE5A97EAULL, 0x9414BA68C16CC92DULL, 0xD25FA68C05A2010BULL
         },
         {
-            0xB14EE89F7E2685E4ULL, 0xA691DC957AE77B88ULL, 0x825AD39F03933BDFULL, 0xE1544752E3F5532AULL, 
-            0x7F8B191DAAE10112ULL, 0xCA8BFD0054DD6C6FULL, 0x615A5E6F9CF052D5ULL, 0xA7B599B6568C6E46ULL, 
-            0x73BA7E1B12DFED60ULL, 0x412F479BFC2932F2ULL, 0x968AC1E05F8FA563ULL, 0x13087566A5008273ULL, 
-            0xB8358AEC29E99F54ULL, 0x658CE18322FC1D15ULL, 0xCFA1ADAD1ACD6BD2ULL, 0xFD53C4873A37BB86ULL, 
-            0xDB969F28EB12CBEBULL, 0x9BFFCFC15FCFBA78ULL, 0x186C99094D20F418ULL, 0x0FE728D427E8C77CULL, 
-            0xB74231B72C52D020ULL, 0x3E0D620557BBEF5BULL, 0xEF225EF651B36A2AULL, 0x26B879124CD4DBEBULL, 
-            0x7E229E9776C9F16BULL, 0x4316856F79220005ULL, 0x91CDE347685FC3E4ULL, 0x60CFBE5321465277ULL, 
-            0x05855D9B54D265B7ULL, 0xD216545560A5DB49ULL, 0x252680337B536405ULL, 0x8006337FF11EC390ULL
+            0x9A49A06CD5674E74ULL, 0xD1908367021F3C3BULL, 0x2E0940F129A87321ULL, 0x2EC8B8CFC755A70AULL, 
+            0xBD32FDE56201A19DULL, 0xE6610CFF0F1179BFULL, 0xC57C27A9060F8B0CULL, 0x7439E6843203BDD0ULL, 
+            0x9B4F756E0AC64D45ULL, 0x2667545F3F0BD0C3ULL, 0x9EBE2578CBB429E5ULL, 0x9CD4A3860679800DULL, 
+            0x59487F80C67A36E4ULL, 0x4E00E14239235C6BULL, 0x0DEC649205FE3CA3ULL, 0x150F1CD61CE17FECULL, 
+            0x8E916B7E78648A5EULL, 0x98552BA183E055DCULL, 0x136B99E517388A97ULL, 0x6CC2C5B2195B0A97ULL, 
+            0x4628AB03C1509B61ULL, 0xFA5637EAF193D5EEULL, 0xBBA9CD753A14C25AULL, 0x0151512B47D65D62ULL, 
+            0xBF5E8F6D0D0F3E53ULL, 0x5D1F5BC057538CAEULL, 0xDE608B9D3146679AULL, 0x5E7077292A83C8D6ULL, 
+            0xB58F7E345D189046ULL, 0x078D302F7D55486FULL, 0xDA9AEB31ADC998AAULL, 0x05F8789FD28CE798ULL
         },
         {
-            0xA3E253725D03A48BULL, 0x5DB842BAF29C9E34ULL, 0xDF1BD8FF899138A9ULL, 0xBF8574D4A333CE4BULL, 
-            0x8C6EEE675E861BC0ULL, 0xF9AD34301664D646ULL, 0xFB54965ED48C8FB9ULL, 0x0004606334900FD7ULL, 
-            0x060A3B5B79F230AEULL, 0x7F17DC0788EECCEEULL, 0xBEDF2EDD9E3E733BULL, 0x8CD8A4C5CCF630E0ULL, 
-            0xB6952BB32859805AULL, 0x5F987C7859BB918CULL, 0x0229AF714330E916ULL, 0xAEEAACD8C48A75A7ULL, 
-            0x5744A1D6D336984AULL, 0xD17CFAE09A75118BULL, 0xF754E5E2D3334D54ULL, 0x4DA42294A400D9FEULL, 
-            0x2713FC577A306B86ULL, 0xE64B629715A36618ULL, 0xC1FC49B2D01D99DCULL, 0xDED21F9066FEC40CULL, 
-            0x57B4BFB8B36D22A6ULL, 0x9C8B09309793F24BULL, 0xE871992DBB0B507EULL, 0x635A7024022AD8B7ULL, 
-            0x75E195233EF4D65FULL, 0x8EC1DAD8AF455410ULL, 0x629B7AE6E2D36CA6ULL, 0xCA21F74079E2C10AULL
+            0xCEAFC39726F1C334ULL, 0xC01E08991AF4C384ULL, 0xB4194A36A3D8A90AULL, 0x8D19E0DCDC6DBAA4ULL, 
+            0x263196A141BFCF9EULL, 0xC9CFABCBEB04BEF1ULL, 0x0D369AAB3AA0398AULL, 0x6BE181BF75B353A8ULL, 
+            0xDDC6F5E7D709FD30ULL, 0x88F86002FCCFBB54ULL, 0x2C6EAAF65B4518EEULL, 0xA7A78130C017EB07ULL, 
+            0xB3E06C3C46629B46ULL, 0xE11970EAE771E3FBULL, 0x61D0EE2AB28AD172ULL, 0x2B77F1AEB78AFC7FULL, 
+            0xBEEAC351794ADDF8ULL, 0x9C205FFB0162AE28ULL, 0x5DD11842531FAA31ULL, 0xEE0DFC9B2BB11F1EULL, 
+            0x44ED64C4A3342B30ULL, 0x70790C2741D01CDFULL, 0x61E79E235A87586AULL, 0xD0DDC5BD76DE9D88ULL, 
+            0xDA9062DDED1A32BEULL, 0x1882C9F4361BD387ULL, 0x97170BD0DE1693A4ULL, 0x045A7BC94DB83C73ULL, 
+            0x89F9DCBBB82DEB21ULL, 0x0B90C98C6E6D0B5AULL, 0x80AE4060FC6D1657ULL, 0xF66AEB7077895551ULL
         },
         {
-            0x00C5FB567F45F75FULL, 0x680E8BF660200CCCULL, 0x5A2FDF38D1A2B0F3ULL, 0x54C7DC72780FD273ULL, 
-            0x59C2B9786CAD6332ULL, 0xB919EC8C7B94A751ULL, 0xB2A713812A3F0881ULL, 0x21E9ACC96905BC5BULL, 
-            0x10B70A7AC87BC4C0ULL, 0xA2E63F07EA68C836ULL, 0xD77683D7D51C343EULL, 0x5EB79AD821D092BEULL, 
-            0x69B34024F1BEC76EULL, 0x2FE94FEE87EB8B00ULL, 0x79F66E1B3364A904ULL, 0xFB3E3987EAF8D8B1ULL, 
-            0xA48D4A72A9B1AF73ULL, 0x0BA7FDE8DBE825DEULL, 0x165EA1392405E086ULL, 0xEB56CFFBDF5C698EULL, 
-            0x4D7D664C3EBA1757ULL, 0xA5AF4B4FC96140EDULL, 0xA1635888B9011D7FULL, 0x8CD1BCD8FCA3F7D9ULL, 
-            0x78A09FD1E532D773ULL, 0x0F31C7419D614A3BULL, 0x79343F159ED673DAULL, 0xF3758B336A6E2917ULL, 
-            0x5CE1D4022989501FULL, 0xC3D2F771D1D511D4ULL, 0x665B11D663474C17ULL, 0xC2DD64100F89278AULL
+            0x8D8E4D6A465A6586ULL, 0xD4A79968144A1EE9ULL, 0xE171757741916906ULL, 0x841EFBF0A47706A9ULL, 
+            0x23340130024E3355ULL, 0x9E439853982F7F19ULL, 0x96938ABE860C5626ULL, 0x5931484E6939318EULL, 
+            0xEF886491346094A6ULL, 0x22FB0AB16B5F6F94ULL, 0x099155DF68CE468FULL, 0x3406EDFC44F68CBCULL, 
+            0x41E8BBF4624CA784ULL, 0x224EAF6F5B8845E1ULL, 0x36426A885A7AC5F5ULL, 0x7F93FE1430334D40ULL, 
+            0x1961E47BD7EF3D83ULL, 0xA89DC6A0539F8FA9ULL, 0x576DDB8309CA5F81ULL, 0x663D0E57CE642AB4ULL, 
+            0xF92857EDD6F6D527ULL, 0x99432A10352866C6ULL, 0xA16BCF88E41B1FB6ULL, 0xD0306C8E27BA4106ULL, 
+            0x8B2C7DA0C3DF0666ULL, 0x03924C91BBF46C21ULL, 0x114A7DA3A99708A9ULL, 0xAE72EFB6287023C1ULL, 
+            0x148C6749624FAF1CULL, 0x40F11A62A400BFCAULL, 0x588A397F23742242ULL, 0xA4336D13075904E3ULL
         },
         {
-            0x09D10A9B7370C1EFULL, 0xA9DACB0A9796A1F6ULL, 0xDB624A22395FDE4BULL, 0xA1B811004701B04EULL, 
-            0xA67FEBFADF2D5F00ULL, 0x7D4EA5260739A1D1ULL, 0xCA388821A1D12C6DULL, 0x6023E3536A4ACFECULL, 
-            0xF6D291C616B6F2F9ULL, 0x9D8BC8A002C5E395ULL, 0xD34BB8F4E688BBE0ULL, 0x7153974702A059C6ULL, 
-            0x2C18F4A245C94A26ULL, 0x31E176C010F33EA4ULL, 0x845AC41E5431C4CAULL, 0xBB11D619F772660AULL, 
-            0xDB7AD127A899A5F3ULL, 0xBF16B33B7281082FULL, 0xBF5E87E61B5A666CULL, 0x7A2EBA505D886953ULL, 
-            0x2FFC4947819B9BE6ULL, 0xA42FFF432927629EULL, 0x7959718A5E9DB441ULL, 0x3DBF4CC189D59C84ULL, 
-            0xF6A14F2F40903582ULL, 0x3702CEA57C4DAFD8ULL, 0x94C4780B4CB8E9E3ULL, 0xF7C5B33039D94C1AULL, 
-            0x3D7F56AA3C61B7A2ULL, 0xE180AB0272A28F5CULL, 0x4F07AACC2A0B1065ULL, 0x270345CF78EEF498ULL
+            0xADDE6C839F6D8CE5ULL, 0x386D36F2131DC6F8ULL, 0x3CA16ED7E36C5D3BULL, 0x81494D5494CF3C1BULL, 
+            0x38A4755F70C4A7C8ULL, 0xA804A060F7B3A8EAULL, 0x5E976FEAE59D1DC3ULL, 0xBC393866FD15BB36ULL, 
+            0x8DFDD05C7A706716ULL, 0xE87D37D71C53C986ULL, 0x8CDE3C48448B5519ULL, 0x624DBED9A5CEBF2BULL, 
+            0x017F00E22B67CA2BULL, 0x5B63763659FD4EC1ULL, 0x633764CB601BEBFDULL, 0x2BB3109494E9469CULL, 
+            0x64DA760719F6490BULL, 0xC355F5D62C3E5821ULL, 0xE020F8D88C8B1AF7ULL, 0xD90C6D099E0ECAF9ULL, 
+            0x871EB203D3891600ULL, 0x3466EB9892C3C638ULL, 0xBB1733996AEFA389ULL, 0x17D81969DF2EF62EULL, 
+            0xA49D0DEEBEAB0AD4ULL, 0x819457248A20596BULL, 0xC0B03766EBEF00BDULL, 0xE33E57405BCFEDE7ULL, 
+            0xEB6E983F0874E247ULL, 0xCF00BA89679C34DFULL, 0x03CC5AF8AAB24415ULL, 0x98C5CCA752A6B223ULL
         },
         {
-            0xCBDC252306F831ECULL, 0xECAD5836E114758AULL, 0x048B54F5887C5852ULL, 0x5E92FDC1A59DD68CULL, 
-            0x79E3B0DBD0D0C6D3ULL, 0xDEB84A2081AA4A3DULL, 0xE97510B3DBB0C9EBULL, 0xDA50E56A0CD9369EULL, 
-            0x9FF319C99CFE37EBULL, 0x65AC6D44B9EC6EA9ULL, 0x1142D63D4E06A033ULL, 0x53C3E712B6E155C8ULL, 
-            0xF84C7E9020D35AB4ULL, 0x0C7104C30E5EEBE7ULL, 0x08C79BDA59562928ULL, 0x73156A8C3456F389ULL, 
-            0x0666EC19EECE990AULL, 0x2976E0A16E4259E7ULL, 0xF563AB9C266D8A42ULL, 0xEF62C37E6DBE21AFULL, 
-            0xC7667D915749F00AULL, 0xEFF4AC1D90630487ULL, 0x483FFEB97CF9F73FULL, 0x07850D4F3E681E6FULL, 
-            0xE3FDD026BB1303EDULL, 0xC702536872E18858ULL, 0x7F775BFE12D61430ULL, 0x09F72D5BDAEA1960ULL, 
-            0x9579F10E4AAC06C6ULL, 0xF48FCE94C78DDB3CULL, 0xEEE128C96581D68BULL, 0x3B91DA9A9DA86C5EULL
+            0x80AE6B0107559219ULL, 0x4794563762B8FE80ULL, 0x02812A0D86377408ULL, 0x5C47A99C1D0F4DC2ULL, 
+            0x508C28B8CAAA1445ULL, 0x10DE3BC8A72C89A7ULL, 0x88B0432356CDDEE9ULL, 0x18F5A64CA441EE38ULL, 
+            0x62E9DCEEC73A7505ULL, 0x37404F4C141F4EABULL, 0xCA3A3C4DC2178A69ULL, 0x207080DA399EB473ULL, 
+            0x97C31F771EA9E93CULL, 0x1771949FCF17267EULL, 0x600670793AFDED9AULL, 0xD95D1C8F057F3762ULL, 
+            0x8945D95FB6D77DC1ULL, 0x44EC3C4180DA1607ULL, 0x2827C98C703E2CADULL, 0xDFE0C1FA802D5F64ULL, 
+            0x4E0DF53418323D7EULL, 0x63B707F97A12C2D4ULL, 0xA827C7DF4D6CA85AULL, 0x257848CF262E4B71ULL, 
+            0xE107CD9127782D1DULL, 0xEAD86753F803E7B4ULL, 0x5D285617FB3C22AAULL, 0xB329D3396225F48FULL, 
+            0xC4FC16727B856FB0ULL, 0x32D5E9ECFBAD6BC5ULL, 0xFAE12FBF5F169772ULL, 0xEC8EC0F1F5F1C25CULL
         }
     },
     {
         {
-            0x637EFDFEB152BA89ULL, 0x98703015917FD8FFULL, 0x92D331FA8055A51BULL, 0xC9E4CCA4189EA1E5ULL, 
-            0xC7A9D9E873AFCFCCULL, 0xEE3A509651A8B150ULL, 0xA0FA7221AD0131A6ULL, 0x900A5EE6199ADB18ULL, 
-            0x2AC63F50F7021CA7ULL, 0xAFD7A8397BC1AAA7ULL, 0x0E64AF22A10A1C1EULL, 0xDC54806DEEBEAB99ULL, 
-            0x0B56F9DBB73A6E3DULL, 0xD14E4810AAF717ECULL, 0x87B76E6FDFAF4E06ULL, 0x542AFB72B5DE312AULL, 
-            0x5D4E433534534A83ULL, 0x48831A7DFB9C25C3ULL, 0x5C331A57ED2AC32EULL, 0xE745B1EB0F3CE07AULL, 
-            0x8123625FFDA66237ULL, 0x12A8D792E983FA32ULL, 0x42861DD5C06A09BBULL, 0xA74E51A7F47784D5ULL, 
-            0xCE2F9ED1D5CF24CDULL, 0x37259389116DB078ULL, 0x0E3EDE7852175CA9ULL, 0x86B42D0E53F9C61DULL, 
-            0x872F52E104CA4FAFULL, 0xD2A95DCFACA7A5C0ULL, 0xE301AE847371F582ULL, 0xE1F764ED598B3BBAULL
+            0x71B5FA25119B24E3ULL, 0x9515120520567222ULL, 0x61D1AD1CC7FAEE4EULL, 0x6AF02E40BD954573ULL, 
+            0xE389CF5CE4F9F81AULL, 0x60831B453206D0ECULL, 0x6BCCEF386638ED8AULL, 0xE629D159B584F7D6ULL, 
+            0x92863FEAD7DC48F0ULL, 0x3946CD4D6D267135ULL, 0xDB9D9E77DED6AA2CULL, 0x107F0A1DAD8F28F8ULL, 
+            0xC5B8BDA29B823CA4ULL, 0x1717764C01560245ULL, 0xE960B63DFCC4849FULL, 0x0FFEF384BF91CC71ULL, 
+            0xD92DC4873B30D781ULL, 0x6CADB1DC065ACEFCULL, 0xF818D716DA244473ULL, 0x0BFC21718EB55C2FULL, 
+            0xEC4176AD81B3018BULL, 0xC969984E68E026E3ULL, 0x85E6AB69D3EF163AULL, 0x723DEAD90AC6D040ULL, 
+            0xEF05BD8575D11689ULL, 0xCCA70E3EF0AB8874ULL, 0x40023A7FFC079A5DULL, 0xC39738658F028BB0ULL, 
+            0xEAEB9E5EB103F8C1ULL, 0xB348FC87C5D778E7ULL, 0xBCD372A77BAE3C9BULL, 0xB9F5A19E935B1CA7ULL
         },
         {
-            0x7E9AAB64E946DDE7ULL, 0x0B8764CA31016199ULL, 0x8FB23E18189D7312ULL, 0x0A1CB9A247B79DE6ULL, 
-            0xA6F49A680480F905ULL, 0xD40628A46235D536ULL, 0x6005C9480BDFB61FULL, 0xA9EB4C99F9CFD829ULL, 
-            0x6CE1270DEEC34F92ULL, 0x277E0E9B7ED2583EULL, 0x6B5DE9A8DEA6B54DULL, 0xEA075BDE3641C56BULL, 
-            0xAD867209969B875AULL, 0x88903A7A89EFD292ULL, 0x5EB01B4990ECC9B9ULL, 0x2570B03E136C7BB5ULL, 
-            0xAC026EA17A741D3FULL, 0xAD5FB97ABDA968CEULL, 0xD44CC1610EF46E1BULL, 0xE08D91ABDDCA6990ULL, 
-            0xC2C224D9023A143CULL, 0xF8AD44BC1D5B3378ULL, 0xE9EE87E31CAE1531ULL, 0xD796E92D38A09C5AULL, 
-            0x5A5CC8ED3792DC47ULL, 0x46F6ABB976565CC7ULL, 0x6D2FC4ECC96AE0E9ULL, 0xFDFDCF1355853BC4ULL, 
-            0xA117490BC1374E24ULL, 0x1F439C5EBE48FB87ULL, 0x775C2380D6451570ULL, 0x30495885A26DC4B8ULL
+            0xD46E02320FAC6AC4ULL, 0xB0DBD686A2504A3FULL, 0xE8E37957FB8BB86FULL, 0xE54D117E892298B9ULL, 
+            0x598F0F9C6601F675ULL, 0x3F4331181148DAF6ULL, 0x8383AB91DA2C5AEDULL, 0xD70FD8B94E4C5975ULL, 
+            0x6B92D1F387D5CA0DULL, 0xB6EF6B1843BEF4BAULL, 0x8BEE974925F18238ULL, 0xCFF898940758F845ULL, 
+            0x4D38EF744EB4A58EULL, 0x1A2071889709F6A7ULL, 0xC21CE2DFC0B51DC6ULL, 0xF3F097AB58072B48ULL, 
+            0xF596263FCA7DCCE2ULL, 0x6D36BB4345C80BE2ULL, 0x8952BF14A1DC6CF6ULL, 0xDAC46E9745876215ULL, 
+            0x48DE1CC1B0E85CD2ULL, 0x14102623EE434044ULL, 0x6C1D67D35190BB21ULL, 0x9AF70B2C80083931ULL, 
+            0xF922E9FFA8747E7BULL, 0x9ADA8BC7DE8B4AF7ULL, 0x110C54C126D0A69DULL, 0xC6DC40C2D94ECCEBULL, 
+            0x1FB2D2374198CF2CULL, 0x2FD52F56046BA859ULL, 0xCE5D1741C37FF1DCULL, 0x76B21EC5D264F2C9ULL
         },
         {
-            0x8E1C0A24CCE4636FULL, 0x18ED3B048BB5C30EULL, 0xB8C88AECD09DFD2CULL, 0x64E74A8FC6616F98ULL, 
-            0x6702692BE4B8FDCCULL, 0xF6B66D2AB1C02D04ULL, 0x1D46C77B29A41270ULL, 0xA5238C0F30750275ULL, 
-            0xBF5C31AA3D60B5D2ULL, 0x3C4B5A3F114521A3ULL, 0xE136D4CCC240A215ULL, 0x1EAEB9A11A1F1B15ULL, 
-            0x4AD4824C7CB69D3EULL, 0xD3ACABF96B66A414ULL, 0x54A97FCE03ADD7CFULL, 0xD32D78A189A8FAE0ULL, 
-            0xCE16E71CC1E3F3ADULL, 0xD6072BCF265C9635ULL, 0x10C6B2705BFF8845ULL, 0xA1D3F25AF5513772ULL, 
-            0x8276FF886550DAE0ULL, 0x68627D80F149EBDBULL, 0x1720963337614ECCULL, 0x02E19D1EBF77D5FAULL, 
-            0x78856AA1C9E6BE72ULL, 0x5B83ED0A88FFDA7BULL, 0x3A381239D3684185ULL, 0xC28619FA3ADD34C3ULL, 
-            0x780C7E7A737952DDULL, 0xD1A6BA6BD6594790ULL, 0x9C857E81D964936CULL, 0x0D979D33399FF0E5ULL
+            0x400FB628F5546F36ULL, 0xC40EDE91351B7BACULL, 0xC03A583D3FA040BDULL, 0xB2362E8BE637FEE6ULL, 
+            0xCA50C38F53374E0BULL, 0xB8CDEA9583DC0EB3ULL, 0xC9638AC5E45130E4ULL, 0x4DFE527196BF493FULL, 
+            0x23DDB94509A1F92EULL, 0x8DF2C7B271851C9DULL, 0xCEA7FDE762D0A340ULL, 0x75EDE3F24B443122ULL, 
+            0xCD5B9EE72D6632A3ULL, 0x1B12173C6DB8254AULL, 0xED30C0F0D9C2B011ULL, 0xA7EFA6D3F4BD699EULL, 
+            0x73BCFF71BE9F7843ULL, 0x66F6B59B436A8AC4ULL, 0xCEFEFDFAAD7A8FE6ULL, 0x7BBDE01D452E20DEULL, 
+            0xA0C11699A45A71EFULL, 0xB20F365FD6AB6C42ULL, 0x93B0A295880205ABULL, 0xC7F3BB59EA828E6AULL, 
+            0x3246E5F34BE5DF0DULL, 0x62420513B6527521ULL, 0x6E2D47F8AE7A99E8ULL, 0x86FB3F2B52474FD2ULL, 
+            0xF596BE5A7B2B7A2FULL, 0x4028329B5AC7BC40ULL, 0xEF59E864D97CC411ULL, 0x56A31461132476B4ULL
         },
         {
-            0x75ED86D14A1D5428ULL, 0xADDC07A6BD1E102CULL, 0x6C8BFFA20A9CD3F1ULL, 0x8DE5736FFC368BF8ULL, 
-            0xEA12B2EFFC84BB08ULL, 0xC69B5E06D98E76ADULL, 0x3B7AEC343C9595A2ULL, 0x67BD3C3C8E99A0ADULL, 
-            0x25147B5A45946502ULL, 0x20CE7F1CD24E5BB0ULL, 0x3A766CE05732AAEEULL, 0x12F035713D3C3BDFULL, 
-            0xF665378E67F82DA6ULL, 0x92329CE1D3859C1BULL, 0x839909A105032D85ULL, 0x15521D13F2E804DFULL, 
-            0xB7D9711B08E72988ULL, 0xFB1FD50C94EA4364ULL, 0x865B134E957D31F7ULL, 0xC9440E8CDEBD0301ULL, 
-            0x3333417392B17745ULL, 0x12B4E85818BAB2DEULL, 0x6C1B730AFE9F8E89ULL, 0xCE757780BDEF3091ULL, 
-            0x3B78D5D9577F4457ULL, 0xBCDB6700E7A11B4CULL, 0xC2FC63AB0A78801FULL, 0xC723E50BD12D1190ULL, 
-            0x0A10FCEB8C9A5B34ULL, 0x08DA4EB7B5D23DB2ULL, 0x7EB348C972E6FF75ULL, 0xB9FD70E60B7A224AULL
+            0x4DD011EB2E1F8BDFULL, 0x7EFB92752CFA1047ULL, 0x5427BFB432DDB0B7ULL, 0x97232612F3CAD9A1ULL, 
+            0x55691545BC9BCF2AULL, 0x682DE169E770E5AFULL, 0x5F2662E8C04CCBD1ULL, 0xC4F15A7C6266D258ULL, 
+            0x8EB5579A26D1D014ULL, 0x90641639CB0C1A44ULL, 0x1FCED41C7C572C7DULL, 0x4C6E1411FCF19660ULL, 
+            0x75A5DED8ADE08A5EULL, 0xACE3561AC7077E3BULL, 0xCAFFD4AE9DB3CAD7ULL, 0x49FFC89B44098ADBULL, 
+            0x39B3A867A36ECDCCULL, 0xE7D42D68A8CBB139ULL, 0x3EBEA2BCA5532040ULL, 0x8890320430D84649ULL, 
+            0x4A698F841580B5E5ULL, 0x9C3D812336BFB8A2ULL, 0x0313C1ACD8519A0CULL, 0xFEFBD46DF3F6E00BULL, 
+            0x4C8779FAE06F268DULL, 0x0229836294F50ED9ULL, 0x167E191F61A2CE64ULL, 0x632B60B626DC0512ULL, 
+            0x8EF5891E19C34A19ULL, 0x19AFE5D49FBB6120ULL, 0x6A78EE9A2312B47AULL, 0x552656A29E76AA7EULL
         },
         {
-            0xADF6A1C472B53332ULL, 0x1395218005763271ULL, 0x8090980E8FE1259AULL, 0x65D1A21A0A2D0907ULL, 
-            0x86DE97F1FEB46385ULL, 0x5FEF897A22A536DCULL, 0x7DBC2AD2DA70EFACULL, 0xCF8FF4CEBE663479ULL, 
-            0xC69558290DF2AB2BULL, 0xAE2428BB9933CD99ULL, 0x9AE843FC80A1B47EULL, 0x8FD965F6D43719F7ULL, 
-            0x2D3EE289A5EBC6CAULL, 0x81B0EA06C8D231F3ULL, 0x790B995E4223FFC9ULL, 0x7DCF6724360F7BEDULL, 
-            0x65001D6488D69DF2ULL, 0x9FC5BBB2CAB23327ULL, 0x518A230EFAD0D070ULL, 0x8C2F2F51E7F681D2ULL, 
-            0x572F02E161127BDBULL, 0x93FA4630922BF920ULL, 0x05B157AFC1DDBBC2ULL, 0x56F4F8BFADDDE825ULL, 
-            0x1B0BF681ED039430ULL, 0x3A5AD71C084087C6ULL, 0xE525999588E1FDE5ULL, 0x57500C3D66250151ULL, 
-            0x25F1F444905F8072ULL, 0x15309183FE20A215ULL, 0x10B59816183F3A14ULL, 0xF0BBF7B416F2DD83ULL
+            0x4227055E38D5CCEEULL, 0x3AD7B82185D59AD0ULL, 0x9EC0E845216EB5ACULL, 0x1E44594C2EA824D3ULL, 
+            0x084E5F0F02223FC7ULL, 0x1D215FC82A4C7A91ULL, 0x8E474415D2929912ULL, 0x7D2BE3A16DAB7534ULL, 
+            0xA51688194AE815DFULL, 0xA1146D163AE567E8ULL, 0x3B74004DD4AA0B92ULL, 0xA912E3D53EA2C306ULL, 
+            0xAFE247573D774A52ULL, 0xE142F399149DE16EULL, 0x01D36678E831C210ULL, 0x0111C79093BF4BDEULL, 
+            0x16E513BD4106C720ULL, 0x58F0BB0868E8C4B3ULL, 0xAE30B6624DAFDD0EULL, 0x698A1979E8F3B1EFULL, 
+            0x124D1DE978B50DC8ULL, 0x0EF6C93D8D7C2D4AULL, 0x6EB6A7085C38E80EULL, 0x99E71D14FF6713DDULL, 
+            0x25DEA6E66DC83A38ULL, 0x437EC1C8A89DB6ABULL, 0x2B0F9F8E178A20A4ULL, 0x136D782506E05DC8ULL, 
+            0x4B4FA71F177618C2ULL, 0x86305A3C3FDAAF83ULL, 0xC9C4A482D2BE4B63ULL, 0xB638C5A407762BD4ULL
         },
         {
-            0x4D4BADAFBF4AD863ULL, 0x5A5720DFEAB23F97ULL, 0xD950B45BEBC41BF7ULL, 0xCE998F2458D1267BULL, 
-            0x8FBA41465AD115E7ULL, 0xA98E1B3935EC1233ULL, 0xC52EDBB5660E7C65ULL, 0x45FF5EDB4CAB7142ULL, 
-            0xE13F638A6E90F014ULL, 0xCBD63EF4A93978F0ULL, 0x81D5E30CA9777DDEULL, 0x7A7C6E07456CB30AULL, 
-            0xA43D0E40AE59B4F5ULL, 0x7F71153EDD234C9DULL, 0x21AF4DC58F2B2E9EULL, 0x9D6599605D10260EULL, 
-            0x64A7C5F57630A8F6ULL, 0x2C2F82E2D10DAD7AULL, 0x76166735AF2455D3ULL, 0x11E8F8D8546459FAULL, 
-            0xC8F96736E24D62B9ULL, 0xECC07011E885DE56ULL, 0x0713AB74929AB214ULL, 0x370A88C0C088345FULL, 
-            0xF7BDC8BF0E4E8548ULL, 0xC00901ED217EC089ULL, 0x4838CDE69CB8C271ULL, 0xE5CDA89787EBA1D0ULL, 
-            0x15D4B0A955C9A50FULL, 0x95267D586535EDEFULL, 0x158A11FA35E6BBA7ULL, 0x97EF49672E4EE347ULL
+            0x769F7A0C31E70F43ULL, 0x4A5D10F2DAECA896ULL, 0x18826C17892C5C9AULL, 0xE636B4FBDDB3384FULL, 
+            0x9ADA574559575188ULL, 0x47E66207F79AF035ULL, 0xE3E31FCE4A2D678CULL, 0x527C1901CDF96C1BULL, 
+            0x224DF5F3742CB10EULL, 0x73E6D7683CEC6797ULL, 0x52C09B71F8D97C79ULL, 0x2D1780F97D5BBE33ULL, 
+            0xBBA2F1F42CABA1DBULL, 0x3C6704B10ED7DB71ULL, 0xD4B3574DDC9B6475ULL, 0x61F115B2FCF805AAULL, 
+            0xD9855CE180D472F4ULL, 0xD6A1015C26DC3D77ULL, 0x6117D28FB3EB92B4ULL, 0xD3AA828591DAE4B2ULL, 
+            0x2F0ED64D7B053C23ULL, 0x4F00533986BDC704ULL, 0xF7C697D35887C15CULL, 0x06E7830DF94AE984ULL, 
+            0xA100F4BD8BD95345ULL, 0x435F2A9E8D6261F1ULL, 0xBC15204EB3856673ULL, 0xDB8BE22450025DB7ULL, 
+            0x3508D9AB559DF8A2ULL, 0x20884A3B5343994EULL, 0x083085188743C295ULL, 0x66A4842FC8950830ULL
         }
     },
     {
         {
-            0xEC641419D0FCCBC6ULL, 0xD5B9B243E4C3BC46ULL, 0x436A15351B94DAD1ULL, 0xA7AE65E3F318EE32ULL, 
-            0x39B49EF490698CF7ULL, 0xB0ED6D9141EE1DF9ULL, 0x307E6E237FFBEE2EULL, 0x733AA0CFA2D3AB85ULL, 
-            0x509B46113F69C4E3ULL, 0x413C977F7ADAE95AULL, 0x9372485EFAA71960ULL, 0xBDFF4E81B956DB5AULL, 
-            0xC96BD70A24539934ULL, 0x93B278F521A6C848ULL, 0x588593D4322F3207ULL, 0xA444C7EF37C69C61ULL, 
-            0x2883BE0149006A82ULL, 0xBC818CE81D1784E5ULL, 0xD2F1DD1010F5C704ULL, 0x35C09B35C97C5459ULL, 
-            0x0B121B45A9F24EB9ULL, 0xE11997062900C1CEULL, 0xC42363ECBC212065ULL, 0x2FA2114F06BADEBDULL, 
-            0x094AB713FD305E05ULL, 0x12A0918E10AEFB6CULL, 0xD756F871B2BAFF38ULL, 0x275F814DB21B9270ULL, 
-            0xEC0D2BC36039A220ULL, 0xD2E44E964304CCE2ULL, 0x3514FEC12A941094ULL, 0x2F055B88FA0E6EDDULL
+            0x06106BD1D9858D74ULL, 0x8EB7E4E7224DF849ULL, 0xC12689374A9FEF0BULL, 0xBB3AAF095557DD9AULL, 
+            0xF2EF6830025D53AAULL, 0xA82564B630D91715ULL, 0xBC427261C6427354ULL, 0x0242BBBE419A9703ULL, 
+            0x8A45E82AE2EC037AULL, 0xA80B7CB4FD9418C7ULL, 0xB7A31DDF89DCDA61ULL, 0x76A5B548952B0A22ULL, 
+            0x2438739E401B1972ULL, 0xF0A1B49E7B214ADDULL, 0xF40BC3076EA0F99EULL, 0xF58E5F227D24E3C8ULL, 
+            0xEEF1BFAFAAFF4D8CULL, 0x6DA768F50E829473ULL, 0x093D93D0AB2A25D9ULL, 0xC8345007B9C93191ULL, 
+            0x754AE979CD9653E5ULL, 0x6B0F195D0FF1688BULL, 0x75A3BFC4D2DDC8E7ULL, 0x2C9D9D108A10C265ULL, 
+            0x309FDBEF34BE386DULL, 0x2E94E683A0F4FE2DULL, 0x9E4F05006A5B8EDDULL, 0x5930D40CB9C1ED85ULL, 
+            0xAC25784D4F74E8B2ULL, 0x74E160ABC1D0BF6AULL, 0x4375C0D7214564B5ULL, 0x6E3AB9FFB3FB1F40ULL
         },
         {
-            0x185154471FF3E3C3ULL, 0xAA8E501E88C80513ULL, 0xF8EDECD968490C66ULL, 0x77DB735169245F31ULL, 
-            0xD6EE702651903CABULL, 0x793940D7785E9E39ULL, 0x59FD91A9CB403853ULL, 0xBC68690CC55E44BBULL, 
-            0x1BAC906B68A9FEE3ULL, 0xB8D4C7806B76B514ULL, 0x05234C05778279E4ULL, 0xFD42C09A5876EA3CULL, 
-            0x84275635E9906D0DULL, 0x9EA0A17CF191C9BDULL, 0xB96DE99E611EC676ULL, 0x4D3918591450CF91ULL, 
-            0x50EBB2D7A5C648C6ULL, 0x85BA2F8CD8D28C64ULL, 0x2071E973DBD03B4AULL, 0xFDE594635BF8D933ULL, 
-            0x7ABE627FB2F9414DULL, 0x6B4AA1AE26871ACBULL, 0x456A7C19C925A0B3ULL, 0x15183ABA18573F34ULL, 
-            0x4BDCF0709AF0F601ULL, 0xE46DFF455729C60CULL, 0x4BA88276A7750083ULL, 0xE61944C02A25AD3DULL, 
-            0x9047F53178AA5397ULL, 0xD4E7C158BFF4BB6BULL, 0xDCC74D4C14EBB527ULL, 0xC7891678D278AEAAULL
+            0x5E12025ACC9B8A57ULL, 0xE4A7D8517FBB7B54ULL, 0x9FAB6D0665555FCEULL, 0x3F489CEAAA20F847ULL, 
+            0x5799F9AF84F804C6ULL, 0x663032514EA16077ULL, 0xCB2A0ABB10BA84FFULL, 0x06B279C6C040D32EULL, 
+            0xEBE617FDDC4F0797ULL, 0x1FC16414EDEEDC8EULL, 0x7A3D97F80695FBD1ULL, 0xB0EA2BEA926357ACULL, 
+            0x388B38E9DF5836B9ULL, 0xFC183D933E791D01ULL, 0x485181B46BF6AB44ULL, 0x3B5B1CE6390D2004ULL, 
+            0x98C599D3CCF36AFCULL, 0xECE1F655C757DF99ULL, 0x9EBA4F22C99D726EULL, 0x051535DDF618B45BULL, 
+            0x31F7553907330008ULL, 0x4C50ABBAD4462636ULL, 0xC4BD3C243BC57087ULL, 0x6D5303A754CCA880ULL, 
+            0xF6753EB00F17C48EULL, 0x1EAB3324B53B5217ULL, 0x7EB7D9DF2ACE4C85ULL, 0xF4CB6002AF5AE875ULL, 
+            0xA1D721C6F16EF72FULL, 0x9F883CD4F00225AEULL, 0xA5BACB5B6FC264A6ULL, 0x8860D4F5906DD585ULL
         },
         {
-            0x3D1889237F61C2F3ULL, 0x46F0398BCE045A7DULL, 0x4CD79E968672EF79ULL, 0x7CE81AEF04E438ECULL, 
-            0xE0EF0259AAF61F3CULL, 0xFC54913E050F2198ULL, 0xCB1E9C24B3859A79ULL, 0x3F70A540B36308D1ULL, 
-            0xD82D28E8C6D3407BULL, 0x63EB309AAE3E3B55ULL, 0x153AB0BE7D7B908CULL, 0xE784BB84E2237388ULL, 
-            0x8E6DFA37AAFC9AB2ULL, 0xC7792A44BA025483ULL, 0x47DA524F6FF2F6D1ULL, 0xA5AC8D3FC4FB24D3ULL, 
-            0x45FF51F440308284ULL, 0xBC45B782B1D769A0ULL, 0x1A071C8058392F1EULL, 0xE01BFF3F2F688F9BULL, 
-            0x47E7A3864D29D3D3ULL, 0x0A2CCC28926CB278ULL, 0xEE16DD860A4178EEULL, 0x92BDC19EE4B0765BULL, 
-            0xEEEE8497652A76F3ULL, 0xE5C0F054E38484E5ULL, 0x0E2339A2827C673FULL, 0x48F73DBF1DD9F363ULL, 
-            0x9CFBF2E6371482F7ULL, 0x16EC3DCA009B2D2EULL, 0x2D668E40505E28C6ULL, 0xDF26344584B3BC66ULL
+            0x1EFEF7BC9D761A45ULL, 0xBC0827D878AD72B9ULL, 0xD46165FD5E5B2F5DULL, 0x352C8A4E24998FB1ULL, 
+            0x047D8699A526AA77ULL, 0x692AE004D08A28CFULL, 0xC0B24BB6CC3D38E3ULL, 0x86CC9F3D70D93AEBULL, 
+            0xC78AB1F95921DEA4ULL, 0xE48069E519EBFB3FULL, 0x7CE8D0B2E93BCA55ULL, 0xF8777D19C3BAB4F5ULL, 
+            0x10F4F79A8CBB6D02ULL, 0x88A15EED375CDC0BULL, 0x4A465530EC460E0DULL, 0xE1B3D0317F923074ULL, 
+            0xBCC3E49856FD586AULL, 0xF78F3036C1E53BFFULL, 0x9265148C13F50B05ULL, 0xE3FC8DB41AFDFD3AULL, 
+            0x9F7F089C4167387AULL, 0xC6893DA3CB42BEF4ULL, 0x07E974CB6F86C093ULL, 0x24B9612C9A008F1AULL, 
+            0x5DFAE102B628659CULL, 0xBF14BB2241387DA4ULL, 0x9F04876D95BF3346ULL, 0x8534D3D91BBFA54EULL, 
+            0xE093EFEDD6561509ULL, 0x60A601443B5E00C4ULL, 0x84DCF5E1C1EB5FAEULL, 0xD9C299C1C169CBC3ULL
         },
         {
-            0xD6D835AA3C9D0E3DULL, 0x81A3B2DE72A167B8ULL, 0x29D5A2176E9C9DD6ULL, 0x0C4A9503B10673ADULL, 
-            0x08185409FA5BFE46ULL, 0x60F53F2DADF653F7ULL, 0xF0FFDE653B75F1A6ULL, 0xD3E8ED0B6D14D3ABULL, 
-            0x159FB37365A1D8DDULL, 0xEC971FA7D1268128ULL, 0xAEE89D98EE9BE6E7ULL, 0xD918016E1FEAF9E9ULL, 
-            0xAAD00C5B719EF42BULL, 0x87CD1E081D745928ULL, 0x965E77EAECE7EED3ULL, 0x04620D98A99A1317ULL, 
-            0x9E082BC9550A77A2ULL, 0xBE90F91084F01229ULL, 0xBAE1ED69FEFB71BFULL, 0xEA2CEC75967D9F59ULL, 
-            0x60B529B39666CA91ULL, 0x14AA96457BEEB0EAULL, 0x720B464AD8185B14ULL, 0x8E34ABD3C232714BULL, 
-            0xD926F413C2FB5E21ULL, 0x3F6BBE2193D3C91CULL, 0x2D0C8E78A73ECCDCULL, 0x94D98A75EA6D3EB2ULL, 
-            0xF699FAE1CC826539ULL, 0x44E3286B8EB8E255ULL, 0xEEB549788C20FC01ULL, 0xD07EA8059431B613ULL
+            0x8FDE4A713212C41BULL, 0x8AC1B60A18148AEFULL, 0xDB8CF0AFB2491BA5ULL, 0xDAB03675FFAD44FBULL, 
+            0x9C8A1BCF49A39704ULL, 0x2471633FF42C36F2ULL, 0xD95F6D144845000EULL, 0x2BB5D4381C6C6DD3ULL, 
+            0xA9CD63968BB39BA4ULL, 0xE4EEABEB6389F896ULL, 0xD9E1238480F05400ULL, 0x7A979BDD003CB376ULL, 
+            0xECD8BAC443F901FBULL, 0x31C10CA27FEEE80DULL, 0x2D444ACA2C7EE1FAULL, 0xF1DF1359CCB1DD3FULL, 
+            0x90B699D654097E02ULL, 0x4DAEF015D38ACDF4ULL, 0xE5C4613D4CFA0817ULL, 0x5EEE6AFF72C28AFDULL, 
+            0x1B66821625CAA88CULL, 0xCA61A068960DA2F9ULL, 0xB73735864AF9B985ULL, 0x1C3531EA0CFEF032ULL, 
+            0xEEDBACBC3A43C895ULL, 0x578EAEB9CE947B15ULL, 0x48C37F9F13B6346EULL, 0xA1DBDAA433969367ULL, 
+            0x1B821E80671EFA63ULL, 0xA0DB08C1D549ADDCULL, 0x144D7E1CDC3A63E5ULL, 0x9FEDE3031E4DE84CULL
         },
         {
-            0x07C8C23D2A29229BULL, 0x6A1FB94A5D75D747ULL, 0x80B8D49A4F1601D1ULL, 0xB4EB677DE31F2D12ULL, 
-            0x4648C5A112F0E79CULL, 0xE31B36055B7BDF26ULL, 0x8D75EF4B45781E2FULL, 0x43CDC19372A3EB67ULL, 
-            0xFDD9C1710804863FULL, 0x1DF49DB2B855227FULL, 0xB3B1FB15792621C9ULL, 0x82A5C6F2C6F7E85FULL, 
-            0x997EFD1BD327300FULL, 0xF8B31EABAC85A400ULL, 0x1B8F068CD73B73D3ULL, 0xF03E736495A0665CULL, 
-            0xB7BA8F32612D36FCULL, 0x105B613C505ADF7FULL, 0x600063CDA106476BULL, 0xEEEEEEADE254DDABULL, 
-            0xF43DFB8353852997ULL, 0x630EBC378C552FEEULL, 0xC8C8770A283CE1ABULL, 0x9792A0D97B779A00ULL, 
-            0x71EB29E96C4B7555ULL, 0xCC0247235F747A73ULL, 0x5CDF45C9395480EFULL, 0x8C57F689AC69A23DULL, 
-            0xE25D095B2F03EE22ULL, 0x9348D47050CA1127ULL, 0x82AFCA0EE3919CD6ULL, 0xF4ED9130FE1D4F43ULL
+            0xE951304A2CC74FD7ULL, 0x75AD7F4C4023863EULL, 0x9654785181DB37EEULL, 0x042B6AE83980ED98ULL, 
+            0x6038A8FB310EE4ABULL, 0x6DE9A6EE2237BD5BULL, 0x6CF062AA1785711BULL, 0xD558D2F19DEFF8F5ULL, 
+            0x2D3C9495A1F161F8ULL, 0x1C928F9EC73119F7ULL, 0xF97D6A723B8B5C4FULL, 0xD01562A431E71438ULL, 
+            0x110F907C2EF32775ULL, 0xA7243B8674CD213EULL, 0xABB61FE58F877D1BULL, 0xFAC44F5F18ED5E37ULL, 
+            0x39256200B01CDAC7ULL, 0xF19B0B8A7739944FULL, 0x2571BBB2974A4D2CULL, 0x8E7A0DA042B6AA46ULL, 
+            0xF9CFCD62ADD82866ULL, 0x9A577BC920423C2CULL, 0x1FFD0C71E5E7C13FULL, 0x5556E881A2517D15ULL, 
+            0xD84A7337111EF717ULL, 0x25BE6F6BE1C5F25CULL, 0x11C5AE63F7B92463ULL, 0xFE6383228A9FB539ULL, 
+            0x75AF173FACC819D1ULL, 0x154A51A0C219B07EULL, 0x2C6B371B74555B0AULL, 0x630FA5BEAFCBFEBCULL
         },
         {
-            0x5486A23F22DD4C9DULL, 0xD422C3553198975BULL, 0x6E14E225DF500583ULL, 0x69F4FED75F054869ULL, 
-            0xE21AB0A8D75DAAA6ULL, 0xBF4213E3FE92DC30ULL, 0xFAF04401852A2AB9ULL, 0x6A8D912D439EEEB2ULL, 
-            0xF99A639A27963B7BULL, 0x2B5908929D949A94ULL, 0xA601EABDE8BE48DDULL, 0xC681A4520052A594ULL, 
-            0xE846B707D03EF831ULL, 0x62F0E97B48B558C7ULL, 0x29855CF7AFE7DDE6ULL, 0xDC0DCFFBB223E467ULL, 
-            0x74D740B3406149B8ULL, 0x0832D4BDB659A4C4ULL, 0x9E10D48A5A77BF67ULL, 0xACD2033118D7C1DDULL, 
-            0x42F27A47D4C77871ULL, 0x98CD9D34A62B5F3CULL, 0xF582E15D29EAFE20ULL, 0x16FC097439F31AA0ULL, 
-            0x2CCC3DC602596B2EULL, 0xBC2076CE7F19BC14ULL, 0xFE55F48834474A86ULL, 0x3CEA79866F615413ULL, 
-            0xFBF113CDA24263B8ULL, 0x5D950E1BC8304B80ULL, 0x3830AC2C322FC57AULL, 0xF3815C1FC9BAD34AULL
+            0xD2271A32D77F2226ULL, 0x3926540F37D3BC02ULL, 0x21EF37CC1A7A4712ULL, 0x1D2F0F0C83E6449CULL, 
+            0x30B2AA8F1DB366B6ULL, 0x9C8C44DB2D40F5F3ULL, 0x96AC6B7D3F35F5D8ULL, 0x37CA3F89134C666EULL, 
+            0x0008F42BCD6682E9ULL, 0xD6F1FF06F46380D3ULL, 0xCAD6D1592A4687A1ULL, 0x624127B693CCF29CULL, 
+            0x57C11F59BD385022ULL, 0xB6A5A563642585CAULL, 0xBB7E97EA82AFB8E8ULL, 0x00CD67D9FB08A48CULL, 
+            0xE8168FD82C253612ULL, 0x67012082F31B483EULL, 0x2009F78CE465B549ULL, 0x014464471ADB8B8BULL, 
+            0x2E492E6D37E878F7ULL, 0xC0367E69F3D0D71BULL, 0xC0D605CD4581D70BULL, 0x012C32C930EE3B69ULL, 
+            0x440C94E952019660ULL, 0x5D198F2E5CC41A1EULL, 0x21A0DAB849929894ULL, 0x9292BBAA90E33ACCULL, 
+            0x80866325C5E40260ULL, 0xE17C3E469818DD79ULL, 0x3B970DA16F4406FEULL, 0x9F33EDF4A4D149E1ULL
         }
     }
 };
 
 const TwistDomainConstants TwistExpander_BasketBall::kPhaseHConstants = {
-    0xA0A055C47F3A10E2ULL,
-    0x09876F4ECE5D30F4ULL,
-    0x6BD6E72166BD33B5ULL,
-    0xA0A055C47F3A10E2ULL,
-    0x09876F4ECE5D30F4ULL,
-    0x6BD6E72166BD33B5ULL,
-    0xEE740EE0CA2B2F66ULL,
-    0x932A970CA759A10FULL,
-    0xEC,
-    0xE6,
-    0x3A,
-    0x50,
-    0x32,
-    0x41,
-    0x91,
-    0xE6
+    0x97E2CFA367019056ULL,
+    0x612D0419A46DB922ULL,
+    0x76D7481943668118ULL,
+    0x97E2CFA367019056ULL,
+    0x612D0419A46DB922ULL,
+    0x76D7481943668118ULL,
+    0x44E026CD339C9716ULL,
+    0xDBEB8BE4A56A7B23ULL,
+    0x23,
+    0x6E,
+    0xFE,
+    0x90,
+    0xD9,
+    0xE9,
+    0x8C,
+    0xD6
 };
 
