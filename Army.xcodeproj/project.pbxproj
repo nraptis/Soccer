@@ -7,71 +7,151 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A5F888F72FEEDD9000433EDF /* TwistExpander_VolleyBall.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A5F888DF2FEEDD9000433EDF /* TwistExpander_VolleyBall.cpp */; };
-		A5F888F82FEEDD9000433EDF /* TwistExpander_Softball.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A5F888D72FEEDD9000433EDF /* TwistExpander_Softball.cpp */; };
-		A5F888F92FEEDD9000433EDF /* TwistExpander_BaseBall_Arx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A5F888A12FEEDD9000433EDF /* TwistExpander_BaseBall_Arx.cpp */; };
-		A5F888FA2FEEDD9000433EDF /* TwistExpander_Bowling.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A5F888A72FEEDD9000433EDF /* TwistExpander_Bowling.cpp */; };
-		A5F888FB2FEEDD9000433EDF /* TwistExpander_Fencing.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A5F888B32FEEDD9000433EDF /* TwistExpander_Fencing.cpp */; };
+		A56835CB2FF2ADA6002524E4 /* TwistExpander_Bowling.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A568358B2FF2ADA6002524E4 /* TwistExpander_Bowling.cpp */; };
+		A56835CC2FF2ADA6002524E4 /* TwistExpander_Archery.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A568357B2FF2ADA6002524E4 /* TwistExpander_Archery.cpp */; };
+		A56835CD2FF2ADA6002524E4 /* TwistExpander_Billiards_Arx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A56835892FF2ADA6002524E4 /* TwistExpander_Billiards_Arx.cpp */; };
+		A56835CE2FF2ADA6002524E4 /* TwistExpander_Archery_Arx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A568357D2FF2ADA6002524E4 /* TwistExpander_Archery_Arx.cpp */; };
+		A56835CF2FF2ADA6002524E4 /* TwistExpander_Tennis.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A56835BF2FF2ADA6002524E4 /* TwistExpander_Tennis.cpp */; };
+		A56835D02FF2ADA6002524E4 /* TwistExpander_Karate_Arx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A56835A92FF2ADA6002524E4 /* TwistExpander_Karate_Arx.cpp */; };
+		A56835D12FF2ADA6002524E4 /* TwistExpander_Billiards.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A56835872FF2ADA6002524E4 /* TwistExpander_Billiards.cpp */; };
+		A56835D22FF2ADA6002524E4 /* TwistExpander_Karate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A56835A72FF2ADA6002524E4 /* TwistExpander_Karate.cpp */; };
+		A56835D32FF2ADA6002524E4 /* TwistExpander_WaterPolo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A56835C72FF2ADA6002524E4 /* TwistExpander_WaterPolo.cpp */; };
+		A56835D42FF2ADA6002524E4 /* TwistExpander_PickleBall.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A56835AF2FF2ADA6002524E4 /* TwistExpander_PickleBall.cpp */; };
+		A56835D52FF2ADA6002524E4 /* TwistExpander_VolleyBall.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A56835C32FF2ADA6002524E4 /* TwistExpander_VolleyBall.cpp */; };
+		A56835D62FF2ADA6002524E4 /* TwistExpander_Tennis_Arx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A56835C12FF2ADA6002524E4 /* TwistExpander_Tennis_Arx.cpp */; };
+		A56835D72FF2ADA6002524E4 /* TwistExpander_PickleBall_Arx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A56835B12FF2ADA6002524E4 /* TwistExpander_PickleBall_Arx.cpp */; };
+		A56835D82FF2ADA6002524E4 /* TwistExpander_Lacrosse_Arx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A56835AD2FF2ADA6002524E4 /* TwistExpander_Lacrosse_Arx.cpp */; };
+		A56835D92FF2ADA6002524E4 /* TwistExpander_Rugby.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A56835B72FF2ADA6002524E4 /* TwistExpander_Rugby.cpp */; };
+		A56835DA2FF2ADA6002524E4 /* TwistExpander_Fencing.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A56835972FF2ADA6002524E4 /* TwistExpander_Fencing.cpp */; };
+		A56835DB2FF2ADA6002524E4 /* TwistExpander_BasketBall.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A56835832FF2ADA6002524E4 /* TwistExpander_BasketBall.cpp */; };
+		A56835DC2FF2ADA6002524E4 /* TwistExpander_Hockey_Arx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A56835A52FF2ADA6002524E4 /* TwistExpander_Hockey_Arx.cpp */; };
+		A56835DD2FF2ADA6002524E4 /* TwistExpander_PingPong.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A56835B32FF2ADA6002524E4 /* TwistExpander_PingPong.cpp */; };
+		A56835DE2FF2ADA6002524E4 /* TwistExpander_Golf.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A568359F2FF2ADA6002524E4 /* TwistExpander_Golf.cpp */; };
+		A56835DF2FF2ADA6002524E4 /* TwistExpander_WaterPolo_Arx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A56835C92FF2ADA6002524E4 /* TwistExpander_WaterPolo_Arx.cpp */; };
+		A56835E02FF2ADA6002524E4 /* TwistExpander_BasketBall_Arx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A56835852FF2ADA6002524E4 /* TwistExpander_BasketBall_Arx.cpp */; };
+		A56835E12FF2ADA6002524E4 /* TwistExpander_Cricket_Arx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A56835952FF2ADA6002524E4 /* TwistExpander_Cricket_Arx.cpp */; };
+		A56835E22FF2ADA6002524E4 /* TwistExpander_Rugby_Arx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A56835B92FF2ADA6002524E4 /* TwistExpander_Rugby_Arx.cpp */; };
+		A56835E32FF2ADA6002524E4 /* TwistExpander_Golf_Arx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A56835A12FF2ADA6002524E4 /* TwistExpander_Golf_Arx.cpp */; };
+		A56835E42FF2ADA6002524E4 /* TwistExpander_VolleyBall_Arx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A56835C52FF2ADA6002524E4 /* TwistExpander_VolleyBall_Arx.cpp */; };
+		A56835E52FF2ADA6002524E4 /* TwistExpander_Boxing_Arx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A56835912FF2ADA6002524E4 /* TwistExpander_Boxing_Arx.cpp */; };
+		A56835E62FF2ADA6002524E4 /* TwistExpander_FootBall_Arx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A568359D2FF2ADA6002524E4 /* TwistExpander_FootBall_Arx.cpp */; };
+		A56835E72FF2ADA6002524E4 /* TwistExpander_BaseBall_Arx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A56835812FF2ADA6002524E4 /* TwistExpander_BaseBall_Arx.cpp */; };
+		A56835E82FF2ADA6002524E4 /* TwistExpander_Hockey.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A56835A32FF2ADA6002524E4 /* TwistExpander_Hockey.cpp */; };
+		A56835E92FF2ADA6002524E4 /* TwistExpander_Cricket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A56835932FF2ADA6002524E4 /* TwistExpander_Cricket.cpp */; };
+		A56835EA2FF2ADA6002524E4 /* TwistExpander_BaseBall.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A568357F2FF2ADA6002524E4 /* TwistExpander_BaseBall.cpp */; };
+		A56835EB2FF2ADA6002524E4 /* TwistExpander_FootBall.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A568359B2FF2ADA6002524E4 /* TwistExpander_FootBall.cpp */; };
+		A56835EC2FF2ADA6002524E4 /* TwistExpander_Boxing.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A568358F2FF2ADA6002524E4 /* TwistExpander_Boxing.cpp */; };
+		A56835ED2FF2ADA6002524E4 /* TwistExpander_Soccer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A56835BB2FF2ADA6002524E4 /* TwistExpander_Soccer.cpp */; };
+		A56835EE2FF2ADA6002524E4 /* TwistExpander_Bowling_Arx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A568358D2FF2ADA6002524E4 /* TwistExpander_Bowling_Arx.cpp */; };
+		A56835EF2FF2ADA6002524E4 /* TwistExpander_Soccer_Arx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A56835BD2FF2ADA6002524E4 /* TwistExpander_Soccer_Arx.cpp */; };
+		A56835F02FF2ADA6002524E4 /* TwistExpander_Lacrosse.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A56835AB2FF2ADA6002524E4 /* TwistExpander_Lacrosse.cpp */; };
+		A56835F12FF2ADA6002524E4 /* TwistExpander_Fencing_Arx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A56835992FF2ADA6002524E4 /* TwistExpander_Fencing_Arx.cpp */; };
+		A56835F22FF2ADA6002524E4 /* TwistExpander_PingPong_Arx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A56835B52FF2ADA6002524E4 /* TwistExpander_PingPong_Arx.cpp */; };
 		A5F888FC2FEEDD9000433EDF /* Avalancher.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A5F888EC2FEEDD9000433EDF /* Avalancher.cpp */; };
-		A5F888FD2FEEDD9000433EDF /* TwistExpander_Cricket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A5F888AF2FEEDD9000433EDF /* TwistExpander_Cricket.cpp */; };
-		A5F888FE2FEEDD9000433EDF /* TwistExpander_Hockey_Arx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A5F888C12FEEDD9000433EDF /* TwistExpander_Hockey_Arx.cpp */; };
-		A5F888FF2FEEDD9000433EDF /* TwistExpander_Tennis.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A5F888DB2FEEDD9000433EDF /* TwistExpander_Tennis.cpp */; };
-		A5F889002FEEDD9000433EDF /* TwistExpander_Golf_Arx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A5F888BD2FEEDD9000433EDF /* TwistExpander_Golf_Arx.cpp */; };
 		A5F889012FEEDD9000433EDF /* TwistShiftBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A5F8888E2FEEDD9000433EDF /* TwistShiftBox.cpp */; };
 		A5F889022FEEDD9000433EDF /* Random.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A5F888F32FEEDD9000433EDF /* Random.cpp */; };
-		A5F889032FEEDD9000433EDF /* TwistExpander_VolleyBall_Arx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A5F888E12FEEDD9000433EDF /* TwistExpander_VolleyBall_Arx.cpp */; };
 		A5F889042FEEDD9000433EDF /* TwistMix32.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A5F8888A2FEEDD9000433EDF /* TwistMix32.cpp */; };
-		A5F889052FEEDD9000433EDF /* TwistExpander_Archery.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A5F888972FEEDD9000433EDF /* TwistExpander_Archery.cpp */; };
-		A5F889062FEEDD9000433EDF /* TwistExpander_Soccer_Arx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A5F888D52FEEDD9000433EDF /* TwistExpander_Soccer_Arx.cpp */; };
 		A5F889072FEEDD9000433EDF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A5F888EF2FEEDD9000433EDF /* main.m */; };
 		A5F889082FEEDD9000433EDF /* TwistSquash.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A5F888922FEEDD9000433EDF /* TwistSquash.cpp */; };
-		A5F889092FEEDD9000433EDF /* TwistExpander_BaseBall.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A5F8889F2FEEDD9000433EDF /* TwistExpander_BaseBall.cpp */; };
-		A5F8890A2FEEDD9000433EDF /* TwistExpander_Soccer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A5F888D32FEEDD9000433EDF /* TwistExpander_Soccer.cpp */; };
-		A5F8890B2FEEDD9000433EDF /* TwistExpander_Lacrosse.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A5F888C72FEEDD9000433EDF /* TwistExpander_Lacrosse.cpp */; };
 		A5F8890C2FEEDD9000433EDF /* TwistCryptoScoring.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A5F8887A2FEEDD9000433EDF /* TwistCryptoScoring.cpp */; };
-		A5F8890D2FEEDD9000433EDF /* TwistExpander_Badminton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A5F8889B2FEEDD9000433EDF /* TwistExpander_Badminton.cpp */; };
 		A5F8890E2FEEDD9000433EDF /* Rig.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A5F888F52FEEDD9000433EDF /* Rig.cpp */; };
 		A5F8890F2FEEDD9000433EDF /* M88.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A5F888742FEEDD9000433EDF /* M88.cpp */; };
-		A5F889102FEEDD9000433EDF /* TwistExpander_BasketBall_Arx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A5F888A52FEEDD9000433EDF /* TwistExpander_BasketBall_Arx.cpp */; };
 		A5F889112FEEDD9000433EDF /* TwistIndexShuffle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A5F888852FEEDD9000433EDF /* TwistIndexShuffle.cpp */; };
-		A5F889122FEEDD9000433EDF /* TwistExpander_Boxing_Arx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A5F888AD2FEEDD9000433EDF /* TwistExpander_Boxing_Arx.cpp */; };
-		A5F889132FEEDD9000433EDF /* TwistExpander_Tennis_Arx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A5F888DD2FEEDD9000433EDF /* TwistExpander_Tennis_Arx.cpp */; };
-		A5F889142FEEDD9000433EDF /* TwistExpander_Softball_Arx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A5F888D92FEEDD9000433EDF /* TwistExpander_Softball_Arx.cpp */; };
-		A5F889152FEEDD9000433EDF /* TwistExpander_PickleBall_Arx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A5F888CD2FEEDD9000433EDF /* TwistExpander_PickleBall_Arx.cpp */; };
-		A5F889162FEEDD9000433EDF /* TwistExpander_Hockey.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A5F888BF2FEEDD9000433EDF /* TwistExpander_Hockey.cpp */; };
 		A5F889172FEEDD9000433EDF /* TwistFarmSalt.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A5F888822FEEDD9000433EDF /* TwistFarmSalt.cpp */; };
 		A5F889182FEEDD9000433EDF /* TwistInvest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A5F888872FEEDD9000433EDF /* TwistInvest.cpp */; };
-		A5F889192FEEDD9000433EDF /* TwistExpander_Fencing_Arx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A5F888B52FEEDD9000433EDF /* TwistExpander_Fencing_Arx.cpp */; };
-		A5F8891A2FEEDD9000433EDF /* TwistExpander_Rugby.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A5F888CF2FEEDD9000433EDF /* TwistExpander_Rugby.cpp */; };
 		A5F8891B2FEEDD9000433EDF /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = A5F888E92FEEDD9000433EDF /* AppDelegate.mm */; };
-		A5F8891C2FEEDD9000433EDF /* TwistExpander_Karate_Arx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A5F888C52FEEDD9000433EDF /* TwistExpander_Karate_Arx.cpp */; };
-		A5F8891D2FEEDD9000433EDF /* TwistExpander_WaterPolo_Arx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A5F888E52FEEDD9000433EDF /* TwistExpander_WaterPolo_Arx.cpp */; };
-		A5F8891E2FEEDD9000433EDF /* TwistExpander_Rugby_Arx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A5F888D12FEEDD9000433EDF /* TwistExpander_Rugby_Arx.cpp */; };
 		A5F8891F2FEEDD9000433EDF /* FileIO.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A5F888EE2FEEDD9000433EDF /* FileIO.cpp */; };
 		A5F889202FEEDD9000433EDF /* TwistWorkSpace.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A5F888942FEEDD9000433EDF /* TwistWorkSpace.cpp */; };
-		A5F889212FEEDD9000433EDF /* TwistExpander_FootBall.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A5F888B72FEEDD9000433EDF /* TwistExpander_FootBall.cpp */; };
-		A5F889222FEEDD9000433EDF /* TwistExpander_Bowling_Arx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A5F888A92FEEDD9000433EDF /* TwistExpander_Bowling_Arx.cpp */; };
 		A5F889232FEEDD9000433EDF /* TwistSnow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A5F888902FEEDD9000433EDF /* TwistSnow.cpp */; };
 		A5F889242FEEDD9000433EDF /* TwistFarmConstants.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A5F888802FEEDD9000433EDF /* TwistFarmConstants.cpp */; };
-		A5F889252FEEDD9000433EDF /* TwistExpander_Golf.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A5F888BB2FEEDD9000433EDF /* TwistExpander_Golf.cpp */; };
-		A5F889262FEEDD9000433EDF /* TwistExpander_Archery_Arx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A5F888992FEEDD9000433EDF /* TwistExpander_Archery_Arx.cpp */; };
-		A5F889272FEEDD9000433EDF /* TwistExpander_Lacrosse_Arx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A5F888C92FEEDD9000433EDF /* TwistExpander_Lacrosse_Arx.cpp */; };
-		A5F889282FEEDD9000433EDF /* TwistExpander_PickleBall.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A5F888CB2FEEDD9000433EDF /* TwistExpander_PickleBall.cpp */; };
 		A5F889292FEEDD9000433EDF /* TwistMix64.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A5F8888C2FEEDD9000433EDF /* TwistMix64.cpp */; };
-		A5F8892A2FEEDD9000433EDF /* TwistExpander_Badminton_Arx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A5F8889D2FEEDD9000433EDF /* TwistExpander_Badminton_Arx.cpp */; };
-		A5F8892B2FEEDD9000433EDF /* TwistExpander_Boxing.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A5F888AB2FEEDD9000433EDF /* TwistExpander_Boxing.cpp */; };
-		A5F8892C2FEEDD9000433EDF /* TwistExpander_FootBall_Arx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A5F888B92FEEDD9000433EDF /* TwistExpander_FootBall_Arx.cpp */; };
-		A5F8892D2FEEDD9000433EDF /* TwistExpander_Karate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A5F888C32FEEDD9000433EDF /* TwistExpander_Karate.cpp */; };
 		A5F8892E2FEEDD9000433EDF /* TwistExpander.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A5F8887E2FEEDD9000433EDF /* TwistExpander.cpp */; };
-		A5F8892F2FEEDD9000433EDF /* TwistExpander_BasketBall.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A5F888A32FEEDD9000433EDF /* TwistExpander_BasketBall.cpp */; };
-		A5F889302FEEDD9000433EDF /* TwistExpander_Cricket_Arx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A5F888B12FEEDD9000433EDF /* TwistExpander_Cricket_Arx.cpp */; };
-		A5F889312FEEDD9000433EDF /* TwistExpander_WaterPolo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A5F888E32FEEDD9000433EDF /* TwistExpander_WaterPolo.cpp */; };
 		A5F889322FEEDD9000433EDF /* TwistDiffuse.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A5F8887C2FEEDD9000433EDF /* TwistDiffuse.cpp */; };
 		A5F889332FEEDD9000433EDF /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5F888F12FEEDD9000433EDF /* MainMenu.xib */; };
 		A5F889342FEEDD9000433EDF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5F888EA2FEEDD9000433EDF /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A568357A2FF2ADA6002524E4 /* TwistExpander_Archery.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TwistExpander_Archery.hpp; sourceTree = "<group>"; };
+		A568357B2FF2ADA6002524E4 /* TwistExpander_Archery.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TwistExpander_Archery.cpp; sourceTree = "<group>"; };
+		A568357C2FF2ADA6002524E4 /* TwistExpander_Archery_Arx.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TwistExpander_Archery_Arx.hpp; sourceTree = "<group>"; };
+		A568357D2FF2ADA6002524E4 /* TwistExpander_Archery_Arx.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TwistExpander_Archery_Arx.cpp; sourceTree = "<group>"; };
+		A568357E2FF2ADA6002524E4 /* TwistExpander_BaseBall.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TwistExpander_BaseBall.hpp; sourceTree = "<group>"; };
+		A568357F2FF2ADA6002524E4 /* TwistExpander_BaseBall.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TwistExpander_BaseBall.cpp; sourceTree = "<group>"; };
+		A56835802FF2ADA6002524E4 /* TwistExpander_BaseBall_Arx.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TwistExpander_BaseBall_Arx.hpp; sourceTree = "<group>"; };
+		A56835812FF2ADA6002524E4 /* TwistExpander_BaseBall_Arx.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TwistExpander_BaseBall_Arx.cpp; sourceTree = "<group>"; };
+		A56835822FF2ADA6002524E4 /* TwistExpander_BasketBall.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TwistExpander_BasketBall.hpp; sourceTree = "<group>"; };
+		A56835832FF2ADA6002524E4 /* TwistExpander_BasketBall.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TwistExpander_BasketBall.cpp; sourceTree = "<group>"; };
+		A56835842FF2ADA6002524E4 /* TwistExpander_BasketBall_Arx.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TwistExpander_BasketBall_Arx.hpp; sourceTree = "<group>"; };
+		A56835852FF2ADA6002524E4 /* TwistExpander_BasketBall_Arx.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TwistExpander_BasketBall_Arx.cpp; sourceTree = "<group>"; };
+		A56835862FF2ADA6002524E4 /* TwistExpander_Billiards.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TwistExpander_Billiards.hpp; sourceTree = "<group>"; };
+		A56835872FF2ADA6002524E4 /* TwistExpander_Billiards.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TwistExpander_Billiards.cpp; sourceTree = "<group>"; };
+		A56835882FF2ADA6002524E4 /* TwistExpander_Billiards_Arx.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TwistExpander_Billiards_Arx.hpp; sourceTree = "<group>"; };
+		A56835892FF2ADA6002524E4 /* TwistExpander_Billiards_Arx.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TwistExpander_Billiards_Arx.cpp; sourceTree = "<group>"; };
+		A568358A2FF2ADA6002524E4 /* TwistExpander_Bowling.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TwistExpander_Bowling.hpp; sourceTree = "<group>"; };
+		A568358B2FF2ADA6002524E4 /* TwistExpander_Bowling.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TwistExpander_Bowling.cpp; sourceTree = "<group>"; };
+		A568358C2FF2ADA6002524E4 /* TwistExpander_Bowling_Arx.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TwistExpander_Bowling_Arx.hpp; sourceTree = "<group>"; };
+		A568358D2FF2ADA6002524E4 /* TwistExpander_Bowling_Arx.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TwistExpander_Bowling_Arx.cpp; sourceTree = "<group>"; };
+		A568358E2FF2ADA6002524E4 /* TwistExpander_Boxing.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TwistExpander_Boxing.hpp; sourceTree = "<group>"; };
+		A568358F2FF2ADA6002524E4 /* TwistExpander_Boxing.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TwistExpander_Boxing.cpp; sourceTree = "<group>"; };
+		A56835902FF2ADA6002524E4 /* TwistExpander_Boxing_Arx.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TwistExpander_Boxing_Arx.hpp; sourceTree = "<group>"; };
+		A56835912FF2ADA6002524E4 /* TwistExpander_Boxing_Arx.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TwistExpander_Boxing_Arx.cpp; sourceTree = "<group>"; };
+		A56835922FF2ADA6002524E4 /* TwistExpander_Cricket.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TwistExpander_Cricket.hpp; sourceTree = "<group>"; };
+		A56835932FF2ADA6002524E4 /* TwistExpander_Cricket.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TwistExpander_Cricket.cpp; sourceTree = "<group>"; };
+		A56835942FF2ADA6002524E4 /* TwistExpander_Cricket_Arx.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TwistExpander_Cricket_Arx.hpp; sourceTree = "<group>"; };
+		A56835952FF2ADA6002524E4 /* TwistExpander_Cricket_Arx.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TwistExpander_Cricket_Arx.cpp; sourceTree = "<group>"; };
+		A56835962FF2ADA6002524E4 /* TwistExpander_Fencing.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TwistExpander_Fencing.hpp; sourceTree = "<group>"; };
+		A56835972FF2ADA6002524E4 /* TwistExpander_Fencing.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TwistExpander_Fencing.cpp; sourceTree = "<group>"; };
+		A56835982FF2ADA6002524E4 /* TwistExpander_Fencing_Arx.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TwistExpander_Fencing_Arx.hpp; sourceTree = "<group>"; };
+		A56835992FF2ADA6002524E4 /* TwistExpander_Fencing_Arx.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TwistExpander_Fencing_Arx.cpp; sourceTree = "<group>"; };
+		A568359A2FF2ADA6002524E4 /* TwistExpander_FootBall.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TwistExpander_FootBall.hpp; sourceTree = "<group>"; };
+		A568359B2FF2ADA6002524E4 /* TwistExpander_FootBall.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TwistExpander_FootBall.cpp; sourceTree = "<group>"; };
+		A568359C2FF2ADA6002524E4 /* TwistExpander_FootBall_Arx.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TwistExpander_FootBall_Arx.hpp; sourceTree = "<group>"; };
+		A568359D2FF2ADA6002524E4 /* TwistExpander_FootBall_Arx.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TwistExpander_FootBall_Arx.cpp; sourceTree = "<group>"; };
+		A568359E2FF2ADA6002524E4 /* TwistExpander_Golf.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TwistExpander_Golf.hpp; sourceTree = "<group>"; };
+		A568359F2FF2ADA6002524E4 /* TwistExpander_Golf.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TwistExpander_Golf.cpp; sourceTree = "<group>"; };
+		A56835A02FF2ADA6002524E4 /* TwistExpander_Golf_Arx.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TwistExpander_Golf_Arx.hpp; sourceTree = "<group>"; };
+		A56835A12FF2ADA6002524E4 /* TwistExpander_Golf_Arx.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TwistExpander_Golf_Arx.cpp; sourceTree = "<group>"; };
+		A56835A22FF2ADA6002524E4 /* TwistExpander_Hockey.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TwistExpander_Hockey.hpp; sourceTree = "<group>"; };
+		A56835A32FF2ADA6002524E4 /* TwistExpander_Hockey.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TwistExpander_Hockey.cpp; sourceTree = "<group>"; };
+		A56835A42FF2ADA6002524E4 /* TwistExpander_Hockey_Arx.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TwistExpander_Hockey_Arx.hpp; sourceTree = "<group>"; };
+		A56835A52FF2ADA6002524E4 /* TwistExpander_Hockey_Arx.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TwistExpander_Hockey_Arx.cpp; sourceTree = "<group>"; };
+		A56835A62FF2ADA6002524E4 /* TwistExpander_Karate.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TwistExpander_Karate.hpp; sourceTree = "<group>"; };
+		A56835A72FF2ADA6002524E4 /* TwistExpander_Karate.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TwistExpander_Karate.cpp; sourceTree = "<group>"; };
+		A56835A82FF2ADA6002524E4 /* TwistExpander_Karate_Arx.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TwistExpander_Karate_Arx.hpp; sourceTree = "<group>"; };
+		A56835A92FF2ADA6002524E4 /* TwistExpander_Karate_Arx.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TwistExpander_Karate_Arx.cpp; sourceTree = "<group>"; };
+		A56835AA2FF2ADA6002524E4 /* TwistExpander_Lacrosse.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TwistExpander_Lacrosse.hpp; sourceTree = "<group>"; };
+		A56835AB2FF2ADA6002524E4 /* TwistExpander_Lacrosse.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TwistExpander_Lacrosse.cpp; sourceTree = "<group>"; };
+		A56835AC2FF2ADA6002524E4 /* TwistExpander_Lacrosse_Arx.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TwistExpander_Lacrosse_Arx.hpp; sourceTree = "<group>"; };
+		A56835AD2FF2ADA6002524E4 /* TwistExpander_Lacrosse_Arx.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TwistExpander_Lacrosse_Arx.cpp; sourceTree = "<group>"; };
+		A56835AE2FF2ADA6002524E4 /* TwistExpander_PickleBall.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TwistExpander_PickleBall.hpp; sourceTree = "<group>"; };
+		A56835AF2FF2ADA6002524E4 /* TwistExpander_PickleBall.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TwistExpander_PickleBall.cpp; sourceTree = "<group>"; };
+		A56835B02FF2ADA6002524E4 /* TwistExpander_PickleBall_Arx.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TwistExpander_PickleBall_Arx.hpp; sourceTree = "<group>"; };
+		A56835B12FF2ADA6002524E4 /* TwistExpander_PickleBall_Arx.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TwistExpander_PickleBall_Arx.cpp; sourceTree = "<group>"; };
+		A56835B22FF2ADA6002524E4 /* TwistExpander_PingPong.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TwistExpander_PingPong.hpp; sourceTree = "<group>"; };
+		A56835B32FF2ADA6002524E4 /* TwistExpander_PingPong.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TwistExpander_PingPong.cpp; sourceTree = "<group>"; };
+		A56835B42FF2ADA6002524E4 /* TwistExpander_PingPong_Arx.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TwistExpander_PingPong_Arx.hpp; sourceTree = "<group>"; };
+		A56835B52FF2ADA6002524E4 /* TwistExpander_PingPong_Arx.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TwistExpander_PingPong_Arx.cpp; sourceTree = "<group>"; };
+		A56835B62FF2ADA6002524E4 /* TwistExpander_Rugby.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TwistExpander_Rugby.hpp; sourceTree = "<group>"; };
+		A56835B72FF2ADA6002524E4 /* TwistExpander_Rugby.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TwistExpander_Rugby.cpp; sourceTree = "<group>"; };
+		A56835B82FF2ADA6002524E4 /* TwistExpander_Rugby_Arx.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TwistExpander_Rugby_Arx.hpp; sourceTree = "<group>"; };
+		A56835B92FF2ADA6002524E4 /* TwistExpander_Rugby_Arx.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TwistExpander_Rugby_Arx.cpp; sourceTree = "<group>"; };
+		A56835BA2FF2ADA6002524E4 /* TwistExpander_Soccer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TwistExpander_Soccer.hpp; sourceTree = "<group>"; };
+		A56835BB2FF2ADA6002524E4 /* TwistExpander_Soccer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TwistExpander_Soccer.cpp; sourceTree = "<group>"; };
+		A56835BC2FF2ADA6002524E4 /* TwistExpander_Soccer_Arx.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TwistExpander_Soccer_Arx.hpp; sourceTree = "<group>"; };
+		A56835BD2FF2ADA6002524E4 /* TwistExpander_Soccer_Arx.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TwistExpander_Soccer_Arx.cpp; sourceTree = "<group>"; };
+		A56835BE2FF2ADA6002524E4 /* TwistExpander_Tennis.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TwistExpander_Tennis.hpp; sourceTree = "<group>"; };
+		A56835BF2FF2ADA6002524E4 /* TwistExpander_Tennis.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TwistExpander_Tennis.cpp; sourceTree = "<group>"; };
+		A56835C02FF2ADA6002524E4 /* TwistExpander_Tennis_Arx.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TwistExpander_Tennis_Arx.hpp; sourceTree = "<group>"; };
+		A56835C12FF2ADA6002524E4 /* TwistExpander_Tennis_Arx.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TwistExpander_Tennis_Arx.cpp; sourceTree = "<group>"; };
+		A56835C22FF2ADA6002524E4 /* TwistExpander_VolleyBall.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TwistExpander_VolleyBall.hpp; sourceTree = "<group>"; };
+		A56835C32FF2ADA6002524E4 /* TwistExpander_VolleyBall.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TwistExpander_VolleyBall.cpp; sourceTree = "<group>"; };
+		A56835C42FF2ADA6002524E4 /* TwistExpander_VolleyBall_Arx.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TwistExpander_VolleyBall_Arx.hpp; sourceTree = "<group>"; };
+		A56835C52FF2ADA6002524E4 /* TwistExpander_VolleyBall_Arx.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TwistExpander_VolleyBall_Arx.cpp; sourceTree = "<group>"; };
+		A56835C62FF2ADA6002524E4 /* TwistExpander_WaterPolo.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TwistExpander_WaterPolo.hpp; sourceTree = "<group>"; };
+		A56835C72FF2ADA6002524E4 /* TwistExpander_WaterPolo.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TwistExpander_WaterPolo.cpp; sourceTree = "<group>"; };
+		A56835C82FF2ADA6002524E4 /* TwistExpander_WaterPolo_Arx.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TwistExpander_WaterPolo_Arx.hpp; sourceTree = "<group>"; };
+		A56835C92FF2ADA6002524E4 /* TwistExpander_WaterPolo_Arx.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TwistExpander_WaterPolo_Arx.cpp; sourceTree = "<group>"; };
 		A5A98EF02FEECE2A00BE9618 /* Army.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Army.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5F888732FEEDD9000433EDF /* M88.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = M88.hpp; sourceTree = "<group>"; };
 		A5F888742FEEDD9000433EDF /* M88.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = M88.cpp; sourceTree = "<group>"; };
@@ -107,86 +187,6 @@
 		A5F888922FEEDD9000433EDF /* TwistSquash.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TwistSquash.cpp; sourceTree = "<group>"; };
 		A5F888932FEEDD9000433EDF /* TwistWorkSpace.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TwistWorkSpace.hpp; sourceTree = "<group>"; };
 		A5F888942FEEDD9000433EDF /* TwistWorkSpace.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TwistWorkSpace.cpp; sourceTree = "<group>"; };
-		A5F888962FEEDD9000433EDF /* TwistExpander_Archery.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TwistExpander_Archery.hpp; sourceTree = "<group>"; };
-		A5F888972FEEDD9000433EDF /* TwistExpander_Archery.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TwistExpander_Archery.cpp; sourceTree = "<group>"; };
-		A5F888982FEEDD9000433EDF /* TwistExpander_Archery_Arx.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TwistExpander_Archery_Arx.hpp; sourceTree = "<group>"; };
-		A5F888992FEEDD9000433EDF /* TwistExpander_Archery_Arx.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TwistExpander_Archery_Arx.cpp; sourceTree = "<group>"; };
-		A5F8889A2FEEDD9000433EDF /* TwistExpander_Badminton.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TwistExpander_Badminton.hpp; sourceTree = "<group>"; };
-		A5F8889B2FEEDD9000433EDF /* TwistExpander_Badminton.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TwistExpander_Badminton.cpp; sourceTree = "<group>"; };
-		A5F8889C2FEEDD9000433EDF /* TwistExpander_Badminton_Arx.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TwistExpander_Badminton_Arx.hpp; sourceTree = "<group>"; };
-		A5F8889D2FEEDD9000433EDF /* TwistExpander_Badminton_Arx.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TwistExpander_Badminton_Arx.cpp; sourceTree = "<group>"; };
-		A5F8889E2FEEDD9000433EDF /* TwistExpander_BaseBall.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TwistExpander_BaseBall.hpp; sourceTree = "<group>"; };
-		A5F8889F2FEEDD9000433EDF /* TwistExpander_BaseBall.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TwistExpander_BaseBall.cpp; sourceTree = "<group>"; };
-		A5F888A02FEEDD9000433EDF /* TwistExpander_BaseBall_Arx.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TwistExpander_BaseBall_Arx.hpp; sourceTree = "<group>"; };
-		A5F888A12FEEDD9000433EDF /* TwistExpander_BaseBall_Arx.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TwistExpander_BaseBall_Arx.cpp; sourceTree = "<group>"; };
-		A5F888A22FEEDD9000433EDF /* TwistExpander_BasketBall.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TwistExpander_BasketBall.hpp; sourceTree = "<group>"; };
-		A5F888A32FEEDD9000433EDF /* TwistExpander_BasketBall.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TwistExpander_BasketBall.cpp; sourceTree = "<group>"; };
-		A5F888A42FEEDD9000433EDF /* TwistExpander_BasketBall_Arx.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TwistExpander_BasketBall_Arx.hpp; sourceTree = "<group>"; };
-		A5F888A52FEEDD9000433EDF /* TwistExpander_BasketBall_Arx.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TwistExpander_BasketBall_Arx.cpp; sourceTree = "<group>"; };
-		A5F888A62FEEDD9000433EDF /* TwistExpander_Bowling.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TwistExpander_Bowling.hpp; sourceTree = "<group>"; };
-		A5F888A72FEEDD9000433EDF /* TwistExpander_Bowling.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TwistExpander_Bowling.cpp; sourceTree = "<group>"; };
-		A5F888A82FEEDD9000433EDF /* TwistExpander_Bowling_Arx.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TwistExpander_Bowling_Arx.hpp; sourceTree = "<group>"; };
-		A5F888A92FEEDD9000433EDF /* TwistExpander_Bowling_Arx.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TwistExpander_Bowling_Arx.cpp; sourceTree = "<group>"; };
-		A5F888AA2FEEDD9000433EDF /* TwistExpander_Boxing.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TwistExpander_Boxing.hpp; sourceTree = "<group>"; };
-		A5F888AB2FEEDD9000433EDF /* TwistExpander_Boxing.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TwistExpander_Boxing.cpp; sourceTree = "<group>"; };
-		A5F888AC2FEEDD9000433EDF /* TwistExpander_Boxing_Arx.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TwistExpander_Boxing_Arx.hpp; sourceTree = "<group>"; };
-		A5F888AD2FEEDD9000433EDF /* TwistExpander_Boxing_Arx.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TwistExpander_Boxing_Arx.cpp; sourceTree = "<group>"; };
-		A5F888AE2FEEDD9000433EDF /* TwistExpander_Cricket.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TwistExpander_Cricket.hpp; sourceTree = "<group>"; };
-		A5F888AF2FEEDD9000433EDF /* TwistExpander_Cricket.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TwistExpander_Cricket.cpp; sourceTree = "<group>"; };
-		A5F888B02FEEDD9000433EDF /* TwistExpander_Cricket_Arx.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TwistExpander_Cricket_Arx.hpp; sourceTree = "<group>"; };
-		A5F888B12FEEDD9000433EDF /* TwistExpander_Cricket_Arx.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TwistExpander_Cricket_Arx.cpp; sourceTree = "<group>"; };
-		A5F888B22FEEDD9000433EDF /* TwistExpander_Fencing.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TwistExpander_Fencing.hpp; sourceTree = "<group>"; };
-		A5F888B32FEEDD9000433EDF /* TwistExpander_Fencing.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TwistExpander_Fencing.cpp; sourceTree = "<group>"; };
-		A5F888B42FEEDD9000433EDF /* TwistExpander_Fencing_Arx.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TwistExpander_Fencing_Arx.hpp; sourceTree = "<group>"; };
-		A5F888B52FEEDD9000433EDF /* TwistExpander_Fencing_Arx.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TwistExpander_Fencing_Arx.cpp; sourceTree = "<group>"; };
-		A5F888B62FEEDD9000433EDF /* TwistExpander_FootBall.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TwistExpander_FootBall.hpp; sourceTree = "<group>"; };
-		A5F888B72FEEDD9000433EDF /* TwistExpander_FootBall.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TwistExpander_FootBall.cpp; sourceTree = "<group>"; };
-		A5F888B82FEEDD9000433EDF /* TwistExpander_FootBall_Arx.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TwistExpander_FootBall_Arx.hpp; sourceTree = "<group>"; };
-		A5F888B92FEEDD9000433EDF /* TwistExpander_FootBall_Arx.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TwistExpander_FootBall_Arx.cpp; sourceTree = "<group>"; };
-		A5F888BA2FEEDD9000433EDF /* TwistExpander_Golf.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TwistExpander_Golf.hpp; sourceTree = "<group>"; };
-		A5F888BB2FEEDD9000433EDF /* TwistExpander_Golf.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TwistExpander_Golf.cpp; sourceTree = "<group>"; };
-		A5F888BC2FEEDD9000433EDF /* TwistExpander_Golf_Arx.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TwistExpander_Golf_Arx.hpp; sourceTree = "<group>"; };
-		A5F888BD2FEEDD9000433EDF /* TwistExpander_Golf_Arx.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TwistExpander_Golf_Arx.cpp; sourceTree = "<group>"; };
-		A5F888BE2FEEDD9000433EDF /* TwistExpander_Hockey.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TwistExpander_Hockey.hpp; sourceTree = "<group>"; };
-		A5F888BF2FEEDD9000433EDF /* TwistExpander_Hockey.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TwistExpander_Hockey.cpp; sourceTree = "<group>"; };
-		A5F888C02FEEDD9000433EDF /* TwistExpander_Hockey_Arx.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TwistExpander_Hockey_Arx.hpp; sourceTree = "<group>"; };
-		A5F888C12FEEDD9000433EDF /* TwistExpander_Hockey_Arx.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TwistExpander_Hockey_Arx.cpp; sourceTree = "<group>"; };
-		A5F888C22FEEDD9000433EDF /* TwistExpander_Karate.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TwistExpander_Karate.hpp; sourceTree = "<group>"; };
-		A5F888C32FEEDD9000433EDF /* TwistExpander_Karate.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TwistExpander_Karate.cpp; sourceTree = "<group>"; };
-		A5F888C42FEEDD9000433EDF /* TwistExpander_Karate_Arx.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TwistExpander_Karate_Arx.hpp; sourceTree = "<group>"; };
-		A5F888C52FEEDD9000433EDF /* TwistExpander_Karate_Arx.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TwistExpander_Karate_Arx.cpp; sourceTree = "<group>"; };
-		A5F888C62FEEDD9000433EDF /* TwistExpander_Lacrosse.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TwistExpander_Lacrosse.hpp; sourceTree = "<group>"; };
-		A5F888C72FEEDD9000433EDF /* TwistExpander_Lacrosse.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TwistExpander_Lacrosse.cpp; sourceTree = "<group>"; };
-		A5F888C82FEEDD9000433EDF /* TwistExpander_Lacrosse_Arx.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TwistExpander_Lacrosse_Arx.hpp; sourceTree = "<group>"; };
-		A5F888C92FEEDD9000433EDF /* TwistExpander_Lacrosse_Arx.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TwistExpander_Lacrosse_Arx.cpp; sourceTree = "<group>"; };
-		A5F888CA2FEEDD9000433EDF /* TwistExpander_PickleBall.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TwistExpander_PickleBall.hpp; sourceTree = "<group>"; };
-		A5F888CB2FEEDD9000433EDF /* TwistExpander_PickleBall.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TwistExpander_PickleBall.cpp; sourceTree = "<group>"; };
-		A5F888CC2FEEDD9000433EDF /* TwistExpander_PickleBall_Arx.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TwistExpander_PickleBall_Arx.hpp; sourceTree = "<group>"; };
-		A5F888CD2FEEDD9000433EDF /* TwistExpander_PickleBall_Arx.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TwistExpander_PickleBall_Arx.cpp; sourceTree = "<group>"; };
-		A5F888CE2FEEDD9000433EDF /* TwistExpander_Rugby.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TwistExpander_Rugby.hpp; sourceTree = "<group>"; };
-		A5F888CF2FEEDD9000433EDF /* TwistExpander_Rugby.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TwistExpander_Rugby.cpp; sourceTree = "<group>"; };
-		A5F888D02FEEDD9000433EDF /* TwistExpander_Rugby_Arx.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TwistExpander_Rugby_Arx.hpp; sourceTree = "<group>"; };
-		A5F888D12FEEDD9000433EDF /* TwistExpander_Rugby_Arx.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TwistExpander_Rugby_Arx.cpp; sourceTree = "<group>"; };
-		A5F888D22FEEDD9000433EDF /* TwistExpander_Soccer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TwistExpander_Soccer.hpp; sourceTree = "<group>"; };
-		A5F888D32FEEDD9000433EDF /* TwistExpander_Soccer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TwistExpander_Soccer.cpp; sourceTree = "<group>"; };
-		A5F888D42FEEDD9000433EDF /* TwistExpander_Soccer_Arx.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TwistExpander_Soccer_Arx.hpp; sourceTree = "<group>"; };
-		A5F888D52FEEDD9000433EDF /* TwistExpander_Soccer_Arx.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TwistExpander_Soccer_Arx.cpp; sourceTree = "<group>"; };
-		A5F888D62FEEDD9000433EDF /* TwistExpander_Softball.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TwistExpander_Softball.hpp; sourceTree = "<group>"; };
-		A5F888D72FEEDD9000433EDF /* TwistExpander_Softball.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TwistExpander_Softball.cpp; sourceTree = "<group>"; };
-		A5F888D82FEEDD9000433EDF /* TwistExpander_Softball_Arx.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TwistExpander_Softball_Arx.hpp; sourceTree = "<group>"; };
-		A5F888D92FEEDD9000433EDF /* TwistExpander_Softball_Arx.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TwistExpander_Softball_Arx.cpp; sourceTree = "<group>"; };
-		A5F888DA2FEEDD9000433EDF /* TwistExpander_Tennis.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TwistExpander_Tennis.hpp; sourceTree = "<group>"; };
-		A5F888DB2FEEDD9000433EDF /* TwistExpander_Tennis.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TwistExpander_Tennis.cpp; sourceTree = "<group>"; };
-		A5F888DC2FEEDD9000433EDF /* TwistExpander_Tennis_Arx.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TwistExpander_Tennis_Arx.hpp; sourceTree = "<group>"; };
-		A5F888DD2FEEDD9000433EDF /* TwistExpander_Tennis_Arx.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TwistExpander_Tennis_Arx.cpp; sourceTree = "<group>"; };
-		A5F888DE2FEEDD9000433EDF /* TwistExpander_VolleyBall.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TwistExpander_VolleyBall.hpp; sourceTree = "<group>"; };
-		A5F888DF2FEEDD9000433EDF /* TwistExpander_VolleyBall.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TwistExpander_VolleyBall.cpp; sourceTree = "<group>"; };
-		A5F888E02FEEDD9000433EDF /* TwistExpander_VolleyBall_Arx.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TwistExpander_VolleyBall_Arx.hpp; sourceTree = "<group>"; };
-		A5F888E12FEEDD9000433EDF /* TwistExpander_VolleyBall_Arx.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TwistExpander_VolleyBall_Arx.cpp; sourceTree = "<group>"; };
-		A5F888E22FEEDD9000433EDF /* TwistExpander_WaterPolo.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TwistExpander_WaterPolo.hpp; sourceTree = "<group>"; };
-		A5F888E32FEEDD9000433EDF /* TwistExpander_WaterPolo.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TwistExpander_WaterPolo.cpp; sourceTree = "<group>"; };
-		A5F888E42FEEDD9000433EDF /* TwistExpander_WaterPolo_Arx.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TwistExpander_WaterPolo_Arx.hpp; sourceTree = "<group>"; };
-		A5F888E52FEEDD9000433EDF /* TwistExpander_WaterPolo_Arx.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TwistExpander_WaterPolo_Arx.cpp; sourceTree = "<group>"; };
 		A5F888E82FEEDD9000433EDF /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		A5F888E92FEEDD9000433EDF /* AppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AppDelegate.mm; sourceTree = "<group>"; };
 		A5F888EA2FEEDD9000433EDF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -213,6 +213,93 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A56835CA2FF2ADA6002524E4 /* Family */ = {
+			isa = PBXGroup;
+			children = (
+				A568357A2FF2ADA6002524E4 /* TwistExpander_Archery.hpp */,
+				A568357B2FF2ADA6002524E4 /* TwistExpander_Archery.cpp */,
+				A568357C2FF2ADA6002524E4 /* TwistExpander_Archery_Arx.hpp */,
+				A568357D2FF2ADA6002524E4 /* TwistExpander_Archery_Arx.cpp */,
+				A568357E2FF2ADA6002524E4 /* TwistExpander_BaseBall.hpp */,
+				A568357F2FF2ADA6002524E4 /* TwistExpander_BaseBall.cpp */,
+				A56835802FF2ADA6002524E4 /* TwistExpander_BaseBall_Arx.hpp */,
+				A56835812FF2ADA6002524E4 /* TwistExpander_BaseBall_Arx.cpp */,
+				A56835822FF2ADA6002524E4 /* TwistExpander_BasketBall.hpp */,
+				A56835832FF2ADA6002524E4 /* TwistExpander_BasketBall.cpp */,
+				A56835842FF2ADA6002524E4 /* TwistExpander_BasketBall_Arx.hpp */,
+				A56835852FF2ADA6002524E4 /* TwistExpander_BasketBall_Arx.cpp */,
+				A56835862FF2ADA6002524E4 /* TwistExpander_Billiards.hpp */,
+				A56835872FF2ADA6002524E4 /* TwistExpander_Billiards.cpp */,
+				A56835882FF2ADA6002524E4 /* TwistExpander_Billiards_Arx.hpp */,
+				A56835892FF2ADA6002524E4 /* TwistExpander_Billiards_Arx.cpp */,
+				A568358A2FF2ADA6002524E4 /* TwistExpander_Bowling.hpp */,
+				A568358B2FF2ADA6002524E4 /* TwistExpander_Bowling.cpp */,
+				A568358C2FF2ADA6002524E4 /* TwistExpander_Bowling_Arx.hpp */,
+				A568358D2FF2ADA6002524E4 /* TwistExpander_Bowling_Arx.cpp */,
+				A568358E2FF2ADA6002524E4 /* TwistExpander_Boxing.hpp */,
+				A568358F2FF2ADA6002524E4 /* TwistExpander_Boxing.cpp */,
+				A56835902FF2ADA6002524E4 /* TwistExpander_Boxing_Arx.hpp */,
+				A56835912FF2ADA6002524E4 /* TwistExpander_Boxing_Arx.cpp */,
+				A56835922FF2ADA6002524E4 /* TwistExpander_Cricket.hpp */,
+				A56835932FF2ADA6002524E4 /* TwistExpander_Cricket.cpp */,
+				A56835942FF2ADA6002524E4 /* TwistExpander_Cricket_Arx.hpp */,
+				A56835952FF2ADA6002524E4 /* TwistExpander_Cricket_Arx.cpp */,
+				A56835962FF2ADA6002524E4 /* TwistExpander_Fencing.hpp */,
+				A56835972FF2ADA6002524E4 /* TwistExpander_Fencing.cpp */,
+				A56835982FF2ADA6002524E4 /* TwistExpander_Fencing_Arx.hpp */,
+				A56835992FF2ADA6002524E4 /* TwistExpander_Fencing_Arx.cpp */,
+				A568359A2FF2ADA6002524E4 /* TwistExpander_FootBall.hpp */,
+				A568359B2FF2ADA6002524E4 /* TwistExpander_FootBall.cpp */,
+				A568359C2FF2ADA6002524E4 /* TwistExpander_FootBall_Arx.hpp */,
+				A568359D2FF2ADA6002524E4 /* TwistExpander_FootBall_Arx.cpp */,
+				A568359E2FF2ADA6002524E4 /* TwistExpander_Golf.hpp */,
+				A568359F2FF2ADA6002524E4 /* TwistExpander_Golf.cpp */,
+				A56835A02FF2ADA6002524E4 /* TwistExpander_Golf_Arx.hpp */,
+				A56835A12FF2ADA6002524E4 /* TwistExpander_Golf_Arx.cpp */,
+				A56835A22FF2ADA6002524E4 /* TwistExpander_Hockey.hpp */,
+				A56835A32FF2ADA6002524E4 /* TwistExpander_Hockey.cpp */,
+				A56835A42FF2ADA6002524E4 /* TwistExpander_Hockey_Arx.hpp */,
+				A56835A52FF2ADA6002524E4 /* TwistExpander_Hockey_Arx.cpp */,
+				A56835A62FF2ADA6002524E4 /* TwistExpander_Karate.hpp */,
+				A56835A72FF2ADA6002524E4 /* TwistExpander_Karate.cpp */,
+				A56835A82FF2ADA6002524E4 /* TwistExpander_Karate_Arx.hpp */,
+				A56835A92FF2ADA6002524E4 /* TwistExpander_Karate_Arx.cpp */,
+				A56835AA2FF2ADA6002524E4 /* TwistExpander_Lacrosse.hpp */,
+				A56835AB2FF2ADA6002524E4 /* TwistExpander_Lacrosse.cpp */,
+				A56835AC2FF2ADA6002524E4 /* TwistExpander_Lacrosse_Arx.hpp */,
+				A56835AD2FF2ADA6002524E4 /* TwistExpander_Lacrosse_Arx.cpp */,
+				A56835AE2FF2ADA6002524E4 /* TwistExpander_PickleBall.hpp */,
+				A56835AF2FF2ADA6002524E4 /* TwistExpander_PickleBall.cpp */,
+				A56835B02FF2ADA6002524E4 /* TwistExpander_PickleBall_Arx.hpp */,
+				A56835B12FF2ADA6002524E4 /* TwistExpander_PickleBall_Arx.cpp */,
+				A56835B22FF2ADA6002524E4 /* TwistExpander_PingPong.hpp */,
+				A56835B32FF2ADA6002524E4 /* TwistExpander_PingPong.cpp */,
+				A56835B42FF2ADA6002524E4 /* TwistExpander_PingPong_Arx.hpp */,
+				A56835B52FF2ADA6002524E4 /* TwistExpander_PingPong_Arx.cpp */,
+				A56835B62FF2ADA6002524E4 /* TwistExpander_Rugby.hpp */,
+				A56835B72FF2ADA6002524E4 /* TwistExpander_Rugby.cpp */,
+				A56835B82FF2ADA6002524E4 /* TwistExpander_Rugby_Arx.hpp */,
+				A56835B92FF2ADA6002524E4 /* TwistExpander_Rugby_Arx.cpp */,
+				A56835BA2FF2ADA6002524E4 /* TwistExpander_Soccer.hpp */,
+				A56835BB2FF2ADA6002524E4 /* TwistExpander_Soccer.cpp */,
+				A56835BC2FF2ADA6002524E4 /* TwistExpander_Soccer_Arx.hpp */,
+				A56835BD2FF2ADA6002524E4 /* TwistExpander_Soccer_Arx.cpp */,
+				A56835BE2FF2ADA6002524E4 /* TwistExpander_Tennis.hpp */,
+				A56835BF2FF2ADA6002524E4 /* TwistExpander_Tennis.cpp */,
+				A56835C02FF2ADA6002524E4 /* TwistExpander_Tennis_Arx.hpp */,
+				A56835C12FF2ADA6002524E4 /* TwistExpander_Tennis_Arx.cpp */,
+				A56835C22FF2ADA6002524E4 /* TwistExpander_VolleyBall.hpp */,
+				A56835C32FF2ADA6002524E4 /* TwistExpander_VolleyBall.cpp */,
+				A56835C42FF2ADA6002524E4 /* TwistExpander_VolleyBall_Arx.hpp */,
+				A56835C52FF2ADA6002524E4 /* TwistExpander_VolleyBall_Arx.cpp */,
+				A56835C62FF2ADA6002524E4 /* TwistExpander_WaterPolo.hpp */,
+				A56835C72FF2ADA6002524E4 /* TwistExpander_WaterPolo.cpp */,
+				A56835C82FF2ADA6002524E4 /* TwistExpander_WaterPolo_Arx.hpp */,
+				A56835C92FF2ADA6002524E4 /* TwistExpander_WaterPolo_Arx.cpp */,
+			);
+			path = Family;
+			sourceTree = "<group>";
+		};
 		A5A98EE72FEECE2A00BE9618 = {
 			isa = PBXGroup;
 			children = (
@@ -270,98 +357,11 @@
 			path = Core;
 			sourceTree = "<group>";
 		};
-		A5F888E62FEEDD9000433EDF /* Family */ = {
-			isa = PBXGroup;
-			children = (
-				A5F888962FEEDD9000433EDF /* TwistExpander_Archery.hpp */,
-				A5F888972FEEDD9000433EDF /* TwistExpander_Archery.cpp */,
-				A5F888982FEEDD9000433EDF /* TwistExpander_Archery_Arx.hpp */,
-				A5F888992FEEDD9000433EDF /* TwistExpander_Archery_Arx.cpp */,
-				A5F8889A2FEEDD9000433EDF /* TwistExpander_Badminton.hpp */,
-				A5F8889B2FEEDD9000433EDF /* TwistExpander_Badminton.cpp */,
-				A5F8889C2FEEDD9000433EDF /* TwistExpander_Badminton_Arx.hpp */,
-				A5F8889D2FEEDD9000433EDF /* TwistExpander_Badminton_Arx.cpp */,
-				A5F8889E2FEEDD9000433EDF /* TwistExpander_BaseBall.hpp */,
-				A5F8889F2FEEDD9000433EDF /* TwistExpander_BaseBall.cpp */,
-				A5F888A02FEEDD9000433EDF /* TwistExpander_BaseBall_Arx.hpp */,
-				A5F888A12FEEDD9000433EDF /* TwistExpander_BaseBall_Arx.cpp */,
-				A5F888A22FEEDD9000433EDF /* TwistExpander_BasketBall.hpp */,
-				A5F888A32FEEDD9000433EDF /* TwistExpander_BasketBall.cpp */,
-				A5F888A42FEEDD9000433EDF /* TwistExpander_BasketBall_Arx.hpp */,
-				A5F888A52FEEDD9000433EDF /* TwistExpander_BasketBall_Arx.cpp */,
-				A5F888A62FEEDD9000433EDF /* TwistExpander_Bowling.hpp */,
-				A5F888A72FEEDD9000433EDF /* TwistExpander_Bowling.cpp */,
-				A5F888A82FEEDD9000433EDF /* TwistExpander_Bowling_Arx.hpp */,
-				A5F888A92FEEDD9000433EDF /* TwistExpander_Bowling_Arx.cpp */,
-				A5F888AA2FEEDD9000433EDF /* TwistExpander_Boxing.hpp */,
-				A5F888AB2FEEDD9000433EDF /* TwistExpander_Boxing.cpp */,
-				A5F888AC2FEEDD9000433EDF /* TwistExpander_Boxing_Arx.hpp */,
-				A5F888AD2FEEDD9000433EDF /* TwistExpander_Boxing_Arx.cpp */,
-				A5F888AE2FEEDD9000433EDF /* TwistExpander_Cricket.hpp */,
-				A5F888AF2FEEDD9000433EDF /* TwistExpander_Cricket.cpp */,
-				A5F888B02FEEDD9000433EDF /* TwistExpander_Cricket_Arx.hpp */,
-				A5F888B12FEEDD9000433EDF /* TwistExpander_Cricket_Arx.cpp */,
-				A5F888B22FEEDD9000433EDF /* TwistExpander_Fencing.hpp */,
-				A5F888B32FEEDD9000433EDF /* TwistExpander_Fencing.cpp */,
-				A5F888B42FEEDD9000433EDF /* TwistExpander_Fencing_Arx.hpp */,
-				A5F888B52FEEDD9000433EDF /* TwistExpander_Fencing_Arx.cpp */,
-				A5F888B62FEEDD9000433EDF /* TwistExpander_FootBall.hpp */,
-				A5F888B72FEEDD9000433EDF /* TwistExpander_FootBall.cpp */,
-				A5F888B82FEEDD9000433EDF /* TwistExpander_FootBall_Arx.hpp */,
-				A5F888B92FEEDD9000433EDF /* TwistExpander_FootBall_Arx.cpp */,
-				A5F888BA2FEEDD9000433EDF /* TwistExpander_Golf.hpp */,
-				A5F888BB2FEEDD9000433EDF /* TwistExpander_Golf.cpp */,
-				A5F888BC2FEEDD9000433EDF /* TwistExpander_Golf_Arx.hpp */,
-				A5F888BD2FEEDD9000433EDF /* TwistExpander_Golf_Arx.cpp */,
-				A5F888BE2FEEDD9000433EDF /* TwistExpander_Hockey.hpp */,
-				A5F888BF2FEEDD9000433EDF /* TwistExpander_Hockey.cpp */,
-				A5F888C02FEEDD9000433EDF /* TwistExpander_Hockey_Arx.hpp */,
-				A5F888C12FEEDD9000433EDF /* TwistExpander_Hockey_Arx.cpp */,
-				A5F888C22FEEDD9000433EDF /* TwistExpander_Karate.hpp */,
-				A5F888C32FEEDD9000433EDF /* TwistExpander_Karate.cpp */,
-				A5F888C42FEEDD9000433EDF /* TwistExpander_Karate_Arx.hpp */,
-				A5F888C52FEEDD9000433EDF /* TwistExpander_Karate_Arx.cpp */,
-				A5F888C62FEEDD9000433EDF /* TwistExpander_Lacrosse.hpp */,
-				A5F888C72FEEDD9000433EDF /* TwistExpander_Lacrosse.cpp */,
-				A5F888C82FEEDD9000433EDF /* TwistExpander_Lacrosse_Arx.hpp */,
-				A5F888C92FEEDD9000433EDF /* TwistExpander_Lacrosse_Arx.cpp */,
-				A5F888CA2FEEDD9000433EDF /* TwistExpander_PickleBall.hpp */,
-				A5F888CB2FEEDD9000433EDF /* TwistExpander_PickleBall.cpp */,
-				A5F888CC2FEEDD9000433EDF /* TwistExpander_PickleBall_Arx.hpp */,
-				A5F888CD2FEEDD9000433EDF /* TwistExpander_PickleBall_Arx.cpp */,
-				A5F888CE2FEEDD9000433EDF /* TwistExpander_Rugby.hpp */,
-				A5F888CF2FEEDD9000433EDF /* TwistExpander_Rugby.cpp */,
-				A5F888D02FEEDD9000433EDF /* TwistExpander_Rugby_Arx.hpp */,
-				A5F888D12FEEDD9000433EDF /* TwistExpander_Rugby_Arx.cpp */,
-				A5F888D22FEEDD9000433EDF /* TwistExpander_Soccer.hpp */,
-				A5F888D32FEEDD9000433EDF /* TwistExpander_Soccer.cpp */,
-				A5F888D42FEEDD9000433EDF /* TwistExpander_Soccer_Arx.hpp */,
-				A5F888D52FEEDD9000433EDF /* TwistExpander_Soccer_Arx.cpp */,
-				A5F888D62FEEDD9000433EDF /* TwistExpander_Softball.hpp */,
-				A5F888D72FEEDD9000433EDF /* TwistExpander_Softball.cpp */,
-				A5F888D82FEEDD9000433EDF /* TwistExpander_Softball_Arx.hpp */,
-				A5F888D92FEEDD9000433EDF /* TwistExpander_Softball_Arx.cpp */,
-				A5F888DA2FEEDD9000433EDF /* TwistExpander_Tennis.hpp */,
-				A5F888DB2FEEDD9000433EDF /* TwistExpander_Tennis.cpp */,
-				A5F888DC2FEEDD9000433EDF /* TwistExpander_Tennis_Arx.hpp */,
-				A5F888DD2FEEDD9000433EDF /* TwistExpander_Tennis_Arx.cpp */,
-				A5F888DE2FEEDD9000433EDF /* TwistExpander_VolleyBall.hpp */,
-				A5F888DF2FEEDD9000433EDF /* TwistExpander_VolleyBall.cpp */,
-				A5F888E02FEEDD9000433EDF /* TwistExpander_VolleyBall_Arx.hpp */,
-				A5F888E12FEEDD9000433EDF /* TwistExpander_VolleyBall_Arx.cpp */,
-				A5F888E22FEEDD9000433EDF /* TwistExpander_WaterPolo.hpp */,
-				A5F888E32FEEDD9000433EDF /* TwistExpander_WaterPolo.cpp */,
-				A5F888E42FEEDD9000433EDF /* TwistExpander_WaterPolo_Arx.hpp */,
-				A5F888E52FEEDD9000433EDF /* TwistExpander_WaterPolo_Arx.cpp */,
-			);
-			path = Family;
-			sourceTree = "<group>";
-		};
 		A5F888E72FEEDD9000433EDF /* Expander */ = {
 			isa = PBXGroup;
 			children = (
+				A56835CA2FF2ADA6002524E4 /* Family */,
 				A5F888952FEEDD9000433EDF /* Core */,
-				A5F888E62FEEDD9000433EDF /* Family */,
 			);
 			path = Expander;
 			sourceTree = "<group>";
@@ -459,65 +459,65 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A5F888F72FEEDD9000433EDF /* TwistExpander_VolleyBall.cpp in Sources */,
-				A5F888F82FEEDD9000433EDF /* TwistExpander_Softball.cpp in Sources */,
-				A5F888F92FEEDD9000433EDF /* TwistExpander_BaseBall_Arx.cpp in Sources */,
-				A5F888FA2FEEDD9000433EDF /* TwistExpander_Bowling.cpp in Sources */,
-				A5F888FB2FEEDD9000433EDF /* TwistExpander_Fencing.cpp in Sources */,
 				A5F888FC2FEEDD9000433EDF /* Avalancher.cpp in Sources */,
-				A5F888FD2FEEDD9000433EDF /* TwistExpander_Cricket.cpp in Sources */,
-				A5F888FE2FEEDD9000433EDF /* TwistExpander_Hockey_Arx.cpp in Sources */,
-				A5F888FF2FEEDD9000433EDF /* TwistExpander_Tennis.cpp in Sources */,
-				A5F889002FEEDD9000433EDF /* TwistExpander_Golf_Arx.cpp in Sources */,
 				A5F889012FEEDD9000433EDF /* TwistShiftBox.cpp in Sources */,
 				A5F889022FEEDD9000433EDF /* Random.cpp in Sources */,
-				A5F889032FEEDD9000433EDF /* TwistExpander_VolleyBall_Arx.cpp in Sources */,
 				A5F889042FEEDD9000433EDF /* TwistMix32.cpp in Sources */,
-				A5F889052FEEDD9000433EDF /* TwistExpander_Archery.cpp in Sources */,
-				A5F889062FEEDD9000433EDF /* TwistExpander_Soccer_Arx.cpp in Sources */,
 				A5F889072FEEDD9000433EDF /* main.m in Sources */,
 				A5F889082FEEDD9000433EDF /* TwistSquash.cpp in Sources */,
-				A5F889092FEEDD9000433EDF /* TwistExpander_BaseBall.cpp in Sources */,
-				A5F8890A2FEEDD9000433EDF /* TwistExpander_Soccer.cpp in Sources */,
-				A5F8890B2FEEDD9000433EDF /* TwistExpander_Lacrosse.cpp in Sources */,
 				A5F8890C2FEEDD9000433EDF /* TwistCryptoScoring.cpp in Sources */,
-				A5F8890D2FEEDD9000433EDF /* TwistExpander_Badminton.cpp in Sources */,
 				A5F8890E2FEEDD9000433EDF /* Rig.cpp in Sources */,
 				A5F8890F2FEEDD9000433EDF /* M88.cpp in Sources */,
-				A5F889102FEEDD9000433EDF /* TwistExpander_BasketBall_Arx.cpp in Sources */,
 				A5F889112FEEDD9000433EDF /* TwistIndexShuffle.cpp in Sources */,
-				A5F889122FEEDD9000433EDF /* TwistExpander_Boxing_Arx.cpp in Sources */,
-				A5F889132FEEDD9000433EDF /* TwistExpander_Tennis_Arx.cpp in Sources */,
-				A5F889142FEEDD9000433EDF /* TwistExpander_Softball_Arx.cpp in Sources */,
-				A5F889152FEEDD9000433EDF /* TwistExpander_PickleBall_Arx.cpp in Sources */,
-				A5F889162FEEDD9000433EDF /* TwistExpander_Hockey.cpp in Sources */,
 				A5F889172FEEDD9000433EDF /* TwistFarmSalt.cpp in Sources */,
+				A56835CB2FF2ADA6002524E4 /* TwistExpander_Bowling.cpp in Sources */,
+				A56835CC2FF2ADA6002524E4 /* TwistExpander_Archery.cpp in Sources */,
+				A56835CD2FF2ADA6002524E4 /* TwistExpander_Billiards_Arx.cpp in Sources */,
+				A56835CE2FF2ADA6002524E4 /* TwistExpander_Archery_Arx.cpp in Sources */,
+				A56835CF2FF2ADA6002524E4 /* TwistExpander_Tennis.cpp in Sources */,
+				A56835D02FF2ADA6002524E4 /* TwistExpander_Karate_Arx.cpp in Sources */,
+				A56835D12FF2ADA6002524E4 /* TwistExpander_Billiards.cpp in Sources */,
+				A56835D22FF2ADA6002524E4 /* TwistExpander_Karate.cpp in Sources */,
+				A56835D32FF2ADA6002524E4 /* TwistExpander_WaterPolo.cpp in Sources */,
+				A56835D42FF2ADA6002524E4 /* TwistExpander_PickleBall.cpp in Sources */,
+				A56835D52FF2ADA6002524E4 /* TwistExpander_VolleyBall.cpp in Sources */,
+				A56835D62FF2ADA6002524E4 /* TwistExpander_Tennis_Arx.cpp in Sources */,
+				A56835D72FF2ADA6002524E4 /* TwistExpander_PickleBall_Arx.cpp in Sources */,
+				A56835D82FF2ADA6002524E4 /* TwistExpander_Lacrosse_Arx.cpp in Sources */,
+				A56835D92FF2ADA6002524E4 /* TwistExpander_Rugby.cpp in Sources */,
+				A56835DA2FF2ADA6002524E4 /* TwistExpander_Fencing.cpp in Sources */,
+				A56835DB2FF2ADA6002524E4 /* TwistExpander_BasketBall.cpp in Sources */,
+				A56835DC2FF2ADA6002524E4 /* TwistExpander_Hockey_Arx.cpp in Sources */,
+				A56835DD2FF2ADA6002524E4 /* TwistExpander_PingPong.cpp in Sources */,
+				A56835DE2FF2ADA6002524E4 /* TwistExpander_Golf.cpp in Sources */,
+				A56835DF2FF2ADA6002524E4 /* TwistExpander_WaterPolo_Arx.cpp in Sources */,
+				A56835E02FF2ADA6002524E4 /* TwistExpander_BasketBall_Arx.cpp in Sources */,
+				A56835E12FF2ADA6002524E4 /* TwistExpander_Cricket_Arx.cpp in Sources */,
+				A56835E22FF2ADA6002524E4 /* TwistExpander_Rugby_Arx.cpp in Sources */,
+				A56835E32FF2ADA6002524E4 /* TwistExpander_Golf_Arx.cpp in Sources */,
+				A56835E42FF2ADA6002524E4 /* TwistExpander_VolleyBall_Arx.cpp in Sources */,
+				A56835E52FF2ADA6002524E4 /* TwistExpander_Boxing_Arx.cpp in Sources */,
+				A56835E62FF2ADA6002524E4 /* TwistExpander_FootBall_Arx.cpp in Sources */,
+				A56835E72FF2ADA6002524E4 /* TwistExpander_BaseBall_Arx.cpp in Sources */,
+				A56835E82FF2ADA6002524E4 /* TwistExpander_Hockey.cpp in Sources */,
+				A56835E92FF2ADA6002524E4 /* TwistExpander_Cricket.cpp in Sources */,
+				A56835EA2FF2ADA6002524E4 /* TwistExpander_BaseBall.cpp in Sources */,
+				A56835EB2FF2ADA6002524E4 /* TwistExpander_FootBall.cpp in Sources */,
+				A56835EC2FF2ADA6002524E4 /* TwistExpander_Boxing.cpp in Sources */,
+				A56835ED2FF2ADA6002524E4 /* TwistExpander_Soccer.cpp in Sources */,
+				A56835EE2FF2ADA6002524E4 /* TwistExpander_Bowling_Arx.cpp in Sources */,
+				A56835EF2FF2ADA6002524E4 /* TwistExpander_Soccer_Arx.cpp in Sources */,
+				A56835F02FF2ADA6002524E4 /* TwistExpander_Lacrosse.cpp in Sources */,
+				A56835F12FF2ADA6002524E4 /* TwistExpander_Fencing_Arx.cpp in Sources */,
+				A56835F22FF2ADA6002524E4 /* TwistExpander_PingPong_Arx.cpp in Sources */,
 				A5F889182FEEDD9000433EDF /* TwistInvest.cpp in Sources */,
-				A5F889192FEEDD9000433EDF /* TwistExpander_Fencing_Arx.cpp in Sources */,
-				A5F8891A2FEEDD9000433EDF /* TwistExpander_Rugby.cpp in Sources */,
 				A5F8891B2FEEDD9000433EDF /* AppDelegate.mm in Sources */,
-				A5F8891C2FEEDD9000433EDF /* TwistExpander_Karate_Arx.cpp in Sources */,
-				A5F8891D2FEEDD9000433EDF /* TwistExpander_WaterPolo_Arx.cpp in Sources */,
-				A5F8891E2FEEDD9000433EDF /* TwistExpander_Rugby_Arx.cpp in Sources */,
 				A5F8891F2FEEDD9000433EDF /* FileIO.cpp in Sources */,
 				A5F889202FEEDD9000433EDF /* TwistWorkSpace.cpp in Sources */,
-				A5F889212FEEDD9000433EDF /* TwistExpander_FootBall.cpp in Sources */,
-				A5F889222FEEDD9000433EDF /* TwistExpander_Bowling_Arx.cpp in Sources */,
 				A5F889232FEEDD9000433EDF /* TwistSnow.cpp in Sources */,
 				A5F889242FEEDD9000433EDF /* TwistFarmConstants.cpp in Sources */,
-				A5F889252FEEDD9000433EDF /* TwistExpander_Golf.cpp in Sources */,
-				A5F889262FEEDD9000433EDF /* TwistExpander_Archery_Arx.cpp in Sources */,
-				A5F889272FEEDD9000433EDF /* TwistExpander_Lacrosse_Arx.cpp in Sources */,
-				A5F889282FEEDD9000433EDF /* TwistExpander_PickleBall.cpp in Sources */,
 				A5F889292FEEDD9000433EDF /* TwistMix64.cpp in Sources */,
-				A5F8892A2FEEDD9000433EDF /* TwistExpander_Badminton_Arx.cpp in Sources */,
-				A5F8892B2FEEDD9000433EDF /* TwistExpander_Boxing.cpp in Sources */,
-				A5F8892C2FEEDD9000433EDF /* TwistExpander_FootBall_Arx.cpp in Sources */,
-				A5F8892D2FEEDD9000433EDF /* TwistExpander_Karate.cpp in Sources */,
 				A5F8892E2FEEDD9000433EDF /* TwistExpander.cpp in Sources */,
-				A5F8892F2FEEDD9000433EDF /* TwistExpander_BasketBall.cpp in Sources */,
-				A5F889302FEEDD9000433EDF /* TwistExpander_Cricket_Arx.cpp in Sources */,
-				A5F889312FEEDD9000433EDF /* TwistExpander_WaterPolo.cpp in Sources */,
 				A5F889322FEEDD9000433EDF /* TwistDiffuse.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

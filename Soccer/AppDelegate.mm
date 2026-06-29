@@ -32,13 +32,11 @@
     TwistWorkSpace aWorkSpace;
     TwistFarmSalt aFarmSalt;
     std::uint64_t aNonce = 17;
-    std::uint8_t aSource[S_BLOCK];
     std::uint8_t aDest[S_BLOCK * aBlockCount];
 
     aSoccer.Seed(&aWorkSpace,
                  &aFarmSalt,
                  aNonce,
-                 aSource,
                  aTinyPassword, // password
                  2, // password length
                  aDest);

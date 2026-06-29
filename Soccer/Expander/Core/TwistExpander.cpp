@@ -49,7 +49,6 @@ TwistExpander::TwistExpander() {
     mWorkspace = nullptr;
     mFarmSalt = nullptr;
     mSource = nullptr;
-    mSnow = nullptr;
     mDest = nullptr;
     mKDFCallCounter = 0ULL;
     mKDFSessionNonce = 0ULL;
@@ -134,7 +133,11 @@ void TwistExpander::KDF(std::uint64_t pNonce,
 
 void TwistExpander::KDF_A(std::uint64_t pNonce,
                           TwistDomainConstants *pDomainConstants,
-                          TwistDomainSaltSet *pDomainSaltSet) {
+                          TwistDomainSaltSet *pDomainSaltSet,
+                          std::uint8_t *pSnow,
+                          int pIndexKDF) {
+    (void)pSnow;
+    (void)pIndexKDF;
     TwistExpander::KDF(pNonce,
                        pDomainConstants,
                        pDomainSaltSet);
@@ -142,7 +145,9 @@ void TwistExpander::KDF_A(std::uint64_t pNonce,
 
 void TwistExpander::KDF_B(std::uint64_t pNonce,
                           TwistDomainConstants *pDomainConstants,
-                          TwistDomainSaltSet *pDomainSaltSet) {
+                          TwistDomainSaltSet *pDomainSaltSet,
+                          int pIndexKDF) {
+    (void)pIndexKDF;
     TwistExpander::KDF(pNonce,
                        pDomainConstants,
                        pDomainSaltSet);
@@ -151,16 +156,11 @@ void TwistExpander::KDF_B(std::uint64_t pNonce,
 void TwistExpander::Seed(TwistWorkSpace *pWorkSpace,
                          TwistFarmSalt *pFarmSalt,
                          std::uint64_t pNonce,
-                         std::uint8_t *pSource,
                          std::uint8_t *pPassword,
                          unsigned int pPasswordByteLength,
                          std::uint8_t *pDestination) {
     if (pWorkSpace == nullptr) {
         std::printf("fatal: TwistExpander::Seed requires workspace\n");
-        return;
-    }
-    if (pSource == nullptr) {
-        std::printf("fatal: TwistExpander::Seed requires source buffer\n");
         return;
     }
     if (pDestination == nullptr) {
@@ -174,9 +174,9 @@ void TwistExpander::Seed(TwistWorkSpace *pWorkSpace,
 
     mWorkspace = pWorkSpace;
     mFarmSalt = pFarmSalt;
-    mSource = pSource;
+    mSource = pWorkSpace->mSource;
     mDest = pDestination;
-    UnrollPasswordToSource(pSource, pPassword, pPasswordByteLength);
+    UnrollPasswordToSource(pWorkSpace->mSource, pPassword, pPasswordByteLength);
     mKDFCallCounter = 0ULL;
     mKDFSessionNonce = Mix64(pNonce ^ ProcessKDFFreshnessNonce());
     std::memcpy(&mDomainBundleEphemeral, &mDomainBundleInbuilt, sizeof(mDomainBundleEphemeral));
@@ -389,10 +389,10 @@ void TwistExpander::UnrollPasswordToSource(std::uint8_t *pSource,
 
 void TwistExpander::Zero() {
     Zero_PostSeed();
+    mDomainBundleInbuilt.Zero();
     if (mWorkspace != NULL) {
         mWorkspace->Zero();
     }
-    
 }
 
 void TwistExpander::Zero_PostSeed() {
@@ -405,9 +405,7 @@ void TwistExpander::Zero_PostSeed() {
     memset(mIndexList256C, 0, sizeof(mIndexList256C));
     memset(mIndexList256D, 0, sizeof(mIndexList256D));
     
-    mDomainBundleInbuilt.Zero();
     mDomainBundleEphemeral.Zero();
     
     mKDFSessionNonce = 0;
-    
 }

@@ -78,12 +78,9 @@ void Rig::Run(TwistExpander *pExpander,
     TwistWorkSpace aWorkSpace;
     TwistFarmSalt aFarmSalt;
     
-    std::uint8_t aSource[S_BLOCK];
-    memset(aSource, 0, S_BLOCK);
     pExpander->Seed(&aWorkSpace,
                     &aFarmSalt,
                     0ULL,
-                    aSource,
                     pPassword,
                     static_cast<unsigned int>(pPasswordLength),
                     mData);

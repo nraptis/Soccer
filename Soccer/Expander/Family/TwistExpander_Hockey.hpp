@@ -11,10 +11,12 @@ public:
     void KDF_A(std::uint64_t pNonce,
                TwistDomainConstants *pConstants,
                TwistDomainSaltSet *pDomainSaltSet,
-               std::uint8_t *pSnow) override;
+               std::uint8_t *pSnow,
+               int pIndexKDF) override;
     void KDF_B(std::uint64_t pNonce,
                TwistDomainConstants *pConstants,
-               TwistDomainSaltSet *pDomainSaltSet) override;
+               TwistDomainSaltSet *pDomainSaltSet,
+               int pIndexKDF) override;
     void Seed(TwistWorkSpace *pWorkSpace,
               TwistFarmSalt *pFarmSalt,
               std::uint64_t pNonce,
@@ -23,7 +25,7 @@ public:
               std::uint8_t *pDestination) override;
     void TwistBlock(TwistWorkSpace *pWorkSpace,
                     std::uint64_t pNonce,
-                    std::uint8_t *pSourceInput,
+                    std::uint8_t *pSource,
                     std::size_t pBlockIndex,
                     std::size_t pBlockCount,
                     std::uint8_t *pDestination) override;

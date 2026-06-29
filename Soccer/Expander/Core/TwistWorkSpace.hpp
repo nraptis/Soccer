@@ -95,10 +95,10 @@ enum class TwistWorkSpaceSlot : std::uint16_t {
     
     kInvalid=255,
     
-    kSource=0, // size is N * S_BLOCK. To fetch from here is different, because it includes an offset. So we wrap into [offset...offset+S_BLOCK)
-    kDest=1, // size is N * S_BLOCK To write to here is different, because it includes an offset. So we wrap into [offset...offset+S_BLOCK)
-    kParamInputSource=2,
-    kParamOutputDestination=3,
+    kSource=0, // workspace-owned source block
+    kParamSource=2,
+    kParamDestination=3,
+    kParamSnow=4,
     
     kExpansionLaneA=80,
     kExpansionLaneB=81,
@@ -119,12 +119,11 @@ enum class TwistWorkSpaceSlot : std::uint16_t {
     kSnowLaneB=107,
     kSnowLaneC=108,
     kSnowLaneD=109,
-    kSnowA=kSnowLaneA,
-    kSnowB=kSnowLaneB,
-    kSnowC=kSnowLaneC,
-    kSnowD=kSnowLaneD,
 
-    kSnow=112,
+    kFireLaneA=110,
+    kFireLaneB=111,
+    kFireLaneC=112,
+    kFireLaneD=113,
 
     kInvestA=130,
     kInvestB=131,
@@ -463,6 +462,8 @@ public:
     uint8_t                                 mKeyBoxA[H_KEY][W_KEY];
     uint8_t                                 mKeyBoxB[H_KEY][W_KEY];
 
+    std::uint8_t                            mSource[S_BLOCK];
+
     std::uint8_t                            mExpansionLaneA[S_BLOCK];
     std::uint8_t                            mExpansionLaneB[S_BLOCK];
     std::uint8_t                            mExpansionLaneC[S_BLOCK];
@@ -472,17 +473,23 @@ public:
     std::uint8_t                            mWorkLaneB[S_BLOCK];
     std::uint8_t                            mWorkLaneC[S_BLOCK];
     std::uint8_t                            mWorkLaneD[S_BLOCK];
-    
+
     std::uint8_t                            mOperationLaneA[S_BLOCK];
     std::uint8_t                            mOperationLaneB[S_BLOCK];
     std::uint8_t                            mOperationLaneC[S_BLOCK];
     std::uint8_t                            mOperationLaneD[S_BLOCK];
-    
+
     std::uint8_t                            mSnowLaneA[S_BLOCK];
     std::uint8_t                            mSnowLaneB[S_BLOCK];
     std::uint8_t                            mSnowLaneC[S_BLOCK];
     std::uint8_t                            mSnowLaneD[S_BLOCK];
-    
+
+
+    std::uint8_t                            mFireLaneA[S_BLOCK];
+    std::uint8_t                            mFireLaneB[S_BLOCK];
+    std::uint8_t                            mFireLaneC[S_BLOCK];
+    std::uint8_t                            mFireLaneD[S_BLOCK];
+
     std::uint8_t                            mInvestLaneA[S_BLOCK];
     std::uint8_t                            mInvestLaneB[S_BLOCK];
     std::uint8_t                            mInvestLaneC[S_BLOCK];
@@ -492,8 +499,8 @@ public:
     std::uint8_t                            mInvestLaneF[S_BLOCK];
     std::uint8_t                            mInvestLaneG[S_BLOCK];
     std::uint8_t                            mInvestLaneH[S_BLOCK];
-    
-    
+
+
     TwistDomainBundle                       mDomainBundle;
     
     // Rotate stays byte-wide across the workspace helpers.

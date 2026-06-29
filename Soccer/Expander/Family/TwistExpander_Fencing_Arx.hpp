@@ -2,9 +2,9 @@
 
 #include "TwistExpander.hpp"
 
-class TwistExpander_Fencing_Arx : public TwistExpanderArx {
+class TwistExpander_Fencing_Arx {
 public:
-    void KDF_A_A(TwistWorkSpace *pWorkSpace,
+    static void KDF_A_A(TwistWorkSpace *pWorkSpace,
                      std::uint64_t pNonce,
                      TwistDomainConstants *pConstants,
                      TwistDomainSaltSet *pDomainSaltSet,
@@ -22,8 +22,8 @@ public:
                      std::uint64_t *pWandererH,
                      std::uint64_t *pWandererI,
                      std::uint64_t *pWandererJ,
-                     std::uint64_t *pWandererK) override;
-    void KDF_A_B(TwistWorkSpace *pWorkSpace,
+                     std::uint64_t *pWandererK);
+    static void KDF_A_B(TwistWorkSpace *pWorkSpace,
                      std::uint64_t pNonce,
                      TwistDomainConstants *pConstants,
                      TwistDomainSaltSet *pDomainSaltSet,
@@ -40,8 +40,8 @@ public:
                      std::uint64_t *pWandererH,
                      std::uint64_t *pWandererI,
                      std::uint64_t *pWandererJ,
-                     std::uint64_t *pWandererK) override;
-    void KDF_A_C(TwistWorkSpace *pWorkSpace,
+                     std::uint64_t *pWandererK);
+    static void KDF_A_C(TwistWorkSpace *pWorkSpace,
                      std::uint64_t pNonce,
                      TwistDomainConstants *pConstants,
                      TwistDomainSaltSet *pDomainSaltSet,
@@ -58,8 +58,8 @@ public:
                      std::uint64_t *pWandererH,
                      std::uint64_t *pWandererI,
                      std::uint64_t *pWandererJ,
-                     std::uint64_t *pWandererK) override;
-    void KDF_A_D(TwistWorkSpace *pWorkSpace,
+                     std::uint64_t *pWandererK);
+    static void KDF_A_D(TwistWorkSpace *pWorkSpace,
                      std::uint64_t pNonce,
                      TwistDomainConstants *pConstants,
                      TwistDomainSaltSet *pDomainSaltSet,
@@ -76,8 +76,8 @@ public:
                      std::uint64_t *pWandererH,
                      std::uint64_t *pWandererI,
                      std::uint64_t *pWandererJ,
-                     std::uint64_t *pWandererK) override;
-    void KDF_B_A(TwistWorkSpace *pWorkSpace,
+                     std::uint64_t *pWandererK);
+    static void KDF_B_A(TwistWorkSpace *pWorkSpace,
                      std::uint64_t pNonce,
                      TwistDomainConstants *pConstants,
                      TwistDomainSaltSet *pDomainSaltSet,
@@ -94,8 +94,8 @@ public:
                      std::uint64_t *pWandererH,
                      std::uint64_t *pWandererI,
                      std::uint64_t *pWandererJ,
-                     std::uint64_t *pWandererK) override;
-    void KDF_B_B(TwistWorkSpace *pWorkSpace,
+                     std::uint64_t *pWandererK);
+    static void KDF_B_B(TwistWorkSpace *pWorkSpace,
                      std::uint64_t pNonce,
                      TwistDomainConstants *pConstants,
                      TwistDomainSaltSet *pDomainSaltSet,
@@ -112,8 +112,8 @@ public:
                      std::uint64_t *pWandererH,
                      std::uint64_t *pWandererI,
                      std::uint64_t *pWandererJ,
-                     std::uint64_t *pWandererK) override;
-    void KDF_B_C(TwistWorkSpace *pWorkSpace,
+                     std::uint64_t *pWandererK);
+    static void KDF_B_C(TwistWorkSpace *pWorkSpace,
                      std::uint64_t pNonce,
                      TwistDomainConstants *pConstants,
                      TwistDomainSaltSet *pDomainSaltSet,
@@ -130,8 +130,26 @@ public:
                      std::uint64_t *pWandererH,
                      std::uint64_t *pWandererI,
                      std::uint64_t *pWandererJ,
-                     std::uint64_t *pWandererK) override;
-    void Seed_A(TwistWorkSpace *pWorkSpace,
+                     std::uint64_t *pWandererK);
+    static void KDF_B_D(TwistWorkSpace *pWorkSpace,
+                     std::uint64_t pNonce,
+                     TwistDomainConstants *pConstants,
+                     TwistDomainSaltSet *pDomainSaltSet,
+                     std::uint64_t *pPrevious,
+                     std::uint64_t *pIngress,
+                     std::uint64_t *pCarry,
+                     std::uint64_t *pWandererA,
+                     std::uint64_t *pWandererB,
+                     std::uint64_t *pWandererC,
+                     std::uint64_t *pWandererD,
+                     std::uint64_t *pWandererE,
+                     std::uint64_t *pWandererF,
+                     std::uint64_t *pWandererG,
+                     std::uint64_t *pWandererH,
+                     std::uint64_t *pWandererI,
+                     std::uint64_t *pWandererJ,
+                     std::uint64_t *pWandererK);
+    static void Seed_A(TwistWorkSpace *pWorkSpace,
                      std::uint64_t pNonce,
                      std::uint64_t *pPrevious,
                      std::uint64_t *pIngress,
@@ -146,8 +164,8 @@ public:
                      std::uint64_t *pWandererH,
                      std::uint64_t *pWandererI,
                      std::uint64_t *pWandererJ,
-                     std::uint64_t *pWandererK) override;
-    void Seed_B(TwistWorkSpace *pWorkSpace,
+                     std::uint64_t *pWandererK);
+    static void Seed_B(TwistWorkSpace *pWorkSpace,
                      std::uint64_t pNonce,
                      std::uint64_t *pPrevious,
                      std::uint64_t *pIngress,
@@ -162,8 +180,8 @@ public:
                      std::uint64_t *pWandererH,
                      std::uint64_t *pWandererI,
                      std::uint64_t *pWandererJ,
-                     std::uint64_t *pWandererK) override;
-    void Seed_C(TwistWorkSpace *pWorkSpace,
+                     std::uint64_t *pWandererK);
+    static void Seed_C(TwistWorkSpace *pWorkSpace,
                      std::uint64_t pNonce,
                      std::uint64_t *pPrevious,
                      std::uint64_t *pIngress,
@@ -178,8 +196,8 @@ public:
                      std::uint64_t *pWandererH,
                      std::uint64_t *pWandererI,
                      std::uint64_t *pWandererJ,
-                     std::uint64_t *pWandererK) override;
-    void Seed_D(TwistWorkSpace *pWorkSpace,
+                     std::uint64_t *pWandererK);
+    static void Seed_D(TwistWorkSpace *pWorkSpace,
                      std::uint64_t pNonce,
                      std::uint64_t *pPrevious,
                      std::uint64_t *pIngress,
@@ -194,8 +212,8 @@ public:
                      std::uint64_t *pWandererH,
                      std::uint64_t *pWandererI,
                      std::uint64_t *pWandererJ,
-                     std::uint64_t *pWandererK) override;
-    void Seed_E(TwistWorkSpace *pWorkSpace,
+                     std::uint64_t *pWandererK);
+    static void Seed_E(TwistWorkSpace *pWorkSpace,
                      std::uint64_t pNonce,
                      std::uint64_t *pPrevious,
                      std::uint64_t *pIngress,
@@ -210,8 +228,8 @@ public:
                      std::uint64_t *pWandererH,
                      std::uint64_t *pWandererI,
                      std::uint64_t *pWandererJ,
-                     std::uint64_t *pWandererK) override;
-    void Seed_F(TwistWorkSpace *pWorkSpace,
+                     std::uint64_t *pWandererK);
+    static void Seed_F(TwistWorkSpace *pWorkSpace,
                      std::uint64_t pNonce,
                      std::uint64_t *pPrevious,
                      std::uint64_t *pIngress,
@@ -226,8 +244,8 @@ public:
                      std::uint64_t *pWandererH,
                      std::uint64_t *pWandererI,
                      std::uint64_t *pWandererJ,
-                     std::uint64_t *pWandererK) override;
-    void Seed_G(TwistWorkSpace *pWorkSpace,
+                     std::uint64_t *pWandererK);
+    static void Seed_G(TwistWorkSpace *pWorkSpace,
                      std::uint64_t pNonce,
                      std::uint64_t *pPrevious,
                      std::uint64_t *pIngress,
@@ -242,8 +260,8 @@ public:
                      std::uint64_t *pWandererH,
                      std::uint64_t *pWandererI,
                      std::uint64_t *pWandererJ,
-                     std::uint64_t *pWandererK) override;
-    void Twist_A(TwistWorkSpace *pWorkSpace,
+                     std::uint64_t *pWandererK);
+    static void Twist_A(TwistWorkSpace *pWorkSpace,
                      std::uint8_t *pSource,
                      std::uint64_t *pPrevious,
                      std::uint64_t *pIngress,
@@ -258,8 +276,8 @@ public:
                      std::uint64_t *pWandererH,
                      std::uint64_t *pWandererI,
                      std::uint64_t *pWandererJ,
-                     std::uint64_t *pWandererK) override;
-    void Twist_B(TwistWorkSpace *pWorkSpace,
+                     std::uint64_t *pWandererK);
+    static void Twist_B(TwistWorkSpace *pWorkSpace,
                      std::uint8_t *pSource,
                      std::uint64_t *pPrevious,
                      std::uint64_t *pIngress,
@@ -274,8 +292,8 @@ public:
                      std::uint64_t *pWandererH,
                      std::uint64_t *pWandererI,
                      std::uint64_t *pWandererJ,
-                     std::uint64_t *pWandererK) override;
-    void Twist_C(TwistWorkSpace *pWorkSpace,
+                     std::uint64_t *pWandererK);
+    static void Twist_C(TwistWorkSpace *pWorkSpace,
                      std::uint8_t *pSource,
                      std::uint64_t *pPrevious,
                      std::uint64_t *pIngress,
@@ -290,9 +308,8 @@ public:
                      std::uint64_t *pWandererH,
                      std::uint64_t *pWandererI,
                      std::uint64_t *pWandererJ,
-                     std::uint64_t *pWandererK) override;
-    void Twist_D(TwistWorkSpace *pWorkSpace,
-                     std::uint8_t *pSource,
+                     std::uint64_t *pWandererK);
+    static void GROW_A(TwistWorkSpace *pWorkSpace,
                      std::uint64_t *pPrevious,
                      std::uint64_t *pIngress,
                      std::uint64_t *pCarry,
@@ -306,8 +323,8 @@ public:
                      std::uint64_t *pWandererH,
                      std::uint64_t *pWandererI,
                      std::uint64_t *pWandererJ,
-                     std::uint64_t *pWandererK) override;
-    void GROW_A(TwistWorkSpace *pWorkSpace,
+                     std::uint64_t *pWandererK);
+    static void GROW_B(TwistWorkSpace *pWorkSpace,
                      std::uint64_t *pPrevious,
                      std::uint64_t *pIngress,
                      std::uint64_t *pCarry,
@@ -321,20 +338,5 @@ public:
                      std::uint64_t *pWandererH,
                      std::uint64_t *pWandererI,
                      std::uint64_t *pWandererJ,
-                     std::uint64_t *pWandererK) override;
-    void GROW_B(TwistWorkSpace *pWorkSpace,
-                     std::uint64_t *pPrevious,
-                     std::uint64_t *pIngress,
-                     std::uint64_t *pCarry,
-                     std::uint64_t *pWandererA,
-                     std::uint64_t *pWandererB,
-                     std::uint64_t *pWandererC,
-                     std::uint64_t *pWandererD,
-                     std::uint64_t *pWandererE,
-                     std::uint64_t *pWandererF,
-                     std::uint64_t *pWandererG,
-                     std::uint64_t *pWandererH,
-                     std::uint64_t *pWandererI,
-                     std::uint64_t *pWandererJ,
-                     std::uint64_t *pWandererK) override;
+                     std::uint64_t *pWandererK);
 };

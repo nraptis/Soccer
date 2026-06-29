@@ -232,11 +232,9 @@ std::uint8_t *TwistWorkSpace::GetBuffer(TwistWorkSpace *pWorkSpace,
             return nullptr;
         }
         switch (pSlot) {
-            case TwistWorkSpaceSlot::kSource:
-            case TwistWorkSpaceSlot::kDest:
-            case TwistWorkSpaceSlot::kParamInputSource:
-            case TwistWorkSpaceSlot::kParamOutputDestination:
-            case TwistWorkSpaceSlot::kSnow:
+            case TwistWorkSpaceSlot::kParamSource:
+            case TwistWorkSpaceSlot::kParamDestination:
+            case TwistWorkSpaceSlot::kParamSnow:
             case TwistWorkSpaceSlot::kIndexList256A:
             case TwistWorkSpaceSlot::kIndexList256B:
             case TwistWorkSpaceSlot::kIndexList256C:
@@ -248,11 +246,10 @@ std::uint8_t *TwistWorkSpace::GetBuffer(TwistWorkSpace *pWorkSpace,
     }
 
     switch (pSlot) {
-        case TwistWorkSpaceSlot::kSource: return pExpander->mSource;
-        case TwistWorkSpaceSlot::kDest: return pExpander->mDest;
-        case TwistWorkSpaceSlot::kParamInputSource: return pExpander->mSource;
-        case TwistWorkSpaceSlot::kParamOutputDestination: return pExpander->mDest;
-        case TwistWorkSpaceSlot::kSnow: return pExpander->mSnow;
+        case TwistWorkSpaceSlot::kSource: return pWorkSpace->mSource;
+        case TwistWorkSpaceSlot::kParamSource: return pExpander->mSource;
+        case TwistWorkSpaceSlot::kParamDestination: return pExpander->mDest;
+        case TwistWorkSpaceSlot::kParamSnow: return nullptr;
         case TwistWorkSpaceSlot::kExpansionLaneA: return pWorkSpace->mExpansionLaneA;
         case TwistWorkSpaceSlot::kExpansionLaneB: return pWorkSpace->mExpansionLaneB;
         case TwistWorkSpaceSlot::kExpansionLaneC: return pWorkSpace->mExpansionLaneC;
@@ -269,6 +266,10 @@ std::uint8_t *TwistWorkSpace::GetBuffer(TwistWorkSpace *pWorkSpace,
         case TwistWorkSpaceSlot::kSnowLaneB: return pWorkSpace->mSnowLaneB;
         case TwistWorkSpaceSlot::kSnowLaneC: return pWorkSpace->mSnowLaneC;
         case TwistWorkSpaceSlot::kSnowLaneD: return pWorkSpace->mSnowLaneD;
+        case TwistWorkSpaceSlot::kFireLaneA: return pWorkSpace->mFireLaneA;
+        case TwistWorkSpaceSlot::kFireLaneB: return pWorkSpace->mFireLaneB;
+        case TwistWorkSpaceSlot::kFireLaneC: return pWorkSpace->mFireLaneC;
+        case TwistWorkSpaceSlot::kFireLaneD: return pWorkSpace->mFireLaneD;
         case TwistWorkSpaceSlot::kInvestA: return pWorkSpace->mInvestLaneA;
         case TwistWorkSpaceSlot::kInvestB: return pWorkSpace->mInvestLaneB;
         case TwistWorkSpaceSlot::kInvestC: return pWorkSpace->mInvestLaneC;
@@ -404,6 +405,8 @@ void TwistWorkSpace::Zero() {
 
 void TwistWorkSpace::Zero_PostSeed() {
  
+    memset(mSource, 0, sizeof(mSource));
+
     memset(mExpansionLaneA, 0, sizeof(mExpansionLaneA));
     memset(mExpansionLaneB, 0, sizeof(mExpansionLaneB));
     memset(mExpansionLaneC, 0, sizeof(mExpansionLaneC));
@@ -423,6 +426,11 @@ void TwistWorkSpace::Zero_PostSeed() {
     memset(mSnowLaneB, 0, sizeof(mSnowLaneB));
     memset(mSnowLaneC, 0, sizeof(mSnowLaneC));
     memset(mSnowLaneD, 0, sizeof(mSnowLaneD));
+
+    memset(mFireLaneA, 0, sizeof(mFireLaneA));
+    memset(mFireLaneB, 0, sizeof(mFireLaneB));
+    memset(mFireLaneC, 0, sizeof(mFireLaneC));
+    memset(mFireLaneD, 0, sizeof(mFireLaneD));
     
     memset(mInvestLaneA, 0, sizeof(mInvestLaneA));
     memset(mInvestLaneB, 0, sizeof(mInvestLaneB));
