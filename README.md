@@ -8,7 +8,9 @@ This is still being studied, but it contains the final structure of the key expa
 #include "TwistExpander_Soccer.hpp"
 #include "TwistFarmSalt.hpp"
 ```
+
 </br>
+
 ```
 TwistExpander_Soccer aSoccer;
 
@@ -30,7 +32,9 @@ aSoccer.Seed(&aWorkSpace,
              2, // password length
              aDest);
 ```
+
 </br>
+
 ```
 for (int aBlockIndex=1; aBlockIndex<aBlockCount; aBlockIndex++) {
     aSoccer.TwistBlock(&aWorkSpace,
@@ -41,6 +45,7 @@ for (int aBlockIndex=1; aBlockIndex<aBlockCount; aBlockIndex++) {
                        &aDest[(aBlockIndex) * S_BLOCK]); // dest
 }
 ```
+
 </br>
 ![alt text](https://raw.githubusercontent.com/nraptis/Soccer/refs/heads/main/diagram_KDFA.png)</br></br>
 </br>
