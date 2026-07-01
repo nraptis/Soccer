@@ -31,7 +31,7 @@ const int aBlockCount = 32;
 
 TwistWorkSpace aWorkSpace;
 TwistFarmSalt aFarmSalt;
-std::uint64_t aNonce = 17;
+std::uint64_t aNonce = 3333333333333333333;
 std::uint8_t aDest[S_BLOCK * aBlockCount];
 
 aSoccer.Seed(&aWorkSpace,
