@@ -53,11 +53,8 @@ for (int aBlockIndex=1; aBlockIndex<aBlockCount; aBlockIndex++) {
 
 ![alt text](https://raw.githubusercontent.com/nraptis/Soccer/refs/heads/main/diagram_KDFB.png)</br></br>
 
-![alt text](https://raw.githubusercontent.com/nraptis/Soccer/refs/heads/main/diagram_SEED.png)</br></br>
+![alt text](https://raw.githubusercontent.com/nraptis/Soccer/refs/heads/main/diagram_SEED_1.png)</br></br>
 
-![alt text](https://raw.githubusercontent.com/nraptis/Soccer/refs/heads/main/diagram_SEED.png)</br></br>
+![alt text](https://raw.githubusercontent.com/nraptis/Soccer/refs/heads/main/diagram_SEED_2.png)</br></br>
 
 ![alt text](https://raw.githubusercontent.com/nraptis/Soccer/refs/heads/main/diagram_TWIST.png)</br></br>
-
-</br></br>
-![alt text](https://raw.githubusercontent.com/nraptis/Soccer/refs/heads/main/snow.png)</br></br>
