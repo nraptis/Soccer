@@ -55,6 +55,8 @@ for (int aBlockIndex=1; aBlockIndex<aBlockCount; aBlockIndex++) {
 
 ![alt text](https://raw.githubusercontent.com/nraptis/Soccer/refs/heads/main/diagram_SEED.png)</br></br>
 
+![alt text](https://raw.githubusercontent.com/nraptis/Soccer/refs/heads/main/diagram_SEED.png)</br></br>
+
 ![alt text](https://raw.githubusercontent.com/nraptis/Soccer/refs/heads/main/diagram_TWIST.png)</br></br>
 
 </br></br>
