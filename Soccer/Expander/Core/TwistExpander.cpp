@@ -110,7 +110,6 @@ TwistExpander::TwistExpander() {
     std::memset(mIndexList256B, 0, sizeof(mIndexList256B));
     std::memset(mIndexList256C, 0, sizeof(mIndexList256C));
     std::memset(mIndexList256D, 0, sizeof(mIndexList256D));
-    std::memcpy(&mDomainBundleEphemeral, &mDomainBundleInbuilt, sizeof(mDomainBundleEphemeral));
 }
 
 TwistExpander::~TwistExpander() {
@@ -179,8 +178,8 @@ void TwistExpander::Seed(TwistWorkSpace *pWorkSpace,
     UnrollPasswordToSource(pWorkSpace->mSource, pPassword, pPasswordByteLength);
     mKDFCallCounter = 0ULL;
     mKDFSessionNonce = Mix64(pNonce ^ ProcessKDFFreshnessNonce());
-    std::memcpy(&mDomainBundleEphemeral, &mDomainBundleInbuilt, sizeof(mDomainBundleEphemeral));
-    pWorkSpace->mDomainBundle = mDomainBundleEphemeral;
+    mDomainBundleEphemeral.Zero();
+    pWorkSpace->mDomainBundle.Zero();
 }
 
 void TwistExpander::TwistBlock(TwistWorkSpace *pWorkSpace,

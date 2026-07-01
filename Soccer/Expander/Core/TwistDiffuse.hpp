@@ -11,7 +11,7 @@
 #include <cstdint>
 #include <cstddef>
 
-#include "M88.hpp"
+#include "M88/M88.hpp"
 #include "TwistWorkSpace.hpp"
 
 class TwistDiffuse {
