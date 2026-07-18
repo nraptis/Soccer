@@ -166,17 +166,17 @@ Apply key 0b001001110010111011011101110100 at size L3 (final).
 Rotate by 547399 with mask 0b01010010 @ block size L3 (final).
 ```
 
-![alt text](https://raw.githubusercontent.com/nraptis/Scramble/refs/heads/main/byte%20diagrams/KDFA.png)
+![alt text](https://raw.githubusercontent.com/nraptis/Soccer/refs/heads/main/byte%20diagrams/KDFA.png)
 
-![alt text](https://raw.githubusercontent.com/nraptis/Scramble/refs/heads/main/byte%20diagrams/KDFB.png)
+![alt text](https://raw.githubusercontent.com/nraptis/Soccer/refs/heads/main/byte%20diagrams/KDFB.png)
 
-![alt text](https://raw.githubusercontent.com/nraptis/Scramble/refs/heads/main/byte%20diagrams/SEED_1.png)
+![alt text](https://raw.githubusercontent.com/nraptis/Soccer/refs/heads/main/byte%20diagrams/SEED_1.png)
 
-![alt text](https://raw.githubusercontent.com/nraptis/Scramble/refs/heads/main/byte%20diagrams/SEED_2.png)
+![alt text](https://raw.githubusercontent.com/nraptis/Soccer/refs/heads/main/byte%20diagrams/SEED_2.png)
 
-![alt text](https://raw.githubusercontent.com/nraptis/Scramble/refs/heads/main/byte%20diagrams/TWIST_1.png)
+![alt text](https://raw.githubusercontent.com/nraptis/Soccer/refs/heads/main/byte%20diagrams/TWIST_1.png)
 
-![alt text](https://raw.githubusercontent.com/nraptis/Scramble/refs/heads/main/byte%20diagrams/TWIST_2.png)
+![alt text](https://raw.githubusercontent.com/nraptis/Soccer/refs/heads/main/byte%20diagrams/TWIST_2.png)
 
 ## Static library builds
 
