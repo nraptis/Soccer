@@ -12,6 +12,9 @@
 #define S_BLOCK 32768 // 4,096 // 2,048
 #define S_BLOCK1 (S_BLOCK - 1U)
 
+#define S_HALF (S_BLOCK >> 1U)
+#define S_HALF1 (S_HALF - 1U)
+
 #define S_QUARTER (S_BLOCK >> 2U)
 #define S_QUARTER1 (S_QUARTER - 1U)
 

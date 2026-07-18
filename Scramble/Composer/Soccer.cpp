@@ -26,7 +26,6 @@
 
 #include <memory>
 #include <algorithm>
-#include <bit>
 #include <cstdio>
 #include <cstring>
 
@@ -818,20 +817,20 @@ void Soccer::SeedEpilogue() {
     mExpanders[20] = &mMirfak; mExpanders[21] = &mMothallah; mExpanders[22] = &mNaos; mExpanders[23] = &mPolaris;
     mExpanders[24] = &mPollux; mExpanders[25] = &mProcyon; mExpanders[26] = &mRegulus; mExpanders[27] = &mRigel;
     mExpanders[28] = &mSaiph; mExpanders[29] = &mSirius; mExpanders[30] = &mSuhail; mExpanders[31] = &mVega;
-
+    
     for (std::size_t aIndex=0; aIndex<16; aIndex++) {
         mSources[aIndex] = mMaterials[aIndex];
     }
-
+    
     FoldAllMaterialsIntoRandomForBlock(0);
     ShuffleSEWMMCC();
     
     std::size_t aBlockIndex = 1;
-
+    
     while (aBlockIndex < BLOCK_COUNT) {
         const std::size_t aSourceIndex = (aBlockIndex - 1U) * S_BLOCK;
         const std::size_t aDestinationIndex = aBlockIndex * S_BLOCK;
-
+        
         mExpanders[11]->TwistBlock(mWorkSpaces[14], &mSources[ 2][aSourceIndex], &mMaterials[ 7][aDestinationIndex]);
         mExpanders[ 4]->TwistBlock(mWorkSpaces[ 7], &mSources[11][aSourceIndex], &mMaterials[ 0][aDestinationIndex]);
         mExpanders[15]->TwistBlock(mWorkSpaces[ 2], &mSources[ 6][aSourceIndex], &mMaterials[11][aDestinationIndex]);
@@ -848,149 +847,241 @@ void Soccer::SeedEpilogue() {
         mExpanders[12]->TwistBlock(mWorkSpaces[15], &mSources[ 3][aSourceIndex], &mMaterials[ 8][aDestinationIndex]);
         mExpanders[ 5]->TwistBlock(mWorkSpaces[ 8], &mSources[12][aSourceIndex], &mMaterials[ 1][aDestinationIndex]);
         mExpanders[ 8]->TwistBlock(mWorkSpaces[11], &mSources[15][aSourceIndex], &mMaterials[ 4][aDestinationIndex]);
-
+        
         FoldAllMaterialsIntoRandomForBlock(aBlockIndex);
         ShuffleSEWMMCC();
-
+        
         aBlockIndex++;
     }
-    mWorkSpaceA.Zero();
-    mWorkSpaceB.Zero();
-    mWorkSpaceC.Zero();
-    mWorkSpaceD.Zero();
-    mWorkSpaceE.Zero();
-    mWorkSpaceF.Zero();
-    mWorkSpaceG.Zero();
-    mWorkSpaceH.Zero();
-    mWorkSpaceI.Zero();
-    mWorkSpaceJ.Zero();
-    mWorkSpaceK.Zero();
-    mWorkSpaceL.Zero();
-    mWorkSpaceM.Zero();
+    
     mWorkSpaceN.Zero();
     mWorkSpaceO.Zero();
     mWorkSpaceP.Zero();
+    mWorkSpaceD.Zero();
+    mWorkSpaceE.Zero();
+    mWorkSpaceF.Zero();
+    mWorkSpaceJ.Zero();
+    mWorkSpaceI.Zero();
+    mWorkSpaceH.Zero();
+    mWorkSpaceG.Zero();
+    mWorkSpaceB.Zero();
+    mWorkSpaceK.Zero();
+    mWorkSpaceC.Zero();
+    mWorkSpaceM.Zero();
+    mWorkSpaceA.Zero();
+    mWorkSpaceL.Zero();
     
-    const std::size_t aRotStartIndex = mRandom[1] + 317 + mRandom[S_BLOCK1 - 1] + 419;
-
-    std::uint64_t aRandL1AA = TwistMix64::DiffuseA(Read64(&mRandom[aRotStartIndex +   0]));
-    std::uint64_t aRandL1AB = TwistMix64::DiffuseA(Read64(&mRandom[aRotStartIndex +   8]));
-    std::uint64_t aRandL1AC = TwistMix64::DiffuseA(Read64(&mRandom[aRotStartIndex +  16]));
-    std::uint64_t aRandL1AD = TwistMix64::DiffuseA(Read64(&mRandom[aRotStartIndex +  24]));
-
-    std::uint64_t aRandL1BA = TwistMix64::DiffuseA(Read64(&mRandom[aRotStartIndex +  32]));
-    std::uint64_t aRandL1BB = TwistMix64::DiffuseA(Read64(&mRandom[aRotStartIndex +  40]));
-    std::uint64_t aRandL1BC = TwistMix64::DiffuseA(Read64(&mRandom[aRotStartIndex +  48]));
-    std::uint64_t aRandL1BD = TwistMix64::DiffuseA(Read64(&mRandom[aRotStartIndex +  56]));
-
-    std::uint64_t aRandL2AA = TwistMix64::DiffuseA(Read64(&mRandom[aRotStartIndex +  64]));
-    std::uint64_t aRandL2AB = TwistMix64::DiffuseA(Read64(&mRandom[aRotStartIndex +  72]));
-    std::uint64_t aRandL2AC = TwistMix64::DiffuseA(Read64(&mRandom[aRotStartIndex +  80]));
-    std::uint64_t aRandL2AD = TwistMix64::DiffuseA(Read64(&mRandom[aRotStartIndex +  88]));
-
-    std::uint64_t aRandL2BA = TwistMix64::DiffuseA(Read64(&mRandom[aRotStartIndex +  96]));
-    std::uint64_t aRandL2BB = TwistMix64::DiffuseA(Read64(&mRandom[aRotStartIndex + 104]));
-    std::uint64_t aRandL2BC = TwistMix64::DiffuseA(Read64(&mRandom[aRotStartIndex + 112]));
-    std::uint64_t aRandL2BD = TwistMix64::DiffuseA(Read64(&mRandom[aRotStartIndex + 120]));
-
-    std::uint64_t aRandL3AA = TwistMix64::DiffuseA(Read64(&mRandom[aRotStartIndex + 128]));
-    std::uint64_t aRandL3AB = TwistMix64::DiffuseA(Read64(&mRandom[aRotStartIndex + 136]));
-    std::uint64_t aRandL3AC = TwistMix64::DiffuseA(Read64(&mRandom[aRotStartIndex + 144]));
-    std::uint64_t aRandL3AD = TwistMix64::DiffuseA(Read64(&mRandom[aRotStartIndex + 152]));
-
-    std::uint64_t aRandL3BA = TwistMix64::DiffuseA(Read64(&mRandom[aRotStartIndex + 160]));
-    std::uint64_t aRandL3BB = TwistMix64::DiffuseA(Read64(&mRandom[aRotStartIndex + 168]));
-    std::uint64_t aRandL3BC = TwistMix64::DiffuseA(Read64(&mRandom[aRotStartIndex + 176]));
-    std::uint64_t aRandL3BD = TwistMix64::DiffuseA(Read64(&mRandom[aRotStartIndex + 184]));
-
-    std::uint64_t aRandFinalAA = TwistMix64::DiffuseA(Read64(&mRandom[aRotStartIndex + 192]));
-    std::uint64_t aRandFinalAB = TwistMix64::DiffuseA(Read64(&mRandom[aRotStartIndex + 200]));
-    std::uint64_t aRandFinalAC = TwistMix64::DiffuseA(Read64(&mRandom[aRotStartIndex + 208]));
-    std::uint64_t aRandFinalAD = TwistMix64::DiffuseA(Read64(&mRandom[aRotStartIndex + 216]));
-
-    std::uint64_t aRandFinalBA = TwistMix64::DiffuseA(Read64(&mRandom[aRotStartIndex + 224]));
-    std::uint64_t aRandFinalBB = TwistMix64::DiffuseA(Read64(&mRandom[aRotStartIndex + 232]));
-    std::uint64_t aRandFinalBC = TwistMix64::DiffuseA(Read64(&mRandom[aRotStartIndex + 240]));
-    std::uint64_t aRandFinalBD = TwistMix64::DiffuseA(Read64(&mRandom[aRotStartIndex + 248]));
-
-    std::uint64_t aRotWordL1AA = ((aRandL1AA >> 16) & (  8192ULL - 1ULL));
-    std::uint64_t aRotWordL1AB = ((aRandL1AB >> 15) & ( 16384ULL - 1ULL));
-    std::uint64_t aRotWordL1AC = ((aRandL1AC >> 14) & ( 32768ULL - 1ULL));
-    std::uint64_t aRotWordL1AD = ((aRandL1AD >> 13) & ( 65536ULL - 1ULL));
-    std::uint64_t aRotSpanL1A = (aRotWordL1AA + aRotWordL1AB + aRotWordL1AC + aRotWordL1AD);
-
-    std::uint64_t aRotWordL1BA = ((aRandL1BA >> 16) & (  8192ULL - 1ULL));
-    std::uint64_t aRotWordL1BB = ((aRandL1BB >> 15) & ( 16384ULL - 1ULL));
-    std::uint64_t aRotWordL1BC = ((aRandL1BC >> 14) & ( 32768ULL - 1ULL));
-    std::uint64_t aRotWordL1BD = ((aRandL1BD >> 13) & ( 65536ULL - 1ULL));
-    std::uint64_t aRotSpanL1B = (aRotWordL1BA + aRotWordL1BB + aRotWordL1BC + aRotWordL1BD);
-
-    std::uint64_t aRotWordL2AA = ((aRandL2AA >> 16) & ( 16384ULL - 1ULL));
-    std::uint64_t aRotWordL2AB = ((aRandL2AB >> 15) & ( 32768ULL - 1ULL));
-    std::uint64_t aRotWordL2AC = ((aRandL2AC >> 14) & ( 65536ULL - 1ULL));
-    std::uint64_t aRotWordL2AD = ((aRandL2AD >> 13) & (131072ULL - 1ULL));
-    std::uint64_t aRotSpanL2A = (aRotWordL2AA + aRotWordL2AB + aRotWordL2AC + aRotWordL2AD);
-
-    std::uint64_t aRotWordL2BA = ((aRandL2BA >> 16) & ( 16384ULL - 1ULL));
-    std::uint64_t aRotWordL2BB = ((aRandL2BB >> 15) & ( 32768ULL - 1ULL));
-    std::uint64_t aRotWordL2BC = ((aRandL2BC >> 14) & ( 65536ULL - 1ULL));
-    std::uint64_t aRotWordL2BD = ((aRandL2BD >> 13) & (131072ULL - 1ULL));
-    std::uint64_t aRotSpanL2B = (aRotWordL2BA + aRotWordL2BB + aRotWordL2BC + aRotWordL2BD);
+    std::uint64_t aRandFinalB = 0ULL;
+    std::uint64_t aRandL1B = 0ULL;
+    std::uint64_t aRandFinalA = 0ULL;
+    std::uint64_t aRandL1A = 0ULL;
+    std::uint64_t aRandL3A = 0ULL;
+    std::uint64_t aRandL3B = 0ULL;
+    std::uint64_t aRandL2B = 0ULL;
+    std::uint64_t aRandL2A = 0ULL;
     
-    std::uint64_t aRotWordL3AA = ((aRandL3AA >> 16) & ( 32768ULL - 1ULL));
-    std::uint64_t aRotWordL3AB = ((aRandL3AB >> 15) & ( 65536ULL - 1ULL));
-    std::uint64_t aRotWordL3AC = ((aRandL3AC >> 14) & (131072ULL - 1ULL));
-    std::uint64_t aRotWordL3AD = ((aRandL3AD >> 13) & (262144ULL - 1ULL));
-    std::uint64_t aRotSpanL3A = (aRotWordL3AA + aRotWordL3AB + aRotWordL3AC + aRotWordL3AD);
+    constexpr std::size_t aRotSampleCount = S_BLOCK - sizeof(std::uint64_t) + 1U;
+    std::size_t aRotSampleIndex = 0U;
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialA[   73]) + static_cast<std::size_t>(mMaterialE[  911]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialI[ 1777]) + static_cast<std::size_t>(mMaterialM[ 2603]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialB[  149]) + static_cast<std::size_t>(mMaterialF[ 1021]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialJ[ 1889]) + static_cast<std::size_t>(mMaterialN[ 2711]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialC[  263]) + static_cast<std::size_t>(mMaterialG[ 1151]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialK[ 1999]) + static_cast<std::size_t>(mMaterialO[ 2833]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialD[  379]) + static_cast<std::size_t>(mMaterialH[ 1277]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialL[ 2131]) + static_cast<std::size_t>(mMaterialP[ 2953]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialA[ 3079]) + static_cast<std::size_t>(mMaterialE[ 3203]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialI[ 3319]) + static_cast<std::size_t>(mMaterialM[ 3449]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialB[ 3581]) + static_cast<std::size_t>(mMaterialF[ 3701]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialJ[ 3821]) + static_cast<std::size_t>(mMaterialN[ 3943]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialC[ 4057]) + static_cast<std::size_t>(mMaterialG[ 4211]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialK[ 4337]) + static_cast<std::size_t>(mMaterialO[ 4463]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialD[ 4591]) + static_cast<std::size_t>(mMaterialH[ 4721]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialL[ 4861]) + static_cast<std::size_t>(mMaterialP[ 4993]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialA[ 5107]) + static_cast<std::size_t>(mMaterialE[ 5231]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialI[ 5351]) + static_cast<std::size_t>(mMaterialM[ 5483]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialB[ 5623]) + static_cast<std::size_t>(mMaterialF[ 5749]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialJ[ 5879]) + static_cast<std::size_t>(mMaterialN[ 6007]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialC[ 6131]) + static_cast<std::size_t>(mMaterialG[ 6263]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialK[ 6397]) + static_cast<std::size_t>(mMaterialO[ 6521]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialD[ 6653]) + static_cast<std::size_t>(mMaterialH[ 6781]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialL[ 6917]) + static_cast<std::size_t>(mMaterialP[ 7043]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialA[ 7177]) + static_cast<std::size_t>(mMaterialE[ 7309]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialI[ 7433]) + static_cast<std::size_t>(mMaterialM[ 7561]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialB[ 7691]) + static_cast<std::size_t>(mMaterialF[ 7823]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialJ[ 7951]) + static_cast<std::size_t>(mMaterialN[ 8081]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialC[ 8219]) + static_cast<std::size_t>(mMaterialG[ 8353]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialK[ 8477]) + static_cast<std::size_t>(mMaterialO[ 8609]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialD[ 8731]) + static_cast<std::size_t>(mMaterialH[ 8863]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialL[ 8999]) + static_cast<std::size_t>(mMaterialP[ 9127]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialA[ 9257]) + static_cast<std::size_t>(mMaterialE[ 9391]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialI[ 9521]) + static_cast<std::size_t>(mMaterialM[ 9649]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialB[ 9781]) + static_cast<std::size_t>(mMaterialF[ 9907]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialJ[10039]) + static_cast<std::size_t>(mMaterialN[10169]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialC[10297]) + static_cast<std::size_t>(mMaterialG[10429]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialK[10559]) + static_cast<std::size_t>(mMaterialO[10687]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialD[10817]) + static_cast<std::size_t>(mMaterialH[10949]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialL[11083]) + static_cast<std::size_t>(mMaterialP[11213]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialA[11351]) + static_cast<std::size_t>(mMaterialE[11483]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialI[11617]) + static_cast<std::size_t>(mMaterialM[11743]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialB[11873]) + static_cast<std::size_t>(mMaterialF[12007]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialJ[12143]) + static_cast<std::size_t>(mMaterialN[12269]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialC[12401]) + static_cast<std::size_t>(mMaterialG[12533]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialK[12659]) + static_cast<std::size_t>(mMaterialO[12791]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialD[12919]) + static_cast<std::size_t>(mMaterialH[13049]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialL[13183]) + static_cast<std::size_t>(mMaterialP[13309]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialA[13441]) + static_cast<std::size_t>(mMaterialE[13577]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialI[13709]) + static_cast<std::size_t>(mMaterialM[13837]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialB[13967]) + static_cast<std::size_t>(mMaterialF[14099]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialJ[14221]) + static_cast<std::size_t>(mMaterialN[14359]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialC[14489]) + static_cast<std::size_t>(mMaterialG[14621]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialK[14747]) + static_cast<std::size_t>(mMaterialO[14879]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialD[15013]) + static_cast<std::size_t>(mMaterialH[15139]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialL[15269]) + static_cast<std::size_t>(mMaterialP[15401]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialA[15527]) + static_cast<std::size_t>(mMaterialE[15661]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialI[15791]) + static_cast<std::size_t>(mMaterialM[15923]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialB[16057]) + static_cast<std::size_t>(mMaterialF[16183]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialJ[16319]) + static_cast<std::size_t>(mMaterialN[16447]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialC[16573]) + static_cast<std::size_t>(mMaterialG[16703]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialK[16831]) + static_cast<std::size_t>(mMaterialO[16963]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialD[17093]) + static_cast<std::size_t>(mMaterialH[17221]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialL[17351]) + static_cast<std::size_t>(mMaterialP[17477]);
 
-    std::uint64_t aRotWordL3BA = ((aRandL3BA >> 16) & ( 32768ULL - 1ULL));
-    std::uint64_t aRotWordL3BB = ((aRandL3BB >> 15) & ( 65536ULL - 1ULL));
-    std::uint64_t aRotWordL3BC = ((aRandL3BC >> 14) & (131072ULL - 1ULL));
-    std::uint64_t aRotWordL3BD = ((aRandL3BD >> 13) & (262144ULL - 1ULL));
-    std::uint64_t aRotSpanL3B = (aRotWordL3BA + aRotWordL3BB + aRotWordL3BC + aRotWordL3BD);
-    
-    std::uint64_t aRotWordFinalAA = ((aRandFinalAA >> 16) & ( 32768ULL - 1ULL));
-    std::uint64_t aRotWordFinalAB = ((aRandFinalAB >> 15) & ( 65536ULL - 1ULL));
-    std::uint64_t aRotWordFinalAC = ((aRandFinalAC >> 14) & (131072ULL - 1ULL));
-    std::uint64_t aRotWordFinalAD = ((aRandFinalAD >> 13) & (262144ULL - 1ULL));
-    std::uint64_t aRotSpanFinalA = (aRotWordFinalAA + aRotWordFinalAB + aRotWordFinalAC + aRotWordFinalAD);
+    aRotSampleIndex %= aRotSampleCount;
 
-    std::uint64_t aRotWordFinalBA = ((aRandFinalBA >> 16) & ( 32768ULL - 1ULL));
-    std::uint64_t aRotWordFinalBB = ((aRandFinalBB >> 15) & ( 65536ULL - 1ULL));
-    std::uint64_t aRotWordFinalBC = ((aRandFinalBC >> 14) & (131072ULL - 1ULL));
-    std::uint64_t aRotWordFinalBD = ((aRandFinalBD >> 13) & (262144ULL - 1ULL));
-    std::uint64_t aRotSpanFinalB = (aRotWordFinalBA + aRotWordFinalBB + aRotWordFinalBC + aRotWordFinalBD);
+    auto AdvanceRotSample = [&](std::uint64_t pMix, std::size_t pHop) {
+        const std::size_t aNearIndex = (aRotSampleIndex + 8U + pHop) % S_BLOCK;
+        const std::size_t aFarIndex = static_cast<std::size_t>((pMix ^ (pMix >> 32U)) % S_BLOCK);
+        aRotSampleIndex = (aRotSampleIndex + mRandom[aNearIndex] + mRandom[aFarIndex] + pHop) % aRotSampleCount;
+    };
     
-    mRotationAmountsL1[0] = (8192ULL / 2ULL) + aRotSpanL1A;
-    mRotationAmountsL1[1] = 131072ULL + (8192ULL / 2ULL) + aRotSpanL1B;
+    auto MixRotRoundA = [&](std::uint64_t &pValue, std::size_t pHop, std::uint64_t pRotation) {
+        
+        const std::uint64_t aSample = Read64(&mRandom[aRotSampleIndex]);
+        pValue = (pValue ^ aSample) + RotL64(pValue + pHop, pRotation);
+        AdvanceRotSample(pValue ^ RotL64(aSample, pRotation), pHop);
+    };
+
+    auto MixRotRoundB = [&](std::uint64_t &pValue, std::size_t pHop, std::uint64_t pRotation) {
+        
+        const std::uint64_t aSample = Read64(&mRandom[aRotSampleIndex]);
+        pValue = RotL64(pValue ^ aSample, pRotation) + (aSample ^ static_cast<std::uint64_t>(pHop));
+        AdvanceRotSample(pValue + RotL64(aSample + pValue, pRotation), pHop);
+    };
+
+    MixRotRoundA(aRandFinalB, mMaterialA[1791], mMaterialI[ 400]);
+    MixRotRoundA(aRandL1B,    mMaterialB[ 233], mMaterialJ[3017]);
+    MixRotRoundA(aRandFinalA, mMaterialC[4099], mMaterialK[ 877]);
+    MixRotRoundA(aRandL1A,    mMaterialD[  97], mMaterialL[6211]);
+    MixRotRoundA(aRandL3A,    mMaterialE[1543], mMaterialM[ 711]);
+    MixRotRoundA(aRandL3B,    mMaterialF[2887], mMaterialN[ 190]);
+    MixRotRoundA(aRandL2B,    mMaterialG[ 503], mMaterialO[4519]);
+    MixRotRoundA(aRandL2A,    mMaterialH[3761], mMaterialP[1297]);
+
+    MixRotRoundB(aRandL3B,    mMaterialI[ 547], mMaterialP[ 281]);
+    MixRotRoundB(aRandL2A,    mMaterialJ[3329], mMaterialA[1907]);
+    MixRotRoundB(aRandFinalA, mMaterialK[ 743], mMaterialB[4621]);
+    MixRotRoundB(aRandL1B,    mMaterialL[5701], mMaterialC[ 359]);
+    MixRotRoundB(aRandL3A,    mMaterialM[2189], mMaterialD[1003]);
+    MixRotRoundB(aRandFinalB, mMaterialN[ 127], mMaterialE[5413]);
+    MixRotRoundB(aRandL2B,    mMaterialO[3893], mMaterialF[ 617]);
+    MixRotRoundB(aRandL1A,    mMaterialP[2011], mMaterialG[3209]);
+
+    MixRotRoundA(aRandL1A,    mMaterialH[ 829], mMaterialA[4871]);
+    MixRotRoundA(aRandFinalB, mMaterialA[2579], mMaterialI[ 109]);
+    MixRotRoundA(aRandL2B,    mMaterialB[ 601], mMaterialJ[5237]);
+    MixRotRoundA(aRandL3A,    mMaterialC[3467], mMaterialK[ 941]);
+    MixRotRoundA(aRandFinalA, mMaterialD[ 151], mMaterialL[2899]);
+    MixRotRoundA(aRandL1B,    mMaterialE[4723], mMaterialM[ 733]);
+    MixRotRoundA(aRandL2A,    mMaterialF[1181], mMaterialN[3659]);
+    MixRotRoundA(aRandL3B,    mMaterialG[4229], mMaterialO[ 317]);
+
+    MixRotRoundB(aRandL2A,    mMaterialP[ 563], mMaterialH[4951]);
+    MixRotRoundB(aRandL3A,    mMaterialO[2741], mMaterialG[ 181]);
+    MixRotRoundB(aRandL1B,    mMaterialN[ 397], mMaterialF[5807]);
+    MixRotRoundB(aRandFinalB, mMaterialM[3253], mMaterialE[1051]);
+    MixRotRoundB(aRandL2B,    mMaterialL[ 677], mMaterialD[2447]);
+    MixRotRoundB(aRandL1A,    mMaterialK[5009], mMaterialC[ 229]);
+    MixRotRoundB(aRandL3B,    mMaterialJ[1433], mMaterialB[4363]);
+    MixRotRoundB(aRandFinalA, mMaterialI[3671], mMaterialA[ 887]);
+
+    MixRotRoundA(aRandFinalA, mMaterialA[ 619], mMaterialH[5333]);
+    MixRotRoundA(aRandL2B,    mMaterialC[2081], mMaterialJ[ 491]);
+    MixRotRoundA(aRandL3B,    mMaterialE[4513], mMaterialL[1379]);
+    MixRotRoundA(aRandL1A,    mMaterialG[ 337], mMaterialN[6029]);
+    MixRotRoundA(aRandFinalB, mMaterialI[2749], mMaterialP[ 157]);
+    MixRotRoundA(aRandL2A,    mMaterialK[ 811], mMaterialB[4201]);
+    MixRotRoundA(aRandL1B,    mMaterialM[5723], mMaterialD[1019]);
+    MixRotRoundA(aRandL3A,    mMaterialO[1877], mMaterialF[3499]);
+
+    MixRotRoundB(aRandL3A,    mMaterialB[ 293], mMaterialI[4831]);
+    MixRotRoundB(aRandL1B,    mMaterialD[4421], mMaterialK[ 557]);
+    MixRotRoundB(aRandL2A,    mMaterialF[1223], mMaterialM[6151]);
+    MixRotRoundB(aRandFinalA, mMaterialH[3613], mMaterialO[ 211]);
+    MixRotRoundB(aRandL3B,    mMaterialJ[ 769], mMaterialA[5279]);
+    MixRotRoundB(aRandL1A,    mMaterialL[5903], mMaterialC[1327]);
+    MixRotRoundB(aRandFinalB, mMaterialN[ 463], mMaterialE[4001]);
+    MixRotRoundB(aRandL2B,    mMaterialP[2519], mMaterialG[ 953]);
+
+    MixRotRoundA(aRandL2B,    mMaterialC[ 541], mMaterialP[5689]);
+    MixRotRoundA(aRandFinalA, mMaterialF[3313], mMaterialB[ 173]);
+    MixRotRoundA(aRandL1A,    mMaterialI[4921], mMaterialE[1201]);
+    MixRotRoundA(aRandL3B,    mMaterialL[ 887], mMaterialH[6361]);
+    MixRotRoundA(aRandL2A,    mMaterialO[3011], mMaterialK[ 389]);
+    MixRotRoundA(aRandFinalB, mMaterialB[5801], mMaterialN[1447]);
+    MixRotRoundA(aRandL3A,    mMaterialE[ 223], mMaterialA[4703]);
+    MixRotRoundA(aRandL1B,    mMaterialH[4117], mMaterialD[ 659]);
+
+    MixRotRoundB(aRandFinalB, mMaterialD[ 971], mMaterialM[5209]);
+    MixRotRoundB(aRandL3B,    mMaterialH[2879], mMaterialA[ 431]);
+    MixRotRoundB(aRandL1A,    mMaterialL[6199], mMaterialE[1187]);
+    MixRotRoundB(aRandL2A,    mMaterialP[ 353], mMaterialI[4441]);
+    MixRotRoundB(aRandL1B,    mMaterialC[2693], mMaterialN[ 739]);
+    MixRotRoundB(aRandL3A,    mMaterialG[5077], mMaterialB[ 199]);
+    MixRotRoundB(aRandFinalA, mMaterialK[1559], mMaterialF[5881]);
+    MixRotRoundB(aRandL2B,    mMaterialO[6013], mMaterialJ[ 823]);
+
+    aRandFinalB = TwistMix64::DiffuseA(aRandFinalB);
+    aRandL1B = TwistMix64::DiffuseA(aRandL1B);
+    aRandFinalA = TwistMix64::DiffuseA(aRandFinalA);
+    aRandL1A = TwistMix64::DiffuseA(aRandL1A);
+    aRandL3A = TwistMix64::DiffuseA(aRandL3A);
+    aRandL3B = TwistMix64::DiffuseA(aRandL3B);
+    aRandL2B = TwistMix64::DiffuseA(aRandL2B);
+    aRandL2A = TwistMix64::DiffuseA(aRandL2A);
     
-    mRotationAmountsL2[0] = (16384ULL / 2ULL) + aRotSpanL2A;
-    mRotationAmountsL2[1] = 262144ULL + (16384ULL / 2ULL) + aRotSpanL2B;
+    constexpr std::uint64_t aRotationRange = 131072ULL;
+    constexpr std::uint64_t aRotationMask = aRotationRange - 1ULL;
     
-    mRotationAmountsL3[0] = (32768ULL / 2ULL) + aRotSpanL3A;
-    mRotationAmountsL3[1] = 524288ULL + (32768ULL / 2ULL) + aRotSpanL3B;
-    
-    mRotationAmountsFinal[0] = (32768ULL / 2ULL) + aRotSpanFinalA;
-    mRotationAmountsFinal[1] = 524288ULL + (32768ULL / 2ULL) + aRotSpanFinalB;
+    mRotationAmountsL3[1]       = ((aRandL3B >> 9U)     & aRotationMask) + 786432ULL;
+    mRotationAmountsL1[0]       = ((aRandL1A >> 21U)    & aRotationMask);
+    mRotationAmountsFinal[0]    = ((aRandFinalA >> 11U) & aRotationMask) + 655360ULL;
+    mRotationAmountsFinal[1]    = ((aRandFinalB >> 13U) & aRotationMask) + 917504ULL;
+    mRotationAmountsL3[0]       = ((aRandL3A >> 7U)     & aRotationMask) + 524288ULL;
+    mRotationAmountsL2[1]       = ((aRandL2B >> 25U)    & aRotationMask) + 393216ULL;
+    mRotationAmountsL2[0]       = ((aRandL2A >> 17U)    & aRotationMask) + 262144ULL;
+    mRotationAmountsL1[1]       = ((aRandL1B >> 27U)    & aRotationMask) + 131072ULL;
     
     std::size_t aLaneIndex = 0u;
     std::size_t aLaneOffset = 0u;
-
+    
     auto NextMaterial = [&](std::size_t pByteCount) -> std::uint8_t * {
         if ((aLaneOffset + pByteCount) > SOCCER_BLOCK_SIZE) {
             ++aLaneIndex;
             aLaneOffset = 0u;
         }
-
+        
+        /*
         if (aLaneIndex == 16u) {
             aLaneIndex = 0u;
         }
+        */
         
         std::uint8_t *aResult = mMaterials[aLaneIndex] + aLaneOffset;
         aLaneOffset += pByteCount;
         return aResult;
     };
-
+    
     auto AddCipherA = [&](EncryptionLayer &pLayer,
                           std::uint8_t pIdentifier,
                           std::size_t pLayerByteLength) {
@@ -1007,7 +1098,7 @@ void Soccer::SeedEpilogue() {
                 break;
         }
     };
-
+    
     auto AddCipherB = [&](EncryptionLayer &pLayer,
                           std::uint8_t pIdentifier,
                           std::size_t pLayerByteLength) {
@@ -1025,21 +1116,21 @@ void Soccer::SeedEpilogue() {
                 pLayer.AddCipher(std::make_unique<PasswordJumpAddCipher>(aPassword, aJumps));
                 break;
             }
-
+                
             case 1: {
                 std::uint8_t *aPassword = TakeMaterial("PasswordJumpXORCipher", "pPassword");
                 std::uint8_t *aJumps = TakeMaterial("PasswordJumpXORCipher", "pJumps");
                 pLayer.AddCipher(std::make_unique<PasswordJumpXORCipher>(aPassword, aJumps));
                 break;
             }
-
+                
             case 2: {
                 std::uint8_t *aMask = TakeMaterial("PepperNoiseXORCipher", "pMask");
                 std::uint8_t *aNoise = TakeMaterial("PepperNoiseXORCipher", "pNoise");
                 pLayer.AddCipher(std::make_unique<PepperNoiseXORCipher>(aMask, aNoise));
                 break;
             }
-
+                
             case 3: {
                 std::uint8_t *aMask = TakeMaterial("PepperJumpNoiseXORCipher", "pMask");
                 std::uint8_t *aNoise = TakeMaterial("PepperJumpNoiseXORCipher", "pNoise");
@@ -1047,7 +1138,7 @@ void Soccer::SeedEpilogue() {
                 pLayer.AddCipher(std::make_unique<PepperJumpNoiseXORCipher>(aMask, aNoise, aJumps));
                 break;
             }
-
+                
             case 4: {
                 std::uint8_t *aMask = TakeMaterial("PepperDualJumpNoiseXORCipher", "pMask");
                 std::uint8_t *aNoise = TakeMaterial("PepperDualJumpNoiseXORCipher", "pNoise");
@@ -1056,20 +1147,20 @@ void Soccer::SeedEpilogue() {
                 pLayer.AddCipher(std::make_unique<PepperDualJumpNoiseXORCipher>(aMask, aNoise, aMaskJumps, aNoiseJumps));
                 break;
             }
-
+                
             case 5: {
                 std::uint8_t *aMask = TakeMaterial("CascadeJumpXORCipher", "pMask");
                 std::uint8_t *aJumps = TakeMaterial("CascadeJumpXORCipher", "pJumps");
                 pLayer.AddCipher(std::make_unique<CascadeJumpXORCipher>(aMask, aJumps));
                 break;
             }
-
+                
             case 6: {
                 std::uint8_t *aMask = TakeMaterial("CascadeXORCipher", "pMask");
                 pLayer.AddCipher(std::make_unique<CascadeXORCipher>(aMask));
                 break;
             }
-
+                
             case 7: {
                 std::uint8_t *aPassword = TakeMaterial("PasswordAddCipher", "pPassword");
                 pLayer.AddCipher(std::make_unique<PasswordAddCipher>(aPassword));
@@ -1097,24 +1188,68 @@ void Soccer::SeedEpilogue() {
     mCrypt.Layer1().AddCipher(std::make_unique<RotateMaskCipher>(mMasks[0], mRotationAmountsL1[0]));
     AddCipherB(mCrypt.Layer1(), mCiphersIdentifiersB[0], aLayerSizeL1);
     mCrypt.Layer1().AddCipher(std::make_unique<RotateMaskCipher>(mMasks[1], mRotationAmountsL1[1]));
-
+    
     mCrypt.Layer2().ClearCiphers();
     AddCipherA(mCrypt.Layer2(), mCiphersIdentifiersA[1], aLayerSizeL2);
     mCrypt.Layer2().AddCipher(std::make_unique<RotateMaskCipher>(mMasks[2], mRotationAmountsL2[0]));
     AddCipherB(mCrypt.Layer2(), mCiphersIdentifiersB[1], aLayerSizeL2);
     mCrypt.Layer2().AddCipher(std::make_unique<RotateMaskCipher>(mMasks[3], mRotationAmountsL2[1]));
-
+    
     mCrypt.Layer3().ClearCiphers();
     AddCipherA(mCrypt.Layer3(), mCiphersIdentifiersA[2], aLayerSizeL3);
     mCrypt.Layer3().AddCipher(std::make_unique<RotateMaskCipher>(mMasks[4], mRotationAmountsL3[0]));
     AddCipherB(mCrypt.Layer3(), mCiphersIdentifiersB[2], aLayerSizeL3);
     mCrypt.Layer3().AddCipher(std::make_unique<RotateMaskCipher>(mMasks[5], mRotationAmountsL3[1]));
-
+    
     mFinalL3.ClearCiphers();
     AddCipherA(mFinalL3, mCiphersIdentifiersA[3], aLayerSizeL3);
     mFinalL3.AddCipher(std::make_unique<RotateMaskCipher>(mMasks[6], mRotationAmountsFinal[0]));
     AddCipherB(mFinalL3, mCiphersIdentifiersB[3], aLayerSizeL3);
     mFinalL3.AddCipher(std::make_unique<RotateMaskCipher>(mMasks[7], mRotationAmountsFinal[1]));
+    
+    auto PrintKey = [](const std::uint8_t *pMaterial,
+                       const char *pBlockSize) {
+        std::printf("Apply key ");
+        for (std::size_t aIndex = 0; aIndex < 6; ++aIndex) {
+            for (int aBit = 7; aBit >= 0; --aBit) {
+                std::printf("%u",
+                            static_cast<unsigned int>((pMaterial[aIndex] >> aBit) & 1U));
+            }
+        }
+        std::printf(" at size %s.\n", pBlockSize);
+    };
+    
+    auto PrintRotation = [](std::uint64_t pRotationAmount,
+                            std::uint8_t pMask,
+                            const char *pBlockSize) {
+        std::printf("Rotate by %llu every bit matching mask ",
+                    static_cast<unsigned long long>(pRotationAmount));
+        for (int aBit = 7; aBit >= 0; --aBit) {
+            std::printf("%u",
+                        static_cast<unsigned int>((pMask >> aBit) & 1U));
+        }
+        std::printf(" wrapping @ block size %s.\n", pBlockSize);
+    };
+    
+    PrintKey(mMaterialE, "L3");
+    PrintRotation(mRotationAmountsL3[0], mMasks[4], "L3");
+    PrintKey(mMaterialF, "L3");
+    PrintRotation(mRotationAmountsL3[1], mMasks[5], "L3");
+    
+    PrintKey(mMaterialC, "L2");
+    PrintRotation(mRotationAmountsL2[0], mMasks[2], "L2");
+    PrintKey(mMaterialD, "L2");
+    PrintRotation(mRotationAmountsL2[1], mMasks[3], "L2");
+    
+    PrintKey(mMaterialA, "L1");
+    PrintRotation(mRotationAmountsL1[0], mMasks[0], "L1");
+    PrintKey(mMaterialB, "L1");
+    PrintRotation(mRotationAmountsL1[1], mMasks[1], "L1");
+    
+    PrintKey(mMaterialG, "L3 (final)");
+    PrintRotation(mRotationAmountsFinal[0], mMasks[6], "L3 (final)");
+    PrintKey(mMaterialH, "L3 (final)");
+    PrintRotation(mRotationAmountsFinal[1], mMasks[7], "L3 (final)");
 }
 
 bool Soccer::EncryptBlock(std::uint8_t *pSource,
