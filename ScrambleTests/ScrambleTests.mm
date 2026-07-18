@@ -59,7 +59,7 @@
 
 - (void)test_encryptDecrypt11 {
     
-    for (int i=0; i<100; i++) {
+    for (int i=0; i<1024; i++) {
         
         std::vector<std::uint8_t> aOriginalA(SOCCER_BLOCK_SIZE);
         for (std::uint8_t &aByte : aOriginalA) {

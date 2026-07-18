@@ -849,6 +849,20 @@ void Soccer::SeedEpilogue() {
         mExpanders[ 8]->TwistBlock(mWorkSpaces[11], &mSources[15][aSourceIndex], &mMaterials[ 4][aDestinationIndex]);
         
         FoldAllMaterialsIntoRandomForBlock(aBlockIndex);
+        
+        const std::size_t aReverseEndIndex = aDestinationIndex + S_BLOCK;
+        for (std::size_t aMaterialIndex=0U; aMaterialIndex<4U; aMaterialIndex++) {
+            std::reverse(mMaterials[aMaterialIndex] + aDestinationIndex,
+                         mMaterials[aMaterialIndex] + aReverseEndIndex);
+        }
+
+        if (aBlockIndex == (BLOCK_COUNT - 1U)) {
+            for (std::size_t aMaterialIndex=0U; aMaterialIndex<8U; aMaterialIndex++) {
+                std::reverse(mMaterials[aMaterialIndex],
+                             mMaterials[aMaterialIndex] + SOCCER_BLOCK_SIZE);
+            }
+        }
+        
         ShuffleSEWMMCC();
         
         aBlockIndex++;
@@ -882,70 +896,418 @@ void Soccer::SeedEpilogue() {
     
     constexpr std::size_t aRotSampleCount = S_BLOCK - sizeof(std::uint64_t) + 1U;
     std::size_t aRotSampleIndex = 0U;
-    aRotSampleIndex += static_cast<std::size_t>(mMaterialA[   73]) + static_cast<std::size_t>(mMaterialE[  911]);
-    aRotSampleIndex += static_cast<std::size_t>(mMaterialI[ 1777]) + static_cast<std::size_t>(mMaterialM[ 2603]);
-    aRotSampleIndex += static_cast<std::size_t>(mMaterialB[  149]) + static_cast<std::size_t>(mMaterialF[ 1021]);
-    aRotSampleIndex += static_cast<std::size_t>(mMaterialJ[ 1889]) + static_cast<std::size_t>(mMaterialN[ 2711]);
-    aRotSampleIndex += static_cast<std::size_t>(mMaterialC[  263]) + static_cast<std::size_t>(mMaterialG[ 1151]);
-    aRotSampleIndex += static_cast<std::size_t>(mMaterialK[ 1999]) + static_cast<std::size_t>(mMaterialO[ 2833]);
-    aRotSampleIndex += static_cast<std::size_t>(mMaterialD[  379]) + static_cast<std::size_t>(mMaterialH[ 1277]);
-    aRotSampleIndex += static_cast<std::size_t>(mMaterialL[ 2131]) + static_cast<std::size_t>(mMaterialP[ 2953]);
-    aRotSampleIndex += static_cast<std::size_t>(mMaterialA[ 3079]) + static_cast<std::size_t>(mMaterialE[ 3203]);
-    aRotSampleIndex += static_cast<std::size_t>(mMaterialI[ 3319]) + static_cast<std::size_t>(mMaterialM[ 3449]);
-    aRotSampleIndex += static_cast<std::size_t>(mMaterialB[ 3581]) + static_cast<std::size_t>(mMaterialF[ 3701]);
-    aRotSampleIndex += static_cast<std::size_t>(mMaterialJ[ 3821]) + static_cast<std::size_t>(mMaterialN[ 3943]);
-    aRotSampleIndex += static_cast<std::size_t>(mMaterialC[ 4057]) + static_cast<std::size_t>(mMaterialG[ 4211]);
-    aRotSampleIndex += static_cast<std::size_t>(mMaterialK[ 4337]) + static_cast<std::size_t>(mMaterialO[ 4463]);
-    aRotSampleIndex += static_cast<std::size_t>(mMaterialD[ 4591]) + static_cast<std::size_t>(mMaterialH[ 4721]);
-    aRotSampleIndex += static_cast<std::size_t>(mMaterialL[ 4861]) + static_cast<std::size_t>(mMaterialP[ 4993]);
-    aRotSampleIndex += static_cast<std::size_t>(mMaterialA[ 5107]) + static_cast<std::size_t>(mMaterialE[ 5231]);
-    aRotSampleIndex += static_cast<std::size_t>(mMaterialI[ 5351]) + static_cast<std::size_t>(mMaterialM[ 5483]);
-    aRotSampleIndex += static_cast<std::size_t>(mMaterialB[ 5623]) + static_cast<std::size_t>(mMaterialF[ 5749]);
-    aRotSampleIndex += static_cast<std::size_t>(mMaterialJ[ 5879]) + static_cast<std::size_t>(mMaterialN[ 6007]);
-    aRotSampleIndex += static_cast<std::size_t>(mMaterialC[ 6131]) + static_cast<std::size_t>(mMaterialG[ 6263]);
-    aRotSampleIndex += static_cast<std::size_t>(mMaterialK[ 6397]) + static_cast<std::size_t>(mMaterialO[ 6521]);
-    aRotSampleIndex += static_cast<std::size_t>(mMaterialD[ 6653]) + static_cast<std::size_t>(mMaterialH[ 6781]);
-    aRotSampleIndex += static_cast<std::size_t>(mMaterialL[ 6917]) + static_cast<std::size_t>(mMaterialP[ 7043]);
-    aRotSampleIndex += static_cast<std::size_t>(mMaterialA[ 7177]) + static_cast<std::size_t>(mMaterialE[ 7309]);
-    aRotSampleIndex += static_cast<std::size_t>(mMaterialI[ 7433]) + static_cast<std::size_t>(mMaterialM[ 7561]);
-    aRotSampleIndex += static_cast<std::size_t>(mMaterialB[ 7691]) + static_cast<std::size_t>(mMaterialF[ 7823]);
-    aRotSampleIndex += static_cast<std::size_t>(mMaterialJ[ 7951]) + static_cast<std::size_t>(mMaterialN[ 8081]);
-    aRotSampleIndex += static_cast<std::size_t>(mMaterialC[ 8219]) + static_cast<std::size_t>(mMaterialG[ 8353]);
-    aRotSampleIndex += static_cast<std::size_t>(mMaterialK[ 8477]) + static_cast<std::size_t>(mMaterialO[ 8609]);
-    aRotSampleIndex += static_cast<std::size_t>(mMaterialD[ 8731]) + static_cast<std::size_t>(mMaterialH[ 8863]);
-    aRotSampleIndex += static_cast<std::size_t>(mMaterialL[ 8999]) + static_cast<std::size_t>(mMaterialP[ 9127]);
-    aRotSampleIndex += static_cast<std::size_t>(mMaterialA[ 9257]) + static_cast<std::size_t>(mMaterialE[ 9391]);
-    aRotSampleIndex += static_cast<std::size_t>(mMaterialI[ 9521]) + static_cast<std::size_t>(mMaterialM[ 9649]);
-    aRotSampleIndex += static_cast<std::size_t>(mMaterialB[ 9781]) + static_cast<std::size_t>(mMaterialF[ 9907]);
-    aRotSampleIndex += static_cast<std::size_t>(mMaterialJ[10039]) + static_cast<std::size_t>(mMaterialN[10169]);
-    aRotSampleIndex += static_cast<std::size_t>(mMaterialC[10297]) + static_cast<std::size_t>(mMaterialG[10429]);
-    aRotSampleIndex += static_cast<std::size_t>(mMaterialK[10559]) + static_cast<std::size_t>(mMaterialO[10687]);
-    aRotSampleIndex += static_cast<std::size_t>(mMaterialD[10817]) + static_cast<std::size_t>(mMaterialH[10949]);
-    aRotSampleIndex += static_cast<std::size_t>(mMaterialL[11083]) + static_cast<std::size_t>(mMaterialP[11213]);
-    aRotSampleIndex += static_cast<std::size_t>(mMaterialA[11351]) + static_cast<std::size_t>(mMaterialE[11483]);
-    aRotSampleIndex += static_cast<std::size_t>(mMaterialI[11617]) + static_cast<std::size_t>(mMaterialM[11743]);
-    aRotSampleIndex += static_cast<std::size_t>(mMaterialB[11873]) + static_cast<std::size_t>(mMaterialF[12007]);
-    aRotSampleIndex += static_cast<std::size_t>(mMaterialJ[12143]) + static_cast<std::size_t>(mMaterialN[12269]);
-    aRotSampleIndex += static_cast<std::size_t>(mMaterialC[12401]) + static_cast<std::size_t>(mMaterialG[12533]);
-    aRotSampleIndex += static_cast<std::size_t>(mMaterialK[12659]) + static_cast<std::size_t>(mMaterialO[12791]);
-    aRotSampleIndex += static_cast<std::size_t>(mMaterialD[12919]) + static_cast<std::size_t>(mMaterialH[13049]);
-    aRotSampleIndex += static_cast<std::size_t>(mMaterialL[13183]) + static_cast<std::size_t>(mMaterialP[13309]);
-    aRotSampleIndex += static_cast<std::size_t>(mMaterialA[13441]) + static_cast<std::size_t>(mMaterialE[13577]);
-    aRotSampleIndex += static_cast<std::size_t>(mMaterialI[13709]) + static_cast<std::size_t>(mMaterialM[13837]);
-    aRotSampleIndex += static_cast<std::size_t>(mMaterialB[13967]) + static_cast<std::size_t>(mMaterialF[14099]);
-    aRotSampleIndex += static_cast<std::size_t>(mMaterialJ[14221]) + static_cast<std::size_t>(mMaterialN[14359]);
-    aRotSampleIndex += static_cast<std::size_t>(mMaterialC[14489]) + static_cast<std::size_t>(mMaterialG[14621]);
-    aRotSampleIndex += static_cast<std::size_t>(mMaterialK[14747]) + static_cast<std::size_t>(mMaterialO[14879]);
-    aRotSampleIndex += static_cast<std::size_t>(mMaterialD[15013]) + static_cast<std::size_t>(mMaterialH[15139]);
-    aRotSampleIndex += static_cast<std::size_t>(mMaterialL[15269]) + static_cast<std::size_t>(mMaterialP[15401]);
-    aRotSampleIndex += static_cast<std::size_t>(mMaterialA[15527]) + static_cast<std::size_t>(mMaterialE[15661]);
-    aRotSampleIndex += static_cast<std::size_t>(mMaterialI[15791]) + static_cast<std::size_t>(mMaterialM[15923]);
-    aRotSampleIndex += static_cast<std::size_t>(mMaterialB[16057]) + static_cast<std::size_t>(mMaterialF[16183]);
-    aRotSampleIndex += static_cast<std::size_t>(mMaterialJ[16319]) + static_cast<std::size_t>(mMaterialN[16447]);
-    aRotSampleIndex += static_cast<std::size_t>(mMaterialC[16573]) + static_cast<std::size_t>(mMaterialG[16703]);
-    aRotSampleIndex += static_cast<std::size_t>(mMaterialK[16831]) + static_cast<std::size_t>(mMaterialO[16963]);
-    aRotSampleIndex += static_cast<std::size_t>(mMaterialD[17093]) + static_cast<std::size_t>(mMaterialH[17221]);
-    aRotSampleIndex += static_cast<std::size_t>(mMaterialL[17351]) + static_cast<std::size_t>(mMaterialP[17477]);
+
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialM[13268U]) + static_cast<std::size_t>(mMaterialI[30513U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialD[15984U]) + static_cast<std::size_t>(mMaterialC[5212U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialF[4492U]) + static_cast<std::size_t>(mMaterialJ[436U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialG[22270U]) + static_cast<std::size_t>(mMaterialP[5459U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialN[27873U]) + static_cast<std::size_t>(mMaterialL[28586U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialB[20892U]) + static_cast<std::size_t>(mMaterialH[20567U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialA[20398U]) + static_cast<std::size_t>(mMaterialE[19163U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialO[1324U]) + static_cast<std::size_t>(mMaterialK[26568U]);
+
+    //
+    // $$$$$$$$$$$$$$$$
+    //
+
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialD[38745U]) + static_cast<std::size_t>(mMaterialC[55734U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialN[41262U]) + static_cast<std::size_t>(mMaterialG[49571U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialB[51479U]) + static_cast<std::size_t>(mMaterialH[40893U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialL[52507U]) + static_cast<std::size_t>(mMaterialF[45388U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialO[63366U]) + static_cast<std::size_t>(mMaterialJ[56760U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialP[33278U]) + static_cast<std::size_t>(mMaterialA[52877U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialI[40064U]) + static_cast<std::size_t>(mMaterialK[58191U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialE[41577U]) + static_cast<std::size_t>(mMaterialM[50988U]);
+
+    //
+    // $$$$$$$$$$$$$$$$
+    //
+
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialB[94774U]) + static_cast<std::size_t>(mMaterialD[86657U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialC[68044U]) + static_cast<std::size_t>(mMaterialH[74747U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialO[86906U]) + static_cast<std::size_t>(mMaterialL[91324U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialG[68382U]) + static_cast<std::size_t>(mMaterialI[76843U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialK[68523U]) + static_cast<std::size_t>(mMaterialJ[66795U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialN[66792U]) + static_cast<std::size_t>(mMaterialE[88548U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialM[75513U]) + static_cast<std::size_t>(mMaterialP[71661U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialA[69167U]) + static_cast<std::size_t>(mMaterialF[88235U]);
+
+    //
+    // $$$$$$$$$$$$$$$$
+    //
+
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialP[104812U]) + static_cast<std::size_t>(mMaterialF[109521U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialJ[117056U]) + static_cast<std::size_t>(mMaterialB[108739U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialD[119108U]) + static_cast<std::size_t>(mMaterialA[113218U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialO[127689U]) + static_cast<std::size_t>(mMaterialC[118949U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialL[130668U]) + static_cast<std::size_t>(mMaterialK[107028U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialN[107307U]) + static_cast<std::size_t>(mMaterialI[128068U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialH[99570U]) + static_cast<std::size_t>(mMaterialE[106756U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialM[120270U]) + static_cast<std::size_t>(mMaterialG[103658U]);
+
+    //
+    // $$$$$$$$$$$$$$$$
+    //
+
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialM[132394U]) + static_cast<std::size_t>(mMaterialE[137953U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialJ[161854U]) + static_cast<std::size_t>(mMaterialA[150384U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialI[151689U]) + static_cast<std::size_t>(mMaterialL[156551U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialD[140289U]) + static_cast<std::size_t>(mMaterialC[140674U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialP[157717U]) + static_cast<std::size_t>(mMaterialK[144926U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialB[159621U]) + static_cast<std::size_t>(mMaterialN[136868U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialG[144853U]) + static_cast<std::size_t>(mMaterialF[138709U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialO[156910U]) + static_cast<std::size_t>(mMaterialH[161195U]);
+
+    //
+    // $$$$$$$$$$$$$$$$
+    //
+
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialD[187307U]) + static_cast<std::size_t>(mMaterialB[181489U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialO[169473U]) + static_cast<std::size_t>(mMaterialH[196592U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialF[179235U]) + static_cast<std::size_t>(mMaterialK[191425U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialM[174812U]) + static_cast<std::size_t>(mMaterialE[175796U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialI[164849U]) + static_cast<std::size_t>(mMaterialP[172225U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialC[186664U]) + static_cast<std::size_t>(mMaterialG[195640U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialN[191568U]) + static_cast<std::size_t>(mMaterialJ[184323U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialL[178363U]) + static_cast<std::size_t>(mMaterialA[183673U]);
+
+    //
+    // $$$$$$$$$$$$$$$$
+    //
+
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialP[211932U]) + static_cast<std::size_t>(mMaterialC[218710U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialO[201968U]) + static_cast<std::size_t>(mMaterialL[226759U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialG[198442U]) + static_cast<std::size_t>(mMaterialK[218036U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialI[213409U]) + static_cast<std::size_t>(mMaterialH[205177U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialN[212609U]) + static_cast<std::size_t>(mMaterialM[220554U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialD[209314U]) + static_cast<std::size_t>(mMaterialB[197919U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialE[218906U]) + static_cast<std::size_t>(mMaterialA[228713U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialJ[217627U]) + static_cast<std::size_t>(mMaterialF[198664U]);
+
+    //
+    // $$$$$$$$$$$$$$$$
+    //
+
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialL[261204U]) + static_cast<std::size_t>(mMaterialG[241114U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialO[247579U]) + static_cast<std::size_t>(mMaterialD[255244U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialN[240948U]) + static_cast<std::size_t>(mMaterialI[229401U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialM[242206U]) + static_cast<std::size_t>(mMaterialE[258546U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialA[239034U]) + static_cast<std::size_t>(mMaterialH[239382U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialP[252940U]) + static_cast<std::size_t>(mMaterialB[231241U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialK[240244U]) + static_cast<std::size_t>(mMaterialC[242944U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialF[242244U]) + static_cast<std::size_t>(mMaterialJ[231564U]);
+
+    //
+    // $$$$$$$$$$$$$$$$
+    //
+
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialM[289199U]) + static_cast<std::size_t>(mMaterialG[284934U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialN[271838U]) + static_cast<std::size_t>(mMaterialF[282298U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialJ[262167U]) + static_cast<std::size_t>(mMaterialP[274745U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialE[286991U]) + static_cast<std::size_t>(mMaterialD[280662U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialA[263585U]) + static_cast<std::size_t>(mMaterialL[282215U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialK[282308U]) + static_cast<std::size_t>(mMaterialI[293778U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialC[274903U]) + static_cast<std::size_t>(mMaterialO[292511U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialB[266832U]) + static_cast<std::size_t>(mMaterialH[281535U]);
+
+    //
+    // $$$$$$$$$$$$$$$$
+    //
+
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialM[295544U]) + static_cast<std::size_t>(mMaterialE[311717U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialJ[308822U]) + static_cast<std::size_t>(mMaterialC[326128U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialF[316482U]) + static_cast<std::size_t>(mMaterialP[295895U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialA[301620U]) + static_cast<std::size_t>(mMaterialK[313162U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialD[298493U]) + static_cast<std::size_t>(mMaterialG[310481U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialB[313204U]) + static_cast<std::size_t>(mMaterialI[309897U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialO[316368U]) + static_cast<std::size_t>(mMaterialL[317617U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialN[300877U]) + static_cast<std::size_t>(mMaterialH[323727U]);
+
+    //
+    // $$$$$$$$$$$$$$$$
+    //
+
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialP[339827U]) + static_cast<std::size_t>(mMaterialA[355078U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialG[335802U]) + static_cast<std::size_t>(mMaterialM[355659U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialI[359973U]) + static_cast<std::size_t>(mMaterialN[346964U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialD[359275U]) + static_cast<std::size_t>(mMaterialF[347361U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialC[344016U]) + static_cast<std::size_t>(mMaterialL[353493U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialB[345613U]) + static_cast<std::size_t>(mMaterialE[334565U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialK[330169U]) + static_cast<std::size_t>(mMaterialJ[357581U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialO[354197U]) + static_cast<std::size_t>(mMaterialH[354898U]);
+
+    //
+    // $$$$$$$$$$$$$$$$
+    //
+
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialO[384911U]) + static_cast<std::size_t>(mMaterialJ[378878U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialB[365488U]) + static_cast<std::size_t>(mMaterialF[363254U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialN[365168U]) + static_cast<std::size_t>(mMaterialI[386579U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialH[374397U]) + static_cast<std::size_t>(mMaterialM[373939U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialD[390897U]) + static_cast<std::size_t>(mMaterialA[371999U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialK[383709U]) + static_cast<std::size_t>(mMaterialP[379418U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialL[383860U]) + static_cast<std::size_t>(mMaterialC[376620U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialE[384517U]) + static_cast<std::size_t>(mMaterialG[366763U]);
+
+    //
+    // $$$$$$$$$$$$$$$$
+    //
+
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialD[401902U]) + static_cast<std::size_t>(mMaterialF[407371U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialM[414243U]) + static_cast<std::size_t>(mMaterialC[418099U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialB[409905U]) + static_cast<std::size_t>(mMaterialK[424303U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialE[403810U]) + static_cast<std::size_t>(mMaterialG[411002U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialP[399709U]) + static_cast<std::size_t>(mMaterialA[413204U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialJ[415594U]) + static_cast<std::size_t>(mMaterialI[399048U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialH[393593U]) + static_cast<std::size_t>(mMaterialO[394616U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialN[403884U]) + static_cast<std::size_t>(mMaterialL[398186U]);
+
+    //
+    // $$$$$$$$$$$$$$$$
+    //
+
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialH[439857U]) + static_cast<std::size_t>(mMaterialP[454953U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialD[440296U]) + static_cast<std::size_t>(mMaterialO[432647U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialA[449308U]) + static_cast<std::size_t>(mMaterialJ[447170U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialC[433906U]) + static_cast<std::size_t>(mMaterialE[435043U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialG[454273U]) + static_cast<std::size_t>(mMaterialK[428607U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialN[428201U]) + static_cast<std::size_t>(mMaterialF[446589U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialM[433265U]) + static_cast<std::size_t>(mMaterialB[446442U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialI[445984U]) + static_cast<std::size_t>(mMaterialL[449910U]);
+
+    //
+    // $$$$$$$$$$$$$$$$
+    //
+
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialN[462450U]) + static_cast<std::size_t>(mMaterialD[463266U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialA[485381U]) + static_cast<std::size_t>(mMaterialJ[464590U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialF[486761U]) + static_cast<std::size_t>(mMaterialC[484466U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialM[468125U]) + static_cast<std::size_t>(mMaterialI[482900U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialL[467497U]) + static_cast<std::size_t>(mMaterialK[465566U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialO[484294U]) + static_cast<std::size_t>(mMaterialH[468756U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialP[486189U]) + static_cast<std::size_t>(mMaterialB[464936U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialG[485153U]) + static_cast<std::size_t>(mMaterialE[482590U]);
+
+    //
+    // $$$$$$$$$$$$$$$$
+    //
+
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialE[507751U]) + static_cast<std::size_t>(mMaterialH[507618U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialF[504392U]) + static_cast<std::size_t>(mMaterialJ[509705U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialC[507610U]) + static_cast<std::size_t>(mMaterialB[513273U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialP[516566U]) + static_cast<std::size_t>(mMaterialA[498440U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialL[519531U]) + static_cast<std::size_t>(mMaterialO[522681U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialM[499823U]) + static_cast<std::size_t>(mMaterialI[507965U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialK[522963U]) + static_cast<std::size_t>(mMaterialN[511604U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialD[521756U]) + static_cast<std::size_t>(mMaterialG[516312U]);
+
+    //
+    // $$$$$$$$$$$$$$$$
+    //
+
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialC[544509U]) + static_cast<std::size_t>(mMaterialO[549635U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialA[554357U]) + static_cast<std::size_t>(mMaterialI[525244U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialP[551625U]) + static_cast<std::size_t>(mMaterialM[544810U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialL[539168U]) + static_cast<std::size_t>(mMaterialJ[537109U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialE[544432U]) + static_cast<std::size_t>(mMaterialH[539688U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialG[551986U]) + static_cast<std::size_t>(mMaterialB[525753U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialK[532976U]) + static_cast<std::size_t>(mMaterialF[553087U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialD[540454U]) + static_cast<std::size_t>(mMaterialN[538284U]);
+
+    //
+    // $$$$$$$$$$$$$$$$
+    //
+
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialJ[583530U]) + static_cast<std::size_t>(mMaterialM[577695U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialB[574875U]) + static_cast<std::size_t>(mMaterialE[588001U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialK[585932U]) + static_cast<std::size_t>(mMaterialA[582584U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialP[569287U]) + static_cast<std::size_t>(mMaterialG[575832U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialO[574205U]) + static_cast<std::size_t>(mMaterialI[561789U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialH[579853U]) + static_cast<std::size_t>(mMaterialD[573244U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialC[573238U]) + static_cast<std::size_t>(mMaterialF[576687U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialL[570459U]) + static_cast<std::size_t>(mMaterialN[570244U]);
+
+    //
+    // $$$$$$$$$$$$$$$$
+    //
+
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialE[614514U]) + static_cast<std::size_t>(mMaterialM[619422U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialO[622497U]) + static_cast<std::size_t>(mMaterialC[612127U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialP[608756U]) + static_cast<std::size_t>(mMaterialL[605583U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialG[591090U]) + static_cast<std::size_t>(mMaterialJ[619085U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialH[619587U]) + static_cast<std::size_t>(mMaterialD[594601U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialF[620385U]) + static_cast<std::size_t>(mMaterialI[621479U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialB[600900U]) + static_cast<std::size_t>(mMaterialA[620380U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialN[614098U]) + static_cast<std::size_t>(mMaterialK[613571U]);
+
+    //
+    // $$$$$$$$$$$$$$$$
+    //
+
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialB[645188U]) + static_cast<std::size_t>(mMaterialO[652313U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialG[639822U]) + static_cast<std::size_t>(mMaterialP[635806U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialD[634871U]) + static_cast<std::size_t>(mMaterialL[623014U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialK[651477U]) + static_cast<std::size_t>(mMaterialE[632442U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialM[638256U]) + static_cast<std::size_t>(mMaterialJ[654813U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialA[643378U]) + static_cast<std::size_t>(mMaterialC[632347U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialF[624374U]) + static_cast<std::size_t>(mMaterialI[645649U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialN[623348U]) + static_cast<std::size_t>(mMaterialH[628267U]);
+
+    //
+    // $$$$$$$$$$$$$$$$
+    //
+
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialP[684337U]) + static_cast<std::size_t>(mMaterialA[672059U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialM[684332U]) + static_cast<std::size_t>(mMaterialH[664698U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialE[673913U]) + static_cast<std::size_t>(mMaterialD[680812U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialC[682340U]) + static_cast<std::size_t>(mMaterialJ[687321U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialO[680674U]) + static_cast<std::size_t>(mMaterialF[679257U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialK[656338U]) + static_cast<std::size_t>(mMaterialN[661272U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialI[676617U]) + static_cast<std::size_t>(mMaterialG[667505U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialB[679164U]) + static_cast<std::size_t>(mMaterialL[686758U]);
+
+    //
+    // $$$$$$$$$$$$$$$$
+    //
+
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialO[699239U]) + static_cast<std::size_t>(mMaterialC[713876U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialB[703484U]) + static_cast<std::size_t>(mMaterialK[716869U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialH[705999U]) + static_cast<std::size_t>(mMaterialA[693965U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialG[692060U]) + static_cast<std::size_t>(mMaterialN[717931U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialJ[702279U]) + static_cast<std::size_t>(mMaterialF[690651U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialM[705119U]) + static_cast<std::size_t>(mMaterialE[707062U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialL[697354U]) + static_cast<std::size_t>(mMaterialD[696520U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialP[688926U]) + static_cast<std::size_t>(mMaterialI[697302U]);
+
+    //
+    // $$$$$$$$$$$$$$$$
+    //
+
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialB[733135U]) + static_cast<std::size_t>(mMaterialM[735711U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialH[752864U]) + static_cast<std::size_t>(mMaterialJ[724037U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialE[729452U]) + static_cast<std::size_t>(mMaterialD[751740U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialL[737294U]) + static_cast<std::size_t>(mMaterialC[739772U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialF[727143U]) + static_cast<std::size_t>(mMaterialK[745821U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialP[725289U]) + static_cast<std::size_t>(mMaterialO[736921U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialI[739153U]) + static_cast<std::size_t>(mMaterialA[728092U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialG[740138U]) + static_cast<std::size_t>(mMaterialN[745793U]);
+
+    //
+    // $$$$$$$$$$$$$$$$
+    //
+
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialB[766501U]) + static_cast<std::size_t>(mMaterialM[779762U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialH[773129U]) + static_cast<std::size_t>(mMaterialN[763739U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialF[762885U]) + static_cast<std::size_t>(mMaterialK[770178U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialP[757919U]) + static_cast<std::size_t>(mMaterialD[776353U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialI[762886U]) + static_cast<std::size_t>(mMaterialA[762786U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialC[764405U]) + static_cast<std::size_t>(mMaterialO[761119U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialJ[783562U]) + static_cast<std::size_t>(mMaterialL[758191U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialG[758793U]) + static_cast<std::size_t>(mMaterialE[781759U]);
+
+    //
+    // $$$$$$$$$$$$$$$$
+    //
+
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialP[795437U]) + static_cast<std::size_t>(mMaterialL[795423U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialK[790773U]) + static_cast<std::size_t>(mMaterialB[808087U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialI[810342U]) + static_cast<std::size_t>(mMaterialG[818398U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialD[802603U]) + static_cast<std::size_t>(mMaterialA[791631U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialM[809189U]) + static_cast<std::size_t>(mMaterialJ[799138U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialF[813067U]) + static_cast<std::size_t>(mMaterialO[809290U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialN[814041U]) + static_cast<std::size_t>(mMaterialC[811438U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialH[802903U]) + static_cast<std::size_t>(mMaterialE[788237U]);
+
+    //
+    // $$$$$$$$$$$$$$$$
+    //
+
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialA[850732U]) + static_cast<std::size_t>(mMaterialK[829947U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialD[839105U]) + static_cast<std::size_t>(mMaterialN[836154U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialC[849400U]) + static_cast<std::size_t>(mMaterialM[822791U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialH[841669U]) + static_cast<std::size_t>(mMaterialJ[820010U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialP[838629U]) + static_cast<std::size_t>(mMaterialG[839139U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialF[828192U]) + static_cast<std::size_t>(mMaterialI[848232U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialE[836131U]) + static_cast<std::size_t>(mMaterialO[832316U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialL[850853U]) + static_cast<std::size_t>(mMaterialB[851958U]);
+
+    //
+    // $$$$$$$$$$$$$$$$
+    //
+
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialN[873358U]) + static_cast<std::size_t>(mMaterialB[877900U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialA[883750U]) + static_cast<std::size_t>(mMaterialK[854137U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialE[868611U]) + static_cast<std::size_t>(mMaterialG[866538U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialI[873826U]) + static_cast<std::size_t>(mMaterialP[864045U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialD[875026U]) + static_cast<std::size_t>(mMaterialM[860471U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialL[879346U]) + static_cast<std::size_t>(mMaterialO[860869U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialJ[862795U]) + static_cast<std::size_t>(mMaterialH[854505U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialC[857354U]) + static_cast<std::size_t>(mMaterialF[858285U]);
+
+    //
+    // $$$$$$$$$$$$$$$$
+    //
+
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialL[892563U]) + static_cast<std::size_t>(mMaterialK[892550U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialP[888653U]) + static_cast<std::size_t>(mMaterialD[887665U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialH[887390U]) + static_cast<std::size_t>(mMaterialB[900944U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialA[914585U]) + static_cast<std::size_t>(mMaterialO[910856U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialJ[887233U]) + static_cast<std::size_t>(mMaterialG[888527U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialE[895821U]) + static_cast<std::size_t>(mMaterialM[916848U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialC[903483U]) + static_cast<std::size_t>(mMaterialI[900346U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialN[911521U]) + static_cast<std::size_t>(mMaterialF[909916U]);
+
+    //
+    // $$$$$$$$$$$$$$$$
+    //
+
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialM[949288U]) + static_cast<std::size_t>(mMaterialB[924299U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialP[932354U]) + static_cast<std::size_t>(mMaterialG[941653U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialL[929589U]) + static_cast<std::size_t>(mMaterialN[946555U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialE[924973U]) + static_cast<std::size_t>(mMaterialD[941864U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialK[927145U]) + static_cast<std::size_t>(mMaterialJ[931193U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialO[933582U]) + static_cast<std::size_t>(mMaterialF[934661U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialI[937576U]) + static_cast<std::size_t>(mMaterialA[943642U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialH[945302U]) + static_cast<std::size_t>(mMaterialC[939366U]);
+
+    //
+    // $$$$$$$$$$$$$$$$
+    //
+
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialL[959567U]) + static_cast<std::size_t>(mMaterialB[959340U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialM[960313U]) + static_cast<std::size_t>(mMaterialK[962440U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialI[971702U]) + static_cast<std::size_t>(mMaterialD[953867U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialO[962026U]) + static_cast<std::size_t>(mMaterialC[972456U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialE[979830U]) + static_cast<std::size_t>(mMaterialA[958890U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialG[975957U]) + static_cast<std::size_t>(mMaterialF[977655U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialH[965135U]) + static_cast<std::size_t>(mMaterialP[974020U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialJ[975885U]) + static_cast<std::size_t>(mMaterialN[975679U]);
+
+    //
+    // $$$$$$$$$$$$$$$$
+    //
+
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialC[985284U]) + static_cast<std::size_t>(mMaterialG[1006527U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialD[999589U]) + static_cast<std::size_t>(mMaterialN[1008638U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialK[999491U]) + static_cast<std::size_t>(mMaterialJ[1000953U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialE[998854U]) + static_cast<std::size_t>(mMaterialA[1004381U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialM[1012716U]) + static_cast<std::size_t>(mMaterialP[1002843U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialL[1003486U]) + static_cast<std::size_t>(mMaterialH[991200U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialO[996922U]) + static_cast<std::size_t>(mMaterialF[1004393U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialI[989712U]) + static_cast<std::size_t>(mMaterialB[1002161U]);
+
+    //
+    // $$$$$$$$$$$$$$$$
+    //
+
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialI[1027619U]) + static_cast<std::size_t>(mMaterialO[1038909U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialD[1019834U]) + static_cast<std::size_t>(mMaterialG[1031464U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialM[1041729U]) + static_cast<std::size_t>(mMaterialF[1046005U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialE[1033633U]) + static_cast<std::size_t>(mMaterialL[1047040U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialP[1031293U]) + static_cast<std::size_t>(mMaterialB[1045749U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialA[1037084U]) + static_cast<std::size_t>(mMaterialN[1040007U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialJ[1032171U]) + static_cast<std::size_t>(mMaterialH[1041811U]);
+    aRotSampleIndex += static_cast<std::size_t>(mMaterialC[1027927U]) + static_cast<std::size_t>(mMaterialK[1042061U]);
 
     aRotSampleIndex %= aRotSampleCount;
 
@@ -954,92 +1316,431 @@ void Soccer::SeedEpilogue() {
         const std::size_t aFarIndex = static_cast<std::size_t>((pMix ^ (pMix >> 32U)) % S_BLOCK);
         aRotSampleIndex = (aRotSampleIndex + mRandom[aNearIndex] + mRandom[aFarIndex] + pHop) % aRotSampleCount;
     };
-    
+
     auto MixRotRoundA = [&](std::uint64_t &pValue, std::size_t pHop, std::uint64_t pRotation) {
-        
+
         const std::uint64_t aSample = Read64(&mRandom[aRotSampleIndex]);
         pValue = (pValue ^ aSample) + RotL64(pValue + pHop, pRotation);
         AdvanceRotSample(pValue ^ RotL64(aSample, pRotation), pHop);
     };
 
     auto MixRotRoundB = [&](std::uint64_t &pValue, std::size_t pHop, std::uint64_t pRotation) {
-        
+
         const std::uint64_t aSample = Read64(&mRandom[aRotSampleIndex]);
         pValue = RotL64(pValue ^ aSample, pRotation) + (aSample ^ static_cast<std::uint64_t>(pHop));
         AdvanceRotSample(pValue + RotL64(aSample + pValue, pRotation), pHop);
     };
+    MixRotRoundA(aRandL3B, mMaterialB[700083U], mMaterialA[906320U]);
+    MixRotRoundA(aRandL3A, mMaterialI[763743U], mMaterialE[371481U]);
+    MixRotRoundA(aRandL2A, mMaterialN[851673U], mMaterialG[175136U]);
+    MixRotRoundA(aRandFinalB, mMaterialJ[241663U], mMaterialM[119337U]);
+    MixRotRoundA(aRandL1B, mMaterialF[817205U], mMaterialD[733776U]);
+    MixRotRoundA(aRandL1A, mMaterialH[593380U], mMaterialO[511517U]);
+    MixRotRoundA(aRandFinalA, mMaterialL[563785U], mMaterialC[206397U]);
+    MixRotRoundA(aRandL2B, mMaterialP[58922U], mMaterialK[881986U]);
 
-    MixRotRoundA(aRandFinalB, mMaterialA[1791], mMaterialI[ 400]);
-    MixRotRoundA(aRandL1B,    mMaterialB[ 233], mMaterialJ[3017]);
-    MixRotRoundA(aRandFinalA, mMaterialC[4099], mMaterialK[ 877]);
-    MixRotRoundA(aRandL1A,    mMaterialD[  97], mMaterialL[6211]);
-    MixRotRoundA(aRandL3A,    mMaterialE[1543], mMaterialM[ 711]);
-    MixRotRoundA(aRandL3B,    mMaterialF[2887], mMaterialN[ 190]);
-    MixRotRoundA(aRandL2B,    mMaterialG[ 503], mMaterialO[4519]);
-    MixRotRoundA(aRandL2A,    mMaterialH[3761], mMaterialP[1297]);
+    //
+    // $$$$$$$$$$$$$$$$
+    //
 
-    MixRotRoundB(aRandL3B,    mMaterialI[ 547], mMaterialP[ 281]);
-    MixRotRoundB(aRandL2A,    mMaterialJ[3329], mMaterialA[1907]);
-    MixRotRoundB(aRandFinalA, mMaterialK[ 743], mMaterialB[4621]);
-    MixRotRoundB(aRandL1B,    mMaterialL[5701], mMaterialC[ 359]);
-    MixRotRoundB(aRandL3A,    mMaterialM[2189], mMaterialD[1003]);
-    MixRotRoundB(aRandFinalB, mMaterialN[ 127], mMaterialE[5413]);
-    MixRotRoundB(aRandL2B,    mMaterialO[3893], mMaterialF[ 617]);
-    MixRotRoundB(aRandL1A,    mMaterialP[2011], mMaterialG[3209]);
+    MixRotRoundB(aRandL1A, mMaterialB[269845U], mMaterialH[27020U]);
+    MixRotRoundB(aRandFinalB, mMaterialC[929180U], mMaterialE[1005140U]);
+    MixRotRoundB(aRandL3B, mMaterialJ[767414U], mMaterialP[670183U]);
+    MixRotRoundB(aRandL1B, mMaterialK[1035935U], mMaterialM[303125U]);
+    MixRotRoundB(aRandL2A, mMaterialI[184036U], mMaterialF[879973U]);
+    MixRotRoundB(aRandL3A, mMaterialD[530148U], mMaterialO[335396U]);
+    MixRotRoundB(aRandL2B, mMaterialA[833777U], mMaterialG[83401U]);
+    MixRotRoundB(aRandFinalA, mMaterialN[750176U], mMaterialL[519737U]);
 
-    MixRotRoundA(aRandL1A,    mMaterialH[ 829], mMaterialA[4871]);
-    MixRotRoundA(aRandFinalB, mMaterialA[2579], mMaterialI[ 109]);
-    MixRotRoundA(aRandL2B,    mMaterialB[ 601], mMaterialJ[5237]);
-    MixRotRoundA(aRandL3A,    mMaterialC[3467], mMaterialK[ 941]);
-    MixRotRoundA(aRandFinalA, mMaterialD[ 151], mMaterialL[2899]);
-    MixRotRoundA(aRandL1B,    mMaterialE[4723], mMaterialM[ 733]);
-    MixRotRoundA(aRandL2A,    mMaterialF[1181], mMaterialN[3659]);
-    MixRotRoundA(aRandL3B,    mMaterialG[4229], mMaterialO[ 317]);
+    //
+    // $$$$$$$$$$$$$$$$
+    //
 
-    MixRotRoundB(aRandL2A,    mMaterialP[ 563], mMaterialH[4951]);
-    MixRotRoundB(aRandL3A,    mMaterialO[2741], mMaterialG[ 181]);
-    MixRotRoundB(aRandL1B,    mMaterialN[ 397], mMaterialF[5807]);
-    MixRotRoundB(aRandFinalB, mMaterialM[3253], mMaterialE[1051]);
-    MixRotRoundB(aRandL2B,    mMaterialL[ 677], mMaterialD[2447]);
-    MixRotRoundB(aRandL1A,    mMaterialK[5009], mMaterialC[ 229]);
-    MixRotRoundB(aRandL3B,    mMaterialJ[1433], mMaterialB[4363]);
-    MixRotRoundB(aRandFinalA, mMaterialI[3671], mMaterialA[ 887]);
+    MixRotRoundA(aRandFinalB, mMaterialP[1008089U], mMaterialN[57836U]);
+    MixRotRoundA(aRandL2B, mMaterialA[448999U], mMaterialC[339057U]);
+    MixRotRoundA(aRandL2A, mMaterialL[862794U], mMaterialE[93666U]);
+    MixRotRoundA(aRandL1A, mMaterialI[938994U], mMaterialB[249271U]);
+    MixRotRoundA(aRandL1B, mMaterialG[112982U], mMaterialO[1022881U]);
+    MixRotRoundA(aRandL3B, mMaterialF[487023U], mMaterialH[560705U]);
+    MixRotRoundA(aRandL3A, mMaterialD[659129U], mMaterialM[283406U]);
+    MixRotRoundA(aRandFinalA, mMaterialK[146018U], mMaterialJ[205171U]);
 
-    MixRotRoundA(aRandFinalA, mMaterialA[ 619], mMaterialH[5333]);
-    MixRotRoundA(aRandL2B,    mMaterialC[2081], mMaterialJ[ 491]);
-    MixRotRoundA(aRandL3B,    mMaterialE[4513], mMaterialL[1379]);
-    MixRotRoundA(aRandL1A,    mMaterialG[ 337], mMaterialN[6029]);
-    MixRotRoundA(aRandFinalB, mMaterialI[2749], mMaterialP[ 157]);
-    MixRotRoundA(aRandL2A,    mMaterialK[ 811], mMaterialB[4201]);
-    MixRotRoundA(aRandL1B,    mMaterialM[5723], mMaterialD[1019]);
-    MixRotRoundA(aRandL3A,    mMaterialO[1877], mMaterialF[3499]);
+    //
+    // $$$$$$$$$$$$$$$$
+    //
 
-    MixRotRoundB(aRandL3A,    mMaterialB[ 293], mMaterialI[4831]);
-    MixRotRoundB(aRandL1B,    mMaterialD[4421], mMaterialK[ 557]);
-    MixRotRoundB(aRandL2A,    mMaterialF[1223], mMaterialM[6151]);
-    MixRotRoundB(aRandFinalA, mMaterialH[3613], mMaterialO[ 211]);
-    MixRotRoundB(aRandL3B,    mMaterialJ[ 769], mMaterialA[5279]);
-    MixRotRoundB(aRandL1A,    mMaterialL[5903], mMaterialC[1327]);
-    MixRotRoundB(aRandFinalB, mMaterialN[ 463], mMaterialE[4001]);
-    MixRotRoundB(aRandL2B,    mMaterialP[2519], mMaterialG[ 953]);
+    MixRotRoundB(aRandL1B, mMaterialH[867028U], mMaterialG[292700U]);
+    MixRotRoundB(aRandL1A, mMaterialL[142575U], mMaterialP[885737U]);
+    MixRotRoundB(aRandL2A, mMaterialE[303190U], mMaterialI[716722U]);
+    MixRotRoundB(aRandFinalA, mMaterialF[727156U], mMaterialA[368582U]);
+    MixRotRoundB(aRandL2B, mMaterialC[653064U], mMaterialN[1002484U]);
+    MixRotRoundB(aRandFinalB, mMaterialM[757929U], mMaterialO[619374U]);
+    MixRotRoundB(aRandL3A, mMaterialJ[342837U], mMaterialD[410937U]);
+    MixRotRoundB(aRandL3B, mMaterialB[197481U], mMaterialK[529312U]);
 
-    MixRotRoundA(aRandL2B,    mMaterialC[ 541], mMaterialP[5689]);
-    MixRotRoundA(aRandFinalA, mMaterialF[3313], mMaterialB[ 173]);
-    MixRotRoundA(aRandL1A,    mMaterialI[4921], mMaterialE[1201]);
-    MixRotRoundA(aRandL3B,    mMaterialL[ 887], mMaterialH[6361]);
-    MixRotRoundA(aRandL2A,    mMaterialO[3011], mMaterialK[ 389]);
-    MixRotRoundA(aRandFinalB, mMaterialB[5801], mMaterialN[1447]);
-    MixRotRoundA(aRandL3A,    mMaterialE[ 223], mMaterialA[4703]);
-    MixRotRoundA(aRandL1B,    mMaterialH[4117], mMaterialD[ 659]);
+    //
+    // $$$$$$$$$$$$$$$$
+    //
 
-    MixRotRoundB(aRandFinalB, mMaterialD[ 971], mMaterialM[5209]);
-    MixRotRoundB(aRandL3B,    mMaterialH[2879], mMaterialA[ 431]);
-    MixRotRoundB(aRandL1A,    mMaterialL[6199], mMaterialE[1187]);
-    MixRotRoundB(aRandL2A,    mMaterialP[ 353], mMaterialI[4441]);
-    MixRotRoundB(aRandL1B,    mMaterialC[2693], mMaterialN[ 739]);
-    MixRotRoundB(aRandL3A,    mMaterialG[5077], mMaterialB[ 199]);
-    MixRotRoundB(aRandFinalA, mMaterialK[1559], mMaterialF[5881]);
-    MixRotRoundB(aRandL2B,    mMaterialO[6013], mMaterialJ[ 823]);
+    MixRotRoundA(aRandL3B, mMaterialN[549770U], mMaterialC[109163U]);
+    MixRotRoundA(aRandFinalB, mMaterialA[739898U], mMaterialG[916076U]);
+    MixRotRoundA(aRandL3A, mMaterialM[441530U], mMaterialO[695127U]);
+    MixRotRoundA(aRandL2A, mMaterialI[72643U], mMaterialH[217530U]);
+    MixRotRoundA(aRandFinalA, mMaterialJ[174457U], mMaterialF[1048202U]);
+    MixRotRoundA(aRandL1A, mMaterialL[356795U], mMaterialB[953693U]);
+    MixRotRoundA(aRandL2B, mMaterialP[796007U], mMaterialD[580443U]);
+    MixRotRoundA(aRandL1B, mMaterialK[622691U], mMaterialE[393461U]);
+
+    //
+    // $$$$$$$$$$$$$$$$
+    //
+
+    MixRotRoundB(aRandL1A, mMaterialE[844595U], mMaterialO[261395U]);
+    MixRotRoundB(aRandL3B, mMaterialB[179335U], mMaterialJ[122434U]);
+    MixRotRoundB(aRandL3A, mMaterialM[387845U], mMaterialK[29279U]);
+    MixRotRoundB(aRandL1B, mMaterialC[283425U], mMaterialH[329930U]);
+    MixRotRoundB(aRandL2A, mMaterialG[433931U], mMaterialN[801602U]);
+    MixRotRoundB(aRandFinalB, mMaterialL[632005U], mMaterialF[596385U]);
+    MixRotRoundB(aRandL2B, mMaterialD[883644U], mMaterialI[319398U]);
+    MixRotRoundB(aRandFinalA, mMaterialP[472844U], mMaterialA[675296U]);
+
+    //
+    // $$$$$$$$$$$$$$$$
+    //
+
+    MixRotRoundA(aRandFinalA, mMaterialO[84995U], mMaterialH[965632U]);
+    MixRotRoundA(aRandL2A, mMaterialC[1011322U], mMaterialK[124942U]);
+    MixRotRoundA(aRandL1A, mMaterialP[6112U], mMaterialJ[44835U]);
+    MixRotRoundA(aRandL3B, mMaterialL[175976U], mMaterialD[238921U]);
+    MixRotRoundA(aRandL3A, mMaterialF[932841U], mMaterialN[639905U]);
+    MixRotRoundA(aRandFinalB, mMaterialB[831763U], mMaterialA[1027342U]);
+    MixRotRoundA(aRandL2B, mMaterialE[580031U], mMaterialI[655372U]);
+    MixRotRoundA(aRandL1B, mMaterialM[458897U], mMaterialG[801368U]);
+
+    //
+    // $$$$$$$$$$$$$$$$
+    //
+
+    MixRotRoundB(aRandFinalB, mMaterialA[705520U], mMaterialH[56286U]);
+    MixRotRoundB(aRandL2A, mMaterialK[888772U], mMaterialG[501582U]);
+    MixRotRoundB(aRandL1A, mMaterialI[572237U], mMaterialM[1021214U]);
+    MixRotRoundB(aRandFinalA, mMaterialF[70360U], mMaterialO[394815U]);
+    MixRotRoundB(aRandL3A, mMaterialC[804774U], mMaterialE[228329U]);
+    MixRotRoundB(aRandL2B, mMaterialD[971461U], mMaterialJ[537403U]);
+    MixRotRoundB(aRandL3B, mMaterialP[765326U], mMaterialL[1003704U]);
+    MixRotRoundB(aRandL1B, mMaterialB[142424U], mMaterialN[264601U]);
+
+    //
+    // $$$$$$$$$$$$$$$$
+    //
+
+    MixRotRoundA(aRandL1A, mMaterialK[604423U], mMaterialF[145669U]);
+    MixRotRoundA(aRandL2A, mMaterialO[631724U], mMaterialA[41042U]);
+    MixRotRoundA(aRandL3A, mMaterialJ[927216U], mMaterialI[117139U]);
+    MixRotRoundA(aRandL3B, mMaterialC[689633U], mMaterialE[910253U]);
+    MixRotRoundA(aRandFinalB, mMaterialD[799875U], mMaterialH[500857U]);
+    MixRotRoundA(aRandFinalA, mMaterialG[296252U], mMaterialB[758749U]);
+    MixRotRoundA(aRandL2B, mMaterialN[684133U], mMaterialM[964694U]);
+    MixRotRoundA(aRandL1B, mMaterialL[1042425U], mMaterialP[397732U]);
+
+    //
+    // $$$$$$$$$$$$$$$$
+    //
+
+    MixRotRoundB(aRandL1A, mMaterialJ[492149U], mMaterialH[798612U]);
+    MixRotRoundB(aRandFinalA, mMaterialC[1040816U], mMaterialF[825192U]);
+    MixRotRoundB(aRandL3A, mMaterialB[25725U], mMaterialN[366056U]);
+    MixRotRoundB(aRandL2B, mMaterialA[952748U], mMaterialK[727524U]);
+    MixRotRoundB(aRandL1B, mMaterialM[235327U], mMaterialP[86013U]);
+    MixRotRoundB(aRandFinalB, mMaterialI[360092U], mMaterialE[115770U]);
+    MixRotRoundB(aRandL2A, mMaterialG[718701U], mMaterialO[144529U]);
+    MixRotRoundB(aRandL3B, mMaterialL[472935U], mMaterialD[1005709U]);
+
+    //
+    // $$$$$$$$$$$$$$$$
+    //
+
+    MixRotRoundA(aRandFinalA, mMaterialM[639687U], mMaterialB[612313U]);
+    MixRotRoundA(aRandL3B, mMaterialF[913119U], mMaterialD[380614U]);
+    MixRotRoundA(aRandFinalB, mMaterialH[664393U], mMaterialL[416474U]);
+    MixRotRoundA(aRandL2B, mMaterialE[947213U], mMaterialP[181617U]);
+    MixRotRoundA(aRandL1B, mMaterialJ[567780U], mMaterialA[264708U]);
+    MixRotRoundA(aRandL1A, mMaterialK[846700U], mMaterialN[969983U]);
+    MixRotRoundA(aRandL3A, mMaterialC[860868U], mMaterialG[333044U]);
+    MixRotRoundA(aRandL2A, mMaterialI[492378U], mMaterialO[468357U]);
+
+    //
+    // $$$$$$$$$$$$$$$$
+    //
+
+    MixRotRoundB(aRandL2B, mMaterialP[630442U], mMaterialJ[823318U]);
+    MixRotRoundB(aRandL3B, mMaterialD[719815U], mMaterialA[512968U]);
+    MixRotRoundB(aRandFinalB, mMaterialK[166989U], mMaterialB[411820U]);
+    MixRotRoundB(aRandFinalA, mMaterialE[596141U], mMaterialI[741546U]);
+    MixRotRoundB(aRandL1B, mMaterialO[366653U], mMaterialN[336780U]);
+    MixRotRoundB(aRandL2A, mMaterialF[775543U], mMaterialL[950859U]);
+    MixRotRoundB(aRandL1A, mMaterialH[305357U], mMaterialG[525402U]);
+    MixRotRoundB(aRandL3A, mMaterialM[797077U], mMaterialC[63483U]);
+
+    //
+    // $$$$$$$$$$$$$$$$
+    //
+
+    MixRotRoundA(aRandL2B, mMaterialH[109254U], mMaterialN[503078U]);
+    MixRotRoundA(aRandFinalB, mMaterialK[769014U], mMaterialO[953570U]);
+    MixRotRoundA(aRandL3A, mMaterialM[669439U], mMaterialJ[901540U]);
+    MixRotRoundA(aRandL1B, mMaterialI[822413U], mMaterialG[739802U]);
+    MixRotRoundA(aRandFinalA, mMaterialL[270363U], mMaterialE[152699U]);
+    MixRotRoundA(aRandL2A, mMaterialD[346572U], mMaterialA[569629U]);
+    MixRotRoundA(aRandL3B, mMaterialC[437690U], mMaterialB[1015700U]);
+    MixRotRoundA(aRandL1A, mMaterialF[231142U], mMaterialP[1040917U]);
+
+    //
+    // $$$$$$$$$$$$$$$$
+    //
+
+    MixRotRoundB(aRandL3A, mMaterialD[608915U], mMaterialJ[969915U]);
+    MixRotRoundB(aRandL2A, mMaterialO[936276U], mMaterialG[984451U]);
+    MixRotRoundB(aRandL2B, mMaterialE[673847U], mMaterialK[358121U]);
+    MixRotRoundB(aRandFinalB, mMaterialI[365648U], mMaterialH[230106U]);
+    MixRotRoundB(aRandL1A, mMaterialL[209531U], mMaterialF[495427U]);
+    MixRotRoundB(aRandL3B, mMaterialM[894834U], mMaterialA[474208U]);
+    MixRotRoundB(aRandL1B, mMaterialN[145225U], mMaterialC[169001U]);
+    MixRotRoundB(aRandFinalA, mMaterialB[301872U], mMaterialP[551681U]);
+
+    //
+    // $$$$$$$$$$$$$$$$
+    //
+
+    MixRotRoundA(aRandL2B, mMaterialM[994369U], mMaterialL[256880U]);
+    MixRotRoundA(aRandFinalA, mMaterialD[1040831U], mMaterialP[151007U]);
+    MixRotRoundA(aRandL3B, mMaterialO[756230U], mMaterialA[812553U]);
+    MixRotRoundA(aRandFinalB, mMaterialC[962577U], mMaterialI[448770U]);
+    MixRotRoundA(aRandL1A, mMaterialB[75928U], mMaterialN[878431U]);
+    MixRotRoundA(aRandL3A, mMaterialH[690200U], mMaterialK[208297U]);
+    MixRotRoundA(aRandL2A, mMaterialJ[309350U], mMaterialG[63021U]);
+    MixRotRoundA(aRandL1B, mMaterialF[27496U], mMaterialE[747330U]);
+
+    //
+    // $$$$$$$$$$$$$$$$
+    //
+
+    MixRotRoundB(aRandL2A, mMaterialB[950048U], mMaterialA[1003994U]);
+    MixRotRoundB(aRandL3B, mMaterialD[469570U], mMaterialK[585608U]);
+    MixRotRoundB(aRandL1B, mMaterialI[280842U], mMaterialF[543062U]);
+    MixRotRoundB(aRandL2B, mMaterialN[399303U], mMaterialG[955644U]);
+    MixRotRoundB(aRandL1A, mMaterialJ[707802U], mMaterialE[437142U]);
+    MixRotRoundB(aRandFinalB, mMaterialP[839350U], mMaterialC[246350U]);
+    MixRotRoundB(aRandL3A, mMaterialH[1021723U], mMaterialM[179852U]);
+    MixRotRoundB(aRandFinalA, mMaterialO[21774U], mMaterialL[604851U]);
+
+    //
+    // $$$$$$$$$$$$$$$$
+    //
+
+    MixRotRoundA(aRandL2B, mMaterialL[938535U], mMaterialA[152176U]);
+    MixRotRoundA(aRandL1A, mMaterialG[417795U], mMaterialD[5200U]);
+    MixRotRoundA(aRandL3A, mMaterialB[430475U], mMaterialO[124941U]);
+    MixRotRoundA(aRandFinalB, mMaterialJ[360491U], mMaterialC[84800U]);
+    MixRotRoundA(aRandL1B, mMaterialF[357185U], mMaterialK[695764U]);
+    MixRotRoundA(aRandFinalA, mMaterialI[1000278U], mMaterialN[600757U]);
+    MixRotRoundA(aRandL3B, mMaterialP[570744U], mMaterialE[789140U]);
+    MixRotRoundA(aRandL2A, mMaterialH[755584U], mMaterialM[837551U]);
+
+    //
+    // $$$$$$$$$$$$$$$$
+    //
+
+    MixRotRoundB(aRandFinalA, mMaterialJ[802449U], mMaterialA[235346U]);
+    MixRotRoundB(aRandL1A, mMaterialG[1028472U], mMaterialF[314646U]);
+    MixRotRoundB(aRandFinalB, mMaterialK[435187U], mMaterialC[479251U]);
+    MixRotRoundB(aRandL2B, mMaterialO[829213U], mMaterialI[863007U]);
+    MixRotRoundB(aRandL3B, mMaterialN[783522U], mMaterialB[545762U]);
+    MixRotRoundB(aRandL2A, mMaterialP[917939U], mMaterialE[338689U]);
+    MixRotRoundB(aRandL3A, mMaterialD[174247U], mMaterialM[593926U]);
+    MixRotRoundB(aRandL1B, mMaterialH[1012593U], mMaterialL[901046U]);
+
+    //
+    // $$$$$$$$$$$$$$$$
+    //
+
+    MixRotRoundA(aRandL1A, mMaterialJ[740542U], mMaterialC[685395U]);
+    MixRotRoundA(aRandL3B, mMaterialP[245174U], mMaterialA[336508U]);
+    MixRotRoundA(aRandL2B, mMaterialO[986953U], mMaterialL[381512U]);
+    MixRotRoundA(aRandL3A, mMaterialK[82775U], mMaterialI[535045U]);
+    MixRotRoundA(aRandL2A, mMaterialB[465271U], mMaterialE[11424U]);
+    MixRotRoundA(aRandFinalB, mMaterialM[858509U], mMaterialH[452160U]);
+    MixRotRoundA(aRandFinalA, mMaterialD[291535U], mMaterialF[189121U]);
+    MixRotRoundA(aRandL1B, mMaterialN[712395U], mMaterialG[566720U]);
+
+    //
+    // $$$$$$$$$$$$$$$$
+    //
+
+    MixRotRoundB(aRandL1B, mMaterialH[843737U], mMaterialK[996917U]);
+    MixRotRoundB(aRandL3B, mMaterialN[113189U], mMaterialC[529931U]);
+    MixRotRoundB(aRandL2B, mMaterialJ[149459U], mMaterialA[944549U]);
+    MixRotRoundB(aRandL3A, mMaterialE[260501U], mMaterialM[503177U]);
+    MixRotRoundB(aRandL2A, mMaterialL[52855U], mMaterialO[660260U]);
+    MixRotRoundB(aRandFinalA, mMaterialI[598776U], mMaterialP[267400U]);
+    MixRotRoundB(aRandL1A, mMaterialD[317913U], mMaterialF[391263U]);
+    MixRotRoundB(aRandFinalB, mMaterialB[876745U], mMaterialG[7083U]);
+
+    //
+    // $$$$$$$$$$$$$$$$
+    //
+
+    MixRotRoundA(aRandL1A, mMaterialL[530622U], mMaterialE[974847U]);
+    MixRotRoundA(aRandL1B, mMaterialH[137527U], mMaterialJ[625430U]);
+    MixRotRoundA(aRandFinalB, mMaterialG[780387U], mMaterialK[816087U]);
+    MixRotRoundA(aRandFinalA, mMaterialM[925527U], mMaterialD[848015U]);
+    MixRotRoundA(aRandL2B, mMaterialC[26828U], mMaterialF[670498U]);
+    MixRotRoundA(aRandL3B, mMaterialB[339953U], mMaterialO[580301U]);
+    MixRotRoundA(aRandL3A, mMaterialI[233289U], mMaterialA[77849U]);
+    MixRotRoundA(aRandL2A, mMaterialP[432902U], mMaterialN[897788U]);
+
+    //
+    // $$$$$$$$$$$$$$$$
+    //
+
+    MixRotRoundB(aRandL1A, mMaterialH[262166U], mMaterialO[175188U]);
+    MixRotRoundB(aRandFinalB, mMaterialC[364617U], mMaterialM[396300U]);
+    MixRotRoundB(aRandL3A, mMaterialD[625559U], mMaterialF[201638U]);
+    MixRotRoundB(aRandFinalA, mMaterialA[859851U], mMaterialE[549653U]);
+    MixRotRoundB(aRandL3B, mMaterialP[600884U], mMaterialN[1047148U]);
+    MixRotRoundB(aRandL1B, mMaterialJ[431963U], mMaterialG[668671U]);
+    MixRotRoundB(aRandL2B, mMaterialL[782617U], mMaterialB[893740U]);
+    MixRotRoundB(aRandL2A, mMaterialK[922068U], mMaterialI[52580U]);
+
+    //
+    // $$$$$$$$$$$$$$$$
+    //
+
+    MixRotRoundA(aRandL1B, mMaterialF[55872U], mMaterialL[740134U]);
+    MixRotRoundA(aRandFinalB, mMaterialA[179038U], mMaterialG[247435U]);
+    MixRotRoundA(aRandL1A, mMaterialI[623501U], mMaterialE[262543U]);
+    MixRotRoundA(aRandL2A, mMaterialC[592476U], mMaterialH[486082U]);
+    MixRotRoundA(aRandFinalA, mMaterialB[496364U], mMaterialD[888197U]);
+    MixRotRoundA(aRandL3A, mMaterialP[301134U], mMaterialO[533025U]);
+    MixRotRoundA(aRandL3B, mMaterialM[199565U], mMaterialK[665019U]);
+    MixRotRoundA(aRandL2B, mMaterialJ[1036362U], mMaterialN[77097U]);
+
+    //
+    // $$$$$$$$$$$$$$$$
+    //
+
+    MixRotRoundB(aRandFinalA, mMaterialP[507917U], mMaterialL[107383U]);
+    MixRotRoundB(aRandL3A, mMaterialK[266244U], mMaterialO[317555U]);
+    MixRotRoundB(aRandL1B, mMaterialC[891864U], mMaterialA[605928U]);
+    MixRotRoundB(aRandL2B, mMaterialG[471597U], mMaterialE[858870U]);
+    MixRotRoundB(aRandL2A, mMaterialD[227514U], mMaterialB[65490U]);
+    MixRotRoundB(aRandFinalB, mMaterialH[166804U], mMaterialM[744387U]);
+    MixRotRoundB(aRandL3B, mMaterialJ[1005277U], mMaterialN[10002U]);
+    MixRotRoundB(aRandL1A, mMaterialI[399980U], mMaterialF[692401U]);
+
+    //
+    // $$$$$$$$$$$$$$$$
+    //
+
+    MixRotRoundA(aRandFinalB, mMaterialP[701762U], mMaterialH[901996U]);
+    MixRotRoundA(aRandL3B, mMaterialC[741159U], mMaterialE[639549U]);
+    MixRotRoundA(aRandL1B, mMaterialL[458735U], mMaterialJ[489906U]);
+    MixRotRoundA(aRandL1A, mMaterialF[962740U], mMaterialM[574664U]);
+    MixRotRoundA(aRandFinalA, mMaterialA[226245U], mMaterialG[598795U]);
+    MixRotRoundA(aRandL2A, mMaterialK[373420U], mMaterialO[45194U]);
+    MixRotRoundA(aRandL3A, mMaterialI[150009U], mMaterialN[947428U]);
+    MixRotRoundA(aRandL2B, mMaterialD[101547U], mMaterialB[812699U]);
+
+    //
+    // $$$$$$$$$$$$$$$$
+    //
+
+    MixRotRoundB(aRandL3A, mMaterialF[436142U], mMaterialL[838773U]);
+    MixRotRoundB(aRandL2A, mMaterialA[761760U], mMaterialI[1033951U]);
+    MixRotRoundB(aRandL1B, mMaterialK[51923U], mMaterialD[66517U]);
+    MixRotRoundB(aRandFinalB, mMaterialP[119618U], mMaterialH[420500U]);
+    MixRotRoundB(aRandL2B, mMaterialE[708245U], mMaterialG[637744U]);
+    MixRotRoundB(aRandL1A, mMaterialJ[863440U], mMaterialC[157432U]);
+    MixRotRoundB(aRandL3B, mMaterialB[571102U], mMaterialN[167909U]);
+    MixRotRoundB(aRandFinalA, mMaterialM[4204U], mMaterialO[726391U]);
+
+    //
+    // $$$$$$$$$$$$$$$$
+    //
+
+    MixRotRoundA(aRandL2A, mMaterialA[116592U], mMaterialD[439252U]);
+    MixRotRoundA(aRandFinalA, mMaterialN[296898U], mMaterialJ[606629U]);
+    MixRotRoundA(aRandL3A, mMaterialO[810179U], mMaterialG[209142U]);
+    MixRotRoundA(aRandL2B, mMaterialL[679260U], mMaterialF[1014367U]);
+    MixRotRoundA(aRandL1A, mMaterialE[763981U], mMaterialC[581111U]);
+    MixRotRoundA(aRandL1B, mMaterialI[4002U], mMaterialP[975460U]);
+    MixRotRoundA(aRandFinalB, mMaterialB[1016701U], mMaterialM[355986U]);
+    MixRotRoundA(aRandL3B, mMaterialK[421021U], mMaterialH[741113U]);
+
+    //
+    // $$$$$$$$$$$$$$$$
+    //
+
+    MixRotRoundB(aRandL1B, mMaterialP[196980U], mMaterialC[398027U]);
+    MixRotRoundB(aRandL2A, mMaterialJ[662985U], mMaterialG[875389U]);
+    MixRotRoundB(aRandL3B, mMaterialK[296088U], mMaterialE[505158U]);
+    MixRotRoundB(aRandL3A, mMaterialN[261123U], mMaterialH[375945U]);
+    MixRotRoundB(aRandFinalB, mMaterialA[641734U], mMaterialD[769585U]);
+    MixRotRoundB(aRandL1A, mMaterialF[105426U], mMaterialL[97998U]);
+    MixRotRoundB(aRandFinalA, mMaterialO[889941U], mMaterialI[807068U]);
+    MixRotRoundB(aRandL2B, mMaterialB[737451U], mMaterialM[158327U]);
+
+    //
+    // $$$$$$$$$$$$$$$$
+    //
+
+    MixRotRoundA(aRandFinalB, mMaterialA[319888U], mMaterialM[713848U]);
+    MixRotRoundA(aRandFinalA, mMaterialO[876536U], mMaterialE[186055U]);
+    MixRotRoundA(aRandL2A, mMaterialH[540381U], mMaterialD[47151U]);
+    MixRotRoundA(aRandL1A, mMaterialN[437219U], mMaterialC[501397U]);
+    MixRotRoundA(aRandL3B, mMaterialF[400792U], mMaterialJ[28600U]);
+    MixRotRoundA(aRandL2B, mMaterialP[374062U], mMaterialL[815956U]);
+    MixRotRoundA(aRandL3A, mMaterialK[464254U], mMaterialB[634428U]);
+    MixRotRoundA(aRandL1B, mMaterialG[936635U], mMaterialI[200677U]);
+
+    //
+    // $$$$$$$$$$$$$$$$
+    //
+
+    MixRotRoundB(aRandL2B, mMaterialL[22813U], mMaterialI[951946U]);
+    MixRotRoundB(aRandL2A, mMaterialD[140100U], mMaterialK[504626U]);
+    MixRotRoundB(aRandL1A, mMaterialB[101627U], mMaterialP[739481U]);
+    MixRotRoundB(aRandL3A, mMaterialF[579897U], mMaterialH[646289U]);
+    MixRotRoundB(aRandL3B, mMaterialJ[269886U], mMaterialA[402815U]);
+    MixRotRoundB(aRandFinalA, mMaterialG[384633U], mMaterialN[463247U]);
+    MixRotRoundB(aRandL1B, mMaterialM[84629U], mMaterialE[57739U]);
+    MixRotRoundB(aRandFinalB, mMaterialO[221550U], mMaterialC[778680U]);
+
+    //
+    // $$$$$$$$$$$$$$$$
+    //
+
+    MixRotRoundA(aRandL3A, mMaterialE[1033309U], mMaterialJ[394026U]);
+    MixRotRoundA(aRandFinalB, mMaterialG[146966U], mMaterialP[328457U]);
+    MixRotRoundA(aRandL3B, mMaterialF[269921U], mMaterialL[306040U]);
+    MixRotRoundA(aRandL2B, mMaterialI[479872U], mMaterialH[72589U]);
+    MixRotRoundA(aRandL2A, mMaterialM[555482U], mMaterialB[680997U]);
+    MixRotRoundA(aRandL1B, mMaterialD[930491U], mMaterialO[429016U]);
+    MixRotRoundA(aRandFinalA, mMaterialC[821071U], mMaterialK[965720U]);
+    MixRotRoundA(aRandL1A, mMaterialA[16867U], mMaterialN[205734U]);
+
+    //
+    // $$$$$$$$$$$$$$$$
+    //
+
+    MixRotRoundB(aRandL3B, mMaterialD[504174U], mMaterialO[282854U]);
+    MixRotRoundB(aRandL2B, mMaterialJ[68553U], mMaterialH[949572U]);
+    MixRotRoundB(aRandL1A, mMaterialF[630456U], mMaterialA[547174U]);
+    MixRotRoundB(aRandFinalA, mMaterialG[834683U], mMaterialL[699763U]);
+    MixRotRoundB(aRandFinalB, mMaterialK[242121U], mMaterialC[317705U]);
+    MixRotRoundB(aRandL3A, mMaterialP[865157U], mMaterialN[580924U]);
+    MixRotRoundB(aRandL1B, mMaterialM[44338U], mMaterialB[387378U]);
+    MixRotRoundB(aRandL2A, mMaterialI[889934U], mMaterialE[482256U]);
 
     aRandFinalB = TwistMix64::DiffuseA(aRandFinalB);
     aRandL1B = TwistMix64::DiffuseA(aRandL1B);
@@ -1072,10 +1773,10 @@ void Soccer::SeedEpilogue() {
         }
         
         /*
-        if (aLaneIndex == 16u) {
-            aLaneIndex = 0u;
-        }
-        */
+         if (aLaneIndex == 16u) {
+         aLaneIndex = 0u;
+         }
+         */
         
         std::uint8_t *aResult = mMaterials[aLaneIndex] + aLaneOffset;
         aLaneOffset += pByteCount;
