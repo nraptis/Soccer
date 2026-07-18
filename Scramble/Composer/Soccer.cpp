@@ -1206,50 +1206,6 @@ void Soccer::SeedEpilogue() {
     mFinalL3.AddCipher(std::make_unique<RotateMaskCipher>(mMasks[6], mRotationAmountsFinal[0]));
     AddCipherB(mFinalL3, mCiphersIdentifiersB[3], aLayerSizeL3);
     mFinalL3.AddCipher(std::make_unique<RotateMaskCipher>(mMasks[7], mRotationAmountsFinal[1]));
-    
-    auto PrintKey = [](const std::uint8_t *pMaterial,
-                       const char *pBlockSize) {
-        std::printf("Apply key ");
-        for (std::size_t aIndex = 0; aIndex < 6; ++aIndex) {
-            for (int aBit = 7; aBit >= 0; --aBit) {
-                std::printf("%u",
-                            static_cast<unsigned int>((pMaterial[aIndex] >> aBit) & 1U));
-            }
-        }
-        std::printf(" at size %s.\n", pBlockSize);
-    };
-    
-    auto PrintRotation = [](std::uint64_t pRotationAmount,
-                            std::uint8_t pMask,
-                            const char *pBlockSize) {
-        std::printf("Rotate by %llu every bit matching mask ",
-                    static_cast<unsigned long long>(pRotationAmount));
-        for (int aBit = 7; aBit >= 0; --aBit) {
-            std::printf("%u",
-                        static_cast<unsigned int>((pMask >> aBit) & 1U));
-        }
-        std::printf(" wrapping @ block size %s.\n", pBlockSize);
-    };
-    
-    PrintKey(mMaterialE, "L3");
-    PrintRotation(mRotationAmountsL3[0], mMasks[4], "L3");
-    PrintKey(mMaterialF, "L3");
-    PrintRotation(mRotationAmountsL3[1], mMasks[5], "L3");
-    
-    PrintKey(mMaterialC, "L2");
-    PrintRotation(mRotationAmountsL2[0], mMasks[2], "L2");
-    PrintKey(mMaterialD, "L2");
-    PrintRotation(mRotationAmountsL2[1], mMasks[3], "L2");
-    
-    PrintKey(mMaterialA, "L1");
-    PrintRotation(mRotationAmountsL1[0], mMasks[0], "L1");
-    PrintKey(mMaterialB, "L1");
-    PrintRotation(mRotationAmountsL1[1], mMasks[1], "L1");
-    
-    PrintKey(mMaterialG, "L3 (final)");
-    PrintRotation(mRotationAmountsFinal[0], mMasks[6], "L3 (final)");
-    PrintKey(mMaterialH, "L3 (final)");
-    PrintRotation(mRotationAmountsFinal[1], mMasks[7], "L3 (final)");
 }
 
 bool Soccer::EncryptBlock(std::uint8_t *pSource,

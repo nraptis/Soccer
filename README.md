@@ -133,37 +133,37 @@ expensive and can take about 40 seconds.
 ### L3
 
 ```text
-Apply key 0b100100111000010100011011001101 at size L3.
-Rotate by 396810 with mask 0b10100100 @ block size L3.
-Apply key 0b010101010101000101101111001011 at size L3.
-Rotate by 785849 with mask 0b00101100 @ block size L3.
+Apply key 100100111000010100011011001101100001001010011100 at size L3.
+Rotate by 628478 every bit matching mask 10100100 wrapping @ block size L3.
+Apply key 010101010101000101101111001010110101101001010100 at size L3.
+Rotate by 878516 every bit matching mask 00101100 wrapping @ block size L3.
 ```
 
 ### L2
 
 ```text
-Apply key 0b111111100011111010111001000101 at size L2.
-Rotate by 96221 with mask 0b00110011 @ block size L2.
-Apply key 0b101101001011100100110110011001 at size L2.
-Rotate by 395877 with mask 0b00111000 @ block size L2.
+Apply key 111111100011111010111001001001011001000111110100 at size L2.
+Rotate by 332374 every bit matching mask 00110011 wrapping @ block size L2.
+Apply key 101101001011100100110110011000011001110001001010 at size L2.
+Rotate by 489449 every bit matching mask 00111000 wrapping @ block size L2.
 ```
 
 ### L1
 
 ```text
-Apply key 0b110011011011010101101101000100 at size L1.
-Rotate by 74490 with mask 0b00100101 @ block size L1.
-Apply key 0b101001010110010011001001010001 at size L1.
-Rotate by 198127 with mask 0b11000001 @ block size L1.
+Apply key 110011011011010101101101000110000010100001100010 at size L1.
+Rotate by 72731 every bit matching mask 00100101 wrapping @ block size L1.
+Apply key 101001010110010011001001010001011011001111001110 at size L1.
+Rotate by 245208 every bit matching mask 11000001 wrapping @ block size L1.
 ```
 
 ### Final L3
 
 ```text
-Apply key 0b000001011001011000101000110011 at size L3 (final).
-Rotate by 311376 with mask 0b01000110 @ block size L3 (final).
-Apply key 0b001001110010111011011101110100 at size L3 (final).
-Rotate by 547399 with mask 0b01010010 @ block size L3 (final).
+Apply key 000001011001011000101000110110111001000101101011 at size L3 (final).
+Rotate by 717233 every bit matching mask 01000110 wrapping @ block size L3 (final).
+Apply key 001001110010111011011101111001001010101110011011 at size L3 (final).
+Rotate by 1007156 every bit matching mask 01010010 wrapping @ block size L3 (final).
 ```
 
 ![alt text](https://raw.githubusercontent.com/nraptis/Soccer/refs/heads/main/byte%20diagrams/KDFA.png)
