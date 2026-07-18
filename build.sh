@@ -45,7 +45,7 @@ build_mac() {
         return
     fi
 
-    local archs="${SOCCER_MAC_ARCHS:-arm64;x86_64}"
+    local archs="${SOCCER_MAC_ARCHS:-arm64}"
     run_cmake_build \
         "${BUILD_DIR}/cmake-mac" \
         "${RELEASE_DIR}/libsoccer-Mac" \

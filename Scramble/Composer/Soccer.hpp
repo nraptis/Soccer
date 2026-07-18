@@ -54,140 +54,89 @@
 
 class Soccer {
 public:
-    
+
     static bool                                 AttemptSeed_Encrypt(std::uint8_t *pPassword,
                                                                     std::size_t pPasswordByteLength,
                                                                     std::uint64_t pNonce,
                                                                     std::uint32_t *pAckWord);
-    
+
     static bool                                 AttemptSeed_Decrypt(std::uint8_t *pPassword,
                                                                     std::size_t pPasswordByteLength,
                                                                     std::uint64_t pNonce,
                                                                     std::uint32_t pAckWord);
-    
+
     static bool                                 EncryptBlock(std::uint8_t *pSource,
                                                              std::uint8_t *pDestination);
     static bool                                 DecryptBlock(std::uint8_t *pSource,
                                                              std::uint8_t *pDestination);
-    
-    static inline std::uint8_t                  mMaterialA[SOCCER_BLOCK_SIZE];
-    static inline std::uint8_t                  mMaterialB[SOCCER_BLOCK_SIZE];
-    static inline std::uint8_t                  mMaterialC[SOCCER_BLOCK_SIZE];
-    static inline std::uint8_t                  mMaterialD[SOCCER_BLOCK_SIZE];
 
-    static inline std::uint8_t                  mMaterialE[SOCCER_BLOCK_SIZE];
-    static inline std::uint8_t                  mMaterialF[SOCCER_BLOCK_SIZE];
-    static inline std::uint8_t                  mMaterialG[SOCCER_BLOCK_SIZE];
-    static inline std::uint8_t                  mMaterialH[SOCCER_BLOCK_SIZE];
+    static void                                 InitializeAvalancheReferenceMaterials(const std::uint8_t *(&pMaterials)[16]);
 
-    static inline std::uint8_t                  mMaterialI[SOCCER_BLOCK_SIZE];
-    static inline std::uint8_t                  mMaterialJ[SOCCER_BLOCK_SIZE];
-    static inline std::uint8_t                  mMaterialK[SOCCER_BLOCK_SIZE];
-    static inline std::uint8_t                  mMaterialL[SOCCER_BLOCK_SIZE];
-    
-    static inline std::uint8_t                  mMaterialM[SOCCER_BLOCK_SIZE];
-    static inline std::uint8_t                  mMaterialN[SOCCER_BLOCK_SIZE];
-    static inline std::uint8_t                  mMaterialO[SOCCER_BLOCK_SIZE];
-    static inline std::uint8_t                  mMaterialP[SOCCER_BLOCK_SIZE];
-    
 private:
-    
-    // This is only used for the initial shuffle.
-    static inline TwistExpander_Gemma           mStarter;
-    
-    static inline TwistWorkSpace                mWorkSpaceA;
-    static inline TwistWorkSpace                mWorkSpaceB;
-    static inline TwistWorkSpace                mWorkSpaceC;
-    static inline TwistWorkSpace                mWorkSpaceD;
-    static inline TwistWorkSpace                mWorkSpaceE;
-    static inline TwistWorkSpace                mWorkSpaceF;
-    static inline TwistWorkSpace                mWorkSpaceG;
-    static inline TwistWorkSpace                mWorkSpaceH;
-    static inline TwistWorkSpace                mWorkSpaceI;
-    static inline TwistWorkSpace                mWorkSpaceJ;
-    static inline TwistWorkSpace                mWorkSpaceK;
-    static inline TwistWorkSpace                mWorkSpaceL;
-    static inline TwistWorkSpace                mWorkSpaceM;
-    static inline TwistWorkSpace                mWorkSpaceN;
-    static inline TwistWorkSpace                mWorkSpaceO;
-    static inline TwistWorkSpace                mWorkSpaceP;
-    
-    static inline TwistFarmSalt                 mFarmSalt;
-    
-    static inline TwistExpander_Achernar        mAchernar; // 1
-    static inline TwistExpander_Alcor           mAlcor; // 2
-    static inline TwistExpander_Aldebaran       mAldebaran; // 3
-    static inline TwistExpander_Alioth          mAlioth; // 4
-    static inline TwistExpander_Alkaid          mAlkaid; // 5
-    static inline TwistExpander_Alnitak         mAlnitak; // 6
-    static inline TwistExpander_Altair          mAltair; // 7
-    static inline TwistExpander_Ankaa           mAnkaa; // 8
-    static inline TwistExpander_Antares         mAntares; // 9
-    static inline TwistExpander_Arcturus        mArcturus; // 10
-    static inline TwistExpander_Athebyne        mAthebyne; // 11
-    static inline TwistExpander_Bellatrix       mBellatrix; // 12
-    static inline TwistExpander_Betelgeuse      mBetelgeuse; // 13
-    static inline TwistExpander_Canopus         mCanopus; // 14
-    static inline TwistExpander_Capella         mCapella; // 15
-    static inline TwistExpander_Castor          mCastor; // 16
-    static inline TwistExpander_Mebsuta         mMebsuta; // 17
-    static inline TwistExpander_Menkent         mMenkent; // 18
-    static inline TwistExpander_Mimosa          mMimosa; // 19
-    static inline TwistExpander_Miram           mMiram; // 20
-    static inline TwistExpander_Mirfak          mMirfak; // 21
-    static inline TwistExpander_Mothallah       mMothallah; // 22
-    static inline TwistExpander_Naos            mNaos; // 23
-    static inline TwistExpander_Polaris         mPolaris; // 24
-    static inline TwistExpander_Pollux          mPollux; // 25
-    static inline TwistExpander_Procyon         mProcyon; // 26
-    static inline TwistExpander_Regulus         mRegulus; // 27
-    static inline TwistExpander_Rigel           mRigel; // 28
-    static inline TwistExpander_Saiph           mSaiph; // 29
-    static inline TwistExpander_Sirius          mSirius; // 30
-    static inline TwistExpander_Suhail          mSuhail; // 31
-    static inline TwistExpander_Vega            mVega; // 32
-    
-    static inline std::uint8_t                  mMasks[32];
 
-    static inline std::uint8_t                  *mMaterials[16];
-    static inline TwistExpander                 *mExpanders[32];
-    static inline TwistWorkSpace                *mWorkSpaces[16];
-    static inline std::uint8_t                  *mSources[16];
+    static TwistFarmSalt                        mFarmSalt;
 
-    static inline TwistExpander                 *mClaimedExpanders[16];
-    static inline std::size_t                   mClaimedExpanderCount;
-    
-    static inline uint8_t                       *mClaimedMaterials[16];
-    static inline std::size_t                   mClaimedMaterialCount;
-    
-    static inline TwistWorkSpace                *mClaimedWorkSpaces[16];
-    static inline std::size_t                   mClaimedWorkSpaceCount;
-    
-    static inline std::uint8_t                  mCiphersIdentifiersA[64];
-    static inline std::uint8_t                  mCiphersIdentifiersB[64];
-    
-    static inline std::uint8_t                  mRandom[S_BLOCK];
-    
-    static inline std::uint8_t                  mScratch[SOCCER_BLOCK_SIZE];
-    
-    static inline std::uint8_t                  mCrushA[S_BLOCK];
-    static inline std::uint8_t                  mCrushB[S_BLOCK];
-    static inline std::uint8_t                  mCrushC[S_BLOCK];
-    static inline std::uint8_t                  mCrushD[S_BLOCK];
-    
-    static inline std::uint64_t                 mRotationAmountsL3[2];
-    static inline std::uint64_t                 mRotationAmountsL2[2];
-    static inline std::uint64_t                 mRotationAmountsL1[2];
-    static inline std::uint64_t                 mRotationAmountsFinal[2];
-    
-    static inline LayeredCrypt                  mCrypt;
-    static inline EncryptionLayer               mFinalL3;
-    
-    static inline std::uint8_t                  mCryptTemp[SOCCER_BLOCK_SIZE];
+    static TwistExpander_Achernar               mAchernar; // 1
+    static TwistExpander_Alcor                  mAlcor; // 2
+    static TwistExpander_Aldebaran              mAldebaran; // 3
+    static TwistExpander_Alioth                 mAlioth; // 4
+    static TwistExpander_Alkaid                 mAlkaid; // 5
+    static TwistExpander_Alnitak                mAlnitak; // 6
+    static TwistExpander_Altair                 mAltair; // 7
+    static TwistExpander_Ankaa                  mAnkaa; // 8
+    static TwistExpander_Antares                mAntares; // 9
+    static TwistExpander_Arcturus               mArcturus; // 10
+    static TwistExpander_Athebyne               mAthebyne; // 11
+    static TwistExpander_Bellatrix              mBellatrix; // 12
+    static TwistExpander_Betelgeuse             mBetelgeuse; // 13
+    static TwistExpander_Canopus                mCanopus; // 14
+    static TwistExpander_Capella                mCapella; // 15
+    static TwistExpander_Castor                 mCastor; // 16
+    static TwistExpander_Mebsuta                mMebsuta; // 17
+    static TwistExpander_Menkent                mMenkent; // 18
+    static TwistExpander_Mimosa                 mMimosa; // 19
+    static TwistExpander_Miram                  mMiram; // 20
+    static TwistExpander_Mirfak                 mMirfak; // 21
+    static TwistExpander_Mothallah              mMothallah; // 22
+    static TwistExpander_Naos                   mNaos; // 23
+    static TwistExpander_Polaris                mPolaris; // 24
+    static TwistExpander_Pollux                 mPollux; // 25
+    static TwistExpander_Procyon                mProcyon; // 26
+    static TwistExpander_Regulus                mRegulus; // 27
+    static TwistExpander_Rigel                  mRigel; // 28
+    static TwistExpander_Saiph                  mSaiph; // 29
+    static TwistExpander_Sirius                 mSirius; // 30
+    static TwistExpander_Suhail                 mSuhail; // 31
+    static TwistExpander_Vega                   mVega; // 32
+
+    static std::uint8_t                         mMasks[32];
+
+    static std::uint8_t                         *mMaterials[16];
+    static TwistExpander                        *mExpanders[32];
+    static TwistWorkSpace                       *mWorkSpaces[16];
+    static std::uint8_t                         *mSources[16];
+
+    static TwistExpander                        *mClaimedExpanders[16];
+    static std::size_t                          mClaimedExpanderCount;
+
+    static std::uint8_t                         *mClaimedMaterials[16];
+    static std::size_t                          mClaimedMaterialCount;
+
+    static TwistWorkSpace                       *mClaimedWorkSpaces[16];
+    static std::size_t                          mClaimedWorkSpaceCount;
+
+    static std::uint8_t                         mCiphersIdentifiersA[64];
+    static std::uint8_t                         mCiphersIdentifiersB[64];
+
+    static std::uint64_t                        mRotationAmountsL3[2];
+    static std::uint64_t                        mRotationAmountsL2[2];
+    static std::uint64_t                        mRotationAmountsL1[2];
+    static std::uint64_t                        mRotationAmountsFinal[2];
+
+    static LayeredCrypt                         mCrypt;
+    static EncryptionLayer                      mFinalL3;
 
     static std::uint64_t                        Read64(const std::uint8_t *pSource);
-    
-
     
     static bool                                 SeedPrelude(std::uint8_t *pPassword,
                                                             std::size_t pPasswordByteLength,
@@ -198,17 +147,11 @@ private:
     
     static void                                 ShuffleSEWMMCC();
     
-    
     static void                                 FoldAllMaterialsIntoRandomForBlock(std::size_t pBlockIndex);
     
-    
-    static void                                 PrintDebugLists(bool pIsEncrypt);
-    
-    static inline std::uint8_t                  *mShuffleMaterials[16];
-    static inline TwistExpander                 *mShuffleExpanders[32];
-    static inline TwistWorkSpace                *mShuffleWorkSpaces[16];
-    
-    
+    static std::uint8_t                         *mShuffleMaterials[16];
+    static TwistExpander                        *mShuffleExpanders[32];
+    static TwistWorkSpace                       *mShuffleWorkSpaces[16];
 };
 
 #endif /* Soccer_hpp */

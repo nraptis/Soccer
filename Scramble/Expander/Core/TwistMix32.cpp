@@ -10,27 +10,27 @@
 
 std::uint32_t TwistMix32::DiffuseA(std::uint32_t pValue) {
     pValue ^= pValue >> 16;
-    pValue *= 0x85ebca6b;
+    pValue *= 0x85EBCA6B;
     pValue ^= pValue >> 13;
-    pValue *= 0xc2b2ae35;
+    pValue *= 0xC2B2AE35;
     pValue ^= pValue >> 16;
     return pValue;
 }
 
 std::uint32_t TwistMix32::DiffuseB(std::uint32_t pValue) {
     pValue ^= pValue >> 16;
-    pValue *= 0x21f0aaad;
+    pValue *= 0x21F0AAAD;
     pValue ^= pValue >> 15;
-    pValue *= 0x735a2d97;
+    pValue *= 0x735A2D97;
     pValue ^= pValue >> 15;
     return pValue;
 }
 
 std::uint32_t TwistMix32::DiffuseC(std::uint32_t pValue) {
     pValue ^= pValue >> 16;
-    pValue *= 0x7feb352d;
+    pValue *= 0x7FEB352D;
     pValue ^= pValue >> 15;
-    pValue *= 0x846ca68b;
+    pValue *= 0x846CA68B;
     pValue ^= pValue >> 16;
     return pValue;
 }

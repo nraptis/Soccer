@@ -11,7 +11,7 @@ said, Soccer is not battle tested. It should be studied, attacked, benchmarked,
 and reviewed before anyone treats it like established cryptographic
 infrastructure.
 
-![alt text](https://raw.githubusercontent.com/nraptis/Scramble/refs/heads/main/image.png)
+![alt text](https://raw.githubusercontent.com/nraptis/Soccer/refs/heads/main/image.png)
 
 ## `secure.test.encrypted` challenge
 

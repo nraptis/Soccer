@@ -31,6 +31,145 @@
 
 #define BLOCK_COUNT (SOCCER_BLOCK_SIZE / S_BLOCK)
 
+namespace {
+
+std::uint8_t mMaterialA[SOCCER_BLOCK_SIZE];
+std::uint8_t mMaterialB[SOCCER_BLOCK_SIZE];
+std::uint8_t mMaterialC[SOCCER_BLOCK_SIZE];
+std::uint8_t mMaterialD[SOCCER_BLOCK_SIZE];
+
+std::uint8_t mMaterialE[SOCCER_BLOCK_SIZE];
+std::uint8_t mMaterialF[SOCCER_BLOCK_SIZE];
+std::uint8_t mMaterialG[SOCCER_BLOCK_SIZE];
+std::uint8_t mMaterialH[SOCCER_BLOCK_SIZE];
+
+std::uint8_t mMaterialI[SOCCER_BLOCK_SIZE];
+std::uint8_t mMaterialJ[SOCCER_BLOCK_SIZE];
+std::uint8_t mMaterialK[SOCCER_BLOCK_SIZE];
+std::uint8_t mMaterialL[SOCCER_BLOCK_SIZE];
+
+std::uint8_t mMaterialM[SOCCER_BLOCK_SIZE];
+std::uint8_t mMaterialN[SOCCER_BLOCK_SIZE];
+std::uint8_t mMaterialO[SOCCER_BLOCK_SIZE];
+std::uint8_t mMaterialP[SOCCER_BLOCK_SIZE];
+
+// This is only used for the initial shuffle.
+TwistExpander_Gemma mStarter;
+
+TwistWorkSpace mWorkSpaceA;
+TwistWorkSpace mWorkSpaceB;
+TwistWorkSpace mWorkSpaceC;
+TwistWorkSpace mWorkSpaceD;
+TwistWorkSpace mWorkSpaceE;
+TwistWorkSpace mWorkSpaceF;
+TwistWorkSpace mWorkSpaceG;
+TwistWorkSpace mWorkSpaceH;
+TwistWorkSpace mWorkSpaceI;
+TwistWorkSpace mWorkSpaceJ;
+TwistWorkSpace mWorkSpaceK;
+TwistWorkSpace mWorkSpaceL;
+TwistWorkSpace mWorkSpaceM;
+TwistWorkSpace mWorkSpaceN;
+TwistWorkSpace mWorkSpaceO;
+TwistWorkSpace mWorkSpaceP;
+
+std::uint8_t mRandom[S_BLOCK];
+std::uint8_t mScratch[SOCCER_BLOCK_SIZE];
+
+std::uint8_t mCrushA[S_BLOCK];
+std::uint8_t mCrushB[S_BLOCK];
+std::uint8_t mCrushC[S_BLOCK];
+std::uint8_t mCrushD[S_BLOCK];
+
+std::uint8_t mCryptTemp[SOCCER_BLOCK_SIZE];
+
+} // namespace
+
+TwistFarmSalt Soccer::mFarmSalt;
+
+TwistExpander_Achernar Soccer::mAchernar;
+TwistExpander_Alcor Soccer::mAlcor;
+TwistExpander_Aldebaran Soccer::mAldebaran;
+TwistExpander_Alioth Soccer::mAlioth;
+TwistExpander_Alkaid Soccer::mAlkaid;
+TwistExpander_Alnitak Soccer::mAlnitak;
+TwistExpander_Altair Soccer::mAltair;
+TwistExpander_Ankaa Soccer::mAnkaa;
+TwistExpander_Antares Soccer::mAntares;
+TwistExpander_Arcturus Soccer::mArcturus;
+TwistExpander_Athebyne Soccer::mAthebyne;
+TwistExpander_Bellatrix Soccer::mBellatrix;
+TwistExpander_Betelgeuse Soccer::mBetelgeuse;
+TwistExpander_Canopus Soccer::mCanopus;
+TwistExpander_Capella Soccer::mCapella;
+TwistExpander_Castor Soccer::mCastor;
+TwistExpander_Mebsuta Soccer::mMebsuta;
+TwistExpander_Menkent Soccer::mMenkent;
+TwistExpander_Mimosa Soccer::mMimosa;
+TwistExpander_Miram Soccer::mMiram;
+TwistExpander_Mirfak Soccer::mMirfak;
+TwistExpander_Mothallah Soccer::mMothallah;
+TwistExpander_Naos Soccer::mNaos;
+TwistExpander_Polaris Soccer::mPolaris;
+TwistExpander_Pollux Soccer::mPollux;
+TwistExpander_Procyon Soccer::mProcyon;
+TwistExpander_Regulus Soccer::mRegulus;
+TwistExpander_Rigel Soccer::mRigel;
+TwistExpander_Saiph Soccer::mSaiph;
+TwistExpander_Sirius Soccer::mSirius;
+TwistExpander_Suhail Soccer::mSuhail;
+TwistExpander_Vega Soccer::mVega;
+
+std::uint8_t Soccer::mMasks[32];
+
+std::uint8_t *Soccer::mMaterials[16];
+TwistExpander *Soccer::mExpanders[32];
+TwistWorkSpace *Soccer::mWorkSpaces[16];
+std::uint8_t *Soccer::mSources[16];
+
+TwistExpander *Soccer::mClaimedExpanders[16];
+std::size_t Soccer::mClaimedExpanderCount;
+
+std::uint8_t *Soccer::mClaimedMaterials[16];
+std::size_t Soccer::mClaimedMaterialCount;
+
+TwistWorkSpace *Soccer::mClaimedWorkSpaces[16];
+std::size_t Soccer::mClaimedWorkSpaceCount;
+
+std::uint8_t Soccer::mCiphersIdentifiersA[64];
+std::uint8_t Soccer::mCiphersIdentifiersB[64];
+
+std::uint64_t Soccer::mRotationAmountsL3[2];
+std::uint64_t Soccer::mRotationAmountsL2[2];
+std::uint64_t Soccer::mRotationAmountsL1[2];
+std::uint64_t Soccer::mRotationAmountsFinal[2];
+
+LayeredCrypt Soccer::mCrypt;
+EncryptionLayer Soccer::mFinalL3;
+
+std::uint8_t *Soccer::mShuffleMaterials[16];
+TwistExpander *Soccer::mShuffleExpanders[32];
+TwistWorkSpace *Soccer::mShuffleWorkSpaces[16];
+
+void Soccer::InitializeAvalancheReferenceMaterials(const std::uint8_t *(&pMaterials)[16]) {
+    pMaterials[ 0] = mMaterialA;
+    pMaterials[ 1] = mMaterialB;
+    pMaterials[ 2] = mMaterialC;
+    pMaterials[ 3] = mMaterialD;
+    pMaterials[ 4] = mMaterialE;
+    pMaterials[ 5] = mMaterialF;
+    pMaterials[ 6] = mMaterialG;
+    pMaterials[ 7] = mMaterialH;
+    pMaterials[ 8] = mMaterialI;
+    pMaterials[ 9] = mMaterialJ;
+    pMaterials[10] = mMaterialK;
+    pMaterials[11] = mMaterialL;
+    pMaterials[12] = mMaterialM;
+    pMaterials[13] = mMaterialN;
+    pMaterials[14] = mMaterialO;
+    pMaterials[15] = mMaterialP;
+}
+
 std::uint64_t Soccer::Read64(const std::uint8_t *pSource) {
     return static_cast<std::uint64_t>(pSource[0]) |
     (static_cast<std::uint64_t>(pSource[1]) << 8) |

@@ -20,34 +20,12 @@ void TwistIndexShuffle::ExecuteA(std::size_t *pIndexList256,
         ++aWrite;
     }
     
-    const std::uint8_t *aEntropy = pBlockSizedEntropySource;
-    const std::uint8_t * const aEntropyEnd = pBlockSizedEntropySource + static_cast<std::size_t>(S_BLOCK);
-    
-    std::size_t *aBase = pIndexList256;
-    
-    for (std::size_t aRemaining = 256; aRemaining > 1; --aRemaining) {
-        
-        const std::size_t aLimit = 256 - (256 % aRemaining);
-        std::uint8_t aSample = 0;
-        
-        do {
-            if (aEntropy >= aEntropyEnd) {
-                return;
-            }
-            
-            aSample = *aEntropy;
-            ++aEntropy;
-            
-        } while (static_cast<std::size_t>(aSample) >= aLimit);
-        
-        std::size_t *aSwapA = aBase;
-        std::size_t *aSwapB = aBase + (static_cast<std::size_t>(aSample) % aRemaining);
-        
-        const std::size_t aHold = *aSwapA;
-        *aSwapA = *aSwapB;
-        *aSwapB = aHold;
-        
-        ++aBase;
+    for (std::size_t aEntropyIndex=0U; aEntropyIndex<S_HALF; aEntropyIndex+=2U) {
+        const std::size_t aIndexA = pBlockSizedEntropySource[aEntropyIndex];
+        const std::size_t aIndexB = pBlockSizedEntropySource[aEntropyIndex + 1U];
+        const std::size_t aHold = pIndexList256[aIndexA];
+        pIndexList256[aIndexA] = pIndexList256[aIndexB];
+        pIndexList256[aIndexB] = aHold;
     }
 }
 
@@ -63,33 +41,11 @@ void TwistIndexShuffle::ExecuteB(std::size_t *pIndexList256,
         ++aWrite;
     }
     
-    const std::uint8_t * const aEntropyBegin = pBlockSizedEntropySource;
-    const std::uint8_t *aEntropy = pBlockSizedEntropySource + static_cast<std::size_t>(S_BLOCK);
-    
-    std::size_t *aBase = pIndexList256;
-    
-    for (std::size_t aRemaining = 256; aRemaining > 1; --aRemaining) {
-        
-        const std::size_t aLimit = 256 - (256 % aRemaining);
-        std::uint8_t aSample = 0;
-        
-        do {
-            if (aEntropy <= aEntropyBegin) {
-                return;
-            }
-            
-            --aEntropy;
-            aSample = *aEntropy;
-            
-        } while (static_cast<std::size_t>(aSample) >= aLimit);
-        
-        std::size_t *aSwapA = aBase;
-        std::size_t *aSwapB = aBase + (static_cast<std::size_t>(aSample) % aRemaining);
-        
-        const std::size_t aHold = *aSwapA;
-        *aSwapA = *aSwapB;
-        *aSwapB = aHold;
-        
-        ++aBase;
+    for (std::size_t aEntropyIndex=S_HALF; aEntropyIndex<S_BLOCK; aEntropyIndex+=2U) {
+        const std::size_t aIndexA = pBlockSizedEntropySource[aEntropyIndex];
+        const std::size_t aIndexB = pBlockSizedEntropySource[aEntropyIndex + 1U];
+        const std::size_t aHold = pIndexList256[aIndexA];
+        pIndexList256[aIndexA] = pIndexList256[aIndexB];
+        pIndexList256[aIndexB] = aHold;
     }
 }

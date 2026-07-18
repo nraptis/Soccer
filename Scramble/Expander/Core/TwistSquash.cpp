@@ -18,9 +18,9 @@ void TwistSquash::SquashA(std::uint8_t *pInputLaneA,
         aSquash |= static_cast<std::uint32_t>(pInputLaneC[aIndex]) << 16U;
         aSquash |= static_cast<std::uint32_t>(pInputLaneD[aIndex]) << 24U;
         aSquash ^= aSquash >> 16U;
-        aSquash *= 0x85ebca6bU;
+        aSquash *= 0x85EBCA6BU;
         aSquash ^= aSquash >> 13U;
-        aSquash *= 0xc2b2ae35U;
+        aSquash *= 0xC2B2AE35U;
         aSquash ^= aSquash >> 16U;
         pOutputLane[aIndex] = static_cast<std::uint8_t>(aSquash);
     }
@@ -37,9 +37,9 @@ void TwistSquash::SquashB(std::uint8_t *pInputLaneA,
         aSquash |= static_cast<std::uint32_t>(pInputLaneC[aIndex]) << 16U;
         aSquash |= static_cast<std::uint32_t>(pInputLaneD[aIndex]) << 24U;
         aSquash ^= aSquash >> 16U;
-        aSquash *= 0x21f0aaadU;
+        aSquash *= 0x21F0AAADU;
         aSquash ^= aSquash >> 15U;
-        aSquash *= 0x735a2d97U;
+        aSquash *= 0x735A2D97U;
         aSquash ^= aSquash >> 15U;
         pOutputLane[aIndex] = static_cast<std::uint8_t>(aSquash);
     }
@@ -56,9 +56,9 @@ void TwistSquash::SquashC(std::uint8_t *pInputLaneA,
         aSquash |= static_cast<std::uint32_t>(pInputLaneC[aIndex]) << 16U;
         aSquash |= static_cast<std::uint32_t>(pInputLaneD[aIndex]) << 24U;
         aSquash ^= aSquash >> 16U;
-        aSquash *= 0x7feb352dU;
+        aSquash *= 0x7FEB352DU;
         aSquash ^= aSquash >> 15U;
-        aSquash *= 0x846ca68bU;
+        aSquash *= 0x846CA68BU;
         aSquash ^= aSquash >> 16U;
         pOutputLane[aIndex] = static_cast<std::uint8_t>(aSquash);
     }

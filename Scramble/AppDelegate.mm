@@ -333,22 +333,13 @@ void Make10_000Challnge() {
                 static_cast<unsigned int>(aAckWord));
     
     std::vector<std::vector<std::uint8_t>> aOriginalMaterials(16U);
-    aOriginalMaterials[0].assign(Soccer::mMaterialA, Soccer::mMaterialA + SOCCER_BLOCK_SIZE);
-    aOriginalMaterials[1].assign(Soccer::mMaterialB, Soccer::mMaterialB + SOCCER_BLOCK_SIZE);
-    aOriginalMaterials[2].assign(Soccer::mMaterialC, Soccer::mMaterialC + SOCCER_BLOCK_SIZE);
-    aOriginalMaterials[3].assign(Soccer::mMaterialD, Soccer::mMaterialD + SOCCER_BLOCK_SIZE);
-    aOriginalMaterials[4].assign(Soccer::mMaterialE, Soccer::mMaterialE + SOCCER_BLOCK_SIZE);
-    aOriginalMaterials[5].assign(Soccer::mMaterialF, Soccer::mMaterialF + SOCCER_BLOCK_SIZE);
-    aOriginalMaterials[6].assign(Soccer::mMaterialG, Soccer::mMaterialG + SOCCER_BLOCK_SIZE);
-    aOriginalMaterials[7].assign(Soccer::mMaterialH, Soccer::mMaterialH + SOCCER_BLOCK_SIZE);
-    aOriginalMaterials[8].assign(Soccer::mMaterialI, Soccer::mMaterialI + SOCCER_BLOCK_SIZE);
-    aOriginalMaterials[9].assign(Soccer::mMaterialJ, Soccer::mMaterialJ + SOCCER_BLOCK_SIZE);
-    aOriginalMaterials[10].assign(Soccer::mMaterialK, Soccer::mMaterialK + SOCCER_BLOCK_SIZE);
-    aOriginalMaterials[11].assign(Soccer::mMaterialL, Soccer::mMaterialL + SOCCER_BLOCK_SIZE);
-    aOriginalMaterials[12].assign(Soccer::mMaterialM, Soccer::mMaterialM + SOCCER_BLOCK_SIZE);
-    aOriginalMaterials[13].assign(Soccer::mMaterialN, Soccer::mMaterialN + SOCCER_BLOCK_SIZE);
-    aOriginalMaterials[14].assign(Soccer::mMaterialO, Soccer::mMaterialO + SOCCER_BLOCK_SIZE);
-    aOriginalMaterials[15].assign(Soccer::mMaterialP, Soccer::mMaterialP + SOCCER_BLOCK_SIZE);
+    const std::uint8_t *aAvalancheReferenceMaterials[16];
+    Soccer::InitializeAvalancheReferenceMaterials(aAvalancheReferenceMaterials);
+    for (std::size_t aMaterialIndex = 0U; aMaterialIndex < 16U; aMaterialIndex += 1U) {
+        const std::uint8_t *aMaterial = aAvalancheReferenceMaterials[aMaterialIndex];
+        aOriginalMaterials[aMaterialIndex].assign(aMaterial,
+                                                   aMaterial + SOCCER_BLOCK_SIZE);
+    }
     
     const std::vector<const char *> aMaterialNames = {
         "mMaterialA",
