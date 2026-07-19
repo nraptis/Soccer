@@ -116,13 +116,13 @@ void TwistExpander_Antares_Arx::KDF_A_A(TwistWorkSpace *pWorkSpace,
             aScatter = (RotL64(aIngress, 35U) ^ RotL64(aCross, 21U)) ^ (RotL64(aCarry, 3U) + RotL64(aPrevious, 52U));
             aScatter = TwistMix64::DiffuseA(((aScatter ^ aDomainWordScatter) ^ aNonceWordH));
             //
-            aOrbiterJ = ((aWandererI + RotL64(aIngress, 43U)) + 0xB6EB113323D6DA57ULL) + aOrbiterAssignSaltB[((aIndex + 3U)) & S_SALT1];
+            aOrbiterJ = ((aWandererI + RotL64(aIngress, 43U)) + 0xB6EB113323D6DA57ULL) + aOrbiterAssignSaltB[((aIndex + 3U)) & 31];
             aOrbiterD = (aWandererC + RotL64(aPrevious, 26U)) + 0x73E26C8DA2EAA950ULL;
             aOrbiterI = (aWandererA + RotL64(aCross, 21U)) + 0x6873126603778B5AULL;
             aOrbiterH = ((aWandererB + RotL64(aScatter, 53U)) + 0x1A9EDDF0229DA0B4ULL) + aNonceWordM;
             aOrbiterB = ((aWandererE + RotL64(aCross, 57U)) + RotL64(aCarry, 43U)) + 0x69323EF6A927267CULL;
             aOrbiterC = ((aWandererF + RotL64(aIngress, 29U)) + RotL64(aCarry, 51U)) + 0xC182F213C5B4F1D4ULL;
-            aOrbiterK = (((aWandererD + RotL64(aScatter, 47U)) + RotL64(aCarry, 11U)) + 0x56389B554A21DF6BULL) + aOrbiterAssignSaltC[((aIndex + 5U)) & S_SALT1];
+            aOrbiterK = (((aWandererD + RotL64(aScatter, 47U)) + RotL64(aCarry, 11U)) + 0x56389B554A21DF6BULL) + aOrbiterAssignSaltC[((aIndex + 5U)) & 31];
             aOrbiterG = (aWandererH + RotL64(aPrevious, 18U)) + 0xA986EAC0AF51864DULL;
             aOrbiterA = (aWandererG + RotL64(aScatter, 5U)) + 0x9B8AC9AB348C98D1ULL;
             aOrbiterE = ((aWandererJ + RotL64(aIngress, 13U)) + 0x88BDAFECA5DC3647ULL) + aNonceWordD;
@@ -137,7 +137,7 @@ void TwistExpander_Antares_Arx::KDF_A_A(TwistWorkSpace *pWorkSpace,
             aOrbiterC = RotL64((aOrbiterC * 0xD24C04599C778385ULL), 41U);
             //
             aOrbiterI = (aOrbiterI + aOrbiterK) + 0xF28BBF259B5CC908ULL;
-            aOrbiterG = ((aOrbiterG ^ aOrbiterI) ^ 0x3BAC729F927EB57BULL) ^ aOrbiterUpdateSaltF[(((31U - aIndex) + 16U)) & S_SALT1];
+            aOrbiterG = ((aOrbiterG ^ aOrbiterI) ^ 0x3BAC729F927EB57BULL) ^ aOrbiterUpdateSaltF[(((31U - aIndex) + 16U)) & 31];
             aOrbiterG = RotL64((aOrbiterG * 0xB03B7D52E572ACABULL), 11U);
             //
             aOrbiterD = (aOrbiterD + aOrbiterH) + 0xF11522F5DA8861BAULL;
@@ -149,7 +149,7 @@ void TwistExpander_Antares_Arx::KDF_A_A(TwistWorkSpace *pWorkSpace,
             aOrbiterA = RotL64((aOrbiterA * 0xAA24A55D49A48A97ULL), 27U);
             //
             aOrbiterE = (aOrbiterE + aOrbiterF) + 0x9DC3EA2AC6A3BCA2ULL;
-            aOrbiterH = (((aOrbiterH ^ aOrbiterE) ^ 0x88F67AFBC9741CD3ULL) ^ aOrbiterUpdateSaltA[((aIndex + 28U)) & S_SALT1]) ^ aNonceWordL;
+            aOrbiterH = (((aOrbiterH ^ aOrbiterE) ^ 0x88F67AFBC9741CD3ULL) ^ aOrbiterUpdateSaltA[((aIndex + 28U)) & 31]) ^ aNonceWordL;
             aOrbiterH = RotL64((aOrbiterH * 0xCEF4922D26962759ULL), 21U);
             //
             aOrbiterC = (aOrbiterC + aOrbiterA) + 0xB5EDC55B519D0D9FULL;
@@ -168,8 +168,8 @@ void TwistExpander_Antares_Arx::KDF_A_A(TwistWorkSpace *pWorkSpace,
             aOrbiterE = (aOrbiterE ^ aOrbiterK) ^ 0xAE642B013E295B71ULL;
             aOrbiterE = RotL64((aOrbiterE * 0x8C0853796821BBADULL), 37U);
             //
-            aOrbiterG = ((aOrbiterG + aOrbiterE) + 0xB7C5EB4E1E592B96ULL) + aOrbiterUpdateSaltD[((aIndex + 25U)) & S_SALT1];
-            aOrbiterD = ((aOrbiterD ^ aOrbiterG) ^ 0xD55102D066273C28ULL) ^ aOrbiterUpdateSaltC[((aIndex + 13U)) & S_SALT1];
+            aOrbiterG = ((aOrbiterG + aOrbiterE) + 0xB7C5EB4E1E592B96ULL) + aOrbiterUpdateSaltD[((aIndex + 25U)) & 31];
+            aOrbiterD = ((aOrbiterD ^ aOrbiterG) ^ 0xD55102D066273C28ULL) ^ aOrbiterUpdateSaltC[((aIndex + 13U)) & 31];
             aOrbiterD = RotL64((aOrbiterD * 0x433077C6719D613FULL), 29U);
             //
             aIngress = RotL64(aOrbiterB, 41U) ^ aOrbiterE;
@@ -187,10 +187,10 @@ void TwistExpander_Antares_Arx::KDF_A_A(TwistWorkSpace *pWorkSpace,
             aWandererK = aWandererK ^ ((RotL64(aIngress, 37U) + aOrbiterE) + RotL64(aOrbiterC, 5U));
             aWandererG = aWandererG + ((RotL64(aCross, 47U) + RotL64(aOrbiterB, 35U)) + aOrbiterA);
             aWandererF = aWandererF ^ ((RotL64(aScatter, 27U) + RotL64(aOrbiterJ, 21U)) + aOrbiterD);
-            aWandererA = aWandererA + ((((RotL64(aPrevious, 53U) + RotL64(aOrbiterK, 58U)) + aOrbiterD) + RotL64(aCarry, 5U)) + aWandererUpdateSaltE[(((31U - aIndex) + 27U)) & S_SALT1]);
+            aWandererA = aWandererA + ((((RotL64(aPrevious, 53U) + RotL64(aOrbiterK, 58U)) + aOrbiterD) + RotL64(aCarry, 5U)) + aWandererUpdateSaltE[(((31U - aIndex) + 27U)) & 31]);
             aWandererD = aWandererD ^ ((RotL64(aScatter, 44U) + aOrbiterC) + RotL64(aOrbiterD, 41U));
             aWandererB = aWandererB + (((RotL64(aIngress, 29U) + aOrbiterJ) + RotL64(aOrbiterI, 3U)) + aNonceWordH);
-            aWandererC = aWandererC ^ (((RotL64(aPrevious, 5U) + RotL64(aOrbiterF, 27U)) + aOrbiterJ) + aWandererUpdateSaltD[((aIndex + 8U)) & S_SALT1]);
+            aWandererC = aWandererC ^ (((RotL64(aPrevious, 5U) + RotL64(aOrbiterF, 27U)) + aOrbiterJ) + aWandererUpdateSaltD[((aIndex + 8U)) & 31]);
             //
             aCarry = aCarry + (aWandererB ^ RotL64(aWandererF, 51U));
             aCarry = aCarry + (aWandererC ^ RotL64(aWandererI, 46U));
@@ -229,13 +229,13 @@ void TwistExpander_Antares_Arx::KDF_A_A(TwistWorkSpace *pWorkSpace,
             aScatter = (RotL64(aIngress, 19U) + RotL64(aCross, 35U)) + (RotL64(aPrevious, 5U) ^ RotL64(aCarry, 52U));
             aScatter = TwistMix64::DiffuseC(((aScatter ^ aDomainWordScatter) ^ aNonceWordO));
             //
-            aOrbiterC = (((aWandererA + RotL64(aCross, 11U)) + 0xAEED152727873C0DULL) + aOrbiterAssignSaltF[(((31U - aIndex) + 9U)) & S_SALT1]) + aNonceWordB;
+            aOrbiterC = (((aWandererA + RotL64(aCross, 11U)) + 0xAEED152727873C0DULL) + aOrbiterAssignSaltF[(((31U - aIndex) + 9U)) & 31]) + aNonceWordB;
             aOrbiterF = (aWandererC + RotL64(aIngress, 35U)) + 0xF31CFE0CC25545D2ULL;
             aOrbiterE = (aWandererE + RotL64(aScatter, 29U)) + 0xF20ED9B9DC1EE842ULL;
             aOrbiterA = (((aWandererG + RotL64(aPrevious, 18U)) + RotL64(aCarry, 11U)) + 0x4CBA3F50BDDE65A2ULL) + aNonceWordC;
             aOrbiterB = (aWandererK + RotL64(aScatter, 27U)) + 0x89572B86ABA511D2ULL;
             aOrbiterD = (aWandererH + RotL64(aPrevious, 53U)) + 0x0A6F8B108F8AEC99ULL;
-            aOrbiterI = ((aWandererF + RotL64(aIngress, 3U)) + 0x8F40A126AD9F80A9ULL) + aOrbiterAssignSaltE[(((31U - aIndex) + 23U)) & S_SALT1];
+            aOrbiterI = ((aWandererF + RotL64(aIngress, 3U)) + 0x8F40A126AD9F80A9ULL) + aOrbiterAssignSaltE[(((31U - aIndex) + 23U)) & 31];
             aOrbiterK = ((aWandererB + RotL64(aCross, 41U)) + 0x9B25DB6D491EF648ULL) + aNonceWordA;
             aOrbiterJ = ((aWandererJ + RotL64(aIngress, 48U)) + RotL64(aCarry, 41U)) + 0x3DF7EACCF1050BB9ULL;
             aOrbiterH = (aWandererD + RotL64(aPrevious, 57U)) + 0x3DE6F1F5DA3E7A83ULL;
@@ -257,16 +257,16 @@ void TwistExpander_Antares_Arx::KDF_A_A(TwistWorkSpace *pWorkSpace,
             aOrbiterA = (aOrbiterA ^ aOrbiterI) ^ 0x920E907B2CAD7327ULL;
             aOrbiterA = RotL64((aOrbiterA * 0x6049AFCF139DCF55ULL), 27U);
             //
-            aOrbiterK = ((aOrbiterK + aOrbiterI) + 0xB82E56C58D77DD03ULL) + aOrbiterUpdateSaltE[((aIndex + 28U)) & S_SALT1];
+            aOrbiterK = ((aOrbiterK + aOrbiterI) + 0xB82E56C58D77DD03ULL) + aOrbiterUpdateSaltE[((aIndex + 28U)) & 31];
             aOrbiterJ = (aOrbiterJ ^ aOrbiterK) ^ 0x14C5509A30E091BBULL;
             aOrbiterJ = RotL64((aOrbiterJ * 0x22D9572210FCC4E3ULL), 11U);
             //
-            aOrbiterH = ((aOrbiterH + aOrbiterG) + 0xAD85E9E0772659E4ULL) + aOrbiterUpdateSaltF[(((31U - aIndex) + 5U)) & S_SALT1];
+            aOrbiterH = ((aOrbiterH + aOrbiterG) + 0xAD85E9E0772659E4ULL) + aOrbiterUpdateSaltF[(((31U - aIndex) + 5U)) & 31];
             aOrbiterK = (aOrbiterK ^ aOrbiterH) ^ 0x924BA6ABD04DFD8BULL;
             aOrbiterK = RotL64((aOrbiterK * 0x82DEB648B4C47BBDULL), 35U);
             //
             aOrbiterF = (aOrbiterF + aOrbiterK) + 0x3F3374B8295370DAULL;
-            aOrbiterD = ((aOrbiterD ^ aOrbiterF) ^ 0x06CF6C1EE8C24CB9ULL) ^ aOrbiterUpdateSaltC[((aIndex + 27U)) & S_SALT1];
+            aOrbiterD = ((aOrbiterD ^ aOrbiterF) ^ 0x06CF6C1EE8C24CB9ULL) ^ aOrbiterUpdateSaltC[((aIndex + 27U)) & 31];
             aOrbiterD = RotL64((aOrbiterD * 0x6210270368C459D1ULL), 21U);
             //
             aOrbiterG = (aOrbiterG + aOrbiterC) + 0x17C48A47ADB6B124ULL;
@@ -277,7 +277,7 @@ void TwistExpander_Antares_Arx::KDF_A_A(TwistWorkSpace *pWorkSpace,
             aOrbiterH = (aOrbiterH ^ aOrbiterD) ^ 0xC6B80E729821C4E1ULL;
             aOrbiterH = RotL64((aOrbiterH * 0xC69A21587D44C225ULL), 23U);
             //
-            aOrbiterB = ((aOrbiterB + aOrbiterH) + 0xD571B8AE3CCAC043ULL) + aOrbiterUpdateSaltB[((aIndex + 26U)) & S_SALT1];
+            aOrbiterB = ((aOrbiterB + aOrbiterH) + 0xD571B8AE3CCAC043ULL) + aOrbiterUpdateSaltB[((aIndex + 26U)) & 31];
             aOrbiterF = (aOrbiterF ^ aOrbiterB) ^ 0xA6C131072457C468ULL;
             aOrbiterF = RotL64((aOrbiterF * 0xE75A86B5E4DDEDF1ULL), 53U);
             //
@@ -293,11 +293,11 @@ void TwistExpander_Antares_Arx::KDF_A_A(TwistWorkSpace *pWorkSpace,
             aIngress = aIngress + RotL64(aOrbiterG, 27U);
             aIngress = TwistMix64::DiffuseC((aIngress + aScatter));
             //
-            aWandererG = aWandererG + (((RotL64(aPrevious, 35U) + RotL64(aOrbiterB, 6U)) + aOrbiterE) + aWandererUpdateSaltC[((aIndex + 15U)) & S_SALT1]);
+            aWandererG = aWandererG + (((RotL64(aPrevious, 35U) + RotL64(aOrbiterB, 6U)) + aOrbiterE) + aWandererUpdateSaltC[((aIndex + 15U)) & 31]);
             aWandererE = aWandererE ^ ((RotL64(aScatter, 40U) + RotL64(aOrbiterG, 41U)) + aOrbiterC);
             aWandererK = aWandererK + ((RotL64(aIngress, 27U) + aOrbiterD) + RotL64(aOrbiterK, 35U));
             aWandererC = aWandererC ^ ((RotL64(aCross, 11U) + RotL64(aOrbiterA, 51U)) + aOrbiterE);
-            aWandererD = aWandererD + ((((RotL64(aPrevious, 57U) + aOrbiterK) + RotL64(aOrbiterA, 13U)) + RotL64(aCarry, 29U)) + aWandererUpdateSaltA[((aIndex + 22U)) & S_SALT1]);
+            aWandererD = aWandererD + ((((RotL64(aPrevious, 57U) + aOrbiterK) + RotL64(aOrbiterA, 13U)) + RotL64(aCarry, 29U)) + aWandererUpdateSaltA[((aIndex + 22U)) & 31]);
             aWandererA = aWandererA ^ (((RotL64(aScatter, 20U) + RotL64(aOrbiterK, 46U)) + aOrbiterC) + aNonceWordI);
             aWandererH = aWandererH + ((((RotL64(aCross, 53U) + aOrbiterC) + RotL64(aOrbiterF, 19U)) + RotL64(aCarry, 41U)) + aNonceWordE);
             aWandererJ = aWandererJ ^ ((RotL64(aIngress, 23U) + aOrbiterI) + RotL64(aOrbiterG, 27U));
@@ -347,10 +347,10 @@ void TwistExpander_Antares_Arx::KDF_A_A(TwistWorkSpace *pWorkSpace,
             aOrbiterC = ((aWandererB + RotL64(aCross, 54U)) + 0x8DE53BC07381D1C3ULL) + aNonceWordH;
             aOrbiterF = (aWandererD + RotL64(aScatter, 37U)) + 0xBA80C41765E4E314ULL;
             aOrbiterJ = (aWandererF + RotL64(aIngress, 43U)) + 0x6AA23450EC295D8EULL;
-            aOrbiterE = (((aWandererJ + RotL64(aPrevious, 5U)) + RotL64(aCarry, 19U)) + 0xF93DFA88521DE2BCULL) + aOrbiterAssignSaltA[(((31U - aIndex) + 23U)) & S_SALT1];
+            aOrbiterE = (((aWandererJ + RotL64(aPrevious, 5U)) + RotL64(aCarry, 19U)) + 0xF93DFA88521DE2BCULL) + aOrbiterAssignSaltA[(((31U - aIndex) + 23U)) & 31];
             aOrbiterG = ((aWandererH + RotL64(aScatter, 3U)) + 0xF22FCB05533B45BAULL) + aNonceWordC;
             aOrbiterK = (aWandererG + RotL64(aCross, 35U)) + 0xB032394FE0B99D1FULL;
-            aOrbiterI = (((aWandererC + RotL64(aIngress, 19U)) + 0x8D56B8ED1DBE9E95ULL) + aOrbiterAssignSaltD[(((31U - aIndex) + 21U)) & S_SALT1]) + aNonceWordL;
+            aOrbiterI = (((aWandererC + RotL64(aIngress, 19U)) + 0x8D56B8ED1DBE9E95ULL) + aOrbiterAssignSaltD[(((31U - aIndex) + 21U)) & 31]) + aNonceWordL;
             aOrbiterH = (aWandererI + RotL64(aCross, 13U)) + 0x4CBA8EE8D5D416B5ULL;
             aOrbiterB = ((aWandererE + RotL64(aScatter, 24U)) + RotL64(aCarry, 41U)) + 0x697AC4118DD53414ULL;
             //
@@ -362,7 +362,7 @@ void TwistExpander_Antares_Arx::KDF_A_A(TwistWorkSpace *pWorkSpace,
             aOrbiterJ = (aOrbiterJ ^ aOrbiterA) ^ 0x46F22B3384FD2A46ULL;
             aOrbiterJ = RotL64((aOrbiterJ * 0x5C8A7971DC8EC1E5ULL), 11U);
             //
-            aOrbiterE = ((aOrbiterE + aOrbiterG) + 0xC169484B1386A8E0ULL) + aOrbiterUpdateSaltE[(((31U - aIndex) + 16U)) & S_SALT1];
+            aOrbiterE = ((aOrbiterE + aOrbiterG) + 0xC169484B1386A8E0ULL) + aOrbiterUpdateSaltE[(((31U - aIndex) + 16U)) & 31];
             aOrbiterK = (aOrbiterK ^ aOrbiterE) ^ 0x89EACBCBB6819D67ULL;
             aOrbiterK = RotL64((aOrbiterK * 0xCFC90DCD79EDF12BULL), 39U);
             //
@@ -371,14 +371,14 @@ void TwistExpander_Antares_Arx::KDF_A_A(TwistWorkSpace *pWorkSpace,
             aOrbiterI = RotL64((aOrbiterI * 0xF030B729314A65C3ULL), 27U);
             //
             aOrbiterC = (aOrbiterC + aOrbiterJ) + 0x680F562EF86955D2ULL;
-            aOrbiterH = ((aOrbiterH ^ aOrbiterC) ^ 0x5771A66541AEC85BULL) ^ aOrbiterUpdateSaltA[(((31U - aIndex) + 29U)) & S_SALT1];
+            aOrbiterH = ((aOrbiterH ^ aOrbiterC) ^ 0x5771A66541AEC85BULL) ^ aOrbiterUpdateSaltA[(((31U - aIndex) + 29U)) & 31];
             aOrbiterH = RotL64((aOrbiterH * 0x54067D25034E132FULL), 19U);
             //
             aOrbiterG = (aOrbiterG + aOrbiterD) + 0x9846F15B7D4B2357ULL;
             aOrbiterB = (aOrbiterB ^ aOrbiterG) ^ 0x2C376EB2C79754A6ULL;
             aOrbiterB = RotL64((aOrbiterB * 0x31C8D51B48448865ULL), 29U);
             //
-            aOrbiterI = (((aOrbiterI + aOrbiterK) + 0x56464A42948F8140ULL) + aOrbiterUpdateSaltF[(((31U - aIndex) + 11U)) & S_SALT1]) + aNonceWordP;
+            aOrbiterI = (((aOrbiterI + aOrbiterK) + 0x56464A42948F8140ULL) + aOrbiterUpdateSaltF[(((31U - aIndex) + 11U)) & 31]) + aNonceWordP;
             aOrbiterD = (aOrbiterD ^ aOrbiterI) ^ 0xE65337B2844872F2ULL;
             aOrbiterD = RotL64((aOrbiterD * 0x1A9EFD8521702139ULL), 3U);
             //
@@ -387,7 +387,7 @@ void TwistExpander_Antares_Arx::KDF_A_A(TwistWorkSpace *pWorkSpace,
             aOrbiterA = RotL64((aOrbiterA * 0xDA0C40D9CB56E469ULL), 5U);
             //
             aOrbiterF = (aOrbiterF + aOrbiterH) + 0x8A5A742D2F694284ULL;
-            aOrbiterE = ((aOrbiterE ^ aOrbiterF) ^ 0xC6B1E16D496B9492ULL) ^ aOrbiterUpdateSaltB[((aIndex + 5U)) & S_SALT1];
+            aOrbiterE = ((aOrbiterE ^ aOrbiterF) ^ 0xC6B1E16D496B9492ULL) ^ aOrbiterUpdateSaltB[((aIndex + 5U)) & 31];
             aOrbiterE = RotL64((aOrbiterE * 0xF116CE15AFDFD631ULL), 21U);
             //
             aOrbiterH = (aOrbiterH + aOrbiterI) + 0x3E09A7E74ED473B9ULL;
@@ -406,7 +406,7 @@ void TwistExpander_Antares_Arx::KDF_A_A(TwistWorkSpace *pWorkSpace,
             aIngress = aIngress + RotL64(aOrbiterC, 11U);
             aIngress = TwistMix64::DiffuseA((aIngress + aScatter));
             //
-            aWandererI = aWandererI + (((((RotL64(aPrevious, 27U) + aOrbiterH) + RotL64(aOrbiterC, 51U)) + RotL64(aCarry, 11U)) + aNonceWordN) + aWandererUpdateSaltB[((aIndex + 10U)) & S_SALT1]);
+            aWandererI = aWandererI + (((((RotL64(aPrevious, 27U) + aOrbiterH) + RotL64(aOrbiterC, 51U)) + RotL64(aCarry, 11U)) + aNonceWordN) + aWandererUpdateSaltB[((aIndex + 10U)) & 31]);
             aWandererC = aWandererC ^ ((RotL64(aCross, 19U) + aOrbiterH) + RotL64(aOrbiterB, 57U));
             aWandererD = aWandererD + (((RotL64(aIngress, 57U) + RotL64(aOrbiterB, 39U)) + aOrbiterK) + aNonceWordB);
             aWandererG = aWandererG ^ (((RotL64(aScatter, 30U) + aOrbiterF) + RotL64(aOrbiterB, 46U)) + aNonceWordO);
@@ -414,7 +414,7 @@ void TwistExpander_Antares_Arx::KDF_A_A(TwistWorkSpace *pWorkSpace,
             aWandererE = aWandererE ^ ((RotL64(aScatter, 11U) + aOrbiterE) + RotL64(aOrbiterK, 19U));
             aWandererB = aWandererB + ((RotL64(aPrevious, 37U) + aOrbiterI) + RotL64(aOrbiterH, 41U));
             aWandererF = aWandererF ^ ((RotL64(aIngress, 24U) + aOrbiterK) + RotL64(aOrbiterA, 23U));
-            aWandererJ = aWandererJ + (((RotL64(aPrevious, 47U) + RotL64(aOrbiterD, 44U)) + aOrbiterE) + aWandererUpdateSaltF[(((31U - aIndex) + 12U)) & S_SALT1]);
+            aWandererJ = aWandererJ + (((RotL64(aPrevious, 47U) + RotL64(aOrbiterD, 44U)) + aOrbiterE) + aWandererUpdateSaltF[(((31U - aIndex) + 12U)) & 31]);
             aWandererK = aWandererK ^ ((RotL64(aIngress, 3U) + aOrbiterG) + RotL64(aOrbiterB, 13U));
             aWandererH = aWandererH + (((RotL64(aScatter, 5U) + RotL64(aOrbiterC, 35U)) + aOrbiterJ) + RotL64(aCarry, 21U));
             //
@@ -457,21 +457,21 @@ void TwistExpander_Antares_Arx::KDF_A_A(TwistWorkSpace *pWorkSpace,
             //
             aOrbiterK = (aWandererG + RotL64(aPrevious, 13U)) + 0x1D192C99B736AB1BULL;
             aOrbiterI = (((aWandererH + RotL64(aScatter, 53U)) + RotL64(aCarry, 11U)) + 0x683B132DA64B3629ULL) + aNonceWordB;
-            aOrbiterF = (((aWandererI + RotL64(aIngress, 37U)) + RotL64(aCarry, 35U)) + 0x82641460A0A51368ULL) + aOrbiterAssignSaltC[(((31U - aIndex) + 11U)) & S_SALT1];
+            aOrbiterF = (((aWandererI + RotL64(aIngress, 37U)) + RotL64(aCarry, 35U)) + 0x82641460A0A51368ULL) + aOrbiterAssignSaltC[(((31U - aIndex) + 11U)) & 31];
             aOrbiterB = ((aWandererD + RotL64(aCross, 21U)) + 0x0E147CF8D87A1DD6ULL) + aNonceWordI;
             aOrbiterC = (aWandererE + RotL64(aIngress, 28U)) + 0xD61ED2CDCAB2AD71ULL;
             aOrbiterE = ((aWandererF + RotL64(aPrevious, 39U)) + RotL64(aCarry, 5U)) + 0x27B23ADDE315815CULL;
-            aOrbiterH = ((aWandererB + RotL64(aScatter, 57U)) + 0xA269DB15B302EB77ULL) + aOrbiterAssignSaltB[((aIndex + 28U)) & S_SALT1];
+            aOrbiterH = ((aWandererB + RotL64(aScatter, 57U)) + 0xA269DB15B302EB77ULL) + aOrbiterAssignSaltB[((aIndex + 28U)) & 31];
             aOrbiterA = (aWandererC + RotL64(aCross, 11U)) + 0xB840A3CAA6EE5069ULL;
             aOrbiterD = (aWandererJ + RotL64(aScatter, 41U)) + 0xEDE10D5F2C28CD8BULL;
             aOrbiterJ = (aWandererK + RotL64(aCross, 26U)) + 0xE1B93D28F717CA59ULL;
             aOrbiterG = ((aWandererA + RotL64(aIngress, 19U)) + 0xC2561322C20418F8ULL) + aNonceWordJ;
             //
-            aOrbiterK = (((aOrbiterK + aOrbiterI) + 0xD0997810F713A9B2ULL) + aOrbiterUpdateSaltB[(((31U - aIndex) + 24U)) & S_SALT1]) + aNonceWordO;
+            aOrbiterK = (((aOrbiterK + aOrbiterI) + 0xD0997810F713A9B2ULL) + aOrbiterUpdateSaltB[(((31U - aIndex) + 24U)) & 31]) + aNonceWordO;
             aOrbiterF = (aOrbiterF ^ aOrbiterK) ^ 0x6FED6341FCE5BE34ULL;
             aOrbiterF = RotL64((aOrbiterF * 0xD6522F91814D9295ULL), 29U);
             //
-            aOrbiterB = ((aOrbiterB + aOrbiterC) + 0x48AF24755C60B8F3ULL) + aOrbiterUpdateSaltD[((aIndex + 15U)) & S_SALT1];
+            aOrbiterB = ((aOrbiterB + aOrbiterC) + 0x48AF24755C60B8F3ULL) + aOrbiterUpdateSaltD[((aIndex + 15U)) & 31];
             aOrbiterE = (aOrbiterE ^ aOrbiterB) ^ 0x0E07C19ED4FB4381ULL;
             aOrbiterE = RotL64((aOrbiterE * 0xB74D160C9A3504BBULL), 27U);
             //
@@ -483,11 +483,11 @@ void TwistExpander_Antares_Arx::KDF_A_A(TwistWorkSpace *pWorkSpace,
             aOrbiterJ = (aOrbiterJ ^ aOrbiterI) ^ 0x7F647E3B5D69B506ULL;
             aOrbiterJ = RotL64((aOrbiterJ * 0xCF913077B5E2D207ULL), 51U);
             //
-            aOrbiterC = ((aOrbiterC + aOrbiterG) + 0x87B8CAE62B2AFB25ULL) + aOrbiterUpdateSaltC[(((31U - aIndex) + 13U)) & S_SALT1];
+            aOrbiterC = ((aOrbiterC + aOrbiterG) + 0x87B8CAE62B2AFB25ULL) + aOrbiterUpdateSaltC[(((31U - aIndex) + 13U)) & 31];
             aOrbiterH = (aOrbiterH ^ aOrbiterC) ^ 0x1C7A6D62F4FAF527ULL;
             aOrbiterH = RotL64((aOrbiterH * 0xCAEC4936772F1FC3ULL), 41U);
             //
-            aOrbiterA = ((aOrbiterA + aOrbiterK) + 0xDB341EE17AACF19BULL) + aOrbiterUpdateSaltF[(((31U - aIndex) + 29U)) & S_SALT1];
+            aOrbiterA = ((aOrbiterA + aOrbiterK) + 0xDB341EE17AACF19BULL) + aOrbiterUpdateSaltF[(((31U - aIndex) + 29U)) & 31];
             aOrbiterD = (aOrbiterD ^ aOrbiterA) ^ 0x3C0C1829AAF83E6BULL;
             aOrbiterD = RotL64((aOrbiterD * 0x32E671557D408D77ULL), 11U);
             //
@@ -525,9 +525,9 @@ void TwistExpander_Antares_Arx::KDF_A_A(TwistWorkSpace *pWorkSpace,
             aWandererG = aWandererG ^ ((RotL64(aPrevious, 35U) + aOrbiterE) + RotL64(aOrbiterK, 27U));
             aWandererB = aWandererB + ((RotL64(aIngress, 11U) + RotL64(aOrbiterD, 24U)) + aOrbiterE);
             aWandererI = aWandererI ^ ((RotL64(aScatter, 53U) + aOrbiterG) + RotL64(aOrbiterK, 47U));
-            aWandererA = aWandererA + ((((RotL64(aPrevious, 14U) + RotL64(aOrbiterD, 37U)) + aOrbiterA) + RotL64(aCarry, 47U)) + aWandererUpdateSaltE[((aIndex + 25U)) & S_SALT1]);
+            aWandererA = aWandererA + ((((RotL64(aPrevious, 14U) + RotL64(aOrbiterD, 37U)) + aOrbiterA) + RotL64(aCarry, 47U)) + aWandererUpdateSaltE[((aIndex + 25U)) & 31]);
             aWandererD = aWandererD ^ ((RotL64(aCross, 29U) + aOrbiterD) + RotL64(aOrbiterB, 29U));
-            aWandererJ = aWandererJ + ((((RotL64(aIngress, 27U) + RotL64(aOrbiterC, 53U)) + aOrbiterG) + aNonceWordC) + aWandererUpdateSaltD[(((31U - aIndex) + 16U)) & S_SALT1]);
+            aWandererJ = aWandererJ + ((((RotL64(aIngress, 27U) + RotL64(aOrbiterC, 53U)) + aOrbiterG) + aNonceWordC) + aWandererUpdateSaltD[(((31U - aIndex) + 16U)) & 31]);
             aWandererK = aWandererK ^ (((RotL64(aCross, 37U) + aOrbiterJ) + RotL64(aOrbiterI, 35U)) + aNonceWordE);
             aWandererC = aWandererC + ((RotL64(aPrevious, 21U) + aOrbiterH) + RotL64(aOrbiterB, 60U));
             //
@@ -571,13 +571,13 @@ void TwistExpander_Antares_Arx::KDF_A_A(TwistWorkSpace *pWorkSpace,
             aOrbiterG = ((aWandererE + RotL64(aCross, 47U)) + RotL64(aCarry, 43U)) + 0x2C96261F22556504ULL;
             aOrbiterJ = (((aWandererF + RotL64(aIngress, 57U)) + RotL64(aCarry, 37U)) + 0x1BE24A17A7596D36ULL) + aNonceWordM;
             aOrbiterB = ((aWandererH + RotL64(aScatter, 50U)) + RotL64(aCarry, 57U)) + 0x08C19B6BBDFAF5E3ULL;
-            aOrbiterC = ((aWandererI + RotL64(aPrevious, 3U)) + 0xE8F375416F73023DULL) + aOrbiterAssignSaltE[(((31U - aIndex) + 22U)) & S_SALT1];
+            aOrbiterC = ((aWandererI + RotL64(aPrevious, 3U)) + 0xE8F375416F73023DULL) + aOrbiterAssignSaltE[(((31U - aIndex) + 22U)) & 31];
             aOrbiterI = (aWandererJ + RotL64(aScatter, 39U)) + 0xC34941421B618592ULL;
             aOrbiterD = ((aWandererB + RotL64(aPrevious, 53U)) + 0x7B9A4B2D471DD5A7ULL) + aNonceWordB;
             aOrbiterA = ((aWandererK + RotL64(aIngress, 43U)) + 0x34169433E92F6D7DULL) + aNonceWordP;
             aOrbiterH = (aWandererC + RotL64(aCross, 19U)) + 0x0C617C2E94645BD3ULL;
             aOrbiterE = ((aWandererD + RotL64(aPrevious, 5U)) + 0xC701D2A8A39564D1ULL) + aNonceWordE;
-            aOrbiterK = ((aWandererA + RotL64(aIngress, 11U)) + 0x512798344D538E68ULL) + aOrbiterAssignSaltF[((aIndex + 14U)) & S_SALT1];
+            aOrbiterK = ((aWandererA + RotL64(aIngress, 11U)) + 0x512798344D538E68ULL) + aOrbiterAssignSaltF[((aIndex + 14U)) & 31];
             aOrbiterF = (aWandererG + RotL64(aCross, 28U)) + 0x8C71CC6A4EF77C66ULL;
             //
             aOrbiterG = (aOrbiterG + aOrbiterJ) + 0x34FB42231A9ED4A1ULL;
@@ -585,7 +585,7 @@ void TwistExpander_Antares_Arx::KDF_A_A(TwistWorkSpace *pWorkSpace,
             aOrbiterB = RotL64((aOrbiterB * 0x99A1F4A166FC1F41ULL), 5U);
             //
             aOrbiterB = (aOrbiterB + aOrbiterC) + 0xD4264C5D179ACB5BULL;
-            aOrbiterI = ((aOrbiterI ^ aOrbiterB) ^ 0xDD856DF7AEFB4983ULL) ^ aOrbiterUpdateSaltF[(((31U - aIndex) + 6U)) & S_SALT1];
+            aOrbiterI = ((aOrbiterI ^ aOrbiterB) ^ 0xDD856DF7AEFB4983ULL) ^ aOrbiterUpdateSaltF[(((31U - aIndex) + 6U)) & 31];
             aOrbiterI = RotL64((aOrbiterI * 0x9E237F15CDF987E7ULL), 41U);
             //
             aOrbiterJ = (aOrbiterJ + aOrbiterD) + 0xAB517DE556989139ULL;
@@ -605,11 +605,11 @@ void TwistExpander_Antares_Arx::KDF_A_A(TwistWorkSpace *pWorkSpace,
             aOrbiterK = RotL64((aOrbiterK * 0x3AF73C1EA7B495A1ULL), 19U);
             //
             aOrbiterF = (aOrbiterF + aOrbiterK) + 0x9F1464E106EBB798ULL;
-            aOrbiterA = ((aOrbiterA ^ aOrbiterF) ^ 0x0C97F095B8659157ULL) ^ aOrbiterUpdateSaltE[((aIndex + 21U)) & S_SALT1];
+            aOrbiterA = ((aOrbiterA ^ aOrbiterF) ^ 0x0C97F095B8659157ULL) ^ aOrbiterUpdateSaltE[((aIndex + 21U)) & 31];
             aOrbiterA = RotL64((aOrbiterA * 0x976DC49C0CD1FBB1ULL), 51U);
             //
             aOrbiterK = (aOrbiterK + aOrbiterB) + 0x82C88DAD6EB3C4B2ULL;
-            aOrbiterE = (((aOrbiterE ^ aOrbiterK) ^ 0x1504882E921A8F9CULL) ^ aOrbiterUpdateSaltD[((aIndex + 27U)) & S_SALT1]) ^ aNonceWordF;
+            aOrbiterE = (((aOrbiterE ^ aOrbiterK) ^ 0x1504882E921A8F9CULL) ^ aOrbiterUpdateSaltD[((aIndex + 27U)) & 31]) ^ aNonceWordF;
             aOrbiterE = RotL64((aOrbiterE * 0x72E6ADCC99725E69ULL), 21U);
             //
             aOrbiterI = (aOrbiterI + aOrbiterF) + 0xA1B833EDDEA634F5ULL;
@@ -620,7 +620,7 @@ void TwistExpander_Antares_Arx::KDF_A_A(TwistWorkSpace *pWorkSpace,
             aOrbiterG = (aOrbiterG ^ aOrbiterA) ^ 0xAD0BDA78DC92C7F4ULL;
             aOrbiterG = RotL64((aOrbiterG * 0x5C79A4684B2EEB5FULL), 47U);
             //
-            aOrbiterC = ((aOrbiterC + aOrbiterH) + 0x1AD85CF74A873E89ULL) + aOrbiterUpdateSaltC[(((31U - aIndex) + 11U)) & S_SALT1];
+            aOrbiterC = ((aOrbiterC + aOrbiterH) + 0x1AD85CF74A873E89ULL) + aOrbiterUpdateSaltC[(((31U - aIndex) + 11U)) & 31];
             aOrbiterF = (aOrbiterF ^ aOrbiterC) ^ 0xA2559EDDA2FCB0D2ULL;
             aOrbiterF = RotL64((aOrbiterF * 0x03F23AE5910D964DULL), 29U);
             //
@@ -632,11 +632,11 @@ void TwistExpander_Antares_Arx::KDF_A_A(TwistWorkSpace *pWorkSpace,
             aIngress = aIngress + RotL64(aOrbiterH, 41U);
             aIngress = TwistMix64::DiffuseC((aIngress + aScatter));
             //
-            aWandererA = aWandererA ^ (((RotL64(aScatter, 23U) + RotL64(aOrbiterC, 29U)) + aOrbiterJ) + aWandererUpdateSaltA[((aIndex + 24U)) & S_SALT1]);
+            aWandererA = aWandererA ^ (((RotL64(aScatter, 23U) + RotL64(aOrbiterC, 29U)) + aOrbiterJ) + aWandererUpdateSaltA[((aIndex + 24U)) & 31]);
             aWandererD = aWandererD + ((RotL64(aCross, 10U) + RotL64(aOrbiterD, 10U)) + aOrbiterH);
             aWandererF = aWandererF ^ ((RotL64(aIngress, 27U) + aOrbiterD) + RotL64(aOrbiterA, 57U));
             aWandererK = aWandererK + ((((RotL64(aPrevious, 3U) + RotL64(aOrbiterI, 3U)) + aOrbiterD) + RotL64(aCarry, 3U)) + aNonceWordC);
-            aWandererG = aWandererG ^ (((RotL64(aScatter, 21U) + aOrbiterD) + RotL64(aOrbiterB, 21U)) + aWandererUpdateSaltC[(((31U - aIndex) + 7U)) & S_SALT1]);
+            aWandererG = aWandererG ^ (((RotL64(aScatter, 21U) + aOrbiterD) + RotL64(aOrbiterB, 21U)) + aWandererUpdateSaltC[(((31U - aIndex) + 7U)) & 31]);
             aWandererJ = aWandererJ + (((RotL64(aIngress, 53U) + aOrbiterG) + RotL64(aOrbiterJ, 13U)) + RotL64(aCarry, 51U));
             aWandererH = aWandererH ^ ((RotL64(aPrevious, 18U) + RotL64(aOrbiterH, 39U)) + aOrbiterG);
             aWandererE = aWandererE + (((RotL64(aCross, 13U) + aOrbiterE) + RotL64(aOrbiterC, 27U)) + aNonceWordI);
@@ -684,14 +684,14 @@ void TwistExpander_Antares_Arx::KDF_A_A(TwistWorkSpace *pWorkSpace,
             aOrbiterB = ((aWandererC + RotL64(aIngress, 43U)) + RotL64(aCarry, 51U)) + 0x474F59040AAF499DULL;
             aOrbiterK = (aWandererA + RotL64(aCross, 56U)) + 0x70DF210EFDD9B9E5ULL;
             aOrbiterF = (aWandererB + RotL64(aScatter, 3U)) + 0x5A582ACCCF5A16B2ULL;
-            aOrbiterE = ((aWandererG + RotL64(aPrevious, 51U)) + 0xF88F8B520F9862F2ULL) + aOrbiterAssignSaltD[(((31U - aIndex) + 4U)) & S_SALT1];
+            aOrbiterE = ((aWandererG + RotL64(aPrevious, 51U)) + 0xF88F8B520F9862F2ULL) + aOrbiterAssignSaltD[(((31U - aIndex) + 4U)) & 31];
             aOrbiterI = (aWandererI + RotL64(aIngress, 41U)) + 0xD47B3FAC89B57B23ULL;
             aOrbiterA = ((aWandererJ + RotL64(aPrevious, 19U)) + 0x599F25D7123B0B88ULL) + aNonceWordI;
             aOrbiterG = (aWandererH + RotL64(aCross, 21U)) + 0xFDBD81B172634819ULL;
             aOrbiterD = (aWandererF + RotL64(aScatter, 60U)) + 0x3F90CD6CF286610EULL;
             aOrbiterH = ((aWandererK + RotL64(aCross, 37U)) + RotL64(aCarry, 43U)) + 0xA9AD516B405E3D52ULL;
             aOrbiterC = ((aWandererE + RotL64(aScatter, 13U)) + 0x85770D093344BF99ULL) + aNonceWordA;
-            aOrbiterJ = (((aWandererD + RotL64(aPrevious, 23U)) + RotL64(aCarry, 5U)) + 0x4F432E6E66348319ULL) + aOrbiterAssignSaltA[((aIndex + 19U)) & S_SALT1];
+            aOrbiterJ = (((aWandererD + RotL64(aPrevious, 23U)) + RotL64(aCarry, 5U)) + 0x4F432E6E66348319ULL) + aOrbiterAssignSaltA[((aIndex + 19U)) & 31];
             //
             aOrbiterB = ((aOrbiterB + aOrbiterK) + 0x99C14DD0CE10BBDDULL) + aNonceWordL;
             aOrbiterF = (aOrbiterF ^ aOrbiterB) ^ 0x34882B933B21549BULL;
@@ -702,18 +702,18 @@ void TwistExpander_Antares_Arx::KDF_A_A(TwistWorkSpace *pWorkSpace,
             aOrbiterA = RotL64((aOrbiterA * 0xA271871A7DBAC6B9ULL), 41U);
             //
             aOrbiterK = (aOrbiterK + aOrbiterG) + 0x85E81D03C8648E98ULL;
-            aOrbiterE = ((aOrbiterE ^ aOrbiterK) ^ 0x03ACC1F4ABE20B3EULL) ^ aOrbiterUpdateSaltB[(((31U - aIndex) + 27U)) & S_SALT1];
+            aOrbiterE = ((aOrbiterE ^ aOrbiterK) ^ 0x03ACC1F4ABE20B3EULL) ^ aOrbiterUpdateSaltB[(((31U - aIndex) + 27U)) & 31];
             aOrbiterE = RotL64((aOrbiterE * 0x3F90C2720506A14FULL), 47U);
             //
             aOrbiterF = (aOrbiterF + aOrbiterE) + 0x42D46BDC7A4629A2ULL;
-            aOrbiterD = ((aOrbiterD ^ aOrbiterF) ^ 0xB3AD90C50C80C48BULL) ^ aOrbiterUpdateSaltD[((aIndex + 3U)) & S_SALT1];
+            aOrbiterD = ((aOrbiterD ^ aOrbiterF) ^ 0xB3AD90C50C80C48BULL) ^ aOrbiterUpdateSaltD[((aIndex + 3U)) & 31];
             aOrbiterD = RotL64((aOrbiterD * 0xBD0794A7578F4745ULL), 11U);
             //
             aOrbiterG = (aOrbiterG + aOrbiterF) + 0x6C91F679CB2EE862ULL;
             aOrbiterI = ((aOrbiterI ^ aOrbiterG) ^ 0xBD7090833C7157BCULL) ^ aNonceWordE;
             aOrbiterI = RotL64((aOrbiterI * 0x825299042D509603ULL), 37U);
             //
-            aOrbiterA = ((aOrbiterA + aOrbiterH) + 0x2ED6550D1E7E98B6ULL) + aOrbiterUpdateSaltA[(((31U - aIndex) + 6U)) & S_SALT1];
+            aOrbiterA = ((aOrbiterA + aOrbiterH) + 0x2ED6550D1E7E98B6ULL) + aOrbiterUpdateSaltA[(((31U - aIndex) + 6U)) & 31];
             aOrbiterC = (aOrbiterC ^ aOrbiterA) ^ 0xC85F41093A960222ULL;
             aOrbiterC = RotL64((aOrbiterC * 0x7DAD1EC3E797533FULL), 23U);
             //
@@ -730,7 +730,7 @@ void TwistExpander_Antares_Arx::KDF_A_A(TwistWorkSpace *pWorkSpace,
             aOrbiterG = RotL64((aOrbiterG * 0x5449123AA74E0CC9ULL), 13U);
             //
             aOrbiterJ = (aOrbiterJ + aOrbiterC) + 0x93E0DBDA0ED4E3C4ULL;
-            aOrbiterK = ((aOrbiterK ^ aOrbiterJ) ^ 0x6C96527692DB37DFULL) ^ aOrbiterUpdateSaltC[((aIndex + 24U)) & S_SALT1];
+            aOrbiterK = ((aOrbiterK ^ aOrbiterJ) ^ 0x6C96527692DB37DFULL) ^ aOrbiterUpdateSaltC[((aIndex + 24U)) & 31];
             aOrbiterK = RotL64((aOrbiterK * 0xC20C4999F5A2E571ULL), 21U);
             //
             aOrbiterI = (aOrbiterI + aOrbiterD) + 0xFC81F08CE3B48A1AULL;
@@ -749,8 +749,8 @@ void TwistExpander_Antares_Arx::KDF_A_A(TwistWorkSpace *pWorkSpace,
             aWandererC = aWandererC ^ (((RotL64(aScatter, 19U) + aOrbiterH) + RotL64(aOrbiterE, 28U)) + aNonceWordD);
             aWandererD = aWandererD + (((RotL64(aIngress, 11U) + aOrbiterI) + RotL64(aOrbiterE, 47U)) + RotL64(aCarry, 39U));
             aWandererA = aWandererA ^ ((RotL64(aCross, 13U) + aOrbiterF) + RotL64(aOrbiterG, 57U));
-            aWandererG = aWandererG + (((((RotL64(aScatter, 51U) + RotL64(aOrbiterD, 41U)) + aOrbiterB) + RotL64(aCarry, 21U)) + aNonceWordN) + aWandererUpdateSaltF[(((31U - aIndex) + 25U)) & S_SALT1]);
-            aWandererJ = aWandererJ ^ (((RotL64(aPrevious, 5U) + aOrbiterC) + RotL64(aOrbiterJ, 37U)) + aWandererUpdateSaltB[(((31U - aIndex) + 12U)) & S_SALT1]);
+            aWandererG = aWandererG + (((((RotL64(aScatter, 51U) + RotL64(aOrbiterD, 41U)) + aOrbiterB) + RotL64(aCarry, 21U)) + aNonceWordN) + aWandererUpdateSaltF[(((31U - aIndex) + 25U)) & 31]);
+            aWandererJ = aWandererJ ^ (((RotL64(aPrevious, 5U) + aOrbiterC) + RotL64(aOrbiterJ, 37U)) + aWandererUpdateSaltB[(((31U - aIndex) + 12U)) & 31]);
             aWandererE = aWandererE + ((RotL64(aIngress, 35U) + RotL64(aOrbiterC, 51U)) + aOrbiterA);
             aWandererF = aWandererF ^ ((RotL64(aCross, 26U) + aOrbiterE) + RotL64(aOrbiterK, 39U));
             aWandererI = aWandererI + ((RotL64(aScatter, 23U) + RotL64(aOrbiterI, 3U)) + aOrbiterJ);
@@ -906,10 +906,10 @@ void TwistExpander_Antares_Arx::KDF_A_B(TwistWorkSpace *pWorkSpace,
             aOrbiterJ = ((aWandererJ + RotL64(aCross, 47U)) + 0xE6052550AFB448F1ULL) + aNonceWordP;
             aOrbiterF = ((aWandererE + RotL64(aScatter, 29U)) + RotL64(aCarry, 19U)) + 0x3DD3C1B5A530D38BULL;
             aOrbiterC = ((aWandererB + RotL64(aPrevious, 43U)) + 0x362780A424EAE904ULL) + aNonceWordE;
-            aOrbiterI = ((aWandererI + RotL64(aIngress, 13U)) + 0x83C1E1CE96102F9CULL) + aOrbiterAssignSaltF[((aIndex + 18U)) & S_SALT1];
+            aOrbiterI = ((aWandererI + RotL64(aIngress, 13U)) + 0x83C1E1CE96102F9CULL) + aOrbiterAssignSaltF[((aIndex + 18U)) & 31];
             aOrbiterB = (aWandererH + RotL64(aPrevious, 39U)) + 0x221866FAC11C4EE0ULL;
             aOrbiterH = (aWandererA + RotL64(aScatter, 60U)) + 0x51AB3C76C08D18ABULL;
-            aOrbiterD = (((aWandererD + RotL64(aCross, 53U)) + RotL64(aCarry, 29U)) + 0x4122DF2E1E0FED96ULL) + aOrbiterAssignSaltE[(((31U - aIndex) + 13U)) & S_SALT1];
+            aOrbiterD = (((aWandererD + RotL64(aCross, 53U)) + RotL64(aCarry, 29U)) + 0x4122DF2E1E0FED96ULL) + aOrbiterAssignSaltE[(((31U - aIndex) + 13U)) & 31];
             aOrbiterK = (aWandererC + RotL64(aPrevious, 3U)) + 0x61E023877B1ADEB0ULL;
             //
             aOrbiterG = (aOrbiterG + aOrbiterJ) + 0x60ED96E835E1542EULL;
@@ -920,16 +920,16 @@ void TwistExpander_Antares_Arx::KDF_A_B(TwistWorkSpace *pWorkSpace,
             aOrbiterB = (aOrbiterB ^ aOrbiterC) ^ 0x99D8C69B34E06EADULL;
             aOrbiterB = RotL64((aOrbiterB * 0xE470BE8962515B81ULL), 53U);
             //
-            aOrbiterI = ((aOrbiterI + aOrbiterH) + 0xD51CE52BBC245839ULL) + aOrbiterUpdateSaltD[(((31U - aIndex) + 17U)) & S_SALT1];
+            aOrbiterI = ((aOrbiterI + aOrbiterH) + 0xD51CE52BBC245839ULL) + aOrbiterUpdateSaltD[(((31U - aIndex) + 17U)) & 31];
             aOrbiterG = (aOrbiterG ^ aOrbiterI) ^ 0x6265150888227958ULL;
             aOrbiterG = RotL64((aOrbiterG * 0x66D26431DE7075F1ULL), 39U);
             //
-            aOrbiterH = ((aOrbiterH + aOrbiterC) + 0x7C27ADD43F34D02FULL) + aOrbiterUpdateSaltF[(((31U - aIndex) + 9U)) & S_SALT1];
+            aOrbiterH = ((aOrbiterH + aOrbiterC) + 0x7C27ADD43F34D02FULL) + aOrbiterUpdateSaltF[(((31U - aIndex) + 9U)) & 31];
             aOrbiterJ = ((aOrbiterJ ^ aOrbiterH) ^ 0xE9BBB21EED253E4FULL) ^ aNonceWordB;
             aOrbiterJ = RotL64((aOrbiterJ * 0xEA8DBB9E788FA4D9ULL), 29U);
             //
             aOrbiterJ = (aOrbiterJ + aOrbiterB) + 0x386052C2A5A657F4ULL;
-            aOrbiterD = ((aOrbiterD ^ aOrbiterJ) ^ 0x1A0511BBA84EB424ULL) ^ aOrbiterUpdateSaltC[(((31U - aIndex) + 16U)) & S_SALT1];
+            aOrbiterD = ((aOrbiterD ^ aOrbiterJ) ^ 0x1A0511BBA84EB424ULL) ^ aOrbiterUpdateSaltC[(((31U - aIndex) + 16U)) & 31];
             aOrbiterD = RotL64((aOrbiterD * 0x2D6DAD227C0F151FULL), 13U);
             //
             aOrbiterD = (aOrbiterD + aOrbiterK) + 0xED1FC7BAD6733B91ULL;
@@ -937,7 +937,7 @@ void TwistExpander_Antares_Arx::KDF_A_B(TwistWorkSpace *pWorkSpace,
             aOrbiterI = RotL64((aOrbiterI * 0x06775126A233F999ULL), 5U);
             //
             aOrbiterB = (aOrbiterB + aOrbiterG) + 0x86A746FBA5ACD455ULL;
-            aOrbiterK = ((aOrbiterK ^ aOrbiterB) ^ 0x8A6B19E5E9BEA192ULL) ^ aOrbiterUpdateSaltE[((aIndex + 5U)) & S_SALT1];
+            aOrbiterK = ((aOrbiterK ^ aOrbiterB) ^ 0x8A6B19E5E9BEA192ULL) ^ aOrbiterUpdateSaltE[((aIndex + 5U)) & 31];
             aOrbiterK = RotL64((aOrbiterK * 0xE6C765A69963D553ULL), 19U);
             //
             aOrbiterK = (aOrbiterK + aOrbiterF) + 0x99C67DF2DAADC65AULL;
@@ -956,13 +956,13 @@ void TwistExpander_Antares_Arx::KDF_A_B(TwistWorkSpace *pWorkSpace,
             aIngress = TwistMix64::DiffuseB((aIngress + aScatter));
             //
             aWandererB = aWandererB + ((RotL64(aIngress, 47U) + aOrbiterB) + RotL64(aOrbiterG, 43U));
-            aWandererC = aWandererC ^ (((RotL64(aCross, 13U) + aOrbiterC) + RotL64(aOrbiterB, 34U)) + aWandererUpdateSaltB[((aIndex + 11U)) & S_SALT1]);
+            aWandererC = aWandererC ^ (((RotL64(aCross, 13U) + aOrbiterC) + RotL64(aOrbiterB, 34U)) + aWandererUpdateSaltB[((aIndex + 11U)) & 31]);
             aWandererK = aWandererK + ((RotL64(aPrevious, 37U) + RotL64(aOrbiterD, 19U)) + aOrbiterI);
             aWandererA = aWandererA ^ ((RotL64(aScatter, 58U) + RotL64(aOrbiterK, 29U)) + aOrbiterH);
             aWandererH = aWandererH + (((RotL64(aPrevious, 3U) + RotL64(aOrbiterB, 51U)) + aOrbiterD) + aNonceWordI);
             aWandererE = aWandererE ^ ((RotL64(aScatter, 23U) + RotL64(aOrbiterH, 23U)) + aOrbiterG);
             aWandererI = aWandererI + (((RotL64(aIngress, 29U) + RotL64(aOrbiterD, 13U)) + aOrbiterF) + RotL64(aCarry, 37U));
-            aWandererD = aWandererD ^ ((((RotL64(aCross, 19U) + aOrbiterC) + RotL64(aOrbiterF, 39U)) + aNonceWordJ) + aWandererUpdateSaltA[((aIndex + 22U)) & S_SALT1]);
+            aWandererD = aWandererD ^ ((((RotL64(aCross, 19U) + aOrbiterC) + RotL64(aOrbiterF, 39U)) + aNonceWordJ) + aWandererUpdateSaltA[((aIndex + 22U)) & 31]);
             aWandererJ = aWandererJ + (((RotL64(aScatter, 54U) + RotL64(aOrbiterI, 56U)) + aOrbiterJ) + RotL64(aCarry, 11U));
             //
             aCarry = aCarry + (aWandererK ^ RotL64(aWandererE, 41U));
@@ -1008,11 +1008,11 @@ void TwistExpander_Antares_Arx::KDF_A_B(TwistWorkSpace *pWorkSpace,
             aOrbiterG = (aWandererC + RotL64(aPrevious, 28U)) + 0x12FAC628E83ACD06ULL;
             aOrbiterF = ((aWandererE + RotL64(aScatter, 35U)) + RotL64(aCarry, 27U)) + 0x9798A90B5523BF73ULL;
             aOrbiterH = (aWandererH + RotL64(aCross, 47U)) + 0x9EA0EE9D9CA7374FULL;
-            aOrbiterK = ((aWandererF + RotL64(aPrevious, 23U)) + 0xD2309CD08ABE5306ULL) + aOrbiterAssignSaltD[(((31U - aIndex) + 27U)) & S_SALT1];
-            aOrbiterA = (((aWandererA + RotL64(aIngress, 57U)) + 0x42D1A90BBE6413F9ULL) + aOrbiterAssignSaltA[((aIndex + 13U)) & S_SALT1]) + aNonceWordF;
+            aOrbiterK = ((aWandererF + RotL64(aPrevious, 23U)) + 0xD2309CD08ABE5306ULL) + aOrbiterAssignSaltD[(((31U - aIndex) + 27U)) & 31];
+            aOrbiterA = (((aWandererA + RotL64(aIngress, 57U)) + 0x42D1A90BBE6413F9ULL) + aOrbiterAssignSaltA[((aIndex + 13U)) & 31]) + aNonceWordF;
             aOrbiterC = (aWandererD + RotL64(aPrevious, 6U)) + 0x8164BC8829880D99ULL;
             //
-            aOrbiterB = ((aOrbiterB + aOrbiterI) + 0x59D3D2D50731A750ULL) + aOrbiterUpdateSaltF[((aIndex + 6U)) & S_SALT1];
+            aOrbiterB = ((aOrbiterB + aOrbiterI) + 0x59D3D2D50731A750ULL) + aOrbiterUpdateSaltF[((aIndex + 6U)) & 31];
             aOrbiterJ = (aOrbiterJ ^ aOrbiterB) ^ 0xD93BD4CCF4A0B318ULL;
             aOrbiterJ = RotL64((aOrbiterJ * 0x5A19237E4411C65BULL), 13U);
             //
@@ -1033,18 +1033,18 @@ void TwistExpander_Antares_Arx::KDF_A_B(TwistWorkSpace *pWorkSpace,
             aOrbiterC = RotL64((aOrbiterC * 0xDBA34F2EA6187F23ULL), 51U);
             //
             aOrbiterK = (aOrbiterK + aOrbiterB) + 0x8CBB2D9350CF8B1CULL;
-            aOrbiterG = ((aOrbiterG ^ aOrbiterK) ^ 0x53CDB558244FDD92ULL) ^ aOrbiterUpdateSaltC[(((31U - aIndex) + 3U)) & S_SALT1];
+            aOrbiterG = ((aOrbiterG ^ aOrbiterK) ^ 0x53CDB558244FDD92ULL) ^ aOrbiterUpdateSaltC[(((31U - aIndex) + 3U)) & 31];
             aOrbiterG = RotL64((aOrbiterG * 0x4DB19B844E6ACF41ULL), 29U);
             //
             aOrbiterJ = (aOrbiterJ + aOrbiterC) + 0x67BD49C426E5C462ULL;
             aOrbiterA = ((aOrbiterA ^ aOrbiterJ) ^ 0xB6749B3D54CCB6C9ULL) ^ aNonceWordJ;
             aOrbiterA = RotL64((aOrbiterA * 0x1BB2467EA50C3AEDULL), 23U);
             //
-            aOrbiterA = ((aOrbiterA + aOrbiterH) + 0x0F48B17ACA8BD92AULL) + aOrbiterUpdateSaltB[((aIndex + 22U)) & S_SALT1];
+            aOrbiterA = ((aOrbiterA + aOrbiterH) + 0x0F48B17ACA8BD92AULL) + aOrbiterUpdateSaltB[((aIndex + 22U)) & 31];
             aOrbiterI = (aOrbiterI ^ aOrbiterA) ^ 0x5C31FDD186D43462ULL;
             aOrbiterI = RotL64((aOrbiterI * 0xE45252A27A045CA7ULL), 3U);
             //
-            aOrbiterC = ((aOrbiterC + aOrbiterG) + 0xF98207E4663B4304ULL) + aOrbiterUpdateSaltA[(((31U - aIndex) + 5U)) & S_SALT1];
+            aOrbiterC = ((aOrbiterC + aOrbiterG) + 0xF98207E4663B4304ULL) + aOrbiterUpdateSaltA[(((31U - aIndex) + 5U)) & 31];
             aOrbiterH = (aOrbiterH ^ aOrbiterC) ^ 0x4D57F2CF0AE03935ULL;
             aOrbiterH = RotL64((aOrbiterH * 0x68793022C0B3D579ULL), 39U);
             //
@@ -1058,12 +1058,12 @@ void TwistExpander_Antares_Arx::KDF_A_B(TwistWorkSpace *pWorkSpace,
             aWandererD = aWandererD + ((RotL64(aCross, 18U) + RotL64(aOrbiterF, 6U)) + aOrbiterK);
             aWandererB = aWandererB ^ ((RotL64(aScatter, 5U) + RotL64(aOrbiterA, 51U)) + aOrbiterI);
             aWandererF = aWandererF + (((RotL64(aIngress, 29U) + RotL64(aOrbiterB, 41U)) + aOrbiterF) + aNonceWordH);
-            aWandererK = aWandererK ^ ((((RotL64(aPrevious, 51U) + RotL64(aOrbiterH, 47U)) + aOrbiterC) + aNonceWordM) + aWandererUpdateSaltE[(((31U - aIndex) + 8U)) & S_SALT1]);
+            aWandererK = aWandererK ^ ((((RotL64(aPrevious, 51U) + RotL64(aOrbiterH, 47U)) + aOrbiterC) + aNonceWordM) + aWandererUpdateSaltE[(((31U - aIndex) + 8U)) & 31]);
             aWandererH = aWandererH + (((RotL64(aIngress, 37U) + aOrbiterA) + RotL64(aOrbiterG, 29U)) + RotL64(aCarry, 47U));
             aWandererI = aWandererI ^ ((RotL64(aCross, 23U) + RotL64(aOrbiterC, 37U)) + aOrbiterB);
             aWandererE = aWandererE + ((((RotL64(aPrevious, 57U) + aOrbiterJ) + RotL64(aOrbiterG, 14U)) + RotL64(aCarry, 39U)) + aNonceWordO);
             aWandererC = aWandererC ^ ((RotL64(aScatter, 44U) + aOrbiterB) + RotL64(aOrbiterH, 57U));
-            aWandererA = aWandererA + (((RotL64(aIngress, 11U) + RotL64(aOrbiterK, 23U)) + aOrbiterA) + aWandererUpdateSaltF[(((31U - aIndex) + 18U)) & S_SALT1]);
+            aWandererA = aWandererA + (((RotL64(aIngress, 11U) + RotL64(aOrbiterK, 23U)) + aOrbiterA) + aWandererUpdateSaltF[(((31U - aIndex) + 18U)) & 31]);
             //
             aCarry = aCarry + (aWandererH ^ RotL64(aWandererC, 35U));
             aCarry = aCarry + (RotL64(aWandererE, 60U) ^ aWandererF);
@@ -1106,18 +1106,18 @@ void TwistExpander_Antares_Arx::KDF_A_B(TwistWorkSpace *pWorkSpace,
             aOrbiterK = (aWandererC + RotL64(aScatter, 5U)) + 0xBCD1A1567914FB86ULL;
             aOrbiterC = (((aWandererF + RotL64(aIngress, 37U)) + RotL64(aCarry, 27U)) + 0xEE160FE5CB3EF40DULL) + aNonceWordJ;
             aOrbiterJ = ((aWandererA + RotL64(aPrevious, 57U)) + RotL64(aCarry, 37U)) + 0xD6E36088DD835844ULL;
-            aOrbiterG = ((aWandererD + RotL64(aIngress, 47U)) + 0xCFC212E2A43DD06AULL) + aOrbiterAssignSaltC[(((31U - aIndex) + 29U)) & S_SALT1];
-            aOrbiterD = (((aWandererK + RotL64(aCross, 42U)) + 0x81248A6D185923E3ULL) + aOrbiterAssignSaltB[((aIndex + 19U)) & S_SALT1]) + aNonceWordP;
+            aOrbiterG = ((aWandererD + RotL64(aIngress, 47U)) + 0xCFC212E2A43DD06AULL) + aOrbiterAssignSaltC[(((31U - aIndex) + 29U)) & 31];
+            aOrbiterD = (((aWandererK + RotL64(aCross, 42U)) + 0x81248A6D185923E3ULL) + aOrbiterAssignSaltB[((aIndex + 19U)) & 31]) + aNonceWordP;
             aOrbiterI = (aWandererB + RotL64(aPrevious, 11U)) + 0x431D42CCA4B3345CULL;
             aOrbiterH = (aWandererJ + RotL64(aScatter, 29U)) + 0x2C4D416FB18DB953ULL;
             aOrbiterE = (aWandererI + RotL64(aIngress, 23U)) + 0x8A2F995C8B5C4CBEULL;
             //
-            aOrbiterA = (((aOrbiterA + aOrbiterK) + 0x6D330808C779C7CDULL) + aOrbiterUpdateSaltB[((aIndex + 17U)) & S_SALT1]) + aNonceWordA;
+            aOrbiterA = (((aOrbiterA + aOrbiterK) + 0x6D330808C779C7CDULL) + aOrbiterUpdateSaltB[((aIndex + 17U)) & 31]) + aNonceWordA;
             aOrbiterC = (aOrbiterC ^ aOrbiterA) ^ 0x1AEDF2B3CD4C0EC4ULL;
             aOrbiterC = RotL64((aOrbiterC * 0x1BC3AF39412E9FA3ULL), 23U);
             //
             aOrbiterJ = (aOrbiterJ + aOrbiterG) + 0xCE2D9B1559526551ULL;
-            aOrbiterD = ((aOrbiterD ^ aOrbiterJ) ^ 0xB024BF106C5EDB82ULL) ^ aOrbiterUpdateSaltF[(((31U - aIndex) + 22U)) & S_SALT1];
+            aOrbiterD = ((aOrbiterD ^ aOrbiterJ) ^ 0xB024BF106C5EDB82ULL) ^ aOrbiterUpdateSaltF[(((31U - aIndex) + 22U)) & 31];
             aOrbiterD = RotL64((aOrbiterD * 0x152570B016693A11ULL), 51U);
             //
             aOrbiterG = (aOrbiterG + aOrbiterA) + 0xB27C913D30375E3EULL;
@@ -1141,10 +1141,10 @@ void TwistExpander_Antares_Arx::KDF_A_B(TwistWorkSpace *pWorkSpace,
             aOrbiterH = RotL64((aOrbiterH * 0x525762B85ECB306DULL), 29U);
             //
             aOrbiterD = (aOrbiterD + aOrbiterI) + 0x78134AED6483FB3DULL;
-            aOrbiterE = ((aOrbiterE ^ aOrbiterD) ^ 0x5934BAA0497F4354ULL) ^ aOrbiterUpdateSaltC[(((31U - aIndex) + 7U)) & S_SALT1];
+            aOrbiterE = ((aOrbiterE ^ aOrbiterD) ^ 0x5934BAA0497F4354ULL) ^ aOrbiterUpdateSaltC[(((31U - aIndex) + 7U)) & 31];
             aOrbiterE = RotL64((aOrbiterE * 0xB4D5F66452A9DAABULL), 41U);
             //
-            aOrbiterH = ((aOrbiterH + aOrbiterE) + 0xEB9E09BD0284D42BULL) + aOrbiterUpdateSaltE[((aIndex + 14U)) & S_SALT1];
+            aOrbiterH = ((aOrbiterH + aOrbiterE) + 0xEB9E09BD0284D42BULL) + aOrbiterUpdateSaltE[((aIndex + 14U)) & 31];
             aOrbiterA = (aOrbiterA ^ aOrbiterH) ^ 0x255FAD6CEBD6ADABULL;
             aOrbiterA = RotL64((aOrbiterA * 0x759DCB1038717951ULL), 47U);
             //
@@ -1159,9 +1159,9 @@ void TwistExpander_Antares_Arx::KDF_A_B(TwistWorkSpace *pWorkSpace,
             aWandererA = aWandererA + (((RotL64(aCross, 47U) + aOrbiterC) + RotL64(aOrbiterA, 57U)) + RotL64(aCarry, 57U));
             aWandererI = aWandererI ^ ((RotL64(aIngress, 39U) + RotL64(aOrbiterH, 14U)) + aOrbiterG);
             aWandererJ = aWandererJ + ((RotL64(aPrevious, 5U) + RotL64(aOrbiterK, 51U)) + aOrbiterD);
-            aWandererK = aWandererK ^ ((((RotL64(aScatter, 30U) + aOrbiterE) + RotL64(aOrbiterA, 29U)) + aNonceWordL) + aWandererUpdateSaltC[(((31U - aIndex) + 8U)) & S_SALT1]);
+            aWandererK = aWandererK ^ ((((RotL64(aScatter, 30U) + aOrbiterE) + RotL64(aOrbiterA, 29U)) + aNonceWordL) + aWandererUpdateSaltC[(((31U - aIndex) + 8U)) & 31]);
             aWandererC = aWandererC + (((RotL64(aPrevious, 23U) + RotL64(aOrbiterA, 3U)) + aOrbiterK) + RotL64(aCarry, 41U));
-            aWandererF = aWandererF ^ ((((RotL64(aCross, 35U) + aOrbiterH) + RotL64(aOrbiterD, 23U)) + aNonceWordE) + aWandererUpdateSaltD[(((31U - aIndex) + 27U)) & S_SALT1]);
+            aWandererF = aWandererF ^ ((((RotL64(aCross, 35U) + aOrbiterH) + RotL64(aOrbiterD, 23U)) + aNonceWordE) + aWandererUpdateSaltD[(((31U - aIndex) + 27U)) & 31]);
             aWandererB = aWandererB + ((RotL64(aIngress, 51U) + aOrbiterJ) + RotL64(aOrbiterE, 18U));
             aWandererG = aWandererG ^ ((RotL64(aScatter, 18U) + aOrbiterK) + RotL64(aOrbiterC, 47U));
             //
@@ -1202,12 +1202,12 @@ void TwistExpander_Antares_Arx::KDF_A_B(TwistWorkSpace *pWorkSpace,
             aScatter = (RotL64(aPrevious, 13U) ^ RotL64(aCross, 57U)) + (RotL64(aCarry, 42U) + RotL64(aIngress, 29U));
             aScatter = TwistMix64::DiffuseB(((aScatter ^ aDomainWordScatter) ^ aNonceWordB));
             //
-            aOrbiterI = (((aWandererH + RotL64(aIngress, 36U)) + RotL64(aCarry, 47U)) + 0x9231DF73D6172C60ULL) + aOrbiterAssignSaltE[((aIndex + 24U)) & S_SALT1];
+            aOrbiterI = (((aWandererH + RotL64(aIngress, 36U)) + RotL64(aCarry, 47U)) + 0x9231DF73D6172C60ULL) + aOrbiterAssignSaltE[((aIndex + 24U)) & 31];
             aOrbiterK = (aWandererJ + RotL64(aPrevious, 51U)) + 0xD544FDA1FC6CBA46ULL;
             aOrbiterH = ((aWandererD + RotL64(aCross, 19U)) + 0x610E5A8768A322D4ULL) + aNonceWordF;
             aOrbiterA = ((aWandererA + RotL64(aScatter, 57U)) + 0x346C2445484113F2ULL) + aNonceWordJ;
             aOrbiterC = (aWandererK + RotL64(aCross, 41U)) + 0xC358A741D190DA6EULL;
-            aOrbiterD = ((aWandererC + RotL64(aScatter, 11U)) + 0xC15953330124EBE1ULL) + aOrbiterAssignSaltF[((aIndex + 17U)) & S_SALT1];
+            aOrbiterD = ((aWandererC + RotL64(aScatter, 11U)) + 0xC15953330124EBE1ULL) + aOrbiterAssignSaltF[((aIndex + 17U)) & 31];
             aOrbiterE = ((aWandererE + RotL64(aPrevious, 6U)) + RotL64(aCarry, 57U)) + 0xDED5DB9E7D5B61F2ULL;
             aOrbiterF = (aWandererB + RotL64(aIngress, 27U)) + 0x548C419BDF19A843ULL;
             aOrbiterB = ((aWandererF + RotL64(aScatter, 23U)) + RotL64(aCarry, 23U)) + 0xB958F843F1C592DFULL;
@@ -1216,12 +1216,12 @@ void TwistExpander_Antares_Arx::KDF_A_B(TwistWorkSpace *pWorkSpace,
             aOrbiterH = (aOrbiterH ^ aOrbiterI) ^ 0x1ECBD73CDA0CACF7ULL;
             aOrbiterH = RotL64((aOrbiterH * 0x82B6F710F2ABDCC3ULL), 3U);
             //
-            aOrbiterA = ((aOrbiterA + aOrbiterH) + 0x2D340BE625647650ULL) + aOrbiterUpdateSaltD[((aIndex + 23U)) & S_SALT1];
+            aOrbiterA = ((aOrbiterA + aOrbiterH) + 0x2D340BE625647650ULL) + aOrbiterUpdateSaltD[((aIndex + 23U)) & 31];
             aOrbiterC = (aOrbiterC ^ aOrbiterA) ^ 0xBB439B927C1A8DE8ULL;
             aOrbiterC = RotL64((aOrbiterC * 0x3C1F1D773D9F84F9ULL), 57U);
             //
             aOrbiterD = ((aOrbiterD + aOrbiterE) + 0xA8DED79A8B99BB33ULL) + aNonceWordB;
-            aOrbiterK = ((aOrbiterK ^ aOrbiterD) ^ 0x04AE7074BCEACCB4ULL) ^ aOrbiterUpdateSaltE[(((31U - aIndex) + 13U)) & S_SALT1];
+            aOrbiterK = ((aOrbiterK ^ aOrbiterD) ^ 0x04AE7074BCEACCB4ULL) ^ aOrbiterUpdateSaltE[(((31U - aIndex) + 13U)) & 31];
             aOrbiterK = RotL64((aOrbiterK * 0xC89679B86EFC85C7ULL), 47U);
             //
             aOrbiterC = ((aOrbiterC + aOrbiterF) + 0x7D68BE96B32AAE95ULL) + aNonceWordC;
@@ -1232,7 +1232,7 @@ void TwistExpander_Antares_Arx::KDF_A_B(TwistWorkSpace *pWorkSpace,
             aOrbiterI = (aOrbiterI ^ aOrbiterF) ^ 0x639372843DF6F3E3ULL;
             aOrbiterI = RotL64((aOrbiterI * 0xDBA5AE296610DB0DULL), 29U);
             //
-            aOrbiterH = ((aOrbiterH + aOrbiterB) + 0xE5A9D568F3CA7C72ULL) + aOrbiterUpdateSaltC[((aIndex + 18U)) & S_SALT1];
+            aOrbiterH = ((aOrbiterH + aOrbiterB) + 0xE5A9D568F3CA7C72ULL) + aOrbiterUpdateSaltC[((aIndex + 18U)) & 31];
             aOrbiterF = (aOrbiterF ^ aOrbiterH) ^ 0xAE63FAC684B27728ULL;
             aOrbiterF = RotL64((aOrbiterF * 0x319CFE3CE78E6E51ULL), 23U);
             //
@@ -1244,7 +1244,7 @@ void TwistExpander_Antares_Arx::KDF_A_B(TwistWorkSpace *pWorkSpace,
             aOrbiterD = (aOrbiterD ^ aOrbiterB) ^ 0xA139B16AF5782F1CULL;
             aOrbiterD = RotL64((aOrbiterD * 0x730BA347E1C13CBFULL), 37U);
             //
-            aOrbiterE = ((aOrbiterE + aOrbiterI) + 0x0F5ACC79AC29B1EDULL) + aOrbiterUpdateSaltB[(((31U - aIndex) + 25U)) & S_SALT1];
+            aOrbiterE = ((aOrbiterE + aOrbiterI) + 0x0F5ACC79AC29B1EDULL) + aOrbiterUpdateSaltB[(((31U - aIndex) + 25U)) & 31];
             aOrbiterA = (aOrbiterA ^ aOrbiterE) ^ 0x7488249EC80B521DULL;
             aOrbiterA = RotL64((aOrbiterA * 0x6E86187914A09569ULL), 11U);
             //
@@ -1258,12 +1258,12 @@ void TwistExpander_Antares_Arx::KDF_A_B(TwistWorkSpace *pWorkSpace,
             aWandererE = aWandererE + (((RotL64(aCross, 35U) + aOrbiterA) + RotL64(aOrbiterC, 5U)) + aNonceWordA);
             aWandererB = aWandererB ^ ((RotL64(aPrevious, 23U) + RotL64(aOrbiterI, 53U)) + aOrbiterF);
             aWandererH = aWandererH + (((RotL64(aIngress, 29U) + aOrbiterA) + RotL64(aOrbiterK, 39U)) + RotL64(aCarry, 41U));
-            aWandererF = aWandererF ^ ((((RotL64(aScatter, 13U) + RotL64(aOrbiterA, 29U)) + aOrbiterH) + aNonceWordE) + aWandererUpdateSaltB[(((31U - aIndex) + 29U)) & S_SALT1]);
+            aWandererF = aWandererF ^ ((((RotL64(aScatter, 13U) + RotL64(aOrbiterA, 29U)) + aOrbiterH) + aNonceWordE) + aWandererUpdateSaltB[(((31U - aIndex) + 29U)) & 31]);
             aWandererD = aWandererD + ((RotL64(aCross, 48U) + RotL64(aOrbiterE, 48U)) + aOrbiterA);
             aWandererK = aWandererK ^ ((RotL64(aPrevious, 57U) + aOrbiterB) + RotL64(aOrbiterA, 57U));
             aWandererC = aWandererC + ((RotL64(aScatter, 5U) + RotL64(aOrbiterE, 13U)) + aOrbiterD);
             aWandererA = aWandererA ^ ((RotL64(aIngress, 19U) + aOrbiterD) + RotL64(aOrbiterI, 23U));
-            aWandererJ = aWandererJ + ((((RotL64(aCross, 44U) + aOrbiterA) + RotL64(aOrbiterI, 34U)) + RotL64(aCarry, 27U)) + aWandererUpdateSaltA[(((31U - aIndex) + 5U)) & S_SALT1]);
+            aWandererJ = aWandererJ + ((((RotL64(aCross, 44U) + aOrbiterA) + RotL64(aOrbiterI, 34U)) + RotL64(aCarry, 27U)) + aWandererUpdateSaltA[(((31U - aIndex) + 5U)) & 31]);
             //
             aCarry = aCarry + (aWandererD ^ RotL64(aWandererK, 3U));
             aCarry = aCarry + (RotL64(aWandererB, 43U) ^ aWandererF);
@@ -1414,8 +1414,8 @@ void TwistExpander_Antares_Arx::KDF_A_C(TwistWorkSpace *pWorkSpace,
             aScatter = (RotL64(aIngress, 21U) + RotL64(aCarry, 3U)) + (RotL64(aPrevious, 37U) ^ RotL64(aCross, 52U));
             aScatter = TwistMix64::DiffuseA(((aScatter ^ aDomainWordScatter) ^ aNonceWordE));
             //
-            aOrbiterH = (((aWandererH + RotL64(aIngress, 27U)) + RotL64(aCarry, 35U)) + 0x0955CE05F642C638ULL) + aOrbiterAssignSaltB[(((31U - aIndex) + 10U)) & S_SALT1];
-            aOrbiterG = ((((aWandererC + RotL64(aCross, 21U)) + RotL64(aCarry, 21U)) + 0x5B44BBB6B498D08CULL) + aOrbiterAssignSaltD[((aIndex + 6U)) & S_SALT1]) + aNonceWordM;
+            aOrbiterH = (((aWandererH + RotL64(aIngress, 27U)) + RotL64(aCarry, 35U)) + 0x0955CE05F642C638ULL) + aOrbiterAssignSaltB[(((31U - aIndex) + 10U)) & 31];
+            aOrbiterG = ((((aWandererC + RotL64(aCross, 21U)) + RotL64(aCarry, 21U)) + 0x5B44BBB6B498D08CULL) + aOrbiterAssignSaltD[((aIndex + 6U)) & 31]) + aNonceWordM;
             aOrbiterI = (((aWandererA + RotL64(aScatter, 41U)) + RotL64(aCarry, 53U)) + 0xED7D72A6B7B92721ULL) + aNonceWordE;
             aOrbiterK = (aWandererI + RotL64(aPrevious, 35U)) + 0x4480FA873CF94329ULL;
             aOrbiterD = (aWandererB + RotL64(aCross, 5U)) + 0xC8ACA1FDB09950B3ULL;
@@ -1426,16 +1426,16 @@ void TwistExpander_Antares_Arx::KDF_A_C(TwistWorkSpace *pWorkSpace,
             aOrbiterI = (aOrbiterI ^ aOrbiterH) ^ 0x4BEAFD8FE17C4138ULL;
             aOrbiterI = RotL64((aOrbiterI * 0x7846245E425B0C9DULL), 11U);
             //
-            aOrbiterG = ((aOrbiterG + aOrbiterK) + 0x2D9E67F56B072FEAULL) + aOrbiterUpdateSaltC[(((31U - aIndex) + 13U)) & S_SALT1];
+            aOrbiterG = ((aOrbiterG + aOrbiterK) + 0x2D9E67F56B072FEAULL) + aOrbiterUpdateSaltC[(((31U - aIndex) + 13U)) & 31];
             aOrbiterD = (aOrbiterD ^ aOrbiterG) ^ 0xC2F5CD56A6FC492DULL;
             aOrbiterD = RotL64((aOrbiterD * 0x3998C959E10184EBULL), 5U);
             //
             aOrbiterD = ((aOrbiterD + aOrbiterH) + 0x9D9276DB742ABF01ULL) + aNonceWordC;
-            aOrbiterJ = (((aOrbiterJ ^ aOrbiterD) ^ 0x97C424CD1B1BA3E1ULL) ^ aOrbiterUpdateSaltF[((aIndex + 17U)) & S_SALT1]) ^ aNonceWordN;
+            aOrbiterJ = (((aOrbiterJ ^ aOrbiterD) ^ 0x97C424CD1B1BA3E1ULL) ^ aOrbiterUpdateSaltF[((aIndex + 17U)) & 31]) ^ aNonceWordN;
             aOrbiterJ = RotL64((aOrbiterJ * 0x19126D7BF6405D31ULL), 57U);
             //
             aOrbiterB = (aOrbiterB + aOrbiterJ) + 0xE1BE51B6D5A79DB4ULL;
-            aOrbiterG = ((aOrbiterG ^ aOrbiterB) ^ 0x79F8BEF65E079982ULL) ^ aOrbiterUpdateSaltA[((aIndex + 24U)) & S_SALT1];
+            aOrbiterG = ((aOrbiterG ^ aOrbiterB) ^ 0x79F8BEF65E079982ULL) ^ aOrbiterUpdateSaltA[((aIndex + 24U)) & 31];
             aOrbiterG = RotL64((aOrbiterG * 0x0E67188DB2F45615ULL), 37U);
             //
             aOrbiterI = (aOrbiterI + aOrbiterD) + 0x88ABF0109B0283C5ULL;
@@ -1447,7 +1447,7 @@ void TwistExpander_Antares_Arx::KDF_A_C(TwistWorkSpace *pWorkSpace,
             aOrbiterK = RotL64((aOrbiterK * 0xF625E80EDAEEA613ULL), 29U);
             //
             aOrbiterK = (aOrbiterK + aOrbiterB) + 0x4FEAE72BC792DA8CULL;
-            aOrbiterH = ((aOrbiterH ^ aOrbiterK) ^ 0x43CB19B678A9A8D0ULL) ^ aOrbiterUpdateSaltD[((aIndex + 5U)) & S_SALT1];
+            aOrbiterH = ((aOrbiterH ^ aOrbiterK) ^ 0x43CB19B678A9A8D0ULL) ^ aOrbiterUpdateSaltD[((aIndex + 5U)) & 31];
             aOrbiterH = RotL64((aOrbiterH * 0x4A53CE656907E96BULL), 23U);
             //
             aIngress = RotL64(aOrbiterB, 57U) ^ aOrbiterI;
@@ -1459,8 +1459,8 @@ void TwistExpander_Antares_Arx::KDF_A_C(TwistWorkSpace *pWorkSpace,
             aWandererD = aWandererD ^ (((RotL64(aPrevious, 47U) + RotL64(aOrbiterB, 5U)) + aOrbiterG) + aNonceWordP);
             aWandererJ = aWandererJ + (((RotL64(aIngress, 29U) + aOrbiterH) + RotL64(aOrbiterI, 58U)) + aNonceWordI);
             aWandererB = aWandererB ^ (((RotL64(aCross, 35U) + RotL64(aOrbiterH, 29U)) + aOrbiterD) + aNonceWordD);
-            aWandererC = aWandererC + ((((RotL64(aScatter, 41U) + RotL64(aOrbiterK, 47U)) + aOrbiterB) + RotL64(aCarry, 27U)) + aWandererUpdateSaltD[(((31U - aIndex) + 20U)) & S_SALT1]);
-            aWandererA = aWandererA ^ (((RotL64(aIngress, 22U) + aOrbiterG) + RotL64(aOrbiterK, 35U)) + aWandererUpdateSaltF[((aIndex + 16U)) & S_SALT1]);
+            aWandererC = aWandererC + ((((RotL64(aScatter, 41U) + RotL64(aOrbiterK, 47U)) + aOrbiterB) + RotL64(aCarry, 27U)) + aWandererUpdateSaltD[(((31U - aIndex) + 20U)) & 31]);
+            aWandererA = aWandererA ^ (((RotL64(aIngress, 22U) + aOrbiterG) + RotL64(aOrbiterK, 35U)) + aWandererUpdateSaltF[((aIndex + 16U)) & 31]);
             aWandererI = aWandererI + (((RotL64(aPrevious, 57U) + RotL64(aOrbiterD, 11U)) + aOrbiterI) + RotL64(aCarry, 51U));
             aWandererH = aWandererH ^ ((RotL64(aScatter, 3U) + aOrbiterJ) + RotL64(aOrbiterK, 19U));
             //
@@ -1501,16 +1501,16 @@ void TwistExpander_Antares_Arx::KDF_A_C(TwistWorkSpace *pWorkSpace,
             aScatter = (RotL64(aIngress, 6U) + RotL64(aCross, 23U)) ^ (RotL64(aPrevious, 39U) ^ RotL64(aCarry, 57U));
             aScatter = TwistMix64::DiffuseA(((aScatter ^ aDomainWordScatter) ^ aNonceWordK));
             //
-            aOrbiterC = ((aWandererH + RotL64(aScatter, 57U)) + 0x107178C3F4EF76ABULL) + aOrbiterAssignSaltA[(((31U - aIndex) + 29U)) & S_SALT1];
+            aOrbiterC = ((aWandererH + RotL64(aScatter, 57U)) + 0x107178C3F4EF76ABULL) + aOrbiterAssignSaltA[(((31U - aIndex) + 29U)) & 31];
             aOrbiterE = (aWandererG + RotL64(aPrevious, 3U)) + 0xD129839472ACE6A4ULL;
             aOrbiterA = (((aWandererF + RotL64(aCross, 44U)) + RotL64(aCarry, 5U)) + 0xAD21B6B5EF675B07ULL) + aNonceWordH;
             aOrbiterD = ((aWandererK + RotL64(aIngress, 23U)) + 0x9887F74E094E0A97ULL) + aNonceWordG;
             aOrbiterK = ((aWandererD + RotL64(aPrevious, 13U)) + RotL64(aCarry, 29U)) + 0xCF3ABAC4C9952A44ULL;
-            aOrbiterB = ((((aWandererC + RotL64(aScatter, 37U)) + RotL64(aCarry, 41U)) + 0x86A5B8210161E49BULL) + aOrbiterAssignSaltC[((aIndex + 21U)) & S_SALT1]) + aNonceWordM;
+            aOrbiterB = ((((aWandererC + RotL64(aScatter, 37U)) + RotL64(aCarry, 41U)) + 0x86A5B8210161E49BULL) + aOrbiterAssignSaltC[((aIndex + 21U)) & 31]) + aNonceWordM;
             aOrbiterI = (aWandererI + RotL64(aIngress, 51U)) + 0x5E39EE5EE9AA7213ULL;
             //
-            aOrbiterC = ((aOrbiterC + aOrbiterE) + 0x54EE366C45EECB4AULL) + aOrbiterUpdateSaltB[(((31U - aIndex) + 23U)) & S_SALT1];
-            aOrbiterA = ((aOrbiterA ^ aOrbiterC) ^ 0xD5ABCA1F4B4041A8ULL) ^ aOrbiterUpdateSaltA[(((31U - aIndex) + 19U)) & S_SALT1];
+            aOrbiterC = ((aOrbiterC + aOrbiterE) + 0x54EE366C45EECB4AULL) + aOrbiterUpdateSaltB[(((31U - aIndex) + 23U)) & 31];
+            aOrbiterA = ((aOrbiterA ^ aOrbiterC) ^ 0xD5ABCA1F4B4041A8ULL) ^ aOrbiterUpdateSaltA[(((31U - aIndex) + 19U)) & 31];
             aOrbiterA = RotL64((aOrbiterA * 0x9B8298DB531B919DULL), 5U);
             //
             aOrbiterD = ((aOrbiterD + aOrbiterA) + 0x2BF77D30F2FA2E8AULL) + aNonceWordP;
@@ -1522,7 +1522,7 @@ void TwistExpander_Antares_Arx::KDF_A_C(TwistWorkSpace *pWorkSpace,
             aOrbiterE = RotL64((aOrbiterE * 0xA9BB96F0960D1B09ULL), 39U);
             //
             aOrbiterI = (aOrbiterI + aOrbiterK) + 0x9F2B661EA0B61A82ULL;
-            aOrbiterC = ((aOrbiterC ^ aOrbiterI) ^ 0xBD8BBDC40FD5BEAAULL) ^ aOrbiterUpdateSaltD[(((31U - aIndex) + 10U)) & S_SALT1];
+            aOrbiterC = ((aOrbiterC ^ aOrbiterI) ^ 0xBD8BBDC40FD5BEAAULL) ^ aOrbiterUpdateSaltD[(((31U - aIndex) + 10U)) & 31];
             aOrbiterC = RotL64((aOrbiterC * 0x70CDD6CB23835C4DULL), 29U);
             //
             aOrbiterE = (aOrbiterE + aOrbiterD) + 0xB067A3481D69CF61ULL;
@@ -1530,7 +1530,7 @@ void TwistExpander_Antares_Arx::KDF_A_C(TwistWorkSpace *pWorkSpace,
             aOrbiterI = RotL64((aOrbiterI * 0xDEE74D3D29F6DFD7ULL), 21U);
             //
             aOrbiterB = ((aOrbiterB + aOrbiterC) + 0x1B64B3CE0F9348BDULL) + aNonceWordF;
-            aOrbiterD = ((aOrbiterD ^ aOrbiterB) ^ 0x753C421F9D1FD7C5ULL) ^ aOrbiterUpdateSaltE[((aIndex + 11U)) & S_SALT1];
+            aOrbiterD = ((aOrbiterD ^ aOrbiterB) ^ 0x753C421F9D1FD7C5ULL) ^ aOrbiterUpdateSaltE[((aIndex + 11U)) & 31];
             aOrbiterD = RotL64((aOrbiterD * 0x1E2BE1C9CF6E3A33ULL), 57U);
             //
             aOrbiterA = (aOrbiterA + aOrbiterI) + 0x7A527016E5D91637ULL;
@@ -1547,9 +1547,9 @@ void TwistExpander_Antares_Arx::KDF_A_C(TwistWorkSpace *pWorkSpace,
             aWandererG = aWandererG ^ (((RotL64(aScatter, 29U) + aOrbiterI) + RotL64(aOrbiterC, 4U)) + aNonceWordN);
             aWandererH = aWandererH + (((RotL64(aCross, 37U) + RotL64(aOrbiterA, 21U)) + aOrbiterD) + RotL64(aCarry, 29U));
             aWandererF = aWandererF ^ ((RotL64(aPrevious, 21U) + RotL64(aOrbiterA, 57U)) + aOrbiterC);
-            aWandererK = aWandererK + (((RotL64(aCross, 53U) + aOrbiterE) + RotL64(aOrbiterK, 51U)) + aWandererUpdateSaltB[(((31U - aIndex) + 25U)) & S_SALT1]);
+            aWandererK = aWandererK + (((RotL64(aCross, 53U) + aOrbiterE) + RotL64(aOrbiterK, 51U)) + aWandererUpdateSaltB[(((31U - aIndex) + 25U)) & 31]);
             aWandererD = aWandererD ^ (((RotL64(aScatter, 47U) + aOrbiterK) + RotL64(aOrbiterB, 13U)) + aNonceWordC);
-            aWandererI = aWandererI + ((((RotL64(aPrevious, 11U) + RotL64(aOrbiterA, 43U)) + aOrbiterI) + RotL64(aCarry, 57U)) + aWandererUpdateSaltC[(((31U - aIndex) + 3U)) & S_SALT1]);
+            aWandererI = aWandererI + ((((RotL64(aPrevious, 11U) + RotL64(aOrbiterA, 43U)) + aOrbiterI) + RotL64(aCarry, 57U)) + aWandererUpdateSaltC[(((31U - aIndex) + 3U)) & 31]);
             //
             aCarry = aCarry + (aWandererD ^ RotL64(aWandererF, 35U));
             aCarry = aCarry + (RotL64(aWandererG, 57U) ^ aWandererK);
@@ -1589,9 +1589,9 @@ void TwistExpander_Antares_Arx::KDF_A_C(TwistWorkSpace *pWorkSpace,
             aScatter = TwistMix64::DiffuseA(((aScatter ^ aDomainWordScatter) ^ aNonceWordA));
             //
             aOrbiterC = (aWandererK + RotL64(aCross, 13U)) + 0x105E699CF71A24DFULL;
-            aOrbiterH = (((aWandererJ + RotL64(aIngress, 3U)) + RotL64(aCarry, 11U)) + 0x6BC0BA1EF5B83CDAULL) + aOrbiterAssignSaltF[(((31U - aIndex) + 27U)) & S_SALT1];
+            aOrbiterH = (((aWandererJ + RotL64(aIngress, 3U)) + RotL64(aCarry, 11U)) + 0x6BC0BA1EF5B83CDAULL) + aOrbiterAssignSaltF[(((31U - aIndex) + 27U)) & 31];
             aOrbiterF = ((aWandererD + RotL64(aPrevious, 27U)) + RotL64(aCarry, 29U)) + 0x9D26253C8F981FC8ULL;
-            aOrbiterG = ((((aWandererI + RotL64(aScatter, 37U)) + RotL64(aCarry, 47U)) + 0x34FC32E3BE52C8A6ULL) + aOrbiterAssignSaltE[((aIndex + 17U)) & S_SALT1]) + aNonceWordE;
+            aOrbiterG = ((((aWandererI + RotL64(aScatter, 37U)) + RotL64(aCarry, 47U)) + 0x34FC32E3BE52C8A6ULL) + aOrbiterAssignSaltE[((aIndex + 17U)) & 31]) + aNonceWordE;
             aOrbiterE = (aWandererA + RotL64(aPrevious, 19U)) + 0x4695363B02325902ULL;
             aOrbiterD = (aWandererG + RotL64(aScatter, 46U)) + 0x3F95E5E44F21CC7EULL;
             aOrbiterJ = ((aWandererE + RotL64(aCross, 53U)) + 0x54D9CF08BC7ABCD4ULL) + aNonceWordH;
@@ -1601,15 +1601,15 @@ void TwistExpander_Antares_Arx::KDF_A_C(TwistWorkSpace *pWorkSpace,
             aOrbiterF = RotL64((aOrbiterF * 0x47D60B3AA8099555ULL), 5U);
             //
             aOrbiterG = ((aOrbiterG + aOrbiterE) + 0xDAA7F2C1D73C71E6ULL) + aNonceWordG;
-            aOrbiterC = ((aOrbiterC ^ aOrbiterG) ^ 0x9F68C3B5187AF2E9ULL) ^ aOrbiterUpdateSaltB[((aIndex + 6U)) & S_SALT1];
+            aOrbiterC = ((aOrbiterC ^ aOrbiterG) ^ 0x9F68C3B5187AF2E9ULL) ^ aOrbiterUpdateSaltB[((aIndex + 6U)) & 31];
             aOrbiterC = RotL64((aOrbiterC * 0x664764CE71EB44DBULL), 41U);
             //
-            aOrbiterE = (((aOrbiterE + aOrbiterC) + 0x518AF95F417D7442ULL) + aOrbiterUpdateSaltD[(((31U - aIndex) + 9U)) & S_SALT1]) + aNonceWordI;
+            aOrbiterE = (((aOrbiterE + aOrbiterC) + 0x518AF95F417D7442ULL) + aOrbiterUpdateSaltD[(((31U - aIndex) + 9U)) & 31]) + aNonceWordI;
             aOrbiterH = ((aOrbiterH ^ aOrbiterE) ^ 0xCF64B566EAFD79A3ULL) ^ aNonceWordO;
             aOrbiterH = RotL64((aOrbiterH * 0xB61EEE065D77196DULL), 47U);
             //
             aOrbiterD = (aOrbiterD + aOrbiterJ) + 0x5074F51058BEE9E7ULL;
-            aOrbiterG = ((aOrbiterG ^ aOrbiterD) ^ 0x5F391571367F3DC5ULL) ^ aOrbiterUpdateSaltE[((aIndex + 19U)) & S_SALT1];
+            aOrbiterG = ((aOrbiterG ^ aOrbiterD) ^ 0x5F391571367F3DC5ULL) ^ aOrbiterUpdateSaltE[((aIndex + 19U)) & 31];
             aOrbiterG = RotL64((aOrbiterG * 0x79E866127F398ADBULL), 57U);
             //
             aOrbiterH = (aOrbiterH + aOrbiterF) + 0x996F93A0BD283BABULL;
@@ -1617,7 +1617,7 @@ void TwistExpander_Antares_Arx::KDF_A_C(TwistWorkSpace *pWorkSpace,
             aOrbiterD = RotL64((aOrbiterD * 0x3055DA1C89C88F95ULL), 23U);
             //
             aOrbiterF = (aOrbiterF + aOrbiterD) + 0x101B1745B3570B74ULL;
-            aOrbiterJ = ((aOrbiterJ ^ aOrbiterF) ^ 0xCC0C578A77EA521DULL) ^ aOrbiterUpdateSaltC[(((31U - aIndex) + 21U)) & S_SALT1];
+            aOrbiterJ = ((aOrbiterJ ^ aOrbiterF) ^ 0xCC0C578A77EA521DULL) ^ aOrbiterUpdateSaltC[(((31U - aIndex) + 21U)) & 31];
             aOrbiterJ = RotL64((aOrbiterJ * 0x81BE3F72DDE064FBULL), 29U);
             //
             aOrbiterJ = (aOrbiterJ + aOrbiterG) + 0xC5CAFC95625DE7BDULL;
@@ -1634,8 +1634,8 @@ void TwistExpander_Antares_Arx::KDF_A_C(TwistWorkSpace *pWorkSpace,
             aWandererG = aWandererG + ((((RotL64(aIngress, 27U) + RotL64(aOrbiterE, 37U)) + aOrbiterF) + RotL64(aCarry, 47U)) + aNonceWordJ);
             aWandererE = aWandererE ^ ((RotL64(aPrevious, 13U) + aOrbiterG) + RotL64(aOrbiterD, 12U));
             aWandererK = aWandererK + (((RotL64(aCross, 58U) + RotL64(aOrbiterG, 57U)) + aOrbiterJ) + RotL64(aCarry, 35U));
-            aWandererI = aWandererI ^ (((RotL64(aScatter, 35U) + RotL64(aOrbiterD, 27U)) + aOrbiterH) + aWandererUpdateSaltA[(((31U - aIndex) + 10U)) & S_SALT1]);
-            aWandererJ = aWandererJ + (((RotL64(aCross, 5U) + aOrbiterE) + RotL64(aOrbiterJ, 47U)) + aWandererUpdateSaltE[((aIndex + 14U)) & S_SALT1]);
+            aWandererI = aWandererI ^ (((RotL64(aScatter, 35U) + RotL64(aOrbiterD, 27U)) + aOrbiterH) + aWandererUpdateSaltA[(((31U - aIndex) + 10U)) & 31]);
+            aWandererJ = aWandererJ + (((RotL64(aCross, 5U) + aOrbiterE) + RotL64(aOrbiterJ, 47U)) + aWandererUpdateSaltE[((aIndex + 14U)) & 31]);
             aWandererA = aWandererA ^ (((RotL64(aPrevious, 21U) + aOrbiterC) + RotL64(aOrbiterG, 3U)) + aNonceWordF);
             //
             aCarry = aCarry + (RotL64(aWandererE, 11U) ^ aWandererK);
@@ -1677,14 +1677,14 @@ void TwistExpander_Antares_Arx::KDF_A_C(TwistWorkSpace *pWorkSpace,
             //
             aOrbiterI = (aWandererK + RotL64(aCross, 29U)) + 0x6AD1246B90A6896CULL;
             aOrbiterH = (((aWandererH + RotL64(aScatter, 51U)) + RotL64(aCarry, 47U)) + 0x8465F128FE0895C4ULL) + aNonceWordJ;
-            aOrbiterB = ((((aWandererG + RotL64(aPrevious, 37U)) + RotL64(aCarry, 23U)) + 0x7E29D743D5529F44ULL) + aOrbiterAssignSaltD[(((31U - aIndex) + 11U)) & S_SALT1]) + aNonceWordP;
-            aOrbiterJ = (((aWandererJ + RotL64(aIngress, 21U)) + RotL64(aCarry, 11U)) + 0xEBE3A15D9F6C72F0ULL) + aOrbiterAssignSaltB[(((31U - aIndex) + 13U)) & S_SALT1];
+            aOrbiterB = ((((aWandererG + RotL64(aPrevious, 37U)) + RotL64(aCarry, 23U)) + 0x7E29D743D5529F44ULL) + aOrbiterAssignSaltD[(((31U - aIndex) + 11U)) & 31]) + aNonceWordP;
+            aOrbiterJ = (((aWandererJ + RotL64(aIngress, 21U)) + RotL64(aCarry, 11U)) + 0xEBE3A15D9F6C72F0ULL) + aOrbiterAssignSaltB[(((31U - aIndex) + 13U)) & 31];
             aOrbiterE = (aWandererI + RotL64(aCross, 12U)) + 0xC7CE5D32A7707D3AULL;
             aOrbiterG = ((aWandererE + RotL64(aScatter, 43U)) + 0xF980E5FD4FD39E88ULL) + aNonceWordA;
             aOrbiterC = ((aWandererB + RotL64(aPrevious, 3U)) + 0xAD649EB04DA5C69DULL) + aNonceWordO;
             //
-            aOrbiterI = ((aOrbiterI + aOrbiterH) + 0x42FB68F409C3D19AULL) + aOrbiterUpdateSaltF[(((31U - aIndex) + 6U)) & S_SALT1];
-            aOrbiterB = ((aOrbiterB ^ aOrbiterI) ^ 0x0117F1BEBE7E4783ULL) ^ aOrbiterUpdateSaltA[((aIndex + 8U)) & S_SALT1];
+            aOrbiterI = ((aOrbiterI + aOrbiterH) + 0x42FB68F409C3D19AULL) + aOrbiterUpdateSaltF[(((31U - aIndex) + 6U)) & 31];
+            aOrbiterB = ((aOrbiterB ^ aOrbiterI) ^ 0x0117F1BEBE7E4783ULL) ^ aOrbiterUpdateSaltA[((aIndex + 8U)) & 31];
             aOrbiterB = RotL64((aOrbiterB * 0x2CB45DC758377071ULL), 19U);
             //
             aOrbiterJ = (aOrbiterJ + aOrbiterE) + 0xA63C6174FED4F4D4ULL;
@@ -1700,7 +1700,7 @@ void TwistExpander_Antares_Arx::KDF_A_C(TwistWorkSpace *pWorkSpace,
             aOrbiterE = RotL64((aOrbiterE * 0xB284227E38CE4F11ULL), 5U);
             //
             aOrbiterB = (aOrbiterB + aOrbiterG) + 0xA484C245AED5A578ULL;
-            aOrbiterC = ((aOrbiterC ^ aOrbiterB) ^ 0x02427973CAC37C9DULL) ^ aOrbiterUpdateSaltB[((aIndex + 23U)) & S_SALT1];
+            aOrbiterC = ((aOrbiterC ^ aOrbiterB) ^ 0x02427973CAC37C9DULL) ^ aOrbiterUpdateSaltB[((aIndex + 23U)) & 31];
             aOrbiterC = RotL64((aOrbiterC * 0x3D6B2F2EED7854E5ULL), 57U);
             //
             aOrbiterG = (aOrbiterG + aOrbiterC) + 0x438ED686B373858DULL;
@@ -1708,7 +1708,7 @@ void TwistExpander_Antares_Arx::KDF_A_C(TwistWorkSpace *pWorkSpace,
             aOrbiterJ = RotL64((aOrbiterJ * 0x03C9452B14D2FA37ULL), 37U);
             //
             aOrbiterE = ((aOrbiterE + aOrbiterI) + 0x928776CE85DB4B71ULL) + aNonceWordK;
-            aOrbiterH = ((aOrbiterH ^ aOrbiterE) ^ 0xAEE067D669DAB17AULL) ^ aOrbiterUpdateSaltE[((aIndex + 27U)) & S_SALT1];
+            aOrbiterH = ((aOrbiterH ^ aOrbiterE) ^ 0xAEE067D669DAB17AULL) ^ aOrbiterUpdateSaltE[((aIndex + 27U)) & 31];
             aOrbiterH = RotL64((aOrbiterH * 0x9FB0109233A38705ULL), 29U);
             //
             aIngress = RotL64(aOrbiterH, 11U) ^ aOrbiterI;
@@ -1717,9 +1717,9 @@ void TwistExpander_Antares_Arx::KDF_A_C(TwistWorkSpace *pWorkSpace,
             aIngress = aIngress + RotL64(aOrbiterG, 5U);
             aIngress = TwistMix64::DiffuseA((aIngress + aScatter));
             //
-            aWandererK = aWandererK + (((((RotL64(aIngress, 53U) + aOrbiterJ) + RotL64(aOrbiterG, 11U)) + RotL64(aCarry, 27U)) + aNonceWordM) + aWandererUpdateSaltF[((aIndex + 15U)) & S_SALT1]);
+            aWandererK = aWandererK + (((((RotL64(aIngress, 53U) + aOrbiterJ) + RotL64(aOrbiterG, 11U)) + RotL64(aCarry, 27U)) + aNonceWordM) + aWandererUpdateSaltF[((aIndex + 15U)) & 31]);
             aWandererI = aWandererI ^ (((RotL64(aScatter, 6U) + aOrbiterG) + RotL64(aOrbiterB, 26U)) + aNonceWordN);
-            aWandererB = aWandererB + (((RotL64(aPrevious, 41U) + RotL64(aOrbiterC, 41U)) + aOrbiterB) + aWandererUpdateSaltD[(((31U - aIndex) + 16U)) & S_SALT1]);
+            aWandererB = aWandererB + (((RotL64(aPrevious, 41U) + RotL64(aOrbiterC, 41U)) + aOrbiterB) + aWandererUpdateSaltD[(((31U - aIndex) + 16U)) & 31]);
             aWandererG = aWandererG ^ ((RotL64(aCross, 23U) + aOrbiterI) + RotL64(aOrbiterH, 35U));
             aWandererJ = aWandererJ + (((RotL64(aIngress, 13U) + aOrbiterH) + RotL64(aOrbiterG, 47U)) + aNonceWordB);
             aWandererE = aWandererE ^ ((RotL64(aCross, 35U) + RotL64(aOrbiterJ, 3U)) + aOrbiterC);
@@ -1880,10 +1880,10 @@ void TwistExpander_Antares_Arx::KDF_A_D(TwistWorkSpace *pWorkSpace,
             aOrbiterD = (aWandererI + RotL64(aIngress, 43U)) + 0xF6594E39021B077BULL;
             aOrbiterJ = ((aWandererE + RotL64(aScatter, 5U)) + 0x43DB35E6658AD671ULL) + aNonceWordF;
             aOrbiterC = (aWandererD + RotL64(aPrevious, 35U)) + 0x98769473D9DF680CULL;
-            aOrbiterI = ((aWandererG + RotL64(aCross, 58U)) + 0x6D5FC56ADF510856ULL) + aOrbiterAssignSaltB[((aIndex + 16U)) & S_SALT1];
+            aOrbiterI = ((aWandererG + RotL64(aCross, 58U)) + 0x6D5FC56ADF510856ULL) + aOrbiterAssignSaltB[((aIndex + 16U)) & 31];
             aOrbiterF = ((aWandererF + RotL64(aScatter, 13U)) + RotL64(aCarry, 5U)) + 0x1EC37D3BB6E5F493ULL;
             aOrbiterK = ((aWandererH + RotL64(aIngress, 23U)) + RotL64(aCarry, 39U)) + 0xC8C0A45C36CF6640ULL;
-            aOrbiterA = (((aWandererJ + RotL64(aCross, 53U)) + RotL64(aCarry, 13U)) + 0x75216E828F0A2BBFULL) + aOrbiterAssignSaltE[(((31U - aIndex) + 26U)) & S_SALT1];
+            aOrbiterA = (((aWandererJ + RotL64(aCross, 53U)) + RotL64(aCarry, 13U)) + 0x75216E828F0A2BBFULL) + aOrbiterAssignSaltE[(((31U - aIndex) + 26U)) & 31];
             aOrbiterG = ((aWandererA + RotL64(aPrevious, 47U)) + 0x6EAC462399F1EE91ULL) + aNonceWordG;
             aOrbiterE = (aWandererK + RotL64(aCross, 18U)) + 0x54376C27D2E7E7EEULL;
             //
@@ -1895,7 +1895,7 @@ void TwistExpander_Antares_Arx::KDF_A_D(TwistWorkSpace *pWorkSpace,
             aOrbiterK = (aOrbiterK ^ aOrbiterI) ^ 0xE9B2E6423D25F6DEULL;
             aOrbiterK = RotL64((aOrbiterK * 0x367457410A28F8BDULL), 43U);
             //
-            aOrbiterF = ((aOrbiterF + aOrbiterC) + 0x697B61DC5E5C264EULL) + aOrbiterUpdateSaltC[((aIndex + 23U)) & S_SALT1];
+            aOrbiterF = ((aOrbiterF + aOrbiterC) + 0x697B61DC5E5C264EULL) + aOrbiterUpdateSaltC[((aIndex + 23U)) & 31];
             aOrbiterA = (aOrbiterA ^ aOrbiterF) ^ 0xBEE3253643AE953EULL;
             aOrbiterA = RotL64((aOrbiterA * 0x41D662D7256F4ABFULL), 35U);
             //
@@ -1903,12 +1903,12 @@ void TwistExpander_Antares_Arx::KDF_A_D(TwistWorkSpace *pWorkSpace,
             aOrbiterI = (aOrbiterI ^ aOrbiterJ) ^ 0xEAB54FA76D9749E7ULL;
             aOrbiterI = RotL64((aOrbiterI * 0x7A3CB860942B376BULL), 51U);
             //
-            aOrbiterK = ((aOrbiterK + aOrbiterA) + 0x75821C5D2D0D88D1ULL) + aOrbiterUpdateSaltA[(((31U - aIndex) + 5U)) & S_SALT1];
+            aOrbiterK = ((aOrbiterK + aOrbiterA) + 0x75821C5D2D0D88D1ULL) + aOrbiterUpdateSaltA[(((31U - aIndex) + 5U)) & 31];
             aOrbiterD = (aOrbiterD ^ aOrbiterK) ^ 0xFC505633847DA34AULL;
             aOrbiterD = RotL64((aOrbiterD * 0x2D27BA7502545155ULL), 57U);
             //
             aOrbiterA = (aOrbiterA + aOrbiterE) + 0x4778D1B434B8A92CULL;
-            aOrbiterJ = ((aOrbiterJ ^ aOrbiterA) ^ 0xD09626BD327C8827ULL) ^ aOrbiterUpdateSaltD[((aIndex + 7U)) & S_SALT1];
+            aOrbiterJ = ((aOrbiterJ ^ aOrbiterA) ^ 0xD09626BD327C8827ULL) ^ aOrbiterUpdateSaltD[((aIndex + 7U)) & 31];
             aOrbiterJ = RotL64((aOrbiterJ * 0x93E1809468CD66A5ULL), 23U);
             //
             aOrbiterC = (aOrbiterC + aOrbiterI) + 0xBBA741B64C5DF2DEULL;
@@ -1919,7 +1919,7 @@ void TwistExpander_Antares_Arx::KDF_A_D(TwistWorkSpace *pWorkSpace,
             aOrbiterG = (aOrbiterG ^ aOrbiterE) ^ 0xDC39E515E592D5D7ULL;
             aOrbiterG = RotL64((aOrbiterG * 0xCAB096AF65459E21ULL), 13U);
             //
-            aOrbiterG = ((aOrbiterG + aOrbiterD) + 0xE242B56576AAE4B3ULL) + aOrbiterUpdateSaltF[((aIndex + 8U)) & S_SALT1];
+            aOrbiterG = ((aOrbiterG + aOrbiterD) + 0xE242B56576AAE4B3ULL) + aOrbiterUpdateSaltF[((aIndex + 8U)) & 31];
             aOrbiterF = ((aOrbiterF ^ aOrbiterG) ^ 0x0747D044F52492D6ULL) ^ aNonceWordO;
             aOrbiterF = RotL64((aOrbiterF * 0x31051A188AF46971ULL), 29U);
             //
@@ -1931,8 +1931,8 @@ void TwistExpander_Antares_Arx::KDF_A_D(TwistWorkSpace *pWorkSpace,
             aIngress = TwistMix64::DiffuseB((aIngress + aScatter));
             //
             aWandererA = aWandererA ^ ((RotL64(aIngress, 14U) + aOrbiterF) + RotL64(aOrbiterG, 13U));
-            aWandererJ = aWandererJ + (((RotL64(aScatter, 43U) + aOrbiterK) + RotL64(aOrbiterC, 28U)) + aWandererUpdateSaltE[((aIndex + 9U)) & S_SALT1]);
-            aWandererD = aWandererD ^ (((RotL64(aCross, 53U) + aOrbiterE) + RotL64(aOrbiterA, 47U)) + aWandererUpdateSaltB[(((31U - aIndex) + 27U)) & S_SALT1]);
+            aWandererJ = aWandererJ + (((RotL64(aScatter, 43U) + aOrbiterK) + RotL64(aOrbiterC, 28U)) + aWandererUpdateSaltE[((aIndex + 9U)) & 31]);
+            aWandererD = aWandererD ^ (((RotL64(aCross, 53U) + aOrbiterE) + RotL64(aOrbiterA, 47U)) + aWandererUpdateSaltB[(((31U - aIndex) + 27U)) & 31]);
             aWandererK = aWandererK + ((RotL64(aPrevious, 19U) + aOrbiterJ) + RotL64(aOrbiterD, 53U));
             aWandererI = aWandererI ^ ((RotL64(aCross, 23U) + aOrbiterD) + RotL64(aOrbiterG, 5U));
             aWandererF = aWandererF + (((RotL64(aScatter, 3U) + aOrbiterA) + RotL64(aOrbiterG, 18U)) + RotL64(aCarry, 27U));
@@ -1978,7 +1978,7 @@ void TwistExpander_Antares_Arx::KDF_A_D(TwistWorkSpace *pWorkSpace,
             aScatter = (RotL64(aCross, 39U) + RotL64(aPrevious, 60U)) + (RotL64(aIngress, 11U) ^ RotL64(aCarry, 27U));
             aScatter = TwistMix64::DiffuseC(((aScatter ^ aDomainWordScatter) ^ aNonceWordA));
             //
-            aOrbiterD = (((aWandererH + RotL64(aIngress, 52U)) + 0x922FD67F3569E871ULL) + aOrbiterAssignSaltA[((aIndex + 8U)) & S_SALT1]) + aNonceWordB;
+            aOrbiterD = (((aWandererH + RotL64(aIngress, 52U)) + 0x922FD67F3569E871ULL) + aOrbiterAssignSaltA[((aIndex + 8U)) & 31]) + aNonceWordB;
             aOrbiterF = ((aWandererJ + RotL64(aScatter, 35U)) + RotL64(aCarry, 43U)) + 0x2C8AA3B59F64DABAULL;
             aOrbiterI = (aWandererI + RotL64(aPrevious, 23U)) + 0xF6CE1312F72FCBF9ULL;
             aOrbiterC = (aWandererB + RotL64(aCross, 19U)) + 0x10D65889D08A7D0BULL;
@@ -1986,7 +1986,7 @@ void TwistExpander_Antares_Arx::KDF_A_D(TwistWorkSpace *pWorkSpace,
             aOrbiterA = ((aWandererD + RotL64(aCross, 5U)) + RotL64(aCarry, 11U)) + 0x218CF64F2F49A9B1ULL;
             aOrbiterE = (((aWandererE + RotL64(aPrevious, 29U)) + RotL64(aCarry, 19U)) + 0x6C0694BC45228B78ULL) + aNonceWordD;
             aOrbiterB = (aWandererG + RotL64(aScatter, 41U)) + 0xE32B5055B4DF60C4ULL;
-            aOrbiterK = (((aWandererC + RotL64(aCross, 60U)) + 0x93A17A194F3C9239ULL) + aOrbiterAssignSaltD[((aIndex + 21U)) & S_SALT1]) + aNonceWordA;
+            aOrbiterK = (((aWandererC + RotL64(aCross, 60U)) + 0x93A17A194F3C9239ULL) + aOrbiterAssignSaltD[((aIndex + 21U)) & 31]) + aNonceWordA;
             //
             aOrbiterD = (aOrbiterD + aOrbiterF) + 0xC1AA53E5A112E177ULL;
             aOrbiterI = (aOrbiterI ^ aOrbiterD) ^ 0x6F1AA7A6AADCA191ULL;
@@ -2000,8 +2000,8 @@ void TwistExpander_Antares_Arx::KDF_A_D(TwistWorkSpace *pWorkSpace,
             aOrbiterE = (aOrbiterE ^ aOrbiterF) ^ 0x79C59B3F6990488FULL;
             aOrbiterE = RotL64((aOrbiterE * 0x2BC4D65F28DC8EADULL), 11U);
             //
-            aOrbiterJ = ((aOrbiterJ + aOrbiterB) + 0x4A13E960D9749138ULL) + aOrbiterUpdateSaltB[((aIndex + 9U)) & S_SALT1];
-            aOrbiterF = (((aOrbiterF ^ aOrbiterJ) ^ 0xB2C96B765E17191AULL) ^ aOrbiterUpdateSaltE[(((31U - aIndex) + 18U)) & S_SALT1]) ^ aNonceWordL;
+            aOrbiterJ = ((aOrbiterJ + aOrbiterB) + 0x4A13E960D9749138ULL) + aOrbiterUpdateSaltB[((aIndex + 9U)) & 31];
+            aOrbiterF = (((aOrbiterF ^ aOrbiterJ) ^ 0xB2C96B765E17191AULL) ^ aOrbiterUpdateSaltE[(((31U - aIndex) + 18U)) & 31]) ^ aNonceWordL;
             aOrbiterF = RotL64((aOrbiterF * 0xFAA319E812323AFDULL), 21U);
             //
             aOrbiterI = (aOrbiterI + aOrbiterE) + 0x6C575E0C363B70DBULL;
@@ -2017,11 +2017,11 @@ void TwistExpander_Antares_Arx::KDF_A_D(TwistWorkSpace *pWorkSpace,
             aOrbiterB = RotL64((aOrbiterB * 0xAACE4A1F1C9EA34BULL), 51U);
             //
             aOrbiterA = (aOrbiterA + aOrbiterD) + 0xF314A2923AD11F55ULL;
-            aOrbiterK = ((aOrbiterK ^ aOrbiterA) ^ 0x6DE8D56F42C081D4ULL) ^ aOrbiterUpdateSaltA[((aIndex + 28U)) & S_SALT1];
+            aOrbiterK = ((aOrbiterK ^ aOrbiterA) ^ 0x6DE8D56F42C081D4ULL) ^ aOrbiterUpdateSaltA[((aIndex + 28U)) & 31];
             aOrbiterK = RotL64((aOrbiterK * 0x2EBDD51D2C24B5FBULL), 47U);
             //
             aOrbiterB = (aOrbiterB + aOrbiterC) + 0x98BE96A6D98C7EA9ULL;
-            aOrbiterA = (((aOrbiterA ^ aOrbiterB) ^ 0x1B42AE3D22A755C4ULL) ^ aOrbiterUpdateSaltD[((aIndex + 7U)) & S_SALT1]) ^ aNonceWordC;
+            aOrbiterA = (((aOrbiterA ^ aOrbiterB) ^ 0x1B42AE3D22A755C4ULL) ^ aOrbiterUpdateSaltD[((aIndex + 7U)) & 31]) ^ aNonceWordC;
             aOrbiterA = RotL64((aOrbiterA * 0xF9CD848FA6B6669BULL), 29U);
             //
             aIngress = aOrbiterF ^ RotL64(aOrbiterE, 37U);
@@ -2036,8 +2036,8 @@ void TwistExpander_Antares_Arx::KDF_A_D(TwistWorkSpace *pWorkSpace,
             aWandererE = aWandererE + (((RotL64(aPrevious, 13U) + RotL64(aOrbiterF, 53U)) + aOrbiterK) + aNonceWordO);
             aWandererJ = aWandererJ ^ ((RotL64(aScatter, 51U) + aOrbiterB) + RotL64(aOrbiterA, 14U));
             aWandererI = aWandererI + ((RotL64(aIngress, 18U) + aOrbiterD) + RotL64(aOrbiterA, 27U));
-            aWandererD = aWandererD ^ (((RotL64(aCross, 5U) + RotL64(aOrbiterJ, 57U)) + aOrbiterI) + aWandererUpdateSaltD[(((31U - aIndex) + 26U)) & S_SALT1]);
-            aWandererG = aWandererG + (((RotL64(aScatter, 47U) + aOrbiterB) + RotL64(aOrbiterC, 23U)) + aWandererUpdateSaltF[((aIndex + 11U)) & S_SALT1]);
+            aWandererD = aWandererD ^ (((RotL64(aCross, 5U) + RotL64(aOrbiterJ, 57U)) + aOrbiterI) + aWandererUpdateSaltD[(((31U - aIndex) + 26U)) & 31]);
+            aWandererG = aWandererG + (((RotL64(aScatter, 47U) + aOrbiterB) + RotL64(aOrbiterC, 23U)) + aWandererUpdateSaltF[((aIndex + 11U)) & 31]);
             aWandererB = aWandererB ^ ((RotL64(aPrevious, 23U) + aOrbiterE) + RotL64(aOrbiterC, 46U));
             aWandererC = aWandererC + (((RotL64(aScatter, 56U) + aOrbiterE) + RotL64(aOrbiterF, 3U)) + RotL64(aCarry, 29U));
             //
@@ -2080,28 +2080,28 @@ void TwistExpander_Antares_Arx::KDF_A_D(TwistWorkSpace *pWorkSpace,
             aScatter = TwistMix64::DiffuseA(((aScatter ^ aDomainWordScatter) ^ aNonceWordA));
             //
             aOrbiterJ = (aWandererE + RotL64(aIngress, 6U)) + 0xB3F8D8A95945D6A5ULL;
-            aOrbiterH = ((aWandererH + RotL64(aPrevious, 13U)) + 0xF246E1AD602B52C1ULL) + aOrbiterAssignSaltC[((aIndex + 26U)) & S_SALT1];
+            aOrbiterH = ((aWandererH + RotL64(aPrevious, 13U)) + 0xF246E1AD602B52C1ULL) + aOrbiterAssignSaltC[((aIndex + 26U)) & 31];
             aOrbiterI = ((aWandererA + RotL64(aScatter, 57U)) + RotL64(aCarry, 3U)) + 0xD50918CF989BCF86ULL;
             aOrbiterE = (aWandererG + RotL64(aCross, 35U)) + 0xF3724E20CEB72476ULL;
             aOrbiterC = ((aWandererB + RotL64(aScatter, 51U)) + 0xF8ABE1465DC1704AULL) + aNonceWordM;
             aOrbiterK = (((aWandererC + RotL64(aIngress, 39U)) + RotL64(aCarry, 41U)) + 0x2546E39C531A3630ULL) + aNonceWordO;
-            aOrbiterF = ((aWandererF + RotL64(aPrevious, 19U)) + 0x68AF9C0A77796240ULL) + aOrbiterAssignSaltF[(((31U - aIndex) + 17U)) & S_SALT1];
+            aOrbiterF = ((aWandererF + RotL64(aPrevious, 19U)) + 0x68AF9C0A77796240ULL) + aOrbiterAssignSaltF[(((31U - aIndex) + 17U)) & 31];
             aOrbiterA = (aWandererD + RotL64(aCross, 47U)) + 0x5E4ECC48DCC630D0ULL;
             aOrbiterG = (((aWandererK + RotL64(aPrevious, 26U)) + RotL64(aCarry, 51U)) + 0xBED4BAEE8DBA66CEULL) + aNonceWordH;
             //
-            aOrbiterJ = ((aOrbiterJ + aOrbiterH) + 0xD07BF63A120AC5BCULL) + aOrbiterUpdateSaltE[((aIndex + 16U)) & S_SALT1];
+            aOrbiterJ = ((aOrbiterJ + aOrbiterH) + 0xD07BF63A120AC5BCULL) + aOrbiterUpdateSaltE[((aIndex + 16U)) & 31];
             aOrbiterI = (aOrbiterI ^ aOrbiterJ) ^ 0xB33A25B7D8416A5AULL;
             aOrbiterI = RotL64((aOrbiterI * 0xE889B56EE136D7E3ULL), 29U);
             //
             aOrbiterE = (aOrbiterE + aOrbiterC) + 0xB909CEDC9775BCD3ULL;
-            aOrbiterK = ((aOrbiterK ^ aOrbiterE) ^ 0xBC4D77CF8148928AULL) ^ aOrbiterUpdateSaltB[((aIndex + 14U)) & S_SALT1];
+            aOrbiterK = ((aOrbiterK ^ aOrbiterE) ^ 0xBC4D77CF8148928AULL) ^ aOrbiterUpdateSaltB[((aIndex + 14U)) & 31];
             aOrbiterK = RotL64((aOrbiterK * 0x571533B68847E695ULL), 19U);
             //
             aOrbiterC = (aOrbiterC + aOrbiterJ) + 0xF35AC9DE41E4D208ULL;
             aOrbiterF = (aOrbiterF ^ aOrbiterC) ^ 0x8962EF915F93A6C8ULL;
             aOrbiterF = RotL64((aOrbiterF * 0xF1F1C2E868E1F0D5ULL), 23U);
             //
-            aOrbiterK = (((aOrbiterK + aOrbiterF) + 0x3E887C8B6F235EAAULL) + aOrbiterUpdateSaltF[(((31U - aIndex) + 21U)) & S_SALT1]) + aNonceWordB;
+            aOrbiterK = (((aOrbiterK + aOrbiterF) + 0x3E887C8B6F235EAAULL) + aOrbiterUpdateSaltF[(((31U - aIndex) + 21U)) & 31]) + aNonceWordB;
             aOrbiterA = (aOrbiterA ^ aOrbiterK) ^ 0xCDD21A8C2A1B65FDULL;
             aOrbiterA = RotL64((aOrbiterA * 0x838C2BA4748CA205ULL), 11U);
             //
@@ -2121,7 +2121,7 @@ void TwistExpander_Antares_Arx::KDF_A_D(TwistWorkSpace *pWorkSpace,
             aOrbiterH = (aOrbiterH ^ aOrbiterA) ^ 0xF6BD21688F7B4902ULL;
             aOrbiterH = RotL64((aOrbiterH * 0xDB5416569EE34563ULL), 39U);
             //
-            aOrbiterF = ((aOrbiterF + aOrbiterI) + 0xB620631533694F57ULL) + aOrbiterUpdateSaltD[((aIndex + 10U)) & S_SALT1];
+            aOrbiterF = ((aOrbiterF + aOrbiterI) + 0xB620631533694F57ULL) + aOrbiterUpdateSaltD[((aIndex + 10U)) & 31];
             aOrbiterE = (aOrbiterE ^ aOrbiterF) ^ 0x7DA0B6F4E48DA43BULL;
             aOrbiterE = RotL64((aOrbiterE * 0x159CF895A22CD557ULL), 3U);
             //
@@ -2136,9 +2136,9 @@ void TwistExpander_Antares_Arx::KDF_A_D(TwistWorkSpace *pWorkSpace,
             aWandererH = aWandererH ^ (((RotL64(aCross, 39U) + RotL64(aOrbiterH, 47U)) + aOrbiterA) + aNonceWordE);
             aWandererG = aWandererG + (((RotL64(aPrevious, 18U) + RotL64(aOrbiterG, 37U)) + aOrbiterJ) + RotL64(aCarry, 51U));
             aWandererD = aWandererD ^ (((RotL64(aScatter, 43U) + RotL64(aOrbiterK, 13U)) + aOrbiterC) + aNonceWordC);
-            aWandererC = aWandererC + ((((RotL64(aIngress, 35U) + RotL64(aOrbiterE, 23U)) + aOrbiterI) + RotL64(aCarry, 13U)) + aWandererUpdateSaltA[(((31U - aIndex) + 29U)) & S_SALT1]);
+            aWandererC = aWandererC + ((((RotL64(aIngress, 35U) + RotL64(aOrbiterE, 23U)) + aOrbiterI) + RotL64(aCarry, 13U)) + aWandererUpdateSaltA[(((31U - aIndex) + 29U)) & 31]);
             aWandererA = aWandererA ^ ((RotL64(aScatter, 11U) + aOrbiterH) + RotL64(aOrbiterI, 43U));
-            aWandererF = aWandererF + (((RotL64(aCross, 22U) + RotL64(aOrbiterF, 19U)) + aOrbiterA) + aWandererUpdateSaltC[(((31U - aIndex) + 5U)) & S_SALT1]);
+            aWandererF = aWandererF + (((RotL64(aCross, 22U) + RotL64(aOrbiterF, 19U)) + aOrbiterA) + aWandererUpdateSaltC[(((31U - aIndex) + 5U)) & 31]);
             aWandererB = aWandererB ^ ((RotL64(aPrevious, 29U) + aOrbiterJ) + RotL64(aOrbiterA, 27U));
             aWandererK = aWandererK + (((RotL64(aIngress, 3U) + RotL64(aOrbiterI, 6U)) + aOrbiterC) + aNonceWordF);
             //
@@ -2181,17 +2181,17 @@ void TwistExpander_Antares_Arx::KDF_A_D(TwistWorkSpace *pWorkSpace,
             aScatter = TwistMix64::DiffuseC(((aScatter ^ aDomainWordScatter) ^ aNonceWordE));
             //
             aOrbiterD = (aWandererA + RotL64(aIngress, 51U)) + 0xAD419A50DE6BC841ULL;
-            aOrbiterH = ((aWandererD + RotL64(aPrevious, 43U)) + 0x2C6CB10252DD7DB1ULL) + aOrbiterAssignSaltE[((aIndex + 19U)) & S_SALT1];
+            aOrbiterH = ((aWandererD + RotL64(aPrevious, 43U)) + 0x2C6CB10252DD7DB1ULL) + aOrbiterAssignSaltE[((aIndex + 19U)) & 31];
             aOrbiterB = (((aWandererK + RotL64(aScatter, 39U)) + RotL64(aCarry, 3U)) + 0xAA59E43A2D29D6D5ULL) + aNonceWordJ;
-            aOrbiterF = ((((aWandererJ + RotL64(aCross, 34U)) + RotL64(aCarry, 27U)) + 0xC4A655E1653ECD45ULL) + aOrbiterAssignSaltB[(((31U - aIndex) + 27U)) & S_SALT1]) + aNonceWordK;
+            aOrbiterF = ((((aWandererJ + RotL64(aCross, 34U)) + RotL64(aCarry, 27U)) + 0xC4A655E1653ECD45ULL) + aOrbiterAssignSaltB[(((31U - aIndex) + 27U)) & 31]) + aNonceWordK;
             aOrbiterC = ((aWandererE + RotL64(aScatter, 5U)) + 0x891E895B22D12A45ULL) + aNonceWordA;
             aOrbiterE = (aWandererH + RotL64(aCross, 57U)) + 0x6D4653CB16C9266CULL;
             aOrbiterI = (aWandererG + RotL64(aPrevious, 47U)) + 0x3328CB5CB290DE22ULL;
             aOrbiterA = (aWandererI + RotL64(aIngress, 29U)) + 0xA1F0F139512C3F6BULL;
             aOrbiterK = ((aWandererC + RotL64(aPrevious, 14U)) + RotL64(aCarry, 39U)) + 0xEB510C56E44DFDF5ULL;
             //
-            aOrbiterD = ((aOrbiterD + aOrbiterH) + 0xAEA7F3C365F4121EULL) + aOrbiterUpdateSaltC[(((31U - aIndex) + 11U)) & S_SALT1];
-            aOrbiterB = ((aOrbiterB ^ aOrbiterD) ^ 0x20AC98CF3ADA442DULL) ^ aOrbiterUpdateSaltD[((aIndex + 15U)) & S_SALT1];
+            aOrbiterD = ((aOrbiterD + aOrbiterH) + 0xAEA7F3C365F4121EULL) + aOrbiterUpdateSaltC[(((31U - aIndex) + 11U)) & 31];
+            aOrbiterB = ((aOrbiterB ^ aOrbiterD) ^ 0x20AC98CF3ADA442DULL) ^ aOrbiterUpdateSaltD[((aIndex + 15U)) & 31];
             aOrbiterB = RotL64((aOrbiterB * 0x9E695F0CA51B5B29ULL), 51U);
             //
             aOrbiterF = (aOrbiterF + aOrbiterC) + 0x7A04335AB0F2F687ULL;
@@ -2215,14 +2215,14 @@ void TwistExpander_Antares_Arx::KDF_A_D(TwistWorkSpace *pWorkSpace,
             aOrbiterF = RotL64((aOrbiterF * 0x2B8704D20C911387ULL), 23U);
             //
             aOrbiterK = (aOrbiterK + aOrbiterD) + 0x74717EEFD315939EULL;
-            aOrbiterA = ((aOrbiterA ^ aOrbiterK) ^ 0xDDBD51FD116EA327ULL) ^ aOrbiterUpdateSaltF[(((31U - aIndex) + 24U)) & S_SALT1];
+            aOrbiterA = ((aOrbiterA ^ aOrbiterK) ^ 0xDDBD51FD116EA327ULL) ^ aOrbiterUpdateSaltF[(((31U - aIndex) + 24U)) & 31];
             aOrbiterA = RotL64((aOrbiterA * 0x7DB6E5D1FDE6A867ULL), 47U);
             //
             aOrbiterC = (aOrbiterC + aOrbiterK) + 0x43D29D049BBBF864ULL;
             aOrbiterH = ((aOrbiterH ^ aOrbiterC) ^ 0x493C77705DAF2E15ULL) ^ aNonceWordM;
             aOrbiterH = RotL64((aOrbiterH * 0x82BE06EE9106C559ULL), 13U);
             //
-            aOrbiterA = ((aOrbiterA + aOrbiterB) + 0xD71E08ACC9BA64A3ULL) + aOrbiterUpdateSaltE[(((31U - aIndex) + 10U)) & S_SALT1];
+            aOrbiterA = ((aOrbiterA + aOrbiterB) + 0xD71E08ACC9BA64A3ULL) + aOrbiterUpdateSaltE[(((31U - aIndex) + 10U)) & 31];
             aOrbiterI = ((aOrbiterI ^ aOrbiterA) ^ 0x74720F28F8A5DC0EULL) ^ aNonceWordG;
             aOrbiterI = RotL64((aOrbiterI * 0xB7770BE12D6947A9ULL), 5U);
             //
@@ -2233,14 +2233,14 @@ void TwistExpander_Antares_Arx::KDF_A_D(TwistWorkSpace *pWorkSpace,
             aIngress = aIngress + RotL64(aOrbiterE, 47U);
             aIngress = TwistMix64::DiffuseC((aIngress + aScatter));
             //
-            aWandererK = aWandererK ^ (((RotL64(aIngress, 48U) + RotL64(aOrbiterC, 5U)) + aOrbiterI) + aWandererUpdateSaltB[(((31U - aIndex) + 9U)) & S_SALT1]);
+            aWandererK = aWandererK ^ (((RotL64(aIngress, 48U) + RotL64(aOrbiterC, 5U)) + aOrbiterI) + aWandererUpdateSaltB[(((31U - aIndex) + 9U)) & 31]);
             aWandererA = aWandererA + (((RotL64(aCross, 19U) + RotL64(aOrbiterA, 24U)) + aOrbiterE) + aNonceWordD);
             aWandererD = aWandererD ^ ((RotL64(aScatter, 35U) + RotL64(aOrbiterH, 19U)) + aOrbiterK);
             aWandererC = aWandererC + (((RotL64(aPrevious, 5U) + aOrbiterI) + RotL64(aOrbiterF, 29U)) + aNonceWordP);
             aWandererG = aWandererG ^ ((RotL64(aIngress, 43U) + aOrbiterC) + RotL64(aOrbiterD, 35U));
             aWandererJ = aWandererJ + (((RotL64(aPrevious, 53U) + RotL64(aOrbiterI, 39U)) + aOrbiterA) + RotL64(aCarry, 39U));
             aWandererH = aWandererH ^ ((RotL64(aScatter, 30U) + aOrbiterE) + RotL64(aOrbiterH, 10U));
-            aWandererE = aWandererE + ((((RotL64(aCross, 13U) + RotL64(aOrbiterH, 47U)) + aOrbiterB) + RotL64(aCarry, 3U)) + aWandererUpdateSaltE[(((31U - aIndex) + 25U)) & S_SALT1]);
+            aWandererE = aWandererE + ((((RotL64(aCross, 13U) + RotL64(aOrbiterH, 47U)) + aOrbiterB) + RotL64(aCarry, 3U)) + aWandererUpdateSaltE[(((31U - aIndex) + 25U)) & 31]);
             aWandererI = aWandererI ^ ((RotL64(aIngress, 23U) + RotL64(aOrbiterA, 51U)) + aOrbiterD);
             //
             aCarry = aCarry + (RotL64(aWandererE, 57U) ^ aWandererC);
@@ -2400,18 +2400,18 @@ void TwistExpander_Antares_Arx::KDF_A_E(TwistWorkSpace *pWorkSpace,
             //
             aOrbiterE = (aWandererB + RotL64(aIngress, 3U)) + 0x2B208A473BB3264DULL;
             aOrbiterK = ((aWandererC + RotL64(aPrevious, 18U)) + 0x1404A06A896CB909ULL) + aNonceWordL;
-            aOrbiterA = ((aWandererF + RotL64(aScatter, 37U)) + 0x087465FB070D13F4ULL) + aOrbiterAssignSaltC[(((31U - aIndex) + 11U)) & S_SALT1];
+            aOrbiterA = ((aWandererF + RotL64(aScatter, 37U)) + 0x087465FB070D13F4ULL) + aOrbiterAssignSaltC[(((31U - aIndex) + 11U)) & 31];
             aOrbiterB = (aWandererA + RotL64(aCross, 5U)) + 0x507F232ABA5C1F2EULL;
             aOrbiterI = (aWandererJ + RotL64(aPrevious, 29U)) + 0xBA2BEA48C6C512FEULL;
             aOrbiterD = (aWandererG + RotL64(aCross, 47U)) + 0xC3E798A5BAE2B982ULL;
             aOrbiterF = ((aWandererE + RotL64(aScatter, 13U)) + RotL64(aCarry, 47U)) + 0xAAAA80D9ACA9C4EAULL;
-            aOrbiterJ = ((aWandererD + RotL64(aIngress, 27U)) + 0x7791D40DF763A669ULL) + aOrbiterAssignSaltA[((aIndex + 16U)) & S_SALT1];
+            aOrbiterJ = ((aWandererD + RotL64(aIngress, 27U)) + 0x7791D40DF763A669ULL) + aOrbiterAssignSaltA[((aIndex + 16U)) & 31];
             aOrbiterH = (((aWandererH + RotL64(aPrevious, 21U)) + RotL64(aCarry, 41U)) + 0xF85CBA39E42EBB5DULL) + aNonceWordI;
             aOrbiterG = ((aWandererI + RotL64(aIngress, 43U)) + RotL64(aCarry, 11U)) + 0xA44F01A38B66B2EFULL;
             aOrbiterC = (aWandererK + RotL64(aScatter, 40U)) + 0xC170521235DE23D2ULL;
             //
             aOrbiterE = (aOrbiterE + aOrbiterK) + 0x9775F6386659477DULL;
-            aOrbiterA = ((aOrbiterA ^ aOrbiterE) ^ 0x2FB871745049456EULL) ^ aOrbiterUpdateSaltD[((aIndex + 10U)) & S_SALT1];
+            aOrbiterA = ((aOrbiterA ^ aOrbiterE) ^ 0x2FB871745049456EULL) ^ aOrbiterUpdateSaltD[((aIndex + 10U)) & 31];
             aOrbiterA = RotL64((aOrbiterA * 0x5DC87B7C832ABF7BULL), 23U);
             //
             aOrbiterB = (aOrbiterB + aOrbiterI) + 0xBDC40C7555E88E9FULL;
@@ -2426,8 +2426,8 @@ void TwistExpander_Antares_Arx::KDF_A_E(TwistWorkSpace *pWorkSpace,
             aOrbiterB = (aOrbiterB ^ aOrbiterA) ^ 0x37C97AD9711F8906ULL;
             aOrbiterB = RotL64((aOrbiterB * 0xFBB45388A0982419ULL), 53U);
             //
-            aOrbiterI = (((aOrbiterI + aOrbiterJ) + 0xBE3B62DB76215AF2ULL) + aOrbiterUpdateSaltB[(((31U - aIndex) + 24U)) & S_SALT1]) + aNonceWordG;
-            aOrbiterG = ((aOrbiterG ^ aOrbiterI) ^ 0x3A154E4B53A96C60ULL) ^ aOrbiterUpdateSaltA[(((31U - aIndex) + 13U)) & S_SALT1];
+            aOrbiterI = (((aOrbiterI + aOrbiterJ) + 0xBE3B62DB76215AF2ULL) + aOrbiterUpdateSaltB[(((31U - aIndex) + 24U)) & 31]) + aNonceWordG;
+            aOrbiterG = ((aOrbiterG ^ aOrbiterI) ^ 0x3A154E4B53A96C60ULL) ^ aOrbiterUpdateSaltA[(((31U - aIndex) + 13U)) & 31];
             aOrbiterG = RotL64((aOrbiterG * 0x370B8DA5F9C96FADULL), 29U);
             //
             aOrbiterF = (aOrbiterF + aOrbiterB) + 0x589017F362BC86E0ULL;
@@ -2443,7 +2443,7 @@ void TwistExpander_Antares_Arx::KDF_A_E(TwistWorkSpace *pWorkSpace,
             aOrbiterF = RotL64((aOrbiterF * 0xDD14EB73FBF1DAB3ULL), 13U);
             //
             aOrbiterG = (aOrbiterG + aOrbiterC) + 0x2CFD664387B46BEEULL;
-            aOrbiterD = ((aOrbiterD ^ aOrbiterG) ^ 0x418DD993CD26A35BULL) ^ aOrbiterUpdateSaltC[(((31U - aIndex) + 17U)) & S_SALT1];
+            aOrbiterD = ((aOrbiterD ^ aOrbiterG) ^ 0x418DD993CD26A35BULL) ^ aOrbiterUpdateSaltC[(((31U - aIndex) + 17U)) & 31];
             aOrbiterD = RotL64((aOrbiterD * 0x57825FC399FD6579ULL), 27U);
             //
             aOrbiterK = (aOrbiterK + aOrbiterG) + 0xC0B65146A7436747ULL;
@@ -2463,8 +2463,8 @@ void TwistExpander_Antares_Arx::KDF_A_E(TwistWorkSpace *pWorkSpace,
             aIngress = TwistMix64::DiffuseC((aIngress + aScatter));
             //
             aWandererA = aWandererA + ((RotL64(aCross, 50U) + aOrbiterB) + RotL64(aOrbiterE, 5U));
-            aWandererJ = aWandererJ ^ (((RotL64(aScatter, 13U) + RotL64(aOrbiterH, 43U)) + aOrbiterI) + aWandererUpdateSaltA[((aIndex + 7U)) & S_SALT1]);
-            aWandererK = aWandererK + ((((RotL64(aIngress, 53U) + RotL64(aOrbiterC, 58U)) + aOrbiterF) + aNonceWordD) + aWandererUpdateSaltB[(((31U - aIndex) + 8U)) & S_SALT1]);
+            aWandererJ = aWandererJ ^ (((RotL64(aScatter, 13U) + RotL64(aOrbiterH, 43U)) + aOrbiterI) + aWandererUpdateSaltA[((aIndex + 7U)) & 31]);
+            aWandererK = aWandererK + ((((RotL64(aIngress, 53U) + RotL64(aOrbiterC, 58U)) + aOrbiterF) + aNonceWordD) + aWandererUpdateSaltB[(((31U - aIndex) + 8U)) & 31]);
             aWandererD = aWandererD ^ ((RotL64(aPrevious, 23U) + RotL64(aOrbiterG, 35U)) + aOrbiterA);
             aWandererB = aWandererB + (((RotL64(aScatter, 11U) + RotL64(aOrbiterG, 29U)) + aOrbiterD) + RotL64(aCarry, 37U));
             aWandererF = aWandererF ^ ((RotL64(aPrevious, 5U) + aOrbiterB) + RotL64(aOrbiterK, 27U));
@@ -2514,7 +2514,7 @@ void TwistExpander_Antares_Arx::KDF_A_E(TwistWorkSpace *pWorkSpace,
             aScatter = TwistMix64::DiffuseB(((aScatter ^ aDomainWordScatter) ^ aNonceWordK));
             //
             aOrbiterC = ((aWandererA + RotL64(aCross, 13U)) + 0x0D3979A3CCD9BB34ULL) + aNonceWordG;
-            aOrbiterE = ((aWandererD + RotL64(aScatter, 57U)) + 0xC1A8ECBF9E0FD236ULL) + aOrbiterAssignSaltB[(((31U - aIndex) + 23U)) & S_SALT1];
+            aOrbiterE = ((aWandererD + RotL64(aScatter, 57U)) + 0xC1A8ECBF9E0FD236ULL) + aOrbiterAssignSaltB[(((31U - aIndex) + 23U)) & 31];
             aOrbiterH = ((aWandererC + RotL64(aPrevious, 44U)) + RotL64(aCarry, 23U)) + 0xD59D9945CE9E05EAULL;
             aOrbiterI = ((aWandererI + RotL64(aIngress, 19U)) + RotL64(aCarry, 57U)) + 0x7A50D7764A16CC9FULL;
             aOrbiterD = (aWandererB + RotL64(aPrevious, 29U)) + 0xFC4452596F8AD944ULL;
@@ -2522,10 +2522,10 @@ void TwistExpander_Antares_Arx::KDF_A_E(TwistWorkSpace *pWorkSpace,
             aOrbiterB = (aWandererK + RotL64(aCross, 54U)) + 0x0B54856182CE09AEULL;
             aOrbiterJ = (aWandererF + RotL64(aScatter, 23U)) + 0x64A6B0241F3C08BCULL;
             aOrbiterA = (aWandererG + RotL64(aPrevious, 39U)) + 0xB719FBC4F6F3F164ULL;
-            aOrbiterK = ((aWandererJ + RotL64(aIngress, 11U)) + 0x4DED716EE64C29E5ULL) + aOrbiterAssignSaltE[(((31U - aIndex) + 26U)) & S_SALT1];
+            aOrbiterK = ((aWandererJ + RotL64(aIngress, 11U)) + 0x4DED716EE64C29E5ULL) + aOrbiterAssignSaltE[(((31U - aIndex) + 26U)) & 31];
             aOrbiterF = (((aWandererE + RotL64(aScatter, 41U)) + RotL64(aCarry, 11U)) + 0x373F5DCBD2679E98ULL) + aNonceWordL;
             //
-            aOrbiterC = ((aOrbiterC + aOrbiterE) + 0xDA2528F7880D50ADULL) + aOrbiterUpdateSaltD[(((31U - aIndex) + 12U)) & S_SALT1];
+            aOrbiterC = ((aOrbiterC + aOrbiterE) + 0xDA2528F7880D50ADULL) + aOrbiterUpdateSaltD[(((31U - aIndex) + 12U)) & 31];
             aOrbiterH = (aOrbiterH ^ aOrbiterC) ^ 0xC9F0E480CBCA83DBULL;
             aOrbiterH = RotL64((aOrbiterH * 0xB65A67B7E25E0EA7ULL), 35U);
             //
@@ -2542,7 +2542,7 @@ void TwistExpander_Antares_Arx::KDF_A_E(TwistWorkSpace *pWorkSpace,
             aOrbiterD = RotL64((aOrbiterD * 0x6F05882305E179F3ULL), 37U);
             //
             aOrbiterA = (aOrbiterA + aOrbiterK) + 0xAEC27ADE58D15634ULL;
-            aOrbiterC = ((aOrbiterC ^ aOrbiterA) ^ 0xBE95A22E4F15BC9CULL) ^ aOrbiterUpdateSaltE[(((31U - aIndex) + 20U)) & S_SALT1];
+            aOrbiterC = ((aOrbiterC ^ aOrbiterA) ^ 0xBE95A22E4F15BC9CULL) ^ aOrbiterUpdateSaltE[(((31U - aIndex) + 20U)) & 31];
             aOrbiterC = RotL64((aOrbiterC * 0x4B7E39FDB083563BULL), 27U);
             //
             aOrbiterD = ((aOrbiterD + aOrbiterC) + 0x1D8296FD4A96C9FCULL) + aNonceWordF;
@@ -2554,7 +2554,7 @@ void TwistExpander_Antares_Arx::KDF_A_E(TwistWorkSpace *pWorkSpace,
             aOrbiterA = RotL64((aOrbiterA * 0x2C527185C7705E27ULL), 23U);
             //
             aOrbiterE = (aOrbiterE + aOrbiterG) + 0x9AAE5B0A0CA1CDE0ULL;
-            aOrbiterB = (((aOrbiterB ^ aOrbiterE) ^ 0xE7B98C967A8F2B6DULL) ^ aOrbiterUpdateSaltF[((aIndex + 21U)) & S_SALT1]) ^ aNonceWordH;
+            aOrbiterB = (((aOrbiterB ^ aOrbiterE) ^ 0xE7B98C967A8F2B6DULL) ^ aOrbiterUpdateSaltF[((aIndex + 21U)) & 31]) ^ aNonceWordH;
             aOrbiterB = RotL64((aOrbiterB * 0x249C129DC70EC373ULL), 51U);
             //
             aOrbiterG = (aOrbiterG + aOrbiterF) + 0x2C1753658C3B6F98ULL;
@@ -2565,7 +2565,7 @@ void TwistExpander_Antares_Arx::KDF_A_E(TwistWorkSpace *pWorkSpace,
             aOrbiterK = (aOrbiterK ^ aOrbiterH) ^ 0xCA8DECD375B649E4ULL;
             aOrbiterK = RotL64((aOrbiterK * 0xF7D56F625D2BE507ULL), 21U);
             //
-            aOrbiterK = ((aOrbiterK + aOrbiterI) + 0xE933EDAB469F5F13ULL) + aOrbiterUpdateSaltC[((aIndex + 7U)) & S_SALT1];
+            aOrbiterK = ((aOrbiterK + aOrbiterI) + 0xE933EDAB469F5F13ULL) + aOrbiterUpdateSaltC[((aIndex + 7U)) & 31];
             aOrbiterE = (aOrbiterE ^ aOrbiterK) ^ 0xBAEB4FBAEA90D672ULL;
             aOrbiterE = RotL64((aOrbiterE * 0xA9C46B98C82B2F47ULL), 5U);
             //
@@ -2579,13 +2579,13 @@ void TwistExpander_Antares_Arx::KDF_A_E(TwistWorkSpace *pWorkSpace,
             //
             aWandererG = aWandererG ^ ((RotL64(aIngress, 53U) + RotL64(aOrbiterC, 35U)) + aOrbiterF);
             aWandererI = aWandererI + (((RotL64(aScatter, 39U) + aOrbiterH) + RotL64(aOrbiterB, 13U)) + RotL64(aCarry, 23U));
-            aWandererE = aWandererE ^ (((RotL64(aCross, 41U) + RotL64(aOrbiterG, 18U)) + aOrbiterF) + aWandererUpdateSaltC[(((31U - aIndex) + 17U)) & S_SALT1]);
+            aWandererE = aWandererE ^ (((RotL64(aCross, 41U) + RotL64(aOrbiterG, 18U)) + aOrbiterF) + aWandererUpdateSaltC[(((31U - aIndex) + 17U)) & 31]);
             aWandererH = aWandererH + ((RotL64(aPrevious, 13U) + aOrbiterE) + RotL64(aOrbiterI, 51U));
             aWandererB = aWandererB ^ ((RotL64(aIngress, 23U) + RotL64(aOrbiterA, 43U)) + aOrbiterI);
             aWandererJ = aWandererJ + (((RotL64(aCross, 29U) + RotL64(aOrbiterD, 53U)) + aOrbiterJ) + aNonceWordC);
             aWandererK = aWandererK ^ ((RotL64(aScatter, 44U) + RotL64(aOrbiterI, 23U)) + aOrbiterG);
             aWandererA = aWandererA + (((RotL64(aPrevious, 57U) + aOrbiterD) + RotL64(aOrbiterC, 39U)) + aNonceWordA);
-            aWandererF = aWandererF ^ (((RotL64(aScatter, 37U) + RotL64(aOrbiterK, 30U)) + aOrbiterC) + aWandererUpdateSaltE[((aIndex + 18U)) & S_SALT1]);
+            aWandererF = aWandererF ^ (((RotL64(aScatter, 37U) + RotL64(aOrbiterK, 30U)) + aOrbiterC) + aWandererUpdateSaltE[((aIndex + 18U)) & 31]);
             aWandererC = aWandererC + (((RotL64(aIngress, 11U) + aOrbiterB) + RotL64(aOrbiterA, 41U)) + RotL64(aCarry, 37U));
             aWandererD = aWandererD ^ ((RotL64(aCross, 20U) + aOrbiterC) + RotL64(aOrbiterH, 5U));
             //
@@ -2631,21 +2631,21 @@ void TwistExpander_Antares_Arx::KDF_A_E(TwistWorkSpace *pWorkSpace,
             aOrbiterJ = ((aWandererF + RotL64(aPrevious, 37U)) + RotL64(aCarry, 53U)) + 0x854F440A5B68F727ULL;
             aOrbiterE = (aWandererJ + RotL64(aCross, 56U)) + 0x42641CD1DA48B24FULL;
             aOrbiterK = ((aWandererD + RotL64(aIngress, 47U)) + 0xA9E42ECF7420F171ULL) + aNonceWordL;
-            aOrbiterA = ((aWandererB + RotL64(aScatter, 19U)) + 0x16868437C708BDD3ULL) + aOrbiterAssignSaltD[(((31U - aIndex) + 15U)) & S_SALT1];
+            aOrbiterA = ((aWandererB + RotL64(aScatter, 19U)) + 0x16868437C708BDD3ULL) + aOrbiterAssignSaltD[(((31U - aIndex) + 15U)) & 31];
             aOrbiterB = (aWandererK + RotL64(aIngress, 51U)) + 0x80B612910119118DULL;
             aOrbiterI = (aWandererG + RotL64(aCross, 39U)) + 0x518CD65B724357EEULL;
             aOrbiterH = ((aWandererI + RotL64(aScatter, 53U)) + RotL64(aCarry, 37U)) + 0x4C6198C6E59929FAULL;
             aOrbiterC = (aWandererC + RotL64(aPrevious, 41U)) + 0x1ECD6F680B9875E2ULL;
             aOrbiterF = (aWandererA + RotL64(aScatter, 23U)) + 0x145406AD2EC0FAD0ULL;
-            aOrbiterG = (((aWandererH + RotL64(aIngress, 60U)) + RotL64(aCarry, 5U)) + 0xAE7B98E084AF687DULL) + aOrbiterAssignSaltF[((aIndex + 28U)) & S_SALT1];
+            aOrbiterG = (((aWandererH + RotL64(aIngress, 60U)) + RotL64(aCarry, 5U)) + 0xAE7B98E084AF687DULL) + aOrbiterAssignSaltF[((aIndex + 28U)) & 31];
             aOrbiterD = ((aWandererE + RotL64(aCross, 21U)) + 0x6034C631410CDE9BULL) + aNonceWordK;
             //
-            aOrbiterJ = ((aOrbiterJ + aOrbiterE) + 0x4963E7745B9ABD8DULL) + aOrbiterUpdateSaltA[((aIndex + 7U)) & S_SALT1];
+            aOrbiterJ = ((aOrbiterJ + aOrbiterE) + 0x4963E7745B9ABD8DULL) + aOrbiterUpdateSaltA[((aIndex + 7U)) & 31];
             aOrbiterK = (aOrbiterK ^ aOrbiterJ) ^ 0x48E7E35F827BC9E7ULL;
             aOrbiterK = RotL64((aOrbiterK * 0x172F063EE9F91481ULL), 5U);
             //
             aOrbiterE = (aOrbiterE + aOrbiterA) + 0xA530DFB837A7F490ULL;
-            aOrbiterB = ((aOrbiterB ^ aOrbiterE) ^ 0xBCC280BDA6AB24D6ULL) ^ aOrbiterUpdateSaltB[(((31U - aIndex) + 23U)) & S_SALT1];
+            aOrbiterB = ((aOrbiterB ^ aOrbiterE) ^ 0xBCC280BDA6AB24D6ULL) ^ aOrbiterUpdateSaltB[(((31U - aIndex) + 23U)) & 31];
             aOrbiterB = RotL64((aOrbiterB * 0x528769655AF75BC9ULL), 3U);
             //
             aOrbiterB = (aOrbiterB + aOrbiterI) + 0x8EA14175ECECCD94ULL;
@@ -2657,7 +2657,7 @@ void TwistExpander_Antares_Arx::KDF_A_E(TwistWorkSpace *pWorkSpace,
             aOrbiterF = RotL64((aOrbiterF * 0x03C4485BDD0A2F41ULL), 11U);
             //
             aOrbiterF = (aOrbiterF + aOrbiterG) + 0xFD03B37B5CED71E4ULL;
-            aOrbiterE = (((aOrbiterE ^ aOrbiterF) ^ 0xB24266F23A354175ULL) ^ aOrbiterUpdateSaltD[(((31U - aIndex) + 3U)) & S_SALT1]) ^ aNonceWordG;
+            aOrbiterE = (((aOrbiterE ^ aOrbiterF) ^ 0xB24266F23A354175ULL) ^ aOrbiterUpdateSaltD[(((31U - aIndex) + 3U)) & 31]) ^ aNonceWordG;
             aOrbiterE = RotL64((aOrbiterE * 0xEC6B0C58D3B73B57ULL), 21U);
             //
             aOrbiterD = (aOrbiterD + aOrbiterH) + 0xA03ED89B3611BC24ULL;
@@ -2677,7 +2677,7 @@ void TwistExpander_Antares_Arx::KDF_A_E(TwistWorkSpace *pWorkSpace,
             aOrbiterJ = RotL64((aOrbiterJ * 0xB62AB91332EE787BULL), 43U);
             //
             aOrbiterA = (aOrbiterA + aOrbiterD) + 0x45FCEF4F68D32B62ULL;
-            aOrbiterI = ((aOrbiterI ^ aOrbiterA) ^ 0xBFAD03857413646BULL) ^ aOrbiterUpdateSaltC[((aIndex + 5U)) & S_SALT1];
+            aOrbiterI = ((aOrbiterI ^ aOrbiterA) ^ 0xBFAD03857413646BULL) ^ aOrbiterUpdateSaltC[((aIndex + 5U)) & 31];
             aOrbiterI = RotL64((aOrbiterI * 0xFD7408F37F57C9C1ULL), 57U);
             //
             aOrbiterG = (aOrbiterG + aOrbiterK) + 0x9A98CDB761E1EA18ULL;
@@ -2694,13 +2694,13 @@ void TwistExpander_Antares_Arx::KDF_A_E(TwistWorkSpace *pWorkSpace,
             //
             aWandererJ = aWandererJ ^ ((RotL64(aScatter, 48U) + RotL64(aOrbiterB, 23U)) + aOrbiterE);
             aWandererK = aWandererK + ((RotL64(aCross, 41U) + RotL64(aOrbiterF, 27U)) + aOrbiterG);
-            aWandererH = aWandererH ^ (((RotL64(aPrevious, 3U) + RotL64(aOrbiterA, 37U)) + aOrbiterI) + aWandererUpdateSaltD[(((31U - aIndex) + 11U)) & S_SALT1]);
+            aWandererH = aWandererH ^ (((RotL64(aPrevious, 3U) + RotL64(aOrbiterA, 37U)) + aOrbiterI) + aWandererUpdateSaltD[(((31U - aIndex) + 11U)) & 31]);
             aWandererA = aWandererA + ((((RotL64(aIngress, 19U) + RotL64(aOrbiterJ, 18U)) + aOrbiterC) + RotL64(aCarry, 19U)) + aNonceWordA);
             aWandererB = aWandererB ^ ((RotL64(aPrevious, 51U) + RotL64(aOrbiterB, 53U)) + aOrbiterI);
             aWandererI = aWandererI + (((RotL64(aCross, 53U) + aOrbiterC) + RotL64(aOrbiterI, 57U)) + aNonceWordM);
             aWandererF = aWandererF ^ ((RotL64(aScatter, 56U) + RotL64(aOrbiterB, 29U)) + aOrbiterH);
             aWandererC = aWandererC + ((RotL64(aIngress, 37U) + aOrbiterI) + RotL64(aOrbiterG, 50U));
-            aWandererG = aWandererG ^ ((((RotL64(aScatter, 21U) + aOrbiterF) + RotL64(aOrbiterD, 35U)) + aNonceWordC) + aWandererUpdateSaltF[((aIndex + 9U)) & S_SALT1]);
+            aWandererG = aWandererG ^ ((((RotL64(aScatter, 21U) + aOrbiterF) + RotL64(aOrbiterD, 35U)) + aNonceWordC) + aWandererUpdateSaltF[((aIndex + 9U)) & 31]);
             aWandererE = aWandererE + (((RotL64(aPrevious, 27U) + aOrbiterC) + RotL64(aOrbiterK, 11U)) + RotL64(aCarry, 43U));
             aWandererD = aWandererD ^ ((RotL64(aCross, 23U) + aOrbiterA) + RotL64(aOrbiterE, 3U));
             //
@@ -2743,7 +2743,7 @@ void TwistExpander_Antares_Arx::KDF_A_E(TwistWorkSpace *pWorkSpace,
             aScatter = (RotL64(aIngress, 40U) ^ RotL64(aCross, 23U)) + (RotL64(aCarry, 57U) ^ RotL64(aPrevious, 5U));
             aScatter = TwistMix64::DiffuseA(((aScatter ^ aDomainWordScatter) ^ aNonceWordA));
             //
-            aOrbiterB = (((aWandererA + RotL64(aScatter, 53U)) + RotL64(aCarry, 35U)) + 0x15BFA06BE7D71D2CULL) + aOrbiterAssignSaltA[(((31U - aIndex) + 7U)) & S_SALT1];
+            aOrbiterB = (((aWandererA + RotL64(aScatter, 53U)) + RotL64(aCarry, 35U)) + 0x15BFA06BE7D71D2CULL) + aOrbiterAssignSaltA[(((31U - aIndex) + 7U)) & 31];
             aOrbiterH = ((aWandererB + RotL64(aCross, 3U)) + 0x54865467C1BEC2BEULL) + aNonceWordF;
             aOrbiterE = ((aWandererD + RotL64(aIngress, 57U)) + RotL64(aCarry, 43U)) + 0xDE9B6FC7DFBA03BAULL;
             aOrbiterD = (aWandererE + RotL64(aPrevious, 26U)) + 0xBF8B1697A6A79AFCULL;
@@ -2751,7 +2751,7 @@ void TwistExpander_Antares_Arx::KDF_A_E(TwistWorkSpace *pWorkSpace,
             aOrbiterA = (aWandererI + RotL64(aCross, 29U)) + 0xE3B910B16FB18341ULL;
             aOrbiterI = ((aWandererF + RotL64(aPrevious, 13U)) + 0x770A9C3575E633CDULL) + aNonceWordB;
             aOrbiterK = (aWandererC + RotL64(aIngress, 23U)) + 0x9AD3D549B7478CFEULL;
-            aOrbiterJ = ((((aWandererJ + RotL64(aCross, 47U)) + RotL64(aCarry, 53U)) + 0x187A4705ADDF8BADULL) + aOrbiterAssignSaltC[(((31U - aIndex) + 3U)) & S_SALT1]) + aNonceWordC;
+            aOrbiterJ = ((((aWandererJ + RotL64(aCross, 47U)) + RotL64(aCarry, 53U)) + 0x187A4705ADDF8BADULL) + aOrbiterAssignSaltC[(((31U - aIndex) + 3U)) & 31]) + aNonceWordC;
             aOrbiterF = ((aWandererG + RotL64(aScatter, 38U)) + 0x98B93679E2565691ULL) + aNonceWordG;
             aOrbiterG = (aWandererH + RotL64(aPrevious, 5U)) + 0xB4740585205301E2ULL;
             //
@@ -2764,7 +2764,7 @@ void TwistExpander_Antares_Arx::KDF_A_E(TwistWorkSpace *pWorkSpace,
             aOrbiterA = RotL64((aOrbiterA * 0xAE87E4A258811BC1ULL), 3U);
             //
             aOrbiterE = (aOrbiterE + aOrbiterD) + 0xF1ABC4B7A362BE2DULL;
-            aOrbiterI = ((aOrbiterI ^ aOrbiterE) ^ 0x829BE45D4AD7F24DULL) ^ aOrbiterUpdateSaltA[((aIndex + 17U)) & S_SALT1];
+            aOrbiterI = ((aOrbiterI ^ aOrbiterE) ^ 0x829BE45D4AD7F24DULL) ^ aOrbiterUpdateSaltA[((aIndex + 17U)) & 31];
             aOrbiterI = RotL64((aOrbiterI * 0x24563C975DE0E81DULL), 53U);
             //
             aOrbiterI = (aOrbiterI + aOrbiterA) + 0xA3D2049F68C41BA8ULL;
@@ -2783,7 +2783,7 @@ void TwistExpander_Antares_Arx::KDF_A_E(TwistWorkSpace *pWorkSpace,
             aOrbiterB = (aOrbiterB ^ aOrbiterG) ^ 0x90E259F37393D69EULL;
             aOrbiterB = RotL64((aOrbiterB * 0x9C3889FCB4F73BCBULL), 29U);
             //
-            aOrbiterJ = ((aOrbiterJ + aOrbiterE) + 0x5E6B11427CC9A61AULL) + aOrbiterUpdateSaltD[((aIndex + 6U)) & S_SALT1];
+            aOrbiterJ = ((aOrbiterJ + aOrbiterE) + 0x5E6B11427CC9A61AULL) + aOrbiterUpdateSaltD[((aIndex + 6U)) & 31];
             aOrbiterC = (aOrbiterC ^ aOrbiterJ) ^ 0x03101445DE340AB2ULL;
             aOrbiterC = RotL64((aOrbiterC * 0x7E9298B7909F03D1ULL), 21U);
             //
@@ -2791,12 +2791,12 @@ void TwistExpander_Antares_Arx::KDF_A_E(TwistWorkSpace *pWorkSpace,
             aOrbiterF = (aOrbiterF ^ aOrbiterA) ^ 0x3943BD34BA128E3AULL;
             aOrbiterF = RotL64((aOrbiterF * 0x9208E0EF37A1B77DULL), 43U);
             //
-            aOrbiterF = (((aOrbiterF + aOrbiterB) + 0x0C1D9C4667DE7BF1ULL) + aOrbiterUpdateSaltC[(((31U - aIndex) + 13U)) & S_SALT1]) + aNonceWordN;
+            aOrbiterF = (((aOrbiterF + aOrbiterB) + 0x0C1D9C4667DE7BF1ULL) + aOrbiterUpdateSaltC[(((31U - aIndex) + 13U)) & 31]) + aNonceWordN;
             aOrbiterJ = (aOrbiterJ ^ aOrbiterF) ^ 0xD8A65B3F0C7B59AEULL;
             aOrbiterJ = RotL64((aOrbiterJ * 0x8B703CE2025471FDULL), 39U);
             //
             aOrbiterC = (aOrbiterC + aOrbiterI) + 0xFD8554382F663AE0ULL;
-            aOrbiterG = (((aOrbiterG ^ aOrbiterC) ^ 0xE891E8B3F584A577ULL) ^ aOrbiterUpdateSaltB[((aIndex + 27U)) & S_SALT1]) ^ aNonceWordI;
+            aOrbiterG = (((aOrbiterG ^ aOrbiterC) ^ 0xE891E8B3F584A577ULL) ^ aOrbiterUpdateSaltB[((aIndex + 27U)) & 31]) ^ aNonceWordI;
             aOrbiterG = RotL64((aOrbiterG * 0xBA0C3F856B44A037ULL), 57U);
             //
             aIngress = aOrbiterK ^ RotL64(aOrbiterB, 58U);
@@ -2810,12 +2810,12 @@ void TwistExpander_Antares_Arx::KDF_A_E(TwistWorkSpace *pWorkSpace,
             aWandererE = aWandererE + ((RotL64(aCross, 11U) + aOrbiterJ) + RotL64(aOrbiterF, 23U));
             aWandererH = aWandererH ^ (((RotL64(aIngress, 43U) + RotL64(aOrbiterB, 56U)) + aOrbiterG) + aNonceWordM);
             aWandererD = aWandererD + (((RotL64(aPrevious, 57U) + aOrbiterK) + RotL64(aOrbiterG, 39U)) + RotL64(aCarry, 21U));
-            aWandererI = aWandererI ^ (((RotL64(aScatter, 51U) + aOrbiterI) + RotL64(aOrbiterC, 11U)) + aWandererUpdateSaltB[(((31U - aIndex) + 28U)) & S_SALT1]);
+            aWandererI = aWandererI ^ (((RotL64(aScatter, 51U) + aOrbiterI) + RotL64(aOrbiterC, 11U)) + aWandererUpdateSaltB[(((31U - aIndex) + 28U)) & 31]);
             aWandererA = aWandererA + ((RotL64(aCross, 46U) + RotL64(aOrbiterA, 43U)) + aOrbiterE);
             aWandererJ = aWandererJ ^ ((RotL64(aIngress, 41U) + RotL64(aOrbiterJ, 3U)) + aOrbiterI);
             aWandererF = aWandererF + ((RotL64(aScatter, 27U) + RotL64(aOrbiterG, 21U)) + aOrbiterE);
             aWandererK = aWandererK ^ (((RotL64(aPrevious, 53U) + RotL64(aOrbiterH, 35U)) + aOrbiterK) + aNonceWordO);
-            aWandererG = aWandererG + ((((RotL64(aIngress, 29U) + RotL64(aOrbiterI, 29U)) + aOrbiterH) + aNonceWordD) + aWandererUpdateSaltA[((aIndex + 10U)) & S_SALT1]);
+            aWandererG = aWandererG + ((((RotL64(aIngress, 29U) + RotL64(aOrbiterI, 29U)) + aOrbiterH) + aNonceWordD) + aWandererUpdateSaltA[((aIndex + 10U)) & 31]);
             aWandererC = aWandererC ^ ((RotL64(aPrevious, 23U) + aOrbiterD) + RotL64(aOrbiterK, 52U));
             aWandererB = aWandererB + (((RotL64(aScatter, 36U) + RotL64(aOrbiterH, 19U)) + aOrbiterD) + RotL64(aCarry, 29U));
             //
@@ -2978,8 +2978,8 @@ void TwistExpander_Antares_Arx::KDF_B_A(TwistWorkSpace *pWorkSpace,
             aOrbiterK = (((aWandererG + RotL64(aCross, 24U)) + RotL64(aCarry, 23U)) + 0x5C6AFEBDDC172EC6ULL) + aNonceWordL;
             aOrbiterI = (aWandererI + RotL64(aIngress, 47U)) + 0x70E06AD050C3F1BDULL;
             aOrbiterE = (aWandererC + RotL64(aCross, 19U)) + 0xB24CB6BD7EF70E02ULL;
-            aOrbiterD = (((aWandererD + RotL64(aPrevious, 13U)) + RotL64(aCarry, 51U)) + 0x7AFAF4EC5C5C63D3ULL) + aOrbiterAssignSaltE[(((31U - aIndex) + 29U)) & S_SALT1];
-            aOrbiterG = (((aWandererK + RotL64(aScatter, 43U)) + RotL64(aCarry, 37U)) + 0xE0AE35156732F742ULL) + aOrbiterAssignSaltD[((aIndex + 9U)) & S_SALT1];
+            aOrbiterD = (((aWandererD + RotL64(aPrevious, 13U)) + RotL64(aCarry, 51U)) + 0x7AFAF4EC5C5C63D3ULL) + aOrbiterAssignSaltE[(((31U - aIndex) + 29U)) & 31];
+            aOrbiterG = (((aWandererK + RotL64(aScatter, 43U)) + RotL64(aCarry, 37U)) + 0xE0AE35156732F742ULL) + aOrbiterAssignSaltD[((aIndex + 9U)) & 31];
             aOrbiterC = (aWandererA + RotL64(aIngress, 53U)) + 0x7AA6B055F27A5CA3ULL;
             aOrbiterB = (aWandererJ + RotL64(aScatter, 28U)) + 0xDC519C5264F9BF61ULL;
             //
@@ -2992,23 +2992,23 @@ void TwistExpander_Antares_Arx::KDF_B_A(TwistWorkSpace *pWorkSpace,
             aOrbiterD = RotL64((aOrbiterD * 0xEFB35F6D2874F0BBULL), 13U);
             //
             aOrbiterG = (aOrbiterG + aOrbiterC) + 0x50E0371BAE53FA8EULL;
-            aOrbiterH = (((aOrbiterH ^ aOrbiterG) ^ 0x16767250294597D7ULL) ^ aOrbiterUpdateSaltE[((aIndex + 4U)) & S_SALT1]) ^ aNonceWordO;
+            aOrbiterH = (((aOrbiterH ^ aOrbiterG) ^ 0x16767250294597D7ULL) ^ aOrbiterUpdateSaltE[((aIndex + 4U)) & 31]) ^ aNonceWordO;
             aOrbiterH = RotL64((aOrbiterH * 0xBA7F323087746717ULL), 57U);
             //
             aOrbiterH = ((aOrbiterH + aOrbiterB) + 0x2C750DD163DAD011ULL) + aNonceWordE;
-            aOrbiterI = ((aOrbiterI ^ aOrbiterH) ^ 0x94833616BD9AB0A0ULL) ^ aOrbiterUpdateSaltD[(((31U - aIndex) + 27U)) & S_SALT1];
+            aOrbiterI = ((aOrbiterI ^ aOrbiterH) ^ 0x94833616BD9AB0A0ULL) ^ aOrbiterUpdateSaltD[(((31U - aIndex) + 27U)) & 31];
             aOrbiterI = RotL64((aOrbiterI * 0x629AE253D32AE373ULL), 27U);
             //
             aOrbiterE = ((aOrbiterE + aOrbiterK) + 0x3E2A2E43E730B626ULL) + aNonceWordH;
             aOrbiterG = (aOrbiterG ^ aOrbiterE) ^ 0x8773C6E053E29DEFULL;
             aOrbiterG = RotL64((aOrbiterG * 0xBE25E362814F6137ULL), 19U);
             //
-            aOrbiterB = ((aOrbiterB + aOrbiterA) + 0x58E1D7344C451A65ULL) + aOrbiterUpdateSaltB[((aIndex + 16U)) & S_SALT1];
+            aOrbiterB = ((aOrbiterB + aOrbiterA) + 0x58E1D7344C451A65ULL) + aOrbiterUpdateSaltB[((aIndex + 16U)) & 31];
             aOrbiterE = (aOrbiterE ^ aOrbiterB) ^ 0x5B1A73F6A97DCB92ULL;
             aOrbiterE = RotL64((aOrbiterE * 0x9A750895D832F35DULL), 3U);
             //
             aOrbiterC = (aOrbiterC + aOrbiterD) + 0xE288F8D7A08C7BB2ULL;
-            aOrbiterB = ((aOrbiterB ^ aOrbiterC) ^ 0x517784055F5A9C93ULL) ^ aOrbiterUpdateSaltA[(((31U - aIndex) + 20U)) & S_SALT1];
+            aOrbiterB = ((aOrbiterB ^ aOrbiterC) ^ 0x517784055F5A9C93ULL) ^ aOrbiterUpdateSaltA[(((31U - aIndex) + 20U)) & 31];
             aOrbiterB = RotL64((aOrbiterB * 0xFD578286A0258139ULL), 41U);
             //
             aOrbiterK = (aOrbiterK + aOrbiterI) + 0x3BB69E5DB4D34CF0ULL;
@@ -3026,14 +3026,14 @@ void TwistExpander_Antares_Arx::KDF_B_A(TwistWorkSpace *pWorkSpace,
             aIngress = aIngress + RotL64(aOrbiterC, 60U);
             aIngress = TwistMix64::DiffuseB((aIngress + aScatter));
             //
-            aWandererA = aWandererA ^ (((RotL64(aPrevious, 24U) + RotL64(aOrbiterG, 35U)) + aOrbiterB) + aWandererUpdateSaltA[((aIndex + 11U)) & S_SALT1]);
+            aWandererA = aWandererA ^ (((RotL64(aPrevious, 24U) + RotL64(aOrbiterG, 35U)) + aOrbiterB) + aWandererUpdateSaltA[((aIndex + 11U)) & 31]);
             aWandererG = aWandererG + ((RotL64(aCross, 57U) + RotL64(aOrbiterK, 27U)) + aOrbiterI);
             aWandererI = aWandererI ^ (((RotL64(aIngress, 51U) + aOrbiterG) + RotL64(aOrbiterH, 10U)) + aNonceWordN);
             aWandererK = aWandererK + ((RotL64(aScatter, 39U) + aOrbiterB) + RotL64(aOrbiterK, 47U));
             aWandererD = aWandererD ^ ((RotL64(aPrevious, 18U) + aOrbiterI) + RotL64(aOrbiterA, 23U));
             aWandererF = aWandererF + (((RotL64(aIngress, 35U) + RotL64(aOrbiterG, 19U)) + aOrbiterC) + RotL64(aCarry, 39U));
             aWandererC = aWandererC ^ ((RotL64(aScatter, 47U) + aOrbiterE) + RotL64(aOrbiterI, 53U));
-            aWandererJ = aWandererJ + ((((RotL64(aCross, 11U) + RotL64(aOrbiterD, 6U)) + aOrbiterA) + RotL64(aCarry, 27U)) + aWandererUpdateSaltB[((aIndex + 14U)) & S_SALT1]);
+            aWandererJ = aWandererJ + ((((RotL64(aCross, 11U) + RotL64(aOrbiterD, 6U)) + aOrbiterA) + RotL64(aCarry, 27U)) + aWandererUpdateSaltB[((aIndex + 14U)) & 31]);
             aWandererH = aWandererH ^ (((RotL64(aIngress, 43U) + aOrbiterC) + RotL64(aOrbiterA, 43U)) + aNonceWordA);
             //
             aCarry = aCarry + (aWandererD ^ RotL64(aWandererK, 40U));
@@ -3074,11 +3074,11 @@ void TwistExpander_Antares_Arx::KDF_B_A(TwistWorkSpace *pWorkSpace,
             aScatter = (RotL64(aCarry, 6U) + RotL64(aPrevious, 19U)) + (RotL64(aCross, 53U) ^ RotL64(aIngress, 35U));
             aScatter = TwistMix64::DiffuseC(((aScatter ^ aDomainWordScatter) ^ aNonceWordO));
             //
-            aOrbiterH = ((aWandererK + RotL64(aPrevious, 57U)) + 0xEEE2AE61074FB767ULL) + aOrbiterAssignSaltC[((aIndex + 26U)) & S_SALT1];
+            aOrbiterH = ((aWandererK + RotL64(aPrevious, 57U)) + 0xEEE2AE61074FB767ULL) + aOrbiterAssignSaltC[((aIndex + 26U)) & 31];
             aOrbiterI = (((aWandererE + RotL64(aCross, 38U)) + RotL64(aCarry, 43U)) + 0x13D83A84960D269AULL) + aNonceWordD;
             aOrbiterC = ((aWandererC + RotL64(aIngress, 5U)) + 0x077C56EA2D73ADCCULL) + aNonceWordG;
             aOrbiterF = ((aWandererA + RotL64(aScatter, 13U)) + RotL64(aCarry, 3U)) + 0x5BB6302BB5C09826ULL;
-            aOrbiterA = (((aWandererH + RotL64(aIngress, 47U)) + RotL64(aCarry, 57U)) + 0xFC08087E44DDA366ULL) + aOrbiterAssignSaltF[(((31U - aIndex) + 6U)) & S_SALT1];
+            aOrbiterA = (((aWandererH + RotL64(aIngress, 47U)) + RotL64(aCarry, 57U)) + 0xFC08087E44DDA366ULL) + aOrbiterAssignSaltF[(((31U - aIndex) + 6U)) & 31];
             aOrbiterB = ((aWandererG + RotL64(aScatter, 42U)) + 0xDE919790AD132BAAULL) + aNonceWordJ;
             aOrbiterD = (aWandererD + RotL64(aPrevious, 51U)) + 0xD412844558214219ULL;
             aOrbiterG = (aWandererJ + RotL64(aCross, 21U)) + 0xD37329350D488C17ULL;
@@ -3089,11 +3089,11 @@ void TwistExpander_Antares_Arx::KDF_B_A(TwistWorkSpace *pWorkSpace,
             aOrbiterC = RotL64((aOrbiterC * 0xA78D0BC49E1BA31DULL), 43U);
             //
             aOrbiterI = ((aOrbiterI + aOrbiterF) + 0x2A2E7BC07AAF3889ULL) + aNonceWordC;
-            aOrbiterA = ((aOrbiterA ^ aOrbiterI) ^ 0x85592792D6729F4EULL) ^ aOrbiterUpdateSaltC[((aIndex + 11U)) & S_SALT1];
+            aOrbiterA = ((aOrbiterA ^ aOrbiterI) ^ 0x85592792D6729F4EULL) ^ aOrbiterUpdateSaltC[((aIndex + 11U)) & 31];
             aOrbiterA = RotL64((aOrbiterA * 0x054A58DE5A62C507ULL), 23U);
             //
             aOrbiterB = (aOrbiterB + aOrbiterD) + 0xECD2F743D6068EB3ULL;
-            aOrbiterH = ((aOrbiterH ^ aOrbiterB) ^ 0xF6BA5A65252C1241ULL) ^ aOrbiterUpdateSaltF[((aIndex + 5U)) & S_SALT1];
+            aOrbiterH = ((aOrbiterH ^ aOrbiterB) ^ 0xF6BA5A65252C1241ULL) ^ aOrbiterUpdateSaltF[((aIndex + 5U)) & 31];
             aOrbiterH = RotL64((aOrbiterH * 0x1F5D8CF7DE79C567ULL), 47U);
             //
             aOrbiterG = (aOrbiterG + aOrbiterC) + 0xD5A9DD89B517E75FULL;
@@ -3101,7 +3101,7 @@ void TwistExpander_Antares_Arx::KDF_B_A(TwistWorkSpace *pWorkSpace,
             aOrbiterB = RotL64((aOrbiterB * 0x86D3B12A75A5C14BULL), 5U);
             //
             aOrbiterC = (aOrbiterC + aOrbiterA) + 0xE57ECAA218D93C99ULL;
-            aOrbiterD = ((aOrbiterD ^ aOrbiterC) ^ 0x5ABF05B82B124CC2ULL) ^ aOrbiterUpdateSaltB[(((31U - aIndex) + 10U)) & S_SALT1];
+            aOrbiterD = ((aOrbiterD ^ aOrbiterC) ^ 0x5ABF05B82B124CC2ULL) ^ aOrbiterUpdateSaltB[(((31U - aIndex) + 10U)) & 31];
             aOrbiterD = RotL64((aOrbiterD * 0x1F1D731DCB450485ULL), 35U);
             //
             aOrbiterE = (aOrbiterE + aOrbiterB) + 0x594452210CB866C5ULL;
@@ -3117,7 +3117,7 @@ void TwistExpander_Antares_Arx::KDF_B_A(TwistWorkSpace *pWorkSpace,
             aOrbiterG = RotL64((aOrbiterG * 0x0B18F49AB8AEEE99ULL), 39U);
             //
             aOrbiterA = (aOrbiterA + aOrbiterG) + 0x88324FE9AD9693F0ULL;
-            aOrbiterE = ((aOrbiterE ^ aOrbiterA) ^ 0x6DC356E6F83325FDULL) ^ aOrbiterUpdateSaltA[(((31U - aIndex) + 3U)) & S_SALT1];
+            aOrbiterE = ((aOrbiterE ^ aOrbiterA) ^ 0x6DC356E6F83325FDULL) ^ aOrbiterUpdateSaltA[(((31U - aIndex) + 3U)) & 31];
             aOrbiterE = RotL64((aOrbiterE * 0xF1D6AC0E8468E4E3ULL), 53U);
             //
             aIngress = aOrbiterI ^ RotL64(aOrbiterC, 23U);
@@ -3127,12 +3127,12 @@ void TwistExpander_Antares_Arx::KDF_B_A(TwistWorkSpace *pWorkSpace,
             aIngress = aIngress + RotL64(aOrbiterH, 41U);
             aIngress = TwistMix64::DiffuseA((aIngress + aScatter));
             //
-            aWandererD = aWandererD + (((((RotL64(aPrevious, 4U) + RotL64(aOrbiterD, 29U)) + aOrbiterG) + RotL64(aCarry, 35U)) + aNonceWordM) + aWandererUpdateSaltD[(((31U - aIndex) + 8U)) & S_SALT1]);
+            aWandererD = aWandererD + (((((RotL64(aPrevious, 4U) + RotL64(aOrbiterD, 29U)) + aOrbiterG) + RotL64(aCarry, 35U)) + aNonceWordM) + aWandererUpdateSaltD[(((31U - aIndex) + 8U)) & 31]);
             aWandererG = aWandererG ^ ((RotL64(aCross, 29U) + RotL64(aOrbiterD, 23U)) + aOrbiterI);
             aWandererF = aWandererF + ((RotL64(aIngress, 23U) + aOrbiterB) + RotL64(aOrbiterE, 47U));
             aWandererJ = aWandererJ ^ ((RotL64(aScatter, 37U) + RotL64(aOrbiterE, 19U)) + aOrbiterF);
             aWandererE = aWandererE + ((RotL64(aCross, 41U) + aOrbiterI) + RotL64(aOrbiterB, 60U));
-            aWandererH = aWandererH ^ (((RotL64(aIngress, 56U) + aOrbiterH) + RotL64(aOrbiterE, 51U)) + aWandererUpdateSaltF[((aIndex + 27U)) & S_SALT1]);
+            aWandererH = aWandererH ^ (((RotL64(aIngress, 56U) + aOrbiterH) + RotL64(aOrbiterE, 51U)) + aWandererUpdateSaltF[((aIndex + 27U)) & 31]);
             aWandererC = aWandererC + ((RotL64(aPrevious, 13U) + RotL64(aOrbiterH, 39U)) + aOrbiterB);
             aWandererA = aWandererA ^ ((RotL64(aScatter, 51U) + aOrbiterC) + RotL64(aOrbiterF, 35U));
             aWandererK = aWandererK + ((((RotL64(aIngress, 19U) + aOrbiterA) + RotL64(aOrbiterE, 12U)) + RotL64(aCarry, 19U)) + aNonceWordL);
@@ -3180,8 +3180,8 @@ void TwistExpander_Antares_Arx::KDF_B_A(TwistWorkSpace *pWorkSpace,
             aOrbiterI = (aWandererH + RotL64(aPrevious, 57U)) + 0xEF1517CE337C1756ULL;
             aOrbiterF = ((aWandererA + RotL64(aScatter, 11U)) + 0x2987D351E9885531ULL) + aNonceWordH;
             aOrbiterB = (aWandererJ + RotL64(aPrevious, 5U)) + 0xE08BEEDAC1E1BA5CULL;
-            aOrbiterG = ((aWandererF + RotL64(aIngress, 47U)) + 0x70D74C860F648A89ULL) + aOrbiterAssignSaltB[(((31U - aIndex) + 13U)) & S_SALT1];
-            aOrbiterH = (((aWandererB + RotL64(aCross, 28U)) + RotL64(aCarry, 51U)) + 0xE8F1B1D2BBC1647EULL) + aOrbiterAssignSaltA[((aIndex + 28U)) & S_SALT1];
+            aOrbiterG = ((aWandererF + RotL64(aIngress, 47U)) + 0x70D74C860F648A89ULL) + aOrbiterAssignSaltB[(((31U - aIndex) + 13U)) & 31];
+            aOrbiterH = (((aWandererB + RotL64(aCross, 28U)) + RotL64(aCarry, 51U)) + 0xE8F1B1D2BBC1647EULL) + aOrbiterAssignSaltA[((aIndex + 28U)) & 31];
             aOrbiterJ = (((aWandererK + RotL64(aScatter, 41U)) + RotL64(aCarry, 41U)) + 0x025C230ED54A0EFEULL) + aNonceWordC;
             aOrbiterA = (aWandererI + RotL64(aCross, 23U)) + 0x6457906B9DF628D7ULL;
             //
@@ -3194,19 +3194,19 @@ void TwistExpander_Antares_Arx::KDF_B_A(TwistWorkSpace *pWorkSpace,
             aOrbiterB = RotL64((aOrbiterB * 0xD64FDA1652A72AEFULL), 29U);
             //
             aOrbiterG = ((aOrbiterG + aOrbiterB) + 0xC8DBEF4808A3449CULL) + aNonceWordJ;
-            aOrbiterE = ((aOrbiterE ^ aOrbiterG) ^ 0x77959118A4EBBB44ULL) ^ aOrbiterUpdateSaltE[((aIndex + 23U)) & S_SALT1];
+            aOrbiterE = ((aOrbiterE ^ aOrbiterG) ^ 0x77959118A4EBBB44ULL) ^ aOrbiterUpdateSaltE[((aIndex + 23U)) & 31];
             aOrbiterE = RotL64((aOrbiterE * 0x0D843EDF738586F1ULL), 11U);
             //
             aOrbiterI = (aOrbiterI + aOrbiterH) + 0xDB31B966DB7463F5ULL;
             aOrbiterJ = (aOrbiterJ ^ aOrbiterI) ^ 0x0A6E3B04EBEDAECCULL;
             aOrbiterJ = RotL64((aOrbiterJ * 0x8E61A17AED46B6E5ULL), 39U);
             //
-            aOrbiterH = ((aOrbiterH + aOrbiterG) + 0x1762D41DE52858C3ULL) + aOrbiterUpdateSaltD[((aIndex + 27U)) & S_SALT1];
+            aOrbiterH = ((aOrbiterH + aOrbiterG) + 0x1762D41DE52858C3ULL) + aOrbiterUpdateSaltD[((aIndex + 27U)) & 31];
             aOrbiterC = (aOrbiterC ^ aOrbiterH) ^ 0x41DBF796CB863B66ULL;
             aOrbiterC = RotL64((aOrbiterC * 0x5874A82E89FB7073ULL), 53U);
             //
             aOrbiterE = (aOrbiterE + aOrbiterA) + 0x9AB1A76E8B31593BULL;
-            aOrbiterH = ((aOrbiterH ^ aOrbiterE) ^ 0xDA0ADE9B6E8A6B65ULL) ^ aOrbiterUpdateSaltA[((aIndex + 20U)) & S_SALT1];
+            aOrbiterH = ((aOrbiterH ^ aOrbiterE) ^ 0xDA0ADE9B6E8A6B65ULL) ^ aOrbiterUpdateSaltA[((aIndex + 20U)) & 31];
             aOrbiterH = RotL64((aOrbiterH * 0xF52E2240A8CC7D1DULL), 19U);
             //
             aOrbiterB = (aOrbiterB + aOrbiterJ) + 0x731619172297187EULL;
@@ -3218,7 +3218,7 @@ void TwistExpander_Antares_Arx::KDF_B_A(TwistWorkSpace *pWorkSpace,
             aOrbiterF = RotL64((aOrbiterF * 0x5CF28092D7673421ULL), 35U);
             //
             aOrbiterA = (aOrbiterA + aOrbiterF) + 0x17224CB28AE92064ULL;
-            aOrbiterG = ((aOrbiterG ^ aOrbiterA) ^ 0xD83A2FE425A85E8DULL) ^ aOrbiterUpdateSaltB[(((31U - aIndex) + 15U)) & S_SALT1];
+            aOrbiterG = ((aOrbiterG ^ aOrbiterA) ^ 0xD83A2FE425A85E8DULL) ^ aOrbiterUpdateSaltB[(((31U - aIndex) + 15U)) & 31];
             aOrbiterG = RotL64((aOrbiterG * 0x0365369E8993D527ULL), 23U);
             //
             aIngress = RotL64(aOrbiterB, 19U) ^ aOrbiterI;
@@ -3230,9 +3230,9 @@ void TwistExpander_Antares_Arx::KDF_B_A(TwistWorkSpace *pWorkSpace,
             //
             aWandererB = aWandererB ^ ((RotL64(aCross, 28U) + aOrbiterH) + RotL64(aOrbiterC, 51U));
             aWandererK = aWandererK + (((RotL64(aIngress, 51U) + RotL64(aOrbiterH, 41U)) + aOrbiterJ) + RotL64(aCarry, 37U));
-            aWandererA = aWandererA ^ (((RotL64(aPrevious, 19U) + aOrbiterA) + RotL64(aOrbiterG, 28U)) + aWandererUpdateSaltC[((aIndex + 17U)) & S_SALT1]);
+            aWandererA = aWandererA ^ (((RotL64(aPrevious, 19U) + aOrbiterA) + RotL64(aOrbiterG, 28U)) + aWandererUpdateSaltC[((aIndex + 17U)) & 31]);
             aWandererI = aWandererI + ((RotL64(aScatter, 47U) + aOrbiterJ) + RotL64(aOrbiterI, 21U));
-            aWandererE = aWandererE ^ (((RotL64(aIngress, 41U) + RotL64(aOrbiterA, 47U)) + aOrbiterE) + aWandererUpdateSaltE[((aIndex + 7U)) & S_SALT1]);
+            aWandererE = aWandererE ^ (((RotL64(aIngress, 41U) + RotL64(aOrbiterA, 47U)) + aOrbiterE) + aWandererUpdateSaltE[((aIndex + 7U)) & 31]);
             aWandererH = aWandererH + (((RotL64(aPrevious, 23U) + RotL64(aOrbiterB, 3U)) + aOrbiterA) + aNonceWordL);
             aWandererF = aWandererF ^ ((RotL64(aCross, 10U) + aOrbiterJ) + RotL64(aOrbiterF, 58U));
             aWandererC = aWandererC + ((((RotL64(aScatter, 57U) + aOrbiterC) + RotL64(aOrbiterF, 35U)) + RotL64(aCarry, 23U)) + aNonceWordO);
@@ -3276,25 +3276,25 @@ void TwistExpander_Antares_Arx::KDF_B_A(TwistWorkSpace *pWorkSpace,
             aScatter = (RotL64(aCarry, 23U) + RotL64(aPrevious, 51U)) + (RotL64(aIngress, 3U) ^ RotL64(aCross, 36U));
             aScatter = TwistMix64::DiffuseA(((aScatter ^ aDomainWordScatter) ^ aNonceWordK));
             //
-            aOrbiterF = (((aWandererF + RotL64(aScatter, 29U)) + RotL64(aCarry, 5U)) + 0x47E40E06BE63120EULL) + aOrbiterAssignSaltE[((aIndex + 12U)) & S_SALT1];
+            aOrbiterF = (((aWandererF + RotL64(aScatter, 29U)) + RotL64(aCarry, 5U)) + 0x47E40E06BE63120EULL) + aOrbiterAssignSaltE[((aIndex + 12U)) & 31];
             aOrbiterI = ((aWandererG + RotL64(aIngress, 60U)) + 0x6AC0714333C29534ULL) + aNonceWordN;
             aOrbiterK = ((aWandererC + RotL64(aCross, 13U)) + RotL64(aCarry, 13U)) + 0x2AA395ED6C11E97AULL;
             aOrbiterE = (aWandererA + RotL64(aPrevious, 3U)) + 0x4B240C091449CFB9ULL;
             aOrbiterD = (aWandererH + RotL64(aCross, 41U)) + 0xFB0ECAAF845E60C8ULL;
-            aOrbiterJ = ((((aWandererK + RotL64(aIngress, 37U)) + RotL64(aCarry, 27U)) + 0x10394D1EBC88D113ULL) + aOrbiterAssignSaltD[(((31U - aIndex) + 28U)) & S_SALT1]) + aNonceWordD;
+            aOrbiterJ = ((((aWandererK + RotL64(aIngress, 37U)) + RotL64(aCarry, 27U)) + 0x10394D1EBC88D113ULL) + aOrbiterAssignSaltD[(((31U - aIndex) + 28U)) & 31]) + aNonceWordD;
             aOrbiterB = ((aWandererJ + RotL64(aPrevious, 20U)) + 0xB7BD67321562DB28ULL) + aNonceWordE;
             aOrbiterC = ((aWandererD + RotL64(aScatter, 47U)) + 0xEA26CB9B92C84BECULL) + aNonceWordM;
             aOrbiterG = (aWandererI + RotL64(aIngress, 51U)) + 0x6458A75C058C09ECULL;
             //
             aOrbiterF = (aOrbiterF + aOrbiterI) + 0x576131C5F6A64214ULL;
-            aOrbiterK = ((aOrbiterK ^ aOrbiterF) ^ 0xB276941F2CDD01E4ULL) ^ aOrbiterUpdateSaltE[(((31U - aIndex) + 27U)) & S_SALT1];
+            aOrbiterK = ((aOrbiterK ^ aOrbiterF) ^ 0xB276941F2CDD01E4ULL) ^ aOrbiterUpdateSaltE[(((31U - aIndex) + 27U)) & 31];
             aOrbiterK = RotL64((aOrbiterK * 0x0F2ECDC150E0A29FULL), 23U);
             //
             aOrbiterE = (aOrbiterE + aOrbiterD) + 0x1AE274CD6FA0D917ULL;
             aOrbiterI = (aOrbiterI ^ aOrbiterE) ^ 0x97C6469C3745E2DCULL;
             aOrbiterI = RotL64((aOrbiterI * 0x9492DD50E22CBDA1ULL), 35U);
             //
-            aOrbiterI = ((aOrbiterI + aOrbiterJ) + 0x903BC062BF868729ULL) + aOrbiterUpdateSaltA[((aIndex + 3U)) & S_SALT1];
+            aOrbiterI = ((aOrbiterI + aOrbiterJ) + 0x903BC062BF868729ULL) + aOrbiterUpdateSaltA[((aIndex + 3U)) & 31];
             aOrbiterB = (aOrbiterB ^ aOrbiterI) ^ 0xFBB88162C232279EULL;
             aOrbiterB = RotL64((aOrbiterB * 0x40B8E091399F9B7DULL), 27U);
             //
@@ -3302,8 +3302,8 @@ void TwistExpander_Antares_Arx::KDF_B_A(TwistWorkSpace *pWorkSpace,
             aOrbiterC = (aOrbiterC ^ aOrbiterJ) ^ 0x0957ED5443EC220BULL;
             aOrbiterC = RotL64((aOrbiterC * 0x399B2DFCECC2E2A3ULL), 57U);
             //
-            aOrbiterC = (((aOrbiterC + aOrbiterG) + 0xD771421904DCBE29ULL) + aOrbiterUpdateSaltC[((aIndex + 11U)) & S_SALT1]) + aNonceWordG;
-            aOrbiterD = (((aOrbiterD ^ aOrbiterC) ^ 0x56D749959431A9B4ULL) ^ aOrbiterUpdateSaltD[((aIndex + 5U)) & S_SALT1]) ^ aNonceWordL;
+            aOrbiterC = (((aOrbiterC + aOrbiterG) + 0xD771421904DCBE29ULL) + aOrbiterUpdateSaltC[((aIndex + 11U)) & 31]) + aNonceWordG;
+            aOrbiterD = (((aOrbiterD ^ aOrbiterC) ^ 0x56D749959431A9B4ULL) ^ aOrbiterUpdateSaltD[((aIndex + 5U)) & 31]) ^ aNonceWordL;
             aOrbiterD = RotL64((aOrbiterD * 0x3A3C6639C43A249BULL), 13U);
             //
             aOrbiterG = (aOrbiterG + aOrbiterE) + 0xA06F1D3C50B98B20ULL;
@@ -3333,9 +3333,9 @@ void TwistExpander_Antares_Arx::KDF_B_A(TwistWorkSpace *pWorkSpace,
             aWandererG = aWandererG ^ ((RotL64(aPrevious, 26U) + RotL64(aOrbiterI, 20U)) + aOrbiterE);
             aWandererA = aWandererA + ((((RotL64(aScatter, 47U) + aOrbiterI) + RotL64(aOrbiterK, 13U)) + RotL64(aCarry, 35U)) + aNonceWordK);
             aWandererK = aWandererK ^ ((RotL64(aCross, 19U) + RotL64(aOrbiterB, 47U)) + aOrbiterI);
-            aWandererH = aWandererH + (((((RotL64(aIngress, 13U) + RotL64(aOrbiterJ, 51U)) + aOrbiterK) + RotL64(aCarry, 13U)) + aNonceWordA) + aWandererUpdateSaltA[(((31U - aIndex) + 24U)) & S_SALT1]);
+            aWandererH = aWandererH + (((((RotL64(aIngress, 13U) + RotL64(aOrbiterJ, 51U)) + aOrbiterK) + RotL64(aCarry, 13U)) + aNonceWordA) + aWandererUpdateSaltA[(((31U - aIndex) + 24U)) & 31]);
             aWandererD = aWandererD ^ ((RotL64(aPrevious, 52U) + RotL64(aOrbiterJ, 24U)) + aOrbiterD);
-            aWandererF = aWandererF + ((((RotL64(aScatter, 57U) + RotL64(aOrbiterF, 57U)) + aOrbiterG) + aNonceWordH) + aWandererUpdateSaltB[((aIndex + 7U)) & S_SALT1]);
+            aWandererF = aWandererF + ((((RotL64(aScatter, 57U) + RotL64(aOrbiterF, 57U)) + aOrbiterG) + aNonceWordH) + aWandererUpdateSaltB[((aIndex + 7U)) & 31]);
             aWandererC = aWandererC ^ ((RotL64(aCross, 3U) + aOrbiterK) + RotL64(aOrbiterC, 35U));
             aWandererI = aWandererI + ((RotL64(aPrevious, 37U) + aOrbiterE) + RotL64(aOrbiterF, 29U));
             //
@@ -3496,21 +3496,21 @@ void TwistExpander_Antares_Arx::KDF_B_B(TwistWorkSpace *pWorkSpace,
             //
             aOrbiterC = (((aWandererE + RotL64(aPrevious, 41U)) + RotL64(aCarry, 27U)) + 0x428F2C13A2156759ULL) + aNonceWordD;
             aOrbiterH = (aWandererG + RotL64(aScatter, 11U)) + 0x458D440EBDCA1149ULL;
-            aOrbiterI = ((aWandererB + RotL64(aCross, 21U)) + 0x58E9F1A14ACAAEB1ULL) + aOrbiterAssignSaltA[((aIndex + 21U)) & S_SALT1];
+            aOrbiterI = ((aWandererB + RotL64(aCross, 21U)) + 0x58E9F1A14ACAAEB1ULL) + aOrbiterAssignSaltA[((aIndex + 21U)) & 31];
             aOrbiterE = (((aWandererK + RotL64(aIngress, 27U)) + RotL64(aCarry, 5U)) + 0xF9A8E81A3AFEBD59ULL) + aNonceWordC;
             aOrbiterG = ((aWandererH + RotL64(aPrevious, 60U)) + 0x730DBA3E5A39DF7EULL) + aNonceWordN;
             aOrbiterB = (((aWandererJ + RotL64(aCross, 35U)) + RotL64(aCarry, 39U)) + 0x4D28DC54DDE7A6E9ULL) + aNonceWordG;
-            aOrbiterF = ((aWandererC + RotL64(aScatter, 53U)) + 0xDF4F70758A8A335BULL) + aOrbiterAssignSaltD[(((31U - aIndex) + 12U)) & S_SALT1];
+            aOrbiterF = ((aWandererC + RotL64(aScatter, 53U)) + 0xDF4F70758A8A335BULL) + aOrbiterAssignSaltD[(((31U - aIndex) + 12U)) & 31];
             //
-            aOrbiterC = ((aOrbiterC + aOrbiterH) + 0x50AEFEF735B6B1E5ULL) + aOrbiterUpdateSaltD[(((31U - aIndex) + 15U)) & S_SALT1];
+            aOrbiterC = ((aOrbiterC + aOrbiterH) + 0x50AEFEF735B6B1E5ULL) + aOrbiterUpdateSaltD[(((31U - aIndex) + 15U)) & 31];
             aOrbiterI = (aOrbiterI ^ aOrbiterC) ^ 0xD82452A48F86B06BULL;
             aOrbiterI = RotL64((aOrbiterI * 0x2C18F6B3C7C6DB9FULL), 3U);
             //
             aOrbiterE = ((aOrbiterE + aOrbiterG) + 0x7DC728F383302725ULL) + aNonceWordF;
-            aOrbiterH = ((aOrbiterH ^ aOrbiterE) ^ 0x4E2EA5C68A1F6F11ULL) ^ aOrbiterUpdateSaltA[((aIndex + 28U)) & S_SALT1];
+            aOrbiterH = ((aOrbiterH ^ aOrbiterE) ^ 0x4E2EA5C68A1F6F11ULL) ^ aOrbiterUpdateSaltA[((aIndex + 28U)) & 31];
             aOrbiterH = RotL64((aOrbiterH * 0xDDA65EFDEAB9AC4FULL), 13U);
             //
-            aOrbiterH = (((aOrbiterH + aOrbiterB) + 0x226183FB88192A91ULL) + aOrbiterUpdateSaltC[((aIndex + 5U)) & S_SALT1]) + aNonceWordI;
+            aOrbiterH = (((aOrbiterH + aOrbiterB) + 0x226183FB88192A91ULL) + aOrbiterUpdateSaltC[((aIndex + 5U)) & 31]) + aNonceWordI;
             aOrbiterF = (aOrbiterF ^ aOrbiterH) ^ 0x0D2BEFCF289FC9B5ULL;
             aOrbiterF = RotL64((aOrbiterF * 0xC9497B6D06B3D757ULL), 57U);
             //
@@ -3518,7 +3518,7 @@ void TwistExpander_Antares_Arx::KDF_B_B(TwistWorkSpace *pWorkSpace,
             aOrbiterC = ((aOrbiterC ^ aOrbiterB) ^ 0x10C25C8423EA05EAULL) ^ aNonceWordB;
             aOrbiterC = RotL64((aOrbiterC * 0xEA3709C233EE175BULL), 47U);
             //
-            aOrbiterF = ((aOrbiterF + aOrbiterC) + 0xCBED65BB3AFDA550ULL) + aOrbiterUpdateSaltB[(((31U - aIndex) + 11U)) & S_SALT1];
+            aOrbiterF = ((aOrbiterF + aOrbiterC) + 0xCBED65BB3AFDA550ULL) + aOrbiterUpdateSaltB[(((31U - aIndex) + 11U)) & 31];
             aOrbiterG = (aOrbiterG ^ aOrbiterF) ^ 0xD64CCA6CEBAEB63EULL;
             aOrbiterG = RotL64((aOrbiterG * 0x46EB7DDF11BAFE7FULL), 29U);
             //
@@ -3538,9 +3538,9 @@ void TwistExpander_Antares_Arx::KDF_B_B(TwistWorkSpace *pWorkSpace,
             //
             aWandererH = aWandererH + (((RotL64(aCross, 11U) + RotL64(aOrbiterC, 5U)) + aOrbiterI) + aNonceWordE);
             aWandererB = aWandererB ^ ((RotL64(aIngress, 22U) + aOrbiterF) + RotL64(aOrbiterI, 60U));
-            aWandererJ = aWandererJ + ((((RotL64(aScatter, 35U) + RotL64(aOrbiterB, 19U)) + aOrbiterG) + aNonceWordK) + aWandererUpdateSaltA[((aIndex + 3U)) & S_SALT1]);
+            aWandererJ = aWandererJ + ((((RotL64(aScatter, 35U) + RotL64(aOrbiterB, 19U)) + aOrbiterG) + aNonceWordK) + aWandererUpdateSaltA[((aIndex + 3U)) & 31]);
             aWandererC = aWandererC ^ ((RotL64(aPrevious, 41U) + RotL64(aOrbiterE, 29U)) + aOrbiterH);
-            aWandererG = aWandererG + ((((RotL64(aIngress, 29U) + RotL64(aOrbiterG, 37U)) + aOrbiterI) + RotL64(aCarry, 13U)) + aWandererUpdateSaltC[((aIndex + 7U)) & S_SALT1]);
+            aWandererG = aWandererG + ((((RotL64(aIngress, 29U) + RotL64(aOrbiterG, 37U)) + aOrbiterI) + RotL64(aCarry, 13U)) + aWandererUpdateSaltC[((aIndex + 7U)) & 31]);
             aWandererK = aWandererK ^ (((RotL64(aScatter, 3U) + RotL64(aOrbiterF, 47U)) + aOrbiterG) + aNonceWordM);
             aWandererE = aWandererE + ((((RotL64(aCross, 57U) + aOrbiterE) + RotL64(aOrbiterF, 11U)) + RotL64(aCarry, 43U)) + aNonceWordL);
             //
@@ -3584,12 +3584,12 @@ void TwistExpander_Antares_Arx::KDF_B_B(TwistWorkSpace *pWorkSpace,
             aOrbiterC = ((aWandererG + RotL64(aIngress, 19U)) + RotL64(aCarry, 51U)) + 0xEDEAD05C3F05D2DEULL;
             aOrbiterI = ((aWandererF + RotL64(aCross, 60U)) + 0x6E78668445110F3EULL) + aNonceWordF;
             aOrbiterF = ((aWandererD + RotL64(aPrevious, 29U)) + 0xDD6C35319FDDBB79ULL) + aNonceWordA;
-            aOrbiterA = ((((aWandererA + RotL64(aScatter, 35U)) + RotL64(aCarry, 13U)) + 0xAD16C848F3169AE0ULL) + aOrbiterAssignSaltE[((aIndex + 22U)) & S_SALT1]) + aNonceWordO;
-            aOrbiterD = (((aWandererI + RotL64(aIngress, 43U)) + 0xA37AF771234C855BULL) + aOrbiterAssignSaltF[((aIndex + 15U)) & S_SALT1]) + aNonceWordM;
+            aOrbiterA = ((((aWandererA + RotL64(aScatter, 35U)) + RotL64(aCarry, 13U)) + 0xAD16C848F3169AE0ULL) + aOrbiterAssignSaltE[((aIndex + 22U)) & 31]) + aNonceWordO;
+            aOrbiterD = (((aWandererI + RotL64(aIngress, 43U)) + 0xA37AF771234C855BULL) + aOrbiterAssignSaltF[((aIndex + 15U)) & 31]) + aNonceWordM;
             aOrbiterH = ((aWandererH + RotL64(aPrevious, 3U)) + RotL64(aCarry, 37U)) + 0xB9DF49DDD23369E5ULL;
             aOrbiterG = (aWandererK + RotL64(aScatter, 13U)) + 0x01C28DDC3CB10E2DULL;
             //
-            aOrbiterC = ((aOrbiterC + aOrbiterI) + 0x76EFB121E12049DEULL) + aOrbiterUpdateSaltB[(((31U - aIndex) + 4U)) & S_SALT1];
+            aOrbiterC = ((aOrbiterC + aOrbiterI) + 0x76EFB121E12049DEULL) + aOrbiterUpdateSaltB[(((31U - aIndex) + 4U)) & 31];
             aOrbiterF = (aOrbiterF ^ aOrbiterC) ^ 0xA3E90150632ECE27ULL;
             aOrbiterF = RotL64((aOrbiterF * 0xF55D722D6B359EB1ULL), 41U);
             //
@@ -3598,11 +3598,11 @@ void TwistExpander_Antares_Arx::KDF_B_B(TwistWorkSpace *pWorkSpace,
             aOrbiterD = RotL64((aOrbiterD * 0xCF9E9C7D1E16E0DFULL), 5U);
             //
             aOrbiterH = (aOrbiterH + aOrbiterC) + 0xE7B3BCFC2AECAA86ULL;
-            aOrbiterA = ((aOrbiterA ^ aOrbiterH) ^ 0x7E74C3D2D7AF95B6ULL) ^ aOrbiterUpdateSaltF[(((31U - aIndex) + 24U)) & S_SALT1];
+            aOrbiterA = ((aOrbiterA ^ aOrbiterH) ^ 0x7E74C3D2D7AF95B6ULL) ^ aOrbiterUpdateSaltF[(((31U - aIndex) + 24U)) & 31];
             aOrbiterA = RotL64((aOrbiterA * 0xCF47AB4A9162CB3BULL), 53U);
             //
             aOrbiterG = ((aOrbiterG + aOrbiterD) + 0x2863509A6FA02DF3ULL) + aNonceWordK;
-            aOrbiterC = (((aOrbiterC ^ aOrbiterG) ^ 0x3E69CA932935B511ULL) ^ aOrbiterUpdateSaltE[(((31U - aIndex) + 13U)) & S_SALT1]) ^ aNonceWordG;
+            aOrbiterC = (((aOrbiterC ^ aOrbiterG) ^ 0x3E69CA932935B511ULL) ^ aOrbiterUpdateSaltE[(((31U - aIndex) + 13U)) & 31]) ^ aNonceWordG;
             aOrbiterC = RotL64((aOrbiterC * 0x2F29D3857EE1BBF5ULL), 27U);
             //
             aOrbiterD = (aOrbiterD + aOrbiterH) + 0xDF34E882DD777326ULL;
@@ -3614,7 +3614,7 @@ void TwistExpander_Antares_Arx::KDF_B_B(TwistWorkSpace *pWorkSpace,
             aOrbiterG = RotL64((aOrbiterG * 0x5BD076BC5B0ED879ULL), 13U);
             //
             aOrbiterF = (aOrbiterF + aOrbiterG) + 0x96FD1427BA215A89ULL;
-            aOrbiterH = ((aOrbiterH ^ aOrbiterF) ^ 0x0FE27BABE04CA27DULL) ^ aOrbiterUpdateSaltC[((aIndex + 28U)) & S_SALT1];
+            aOrbiterH = ((aOrbiterH ^ aOrbiterF) ^ 0x0FE27BABE04CA27DULL) ^ aOrbiterUpdateSaltC[((aIndex + 28U)) & 31];
             aOrbiterH = RotL64((aOrbiterH * 0x33417EC51B5D64E5ULL), 35U);
             //
             aIngress = RotL64(aOrbiterD, 47U) ^ aOrbiterI;
@@ -3623,13 +3623,13 @@ void TwistExpander_Antares_Arx::KDF_B_B(TwistWorkSpace *pWorkSpace,
             aIngress = aIngress + RotL64(aOrbiterG, 54U);
             aIngress = TwistMix64::DiffuseC((aIngress + aScatter));
             //
-            aWandererI = aWandererI ^ (((RotL64(aIngress, 51U) + RotL64(aOrbiterC, 29U)) + aOrbiterI) + aWandererUpdateSaltE[((aIndex + 7U)) & S_SALT1]);
+            aWandererI = aWandererI ^ (((RotL64(aIngress, 51U) + RotL64(aOrbiterC, 29U)) + aOrbiterI) + aWandererUpdateSaltE[((aIndex + 7U)) & 31]);
             aWandererA = aWandererA + ((((RotL64(aCross, 30U) + aOrbiterH) + RotL64(aOrbiterC, 57U)) + RotL64(aCarry, 53U)) + aNonceWordI);
             aWandererK = aWandererK ^ ((RotL64(aScatter, 23U) + aOrbiterF) + RotL64(aOrbiterG, 51U));
             aWandererD = aWandererD + ((RotL64(aPrevious, 3U) + RotL64(aOrbiterF, 5U)) + aOrbiterA);
             aWandererG = aWandererG ^ (((RotL64(aScatter, 57U) + aOrbiterA) + RotL64(aOrbiterI, 21U)) + aNonceWordL);
             aWandererH = aWandererH + ((((RotL64(aPrevious, 43U) + RotL64(aOrbiterD, 44U)) + aOrbiterG) + RotL64(aCarry, 13U)) + aNonceWordE);
-            aWandererF = aWandererF ^ (((RotL64(aCross, 37U) + aOrbiterF) + RotL64(aOrbiterH, 13U)) + aWandererUpdateSaltF[((aIndex + 11U)) & S_SALT1]);
+            aWandererF = aWandererF ^ (((RotL64(aCross, 37U) + aOrbiterF) + RotL64(aOrbiterH, 13U)) + aWandererUpdateSaltF[((aIndex + 11U)) & 31]);
             //
             aCarry = aCarry + (RotL64(aWandererA, 43U) ^ aWandererF);
             aCarry = aCarry + (RotL64(aWandererD, 54U) ^ aWandererK);
@@ -3668,15 +3668,15 @@ void TwistExpander_Antares_Arx::KDF_B_B(TwistWorkSpace *pWorkSpace,
             aScatter = (RotL64(aCarry, 13U) ^ RotL64(aIngress, 26U)) + (RotL64(aPrevious, 51U) + RotL64(aCross, 39U));
             aScatter = TwistMix64::DiffuseA(((aScatter ^ aDomainWordScatter) ^ aNonceWordG));
             //
-            aOrbiterH = (((aWandererB + RotL64(aCross, 43U)) + RotL64(aCarry, 53U)) + 0x17AB5A2F3F3259DDULL) + aOrbiterAssignSaltB[((aIndex + 19U)) & S_SALT1];
+            aOrbiterH = (((aWandererB + RotL64(aCross, 43U)) + RotL64(aCarry, 53U)) + 0x17AB5A2F3F3259DDULL) + aOrbiterAssignSaltB[((aIndex + 19U)) & 31];
             aOrbiterC = ((aWandererE + RotL64(aScatter, 51U)) + RotL64(aCarry, 3U)) + 0x2F143BC8AE5848F0ULL;
             aOrbiterD = ((aWandererH + RotL64(aIngress, 57U)) + RotL64(aCarry, 37U)) + 0xA71663DF8DC25D51ULL;
             aOrbiterI = (aWandererD + RotL64(aPrevious, 22U)) + 0xA2858589433B2CFBULL;
             aOrbiterJ = (aWandererC + RotL64(aIngress, 29U)) + 0x3FADD513AD62249DULL;
-            aOrbiterE = (((aWandererG + RotL64(aCross, 11U)) + 0xF5525DAA12961E27ULL) + aOrbiterAssignSaltC[(((31U - aIndex) + 9U)) & S_SALT1]) + aNonceWordF;
+            aOrbiterE = (((aWandererG + RotL64(aCross, 11U)) + 0xF5525DAA12961E27ULL) + aOrbiterAssignSaltC[(((31U - aIndex) + 9U)) & 31]) + aNonceWordF;
             aOrbiterA = ((aWandererF + RotL64(aPrevious, 3U)) + 0xBCAACA382522C18FULL) + aNonceWordA;
             //
-            aOrbiterH = ((aOrbiterH + aOrbiterC) + 0x2D4F5A1D4E1A33FBULL) + aOrbiterUpdateSaltA[(((31U - aIndex) + 20U)) & S_SALT1];
+            aOrbiterH = ((aOrbiterH + aOrbiterC) + 0x2D4F5A1D4E1A33FBULL) + aOrbiterUpdateSaltA[(((31U - aIndex) + 20U)) & 31];
             aOrbiterD = (aOrbiterD ^ aOrbiterH) ^ 0x8A4A4A2184B21FAEULL;
             aOrbiterD = RotL64((aOrbiterD * 0xB24EC77920A1F2C1ULL), 47U);
             //
@@ -3685,10 +3685,10 @@ void TwistExpander_Antares_Arx::KDF_B_B(TwistWorkSpace *pWorkSpace,
             aOrbiterJ = RotL64((aOrbiterJ * 0xB10625B3A521C2D5ULL), 19U);
             //
             aOrbiterJ = (aOrbiterJ + aOrbiterE) + 0x4F9E68D4AB517E6EULL;
-            aOrbiterA = ((aOrbiterA ^ aOrbiterJ) ^ 0x1B6CCA84CE2F40A6ULL) ^ aOrbiterUpdateSaltB[((aIndex + 11U)) & S_SALT1];
+            aOrbiterA = ((aOrbiterA ^ aOrbiterJ) ^ 0x1B6CCA84CE2F40A6ULL) ^ aOrbiterUpdateSaltB[((aIndex + 11U)) & 31];
             aOrbiterA = RotL64((aOrbiterA * 0xA8F0BCCD3F9D1CE5ULL), 5U);
             //
-            aOrbiterI = (((aOrbiterI + aOrbiterJ) + 0x35F7761AEDC3C8C5ULL) + aOrbiterUpdateSaltC[(((31U - aIndex) + 4U)) & S_SALT1]) + aNonceWordB;
+            aOrbiterI = (((aOrbiterI + aOrbiterJ) + 0x35F7761AEDC3C8C5ULL) + aOrbiterUpdateSaltC[(((31U - aIndex) + 4U)) & 31]) + aNonceWordB;
             aOrbiterE = ((aOrbiterE ^ aOrbiterI) ^ 0xACFD372D33826641ULL) ^ aNonceWordK;
             aOrbiterE = RotL64((aOrbiterE * 0xA5738122950AA101ULL), 13U);
             //
@@ -3701,7 +3701,7 @@ void TwistExpander_Antares_Arx::KDF_B_B(TwistWorkSpace *pWorkSpace,
             aOrbiterH = RotL64((aOrbiterH * 0x9D8953C224F1531DULL), 53U);
             //
             aOrbiterA = (aOrbiterA + aOrbiterH) + 0x46313123D431AC6BULL;
-            aOrbiterC = ((aOrbiterC ^ aOrbiterA) ^ 0xC4A9AFB818A2FD03ULL) ^ aOrbiterUpdateSaltD[((aIndex + 15U)) & S_SALT1];
+            aOrbiterC = ((aOrbiterC ^ aOrbiterA) ^ 0xC4A9AFB818A2FD03ULL) ^ aOrbiterUpdateSaltD[((aIndex + 15U)) & 31];
             aOrbiterC = RotL64((aOrbiterC * 0x2321B1421A5A73EBULL), 41U);
             //
             aIngress = aOrbiterA ^ RotL64(aOrbiterC, 57U);
@@ -3711,8 +3711,8 @@ void TwistExpander_Antares_Arx::KDF_B_B(TwistWorkSpace *pWorkSpace,
             aIngress = TwistMix64::DiffuseA((aIngress + aScatter));
             //
             aWandererG = aWandererG ^ ((RotL64(aScatter, 37U) + aOrbiterH) + RotL64(aOrbiterC, 5U));
-            aWandererC = aWandererC + ((((RotL64(aIngress, 57U) + aOrbiterA) + RotL64(aOrbiterJ, 51U)) + RotL64(aCarry, 51U)) + aWandererUpdateSaltB[(((31U - aIndex) + 5U)) & S_SALT1]);
-            aWandererB = aWandererB ^ ((((RotL64(aCross, 43U) + aOrbiterE) + RotL64(aOrbiterH, 11U)) + aNonceWordI) + aWandererUpdateSaltD[(((31U - aIndex) + 8U)) & S_SALT1]);
+            aWandererC = aWandererC + ((((RotL64(aIngress, 57U) + aOrbiterA) + RotL64(aOrbiterJ, 51U)) + RotL64(aCarry, 51U)) + aWandererUpdateSaltB[(((31U - aIndex) + 5U)) & 31]);
+            aWandererB = aWandererB ^ ((((RotL64(aCross, 43U) + aOrbiterE) + RotL64(aOrbiterH, 11U)) + aNonceWordI) + aWandererUpdateSaltD[(((31U - aIndex) + 8U)) & 31]);
             aWandererD = aWandererD + ((RotL64(aPrevious, 3U) + aOrbiterI) + RotL64(aOrbiterD, 60U));
             aWandererE = aWandererE ^ (((RotL64(aIngress, 50U) + RotL64(aOrbiterC, 19U)) + aOrbiterI) + aNonceWordJ);
             aWandererH = aWandererH + (((RotL64(aPrevious, 13U) + RotL64(aOrbiterA, 35U)) + aOrbiterH) + RotL64(aCarry, 5U));
@@ -3757,18 +3757,18 @@ void TwistExpander_Antares_Arx::KDF_B_B(TwistWorkSpace *pWorkSpace,
             //
             aOrbiterG = (((aWandererF + RotL64(aIngress, 11U)) + RotL64(aCarry, 37U)) + 0x3D23CEAB9976D4B4ULL) + aNonceWordM;
             aOrbiterD = ((aWandererG + RotL64(aCross, 3U)) + RotL64(aCarry, 51U)) + 0x8CDA9C5C067DBC65ULL;
-            aOrbiterK = ((aWandererC + RotL64(aPrevious, 35U)) + 0xFB2B64AF98813288ULL) + aOrbiterAssignSaltA[((aIndex + 19U)) & S_SALT1];
+            aOrbiterK = ((aWandererC + RotL64(aPrevious, 35U)) + 0xFB2B64AF98813288ULL) + aOrbiterAssignSaltA[((aIndex + 19U)) & 31];
             aOrbiterC = ((aWandererA + RotL64(aScatter, 21U)) + RotL64(aCarry, 23U)) + 0x7812364BB872C7CEULL;
             aOrbiterA = (aWandererB + RotL64(aCross, 48U)) + 0x68D1E96F9DD28CBBULL;
             aOrbiterB = ((aWandererK + RotL64(aIngress, 29U)) + 0x9695BF144FCB24F1ULL) + aNonceWordO;
-            aOrbiterJ = (((aWandererE + RotL64(aPrevious, 41U)) + 0xE071DBF2373CE480ULL) + aOrbiterAssignSaltD[((aIndex + 15U)) & S_SALT1]) + aNonceWordB;
+            aOrbiterJ = (((aWandererE + RotL64(aPrevious, 41U)) + 0xE071DBF2373CE480ULL) + aOrbiterAssignSaltD[((aIndex + 15U)) & 31]) + aNonceWordB;
             //
             aOrbiterG = (aOrbiterG + aOrbiterD) + 0xE89D499C6FEA44F4ULL;
             aOrbiterK = ((aOrbiterK ^ aOrbiterG) ^ 0x5EC0E3D51AE66175ULL) ^ aNonceWordI;
             aOrbiterK = RotL64((aOrbiterK * 0xAAA1C92CD1AEF367ULL), 27U);
             //
             aOrbiterC = (aOrbiterC + aOrbiterG) + 0x38238C63C23C98CBULL;
-            aOrbiterD = ((aOrbiterD ^ aOrbiterC) ^ 0xFAD76484D3B93A40ULL) ^ aOrbiterUpdateSaltE[(((31U - aIndex) + 9U)) & S_SALT1];
+            aOrbiterD = ((aOrbiterD ^ aOrbiterC) ^ 0xFAD76484D3B93A40ULL) ^ aOrbiterUpdateSaltE[(((31U - aIndex) + 9U)) & 31];
             aOrbiterD = RotL64((aOrbiterD * 0x481D3A2DCD0160EBULL), 57U);
             //
             aOrbiterA = (aOrbiterA + aOrbiterB) + 0xB0FC828F48E0B446ULL;
@@ -3776,14 +3776,14 @@ void TwistExpander_Antares_Arx::KDF_B_B(TwistWorkSpace *pWorkSpace,
             aOrbiterJ = RotL64((aOrbiterJ * 0x65F9E4B60325A8E7ULL), 43U);
             //
             aOrbiterB = (aOrbiterB + aOrbiterJ) + 0xCC471B4499C9E912ULL;
-            aOrbiterC = ((aOrbiterC ^ aOrbiterB) ^ 0x0CA614D98CBF534EULL) ^ aOrbiterUpdateSaltB[(((31U - aIndex) + 28U)) & S_SALT1];
+            aOrbiterC = ((aOrbiterC ^ aOrbiterB) ^ 0x0CA614D98CBF534EULL) ^ aOrbiterUpdateSaltB[(((31U - aIndex) + 28U)) & 31];
             aOrbiterC = RotL64((aOrbiterC * 0x3E3C5F27C932024FULL), 51U);
             //
             aOrbiterD = ((aOrbiterD + aOrbiterK) + 0x9FD7CFC1E0896C91ULL) + aNonceWordN;
-            aOrbiterA = (((aOrbiterA ^ aOrbiterD) ^ 0x572F23AC9CA221B2ULL) ^ aOrbiterUpdateSaltD[(((31U - aIndex) + 18U)) & S_SALT1]) ^ aNonceWordE;
+            aOrbiterA = (((aOrbiterA ^ aOrbiterD) ^ 0x572F23AC9CA221B2ULL) ^ aOrbiterUpdateSaltD[(((31U - aIndex) + 18U)) & 31]) ^ aNonceWordE;
             aOrbiterA = RotL64((aOrbiterA * 0x7B3DBBEE25FD032DULL), 5U);
             //
-            aOrbiterK = ((aOrbiterK + aOrbiterA) + 0x06A5BD3DE1936459ULL) + aOrbiterUpdateSaltF[(((31U - aIndex) + 22U)) & S_SALT1];
+            aOrbiterK = ((aOrbiterK + aOrbiterA) + 0x06A5BD3DE1936459ULL) + aOrbiterUpdateSaltF[(((31U - aIndex) + 22U)) & 31];
             aOrbiterB = (aOrbiterB ^ aOrbiterK) ^ 0x99F1B449539772B1ULL;
             aOrbiterB = RotL64((aOrbiterB * 0xD95721DEEAA687ABULL), 19U);
             //
@@ -3798,12 +3798,12 @@ void TwistExpander_Antares_Arx::KDF_B_B(TwistWorkSpace *pWorkSpace,
             aIngress = TwistMix64::DiffuseC((aIngress + aScatter));
             //
             aWandererK = aWandererK ^ ((RotL64(aScatter, 47U) + aOrbiterA) + RotL64(aOrbiterJ, 19U));
-            aWandererE = aWandererE + (((((RotL64(aPrevious, 27U) + RotL64(aOrbiterG, 39U)) + aOrbiterJ) + RotL64(aCarry, 13U)) + aNonceWordH) + aWandererUpdateSaltC[(((31U - aIndex) + 13U)) & S_SALT1]);
+            aWandererE = aWandererE + (((((RotL64(aPrevious, 27U) + RotL64(aOrbiterG, 39U)) + aOrbiterJ) + RotL64(aCarry, 13U)) + aNonceWordH) + aWandererUpdateSaltC[(((31U - aIndex) + 13U)) & 31]);
             aWandererA = aWandererA ^ ((RotL64(aCross, 4U) + RotL64(aOrbiterC, 57U)) + aOrbiterB);
             aWandererG = aWandererG + (((RotL64(aIngress, 37U) + RotL64(aOrbiterJ, 12U)) + aOrbiterB) + aNonceWordF);
             aWandererF = aWandererF ^ ((RotL64(aScatter, 11U) + RotL64(aOrbiterG, 51U)) + aOrbiterD);
             aWandererB = aWandererB + ((((RotL64(aIngress, 19U) + RotL64(aOrbiterK, 5U)) + aOrbiterB) + RotL64(aCarry, 29U)) + aNonceWordD);
-            aWandererC = aWandererC ^ ((((RotL64(aCross, 53U) + aOrbiterK) + RotL64(aOrbiterD, 27U)) + aNonceWordL) + aWandererUpdateSaltA[((aIndex + 16U)) & S_SALT1]);
+            aWandererC = aWandererC ^ ((((RotL64(aCross, 53U) + aOrbiterK) + RotL64(aOrbiterD, 27U)) + aNonceWordL) + aWandererUpdateSaltA[((aIndex + 16U)) & 31]);
             //
             aCarry = aCarry + (aWandererB ^ RotL64(aWandererA, 53U));
             aCarry = aCarry + (aWandererK ^ RotL64(aWandererE, 6U));
@@ -3962,8 +3962,8 @@ void TwistExpander_Antares_Arx::KDF_B_C(TwistWorkSpace *pWorkSpace,
             aScatter = TwistMix64::DiffuseB(((aScatter ^ aDomainWordScatter) ^ aNonceWordE));
             //
             aOrbiterD = (aWandererH + RotL64(aPrevious, 47U)) + 0xADF5E66FC0D40E2CULL;
-            aOrbiterK = (((aWandererC + RotL64(aScatter, 53U)) + RotL64(aCarry, 11U)) + 0xCC93C7DBC3ACDA11ULL) + aOrbiterAssignSaltA[(((31U - aIndex) + 22U)) & S_SALT1];
-            aOrbiterG = (((aWandererG + RotL64(aIngress, 13U)) + 0xE8AD8099ED5B8C44ULL) + aOrbiterAssignSaltF[(((31U - aIndex) + 9U)) & S_SALT1]) + aNonceWordH;
+            aOrbiterK = (((aWandererC + RotL64(aScatter, 53U)) + RotL64(aCarry, 11U)) + 0xCC93C7DBC3ACDA11ULL) + aOrbiterAssignSaltA[(((31U - aIndex) + 22U)) & 31];
+            aOrbiterG = (((aWandererG + RotL64(aIngress, 13U)) + 0xE8AD8099ED5B8C44ULL) + aOrbiterAssignSaltF[(((31U - aIndex) + 9U)) & 31]) + aNonceWordH;
             aOrbiterB = (aWandererI + RotL64(aCross, 56U)) + 0x26A22DBBB0FA7865ULL;
             aOrbiterA = (aWandererJ + RotL64(aScatter, 35U)) + 0xDAEB5AE190AFAC06ULL;
             aOrbiterH = (aWandererK + RotL64(aPrevious, 11U)) + 0x3299D4D9B71829A0ULL;
@@ -3974,7 +3974,7 @@ void TwistExpander_Antares_Arx::KDF_B_C(TwistWorkSpace *pWorkSpace,
             aOrbiterE = ((aWandererE + RotL64(aIngress, 5U)) + RotL64(aCarry, 51U)) + 0x7D199AA47CBD7065ULL;
             //
             aOrbiterD = (aOrbiterD + aOrbiterK) + 0x0D2BD045120DA614ULL;
-            aOrbiterG = ((aOrbiterG ^ aOrbiterD) ^ 0x55A6F88E5DB393DBULL) ^ aOrbiterUpdateSaltF[((aIndex + 27U)) & S_SALT1];
+            aOrbiterG = ((aOrbiterG ^ aOrbiterD) ^ 0x55A6F88E5DB393DBULL) ^ aOrbiterUpdateSaltF[((aIndex + 27U)) & 31];
             aOrbiterG = RotL64((aOrbiterG * 0x7AC68EA9A62A5259ULL), 3U);
             //
             aOrbiterB = (aOrbiterB + aOrbiterA) + 0x73A0FB16AF03B752ULL;
@@ -4002,15 +4002,15 @@ void TwistExpander_Antares_Arx::KDF_B_C(TwistWorkSpace *pWorkSpace,
             aOrbiterK = RotL64((aOrbiterK * 0x3C782925282A068BULL), 19U);
             //
             aOrbiterK = (aOrbiterK + aOrbiterI) + 0x7629A3E8DA93EE10ULL;
-            aOrbiterB = ((aOrbiterB ^ aOrbiterK) ^ 0x60EDC5C84F78218FULL) ^ aOrbiterUpdateSaltD[(((31U - aIndex) + 24U)) & S_SALT1];
+            aOrbiterB = ((aOrbiterB ^ aOrbiterK) ^ 0x60EDC5C84F78218FULL) ^ aOrbiterUpdateSaltD[(((31U - aIndex) + 24U)) & 31];
             aOrbiterB = RotL64((aOrbiterB * 0x5B08A3A588FA6D45ULL), 23U);
             //
             aOrbiterI = (aOrbiterI + aOrbiterJ) + 0x64DD5AB1AB730E94ULL;
-            aOrbiterA = ((aOrbiterA ^ aOrbiterI) ^ 0xBF26A3EA11D8348EULL) ^ aOrbiterUpdateSaltC[((aIndex + 25U)) & S_SALT1];
+            aOrbiterA = ((aOrbiterA ^ aOrbiterI) ^ 0xBF26A3EA11D8348EULL) ^ aOrbiterUpdateSaltC[((aIndex + 25U)) & 31];
             aOrbiterA = RotL64((aOrbiterA * 0xBB55308943430A11ULL), 11U);
             //
             aOrbiterC = ((aOrbiterC + aOrbiterE) + 0x59C5E1C992316355ULL) + aNonceWordB;
-            aOrbiterD = (((aOrbiterD ^ aOrbiterC) ^ 0x1DAE95D741371785ULL) ^ aOrbiterUpdateSaltE[(((31U - aIndex) + 19U)) & S_SALT1]) ^ aNonceWordF;
+            aOrbiterD = (((aOrbiterD ^ aOrbiterC) ^ 0x1DAE95D741371785ULL) ^ aOrbiterUpdateSaltE[(((31U - aIndex) + 19U)) & 31]) ^ aNonceWordF;
             aOrbiterD = RotL64((aOrbiterD * 0x92024D4C141F7457ULL), 39U);
             //
             aOrbiterG = (aOrbiterG + aOrbiterB) + 0x8DB6471B3F2C837CULL;
@@ -4030,9 +4030,9 @@ void TwistExpander_Antares_Arx::KDF_B_C(TwistWorkSpace *pWorkSpace,
             aWandererH = aWandererH ^ ((RotL64(aCross, 19U) + aOrbiterA) + RotL64(aOrbiterB, 37U));
             aWandererJ = aWandererJ + ((RotL64(aIngress, 23U) + aOrbiterG) + RotL64(aOrbiterE, 60U));
             aWandererG = aWandererG ^ ((RotL64(aCross, 47U) + RotL64(aOrbiterI, 53U)) + aOrbiterK);
-            aWandererA = aWandererA + (((RotL64(aPrevious, 37U) + RotL64(aOrbiterH, 57U)) + aOrbiterI) + aWandererUpdateSaltD[((aIndex + 3U)) & S_SALT1]);
+            aWandererA = aWandererA + (((RotL64(aPrevious, 37U) + RotL64(aOrbiterH, 57U)) + aOrbiterI) + aWandererUpdateSaltD[((aIndex + 3U)) & 31]);
             aWandererC = aWandererC ^ (((RotL64(aIngress, 3U) + aOrbiterD) + RotL64(aOrbiterH, 43U)) + aNonceWordJ);
-            aWandererB = aWandererB + (((RotL64(aScatter, 29U) + RotL64(aOrbiterG, 5U)) + aOrbiterI) + aWandererUpdateSaltC[((aIndex + 8U)) & S_SALT1]);
+            aWandererB = aWandererB + (((RotL64(aScatter, 29U) + RotL64(aOrbiterG, 5U)) + aOrbiterI) + aWandererUpdateSaltC[((aIndex + 8U)) & 31]);
             aWandererE = aWandererE ^ (((RotL64(aPrevious, 53U) + RotL64(aOrbiterB, 35U)) + aOrbiterJ) + aNonceWordO);
             aWandererF = aWandererF + (((RotL64(aCross, 21U) + RotL64(aOrbiterA, 46U)) + aOrbiterC) + RotL64(aCarry, 19U));
             aWandererD = aWandererD ^ ((RotL64(aIngress, 12U) + RotL64(aOrbiterJ, 11U)) + aOrbiterC);
@@ -4078,12 +4078,12 @@ void TwistExpander_Antares_Arx::KDF_B_C(TwistWorkSpace *pWorkSpace,
             //
             aOrbiterK = ((aWandererD + RotL64(aScatter, 43U)) + 0x8901F4483396672AULL) + aNonceWordJ;
             aOrbiterI = (aWandererH + RotL64(aIngress, 39U)) + 0xCDA536ECB9166E5EULL;
-            aOrbiterD = ((aWandererF + RotL64(aCross, 6U)) + 0x6FE55C315FDB9F97ULL) + aOrbiterAssignSaltC[(((31U - aIndex) + 22U)) & S_SALT1];
+            aOrbiterD = ((aWandererF + RotL64(aCross, 6U)) + 0x6FE55C315FDB9F97ULL) + aOrbiterAssignSaltC[(((31U - aIndex) + 22U)) & 31];
             aOrbiterG = ((aWandererC + RotL64(aPrevious, 35U)) + RotL64(aCarry, 23U)) + 0xBBEB23BC4A139DA0ULL;
             aOrbiterJ = ((aWandererI + RotL64(aIngress, 27U)) + 0x424F8FD8988A7563ULL) + aNonceWordG;
             aOrbiterC = (aWandererG + RotL64(aPrevious, 53U)) + 0xA9220D5DB16E5D5CULL;
             aOrbiterF = (((aWandererB + RotL64(aCross, 57U)) + RotL64(aCarry, 13U)) + 0xBD50C96B3AADF83CULL) + aNonceWordO;
-            aOrbiterE = ((aWandererE + RotL64(aScatter, 29U)) + 0x7992667C71061513ULL) + aOrbiterAssignSaltD[((aIndex + 17U)) & S_SALT1];
+            aOrbiterE = ((aWandererE + RotL64(aScatter, 29U)) + 0x7992667C71061513ULL) + aOrbiterAssignSaltD[((aIndex + 17U)) & 31];
             aOrbiterB = (aWandererA + RotL64(aIngress, 3U)) + 0x067DA8082DB71CB4ULL;
             aOrbiterA = (aWandererK + RotL64(aCross, 11U)) + 0x54AB18E5BBD49638ULL;
             aOrbiterH = ((aWandererJ + RotL64(aScatter, 60U)) + RotL64(aCarry, 53U)) + 0x838EC6EFD254A352ULL;
@@ -4101,15 +4101,15 @@ void TwistExpander_Antares_Arx::KDF_B_C(TwistWorkSpace *pWorkSpace,
             aOrbiterK = RotL64((aOrbiterK * 0x2049A430CF3BC0C5ULL), 5U);
             //
             aOrbiterE = (aOrbiterE + aOrbiterB) + 0xB5A2071EDCAA8103ULL;
-            aOrbiterA = (((aOrbiterA ^ aOrbiterE) ^ 0xECCE7D7086BF0ABBULL) ^ aOrbiterUpdateSaltB[((aIndex + 29U)) & S_SALT1]) ^ aNonceWordM;
+            aOrbiterA = (((aOrbiterA ^ aOrbiterE) ^ 0xECCE7D7086BF0ABBULL) ^ aOrbiterUpdateSaltB[((aIndex + 29U)) & 31]) ^ aNonceWordM;
             aOrbiterA = RotL64((aOrbiterA * 0x649D9996582AD405ULL), 13U);
             //
-            aOrbiterD = ((aOrbiterD + aOrbiterE) + 0xEA84B63E54BA10F0ULL) + aOrbiterUpdateSaltA[(((31U - aIndex) + 3U)) & S_SALT1];
+            aOrbiterD = ((aOrbiterD + aOrbiterE) + 0xEA84B63E54BA10F0ULL) + aOrbiterUpdateSaltA[(((31U - aIndex) + 3U)) & 31];
             aOrbiterF = ((aOrbiterF ^ aOrbiterD) ^ 0x29044B09FBCD6372ULL) ^ aNonceWordD;
             aOrbiterF = RotL64((aOrbiterF * 0x05ACF570C63023D1ULL), 3U);
             //
             aOrbiterF = (aOrbiterF + aOrbiterA) + 0xD52AB9B6EFDDCD1BULL;
-            aOrbiterI = ((aOrbiterI ^ aOrbiterF) ^ 0xF590F2DBD914A08AULL) ^ aOrbiterUpdateSaltD[(((31U - aIndex) + 26U)) & S_SALT1];
+            aOrbiterI = ((aOrbiterI ^ aOrbiterF) ^ 0xF590F2DBD914A08AULL) ^ aOrbiterUpdateSaltD[(((31U - aIndex) + 26U)) & 31];
             aOrbiterI = RotL64((aOrbiterI * 0xD9BADCB030D82FD9ULL), 19U);
             //
             aOrbiterI = (aOrbiterI + aOrbiterH) + 0x105D39D60813078DULL;
@@ -4129,7 +4129,7 @@ void TwistExpander_Antares_Arx::KDF_B_C(TwistWorkSpace *pWorkSpace,
             aOrbiterG = RotL64((aOrbiterG * 0x38F96EDD352B8C0FULL), 35U);
             //
             aOrbiterH = (aOrbiterH + aOrbiterJ) + 0x041018D218F2D739ULL;
-            aOrbiterB = ((aOrbiterB ^ aOrbiterH) ^ 0x3EA69BEB5A8C489DULL) ^ aOrbiterUpdateSaltF[((aIndex + 19U)) & S_SALT1];
+            aOrbiterB = ((aOrbiterB ^ aOrbiterH) ^ 0x3EA69BEB5A8C489DULL) ^ aOrbiterUpdateSaltF[((aIndex + 19U)) & 31];
             aOrbiterB = RotL64((aOrbiterB * 0x11D8127B55AD1095ULL), 41U);
             //
             aIngress = aOrbiterB ^ RotL64(aOrbiterK, 41U);
@@ -4140,7 +4140,7 @@ void TwistExpander_Antares_Arx::KDF_B_C(TwistWorkSpace *pWorkSpace,
             aIngress = aIngress + RotL64(aOrbiterF, 5U);
             aIngress = TwistMix64::DiffuseC((aIngress + aScatter));
             //
-            aWandererH = aWandererH + (((RotL64(aCross, 43U) + aOrbiterC) + RotL64(aOrbiterF, 53U)) + aWandererUpdateSaltA[((aIndex + 10U)) & S_SALT1]);
+            aWandererH = aWandererH + (((RotL64(aCross, 43U) + aOrbiterC) + RotL64(aOrbiterF, 53U)) + aWandererUpdateSaltA[((aIndex + 10U)) & 31]);
             aWandererD = aWandererD ^ ((RotL64(aPrevious, 51U) + aOrbiterH) + RotL64(aOrbiterJ, 40U));
             aWandererE = aWandererE + ((RotL64(aIngress, 47U) + RotL64(aOrbiterE, 37U)) + aOrbiterD);
             aWandererK = aWandererK ^ (((RotL64(aScatter, 35U) + aOrbiterD) + RotL64(aOrbiterF, 35U)) + aNonceWordE);
@@ -4150,7 +4150,7 @@ void TwistExpander_Antares_Arx::KDF_B_C(TwistWorkSpace *pWorkSpace,
             aWandererC = aWandererC ^ (((RotL64(aCross, 3U) + RotL64(aOrbiterG, 27U)) + aOrbiterJ) + aNonceWordB);
             aWandererF = aWandererF + (((RotL64(aPrevious, 57U) + RotL64(aOrbiterI, 11U)) + aOrbiterG) + aNonceWordL);
             aWandererI = aWandererI ^ ((RotL64(aCross, 19U) + aOrbiterI) + RotL64(aOrbiterH, 20U));
-            aWandererA = aWandererA + (((((RotL64(aIngress, 54U) + aOrbiterK) + RotL64(aOrbiterC, 29U)) + RotL64(aCarry, 57U)) + aNonceWordF) + aWandererUpdateSaltF[((aIndex + 20U)) & S_SALT1]);
+            aWandererA = aWandererA + (((((RotL64(aIngress, 54U) + aOrbiterK) + RotL64(aOrbiterC, 29U)) + RotL64(aCarry, 57U)) + aNonceWordF) + aWandererUpdateSaltF[((aIndex + 20U)) & 31]);
             //
             aCarry = aCarry + (RotL64(aWandererC, 43U) ^ aWandererG);
             aCarry = aCarry + (RotL64(aWandererF, 60U) ^ aWandererB);
@@ -4191,9 +4191,9 @@ void TwistExpander_Antares_Arx::KDF_B_C(TwistWorkSpace *pWorkSpace,
             aScatter = (RotL64(aCarry, 23U) ^ RotL64(aPrevious, 37U)) ^ (RotL64(aCross, 52U) + RotL64(aIngress, 3U));
             aScatter = TwistMix64::DiffuseC(((aScatter ^ aDomainWordScatter) ^ aNonceWordG));
             //
-            aOrbiterB = (((aWandererF + RotL64(aIngress, 53U)) + 0xB7AFAABED4586053ULL) + aOrbiterAssignSaltE[(((31U - aIndex) + 21U)) & S_SALT1]) + aNonceWordG;
+            aOrbiterB = (((aWandererF + RotL64(aIngress, 53U)) + 0xB7AFAABED4586053ULL) + aOrbiterAssignSaltE[(((31U - aIndex) + 21U)) & 31]) + aNonceWordG;
             aOrbiterE = ((aWandererJ + RotL64(aScatter, 41U)) + 0xEC4330E956CDA7F3ULL) + aNonceWordI;
-            aOrbiterG = (((aWandererB + RotL64(aPrevious, 51U)) + RotL64(aCarry, 13U)) + 0x68E7C8FABEDD564AULL) + aOrbiterAssignSaltB[((aIndex + 22U)) & S_SALT1];
+            aOrbiterG = (((aWandererB + RotL64(aPrevious, 51U)) + RotL64(aCarry, 13U)) + 0x68E7C8FABEDD564AULL) + aOrbiterAssignSaltB[((aIndex + 22U)) & 31];
             aOrbiterI = ((aWandererH + RotL64(aCross, 27U)) + RotL64(aCarry, 41U)) + 0x4950B512C5654B6CULL;
             aOrbiterJ = (aWandererE + RotL64(aIngress, 20U)) + 0xD47D1D3F03153615ULL;
             aOrbiterC = (aWandererI + RotL64(aCross, 5U)) + 0xB82A086789DD8843ULL;
@@ -4204,18 +4204,18 @@ void TwistExpander_Antares_Arx::KDF_B_C(TwistWorkSpace *pWorkSpace,
             aOrbiterH = (aWandererK + RotL64(aScatter, 24U)) + 0x96A86F48694522CEULL;
             //
             aOrbiterB = ((aOrbiterB + aOrbiterE) + 0xC2EF8EE5710B7D80ULL) + aNonceWordE;
-            aOrbiterG = ((aOrbiterG ^ aOrbiterB) ^ 0xB499E156DD4291D9ULL) ^ aOrbiterUpdateSaltD[((aIndex + 16U)) & S_SALT1];
+            aOrbiterG = ((aOrbiterG ^ aOrbiterB) ^ 0xB499E156DD4291D9ULL) ^ aOrbiterUpdateSaltD[((aIndex + 16U)) & 31];
             aOrbiterG = RotL64((aOrbiterG * 0x29E77CB3B5F03BBDULL), 23U);
             //
             aOrbiterI = (aOrbiterI + aOrbiterJ) + 0xB505DF9894AACCF6ULL;
             aOrbiterC = (aOrbiterC ^ aOrbiterI) ^ 0x4766384480CEAFBAULL;
             aOrbiterC = RotL64((aOrbiterC * 0xB2C6AB05D53ACE77ULL), 19U);
             //
-            aOrbiterJ = ((aOrbiterJ + aOrbiterF) + 0x49EBCB191EC78233ULL) + aOrbiterUpdateSaltB[(((31U - aIndex) + 6U)) & S_SALT1];
+            aOrbiterJ = ((aOrbiterJ + aOrbiterF) + 0x49EBCB191EC78233ULL) + aOrbiterUpdateSaltB[(((31U - aIndex) + 6U)) & 31];
             aOrbiterK = (aOrbiterK ^ aOrbiterJ) ^ 0x4D478B528B82EBC3ULL;
             aOrbiterK = RotL64((aOrbiterK * 0x364535934A32C16DULL), 11U);
             //
-            aOrbiterE = ((aOrbiterE + aOrbiterA) + 0x373BE2A5A57E0320ULL) + aOrbiterUpdateSaltA[(((31U - aIndex) + 23U)) & S_SALT1];
+            aOrbiterE = ((aOrbiterE + aOrbiterA) + 0x373BE2A5A57E0320ULL) + aOrbiterUpdateSaltA[(((31U - aIndex) + 23U)) & 31];
             aOrbiterI = ((aOrbiterI ^ aOrbiterE) ^ 0x06A7676C0DA46BDFULL) ^ aNonceWordH;
             aOrbiterI = RotL64((aOrbiterI * 0x02BECB075D8C4883ULL), 43U);
             //
@@ -4236,7 +4236,7 @@ void TwistExpander_Antares_Arx::KDF_B_C(TwistWorkSpace *pWorkSpace,
             aOrbiterF = RotL64((aOrbiterF * 0x83A968166AEFC9D3ULL), 5U);
             //
             aOrbiterF = (aOrbiterF + aOrbiterB) + 0x14E1D6ED62CA5E5BULL;
-            aOrbiterH = ((aOrbiterH ^ aOrbiterF) ^ 0xE6377BBC93B4E636ULL) ^ aOrbiterUpdateSaltC[(((31U - aIndex) + 24U)) & S_SALT1];
+            aOrbiterH = ((aOrbiterH ^ aOrbiterF) ^ 0xE6377BBC93B4E636ULL) ^ aOrbiterUpdateSaltC[(((31U - aIndex) + 24U)) & 31];
             aOrbiterH = RotL64((aOrbiterH * 0xED29C0E3F9BAE8BBULL), 57U);
             //
             aOrbiterH = (aOrbiterH + aOrbiterG) + 0xDCDFC1C50F7620D1ULL;
@@ -4260,12 +4260,12 @@ void TwistExpander_Antares_Arx::KDF_B_C(TwistWorkSpace *pWorkSpace,
             aWandererA = aWandererA + ((RotL64(aPrevious, 35U) + RotL64(aOrbiterH, 35U)) + aOrbiterK);
             aWandererE = aWandererE ^ (((RotL64(aIngress, 23U) + RotL64(aOrbiterJ, 41U)) + aOrbiterB) + aNonceWordB);
             aWandererF = aWandererF + ((((RotL64(aScatter, 19U) + RotL64(aOrbiterJ, 3U)) + aOrbiterA) + RotL64(aCarry, 23U)) + aNonceWordM);
-            aWandererG = aWandererG ^ ((((RotL64(aPrevious, 51U) + aOrbiterI) + RotL64(aOrbiterH, 37U)) + aNonceWordL) + aWandererUpdateSaltE[(((31U - aIndex) + 17U)) & S_SALT1]);
+            aWandererG = aWandererG ^ ((((RotL64(aPrevious, 51U) + aOrbiterI) + RotL64(aOrbiterH, 37U)) + aNonceWordL) + aWandererUpdateSaltE[(((31U - aIndex) + 17U)) & 31]);
             aWandererI = aWandererI + (((RotL64(aIngress, 6U) + aOrbiterG) + RotL64(aOrbiterJ, 21U)) + RotL64(aCarry, 51U));
             aWandererJ = aWandererJ ^ (((RotL64(aCross, 11U) + RotL64(aOrbiterA, 60U)) + aOrbiterH) + aNonceWordP);
             aWandererK = aWandererK + ((RotL64(aScatter, 21U) + aOrbiterF) + RotL64(aOrbiterA, 11U));
             aWandererC = aWandererC ^ ((RotL64(aIngress, 57U) + RotL64(aOrbiterE, 47U)) + aOrbiterC);
-            aWandererD = aWandererD + (((RotL64(aPrevious, 44U) + RotL64(aOrbiterB, 53U)) + aOrbiterC) + aWandererUpdateSaltB[((aIndex + 25U)) & S_SALT1]);
+            aWandererD = aWandererD + (((RotL64(aPrevious, 44U) + RotL64(aOrbiterB, 53U)) + aOrbiterC) + aWandererUpdateSaltB[((aIndex + 25U)) & 31]);
             //
             aCarry = aCarry + (aWandererJ ^ RotL64(aWandererH, 40U));
             aCarry = aCarry + (RotL64(aWandererA, 27U) ^ aWandererC);
@@ -4313,8 +4313,8 @@ void TwistExpander_Antares_Arx::KDF_B_C(TwistWorkSpace *pWorkSpace,
             aOrbiterH = ((aWandererF + RotL64(aCross, 19U)) + RotL64(aCarry, 27U)) + 0xFCD1C6258859C6D0ULL;
             aOrbiterK = (aWandererH + RotL64(aScatter, 13U)) + 0x844F19A67EC29E68ULL;
             aOrbiterJ = ((aWandererK + RotL64(aIngress, 5U)) + RotL64(aCarry, 3U)) + 0xB2B178F2661502E4ULL;
-            aOrbiterA = (((aWandererE + RotL64(aPrevious, 29U)) + 0x45C9309C2A5260A8ULL) + aOrbiterAssignSaltA[((aIndex + 26U)) & S_SALT1]) + aNonceWordL;
-            aOrbiterE = ((aWandererJ + RotL64(aCross, 21U)) + 0xC154AB186B44A744ULL) + aOrbiterAssignSaltF[(((31U - aIndex) + 23U)) & S_SALT1];
+            aOrbiterA = (((aWandererE + RotL64(aPrevious, 29U)) + 0x45C9309C2A5260A8ULL) + aOrbiterAssignSaltA[((aIndex + 26U)) & 31]) + aNonceWordL;
+            aOrbiterE = ((aWandererJ + RotL64(aCross, 21U)) + 0xC154AB186B44A744ULL) + aOrbiterAssignSaltF[(((31U - aIndex) + 23U)) & 31];
             aOrbiterF = (((aWandererA + RotL64(aScatter, 37U)) + RotL64(aCarry, 41U)) + 0x6AC8D2B9A7BC92C3ULL) + aNonceWordM;
             aOrbiterI = (aWandererI + RotL64(aIngress, 40U)) + 0x3DE1462A50D60DE9ULL;
             //
@@ -4334,19 +4334,19 @@ void TwistExpander_Antares_Arx::KDF_B_C(TwistWorkSpace *pWorkSpace,
             aOrbiterB = (aOrbiterB ^ aOrbiterE) ^ 0x81F9A88A13717F2DULL;
             aOrbiterB = RotL64((aOrbiterB * 0xFD470177542FBF69ULL), 21U);
             //
-            aOrbiterH = ((aOrbiterH + aOrbiterF) + 0x4AA56CE387AD0975ULL) + aOrbiterUpdateSaltB[((aIndex + 28U)) & S_SALT1];
+            aOrbiterH = ((aOrbiterH + aOrbiterF) + 0x4AA56CE387AD0975ULL) + aOrbiterUpdateSaltB[((aIndex + 28U)) & 31];
             aOrbiterJ = (aOrbiterJ ^ aOrbiterH) ^ 0x7A03B1F5DD22FD47ULL;
             aOrbiterJ = RotL64((aOrbiterJ * 0xBE281073E7366C35ULL), 39U);
             //
             aOrbiterC = (aOrbiterC + aOrbiterH) + 0x814DF2657CCE2BD3ULL;
-            aOrbiterK = ((aOrbiterK ^ aOrbiterC) ^ 0xDE2C7463E4E2C169ULL) ^ aOrbiterUpdateSaltE[(((31U - aIndex) + 29U)) & S_SALT1];
+            aOrbiterK = ((aOrbiterK ^ aOrbiterC) ^ 0xDE2C7463E4E2C169ULL) ^ aOrbiterUpdateSaltE[(((31U - aIndex) + 29U)) & 31];
             aOrbiterK = RotL64((aOrbiterK * 0x169D72D69644DF1DULL), 3U);
             //
             aOrbiterJ = (aOrbiterJ + aOrbiterI) + 0x69F5B373AD1FBEE4ULL;
             aOrbiterE = (aOrbiterE ^ aOrbiterJ) ^ 0xEC56B0A7EC35257BULL;
             aOrbiterE = RotL64((aOrbiterE * 0x73F86456784263F1ULL), 27U);
             //
-            aOrbiterB = ((aOrbiterB + aOrbiterC) + 0xC2F5F4B2C328E2FEULL) + aOrbiterUpdateSaltD[(((31U - aIndex) + 19U)) & S_SALT1];
+            aOrbiterB = ((aOrbiterB + aOrbiterC) + 0xC2F5F4B2C328E2FEULL) + aOrbiterUpdateSaltD[(((31U - aIndex) + 19U)) & 31];
             aOrbiterF = ((aOrbiterF ^ aOrbiterB) ^ 0x1925E4966E6B9B68ULL) ^ aNonceWordP;
             aOrbiterF = RotL64((aOrbiterF * 0xDAABAE14F83D589BULL), 53U);
             //
@@ -4359,7 +4359,7 @@ void TwistExpander_Antares_Arx::KDF_B_C(TwistWorkSpace *pWorkSpace,
             aOrbiterI = RotL64((aOrbiterI * 0xB6A688DE06A47423ULL), 5U);
             //
             aOrbiterI = ((aOrbiterI + aOrbiterA) + 0x909F490CD5229C28ULL) + aNonceWordF;
-            aOrbiterG = ((aOrbiterG ^ aOrbiterI) ^ 0xF8E5667165E692CAULL) ^ aOrbiterUpdateSaltA[(((31U - aIndex) + 24U)) & S_SALT1];
+            aOrbiterG = ((aOrbiterG ^ aOrbiterI) ^ 0xF8E5667165E692CAULL) ^ aOrbiterUpdateSaltA[(((31U - aIndex) + 24U)) & 31];
             aOrbiterG = RotL64((aOrbiterG * 0x2B20ADB13ED43A09ULL), 37U);
             //
             aIngress = RotL64(aOrbiterE, 27U) ^ aOrbiterG;
@@ -4370,14 +4370,14 @@ void TwistExpander_Antares_Arx::KDF_B_C(TwistWorkSpace *pWorkSpace,
             aIngress = aIngress + RotL64(aOrbiterJ, 3U);
             aIngress = TwistMix64::DiffuseB((aIngress + aScatter));
             //
-            aWandererG = aWandererG ^ (((RotL64(aPrevious, 51U) + RotL64(aOrbiterG, 29U)) + aOrbiterC) + aWandererUpdateSaltC[((aIndex + 25U)) & S_SALT1]);
+            aWandererG = aWandererG ^ (((RotL64(aPrevious, 51U) + RotL64(aOrbiterG, 29U)) + aOrbiterC) + aWandererUpdateSaltC[((aIndex + 25U)) & 31]);
             aWandererK = aWandererK + (((RotL64(aScatter, 5U) + aOrbiterJ) + RotL64(aOrbiterB, 6U)) + aNonceWordG);
             aWandererD = aWandererD ^ ((RotL64(aCross, 37U) + aOrbiterD) + RotL64(aOrbiterK, 23U));
             aWandererE = aWandererE + (((RotL64(aIngress, 56U) + aOrbiterK) + RotL64(aOrbiterE, 51U)) + RotL64(aCarry, 19U));
             aWandererA = aWandererA ^ ((RotL64(aPrevious, 43U) + RotL64(aOrbiterJ, 53U)) + aOrbiterD);
             aWandererB = aWandererB + (((RotL64(aCross, 27U) + RotL64(aOrbiterJ, 14U)) + aOrbiterK) + RotL64(aCarry, 3U));
             aWandererI = aWandererI ^ ((RotL64(aIngress, 19U) + RotL64(aOrbiterA, 37U)) + aOrbiterB);
-            aWandererF = aWandererF + (((RotL64(aScatter, 30U) + aOrbiterJ) + RotL64(aOrbiterH, 27U)) + aWandererUpdateSaltD[((aIndex + 21U)) & S_SALT1]);
+            aWandererF = aWandererF + (((RotL64(aScatter, 30U) + aOrbiterJ) + RotL64(aOrbiterH, 27U)) + aWandererUpdateSaltD[((aIndex + 21U)) & 31]);
             aWandererC = aWandererC ^ ((RotL64(aCross, 3U) + aOrbiterI) + RotL64(aOrbiterG, 47U));
             aWandererH = aWandererH + ((RotL64(aScatter, 41U) + aOrbiterH) + RotL64(aOrbiterF, 11U));
             aWandererJ = aWandererJ ^ (((RotL64(aIngress, 11U) + RotL64(aOrbiterF, 19U)) + aOrbiterG) + aNonceWordA);
@@ -4541,10 +4541,10 @@ void TwistExpander_Antares_Arx::KDF_B_D(TwistWorkSpace *pWorkSpace,
             aScatter = TwistMix64::DiffuseA(((aScatter ^ aDomainWordScatter) ^ aNonceWordO));
             //
             aOrbiterG = ((aWandererC + RotL64(aScatter, 57U)) + 0x4AFD1FDEFA098D55ULL) + aNonceWordD;
-            aOrbiterC = (((aWandererI + RotL64(aPrevious, 29U)) + RotL64(aCarry, 3U)) + 0x62D6B8153F4A7811ULL) + aOrbiterAssignSaltA[(((31U - aIndex) + 29U)) & S_SALT1];
+            aOrbiterC = (((aWandererI + RotL64(aPrevious, 29U)) + RotL64(aCarry, 3U)) + 0x62D6B8153F4A7811ULL) + aOrbiterAssignSaltA[(((31U - aIndex) + 29U)) & 31];
             aOrbiterE = (aWandererD + RotL64(aCross, 47U)) + 0xF9158D8AEF8920A4ULL;
             aOrbiterI = (aWandererH + RotL64(aIngress, 5U)) + 0x26076CAA4C486A94ULL;
-            aOrbiterJ = ((((aWandererK + RotL64(aCross, 22U)) + RotL64(aCarry, 57U)) + 0x350623629A44D0CBULL) + aOrbiterAssignSaltB[((aIndex + 4U)) & S_SALT1]) + aNonceWordL;
+            aOrbiterJ = ((((aWandererK + RotL64(aCross, 22U)) + RotL64(aCarry, 57U)) + 0x350623629A44D0CBULL) + aOrbiterAssignSaltB[((aIndex + 4U)) & 31]) + aNonceWordL;
             aOrbiterA = (aWandererE + RotL64(aPrevious, 51U)) + 0xA5EE5F089B6CA3CCULL;
             aOrbiterB = (((aWandererB + RotL64(aScatter, 41U)) + RotL64(aCarry, 47U)) + 0x836532DC3FAD790BULL) + aNonceWordF;
             aOrbiterD = ((aWandererF + RotL64(aIngress, 37U)) + 0x3E08EF0941AE0234ULL) + aNonceWordO;
@@ -4570,15 +4570,15 @@ void TwistExpander_Antares_Arx::KDF_B_D(TwistWorkSpace *pWorkSpace,
             aOrbiterJ = ((aOrbiterJ ^ aOrbiterD) ^ 0x6043D34AB7EDEBA7ULL) ^ aNonceWordH;
             aOrbiterJ = RotL64((aOrbiterJ * 0x2F9DEBE7010CEA5DULL), 19U);
             //
-            aOrbiterJ = ((aOrbiterJ + aOrbiterB) + 0x4845A5764C691050ULL) + aOrbiterUpdateSaltF[((aIndex + 17U)) & S_SALT1];
-            aOrbiterG = (((aOrbiterG ^ aOrbiterJ) ^ 0xCA3F7A032022F0CEULL) ^ aOrbiterUpdateSaltD[((aIndex + 26U)) & S_SALT1]) ^ aNonceWordP;
+            aOrbiterJ = ((aOrbiterJ + aOrbiterB) + 0x4845A5764C691050ULL) + aOrbiterUpdateSaltF[((aIndex + 17U)) & 31];
+            aOrbiterG = (((aOrbiterG ^ aOrbiterJ) ^ 0xCA3F7A032022F0CEULL) ^ aOrbiterUpdateSaltD[((aIndex + 26U)) & 31]) ^ aNonceWordP;
             aOrbiterG = RotL64((aOrbiterG * 0xCDC89C4AD58254FBULL), 47U);
             //
-            aOrbiterK = ((aOrbiterK + aOrbiterE) + 0x5AB9533A6775B1A8ULL) + aOrbiterUpdateSaltA[(((31U - aIndex) + 7U)) & S_SALT1];
+            aOrbiterK = ((aOrbiterK + aOrbiterE) + 0x5AB9533A6775B1A8ULL) + aOrbiterUpdateSaltA[(((31U - aIndex) + 7U)) & 31];
             aOrbiterB = ((aOrbiterB ^ aOrbiterK) ^ 0x14756E6E33D2E5C7ULL) ^ aNonceWordK;
             aOrbiterB = RotL64((aOrbiterB * 0x9367B1DAE8E964E5ULL), 57U);
             //
-            aOrbiterA = ((aOrbiterA + aOrbiterG) + 0x11101A3368D26458ULL) + aOrbiterUpdateSaltB[((aIndex + 18U)) & S_SALT1];
+            aOrbiterA = ((aOrbiterA + aOrbiterG) + 0x11101A3368D26458ULL) + aOrbiterUpdateSaltB[((aIndex + 18U)) & 31];
             aOrbiterK = (aOrbiterK ^ aOrbiterA) ^ 0xD264F35D5E61571DULL;
             aOrbiterK = RotL64((aOrbiterK * 0xA2DEC5E69ABC25B3ULL), 51U);
             //
@@ -4597,10 +4597,10 @@ void TwistExpander_Antares_Arx::KDF_B_D(TwistWorkSpace *pWorkSpace,
             aWandererB = aWandererB ^ ((RotL64(aScatter, 18U) + aOrbiterI) + RotL64(aOrbiterE, 3U));
             aWandererC = aWandererC + ((((RotL64(aIngress, 23U) + aOrbiterA) + RotL64(aOrbiterC, 47U)) + RotL64(aCarry, 19U)) + aNonceWordN);
             aWandererE = aWandererE ^ (((RotL64(aCross, 47U) + RotL64(aOrbiterG, 39U)) + aOrbiterA) + aNonceWordM);
-            aWandererH = aWandererH + (((RotL64(aPrevious, 53U) + RotL64(aOrbiterJ, 10U)) + aOrbiterG) + aWandererUpdateSaltA[((aIndex + 23U)) & S_SALT1]);
+            aWandererH = aWandererH + (((RotL64(aPrevious, 53U) + RotL64(aOrbiterJ, 10U)) + aOrbiterG) + aWandererUpdateSaltA[((aIndex + 23U)) & 31]);
             aWandererK = aWandererK ^ (((RotL64(aIngress, 30U) + RotL64(aOrbiterK, 27U)) + aOrbiterD) + aNonceWordB);
             aWandererI = aWandererI + ((RotL64(aScatter, 57U) + aOrbiterC) + RotL64(aOrbiterK, 43U));
-            aWandererA = aWandererA ^ (((RotL64(aCross, 43U) + aOrbiterC) + RotL64(aOrbiterB, 57U)) + aWandererUpdateSaltE[((aIndex + 25U)) & S_SALT1]);
+            aWandererA = aWandererA ^ (((RotL64(aCross, 43U) + aOrbiterC) + RotL64(aOrbiterB, 57U)) + aWandererUpdateSaltE[((aIndex + 25U)) & 31]);
             aWandererF = aWandererF + ((RotL64(aIngress, 35U) + RotL64(aOrbiterA, 18U)) + aOrbiterI);
             //
             aCarry = aCarry + (aWandererF ^ RotL64(aWandererI, 11U));
@@ -4641,14 +4641,14 @@ void TwistExpander_Antares_Arx::KDF_B_D(TwistWorkSpace *pWorkSpace,
             aScatter = (RotL64(aCross, 21U) ^ RotL64(aPrevious, 51U)) + (RotL64(aIngress, 36U) ^ RotL64(aCarry, 5U));
             aScatter = TwistMix64::DiffuseA(((aScatter ^ aDomainWordScatter) ^ aNonceWordC));
             //
-            aOrbiterI = ((((aWandererA + RotL64(aScatter, 14U)) + RotL64(aCarry, 29U)) + 0x92DBA8FE8A26C49DULL) + aOrbiterAssignSaltE[((aIndex + 28U)) & S_SALT1]) + aNonceWordM;
+            aOrbiterI = ((((aWandererA + RotL64(aScatter, 14U)) + RotL64(aCarry, 29U)) + 0x92DBA8FE8A26C49DULL) + aOrbiterAssignSaltE[((aIndex + 28U)) & 31]) + aNonceWordM;
             aOrbiterK = (aWandererC + RotL64(aPrevious, 3U)) + 0x55CF25CD4618BB63ULL;
             aOrbiterE = ((aWandererH + RotL64(aCross, 47U)) + RotL64(aCarry, 21U)) + 0x3F66DBD2FAA34860ULL;
             aOrbiterG = ((aWandererF + RotL64(aIngress, 35U)) + RotL64(aCarry, 5U)) + 0xE51C90A1E7816A2EULL;
             aOrbiterC = (aWandererI + RotL64(aPrevious, 19U)) + 0xAA5CB6591AA28753ULL;
             aOrbiterA = ((aWandererE + RotL64(aScatter, 23U)) + 0x0FB59292A34733AEULL) + aNonceWordF;
             aOrbiterJ = (aWandererD + RotL64(aIngress, 53U)) + 0xF9AA2AC9D2D13AC1ULL;
-            aOrbiterH = ((aWandererG + RotL64(aCross, 28U)) + 0x594BFA359D76D797ULL) + aOrbiterAssignSaltC[((aIndex + 12U)) & S_SALT1];
+            aOrbiterH = ((aWandererG + RotL64(aCross, 28U)) + 0x594BFA359D76D797ULL) + aOrbiterAssignSaltC[((aIndex + 12U)) & 31];
             aOrbiterD = (aWandererK + RotL64(aScatter, 39U)) + 0xD2BC257D58D1D8D6ULL;
             //
             aOrbiterI = ((aOrbiterI + aOrbiterK) + 0x4AE420C977AAEF33ULL) + aNonceWordH;
@@ -4659,15 +4659,15 @@ void TwistExpander_Antares_Arx::KDF_B_D(TwistWorkSpace *pWorkSpace,
             aOrbiterC = (aOrbiterC ^ aOrbiterK) ^ 0x3F24B251696AE338ULL;
             aOrbiterC = RotL64((aOrbiterC * 0xE16D552D3AB9A0A5ULL), 47U);
             //
-            aOrbiterG = ((aOrbiterG + aOrbiterI) + 0xC10318254944429EULL) + aOrbiterUpdateSaltA[((aIndex + 21U)) & S_SALT1];
+            aOrbiterG = ((aOrbiterG + aOrbiterI) + 0xC10318254944429EULL) + aOrbiterUpdateSaltA[((aIndex + 21U)) & 31];
             aOrbiterA = (aOrbiterA ^ aOrbiterG) ^ 0x5BF3A6C14184E02EULL;
             aOrbiterA = RotL64((aOrbiterA * 0xDBCAFE3D4CBC884FULL), 53U);
             //
-            aOrbiterC = ((aOrbiterC + aOrbiterA) + 0xC40BEAEEC2365B30ULL) + aOrbiterUpdateSaltF[((aIndex + 22U)) & S_SALT1];
+            aOrbiterC = ((aOrbiterC + aOrbiterA) + 0xC40BEAEEC2365B30ULL) + aOrbiterUpdateSaltF[((aIndex + 22U)) & 31];
             aOrbiterJ = ((aOrbiterJ ^ aOrbiterC) ^ 0xA207CA13E8C3255CULL) ^ aNonceWordN;
             aOrbiterJ = RotL64((aOrbiterJ * 0x5AF5330182E6F69BULL), 21U);
             //
-            aOrbiterH = ((aOrbiterH + aOrbiterD) + 0x541436620AA2D4F3ULL) + aOrbiterUpdateSaltE[(((31U - aIndex) + 15U)) & S_SALT1];
+            aOrbiterH = ((aOrbiterH + aOrbiterD) + 0x541436620AA2D4F3ULL) + aOrbiterUpdateSaltE[(((31U - aIndex) + 15U)) & 31];
             aOrbiterI = ((aOrbiterI ^ aOrbiterH) ^ 0x5B01675A8FDC34FEULL) ^ aNonceWordJ;
             aOrbiterI = RotL64((aOrbiterI * 0x994EB2D1D37E51E9ULL), 35U);
             //
@@ -4680,7 +4680,7 @@ void TwistExpander_Antares_Arx::KDF_B_D(TwistWorkSpace *pWorkSpace,
             aOrbiterG = RotL64((aOrbiterG * 0x6F2857341BE515A3ULL), 39U);
             //
             aOrbiterD = (aOrbiterD + aOrbiterJ) + 0x9FB0EBDCA1839F16ULL;
-            aOrbiterK = ((aOrbiterK ^ aOrbiterD) ^ 0xBA3E2B2C7CA36482ULL) ^ aOrbiterUpdateSaltC[((aIndex + 3U)) & S_SALT1];
+            aOrbiterK = ((aOrbiterK ^ aOrbiterD) ^ 0xBA3E2B2C7CA36482ULL) ^ aOrbiterUpdateSaltC[((aIndex + 3U)) & 31];
             aOrbiterK = RotL64((aOrbiterK * 0x0432390E059A40F7ULL), 57U);
             //
             aOrbiterE = ((aOrbiterE + aOrbiterC) + 0xDDB6C4C85E98702FULL) + aNonceWordG;
@@ -4694,13 +4694,13 @@ void TwistExpander_Antares_Arx::KDF_B_D(TwistWorkSpace *pWorkSpace,
             aIngress = aIngress + RotL64(aOrbiterI, 54U);
             aIngress = TwistMix64::DiffuseB((aIngress + aScatter));
             //
-            aWandererI = aWandererI + (((RotL64(aCross, 19U) + aOrbiterJ) + RotL64(aOrbiterE, 19U)) + aWandererUpdateSaltC[(((31U - aIndex) + 11U)) & S_SALT1]);
+            aWandererI = aWandererI + (((RotL64(aCross, 19U) + aOrbiterJ) + RotL64(aOrbiterE, 19U)) + aWandererUpdateSaltC[(((31U - aIndex) + 11U)) & 31]);
             aWandererE = aWandererE ^ ((RotL64(aPrevious, 39U) + RotL64(aOrbiterI, 12U)) + aOrbiterH);
             aWandererK = aWandererK + ((((RotL64(aIngress, 57U) + aOrbiterC) + RotL64(aOrbiterE, 23U)) + RotL64(aCarry, 21U)) + aNonceWordI);
             aWandererC = aWandererC ^ (((RotL64(aScatter, 51U) + aOrbiterA) + RotL64(aOrbiterC, 43U)) + aNonceWordB);
             aWandererG = aWandererG + (((RotL64(aCross, 10U) + RotL64(aOrbiterK, 47U)) + aOrbiterC) + RotL64(aCarry, 35U));
             aWandererD = aWandererD ^ ((RotL64(aIngress, 35U) + aOrbiterK) + RotL64(aOrbiterH, 51U));
-            aWandererA = aWandererA + (((RotL64(aPrevious, 47U) + aOrbiterG) + RotL64(aOrbiterA, 60U)) + aWandererUpdateSaltD[(((31U - aIndex) + 5U)) & S_SALT1]);
+            aWandererA = aWandererA + (((RotL64(aPrevious, 47U) + aOrbiterG) + RotL64(aOrbiterA, 60U)) + aWandererUpdateSaltD[(((31U - aIndex) + 5U)) & 31]);
             aWandererH = aWandererH ^ ((RotL64(aScatter, 5U) + aOrbiterE) + RotL64(aOrbiterA, 5U));
             aWandererF = aWandererF + (((RotL64(aPrevious, 24U) + aOrbiterD) + RotL64(aOrbiterA, 27U)) + aNonceWordC);
             //
@@ -4742,26 +4742,26 @@ void TwistExpander_Antares_Arx::KDF_B_D(TwistWorkSpace *pWorkSpace,
             aScatter = (RotL64(aCarry, 50U) ^ RotL64(aPrevious, 19U)) + (RotL64(aCross, 35U) + RotL64(aIngress, 5U));
             aScatter = TwistMix64::DiffuseA(((aScatter ^ aDomainWordScatter) ^ aNonceWordM));
             //
-            aOrbiterG = ((aWandererJ + RotL64(aCross, 23U)) + 0x9C3A3F318B70320EULL) + aOrbiterAssignSaltF[((aIndex + 5U)) & S_SALT1];
+            aOrbiterG = ((aWandererJ + RotL64(aCross, 23U)) + 0x9C3A3F318B70320EULL) + aOrbiterAssignSaltF[((aIndex + 5U)) & 31];
             aOrbiterA = (aWandererG + RotL64(aScatter, 4U)) + 0xDDB7B89C6B4C2DD8ULL;
             aOrbiterH = (aWandererI + RotL64(aIngress, 53U)) + 0x7864C92F40DE1D50ULL;
             aOrbiterK = (aWandererD + RotL64(aPrevious, 27U)) + 0x8695ECB0CFE30568ULL;
             aOrbiterC = (((aWandererH + RotL64(aCross, 37U)) + RotL64(aCarry, 53U)) + 0x2DFAAC6BCC18E4C9ULL) + aNonceWordK;
             aOrbiterJ = ((aWandererC + RotL64(aScatter, 19U)) + RotL64(aCarry, 19U)) + 0x9A7B3E65EAACD80CULL;
             aOrbiterD = ((aWandererA + RotL64(aPrevious, 47U)) + 0xBB65BD11DF213214ULL) + aNonceWordP;
-            aOrbiterB = (((aWandererE + RotL64(aIngress, 13U)) + RotL64(aCarry, 35U)) + 0x196DEB668FA21B7DULL) + aOrbiterAssignSaltD[((aIndex + 17U)) & S_SALT1];
+            aOrbiterB = (((aWandererE + RotL64(aIngress, 13U)) + RotL64(aCarry, 35U)) + 0x196DEB668FA21B7DULL) + aOrbiterAssignSaltD[((aIndex + 17U)) & 31];
             aOrbiterE = ((aWandererF + RotL64(aScatter, 60U)) + 0xB0929BB856B4D5BCULL) + aNonceWordI;
             //
             aOrbiterG = (aOrbiterG + aOrbiterA) + 0x26E21C70999CDDF2ULL;
             aOrbiterH = (aOrbiterH ^ aOrbiterG) ^ 0x81159452981DC53FULL;
             aOrbiterH = RotL64((aOrbiterH * 0x926862EA1A2CC2F3ULL), 47U);
             //
-            aOrbiterA = ((aOrbiterA + aOrbiterK) + 0x9E187B0408ED382AULL) + aOrbiterUpdateSaltD[(((31U - aIndex) + 23U)) & S_SALT1];
+            aOrbiterA = ((aOrbiterA + aOrbiterK) + 0x9E187B0408ED382AULL) + aOrbiterUpdateSaltD[(((31U - aIndex) + 23U)) & 31];
             aOrbiterC = (aOrbiterC ^ aOrbiterA) ^ 0x95D4258718B34F3FULL;
             aOrbiterC = RotL64((aOrbiterC * 0xE3106B8B82D0D8A9ULL), 23U);
             //
-            aOrbiterJ = ((aOrbiterJ + aOrbiterG) + 0x92AA313194C7D561ULL) + aOrbiterUpdateSaltF[(((31U - aIndex) + 12U)) & S_SALT1];
-            aOrbiterD = ((aOrbiterD ^ aOrbiterJ) ^ 0xDB914E235CFAD597ULL) ^ aOrbiterUpdateSaltE[(((31U - aIndex) + 11U)) & S_SALT1];
+            aOrbiterJ = ((aOrbiterJ + aOrbiterG) + 0x92AA313194C7D561ULL) + aOrbiterUpdateSaltF[(((31U - aIndex) + 12U)) & 31];
+            aOrbiterD = ((aOrbiterD ^ aOrbiterJ) ^ 0xDB914E235CFAD597ULL) ^ aOrbiterUpdateSaltE[(((31U - aIndex) + 11U)) & 31];
             aOrbiterD = RotL64((aOrbiterD * 0xC1D939A057A96B3DULL), 29U);
             //
             aOrbiterC = ((aOrbiterC + aOrbiterB) + 0x8A4B4D4CC51F6BDEULL) + aNonceWordN;
@@ -4784,7 +4784,7 @@ void TwistExpander_Antares_Arx::KDF_B_D(TwistWorkSpace *pWorkSpace,
             aOrbiterK = (aOrbiterK ^ aOrbiterE) ^ 0xD34788524CB6FCDCULL;
             aOrbiterK = RotL64((aOrbiterK * 0x5ECD688532D5C3B3ULL), 53U);
             //
-            aOrbiterK = ((aOrbiterK + aOrbiterD) + 0x5723E3BAFB831D33ULL) + aOrbiterUpdateSaltC[(((31U - aIndex) + 20U)) & S_SALT1];
+            aOrbiterK = ((aOrbiterK + aOrbiterD) + 0x5723E3BAFB831D33ULL) + aOrbiterUpdateSaltC[(((31U - aIndex) + 20U)) & 31];
             aOrbiterB = (aOrbiterB ^ aOrbiterK) ^ 0xB1573128775A848DULL;
             aOrbiterB = RotL64((aOrbiterB * 0x87B4B1AA1AAC9521ULL), 35U);
             //
@@ -4798,11 +4798,11 @@ void TwistExpander_Antares_Arx::KDF_B_D(TwistWorkSpace *pWorkSpace,
             aWandererE = aWandererE + ((RotL64(aScatter, 30U) + RotL64(aOrbiterD, 39U)) + aOrbiterB);
             aWandererG = aWandererG ^ ((RotL64(aPrevious, 35U) + aOrbiterA) + RotL64(aOrbiterC, 57U));
             aWandererA = aWandererA + ((RotL64(aIngress, 47U) + RotL64(aOrbiterH, 21U)) + aOrbiterD);
-            aWandererJ = aWandererJ ^ ((((RotL64(aCross, 11U) + RotL64(aOrbiterJ, 43U)) + aOrbiterG) + aNonceWordB) + aWandererUpdateSaltB[((aIndex + 24U)) & S_SALT1]);
+            aWandererJ = aWandererJ ^ ((((RotL64(aCross, 11U) + RotL64(aOrbiterJ, 43U)) + aOrbiterG) + aNonceWordB) + aWandererUpdateSaltB[((aIndex + 24U)) & 31]);
             aWandererF = aWandererF + ((((RotL64(aIngress, 57U) + RotL64(aOrbiterA, 34U)) + aOrbiterH) + RotL64(aCarry, 3U)) + aNonceWordO);
             aWandererH = aWandererH ^ ((RotL64(aScatter, 51U) + RotL64(aOrbiterE, 27U)) + aOrbiterB);
             aWandererD = aWandererD + (((RotL64(aCross, 43U) + aOrbiterB) + RotL64(aOrbiterJ, 13U)) + RotL64(aCarry, 11U));
-            aWandererI = aWandererI ^ ((((RotL64(aPrevious, 20U) + aOrbiterH) + RotL64(aOrbiterJ, 3U)) + aNonceWordL) + aWandererUpdateSaltF[(((31U - aIndex) + 22U)) & S_SALT1]);
+            aWandererI = aWandererI ^ ((((RotL64(aPrevious, 20U) + aOrbiterH) + RotL64(aOrbiterJ, 3U)) + aNonceWordL) + aWandererUpdateSaltF[(((31U - aIndex) + 22U)) & 31]);
             aWandererC = aWandererC + (((RotL64(aIngress, 3U) + RotL64(aOrbiterK, 52U)) + aOrbiterC) + aNonceWordG);
             //
             aCarry = aCarry + (RotL64(aWandererD, 54U) ^ aWandererE);
@@ -4847,14 +4847,14 @@ void TwistExpander_Antares_Arx::KDF_B_D(TwistWorkSpace *pWorkSpace,
             aOrbiterG = (aWandererH + RotL64(aScatter, 39U)) + 0x4FAC81C68AB611F1ULL;
             aOrbiterK = ((aWandererI + RotL64(aCross, 54U)) + 0x8CFC4B68298E5730ULL) + aNonceWordF;
             aOrbiterD = ((aWandererJ + RotL64(aIngress, 19U)) + 0xCAAD819898458612ULL) + aNonceWordP;
-            aOrbiterB = (((aWandererK + RotL64(aPrevious, 43U)) + 0xCC547F2C5F8D7B87ULL) + aOrbiterAssignSaltA[((aIndex + 24U)) & S_SALT1]) + aNonceWordL;
+            aOrbiterB = (((aWandererK + RotL64(aPrevious, 43U)) + 0xCC547F2C5F8D7B87ULL) + aOrbiterAssignSaltA[((aIndex + 24U)) & 31]) + aNonceWordL;
             aOrbiterE = ((aWandererD + RotL64(aCross, 3U)) + RotL64(aCarry, 13U)) + 0x0972ECE4AA469262ULL;
-            aOrbiterF = ((aWandererF + RotL64(aIngress, 35U)) + 0x2BDC184A0ED95722ULL) + aOrbiterAssignSaltB[(((31U - aIndex) + 20U)) & S_SALT1];
+            aOrbiterF = ((aWandererF + RotL64(aIngress, 35U)) + 0x2BDC184A0ED95722ULL) + aOrbiterAssignSaltB[(((31U - aIndex) + 20U)) & 31];
             aOrbiterA = ((aWandererC + RotL64(aScatter, 23U)) + RotL64(aCarry, 57U)) + 0x827232D4E2712285ULL;
             aOrbiterH = ((aWandererE + RotL64(aPrevious, 28U)) + RotL64(aCarry, 47U)) + 0xD6949CCF317BB72BULL;
             //
             aOrbiterI = (aOrbiterI + aOrbiterG) + 0x6AFA6E27DAAC922DULL;
-            aOrbiterK = ((aOrbiterK ^ aOrbiterI) ^ 0x8C677DC92056BD14ULL) ^ aOrbiterUpdateSaltF[((aIndex + 3U)) & S_SALT1];
+            aOrbiterK = ((aOrbiterK ^ aOrbiterI) ^ 0x8C677DC92056BD14ULL) ^ aOrbiterUpdateSaltF[((aIndex + 3U)) & 31];
             aOrbiterK = RotL64((aOrbiterK * 0xF09304CED27A5471ULL), 3U);
             //
             aOrbiterD = (aOrbiterD + aOrbiterB) + 0x8DBF61A88482E750ULL;
@@ -4869,7 +4869,7 @@ void TwistExpander_Antares_Arx::KDF_B_D(TwistWorkSpace *pWorkSpace,
             aOrbiterG = ((aOrbiterG ^ aOrbiterB) ^ 0xB4B8753AF421C0E5ULL) ^ aNonceWordI;
             aOrbiterG = RotL64((aOrbiterG * 0xD77611F33A81F2EBULL), 51U);
             //
-            aOrbiterA = ((aOrbiterA + aOrbiterK) + 0xF2FE1851D2A08F24ULL) + aOrbiterUpdateSaltE[((aIndex + 7U)) & S_SALT1];
+            aOrbiterA = ((aOrbiterA + aOrbiterK) + 0xF2FE1851D2A08F24ULL) + aOrbiterUpdateSaltE[((aIndex + 7U)) & 31];
             aOrbiterE = (aOrbiterE ^ aOrbiterA) ^ 0x5C77DEC82FDF024FULL;
             aOrbiterE = RotL64((aOrbiterE * 0xBC624849E44A064DULL), 47U);
             //
@@ -4878,7 +4878,7 @@ void TwistExpander_Antares_Arx::KDF_B_D(TwistWorkSpace *pWorkSpace,
             aOrbiterB = RotL64((aOrbiterB * 0x8789FB15857EFC97ULL), 11U);
             //
             aOrbiterG = (aOrbiterG + aOrbiterA) + 0x936880CBF93AABA1ULL;
-            aOrbiterH = (((aOrbiterH ^ aOrbiterG) ^ 0x26B65CC0B51CD67EULL) ^ aOrbiterUpdateSaltD[((aIndex + 21U)) & S_SALT1]) ^ aNonceWordM;
+            aOrbiterH = (((aOrbiterH ^ aOrbiterG) ^ 0x26B65CC0B51CD67EULL) ^ aOrbiterUpdateSaltD[((aIndex + 21U)) & 31]) ^ aNonceWordM;
             aOrbiterH = RotL64((aOrbiterH * 0x9DC5E35343343AF3ULL), 35U);
             //
             aOrbiterK = (aOrbiterK + aOrbiterH) + 0x0B992B82A3DBCB3EULL;
@@ -4886,7 +4886,7 @@ void TwistExpander_Antares_Arx::KDF_B_D(TwistWorkSpace *pWorkSpace,
             aOrbiterD = RotL64((aOrbiterD * 0x620FC3C276060851ULL), 57U);
             //
             aOrbiterF = (aOrbiterF + aOrbiterI) + 0xD5C7490941F2522CULL;
-            aOrbiterA = ((aOrbiterA ^ aOrbiterF) ^ 0xC42841F3C36ED7EFULL) ^ aOrbiterUpdateSaltB[(((31U - aIndex) + 9U)) & S_SALT1];
+            aOrbiterA = ((aOrbiterA ^ aOrbiterF) ^ 0xC42841F3C36ED7EFULL) ^ aOrbiterUpdateSaltB[(((31U - aIndex) + 9U)) & 31];
             aOrbiterA = RotL64((aOrbiterA * 0x681430B55DA127C3ULL), 41U);
             //
             aIngress = aOrbiterG ^ RotL64(aOrbiterH, 57U);
@@ -4896,8 +4896,8 @@ void TwistExpander_Antares_Arx::KDF_B_D(TwistWorkSpace *pWorkSpace,
             aIngress = aIngress + RotL64(aOrbiterB, 47U);
             aIngress = TwistMix64::DiffuseB((aIngress + aScatter));
             //
-            aWandererC = aWandererC ^ (((RotL64(aScatter, 39U) + RotL64(aOrbiterF, 57U)) + aOrbiterG) + aWandererUpdateSaltA[((aIndex + 17U)) & S_SALT1]);
-            aWandererI = aWandererI + ((((RotL64(aIngress, 35U) + RotL64(aOrbiterH, 38U)) + aOrbiterE) + RotL64(aCarry, 11U)) + aWandererUpdateSaltE[((aIndex + 16U)) & S_SALT1]);
+            aWandererC = aWandererC ^ (((RotL64(aScatter, 39U) + RotL64(aOrbiterF, 57U)) + aOrbiterG) + aWandererUpdateSaltA[((aIndex + 17U)) & 31]);
+            aWandererI = aWandererI + ((((RotL64(aIngress, 35U) + RotL64(aOrbiterH, 38U)) + aOrbiterE) + RotL64(aCarry, 11U)) + aWandererUpdateSaltE[((aIndex + 16U)) & 31]);
             aWandererH = aWandererH ^ ((RotL64(aPrevious, 44U) + RotL64(aOrbiterF, 23U)) + aOrbiterB);
             aWandererF = aWandererF + ((RotL64(aCross, 27U) + RotL64(aOrbiterG, 47U)) + aOrbiterK);
             aWandererK = aWandererK ^ (((RotL64(aIngress, 3U) + RotL64(aOrbiterH, 19U)) + aOrbiterK) + aNonceWordD);
@@ -5081,16 +5081,16 @@ void TwistExpander_Antares_Arx::Seed_A(TwistWorkSpace *pWorkSpace,
             aOrbiterE = ((aWandererH + RotL64(aPrevious, 43U)) + 0xA14CE7D1101EA035ULL) + aNonceWordA;
             aOrbiterF = ((aWandererB + RotL64(aIngress, 39U)) + 0xEC1E0B6D0876EBCFULL) + aNonceWordG;
             aOrbiterD = (aWandererG + RotL64(aScatter, 29U)) + 0x620F1C26E9F73382ULL;
-            aOrbiterJ = (((aWandererD + RotL64(aIngress, 35U)) + RotL64(aCarry, 19U)) + 0xE6E422D2629BE37EULL) + aPhaseDOrbiterAssignSaltC[(((31U - aIndex) + 21U)) & S_SALT1];
+            aOrbiterJ = (((aWandererD + RotL64(aIngress, 35U)) + RotL64(aCarry, 19U)) + 0xE6E422D2629BE37EULL) + aPhaseDOrbiterAssignSaltC[(((31U - aIndex) + 21U)) & 31];
             aOrbiterK = ((aWandererE + RotL64(aPrevious, 19U)) + RotL64(aCarry, 35U)) + 0x6262066CED2D5C18ULL;
-            aOrbiterH = ((((aWandererJ + RotL64(aCross, 54U)) + RotL64(aCarry, 27U)) + 0x9307B0D9DBED48D5ULL) + aPhaseDOrbiterAssignSaltA[((aIndex + 15U)) & S_SALT1]) + aNonceWordO;
+            aOrbiterH = ((((aWandererJ + RotL64(aCross, 54U)) + RotL64(aCarry, 27U)) + 0x9307B0D9DBED48D5ULL) + aPhaseDOrbiterAssignSaltA[((aIndex + 15U)) & 31]) + aNonceWordO;
             aOrbiterI = (aWandererK + RotL64(aScatter, 47U)) + 0x0A62F1F8BDBA582FULL;
             //
             aOrbiterC = (aOrbiterC + aOrbiterB) + 0xFAB816027033F6AAULL;
             aOrbiterE = (aOrbiterE ^ aOrbiterC) ^ 0xB3E87DCBE932371AULL;
             aOrbiterE = RotL64((aOrbiterE * 0x13BD6595AA4A988BULL), 3U);
             //
-            aOrbiterF = ((aOrbiterF + aOrbiterE) + 0xE6F4F2D9D1242469ULL) + aPhaseDOrbiterUpdateSaltE[(((31U - aIndex) + 11U)) & S_SALT1];
+            aOrbiterF = ((aOrbiterF + aOrbiterE) + 0xE6F4F2D9D1242469ULL) + aPhaseDOrbiterUpdateSaltE[(((31U - aIndex) + 11U)) & 31];
             aOrbiterD = (aOrbiterD ^ aOrbiterF) ^ 0xD1EC943968C92A74ULL;
             aOrbiterD = RotL64((aOrbiterD * 0x7318A41DE6347885ULL), 39U);
             //
@@ -5099,11 +5099,11 @@ void TwistExpander_Antares_Arx::Seed_A(TwistWorkSpace *pWorkSpace,
             aOrbiterH = RotL64((aOrbiterH * 0xCEE4CCCFCEBE2EB5ULL), 27U);
             //
             aOrbiterE = (aOrbiterE + aOrbiterI) + 0xFC51B3B271112D20ULL;
-            aOrbiterJ = ((aOrbiterJ ^ aOrbiterE) ^ 0xA335B71B097415B9ULL) ^ aPhaseDOrbiterUpdateSaltC[(((31U - aIndex) + 24U)) & S_SALT1];
+            aOrbiterJ = ((aOrbiterJ ^ aOrbiterE) ^ 0xA335B71B097415B9ULL) ^ aPhaseDOrbiterUpdateSaltC[(((31U - aIndex) + 24U)) & 31];
             aOrbiterJ = RotL64((aOrbiterJ * 0x33C97C893CA41383ULL), 35U);
             //
             aOrbiterI = ((aOrbiterI + aOrbiterF) + 0x7DFA975A4F017DCFULL) + aNonceWordM;
-            aOrbiterK = ((aOrbiterK ^ aOrbiterI) ^ 0x514E35D81AD705C8ULL) ^ aPhaseDOrbiterUpdateSaltD[((aIndex + 6U)) & S_SALT1];
+            aOrbiterK = ((aOrbiterK ^ aOrbiterI) ^ 0x514E35D81AD705C8ULL) ^ aPhaseDOrbiterUpdateSaltD[((aIndex + 6U)) & 31];
             aOrbiterK = RotL64((aOrbiterK * 0xBC0460E4283ED6C3ULL), 57U);
             //
             aOrbiterD = ((aOrbiterD + aOrbiterJ) + 0x6B3C61152453CEEEULL) + aNonceWordN;
@@ -5111,7 +5111,7 @@ void TwistExpander_Antares_Arx::Seed_A(TwistWorkSpace *pWorkSpace,
             aOrbiterB = RotL64((aOrbiterB * 0x6A6E492B91781521ULL), 53U);
             //
             aOrbiterB = (aOrbiterB + aOrbiterH) + 0xA87A33E8733A767AULL;
-            aOrbiterI = ((aOrbiterI ^ aOrbiterB) ^ 0x7B631F50CD0CA38FULL) ^ aPhaseDOrbiterUpdateSaltB[((aIndex + 13U)) & S_SALT1];
+            aOrbiterI = ((aOrbiterI ^ aOrbiterB) ^ 0x7B631F50CD0CA38FULL) ^ aPhaseDOrbiterUpdateSaltB[((aIndex + 13U)) & 31];
             aOrbiterI = RotL64((aOrbiterI * 0x511E7E0FA5973053ULL), 13U);
             //
             aOrbiterK = (aOrbiterK + aOrbiterD) + 0x5C4C2E9C79B96EF6ULL;
@@ -5132,8 +5132,8 @@ void TwistExpander_Antares_Arx::Seed_A(TwistWorkSpace *pWorkSpace,
             aWandererD = aWandererD + (((RotL64(aScatter, 13U) + aOrbiterJ) + RotL64(aOrbiterK, 58U)) + RotL64(aCarry, 29U));
             aWandererK = aWandererK ^ ((RotL64(aIngress, 34U) + aOrbiterC) + RotL64(aOrbiterE, 51U));
             aWandererJ = aWandererJ + (((RotL64(aPrevious, 43U) + RotL64(aOrbiterK, 5U)) + aOrbiterI) + aNonceWordF);
-            aWandererG = aWandererG ^ (((RotL64(aCross, 23U) + aOrbiterK) + RotL64(aOrbiterD, 39U)) + aPhaseDWandererUpdateSaltF[(((31U - aIndex) + 20U)) & S_SALT1]);
-            aWandererA = aWandererA + ((((RotL64(aScatter, 19U) + RotL64(aOrbiterI, 43U)) + aOrbiterD) + aNonceWordP) + aPhaseDWandererUpdateSaltD[(((31U - aIndex) + 16U)) & S_SALT1]);
+            aWandererG = aWandererG ^ (((RotL64(aCross, 23U) + aOrbiterK) + RotL64(aOrbiterD, 39U)) + aPhaseDWandererUpdateSaltF[(((31U - aIndex) + 20U)) & 31]);
+            aWandererA = aWandererA + ((((RotL64(aScatter, 19U) + RotL64(aOrbiterI, 43U)) + aOrbiterD) + aNonceWordP) + aPhaseDWandererUpdateSaltD[(((31U - aIndex) + 16U)) & 31]);
             aWandererH = aWandererH ^ ((RotL64(aCross, 27U) + RotL64(aOrbiterH, 20U)) + aOrbiterD);
             aWandererC = aWandererC + ((((RotL64(aIngress, 3U) + RotL64(aOrbiterH, 47U)) + aOrbiterB) + RotL64(aCarry, 5U)) + aNonceWordB);
             aWandererE = aWandererE ^ ((RotL64(aPrevious, 47U) + RotL64(aOrbiterE, 35U)) + aOrbiterF);
@@ -5177,15 +5177,15 @@ void TwistExpander_Antares_Arx::Seed_A(TwistWorkSpace *pWorkSpace,
             //
             aOrbiterB = ((aWandererE + RotL64(aCross, 43U)) + RotL64(aCarry, 11U)) + 0x0C597D95ECEA5D5BULL;
             aOrbiterG = (aWandererF + RotL64(aIngress, 29U)) + 0x96B6BA8E407AAB26ULL;
-            aOrbiterK = (((aWandererJ + RotL64(aPrevious, 35U)) + RotL64(aCarry, 3U)) + 0xC04B05671DCDAB29ULL) + aPhaseFOrbiterAssignSaltC[(((31U - aIndex) + 17U)) & S_SALT1];
+            aOrbiterK = (((aWandererJ + RotL64(aPrevious, 35U)) + RotL64(aCarry, 3U)) + 0xC04B05671DCDAB29ULL) + aPhaseFOrbiterAssignSaltC[(((31U - aIndex) + 17U)) & 31];
             aOrbiterH = (aWandererG + RotL64(aScatter, 48U)) + 0xBB351FA532AA461EULL;
-            aOrbiterJ = (((aWandererC + RotL64(aIngress, 39U)) + RotL64(aCarry, 35U)) + 0x19AFDE9E21C51F53ULL) + aPhaseFOrbiterAssignSaltD[((aIndex + 12U)) & S_SALT1];
+            aOrbiterJ = (((aWandererC + RotL64(aIngress, 39U)) + RotL64(aCarry, 35U)) + 0x19AFDE9E21C51F53ULL) + aPhaseFOrbiterAssignSaltD[((aIndex + 12U)) & 31];
             aOrbiterE = ((aWandererA + RotL64(aCross, 3U)) + 0x59D186CAB4CA20CBULL) + aNonceWordH;
             aOrbiterA = (aWandererH + RotL64(aPrevious, 23U)) + 0xF3C4C8C2DD038E44ULL;
             aOrbiterD = (aWandererD + RotL64(aScatter, 54U)) + 0x422137646460975EULL;
             aOrbiterI = ((aWandererI + RotL64(aCross, 19U)) + 0x896F4D357423EB9DULL) + aNonceWordI;
             //
-            aOrbiterB = (((aOrbiterB + aOrbiterG) + 0xB11C8E7B6B62447AULL) + aPhaseFOrbiterUpdateSaltB[((aIndex + 16U)) & S_SALT1]) + aNonceWordD;
+            aOrbiterB = (((aOrbiterB + aOrbiterG) + 0xB11C8E7B6B62447AULL) + aPhaseFOrbiterUpdateSaltB[((aIndex + 16U)) & 31]) + aNonceWordD;
             aOrbiterK = (aOrbiterK ^ aOrbiterB) ^ 0x6167E1F2DBD8A86CULL;
             aOrbiterK = RotL64((aOrbiterK * 0x04BF47B149059215ULL), 41U);
             //
@@ -5194,7 +5194,7 @@ void TwistExpander_Antares_Arx::Seed_A(TwistWorkSpace *pWorkSpace,
             aOrbiterE = RotL64((aOrbiterE * 0x1E280CD4DA6C62F9ULL), 19U);
             //
             aOrbiterA = (aOrbiterA + aOrbiterK) + 0x54CB0B46FB7F4A74ULL;
-            aOrbiterJ = ((aOrbiterJ ^ aOrbiterA) ^ 0xB3EFC5ACCB602A6FULL) ^ aPhaseFOrbiterUpdateSaltA[(((31U - aIndex) + 29U)) & S_SALT1];
+            aOrbiterJ = ((aOrbiterJ ^ aOrbiterA) ^ 0xB3EFC5ACCB602A6FULL) ^ aPhaseFOrbiterUpdateSaltA[(((31U - aIndex) + 29U)) & 31];
             aOrbiterJ = RotL64((aOrbiterJ * 0x821C2ED06C9F3A1FULL), 23U);
             //
             aOrbiterJ = (aOrbiterJ + aOrbiterD) + 0x9896A3EF3813AED3ULL;
@@ -5210,14 +5210,14 @@ void TwistExpander_Antares_Arx::Seed_A(TwistWorkSpace *pWorkSpace,
             aOrbiterG = RotL64((aOrbiterG * 0xF5B98E1064DED1F3ULL), 5U);
             //
             aOrbiterG = ((aOrbiterG + aOrbiterE) + 0x701358BEC27A5EA8ULL) + aNonceWordB;
-            aOrbiterI = ((aOrbiterI ^ aOrbiterG) ^ 0x8D94FA7DC15D6F48ULL) ^ aPhaseFOrbiterUpdateSaltF[((aIndex + 20U)) & S_SALT1];
+            aOrbiterI = ((aOrbiterI ^ aOrbiterG) ^ 0x8D94FA7DC15D6F48ULL) ^ aPhaseFOrbiterUpdateSaltF[((aIndex + 20U)) & 31];
             aOrbiterI = RotL64((aOrbiterI * 0x345A589E49D103BBULL), 53U);
             //
             aOrbiterI = (aOrbiterI + aOrbiterA) + 0x73093EBD1160EE22ULL;
             aOrbiterH = (aOrbiterH ^ aOrbiterI) ^ 0x2F11551101A582CFULL;
             aOrbiterH = RotL64((aOrbiterH * 0xD3E39DA4F0941C5DULL), 47U);
             //
-            aOrbiterE = ((aOrbiterE + aOrbiterB) + 0x58151904E537D7F5ULL) + aPhaseFOrbiterUpdateSaltC[((aIndex + 18U)) & S_SALT1];
+            aOrbiterE = ((aOrbiterE + aOrbiterB) + 0x58151904E537D7F5ULL) + aPhaseFOrbiterUpdateSaltC[((aIndex + 18U)) & 31];
             aOrbiterA = ((aOrbiterA ^ aOrbiterE) ^ 0xE96E901432195BD0ULL) ^ aNonceWordE;
             aOrbiterA = RotL64((aOrbiterA * 0xE3CEF61A23ACB163ULL), 11U);
             //
@@ -5229,8 +5229,8 @@ void TwistExpander_Antares_Arx::Seed_A(TwistWorkSpace *pWorkSpace,
             aIngress = TwistMix64::DiffuseA((aIngress + aScatter));
             //
             aWandererF = aWandererF ^ ((RotL64(aIngress, 3U) + aOrbiterH) + RotL64(aOrbiterK, 14U));
-            aWandererH = aWandererH + (((RotL64(aCross, 47U) + RotL64(aOrbiterK, 37U)) + aOrbiterB) + aPhaseFWandererUpdateSaltF[(((31U - aIndex) + 27U)) & S_SALT1]);
-            aWandererJ = aWandererJ ^ ((((RotL64(aScatter, 41U) + RotL64(aOrbiterI, 29U)) + aOrbiterG) + aNonceWordN) + aPhaseFWandererUpdateSaltB[((aIndex + 19U)) & S_SALT1]);
+            aWandererH = aWandererH + (((RotL64(aCross, 47U) + RotL64(aOrbiterK, 37U)) + aOrbiterB) + aPhaseFWandererUpdateSaltF[(((31U - aIndex) + 27U)) & 31]);
+            aWandererJ = aWandererJ ^ ((((RotL64(aScatter, 41U) + RotL64(aOrbiterI, 29U)) + aOrbiterG) + aNonceWordN) + aPhaseFWandererUpdateSaltB[((aIndex + 19U)) & 31]);
             aWandererG = aWandererG + ((((RotL64(aPrevious, 14U) + RotL64(aOrbiterK, 57U)) + aOrbiterD) + RotL64(aCarry, 5U)) + aNonceWordA);
             aWandererI = aWandererI ^ (((RotL64(aIngress, 53U) + aOrbiterB) + RotL64(aOrbiterG, 41U)) + aNonceWordF);
             aWandererE = aWandererE + ((((RotL64(aCross, 57U) + RotL64(aOrbiterA, 20U)) + aOrbiterJ) + RotL64(aCarry, 47U)) + aNonceWordK);
@@ -5275,17 +5275,17 @@ void TwistExpander_Antares_Arx::Seed_A(TwistWorkSpace *pWorkSpace,
             aScatter = (RotL64(aPrevious, 44U) + RotL64(aCarry, 5U)) ^ (RotL64(aCross, 21U) ^ RotL64(aIngress, 57U));
             aScatter = TwistMix64::DiffuseC(((aScatter ^ aPhaseADomainWordScatter) ^ aNonceWordA));
             //
-            aOrbiterH = ((((aWandererE + RotL64(aScatter, 44U)) + RotL64(aCarry, 53U)) + 0xBA1932DE030219C3ULL) + aPhaseAOrbiterAssignSaltA[((aIndex + 24U)) & S_SALT1]) + aNonceWordF;
+            aOrbiterH = ((((aWandererE + RotL64(aScatter, 44U)) + RotL64(aCarry, 53U)) + 0xBA1932DE030219C3ULL) + aPhaseAOrbiterAssignSaltA[((aIndex + 24U)) & 31]) + aNonceWordF;
             aOrbiterG = ((aWandererI + RotL64(aPrevious, 57U)) + 0xD51BA4CC32933D42ULL) + aNonceWordI;
             aOrbiterB = (aWandererJ + RotL64(aCross, 53U)) + 0x98E0EF540545DD99ULL;
             aOrbiterJ = (((aWandererC + RotL64(aIngress, 13U)) + RotL64(aCarry, 13U)) + 0xE854671BA7635CEDULL) + aNonceWordO;
-            aOrbiterA = ((aWandererA + RotL64(aCross, 29U)) + 0x9508C847277A633FULL) + aPhaseAOrbiterAssignSaltE[((aIndex + 7U)) & S_SALT1];
+            aOrbiterA = ((aWandererA + RotL64(aCross, 29U)) + 0x9508C847277A633FULL) + aPhaseAOrbiterAssignSaltE[((aIndex + 7U)) & 31];
             aOrbiterC = ((aWandererG + RotL64(aPrevious, 39U)) + RotL64(aCarry, 21U)) + 0xE6CAC7CAEB09F4D4ULL;
             aOrbiterK = (aWandererK + RotL64(aIngress, 23U)) + 0x4EBE93579880DE6BULL;
             aOrbiterF = (aWandererD + RotL64(aScatter, 18U)) + 0x09EF9F2DC7B0872EULL;
             aOrbiterE = (aWandererF + RotL64(aPrevious, 3U)) + 0x5512B9A7A8A14C0AULL;
             //
-            aOrbiterH = ((aOrbiterH + aOrbiterG) + 0xA3651BBB08AF90B5ULL) + aPhaseAOrbiterUpdateSaltF[((aIndex + 29U)) & S_SALT1];
+            aOrbiterH = ((aOrbiterH + aOrbiterG) + 0xA3651BBB08AF90B5ULL) + aPhaseAOrbiterUpdateSaltF[((aIndex + 29U)) & 31];
             aOrbiterB = (aOrbiterB ^ aOrbiterH) ^ 0x77792BDFDCB45876ULL;
             aOrbiterB = RotL64((aOrbiterB * 0xAFA2AEA9B3CBF3BBULL), 57U);
             //
@@ -5305,7 +5305,7 @@ void TwistExpander_Antares_Arx::Seed_A(TwistWorkSpace *pWorkSpace,
             aOrbiterF = (aOrbiterF ^ aOrbiterB) ^ 0xAAB71772E9D613CFULL;
             aOrbiterF = RotL64((aOrbiterF * 0x7C3C510C7524C811ULL), 5U);
             //
-            aOrbiterG = (((aOrbiterG + aOrbiterC) + 0x2AF789E936E91056ULL) + aPhaseAOrbiterUpdateSaltB[(((31U - aIndex) + 21U)) & S_SALT1]) + aNonceWordD;
+            aOrbiterG = (((aOrbiterG + aOrbiterC) + 0x2AF789E936E91056ULL) + aPhaseAOrbiterUpdateSaltB[(((31U - aIndex) + 21U)) & 31]) + aNonceWordD;
             aOrbiterE = ((aOrbiterE ^ aOrbiterG) ^ 0x94C8F90B98DA8A06ULL) ^ aNonceWordE;
             aOrbiterE = RotL64((aOrbiterE * 0xB64D6A3341085903ULL), 11U);
             //
@@ -5313,11 +5313,11 @@ void TwistExpander_Antares_Arx::Seed_A(TwistWorkSpace *pWorkSpace,
             aOrbiterH = ((aOrbiterH ^ aOrbiterE) ^ 0x88FACE5BE2ACED91ULL) ^ aNonceWordN;
             aOrbiterH = RotL64((aOrbiterH * 0x29493CE525D5E159ULL), 43U);
             //
-            aOrbiterK = ((aOrbiterK + aOrbiterA) + 0xB660A03F919CB612ULL) + aPhaseAOrbiterUpdateSaltC[((aIndex + 27U)) & S_SALT1];
+            aOrbiterK = ((aOrbiterK + aOrbiterA) + 0xB660A03F919CB612ULL) + aPhaseAOrbiterUpdateSaltC[((aIndex + 27U)) & 31];
             aOrbiterG = (aOrbiterG ^ aOrbiterK) ^ 0xE53133F7ED71A141ULL;
             aOrbiterG = RotL64((aOrbiterG * 0x27B56A389D669E0BULL), 23U);
             //
-            aOrbiterF = ((aOrbiterF + aOrbiterH) + 0x846475BF517B9616ULL) + aPhaseAOrbiterUpdateSaltE[(((31U - aIndex) + 16U)) & S_SALT1];
+            aOrbiterF = ((aOrbiterF + aOrbiterH) + 0x846475BF517B9616ULL) + aPhaseAOrbiterUpdateSaltE[(((31U - aIndex) + 16U)) & 31];
             aOrbiterJ = (aOrbiterJ ^ aOrbiterF) ^ 0x5EB6611203884FEBULL;
             aOrbiterJ = RotL64((aOrbiterJ * 0xCA1FCA2D4D58B715ULL), 37U);
             //
@@ -5333,10 +5333,10 @@ void TwistExpander_Antares_Arx::Seed_A(TwistWorkSpace *pWorkSpace,
             aWandererF = aWandererF ^ (((RotL64(aScatter, 27U) + RotL64(aOrbiterJ, 43U)) + aOrbiterK) + aNonceWordB);
             aWandererG = aWandererG + ((RotL64(aCross, 19U) + RotL64(aOrbiterE, 3U)) + aOrbiterC);
             aWandererC = aWandererC ^ ((RotL64(aPrevious, 47U) + aOrbiterE) + RotL64(aOrbiterH, 13U));
-            aWandererJ = aWandererJ + (((((RotL64(aCross, 12U) + RotL64(aOrbiterG, 23U)) + aOrbiterA) + RotL64(aCarry, 11U)) + aNonceWordC) + aPhaseAWandererUpdateSaltA[((aIndex + 25U)) & S_SALT1]);
+            aWandererJ = aWandererJ + (((((RotL64(aCross, 12U) + RotL64(aOrbiterG, 23U)) + aOrbiterA) + RotL64(aCarry, 11U)) + aNonceWordC) + aPhaseAWandererUpdateSaltA[((aIndex + 25U)) & 31]);
             aWandererA = aWandererA ^ ((RotL64(aScatter, 23U) + aOrbiterB) + RotL64(aOrbiterJ, 57U));
             aWandererI = aWandererI + (((RotL64(aIngress, 57U) + aOrbiterJ) + RotL64(aOrbiterA, 53U)) + RotL64(aCarry, 19U));
-            aWandererD = aWandererD ^ (((RotL64(aScatter, 5U) + aOrbiterB) + RotL64(aOrbiterA, 48U)) + aPhaseAWandererUpdateSaltE[((aIndex + 15U)) & S_SALT1]);
+            aWandererD = aWandererD ^ (((RotL64(aScatter, 5U) + aOrbiterB) + RotL64(aOrbiterA, 48U)) + aPhaseAWandererUpdateSaltE[((aIndex + 15U)) & 31]);
             //
             aCarry = aCarry + (aWandererF ^ RotL64(aWandererJ, 42U));
             aCarry = aCarry + (RotL64(aWandererD, 37U) ^ aWandererA);
@@ -5377,18 +5377,18 @@ void TwistExpander_Antares_Arx::Seed_A(TwistWorkSpace *pWorkSpace,
             aOrbiterI = ((aWandererG + RotL64(aIngress, 53U)) + 0x902D51072FCF10EEULL) + aNonceWordF;
             aOrbiterG = (aWandererF + RotL64(aPrevious, 42U)) + 0xDD6EA76622FBAEB2ULL;
             aOrbiterE = ((aWandererH + RotL64(aCross, 11U)) + RotL64(aCarry, 29U)) + 0x946B8845AC7CEC52ULL;
-            aOrbiterD = ((aWandererD + RotL64(aScatter, 23U)) + 0x947B50FD6638B636ULL) + aPhaseCOrbiterAssignSaltF[((aIndex + 26U)) & S_SALT1];
+            aOrbiterD = ((aWandererD + RotL64(aScatter, 23U)) + 0x947B50FD6638B636ULL) + aPhaseCOrbiterAssignSaltF[((aIndex + 26U)) & 31];
             aOrbiterH = (aWandererE + RotL64(aIngress, 5U)) + 0xDE03E6137F3A4A89ULL;
             aOrbiterB = (((aWandererA + RotL64(aPrevious, 60U)) + RotL64(aCarry, 43U)) + 0x2ADCD1444922EC89ULL) + aNonceWordD;
             aOrbiterK = (aWandererC + RotL64(aCross, 27U)) + 0xFAF503480D561782ULL;
             aOrbiterF = ((aWandererB + RotL64(aScatter, 37U)) + RotL64(aCarry, 21U)) + 0xD14A4146565FD6BAULL;
-            aOrbiterJ = ((aWandererJ + RotL64(aPrevious, 19U)) + 0xBC3E85A6FA0F18A4ULL) + aPhaseCOrbiterAssignSaltA[(((31U - aIndex) + 14U)) & S_SALT1];
+            aOrbiterJ = ((aWandererJ + RotL64(aPrevious, 19U)) + 0xBC3E85A6FA0F18A4ULL) + aPhaseCOrbiterAssignSaltA[(((31U - aIndex) + 14U)) & 31];
             //
             aOrbiterI = (aOrbiterI + aOrbiterG) + 0x9BB12667C227CC68ULL;
-            aOrbiterE = ((aOrbiterE ^ aOrbiterI) ^ 0x463E613157850DDAULL) ^ aPhaseCOrbiterUpdateSaltB[((aIndex + 25U)) & S_SALT1];
+            aOrbiterE = ((aOrbiterE ^ aOrbiterI) ^ 0x463E613157850DDAULL) ^ aPhaseCOrbiterUpdateSaltB[((aIndex + 25U)) & 31];
             aOrbiterE = RotL64((aOrbiterE * 0x142B78259670CF51ULL), 35U);
             //
-            aOrbiterD = ((aOrbiterD + aOrbiterH) + 0x1A36483255E1B6A4ULL) + aPhaseCOrbiterUpdateSaltA[(((31U - aIndex) + 19U)) & S_SALT1];
+            aOrbiterD = ((aOrbiterD + aOrbiterH) + 0x1A36483255E1B6A4ULL) + aPhaseCOrbiterUpdateSaltA[(((31U - aIndex) + 19U)) & 31];
             aOrbiterI = ((aOrbiterI ^ aOrbiterD) ^ 0xEFB6CC69C731B569ULL) ^ aNonceWordM;
             aOrbiterI = RotL64((aOrbiterI * 0x49E64AC129674479ULL), 19U);
             //
@@ -5405,11 +5405,11 @@ void TwistExpander_Antares_Arx::Seed_A(TwistWorkSpace *pWorkSpace,
             aOrbiterJ = RotL64((aOrbiterJ * 0xB347C505D2EB22EFULL), 29U);
             //
             aOrbiterK = (aOrbiterK + aOrbiterE) + 0x7F52A449BB3693D2ULL;
-            aOrbiterF = ((aOrbiterF ^ aOrbiterK) ^ 0x2789F17D7939BE21ULL) ^ aPhaseCOrbiterUpdateSaltE[((aIndex + 13U)) & S_SALT1];
+            aOrbiterF = ((aOrbiterF ^ aOrbiterK) ^ 0x2789F17D7939BE21ULL) ^ aPhaseCOrbiterUpdateSaltE[((aIndex + 13U)) & 31];
             aOrbiterF = RotL64((aOrbiterF * 0xED48EBE137D68377ULL), 47U);
             //
             aOrbiterB = ((aOrbiterB + aOrbiterF) + 0x787E938FEB4B5194ULL) + aNonceWordL;
-            aOrbiterH = ((aOrbiterH ^ aOrbiterB) ^ 0x0C9052961DF0B501ULL) ^ aPhaseCOrbiterUpdateSaltD[(((31U - aIndex) + 27U)) & S_SALT1];
+            aOrbiterH = ((aOrbiterH ^ aOrbiterB) ^ 0x0C9052961DF0B501ULL) ^ aPhaseCOrbiterUpdateSaltD[(((31U - aIndex) + 27U)) & 31];
             aOrbiterH = RotL64((aOrbiterH * 0xEEBA73B1EB4FC441ULL), 51U);
             //
             aOrbiterJ = (aOrbiterJ + aOrbiterI) + 0xE112042ECCAB183DULL;
@@ -5428,13 +5428,13 @@ void TwistExpander_Antares_Arx::Seed_A(TwistWorkSpace *pWorkSpace,
             aIngress = TwistMix64::DiffuseB((aIngress + aScatter));
             //
             aWandererF = aWandererF + (((RotL64(aScatter, 23U) + aOrbiterH) + RotL64(aOrbiterF, 20U)) + RotL64(aCarry, 21U));
-            aWandererG = aWandererG ^ (((RotL64(aIngress, 14U) + aOrbiterE) + RotL64(aOrbiterD, 35U)) + aPhaseCWandererUpdateSaltC[((aIndex + 29U)) & S_SALT1]);
+            aWandererG = aWandererG ^ (((RotL64(aIngress, 14U) + aOrbiterE) + RotL64(aOrbiterD, 35U)) + aPhaseCWandererUpdateSaltC[((aIndex + 29U)) & 31]);
             aWandererB = aWandererB + ((((RotL64(aPrevious, 57U) + aOrbiterE) + RotL64(aOrbiterK, 53U)) + RotL64(aCarry, 3U)) + aNonceWordH);
             aWandererJ = aWandererJ ^ (((RotL64(aCross, 43U) + aOrbiterE) + RotL64(aOrbiterI, 39U)) + aNonceWordO);
             aWandererE = aWandererE + ((RotL64(aIngress, 53U) + aOrbiterJ) + RotL64(aOrbiterH, 29U));
             aWandererH = aWandererH ^ ((RotL64(aScatter, 5U) + aOrbiterH) + RotL64(aOrbiterI, 57U));
             aWandererA = aWandererA + ((RotL64(aPrevious, 34U) + RotL64(aOrbiterG, 4U)) + aOrbiterB);
-            aWandererD = aWandererD ^ (((RotL64(aCross, 27U) + aOrbiterB) + RotL64(aOrbiterE, 11U)) + aPhaseCWandererUpdateSaltB[((aIndex + 6U)) & S_SALT1]);
+            aWandererD = aWandererD ^ (((RotL64(aCross, 27U) + aOrbiterB) + RotL64(aOrbiterE, 11U)) + aPhaseCWandererUpdateSaltB[((aIndex + 6U)) & 31]);
             aWandererC = aWandererC + ((RotL64(aPrevious, 47U) + aOrbiterD) + RotL64(aOrbiterH, 47U));
             //
             aCarry = aCarry + (RotL64(aWandererE, 5U) ^ aWandererF);
@@ -5473,18 +5473,18 @@ void TwistExpander_Antares_Arx::Seed_A(TwistWorkSpace *pWorkSpace,
             aScatter = (RotL64(aCross, 35U) ^ RotL64(aIngress, 23U)) ^ (RotL64(aPrevious, 6U) + RotL64(aCarry, 51U));
             aScatter = TwistMix64::DiffuseC(((aScatter ^ aPhaseADomainWordScatter) ^ aNonceWordJ));
             //
-            aOrbiterG = ((aWandererB + RotL64(aIngress, 47U)) + 0x06B980F1E1CAD42BULL) + aPhaseAOrbiterAssignSaltB[(((31U - aIndex) + 17U)) & S_SALT1];
+            aOrbiterG = ((aWandererB + RotL64(aIngress, 47U)) + 0x06B980F1E1CAD42BULL) + aPhaseAOrbiterAssignSaltB[(((31U - aIndex) + 17U)) & 31];
             aOrbiterH = ((aWandererA + RotL64(aPrevious, 51U)) + RotL64(aCarry, 27U)) + 0x741370D808DD238AULL;
             aOrbiterD = ((aWandererH + RotL64(aScatter, 57U)) + 0xC51B02EB2EF0C954ULL) + aNonceWordC;
             aOrbiterA = ((aWandererK + RotL64(aCross, 24U)) + 0x4E4D87DB1F27155DULL) + aNonceWordG;
-            aOrbiterI = (((aWandererI + RotL64(aIngress, 43U)) + RotL64(aCarry, 47U)) + 0xC591E63180BF2E57ULL) + aPhaseAOrbiterAssignSaltC[((aIndex + 26U)) & S_SALT1];
+            aOrbiterI = (((aWandererI + RotL64(aIngress, 43U)) + RotL64(aCarry, 47U)) + 0xC591E63180BF2E57ULL) + aPhaseAOrbiterAssignSaltC[((aIndex + 26U)) & 31];
             aOrbiterB = ((aWandererE + RotL64(aPrevious, 13U)) + 0x8116308DD9DE231AULL) + aNonceWordP;
             aOrbiterK = ((aWandererC + RotL64(aScatter, 3U)) + RotL64(aCarry, 35U)) + 0x2653C76C72F0AF47ULL;
             aOrbiterC = (aWandererF + RotL64(aCross, 34U)) + 0xAE308AD0EDB422B2ULL;
             aOrbiterJ = ((aWandererJ + RotL64(aIngress, 19U)) + 0x11935089E4A07D69ULL) + aNonceWordO;
             //
             aOrbiterG = (aOrbiterG + aOrbiterH) + 0x82CC4BB9511F4C8DULL;
-            aOrbiterD = ((aOrbiterD ^ aOrbiterG) ^ 0xA56DE6F024DC56D6ULL) ^ aPhaseAOrbiterUpdateSaltC[((aIndex + 12U)) & S_SALT1];
+            aOrbiterD = ((aOrbiterD ^ aOrbiterG) ^ 0xA56DE6F024DC56D6ULL) ^ aPhaseAOrbiterUpdateSaltC[((aIndex + 12U)) & 31];
             aOrbiterD = RotL64((aOrbiterD * 0xE824D920A8C86859ULL), 27U);
             //
             aOrbiterA = ((aOrbiterA + aOrbiterG) + 0x5054E0CD1D74EE04ULL) + aNonceWordK;
@@ -5496,10 +5496,10 @@ void TwistExpander_Antares_Arx::Seed_A(TwistWorkSpace *pWorkSpace,
             aOrbiterA = RotL64((aOrbiterA * 0xE0465225E1E53557ULL), 53U);
             //
             aOrbiterC = (aOrbiterC + aOrbiterB) + 0xB06A6DDDDC5F15C9ULL;
-            aOrbiterH = ((aOrbiterH ^ aOrbiterC) ^ 0x4B34B2C7D676D4B1ULL) ^ aPhaseAOrbiterUpdateSaltF[((aIndex + 18U)) & S_SALT1];
+            aOrbiterH = ((aOrbiterH ^ aOrbiterC) ^ 0x4B34B2C7D676D4B1ULL) ^ aPhaseAOrbiterUpdateSaltF[((aIndex + 18U)) & 31];
             aOrbiterH = RotL64((aOrbiterH * 0x1944FDE97379A877ULL), 43U);
             //
-            aOrbiterK = ((aOrbiterK + aOrbiterC) + 0x7D1C4A27E6A36F7CULL) + aPhaseAOrbiterUpdateSaltB[(((31U - aIndex) + 29U)) & S_SALT1];
+            aOrbiterK = ((aOrbiterK + aOrbiterC) + 0x7D1C4A27E6A36F7CULL) + aPhaseAOrbiterUpdateSaltB[(((31U - aIndex) + 29U)) & 31];
             aOrbiterG = (aOrbiterG ^ aOrbiterK) ^ 0x75C8B85BEFDA5951ULL;
             aOrbiterG = RotL64((aOrbiterG * 0x1EF99FC9AAD92E25ULL), 5U);
             //
@@ -5507,7 +5507,7 @@ void TwistExpander_Antares_Arx::Seed_A(TwistWorkSpace *pWorkSpace,
             aOrbiterJ = (aOrbiterJ ^ aOrbiterH) ^ 0xA68D173E070875C9ULL;
             aOrbiterJ = RotL64((aOrbiterJ * 0x6CFC20E3566202ADULL), 23U);
             //
-            aOrbiterI = ((aOrbiterI + aOrbiterD) + 0x6654FB993AA7A241ULL) + aPhaseAOrbiterUpdateSaltD[(((31U - aIndex) + 11U)) & S_SALT1];
+            aOrbiterI = ((aOrbiterI + aOrbiterD) + 0x6654FB993AA7A241ULL) + aPhaseAOrbiterUpdateSaltD[(((31U - aIndex) + 11U)) & 31];
             aOrbiterC = (aOrbiterC ^ aOrbiterI) ^ 0xB8DF261083A4248BULL;
             aOrbiterC = RotL64((aOrbiterC * 0x2CE42D69817D0C1FULL), 19U);
             //
@@ -5527,10 +5527,10 @@ void TwistExpander_Antares_Arx::Seed_A(TwistWorkSpace *pWorkSpace,
             aIngress = TwistMix64::DiffuseC((aIngress + aScatter));
             //
             aWandererE = aWandererE + (((RotL64(aPrevious, 54U) + RotL64(aOrbiterG, 23U)) + aOrbiterH) + aNonceWordD);
-            aWandererA = aWandererA ^ (((RotL64(aCross, 23U) + aOrbiterI) + RotL64(aOrbiterK, 56U)) + aPhaseAWandererUpdateSaltC[((aIndex + 25U)) & S_SALT1]);
+            aWandererA = aWandererA ^ (((RotL64(aCross, 23U) + aOrbiterI) + RotL64(aOrbiterK, 56U)) + aPhaseAWandererUpdateSaltC[((aIndex + 25U)) & 31]);
             aWandererJ = aWandererJ + ((((RotL64(aIngress, 39U) + aOrbiterJ) + RotL64(aOrbiterD, 13U)) + RotL64(aCarry, 53U)) + aNonceWordN);
             aWandererB = aWandererB ^ ((RotL64(aScatter, 43U) + RotL64(aOrbiterJ, 5U)) + aOrbiterA);
-            aWandererC = aWandererC + ((((RotL64(aCross, 60U) + RotL64(aOrbiterI, 35U)) + aOrbiterH) + RotL64(aCarry, 3U)) + aPhaseAWandererUpdateSaltB[((aIndex + 9U)) & S_SALT1]);
+            aWandererC = aWandererC + ((((RotL64(aCross, 60U) + RotL64(aOrbiterI, 35U)) + aOrbiterH) + RotL64(aCarry, 3U)) + aPhaseAWandererUpdateSaltB[((aIndex + 9U)) & 31]);
             aWandererK = aWandererK ^ ((RotL64(aPrevious, 27U) + RotL64(aOrbiterB, 39U)) + aOrbiterG);
             aWandererF = aWandererF + ((RotL64(aScatter, 47U) + RotL64(aOrbiterD, 60U)) + aOrbiterC);
             aWandererH = aWandererH ^ ((RotL64(aIngress, 35U) + RotL64(aOrbiterC, 27U)) + aOrbiterB);
@@ -5576,29 +5576,29 @@ void TwistExpander_Antares_Arx::Seed_A(TwistWorkSpace *pWorkSpace,
             aOrbiterF = (aWandererK + RotL64(aCross, 20U)) + 0x40BBF22E2E78355AULL;
             aOrbiterH = (aWandererF + RotL64(aPrevious, 3U)) + 0xA28E67DADBA4B511ULL;
             aOrbiterD = (aWandererD + RotL64(aIngress, 51U)) + 0xE85ED40C8B528B2DULL;
-            aOrbiterE = (((aWandererA + RotL64(aScatter, 37U)) + RotL64(aCarry, 41U)) + 0x2C112653BBC9DDEFULL) + aPhaseCOrbiterAssignSaltC[(((31U - aIndex) + 23U)) & S_SALT1];
-            aOrbiterC = ((aWandererI + RotL64(aPrevious, 11U)) + 0xC353DEE1C7DD1DEBULL) + aPhaseCOrbiterAssignSaltF[((aIndex + 8U)) & S_SALT1];
+            aOrbiterE = (((aWandererA + RotL64(aScatter, 37U)) + RotL64(aCarry, 41U)) + 0x2C112653BBC9DDEFULL) + aPhaseCOrbiterAssignSaltC[(((31U - aIndex) + 23U)) & 31];
+            aOrbiterC = ((aWandererI + RotL64(aPrevious, 11U)) + 0xC353DEE1C7DD1DEBULL) + aPhaseCOrbiterAssignSaltF[((aIndex + 8U)) & 31];
             aOrbiterB = ((aWandererB + RotL64(aIngress, 41U)) + RotL64(aCarry, 29U)) + 0xDF957EF1D0648573ULL;
             aOrbiterG = (((aWandererE + RotL64(aCross, 47U)) + RotL64(aCarry, 5U)) + 0xD3C055A5E284C59EULL) + aNonceWordJ;
             aOrbiterJ = ((aWandererH + RotL64(aIngress, 24U)) + 0x0725C8DE36364999ULL) + aNonceWordH;
             //
-            aOrbiterK = ((aOrbiterK + aOrbiterF) + 0xC4F7A1F77A6A1D9DULL) + aPhaseCOrbiterUpdateSaltD[(((31U - aIndex) + 11U)) & S_SALT1];
+            aOrbiterK = ((aOrbiterK + aOrbiterF) + 0xC4F7A1F77A6A1D9DULL) + aPhaseCOrbiterUpdateSaltD[(((31U - aIndex) + 11U)) & 31];
             aOrbiterH = (aOrbiterH ^ aOrbiterK) ^ 0x681ED45A74C1929CULL;
             aOrbiterH = RotL64((aOrbiterH * 0xE135685FC4EC689BULL), 53U);
             //
             aOrbiterF = (aOrbiterF + aOrbiterD) + 0x3D830E857154BA9DULL;
-            aOrbiterE = ((aOrbiterE ^ aOrbiterF) ^ 0x989B67AB0CB5CB99ULL) ^ aPhaseCOrbiterUpdateSaltE[(((31U - aIndex) + 25U)) & S_SALT1];
+            aOrbiterE = ((aOrbiterE ^ aOrbiterF) ^ 0x989B67AB0CB5CB99ULL) ^ aPhaseCOrbiterUpdateSaltE[(((31U - aIndex) + 25U)) & 31];
             aOrbiterE = RotL64((aOrbiterE * 0x1E4EC0F86C2A6EA3ULL), 29U);
             //
             aOrbiterC = (aOrbiterC + aOrbiterH) + 0x4278499B5841A87AULL;
-            aOrbiterB = ((aOrbiterB ^ aOrbiterC) ^ 0x0A6B7AA7A3A95DD7ULL) ^ aPhaseCOrbiterUpdateSaltF[((aIndex + 5U)) & S_SALT1];
+            aOrbiterB = ((aOrbiterB ^ aOrbiterC) ^ 0x0A6B7AA7A3A95DD7ULL) ^ aPhaseCOrbiterUpdateSaltF[((aIndex + 5U)) & 31];
             aOrbiterB = RotL64((aOrbiterB * 0xF1D3B04EE6A5AE53ULL), 19U);
             //
             aOrbiterB = ((aOrbiterB + aOrbiterG) + 0x227EFB388749571DULL) + aNonceWordM;
             aOrbiterK = (aOrbiterK ^ aOrbiterB) ^ 0x6CB5E89A98BDCAEBULL;
             aOrbiterK = RotL64((aOrbiterK * 0x3CDA15845BC38C5DULL), 39U);
             //
-            aOrbiterJ = ((aOrbiterJ + aOrbiterB) + 0x24C719980ADC47EAULL) + aPhaseCOrbiterUpdateSaltC[((aIndex + 24U)) & S_SALT1];
+            aOrbiterJ = ((aOrbiterJ + aOrbiterB) + 0x24C719980ADC47EAULL) + aPhaseCOrbiterUpdateSaltC[((aIndex + 24U)) & 31];
             aOrbiterD = (aOrbiterD ^ aOrbiterJ) ^ 0xC8DB7E59741E8925ULL;
             aOrbiterD = RotL64((aOrbiterD * 0x450C544967A95B8DULL), 13U);
             //
@@ -5625,7 +5625,7 @@ void TwistExpander_Antares_Arx::Seed_A(TwistWorkSpace *pWorkSpace,
             aIngress = aIngress + RotL64(aOrbiterK, 43U);
             aIngress = TwistMix64::DiffuseA((aIngress + aScatter));
             //
-            aWandererI = aWandererI ^ ((((RotL64(aPrevious, 27U) + RotL64(aOrbiterE, 35U)) + aOrbiterF) + aNonceWordP) + aPhaseCWandererUpdateSaltB[((aIndex + 26U)) & S_SALT1]);
+            aWandererI = aWandererI ^ ((((RotL64(aPrevious, 27U) + RotL64(aOrbiterE, 35U)) + aOrbiterF) + aNonceWordP) + aPhaseCWandererUpdateSaltB[((aIndex + 26U)) & 31]);
             aWandererA = aWandererA + ((((RotL64(aCross, 21U) + RotL64(aOrbiterG, 47U)) + aOrbiterF) + RotL64(aCarry, 23U)) + aNonceWordE);
             aWandererE = aWandererE ^ ((RotL64(aScatter, 52U) + RotL64(aOrbiterD, 19U)) + aOrbiterJ);
             aWandererH = aWandererH + ((RotL64(aIngress, 47U) + RotL64(aOrbiterG, 57U)) + aOrbiterH);
@@ -5633,7 +5633,7 @@ void TwistExpander_Antares_Arx::Seed_A(TwistWorkSpace *pWorkSpace,
             aWandererF = aWandererF + (((RotL64(aIngress, 37U) + aOrbiterB) + RotL64(aOrbiterC, 41U)) + RotL64(aCarry, 39U));
             aWandererD = aWandererD ^ (((RotL64(aPrevious, 58U) + aOrbiterD) + RotL64(aOrbiterB, 23U)) + aNonceWordC);
             aWandererB = aWandererB + ((RotL64(aScatter, 3U) + aOrbiterF) + RotL64(aOrbiterH, 11U));
-            aWandererG = aWandererG ^ (((RotL64(aCross, 41U) + aOrbiterF) + RotL64(aOrbiterC, 28U)) + aPhaseCWandererUpdateSaltF[(((31U - aIndex) + 7U)) & S_SALT1]);
+            aWandererG = aWandererG ^ (((RotL64(aCross, 41U) + aOrbiterF) + RotL64(aOrbiterC, 28U)) + aPhaseCWandererUpdateSaltF[(((31U - aIndex) + 7U)) & 31]);
             //
             aCarry = aCarry + (RotL64(aWandererF, 47U) ^ aWandererG);
             aCarry = aCarry + (RotL64(aWandererE, 57U) ^ aWandererB);
@@ -5813,19 +5813,19 @@ void TwistExpander_Antares_Arx::Seed_B(TwistWorkSpace *pWorkSpace,
             aScatter = (RotL64(aCarry, 37U) ^ RotL64(aPrevious, 5U)) + (RotL64(aCross, 53U) + RotL64(aIngress, 24U));
             aScatter = TwistMix64::DiffuseA(((aScatter ^ aPhaseFDomainWordScatter) ^ aNonceWordG));
             //
-            aOrbiterH = (((aWandererI + RotL64(aIngress, 57U)) + RotL64(aCarry, 41U)) + 0x9716F5025F37319BULL) + aPhaseFOrbiterAssignSaltD[((aIndex + 19U)) & S_SALT1];
+            aOrbiterH = (((aWandererI + RotL64(aIngress, 57U)) + RotL64(aCarry, 41U)) + 0x9716F5025F37319BULL) + aPhaseFOrbiterAssignSaltD[((aIndex + 19U)) & 31];
             aOrbiterC = (((aWandererD + RotL64(aPrevious, 27U)) + RotL64(aCarry, 3U)) + 0xDD4B52FC681D0457ULL) + aNonceWordF;
             aOrbiterK = (aWandererK + RotL64(aCross, 54U)) + 0x42C7DC9EBCBE763CULL;
             aOrbiterJ = (aWandererG + RotL64(aScatter, 3U)) + 0xF0501535851E95B2ULL;
             aOrbiterA = (aWandererE + RotL64(aPrevious, 11U)) + 0xEDA3B3A1EB74782EULL;
             aOrbiterI = ((aWandererF + RotL64(aScatter, 13U)) + RotL64(aCarry, 23U)) + 0x87791AA5A8B58CCDULL;
             aOrbiterE = ((aWandererJ + RotL64(aIngress, 29U)) + 0x14434B23976451E5ULL) + aNonceWordD;
-            aOrbiterG = (((aWandererH + RotL64(aCross, 35U)) + 0x99BF8B0D7417278BULL) + aPhaseFOrbiterAssignSaltA[(((31U - aIndex) + 28U)) & S_SALT1]) + aNonceWordN;
+            aOrbiterG = (((aWandererH + RotL64(aCross, 35U)) + 0x99BF8B0D7417278BULL) + aPhaseFOrbiterAssignSaltA[(((31U - aIndex) + 28U)) & 31]) + aNonceWordN;
             aOrbiterD = (aWandererC + RotL64(aScatter, 42U)) + 0x448E0CA0EFE4D874ULL;
             aOrbiterB = (aWandererB + RotL64(aPrevious, 39U)) + 0xA0752D6E47CCB1BCULL;
             aOrbiterF = ((aWandererA + RotL64(aIngress, 23U)) + 0x66BC7F1325522B22ULL) + aNonceWordO;
             //
-            aOrbiterH = ((aOrbiterH + aOrbiterC) + 0xB86984637C61F93DULL) + aPhaseFOrbiterUpdateSaltC[((aIndex + 9U)) & S_SALT1];
+            aOrbiterH = ((aOrbiterH + aOrbiterC) + 0xB86984637C61F93DULL) + aPhaseFOrbiterUpdateSaltC[((aIndex + 9U)) & 31];
             aOrbiterK = (aOrbiterK ^ aOrbiterH) ^ 0xB9E82F32D61C9272ULL;
             aOrbiterK = RotL64((aOrbiterK * 0xD3EC31C5FC664391ULL), 27U);
             //
@@ -5837,7 +5837,7 @@ void TwistExpander_Antares_Arx::Seed_B(TwistWorkSpace *pWorkSpace,
             aOrbiterG = (aOrbiterG ^ aOrbiterI) ^ 0xAF19A43DBAD64CCAULL;
             aOrbiterG = RotL64((aOrbiterG * 0x138B2ADE2E8C1561ULL), 5U);
             //
-            aOrbiterA = ((aOrbiterA + aOrbiterD) + 0x78A09F708698A823ULL) + aPhaseFOrbiterUpdateSaltB[((aIndex + 18U)) & S_SALT1];
+            aOrbiterA = ((aOrbiterA + aOrbiterD) + 0x78A09F708698A823ULL) + aPhaseFOrbiterUpdateSaltB[((aIndex + 18U)) & 31];
             aOrbiterI = (aOrbiterI ^ aOrbiterA) ^ 0xE0C4E8E3E226CDD5ULL;
             aOrbiterI = RotL64((aOrbiterI * 0x4B25870B2A788D75ULL), 19U);
             //
@@ -5854,11 +5854,11 @@ void TwistExpander_Antares_Arx::Seed_B(TwistWorkSpace *pWorkSpace,
             aOrbiterB = RotL64((aOrbiterB * 0x47902EB49CDEB1C9ULL), 39U);
             //
             aOrbiterF = (aOrbiterF + aOrbiterG) + 0xF5CE6B6DC5AE0F2EULL;
-            aOrbiterA = ((aOrbiterA ^ aOrbiterF) ^ 0x05F450909F28ACF4ULL) ^ aPhaseFOrbiterUpdateSaltE[(((31U - aIndex) + 24U)) & S_SALT1];
+            aOrbiterA = ((aOrbiterA ^ aOrbiterF) ^ 0x05F450909F28ACF4ULL) ^ aPhaseFOrbiterUpdateSaltE[(((31U - aIndex) + 24U)) & 31];
             aOrbiterA = RotL64((aOrbiterA * 0x7D560EAAA7483709ULL), 29U);
             //
             aOrbiterK = (aOrbiterK + aOrbiterF) + 0x60FB61E32F9DD5DDULL;
-            aOrbiterJ = ((aOrbiterJ ^ aOrbiterK) ^ 0x4728FEBF463ECD1CULL) ^ aPhaseFOrbiterUpdateSaltD[((aIndex + 21U)) & S_SALT1];
+            aOrbiterJ = ((aOrbiterJ ^ aOrbiterK) ^ 0x4728FEBF463ECD1CULL) ^ aPhaseFOrbiterUpdateSaltD[((aIndex + 21U)) & 31];
             aOrbiterJ = RotL64((aOrbiterJ * 0xDEF1AB488A0D5D77ULL), 51U);
             //
             aOrbiterD = (aOrbiterD + aOrbiterH) + 0xEC5BA8ABDDDECA06ULL;
@@ -5880,10 +5880,10 @@ void TwistExpander_Antares_Arx::Seed_B(TwistWorkSpace *pWorkSpace,
             aWandererE = aWandererE + (((RotL64(aCross, 5U) + aOrbiterF) + RotL64(aOrbiterA, 39U)) + aNonceWordG);
             aWandererI = aWandererI ^ ((RotL64(aScatter, 21U) + RotL64(aOrbiterH, 18U)) + aOrbiterK);
             aWandererG = aWandererG + (((RotL64(aIngress, 53U) + RotL64(aOrbiterA, 35U)) + aOrbiterC) + RotL64(aCarry, 41U));
-            aWandererD = aWandererD ^ (((RotL64(aPrevious, 34U) + aOrbiterB) + RotL64(aOrbiterJ, 29U)) + aPhaseFWandererUpdateSaltA[(((31U - aIndex) + 27U)) & S_SALT1]);
+            aWandererD = aWandererD ^ (((RotL64(aPrevious, 34U) + aOrbiterB) + RotL64(aOrbiterJ, 29U)) + aPhaseFWandererUpdateSaltA[(((31U - aIndex) + 27U)) & 31]);
             aWandererK = aWandererK + ((((RotL64(aCross, 3U) + RotL64(aOrbiterK, 27U)) + aOrbiterF) + RotL64(aCarry, 53U)) + aNonceWordK);
             aWandererJ = aWandererJ ^ ((RotL64(aScatter, 47U) + RotL64(aOrbiterI, 37U)) + aOrbiterE);
-            aWandererA = aWandererA + (((RotL64(aIngress, 29U) + RotL64(aOrbiterD, 3U)) + aOrbiterJ) + aPhaseFWandererUpdateSaltD[(((31U - aIndex) + 22U)) & S_SALT1]);
+            aWandererA = aWandererA + (((RotL64(aIngress, 29U) + RotL64(aOrbiterD, 3U)) + aOrbiterJ) + aPhaseFWandererUpdateSaltD[(((31U - aIndex) + 22U)) & 31]);
             aWandererB = aWandererB ^ (((RotL64(aPrevious, 11U) + RotL64(aOrbiterJ, 47U)) + aOrbiterK) + aNonceWordL);
             aWandererF = aWandererF + (((RotL64(aIngress, 38U) + aOrbiterC) + RotL64(aOrbiterH, 44U)) + aNonceWordA);
             aWandererC = aWandererC ^ ((RotL64(aScatter, 27U) + aOrbiterH) + RotL64(aOrbiterG, 11U));
@@ -5929,10 +5929,10 @@ void TwistExpander_Antares_Arx::Seed_B(TwistWorkSpace *pWorkSpace,
             //
             aOrbiterC = ((aWandererH + RotL64(aCross, 37U)) + RotL64(aCarry, 23U)) + 0x31DC9D6A91046E84ULL;
             aOrbiterK = ((aWandererA + RotL64(aScatter, 47U)) + 0x195BCB8A1E8EBCA8ULL) + aNonceWordP;
-            aOrbiterF = ((aWandererG + RotL64(aPrevious, 11U)) + 0x6256027482E83F0BULL) + aPhaseAOrbiterAssignSaltC[(((31U - aIndex) + 25U)) & S_SALT1];
+            aOrbiterF = ((aWandererG + RotL64(aPrevious, 11U)) + 0x6256027482E83F0BULL) + aPhaseAOrbiterAssignSaltC[(((31U - aIndex) + 25U)) & 31];
             aOrbiterI = (aWandererK + RotL64(aIngress, 18U)) + 0xC7B20905E853441EULL;
             aOrbiterB = (aWandererI + RotL64(aScatter, 3U)) + 0x16966CC2B019FB15ULL;
-            aOrbiterD = (((aWandererC + RotL64(aIngress, 23U)) + RotL64(aCarry, 39U)) + 0xC30BAB1290ADB7C0ULL) + aPhaseAOrbiterAssignSaltB[(((31U - aIndex) + 15U)) & S_SALT1];
+            aOrbiterD = (((aWandererC + RotL64(aIngress, 23U)) + RotL64(aCarry, 39U)) + 0xC30BAB1290ADB7C0ULL) + aPhaseAOrbiterAssignSaltB[(((31U - aIndex) + 15U)) & 31];
             aOrbiterH = (((aWandererF + RotL64(aPrevious, 41U)) + RotL64(aCarry, 57U)) + 0xD2FEF94183B77D0EULL) + aNonceWordB;
             aOrbiterA = ((aWandererD + RotL64(aCross, 13U)) + 0x35D8ABD7D2192AA2ULL) + aNonceWordI;
             aOrbiterG = (aWandererE + RotL64(aScatter, 27U)) + 0x3A7A4F088C5F3DA4ULL;
@@ -5940,7 +5940,7 @@ void TwistExpander_Antares_Arx::Seed_B(TwistWorkSpace *pWorkSpace,
             aOrbiterE = (aWandererJ + RotL64(aCross, 60U)) + 0x3EDC99FD8420FE65ULL;
             //
             aOrbiterC = (aOrbiterC + aOrbiterK) + 0xE0448D906041AD96ULL;
-            aOrbiterF = ((aOrbiterF ^ aOrbiterC) ^ 0xB74D1E6434EF022EULL) ^ aPhaseAOrbiterUpdateSaltE[(((31U - aIndex) + 3U)) & S_SALT1];
+            aOrbiterF = ((aOrbiterF ^ aOrbiterC) ^ 0xB74D1E6434EF022EULL) ^ aPhaseAOrbiterUpdateSaltE[(((31U - aIndex) + 3U)) & 31];
             aOrbiterF = RotL64((aOrbiterF * 0x73EB89ECA2C0423DULL), 21U);
             //
             aOrbiterI = (aOrbiterI + aOrbiterF) + 0xBB6C379E92218238ULL;
@@ -5952,7 +5952,7 @@ void TwistExpander_Antares_Arx::Seed_B(TwistWorkSpace *pWorkSpace,
             aOrbiterI = RotL64((aOrbiterI * 0x6CA79CCC8827BAFBULL), 43U);
             //
             aOrbiterH = (aOrbiterH + aOrbiterA) + 0x5FDC593D3F41E98AULL;
-            aOrbiterK = (((aOrbiterK ^ aOrbiterH) ^ 0xEB671A3B32C91748ULL) ^ aPhaseAOrbiterUpdateSaltB[(((31U - aIndex) + 4U)) & S_SALT1]) ^ aNonceWordH;
+            aOrbiterK = (((aOrbiterK ^ aOrbiterH) ^ 0xEB671A3B32C91748ULL) ^ aPhaseAOrbiterUpdateSaltB[(((31U - aIndex) + 4U)) & 31]) ^ aNonceWordH;
             aOrbiterK = RotL64((aOrbiterK * 0xF212E0766604891BULL), 29U);
             //
             aOrbiterA = (aOrbiterA + aOrbiterD) + 0x7B3FAC566535B163ULL;
@@ -5968,14 +5968,14 @@ void TwistExpander_Antares_Arx::Seed_B(TwistWorkSpace *pWorkSpace,
             aOrbiterC = RotL64((aOrbiterC * 0x22984799C23ABAF5ULL), 11U);
             //
             aOrbiterE = (aOrbiterE + aOrbiterB) + 0x921B8F0D0FC62BA1ULL;
-            aOrbiterD = ((aOrbiterD ^ aOrbiterE) ^ 0x8EA0ED69EC7A9648ULL) ^ aPhaseAOrbiterUpdateSaltA[((aIndex + 8U)) & S_SALT1];
+            aOrbiterD = ((aOrbiterD ^ aOrbiterE) ^ 0x8EA0ED69EC7A9648ULL) ^ aPhaseAOrbiterUpdateSaltA[((aIndex + 8U)) & 31];
             aOrbiterD = RotL64((aOrbiterD * 0xA85AD1787BB4D553ULL), 39U);
             //
             aOrbiterJ = (aOrbiterJ + aOrbiterE) + 0x261C3B4F5CA374EDULL;
             aOrbiterA = (aOrbiterA ^ aOrbiterJ) ^ 0x6531BA36A1302CDDULL;
             aOrbiterA = RotL64((aOrbiterA * 0x8D5312FAB55F223DULL), 3U);
             //
-            aOrbiterK = ((aOrbiterK + aOrbiterG) + 0x7273BE33EEB22656ULL) + aPhaseAOrbiterUpdateSaltF[(((31U - aIndex) + 29U)) & S_SALT1];
+            aOrbiterK = ((aOrbiterK + aOrbiterG) + 0x7273BE33EEB22656ULL) + aPhaseAOrbiterUpdateSaltF[(((31U - aIndex) + 29U)) & 31];
             aOrbiterJ = (aOrbiterJ ^ aOrbiterK) ^ 0xB566B15760247AE4ULL;
             aOrbiterJ = RotL64((aOrbiterJ * 0x951308A41EDF099FULL), 47U);
             //
@@ -5993,9 +5993,9 @@ void TwistExpander_Antares_Arx::Seed_B(TwistWorkSpace *pWorkSpace,
             //
             aWandererE = aWandererE ^ ((RotL64(aCross, 48U) + aOrbiterE) + RotL64(aOrbiterD, 5U));
             aWandererA = aWandererA + ((((RotL64(aPrevious, 5U) + aOrbiterI) + RotL64(aOrbiterE, 50U)) + RotL64(aCarry, 47U)) + aNonceWordG);
-            aWandererI = aWandererI ^ (((RotL64(aIngress, 11U) + RotL64(aOrbiterE, 53U)) + aOrbiterH) + aPhaseAWandererUpdateSaltD[((aIndex + 10U)) & S_SALT1]);
+            aWandererI = aWandererI ^ (((RotL64(aIngress, 11U) + RotL64(aOrbiterE, 53U)) + aOrbiterH) + aPhaseAWandererUpdateSaltD[((aIndex + 10U)) & 31]);
             aWandererC = aWandererC + ((RotL64(aScatter, 3U) + RotL64(aOrbiterA, 57U)) + aOrbiterJ);
-            aWandererJ = aWandererJ ^ ((((RotL64(aIngress, 41U) + aOrbiterC) + RotL64(aOrbiterD, 47U)) + aNonceWordA) + aPhaseAWandererUpdateSaltE[(((31U - aIndex) + 17U)) & S_SALT1]);
+            aWandererJ = aWandererJ ^ ((((RotL64(aIngress, 41U) + aOrbiterC) + RotL64(aOrbiterD, 47U)) + aNonceWordA) + aPhaseAWandererUpdateSaltE[(((31U - aIndex) + 17U)) & 31]);
             aWandererK = aWandererK + (((RotL64(aCross, 21U) + aOrbiterB) + RotL64(aOrbiterC, 3U)) + aNonceWordC);
             aWandererD = aWandererD ^ ((RotL64(aScatter, 53U) + aOrbiterK) + RotL64(aOrbiterC, 21U));
             aWandererF = aWandererF + (((RotL64(aPrevious, 27U) + aOrbiterF) + RotL64(aOrbiterB, 13U)) + aNonceWordO);
@@ -6041,7 +6041,7 @@ void TwistExpander_Antares_Arx::Seed_B(TwistWorkSpace *pWorkSpace,
             aScatter = (RotL64(aIngress, 35U) ^ RotL64(aCarry, 52U)) + (RotL64(aCross, 5U) + RotL64(aPrevious, 19U));
             aScatter = TwistMix64::DiffuseC(((aScatter ^ aPhaseADomainWordScatter) ^ aNonceWordP));
             //
-            aOrbiterA = (((aWandererA + RotL64(aPrevious, 50U)) + 0x22452351E021456EULL) + aPhaseAOrbiterAssignSaltF[(((31U - aIndex) + 19U)) & S_SALT1]) + aNonceWordF;
+            aOrbiterA = (((aWandererA + RotL64(aPrevious, 50U)) + 0x22452351E021456EULL) + aPhaseAOrbiterAssignSaltF[(((31U - aIndex) + 19U)) & 31]) + aNonceWordF;
             aOrbiterJ = ((aWandererB + RotL64(aIngress, 21U)) + RotL64(aCarry, 21U)) + 0x29D570E454FB9BCFULL;
             aOrbiterK = (aWandererE + RotL64(aScatter, 35U)) + 0xB6F10159AED7CAD4ULL;
             aOrbiterG = (aWandererJ + RotL64(aCross, 23U)) + 0x117DD9B582A05FD2ULL;
@@ -6049,7 +6049,7 @@ void TwistExpander_Antares_Arx::Seed_B(TwistWorkSpace *pWorkSpace,
             aOrbiterH = (((aWandererH + RotL64(aPrevious, 11U)) + RotL64(aCarry, 47U)) + 0x0A8CF20F7790B06DULL) + aNonceWordH;
             aOrbiterF = (aWandererF + RotL64(aCross, 43U)) + 0x8B69F2DA721FAAE5ULL;
             aOrbiterC = ((aWandererI + RotL64(aScatter, 19U)) + RotL64(aCarry, 35U)) + 0x3AE5CE44B25FDADBULL;
-            aOrbiterE = (((aWandererC + RotL64(aPrevious, 13U)) + 0x199505EC580B54F9ULL) + aPhaseAOrbiterAssignSaltE[(((31U - aIndex) + 26U)) & S_SALT1]) + aNonceWordE;
+            aOrbiterE = (((aWandererC + RotL64(aPrevious, 13U)) + 0x199505EC580B54F9ULL) + aPhaseAOrbiterAssignSaltE[(((31U - aIndex) + 26U)) & 31]) + aNonceWordE;
             aOrbiterD = (aWandererG + RotL64(aIngress, 47U)) + 0x838C19C3DE80D61FULL;
             aOrbiterB = ((aWandererD + RotL64(aCross, 60U)) + 0xE1CAC3E1BD7196CEULL) + aNonceWordN;
             //
@@ -6057,12 +6057,12 @@ void TwistExpander_Antares_Arx::Seed_B(TwistWorkSpace *pWorkSpace,
             aOrbiterK = (aOrbiterK ^ aOrbiterA) ^ 0xF50365C26BCBDBEAULL;
             aOrbiterK = RotL64((aOrbiterK * 0x9714BA353850294BULL), 3U);
             //
-            aOrbiterJ = ((aOrbiterJ + aOrbiterG) + 0x2456416355A539D4ULL) + aPhaseAOrbiterUpdateSaltC[((aIndex + 16U)) & S_SALT1];
+            aOrbiterJ = ((aOrbiterJ + aOrbiterG) + 0x2456416355A539D4ULL) + aPhaseAOrbiterUpdateSaltC[((aIndex + 16U)) & 31];
             aOrbiterI = (aOrbiterI ^ aOrbiterJ) ^ 0xABAF8AB20D3F7EF3ULL;
             aOrbiterI = RotL64((aOrbiterI * 0x94DF72BACC2746C5ULL), 23U);
             //
             aOrbiterH = (aOrbiterH + aOrbiterF) + 0x423D32C37C7C6F7BULL;
-            aOrbiterA = ((aOrbiterA ^ aOrbiterH) ^ 0xE306D0E6B0526E12ULL) ^ aPhaseAOrbiterUpdateSaltB[(((31U - aIndex) + 10U)) & S_SALT1];
+            aOrbiterA = ((aOrbiterA ^ aOrbiterH) ^ 0xE306D0E6B0526E12ULL) ^ aPhaseAOrbiterUpdateSaltB[(((31U - aIndex) + 10U)) & 31];
             aOrbiterA = RotL64((aOrbiterA * 0x4439CB1CD67CA2D5ULL), 51U);
             //
             aOrbiterC = ((aOrbiterC + aOrbiterA) + 0xDC61DC4E1112C321ULL) + aNonceWordJ;
@@ -6077,7 +6077,7 @@ void TwistExpander_Antares_Arx::Seed_B(TwistWorkSpace *pWorkSpace,
             aOrbiterD = (aOrbiterD ^ aOrbiterG) ^ 0x6A72AB169577838AULL;
             aOrbiterD = RotL64((aOrbiterD * 0x7532B160E98FBA07ULL), 35U);
             //
-            aOrbiterB = (((aOrbiterB + aOrbiterH) + 0xC96D6D464B9A9A16ULL) + aPhaseAOrbiterUpdateSaltD[(((31U - aIndex) + 27U)) & S_SALT1]) + aNonceWordD;
+            aOrbiterB = (((aOrbiterB + aOrbiterH) + 0xC96D6D464B9A9A16ULL) + aPhaseAOrbiterUpdateSaltD[(((31U - aIndex) + 27U)) & 31]) + aNonceWordD;
             aOrbiterC = ((aOrbiterC ^ aOrbiterB) ^ 0x8B9799B837408A16ULL) ^ aNonceWordA;
             aOrbiterC = RotL64((aOrbiterC * 0xFA9C6E83F58F0815ULL), 47U);
             //
@@ -6086,7 +6086,7 @@ void TwistExpander_Antares_Arx::Seed_B(TwistWorkSpace *pWorkSpace,
             aOrbiterF = RotL64((aOrbiterF * 0xA505C3A7E4BCC05FULL), 11U);
             //
             aOrbiterE = (aOrbiterE + aOrbiterK) + 0xBCEBA041A2057B58ULL;
-            aOrbiterG = ((aOrbiterG ^ aOrbiterE) ^ 0xCC8F8A5E07DFD243ULL) ^ aPhaseAOrbiterUpdateSaltE[((aIndex + 7U)) & S_SALT1];
+            aOrbiterG = ((aOrbiterG ^ aOrbiterE) ^ 0xCC8F8A5E07DFD243ULL) ^ aPhaseAOrbiterUpdateSaltE[((aIndex + 7U)) & 31];
             aOrbiterG = RotL64((aOrbiterG * 0x10E32626F3E53E59ULL), 41U);
             //
             aOrbiterK = (aOrbiterK + aOrbiterI) + 0x504C15956289590DULL;
@@ -6108,10 +6108,10 @@ void TwistExpander_Antares_Arx::Seed_B(TwistWorkSpace *pWorkSpace,
             aWandererB = aWandererB ^ ((RotL64(aCross, 43U) + aOrbiterJ) + RotL64(aOrbiterC, 23U));
             aWandererD = aWandererD + ((RotL64(aPrevious, 29U) + aOrbiterF) + RotL64(aOrbiterE, 41U));
             aWandererG = aWandererG ^ ((RotL64(aScatter, 36U) + RotL64(aOrbiterA, 46U)) + aOrbiterJ);
-            aWandererJ = aWandererJ + (((RotL64(aIngress, 23U) + RotL64(aOrbiterC, 27U)) + aOrbiterI) + aPhaseAWandererUpdateSaltF[(((31U - aIndex) + 11U)) & S_SALT1]);
+            aWandererJ = aWandererJ + (((RotL64(aIngress, 23U) + RotL64(aOrbiterC, 27U)) + aOrbiterI) + aPhaseAWandererUpdateSaltF[(((31U - aIndex) + 11U)) & 31]);
             aWandererI = aWandererI ^ ((RotL64(aCross, 53U) + RotL64(aOrbiterH, 19U)) + aOrbiterI);
             aWandererH = aWandererH + (((RotL64(aIngress, 27U) + aOrbiterF) + RotL64(aOrbiterG, 51U)) + RotL64(aCarry, 23U));
-            aWandererA = aWandererA ^ (((RotL64(aPrevious, 57U) + aOrbiterK) + RotL64(aOrbiterB, 43U)) + aPhaseAWandererUpdateSaltD[((aIndex + 9U)) & S_SALT1]);
+            aWandererA = aWandererA ^ (((RotL64(aPrevious, 57U) + aOrbiterK) + RotL64(aOrbiterB, 43U)) + aPhaseAWandererUpdateSaltD[((aIndex + 9U)) & 31]);
             aWandererE = aWandererE + ((((RotL64(aScatter, 5U) + aOrbiterA) + RotL64(aOrbiterK, 37U)) + RotL64(aCarry, 43U)) + aNonceWordB);
             aWandererK = aWandererK ^ (((RotL64(aPrevious, 13U) + RotL64(aOrbiterC, 21U)) + aOrbiterA) + aNonceWordK);
             aWandererC = aWandererC + ((RotL64(aScatter, 38U) + aOrbiterC) + RotL64(aOrbiterD, 6U));
@@ -6163,8 +6163,8 @@ void TwistExpander_Antares_Arx::Seed_B(TwistWorkSpace *pWorkSpace,
             aOrbiterA = ((aWandererC + RotL64(aScatter, 41U)) + 0x6EA3022E52B53929ULL) + aNonceWordB;
             aOrbiterF = (aWandererK + RotL64(aIngress, 11U)) + 0x9E0710C8C3B3460AULL;
             aOrbiterE = (((aWandererE + RotL64(aPrevious, 53U)) + RotL64(aCarry, 37U)) + 0xD1D922BB70934F5DULL) + aNonceWordN;
-            aOrbiterJ = (((aWandererD + RotL64(aScatter, 35U)) + RotL64(aCarry, 5U)) + 0xB64BCBD96BB8B642ULL) + aPhaseCOrbiterAssignSaltE[((aIndex + 15U)) & S_SALT1];
-            aOrbiterG = ((aWandererI + RotL64(aIngress, 51U)) + 0x26BA537EB35076B0ULL) + aPhaseCOrbiterAssignSaltC[(((31U - aIndex) + 13U)) & S_SALT1];
+            aOrbiterJ = (((aWandererD + RotL64(aScatter, 35U)) + RotL64(aCarry, 5U)) + 0xB64BCBD96BB8B642ULL) + aPhaseCOrbiterAssignSaltE[((aIndex + 15U)) & 31];
+            aOrbiterG = ((aWandererI + RotL64(aIngress, 51U)) + 0x26BA537EB35076B0ULL) + aPhaseCOrbiterAssignSaltC[(((31U - aIndex) + 13U)) & 31];
             aOrbiterD = (aWandererB + RotL64(aCross, 58U)) + 0x24202A214E190BA9ULL;
             //
             aOrbiterI = (aOrbiterI + aOrbiterC) + 0x7E19FA3493644970ULL;
@@ -6179,8 +6179,8 @@ void TwistExpander_Antares_Arx::Seed_B(TwistWorkSpace *pWorkSpace,
             aOrbiterC = (aOrbiterC ^ aOrbiterA) ^ 0xE46311C21694C40AULL;
             aOrbiterC = RotL64((aOrbiterC * 0x3F7EDDE984474AB7ULL), 19U);
             //
-            aOrbiterF = ((aOrbiterF + aOrbiterI) + 0xB9E0E7CD98413F07ULL) + aPhaseCOrbiterUpdateSaltD[((aIndex + 29U)) & S_SALT1];
-            aOrbiterH = ((aOrbiterH ^ aOrbiterF) ^ 0x545E072D2B499CECULL) ^ aPhaseCOrbiterUpdateSaltE[((aIndex + 16U)) & S_SALT1];
+            aOrbiterF = ((aOrbiterF + aOrbiterI) + 0xB9E0E7CD98413F07ULL) + aPhaseCOrbiterUpdateSaltD[((aIndex + 29U)) & 31];
+            aOrbiterH = ((aOrbiterH ^ aOrbiterF) ^ 0x545E072D2B499CECULL) ^ aPhaseCOrbiterUpdateSaltE[((aIndex + 16U)) & 31];
             aOrbiterH = RotL64((aOrbiterH * 0x5231EFB0887C53DFULL), 3U);
             //
             aOrbiterB = (aOrbiterB + aOrbiterE) + 0x6B33A0CD316F8BD2ULL;
@@ -6200,10 +6200,10 @@ void TwistExpander_Antares_Arx::Seed_B(TwistWorkSpace *pWorkSpace,
             aOrbiterA = RotL64((aOrbiterA * 0xAB58A1A3634EE65DULL), 5U);
             //
             aOrbiterD = (aOrbiterD + aOrbiterA) + 0x7BB363BDCA9830CBULL;
-            aOrbiterI = (((aOrbiterI ^ aOrbiterD) ^ 0x7662F93EAA2A58BEULL) ^ aPhaseCOrbiterUpdateSaltB[(((31U - aIndex) + 7U)) & S_SALT1]) ^ aNonceWordI;
+            aOrbiterI = (((aOrbiterI ^ aOrbiterD) ^ 0x7662F93EAA2A58BEULL) ^ aPhaseCOrbiterUpdateSaltB[(((31U - aIndex) + 7U)) & 31]) ^ aNonceWordI;
             aOrbiterI = RotL64((aOrbiterI * 0x916F6758CEA07867ULL), 27U);
             //
-            aOrbiterK = ((aOrbiterK + aOrbiterJ) + 0xE8FB287DBAF3F3B2ULL) + aPhaseCOrbiterUpdateSaltF[((aIndex + 25U)) & S_SALT1];
+            aOrbiterK = ((aOrbiterK + aOrbiterJ) + 0xE8FB287DBAF3F3B2ULL) + aPhaseCOrbiterUpdateSaltF[((aIndex + 25U)) & 31];
             aOrbiterD = (aOrbiterD ^ aOrbiterK) ^ 0x9E8C0C0B83067277ULL;
             aOrbiterD = RotL64((aOrbiterD * 0x6FE6F4522A0DF57BULL), 53U);
             //
@@ -6219,9 +6219,9 @@ void TwistExpander_Antares_Arx::Seed_B(TwistWorkSpace *pWorkSpace,
             aIngress = aIngress + RotL64(aOrbiterA, 11U);
             aIngress = TwistMix64::DiffuseC((aIngress + aScatter));
             //
-            aWandererK = aWandererK ^ (((RotL64(aPrevious, 43U) + RotL64(aOrbiterF, 41U)) + aOrbiterE) + aPhaseCWandererUpdateSaltD[((aIndex + 22U)) & S_SALT1]);
+            aWandererK = aWandererK ^ (((RotL64(aPrevious, 43U) + RotL64(aOrbiterF, 41U)) + aOrbiterE) + aPhaseCWandererUpdateSaltD[((aIndex + 22U)) & 31]);
             aWandererB = aWandererB + ((RotL64(aScatter, 24U) + RotL64(aOrbiterJ, 43U)) + aOrbiterG);
-            aWandererD = aWandererD ^ (((RotL64(aIngress, 39U) + aOrbiterA) + RotL64(aOrbiterK, 19U)) + aPhaseCWandererUpdateSaltA[(((31U - aIndex) + 28U)) & S_SALT1]);
+            aWandererD = aWandererD ^ (((RotL64(aIngress, 39U) + aOrbiterA) + RotL64(aOrbiterK, 19U)) + aPhaseCWandererUpdateSaltA[(((31U - aIndex) + 28U)) & 31]);
             aWandererE = aWandererE + (((RotL64(aCross, 47U) + RotL64(aOrbiterD, 14U)) + aOrbiterA) + aNonceWordO);
             aWandererA = aWandererA ^ ((RotL64(aScatter, 37U) + RotL64(aOrbiterI, 47U)) + aOrbiterD);
             aWandererC = aWandererC + (((RotL64(aPrevious, 13U) + aOrbiterF) + RotL64(aOrbiterB, 3U)) + RotL64(aCarry, 13U));
@@ -6270,11 +6270,11 @@ void TwistExpander_Antares_Arx::Seed_B(TwistWorkSpace *pWorkSpace,
             aScatter = TwistMix64::DiffuseC(((aScatter ^ aPhaseBDomainWordScatter) ^ aNonceWordJ));
             //
             aOrbiterE = (aWandererK + RotL64(aPrevious, 37U)) + 0x88B653227545825AULL;
-            aOrbiterG = (((aWandererI + RotL64(aIngress, 35U)) + RotL64(aCarry, 27U)) + 0x24ED130222D78B67ULL) + aPhaseBOrbiterAssignSaltA[((aIndex + 16U)) & S_SALT1];
+            aOrbiterG = (((aWandererI + RotL64(aIngress, 35U)) + RotL64(aCarry, 27U)) + 0x24ED130222D78B67ULL) + aPhaseBOrbiterAssignSaltA[((aIndex + 16U)) & 31];
             aOrbiterD = (aWandererG + RotL64(aScatter, 48U)) + 0x5E454B3337570CB5ULL;
             aOrbiterC = ((aWandererF + RotL64(aCross, 41U)) + RotL64(aCarry, 41U)) + 0x5A7BA9AABF1F0F8CULL;
             aOrbiterF = ((aWandererA + RotL64(aIngress, 51U)) + 0x1B8BA6CFC295BF58ULL) + aNonceWordK;
-            aOrbiterJ = (((aWandererE + RotL64(aScatter, 23U)) + RotL64(aCarry, 5U)) + 0x21938139ABEC8512ULL) + aPhaseBOrbiterAssignSaltC[(((31U - aIndex) + 12U)) & S_SALT1];
+            aOrbiterJ = (((aWandererE + RotL64(aScatter, 23U)) + RotL64(aCarry, 5U)) + 0x21938139ABEC8512ULL) + aPhaseBOrbiterAssignSaltC[(((31U - aIndex) + 12U)) & 31];
             aOrbiterH = (aWandererC + RotL64(aPrevious, 3U)) + 0x75615B5F30DE88EBULL;
             aOrbiterA = (aWandererJ + RotL64(aCross, 39U)) + 0xD347D7C8AC87D37DULL;
             aOrbiterI = (aWandererB + RotL64(aIngress, 30U)) + 0x8A5F9E358F22EF1DULL;
@@ -6286,7 +6286,7 @@ void TwistExpander_Antares_Arx::Seed_B(TwistWorkSpace *pWorkSpace,
             aOrbiterD = RotL64((aOrbiterD * 0xDF953501834097A5ULL), 23U);
             //
             aOrbiterG = (aOrbiterG + aOrbiterC) + 0xF3C057F759DD8AE8ULL;
-            aOrbiterF = (((aOrbiterF ^ aOrbiterG) ^ 0xC63B1076DCDE4EDDULL) ^ aPhaseBOrbiterUpdateSaltB[((aIndex + 28U)) & S_SALT1]) ^ aNonceWordF;
+            aOrbiterF = (((aOrbiterF ^ aOrbiterG) ^ 0xC63B1076DCDE4EDDULL) ^ aPhaseBOrbiterUpdateSaltB[((aIndex + 28U)) & 31]) ^ aNonceWordF;
             aOrbiterF = RotL64((aOrbiterF * 0x856FA31C98B3842FULL), 35U);
             //
             aOrbiterJ = (aOrbiterJ + aOrbiterH) + 0x58F1EFAA062D171FULL;
@@ -6301,12 +6301,12 @@ void TwistExpander_Antares_Arx::Seed_B(TwistWorkSpace *pWorkSpace,
             aOrbiterE = (aOrbiterE ^ aOrbiterA) ^ 0x40CF6C7C7BEE746EULL;
             aOrbiterE = RotL64((aOrbiterE * 0x21DE159C7CA7B3A9ULL), 47U);
             //
-            aOrbiterH = ((aOrbiterH + aOrbiterB) + 0xBA91B3020AE212B6ULL) + aPhaseBOrbiterUpdateSaltE[((aIndex + 26U)) & S_SALT1];
+            aOrbiterH = ((aOrbiterH + aOrbiterB) + 0xBA91B3020AE212B6ULL) + aPhaseBOrbiterUpdateSaltE[((aIndex + 26U)) & 31];
             aOrbiterC = (aOrbiterC ^ aOrbiterH) ^ 0x9E75923D01690C98ULL;
             aOrbiterC = RotL64((aOrbiterC * 0x47E983D4FA531DE7ULL), 53U);
             //
             aOrbiterD = (aOrbiterD + aOrbiterF) + 0xED5CFD70B8262AC7ULL;
-            aOrbiterH = ((aOrbiterH ^ aOrbiterD) ^ 0x8E990143C281A7D4ULL) ^ aPhaseBOrbiterUpdateSaltC[((aIndex + 29U)) & S_SALT1];
+            aOrbiterH = ((aOrbiterH ^ aOrbiterD) ^ 0x8E990143C281A7D4ULL) ^ aPhaseBOrbiterUpdateSaltC[((aIndex + 29U)) & 31];
             aOrbiterH = RotL64((aOrbiterH * 0x2F2CD958D526DE3DULL), 27U);
             //
             aOrbiterB = (aOrbiterB + aOrbiterK) + 0xDF3D877C0EB4EAF4ULL;
@@ -6318,7 +6318,7 @@ void TwistExpander_Antares_Arx::Seed_B(TwistWorkSpace *pWorkSpace,
             aOrbiterK = RotL64((aOrbiterK * 0xA69ADA2FEAB7670DULL), 39U);
             //
             aOrbiterF = (aOrbiterF + aOrbiterI) + 0xE7662A10A6A0324AULL;
-            aOrbiterB = ((aOrbiterB ^ aOrbiterF) ^ 0xF35ACEC054753BD5ULL) ^ aPhaseBOrbiterUpdateSaltD[(((31U - aIndex) + 3U)) & S_SALT1];
+            aOrbiterB = ((aOrbiterB ^ aOrbiterF) ^ 0xF35ACEC054753BD5ULL) ^ aPhaseBOrbiterUpdateSaltD[(((31U - aIndex) + 3U)) & 31];
             aOrbiterB = RotL64((aOrbiterB * 0x28660C0714AB4D1DULL), 3U);
             //
             aOrbiterK = (aOrbiterK + aOrbiterD) + 0x0A7B246973B6AD4AULL;
@@ -6339,11 +6339,11 @@ void TwistExpander_Antares_Arx::Seed_B(TwistWorkSpace *pWorkSpace,
             aWandererE = aWandererE ^ ((RotL64(aCross, 39U) + aOrbiterE) + RotL64(aOrbiterF, 11U));
             aWandererI = aWandererI + ((RotL64(aPrevious, 35U) + aOrbiterB) + RotL64(aOrbiterE, 53U));
             aWandererH = aWandererH ^ ((RotL64(aScatter, 23U) + aOrbiterJ) + RotL64(aOrbiterH, 23U));
-            aWandererD = aWandererD + (((RotL64(aCross, 41U) + RotL64(aOrbiterJ, 36U)) + aOrbiterA) + aPhaseBWandererUpdateSaltA[(((31U - aIndex) + 6U)) & S_SALT1]);
+            aWandererD = aWandererD + (((RotL64(aCross, 41U) + RotL64(aOrbiterJ, 36U)) + aOrbiterA) + aPhaseBWandererUpdateSaltA[(((31U - aIndex) + 6U)) & 31]);
             aWandererG = aWandererG ^ ((RotL64(aIngress, 26U) + RotL64(aOrbiterI, 29U)) + aOrbiterE);
             aWandererK = aWandererK + ((RotL64(aCross, 19U) + aOrbiterC) + RotL64(aOrbiterA, 39U));
             aWandererJ = aWandererJ ^ ((RotL64(aIngress, 47U) + RotL64(aOrbiterE, 51U)) + aOrbiterG);
-            aWandererB = aWandererB + ((((RotL64(aScatter, 29U) + RotL64(aOrbiterC, 57U)) + aOrbiterD) + RotL64(aCarry, 19U)) + aPhaseBWandererUpdateSaltC[((aIndex + 25U)) & S_SALT1]);
+            aWandererB = aWandererB + ((((RotL64(aScatter, 29U) + RotL64(aOrbiterC, 57U)) + aOrbiterD) + RotL64(aCarry, 19U)) + aPhaseBWandererUpdateSaltC[((aIndex + 25U)) & 31]);
             //
             aCarry = aCarry + (RotL64(aWandererD, 19U) ^ aWandererA);
             aCarry = aCarry + (aWandererC ^ RotL64(aWandererG, 6U));
@@ -6384,18 +6384,18 @@ void TwistExpander_Antares_Arx::Seed_B(TwistWorkSpace *pWorkSpace,
             //
             aOrbiterK = ((aWandererE + RotL64(aIngress, 39U)) + RotL64(aCarry, 47U)) + 0x382B3D7C5B44E9E5ULL;
             aOrbiterC = ((aWandererK + RotL64(aPrevious, 37U)) + RotL64(aCarry, 39U)) + 0x189FAAABC2D5FD5BULL;
-            aOrbiterI = ((aWandererJ + RotL64(aCross, 21U)) + 0xC83D35ED6613E6BBULL) + aPhaseFOrbiterAssignSaltB[((aIndex + 29U)) & S_SALT1];
+            aOrbiterI = ((aWandererJ + RotL64(aCross, 21U)) + 0xC83D35ED6613E6BBULL) + aPhaseFOrbiterAssignSaltB[((aIndex + 29U)) & 31];
             aOrbiterJ = (aWandererB + RotL64(aScatter, 53U)) + 0xE61C6878F2F1A51CULL;
             aOrbiterF = ((aWandererC + RotL64(aIngress, 3U)) + 0xD118F680AB01C6FDULL) + aNonceWordK;
             aOrbiterE = (aWandererF + RotL64(aPrevious, 35U)) + 0xEB939B2EA49507A4ULL;
             aOrbiterG = (aWandererH + RotL64(aCross, 6U)) + 0x6CA5EAD564B6CDD3ULL;
             aOrbiterD = ((aWandererG + RotL64(aScatter, 27U)) + RotL64(aCarry, 3U)) + 0x3E2C4D67B01CD5EDULL;
             aOrbiterB = ((aWandererD + RotL64(aPrevious, 43U)) + 0x04DCD69E2DDF39BBULL) + aNonceWordL;
-            aOrbiterH = ((aWandererA + RotL64(aCross, 29U)) + 0x222C3E8EB323654EULL) + aPhaseFOrbiterAssignSaltF[((aIndex + 6U)) & S_SALT1];
+            aOrbiterH = ((aWandererA + RotL64(aCross, 29U)) + 0x222C3E8EB323654EULL) + aPhaseFOrbiterAssignSaltF[((aIndex + 6U)) & 31];
             aOrbiterA = (aWandererI + RotL64(aScatter, 46U)) + 0x69A599575FA0C3BBULL;
             //
-            aOrbiterK = ((aOrbiterK + aOrbiterC) + 0xEC50F58CE55466A9ULL) + aPhaseFOrbiterUpdateSaltF[(((31U - aIndex) + 25U)) & S_SALT1];
-            aOrbiterI = ((aOrbiterI ^ aOrbiterK) ^ 0x38349CB1FA088D79ULL) ^ aPhaseFOrbiterUpdateSaltB[(((31U - aIndex) + 20U)) & S_SALT1];
+            aOrbiterK = ((aOrbiterK + aOrbiterC) + 0xEC50F58CE55466A9ULL) + aPhaseFOrbiterUpdateSaltF[(((31U - aIndex) + 25U)) & 31];
+            aOrbiterI = ((aOrbiterI ^ aOrbiterK) ^ 0x38349CB1FA088D79ULL) ^ aPhaseFOrbiterUpdateSaltB[(((31U - aIndex) + 20U)) & 31];
             aOrbiterI = RotL64((aOrbiterI * 0x6E8A10E587F5205BULL), 3U);
             //
             aOrbiterJ = (aOrbiterJ + aOrbiterF) + 0x64C1A779D59683B6ULL;
@@ -6411,7 +6411,7 @@ void TwistExpander_Antares_Arx::Seed_B(TwistWorkSpace *pWorkSpace,
             aOrbiterH = RotL64((aOrbiterH * 0xC4B9E217DEE8A787ULL), 5U);
             //
             aOrbiterI = (aOrbiterI + aOrbiterE) + 0xCF23D47067C2D8EDULL;
-            aOrbiterA = ((aOrbiterA ^ aOrbiterI) ^ 0xCD224CC7B359BCFEULL) ^ aPhaseFOrbiterUpdateSaltD[((aIndex + 7U)) & S_SALT1];
+            aOrbiterA = ((aOrbiterA ^ aOrbiterI) ^ 0xCD224CC7B359BCFEULL) ^ aPhaseFOrbiterUpdateSaltD[((aIndex + 7U)) & 31];
             aOrbiterA = RotL64((aOrbiterA * 0x77675F38685B27D3ULL), 13U);
             //
             aOrbiterA = (aOrbiterA + aOrbiterD) + 0xAB40D3B476BE62A9ULL;
@@ -6423,7 +6423,7 @@ void TwistExpander_Antares_Arx::Seed_B(TwistWorkSpace *pWorkSpace,
             aOrbiterC = RotL64((aOrbiterC * 0xC896F068084B2DC1ULL), 41U);
             //
             aOrbiterH = (aOrbiterH + aOrbiterI) + 0xACE2FBB964C777CBULL;
-            aOrbiterG = ((aOrbiterG ^ aOrbiterH) ^ 0xA4DE16D8463416C5ULL) ^ aPhaseFOrbiterUpdateSaltA[(((31U - aIndex) + 26U)) & S_SALT1];
+            aOrbiterG = ((aOrbiterG ^ aOrbiterH) ^ 0xA4DE16D8463416C5ULL) ^ aPhaseFOrbiterUpdateSaltA[(((31U - aIndex) + 26U)) & 31];
             aOrbiterG = RotL64((aOrbiterG * 0x3A04D02BBA26DAA9ULL), 53U);
             //
             aOrbiterD = (aOrbiterD + aOrbiterJ) + 0xA1104E0F5BC51EB2ULL;
@@ -6452,11 +6452,11 @@ void TwistExpander_Antares_Arx::Seed_B(TwistWorkSpace *pWorkSpace,
             aWandererA = aWandererA ^ (((RotL64(aScatter, 47U) + aOrbiterI) + RotL64(aOrbiterH, 57U)) + aNonceWordG);
             aWandererB = aWandererB + ((((RotL64(aCross, 23U) + aOrbiterF) + RotL64(aOrbiterD, 38U)) + RotL64(aCarry, 37U)) + aNonceWordI);
             aWandererJ = aWandererJ ^ ((RotL64(aPrevious, 6U) + aOrbiterG) + RotL64(aOrbiterK, 23U));
-            aWandererI = aWandererI + (((RotL64(aScatter, 51U) + aOrbiterK) + RotL64(aOrbiterB, 13U)) + aPhaseFWandererUpdateSaltD[((aIndex + 28U)) & S_SALT1]);
+            aWandererI = aWandererI + (((RotL64(aScatter, 51U) + aOrbiterK) + RotL64(aOrbiterB, 13U)) + aPhaseFWandererUpdateSaltD[((aIndex + 28U)) & 31]);
             aWandererC = aWandererC ^ ((RotL64(aIngress, 35U) + RotL64(aOrbiterK, 19U)) + aOrbiterD);
             aWandererK = aWandererK + ((RotL64(aPrevious, 29U) + aOrbiterD) + RotL64(aOrbiterB, 3U));
             aWandererE = aWandererE ^ ((RotL64(aScatter, 21U) + aOrbiterJ) + RotL64(aOrbiterD, 5U));
-            aWandererG = aWandererG + (((RotL64(aIngress, 60U) + RotL64(aOrbiterC, 28U)) + aOrbiterF) + aPhaseFWandererUpdateSaltB[(((31U - aIndex) + 17U)) & S_SALT1]);
+            aWandererG = aWandererG + (((RotL64(aIngress, 60U) + RotL64(aOrbiterC, 28U)) + aOrbiterF) + aPhaseFWandererUpdateSaltB[(((31U - aIndex) + 17U)) & 31]);
             //
             aCarry = aCarry + (RotL64(aWandererB, 58U) ^ aWandererD);
             aCarry = aCarry + (aWandererE ^ RotL64(aWandererK, 51U));
@@ -6641,26 +6641,26 @@ void TwistExpander_Antares_Arx::Seed_C(TwistWorkSpace *pWorkSpace,
             aScatter = TwistMix64::DiffuseC(((aScatter ^ aPhaseEDomainWordScatter) ^ aNonceWordH));
             //
             aOrbiterK = (aWandererI + RotL64(aIngress, 27U)) + 0x7CFB5749A6C6DF36ULL;
-            aOrbiterG = ((aWandererJ + RotL64(aCross, 5U)) + 0x61913DDD4171DC32ULL) + aPhaseEOrbiterAssignSaltD[(((31U - aIndex) + 18U)) & S_SALT1];
+            aOrbiterG = ((aWandererJ + RotL64(aCross, 5U)) + 0x61913DDD4171DC32ULL) + aPhaseEOrbiterAssignSaltD[(((31U - aIndex) + 18U)) & 31];
             aOrbiterF = ((aWandererA + RotL64(aPrevious, 60U)) + 0x5B2D58D86A1C21ADULL) + aNonceWordG;
             aOrbiterH = (((aWandererD + RotL64(aScatter, 19U)) + RotL64(aCarry, 3U)) + 0x19CCA6F9A8D2042BULL) + aNonceWordB;
-            aOrbiterD = ((aWandererH + RotL64(aCross, 11U)) + 0xD15C47A70D5BEE72ULL) + aPhaseEOrbiterAssignSaltC[(((31U - aIndex) + 13U)) & S_SALT1];
+            aOrbiterD = ((aWandererH + RotL64(aCross, 11U)) + 0xD15C47A70D5BEE72ULL) + aPhaseEOrbiterAssignSaltC[(((31U - aIndex) + 13U)) & 31];
             aOrbiterC = (((aWandererC + RotL64(aIngress, 51U)) + RotL64(aCarry, 53U)) + 0x94E2C15B469DBC6BULL) + aNonceWordL;
             aOrbiterA = (((aWandererK + RotL64(aPrevious, 37U)) + RotL64(aCarry, 27U)) + 0xA77296B0409FA4DFULL) + aNonceWordF;
             //
-            aOrbiterK = (((aOrbiterK + aOrbiterG) + 0xEEC2BDDCDDD5E263ULL) + aPhaseEOrbiterUpdateSaltF[(((31U - aIndex) + 6U)) & S_SALT1]) + aNonceWordO;
+            aOrbiterK = (((aOrbiterK + aOrbiterG) + 0xEEC2BDDCDDD5E263ULL) + aPhaseEOrbiterUpdateSaltF[(((31U - aIndex) + 6U)) & 31]) + aNonceWordO;
             aOrbiterF = (aOrbiterF ^ aOrbiterK) ^ 0x2A34155D54E7B1CEULL;
             aOrbiterF = RotL64((aOrbiterF * 0xBC6339642CCC87ABULL), 13U);
             //
             aOrbiterH = (aOrbiterH + aOrbiterF) + 0x5227C49CFA7238BDULL;
-            aOrbiterD = (((aOrbiterD ^ aOrbiterH) ^ 0x8F51EAE42D67383AULL) ^ aPhaseEOrbiterUpdateSaltB[(((31U - aIndex) + 23U)) & S_SALT1]) ^ aNonceWordK;
+            aOrbiterD = (((aOrbiterD ^ aOrbiterH) ^ 0x8F51EAE42D67383AULL) ^ aPhaseEOrbiterUpdateSaltB[(((31U - aIndex) + 23U)) & 31]) ^ aNonceWordK;
             aOrbiterD = RotL64((aOrbiterD * 0xF712487317BDD2B7ULL), 53U);
             //
             aOrbiterC = (aOrbiterC + aOrbiterH) + 0x706F855F6D9D5E4FULL;
             aOrbiterG = (aOrbiterG ^ aOrbiterC) ^ 0x412826524530744EULL;
             aOrbiterG = RotL64((aOrbiterG * 0xB6E5C414CCB40AE3ULL), 37U);
             //
-            aOrbiterG = ((aOrbiterG + aOrbiterD) + 0x2A4ED7F059123ACEULL) + aPhaseEOrbiterUpdateSaltD[(((31U - aIndex) + 11U)) & S_SALT1];
+            aOrbiterG = ((aOrbiterG + aOrbiterD) + 0x2A4ED7F059123ACEULL) + aPhaseEOrbiterUpdateSaltD[(((31U - aIndex) + 11U)) & 31];
             aOrbiterA = (aOrbiterA ^ aOrbiterG) ^ 0x769BB671978E7490ULL;
             aOrbiterA = RotL64((aOrbiterA * 0xBD82D34CA539AC8FULL), 27U);
             //
@@ -6668,7 +6668,7 @@ void TwistExpander_Antares_Arx::Seed_C(TwistWorkSpace *pWorkSpace,
             aOrbiterH = (aOrbiterH ^ aOrbiterA) ^ 0xE21B9A071358F4B9ULL;
             aOrbiterH = RotL64((aOrbiterH * 0x04794F32BE8E8567ULL), 43U);
             //
-            aOrbiterF = ((aOrbiterF + aOrbiterA) + 0x38443EA1EE5CDCFEULL) + aPhaseEOrbiterUpdateSaltA[((aIndex + 25U)) & S_SALT1];
+            aOrbiterF = ((aOrbiterF + aOrbiterA) + 0x38443EA1EE5CDCFEULL) + aPhaseEOrbiterUpdateSaltA[((aIndex + 25U)) & 31];
             aOrbiterC = ((aOrbiterC ^ aOrbiterF) ^ 0xD17788AB981F3935ULL) ^ aNonceWordI;
             aOrbiterC = RotL64((aOrbiterC * 0xA3DE28CB63C3CE11ULL), 3U);
             //
@@ -6683,12 +6683,12 @@ void TwistExpander_Antares_Arx::Seed_C(TwistWorkSpace *pWorkSpace,
             aIngress = TwistMix64::DiffuseC((aIngress + aScatter));
             //
             aWandererJ = aWandererJ ^ (((RotL64(aIngress, 51U) + RotL64(aOrbiterH, 47U)) + aOrbiterD) + aNonceWordM);
-            aWandererK = aWandererK + ((((RotL64(aCross, 29U) + RotL64(aOrbiterC, 21U)) + aOrbiterG) + RotL64(aCarry, 27U)) + aPhaseEWandererUpdateSaltF[((aIndex + 29U)) & S_SALT1]);
+            aWandererK = aWandererK + ((((RotL64(aCross, 29U) + RotL64(aOrbiterC, 21U)) + aOrbiterG) + RotL64(aCarry, 27U)) + aPhaseEWandererUpdateSaltF[((aIndex + 29U)) & 31]);
             aWandererD = aWandererD ^ ((RotL64(aScatter, 13U) + RotL64(aOrbiterG, 29U)) + aOrbiterK);
             aWandererH = aWandererH + ((((RotL64(aPrevious, 19U) + aOrbiterH) + RotL64(aOrbiterF, 13U)) + RotL64(aCarry, 13U)) + aNonceWordA);
             aWandererC = aWandererC ^ ((RotL64(aCross, 37U) + aOrbiterH) + RotL64(aOrbiterG, 3U));
             aWandererA = aWandererA + (((RotL64(aPrevious, 6U) + RotL64(aOrbiterA, 38U)) + aOrbiterK) + aNonceWordH);
-            aWandererI = aWandererI ^ (((RotL64(aIngress, 57U) + RotL64(aOrbiterK, 57U)) + aOrbiterD) + aPhaseEWandererUpdateSaltB[(((31U - aIndex) + 8U)) & S_SALT1]);
+            aWandererI = aWandererI ^ (((RotL64(aIngress, 57U) + RotL64(aOrbiterK, 57U)) + aOrbiterD) + aPhaseEWandererUpdateSaltB[(((31U - aIndex) + 8U)) & 31]);
             //
             aCarry = aCarry + (RotL64(aWandererK, 53U) ^ aWandererH);
             aCarry = aCarry + (aWandererI ^ RotL64(aWandererC, 60U));
@@ -6728,14 +6728,14 @@ void TwistExpander_Antares_Arx::Seed_C(TwistWorkSpace *pWorkSpace,
             aScatter = TwistMix64::DiffuseA(((aScatter ^ aPhaseBDomainWordScatter) ^ aNonceWordL));
             //
             aOrbiterF = ((aWandererI + RotL64(aPrevious, 35U)) + 0x4B61D92AF5D6162EULL) + aNonceWordI;
-            aOrbiterJ = ((aWandererE + RotL64(aScatter, 5U)) + 0x884A513E795168ADULL) + aPhaseBOrbiterAssignSaltE[((aIndex + 16U)) & S_SALT1];
+            aOrbiterJ = ((aWandererE + RotL64(aScatter, 5U)) + 0x884A513E795168ADULL) + aPhaseBOrbiterAssignSaltE[((aIndex + 16U)) & 31];
             aOrbiterK = ((aWandererC + RotL64(aCross, 60U)) + 0x42C4A047EF333BBDULL) + aNonceWordG;
-            aOrbiterC = ((((aWandererJ + RotL64(aIngress, 11U)) + RotL64(aCarry, 5U)) + 0x8248D64E55072E7DULL) + aPhaseBOrbiterAssignSaltB[(((31U - aIndex) + 7U)) & S_SALT1]) + aNonceWordF;
+            aOrbiterC = ((((aWandererJ + RotL64(aIngress, 11U)) + RotL64(aCarry, 5U)) + 0x8248D64E55072E7DULL) + aPhaseBOrbiterAssignSaltB[(((31U - aIndex) + 7U)) & 31]) + aNonceWordF;
             aOrbiterG = ((aWandererG + RotL64(aCross, 27U)) + 0xE2FC430BE3E298ACULL) + aNonceWordP;
             aOrbiterH = ((aWandererB + RotL64(aPrevious, 51U)) + RotL64(aCarry, 39U)) + 0x231BA19BA14F7463ULL;
             aOrbiterA = ((aWandererH + RotL64(aScatter, 21U)) + RotL64(aCarry, 57U)) + 0xEC1FCEC130970DAFULL;
             //
-            aOrbiterF = ((aOrbiterF + aOrbiterJ) + 0x28434769906184E2ULL) + aPhaseBOrbiterUpdateSaltB[((aIndex + 4U)) & S_SALT1];
+            aOrbiterF = ((aOrbiterF + aOrbiterJ) + 0x28434769906184E2ULL) + aPhaseBOrbiterUpdateSaltB[((aIndex + 4U)) & 31];
             aOrbiterK = (aOrbiterK ^ aOrbiterF) ^ 0x1BB92CC99A3DB668ULL;
             aOrbiterK = RotL64((aOrbiterK * 0xD34E1018603102A3ULL), 57U);
             //
@@ -6748,15 +6748,15 @@ void TwistExpander_Antares_Arx::Seed_C(TwistWorkSpace *pWorkSpace,
             aOrbiterA = RotL64((aOrbiterA * 0x3A563DC741DBD277ULL), 21U);
             //
             aOrbiterK = (aOrbiterK + aOrbiterA) + 0xF8BB0147D56EF158ULL;
-            aOrbiterG = ((aOrbiterG ^ aOrbiterK) ^ 0xB0C2D617311E7051ULL) ^ aPhaseBOrbiterUpdateSaltA[(((31U - aIndex) + 13U)) & S_SALT1];
+            aOrbiterG = ((aOrbiterG ^ aOrbiterK) ^ 0xB0C2D617311E7051ULL) ^ aPhaseBOrbiterUpdateSaltA[(((31U - aIndex) + 13U)) & 31];
             aOrbiterG = RotL64((aOrbiterG * 0xB2EABF918C555DC9ULL), 41U);
             //
-            aOrbiterA = ((aOrbiterA + aOrbiterC) + 0x9DB8FC1775BA7771ULL) + aPhaseBOrbiterUpdateSaltF[((aIndex + 9U)) & S_SALT1];
+            aOrbiterA = ((aOrbiterA + aOrbiterC) + 0x9DB8FC1775BA7771ULL) + aPhaseBOrbiterUpdateSaltF[((aIndex + 9U)) & 31];
             aOrbiterF = (aOrbiterF ^ aOrbiterA) ^ 0xA73CE2F2D52DA486ULL;
             aOrbiterF = RotL64((aOrbiterF * 0x86866A1741555A89ULL), 5U);
             //
             aOrbiterG = ((aOrbiterG + aOrbiterF) + 0xC7AB770507DACFA2ULL) + aNonceWordJ;
-            aOrbiterH = ((aOrbiterH ^ aOrbiterG) ^ 0x967EF698162D6ACCULL) ^ aPhaseBOrbiterUpdateSaltD[((aIndex + 17U)) & S_SALT1];
+            aOrbiterH = ((aOrbiterH ^ aOrbiterG) ^ 0x967EF698162D6ACCULL) ^ aPhaseBOrbiterUpdateSaltD[((aIndex + 17U)) & 31];
             aOrbiterH = RotL64((aOrbiterH * 0x4244E0990E2E0A2DULL), 11U);
             //
             aOrbiterH = (aOrbiterH + aOrbiterK) + 0x16F2CAF32BB8EA0CULL;
@@ -6769,8 +6769,8 @@ void TwistExpander_Antares_Arx::Seed_C(TwistWorkSpace *pWorkSpace,
             aIngress = aIngress + RotL64(aOrbiterC, 5U);
             aIngress = TwistMix64::DiffuseC((aIngress + aScatter));
             //
-            aWandererC = aWandererC ^ ((((RotL64(aIngress, 57U) + aOrbiterJ) + RotL64(aOrbiterH, 13U)) + aNonceWordM) + aPhaseBWandererUpdateSaltF[(((31U - aIndex) + 23U)) & S_SALT1]);
-            aWandererH = aWandererH + ((((RotL64(aCross, 29U) + RotL64(aOrbiterC, 44U)) + aOrbiterG) + RotL64(aCarry, 27U)) + aPhaseBWandererUpdateSaltE[(((31U - aIndex) + 27U)) & S_SALT1]);
+            aWandererC = aWandererC ^ ((((RotL64(aIngress, 57U) + aOrbiterJ) + RotL64(aOrbiterH, 13U)) + aNonceWordM) + aPhaseBWandererUpdateSaltF[(((31U - aIndex) + 23U)) & 31]);
+            aWandererH = aWandererH + ((((RotL64(aCross, 29U) + RotL64(aOrbiterC, 44U)) + aOrbiterG) + RotL64(aCarry, 27U)) + aPhaseBWandererUpdateSaltE[(((31U - aIndex) + 27U)) & 31]);
             aWandererG = aWandererG ^ ((RotL64(aPrevious, 13U) + RotL64(aOrbiterH, 19U)) + aOrbiterG);
             aWandererI = aWandererI + ((((RotL64(aScatter, 23U) + aOrbiterK) + RotL64(aOrbiterG, 27U)) + RotL64(aCarry, 11U)) + aNonceWordC);
             aWandererE = aWandererE ^ ((RotL64(aPrevious, 35U) + aOrbiterC) + RotL64(aOrbiterH, 5U));
@@ -6814,27 +6814,27 @@ void TwistExpander_Antares_Arx::Seed_C(TwistWorkSpace *pWorkSpace,
             aScatter = (RotL64(aIngress, 11U) ^ RotL64(aCross, 23U)) + (RotL64(aCarry, 35U) + RotL64(aPrevious, 50U));
             aScatter = TwistMix64::DiffuseA(((aScatter ^ aPhaseEDomainWordScatter) ^ aNonceWordD));
             //
-            aOrbiterG = ((((aWandererJ + RotL64(aIngress, 5U)) + RotL64(aCarry, 19U)) + 0xACA086A036BDAE7DULL) + aPhaseEOrbiterAssignSaltC[((aIndex + 21U)) & S_SALT1]) + aNonceWordG;
+            aOrbiterG = ((((aWandererJ + RotL64(aIngress, 5U)) + RotL64(aCarry, 19U)) + 0xACA086A036BDAE7DULL) + aPhaseEOrbiterAssignSaltC[((aIndex + 21U)) & 31]) + aNonceWordG;
             aOrbiterE = (aWandererI + RotL64(aScatter, 19U)) + 0x08B7252F76C40456ULL;
             aOrbiterB = (aWandererC + RotL64(aPrevious, 27U)) + 0xA9DE4C717F0C320EULL;
             aOrbiterA = ((aWandererG + RotL64(aCross, 43U)) + RotL64(aCarry, 53U)) + 0xA8709C46299728A7ULL;
             aOrbiterK = (((aWandererF + RotL64(aScatter, 11U)) + RotL64(aCarry, 41U)) + 0x0757BB45B990E726ULL) + aNonceWordO;
-            aOrbiterF = ((aWandererA + RotL64(aPrevious, 35U)) + 0x90E464F4B1FDB59BULL) + aPhaseEOrbiterAssignSaltA[(((31U - aIndex) + 23U)) & S_SALT1];
+            aOrbiterF = ((aWandererA + RotL64(aPrevious, 35U)) + 0x90E464F4B1FDB59BULL) + aPhaseEOrbiterAssignSaltA[(((31U - aIndex) + 23U)) & 31];
             aOrbiterD = (aWandererK + RotL64(aIngress, 50U)) + 0x676073132C8A89E2ULL;
             //
             aOrbiterG = (aOrbiterG + aOrbiterE) + 0x88CEBC32990F095DULL;
             aOrbiterB = (aOrbiterB ^ aOrbiterG) ^ 0x4ACDC69ACB4C7E62ULL;
             aOrbiterB = RotL64((aOrbiterB * 0xBC988444840C0BB1ULL), 5U);
             //
-            aOrbiterE = ((aOrbiterE + aOrbiterB) + 0xCB52A33E6768D33EULL) + aPhaseEOrbiterUpdateSaltB[((aIndex + 18U)) & S_SALT1];
-            aOrbiterA = ((aOrbiterA ^ aOrbiterE) ^ 0xE79B55915F7180E5ULL) ^ aPhaseEOrbiterUpdateSaltD[(((31U - aIndex) + 3U)) & S_SALT1];
+            aOrbiterE = ((aOrbiterE + aOrbiterB) + 0xCB52A33E6768D33EULL) + aPhaseEOrbiterUpdateSaltB[((aIndex + 18U)) & 31];
+            aOrbiterA = ((aOrbiterA ^ aOrbiterE) ^ 0xE79B55915F7180E5ULL) ^ aPhaseEOrbiterUpdateSaltD[(((31U - aIndex) + 3U)) & 31];
             aOrbiterA = RotL64((aOrbiterA * 0x7A958C887E36B06DULL), 11U);
             //
             aOrbiterA = (aOrbiterA + aOrbiterK) + 0x4856AC7838255835ULL;
-            aOrbiterF = ((aOrbiterF ^ aOrbiterA) ^ 0xA7B04BD189F268C3ULL) ^ aPhaseEOrbiterUpdateSaltC[((aIndex + 15U)) & S_SALT1];
+            aOrbiterF = ((aOrbiterF ^ aOrbiterA) ^ 0xA7B04BD189F268C3ULL) ^ aPhaseEOrbiterUpdateSaltC[((aIndex + 15U)) & 31];
             aOrbiterF = RotL64((aOrbiterF * 0xD577D60947D53F93ULL), 37U);
             //
-            aOrbiterK = ((aOrbiterK + aOrbiterF) + 0xE55BBCDCEC369AC9ULL) + aPhaseEOrbiterUpdateSaltF[(((31U - aIndex) + 4U)) & S_SALT1];
+            aOrbiterK = ((aOrbiterK + aOrbiterF) + 0xE55BBCDCEC369AC9ULL) + aPhaseEOrbiterUpdateSaltF[(((31U - aIndex) + 4U)) & 31];
             aOrbiterD = ((aOrbiterD ^ aOrbiterK) ^ 0x9BA424C623563CD3ULL) ^ aNonceWordD;
             aOrbiterD = RotL64((aOrbiterD * 0xAE976FA91E26DC7DULL), 53U);
             //
@@ -6861,8 +6861,8 @@ void TwistExpander_Antares_Arx::Seed_C(TwistWorkSpace *pWorkSpace,
             aWandererF = aWandererF + (((RotL64(aScatter, 3U) + aOrbiterK) + RotL64(aOrbiterG, 47U)) + RotL64(aCarry, 57U));
             aWandererG = aWandererG ^ (((RotL64(aCross, 21U) + RotL64(aOrbiterE, 35U)) + aOrbiterA) + aNonceWordI);
             aWandererC = aWandererC + ((RotL64(aPrevious, 11U) + RotL64(aOrbiterE, 27U)) + aOrbiterG);
-            aWandererK = aWandererK ^ ((((RotL64(aCross, 44U) + aOrbiterB) + RotL64(aOrbiterK, 41U)) + aNonceWordN) + aPhaseEWandererUpdateSaltE[(((31U - aIndex) + 19U)) & S_SALT1]);
-            aWandererI = aWandererI + ((((RotL64(aIngress, 57U) + RotL64(aOrbiterE, 21U)) + aOrbiterB) + aNonceWordP) + aPhaseEWandererUpdateSaltA[((aIndex + 5U)) & S_SALT1]);
+            aWandererK = aWandererK ^ ((((RotL64(aCross, 44U) + aOrbiterB) + RotL64(aOrbiterK, 41U)) + aNonceWordN) + aPhaseEWandererUpdateSaltE[(((31U - aIndex) + 19U)) & 31]);
+            aWandererI = aWandererI + ((((RotL64(aIngress, 57U) + RotL64(aOrbiterE, 21U)) + aOrbiterB) + aNonceWordP) + aPhaseEWandererUpdateSaltA[((aIndex + 5U)) & 31]);
             //
             aCarry = aCarry + (RotL64(aWandererA, 48U) ^ aWandererJ);
             aCarry = aCarry + (RotL64(aWandererG, 29U) ^ aWandererF);
@@ -6902,22 +6902,22 @@ void TwistExpander_Antares_Arx::Seed_C(TwistWorkSpace *pWorkSpace,
             //
             aOrbiterG = ((aWandererJ + RotL64(aIngress, 11U)) + 0x52DE949916479A88ULL) + aNonceWordK;
             aOrbiterA = (((aWandererA + RotL64(aCross, 41U)) + RotL64(aCarry, 43U)) + 0xB30442D9EC17F126ULL) + aNonceWordI;
-            aOrbiterD = (((aWandererG + RotL64(aPrevious, 3U)) + RotL64(aCarry, 3U)) + 0xEC8F272E39173F22ULL) + aPhaseDOrbiterAssignSaltD[(((31U - aIndex) + 10U)) & S_SALT1];
-            aOrbiterH = ((((aWandererF + RotL64(aScatter, 29U)) + RotL64(aCarry, 21U)) + 0xC78D23058994423EULL) + aPhaseDOrbiterAssignSaltF[(((31U - aIndex) + 19U)) & S_SALT1]) + aNonceWordJ;
+            aOrbiterD = (((aWandererG + RotL64(aPrevious, 3U)) + RotL64(aCarry, 3U)) + 0xEC8F272E39173F22ULL) + aPhaseDOrbiterAssignSaltD[(((31U - aIndex) + 10U)) & 31];
+            aOrbiterH = ((((aWandererF + RotL64(aScatter, 29U)) + RotL64(aCarry, 21U)) + 0xC78D23058994423EULL) + aPhaseDOrbiterAssignSaltF[(((31U - aIndex) + 19U)) & 31]) + aNonceWordJ;
             aOrbiterE = (aWandererK + RotL64(aPrevious, 19U)) + 0x2E0483CA84CBE285ULL;
             aOrbiterC = ((aWandererI + RotL64(aScatter, 35U)) + 0x60735B80D53ADA90ULL) + aNonceWordP;
             aOrbiterK = (aWandererH + RotL64(aIngress, 60U)) + 0x46D1F8E04BE5BF79ULL;
             //
             aOrbiterG = (aOrbiterG + aOrbiterA) + 0xC52E51712E142C8CULL;
-            aOrbiterD = (((aOrbiterD ^ aOrbiterG) ^ 0xBB59EDC91132CFC2ULL) ^ aPhaseDOrbiterUpdateSaltF[(((31U - aIndex) + 18U)) & S_SALT1]) ^ aNonceWordL;
+            aOrbiterD = (((aOrbiterD ^ aOrbiterG) ^ 0xBB59EDC91132CFC2ULL) ^ aPhaseDOrbiterUpdateSaltF[(((31U - aIndex) + 18U)) & 31]) ^ aNonceWordL;
             aOrbiterD = RotL64((aOrbiterD * 0x9DBB0AE8B5654A91ULL), 35U);
             //
             aOrbiterH = (aOrbiterH + aOrbiterE) + 0xBD9F0CBC265E0B02ULL;
-            aOrbiterC = (((aOrbiterC ^ aOrbiterH) ^ 0xE0D2B90DDF1F78DDULL) ^ aPhaseDOrbiterUpdateSaltB[(((31U - aIndex) + 27U)) & S_SALT1]) ^ aNonceWordH;
+            aOrbiterC = (((aOrbiterC ^ aOrbiterH) ^ 0xE0D2B90DDF1F78DDULL) ^ aPhaseDOrbiterUpdateSaltB[(((31U - aIndex) + 27U)) & 31]) ^ aNonceWordH;
             aOrbiterC = RotL64((aOrbiterC * 0x93B6E55D22D1D6B9ULL), 5U);
             //
             aOrbiterD = (aOrbiterD + aOrbiterH) + 0xEDCF85E1F02F56E7ULL;
-            aOrbiterE = ((aOrbiterE ^ aOrbiterD) ^ 0x1DE9FD7C39B2A7F5ULL) ^ aPhaseDOrbiterUpdateSaltD[((aIndex + 29U)) & S_SALT1];
+            aOrbiterE = ((aOrbiterE ^ aOrbiterD) ^ 0x1DE9FD7C39B2A7F5ULL) ^ aPhaseDOrbiterUpdateSaltD[((aIndex + 29U)) & 31];
             aOrbiterE = RotL64((aOrbiterE * 0x24CF15856143137FULL), 47U);
             //
             aOrbiterC = (aOrbiterC + aOrbiterK) + 0xB1330FBB51B3695AULL;
@@ -6932,7 +6932,7 @@ void TwistExpander_Antares_Arx::Seed_C(TwistWorkSpace *pWorkSpace,
             aOrbiterA = (aOrbiterA ^ aOrbiterK) ^ 0xB279FB89B7DCDBA3ULL;
             aOrbiterA = RotL64((aOrbiterA * 0xD13F4BEFDE3E55EDULL), 11U);
             //
-            aOrbiterA = ((aOrbiterA + aOrbiterD) + 0xB838ECAEADA242C9ULL) + aPhaseDOrbiterUpdateSaltE[(((31U - aIndex) + 16U)) & S_SALT1];
+            aOrbiterA = ((aOrbiterA + aOrbiterD) + 0xB838ECAEADA242C9ULL) + aPhaseDOrbiterUpdateSaltE[(((31U - aIndex) + 16U)) & 31];
             aOrbiterH = (aOrbiterH ^ aOrbiterA) ^ 0x6FE1FC2614CE1B0FULL;
             aOrbiterH = RotL64((aOrbiterH * 0x0780F4C13ADD8179ULL), 53U);
             //
@@ -6943,9 +6943,9 @@ void TwistExpander_Antares_Arx::Seed_C(TwistWorkSpace *pWorkSpace,
             aIngress = TwistMix64::DiffuseB((aIngress + aScatter));
             //
             aWandererI = aWandererI ^ (((RotL64(aPrevious, 57U) + RotL64(aOrbiterH, 57U)) + aOrbiterD) + aNonceWordE);
-            aWandererA = aWandererA + ((((RotL64(aIngress, 29U) + aOrbiterG) + RotL64(aOrbiterK, 19U)) + RotL64(aCarry, 29U)) + aPhaseDWandererUpdateSaltE[((aIndex + 20U)) & S_SALT1]);
+            aWandererA = aWandererA + ((((RotL64(aIngress, 29U) + aOrbiterG) + RotL64(aOrbiterK, 19U)) + RotL64(aCarry, 29U)) + aPhaseDWandererUpdateSaltE[((aIndex + 20U)) & 31]);
             aWandererJ = aWandererJ ^ ((RotL64(aCross, 42U) + RotL64(aOrbiterE, 47U)) + aOrbiterC);
-            aWandererG = aWandererG + (((((RotL64(aScatter, 5U) + RotL64(aOrbiterE, 41U)) + aOrbiterD) + RotL64(aCarry, 11U)) + aNonceWordM) + aPhaseDWandererUpdateSaltD[((aIndex + 13U)) & S_SALT1]);
+            aWandererG = aWandererG + (((((RotL64(aScatter, 5U) + RotL64(aOrbiterE, 41U)) + aOrbiterD) + RotL64(aCarry, 11U)) + aNonceWordM) + aPhaseDWandererUpdateSaltD[((aIndex + 13U)) & 31]);
             aWandererH = aWandererH ^ (((RotL64(aCross, 13U) + RotL64(aOrbiterA, 13U)) + aOrbiterK) + aNonceWordN);
             aWandererK = aWandererK + (((RotL64(aPrevious, 51U) + RotL64(aOrbiterH, 26U)) + aOrbiterA) + aNonceWordB);
             aWandererF = aWandererF ^ ((RotL64(aScatter, 19U) + RotL64(aOrbiterC, 3U)) + aOrbiterH);
@@ -6991,26 +6991,26 @@ void TwistExpander_Antares_Arx::Seed_C(TwistWorkSpace *pWorkSpace,
             aOrbiterE = ((aWandererA + RotL64(aIngress, 53U)) + RotL64(aCarry, 51U)) + 0x96B4920D30E810B3ULL;
             aOrbiterG = ((aWandererE + RotL64(aCross, 21U)) + 0x3F24E5BC9B1F06CEULL) + aNonceWordJ;
             aOrbiterB = ((aWandererK + RotL64(aPrevious, 60U)) + RotL64(aCarry, 37U)) + 0x1E32F579B61CEFEFULL;
-            aOrbiterI = (((aWandererG + RotL64(aScatter, 47U)) + 0x6CAB5F62A6BC1F1EULL) + aPhaseBOrbiterAssignSaltD[(((31U - aIndex) + 12U)) & S_SALT1]) + aNonceWordP;
-            aOrbiterC = (((aWandererD + RotL64(aCross, 3U)) + RotL64(aCarry, 11U)) + 0x6D942B6CFDF4144FULL) + aPhaseBOrbiterAssignSaltF[(((31U - aIndex) + 16U)) & S_SALT1];
+            aOrbiterI = (((aWandererG + RotL64(aScatter, 47U)) + 0x6CAB5F62A6BC1F1EULL) + aPhaseBOrbiterAssignSaltD[(((31U - aIndex) + 12U)) & 31]) + aNonceWordP;
+            aOrbiterC = (((aWandererD + RotL64(aCross, 3U)) + RotL64(aCarry, 11U)) + 0x6D942B6CFDF4144FULL) + aPhaseBOrbiterAssignSaltF[(((31U - aIndex) + 16U)) & 31];
             //
             aOrbiterD = (aOrbiterD + aOrbiterK) + 0xD11017ECE398498AULL;
             aOrbiterE = (aOrbiterE ^ aOrbiterD) ^ 0x2129A0A5B942722EULL;
             aOrbiterE = RotL64((aOrbiterE * 0x226FB3BE9F39DB59ULL), 27U);
             //
             aOrbiterE = (aOrbiterE + aOrbiterG) + 0x29D6484F9B239D79ULL;
-            aOrbiterB = (((aOrbiterB ^ aOrbiterE) ^ 0xE66311487F4C98EDULL) ^ aPhaseBOrbiterUpdateSaltF[(((31U - aIndex) + 19U)) & S_SALT1]) ^ aNonceWordM;
+            aOrbiterB = (((aOrbiterB ^ aOrbiterE) ^ 0xE66311487F4C98EDULL) ^ aPhaseBOrbiterUpdateSaltF[(((31U - aIndex) + 19U)) & 31]) ^ aNonceWordM;
             aOrbiterB = RotL64((aOrbiterB * 0x54084BEA5C92DB3DULL), 21U);
             //
             aOrbiterI = (aOrbiterI + aOrbiterB) + 0x923A6D0273D3D1AAULL;
-            aOrbiterK = ((aOrbiterK ^ aOrbiterI) ^ 0x1995C44DAEAC695DULL) ^ aPhaseBOrbiterUpdateSaltB[(((31U - aIndex) + 23U)) & S_SALT1];
+            aOrbiterK = ((aOrbiterK ^ aOrbiterI) ^ 0x1995C44DAEAC695DULL) ^ aPhaseBOrbiterUpdateSaltB[(((31U - aIndex) + 23U)) & 31];
             aOrbiterK = RotL64((aOrbiterK * 0xAB2648BA5114E3C9ULL), 13U);
             //
             aOrbiterC = (aOrbiterC + aOrbiterE) + 0xBCCA851CBA42650AULL;
             aOrbiterI = (aOrbiterI ^ aOrbiterC) ^ 0x6365DD740F7141A6ULL;
             aOrbiterI = RotL64((aOrbiterI * 0xBB35609230C0E527ULL), 43U);
             //
-            aOrbiterK = (((aOrbiterK + aOrbiterC) + 0xDFC982240C43B14AULL) + aPhaseBOrbiterUpdateSaltC[(((31U - aIndex) + 9U)) & S_SALT1]) + aNonceWordD;
+            aOrbiterK = (((aOrbiterK + aOrbiterC) + 0xDFC982240C43B14AULL) + aPhaseBOrbiterUpdateSaltC[(((31U - aIndex) + 9U)) & 31]) + aNonceWordD;
             aOrbiterG = (aOrbiterG ^ aOrbiterK) ^ 0x1AF2B251998D2B26ULL;
             aOrbiterG = RotL64((aOrbiterG * 0xFA40F8B642CB0B13ULL), 37U);
             //
@@ -7019,7 +7019,7 @@ void TwistExpander_Antares_Arx::Seed_C(TwistWorkSpace *pWorkSpace,
             aOrbiterD = RotL64((aOrbiterD * 0xE7542293087A1821ULL), 53U);
             //
             aOrbiterB = ((aOrbiterB + aOrbiterD) + 0x570628DFBB86B152ULL) + aNonceWordC;
-            aOrbiterC = ((aOrbiterC ^ aOrbiterB) ^ 0x60F3BEC2C1107D86ULL) ^ aPhaseBOrbiterUpdateSaltA[(((31U - aIndex) + 22U)) & S_SALT1];
+            aOrbiterC = ((aOrbiterC ^ aOrbiterB) ^ 0x60F3BEC2C1107D86ULL) ^ aPhaseBOrbiterUpdateSaltA[(((31U - aIndex) + 22U)) & 31];
             aOrbiterC = RotL64((aOrbiterC * 0xBC0F9A289379D42DULL), 5U);
             //
             aIngress = RotL64(aOrbiterG, 5U) ^ aOrbiterI;
@@ -7031,10 +7031,10 @@ void TwistExpander_Antares_Arx::Seed_C(TwistWorkSpace *pWorkSpace,
             aWandererE = aWandererE ^ ((RotL64(aIngress, 51U) + RotL64(aOrbiterK, 51U)) + aOrbiterD);
             aWandererC = aWandererC + (((RotL64(aScatter, 5U) + RotL64(aOrbiterI, 28U)) + aOrbiterB) + RotL64(aCarry, 21U));
             aWandererD = aWandererD ^ (((RotL64(aPrevious, 21U) + aOrbiterG) + RotL64(aOrbiterE, 35U)) + aNonceWordH);
-            aWandererG = aWandererG + ((((RotL64(aCross, 60U) + RotL64(aOrbiterK, 19U)) + aOrbiterI) + RotL64(aCarry, 5U)) + aPhaseBWandererUpdateSaltD[(((31U - aIndex) + 6U)) & S_SALT1]);
+            aWandererG = aWandererG + ((((RotL64(aCross, 60U) + RotL64(aOrbiterK, 19U)) + aOrbiterI) + RotL64(aCarry, 5U)) + aPhaseBWandererUpdateSaltD[(((31U - aIndex) + 6U)) & 31]);
             aWandererB = aWandererB ^ (((RotL64(aPrevious, 43U) + aOrbiterB) + RotL64(aOrbiterE, 43U)) + aNonceWordK);
             aWandererA = aWandererA + ((RotL64(aCross, 13U) + RotL64(aOrbiterE, 57U)) + aOrbiterC);
-            aWandererK = aWandererK ^ (((RotL64(aScatter, 35U) + aOrbiterC) + RotL64(aOrbiterB, 13U)) + aPhaseBWandererUpdateSaltE[((aIndex + 15U)) & S_SALT1]);
+            aWandererK = aWandererK ^ (((RotL64(aScatter, 35U) + aOrbiterC) + RotL64(aOrbiterB, 13U)) + aPhaseBWandererUpdateSaltE[((aIndex + 15U)) & 31]);
             //
             aCarry = aCarry + (aWandererC ^ RotL64(aWandererD, 58U));
             aCarry = aCarry + (RotL64(aWandererA, 35U) ^ aWandererE);
@@ -7073,10 +7073,10 @@ void TwistExpander_Antares_Arx::Seed_C(TwistWorkSpace *pWorkSpace,
             aScatter = TwistMix64::DiffuseA(((aScatter ^ aPhaseCDomainWordScatter) ^ aNonceWordI));
             //
             aOrbiterH = ((aWandererG + RotL64(aIngress, 30U)) + RotL64(aCarry, 5U)) + 0x6ADDC8ACC52F84E7ULL;
-            aOrbiterG = (((aWandererH + RotL64(aScatter, 47U)) + RotL64(aCarry, 21U)) + 0x98781EE41C0B5782ULL) + aPhaseCOrbiterAssignSaltC[(((31U - aIndex) + 21U)) & S_SALT1];
+            aOrbiterG = (((aWandererH + RotL64(aScatter, 47U)) + RotL64(aCarry, 21U)) + 0x98781EE41C0B5782ULL) + aPhaseCOrbiterAssignSaltC[(((31U - aIndex) + 21U)) & 31];
             aOrbiterI = (aWandererE + RotL64(aCross, 13U)) + 0xE4E389AB6386BEFDULL;
             aOrbiterA = ((aWandererJ + RotL64(aPrevious, 57U)) + 0x961AB08BFA8F23BDULL) + aNonceWordL;
-            aOrbiterE = ((aWandererF + RotL64(aScatter, 21U)) + 0xBCCE13F8220DA3E0ULL) + aPhaseCOrbiterAssignSaltF[(((31U - aIndex) + 14U)) & S_SALT1];
+            aOrbiterE = ((aWandererF + RotL64(aScatter, 21U)) + 0xBCCE13F8220DA3E0ULL) + aPhaseCOrbiterAssignSaltF[(((31U - aIndex) + 14U)) & 31];
             aOrbiterC = (aWandererD + RotL64(aIngress, 3U)) + 0x28971D06208815DDULL;
             aOrbiterB = (((aWandererC + RotL64(aCross, 39U)) + RotL64(aCarry, 41U)) + 0x60B6947DD3BDDDBFULL) + aNonceWordG;
             //
@@ -7084,11 +7084,11 @@ void TwistExpander_Antares_Arx::Seed_C(TwistWorkSpace *pWorkSpace,
             aOrbiterI = (aOrbiterI ^ aOrbiterH) ^ 0xCB026F06C8910904ULL;
             aOrbiterI = RotL64((aOrbiterI * 0xDADFB6D139DB4431ULL), 39U);
             //
-            aOrbiterI = ((aOrbiterI + aOrbiterA) + 0x31BC2C5A3B7D6BCDULL) + aPhaseCOrbiterUpdateSaltA[((aIndex + 20U)) & S_SALT1];
+            aOrbiterI = ((aOrbiterI + aOrbiterA) + 0x31BC2C5A3B7D6BCDULL) + aPhaseCOrbiterUpdateSaltA[((aIndex + 20U)) & 31];
             aOrbiterE = (aOrbiterE ^ aOrbiterI) ^ 0x1E5B4A5EF206BE34ULL;
             aOrbiterE = RotL64((aOrbiterE * 0x76919C5C8D7794C7ULL), 57U);
             //
-            aOrbiterE = ((aOrbiterE + aOrbiterC) + 0xF3E53D1567332E91ULL) + aPhaseCOrbiterUpdateSaltD[((aIndex + 4U)) & S_SALT1];
+            aOrbiterE = ((aOrbiterE + aOrbiterC) + 0xF3E53D1567332E91ULL) + aPhaseCOrbiterUpdateSaltD[((aIndex + 4U)) & 31];
             aOrbiterG = (aOrbiterG ^ aOrbiterE) ^ 0xA83924061870C688ULL;
             aOrbiterG = RotL64((aOrbiterG * 0xAD9AD8752F542FBDULL), 23U);
             //
@@ -7100,8 +7100,8 @@ void TwistExpander_Antares_Arx::Seed_C(TwistWorkSpace *pWorkSpace,
             aOrbiterH = (aOrbiterH ^ aOrbiterB) ^ 0xCD102EC9D62A978CULL;
             aOrbiterH = RotL64((aOrbiterH * 0x2B8ECA38BEF2E1BDULL), 51U);
             //
-            aOrbiterC = (((aOrbiterC + aOrbiterI) + 0x689510B7C30E2CD5ULL) + aPhaseCOrbiterUpdateSaltF[((aIndex + 16U)) & S_SALT1]) + aNonceWordM;
-            aOrbiterB = (((aOrbiterB ^ aOrbiterC) ^ 0x32192E411219B278ULL) ^ aPhaseCOrbiterUpdateSaltB[((aIndex + 5U)) & S_SALT1]) ^ aNonceWordC;
+            aOrbiterC = (((aOrbiterC + aOrbiterI) + 0x689510B7C30E2CD5ULL) + aPhaseCOrbiterUpdateSaltF[((aIndex + 16U)) & 31]) + aNonceWordM;
+            aOrbiterB = (((aOrbiterB ^ aOrbiterC) ^ 0x32192E411219B278ULL) ^ aPhaseCOrbiterUpdateSaltB[((aIndex + 5U)) & 31]) ^ aNonceWordC;
             aOrbiterB = RotL64((aOrbiterB * 0x9C96CDDB61B78F43ULL), 3U);
             //
             aOrbiterG = (aOrbiterG + aOrbiterB) + 0x1999B50E8B464933ULL;
@@ -7115,8 +7115,8 @@ void TwistExpander_Antares_Arx::Seed_C(TwistWorkSpace *pWorkSpace,
             aIngress = TwistMix64::DiffuseB((aIngress + aScatter));
             //
             aWandererC = aWandererC ^ ((RotL64(aIngress, 37U) + RotL64(aOrbiterI, 44U)) + aOrbiterA);
-            aWandererE = aWandererE + (((((RotL64(aCross, 19U) + RotL64(aOrbiterB, 51U)) + aOrbiterG) + RotL64(aCarry, 19U)) + aNonceWordI) + aPhaseCWandererUpdateSaltC[(((31U - aIndex) + 3U)) & S_SALT1]);
-            aWandererF = aWandererF ^ ((((RotL64(aPrevious, 51U) + aOrbiterB) + RotL64(aOrbiterH, 37U)) + aNonceWordD) + aPhaseCWandererUpdateSaltD[(((31U - aIndex) + 23U)) & S_SALT1]);
+            aWandererE = aWandererE + (((((RotL64(aCross, 19U) + RotL64(aOrbiterB, 51U)) + aOrbiterG) + RotL64(aCarry, 19U)) + aNonceWordI) + aPhaseCWandererUpdateSaltC[(((31U - aIndex) + 3U)) & 31]);
+            aWandererF = aWandererF ^ ((((RotL64(aPrevious, 51U) + aOrbiterB) + RotL64(aOrbiterH, 37U)) + aNonceWordD) + aPhaseCWandererUpdateSaltD[(((31U - aIndex) + 23U)) & 31]);
             aWandererD = aWandererD + ((((RotL64(aScatter, 11U) + RotL64(aOrbiterH, 57U)) + aOrbiterA) + RotL64(aCarry, 39U)) + aNonceWordO);
             aWandererJ = aWandererJ ^ (((RotL64(aPrevious, 29U) + RotL64(aOrbiterC, 21U)) + aOrbiterI) + aNonceWordJ);
             aWandererH = aWandererH + ((RotL64(aCross, 43U) + aOrbiterI) + RotL64(aOrbiterH, 3U));
@@ -7306,15 +7306,15 @@ void TwistExpander_Antares_Arx::Seed_D(TwistWorkSpace *pWorkSpace,
             aOrbiterH = ((aWandererG + RotL64(aScatter, 37U)) + RotL64(aCarry, 47U)) + 0x28D68CC9996D34F4ULL;
             aOrbiterA = ((aWandererD + RotL64(aIngress, 39U)) + RotL64(aCarry, 35U)) + 0x80D07893891016E3ULL;
             aOrbiterJ = (aWandererB + RotL64(aCross, 3U)) + 0x01AA8B308982A435ULL;
-            aOrbiterI = (((aWandererK + RotL64(aPrevious, 6U)) + 0xD68C56899FD701B1ULL) + aPhaseFOrbiterAssignSaltB[(((31U - aIndex) + 13U)) & S_SALT1]) + aNonceWordP;
+            aOrbiterI = (((aWandererK + RotL64(aPrevious, 6U)) + 0xD68C56899FD701B1ULL) + aPhaseFOrbiterAssignSaltB[(((31U - aIndex) + 13U)) & 31]) + aNonceWordP;
             aOrbiterG = ((aWandererF + RotL64(aScatter, 13U)) + 0x2EA93E51098F650CULL) + aNonceWordD;
             aOrbiterD = (aWandererJ + RotL64(aIngress, 51U)) + 0x6C528F98185050E5ULL;
             aOrbiterB = (aWandererE + RotL64(aCross, 27U)) + 0xAFA39D6E95372E1CULL;
-            aOrbiterE = ((aWandererA + RotL64(aScatter, 41U)) + 0x50A11B7EC7B09B33ULL) + aPhaseFOrbiterAssignSaltE[(((31U - aIndex) + 19U)) & S_SALT1];
+            aOrbiterE = ((aWandererA + RotL64(aScatter, 41U)) + 0x50A11B7EC7B09B33ULL) + aPhaseFOrbiterAssignSaltE[(((31U - aIndex) + 19U)) & 31];
             aOrbiterC = (aWandererC + RotL64(aCross, 30U)) + 0x7E404E086FBB11E2ULL;
             aOrbiterK = ((aWandererH + RotL64(aPrevious, 43U)) + RotL64(aCarry, 5U)) + 0xA503A3AB9CCA4BC2ULL;
             //
-            aOrbiterF = ((aOrbiterF + aOrbiterH) + 0xAB971052BB9039E0ULL) + aPhaseFOrbiterUpdateSaltA[(((31U - aIndex) + 29U)) & S_SALT1];
+            aOrbiterF = ((aOrbiterF + aOrbiterH) + 0xAB971052BB9039E0ULL) + aPhaseFOrbiterUpdateSaltA[(((31U - aIndex) + 29U)) & 31];
             aOrbiterA = (aOrbiterA ^ aOrbiterF) ^ 0x07E0798ACD117A37ULL;
             aOrbiterA = RotL64((aOrbiterA * 0xCD479F28E823E891ULL), 57U);
             //
@@ -7331,7 +7331,7 @@ void TwistExpander_Antares_Arx::Seed_D(TwistWorkSpace *pWorkSpace,
             aOrbiterH = RotL64((aOrbiterH * 0x849775A544C5290FULL), 13U);
             //
             aOrbiterC = ((aOrbiterC + aOrbiterE) + 0x66E3016F6A5C068FULL) + aNonceWordK;
-            aOrbiterF = ((aOrbiterF ^ aOrbiterC) ^ 0x40721F12882B3A81ULL) ^ aPhaseFOrbiterUpdateSaltD[((aIndex + 28U)) & S_SALT1];
+            aOrbiterF = ((aOrbiterF ^ aOrbiterC) ^ 0x40721F12882B3A81ULL) ^ aPhaseFOrbiterUpdateSaltD[((aIndex + 28U)) & 31];
             aOrbiterF = RotL64((aOrbiterF * 0xF559CB777DFB6C69ULL), 29U);
             //
             aOrbiterA = (aOrbiterA + aOrbiterJ) + 0x990A336A03E28F3AULL;
@@ -7347,14 +7347,14 @@ void TwistExpander_Antares_Arx::Seed_D(TwistWorkSpace *pWorkSpace,
             aOrbiterB = RotL64((aOrbiterB * 0xAEA38AE9D48D02A7ULL), 35U);
             //
             aOrbiterB = (aOrbiterB + aOrbiterA) + 0x40E40D3C21657E5DULL;
-            aOrbiterC = (((aOrbiterC ^ aOrbiterB) ^ 0x72928837AB524F43ULL) ^ aPhaseFOrbiterUpdateSaltB[((aIndex + 5U)) & S_SALT1]) ^ aNonceWordL;
+            aOrbiterC = (((aOrbiterC ^ aOrbiterB) ^ 0x72928837AB524F43ULL) ^ aPhaseFOrbiterUpdateSaltB[((aIndex + 5U)) & 31]) ^ aNonceWordL;
             aOrbiterC = RotL64((aOrbiterC * 0xE8B96455CE7B71F9ULL), 39U);
             //
             aOrbiterG = (aOrbiterG + aOrbiterK) + 0x18178529B44595FCULL;
             aOrbiterD = (aOrbiterD ^ aOrbiterG) ^ 0x97853962C1874B09ULL;
             aOrbiterD = RotL64((aOrbiterD * 0x2E6D95561CF79E6FULL), 47U);
             //
-            aOrbiterI = (((aOrbiterI + aOrbiterC) + 0xA984913B20E7484DULL) + aPhaseFOrbiterUpdateSaltC[(((31U - aIndex) + 16U)) & S_SALT1]) + aNonceWordF;
+            aOrbiterI = (((aOrbiterI + aOrbiterC) + 0xA984913B20E7484DULL) + aPhaseFOrbiterUpdateSaltC[(((31U - aIndex) + 16U)) & 31]) + aNonceWordF;
             aOrbiterK = (aOrbiterK ^ aOrbiterI) ^ 0x57CEC5EE457770B4ULL;
             aOrbiterK = RotL64((aOrbiterK * 0xA4DD38B2F7922655ULL), 37U);
             //
@@ -7369,12 +7369,12 @@ void TwistExpander_Antares_Arx::Seed_D(TwistWorkSpace *pWorkSpace,
             aWandererD = aWandererD + ((RotL64(aScatter, 23U) + aOrbiterK) + RotL64(aOrbiterE, 3U));
             aWandererF = aWandererF ^ ((RotL64(aPrevious, 5U) + aOrbiterD) + RotL64(aOrbiterF, 40U));
             aWandererB = aWandererB + ((RotL64(aIngress, 60U) + RotL64(aOrbiterF, 43U)) + aOrbiterC);
-            aWandererI = aWandererI ^ (((RotL64(aCross, 51U) + aOrbiterC) + RotL64(aOrbiterH, 51U)) + aPhaseFWandererUpdateSaltB[(((31U - aIndex) + 23U)) & S_SALT1]);
+            aWandererI = aWandererI ^ (((RotL64(aCross, 51U) + aOrbiterC) + RotL64(aOrbiterH, 51U)) + aPhaseFWandererUpdateSaltB[(((31U - aIndex) + 23U)) & 31]);
             aWandererA = aWandererA + (((RotL64(aScatter, 27U) + RotL64(aOrbiterK, 53U)) + aOrbiterF) + RotL64(aCarry, 39U));
             aWandererG = aWandererG ^ ((RotL64(aPrevious, 3U) + aOrbiterG) + RotL64(aOrbiterE, 23U));
             aWandererE = aWandererE + (((RotL64(aIngress, 21U) + aOrbiterE) + RotL64(aOrbiterJ, 37U)) + aNonceWordE);
             aWandererK = aWandererK ^ (((RotL64(aCross, 35U) + aOrbiterA) + RotL64(aOrbiterB, 21U)) + aNonceWordO);
-            aWandererH = aWandererH + (((RotL64(aPrevious, 53U) + aOrbiterI) + RotL64(aOrbiterD, 35U)) + aPhaseFWandererUpdateSaltA[((aIndex + 21U)) & S_SALT1]);
+            aWandererH = aWandererH + (((RotL64(aPrevious, 53U) + aOrbiterI) + RotL64(aOrbiterD, 35U)) + aPhaseFWandererUpdateSaltA[((aIndex + 21U)) & 31]);
             aWandererJ = aWandererJ ^ ((RotL64(aScatter, 57U) + RotL64(aOrbiterK, 19U)) + aOrbiterG);
             aWandererC = aWandererC + (((RotL64(aIngress, 46U) + aOrbiterG) + RotL64(aOrbiterB, 56U)) + RotL64(aCarry, 19U));
             //
@@ -7425,8 +7425,8 @@ void TwistExpander_Antares_Arx::Seed_D(TwistWorkSpace *pWorkSpace,
             aOrbiterH = ((aWandererG + RotL64(aIngress, 57U)) + RotL64(aCarry, 29U)) + 0x437593B32E3565C2ULL;
             aOrbiterA = (aWandererE + RotL64(aScatter, 13U)) + 0x5757884D6D742552ULL;
             aOrbiterB = ((aWandererJ + RotL64(aPrevious, 48U)) + RotL64(aCarry, 37U)) + 0xD163FB09A452CC36ULL;
-            aOrbiterJ = ((aWandererD + RotL64(aCross, 51U)) + 0x5D3BE59E3271D8A2ULL) + aPhaseBOrbiterAssignSaltD[((aIndex + 10U)) & S_SALT1];
-            aOrbiterC = (((aWandererC + RotL64(aIngress, 21U)) + 0x42E5E79B1CA55827ULL) + aPhaseBOrbiterAssignSaltF[((aIndex + 23U)) & S_SALT1]) + aNonceWordG;
+            aOrbiterJ = ((aWandererD + RotL64(aCross, 51U)) + 0x5D3BE59E3271D8A2ULL) + aPhaseBOrbiterAssignSaltD[((aIndex + 10U)) & 31];
+            aOrbiterC = (((aWandererC + RotL64(aIngress, 21U)) + 0x42E5E79B1CA55827ULL) + aPhaseBOrbiterAssignSaltF[((aIndex + 23U)) & 31]) + aNonceWordG;
             aOrbiterF = ((aWandererI + RotL64(aPrevious, 27U)) + 0xE99B8C22F6AFE94EULL) + aNonceWordJ;
             //
             aOrbiterD = (aOrbiterD + aOrbiterE) + 0x5673E41E5C8A0425ULL;
@@ -7434,7 +7434,7 @@ void TwistExpander_Antares_Arx::Seed_D(TwistWorkSpace *pWorkSpace,
             aOrbiterG = RotL64((aOrbiterG * 0xDC98E8259E33AA75ULL), 43U);
             //
             aOrbiterK = (aOrbiterK + aOrbiterI) + 0x088B74D2E64CAE4AULL;
-            aOrbiterH = ((aOrbiterH ^ aOrbiterK) ^ 0x03A82DD9FB1B8E29ULL) ^ aPhaseBOrbiterUpdateSaltB[((aIndex + 24U)) & S_SALT1];
+            aOrbiterH = ((aOrbiterH ^ aOrbiterK) ^ 0x03A82DD9FB1B8E29ULL) ^ aPhaseBOrbiterUpdateSaltB[((aIndex + 24U)) & 31];
             aOrbiterH = RotL64((aOrbiterH * 0x9ABEE9A682A53E87ULL), 37U);
             //
             aOrbiterA = (aOrbiterA + aOrbiterK) + 0xADBF0123CA2022B8ULL;
@@ -7462,15 +7462,15 @@ void TwistExpander_Antares_Arx::Seed_D(TwistWorkSpace *pWorkSpace,
             aOrbiterE = RotL64((aOrbiterE * 0xED0609EC4FA1B3B1ULL), 51U);
             //
             aOrbiterC = (aOrbiterC + aOrbiterG) + 0x040FE71C4977AF16ULL;
-            aOrbiterI = ((aOrbiterI ^ aOrbiterC) ^ 0x0262F951B5E9FBE6ULL) ^ aPhaseBOrbiterUpdateSaltF[(((31U - aIndex) + 6U)) & S_SALT1];
+            aOrbiterI = ((aOrbiterI ^ aOrbiterC) ^ 0x0262F951B5E9FBE6ULL) ^ aPhaseBOrbiterUpdateSaltF[(((31U - aIndex) + 6U)) & 31];
             aOrbiterI = RotL64((aOrbiterI * 0xBB1D9BB4908CC3B5ULL), 19U);
             //
-            aOrbiterE = (((aOrbiterE + aOrbiterJ) + 0x5B29191B5A580B19ULL) + aPhaseBOrbiterUpdateSaltA[(((31U - aIndex) + 22U)) & S_SALT1]) + aNonceWordC;
+            aOrbiterE = (((aOrbiterE + aOrbiterJ) + 0x5B29191B5A580B19ULL) + aPhaseBOrbiterUpdateSaltA[(((31U - aIndex) + 22U)) & 31]) + aNonceWordC;
             aOrbiterA = (aOrbiterA ^ aOrbiterE) ^ 0xACE7F70A597D3BB6ULL;
             aOrbiterA = RotL64((aOrbiterA * 0x7476F4D722587B03ULL), 53U);
             //
             aOrbiterI = (aOrbiterI + aOrbiterF) + 0x29C5D32C965F21CAULL;
-            aOrbiterD = ((aOrbiterD ^ aOrbiterI) ^ 0x48A580F9E48F6D61ULL) ^ aPhaseBOrbiterUpdateSaltD[((aIndex + 5U)) & S_SALT1];
+            aOrbiterD = ((aOrbiterD ^ aOrbiterI) ^ 0x48A580F9E48F6D61ULL) ^ aPhaseBOrbiterUpdateSaltD[((aIndex + 5U)) & 31];
             aOrbiterD = RotL64((aOrbiterD * 0xECD011BBC243F80FULL), 35U);
             //
             aIngress = aOrbiterC ^ RotL64(aOrbiterA, 19U);
@@ -7490,8 +7490,8 @@ void TwistExpander_Antares_Arx::Seed_D(TwistWorkSpace *pWorkSpace,
             aWandererJ = aWandererJ + (((RotL64(aCross, 5U) + RotL64(aOrbiterC, 21U)) + aOrbiterH) + aNonceWordF);
             aWandererD = aWandererD ^ ((RotL64(aIngress, 27U) + aOrbiterC) + RotL64(aOrbiterI, 57U));
             aWandererA = aWandererA + (((RotL64(aScatter, 46U) + RotL64(aOrbiterJ, 35U)) + aOrbiterA) + RotL64(aCarry, 35U));
-            aWandererB = aWandererB ^ (((RotL64(aCross, 13U) + RotL64(aOrbiterJ, 5U)) + aOrbiterE) + aPhaseBWandererUpdateSaltA[((aIndex + 13U)) & S_SALT1]);
-            aWandererG = aWandererG + (((RotL64(aIngress, 19U) + aOrbiterB) + RotL64(aOrbiterK, 60U)) + aPhaseBWandererUpdateSaltF[((aIndex + 27U)) & S_SALT1]);
+            aWandererB = aWandererB ^ (((RotL64(aCross, 13U) + RotL64(aOrbiterJ, 5U)) + aOrbiterE) + aPhaseBWandererUpdateSaltA[((aIndex + 13U)) & 31]);
+            aWandererG = aWandererG + (((RotL64(aIngress, 19U) + aOrbiterB) + RotL64(aOrbiterK, 60U)) + aPhaseBWandererUpdateSaltF[((aIndex + 27U)) & 31]);
             //
             aCarry = aCarry + (aWandererB ^ RotL64(aWandererE, 3U));
             aCarry = aCarry + (aWandererI ^ RotL64(aWandererK, 11U));
@@ -7536,8 +7536,8 @@ void TwistExpander_Antares_Arx::Seed_D(TwistWorkSpace *pWorkSpace,
             aOrbiterA = ((aWandererD + RotL64(aPrevious, 51U)) + RotL64(aCarry, 35U)) + 0xE0869A960F9D97BEULL;
             aOrbiterH = (aWandererH + RotL64(aCross, 41U)) + 0xABFBD46ED2D4D32AULL;
             aOrbiterF = (((aWandererK + RotL64(aIngress, 11U)) + RotL64(aCarry, 21U)) + 0x5F3A9ACEE684C4DFULL) + aNonceWordF;
-            aOrbiterD = ((aWandererB + RotL64(aCross, 19U)) + 0xC66E99566BC56C6AULL) + aPhaseBOrbiterAssignSaltE[((aIndex + 9U)) & S_SALT1];
-            aOrbiterE = ((aWandererJ + RotL64(aPrevious, 24U)) + 0x2F1CE4C7A8909B01ULL) + aPhaseBOrbiterAssignSaltA[((aIndex + 11U)) & S_SALT1];
+            aOrbiterD = ((aWandererB + RotL64(aCross, 19U)) + 0xC66E99566BC56C6AULL) + aPhaseBOrbiterAssignSaltE[((aIndex + 9U)) & 31];
+            aOrbiterE = ((aWandererJ + RotL64(aPrevious, 24U)) + 0x2F1CE4C7A8909B01ULL) + aPhaseBOrbiterAssignSaltA[((aIndex + 11U)) & 31];
             aOrbiterB = (aWandererC + RotL64(aScatter, 47U)) + 0x38887519A1956032ULL;
             aOrbiterC = (aWandererG + RotL64(aIngress, 21U)) + 0x01EB2A35ECDDF88DULL;
             aOrbiterK = ((aWandererF + RotL64(aScatter, 29U)) + 0x2E968151A8420C84ULL) + aNonceWordB;
@@ -7549,7 +7549,7 @@ void TwistExpander_Antares_Arx::Seed_D(TwistWorkSpace *pWorkSpace,
             aOrbiterH = RotL64((aOrbiterH * 0x6D22F3AD6DE64C1FULL), 11U);
             //
             aOrbiterF = (aOrbiterF + aOrbiterD) + 0x1AB76C1A04774F15ULL;
-            aOrbiterA = (((aOrbiterA ^ aOrbiterF) ^ 0x15F5D90A67EF3C7BULL) ^ aPhaseBOrbiterUpdateSaltF[((aIndex + 21U)) & S_SALT1]) ^ aNonceWordI;
+            aOrbiterA = (((aOrbiterA ^ aOrbiterF) ^ 0x15F5D90A67EF3C7BULL) ^ aPhaseBOrbiterUpdateSaltF[((aIndex + 21U)) & 31]) ^ aNonceWordI;
             aOrbiterA = RotL64((aOrbiterA * 0x58FC40EF677E342FULL), 47U);
             //
             aOrbiterE = (aOrbiterE + aOrbiterB) + 0xA9D72ED62DF036D1ULL;
@@ -7560,8 +7560,8 @@ void TwistExpander_Antares_Arx::Seed_D(TwistWorkSpace *pWorkSpace,
             aOrbiterE = (aOrbiterE ^ aOrbiterA) ^ 0x294F668D8E094EB0ULL;
             aOrbiterE = RotL64((aOrbiterE * 0xE59C26E64C4CE7E1ULL), 41U);
             //
-            aOrbiterH = ((aOrbiterH + aOrbiterE) + 0xC2CF15CA325872AEULL) + aPhaseBOrbiterUpdateSaltB[(((31U - aIndex) + 29U)) & S_SALT1];
-            aOrbiterI = ((aOrbiterI ^ aOrbiterH) ^ 0x718F4ACE3692F149ULL) ^ aPhaseBOrbiterUpdateSaltE[(((31U - aIndex) + 3U)) & S_SALT1];
+            aOrbiterH = ((aOrbiterH + aOrbiterE) + 0xC2CF15CA325872AEULL) + aPhaseBOrbiterUpdateSaltB[(((31U - aIndex) + 29U)) & 31];
+            aOrbiterI = ((aOrbiterI ^ aOrbiterH) ^ 0x718F4ACE3692F149ULL) ^ aPhaseBOrbiterUpdateSaltE[(((31U - aIndex) + 3U)) & 31];
             aOrbiterI = RotL64((aOrbiterI * 0x649C81EEE632F2D3ULL), 35U);
             //
             aOrbiterB = ((aOrbiterB + aOrbiterJ) + 0x70720215F6D87C2DULL) + aNonceWordK;
@@ -7581,7 +7581,7 @@ void TwistExpander_Antares_Arx::Seed_D(TwistWorkSpace *pWorkSpace,
             aOrbiterK = RotL64((aOrbiterK * 0x0216D10A778A6D0FULL), 43U);
             //
             aOrbiterC = (aOrbiterC + aOrbiterF) + 0xABE7C4062409D395ULL;
-            aOrbiterG = ((aOrbiterG ^ aOrbiterC) ^ 0xD3B0A8D6F014BD2CULL) ^ aPhaseBOrbiterUpdateSaltC[(((31U - aIndex) + 13U)) & S_SALT1];
+            aOrbiterG = ((aOrbiterG ^ aOrbiterC) ^ 0xD3B0A8D6F014BD2CULL) ^ aPhaseBOrbiterUpdateSaltC[(((31U - aIndex) + 13U)) & 31];
             aOrbiterG = RotL64((aOrbiterG * 0x63472AD74952A503ULL), 53U);
             //
             aOrbiterJ = (aOrbiterJ + aOrbiterG) + 0xBD440D4F5CEA2202ULL;
@@ -7601,9 +7601,9 @@ void TwistExpander_Antares_Arx::Seed_D(TwistWorkSpace *pWorkSpace,
             aWandererB = aWandererB ^ ((RotL64(aScatter, 53U) + RotL64(aOrbiterD, 21U)) + aOrbiterK);
             aWandererD = aWandererD + (((RotL64(aCross, 23U) + RotL64(aOrbiterI, 19U)) + aOrbiterG) + RotL64(aCarry, 37U));
             aWandererE = aWandererE ^ ((RotL64(aPrevious, 35U) + RotL64(aOrbiterG, 5U)) + aOrbiterA);
-            aWandererH = aWandererH + ((((RotL64(aScatter, 26U) + RotL64(aOrbiterJ, 14U)) + aOrbiterI) + RotL64(aCarry, 43U)) + aPhaseBWandererUpdateSaltF[((aIndex + 16U)) & S_SALT1]);
+            aWandererH = aWandererH + ((((RotL64(aScatter, 26U) + RotL64(aOrbiterJ, 14U)) + aOrbiterI) + RotL64(aCarry, 43U)) + aPhaseBWandererUpdateSaltF[((aIndex + 16U)) & 31]);
             aWandererG = aWandererG ^ ((RotL64(aIngress, 3U) + RotL64(aOrbiterJ, 51U)) + aOrbiterE);
-            aWandererC = aWandererC + (((RotL64(aCross, 11U) + RotL64(aOrbiterI, 35U)) + aOrbiterC) + aPhaseBWandererUpdateSaltA[((aIndex + 17U)) & S_SALT1]);
+            aWandererC = aWandererC + (((RotL64(aCross, 11U) + RotL64(aOrbiterI, 35U)) + aOrbiterC) + aPhaseBWandererUpdateSaltA[((aIndex + 17U)) & 31]);
             aWandererI = aWandererI ^ ((RotL64(aPrevious, 51U) + RotL64(aOrbiterB, 57U)) + aOrbiterF);
             aWandererJ = aWandererJ + ((RotL64(aCross, 5U) + aOrbiterH) + RotL64(aOrbiterF, 29U));
             aWandererF = aWandererF ^ (((RotL64(aScatter, 43U) + aOrbiterJ) + RotL64(aOrbiterK, 41U)) + aNonceWordC);
@@ -7648,14 +7648,14 @@ void TwistExpander_Antares_Arx::Seed_D(TwistWorkSpace *pWorkSpace,
             aScatter = TwistMix64::DiffuseC(((aScatter ^ aPhaseADomainWordScatter) ^ aNonceWordL));
             //
             aOrbiterH = (aWandererG + RotL64(aPrevious, 53U)) + 0xAB79488670B1D879ULL;
-            aOrbiterF = (((aWandererF + RotL64(aScatter, 3U)) + RotL64(aCarry, 35U)) + 0xCA4986E3A8A5F2EBULL) + aPhaseAOrbiterAssignSaltC[(((31U - aIndex) + 7U)) & S_SALT1];
+            aOrbiterF = (((aWandererF + RotL64(aScatter, 3U)) + RotL64(aCarry, 35U)) + 0xCA4986E3A8A5F2EBULL) + aPhaseAOrbiterAssignSaltC[(((31U - aIndex) + 7U)) & 31];
             aOrbiterJ = (aWandererH + RotL64(aIngress, 14U)) + 0x8F987C86D11B37A3ULL;
             aOrbiterK = ((aWandererI + RotL64(aCross, 51U)) + 0x238F37C3A309AB83ULL) + aNonceWordD;
             aOrbiterI = (aWandererJ + RotL64(aIngress, 39U)) + 0x5A41F6CB940DD39AULL;
             aOrbiterC = (aWandererK + RotL64(aCross, 35U)) + 0x7ED183D689DC8A65ULL;
             aOrbiterE = ((aWandererC + RotL64(aPrevious, 41U)) + RotL64(aCarry, 41U)) + 0x6B929070898C7B58ULL;
             aOrbiterB = (aWandererE + RotL64(aScatter, 43U)) + 0xF1A4D12B07296E9AULL;
-            aOrbiterG = ((((aWandererD + RotL64(aIngress, 21U)) + RotL64(aCarry, 29U)) + 0xFC9DF53F4501604DULL) + aPhaseAOrbiterAssignSaltE[(((31U - aIndex) + 23U)) & S_SALT1]) + aNonceWordE;
+            aOrbiterG = ((((aWandererD + RotL64(aIngress, 21U)) + RotL64(aCarry, 29U)) + 0xFC9DF53F4501604DULL) + aPhaseAOrbiterAssignSaltE[(((31U - aIndex) + 23U)) & 31]) + aNonceWordE;
             aOrbiterD = (aWandererB + RotL64(aPrevious, 48U)) + 0x5CD547ED257F3829ULL;
             aOrbiterA = (aWandererA + RotL64(aCross, 37U)) + 0x857B348C0E6E77C7ULL;
             //
@@ -7667,7 +7667,7 @@ void TwistExpander_Antares_Arx::Seed_D(TwistWorkSpace *pWorkSpace,
             aOrbiterI = (aOrbiterI ^ aOrbiterJ) ^ 0xA037AC4E2936CBBDULL;
             aOrbiterI = RotL64((aOrbiterI * 0xBBC3DD2BD53AB03DULL), 39U);
             //
-            aOrbiterF = ((aOrbiterF + aOrbiterC) + 0x3F67C75AE7E55E82ULL) + aPhaseAOrbiterUpdateSaltB[((aIndex + 3U)) & S_SALT1];
+            aOrbiterF = ((aOrbiterF + aOrbiterC) + 0x3F67C75AE7E55E82ULL) + aPhaseAOrbiterUpdateSaltB[((aIndex + 3U)) & 31];
             aOrbiterK = ((aOrbiterK ^ aOrbiterF) ^ 0x76D6BE6C26268144ULL) ^ aNonceWordA;
             aOrbiterK = RotL64((aOrbiterK * 0x622429504117B5B9ULL), 41U);
             //
@@ -7680,11 +7680,11 @@ void TwistExpander_Antares_Arx::Seed_D(TwistWorkSpace *pWorkSpace,
             aOrbiterB = RotL64((aOrbiterB * 0x1BA91EE78C858BE3ULL), 19U);
             //
             aOrbiterB = (aOrbiterB + aOrbiterG) + 0xCD2C4DA99A02F5B2ULL;
-            aOrbiterH = ((aOrbiterH ^ aOrbiterB) ^ 0x86A95902BCB1915EULL) ^ aPhaseAOrbiterUpdateSaltD[((aIndex + 5U)) & S_SALT1];
+            aOrbiterH = ((aOrbiterH ^ aOrbiterB) ^ 0x86A95902BCB1915EULL) ^ aPhaseAOrbiterUpdateSaltD[((aIndex + 5U)) & 31];
             aOrbiterH = RotL64((aOrbiterH * 0x8BD6C80E3558B95FULL), 47U);
             //
             aOrbiterG = (aOrbiterG + aOrbiterD) + 0x0E47453B671CF6AEULL;
-            aOrbiterF = ((aOrbiterF ^ aOrbiterG) ^ 0xC2EE149549285FB9ULL) ^ aPhaseAOrbiterUpdateSaltC[((aIndex + 22U)) & S_SALT1];
+            aOrbiterF = ((aOrbiterF ^ aOrbiterG) ^ 0xC2EE149549285FB9ULL) ^ aPhaseAOrbiterUpdateSaltC[((aIndex + 22U)) & 31];
             aOrbiterF = RotL64((aOrbiterF * 0xD2782E65015F8165ULL), 3U);
             //
             aOrbiterI = ((aOrbiterI + aOrbiterA) + 0xBE98F8E171A087BDULL) + aNonceWordL;
@@ -7695,7 +7695,7 @@ void TwistExpander_Antares_Arx::Seed_D(TwistWorkSpace *pWorkSpace,
             aOrbiterC = (aOrbiterC ^ aOrbiterD) ^ 0x626472B1C1152312ULL;
             aOrbiterC = RotL64((aOrbiterC * 0x257714DE8A034A75ULL), 27U);
             //
-            aOrbiterK = ((aOrbiterK + aOrbiterE) + 0xB0B7A41141C568D2ULL) + aPhaseAOrbiterUpdateSaltE[(((31U - aIndex) + 15U)) & S_SALT1];
+            aOrbiterK = ((aOrbiterK + aOrbiterE) + 0xB0B7A41141C568D2ULL) + aPhaseAOrbiterUpdateSaltE[(((31U - aIndex) + 15U)) & 31];
             aOrbiterA = (aOrbiterA ^ aOrbiterK) ^ 0x6256C098C146EE2EULL;
             aOrbiterA = RotL64((aOrbiterA * 0xDE82D4350FB5B109ULL), 53U);
             //
@@ -7715,10 +7715,10 @@ void TwistExpander_Antares_Arx::Seed_D(TwistWorkSpace *pWorkSpace,
             aWandererG = aWandererG + ((RotL64(aIngress, 27U) + RotL64(aOrbiterA, 6U)) + aOrbiterH);
             aWandererJ = aWandererJ ^ (((RotL64(aCross, 35U) + aOrbiterH) + RotL64(aOrbiterI, 41U)) + aNonceWordP);
             aWandererA = aWandererA + (((RotL64(aScatter, 30U) + aOrbiterF) + RotL64(aOrbiterG, 35U)) + RotL64(aCarry, 53U));
-            aWandererI = aWandererI ^ (((RotL64(aIngress, 23U) + aOrbiterE) + RotL64(aOrbiterH, 39U)) + aPhaseAWandererUpdateSaltA[(((31U - aIndex) + 27U)) & S_SALT1]);
+            aWandererI = aWandererI ^ (((RotL64(aIngress, 23U) + aOrbiterE) + RotL64(aOrbiterH, 39U)) + aPhaseAWandererUpdateSaltA[(((31U - aIndex) + 27U)) & 31]);
             aWandererD = aWandererD + ((RotL64(aCross, 19U) + aOrbiterF) + RotL64(aOrbiterE, 51U));
             aWandererC = aWandererC ^ (((RotL64(aPrevious, 3U) + RotL64(aOrbiterH, 3U)) + aOrbiterF) + aNonceWordN);
-            aWandererF = aWandererF + (((RotL64(aScatter, 21U) + aOrbiterB) + RotL64(aOrbiterG, 29U)) + aPhaseAWandererUpdateSaltF[((aIndex + 20U)) & S_SALT1]);
+            aWandererF = aWandererF + (((RotL64(aScatter, 21U) + aOrbiterB) + RotL64(aOrbiterG, 29U)) + aPhaseAWandererUpdateSaltF[((aIndex + 20U)) & 31]);
             aWandererH = aWandererH ^ ((RotL64(aIngress, 38U) + aOrbiterD) + RotL64(aOrbiterC, 22U));
             aWandererB = aWandererB + ((((RotL64(aPrevious, 11U) + RotL64(aOrbiterK, 37U)) + aOrbiterH) + RotL64(aCarry, 47U)) + aNonceWordC);
             aWandererK = aWandererK ^ ((RotL64(aCross, 13U) + aOrbiterJ) + RotL64(aOrbiterB, 47U));
@@ -7762,7 +7762,7 @@ void TwistExpander_Antares_Arx::Seed_D(TwistWorkSpace *pWorkSpace,
             aScatter = (RotL64(aIngress, 3U) + RotL64(aCarry, 50U)) ^ (RotL64(aCross, 35U) + RotL64(aPrevious, 19U));
             aScatter = TwistMix64::DiffuseB(((aScatter ^ aPhaseBDomainWordScatter) ^ aNonceWordE));
             //
-            aOrbiterF = ((aWandererE + RotL64(aCross, 57U)) + 0xBDD9883ECBE79635ULL) + aPhaseBOrbiterAssignSaltD[(((31U - aIndex) + 9U)) & S_SALT1];
+            aOrbiterF = ((aWandererE + RotL64(aCross, 57U)) + 0xBDD9883ECBE79635ULL) + aPhaseBOrbiterAssignSaltD[(((31U - aIndex) + 9U)) & 31];
             aOrbiterK = ((aWandererA + RotL64(aIngress, 60U)) + 0x714B67A15CEB283DULL) + aNonceWordE;
             aOrbiterG = (aWandererF + RotL64(aScatter, 37U)) + 0x78CA352E0B1A0A0EULL;
             aOrbiterC = ((aWandererG + RotL64(aPrevious, 39U)) + RotL64(aCarry, 5U)) + 0x5299F44CC6C11626ULL;
@@ -7772,10 +7772,10 @@ void TwistExpander_Antares_Arx::Seed_D(TwistWorkSpace *pWorkSpace,
             aOrbiterE = (aWandererB + RotL64(aCross, 41U)) + 0x2E21180A206AB989ULL;
             aOrbiterB = ((aWandererJ + RotL64(aIngress, 47U)) + RotL64(aCarry, 11U)) + 0x45EA33017970C6DBULL;
             aOrbiterH = (aWandererK + RotL64(aPrevious, 5U)) + 0xEDF5563475C93D79ULL;
-            aOrbiterA = (((aWandererI + RotL64(aCross, 27U)) + RotL64(aCarry, 19U)) + 0xDA061DBABF57035AULL) + aPhaseBOrbiterAssignSaltF[((aIndex + 26U)) & S_SALT1];
+            aOrbiterA = (((aWandererI + RotL64(aCross, 27U)) + RotL64(aCarry, 19U)) + 0xDA061DBABF57035AULL) + aPhaseBOrbiterAssignSaltF[((aIndex + 26U)) & 31];
             //
             aOrbiterF = (aOrbiterF + aOrbiterK) + 0x3BBBA3935E1B2C05ULL;
-            aOrbiterG = ((aOrbiterG ^ aOrbiterF) ^ 0x31CA032C7204EDC8ULL) ^ aPhaseBOrbiterUpdateSaltA[((aIndex + 19U)) & S_SALT1];
+            aOrbiterG = ((aOrbiterG ^ aOrbiterF) ^ 0x31CA032C7204EDC8ULL) ^ aPhaseBOrbiterUpdateSaltA[((aIndex + 19U)) & 31];
             aOrbiterG = RotL64((aOrbiterG * 0xE0B86F40C2608399ULL), 39U);
             //
             aOrbiterC = (aOrbiterC + aOrbiterD) + 0xC7DEC635A74C2462ULL;
@@ -7791,7 +7791,7 @@ void TwistExpander_Antares_Arx::Seed_D(TwistWorkSpace *pWorkSpace,
             aOrbiterI = RotL64((aOrbiterI * 0x23267132E2EE634FULL), 5U);
             //
             aOrbiterH = (aOrbiterH + aOrbiterE) + 0x6ACBCF3F29A1902AULL;
-            aOrbiterB = (((aOrbiterB ^ aOrbiterH) ^ 0x6B0B91C7F2734F0DULL) ^ aPhaseBOrbiterUpdateSaltB[(((31U - aIndex) + 12U)) & S_SALT1]) ^ aNonceWordI;
+            aOrbiterB = (((aOrbiterB ^ aOrbiterH) ^ 0x6B0B91C7F2734F0DULL) ^ aPhaseBOrbiterUpdateSaltB[(((31U - aIndex) + 12U)) & 31]) ^ aNonceWordI;
             aOrbiterB = RotL64((aOrbiterB * 0x5A4B69A4D7914C45ULL), 41U);
             //
             aOrbiterG = ((aOrbiterG + aOrbiterA) + 0x792A9EC9E59D8E10ULL) + aNonceWordA;
@@ -7806,7 +7806,7 @@ void TwistExpander_Antares_Arx::Seed_D(TwistWorkSpace *pWorkSpace,
             aOrbiterA = (aOrbiterA ^ aOrbiterK) ^ 0x88DA0F4BF8786E76ULL;
             aOrbiterA = RotL64((aOrbiterA * 0x66E3341D8EB2CBC3ULL), 53U);
             //
-            aOrbiterE = ((aOrbiterE + aOrbiterC) + 0xDB6BA50BCDB6168DULL) + aPhaseBOrbiterUpdateSaltC[((aIndex + 22U)) & S_SALT1];
+            aOrbiterE = ((aOrbiterE + aOrbiterC) + 0xDB6BA50BCDB6168DULL) + aPhaseBOrbiterUpdateSaltC[((aIndex + 22U)) & 31];
             aOrbiterF = (aOrbiterF ^ aOrbiterE) ^ 0xE85883C960C1C6B8ULL;
             aOrbiterF = RotL64((aOrbiterF * 0x847D1C50F95B4D97ULL), 47U);
             //
@@ -7814,7 +7814,7 @@ void TwistExpander_Antares_Arx::Seed_D(TwistWorkSpace *pWorkSpace,
             aOrbiterJ = (aOrbiterJ ^ aOrbiterA) ^ 0x0156963CCF4E30C5ULL;
             aOrbiterJ = RotL64((aOrbiterJ * 0xBA6CABE197A2D9CFULL), 29U);
             //
-            aOrbiterD = (((aOrbiterD + aOrbiterJ) + 0xF06DDF2F07B6C1E3ULL) + aPhaseBOrbiterUpdateSaltE[((aIndex + 14U)) & S_SALT1]) + aNonceWordL;
+            aOrbiterD = (((aOrbiterD + aOrbiterJ) + 0xF06DDF2F07B6C1E3ULL) + aPhaseBOrbiterUpdateSaltE[((aIndex + 14U)) & 31]) + aNonceWordL;
             aOrbiterH = (aOrbiterH ^ aOrbiterD) ^ 0x4B8FAAF27B3AA421ULL;
             aOrbiterH = RotL64((aOrbiterH * 0x4F7B19CF44CF22F3ULL), 21U);
             //
@@ -7830,13 +7830,13 @@ void TwistExpander_Antares_Arx::Seed_D(TwistWorkSpace *pWorkSpace,
             aWandererK = aWandererK + ((RotL64(aIngress, 54U) + aOrbiterC) + RotL64(aOrbiterG, 41U));
             aWandererF = aWandererF ^ ((RotL64(aPrevious, 57U) + aOrbiterJ) + RotL64(aOrbiterE, 12U));
             aWandererH = aWandererH + (((RotL64(aScatter, 11U) + RotL64(aOrbiterE, 19U)) + aOrbiterK) + aNonceWordP);
-            aWandererI = aWandererI ^ (((RotL64(aPrevious, 19U) + aOrbiterJ) + RotL64(aOrbiterD, 23U)) + aPhaseBWandererUpdateSaltE[(((31U - aIndex) + 5U)) & S_SALT1]);
+            aWandererI = aWandererI ^ (((RotL64(aPrevious, 19U) + aOrbiterJ) + RotL64(aOrbiterD, 23U)) + aPhaseBWandererUpdateSaltE[(((31U - aIndex) + 5U)) & 31]);
             aWandererB = aWandererB + ((((RotL64(aCross, 35U) + RotL64(aOrbiterF, 47U)) + aOrbiterD) + RotL64(aCarry, 41U)) + aNonceWordN);
             aWandererE = aWandererE ^ ((RotL64(aScatter, 23U) + RotL64(aOrbiterB, 36U)) + aOrbiterG);
             aWandererG = aWandererG + (((RotL64(aIngress, 21U) + aOrbiterF) + RotL64(aOrbiterH, 53U)) + RotL64(aCarry, 21U));
             aWandererC = aWandererC ^ ((RotL64(aCross, 13U) + RotL64(aOrbiterI, 57U)) + aOrbiterG);
             aWandererD = aWandererD + ((RotL64(aScatter, 52U) + RotL64(aOrbiterI, 3U)) + aOrbiterA);
-            aWandererA = aWandererA ^ (((RotL64(aIngress, 41U) + aOrbiterJ) + RotL64(aOrbiterI, 39U)) + aPhaseBWandererUpdateSaltA[(((31U - aIndex) + 27U)) & S_SALT1]);
+            aWandererA = aWandererA ^ (((RotL64(aIngress, 41U) + aOrbiterJ) + RotL64(aOrbiterI, 39U)) + aPhaseBWandererUpdateSaltA[(((31U - aIndex) + 27U)) & 31]);
             //
             aCarry = aCarry + (RotL64(aWandererI, 47U) ^ aWandererJ);
             aCarry = aCarry + (RotL64(aWandererK, 60U) ^ aWandererH);
@@ -7886,8 +7886,8 @@ void TwistExpander_Antares_Arx::Seed_D(TwistWorkSpace *pWorkSpace,
             aOrbiterF = (aWandererK + RotL64(aPrevious, 53U)) + 0xD90B02DA6BC7656EULL;
             aOrbiterB = ((aWandererI + RotL64(aCross, 37U)) + RotL64(aCarry, 43U)) + 0xAAB620A6EAEC399DULL;
             aOrbiterA = ((aWandererJ + RotL64(aScatter, 35U)) + 0x3C433F4AC2DCCE46ULL) + aNonceWordH;
-            aOrbiterK = ((aWandererE + RotL64(aIngress, 50U)) + 0xF6D5D228F96150BAULL) + aPhaseEOrbiterAssignSaltC[(((31U - aIndex) + 14U)) & S_SALT1];
-            aOrbiterI = ((aWandererC + RotL64(aPrevious, 19U)) + 0xD1A83D2B209472F9ULL) + aPhaseEOrbiterAssignSaltA[((aIndex + 5U)) & S_SALT1];
+            aOrbiterK = ((aWandererE + RotL64(aIngress, 50U)) + 0xF6D5D228F96150BAULL) + aPhaseEOrbiterAssignSaltC[(((31U - aIndex) + 14U)) & 31];
+            aOrbiterI = ((aWandererC + RotL64(aPrevious, 19U)) + 0xD1A83D2B209472F9ULL) + aPhaseEOrbiterAssignSaltA[((aIndex + 5U)) & 31];
             //
             aOrbiterD = (aOrbiterD + aOrbiterE) + 0xFE19FA54BE9ED7F4ULL;
             aOrbiterG = ((aOrbiterG ^ aOrbiterD) ^ 0x606A39C3508644EEULL) ^ aNonceWordL;
@@ -7897,7 +7897,7 @@ void TwistExpander_Antares_Arx::Seed_D(TwistWorkSpace *pWorkSpace,
             aOrbiterH = (aOrbiterH ^ aOrbiterJ) ^ 0x8E406046FA7CDC78ULL;
             aOrbiterH = RotL64((aOrbiterH * 0x73771E6D34D40B09ULL), 35U);
             //
-            aOrbiterF = ((aOrbiterF + aOrbiterH) + 0x930A3016185B3265ULL) + aPhaseEOrbiterUpdateSaltA[(((31U - aIndex) + 24U)) & S_SALT1];
+            aOrbiterF = ((aOrbiterF + aOrbiterH) + 0x930A3016185B3265ULL) + aPhaseEOrbiterUpdateSaltA[(((31U - aIndex) + 24U)) & 31];
             aOrbiterD = (aOrbiterD ^ aOrbiterF) ^ 0xF2F66DE4B205CFB3ULL;
             aOrbiterD = RotL64((aOrbiterD * 0x62F65ADB51AD1C57ULL), 47U);
             //
@@ -7922,11 +7922,11 @@ void TwistExpander_Antares_Arx::Seed_D(TwistWorkSpace *pWorkSpace,
             aOrbiterB = RotL64((aOrbiterB * 0x2F03FABA145536B5ULL), 27U);
             //
             aOrbiterC = ((aOrbiterC + aOrbiterF) + 0x73D9981DFBF67C3EULL) + aNonceWordI;
-            aOrbiterI = ((aOrbiterI ^ aOrbiterC) ^ 0xD36119FC7C743947ULL) ^ aPhaseEOrbiterUpdateSaltD[((aIndex + 27U)) & S_SALT1];
+            aOrbiterI = ((aOrbiterI ^ aOrbiterC) ^ 0xD36119FC7C743947ULL) ^ aPhaseEOrbiterUpdateSaltD[((aIndex + 27U)) & 31];
             aOrbiterI = RotL64((aOrbiterI * 0x350D4B405CD89991ULL), 19U);
             //
-            aOrbiterH = ((aOrbiterH + aOrbiterI) + 0x4F51110D8E18FC7EULL) + aPhaseEOrbiterUpdateSaltB[((aIndex + 19U)) & S_SALT1];
-            aOrbiterE = ((aOrbiterE ^ aOrbiterH) ^ 0x39F19D5970C14BE9ULL) ^ aPhaseEOrbiterUpdateSaltF[(((31U - aIndex) + 17U)) & S_SALT1];
+            aOrbiterH = ((aOrbiterH + aOrbiterI) + 0x4F51110D8E18FC7EULL) + aPhaseEOrbiterUpdateSaltB[((aIndex + 19U)) & 31];
+            aOrbiterE = ((aOrbiterE ^ aOrbiterH) ^ 0x39F19D5970C14BE9ULL) ^ aPhaseEOrbiterUpdateSaltF[(((31U - aIndex) + 17U)) & 31];
             aOrbiterE = RotL64((aOrbiterE * 0x842F7D13C47C572FULL), 57U);
             //
             aOrbiterE = (aOrbiterE + aOrbiterB) + 0x082B1ADA70288812ULL;
@@ -7948,8 +7948,8 @@ void TwistExpander_Antares_Arx::Seed_D(TwistWorkSpace *pWorkSpace,
             aWandererH = aWandererH ^ ((RotL64(aScatter, 21U) + RotL64(aOrbiterH, 30U)) + aOrbiterA);
             aWandererA = aWandererA + ((((RotL64(aPrevious, 35U) + RotL64(aOrbiterC, 39U)) + aOrbiterB) + RotL64(aCarry, 23U)) + aNonceWordC);
             aWandererK = aWandererK ^ (((RotL64(aIngress, 41U) + aOrbiterF) + RotL64(aOrbiterA, 21U)) + aNonceWordD);
-            aWandererC = aWandererC + ((((RotL64(aCross, 19U) + RotL64(aOrbiterG, 19U)) + aOrbiterH) + RotL64(aCarry, 35U)) + aPhaseEWandererUpdateSaltA[((aIndex + 4U)) & S_SALT1]);
-            aWandererE = aWandererE ^ (((RotL64(aScatter, 23U) + aOrbiterJ) + RotL64(aOrbiterI, 57U)) + aPhaseEWandererUpdateSaltE[((aIndex + 15U)) & S_SALT1]);
+            aWandererC = aWandererC + ((((RotL64(aCross, 19U) + RotL64(aOrbiterG, 19U)) + aOrbiterH) + RotL64(aCarry, 35U)) + aPhaseEWandererUpdateSaltA[((aIndex + 4U)) & 31]);
+            aWandererE = aWandererE ^ (((RotL64(aScatter, 23U) + aOrbiterJ) + RotL64(aOrbiterI, 57U)) + aPhaseEWandererUpdateSaltE[((aIndex + 15U)) & 31]);
             aWandererI = aWandererI + ((RotL64(aCross, 43U) + RotL64(aOrbiterD, 3U)) + aOrbiterA);
             aWandererG = aWandererG ^ ((RotL64(aIngress, 12U) + aOrbiterC) + RotL64(aOrbiterG, 60U));
             //
@@ -8147,9 +8147,9 @@ void TwistExpander_Antares_Arx::Seed_E(TwistWorkSpace *pWorkSpace,
             aScatter = (RotL64(aIngress, 53U) ^ RotL64(aCarry, 13U)) ^ (RotL64(aCross, 41U) + RotL64(aPrevious, 28U));
             aScatter = TwistMix64::DiffuseB(((aScatter ^ aPhaseADomainWordScatter) ^ aNonceWordL));
             //
-            aOrbiterK = (((aWandererH + RotL64(aPrevious, 42U)) + 0x3F0F040EBAEC97CAULL) + aPhaseAOrbiterAssignSaltA[((aIndex + 23U)) & S_SALT1]) + aNonceWordO;
+            aOrbiterK = (((aWandererH + RotL64(aPrevious, 42U)) + 0x3F0F040EBAEC97CAULL) + aPhaseAOrbiterAssignSaltA[((aIndex + 23U)) & 31]) + aNonceWordO;
             aOrbiterC = (aWandererG + RotL64(aIngress, 57U)) + 0x8353F2DC29AAFAB1ULL;
-            aOrbiterE = ((aWandererF + RotL64(aScatter, 27U)) + 0xB435A1748856B447ULL) + aPhaseAOrbiterAssignSaltD[(((31U - aIndex) + 16U)) & S_SALT1];
+            aOrbiterE = ((aWandererF + RotL64(aScatter, 27U)) + 0xB435A1748856B447ULL) + aPhaseAOrbiterAssignSaltD[(((31U - aIndex) + 16U)) & 31];
             aOrbiterF = (aWandererJ + RotL64(aCross, 11U)) + 0x7C76B076B3BCB46CULL;
             aOrbiterH = ((aWandererE + RotL64(aPrevious, 53U)) + RotL64(aCarry, 3U)) + 0xB85C5C2F107AE6AFULL;
             aOrbiterJ = ((aWandererI + RotL64(aScatter, 5U)) + RotL64(aCarry, 23U)) + 0x92D791467461DEF3ULL;
@@ -8173,15 +8173,15 @@ void TwistExpander_Antares_Arx::Seed_E(TwistWorkSpace *pWorkSpace,
             aOrbiterJ = (aOrbiterJ ^ aOrbiterA) ^ 0xFCECCB2CAB17ABCEULL;
             aOrbiterJ = RotL64((aOrbiterJ * 0x69097E41E664D189ULL), 35U);
             //
-            aOrbiterC = (((aOrbiterC + aOrbiterA) + 0xAD216524394E6E22ULL) + aPhaseAOrbiterUpdateSaltC[(((31U - aIndex) + 29U)) & S_SALT1]) + aNonceWordN;
-            aOrbiterG = ((aOrbiterG ^ aOrbiterC) ^ 0xDC86790D43BDAF17ULL) ^ aPhaseAOrbiterUpdateSaltB[(((31U - aIndex) + 26U)) & S_SALT1];
+            aOrbiterC = (((aOrbiterC + aOrbiterA) + 0xAD216524394E6E22ULL) + aPhaseAOrbiterUpdateSaltC[(((31U - aIndex) + 29U)) & 31]) + aNonceWordN;
+            aOrbiterG = ((aOrbiterG ^ aOrbiterC) ^ 0xDC86790D43BDAF17ULL) ^ aPhaseAOrbiterUpdateSaltB[(((31U - aIndex) + 26U)) & 31];
             aOrbiterG = RotL64((aOrbiterG * 0x7C51F9D35DA51705ULL), 5U);
             //
             aOrbiterD = ((aOrbiterD + aOrbiterF) + 0x09AD8826C1AC32AAULL) + aNonceWordA;
             aOrbiterA = (aOrbiterA ^ aOrbiterD) ^ 0x79CF7A4A3F3F8257ULL;
             aOrbiterA = RotL64((aOrbiterA * 0x558E23D62EFE0B1DULL), 11U);
             //
-            aOrbiterG = (((aOrbiterG + aOrbiterJ) + 0x6C08755635A68231ULL) + aPhaseAOrbiterUpdateSaltA[((aIndex + 19U)) & S_SALT1]) + aNonceWordL;
+            aOrbiterG = (((aOrbiterG + aOrbiterJ) + 0x6C08755635A68231ULL) + aPhaseAOrbiterUpdateSaltA[((aIndex + 19U)) & 31]) + aNonceWordL;
             aOrbiterF = (aOrbiterF ^ aOrbiterG) ^ 0x3BDD6E962FDC7277ULL;
             aOrbiterF = RotL64((aOrbiterF * 0x56A247D73664AC93ULL), 47U);
             //
@@ -8189,7 +8189,7 @@ void TwistExpander_Antares_Arx::Seed_E(TwistWorkSpace *pWorkSpace,
             aOrbiterD = (aOrbiterD ^ aOrbiterE) ^ 0xF7742183E1B0B364ULL;
             aOrbiterD = RotL64((aOrbiterD * 0xE90C5EEDF760902DULL), 51U);
             //
-            aOrbiterH = ((aOrbiterH + aOrbiterD) + 0x104F9E901B94085AULL) + aPhaseAOrbiterUpdateSaltF[((aIndex + 22U)) & S_SALT1];
+            aOrbiterH = ((aOrbiterH + aOrbiterD) + 0x104F9E901B94085AULL) + aPhaseAOrbiterUpdateSaltF[((aIndex + 22U)) & 31];
             aOrbiterC = (aOrbiterC ^ aOrbiterH) ^ 0x9A2ECD28B8E543D4ULL;
             aOrbiterC = RotL64((aOrbiterC * 0x4F9250C4F7042969ULL), 27U);
             //
@@ -8202,8 +8202,8 @@ void TwistExpander_Antares_Arx::Seed_E(TwistWorkSpace *pWorkSpace,
             //
             aWandererF = aWandererF ^ ((RotL64(aPrevious, 5U) + RotL64(aOrbiterG, 47U)) + aOrbiterA);
             aWandererC = aWandererC + (((RotL64(aIngress, 47U) + aOrbiterH) + RotL64(aOrbiterC, 51U)) + RotL64(aCarry, 39U));
-            aWandererJ = aWandererJ ^ (((RotL64(aCross, 28U) + aOrbiterK) + RotL64(aOrbiterF, 5U)) + aPhaseAWandererUpdateSaltB[((aIndex + 5U)) & S_SALT1]);
-            aWandererK = aWandererK + ((((RotL64(aScatter, 53U) + aOrbiterC) + RotL64(aOrbiterJ, 13U)) + RotL64(aCarry, 47U)) + aPhaseAWandererUpdateSaltF[(((31U - aIndex) + 4U)) & S_SALT1]);
+            aWandererJ = aWandererJ ^ (((RotL64(aCross, 28U) + aOrbiterK) + RotL64(aOrbiterF, 5U)) + aPhaseAWandererUpdateSaltB[((aIndex + 5U)) & 31]);
+            aWandererK = aWandererK + ((((RotL64(aScatter, 53U) + aOrbiterC) + RotL64(aOrbiterJ, 13U)) + RotL64(aCarry, 47U)) + aPhaseAWandererUpdateSaltF[(((31U - aIndex) + 4U)) & 31]);
             aWandererE = aWandererE ^ (((RotL64(aCross, 19U) + aOrbiterE) + RotL64(aOrbiterA, 18U)) + aNonceWordB);
             aWandererD = aWandererD + (((RotL64(aScatter, 11U) + aOrbiterC) + RotL64(aOrbiterK, 37U)) + aNonceWordJ);
             aWandererG = aWandererG ^ (((RotL64(aPrevious, 34U) + aOrbiterA) + RotL64(aOrbiterK, 41U)) + aNonceWordD);
@@ -8249,10 +8249,10 @@ void TwistExpander_Antares_Arx::Seed_E(TwistWorkSpace *pWorkSpace,
             aScatter = TwistMix64::DiffuseB(((aScatter ^ aPhaseFDomainWordScatter) ^ aNonceWordB));
             //
             aOrbiterC = (aWandererD + RotL64(aCross, 57U)) + 0xF8D30EECC2B43891ULL;
-            aOrbiterF = ((aWandererK + RotL64(aIngress, 29U)) + 0x55830FC042B1CFBBULL) + aPhaseFOrbiterAssignSaltB[(((31U - aIndex) + 25U)) & S_SALT1];
+            aOrbiterF = ((aWandererK + RotL64(aIngress, 29U)) + 0x55830FC042B1CFBBULL) + aPhaseFOrbiterAssignSaltB[(((31U - aIndex) + 25U)) & 31];
             aOrbiterG = (aWandererC + RotL64(aPrevious, 35U)) + 0x69FAECEAA128DB3CULL;
             aOrbiterE = ((aWandererJ + RotL64(aScatter, 23U)) + 0xE83EE5AEB1733C3DULL) + aNonceWordH;
-            aOrbiterB = ((aWandererH + RotL64(aPrevious, 46U)) + 0xC9EEB016FA17CFE9ULL) + aPhaseFOrbiterAssignSaltA[((aIndex + 24U)) & S_SALT1];
+            aOrbiterB = ((aWandererH + RotL64(aPrevious, 46U)) + 0xC9EEB016FA17CFE9ULL) + aPhaseFOrbiterAssignSaltA[((aIndex + 24U)) & 31];
             aOrbiterD = ((aWandererG + RotL64(aIngress, 41U)) + 0xBF8EA7C780818C8CULL) + aNonceWordJ;
             aOrbiterA = ((aWandererF + RotL64(aScatter, 5U)) + RotL64(aCarry, 13U)) + 0x5430A8A6089D29B0ULL;
             aOrbiterI = (((aWandererE + RotL64(aCross, 53U)) + RotL64(aCarry, 53U)) + 0x61A6047EEAFBAECCULL) + aNonceWordL;
@@ -8263,7 +8263,7 @@ void TwistExpander_Antares_Arx::Seed_E(TwistWorkSpace *pWorkSpace,
             aOrbiterG = RotL64((aOrbiterG * 0xFAD5DD1995736B7BULL), 41U);
             //
             aOrbiterE = (aOrbiterE + aOrbiterB) + 0x4FCBE9F41F0A2E4CULL;
-            aOrbiterF = (((aOrbiterF ^ aOrbiterE) ^ 0xFB0870B55C5554CEULL) ^ aPhaseFOrbiterUpdateSaltD[((aIndex + 22U)) & S_SALT1]) ^ aNonceWordA;
+            aOrbiterF = (((aOrbiterF ^ aOrbiterE) ^ 0xFB0870B55C5554CEULL) ^ aPhaseFOrbiterUpdateSaltD[((aIndex + 22U)) & 31]) ^ aNonceWordA;
             aOrbiterF = RotL64((aOrbiterF * 0x3C9A4076A5AA161FULL), 23U);
             //
             aOrbiterB = (aOrbiterB + aOrbiterD) + 0x8CDCF81013D1E89EULL;
@@ -8271,7 +8271,7 @@ void TwistExpander_Antares_Arx::Seed_E(TwistWorkSpace *pWorkSpace,
             aOrbiterA = RotL64((aOrbiterA * 0x2F2B2BAB7D384871ULL), 5U);
             //
             aOrbiterI = ((aOrbiterI + aOrbiterG) + 0xBEDF6261FBB4A27CULL) + aNonceWordG;
-            aOrbiterD = ((aOrbiterD ^ aOrbiterI) ^ 0x2E76336F3D284190ULL) ^ aPhaseFOrbiterUpdateSaltF[((aIndex + 7U)) & S_SALT1];
+            aOrbiterD = ((aOrbiterD ^ aOrbiterI) ^ 0x2E76336F3D284190ULL) ^ aPhaseFOrbiterUpdateSaltF[((aIndex + 7U)) & 31];
             aOrbiterD = RotL64((aOrbiterD * 0xB6BF9DCFC8997329ULL), 47U);
             //
             aOrbiterF = (aOrbiterF + aOrbiterA) + 0xE0B93A650C89D35CULL;
@@ -8279,7 +8279,7 @@ void TwistExpander_Antares_Arx::Seed_E(TwistWorkSpace *pWorkSpace,
             aOrbiterJ = RotL64((aOrbiterJ * 0x872A20FB14145029ULL), 57U);
             //
             aOrbiterG = (aOrbiterG + aOrbiterJ) + 0x5149924501E58764ULL;
-            aOrbiterE = ((aOrbiterE ^ aOrbiterG) ^ 0x0242DA3D6874A41FULL) ^ aPhaseFOrbiterUpdateSaltA[(((31U - aIndex) + 23U)) & S_SALT1];
+            aOrbiterE = ((aOrbiterE ^ aOrbiterG) ^ 0x0242DA3D6874A41FULL) ^ aPhaseFOrbiterUpdateSaltA[(((31U - aIndex) + 23U)) & 31];
             aOrbiterE = RotL64((aOrbiterE * 0x9D4CC51A426C6161ULL), 51U);
             //
             aOrbiterA = (aOrbiterA + aOrbiterC) + 0x7F2EA773B5FD81B0ULL;
@@ -8287,7 +8287,7 @@ void TwistExpander_Antares_Arx::Seed_E(TwistWorkSpace *pWorkSpace,
             aOrbiterI = RotL64((aOrbiterI * 0x9F6FDB8251EAD4A3ULL), 11U);
             //
             aOrbiterD = (aOrbiterD + aOrbiterE) + 0xCE6C08093BF422D6ULL;
-            aOrbiterC = ((aOrbiterC ^ aOrbiterD) ^ 0xCBE7EAB051EF7725ULL) ^ aPhaseFOrbiterUpdateSaltB[(((31U - aIndex) + 8U)) & S_SALT1];
+            aOrbiterC = ((aOrbiterC ^ aOrbiterD) ^ 0xCBE7EAB051EF7725ULL) ^ aPhaseFOrbiterUpdateSaltB[(((31U - aIndex) + 8U)) & 31];
             aOrbiterC = RotL64((aOrbiterC * 0x4643CD7DAB76A623ULL), 37U);
             //
             aOrbiterJ = (aOrbiterJ + aOrbiterI) + 0xB787107502146A52ULL;
@@ -8307,8 +8307,8 @@ void TwistExpander_Antares_Arx::Seed_E(TwistWorkSpace *pWorkSpace,
             aWandererD = aWandererD ^ ((RotL64(aScatter, 3U) + aOrbiterI) + RotL64(aOrbiterE, 13U));
             aWandererJ = aWandererJ + ((((RotL64(aPrevious, 10U) + aOrbiterA) + RotL64(aOrbiterG, 3U)) + RotL64(aCarry, 11U)) + aNonceWordM);
             aWandererK = aWandererK ^ (((RotL64(aScatter, 39U) + RotL64(aOrbiterC, 29U)) + aOrbiterJ) + aNonceWordO);
-            aWandererE = aWandererE + (((RotL64(aCross, 27U) + aOrbiterB) + RotL64(aOrbiterD, 41U)) + aPhaseFWandererUpdateSaltE[((aIndex + 4U)) & S_SALT1]);
-            aWandererB = aWandererB ^ (((RotL64(aIngress, 47U) + aOrbiterF) + RotL64(aOrbiterJ, 57U)) + aPhaseFWandererUpdateSaltA[((aIndex + 19U)) & S_SALT1]);
+            aWandererE = aWandererE + (((RotL64(aCross, 27U) + aOrbiterB) + RotL64(aOrbiterD, 41U)) + aPhaseFWandererUpdateSaltE[((aIndex + 4U)) & 31]);
+            aWandererB = aWandererB ^ (((RotL64(aIngress, 47U) + aOrbiterF) + RotL64(aOrbiterJ, 57U)) + aPhaseFWandererUpdateSaltA[((aIndex + 19U)) & 31]);
             aWandererG = aWandererG + ((RotL64(aScatter, 57U) + aOrbiterD) + RotL64(aOrbiterE, 20U));
             //
             aCarry = aCarry + (aWandererH ^ RotL64(aWandererD, 5U));
@@ -8352,9 +8352,9 @@ void TwistExpander_Antares_Arx::Seed_E(TwistWorkSpace *pWorkSpace,
             aOrbiterE = ((aWandererA + RotL64(aScatter, 6U)) + RotL64(aCarry, 5U)) + 0xFCEEB997768B791CULL;
             aOrbiterC = ((aWandererK + RotL64(aCross, 47U)) + RotL64(aCarry, 19U)) + 0x95E7285129B8217CULL;
             aOrbiterF = ((aWandererE + RotL64(aIngress, 27U)) + 0xB5B3784C65F6E1C1ULL) + aNonceWordB;
-            aOrbiterD = ((aWandererH + RotL64(aPrevious, 39U)) + 0x9DB381AE18E60A16ULL) + aPhaseFOrbiterAssignSaltC[(((31U - aIndex) + 9U)) & S_SALT1];
+            aOrbiterD = ((aWandererH + RotL64(aPrevious, 39U)) + 0x9DB381AE18E60A16ULL) + aPhaseFOrbiterAssignSaltC[(((31U - aIndex) + 9U)) & 31];
             aOrbiterH = (aWandererB + RotL64(aScatter, 57U)) + 0x1DD3848C67EF969DULL;
-            aOrbiterB = (((aWandererG + RotL64(aIngress, 23U)) + RotL64(aCarry, 43U)) + 0xA6933F4111F5692DULL) + aPhaseFOrbiterAssignSaltE[((aIndex + 14U)) & S_SALT1];
+            aOrbiterB = (((aWandererG + RotL64(aIngress, 23U)) + RotL64(aCarry, 43U)) + 0xA6933F4111F5692DULL) + aPhaseFOrbiterAssignSaltE[((aIndex + 14U)) & 31];
             aOrbiterG = ((aWandererF + RotL64(aCross, 12U)) + 0x6471E68409CD418EULL) + aNonceWordE;
             aOrbiterK = ((aWandererI + RotL64(aPrevious, 19U)) + 0x334981535F5DD082ULL) + aNonceWordG;
             aOrbiterJ = (aWandererC + RotL64(aScatter, 53U)) + 0xA668E9A2448EE611ULL;
@@ -8371,7 +8371,7 @@ void TwistExpander_Antares_Arx::Seed_E(TwistWorkSpace *pWorkSpace,
             aOrbiterG = (aOrbiterG ^ aOrbiterC) ^ 0x82D1896A82D78A42ULL;
             aOrbiterG = RotL64((aOrbiterG * 0xE922770B202EA981ULL), 11U);
             //
-            aOrbiterH = ((aOrbiterH + aOrbiterK) + 0x0A150CE0A1762AA3ULL) + aPhaseFOrbiterUpdateSaltC[((aIndex + 3U)) & S_SALT1];
+            aOrbiterH = ((aOrbiterH + aOrbiterK) + 0x0A150CE0A1762AA3ULL) + aPhaseFOrbiterUpdateSaltC[((aIndex + 3U)) & 31];
             aOrbiterB = (aOrbiterB ^ aOrbiterH) ^ 0xD95ABF7A883CC71AULL;
             aOrbiterB = RotL64((aOrbiterB * 0x73BEF38DDC41CDDFULL), 51U);
             //
@@ -8384,14 +8384,14 @@ void TwistExpander_Antares_Arx::Seed_E(TwistWorkSpace *pWorkSpace,
             aOrbiterD = RotL64((aOrbiterD * 0xBF2CB7B762D904C7ULL), 27U);
             //
             aOrbiterJ = (aOrbiterJ + aOrbiterF) + 0x12C1930D953F8424ULL;
-            aOrbiterH = ((aOrbiterH ^ aOrbiterJ) ^ 0xB3D3962072E52240ULL) ^ aPhaseFOrbiterUpdateSaltE[((aIndex + 23U)) & S_SALT1];
+            aOrbiterH = ((aOrbiterH ^ aOrbiterJ) ^ 0xB3D3962072E52240ULL) ^ aPhaseFOrbiterUpdateSaltE[((aIndex + 23U)) & 31];
             aOrbiterH = RotL64((aOrbiterH * 0x277AA1872C5836C3ULL), 23U);
             //
             aOrbiterK = ((aOrbiterK + aOrbiterE) + 0xA7D1058F98E676D6ULL) + aNonceWordL;
-            aOrbiterJ = ((aOrbiterJ ^ aOrbiterK) ^ 0x0685C7DF9FA8E441ULL) ^ aPhaseFOrbiterUpdateSaltA[(((31U - aIndex) + 21U)) & S_SALT1];
+            aOrbiterJ = ((aOrbiterJ ^ aOrbiterK) ^ 0x0685C7DF9FA8E441ULL) ^ aPhaseFOrbiterUpdateSaltA[(((31U - aIndex) + 21U)) & 31];
             aOrbiterJ = RotL64((aOrbiterJ * 0xEA7C7ADC927B35E7ULL), 35U);
             //
-            aOrbiterG = (((aOrbiterG + aOrbiterD) + 0x7CC579285AA490AFULL) + aPhaseFOrbiterUpdateSaltB[((aIndex + 7U)) & S_SALT1]) + aNonceWordO;
+            aOrbiterG = (((aOrbiterG + aOrbiterD) + 0x7CC579285AA490AFULL) + aPhaseFOrbiterUpdateSaltB[((aIndex + 7U)) & 31]) + aNonceWordO;
             aOrbiterE = (aOrbiterE ^ aOrbiterG) ^ 0xFB6BF8CAA934EA26ULL;
             aOrbiterE = RotL64((aOrbiterE * 0x37133678A81B4579ULL), 19U);
             //
@@ -8403,8 +8403,8 @@ void TwistExpander_Antares_Arx::Seed_E(TwistWorkSpace *pWorkSpace,
             aIngress = TwistMix64::DiffuseA((aIngress + aScatter));
             //
             aWandererK = aWandererK ^ ((RotL64(aIngress, 57U) + RotL64(aOrbiterJ, 13U)) + aOrbiterB);
-            aWandererE = aWandererE + (((((RotL64(aScatter, 12U) + aOrbiterD) + RotL64(aOrbiterJ, 36U)) + RotL64(aCarry, 27U)) + aNonceWordA) + aPhaseFWandererUpdateSaltA[((aIndex + 20U)) & S_SALT1]);
-            aWandererC = aWandererC ^ ((((RotL64(aCross, 29U) + RotL64(aOrbiterF, 57U)) + aOrbiterH) + aNonceWordK) + aPhaseFWandererUpdateSaltE[((aIndex + 24U)) & S_SALT1]);
+            aWandererE = aWandererE + (((((RotL64(aScatter, 12U) + aOrbiterD) + RotL64(aOrbiterJ, 36U)) + RotL64(aCarry, 27U)) + aNonceWordA) + aPhaseFWandererUpdateSaltA[((aIndex + 20U)) & 31]);
+            aWandererC = aWandererC ^ ((((RotL64(aCross, 29U) + RotL64(aOrbiterF, 57U)) + aOrbiterH) + aNonceWordK) + aPhaseFWandererUpdateSaltE[((aIndex + 24U)) & 31]);
             aWandererB = aWandererB + ((RotL64(aPrevious, 5U) + RotL64(aOrbiterD, 47U)) + aOrbiterH);
             aWandererF = aWandererF ^ ((RotL64(aCross, 47U) + RotL64(aOrbiterG, 41U)) + aOrbiterB);
             aWandererH = aWandererH + (((RotL64(aIngress, 22U) + RotL64(aOrbiterK, 53U)) + aOrbiterH) + RotL64(aCarry, 11U));
@@ -8457,8 +8457,8 @@ void TwistExpander_Antares_Arx::Seed_E(TwistWorkSpace *pWorkSpace,
             aOrbiterC = ((aWandererA + RotL64(aPrevious, 51U)) + RotL64(aCarry, 39U)) + 0x9AF3D07EBA4588BCULL;
             aOrbiterE = (aWandererF + RotL64(aCross, 18U)) + 0xF823925BD435A1DCULL;
             aOrbiterJ = (aWandererI + RotL64(aIngress, 57U)) + 0x4A8567783BDD8C98ULL;
-            aOrbiterF = ((aWandererK + RotL64(aScatter, 11U)) + 0xABE720C9B3CEECC3ULL) + aPhaseBOrbiterAssignSaltF[((aIndex + 25U)) & S_SALT1];
-            aOrbiterB = (((aWandererB + RotL64(aCross, 47U)) + 0xBFB6F981D7DC2534ULL) + aPhaseBOrbiterAssignSaltA[(((31U - aIndex) + 15U)) & S_SALT1]) + aNonceWordE;
+            aOrbiterF = ((aWandererK + RotL64(aScatter, 11U)) + 0xABE720C9B3CEECC3ULL) + aPhaseBOrbiterAssignSaltF[((aIndex + 25U)) & 31];
+            aOrbiterB = (((aWandererB + RotL64(aCross, 47U)) + 0xBFB6F981D7DC2534ULL) + aPhaseBOrbiterAssignSaltA[(((31U - aIndex) + 15U)) & 31]) + aNonceWordE;
             //
             aOrbiterA = ((aOrbiterA + aOrbiterD) + 0xEC3444158E1655BCULL) + aNonceWordH;
             aOrbiterH = (aOrbiterH ^ aOrbiterA) ^ 0xADCF95C5BD6BB368ULL;
@@ -8476,8 +8476,8 @@ void TwistExpander_Antares_Arx::Seed_E(TwistWorkSpace *pWorkSpace,
             aOrbiterA = (aOrbiterA ^ aOrbiterJ) ^ 0xA4ED489ADDD81327ULL;
             aOrbiterA = RotL64((aOrbiterA * 0x4E0CDADEE9E22875ULL), 57U);
             //
-            aOrbiterD = ((aOrbiterD + aOrbiterE) + 0x2BC1693B07C39D2CULL) + aPhaseBOrbiterUpdateSaltF[((aIndex + 10U)) & S_SALT1];
-            aOrbiterF = ((aOrbiterF ^ aOrbiterD) ^ 0x49C7CA8515DB8A18ULL) ^ aPhaseBOrbiterUpdateSaltB[(((31U - aIndex) + 19U)) & S_SALT1];
+            aOrbiterD = ((aOrbiterD + aOrbiterE) + 0x2BC1693B07C39D2CULL) + aPhaseBOrbiterUpdateSaltF[((aIndex + 10U)) & 31];
+            aOrbiterF = ((aOrbiterF ^ aOrbiterD) ^ 0x49C7CA8515DB8A18ULL) ^ aPhaseBOrbiterUpdateSaltB[(((31U - aIndex) + 19U)) & 31];
             aOrbiterF = RotL64((aOrbiterF * 0x2FB0EEB77DBD0D5DULL), 19U);
             //
             aOrbiterH = (aOrbiterH + aOrbiterF) + 0x6C931DB9E2655E3EULL;
@@ -8492,8 +8492,8 @@ void TwistExpander_Antares_Arx::Seed_E(TwistWorkSpace *pWorkSpace,
             aOrbiterC = (aOrbiterC ^ aOrbiterB) ^ 0xC5A51D2B4ACACCEBULL;
             aOrbiterC = RotL64((aOrbiterC * 0x07444116C95E7DF7ULL), 47U);
             //
-            aOrbiterE = ((aOrbiterE + aOrbiterH) + 0x94A5BE9C2315F0F4ULL) + aPhaseBOrbiterUpdateSaltC[(((31U - aIndex) + 5U)) & S_SALT1];
-            aOrbiterB = ((aOrbiterB ^ aOrbiterE) ^ 0x49E91B8DD938E194ULL) ^ aPhaseBOrbiterUpdateSaltD[((aIndex + 18U)) & S_SALT1];
+            aOrbiterE = ((aOrbiterE + aOrbiterH) + 0x94A5BE9C2315F0F4ULL) + aPhaseBOrbiterUpdateSaltC[(((31U - aIndex) + 5U)) & 31];
+            aOrbiterB = ((aOrbiterB ^ aOrbiterE) ^ 0x49E91B8DD938E194ULL) ^ aPhaseBOrbiterUpdateSaltD[((aIndex + 18U)) & 31];
             aOrbiterB = RotL64((aOrbiterB * 0xEBBF27966929DB35ULL), 39U);
             //
             aIngress = aOrbiterD ^ RotL64(aOrbiterB, 19U);
@@ -8507,9 +8507,9 @@ void TwistExpander_Antares_Arx::Seed_E(TwistWorkSpace *pWorkSpace,
             aWandererB = aWandererB + (((RotL64(aScatter, 19U) + RotL64(aOrbiterG, 20U)) + aOrbiterF) + aNonceWordL);
             aWandererE = aWandererE ^ ((RotL64(aPrevious, 39U) + RotL64(aOrbiterA, 53U)) + aOrbiterC);
             aWandererC = aWandererC + (((RotL64(aIngress, 44U) + RotL64(aOrbiterJ, 57U)) + aOrbiterH) + RotL64(aCarry, 41U));
-            aWandererA = aWandererA ^ (((RotL64(aCross, 35U) + RotL64(aOrbiterH, 27U)) + aOrbiterB) + aPhaseBWandererUpdateSaltC[(((31U - aIndex) + 29U)) & S_SALT1]);
+            aWandererA = aWandererA ^ (((RotL64(aCross, 35U) + RotL64(aOrbiterH, 27U)) + aOrbiterB) + aPhaseBWandererUpdateSaltC[(((31U - aIndex) + 29U)) & 31]);
             aWandererF = aWandererF + ((((RotL64(aPrevious, 51U) + RotL64(aOrbiterJ, 43U)) + aOrbiterG) + RotL64(aCarry, 3U)) + aNonceWordO);
-            aWandererG = aWandererG ^ (((RotL64(aIngress, 29U) + RotL64(aOrbiterC, 37U)) + aOrbiterD) + aPhaseBWandererUpdateSaltD[(((31U - aIndex) + 16U)) & S_SALT1]);
+            aWandererG = aWandererG ^ (((RotL64(aIngress, 29U) + RotL64(aOrbiterC, 37U)) + aOrbiterD) + aPhaseBWandererUpdateSaltD[(((31U - aIndex) + 16U)) & 31]);
             aWandererI = aWandererI + ((RotL64(aScatter, 3U) + RotL64(aOrbiterA, 47U)) + aOrbiterE);
             aWandererK = aWandererK ^ ((RotL64(aPrevious, 10U) + aOrbiterC) + RotL64(aOrbiterG, 14U));
             //
@@ -8557,8 +8557,8 @@ void TwistExpander_Antares_Arx::Seed_E(TwistWorkSpace *pWorkSpace,
             aOrbiterF = (aWandererD + RotL64(aScatter, 5U)) + 0x6D4D64D0B7E8B15CULL;
             aOrbiterC = ((aWandererH + RotL64(aCross, 23U)) + RotL64(aCarry, 23U)) + 0x45C0DC1D32D1D163ULL;
             aOrbiterJ = (aWandererB + RotL64(aScatter, 35U)) + 0xB9D39F065C139BECULL;
-            aOrbiterE = ((((aWandererE + RotL64(aPrevious, 13U)) + RotL64(aCarry, 11U)) + 0x37E5A7C579C4B50DULL) + aPhaseDOrbiterAssignSaltF[(((31U - aIndex) + 21U)) & S_SALT1]) + aNonceWordL;
-            aOrbiterA = ((aWandererA + RotL64(aIngress, 30U)) + 0x42E813F482F86B71ULL) + aPhaseDOrbiterAssignSaltA[((aIndex + 5U)) & S_SALT1];
+            aOrbiterE = ((((aWandererE + RotL64(aPrevious, 13U)) + RotL64(aCarry, 11U)) + 0x37E5A7C579C4B50DULL) + aPhaseDOrbiterAssignSaltF[(((31U - aIndex) + 21U)) & 31]) + aNonceWordL;
+            aOrbiterA = ((aWandererA + RotL64(aIngress, 30U)) + 0x42E813F482F86B71ULL) + aPhaseDOrbiterAssignSaltA[((aIndex + 5U)) & 31];
             aOrbiterK = (((aWandererG + RotL64(aScatter, 19U)) + RotL64(aCarry, 35U)) + 0x7B7D741025F86DAFULL) + aNonceWordE;
             //
             aOrbiterB = ((aOrbiterB + aOrbiterG) + 0x4DB8D3EE2F2DA2CCULL) + aNonceWordA;
@@ -8566,14 +8566,14 @@ void TwistExpander_Antares_Arx::Seed_E(TwistWorkSpace *pWorkSpace,
             aOrbiterI = RotL64((aOrbiterI * 0x6243BA7E8147A5A5ULL), 57U);
             //
             aOrbiterG = (aOrbiterG + aOrbiterF) + 0x9E93B598EE5BEEB2ULL;
-            aOrbiterC = (((aOrbiterC ^ aOrbiterG) ^ 0xE1C519C40C80DC21ULL) ^ aPhaseDOrbiterUpdateSaltF[(((31U - aIndex) + 10U)) & S_SALT1]) ^ aNonceWordO;
+            aOrbiterC = (((aOrbiterC ^ aOrbiterG) ^ 0xE1C519C40C80DC21ULL) ^ aPhaseDOrbiterUpdateSaltF[(((31U - aIndex) + 10U)) & 31]) ^ aNonceWordO;
             aOrbiterC = RotL64((aOrbiterC * 0x98C8ACB65FD97B67ULL), 11U);
             //
             aOrbiterC = ((aOrbiterC + aOrbiterJ) + 0x1C4982ECF19FCE30ULL) + aNonceWordC;
             aOrbiterE = (aOrbiterE ^ aOrbiterC) ^ 0x74E95CB22F0A7518ULL;
             aOrbiterE = RotL64((aOrbiterE * 0xA0BF3A3497E977D5ULL), 29U);
             //
-            aOrbiterA = ((aOrbiterA + aOrbiterE) + 0xCE896E20A77B96D1ULL) + aPhaseDOrbiterUpdateSaltC[((aIndex + 7U)) & S_SALT1];
+            aOrbiterA = ((aOrbiterA + aOrbiterE) + 0xCE896E20A77B96D1ULL) + aPhaseDOrbiterUpdateSaltC[((aIndex + 7U)) & 31];
             aOrbiterF = (aOrbiterF ^ aOrbiterA) ^ 0x474064C2F37765C8ULL;
             aOrbiterF = RotL64((aOrbiterF * 0x06DC6FBD86491187ULL), 23U);
             //
@@ -8581,11 +8581,11 @@ void TwistExpander_Antares_Arx::Seed_E(TwistWorkSpace *pWorkSpace,
             aOrbiterA = (aOrbiterA ^ aOrbiterI) ^ 0x7ED96E57E89AE463ULL;
             aOrbiterA = RotL64((aOrbiterA * 0xF4AA707B8C1F533DULL), 19U);
             //
-            aOrbiterE = ((aOrbiterE + aOrbiterK) + 0xCBCC1786DCF976A7ULL) + aPhaseDOrbiterUpdateSaltE[(((31U - aIndex) + 11U)) & S_SALT1];
+            aOrbiterE = ((aOrbiterE + aOrbiterK) + 0xCBCC1786DCF976A7ULL) + aPhaseDOrbiterUpdateSaltE[(((31U - aIndex) + 11U)) & 31];
             aOrbiterB = (aOrbiterB ^ aOrbiterE) ^ 0x33A0582E1CA75CAAULL;
             aOrbiterB = RotL64((aOrbiterB * 0xB822C64F9F7A6E55ULL), 51U);
             //
-            aOrbiterF = ((aOrbiterF + aOrbiterB) + 0x1A03B0C3A6F7710EULL) + aPhaseDOrbiterUpdateSaltA[((aIndex + 13U)) & S_SALT1];
+            aOrbiterF = ((aOrbiterF + aOrbiterB) + 0x1A03B0C3A6F7710EULL) + aPhaseDOrbiterUpdateSaltA[((aIndex + 13U)) & 31];
             aOrbiterJ = (aOrbiterJ ^ aOrbiterF) ^ 0x71FBEC296FDE2908ULL;
             aOrbiterJ = RotL64((aOrbiterJ * 0x9A515F0A9863676DULL), 35U);
             //
@@ -8610,8 +8610,8 @@ void TwistExpander_Antares_Arx::Seed_E(TwistWorkSpace *pWorkSpace,
             aWandererJ = aWandererJ + ((RotL64(aIngress, 3U) + aOrbiterK) + RotL64(aOrbiterC, 53U));
             aWandererH = aWandererH ^ ((RotL64(aCross, 48U) + RotL64(aOrbiterB, 57U)) + aOrbiterI);
             aWandererB = aWandererB + (((RotL64(aIngress, 19U) + aOrbiterC) + RotL64(aOrbiterJ, 42U)) + RotL64(aCarry, 13U));
-            aWandererD = aWandererD ^ ((((RotL64(aScatter, 35U) + RotL64(aOrbiterE, 5U)) + aOrbiterK) + aNonceWordJ) + aPhaseDWandererUpdateSaltF[((aIndex + 9U)) & S_SALT1]);
-            aWandererA = aWandererA + ((((RotL64(aPrevious, 29U) + aOrbiterE) + RotL64(aOrbiterF, 27U)) + aNonceWordD) + aPhaseDWandererUpdateSaltC[(((31U - aIndex) + 16U)) & S_SALT1]);
+            aWandererD = aWandererD ^ ((((RotL64(aScatter, 35U) + RotL64(aOrbiterE, 5U)) + aOrbiterK) + aNonceWordJ) + aPhaseDWandererUpdateSaltF[((aIndex + 9U)) & 31]);
+            aWandererA = aWandererA + ((((RotL64(aPrevious, 29U) + aOrbiterE) + RotL64(aOrbiterF, 27U)) + aNonceWordD) + aPhaseDWandererUpdateSaltC[(((31U - aIndex) + 16U)) & 31]);
             aWandererC = aWandererC ^ ((RotL64(aIngress, 42U) + RotL64(aOrbiterB, 35U)) + aOrbiterA);
             //
             aCarry = aCarry + (RotL64(aWandererH, 51U) ^ aWandererD);
@@ -8656,8 +8656,8 @@ void TwistExpander_Antares_Arx::Seed_E(TwistWorkSpace *pWorkSpace,
             aOrbiterB = (((aWandererJ + RotL64(aPrevious, 10U)) + RotL64(aCarry, 5U)) + 0xC8A2B8DCBDA03157ULL) + aNonceWordN;
             aOrbiterC = (aWandererF + RotL64(aCross, 53U)) + 0xE926B9E354E81E43ULL;
             aOrbiterD = ((aWandererD + RotL64(aIngress, 27U)) + RotL64(aCarry, 29U)) + 0x7CAAC9A83BCA430CULL;
-            aOrbiterJ = ((aWandererE + RotL64(aScatter, 43U)) + 0x0CCC9F740FD7990AULL) + aPhaseEOrbiterAssignSaltD[(((31U - aIndex) + 21U)) & S_SALT1];
-            aOrbiterI = ((aWandererK + RotL64(aPrevious, 6U)) + 0xC26EFB70A3AFBC69ULL) + aPhaseEOrbiterAssignSaltB[(((31U - aIndex) + 11U)) & S_SALT1];
+            aOrbiterJ = ((aWandererE + RotL64(aScatter, 43U)) + 0x0CCC9F740FD7990AULL) + aPhaseEOrbiterAssignSaltD[(((31U - aIndex) + 21U)) & 31];
+            aOrbiterI = ((aWandererK + RotL64(aPrevious, 6U)) + 0xC26EFB70A3AFBC69ULL) + aPhaseEOrbiterAssignSaltB[(((31U - aIndex) + 11U)) & 31];
             aOrbiterE = (aWandererB + RotL64(aIngress, 19U)) + 0xD0F988C83C5216BEULL;
             aOrbiterK = ((aWandererG + RotL64(aCross, 35U)) + RotL64(aCarry, 41U)) + 0x8290292BBE17B11FULL;
             aOrbiterF = (aWandererI + RotL64(aScatter, 39U)) + 0x592D44782F02998CULL;
@@ -8667,7 +8667,7 @@ void TwistExpander_Antares_Arx::Seed_E(TwistWorkSpace *pWorkSpace,
             aOrbiterC = RotL64((aOrbiterC * 0xFA9966F311E1A1B9ULL), 35U);
             //
             aOrbiterC = (aOrbiterC + aOrbiterD) + 0xB228B9E9895C86E8ULL;
-            aOrbiterJ = (((aOrbiterJ ^ aOrbiterC) ^ 0x0523C44DDDFCDA77ULL) ^ aPhaseEOrbiterUpdateSaltD[((aIndex + 16U)) & S_SALT1]) ^ aNonceWordG;
+            aOrbiterJ = (((aOrbiterJ ^ aOrbiterC) ^ 0x0523C44DDDFCDA77ULL) ^ aPhaseEOrbiterUpdateSaltD[((aIndex + 16U)) & 31]) ^ aNonceWordG;
             aOrbiterJ = RotL64((aOrbiterJ * 0x75406FB4F664094DULL), 27U);
             //
             aOrbiterI = (aOrbiterI + aOrbiterE) + 0x0E7A5CE918B7B0C7ULL;
@@ -8682,7 +8682,7 @@ void TwistExpander_Antares_Arx::Seed_E(TwistWorkSpace *pWorkSpace,
             aOrbiterD = (aOrbiterD ^ aOrbiterB) ^ 0xEB043167D5E28F15ULL;
             aOrbiterD = RotL64((aOrbiterD * 0x6F11A9D5A59D7591ULL), 3U);
             //
-            aOrbiterJ = ((aOrbiterJ + aOrbiterI) + 0x8AA252B0D974F71BULL) + aPhaseEOrbiterUpdateSaltB[(((31U - aIndex) + 29U)) & S_SALT1];
+            aOrbiterJ = ((aOrbiterJ + aOrbiterI) + 0x8AA252B0D974F71BULL) + aPhaseEOrbiterUpdateSaltB[(((31U - aIndex) + 29U)) & 31];
             aOrbiterB = (aOrbiterB ^ aOrbiterJ) ^ 0x7D7F649EB5BD37ACULL;
             aOrbiterB = RotL64((aOrbiterB * 0x7F067B9C3934A071ULL), 57U);
             //
@@ -8691,11 +8691,11 @@ void TwistExpander_Antares_Arx::Seed_E(TwistWorkSpace *pWorkSpace,
             aOrbiterH = RotL64((aOrbiterH * 0x7750A8CC9B829619ULL), 11U);
             //
             aOrbiterK = ((aOrbiterK + aOrbiterH) + 0x2C1A2F8C57A2856CULL) + aNonceWordA;
-            aOrbiterF = ((aOrbiterF ^ aOrbiterK) ^ 0x1C48AC6C0496DC8EULL) ^ aPhaseEOrbiterUpdateSaltF[(((31U - aIndex) + 4U)) & S_SALT1];
+            aOrbiterF = ((aOrbiterF ^ aOrbiterK) ^ 0x1C48AC6C0496DC8EULL) ^ aPhaseEOrbiterUpdateSaltF[(((31U - aIndex) + 4U)) & 31];
             aOrbiterF = RotL64((aOrbiterF * 0x6DB6819CEC523D67ULL), 47U);
             //
             aOrbiterD = (aOrbiterD + aOrbiterF) + 0x8A3A204216494322ULL;
-            aOrbiterI = ((aOrbiterI ^ aOrbiterD) ^ 0xE883471B214A8450ULL) ^ aPhaseEOrbiterUpdateSaltA[((aIndex + 14U)) & S_SALT1];
+            aOrbiterI = ((aOrbiterI ^ aOrbiterD) ^ 0xE883471B214A8450ULL) ^ aPhaseEOrbiterUpdateSaltA[((aIndex + 14U)) & 31];
             aOrbiterI = RotL64((aOrbiterI * 0xF623F284CE097031ULL), 43U);
             //
             aIngress = RotL64(aOrbiterJ, 22U) ^ aOrbiterK;
@@ -8708,10 +8708,10 @@ void TwistExpander_Antares_Arx::Seed_E(TwistWorkSpace *pWorkSpace,
             aWandererJ = aWandererJ + ((RotL64(aScatter, 12U) + RotL64(aOrbiterC, 34U)) + aOrbiterD);
             aWandererF = aWandererF ^ ((RotL64(aIngress, 23U) + RotL64(aOrbiterC, 57U)) + aOrbiterB);
             aWandererG = aWandererG + ((RotL64(aPrevious, 47U) + aOrbiterI) + RotL64(aOrbiterF, 43U));
-            aWandererK = aWandererK ^ (((RotL64(aCross, 51U) + RotL64(aOrbiterJ, 47U)) + aOrbiterH) + aPhaseEWandererUpdateSaltA[((aIndex + 7U)) & S_SALT1]);
+            aWandererK = aWandererK ^ (((RotL64(aCross, 51U) + RotL64(aOrbiterJ, 47U)) + aOrbiterH) + aPhaseEWandererUpdateSaltA[((aIndex + 7U)) & 31]);
             aWandererI = aWandererI + ((((RotL64(aScatter, 3U) + aOrbiterE) + RotL64(aOrbiterC, 39U)) + RotL64(aCarry, 5U)) + aNonceWordM);
             aWandererB = aWandererB ^ (((RotL64(aCross, 34U) + RotL64(aOrbiterH, 13U)) + aOrbiterK) + aNonceWordF);
-            aWandererD = aWandererD + (((RotL64(aIngress, 19U) + RotL64(aOrbiterB, 51U)) + aOrbiterK) + aPhaseEWandererUpdateSaltF[((aIndex + 20U)) & S_SALT1]);
+            aWandererD = aWandererD + (((RotL64(aIngress, 19U) + RotL64(aOrbiterB, 51U)) + aOrbiterK) + aPhaseEWandererUpdateSaltF[((aIndex + 20U)) & 31]);
             aWandererC = aWandererC ^ ((RotL64(aPrevious, 43U) + RotL64(aOrbiterJ, 27U)) + aOrbiterI);
             aWandererE = aWandererE + (((RotL64(aIngress, 39U) + RotL64(aOrbiterE, 6U)) + aOrbiterF) + RotL64(aCarry, 47U));
             //
@@ -8892,8 +8892,8 @@ void TwistExpander_Antares_Arx::Seed_F(TwistWorkSpace *pWorkSpace,
             aScatter = (RotL64(aIngress, 23U) ^ RotL64(aCarry, 10U)) ^ (RotL64(aPrevious, 57U) + RotL64(aCross, 37U));
             aScatter = TwistMix64::DiffuseC(((aScatter ^ aPhaseDDomainWordScatter) ^ aNonceWordH));
             //
-            aOrbiterC = ((aWandererK + RotL64(aCross, 58U)) + 0x1D07EA0B791664ADULL) + aPhaseDOrbiterAssignSaltF[((aIndex + 17U)) & S_SALT1];
-            aOrbiterA = (((aWandererJ + RotL64(aPrevious, 51U)) + RotL64(aCarry, 13U)) + 0x1B687B6BD4D746F5ULL) + aPhaseDOrbiterAssignSaltD[((aIndex + 12U)) & S_SALT1];
+            aOrbiterC = ((aWandererK + RotL64(aCross, 58U)) + 0x1D07EA0B791664ADULL) + aPhaseDOrbiterAssignSaltF[((aIndex + 17U)) & 31];
+            aOrbiterA = (((aWandererJ + RotL64(aPrevious, 51U)) + RotL64(aCarry, 13U)) + 0x1B687B6BD4D746F5ULL) + aPhaseDOrbiterAssignSaltD[((aIndex + 12U)) & 31];
             aOrbiterH = ((aWandererG + RotL64(aScatter, 41U)) + RotL64(aCarry, 35U)) + 0x6A80D16DA4BDFB59ULL;
             aOrbiterD = ((aWandererC + RotL64(aIngress, 35U)) + RotL64(aCarry, 27U)) + 0x7BD383B1C1C0ADF5ULL;
             aOrbiterG = ((aWandererB + RotL64(aPrevious, 53U)) + 0x69E2AA906D0FA029ULL) + aNonceWordM;
@@ -8912,15 +8912,15 @@ void TwistExpander_Antares_Arx::Seed_F(TwistWorkSpace *pWorkSpace,
             aOrbiterE = (aOrbiterE ^ aOrbiterD) ^ 0x9508E55B3335178BULL;
             aOrbiterE = RotL64((aOrbiterE * 0x4328356954C5D75FULL), 51U);
             //
-            aOrbiterI = ((aOrbiterI + aOrbiterF) + 0xCFBBB0B1122681C2ULL) + aPhaseDOrbiterUpdateSaltB[((aIndex + 11U)) & S_SALT1];
+            aOrbiterI = ((aOrbiterI + aOrbiterF) + 0xCFBBB0B1122681C2ULL) + aPhaseDOrbiterUpdateSaltB[((aIndex + 11U)) & 31];
             aOrbiterD = (aOrbiterD ^ aOrbiterI) ^ 0xF3578F84A60AAC5EULL;
             aOrbiterD = RotL64((aOrbiterD * 0xDABD966BEE9D83D5ULL), 5U);
             //
-            aOrbiterA = ((aOrbiterA + aOrbiterD) + 0xD9BDA444DB2617AAULL) + aPhaseDOrbiterUpdateSaltE[((aIndex + 3U)) & S_SALT1];
+            aOrbiterA = ((aOrbiterA + aOrbiterD) + 0xD9BDA444DB2617AAULL) + aPhaseDOrbiterUpdateSaltE[((aIndex + 3U)) & 31];
             aOrbiterK = (aOrbiterK ^ aOrbiterA) ^ 0xE6AD3CB7B6F237EDULL;
             aOrbiterK = RotL64((aOrbiterK * 0x7411270A2CB3FAB1ULL), 13U);
             //
-            aOrbiterK = ((aOrbiterK + aOrbiterE) + 0xF146BF7427DC4A1EULL) + aPhaseDOrbiterUpdateSaltF[(((31U - aIndex) + 18U)) & S_SALT1];
+            aOrbiterK = ((aOrbiterK + aOrbiterE) + 0xF146BF7427DC4A1EULL) + aPhaseDOrbiterUpdateSaltF[(((31U - aIndex) + 18U)) & 31];
             aOrbiterI = (aOrbiterI ^ aOrbiterK) ^ 0x71925713D739C4D1ULL;
             aOrbiterI = RotL64((aOrbiterI * 0xA4BC975DB4070B31ULL), 23U);
             //
@@ -8944,7 +8944,7 @@ void TwistExpander_Antares_Arx::Seed_F(TwistWorkSpace *pWorkSpace,
             aOrbiterB = (aOrbiterB ^ aOrbiterH) ^ 0x41B94F167798BA40ULL;
             aOrbiterB = RotL64((aOrbiterB * 0x3781EBD0C13896D3ULL), 3U);
             //
-            aOrbiterF = (((aOrbiterF + aOrbiterC) + 0x4EF72BEE37C14E3DULL) + aPhaseDOrbiterUpdateSaltC[(((31U - aIndex) + 25U)) & S_SALT1]) + aNonceWordO;
+            aOrbiterF = (((aOrbiterF + aOrbiterC) + 0x4EF72BEE37C14E3DULL) + aPhaseDOrbiterUpdateSaltC[(((31U - aIndex) + 25U)) & 31]) + aNonceWordO;
             aOrbiterG = (aOrbiterG ^ aOrbiterF) ^ 0x91C94644677B7D6EULL;
             aOrbiterG = RotL64((aOrbiterG * 0x4B990F34B7959955ULL), 47U);
             //
@@ -8961,11 +8961,11 @@ void TwistExpander_Antares_Arx::Seed_F(TwistWorkSpace *pWorkSpace,
             aWandererD = aWandererD ^ (((RotL64(aIngress, 51U) + aOrbiterK) + RotL64(aOrbiterA, 46U)) + aNonceWordD);
             aWandererF = aWandererF + (((RotL64(aPrevious, 26U) + aOrbiterB) + RotL64(aOrbiterH, 13U)) + aNonceWordE);
             aWandererC = aWandererC ^ ((RotL64(aIngress, 35U) + RotL64(aOrbiterJ, 35U)) + aOrbiterK);
-            aWandererK = aWandererK + ((((RotL64(aPrevious, 41U) + aOrbiterB) + RotL64(aOrbiterE, 11U)) + RotL64(aCarry, 29U)) + aPhaseDWandererUpdateSaltB[(((31U - aIndex) + 27U)) & S_SALT1]);
+            aWandererK = aWandererK + ((((RotL64(aPrevious, 41U) + aOrbiterB) + RotL64(aOrbiterE, 11U)) + RotL64(aCarry, 29U)) + aPhaseDWandererUpdateSaltB[(((31U - aIndex) + 27U)) & 31]);
             aWandererA = aWandererA ^ ((RotL64(aScatter, 19U) + RotL64(aOrbiterG, 37U)) + aOrbiterD);
             aWandererE = aWandererE + ((((RotL64(aCross, 11U) + RotL64(aOrbiterF, 51U)) + aOrbiterC) + RotL64(aCarry, 19U)) + aNonceWordC);
             aWandererH = aWandererH ^ ((RotL64(aScatter, 43U) + aOrbiterK) + RotL64(aOrbiterF, 60U));
-            aWandererB = aWandererB + (((RotL64(aIngress, 57U) + RotL64(aOrbiterA, 57U)) + aOrbiterH) + aPhaseDWandererUpdateSaltF[(((31U - aIndex) + 8U)) & S_SALT1]);
+            aWandererB = aWandererB + (((RotL64(aIngress, 57U) + RotL64(aOrbiterA, 57U)) + aOrbiterH) + aPhaseDWandererUpdateSaltF[(((31U - aIndex) + 8U)) & 31]);
             aWandererG = aWandererG ^ (((RotL64(aPrevious, 38U) + aOrbiterJ) + RotL64(aOrbiterH, 5U)) + aNonceWordN);
             //
             aCarry = aCarry + (RotL64(aWandererA, 37U) ^ aWandererH);
@@ -9010,17 +9010,17 @@ void TwistExpander_Antares_Arx::Seed_F(TwistWorkSpace *pWorkSpace,
             aOrbiterG = (aWandererI + RotL64(aIngress, 26U)) + 0x82DD146529168915ULL;
             aOrbiterF = ((aWandererA + RotL64(aPrevious, 37U)) + RotL64(aCarry, 21U)) + 0xCF580CD4F490596AULL;
             aOrbiterK = ((aWandererG + RotL64(aScatter, 23U)) + 0xC88EB55067D5E8C2ULL) + aNonceWordA;
-            aOrbiterC = (((aWandererE + RotL64(aCross, 13U)) + RotL64(aCarry, 41U)) + 0x06A4813D20E496FBULL) + aPhaseCOrbiterAssignSaltE[(((31U - aIndex) + 19U)) & S_SALT1];
+            aOrbiterC = (((aWandererE + RotL64(aCross, 13U)) + RotL64(aCarry, 41U)) + 0x06A4813D20E496FBULL) + aPhaseCOrbiterAssignSaltE[(((31U - aIndex) + 19U)) & 31];
             aOrbiterH = (aWandererB + RotL64(aIngress, 53U)) + 0xB2EC383819366EECULL;
             aOrbiterA = (aWandererJ + RotL64(aCross, 56U)) + 0xE8D63417D36BAD7AULL;
-            aOrbiterJ = ((aWandererK + RotL64(aScatter, 11U)) + 0x5E7D6A15F0EAB234ULL) + aPhaseCOrbiterAssignSaltF[(((31U - aIndex) + 17U)) & S_SALT1];
+            aOrbiterJ = ((aWandererK + RotL64(aScatter, 11U)) + 0x5E7D6A15F0EAB234ULL) + aPhaseCOrbiterAssignSaltF[(((31U - aIndex) + 17U)) & 31];
             aOrbiterB = ((aWandererD + RotL64(aPrevious, 21U)) + 0xC8185AB9D4CE96DCULL) + aNonceWordG;
             aOrbiterE = ((aWandererF + RotL64(aScatter, 41U)) + RotL64(aCarry, 51U)) + 0xB03BC85B72C2B625ULL;
             aOrbiterI = (aWandererC + RotL64(aIngress, 51U)) + 0x0A2B2E118A4F3C6EULL;
             aOrbiterD = ((aWandererH + RotL64(aCross, 39U)) + 0xB5BCEADB5C6C386FULL) + aNonceWordE;
             //
             aOrbiterG = (aOrbiterG + aOrbiterF) + 0x5B164D5723EC9908ULL;
-            aOrbiterK = ((aOrbiterK ^ aOrbiterG) ^ 0x61AE945B16C9E0F3ULL) ^ aPhaseCOrbiterUpdateSaltD[(((31U - aIndex) + 21U)) & S_SALT1];
+            aOrbiterK = ((aOrbiterK ^ aOrbiterG) ^ 0x61AE945B16C9E0F3ULL) ^ aPhaseCOrbiterUpdateSaltD[(((31U - aIndex) + 21U)) & 31];
             aOrbiterK = RotL64((aOrbiterK * 0x19F51A8E370BE61FULL), 11U);
             //
             aOrbiterC = ((aOrbiterC + aOrbiterH) + 0x90136DB9BE2DEB59ULL) + aNonceWordH;
@@ -9028,7 +9028,7 @@ void TwistExpander_Antares_Arx::Seed_F(TwistWorkSpace *pWorkSpace,
             aOrbiterA = RotL64((aOrbiterA * 0x0513D861BC6BCB5DULL), 37U);
             //
             aOrbiterA = (aOrbiterA + aOrbiterJ) + 0x573A782F595D745DULL;
-            aOrbiterB = ((aOrbiterB ^ aOrbiterA) ^ 0x7E1424A859706BB5ULL) ^ aPhaseCOrbiterUpdateSaltA[(((31U - aIndex) + 15U)) & S_SALT1];
+            aOrbiterB = ((aOrbiterB ^ aOrbiterA) ^ 0x7E1424A859706BB5ULL) ^ aPhaseCOrbiterUpdateSaltA[(((31U - aIndex) + 15U)) & 31];
             aOrbiterB = RotL64((aOrbiterB * 0xEB691E0CD44275E7ULL), 13U);
             //
             aOrbiterJ = (aOrbiterJ + aOrbiterK) + 0x3A9693B34924B999ULL;
@@ -9048,14 +9048,14 @@ void TwistExpander_Antares_Arx::Seed_F(TwistWorkSpace *pWorkSpace,
             aOrbiterG = RotL64((aOrbiterG * 0xD3E0424235266273ULL), 3U);
             //
             aOrbiterB = (aOrbiterB + aOrbiterE) + 0x344CEEDB5FA71953ULL;
-            aOrbiterH = (((aOrbiterH ^ aOrbiterB) ^ 0xDD63C620431F7E06ULL) ^ aPhaseCOrbiterUpdateSaltE[((aIndex + 7U)) & S_SALT1]) ^ aNonceWordP;
+            aOrbiterH = (((aOrbiterH ^ aOrbiterB) ^ 0xDD63C620431F7E06ULL) ^ aPhaseCOrbiterUpdateSaltE[((aIndex + 7U)) & 31]) ^ aNonceWordP;
             aOrbiterH = RotL64((aOrbiterH * 0x635A2C123AEFD09BULL), 35U);
             //
             aOrbiterH = (aOrbiterH + aOrbiterG) + 0x9E9EC7822CA06E56ULL;
             aOrbiterJ = (aOrbiterJ ^ aOrbiterH) ^ 0xC5B3EB20C5F70AF5ULL;
             aOrbiterJ = RotL64((aOrbiterJ * 0x167C475650169D73ULL), 19U);
             //
-            aOrbiterI = ((aOrbiterI + aOrbiterB) + 0x223E0C43F6291A81ULL) + aPhaseCOrbiterUpdateSaltB[((aIndex + 28U)) & S_SALT1];
+            aOrbiterI = ((aOrbiterI + aOrbiterB) + 0x223E0C43F6291A81ULL) + aPhaseCOrbiterUpdateSaltB[((aIndex + 28U)) & 31];
             aOrbiterC = (aOrbiterC ^ aOrbiterI) ^ 0xACFC13E6F63EC849ULL;
             aOrbiterC = RotL64((aOrbiterC * 0xC5A3D6E5D3182CE5ULL), 5U);
             //
@@ -9071,12 +9071,12 @@ void TwistExpander_Antares_Arx::Seed_F(TwistWorkSpace *pWorkSpace,
             aIngress = aIngress + RotL64(aOrbiterI, 51U);
             aIngress = TwistMix64::DiffuseB((aIngress + aScatter));
             //
-            aWandererA = aWandererA ^ (((RotL64(aPrevious, 13U) + aOrbiterD) + RotL64(aOrbiterB, 43U)) + aPhaseCWandererUpdateSaltA[((aIndex + 23U)) & S_SALT1]);
+            aWandererA = aWandererA ^ (((RotL64(aPrevious, 13U) + aOrbiterD) + RotL64(aOrbiterB, 43U)) + aPhaseCWandererUpdateSaltA[((aIndex + 23U)) & 31]);
             aWandererK = aWandererK + (((RotL64(aScatter, 21U) + aOrbiterF) + RotL64(aOrbiterK, 23U)) + aNonceWordN);
             aWandererE = aWandererE ^ ((RotL64(aCross, 26U) + aOrbiterF) + RotL64(aOrbiterI, 37U));
             aWandererB = aWandererB + (((RotL64(aIngress, 5U) + RotL64(aOrbiterC, 27U)) + aOrbiterG) + RotL64(aCarry, 3U));
             aWandererD = aWandererD ^ ((RotL64(aCross, 3U) + aOrbiterF) + RotL64(aOrbiterJ, 54U));
-            aWandererF = aWandererF + (((RotL64(aIngress, 43U) + RotL64(aOrbiterC, 5U)) + aOrbiterI) + aPhaseCWandererUpdateSaltF[(((31U - aIndex) + 12U)) & S_SALT1]);
+            aWandererF = aWandererF + (((RotL64(aIngress, 43U) + RotL64(aOrbiterC, 5U)) + aOrbiterI) + aPhaseCWandererUpdateSaltF[(((31U - aIndex) + 12U)) & 31]);
             aWandererI = aWandererI ^ (((RotL64(aPrevious, 35U) + RotL64(aOrbiterC, 47U)) + aOrbiterH) + aNonceWordK);
             aWandererJ = aWandererJ + ((RotL64(aScatter, 50U) + RotL64(aOrbiterJ, 41U)) + aOrbiterG);
             aWandererG = aWandererG ^ (((RotL64(aPrevious, 53U) + aOrbiterE) + RotL64(aOrbiterG, 14U)) + aNonceWordB);
@@ -9126,12 +9126,12 @@ void TwistExpander_Antares_Arx::Seed_F(TwistWorkSpace *pWorkSpace,
             aOrbiterH = (aWandererD + RotL64(aCross, 48U)) + 0x3D65AED61B2368EBULL;
             aOrbiterD = (aWandererG + RotL64(aIngress, 5U)) + 0x158B2DBE5F05AF78ULL;
             aOrbiterK = (aWandererB + RotL64(aScatter, 3U)) + 0xF05B56137A0A9D28ULL;
-            aOrbiterJ = ((aWandererA + RotL64(aCross, 41U)) + 0x8857EA5D432928EEULL) + aPhaseAOrbiterAssignSaltB[(((31U - aIndex) + 7U)) & S_SALT1];
+            aOrbiterJ = ((aWandererA + RotL64(aCross, 41U)) + 0x8857EA5D432928EEULL) + aPhaseAOrbiterAssignSaltB[(((31U - aIndex) + 7U)) & 31];
             aOrbiterE = (((aWandererE + RotL64(aPrevious, 37U)) + RotL64(aCarry, 23U)) + 0xF72B9862D58CF3F9ULL) + aNonceWordK;
             aOrbiterF = ((aWandererF + RotL64(aIngress, 39U)) + RotL64(aCarry, 13U)) + 0xF4231F56C0501245ULL;
             aOrbiterI = ((aWandererC + RotL64(aScatter, 52U)) + 0xBF42297BB65E2542ULL) + aNonceWordA;
             aOrbiterC = (aWandererJ + RotL64(aIngress, 29U)) + 0x2893DEF4578BACEBULL;
-            aOrbiterG = ((aWandererI + RotL64(aPrevious, 23U)) + 0x5B415A6E597626CFULL) + aPhaseAOrbiterAssignSaltE[((aIndex + 13U)) & S_SALT1];
+            aOrbiterG = ((aWandererI + RotL64(aPrevious, 23U)) + 0x5B415A6E597626CFULL) + aPhaseAOrbiterAssignSaltE[((aIndex + 13U)) & 31];
             aOrbiterB = ((aWandererK + RotL64(aCross, 19U)) + RotL64(aCarry, 27U)) + 0x1785B2AC1EF6CD03ULL;
             //
             aOrbiterA = (aOrbiterA + aOrbiterH) + 0x256B4956A59A461EULL;
@@ -9146,11 +9146,11 @@ void TwistExpander_Antares_Arx::Seed_F(TwistWorkSpace *pWorkSpace,
             aOrbiterH = (aOrbiterH ^ aOrbiterE) ^ 0x7AEC9A9D99843CA6ULL;
             aOrbiterH = RotL64((aOrbiterH * 0xA3DC1B952B79959FULL), 53U);
             //
-            aOrbiterF = ((aOrbiterF + aOrbiterI) + 0xEDC809BC12FB9833ULL) + aPhaseAOrbiterUpdateSaltF[((aIndex + 11U)) & S_SALT1];
-            aOrbiterC = ((aOrbiterC ^ aOrbiterF) ^ 0x348DE4937E5010C8ULL) ^ aPhaseAOrbiterUpdateSaltE[(((31U - aIndex) + 26U)) & S_SALT1];
+            aOrbiterF = ((aOrbiterF + aOrbiterI) + 0xEDC809BC12FB9833ULL) + aPhaseAOrbiterUpdateSaltF[((aIndex + 11U)) & 31];
+            aOrbiterC = ((aOrbiterC ^ aOrbiterF) ^ 0x348DE4937E5010C8ULL) ^ aPhaseAOrbiterUpdateSaltE[(((31U - aIndex) + 26U)) & 31];
             aOrbiterC = RotL64((aOrbiterC * 0x809A9088896C656BULL), 41U);
             //
-            aOrbiterI = ((aOrbiterI + aOrbiterK) + 0x5E18D31EFBA31040ULL) + aPhaseAOrbiterUpdateSaltB[((aIndex + 15U)) & S_SALT1];
+            aOrbiterI = ((aOrbiterI + aOrbiterK) + 0x5E18D31EFBA31040ULL) + aPhaseAOrbiterUpdateSaltB[((aIndex + 15U)) & 31];
             aOrbiterE = (aOrbiterE ^ aOrbiterI) ^ 0x914CF8C2CA6A97B8ULL;
             aOrbiterE = RotL64((aOrbiterE * 0x3F69CD074BA48EC5ULL), 57U);
             //
@@ -9174,7 +9174,7 @@ void TwistExpander_Antares_Arx::Seed_F(TwistWorkSpace *pWorkSpace,
             aOrbiterB = (aOrbiterB ^ aOrbiterD) ^ 0xFA701496CBBB1740ULL;
             aOrbiterB = RotL64((aOrbiterB * 0x8D641A707909765FULL), 5U);
             //
-            aOrbiterB = ((aOrbiterB + aOrbiterC) + 0x8B28FEBB7877B17BULL) + aPhaseAOrbiterUpdateSaltA[(((31U - aIndex) + 27U)) & S_SALT1];
+            aOrbiterB = ((aOrbiterB + aOrbiterC) + 0x8B28FEBB7877B17BULL) + aPhaseAOrbiterUpdateSaltA[(((31U - aIndex) + 27U)) & 31];
             aOrbiterK = (aOrbiterK ^ aOrbiterB) ^ 0xDEB785E99EA5E675ULL;
             aOrbiterK = RotL64((aOrbiterK * 0xFB173E1D59BB0DCBULL), 21U);
             //
@@ -9186,14 +9186,14 @@ void TwistExpander_Antares_Arx::Seed_F(TwistWorkSpace *pWorkSpace,
             aIngress = aIngress + RotL64(aOrbiterJ, 21U);
             aIngress = TwistMix64::DiffuseB((aIngress + aScatter));
             //
-            aWandererD = aWandererD + (((RotL64(aPrevious, 22U) + aOrbiterB) + RotL64(aOrbiterH, 30U)) + aPhaseAWandererUpdateSaltE[(((31U - aIndex) + 21U)) & S_SALT1]);
+            aWandererD = aWandererD + (((RotL64(aPrevious, 22U) + aOrbiterB) + RotL64(aOrbiterH, 30U)) + aPhaseAWandererUpdateSaltE[(((31U - aIndex) + 21U)) & 31]);
             aWandererC = aWandererC ^ (((RotL64(aScatter, 37U) + RotL64(aOrbiterE, 27U)) + aOrbiterB) + aNonceWordC);
             aWandererG = aWandererG + ((RotL64(aCross, 53U) + RotL64(aOrbiterK, 21U)) + aOrbiterG);
             aWandererH = aWandererH ^ ((RotL64(aIngress, 39U) + RotL64(aOrbiterJ, 3U)) + aOrbiterK);
             aWandererA = aWandererA + (((RotL64(aPrevious, 43U) + RotL64(aOrbiterF, 13U)) + aOrbiterE) + aNonceWordM);
             aWandererJ = aWandererJ ^ ((RotL64(aScatter, 27U) + RotL64(aOrbiterD, 23U)) + aOrbiterF);
             aWandererB = aWandererB + ((((RotL64(aCross, 57U) + RotL64(aOrbiterJ, 53U)) + aOrbiterF) + RotL64(aCarry, 3U)) + aNonceWordP);
-            aWandererE = aWandererE ^ (((RotL64(aIngress, 30U) + aOrbiterK) + RotL64(aOrbiterA, 46U)) + aPhaseAWandererUpdateSaltA[((aIndex + 3U)) & S_SALT1]);
+            aWandererE = aWandererE ^ (((RotL64(aIngress, 30U) + aOrbiterK) + RotL64(aOrbiterA, 46U)) + aPhaseAWandererUpdateSaltA[((aIndex + 3U)) & 31]);
             aWandererF = aWandererF + (((RotL64(aPrevious, 3U) + aOrbiterA) + RotL64(aOrbiterC, 51U)) + aNonceWordO);
             aWandererI = aWandererI ^ ((RotL64(aCross, 13U) + RotL64(aOrbiterA, 39U)) + aOrbiterD);
             aWandererK = aWandererK + (((RotL64(aScatter, 41U) + RotL64(aOrbiterA, 5U)) + aOrbiterI) + RotL64(aCarry, 23U));
@@ -9241,16 +9241,16 @@ void TwistExpander_Antares_Arx::Seed_F(TwistWorkSpace *pWorkSpace,
             aOrbiterI = (aWandererF + RotL64(aCross, 19U)) + 0x821A11FDCA1332BFULL;
             aOrbiterE = ((aWandererG + RotL64(aPrevious, 43U)) + RotL64(aCarry, 43U)) + 0x6487EE2387F60AA7ULL;
             aOrbiterF = ((aWandererK + RotL64(aScatter, 51U)) + 0x7282BB1D53119D65ULL) + aNonceWordA;
-            aOrbiterD = ((aWandererA + RotL64(aIngress, 53U)) + 0x2D60C7E7A9D29FA4ULL) + aPhaseAOrbiterAssignSaltC[(((31U - aIndex) + 17U)) & S_SALT1];
+            aOrbiterD = ((aWandererA + RotL64(aIngress, 53U)) + 0x2D60C7E7A9D29FA4ULL) + aPhaseAOrbiterAssignSaltC[(((31U - aIndex) + 17U)) & 31];
             aOrbiterA = ((aWandererB + RotL64(aScatter, 22U)) + RotL64(aCarry, 13U)) + 0x7BA979619AC4D75DULL;
             aOrbiterC = (aWandererI + RotL64(aPrevious, 27U)) + 0x972E278CEC61CA9EULL;
             aOrbiterH = ((aWandererE + RotL64(aCross, 29U)) + 0x979246CC99DEC9E7ULL) + aNonceWordJ;
-            aOrbiterJ = ((aWandererC + RotL64(aScatter, 41U)) + 0x407D4E12C46BF0CDULL) + aPhaseAOrbiterAssignSaltE[((aIndex + 14U)) & S_SALT1];
+            aOrbiterJ = ((aWandererC + RotL64(aScatter, 41U)) + 0x407D4E12C46BF0CDULL) + aPhaseAOrbiterAssignSaltE[((aIndex + 14U)) & 31];
             aOrbiterB = (aWandererH + RotL64(aCross, 5U)) + 0x6A34E6828DF2F978ULL;
             aOrbiterG = (aWandererJ + RotL64(aPrevious, 34U)) + 0x7638669C37B0E525ULL;
             //
             aOrbiterK = (aOrbiterK + aOrbiterI) + 0xA664328CDE430548ULL;
-            aOrbiterE = ((aOrbiterE ^ aOrbiterK) ^ 0x36E6CF796075568CULL) ^ aPhaseAOrbiterUpdateSaltF[((aIndex + 7U)) & S_SALT1];
+            aOrbiterE = ((aOrbiterE ^ aOrbiterK) ^ 0x36E6CF796075568CULL) ^ aPhaseAOrbiterUpdateSaltF[((aIndex + 7U)) & 31];
             aOrbiterE = RotL64((aOrbiterE * 0x25C08CB7B9DA1AA7ULL), 19U);
             //
             aOrbiterI = (aOrbiterI + aOrbiterF) + 0xDA2E0EF78821A185ULL;
@@ -9266,7 +9266,7 @@ void TwistExpander_Antares_Arx::Seed_F(TwistWorkSpace *pWorkSpace,
             aOrbiterH = RotL64((aOrbiterH * 0x412C4AEDB3DB4B1FULL), 47U);
             //
             aOrbiterJ = (aOrbiterJ + aOrbiterH) + 0xD3F5060BB01DD8F3ULL;
-            aOrbiterB = ((aOrbiterB ^ aOrbiterJ) ^ 0x6797A96799D3BD7DULL) ^ aPhaseAOrbiterUpdateSaltB[(((31U - aIndex) + 8U)) & S_SALT1];
+            aOrbiterB = ((aOrbiterB ^ aOrbiterJ) ^ 0x6797A96799D3BD7DULL) ^ aPhaseAOrbiterUpdateSaltB[(((31U - aIndex) + 8U)) & 31];
             aOrbiterB = RotL64((aOrbiterB * 0x43B647A0DA6B25A5ULL), 35U);
             //
             aOrbiterB = (aOrbiterB + aOrbiterK) + 0x98C473CC8AC95F21ULL;
@@ -9277,7 +9277,7 @@ void TwistExpander_Antares_Arx::Seed_F(TwistWorkSpace *pWorkSpace,
             aOrbiterK = (aOrbiterK ^ aOrbiterH) ^ 0x5672AE5BF7B6CAEDULL;
             aOrbiterK = RotL64((aOrbiterK * 0xBA86DA2428AAADEBULL), 39U);
             //
-            aOrbiterE = ((aOrbiterE + aOrbiterD) + 0xA6F4C383A5CF6A97ULL) + aPhaseAOrbiterUpdateSaltC[((aIndex + 9U)) & S_SALT1];
+            aOrbiterE = ((aOrbiterE + aOrbiterD) + 0xA6F4C383A5CF6A97ULL) + aPhaseAOrbiterUpdateSaltC[((aIndex + 9U)) & 31];
             aOrbiterC = (aOrbiterC ^ aOrbiterE) ^ 0xD7A80EED36A51CD4ULL;
             aOrbiterC = RotL64((aOrbiterC * 0x50E2723D45318961ULL), 53U);
             //
@@ -9289,7 +9289,7 @@ void TwistExpander_Antares_Arx::Seed_F(TwistWorkSpace *pWorkSpace,
             aOrbiterG = (aOrbiterG ^ aOrbiterC) ^ 0xAD8CA7ADF3055C2CULL;
             aOrbiterG = RotL64((aOrbiterG * 0xE4B9F81A3F6C31EDULL), 57U);
             //
-            aOrbiterG = ((aOrbiterG + aOrbiterB) + 0xA6CE7F771291E782ULL) + aPhaseAOrbiterUpdateSaltE[((aIndex + 5U)) & S_SALT1];
+            aOrbiterG = ((aOrbiterG + aOrbiterB) + 0xA6CE7F771291E782ULL) + aPhaseAOrbiterUpdateSaltE[((aIndex + 5U)) & 31];
             aOrbiterI = (aOrbiterI ^ aOrbiterG) ^ 0x3E1E15E2632279A3ULL;
             aOrbiterI = RotL64((aOrbiterI * 0x4D4F8F0D5F145145ULL), 21U);
             //
@@ -9301,11 +9301,11 @@ void TwistExpander_Antares_Arx::Seed_F(TwistWorkSpace *pWorkSpace,
             aIngress = aIngress + RotL64(aOrbiterH, 3U);
             aIngress = TwistMix64::DiffuseA((aIngress + aScatter));
             //
-            aWandererC = aWandererC ^ ((((RotL64(aPrevious, 60U) + RotL64(aOrbiterD, 11U)) + aOrbiterH) + aNonceWordC) + aPhaseAWandererUpdateSaltE[(((31U - aIndex) + 24U)) & S_SALT1]);
+            aWandererC = aWandererC ^ ((((RotL64(aPrevious, 60U) + RotL64(aOrbiterD, 11U)) + aOrbiterH) + aNonceWordC) + aPhaseAWandererUpdateSaltE[(((31U - aIndex) + 24U)) & 31]);
             aWandererB = aWandererB + ((((RotL64(aCross, 21U) + RotL64(aOrbiterB, 37U)) + aOrbiterD) + RotL64(aCarry, 5U)) + aNonceWordL);
             aWandererE = aWandererE ^ ((RotL64(aIngress, 23U) + aOrbiterA) + RotL64(aOrbiterC, 47U));
             aWandererI = aWandererI + ((RotL64(aScatter, 37U) + RotL64(aOrbiterJ, 19U)) + aOrbiterI);
-            aWandererH = aWandererH ^ ((((RotL64(aIngress, 43U) + aOrbiterK) + RotL64(aOrbiterI, 5U)) + aNonceWordH) + aPhaseAWandererUpdateSaltC[(((31U - aIndex) + 4U)) & S_SALT1]);
+            aWandererH = aWandererH ^ ((((RotL64(aIngress, 43U) + aOrbiterK) + RotL64(aOrbiterI, 5U)) + aNonceWordH) + aPhaseAWandererUpdateSaltC[(((31U - aIndex) + 4U)) & 31]);
             aWandererK = aWandererK + (((RotL64(aPrevious, 5U) + RotL64(aOrbiterG, 27U)) + aOrbiterD) + RotL64(aCarry, 43U));
             aWandererA = aWandererA ^ ((RotL64(aCross, 52U) + aOrbiterC) + RotL64(aOrbiterI, 50U));
             aWandererD = aWandererD + (((RotL64(aScatter, 13U) + aOrbiterE) + RotL64(aOrbiterC, 23U)) + aNonceWordN);
@@ -9359,12 +9359,12 @@ void TwistExpander_Antares_Arx::Seed_F(TwistWorkSpace *pWorkSpace,
             aOrbiterG = (aWandererA + RotL64(aScatter, 39U)) + 0xB2E0F636A710957EULL;
             aOrbiterD = ((aWandererF + RotL64(aIngress, 19U)) + RotL64(aCarry, 27U)) + 0x0B7D24833BBB4B71ULL;
             aOrbiterA = ((aWandererB + RotL64(aPrevious, 43U)) + 0x292037E6B4534DD3ULL) + aNonceWordB;
-            aOrbiterB = ((((aWandererG + RotL64(aCross, 26U)) + RotL64(aCarry, 43U)) + 0xD4D52B6D6266B16FULL) + aPhaseDOrbiterAssignSaltE[(((31U - aIndex) + 13U)) & S_SALT1]) + aNonceWordM;
-            aOrbiterJ = ((aWandererI + RotL64(aScatter, 47U)) + 0x30E0B969214B290AULL) + aPhaseDOrbiterAssignSaltD[(((31U - aIndex) + 23U)) & S_SALT1];
+            aOrbiterB = ((((aWandererG + RotL64(aCross, 26U)) + RotL64(aCarry, 43U)) + 0xD4D52B6D6266B16FULL) + aPhaseDOrbiterAssignSaltE[(((31U - aIndex) + 13U)) & 31]) + aNonceWordM;
+            aOrbiterJ = ((aWandererI + RotL64(aScatter, 47U)) + 0x30E0B969214B290AULL) + aPhaseDOrbiterAssignSaltD[(((31U - aIndex) + 23U)) & 31];
             aOrbiterC = (aWandererH + RotL64(aPrevious, 57U)) + 0xABE06FD8FD143DD7ULL;
             aOrbiterK = (aWandererC + RotL64(aIngress, 37U)) + 0xDA14867CA44C5B93ULL;
             //
-            aOrbiterH = ((aOrbiterH + aOrbiterI) + 0x1BB1F8343FA62597ULL) + aPhaseDOrbiterUpdateSaltE[((aIndex + 9U)) & S_SALT1];
+            aOrbiterH = ((aOrbiterH + aOrbiterI) + 0x1BB1F8343FA62597ULL) + aPhaseDOrbiterUpdateSaltE[((aIndex + 9U)) & 31];
             aOrbiterE = (aOrbiterE ^ aOrbiterH) ^ 0x83862214F430BC38ULL;
             aOrbiterE = RotL64((aOrbiterE * 0x190D671D2F9AA0D9ULL), 39U);
             //
@@ -9380,12 +9380,12 @@ void TwistExpander_Antares_Arx::Seed_F(TwistWorkSpace *pWorkSpace,
             aOrbiterB = (aOrbiterB ^ aOrbiterG) ^ 0x68FD91F2615EA9E7ULL;
             aOrbiterB = RotL64((aOrbiterB * 0x604C1DF7538535DBULL), 51U);
             //
-            aOrbiterE = ((aOrbiterE + aOrbiterD) + 0x1EC45BBCFD8D8E7AULL) + aPhaseDOrbiterUpdateSaltD[((aIndex + 18U)) & S_SALT1];
+            aOrbiterE = ((aOrbiterE + aOrbiterD) + 0x1EC45BBCFD8D8E7AULL) + aPhaseDOrbiterUpdateSaltD[((aIndex + 18U)) & 31];
             aOrbiterJ = (aOrbiterJ ^ aOrbiterE) ^ 0xF2465BB5B101C2AEULL;
             aOrbiterJ = RotL64((aOrbiterJ * 0xC7298C7DB5BB5821ULL), 29U);
             //
-            aOrbiterC = ((aOrbiterC + aOrbiterB) + 0x8B44B5E102580FEAULL) + aPhaseDOrbiterUpdateSaltB[((aIndex + 21U)) & S_SALT1];
-            aOrbiterH = ((aOrbiterH ^ aOrbiterC) ^ 0x75D13BC28C4C1F76ULL) ^ aPhaseDOrbiterUpdateSaltC[(((31U - aIndex) + 15U)) & S_SALT1];
+            aOrbiterC = ((aOrbiterC + aOrbiterB) + 0x8B44B5E102580FEAULL) + aPhaseDOrbiterUpdateSaltB[((aIndex + 21U)) & 31];
+            aOrbiterH = ((aOrbiterH ^ aOrbiterC) ^ 0x75D13BC28C4C1F76ULL) ^ aPhaseDOrbiterUpdateSaltC[(((31U - aIndex) + 15U)) & 31];
             aOrbiterH = RotL64((aOrbiterH * 0xE93F7E8D597585CDULL), 37U);
             //
             aOrbiterJ = (aOrbiterJ + aOrbiterA) + 0xC246318F63C0DEE5ULL;
@@ -9424,8 +9424,8 @@ void TwistExpander_Antares_Arx::Seed_F(TwistWorkSpace *pWorkSpace,
             aWandererJ = aWandererJ + (((RotL64(aCross, 37U) + RotL64(aOrbiterH, 23U)) + aOrbiterK) + RotL64(aCarry, 21U));
             aWandererE = aWandererE ^ ((RotL64(aScatter, 3U) + RotL64(aOrbiterE, 3U)) + aOrbiterD);
             aWandererC = aWandererC + ((RotL64(aIngress, 46U) + RotL64(aOrbiterB, 35U)) + aOrbiterA);
-            aWandererA = aWandererA ^ (((RotL64(aPrevious, 11U) + RotL64(aOrbiterA, 13U)) + aOrbiterG) + aPhaseDWandererUpdateSaltF[(((31U - aIndex) + 10U)) & S_SALT1]);
-            aWandererD = aWandererD + ((((RotL64(aIngress, 5U) + aOrbiterF) + RotL64(aOrbiterD, 30U)) + RotL64(aCarry, 29U)) + aPhaseDWandererUpdateSaltE[(((31U - aIndex) + 17U)) & S_SALT1]);
+            aWandererA = aWandererA ^ (((RotL64(aPrevious, 11U) + RotL64(aOrbiterA, 13U)) + aOrbiterG) + aPhaseDWandererUpdateSaltF[(((31U - aIndex) + 10U)) & 31]);
+            aWandererD = aWandererD + ((((RotL64(aIngress, 5U) + aOrbiterF) + RotL64(aOrbiterD, 30U)) + RotL64(aCarry, 29U)) + aPhaseDWandererUpdateSaltE[(((31U - aIndex) + 17U)) & 31]);
             aWandererB = aWandererB ^ ((RotL64(aScatter, 35U) + aOrbiterE) + RotL64(aOrbiterF, 57U));
             //
             aCarry = aCarry + (aWandererJ ^ RotL64(aWandererH, 60U));
@@ -9467,12 +9467,12 @@ void TwistExpander_Antares_Arx::Seed_F(TwistWorkSpace *pWorkSpace,
             aScatter = (RotL64(aCarry, 35U) ^ RotL64(aPrevious, 57U)) + (RotL64(aIngress, 6U) ^ RotL64(aCross, 21U));
             aScatter = TwistMix64::DiffuseA(((aScatter ^ aPhaseDDomainWordScatter) ^ aNonceWordJ));
             //
-            aOrbiterD = ((aWandererG + RotL64(aScatter, 23U)) + 0x2C795776EA1D6BD6ULL) + aPhaseDOrbiterAssignSaltE[(((31U - aIndex) + 11U)) & S_SALT1];
+            aOrbiterD = ((aWandererG + RotL64(aScatter, 23U)) + 0x2C795776EA1D6BD6ULL) + aPhaseDOrbiterAssignSaltE[(((31U - aIndex) + 11U)) & 31];
             aOrbiterC = (aWandererI + RotL64(aIngress, 44U)) + 0xF05018DD38F980F2ULL;
             aOrbiterK = (((aWandererF + RotL64(aPrevious, 53U)) + RotL64(aCarry, 11U)) + 0xCE8FB7D58F2F416FULL) + aNonceWordG;
             aOrbiterJ = (aWandererA + RotL64(aCross, 5U)) + 0x1BAB644E8F27DD26ULL;
             aOrbiterA = (aWandererK + RotL64(aScatter, 27U)) + 0x3BCC621EAAFC6DA3ULL;
-            aOrbiterB = (((aWandererC + RotL64(aIngress, 39U)) + RotL64(aCarry, 35U)) + 0x0B54C4C34F23C72CULL) + aPhaseDOrbiterAssignSaltB[((aIndex + 24U)) & S_SALT1];
+            aOrbiterB = (((aWandererC + RotL64(aIngress, 39U)) + RotL64(aCarry, 35U)) + 0x0B54C4C34F23C72CULL) + aPhaseDOrbiterAssignSaltB[((aIndex + 24U)) & 31];
             aOrbiterF = (aWandererJ + RotL64(aPrevious, 37U)) + 0xAD987A74F4B908D7ULL;
             aOrbiterI = ((aWandererD + RotL64(aCross, 29U)) + RotL64(aCarry, 39U)) + 0x2A4FDFD1773CC872ULL;
             aOrbiterE = (aWandererE + RotL64(aPrevious, 58U)) + 0xCF63A91D858B2660ULL;
@@ -9492,7 +9492,7 @@ void TwistExpander_Antares_Arx::Seed_F(TwistWorkSpace *pWorkSpace,
             aOrbiterF = RotL64((aOrbiterF * 0x9F6B4EB7C3554BC7ULL), 51U);
             //
             aOrbiterI = (aOrbiterI + aOrbiterF) + 0xB9429B9C7B301487ULL;
-            aOrbiterE = ((aOrbiterE ^ aOrbiterI) ^ 0x6C76E6E32174513CULL) ^ aPhaseDOrbiterUpdateSaltE[((aIndex + 15U)) & S_SALT1];
+            aOrbiterE = ((aOrbiterE ^ aOrbiterI) ^ 0x6C76E6E32174513CULL) ^ aPhaseDOrbiterUpdateSaltE[((aIndex + 15U)) & 31];
             aOrbiterE = RotL64((aOrbiterE * 0xBED3CF5A3645D9F9ULL), 39U);
             //
             aOrbiterH = (aOrbiterH + aOrbiterE) + 0x93A47141F935641FULL;
@@ -9503,16 +9503,16 @@ void TwistExpander_Antares_Arx::Seed_F(TwistWorkSpace *pWorkSpace,
             aOrbiterH = (aOrbiterH ^ aOrbiterB) ^ 0x8891F937938DB97BULL;
             aOrbiterH = RotL64((aOrbiterH * 0x0D766A639A7BE7B1ULL), 21U);
             //
-            aOrbiterE = ((aOrbiterE + aOrbiterJ) + 0xCAA314EAE26899A2ULL) + aPhaseDOrbiterUpdateSaltD[(((31U - aIndex) + 18U)) & S_SALT1];
+            aOrbiterE = ((aOrbiterE + aOrbiterJ) + 0xCAA314EAE26899A2ULL) + aPhaseDOrbiterUpdateSaltD[(((31U - aIndex) + 18U)) & 31];
             aOrbiterD = (aOrbiterD ^ aOrbiterE) ^ 0x9D7A6647CDD37490ULL;
             aOrbiterD = RotL64((aOrbiterD * 0x5B1CED581592568FULL), 37U);
             //
-            aOrbiterC = ((aOrbiterC + aOrbiterG) + 0xE12C78B71C7F059CULL) + aPhaseDOrbiterUpdateSaltB[(((31U - aIndex) + 8U)) & S_SALT1];
+            aOrbiterC = ((aOrbiterC + aOrbiterG) + 0xE12C78B71C7F059CULL) + aPhaseDOrbiterUpdateSaltB[(((31U - aIndex) + 8U)) & 31];
             aOrbiterB = (aOrbiterB ^ aOrbiterC) ^ 0x75BC886038DFD26BULL;
             aOrbiterB = RotL64((aOrbiterB * 0x74D5F52046E82FDBULL), 23U);
             //
             aOrbiterA = ((aOrbiterA + aOrbiterD) + 0x0F330C46BF4613A2ULL) + aNonceWordN;
-            aOrbiterG = ((aOrbiterG ^ aOrbiterA) ^ 0x69BC3BA51D1A6CA2ULL) ^ aPhaseDOrbiterUpdateSaltF[((aIndex + 26U)) & S_SALT1];
+            aOrbiterG = ((aOrbiterG ^ aOrbiterA) ^ 0x69BC3BA51D1A6CA2ULL) ^ aPhaseDOrbiterUpdateSaltF[((aIndex + 26U)) & 31];
             aOrbiterG = RotL64((aOrbiterG * 0xD89C7417BD0D3CCFULL), 57U);
             //
             aOrbiterG = (aOrbiterG + aOrbiterK) + 0xC27DA2C5E7D050EDULL;
@@ -9539,9 +9539,9 @@ void TwistExpander_Antares_Arx::Seed_F(TwistWorkSpace *pWorkSpace,
             aWandererB = aWandererB ^ ((RotL64(aIngress, 35U) + aOrbiterG) + RotL64(aOrbiterH, 27U));
             aWandererI = aWandererI + ((RotL64(aPrevious, 39U) + aOrbiterB) + RotL64(aOrbiterI, 57U));
             aWandererE = aWandererE ^ ((RotL64(aCross, 21U) + RotL64(aOrbiterE, 13U)) + aOrbiterC);
-            aWandererH = aWandererH + ((((RotL64(aScatter, 53U) + aOrbiterK) + RotL64(aOrbiterE, 35U)) + aNonceWordH) + aPhaseDWandererUpdateSaltB[(((31U - aIndex) + 10U)) & S_SALT1]);
+            aWandererH = aWandererH + ((((RotL64(aScatter, 53U) + aOrbiterK) + RotL64(aOrbiterE, 35U)) + aNonceWordH) + aPhaseDWandererUpdateSaltB[(((31U - aIndex) + 10U)) & 31]);
             aWandererA = aWandererA ^ ((RotL64(aIngress, 44U) + RotL64(aOrbiterH, 3U)) + aOrbiterB);
-            aWandererJ = aWandererJ + ((((RotL64(aCross, 51U) + RotL64(aOrbiterK, 38U)) + aOrbiterD) + aNonceWordD) + aPhaseDWandererUpdateSaltA[(((31U - aIndex) + 17U)) & S_SALT1]);
+            aWandererJ = aWandererJ + ((((RotL64(aCross, 51U) + RotL64(aOrbiterK, 38U)) + aOrbiterD) + aNonceWordD) + aPhaseDWandererUpdateSaltA[(((31U - aIndex) + 17U)) & 31]);
             //
             aCarry = aCarry + (RotL64(aWandererD, 27U) ^ aWandererA);
             aCarry = aCarry + (aWandererK ^ RotL64(aWandererJ, 54U));
@@ -9734,14 +9734,14 @@ void TwistExpander_Antares_Arx::Seed_G(TwistWorkSpace *pWorkSpace,
             //
             aOrbiterF = ((aWandererD + RotL64(aPrevious, 27U)) + RotL64(aCarry, 35U)) + 0xFD5897898E3DC684ULL;
             aOrbiterC = ((aWandererA + RotL64(aScatter, 13U)) + RotL64(aCarry, 3U)) + 0x5E344EE7429BAA05ULL;
-            aOrbiterB = ((aWandererC + RotL64(aIngress, 51U)) + 0x3912339A19E3BCE1ULL) + aPhaseEOrbiterAssignSaltE[((aIndex + 25U)) & S_SALT1];
+            aOrbiterB = ((aWandererC + RotL64(aIngress, 51U)) + 0x3912339A19E3BCE1ULL) + aPhaseEOrbiterAssignSaltE[((aIndex + 25U)) & 31];
             aOrbiterK = (((aWandererI + RotL64(aCross, 3U)) + RotL64(aCarry, 51U)) + 0x5C99CBC77E42D08CULL) + aNonceWordK;
             aOrbiterE = (aWandererJ + RotL64(aPrevious, 19U)) + 0xF5019D943D1015FAULL;
-            aOrbiterD = ((aWandererG + RotL64(aIngress, 42U)) + 0x9F5356B56FC79962ULL) + aPhaseEOrbiterAssignSaltB[(((31U - aIndex) + 13U)) & S_SALT1];
+            aOrbiterD = ((aWandererG + RotL64(aIngress, 42U)) + 0x9F5356B56FC79962ULL) + aPhaseEOrbiterAssignSaltB[(((31U - aIndex) + 13U)) & 31];
             aOrbiterH = ((aWandererK + RotL64(aCross, 57U)) + 0xA1C922835BBCD25BULL) + aNonceWordD;
             //
             aOrbiterF = (aOrbiterF + aOrbiterC) + 0x903F7D0DF6E5BCBDULL;
-            aOrbiterB = ((aOrbiterB ^ aOrbiterF) ^ 0xE0A52E55E7DCF03DULL) ^ aPhaseEOrbiterUpdateSaltA[(((31U - aIndex) + 5U)) & S_SALT1];
+            aOrbiterB = ((aOrbiterB ^ aOrbiterF) ^ 0xE0A52E55E7DCF03DULL) ^ aPhaseEOrbiterUpdateSaltA[(((31U - aIndex) + 5U)) & 31];
             aOrbiterB = RotL64((aOrbiterB * 0xFCB7E29C520F928DULL), 11U);
             //
             aOrbiterK = ((aOrbiterK + aOrbiterF) + 0x121DDB5FAE1A21CDULL) + aNonceWordM;
@@ -9753,19 +9753,19 @@ void TwistExpander_Antares_Arx::Seed_G(TwistWorkSpace *pWorkSpace,
             aOrbiterC = RotL64((aOrbiterC * 0xB5A24192BF051585ULL), 27U);
             //
             aOrbiterC = (aOrbiterC + aOrbiterH) + 0xB5A2FB3C5F9D870DULL;
-            aOrbiterK = ((aOrbiterK ^ aOrbiterC) ^ 0x67163D72187CD6B7ULL) ^ aPhaseEOrbiterUpdateSaltC[((aIndex + 28U)) & S_SALT1];
+            aOrbiterK = ((aOrbiterK ^ aOrbiterC) ^ 0x67163D72187CD6B7ULL) ^ aPhaseEOrbiterUpdateSaltC[((aIndex + 28U)) & 31];
             aOrbiterK = RotL64((aOrbiterK * 0x086B7BF13C6B870BULL), 19U);
             //
             aOrbiterH = (aOrbiterH + aOrbiterD) + 0x4762730BB366BFB7ULL;
             aOrbiterF = (aOrbiterF ^ aOrbiterH) ^ 0x6721FCCB04ED7C57ULL;
             aOrbiterF = RotL64((aOrbiterF * 0x4178EE8777894E27ULL), 35U);
             //
-            aOrbiterB = ((aOrbiterB + aOrbiterK) + 0xA309955526555234ULL) + aPhaseEOrbiterUpdateSaltB[(((31U - aIndex) + 29U)) & S_SALT1];
+            aOrbiterB = ((aOrbiterB + aOrbiterK) + 0xA309955526555234ULL) + aPhaseEOrbiterUpdateSaltB[(((31U - aIndex) + 29U)) & 31];
             aOrbiterD = (aOrbiterD ^ aOrbiterB) ^ 0x792C6754524E34E8ULL;
             aOrbiterD = RotL64((aOrbiterD * 0xDA6B64C68B12131BULL), 3U);
             //
             aOrbiterE = (aOrbiterE + aOrbiterB) + 0x3A692FB02826ADA4ULL;
-            aOrbiterH = (((aOrbiterH ^ aOrbiterE) ^ 0x1F4A072D21026945ULL) ^ aPhaseEOrbiterUpdateSaltF[(((31U - aIndex) + 6U)) & S_SALT1]) ^ aNonceWordG;
+            aOrbiterH = (((aOrbiterH ^ aOrbiterE) ^ 0x1F4A072D21026945ULL) ^ aPhaseEOrbiterUpdateSaltF[(((31U - aIndex) + 6U)) & 31]) ^ aNonceWordG;
             aOrbiterH = RotL64((aOrbiterH * 0x781362B27D04B6F9ULL), 51U);
             //
             aIngress = RotL64(aOrbiterC, 19U) ^ aOrbiterE;
@@ -9774,9 +9774,9 @@ void TwistExpander_Antares_Arx::Seed_G(TwistWorkSpace *pWorkSpace,
             aIngress = aIngress + RotL64(aOrbiterF, 3U);
             aIngress = TwistMix64::DiffuseB((aIngress + aScatter));
             //
-            aWandererC = aWandererC + (((RotL64(aScatter, 35U) + aOrbiterE) + RotL64(aOrbiterD, 13U)) + aPhaseEWandererUpdateSaltA[((aIndex + 14U)) & S_SALT1]);
+            aWandererC = aWandererC + (((RotL64(aScatter, 35U) + aOrbiterE) + RotL64(aOrbiterD, 13U)) + aPhaseEWandererUpdateSaltA[((aIndex + 14U)) & 31]);
             aWandererA = aWandererA ^ ((RotL64(aIngress, 3U) + aOrbiterF) + RotL64(aOrbiterC, 22U));
-            aWandererI = aWandererI + ((((RotL64(aPrevious, 19U) + RotL64(aOrbiterH, 35U)) + aOrbiterD) + aNonceWordL) + aPhaseEWandererUpdateSaltB[(((31U - aIndex) + 11U)) & S_SALT1]);
+            aWandererI = aWandererI + ((((RotL64(aPrevious, 19U) + RotL64(aOrbiterH, 35U)) + aOrbiterD) + aNonceWordL) + aPhaseEWandererUpdateSaltB[(((31U - aIndex) + 11U)) & 31]);
             aWandererJ = aWandererJ ^ (((RotL64(aCross, 11U) + RotL64(aOrbiterK, 3U)) + aOrbiterE) + aNonceWordI);
             aWandererG = aWandererG + ((((RotL64(aScatter, 29U) + aOrbiterE) + RotL64(aOrbiterH, 43U)) + RotL64(aCarry, 19U)) + aNonceWordE);
             aWandererD = aWandererD ^ ((RotL64(aCross, 43U) + aOrbiterC) + RotL64(aOrbiterH, 57U));
@@ -9819,15 +9819,15 @@ void TwistExpander_Antares_Arx::Seed_G(TwistWorkSpace *pWorkSpace,
             aScatter = (RotL64(aCarry, 3U) ^ RotL64(aIngress, 37U)) + (RotL64(aCross, 53U) ^ RotL64(aPrevious, 22U));
             aScatter = TwistMix64::DiffuseB(((aScatter ^ aPhaseEDomainWordScatter) ^ aNonceWordG));
             //
-            aOrbiterG = (((aWandererB + RotL64(aPrevious, 60U)) + 0xB3BD53252A28EBACULL) + aPhaseEOrbiterAssignSaltD[(((31U - aIndex) + 16U)) & S_SALT1]) + aNonceWordA;
+            aOrbiterG = (((aWandererB + RotL64(aPrevious, 60U)) + 0xB3BD53252A28EBACULL) + aPhaseEOrbiterAssignSaltD[(((31U - aIndex) + 16U)) & 31]) + aNonceWordA;
             aOrbiterC = ((aWandererJ + RotL64(aIngress, 29U)) + RotL64(aCarry, 3U)) + 0x8BF6E626CD05B5EAULL;
             aOrbiterD = (((aWandererD + RotL64(aCross, 5U)) + RotL64(aCarry, 21U)) + 0x4075E8175F7A398FULL) + aNonceWordO;
             aOrbiterE = ((aWandererC + RotL64(aScatter, 53U)) + RotL64(aCarry, 51U)) + 0x8BBD91C6D7D88E35ULL;
-            aOrbiterJ = (((aWandererH + RotL64(aCross, 47U)) + 0x98D114C1BC4AC11FULL) + aPhaseEOrbiterAssignSaltA[(((31U - aIndex) + 13U)) & S_SALT1]) + aNonceWordC;
+            aOrbiterJ = (((aWandererH + RotL64(aCross, 47U)) + 0x98D114C1BC4AC11FULL) + aPhaseEOrbiterAssignSaltA[(((31U - aIndex) + 13U)) & 31]) + aNonceWordC;
             aOrbiterK = (aWandererG + RotL64(aPrevious, 41U)) + 0x91B2C47AE287C0D1ULL;
             aOrbiterA = (aWandererE + RotL64(aScatter, 21U)) + 0x629F243D25DF8409ULL;
             //
-            aOrbiterG = ((aOrbiterG + aOrbiterC) + 0x86384C17D113E8CDULL) + aPhaseEOrbiterUpdateSaltF[((aIndex + 29U)) & S_SALT1];
+            aOrbiterG = ((aOrbiterG + aOrbiterC) + 0x86384C17D113E8CDULL) + aPhaseEOrbiterUpdateSaltF[((aIndex + 29U)) & 31];
             aOrbiterD = (aOrbiterD ^ aOrbiterG) ^ 0xE2817BF0EF436398ULL;
             aOrbiterD = RotL64((aOrbiterD * 0x691E40E550B0BB83ULL), 27U);
             //
@@ -9835,11 +9835,11 @@ void TwistExpander_Antares_Arx::Seed_G(TwistWorkSpace *pWorkSpace,
             aOrbiterC = (aOrbiterC ^ aOrbiterE) ^ 0xC2D60E3DEC7D64F5ULL;
             aOrbiterC = RotL64((aOrbiterC * 0x765161050A20F9A5ULL), 35U);
             //
-            aOrbiterJ = ((aOrbiterJ + aOrbiterG) + 0xAD45BF50B4FBCE3BULL) + aPhaseEOrbiterUpdateSaltA[((aIndex + 15U)) & S_SALT1];
+            aOrbiterJ = ((aOrbiterJ + aOrbiterG) + 0xAD45BF50B4FBCE3BULL) + aPhaseEOrbiterUpdateSaltA[((aIndex + 15U)) & 31];
             aOrbiterK = (aOrbiterK ^ aOrbiterJ) ^ 0x348F9A7EF38EFEC6ULL;
             aOrbiterK = RotL64((aOrbiterK * 0xA033327B18B6E587ULL), 57U);
             //
-            aOrbiterD = ((aOrbiterD + aOrbiterA) + 0x0B7DD5A2E04684A3ULL) + aPhaseEOrbiterUpdateSaltE[((aIndex + 3U)) & S_SALT1];
+            aOrbiterD = ((aOrbiterD + aOrbiterA) + 0x0B7DD5A2E04684A3ULL) + aPhaseEOrbiterUpdateSaltE[((aIndex + 3U)) & 31];
             aOrbiterJ = ((aOrbiterJ ^ aOrbiterD) ^ 0x240F29B82467B24AULL) ^ aNonceWordF;
             aOrbiterJ = RotL64((aOrbiterJ * 0xB42B17ADCCBC78BFULL), 41U);
             //
@@ -9848,7 +9848,7 @@ void TwistExpander_Antares_Arx::Seed_G(TwistWorkSpace *pWorkSpace,
             aOrbiterE = RotL64((aOrbiterE * 0xDCAE450E7C051453ULL), 11U);
             //
             aOrbiterC = ((aOrbiterC + aOrbiterK) + 0x8F8FC846B2911E14ULL) + aNonceWordM;
-            aOrbiterA = ((aOrbiterA ^ aOrbiterC) ^ 0xF404E2567E78F027ULL) ^ aPhaseEOrbiterUpdateSaltD[((aIndex + 19U)) & S_SALT1];
+            aOrbiterA = ((aOrbiterA ^ aOrbiterC) ^ 0xF404E2567E78F027ULL) ^ aPhaseEOrbiterUpdateSaltD[((aIndex + 19U)) & 31];
             aOrbiterA = RotL64((aOrbiterA * 0xB676AAB94976D68FULL), 5U);
             //
             aOrbiterA = (aOrbiterA + aOrbiterE) + 0xF19845B6088E9221ULL;
@@ -9862,8 +9862,8 @@ void TwistExpander_Antares_Arx::Seed_G(TwistWorkSpace *pWorkSpace,
             aIngress = TwistMix64::DiffuseA((aIngress + aScatter));
             //
             aWandererH = aWandererH + ((((RotL64(aIngress, 11U) + RotL64(aOrbiterA, 13U)) + aOrbiterE) + RotL64(aCarry, 57U)) + aNonceWordD);
-            aWandererJ = aWandererJ ^ (((RotL64(aCross, 27U) + aOrbiterC) + RotL64(aOrbiterJ, 21U)) + aPhaseEWandererUpdateSaltE[((aIndex + 5U)) & S_SALT1]);
-            aWandererB = aWandererB + (((RotL64(aPrevious, 35U) + RotL64(aOrbiterA, 35U)) + aOrbiterG) + aPhaseEWandererUpdateSaltC[(((31U - aIndex) + 8U)) & S_SALT1]);
+            aWandererJ = aWandererJ ^ (((RotL64(aCross, 27U) + aOrbiterC) + RotL64(aOrbiterJ, 21U)) + aPhaseEWandererUpdateSaltE[((aIndex + 5U)) & 31]);
+            aWandererB = aWandererB + (((RotL64(aPrevious, 35U) + RotL64(aOrbiterA, 35U)) + aOrbiterG) + aPhaseEWandererUpdateSaltC[(((31U - aIndex) + 8U)) & 31]);
             aWandererG = aWandererG ^ ((RotL64(aScatter, 19U) + aOrbiterD) + RotL64(aOrbiterA, 51U));
             aWandererE = aWandererE + (((RotL64(aCross, 60U) + RotL64(aOrbiterA, 27U)) + aOrbiterC) + RotL64(aCarry, 13U));
             aWandererD = aWandererD ^ ((RotL64(aPrevious, 53U) + aOrbiterJ) + RotL64(aOrbiterK, 43U));
@@ -9908,18 +9908,18 @@ void TwistExpander_Antares_Arx::Seed_G(TwistWorkSpace *pWorkSpace,
             //
             aOrbiterC = (((aWandererH + RotL64(aPrevious, 19U)) + RotL64(aCarry, 43U)) + 0x6F6227765655B613ULL) + aNonceWordG;
             aOrbiterG = (aWandererG + RotL64(aScatter, 41U)) + 0xE5C9F893608A74C8ULL;
-            aOrbiterA = ((aWandererA + RotL64(aCross, 3U)) + 0x47466A68A2B36660ULL) + aPhaseCOrbiterAssignSaltF[((aIndex + 13U)) & S_SALT1];
+            aOrbiterA = ((aWandererA + RotL64(aCross, 3U)) + 0x47466A68A2B36660ULL) + aPhaseCOrbiterAssignSaltF[((aIndex + 13U)) & 31];
             aOrbiterH = (((aWandererC + RotL64(aIngress, 35U)) + RotL64(aCarry, 21U)) + 0x3A62C052A68E177BULL) + aNonceWordF;
             aOrbiterJ = ((aWandererD + RotL64(aCross, 27U)) + 0x52EC9ED937C6735DULL) + aNonceWordE;
             aOrbiterB = (aWandererF + RotL64(aIngress, 56U)) + 0x4B294B50608A2552ULL;
-            aOrbiterI = (((aWandererK + RotL64(aScatter, 11U)) + RotL64(aCarry, 3U)) + 0x974FECE3AA4261E2ULL) + aPhaseCOrbiterAssignSaltA[((aIndex + 16U)) & S_SALT1];
+            aOrbiterI = (((aWandererK + RotL64(aScatter, 11U)) + RotL64(aCarry, 3U)) + 0x974FECE3AA4261E2ULL) + aPhaseCOrbiterAssignSaltA[((aIndex + 16U)) & 31];
             //
             aOrbiterC = (aOrbiterC + aOrbiterG) + 0x0D20D04056CF23CCULL;
-            aOrbiterA = ((aOrbiterA ^ aOrbiterC) ^ 0xC0C9AC95D205099BULL) ^ aPhaseCOrbiterUpdateSaltD[((aIndex + 25U)) & S_SALT1];
+            aOrbiterA = ((aOrbiterA ^ aOrbiterC) ^ 0xC0C9AC95D205099BULL) ^ aPhaseCOrbiterUpdateSaltD[((aIndex + 25U)) & 31];
             aOrbiterA = RotL64((aOrbiterA * 0x4164681305B9DF3FULL), 13U);
             //
             aOrbiterA = (aOrbiterA + aOrbiterH) + 0xC58BEAADA7018D37ULL;
-            aOrbiterJ = ((aOrbiterJ ^ aOrbiterA) ^ 0xD04A35D689647A6DULL) ^ aPhaseCOrbiterUpdateSaltC[((aIndex + 29U)) & S_SALT1];
+            aOrbiterJ = ((aOrbiterJ ^ aOrbiterA) ^ 0xD04A35D689647A6DULL) ^ aPhaseCOrbiterUpdateSaltC[((aIndex + 29U)) & 31];
             aOrbiterJ = RotL64((aOrbiterJ * 0x6AC67018EE36E9BBULL), 57U);
             //
             aOrbiterJ = (aOrbiterJ + aOrbiterB) + 0xAF893B8F25611263ULL;
@@ -9927,14 +9927,14 @@ void TwistExpander_Antares_Arx::Seed_G(TwistWorkSpace *pWorkSpace,
             aOrbiterI = RotL64((aOrbiterI * 0x7A31CC1B16E66CEDULL), 3U);
             //
             aOrbiterI = (aOrbiterI + aOrbiterC) + 0x0BD2F08A8176910EULL;
-            aOrbiterG = ((aOrbiterG ^ aOrbiterI) ^ 0x6C6D2FB63886F9E1ULL) ^ aPhaseCOrbiterUpdateSaltB[(((31U - aIndex) + 7U)) & S_SALT1];
+            aOrbiterG = ((aOrbiterG ^ aOrbiterI) ^ 0x6C6D2FB63886F9E1ULL) ^ aPhaseCOrbiterUpdateSaltB[(((31U - aIndex) + 7U)) & 31];
             aOrbiterG = RotL64((aOrbiterG * 0xBDA7699A8E293F01ULL), 43U);
             //
             aOrbiterB = (aOrbiterB + aOrbiterI) + 0x0F5E3FB7537E49B6ULL;
             aOrbiterC = (aOrbiterC ^ aOrbiterB) ^ 0x51142F5341C358DCULL;
             aOrbiterC = RotL64((aOrbiterC * 0x5A9090C96DB2EE9BULL), 23U);
             //
-            aOrbiterG = ((aOrbiterG + aOrbiterA) + 0x36DAD7957860E4B8ULL) + aPhaseCOrbiterUpdateSaltF[(((31U - aIndex) + 19U)) & S_SALT1];
+            aOrbiterG = ((aOrbiterG + aOrbiterA) + 0x36DAD7957860E4B8ULL) + aPhaseCOrbiterUpdateSaltF[(((31U - aIndex) + 19U)) & 31];
             aOrbiterH = (aOrbiterH ^ aOrbiterG) ^ 0xC29B3B12EF56BD36ULL;
             aOrbiterH = RotL64((aOrbiterH * 0x55784183FA609323ULL), 37U);
             //
@@ -9952,9 +9952,9 @@ void TwistExpander_Antares_Arx::Seed_G(TwistWorkSpace *pWorkSpace,
             aWandererC = aWandererC + (((RotL64(aCross, 21U) + RotL64(aOrbiterA, 11U)) + aOrbiterJ) + RotL64(aCarry, 3U));
             aWandererG = aWandererG ^ ((RotL64(aScatter, 29U) + RotL64(aOrbiterH, 47U)) + aOrbiterI);
             aWandererK = aWandererK + ((((RotL64(aIngress, 12U) + aOrbiterH) + RotL64(aOrbiterA, 41U)) + RotL64(aCarry, 41U)) + aNonceWordN);
-            aWandererA = aWandererA ^ ((((RotL64(aScatter, 37U) + aOrbiterG) + RotL64(aOrbiterA, 35U)) + aNonceWordM) + aPhaseCWandererUpdateSaltA[((aIndex + 5U)) & S_SALT1]);
+            aWandererA = aWandererA ^ ((((RotL64(aScatter, 37U) + aOrbiterG) + RotL64(aOrbiterA, 35U)) + aNonceWordM) + aPhaseCWandererUpdateSaltA[((aIndex + 5U)) & 31]);
             aWandererD = aWandererD + (((RotL64(aIngress, 51U) + RotL64(aOrbiterI, 58U)) + aOrbiterG) + aNonceWordH);
-            aWandererF = aWandererF ^ ((((RotL64(aPrevious, 3U) + aOrbiterB) + RotL64(aOrbiterJ, 5U)) + aNonceWordD) + aPhaseCWandererUpdateSaltB[(((31U - aIndex) + 24U)) & S_SALT1]);
+            aWandererF = aWandererF ^ ((((RotL64(aPrevious, 3U) + aOrbiterB) + RotL64(aOrbiterJ, 5U)) + aNonceWordD) + aPhaseCWandererUpdateSaltB[(((31U - aIndex) + 24U)) & 31]);
             //
             aCarry = aCarry + (RotL64(aWandererK, 36U) ^ aWandererF);
             aCarry = aCarry + (aWandererH ^ RotL64(aWandererG, 11U));
@@ -9994,10 +9994,10 @@ void TwistExpander_Antares_Arx::Seed_G(TwistWorkSpace *pWorkSpace,
             aScatter = TwistMix64::DiffuseC(((aScatter ^ aPhaseEDomainWordScatter) ^ aNonceWordO));
             //
             aOrbiterK = (aWandererA + RotL64(aIngress, 39U)) + 0x7D2A40E36713DFA2ULL;
-            aOrbiterE = ((aWandererH + RotL64(aCross, 11U)) + 0x1A317202FD06F29CULL) + aPhaseEOrbiterAssignSaltB[(((31U - aIndex) + 17U)) & S_SALT1];
+            aOrbiterE = ((aWandererH + RotL64(aCross, 11U)) + 0x1A317202FD06F29CULL) + aPhaseEOrbiterAssignSaltB[(((31U - aIndex) + 17U)) & 31];
             aOrbiterJ = ((aWandererJ + RotL64(aPrevious, 46U)) + RotL64(aCarry, 53U)) + 0x5B4D35031E521CACULL;
             aOrbiterG = ((aWandererC + RotL64(aScatter, 21U)) + 0x039D180879874E46ULL) + aNonceWordP;
-            aOrbiterI = (((aWandererG + RotL64(aIngress, 5U)) + RotL64(aCarry, 41U)) + 0x69E705EDE71F9705ULL) + aPhaseEOrbiterAssignSaltD[(((31U - aIndex) + 18U)) & S_SALT1];
+            aOrbiterI = (((aWandererG + RotL64(aIngress, 5U)) + RotL64(aCarry, 41U)) + 0x69E705EDE71F9705ULL) + aPhaseEOrbiterAssignSaltD[(((31U - aIndex) + 18U)) & 31];
             aOrbiterB = ((aWandererK + RotL64(aCross, 27U)) + RotL64(aCarry, 27U)) + 0xA526ADFB73096D46ULL;
             aOrbiterD = ((aWandererF + RotL64(aPrevious, 57U)) + 0x60296C3F964CB336ULL) + aNonceWordH;
             //
@@ -10005,11 +10005,11 @@ void TwistExpander_Antares_Arx::Seed_G(TwistWorkSpace *pWorkSpace,
             aOrbiterJ = (aOrbiterJ ^ aOrbiterK) ^ 0x3E536AE68F2460F9ULL;
             aOrbiterJ = RotL64((aOrbiterJ * 0x3B6C222073E40F31ULL), 23U);
             //
-            aOrbiterG = (((aOrbiterG + aOrbiterI) + 0x13059CA1B2B6CF2EULL) + aPhaseEOrbiterUpdateSaltD[((aIndex + 26U)) & S_SALT1]) + aNonceWordD;
+            aOrbiterG = (((aOrbiterG + aOrbiterI) + 0x13059CA1B2B6CF2EULL) + aPhaseEOrbiterUpdateSaltD[((aIndex + 26U)) & 31]) + aNonceWordD;
             aOrbiterB = (aOrbiterB ^ aOrbiterG) ^ 0x9DFAD481E81ABE63ULL;
             aOrbiterB = RotL64((aOrbiterB * 0xD332162E7A82ACF1ULL), 13U);
             //
-            aOrbiterI = ((aOrbiterI + aOrbiterB) + 0x6A6D1B6D9B325EFBULL) + aPhaseEOrbiterUpdateSaltC[(((31U - aIndex) + 9U)) & S_SALT1];
+            aOrbiterI = ((aOrbiterI + aOrbiterB) + 0x6A6D1B6D9B325EFBULL) + aPhaseEOrbiterUpdateSaltC[(((31U - aIndex) + 9U)) & 31];
             aOrbiterD = (aOrbiterD ^ aOrbiterI) ^ 0x738493597CA9A407ULL;
             aOrbiterD = RotL64((aOrbiterD * 0xB0CFEB741CDDD8C1ULL), 41U);
             //
@@ -10021,12 +10021,12 @@ void TwistExpander_Antares_Arx::Seed_G(TwistWorkSpace *pWorkSpace,
             aOrbiterK = (aOrbiterK ^ aOrbiterB) ^ 0x988A53EC687C3E36ULL;
             aOrbiterK = RotL64((aOrbiterK * 0xADD433906B0E3C27ULL), 35U);
             //
-            aOrbiterE = ((aOrbiterE + aOrbiterJ) + 0x58FAED3834364A61ULL) + aPhaseEOrbiterUpdateSaltA[(((31U - aIndex) + 13U)) & S_SALT1];
+            aOrbiterE = ((aOrbiterE + aOrbiterJ) + 0x58FAED3834364A61ULL) + aPhaseEOrbiterUpdateSaltA[(((31U - aIndex) + 13U)) & 31];
             aOrbiterG = ((aOrbiterG ^ aOrbiterE) ^ 0x93E266E49CC414F3ULL) ^ aNonceWordJ;
             aOrbiterG = RotL64((aOrbiterG * 0x1E16EBE1B5752A23ULL), 29U);
             //
             aOrbiterJ = ((aOrbiterJ + aOrbiterG) + 0xF6BE34AC9D3A3EDCULL) + aNonceWordN;
-            aOrbiterI = ((aOrbiterI ^ aOrbiterJ) ^ 0x9E4B3F2A31C04BF5ULL) ^ aPhaseEOrbiterUpdateSaltB[((aIndex + 28U)) & S_SALT1];
+            aOrbiterI = ((aOrbiterI ^ aOrbiterJ) ^ 0x9E4B3F2A31C04BF5ULL) ^ aPhaseEOrbiterUpdateSaltB[((aIndex + 28U)) & 31];
             aOrbiterI = RotL64((aOrbiterI * 0x0EE42315EC964569ULL), 47U);
             //
             aIngress = RotL64(aOrbiterJ, 41U) ^ aOrbiterB;
@@ -10037,9 +10037,9 @@ void TwistExpander_Antares_Arx::Seed_G(TwistWorkSpace *pWorkSpace,
             //
             aWandererF = aWandererF ^ (((RotL64(aIngress, 27U) + RotL64(aOrbiterK, 5U)) + aOrbiterG) + aNonceWordF);
             aWandererK = aWandererK + (((RotL64(aCross, 43U) + RotL64(aOrbiterB, 58U)) + aOrbiterG) + RotL64(aCarry, 27U));
-            aWandererG = aWandererG ^ (((RotL64(aScatter, 4U) + RotL64(aOrbiterE, 29U)) + aOrbiterJ) + aPhaseEWandererUpdateSaltA[((aIndex + 5U)) & S_SALT1]);
+            aWandererG = aWandererG ^ (((RotL64(aScatter, 4U) + RotL64(aOrbiterE, 29U)) + aOrbiterJ) + aPhaseEWandererUpdateSaltA[((aIndex + 5U)) & 31]);
             aWandererA = aWandererA + (((RotL64(aPrevious, 11U) + aOrbiterK) + RotL64(aOrbiterJ, 35U)) + RotL64(aCarry, 11U));
-            aWandererJ = aWandererJ ^ (((RotL64(aScatter, 37U) + aOrbiterK) + RotL64(aOrbiterE, 43U)) + aPhaseEWandererUpdateSaltB[(((31U - aIndex) + 15U)) & S_SALT1]);
+            aWandererJ = aWandererJ ^ (((RotL64(aScatter, 37U) + aOrbiterK) + RotL64(aOrbiterE, 43U)) + aPhaseEWandererUpdateSaltB[(((31U - aIndex) + 15U)) & 31]);
             aWandererC = aWandererC + ((RotL64(aCross, 53U) + aOrbiterI) + RotL64(aOrbiterB, 11U));
             aWandererH = aWandererH ^ (((RotL64(aPrevious, 19U) + RotL64(aOrbiterD, 23U)) + aOrbiterE) + aNonceWordA);
             //
@@ -10080,24 +10080,24 @@ void TwistExpander_Antares_Arx::Seed_G(TwistWorkSpace *pWorkSpace,
             aScatter = (RotL64(aCross, 37U) ^ RotL64(aPrevious, 52U)) ^ (RotL64(aCarry, 23U) + RotL64(aIngress, 5U));
             aScatter = TwistMix64::DiffuseC(((aScatter ^ aPhaseADomainWordScatter) ^ aNonceWordG));
             //
-            aOrbiterD = (((aWandererK + RotL64(aIngress, 53U)) + 0xF3A83DEEE32F2870ULL) + aPhaseAOrbiterAssignSaltF[((aIndex + 6U)) & S_SALT1]) + aNonceWordB;
+            aOrbiterD = (((aWandererK + RotL64(aIngress, 53U)) + 0xF3A83DEEE32F2870ULL) + aPhaseAOrbiterAssignSaltF[((aIndex + 6U)) & 31]) + aNonceWordB;
             aOrbiterE = ((aWandererG + RotL64(aScatter, 3U)) + RotL64(aCarry, 21U)) + 0xADC124F1C7050D7EULL;
             aOrbiterC = ((aWandererA + RotL64(aCross, 13U)) + RotL64(aCarry, 47U)) + 0x3D2844264CAFCC85ULL;
             aOrbiterG = (aWandererJ + RotL64(aPrevious, 44U)) + 0xD3AE1C4FAD058FC7ULL;
-            aOrbiterB = (((aWandererH + RotL64(aIngress, 35U)) + RotL64(aCarry, 3U)) + 0x93941C2A6FA0BCE8ULL) + aPhaseAOrbiterAssignSaltD[(((31U - aIndex) + 3U)) & S_SALT1];
+            aOrbiterB = (((aWandererH + RotL64(aIngress, 35U)) + RotL64(aCarry, 3U)) + 0x93941C2A6FA0BCE8ULL) + aPhaseAOrbiterAssignSaltD[(((31U - aIndex) + 3U)) & 31];
             aOrbiterK = (aWandererI + RotL64(aCross, 27U)) + 0xECF63DEB853375F6ULL;
             aOrbiterI = ((aWandererC + RotL64(aPrevious, 21U)) + 0xDA997EFD1AB61847ULL) + aNonceWordO;
             //
-            aOrbiterD = ((aOrbiterD + aOrbiterE) + 0xB0D647D8831C1411ULL) + aPhaseAOrbiterUpdateSaltE[((aIndex + 21U)) & S_SALT1];
+            aOrbiterD = ((aOrbiterD + aOrbiterE) + 0xB0D647D8831C1411ULL) + aPhaseAOrbiterUpdateSaltE[((aIndex + 21U)) & 31];
             aOrbiterC = (aOrbiterC ^ aOrbiterD) ^ 0x5328AC54CF781AF2ULL;
             aOrbiterC = RotL64((aOrbiterC * 0x504C224588A4D1A9ULL), 3U);
             //
-            aOrbiterG = ((aOrbiterG + aOrbiterD) + 0x76AFCACA0DAD6D1EULL) + aPhaseAOrbiterUpdateSaltB[((aIndex + 5U)) & S_SALT1];
+            aOrbiterG = ((aOrbiterG + aOrbiterD) + 0x76AFCACA0DAD6D1EULL) + aPhaseAOrbiterUpdateSaltB[((aIndex + 5U)) & 31];
             aOrbiterB = (aOrbiterB ^ aOrbiterG) ^ 0x67CE1FC6B68C5B5AULL;
             aOrbiterB = RotL64((aOrbiterB * 0xCB9B3E31901DB50DULL), 11U);
             //
             aOrbiterK = ((aOrbiterK + aOrbiterI) + 0xF43A9055618F0C30ULL) + aNonceWordP;
-            aOrbiterD = ((aOrbiterD ^ aOrbiterK) ^ 0x958F2650C8760C2DULL) ^ aPhaseAOrbiterUpdateSaltD[(((31U - aIndex) + 17U)) & S_SALT1];
+            aOrbiterD = ((aOrbiterD ^ aOrbiterK) ^ 0x958F2650C8760C2DULL) ^ aPhaseAOrbiterUpdateSaltD[(((31U - aIndex) + 17U)) & 31];
             aOrbiterD = RotL64((aOrbiterD * 0x6A2116AB3114840FULL), 19U);
             //
             aOrbiterB = (aOrbiterB + aOrbiterC) + 0x1F81D9431EAF4A70ULL;
@@ -10112,7 +10112,7 @@ void TwistExpander_Antares_Arx::Seed_G(TwistWorkSpace *pWorkSpace,
             aOrbiterK = ((aOrbiterK ^ aOrbiterE) ^ 0x157C057C38613CC3ULL) ^ aNonceWordA;
             aOrbiterK = RotL64((aOrbiterK * 0x7EDA492BCC54327DULL), 51U);
             //
-            aOrbiterI = ((aOrbiterI + aOrbiterG) + 0xEB87CA0568EC94D1ULL) + aPhaseAOrbiterUpdateSaltF[(((31U - aIndex) + 16U)) & S_SALT1];
+            aOrbiterI = ((aOrbiterI + aOrbiterG) + 0xEB87CA0568EC94D1ULL) + aPhaseAOrbiterUpdateSaltF[(((31U - aIndex) + 16U)) & 31];
             aOrbiterE = (aOrbiterE ^ aOrbiterI) ^ 0x1F4FD95E438B161CULL;
             aOrbiterE = RotL64((aOrbiterE * 0x25C5CE0D83564AF5ULL), 35U);
             //
@@ -10127,8 +10127,8 @@ void TwistExpander_Antares_Arx::Seed_G(TwistWorkSpace *pWorkSpace,
             aWandererH = aWandererH + ((((RotL64(aPrevious, 11U) + aOrbiterI) + RotL64(aOrbiterE, 41U)) + RotL64(aCarry, 35U)) + aNonceWordI);
             aWandererI = aWandererI ^ (((RotL64(aIngress, 47U) + aOrbiterK) + RotL64(aOrbiterE, 56U)) + aNonceWordD);
             aWandererJ = aWandererJ + (((RotL64(aScatter, 41U) + aOrbiterG) + RotL64(aOrbiterC, 47U)) + RotL64(aCarry, 51U));
-            aWandererG = aWandererG ^ (((RotL64(aPrevious, 35U) + aOrbiterD) + RotL64(aOrbiterG, 21U)) + aPhaseAWandererUpdateSaltB[(((31U - aIndex) + 8U)) & S_SALT1]);
-            aWandererK = aWandererK + ((((RotL64(aIngress, 26U) + RotL64(aOrbiterB, 3U)) + aOrbiterE) + aNonceWordH) + aPhaseAWandererUpdateSaltF[(((31U - aIndex) + 29U)) & S_SALT1]);
+            aWandererG = aWandererG ^ (((RotL64(aPrevious, 35U) + aOrbiterD) + RotL64(aOrbiterG, 21U)) + aPhaseAWandererUpdateSaltB[(((31U - aIndex) + 8U)) & 31]);
+            aWandererK = aWandererK + ((((RotL64(aIngress, 26U) + RotL64(aOrbiterB, 3U)) + aOrbiterE) + aNonceWordH) + aPhaseAWandererUpdateSaltF[(((31U - aIndex) + 29U)) & 31]);
             //
             aCarry = aCarry + (RotL64(aWandererK, 28U) ^ aWandererJ);
             aCarry = aCarry + (aWandererA ^ RotL64(aWandererH, 47U));
@@ -10169,26 +10169,26 @@ void TwistExpander_Antares_Arx::Seed_G(TwistWorkSpace *pWorkSpace,
             //
             aOrbiterK = ((aWandererC + RotL64(aCross, 23U)) + RotL64(aCarry, 57U)) + 0x7844E08228B189C0ULL;
             aOrbiterE = ((aWandererK + RotL64(aIngress, 35U)) + 0x4B41456731AC2AD8ULL) + aNonceWordL;
-            aOrbiterF = ((aWandererA + RotL64(aScatter, 47U)) + 0x86C5DF885D142B6AULL) + aPhaseDOrbiterAssignSaltD[((aIndex + 28U)) & S_SALT1];
+            aOrbiterF = ((aWandererA + RotL64(aScatter, 47U)) + 0x86C5DF885D142B6AULL) + aPhaseDOrbiterAssignSaltD[((aIndex + 28U)) & 31];
             aOrbiterB = ((aWandererF + RotL64(aPrevious, 13U)) + 0xDAA4E8D0A76A9F4AULL) + aNonceWordO;
             aOrbiterH = ((aWandererJ + RotL64(aScatter, 58U)) + RotL64(aCarry, 23U)) + 0x98BC1E3B509A2FA8ULL;
             aOrbiterA = (((aWandererD + RotL64(aIngress, 3U)) + RotL64(aCarry, 11U)) + 0x9A929A665256B466ULL) + aNonceWordJ;
-            aOrbiterD = ((aWandererG + RotL64(aCross, 29U)) + 0x10CC6CA4470AE338ULL) + aPhaseDOrbiterAssignSaltC[((aIndex + 29U)) & S_SALT1];
+            aOrbiterD = ((aWandererG + RotL64(aCross, 29U)) + 0x10CC6CA4470AE338ULL) + aPhaseDOrbiterAssignSaltC[((aIndex + 29U)) & 31];
             //
             aOrbiterK = (aOrbiterK + aOrbiterE) + 0x8B518D04C3A6CD7DULL;
             aOrbiterF = (aOrbiterF ^ aOrbiterK) ^ 0x728F0460F10AFE5BULL;
             aOrbiterF = RotL64((aOrbiterF * 0x760B3FB7D510399DULL), 13U);
             //
             aOrbiterB = (aOrbiterB + aOrbiterK) + 0x5F25455D725A55CBULL;
-            aOrbiterH = ((aOrbiterH ^ aOrbiterB) ^ 0xA20FC72F1F7EE2EFULL) ^ aPhaseDOrbiterUpdateSaltE[((aIndex + 9U)) & S_SALT1];
+            aOrbiterH = ((aOrbiterH ^ aOrbiterB) ^ 0xA20FC72F1F7EE2EFULL) ^ aPhaseDOrbiterUpdateSaltE[((aIndex + 9U)) & 31];
             aOrbiterH = RotL64((aOrbiterH * 0x2EB249FD846CD867ULL), 29U);
             //
             aOrbiterA = (aOrbiterA + aOrbiterD) + 0xEA0343C4861D441AULL;
-            aOrbiterK = ((aOrbiterK ^ aOrbiterA) ^ 0x0B33938B968B0BC2ULL) ^ aPhaseDOrbiterUpdateSaltC[((aIndex + 27U)) & S_SALT1];
+            aOrbiterK = ((aOrbiterK ^ aOrbiterA) ^ 0x0B33938B968B0BC2ULL) ^ aPhaseDOrbiterUpdateSaltC[((aIndex + 27U)) & 31];
             aOrbiterK = RotL64((aOrbiterK * 0x6054D913D73B2E15ULL), 47U);
             //
             aOrbiterE = (aOrbiterE + aOrbiterA) + 0xA592B969A28EADB3ULL;
-            aOrbiterB = ((aOrbiterB ^ aOrbiterE) ^ 0x17260D02220B1287ULL) ^ aPhaseDOrbiterUpdateSaltD[((aIndex + 25U)) & S_SALT1];
+            aOrbiterB = ((aOrbiterB ^ aOrbiterE) ^ 0x17260D02220B1287ULL) ^ aPhaseDOrbiterUpdateSaltD[((aIndex + 25U)) & 31];
             aOrbiterB = RotL64((aOrbiterB * 0xD6CEE04B287D4407ULL), 37U);
             //
             aOrbiterD = ((aOrbiterD + aOrbiterH) + 0x2178E19E0F6988E2ULL) + aNonceWordI;
@@ -10196,7 +10196,7 @@ void TwistExpander_Antares_Arx::Seed_G(TwistWorkSpace *pWorkSpace,
             aOrbiterE = RotL64((aOrbiterE * 0x4BBAF22B034D525FULL), 23U);
             //
             aOrbiterF = ((aOrbiterF + aOrbiterB) + 0x2ABD35F7A052CBCAULL) + aNonceWordC;
-            aOrbiterD = ((aOrbiterD ^ aOrbiterF) ^ 0x12CA753AD3186FBCULL) ^ aPhaseDOrbiterUpdateSaltB[(((31U - aIndex) + 15U)) & S_SALT1];
+            aOrbiterD = ((aOrbiterD ^ aOrbiterF) ^ 0x12CA753AD3186FBCULL) ^ aPhaseDOrbiterUpdateSaltB[(((31U - aIndex) + 15U)) & 31];
             aOrbiterD = RotL64((aOrbiterD * 0xAC69A223F299D11FULL), 3U);
             //
             aOrbiterH = ((aOrbiterH + aOrbiterF) + 0x75BF65F5444D7B2AULL) + aNonceWordD;
@@ -10213,8 +10213,8 @@ void TwistExpander_Antares_Arx::Seed_G(TwistWorkSpace *pWorkSpace,
             aWandererD = aWandererD + (((RotL64(aScatter, 51U) + RotL64(aOrbiterA, 41U)) + aOrbiterH) + RotL64(aCarry, 47U));
             aWandererJ = aWandererJ ^ (((RotL64(aPrevious, 37U) + RotL64(aOrbiterK, 57U)) + aOrbiterB) + aNonceWordG);
             aWandererG = aWandererG + (((RotL64(aCross, 57U) + aOrbiterD) + RotL64(aOrbiterH, 18U)) + RotL64(aCarry, 11U));
-            aWandererC = aWandererC ^ (((RotL64(aIngress, 21U) + aOrbiterB) + RotL64(aOrbiterE, 47U)) + aPhaseDWandererUpdateSaltC[(((31U - aIndex) + 23U)) & S_SALT1]);
-            aWandererK = aWandererK + ((((RotL64(aScatter, 28U) + RotL64(aOrbiterA, 29U)) + aOrbiterF) + aNonceWordA) + aPhaseDWandererUpdateSaltF[(((31U - aIndex) + 17U)) & S_SALT1]);
+            aWandererC = aWandererC ^ (((RotL64(aIngress, 21U) + aOrbiterB) + RotL64(aOrbiterE, 47U)) + aPhaseDWandererUpdateSaltC[(((31U - aIndex) + 23U)) & 31]);
+            aWandererK = aWandererK + ((((RotL64(aScatter, 28U) + RotL64(aOrbiterA, 29U)) + aOrbiterF) + aNonceWordA) + aPhaseDWandererUpdateSaltF[(((31U - aIndex) + 17U)) & 31]);
             aWandererF = aWandererF ^ ((RotL64(aCross, 43U) + aOrbiterK) + RotL64(aOrbiterF, 5U));
             //
             aCarry = aCarry + (aWandererJ ^ RotL64(aWandererG, 6U));
@@ -10407,17 +10407,17 @@ void TwistExpander_Antares_Arx::Seed_H(TwistWorkSpace *pWorkSpace,
             aOrbiterD = ((aWandererH + RotL64(aCross, 22U)) + 0x7D4354CA52C72F94ULL) + aNonceWordO;
             aOrbiterA = (((aWandererJ + RotL64(aIngress, 43U)) + RotL64(aCarry, 23U)) + 0x88D9DE48454677AEULL) + aNonceWordE;
             aOrbiterJ = (aWandererE + RotL64(aPrevious, 13U)) + 0xF818F64CEE0C06CCULL;
-            aOrbiterF = (((aWandererB + RotL64(aScatter, 51U)) + RotL64(aCarry, 3U)) + 0x1CF01A0C6AECAD4FULL) + aPhaseCOrbiterAssignSaltB[(((31U - aIndex) + 17U)) & S_SALT1];
-            aOrbiterB = (((aWandererD + RotL64(aIngress, 27U)) + 0x7D1EB0F755E75DE7ULL) + aPhaseCOrbiterAssignSaltE[((aIndex + 29U)) & S_SALT1]) + aNonceWordI;
+            aOrbiterF = (((aWandererB + RotL64(aScatter, 51U)) + RotL64(aCarry, 3U)) + 0x1CF01A0C6AECAD4FULL) + aPhaseCOrbiterAssignSaltB[(((31U - aIndex) + 17U)) & 31];
+            aOrbiterB = (((aWandererD + RotL64(aIngress, 27U)) + 0x7D1EB0F755E75DE7ULL) + aPhaseCOrbiterAssignSaltE[((aIndex + 29U)) & 31]) + aNonceWordI;
             aOrbiterC = ((aWandererG + RotL64(aCross, 56U)) + 0x965238E23211A1C8ULL) + aNonceWordN;
             aOrbiterK = (aWandererF + RotL64(aPrevious, 39U)) + 0xAE69068DE35CA217ULL;
             aOrbiterG = ((aWandererI + RotL64(aCross, 35U)) + RotL64(aCarry, 57U)) + 0xD8F0686D5CB0BE03ULL;
             //
-            aOrbiterH = ((aOrbiterH + aOrbiterD) + 0x26D248E5A1471602ULL) + aPhaseCOrbiterUpdateSaltA[((aIndex + 26U)) & S_SALT1];
+            aOrbiterH = ((aOrbiterH + aOrbiterD) + 0x26D248E5A1471602ULL) + aPhaseCOrbiterUpdateSaltA[((aIndex + 26U)) & 31];
             aOrbiterA = (aOrbiterA ^ aOrbiterH) ^ 0xBBD8D0F65629B8FEULL;
             aOrbiterA = RotL64((aOrbiterA * 0x7BFACD04EB2EE107ULL), 51U);
             //
-            aOrbiterJ = ((aOrbiterJ + aOrbiterF) + 0x1AE18D43353DEE55ULL) + aPhaseCOrbiterUpdateSaltC[(((31U - aIndex) + 23U)) & S_SALT1];
+            aOrbiterJ = ((aOrbiterJ + aOrbiterF) + 0x1AE18D43353DEE55ULL) + aPhaseCOrbiterUpdateSaltC[(((31U - aIndex) + 23U)) & 31];
             aOrbiterB = (aOrbiterB ^ aOrbiterJ) ^ 0x8EC2DC6B8EE13BABULL;
             aOrbiterB = RotL64((aOrbiterB * 0xABC1F184EADFB651ULL), 39U);
             //
@@ -10426,7 +10426,7 @@ void TwistExpander_Antares_Arx::Seed_H(TwistWorkSpace *pWorkSpace,
             aOrbiterK = RotL64((aOrbiterK * 0x92337B432FB7615BULL), 11U);
             //
             aOrbiterD = (aOrbiterD + aOrbiterK) + 0x43922F11D5FC2F5FULL;
-            aOrbiterJ = ((aOrbiterJ ^ aOrbiterD) ^ 0xF224921A3F8F5359ULL) ^ aPhaseCOrbiterUpdateSaltF[((aIndex + 21U)) & S_SALT1];
+            aOrbiterJ = ((aOrbiterJ ^ aOrbiterD) ^ 0xF224921A3F8F5359ULL) ^ aPhaseCOrbiterUpdateSaltF[((aIndex + 21U)) & 31];
             aOrbiterJ = RotL64((aOrbiterJ * 0x775C486A361473BDULL), 57U);
             //
             aOrbiterA = ((aOrbiterA + aOrbiterJ) + 0x73C2CFCB35AA8F8DULL) + aNonceWordF;
@@ -10442,7 +10442,7 @@ void TwistExpander_Antares_Arx::Seed_H(TwistWorkSpace *pWorkSpace,
             aOrbiterF = RotL64((aOrbiterF * 0x2D0948BE07AF7C7BULL), 43U);
             //
             aOrbiterF = ((aOrbiterF + aOrbiterA) + 0xF3826579755D83ADULL) + aNonceWordJ;
-            aOrbiterG = ((aOrbiterG ^ aOrbiterF) ^ 0x8BC69F386E021B1EULL) ^ aPhaseCOrbiterUpdateSaltB[((aIndex + 25U)) & S_SALT1];
+            aOrbiterG = ((aOrbiterG ^ aOrbiterF) ^ 0x8BC69F386E021B1EULL) ^ aPhaseCOrbiterUpdateSaltB[((aIndex + 25U)) & 31];
             aOrbiterG = RotL64((aOrbiterG * 0xFA0808B8E6C5612BULL), 35U);
             //
             aOrbiterG = ((aOrbiterG + aOrbiterC) + 0x9C5DF3CD1DBBBE92ULL) + aNonceWordB;
@@ -10458,9 +10458,9 @@ void TwistExpander_Antares_Arx::Seed_H(TwistWorkSpace *pWorkSpace,
             //
             aWandererH = aWandererH + (((RotL64(aScatter, 35U) + aOrbiterG) + RotL64(aOrbiterJ, 39U)) + aNonceWordC);
             aWandererJ = aWandererJ ^ ((RotL64(aPrevious, 46U) + RotL64(aOrbiterJ, 43U)) + aOrbiterB);
-            aWandererI = aWandererI + (((RotL64(aIngress, 23U) + aOrbiterK) + RotL64(aOrbiterH, 6U)) + aPhaseCWandererUpdateSaltA[(((31U - aIndex) + 11U)) & S_SALT1]);
+            aWandererI = aWandererI + (((RotL64(aIngress, 23U) + aOrbiterK) + RotL64(aOrbiterH, 6U)) + aPhaseCWandererUpdateSaltA[(((31U - aIndex) + 11U)) & 31]);
             aWandererC = aWandererC ^ ((RotL64(aCross, 39U) + RotL64(aOrbiterD, 11U)) + aOrbiterF);
-            aWandererE = aWandererE + (((RotL64(aScatter, 57U) + RotL64(aOrbiterH, 23U)) + aOrbiterD) + aPhaseCWandererUpdateSaltE[((aIndex + 12U)) & S_SALT1]);
+            aWandererE = aWandererE + (((RotL64(aScatter, 57U) + RotL64(aOrbiterH, 23U)) + aOrbiterD) + aPhaseCWandererUpdateSaltE[((aIndex + 12U)) & 31]);
             aWandererG = aWandererG ^ ((RotL64(aCross, 19U) + aOrbiterJ) + RotL64(aOrbiterA, 47U));
             aWandererF = aWandererF + ((((RotL64(aPrevious, 29U) + aOrbiterB) + RotL64(aOrbiterC, 27U)) + RotL64(aCarry, 39U)) + aNonceWordM);
             aWandererD = aWandererD ^ (((RotL64(aIngress, 12U) + aOrbiterK) + RotL64(aOrbiterA, 34U)) + aNonceWordD);
@@ -10505,8 +10505,8 @@ void TwistExpander_Antares_Arx::Seed_H(TwistWorkSpace *pWorkSpace,
             aScatter = TwistMix64::DiffuseA(((aScatter ^ aPhaseCDomainWordScatter) ^ aNonceWordO));
             //
             aOrbiterA = (aWandererA + RotL64(aPrevious, 13U)) + 0xE8551D19BC095971ULL;
-            aOrbiterD = (((aWandererH + RotL64(aIngress, 41U)) + RotL64(aCarry, 21U)) + 0x5C40A96F09840E9AULL) + aPhaseCOrbiterAssignSaltF[(((31U - aIndex) + 23U)) & S_SALT1];
-            aOrbiterK = ((((aWandererF + RotL64(aCross, 19U)) + RotL64(aCarry, 57U)) + 0x7E3D869AD5BB250DULL) + aPhaseCOrbiterAssignSaltD[((aIndex + 5U)) & S_SALT1]) + aNonceWordM;
+            aOrbiterD = (((aWandererH + RotL64(aIngress, 41U)) + RotL64(aCarry, 21U)) + 0x5C40A96F09840E9AULL) + aPhaseCOrbiterAssignSaltF[(((31U - aIndex) + 23U)) & 31];
+            aOrbiterK = ((((aWandererF + RotL64(aCross, 19U)) + RotL64(aCarry, 57U)) + 0x7E3D869AD5BB250DULL) + aPhaseCOrbiterAssignSaltD[((aIndex + 5U)) & 31]) + aNonceWordM;
             aOrbiterE = (aWandererJ + RotL64(aScatter, 46U)) + 0x64C4BAC6650DC259ULL;
             aOrbiterI = ((aWandererI + RotL64(aIngress, 23U)) + 0x9DDB9CE6C4309086ULL) + aNonceWordD;
             aOrbiterC = (aWandererK + RotL64(aPrevious, 35U)) + 0x0243D5B7B1A46653ULL;
@@ -10530,11 +10530,11 @@ void TwistExpander_Antares_Arx::Seed_H(TwistWorkSpace *pWorkSpace,
             aOrbiterE = (aOrbiterE ^ aOrbiterK) ^ 0x3B2486C90CD52633ULL;
             aOrbiterE = RotL64((aOrbiterE * 0x1AB0C8990F5312B5ULL), 39U);
             //
-            aOrbiterI = ((aOrbiterI + aOrbiterF) + 0xC8CD8ED17A3594BDULL) + aPhaseCOrbiterUpdateSaltA[(((31U - aIndex) + 9U)) & S_SALT1];
-            aOrbiterC = ((aOrbiterC ^ aOrbiterI) ^ 0x080AEDD51423D46BULL) ^ aPhaseCOrbiterUpdateSaltC[((aIndex + 12U)) & S_SALT1];
+            aOrbiterI = ((aOrbiterI + aOrbiterF) + 0xC8CD8ED17A3594BDULL) + aPhaseCOrbiterUpdateSaltA[(((31U - aIndex) + 9U)) & 31];
+            aOrbiterC = ((aOrbiterC ^ aOrbiterI) ^ 0x080AEDD51423D46BULL) ^ aPhaseCOrbiterUpdateSaltC[((aIndex + 12U)) & 31];
             aOrbiterC = RotL64((aOrbiterC * 0x5CC7A744AD2E09BBULL), 57U);
             //
-            aOrbiterB = ((aOrbiterB + aOrbiterK) + 0xC7E7D0FA64B2F362ULL) + aPhaseCOrbiterUpdateSaltF[(((31U - aIndex) + 7U)) & S_SALT1];
+            aOrbiterB = ((aOrbiterB + aOrbiterK) + 0xC7E7D0FA64B2F362ULL) + aPhaseCOrbiterUpdateSaltF[(((31U - aIndex) + 7U)) & 31];
             aOrbiterF = ((aOrbiterF ^ aOrbiterB) ^ 0x36167890DC9A54A6ULL) ^ aNonceWordL;
             aOrbiterF = RotL64((aOrbiterF * 0xEF2B6BCFABED03E9ULL), 47U);
             //
@@ -10547,7 +10547,7 @@ void TwistExpander_Antares_Arx::Seed_H(TwistWorkSpace *pWorkSpace,
             aOrbiterJ = RotL64((aOrbiterJ * 0xE3BBC8ECAB2F26BBULL), 43U);
             //
             aOrbiterF = (aOrbiterF + aOrbiterE) + 0x8E16F8B0D271397EULL;
-            aOrbiterA = ((aOrbiterA ^ aOrbiterF) ^ 0x3D5819B630F0363EULL) ^ aPhaseCOrbiterUpdateSaltB[(((31U - aIndex) + 24U)) & S_SALT1];
+            aOrbiterA = ((aOrbiterA ^ aOrbiterF) ^ 0x3D5819B630F0363EULL) ^ aPhaseCOrbiterUpdateSaltB[(((31U - aIndex) + 24U)) & 31];
             aOrbiterA = RotL64((aOrbiterA * 0xC8C1761408B07645ULL), 11U);
             //
             aIngress = aOrbiterE ^ RotL64(aOrbiterK, 5U);
@@ -10563,9 +10563,9 @@ void TwistExpander_Antares_Arx::Seed_H(TwistWorkSpace *pWorkSpace,
             aWandererH = aWandererH ^ (((RotL64(aIngress, 29U) + RotL64(aOrbiterD, 3U)) + aOrbiterB) + aNonceWordH);
             aWandererB = aWandererB + (((RotL64(aCross, 19U) + RotL64(aOrbiterF, 43U)) + aOrbiterE) + RotL64(aCarry, 3U));
             aWandererF = aWandererF ^ ((RotL64(aPrevious, 13U) + aOrbiterE) + RotL64(aOrbiterB, 58U));
-            aWandererE = aWandererE + (((RotL64(aScatter, 5U) + RotL64(aOrbiterD, 11U)) + aOrbiterJ) + aPhaseCWandererUpdateSaltE[(((31U - aIndex) + 27U)) & S_SALT1]);
+            aWandererE = aWandererE + (((RotL64(aScatter, 5U) + RotL64(aOrbiterD, 11U)) + aOrbiterJ) + aPhaseCWandererUpdateSaltE[(((31U - aIndex) + 27U)) & 31]);
             aWandererJ = aWandererJ ^ ((RotL64(aIngress, 44U) + RotL64(aOrbiterE, 29U)) + aOrbiterK);
-            aWandererK = aWandererK + (((RotL64(aCross, 23U) + RotL64(aOrbiterK, 39U)) + aOrbiterB) + aPhaseCWandererUpdateSaltD[((aIndex + 21U)) & S_SALT1]);
+            aWandererK = aWandererK + (((RotL64(aCross, 23U) + RotL64(aOrbiterK, 39U)) + aOrbiterB) + aPhaseCWandererUpdateSaltD[((aIndex + 21U)) & 31]);
             //
             aCarry = aCarry + (RotL64(aWandererK, 57U) ^ aWandererF);
             aCarry = aCarry + (aWandererH ^ RotL64(aWandererD, 29U));
@@ -10610,8 +10610,8 @@ void TwistExpander_Antares_Arx::Seed_H(TwistWorkSpace *pWorkSpace,
             aOrbiterB = ((aWandererC + RotL64(aPrevious, 23U)) + RotL64(aCarry, 13U)) + 0x9F2FC3A184EBDDE0ULL;
             aOrbiterG = ((aWandererK + RotL64(aCross, 39U)) + RotL64(aCarry, 37U)) + 0x103B267B929C18F9ULL;
             aOrbiterI = ((aWandererG + RotL64(aIngress, 19U)) + 0x4473CDC339608EBCULL) + aNonceWordB;
-            aOrbiterH = ((aWandererB + RotL64(aCross, 43U)) + 0xCEF94546EDA84DC5ULL) + aPhaseEOrbiterAssignSaltD[(((31U - aIndex) + 19U)) & S_SALT1];
-            aOrbiterE = ((aWandererH + RotL64(aPrevious, 29U)) + 0xC575E137D04CA40DULL) + aPhaseEOrbiterAssignSaltE[((aIndex + 8U)) & S_SALT1];
+            aOrbiterH = ((aWandererB + RotL64(aCross, 43U)) + 0xCEF94546EDA84DC5ULL) + aPhaseEOrbiterAssignSaltD[(((31U - aIndex) + 19U)) & 31];
+            aOrbiterE = ((aWandererH + RotL64(aPrevious, 29U)) + 0xC575E137D04CA40DULL) + aPhaseEOrbiterAssignSaltE[((aIndex + 8U)) & 31];
             aOrbiterK = ((aWandererA + RotL64(aScatter, 5U)) + 0xC0891D7AACCE1744ULL) + aNonceWordA;
             aOrbiterC = (aWandererJ + RotL64(aPrevious, 52U)) + 0x705EA389EC18BEA7ULL;
             //
@@ -10623,7 +10623,7 @@ void TwistExpander_Antares_Arx::Seed_H(TwistWorkSpace *pWorkSpace,
             aOrbiterI = ((aOrbiterI ^ aOrbiterB) ^ 0x0A6B7E467813C5E4ULL) ^ aNonceWordE;
             aOrbiterI = RotL64((aOrbiterI * 0xED612673E2433FB9ULL), 39U);
             //
-            aOrbiterD = ((aOrbiterD + aOrbiterH) + 0x120CEDF6463F3F8AULL) + aPhaseEOrbiterUpdateSaltF[((aIndex + 23U)) & S_SALT1];
+            aOrbiterD = ((aOrbiterD + aOrbiterH) + 0x120CEDF6463F3F8AULL) + aPhaseEOrbiterUpdateSaltF[((aIndex + 23U)) & 31];
             aOrbiterG = (aOrbiterG ^ aOrbiterD) ^ 0xF8167A8E874A6CACULL;
             aOrbiterG = RotL64((aOrbiterG * 0x12D720D316D6DF91ULL), 11U);
             //
@@ -10631,8 +10631,8 @@ void TwistExpander_Antares_Arx::Seed_H(TwistWorkSpace *pWorkSpace,
             aOrbiterJ = (aOrbiterJ ^ aOrbiterG) ^ 0xEAD418979595D93EULL;
             aOrbiterJ = RotL64((aOrbiterJ * 0x6E6257F3B0D07463ULL), 35U);
             //
-            aOrbiterH = ((aOrbiterH + aOrbiterK) + 0xDC2C045A2E110B1BULL) + aPhaseEOrbiterUpdateSaltA[((aIndex + 21U)) & S_SALT1];
-            aOrbiterE = ((aOrbiterE ^ aOrbiterH) ^ 0xCEDC523383AD2D62ULL) ^ aPhaseEOrbiterUpdateSaltB[(((31U - aIndex) + 17U)) & S_SALT1];
+            aOrbiterH = ((aOrbiterH + aOrbiterK) + 0xDC2C045A2E110B1BULL) + aPhaseEOrbiterUpdateSaltA[((aIndex + 21U)) & 31];
+            aOrbiterE = ((aOrbiterE ^ aOrbiterH) ^ 0xCEDC523383AD2D62ULL) ^ aPhaseEOrbiterUpdateSaltB[(((31U - aIndex) + 17U)) & 31];
             aOrbiterE = RotL64((aOrbiterE * 0x3A0A294A3DC97B21ULL), 43U);
             //
             aOrbiterI = (aOrbiterI + aOrbiterJ) + 0x7EA0ED1D6A4760C1ULL;
@@ -10643,7 +10643,7 @@ void TwistExpander_Antares_Arx::Seed_H(TwistWorkSpace *pWorkSpace,
             aOrbiterC = (aOrbiterC ^ aOrbiterK) ^ 0x05410A4EBD731011ULL;
             aOrbiterC = RotL64((aOrbiterC * 0x990E9686435620DDULL), 27U);
             //
-            aOrbiterC = (((aOrbiterC + aOrbiterI) + 0x5994DBD96B25D165ULL) + aPhaseEOrbiterUpdateSaltC[((aIndex + 12U)) & S_SALT1]) + aNonceWordK;
+            aOrbiterC = (((aOrbiterC + aOrbiterI) + 0x5994DBD96B25D165ULL) + aPhaseEOrbiterUpdateSaltC[((aIndex + 12U)) & 31]) + aNonceWordK;
             aOrbiterH = (aOrbiterH ^ aOrbiterC) ^ 0x38D9CB28C7F62215ULL;
             aOrbiterH = RotL64((aOrbiterH * 0x5CC074690F7A15D1ULL), 19U);
             //
@@ -10665,8 +10665,8 @@ void TwistExpander_Antares_Arx::Seed_H(TwistWorkSpace *pWorkSpace,
             aWandererG = aWandererG ^ ((RotL64(aPrevious, 29U) + RotL64(aOrbiterJ, 51U)) + aOrbiterB);
             aWandererK = aWandererK + ((RotL64(aIngress, 39U) + aOrbiterE) + RotL64(aOrbiterG, 47U));
             aWandererC = aWandererC ^ ((RotL64(aScatter, 48U) + aOrbiterJ) + RotL64(aOrbiterK, 34U));
-            aWandererD = aWandererD + (((((RotL64(aCross, 5U) + RotL64(aOrbiterD, 13U)) + aOrbiterK) + RotL64(aCarry, 41U)) + aNonceWordL) + aPhaseEWandererUpdateSaltC[((aIndex + 6U)) & S_SALT1]);
-            aWandererB = aWandererB ^ ((((RotL64(aIngress, 57U) + RotL64(aOrbiterI, 23U)) + aOrbiterH) + aNonceWordM) + aPhaseEWandererUpdateSaltD[(((31U - aIndex) + 28U)) & S_SALT1]);
+            aWandererD = aWandererD + (((((RotL64(aCross, 5U) + RotL64(aOrbiterD, 13U)) + aOrbiterK) + RotL64(aCarry, 41U)) + aNonceWordL) + aPhaseEWandererUpdateSaltC[((aIndex + 6U)) & 31]);
+            aWandererB = aWandererB ^ ((((RotL64(aIngress, 57U) + RotL64(aOrbiterI, 23U)) + aOrbiterH) + aNonceWordM) + aPhaseEWandererUpdateSaltD[(((31U - aIndex) + 28U)) & 31]);
             //
             aCarry = aCarry + (RotL64(aWandererJ, 23U) ^ aWandererH);
             aCarry = aCarry + (RotL64(aWandererG, 19U) ^ aWandererD);
@@ -10711,8 +10711,8 @@ void TwistExpander_Antares_Arx::Seed_H(TwistWorkSpace *pWorkSpace,
             aOrbiterE = (aWandererH + RotL64(aCross, 22U)) + 0x83835ED74704BB52ULL;
             aOrbiterB = ((aWandererJ + RotL64(aIngress, 57U)) + RotL64(aCarry, 53U)) + 0x854AEE3BF3FB7422ULL;
             aOrbiterC = (aWandererB + RotL64(aCross, 27U)) + 0xE7AD14A472C94B71ULL;
-            aOrbiterG = (((aWandererG + RotL64(aScatter, 39U)) + 0x47088E3A8AD9F4B1ULL) + aPhaseFOrbiterAssignSaltB[((aIndex + 9U)) & S_SALT1]) + aNonceWordP;
-            aOrbiterD = ((((aWandererK + RotL64(aPrevious, 34U)) + RotL64(aCarry, 41U)) + 0x20E5FA63D9F16872ULL) + aPhaseFOrbiterAssignSaltC[(((31U - aIndex) + 15U)) & S_SALT1]) + aNonceWordD;
+            aOrbiterG = (((aWandererG + RotL64(aScatter, 39U)) + 0x47088E3A8AD9F4B1ULL) + aPhaseFOrbiterAssignSaltB[((aIndex + 9U)) & 31]) + aNonceWordP;
+            aOrbiterD = ((((aWandererK + RotL64(aPrevious, 34U)) + RotL64(aCarry, 41U)) + 0x20E5FA63D9F16872ULL) + aPhaseFOrbiterAssignSaltC[(((31U - aIndex) + 15U)) & 31]) + aNonceWordD;
             aOrbiterK = (aWandererC + RotL64(aIngress, 47U)) + 0x6B77B87B992BF383ULL;
             aOrbiterA = ((aWandererA + RotL64(aPrevious, 3U)) + 0x97ADF870409AD9A4ULL) + aNonceWordF;
             //
@@ -10724,15 +10724,15 @@ void TwistExpander_Antares_Arx::Seed_H(TwistWorkSpace *pWorkSpace,
             aOrbiterF = (aOrbiterF ^ aOrbiterB) ^ 0xEFDCF453C21F2651ULL;
             aOrbiterF = RotL64((aOrbiterF * 0xD78CDE8BB8E9A791ULL), 27U);
             //
-            aOrbiterC = (((aOrbiterC + aOrbiterH) + 0x457D3ECE609B62EEULL) + aPhaseFOrbiterUpdateSaltF[((aIndex + 6U)) & S_SALT1]) + aNonceWordE;
+            aOrbiterC = (((aOrbiterC + aOrbiterH) + 0x457D3ECE609B62EEULL) + aPhaseFOrbiterUpdateSaltF[((aIndex + 6U)) & 31]) + aNonceWordE;
             aOrbiterG = (aOrbiterG ^ aOrbiterC) ^ 0x375D34A829ABA50FULL;
             aOrbiterG = RotL64((aOrbiterG * 0x3C756B385E41AA89ULL), 13U);
             //
             aOrbiterD = (aOrbiterD + aOrbiterK) + 0x6369A0FDA0284FD1ULL;
-            aOrbiterB = ((aOrbiterB ^ aOrbiterD) ^ 0xACDF53BEF9371C66ULL) ^ aPhaseFOrbiterUpdateSaltE[(((31U - aIndex) + 16U)) & S_SALT1];
+            aOrbiterB = ((aOrbiterB ^ aOrbiterD) ^ 0xACDF53BEF9371C66ULL) ^ aPhaseFOrbiterUpdateSaltE[(((31U - aIndex) + 16U)) & 31];
             aOrbiterB = RotL64((aOrbiterB * 0x56A02A675A4077DDULL), 47U);
             //
-            aOrbiterE = ((aOrbiterE + aOrbiterD) + 0xBDB170DDCA65C8E5ULL) + aPhaseFOrbiterUpdateSaltD[((aIndex + 20U)) & S_SALT1];
+            aOrbiterE = ((aOrbiterE + aOrbiterD) + 0xBDB170DDCA65C8E5ULL) + aPhaseFOrbiterUpdateSaltD[((aIndex + 20U)) & 31];
             aOrbiterA = (aOrbiterA ^ aOrbiterE) ^ 0xBA59223EEA6FA163ULL;
             aOrbiterA = RotL64((aOrbiterA * 0x3C2EAD7F51027DDFULL), 23U);
             //
@@ -10748,7 +10748,7 @@ void TwistExpander_Antares_Arx::Seed_H(TwistWorkSpace *pWorkSpace,
             aOrbiterH = ((aOrbiterH ^ aOrbiterA) ^ 0xA4503F4CA8BC4379ULL) ^ aNonceWordN;
             aOrbiterH = RotL64((aOrbiterH * 0x2EDA7F1360796597ULL), 39U);
             //
-            aOrbiterF = ((aOrbiterF + aOrbiterG) + 0xE2E1ABED76FC1376ULL) + aPhaseFOrbiterUpdateSaltA[(((31U - aIndex) + 25U)) & S_SALT1];
+            aOrbiterF = ((aOrbiterF + aOrbiterG) + 0xE2E1ABED76FC1376ULL) + aPhaseFOrbiterUpdateSaltA[(((31U - aIndex) + 25U)) & 31];
             aOrbiterD = (aOrbiterD ^ aOrbiterF) ^ 0x533039B69AA0C63FULL;
             aOrbiterD = RotL64((aOrbiterD * 0xD1080ADE56634C25ULL), 3U);
             //
@@ -10763,8 +10763,8 @@ void TwistExpander_Antares_Arx::Seed_H(TwistWorkSpace *pWorkSpace,
             aWandererB = aWandererB + (((RotL64(aIngress, 35U) + RotL64(aOrbiterE, 14U)) + aOrbiterD) + RotL64(aCarry, 37U));
             aWandererC = aWandererC ^ (((RotL64(aPrevious, 47U) + aOrbiterC) + RotL64(aOrbiterG, 43U)) + aNonceWordO);
             aWandererI = aWandererI + ((RotL64(aScatter, 43U) + aOrbiterH) + RotL64(aOrbiterE, 29U));
-            aWandererE = aWandererE ^ (((RotL64(aIngress, 4U) + RotL64(aOrbiterB, 39U)) + aOrbiterD) + aPhaseFWandererUpdateSaltA[((aIndex + 4U)) & S_SALT1]);
-            aWandererA = aWandererA + (((RotL64(aPrevious, 27U) + aOrbiterD) + RotL64(aOrbiterF, 21U)) + aPhaseFWandererUpdateSaltE[((aIndex + 21U)) & S_SALT1]);
+            aWandererE = aWandererE ^ (((RotL64(aIngress, 4U) + RotL64(aOrbiterB, 39U)) + aOrbiterD) + aPhaseFWandererUpdateSaltA[((aIndex + 4U)) & 31]);
+            aWandererA = aWandererA + (((RotL64(aPrevious, 27U) + aOrbiterD) + RotL64(aOrbiterF, 21U)) + aPhaseFWandererUpdateSaltE[((aIndex + 21U)) & 31]);
             aWandererH = aWandererH ^ (((RotL64(aCross, 23U) + RotL64(aOrbiterD, 35U)) + aOrbiterK) + aNonceWordM);
             aWandererG = aWandererG + ((((RotL64(aScatter, 39U) + RotL64(aOrbiterG, 48U)) + aOrbiterH) + RotL64(aCarry, 23U)) + aNonceWordL);
             aWandererK = aWandererK ^ ((RotL64(aPrevious, 52U) + aOrbiterB) + RotL64(aOrbiterC, 53U));
@@ -10808,21 +10808,21 @@ void TwistExpander_Antares_Arx::Seed_H(TwistWorkSpace *pWorkSpace,
             aScatter = TwistMix64::DiffuseC(((aScatter ^ aPhaseEDomainWordScatter) ^ aNonceWordA));
             //
             aOrbiterA = (aWandererE + RotL64(aPrevious, 19U)) + 0x347F4983AED6F7F0ULL;
-            aOrbiterE = (((aWandererD + RotL64(aScatter, 43U)) + 0x12962B7974C9D819ULL) + aPhaseEOrbiterAssignSaltE[(((31U - aIndex) + 7U)) & S_SALT1]) + aNonceWordP;
+            aOrbiterE = (((aWandererD + RotL64(aScatter, 43U)) + 0x12962B7974C9D819ULL) + aPhaseEOrbiterAssignSaltE[(((31U - aIndex) + 7U)) & 31]) + aNonceWordP;
             aOrbiterI = ((aWandererA + RotL64(aCross, 23U)) + 0x07BF650E827A7919ULL) + aNonceWordD;
             aOrbiterJ = ((aWandererI + RotL64(aIngress, 56U)) + 0x865ABFA3CECDF3C9ULL) + aNonceWordC;
-            aOrbiterK = (((aWandererH + RotL64(aPrevious, 39U)) + 0xB3FAEAD51F46B595ULL) + aPhaseEOrbiterAssignSaltA[(((31U - aIndex) + 19U)) & S_SALT1]) + aNonceWordA;
+            aOrbiterK = (((aWandererH + RotL64(aPrevious, 39U)) + 0xB3FAEAD51F46B595ULL) + aPhaseEOrbiterAssignSaltA[(((31U - aIndex) + 19U)) & 31]) + aNonceWordA;
             aOrbiterF = ((aWandererF + RotL64(aCross, 47U)) + RotL64(aCarry, 57U)) + 0x496D37E432086602ULL;
             aOrbiterD = ((aWandererG + RotL64(aIngress, 3U)) + RotL64(aCarry, 5U)) + 0xAF880EBA2EE23C46ULL;
             aOrbiterB = ((aWandererC + RotL64(aScatter, 10U)) + RotL64(aCarry, 43U)) + 0x47B463D3BCB1EE75ULL;
             aOrbiterH = (aWandererB + RotL64(aPrevious, 51U)) + 0x0C92209ED958B2B8ULL;
             //
             aOrbiterA = ((aOrbiterA + aOrbiterE) + 0x3357B136ECEC2FB8ULL) + aNonceWordL;
-            aOrbiterI = ((aOrbiterI ^ aOrbiterA) ^ 0xA63C33DAA5CD8E5DULL) ^ aPhaseEOrbiterUpdateSaltC[(((31U - aIndex) + 21U)) & S_SALT1];
+            aOrbiterI = ((aOrbiterI ^ aOrbiterA) ^ 0xA63C33DAA5CD8E5DULL) ^ aPhaseEOrbiterUpdateSaltC[(((31U - aIndex) + 21U)) & 31];
             aOrbiterI = RotL64((aOrbiterI * 0x941E4D26B92E3399ULL), 3U);
             //
             aOrbiterJ = (aOrbiterJ + aOrbiterK) + 0x187A795A3E21777AULL;
-            aOrbiterE = (((aOrbiterE ^ aOrbiterJ) ^ 0x720583B86D2761D9ULL) ^ aPhaseEOrbiterUpdateSaltD[(((31U - aIndex) + 11U)) & S_SALT1]) ^ aNonceWordN;
+            aOrbiterE = (((aOrbiterE ^ aOrbiterJ) ^ 0x720583B86D2761D9ULL) ^ aPhaseEOrbiterUpdateSaltD[(((31U - aIndex) + 11U)) & 31]) ^ aNonceWordN;
             aOrbiterE = RotL64((aOrbiterE * 0xF2A439564F42B301ULL), 23U);
             //
             aOrbiterF = (aOrbiterF + aOrbiterJ) + 0x7320A20879CB0EBBULL;
@@ -10841,11 +10841,11 @@ void TwistExpander_Antares_Arx::Seed_H(TwistWorkSpace *pWorkSpace,
             aOrbiterH = (aOrbiterH ^ aOrbiterD) ^ 0x159A7A6234D4E9EBULL;
             aOrbiterH = RotL64((aOrbiterH * 0x3EBA4678F5DDEB0BULL), 35U);
             //
-            aOrbiterH = ((aOrbiterH + aOrbiterI) + 0x53384A2B091F8412ULL) + aPhaseEOrbiterUpdateSaltE[(((31U - aIndex) + 22U)) & S_SALT1];
+            aOrbiterH = ((aOrbiterH + aOrbiterI) + 0x53384A2B091F8412ULL) + aPhaseEOrbiterUpdateSaltE[(((31U - aIndex) + 22U)) & 31];
             aOrbiterJ = (aOrbiterJ ^ aOrbiterH) ^ 0x2F2EEFC2D5782DB0ULL;
             aOrbiterJ = RotL64((aOrbiterJ * 0x74B7B262615909FBULL), 19U);
             //
-            aOrbiterI = ((aOrbiterI + aOrbiterB) + 0xD91501BDE9C8B2E4ULL) + aPhaseEOrbiterUpdateSaltB[((aIndex + 14U)) & S_SALT1];
+            aOrbiterI = ((aOrbiterI + aOrbiterB) + 0xD91501BDE9C8B2E4ULL) + aPhaseEOrbiterUpdateSaltB[((aIndex + 14U)) & 31];
             aOrbiterK = (aOrbiterK ^ aOrbiterI) ^ 0x4B62725C3F97A9A1ULL;
             aOrbiterK = RotL64((aOrbiterK * 0x7672544C9C978345ULL), 47U);
             //
@@ -10863,9 +10863,9 @@ void TwistExpander_Antares_Arx::Seed_H(TwistWorkSpace *pWorkSpace,
             aWandererF = aWandererF ^ ((RotL64(aScatter, 6U) + aOrbiterK) + RotL64(aOrbiterJ, 39U));
             aWandererH = aWandererH + (((RotL64(aIngress, 13U) + aOrbiterE) + RotL64(aOrbiterJ, 57U)) + aNonceWordH);
             aWandererG = aWandererG ^ (((RotL64(aPrevious, 23U) + RotL64(aOrbiterD, 53U)) + aOrbiterK) + aNonceWordB);
-            aWandererB = aWandererB + (((((RotL64(aCross, 53U) + RotL64(aOrbiterB, 48U)) + aOrbiterJ) + RotL64(aCarry, 29U)) + aNonceWordE) + aPhaseEWandererUpdateSaltC[((aIndex + 27U)) & S_SALT1]);
+            aWandererB = aWandererB + (((((RotL64(aCross, 53U) + RotL64(aOrbiterB, 48U)) + aOrbiterJ) + RotL64(aCarry, 29U)) + aNonceWordE) + aPhaseEWandererUpdateSaltC[((aIndex + 27U)) & 31]);
             aWandererD = aWandererD ^ ((RotL64(aIngress, 57U) + RotL64(aOrbiterA, 13U)) + aOrbiterE);
-            aWandererE = aWandererE + ((((RotL64(aPrevious, 34U) + aOrbiterH) + RotL64(aOrbiterD, 5U)) + RotL64(aCarry, 41U)) + aPhaseEWandererUpdateSaltB[(((31U - aIndex) + 6U)) & S_SALT1]);
+            aWandererE = aWandererE + ((((RotL64(aPrevious, 34U) + aOrbiterH) + RotL64(aOrbiterD, 5U)) + RotL64(aCarry, 41U)) + aPhaseEWandererUpdateSaltB[(((31U - aIndex) + 6U)) & 31]);
             aWandererA = aWandererA ^ ((RotL64(aCross, 19U) + aOrbiterB) + RotL64(aOrbiterI, 23U));
             aWandererI = aWandererI + ((RotL64(aScatter, 41U) + RotL64(aOrbiterD, 29U)) + aOrbiterI);
             aWandererC = aWandererC ^ ((RotL64(aPrevious, 29U) + RotL64(aOrbiterB, 44U)) + aOrbiterF);
@@ -10911,23 +10911,23 @@ void TwistExpander_Antares_Arx::Seed_H(TwistWorkSpace *pWorkSpace,
             aOrbiterJ = ((aWandererD + RotL64(aCross, 57U)) + 0xC9674B926E56432EULL) + aNonceWordA;
             aOrbiterB = ((aWandererK + RotL64(aIngress, 43U)) + 0x4DF4E48EAF35010AULL) + aNonceWordD;
             aOrbiterG = (aWandererI + RotL64(aScatter, 52U)) + 0x8A9398D668D8958DULL;
-            aOrbiterD = ((aWandererE + RotL64(aPrevious, 35U)) + 0xFD05F1C96B34C3F0ULL) + aPhaseDOrbiterAssignSaltA[((aIndex + 3U)) & S_SALT1];
+            aOrbiterD = ((aWandererE + RotL64(aPrevious, 35U)) + 0xFD05F1C96B34C3F0ULL) + aPhaseDOrbiterAssignSaltA[((aIndex + 3U)) & 31];
             aOrbiterF = (aWandererC + RotL64(aCross, 29U)) + 0xE070F8B54F2AF83CULL;
             aOrbiterC = ((aWandererJ + RotL64(aScatter, 5U)) + RotL64(aCarry, 23U)) + 0x1474EBA172BE7BB2ULL;
-            aOrbiterE = (((aWandererH + RotL64(aIngress, 22U)) + RotL64(aCarry, 47U)) + 0x8F74AAF44A4D2487ULL) + aPhaseDOrbiterAssignSaltD[((aIndex + 13U)) & S_SALT1];
+            aOrbiterE = (((aWandererH + RotL64(aIngress, 22U)) + RotL64(aCarry, 47U)) + 0x8F74AAF44A4D2487ULL) + aPhaseDOrbiterAssignSaltD[((aIndex + 13U)) & 31];
             aOrbiterK = ((aWandererG + RotL64(aPrevious, 47U)) + RotL64(aCarry, 39U)) + 0x2CB32827579F1BEBULL;
             aOrbiterI = (aWandererB + RotL64(aCross, 39U)) + 0x184649326A964337ULL;
             //
             aOrbiterJ = (aOrbiterJ + aOrbiterB) + 0x826BF022E3AD775EULL;
-            aOrbiterG = ((aOrbiterG ^ aOrbiterJ) ^ 0xC6CED644975C7B57ULL) ^ aPhaseDOrbiterUpdateSaltD[(((31U - aIndex) + 25U)) & S_SALT1];
+            aOrbiterG = ((aOrbiterG ^ aOrbiterJ) ^ 0xC6CED644975C7B57ULL) ^ aPhaseDOrbiterUpdateSaltD[(((31U - aIndex) + 25U)) & 31];
             aOrbiterG = RotL64((aOrbiterG * 0x4C7E8C0E8BDAEE91ULL), 47U);
             //
-            aOrbiterD = (((aOrbiterD + aOrbiterF) + 0x5EF85B745E3B62E6ULL) + aPhaseDOrbiterUpdateSaltA[(((31U - aIndex) + 8U)) & S_SALT1]) + aNonceWordN;
+            aOrbiterD = (((aOrbiterD + aOrbiterF) + 0x5EF85B745E3B62E6ULL) + aPhaseDOrbiterUpdateSaltA[(((31U - aIndex) + 8U)) & 31]) + aNonceWordN;
             aOrbiterC = (aOrbiterC ^ aOrbiterD) ^ 0x1F67930121DAAB8CULL;
             aOrbiterC = RotL64((aOrbiterC * 0x175C156E2C3D7CF9ULL), 57U);
             //
             aOrbiterE = (aOrbiterE + aOrbiterK) + 0x72FE7AC22BAF7F58ULL;
-            aOrbiterD = ((aOrbiterD ^ aOrbiterE) ^ 0x95F9172147282C82ULL) ^ aPhaseDOrbiterUpdateSaltE[(((31U - aIndex) + 15U)) & S_SALT1];
+            aOrbiterD = ((aOrbiterD ^ aOrbiterE) ^ 0x95F9172147282C82ULL) ^ aPhaseDOrbiterUpdateSaltE[(((31U - aIndex) + 15U)) & 31];
             aOrbiterD = RotL64((aOrbiterD * 0x0959ED45382F82F9ULL), 41U);
             //
             aOrbiterI = (aOrbiterI + aOrbiterD) + 0x739E9A62B647D8EFULL;
@@ -10943,7 +10943,7 @@ void TwistExpander_Antares_Arx::Seed_H(TwistWorkSpace *pWorkSpace,
             aOrbiterJ = RotL64((aOrbiterJ * 0x3C8ABCAE297E0423ULL), 21U);
             //
             aOrbiterC = (aOrbiterC + aOrbiterJ) + 0xF7EA534A5CD91A52ULL;
-            aOrbiterK = ((aOrbiterK ^ aOrbiterC) ^ 0xC8897C808F0EB330ULL) ^ aPhaseDOrbiterUpdateSaltC[((aIndex + 26U)) & S_SALT1];
+            aOrbiterK = ((aOrbiterK ^ aOrbiterC) ^ 0xC8897C808F0EB330ULL) ^ aPhaseDOrbiterUpdateSaltC[((aIndex + 26U)) & 31];
             aOrbiterK = RotL64((aOrbiterK * 0x468C98BB06EB7F53ULL), 13U);
             //
             aOrbiterG = (aOrbiterG + aOrbiterE) + 0x67F07CDED59842D2ULL;
@@ -10963,13 +10963,13 @@ void TwistExpander_Antares_Arx::Seed_H(TwistWorkSpace *pWorkSpace,
             //
             aWandererC = aWandererC ^ ((RotL64(aPrevious, 57U) + aOrbiterG) + RotL64(aOrbiterI, 43U));
             aWandererJ = aWandererJ + (((RotL64(aScatter, 29U) + aOrbiterK) + RotL64(aOrbiterB, 19U)) + aNonceWordG);
-            aWandererK = aWandererK ^ ((((RotL64(aIngress, 43U) + RotL64(aOrbiterJ, 47U)) + aOrbiterC) + aNonceWordK) + aPhaseDWandererUpdateSaltE[(((31U - aIndex) + 6U)) & S_SALT1]);
+            aWandererK = aWandererK ^ ((((RotL64(aIngress, 43U) + RotL64(aOrbiterJ, 47U)) + aOrbiterC) + aNonceWordK) + aPhaseDWandererUpdateSaltE[(((31U - aIndex) + 6U)) & 31]);
             aWandererH = aWandererH + ((((RotL64(aCross, 34U) + aOrbiterD) + RotL64(aOrbiterI, 38U)) + RotL64(aCarry, 3U)) + aNonceWordI);
             aWandererG = aWandererG ^ ((RotL64(aIngress, 11U) + RotL64(aOrbiterE, 11U)) + aOrbiterC);
             aWandererD = aWandererD + ((((RotL64(aPrevious, 23U) + aOrbiterC) + RotL64(aOrbiterK, 23U)) + RotL64(aCarry, 51U)) + aNonceWordC);
             aWandererI = aWandererI ^ ((RotL64(aScatter, 47U) + aOrbiterE) + RotL64(aOrbiterD, 51U));
             aWandererB = aWandererB + ((RotL64(aCross, 5U) + RotL64(aOrbiterG, 28U)) + aOrbiterF);
-            aWandererE = aWandererE ^ (((RotL64(aScatter, 18U) + RotL64(aOrbiterC, 5U)) + aOrbiterD) + aPhaseDWandererUpdateSaltF[((aIndex + 9U)) & S_SALT1]);
+            aWandererE = aWandererE ^ (((RotL64(aScatter, 18U) + RotL64(aOrbiterC, 5U)) + aOrbiterD) + aPhaseDWandererUpdateSaltF[((aIndex + 9U)) & 31]);
             //
             aCarry = aCarry + (aWandererE ^ RotL64(aWandererK, 43U));
             aCarry = aCarry + (aWandererC ^ RotL64(aWandererB, 53U));
@@ -11172,19 +11172,19 @@ void TwistExpander_Antares_Arx::Seed_I(TwistWorkSpace *pWorkSpace,
             aOrbiterA = (aWandererE + RotL64(aCross, 46U)) + 0x580A90F83BC655C5ULL;
             aOrbiterB = (((aWandererF + RotL64(aScatter, 57U)) + RotL64(aCarry, 3U)) + 0x1935912DA061DA35ULL) + aNonceWordK;
             aOrbiterH = (aWandererJ + RotL64(aIngress, 13U)) + 0x66A15E21D3EB5034ULL;
-            aOrbiterD = (((aWandererG + RotL64(aCross, 37U)) + RotL64(aCarry, 37U)) + 0x627AF8C283DB4504ULL) + aPhaseAOrbiterAssignSaltD[(((31U - aIndex) + 23U)) & S_SALT1];
+            aOrbiterD = (((aWandererG + RotL64(aCross, 37U)) + RotL64(aCarry, 37U)) + 0x627AF8C283DB4504ULL) + aPhaseAOrbiterAssignSaltD[(((31U - aIndex) + 23U)) & 31];
             aOrbiterI = ((aWandererK + RotL64(aScatter, 19U)) + 0x8A8569A953DE4948ULL) + aNonceWordJ;
-            aOrbiterE = (((aWandererI + RotL64(aPrevious, 3U)) + 0x65A4DA703D295515ULL) + aPhaseAOrbiterAssignSaltE[(((31U - aIndex) + 15U)) & S_SALT1]) + aNonceWordP;
+            aOrbiterE = (((aWandererI + RotL64(aPrevious, 3U)) + 0x65A4DA703D295515ULL) + aPhaseAOrbiterAssignSaltE[(((31U - aIndex) + 15U)) & 31]) + aNonceWordP;
             //
             aOrbiterG = (aOrbiterG + aOrbiterA) + 0x05B0F46DD03641CCULL;
             aOrbiterB = (aOrbiterB ^ aOrbiterG) ^ 0x55894322540E7047ULL;
             aOrbiterB = RotL64((aOrbiterB * 0x91E091846F1092DDULL), 3U);
             //
-            aOrbiterA = ((aOrbiterA + aOrbiterH) + 0x1EF5C258BE42C645ULL) + aPhaseAOrbiterUpdateSaltE[((aIndex + 21U)) & S_SALT1];
+            aOrbiterA = ((aOrbiterA + aOrbiterH) + 0x1EF5C258BE42C645ULL) + aPhaseAOrbiterUpdateSaltE[((aIndex + 21U)) & 31];
             aOrbiterD = (aOrbiterD ^ aOrbiterA) ^ 0xD06C9EC8E08921DBULL;
             aOrbiterD = RotL64((aOrbiterD * 0xDF8CD58448D7102BULL), 47U);
             //
-            aOrbiterI = ((aOrbiterI + aOrbiterE) + 0x7A1442F0DA48EDE2ULL) + aPhaseAOrbiterUpdateSaltC[((aIndex + 9U)) & S_SALT1];
+            aOrbiterI = ((aOrbiterI + aOrbiterE) + 0x7A1442F0DA48EDE2ULL) + aPhaseAOrbiterUpdateSaltC[((aIndex + 9U)) & 31];
             aOrbiterA = (aOrbiterA ^ aOrbiterI) ^ 0x99A7E33D428E79CEULL;
             aOrbiterA = RotL64((aOrbiterA * 0x8AD2A0E49555E891ULL), 57U);
             //
@@ -11192,7 +11192,7 @@ void TwistExpander_Antares_Arx::Seed_I(TwistWorkSpace *pWorkSpace,
             aOrbiterG = ((aOrbiterG ^ aOrbiterH) ^ 0xF5671A2EE0258BA2ULL) ^ aNonceWordO;
             aOrbiterG = RotL64((aOrbiterG * 0x711CD63D92038B05ULL), 19U);
             //
-            aOrbiterE = ((aOrbiterE + aOrbiterB) + 0x74043B853F197B41ULL) + aPhaseAOrbiterUpdateSaltA[(((31U - aIndex) + 27U)) & S_SALT1];
+            aOrbiterE = ((aOrbiterE + aOrbiterB) + 0x74043B853F197B41ULL) + aPhaseAOrbiterUpdateSaltA[(((31U - aIndex) + 27U)) & 31];
             aOrbiterH = (aOrbiterH ^ aOrbiterE) ^ 0xB6AE8BFA3DC74DB1ULL;
             aOrbiterH = RotL64((aOrbiterH * 0x21C66519CD7385D1ULL), 13U);
             //
@@ -11201,7 +11201,7 @@ void TwistExpander_Antares_Arx::Seed_I(TwistWorkSpace *pWorkSpace,
             aOrbiterI = RotL64((aOrbiterI * 0x10586175AE47D4E5ULL), 39U);
             //
             aOrbiterD = (aOrbiterD + aOrbiterG) + 0x4FE81ECD6E13B6E8ULL;
-            aOrbiterE = ((aOrbiterE ^ aOrbiterD) ^ 0xAFED682B6B78D089ULL) ^ aPhaseAOrbiterUpdateSaltF[((aIndex + 29U)) & S_SALT1];
+            aOrbiterE = ((aOrbiterE ^ aOrbiterD) ^ 0xAFED682B6B78D089ULL) ^ aPhaseAOrbiterUpdateSaltF[((aIndex + 29U)) & 31];
             aOrbiterE = RotL64((aOrbiterE * 0xF3137C0BD37B0481ULL), 27U);
             //
             aIngress = aOrbiterE ^ RotL64(aOrbiterG, 58U);
@@ -11210,9 +11210,9 @@ void TwistExpander_Antares_Arx::Seed_I(TwistWorkSpace *pWorkSpace,
             aIngress = aIngress + RotL64(aOrbiterH, 5U);
             aIngress = TwistMix64::DiffuseA((aIngress + aScatter));
             //
-            aWandererB = aWandererB + (((((RotL64(aIngress, 27U) + aOrbiterD) + RotL64(aOrbiterG, 13U)) + RotL64(aCarry, 3U)) + aNonceWordB) + aPhaseAWandererUpdateSaltA[(((31U - aIndex) + 18U)) & S_SALT1]);
+            aWandererB = aWandererB + (((((RotL64(aIngress, 27U) + aOrbiterD) + RotL64(aOrbiterG, 13U)) + RotL64(aCarry, 3U)) + aNonceWordB) + aPhaseAWandererUpdateSaltA[(((31U - aIndex) + 18U)) & 31]);
             aWandererJ = aWandererJ ^ (((RotL64(aScatter, 13U) + RotL64(aOrbiterI, 57U)) + aOrbiterH) + aNonceWordC);
-            aWandererK = aWandererK + (((RotL64(aCross, 35U) + RotL64(aOrbiterD, 29U)) + aOrbiterB) + aPhaseAWandererUpdateSaltD[(((31U - aIndex) + 3U)) & S_SALT1]);
+            aWandererK = aWandererK + (((RotL64(aCross, 35U) + RotL64(aOrbiterD, 29U)) + aOrbiterB) + aPhaseAWandererUpdateSaltD[(((31U - aIndex) + 3U)) & 31]);
             aWandererF = aWandererF ^ ((RotL64(aPrevious, 57U) + aOrbiterH) + RotL64(aOrbiterE, 5U));
             aWandererI = aWandererI + (((RotL64(aIngress, 50U) + aOrbiterH) + RotL64(aOrbiterG, 51U)) + aNonceWordA);
             aWandererE = aWandererE ^ (((RotL64(aCross, 21U) + aOrbiterA) + RotL64(aOrbiterD, 23U)) + aNonceWordH);
@@ -11255,24 +11255,24 @@ void TwistExpander_Antares_Arx::Seed_I(TwistWorkSpace *pWorkSpace,
             aScatter = (RotL64(aCarry, 11U) + RotL64(aIngress, 23U)) + (RotL64(aPrevious, 37U) ^ RotL64(aCross, 56U));
             aScatter = TwistMix64::DiffuseC(((aScatter ^ aPhaseFDomainWordScatter) ^ aNonceWordB));
             //
-            aOrbiterC = ((aWandererE + RotL64(aScatter, 12U)) + 0x04E153708CEA684DULL) + aPhaseFOrbiterAssignSaltE[((aIndex + 25U)) & S_SALT1];
+            aOrbiterC = ((aWandererE + RotL64(aScatter, 12U)) + 0x04E153708CEA684DULL) + aPhaseFOrbiterAssignSaltE[((aIndex + 25U)) & 31];
             aOrbiterA = (((aWandererI + RotL64(aCross, 37U)) + RotL64(aCarry, 29U)) + 0x78C84B3F89D65337ULL) + aNonceWordE;
             aOrbiterH = (((aWandererC + RotL64(aIngress, 29U)) + RotL64(aCarry, 5U)) + 0xD40F9AE05C5FC564ULL) + aNonceWordN;
             aOrbiterJ = ((aWandererA + RotL64(aPrevious, 23U)) + RotL64(aCarry, 41U)) + 0xC1919F0E3E4B1A10ULL;
             aOrbiterE = (aWandererK + RotL64(aCross, 51U)) + 0x35951048E1F96395ULL;
             aOrbiterB = ((aWandererF + RotL64(aIngress, 5U)) + 0x9F236B9A3D411FDAULL) + aNonceWordC;
-            aOrbiterF = ((aWandererH + RotL64(aScatter, 43U)) + 0x7047BE2235CD767AULL) + aPhaseFOrbiterAssignSaltA[(((31U - aIndex) + 27U)) & S_SALT1];
+            aOrbiterF = ((aWandererH + RotL64(aScatter, 43U)) + 0x7047BE2235CD767AULL) + aPhaseFOrbiterAssignSaltA[(((31U - aIndex) + 27U)) & 31];
             //
             aOrbiterC = (aOrbiterC + aOrbiterA) + 0xC62723292E85F04EULL;
-            aOrbiterH = ((aOrbiterH ^ aOrbiterC) ^ 0xCF4847C38B395E10ULL) ^ aPhaseFOrbiterUpdateSaltA[((aIndex + 15U)) & S_SALT1];
+            aOrbiterH = ((aOrbiterH ^ aOrbiterC) ^ 0xCF4847C38B395E10ULL) ^ aPhaseFOrbiterUpdateSaltA[((aIndex + 15U)) & 31];
             aOrbiterH = RotL64((aOrbiterH * 0xB328A07E173AB853ULL), 47U);
             //
-            aOrbiterJ = ((aOrbiterJ + aOrbiterE) + 0x1E0E51590492CCA1ULL) + aPhaseFOrbiterUpdateSaltF[((aIndex + 5U)) & S_SALT1];
+            aOrbiterJ = ((aOrbiterJ + aOrbiterE) + 0x1E0E51590492CCA1ULL) + aPhaseFOrbiterUpdateSaltF[((aIndex + 5U)) & 31];
             aOrbiterA = ((aOrbiterA ^ aOrbiterJ) ^ 0x20C05DFBFA9D5C9AULL) ^ aNonceWordD;
             aOrbiterA = RotL64((aOrbiterA * 0xDDDF1992BCB64A2FULL), 35U);
             //
             aOrbiterE = ((aOrbiterE + aOrbiterC) + 0x36CCDF9CBFA4FEC1ULL) + aNonceWordH;
-            aOrbiterB = ((aOrbiterB ^ aOrbiterE) ^ 0xCC89FC5571FAB3DCULL) ^ aPhaseFOrbiterUpdateSaltB[((aIndex + 16U)) & S_SALT1];
+            aOrbiterB = ((aOrbiterB ^ aOrbiterE) ^ 0xCC89FC5571FAB3DCULL) ^ aPhaseFOrbiterUpdateSaltB[((aIndex + 16U)) & 31];
             aOrbiterB = RotL64((aOrbiterB * 0xC86E92D87AADA305ULL), 13U);
             //
             aOrbiterH = (aOrbiterH + aOrbiterF) + 0xFB5072082A1B326AULL;
@@ -11287,7 +11287,7 @@ void TwistExpander_Antares_Arx::Seed_I(TwistWorkSpace *pWorkSpace,
             aOrbiterJ = (aOrbiterJ ^ aOrbiterB) ^ 0x5C1D112883DF1715ULL;
             aOrbiterJ = RotL64((aOrbiterJ * 0xE80BA828586F30B7ULL), 57U);
             //
-            aOrbiterA = ((aOrbiterA + aOrbiterB) + 0x87EC06E081482299ULL) + aPhaseFOrbiterUpdateSaltC[((aIndex + 26U)) & S_SALT1];
+            aOrbiterA = ((aOrbiterA + aOrbiterB) + 0x87EC06E081482299ULL) + aPhaseFOrbiterUpdateSaltC[((aIndex + 26U)) & 31];
             aOrbiterF = ((aOrbiterF ^ aOrbiterA) ^ 0xC46F234B75FB22D5ULL) ^ aNonceWordL;
             aOrbiterF = RotL64((aOrbiterF * 0xF3CFA4C7BB963641ULL), 29U);
             //
@@ -11297,12 +11297,12 @@ void TwistExpander_Antares_Arx::Seed_I(TwistWorkSpace *pWorkSpace,
             aIngress = aIngress + RotL64(aOrbiterA, 23U);
             aIngress = TwistMix64::DiffuseC((aIngress + aScatter));
             //
-            aWandererA = aWandererA + (((RotL64(aIngress, 18U) + RotL64(aOrbiterF, 53U)) + aOrbiterA) + aPhaseFWandererUpdateSaltD[(((31U - aIndex) + 23U)) & S_SALT1]);
+            aWandererA = aWandererA + (((RotL64(aIngress, 18U) + RotL64(aOrbiterF, 53U)) + aOrbiterA) + aPhaseFWandererUpdateSaltD[(((31U - aIndex) + 23U)) & 31]);
             aWandererI = aWandererI ^ ((RotL64(aCross, 29U) + aOrbiterB) + RotL64(aOrbiterJ, 60U));
             aWandererE = aWandererE + (((RotL64(aPrevious, 35U) + RotL64(aOrbiterB, 13U)) + aOrbiterE) + aNonceWordK);
             aWandererC = aWandererC ^ ((RotL64(aScatter, 51U) + aOrbiterB) + RotL64(aOrbiterH, 37U));
             aWandererH = aWandererH + (((RotL64(aCross, 5U) + aOrbiterC) + RotL64(aOrbiterE, 29U)) + RotL64(aCarry, 27U));
-            aWandererF = aWandererF ^ (((RotL64(aPrevious, 57U) + RotL64(aOrbiterA, 5U)) + aOrbiterC) + aPhaseFWandererUpdateSaltF[(((31U - aIndex) + 3U)) & S_SALT1]);
+            aWandererF = aWandererF ^ (((RotL64(aPrevious, 57U) + RotL64(aOrbiterA, 5U)) + aOrbiterC) + aPhaseFWandererUpdateSaltF[(((31U - aIndex) + 3U)) & 31]);
             aWandererK = aWandererK + ((((RotL64(aIngress, 11U) + aOrbiterH) + RotL64(aOrbiterF, 19U)) + RotL64(aCarry, 5U)) + aNonceWordM);
             //
             aCarry = aCarry + (RotL64(aWandererF, 47U) ^ aWandererK);
@@ -11342,10 +11342,10 @@ void TwistExpander_Antares_Arx::Seed_I(TwistWorkSpace *pWorkSpace,
             aScatter = (RotL64(aPrevious, 27U) + RotL64(aCross, 11U)) + (RotL64(aIngress, 58U) ^ RotL64(aCarry, 43U));
             aScatter = TwistMix64::DiffuseB(((aScatter ^ aPhaseDDomainWordScatter) ^ aNonceWordK));
             //
-            aOrbiterH = ((aWandererJ + RotL64(aPrevious, 60U)) + 0x99BBB0A7AF58CE89ULL) + aPhaseDOrbiterAssignSaltD[(((31U - aIndex) + 29U)) & S_SALT1];
+            aOrbiterH = ((aWandererJ + RotL64(aPrevious, 60U)) + 0x99BBB0A7AF58CE89ULL) + aPhaseDOrbiterAssignSaltD[(((31U - aIndex) + 29U)) & 31];
             aOrbiterD = ((aWandererC + RotL64(aScatter, 11U)) + 0x80F53AD1537F3B55ULL) + aNonceWordC;
             aOrbiterJ = ((aWandererK + RotL64(aIngress, 23U)) + RotL64(aCarry, 23U)) + 0x71DD1E31426909D8ULL;
-            aOrbiterE = (((aWandererD + RotL64(aCross, 29U)) + 0x8B8E2917106C3037ULL) + aPhaseDOrbiterAssignSaltF[((aIndex + 26U)) & S_SALT1]) + aNonceWordI;
+            aOrbiterE = (((aWandererD + RotL64(aCross, 29U)) + 0x8B8E2917106C3037ULL) + aPhaseDOrbiterAssignSaltF[((aIndex + 26U)) & 31]) + aNonceWordI;
             aOrbiterG = (aWandererH + RotL64(aPrevious, 47U)) + 0x13143DBE91F4CEDEULL;
             aOrbiterK = (((aWandererE + RotL64(aCross, 53U)) + RotL64(aCarry, 57U)) + 0xE197796621E99B66ULL) + aNonceWordD;
             aOrbiterI = ((aWandererG + RotL64(aScatter, 39U)) + RotL64(aCarry, 43U)) + 0x5798C109D0DE324CULL;
@@ -11362,8 +11362,8 @@ void TwistExpander_Antares_Arx::Seed_I(TwistWorkSpace *pWorkSpace,
             aOrbiterH = ((aOrbiterH ^ aOrbiterK) ^ 0x26E02631C59967ADULL) ^ aNonceWordE;
             aOrbiterH = RotL64((aOrbiterH * 0xFAD811E0C5508B0BULL), 41U);
             //
-            aOrbiterG = ((aOrbiterG + aOrbiterK) + 0x23EF4045D9FB95CDULL) + aPhaseDOrbiterUpdateSaltC[(((31U - aIndex) + 9U)) & S_SALT1];
-            aOrbiterI = ((aOrbiterI ^ aOrbiterG) ^ 0xC1868E6DA569ED64ULL) ^ aPhaseDOrbiterUpdateSaltA[((aIndex + 22U)) & S_SALT1];
+            aOrbiterG = ((aOrbiterG + aOrbiterK) + 0x23EF4045D9FB95CDULL) + aPhaseDOrbiterUpdateSaltC[(((31U - aIndex) + 9U)) & 31];
+            aOrbiterI = ((aOrbiterI ^ aOrbiterG) ^ 0xC1868E6DA569ED64ULL) ^ aPhaseDOrbiterUpdateSaltA[((aIndex + 22U)) & 31];
             aOrbiterI = RotL64((aOrbiterI * 0x86040D6B7935B849ULL), 35U);
             //
             aOrbiterJ = (aOrbiterJ + aOrbiterE) + 0x82F196C82B8AD336ULL;
@@ -11371,10 +11371,10 @@ void TwistExpander_Antares_Arx::Seed_I(TwistWorkSpace *pWorkSpace,
             aOrbiterG = RotL64((aOrbiterG * 0xA9AD916AA25D8A59ULL), 3U);
             //
             aOrbiterD = (aOrbiterD + aOrbiterJ) + 0x58080EE14C5C433CULL;
-            aOrbiterE = ((aOrbiterE ^ aOrbiterD) ^ 0x1A4FCD6E0DA2F9CFULL) ^ aPhaseDOrbiterUpdateSaltE[((aIndex + 17U)) & S_SALT1];
+            aOrbiterE = ((aOrbiterE ^ aOrbiterD) ^ 0x1A4FCD6E0DA2F9CFULL) ^ aPhaseDOrbiterUpdateSaltE[((aIndex + 17U)) & 31];
             aOrbiterE = RotL64((aOrbiterE * 0x60273D438C8A06C3ULL), 47U);
             //
-            aOrbiterI = ((aOrbiterI + aOrbiterH) + 0xC39A58CD70EF40D8ULL) + aPhaseDOrbiterUpdateSaltD[((aIndex + 13U)) & S_SALT1];
+            aOrbiterI = ((aOrbiterI + aOrbiterH) + 0xC39A58CD70EF40D8ULL) + aPhaseDOrbiterUpdateSaltD[((aIndex + 13U)) & 31];
             aOrbiterD = (aOrbiterD ^ aOrbiterI) ^ 0xD1A1BE7B4A203DCCULL;
             aOrbiterD = RotL64((aOrbiterD * 0x227579B62153049FULL), 19U);
             //
@@ -11384,10 +11384,10 @@ void TwistExpander_Antares_Arx::Seed_I(TwistWorkSpace *pWorkSpace,
             aIngress = aIngress + RotL64(aOrbiterD, 47U);
             aIngress = TwistMix64::DiffuseA((aIngress + aScatter));
             //
-            aWandererD = aWandererD ^ (((RotL64(aIngress, 3U) + aOrbiterG) + RotL64(aOrbiterI, 53U)) + aPhaseDWandererUpdateSaltC[(((31U - aIndex) + 21U)) & S_SALT1]);
+            aWandererD = aWandererD ^ (((RotL64(aIngress, 3U) + aOrbiterG) + RotL64(aOrbiterI, 53U)) + aPhaseDWandererUpdateSaltC[(((31U - aIndex) + 21U)) & 31]);
             aWandererJ = aWandererJ + (((RotL64(aScatter, 11U) + RotL64(aOrbiterG, 35U)) + aOrbiterH) + RotL64(aCarry, 27U));
             aWandererK = aWandererK ^ ((RotL64(aCross, 51U) + aOrbiterE) + RotL64(aOrbiterK, 29U));
-            aWandererH = aWandererH + (((((RotL64(aPrevious, 23U) + aOrbiterD) + RotL64(aOrbiterH, 3U)) + RotL64(aCarry, 11U)) + aNonceWordL) + aPhaseDWandererUpdateSaltD[((aIndex + 4U)) & S_SALT1]);
+            aWandererH = aWandererH + (((((RotL64(aPrevious, 23U) + aOrbiterD) + RotL64(aOrbiterH, 3U)) + RotL64(aCarry, 11U)) + aNonceWordL) + aPhaseDWandererUpdateSaltD[((aIndex + 4U)) & 31]);
             aWandererE = aWandererE ^ ((RotL64(aCross, 57U) + aOrbiterJ) + RotL64(aOrbiterD, 21U));
             aWandererG = aWandererG + ((RotL64(aIngress, 37U) + aOrbiterG) + RotL64(aOrbiterJ, 13U));
             aWandererC = aWandererC ^ (((RotL64(aPrevious, 30U) + aOrbiterH) + RotL64(aOrbiterK, 44U)) + aNonceWordJ);
@@ -11431,8 +11431,8 @@ void TwistExpander_Antares_Arx::Seed_I(TwistWorkSpace *pWorkSpace,
             //
             aOrbiterC = (aWandererK + RotL64(aPrevious, 53U)) + 0xA7DD3F112A42D7F3ULL;
             aOrbiterA = ((aWandererB + RotL64(aIngress, 5U)) + RotL64(aCarry, 43U)) + 0xC86F7C33A271DA51ULL;
-            aOrbiterG = ((aWandererJ + RotL64(aScatter, 29U)) + 0xE3B170EAD81A7D8FULL) + aPhaseFOrbiterAssignSaltC[(((31U - aIndex) + 17U)) & S_SALT1];
-            aOrbiterH = (((aWandererA + RotL64(aCross, 22U)) + 0x074078A5875FB47EULL) + aPhaseFOrbiterAssignSaltF[((aIndex + 11U)) & S_SALT1]) + aNonceWordG;
+            aOrbiterG = ((aWandererJ + RotL64(aScatter, 29U)) + 0xE3B170EAD81A7D8FULL) + aPhaseFOrbiterAssignSaltC[(((31U - aIndex) + 17U)) & 31];
+            aOrbiterH = (((aWandererA + RotL64(aCross, 22U)) + 0x074078A5875FB47EULL) + aPhaseFOrbiterAssignSaltF[((aIndex + 11U)) & 31]) + aNonceWordG;
             aOrbiterE = ((aWandererI + RotL64(aScatter, 37U)) + RotL64(aCarry, 13U)) + 0x166CF3E09F22258EULL;
             aOrbiterI = ((aWandererD + RotL64(aIngress, 43U)) + 0xC7E7F3E3A977DDC8ULL) + aNonceWordE;
             aOrbiterK = (((aWandererG + RotL64(aCross, 11U)) + RotL64(aCarry, 57U)) + 0xF41E3052C7E5A118ULL) + aNonceWordH;
@@ -11441,15 +11441,15 @@ void TwistExpander_Antares_Arx::Seed_I(TwistWorkSpace *pWorkSpace,
             aOrbiterG = (aOrbiterG ^ aOrbiterC) ^ 0x3B915EFA6C8EB187ULL;
             aOrbiterG = RotL64((aOrbiterG * 0xADD55F99454F7E77ULL), 37U);
             //
-            aOrbiterA = ((aOrbiterA + aOrbiterG) + 0x81EF2EC3C49B0631ULL) + aPhaseFOrbiterUpdateSaltA[((aIndex + 16U)) & S_SALT1];
-            aOrbiterH = ((aOrbiterH ^ aOrbiterA) ^ 0xF21AA85E21BE8ADAULL) ^ aPhaseFOrbiterUpdateSaltC[(((31U - aIndex) + 6U)) & S_SALT1];
+            aOrbiterA = ((aOrbiterA + aOrbiterG) + 0x81EF2EC3C49B0631ULL) + aPhaseFOrbiterUpdateSaltA[((aIndex + 16U)) & 31];
+            aOrbiterH = ((aOrbiterH ^ aOrbiterA) ^ 0xF21AA85E21BE8ADAULL) ^ aPhaseFOrbiterUpdateSaltC[(((31U - aIndex) + 6U)) & 31];
             aOrbiterH = RotL64((aOrbiterH * 0xD93145860CF2C6A1ULL), 13U);
             //
-            aOrbiterE = ((aOrbiterE + aOrbiterI) + 0x7D864F9C76FED691ULL) + aPhaseFOrbiterUpdateSaltE[(((31U - aIndex) + 25U)) & S_SALT1];
+            aOrbiterE = ((aOrbiterE + aOrbiterI) + 0x7D864F9C76FED691ULL) + aPhaseFOrbiterUpdateSaltE[(((31U - aIndex) + 25U)) & 31];
             aOrbiterK = ((aOrbiterK ^ aOrbiterE) ^ 0x14157B7BAB0A1443ULL) ^ aNonceWordO;
             aOrbiterK = RotL64((aOrbiterK * 0x65381E0CE374605BULL), 51U);
             //
-            aOrbiterK = ((aOrbiterK + aOrbiterC) + 0xE902992B810AD472ULL) + aPhaseFOrbiterUpdateSaltD[((aIndex + 20U)) & S_SALT1];
+            aOrbiterK = ((aOrbiterK + aOrbiterC) + 0xE902992B810AD472ULL) + aPhaseFOrbiterUpdateSaltD[((aIndex + 20U)) & 31];
             aOrbiterA = (aOrbiterA ^ aOrbiterK) ^ 0x8086118DD28D2228ULL;
             aOrbiterA = RotL64((aOrbiterA * 0x76DBA1730E458C61ULL), 57U);
             //
@@ -11475,8 +11475,8 @@ void TwistExpander_Antares_Arx::Seed_I(TwistWorkSpace *pWorkSpace,
             aWandererJ = aWandererJ ^ ((RotL64(aCross, 13U) + aOrbiterH) + RotL64(aOrbiterI, 27U));
             aWandererD = aWandererD + (((RotL64(aIngress, 5U) + aOrbiterI) + RotL64(aOrbiterE, 47U)) + aNonceWordM);
             aWandererB = aWandererB ^ (((RotL64(aPrevious, 27U) + RotL64(aOrbiterH, 39U)) + aOrbiterA) + aNonceWordC);
-            aWandererK = aWandererK + (((((RotL64(aIngress, 57U) + aOrbiterH) + RotL64(aOrbiterG, 13U)) + RotL64(aCarry, 3U)) + aNonceWordA) + aPhaseFWandererUpdateSaltE[(((31U - aIndex) + 13U)) & S_SALT1]);
-            aWandererG = aWandererG ^ (((RotL64(aCross, 44U) + aOrbiterC) + RotL64(aOrbiterG, 19U)) + aPhaseFWandererUpdateSaltB[((aIndex + 5U)) & S_SALT1]);
+            aWandererK = aWandererK + (((((RotL64(aIngress, 57U) + aOrbiterH) + RotL64(aOrbiterG, 13U)) + RotL64(aCarry, 3U)) + aNonceWordA) + aPhaseFWandererUpdateSaltE[(((31U - aIndex) + 13U)) & 31]);
+            aWandererG = aWandererG ^ (((RotL64(aCross, 44U) + aOrbiterC) + RotL64(aOrbiterG, 19U)) + aPhaseFWandererUpdateSaltB[((aIndex + 5U)) & 31]);
             aWandererA = aWandererA + (((RotL64(aPrevious, 21U) + RotL64(aOrbiterA, 3U)) + aOrbiterG) + RotL64(aCarry, 21U));
             //
             aCarry = aCarry + (aWandererK ^ RotL64(aWandererD, 58U));
@@ -11519,9 +11519,9 @@ void TwistExpander_Antares_Arx::Seed_I(TwistWorkSpace *pWorkSpace,
             aOrbiterI = ((aWandererI + RotL64(aCross, 47U)) + RotL64(aCarry, 5U)) + 0x751337A45B9A5B55ULL;
             aOrbiterJ = (aWandererB + RotL64(aScatter, 57U)) + 0xAB92C0E22F861EF0ULL;
             aOrbiterA = (aWandererH + RotL64(aPrevious, 21U)) + 0xCC17B4274687E51BULL;
-            aOrbiterB = (((aWandererG + RotL64(aIngress, 29U)) + RotL64(aCarry, 57U)) + 0x209E0C109135137DULL) + aPhaseCOrbiterAssignSaltF[(((31U - aIndex) + 11U)) & S_SALT1];
+            aOrbiterB = (((aWandererG + RotL64(aIngress, 29U)) + RotL64(aCarry, 57U)) + 0x209E0C109135137DULL) + aPhaseCOrbiterAssignSaltF[(((31U - aIndex) + 11U)) & 31];
             aOrbiterD = ((aWandererA + RotL64(aScatter, 41U)) + 0x55D1CE545C25E376ULL) + aNonceWordN;
-            aOrbiterF = ((((aWandererF + RotL64(aPrevious, 10U)) + RotL64(aCarry, 29U)) + 0xBEA7B4ACDAD7778DULL) + aPhaseCOrbiterAssignSaltA[((aIndex + 23U)) & S_SALT1]) + aNonceWordI;
+            aOrbiterF = ((((aWandererF + RotL64(aPrevious, 10U)) + RotL64(aCarry, 29U)) + 0xBEA7B4ACDAD7778DULL) + aPhaseCOrbiterAssignSaltA[((aIndex + 23U)) & 31]) + aNonceWordI;
             aOrbiterE = (aWandererC + RotL64(aIngress, 3U)) + 0x0C6562532DCD29A2ULL;
             //
             aOrbiterI = (aOrbiterI + aOrbiterJ) + 0x05A3565565B34D8AULL;
@@ -11533,7 +11533,7 @@ void TwistExpander_Antares_Arx::Seed_I(TwistWorkSpace *pWorkSpace,
             aOrbiterI = RotL64((aOrbiterI * 0xC578F127D9AC9C21ULL), 47U);
             //
             aOrbiterD = (aOrbiterD + aOrbiterF) + 0x28558AC56FCD766EULL;
-            aOrbiterJ = (((aOrbiterJ ^ aOrbiterD) ^ 0xA20FBB7E0BA5C843ULL) ^ aPhaseCOrbiterUpdateSaltC[((aIndex + 24U)) & S_SALT1]) ^ aNonceWordH;
+            aOrbiterJ = (((aOrbiterJ ^ aOrbiterD) ^ 0xA20FBB7E0BA5C843ULL) ^ aPhaseCOrbiterUpdateSaltC[((aIndex + 24U)) & 31]) ^ aNonceWordH;
             aOrbiterJ = RotL64((aOrbiterJ * 0x5058B17469B5B651ULL), 57U);
             //
             aOrbiterF = (aOrbiterF + aOrbiterI) + 0xEDB5EE7BF21669B3ULL;
@@ -11541,15 +11541,15 @@ void TwistExpander_Antares_Arx::Seed_I(TwistWorkSpace *pWorkSpace,
             aOrbiterE = RotL64((aOrbiterE * 0xD448C6CB6DB224E1ULL), 11U);
             //
             aOrbiterJ = ((aOrbiterJ + aOrbiterE) + 0x819CB738EA19B84EULL) + aNonceWordM;
-            aOrbiterB = ((aOrbiterB ^ aOrbiterJ) ^ 0x917E09580DAE0ECDULL) ^ aPhaseCOrbiterUpdateSaltD[(((31U - aIndex) + 13U)) & S_SALT1];
+            aOrbiterB = ((aOrbiterB ^ aOrbiterJ) ^ 0x917E09580DAE0ECDULL) ^ aPhaseCOrbiterUpdateSaltD[(((31U - aIndex) + 13U)) & 31];
             aOrbiterB = RotL64((aOrbiterB * 0xB7BC7B7779893D07ULL), 41U);
             //
             aOrbiterA = (aOrbiterA + aOrbiterB) + 0xDAA4D032A7CBCBCAULL;
             aOrbiterF = (aOrbiterF ^ aOrbiterA) ^ 0xAA794CE5FAF72E0BULL;
             aOrbiterF = RotL64((aOrbiterF * 0xCD51A9AC66172561ULL), 35U);
             //
-            aOrbiterE = ((aOrbiterE + aOrbiterA) + 0x7D07C874198D191EULL) + aPhaseCOrbiterUpdateSaltE[((aIndex + 12U)) & S_SALT1];
-            aOrbiterD = ((aOrbiterD ^ aOrbiterE) ^ 0x1F5356123728DCB2ULL) ^ aPhaseCOrbiterUpdateSaltA[((aIndex + 26U)) & S_SALT1];
+            aOrbiterE = ((aOrbiterE + aOrbiterA) + 0x7D07C874198D191EULL) + aPhaseCOrbiterUpdateSaltE[((aIndex + 12U)) & 31];
+            aOrbiterD = ((aOrbiterD ^ aOrbiterE) ^ 0x1F5356123728DCB2ULL) ^ aPhaseCOrbiterUpdateSaltA[((aIndex + 26U)) & 31];
             aOrbiterD = RotL64((aOrbiterD * 0xD35024ED4CB3705FULL), 27U);
             //
             aIngress = aOrbiterF ^ RotL64(aOrbiterI, 35U);
@@ -11562,8 +11562,8 @@ void TwistExpander_Antares_Arx::Seed_I(TwistWorkSpace *pWorkSpace,
             aWandererC = aWandererC ^ (((RotL64(aScatter, 47U) + RotL64(aOrbiterE, 13U)) + aOrbiterD) + aNonceWordL);
             aWandererG = aWandererG + (((RotL64(aPrevious, 57U) + aOrbiterA) + RotL64(aOrbiterB, 21U)) + aNonceWordA);
             aWandererF = aWandererF ^ ((RotL64(aIngress, 3U) + RotL64(aOrbiterD, 47U)) + aOrbiterF);
-            aWandererI = aWandererI + ((((RotL64(aPrevious, 39U) + RotL64(aOrbiterD, 28U)) + aOrbiterB) + aNonceWordF) + aPhaseCWandererUpdateSaltC[(((31U - aIndex) + 19U)) & S_SALT1]);
-            aWandererA = aWandererA ^ (((RotL64(aCross, 23U) + aOrbiterF) + RotL64(aOrbiterE, 41U)) + aPhaseCWandererUpdateSaltF[((aIndex + 25U)) & S_SALT1]);
+            aWandererI = aWandererI + ((((RotL64(aPrevious, 39U) + RotL64(aOrbiterD, 28U)) + aOrbiterB) + aNonceWordF) + aPhaseCWandererUpdateSaltC[(((31U - aIndex) + 19U)) & 31]);
+            aWandererA = aWandererA ^ (((RotL64(aCross, 23U) + aOrbiterF) + RotL64(aOrbiterE, 41U)) + aPhaseCWandererUpdateSaltF[((aIndex + 25U)) & 31]);
             aWandererH = aWandererH + (((RotL64(aIngress, 13U) + aOrbiterI) + RotL64(aOrbiterJ, 3U)) + RotL64(aCarry, 39U));
             //
             aCarry = aCarry + (aWandererB ^ RotL64(aWandererC, 46U));
@@ -11603,24 +11603,24 @@ void TwistExpander_Antares_Arx::Seed_I(TwistWorkSpace *pWorkSpace,
             aScatter = (RotL64(aPrevious, 18U) ^ RotL64(aCarry, 5U)) + (RotL64(aCross, 35U) + RotL64(aIngress, 53U));
             aScatter = TwistMix64::DiffuseA(((aScatter ^ aPhaseBDomainWordScatter) ^ aNonceWordM));
             //
-            aOrbiterC = ((aWandererI + RotL64(aCross, 3U)) + 0xBD1497F72459459FULL) + aPhaseBOrbiterAssignSaltB[((aIndex + 9U)) & S_SALT1];
+            aOrbiterC = ((aWandererI + RotL64(aCross, 3U)) + 0xBD1497F72459459FULL) + aPhaseBOrbiterAssignSaltB[((aIndex + 9U)) & 31];
             aOrbiterD = ((aWandererE + RotL64(aPrevious, 21U)) + 0x909B8C2EC953ADA6ULL) + aNonceWordK;
             aOrbiterF = ((aWandererB + RotL64(aIngress, 44U)) + RotL64(aCarry, 27U)) + 0xC43C8E6323866A58ULL;
             aOrbiterA = (aWandererH + RotL64(aScatter, 57U)) + 0x7A84CCDD9BC36154ULL;
             aOrbiterB = ((aWandererC + RotL64(aCross, 35U)) + RotL64(aCarry, 11U)) + 0x4929E936C45BC20EULL;
             aOrbiterI = ((aWandererJ + RotL64(aPrevious, 51U)) + 0x8085E23BE3070E88ULL) + aNonceWordP;
-            aOrbiterH = (((aWandererG + RotL64(aScatter, 11U)) + RotL64(aCarry, 51U)) + 0x01E0642EBD6ADB41ULL) + aPhaseBOrbiterAssignSaltE[((aIndex + 13U)) & S_SALT1];
+            aOrbiterH = (((aWandererG + RotL64(aScatter, 11U)) + RotL64(aCarry, 51U)) + 0x01E0642EBD6ADB41ULL) + aPhaseBOrbiterAssignSaltE[((aIndex + 13U)) & 31];
             //
             aOrbiterC = ((aOrbiterC + aOrbiterD) + 0xA7102BC07CC94B8AULL) + aNonceWordL;
             aOrbiterF = (aOrbiterF ^ aOrbiterC) ^ 0x0F8714596AA3C546ULL;
             aOrbiterF = RotL64((aOrbiterF * 0xB744EAAA97E48AC9ULL), 13U);
             //
-            aOrbiterA = ((aOrbiterA + aOrbiterB) + 0xBA79B4E748D8BE08ULL) + aPhaseBOrbiterUpdateSaltC[(((31U - aIndex) + 27U)) & S_SALT1];
-            aOrbiterD = ((aOrbiterD ^ aOrbiterA) ^ 0xDF862B4465FC84BCULL) ^ aPhaseBOrbiterUpdateSaltD[(((31U - aIndex) + 19U)) & S_SALT1];
+            aOrbiterA = ((aOrbiterA + aOrbiterB) + 0xBA79B4E748D8BE08ULL) + aPhaseBOrbiterUpdateSaltC[(((31U - aIndex) + 27U)) & 31];
+            aOrbiterD = ((aOrbiterD ^ aOrbiterA) ^ 0xDF862B4465FC84BCULL) ^ aPhaseBOrbiterUpdateSaltD[(((31U - aIndex) + 19U)) & 31];
             aOrbiterD = RotL64((aOrbiterD * 0x1E866BA2D6E4138FULL), 21U);
             //
             aOrbiterI = (aOrbiterI + aOrbiterA) + 0xE337AA15B271A8E0ULL;
-            aOrbiterC = ((aOrbiterC ^ aOrbiterI) ^ 0x8234505D5712D5D3ULL) ^ aPhaseBOrbiterUpdateSaltA[((aIndex + 16U)) & S_SALT1];
+            aOrbiterC = ((aOrbiterC ^ aOrbiterI) ^ 0x8234505D5712D5D3ULL) ^ aPhaseBOrbiterUpdateSaltA[((aIndex + 16U)) & 31];
             aOrbiterC = RotL64((aOrbiterC * 0xB816EE370FA1D189ULL), 5U);
             //
             aOrbiterF = (aOrbiterF + aOrbiterH) + 0xE8BD0FBE43C82F38ULL;
@@ -11636,7 +11636,7 @@ void TwistExpander_Antares_Arx::Seed_I(TwistWorkSpace *pWorkSpace,
             aOrbiterB = RotL64((aOrbiterB * 0x1E7227862525F1E9ULL), 57U);
             //
             aOrbiterD = (aOrbiterD + aOrbiterI) + 0x7BA8CAD29A3314AEULL;
-            aOrbiterH = ((aOrbiterH ^ aOrbiterD) ^ 0x173D2F2F668109BBULL) ^ aPhaseBOrbiterUpdateSaltE[((aIndex + 5U)) & S_SALT1];
+            aOrbiterH = ((aOrbiterH ^ aOrbiterD) ^ 0x173D2F2F668109BBULL) ^ aPhaseBOrbiterUpdateSaltE[((aIndex + 5U)) & 31];
             aOrbiterH = RotL64((aOrbiterH * 0x1BDAD5E5CA7CC6DFULL), 35U);
             //
             aIngress = aOrbiterB ^ RotL64(aOrbiterD, 27U);
@@ -11645,12 +11645,12 @@ void TwistExpander_Antares_Arx::Seed_I(TwistWorkSpace *pWorkSpace,
             aIngress = aIngress + RotL64(aOrbiterC, 57U);
             aIngress = TwistMix64::DiffuseA((aIngress + aScatter));
             //
-            aWandererC = aWandererC ^ ((((RotL64(aPrevious, 19U) + RotL64(aOrbiterF, 42U)) + aOrbiterC) + aNonceWordE) + aPhaseBWandererUpdateSaltC[(((31U - aIndex) + 24U)) & S_SALT1]);
+            aWandererC = aWandererC ^ ((((RotL64(aPrevious, 19U) + RotL64(aOrbiterF, 42U)) + aOrbiterC) + aNonceWordE) + aPhaseBWandererUpdateSaltC[(((31U - aIndex) + 24U)) & 31]);
             aWandererE = aWandererE + (((RotL64(aScatter, 42U) + aOrbiterC) + RotL64(aOrbiterB, 57U)) + RotL64(aCarry, 35U));
             aWandererB = aWandererB ^ (((RotL64(aCross, 57U) + aOrbiterH) + RotL64(aOrbiterB, 11U)) + aNonceWordD);
             aWandererJ = aWandererJ + ((RotL64(aIngress, 29U) + RotL64(aOrbiterI, 19U)) + aOrbiterA);
             aWandererH = aWandererH ^ ((RotL64(aScatter, 35U) + aOrbiterB) + RotL64(aOrbiterF, 35U));
-            aWandererI = aWandererI + (((((RotL64(aCross, 51U) + aOrbiterD) + RotL64(aOrbiterI, 51U)) + RotL64(aCarry, 51U)) + aNonceWordG) + aPhaseBWandererUpdateSaltB[(((31U - aIndex) + 7U)) & S_SALT1]);
+            aWandererI = aWandererI + (((((RotL64(aCross, 51U) + aOrbiterD) + RotL64(aOrbiterI, 51U)) + RotL64(aCarry, 51U)) + aNonceWordG) + aPhaseBWandererUpdateSaltB[(((31U - aIndex) + 7U)) & 31]);
             aWandererG = aWandererG ^ (((RotL64(aIngress, 5U) + RotL64(aOrbiterF, 29U)) + aOrbiterA) + aNonceWordH);
             //
             aCarry = aCarry + (aWandererJ ^ RotL64(aWandererE, 23U));
@@ -11799,18 +11799,18 @@ void TwistExpander_Antares_Arx::Twist_A(TwistWorkSpace *pWorkSpace,
             aOrbiterB = ((aWandererI + RotL64(aPrevious, 19U)) + RotL64(aCarry, 3U)) + 0xE2C2F8D62F972737ULL;
             aOrbiterD = ((aWandererK + RotL64(aIngress, 30U)) + RotL64(aCarry, 13U)) + 0x5B0CDF4554F55334ULL;
             aOrbiterG = (aWandererJ + RotL64(aScatter, 37U)) + 0x9B547589A9B0B0B6ULL;
-            aOrbiterI = ((aWandererF + RotL64(aCross, 13U)) + 0xEE75D4ADD10EDB96ULL) + aPhaseAOrbiterAssignSaltD[((aIndex + 26U)) & S_SALT1];
-            aOrbiterE = ((aWandererE + RotL64(aIngress, 41U)) + 0x383C0AC8B3941306ULL) + aPhaseAOrbiterAssignSaltB[(((31U - aIndex) + 9U)) & S_SALT1];
+            aOrbiterI = ((aWandererF + RotL64(aCross, 13U)) + 0xEE75D4ADD10EDB96ULL) + aPhaseAOrbiterAssignSaltD[((aIndex + 26U)) & 31];
+            aOrbiterE = ((aWandererE + RotL64(aIngress, 41U)) + 0x383C0AC8B3941306ULL) + aPhaseAOrbiterAssignSaltB[(((31U - aIndex) + 9U)) & 31];
             //
             aOrbiterC = (aOrbiterC + aOrbiterF) + 0xBBABE17A54777480ULL;
             aOrbiterA = (aOrbiterA ^ aOrbiterC) ^ 0x61C654A5AB28D339ULL;
             aOrbiterA = RotL64((aOrbiterA * 0x26D5B1AB412819C9ULL), 47U);
             //
-            aOrbiterA = ((aOrbiterA + aOrbiterK) + 0xB51215D425A4C3BDULL) + aPhaseAOrbiterUpdateSaltD[(((31U - aIndex) + 7U)) & S_SALT1];
+            aOrbiterA = ((aOrbiterA + aOrbiterK) + 0xB51215D425A4C3BDULL) + aPhaseAOrbiterUpdateSaltD[(((31U - aIndex) + 7U)) & 31];
             aOrbiterB = (aOrbiterB ^ aOrbiterA) ^ 0x3E1EE7DF706DA7EEULL;
             aOrbiterB = RotL64((aOrbiterB * 0x50B68DB4D398A093ULL), 39U);
             //
-            aOrbiterD = ((aOrbiterD + aOrbiterG) + 0x9D8857BA11620E71ULL) + aPhaseAOrbiterUpdateSaltF[(((31U - aIndex) + 27U)) & S_SALT1];
+            aOrbiterD = ((aOrbiterD + aOrbiterG) + 0x9D8857BA11620E71ULL) + aPhaseAOrbiterUpdateSaltF[(((31U - aIndex) + 27U)) & 31];
             aOrbiterC = (aOrbiterC ^ aOrbiterD) ^ 0xB63B3CE5CD832CB7ULL;
             aOrbiterC = RotL64((aOrbiterC * 0xD91AA2482958B365ULL), 27U);
             //
@@ -11827,11 +11827,11 @@ void TwistExpander_Antares_Arx::Twist_A(TwistWorkSpace *pWorkSpace,
             aOrbiterD = RotL64((aOrbiterD * 0xB2718DBCABBBC69BULL), 13U);
             //
             aOrbiterI = (aOrbiterI + aOrbiterC) + 0xB41EF42998DAD137ULL;
-            aOrbiterE = ((aOrbiterE ^ aOrbiterI) ^ 0xFA059A290C93AC51ULL) ^ aPhaseAOrbiterUpdateSaltE[((aIndex + 18U)) & S_SALT1];
+            aOrbiterE = ((aOrbiterE ^ aOrbiterI) ^ 0xFA059A290C93AC51ULL) ^ aPhaseAOrbiterUpdateSaltE[((aIndex + 18U)) & 31];
             aOrbiterE = RotL64((aOrbiterE * 0xA892885A49EA796FULL), 5U);
             //
             aOrbiterB = (aOrbiterB + aOrbiterD) + 0xBE3473A139EF3307ULL;
-            aOrbiterI = ((aOrbiterI ^ aOrbiterB) ^ 0xC5A42B413283F327ULL) ^ aPhaseAOrbiterUpdateSaltA[(((31U - aIndex) + 23U)) & S_SALT1];
+            aOrbiterI = ((aOrbiterI ^ aOrbiterB) ^ 0xC5A42B413283F327ULL) ^ aPhaseAOrbiterUpdateSaltA[(((31U - aIndex) + 23U)) & 31];
             aOrbiterI = RotL64((aOrbiterI * 0x11CDDC9CD3E8B0DFULL), 19U);
             //
             aOrbiterE = (aOrbiterE + aOrbiterA) + 0xCB4471A0DF471932ULL;
@@ -11846,13 +11846,13 @@ void TwistExpander_Antares_Arx::Twist_A(TwistWorkSpace *pWorkSpace,
             aIngress = TwistMix64::DiffuseA((aIngress + aScatter));
             //
             aWandererI = aWandererI + (((RotL64(aPrevious, 41U) + RotL64(aOrbiterB, 39U)) + aOrbiterG) + RotL64(aCarry, 11U));
-            aWandererA = aWandererA ^ (((RotL64(aCross, 10U) + aOrbiterA) + RotL64(aOrbiterC, 58U)) + aPhaseAWandererUpdateSaltC[(((31U - aIndex) + 19U)) & S_SALT1]);
+            aWandererA = aWandererA ^ (((RotL64(aCross, 10U) + aOrbiterA) + RotL64(aOrbiterC, 58U)) + aPhaseAWandererUpdateSaltC[(((31U - aIndex) + 19U)) & 31]);
             aWandererF = aWandererF + ((RotL64(aIngress, 23U) + aOrbiterD) + RotL64(aOrbiterE, 23U));
             aWandererE = aWandererE ^ ((RotL64(aScatter, 35U) + RotL64(aOrbiterK, 19U)) + aOrbiterC);
             aWandererH = aWandererH + (((RotL64(aIngress, 3U) + aOrbiterF) + RotL64(aOrbiterC, 27U)) + RotL64(aCarry, 53U));
             aWandererK = aWandererK ^ ((RotL64(aCross, 19U) + RotL64(aOrbiterI, 51U)) + aOrbiterE);
             aWandererD = aWandererD + ((RotL64(aPrevious, 56U) + aOrbiterG) + RotL64(aOrbiterF, 13U));
-            aWandererJ = aWandererJ ^ (((RotL64(aScatter, 29U) + RotL64(aOrbiterK, 34U)) + aOrbiterG) + aPhaseAWandererUpdateSaltA[((aIndex + 20U)) & S_SALT1]);
+            aWandererJ = aWandererJ ^ (((RotL64(aScatter, 29U) + RotL64(aOrbiterK, 34U)) + aOrbiterG) + aPhaseAWandererUpdateSaltA[((aIndex + 20U)) & 31]);
             aWandererC = aWandererC + ((RotL64(aCross, 47U) + RotL64(aOrbiterE, 43U)) + aOrbiterA);
             //
             aCarry = aCarry + (aWandererA ^ RotL64(aWandererF, 19U));
@@ -11891,10 +11891,10 @@ void TwistExpander_Antares_Arx::Twist_A(TwistWorkSpace *pWorkSpace,
             aScatter = (RotL64(aCross, 57U) + RotL64(aPrevious, 6U)) ^ (RotL64(aIngress, 23U) ^ RotL64(aCarry, 41U));
             aScatter = TwistMix64::DiffuseC(aScatter);
             //
-            aOrbiterB = (((aWandererC + RotL64(aScatter, 13U)) + RotL64(aCarry, 27U)) + 0x338E2B96AF10CBBFULL) + aPhaseBOrbiterAssignSaltF[(((31U - aIndex) + 12U)) & S_SALT1];
+            aOrbiterB = (((aWandererC + RotL64(aScatter, 13U)) + RotL64(aCarry, 27U)) + 0x338E2B96AF10CBBFULL) + aPhaseBOrbiterAssignSaltF[(((31U - aIndex) + 12U)) & 31];
             aOrbiterA = (aWandererE + RotL64(aPrevious, 52U)) + 0xDCE264BD44DAAAF2ULL;
             aOrbiterF = (aWandererI + RotL64(aIngress, 19U)) + 0xB3443667C5377EACULL;
-            aOrbiterH = ((aWandererF + RotL64(aCross, 47U)) + 0x0DEE1559B2A92DE8ULL) + aPhaseBOrbiterAssignSaltD[(((31U - aIndex) + 20U)) & S_SALT1];
+            aOrbiterH = ((aWandererF + RotL64(aCross, 47U)) + 0x0DEE1559B2A92DE8ULL) + aPhaseBOrbiterAssignSaltD[(((31U - aIndex) + 20U)) & 31];
             aOrbiterC = ((aWandererD + RotL64(aPrevious, 43U)) + RotL64(aCarry, 5U)) + 0x2144591827DDD8D7ULL;
             aOrbiterE = ((aWandererJ + RotL64(aIngress, 57U)) + RotL64(aCarry, 37U)) + 0x16CD18A75942E2B1ULL;
             aOrbiterI = (aWandererG + RotL64(aCross, 37U)) + 0x56BE8CA4ECA703AEULL;
@@ -11906,14 +11906,14 @@ void TwistExpander_Antares_Arx::Twist_A(TwistWorkSpace *pWorkSpace,
             aOrbiterF = RotL64((aOrbiterF * 0x6F3E4635964D7B07ULL), 27U);
             //
             aOrbiterH = (aOrbiterH + aOrbiterC) + 0x6DE4F215D339D05CULL;
-            aOrbiterB = ((aOrbiterB ^ aOrbiterH) ^ 0x96F987F75EA7151EULL) ^ aPhaseBOrbiterUpdateSaltF[((aIndex + 17U)) & S_SALT1];
+            aOrbiterB = ((aOrbiterB ^ aOrbiterH) ^ 0x96F987F75EA7151EULL) ^ aPhaseBOrbiterUpdateSaltF[((aIndex + 17U)) & 31];
             aOrbiterB = RotL64((aOrbiterB * 0x19D330D2AEF7F635ULL), 53U);
             //
             aOrbiterE = (aOrbiterE + aOrbiterH) + 0x67671DA59F23F232ULL;
-            aOrbiterI = ((aOrbiterI ^ aOrbiterE) ^ 0x0B6BF2028AE5F5CEULL) ^ aPhaseBOrbiterUpdateSaltE[((aIndex + 15U)) & S_SALT1];
+            aOrbiterI = ((aOrbiterI ^ aOrbiterE) ^ 0x0B6BF2028AE5F5CEULL) ^ aPhaseBOrbiterUpdateSaltE[((aIndex + 15U)) & 31];
             aOrbiterI = RotL64((aOrbiterI * 0x1666D543DC33ED5BULL), 47U);
             //
-            aOrbiterA = ((aOrbiterA + aOrbiterI) + 0xCCFE2EB180939439ULL) + aPhaseBOrbiterUpdateSaltB[((aIndex + 7U)) & S_SALT1];
+            aOrbiterA = ((aOrbiterA + aOrbiterI) + 0xCCFE2EB180939439ULL) + aPhaseBOrbiterUpdateSaltB[((aIndex + 7U)) & 31];
             aOrbiterD = (aOrbiterD ^ aOrbiterA) ^ 0x0B47C46A5542734EULL;
             aOrbiterD = RotL64((aOrbiterD * 0xB6C832DE13052841ULL), 37U);
             //
@@ -11921,7 +11921,7 @@ void TwistExpander_Antares_Arx::Twist_A(TwistWorkSpace *pWorkSpace,
             aOrbiterA = (aOrbiterA ^ aOrbiterC) ^ 0xAC5DFA9B7AC94548ULL;
             aOrbiterA = RotL64((aOrbiterA * 0x0A59A7E4D39F493FULL), 43U);
             //
-            aOrbiterD = ((aOrbiterD + aOrbiterK) + 0x83A8F0187B0B3EE3ULL) + aPhaseBOrbiterUpdateSaltC[((aIndex + 14U)) & S_SALT1];
+            aOrbiterD = ((aOrbiterD + aOrbiterK) + 0x83A8F0187B0B3EE3ULL) + aPhaseBOrbiterUpdateSaltC[((aIndex + 14U)) & 31];
             aOrbiterE = (aOrbiterE ^ aOrbiterD) ^ 0xA9BC275E27734B9AULL;
             aOrbiterE = RotL64((aOrbiterE * 0x595F98AD1DCA99C5ULL), 57U);
             //
@@ -11947,9 +11947,9 @@ void TwistExpander_Antares_Arx::Twist_A(TwistWorkSpace *pWorkSpace,
             aWandererB = aWandererB ^ ((RotL64(aCross, 19U) + RotL64(aOrbiterI, 47U)) + aOrbiterB);
             aWandererF = aWandererF + ((RotL64(aIngress, 51U) + RotL64(aOrbiterF, 40U)) + aOrbiterD);
             aWandererI = aWandererI ^ ((RotL64(aPrevious, 60U) + aOrbiterA) + RotL64(aOrbiterK, 5U));
-            aWandererJ = aWandererJ + (((RotL64(aScatter, 3U) + aOrbiterK) + RotL64(aOrbiterF, 11U)) + aPhaseBWandererUpdateSaltB[((aIndex + 9U)) & S_SALT1]);
+            aWandererJ = aWandererJ + (((RotL64(aScatter, 3U) + aOrbiterK) + RotL64(aOrbiterF, 11U)) + aPhaseBWandererUpdateSaltB[((aIndex + 9U)) & 31]);
             aWandererD = aWandererD ^ ((RotL64(aCross, 43U) + RotL64(aOrbiterD, 35U)) + aOrbiterK);
-            aWandererE = aWandererE + ((((RotL64(aIngress, 39U) + aOrbiterE) + RotL64(aOrbiterF, 24U)) + RotL64(aCarry, 21U)) + aPhaseBWandererUpdateSaltD[(((31U - aIndex) + 21U)) & S_SALT1]);
+            aWandererE = aWandererE + ((((RotL64(aIngress, 39U) + aOrbiterE) + RotL64(aOrbiterF, 24U)) + RotL64(aCarry, 21U)) + aPhaseBWandererUpdateSaltD[(((31U - aIndex) + 21U)) & 31]);
             aWandererA = aWandererA ^ ((RotL64(aScatter, 11U) + RotL64(aOrbiterH, 53U)) + aOrbiterK);
             aWandererG = aWandererG + (((RotL64(aPrevious, 56U) + RotL64(aOrbiterE, 19U)) + aOrbiterI) + RotL64(aCarry, 51U));
             aWandererC = aWandererC ^ ((RotL64(aIngress, 35U) + aOrbiterH) + RotL64(aOrbiterC, 57U));
@@ -11998,14 +11998,14 @@ void TwistExpander_Antares_Arx::Twist_A(TwistWorkSpace *pWorkSpace,
             aOrbiterA = (aWandererI + RotL64(aPrevious, 58U)) + 0x1F49607717A8EE7EULL;
             aOrbiterJ = (aWandererH + RotL64(aCross, 23U)) + 0x1B7D96596B6911BEULL;
             aOrbiterH = ((aWandererG + RotL64(aScatter, 19U)) + RotL64(aCarry, 39U)) + 0xCAE3D43103FB0321ULL;
-            aOrbiterE = ((aWandererF + RotL64(aIngress, 29U)) + 0x695B3ACB44D230B6ULL) + aPhaseCOrbiterAssignSaltF[((aIndex + 20U)) & S_SALT1];
-            aOrbiterK = ((aWandererE + RotL64(aPrevious, 52U)) + 0x04A6346143C4286DULL) + aPhaseCOrbiterAssignSaltA[(((31U - aIndex) + 14U)) & S_SALT1];
+            aOrbiterE = ((aWandererF + RotL64(aIngress, 29U)) + 0x695B3ACB44D230B6ULL) + aPhaseCOrbiterAssignSaltF[((aIndex + 20U)) & 31];
+            aOrbiterK = ((aWandererE + RotL64(aPrevious, 52U)) + 0x04A6346143C4286DULL) + aPhaseCOrbiterAssignSaltA[(((31U - aIndex) + 14U)) & 31];
             //
             aOrbiterD = (aOrbiterD + aOrbiterB) + 0xBE5F53B1C2FA12BEULL;
             aOrbiterF = (aOrbiterF ^ aOrbiterD) ^ 0xB6A6BD0EA4AE90EEULL;
             aOrbiterF = RotL64((aOrbiterF * 0x3CB9D878203DA20DULL), 13U);
             //
-            aOrbiterI = ((aOrbiterI + aOrbiterA) + 0x3519E4A9DE4941B4ULL) + aPhaseCOrbiterUpdateSaltB[((aIndex + 13U)) & S_SALT1];
+            aOrbiterI = ((aOrbiterI + aOrbiterA) + 0x3519E4A9DE4941B4ULL) + aPhaseCOrbiterUpdateSaltB[((aIndex + 13U)) & 31];
             aOrbiterJ = (aOrbiterJ ^ aOrbiterI) ^ 0x8E4D8EBB1BD07B65ULL;
             aOrbiterJ = RotL64((aOrbiterJ * 0x0A7CECFADC70EDAFULL), 47U);
             //
@@ -12014,7 +12014,7 @@ void TwistExpander_Antares_Arx::Twist_A(TwistWorkSpace *pWorkSpace,
             aOrbiterE = RotL64((aOrbiterE * 0xC1D87DD96E3D2A6FULL), 3U);
             //
             aOrbiterJ = (aOrbiterJ + aOrbiterK) + 0x093086A43E8A662FULL;
-            aOrbiterB = ((aOrbiterB ^ aOrbiterJ) ^ 0x9DDF21AA2E5A6CA7ULL) ^ aPhaseCOrbiterUpdateSaltE[(((31U - aIndex) + 8U)) & S_SALT1];
+            aOrbiterB = ((aOrbiterB ^ aOrbiterJ) ^ 0x9DDF21AA2E5A6CA7ULL) ^ aPhaseCOrbiterUpdateSaltE[(((31U - aIndex) + 8U)) & 31];
             aOrbiterB = RotL64((aOrbiterB * 0x76497A580EC11E65ULL), 57U);
             //
             aOrbiterK = (aOrbiterK + aOrbiterE) + 0xE06EA225732EE2D9ULL;
@@ -12033,8 +12033,8 @@ void TwistExpander_Antares_Arx::Twist_A(TwistWorkSpace *pWorkSpace,
             aOrbiterK = (aOrbiterK ^ aOrbiterA) ^ 0x26EF920A1E36A5A0ULL;
             aOrbiterK = RotL64((aOrbiterK * 0xEB05BF8224C61961ULL), 51U);
             //
-            aOrbiterB = ((aOrbiterB + aOrbiterI) + 0xCB0A1C2F23CE1E77ULL) + aPhaseCOrbiterUpdateSaltA[((aIndex + 27U)) & S_SALT1];
-            aOrbiterH = ((aOrbiterH ^ aOrbiterB) ^ 0xC1562F17E92A7CEBULL) ^ aPhaseCOrbiterUpdateSaltD[(((31U - aIndex) + 15U)) & S_SALT1];
+            aOrbiterB = ((aOrbiterB + aOrbiterI) + 0xCB0A1C2F23CE1E77ULL) + aPhaseCOrbiterUpdateSaltA[((aIndex + 27U)) & 31];
+            aOrbiterH = ((aOrbiterH ^ aOrbiterB) ^ 0xC1562F17E92A7CEBULL) ^ aPhaseCOrbiterUpdateSaltD[(((31U - aIndex) + 15U)) & 31];
             aOrbiterH = RotL64((aOrbiterH * 0xD80F650F3299B085ULL), 23U);
             //
             aIngress = RotL64(aOrbiterI, 29U) ^ aOrbiterD;
@@ -12050,8 +12050,8 @@ void TwistExpander_Antares_Arx::Twist_A(TwistWorkSpace *pWorkSpace,
             aWandererH = aWandererH + (((RotL64(aScatter, 41U) + aOrbiterI) + RotL64(aOrbiterA, 27U)) + RotL64(aCarry, 3U));
             aWandererF = aWandererF ^ ((RotL64(aIngress, 29U) + aOrbiterH) + RotL64(aOrbiterB, 3U));
             aWandererJ = aWandererJ + (((RotL64(aCross, 58U) + RotL64(aOrbiterJ, 11U)) + aOrbiterH) + RotL64(aCarry, 19U));
-            aWandererD = aWandererD ^ (((RotL64(aScatter, 35U) + aOrbiterJ) + RotL64(aOrbiterD, 39U)) + aPhaseCWandererUpdateSaltA[((aIndex + 19U)) & S_SALT1]);
-            aWandererE = aWandererE + (((RotL64(aPrevious, 19U) + RotL64(aOrbiterE, 52U)) + aOrbiterK) + aPhaseCWandererUpdateSaltE[(((31U - aIndex) + 29U)) & S_SALT1]);
+            aWandererD = aWandererD ^ (((RotL64(aScatter, 35U) + aOrbiterJ) + RotL64(aOrbiterD, 39U)) + aPhaseCWandererUpdateSaltA[((aIndex + 19U)) & 31]);
+            aWandererE = aWandererE + (((RotL64(aPrevious, 19U) + RotL64(aOrbiterE, 52U)) + aOrbiterK) + aPhaseCWandererUpdateSaltE[(((31U - aIndex) + 29U)) & 31]);
             aWandererK = aWandererK ^ ((RotL64(aCross, 47U) + RotL64(aOrbiterI, 23U)) + aOrbiterK);
             //
             aCarry = aCarry + (aWandererK ^ RotL64(aWandererI, 24U));
@@ -12091,16 +12091,16 @@ void TwistExpander_Antares_Arx::Twist_A(TwistWorkSpace *pWorkSpace,
             aScatter = TwistMix64::DiffuseC(aScatter);
             //
             aOrbiterC = (aWandererD + RotL64(aScatter, 12U)) + 0xBB0BD0E7524202F4ULL;
-            aOrbiterF = ((aWandererF + RotL64(aIngress, 19U)) + 0x9CFD20D282808CC5ULL) + aPhaseEOrbiterAssignSaltC[(((31U - aIndex) + 11U)) & S_SALT1];
+            aOrbiterF = ((aWandererF + RotL64(aIngress, 19U)) + 0x9CFD20D282808CC5ULL) + aPhaseEOrbiterAssignSaltC[(((31U - aIndex) + 11U)) & 31];
             aOrbiterB = (aWandererG + RotL64(aPrevious, 23U)) + 0x820CCD387711B88FULL;
             aOrbiterA = (aWandererJ + RotL64(aCross, 57U)) + 0x24CD1B713365072CULL;
-            aOrbiterH = (((aWandererB + RotL64(aScatter, 53U)) + RotL64(aCarry, 19U)) + 0xF5EA70DBF0B7E5F8ULL) + aPhaseEOrbiterAssignSaltF[((aIndex + 16U)) & S_SALT1];
+            aOrbiterH = (((aWandererB + RotL64(aScatter, 53U)) + RotL64(aCarry, 19U)) + 0xF5EA70DBF0B7E5F8ULL) + aPhaseEOrbiterAssignSaltF[((aIndex + 16U)) & 31];
             aOrbiterD = (aWandererA + RotL64(aPrevious, 41U)) + 0xCA18C3BC62E825B4ULL;
             aOrbiterJ = ((aWandererH + RotL64(aCross, 34U)) + RotL64(aCarry, 51U)) + 0x897429F6E23907D9ULL;
             aOrbiterK = ((aWandererK + RotL64(aIngress, 29U)) + RotL64(aCarry, 41U)) + 0x406EDBA303B70D57ULL;
             aOrbiterG = (aWandererI + RotL64(aPrevious, 3U)) + 0x1CA8256C3A0D1411ULL;
             //
-            aOrbiterC = ((aOrbiterC + aOrbiterF) + 0xC04458BC351CDC6DULL) + aPhaseEOrbiterUpdateSaltB[(((31U - aIndex) + 27U)) & S_SALT1];
+            aOrbiterC = ((aOrbiterC + aOrbiterF) + 0xC04458BC351CDC6DULL) + aPhaseEOrbiterUpdateSaltB[(((31U - aIndex) + 27U)) & 31];
             aOrbiterB = (aOrbiterB ^ aOrbiterC) ^ 0x76CF3447DA103A0CULL;
             aOrbiterB = RotL64((aOrbiterB * 0xE8F7D7C144554E47ULL), 43U);
             //
@@ -12125,15 +12125,15 @@ void TwistExpander_Antares_Arx::Twist_A(TwistWorkSpace *pWorkSpace,
             aOrbiterK = RotL64((aOrbiterK * 0x74E359ED18A79FB9ULL), 23U);
             //
             aOrbiterK = (aOrbiterK + aOrbiterA) + 0xC91C073F263826B7ULL;
-            aOrbiterJ = ((aOrbiterJ ^ aOrbiterK) ^ 0xC44993C0F4A04DFDULL) ^ aPhaseEOrbiterUpdateSaltD[(((31U - aIndex) + 14U)) & S_SALT1];
+            aOrbiterJ = ((aOrbiterJ ^ aOrbiterK) ^ 0xC44993C0F4A04DFDULL) ^ aPhaseEOrbiterUpdateSaltD[(((31U - aIndex) + 14U)) & 31];
             aOrbiterJ = RotL64((aOrbiterJ * 0x2233E11235BE074DULL), 11U);
             //
             aOrbiterF = (aOrbiterF + aOrbiterG) + 0x6CCA50F61E9C0AD7ULL;
             aOrbiterD = (aOrbiterD ^ aOrbiterF) ^ 0x7011534F4AD68317ULL;
             aOrbiterD = RotL64((aOrbiterD * 0x55D14A7CB9CEE3D9ULL), 35U);
             //
-            aOrbiterJ = ((aOrbiterJ + aOrbiterC) + 0x6EF6BA54324F4912ULL) + aPhaseEOrbiterUpdateSaltC[(((31U - aIndex) + 22U)) & S_SALT1];
-            aOrbiterG = ((aOrbiterG ^ aOrbiterJ) ^ 0x0909E3B6544451C8ULL) ^ aPhaseEOrbiterUpdateSaltE[((aIndex + 4U)) & S_SALT1];
+            aOrbiterJ = ((aOrbiterJ + aOrbiterC) + 0x6EF6BA54324F4912ULL) + aPhaseEOrbiterUpdateSaltC[(((31U - aIndex) + 22U)) & 31];
+            aOrbiterG = ((aOrbiterG ^ aOrbiterJ) ^ 0x0909E3B6544451C8ULL) ^ aPhaseEOrbiterUpdateSaltE[((aIndex + 4U)) & 31];
             aOrbiterG = RotL64((aOrbiterG * 0x296ACDA87A79D305ULL), 39U);
             //
             aIngress = RotL64(aOrbiterH, 46U) ^ aOrbiterG;
@@ -12149,9 +12149,9 @@ void TwistExpander_Antares_Arx::Twist_A(TwistWorkSpace *pWorkSpace,
             aWandererI = aWandererI + (((RotL64(aIngress, 47U) + RotL64(aOrbiterK, 23U)) + aOrbiterG) + RotL64(aCarry, 23U));
             aWandererF = aWandererF ^ ((RotL64(aPrevious, 27U) + RotL64(aOrbiterB, 39U)) + aOrbiterK);
             aWandererB = aWandererB + (((RotL64(aCross, 35U) + RotL64(aOrbiterJ, 34U)) + aOrbiterC) + RotL64(aCarry, 11U));
-            aWandererD = aWandererD ^ (((RotL64(aIngress, 6U) + aOrbiterG) + RotL64(aOrbiterB, 3U)) + aPhaseEWandererUpdateSaltC[(((31U - aIndex) + 8U)) & S_SALT1]);
+            aWandererD = aWandererD ^ (((RotL64(aIngress, 6U) + aOrbiterG) + RotL64(aOrbiterB, 3U)) + aPhaseEWandererUpdateSaltC[(((31U - aIndex) + 8U)) & 31]);
             aWandererH = aWandererH + ((RotL64(aScatter, 51U) + RotL64(aOrbiterG, 29U)) + aOrbiterA);
-            aWandererG = aWandererG ^ (((RotL64(aIngress, 19U) + aOrbiterC) + RotL64(aOrbiterA, 13U)) + aPhaseEWandererUpdateSaltE[(((31U - aIndex) + 25U)) & S_SALT1]);
+            aWandererG = aWandererG ^ (((RotL64(aIngress, 19U) + aOrbiterC) + RotL64(aOrbiterA, 13U)) + aPhaseEWandererUpdateSaltE[(((31U - aIndex) + 25U)) & 31]);
             //
             aCarry = aCarry + (aWandererK ^ RotL64(aWandererH, 3U));
             aCarry = aCarry + (aWandererJ ^ RotL64(aWandererA, 57U));
@@ -12190,13 +12190,13 @@ void TwistExpander_Antares_Arx::Twist_A(TwistWorkSpace *pWorkSpace,
             aScatter = TwistMix64::DiffuseC(aScatter);
             //
             aOrbiterI = (aWandererD + RotL64(aCross, 11U)) + 0xB02130272B4D1A21ULL;
-            aOrbiterE = (((aWandererA + RotL64(aPrevious, 5U)) + RotL64(aCarry, 41U)) + 0x273407F2D2997691ULL) + aPhaseAOrbiterAssignSaltE[((aIndex + 18U)) & S_SALT1];
+            aOrbiterE = (((aWandererA + RotL64(aPrevious, 5U)) + RotL64(aCarry, 41U)) + 0x273407F2D2997691ULL) + aPhaseAOrbiterAssignSaltE[((aIndex + 18U)) & 31];
             aOrbiterG = (aWandererE + RotL64(aScatter, 39U)) + 0x8689535785752BECULL;
             aOrbiterC = (aWandererF + RotL64(aIngress, 35U)) + 0xE60AC5C872CA2817ULL;
             aOrbiterD = ((aWandererK + RotL64(aCross, 48U)) + RotL64(aCarry, 23U)) + 0x89580F516F264E07ULL;
             aOrbiterF = (aWandererH + RotL64(aPrevious, 43U)) + 0xDAA5C09025B30AD5ULL;
             aOrbiterB = ((aWandererJ + RotL64(aIngress, 21U)) + RotL64(aCarry, 51U)) + 0x912C9A963C5AB658ULL;
-            aOrbiterA = ((aWandererC + RotL64(aScatter, 29U)) + 0xF708A66B79A72919ULL) + aPhaseAOrbiterAssignSaltF[((aIndex + 25U)) & S_SALT1];
+            aOrbiterA = ((aWandererC + RotL64(aScatter, 29U)) + 0xF708A66B79A72919ULL) + aPhaseAOrbiterAssignSaltF[((aIndex + 25U)) & 31];
             aOrbiterJ = (aWandererB + RotL64(aCross, 52U)) + 0x1BD7AF38A81F7970ULL;
             //
             aOrbiterI = (aOrbiterI + aOrbiterE) + 0x19B3930E99621552ULL;
@@ -12207,7 +12207,7 @@ void TwistExpander_Antares_Arx::Twist_A(TwistWorkSpace *pWorkSpace,
             aOrbiterD = (aOrbiterD ^ aOrbiterC) ^ 0xC6476B9784BB0910ULL;
             aOrbiterD = RotL64((aOrbiterD * 0x6497D19BD4E30CA7ULL), 57U);
             //
-            aOrbiterD = ((aOrbiterD + aOrbiterF) + 0x5C2C54A66DD065BAULL) + aPhaseAOrbiterUpdateSaltA[(((31U - aIndex) + 23U)) & S_SALT1];
+            aOrbiterD = ((aOrbiterD + aOrbiterF) + 0x5C2C54A66DD065BAULL) + aPhaseAOrbiterUpdateSaltA[(((31U - aIndex) + 23U)) & 31];
             aOrbiterE = (aOrbiterE ^ aOrbiterD) ^ 0x67DF3B8C30E519C1ULL;
             aOrbiterE = RotL64((aOrbiterE * 0x985E164C6AA94E5FULL), 39U);
             //
@@ -12220,7 +12220,7 @@ void TwistExpander_Antares_Arx::Twist_A(TwistWorkSpace *pWorkSpace,
             aOrbiterJ = RotL64((aOrbiterJ * 0xC5F3F7693735580DULL), 47U);
             //
             aOrbiterG = (aOrbiterG + aOrbiterJ) + 0x9369972EC8C26D41ULL;
-            aOrbiterF = ((aOrbiterF ^ aOrbiterG) ^ 0x485AA14148D83E20ULL) ^ aPhaseAOrbiterUpdateSaltE[((aIndex + 12U)) & S_SALT1];
+            aOrbiterF = ((aOrbiterF ^ aOrbiterG) ^ 0x485AA14148D83E20ULL) ^ aPhaseAOrbiterUpdateSaltE[((aIndex + 12U)) & 31];
             aOrbiterF = RotL64((aOrbiterF * 0x7437EF432AC7603FULL), 51U);
             //
             aOrbiterF = (aOrbiterF + aOrbiterB) + 0xA039EB5D73CC6AB1ULL;
@@ -12228,11 +12228,11 @@ void TwistExpander_Antares_Arx::Twist_A(TwistWorkSpace *pWorkSpace,
             aOrbiterA = RotL64((aOrbiterA * 0x21F936F6992DC5EFULL), 3U);
             //
             aOrbiterJ = (aOrbiterJ + aOrbiterC) + 0x248A85A2907B93DCULL;
-            aOrbiterB = ((aOrbiterB ^ aOrbiterJ) ^ 0xFA0F07C096C3B8B1ULL) ^ aPhaseAOrbiterUpdateSaltC[(((31U - aIndex) + 3U)) & S_SALT1];
+            aOrbiterB = ((aOrbiterB ^ aOrbiterJ) ^ 0xFA0F07C096C3B8B1ULL) ^ aPhaseAOrbiterUpdateSaltC[(((31U - aIndex) + 3U)) & 31];
             aOrbiterB = RotL64((aOrbiterB * 0x5CCA3AE2BD987469ULL), 21U);
             //
             aOrbiterA = (aOrbiterA + aOrbiterI) + 0xE974321ABD22A659ULL;
-            aOrbiterC = ((aOrbiterC ^ aOrbiterA) ^ 0x6AAC5F94C15099DFULL) ^ aPhaseAOrbiterUpdateSaltD[((aIndex + 20U)) & S_SALT1];
+            aOrbiterC = ((aOrbiterC ^ aOrbiterA) ^ 0x6AAC5F94C15099DFULL) ^ aPhaseAOrbiterUpdateSaltD[((aIndex + 20U)) & 31];
             aOrbiterC = RotL64((aOrbiterC * 0x7C937CF31C0C4349ULL), 11U);
             //
             aIngress = RotL64(aOrbiterG, 44U) ^ aOrbiterD;
@@ -12243,11 +12243,11 @@ void TwistExpander_Antares_Arx::Twist_A(TwistWorkSpace *pWorkSpace,
             aIngress = TwistMix64::DiffuseB((aIngress + aScatter));
             //
             aWandererA = aWandererA ^ ((RotL64(aScatter, 19U) + aOrbiterC) + RotL64(aOrbiterB, 47U));
-            aWandererK = aWandererK + (((RotL64(aIngress, 23U) + RotL64(aOrbiterJ, 5U)) + aOrbiterG) + aPhaseAWandererUpdateSaltD[((aIndex + 26U)) & S_SALT1]);
+            aWandererK = aWandererK + (((RotL64(aIngress, 23U) + RotL64(aOrbiterJ, 5U)) + aOrbiterG) + aPhaseAWandererUpdateSaltD[((aIndex + 26U)) & 31]);
             aWandererD = aWandererD ^ ((RotL64(aPrevious, 34U) + RotL64(aOrbiterE, 56U)) + aOrbiterJ);
             aWandererF = aWandererF + (((RotL64(aCross, 3U) + RotL64(aOrbiterI, 21U)) + aOrbiterG) + RotL64(aCarry, 5U));
             aWandererE = aWandererE ^ ((RotL64(aIngress, 29U) + aOrbiterE) + RotL64(aOrbiterF, 51U));
-            aWandererB = aWandererB + (((RotL64(aPrevious, 41U) + aOrbiterD) + RotL64(aOrbiterJ, 27U)) + aPhaseAWandererUpdateSaltE[(((31U - aIndex) + 27U)) & S_SALT1]);
+            aWandererB = aWandererB + (((RotL64(aPrevious, 41U) + aOrbiterD) + RotL64(aOrbiterJ, 27U)) + aPhaseAWandererUpdateSaltE[(((31U - aIndex) + 27U)) & 31]);
             aWandererC = aWandererC ^ ((RotL64(aCross, 13U) + aOrbiterG) + RotL64(aOrbiterB, 43U));
             aWandererJ = aWandererJ + (((RotL64(aScatter, 46U) + RotL64(aOrbiterC, 13U)) + aOrbiterA) + RotL64(aCarry, 27U));
             aWandererH = aWandererH ^ ((RotL64(aIngress, 51U) + RotL64(aOrbiterD, 60U)) + aOrbiterB);
@@ -12294,19 +12294,19 @@ void TwistExpander_Antares_Arx::Twist_A(TwistWorkSpace *pWorkSpace,
             aOrbiterD = (aWandererK + RotL64(aPrevious, 39U)) + 0x7B682436A47B1712ULL;
             aOrbiterK = (aWandererC + RotL64(aCross, 27U)) + 0x0566DDE3C3607B57ULL;
             aOrbiterG = (aWandererA + RotL64(aIngress, 43U)) + 0xC14711263EDA5C38ULL;
-            aOrbiterI = (((aWandererB + RotL64(aPrevious, 5U)) + RotL64(aCarry, 47U)) + 0xD6D55F969CB6922DULL) + aPhaseBOrbiterAssignSaltC[((aIndex + 11U)) & S_SALT1];
-            aOrbiterA = ((aWandererJ + RotL64(aScatter, 14U)) + 0x3D22C4A3B303951AULL) + aPhaseBOrbiterAssignSaltD[((aIndex + 16U)) & S_SALT1];
+            aOrbiterI = (((aWandererB + RotL64(aPrevious, 5U)) + RotL64(aCarry, 47U)) + 0xD6D55F969CB6922DULL) + aPhaseBOrbiterAssignSaltC[((aIndex + 11U)) & 31];
+            aOrbiterA = ((aWandererJ + RotL64(aScatter, 14U)) + 0x3D22C4A3B303951AULL) + aPhaseBOrbiterAssignSaltD[((aIndex + 16U)) & 31];
             aOrbiterC = (aWandererH + RotL64(aPrevious, 47U)) + 0x9CAEEA27C18FC2BAULL;
             //
             aOrbiterH = (aOrbiterH + aOrbiterE) + 0x1A2DE1653D742FA4ULL;
             aOrbiterB = (aOrbiterB ^ aOrbiterH) ^ 0x748E9D5A98C7DF90ULL;
             aOrbiterB = RotL64((aOrbiterB * 0x68EB2F77B028CD0DULL), 43U);
             //
-            aOrbiterD = ((aOrbiterD + aOrbiterB) + 0x9D18EED4BA9CEBE5ULL) + aPhaseBOrbiterUpdateSaltB[(((31U - aIndex) + 22U)) & S_SALT1];
-            aOrbiterK = ((aOrbiterK ^ aOrbiterD) ^ 0xCF3DB8B78FA3F0E2ULL) ^ aPhaseBOrbiterUpdateSaltF[((aIndex + 17U)) & S_SALT1];
+            aOrbiterD = ((aOrbiterD + aOrbiterB) + 0x9D18EED4BA9CEBE5ULL) + aPhaseBOrbiterUpdateSaltB[(((31U - aIndex) + 22U)) & 31];
+            aOrbiterK = ((aOrbiterK ^ aOrbiterD) ^ 0xCF3DB8B78FA3F0E2ULL) ^ aPhaseBOrbiterUpdateSaltF[((aIndex + 17U)) & 31];
             aOrbiterK = RotL64((aOrbiterK * 0xCFBD2A787720D6B1ULL), 39U);
             //
-            aOrbiterG = ((aOrbiterG + aOrbiterH) + 0xE4CC88B35AC2D697ULL) + aPhaseBOrbiterUpdateSaltE[(((31U - aIndex) + 25U)) & S_SALT1];
+            aOrbiterG = ((aOrbiterG + aOrbiterH) + 0xE4CC88B35AC2D697ULL) + aPhaseBOrbiterUpdateSaltE[(((31U - aIndex) + 25U)) & 31];
             aOrbiterD = (aOrbiterD ^ aOrbiterG) ^ 0xB1342924301D440FULL;
             aOrbiterD = RotL64((aOrbiterD * 0x0441918F8CC3847FULL), 29U);
             //
@@ -12314,7 +12314,7 @@ void TwistExpander_Antares_Arx::Twist_A(TwistWorkSpace *pWorkSpace,
             aOrbiterA = (aOrbiterA ^ aOrbiterI) ^ 0xA42A9836307CB70EULL;
             aOrbiterA = RotL64((aOrbiterA * 0xFC142BE5D7202B61ULL), 13U);
             //
-            aOrbiterC = ((aOrbiterC + aOrbiterA) + 0x2B137A2AAF0F3C1BULL) + aPhaseBOrbiterUpdateSaltC[((aIndex + 27U)) & S_SALT1];
+            aOrbiterC = ((aOrbiterC + aOrbiterA) + 0x2B137A2AAF0F3C1BULL) + aPhaseBOrbiterUpdateSaltC[((aIndex + 27U)) & 31];
             aOrbiterE = (aOrbiterE ^ aOrbiterC) ^ 0x11AD4A586C086D95ULL;
             aOrbiterE = RotL64((aOrbiterE * 0xB617CCB84CDA9B77ULL), 23U);
             //
@@ -12343,9 +12343,9 @@ void TwistExpander_Antares_Arx::Twist_A(TwistWorkSpace *pWorkSpace,
             //
             aWandererA = aWandererA ^ ((RotL64(aPrevious, 46U) + RotL64(aOrbiterD, 35U)) + aOrbiterG);
             aWandererD = aWandererD + ((RotL64(aCross, 27U) + RotL64(aOrbiterG, 5U)) + aOrbiterA);
-            aWandererC = aWandererC ^ (((RotL64(aScatter, 39U) + RotL64(aOrbiterD, 20U)) + aOrbiterB) + aPhaseBWandererUpdateSaltD[((aIndex + 23U)) & S_SALT1]);
+            aWandererC = aWandererC ^ (((RotL64(aScatter, 39U) + RotL64(aOrbiterD, 20U)) + aOrbiterB) + aPhaseBWandererUpdateSaltD[((aIndex + 23U)) & 31]);
             aWandererH = aWandererH + ((RotL64(aIngress, 3U) + RotL64(aOrbiterI, 43U)) + aOrbiterD);
-            aWandererJ = aWandererJ ^ (((RotL64(aPrevious, 35U) + RotL64(aOrbiterH, 39U)) + aOrbiterA) + aPhaseBWandererUpdateSaltE[(((31U - aIndex) + 8U)) & S_SALT1]);
+            aWandererJ = aWandererJ ^ (((RotL64(aPrevious, 35U) + RotL64(aOrbiterH, 39U)) + aOrbiterA) + aPhaseBWandererUpdateSaltE[(((31U - aIndex) + 8U)) & 31]);
             aWandererB = aWandererB + (((RotL64(aIngress, 23U) + aOrbiterK) + RotL64(aOrbiterE, 47U)) + RotL64(aCarry, 11U));
             aWandererF = aWandererF ^ ((RotL64(aScatter, 58U) + aOrbiterC) + RotL64(aOrbiterB, 51U));
             aWandererI = aWandererI + (((RotL64(aCross, 53U) + aOrbiterC) + RotL64(aOrbiterA, 24U)) + RotL64(aCarry, 37U));
@@ -12505,19 +12505,19 @@ void TwistExpander_Antares_Arx::Twist_B(TwistWorkSpace *pWorkSpace,
             aScatter = TwistMix64::DiffuseA(aScatter);
             //
             aOrbiterD = (aWandererJ + RotL64(aPrevious, 13U)) + 0x724B405202A9E634ULL;
-            aOrbiterG = (((aWandererE + RotL64(aCross, 21U)) + RotL64(aCarry, 39U)) + 0x84C225A0C3DE84F5ULL) + aPhaseEOrbiterAssignSaltE[((aIndex + 18U)) & S_SALT1];
+            aOrbiterG = (((aWandererE + RotL64(aCross, 21U)) + RotL64(aCarry, 39U)) + 0x84C225A0C3DE84F5ULL) + aPhaseEOrbiterAssignSaltE[((aIndex + 18U)) & 31];
             aOrbiterE = (aWandererB + RotL64(aIngress, 5U)) + 0xD5E83F11B940C49CULL;
             aOrbiterB = (aWandererG + RotL64(aScatter, 57U)) + 0x3223AF2EB1275961ULL;
             aOrbiterK = ((aWandererF + RotL64(aPrevious, 27U)) + RotL64(aCarry, 21U)) + 0x3E4AB0F1B7ECE454ULL;
             aOrbiterF = (aWandererD + RotL64(aIngress, 37U)) + 0xAC1DAA08247EBE0CULL;
-            aOrbiterH = (((aWandererH + RotL64(aScatter, 50U)) + RotL64(aCarry, 53U)) + 0x1B57E396EC085D4AULL) + aPhaseEOrbiterAssignSaltA[(((31U - aIndex) + 12U)) & S_SALT1];
+            aOrbiterH = (((aWandererH + RotL64(aScatter, 50U)) + RotL64(aCarry, 53U)) + 0x1B57E396EC085D4AULL) + aPhaseEOrbiterAssignSaltA[(((31U - aIndex) + 12U)) & 31];
             //
-            aOrbiterD = ((aOrbiterD + aOrbiterG) + 0x92B196CE151F7398ULL) + aPhaseEOrbiterUpdateSaltE[(((31U - aIndex) + 10U)) & S_SALT1];
+            aOrbiterD = ((aOrbiterD + aOrbiterG) + 0x92B196CE151F7398ULL) + aPhaseEOrbiterUpdateSaltE[(((31U - aIndex) + 10U)) & 31];
             aOrbiterE = (aOrbiterE ^ aOrbiterD) ^ 0xE8530B62E1218E13ULL;
             aOrbiterE = RotL64((aOrbiterE * 0xAAD55D6FE4A221F9ULL), 57U);
             //
-            aOrbiterB = ((aOrbiterB + aOrbiterK) + 0x3BC2F587D712DE52ULL) + aPhaseEOrbiterUpdateSaltB[((aIndex + 21U)) & S_SALT1];
-            aOrbiterD = ((aOrbiterD ^ aOrbiterB) ^ 0x8E9E294C2EB3BB8AULL) ^ aPhaseEOrbiterUpdateSaltF[(((31U - aIndex) + 17U)) & S_SALT1];
+            aOrbiterB = ((aOrbiterB + aOrbiterK) + 0x3BC2F587D712DE52ULL) + aPhaseEOrbiterUpdateSaltB[((aIndex + 21U)) & 31];
+            aOrbiterD = ((aOrbiterD ^ aOrbiterB) ^ 0x8E9E294C2EB3BB8AULL) ^ aPhaseEOrbiterUpdateSaltF[(((31U - aIndex) + 17U)) & 31];
             aOrbiterD = RotL64((aOrbiterD * 0x9EA453049FD9B449ULL), 39U);
             //
             aOrbiterK = (aOrbiterK + aOrbiterF) + 0x6632D5ECB7D32EAAULL;
@@ -12529,7 +12529,7 @@ void TwistExpander_Antares_Arx::Twist_B(TwistWorkSpace *pWorkSpace,
             aOrbiterK = RotL64((aOrbiterK * 0xFB90404524886D39ULL), 29U);
             //
             aOrbiterH = (aOrbiterH + aOrbiterD) + 0xC96A11127A0F6258ULL;
-            aOrbiterF = ((aOrbiterF ^ aOrbiterH) ^ 0xCD63F5A36F1D1D75ULL) ^ aPhaseEOrbiterUpdateSaltC[((aIndex + 16U)) & S_SALT1];
+            aOrbiterF = ((aOrbiterF ^ aOrbiterH) ^ 0xCD63F5A36F1D1D75ULL) ^ aPhaseEOrbiterUpdateSaltC[((aIndex + 16U)) & 31];
             aOrbiterF = RotL64((aOrbiterF * 0x5CFE5C933491A3EBULL), 11U);
             //
             aOrbiterG = (aOrbiterG + aOrbiterB) + 0xCB99EF90942D5C5BULL;
@@ -12548,8 +12548,8 @@ void TwistExpander_Antares_Arx::Twist_B(TwistWorkSpace *pWorkSpace,
             //
             aWandererG = aWandererG + ((RotL64(aScatter, 35U) + aOrbiterK) + RotL64(aOrbiterF, 5U));
             aWandererD = aWandererD ^ ((RotL64(aIngress, 50U) + aOrbiterG) + RotL64(aOrbiterH, 19U));
-            aWandererB = aWandererB + (((RotL64(aPrevious, 43U) + aOrbiterF) + RotL64(aOrbiterH, 44U)) + aPhaseEWandererUpdateSaltD[((aIndex + 22U)) & S_SALT1]);
-            aWandererF = aWandererF ^ (((RotL64(aCross, 57U) + RotL64(aOrbiterK, 57U)) + aOrbiterB) + aPhaseEWandererUpdateSaltE[((aIndex + 25U)) & S_SALT1]);
+            aWandererB = aWandererB + (((RotL64(aPrevious, 43U) + aOrbiterF) + RotL64(aOrbiterH, 44U)) + aPhaseEWandererUpdateSaltD[((aIndex + 22U)) & 31]);
+            aWandererF = aWandererF ^ (((RotL64(aCross, 57U) + RotL64(aOrbiterK, 57U)) + aOrbiterB) + aPhaseEWandererUpdateSaltE[((aIndex + 25U)) & 31]);
             aWandererH = aWandererH + (((RotL64(aScatter, 11U) + RotL64(aOrbiterK, 27U)) + aOrbiterG) + RotL64(aCarry, 43U));
             aWandererJ = aWandererJ ^ ((RotL64(aPrevious, 3U) + aOrbiterD) + RotL64(aOrbiterG, 11U));
             aWandererE = aWandererE + (((RotL64(aIngress, 23U) + RotL64(aOrbiterE, 35U)) + aOrbiterK) + RotL64(aCarry, 11U));
@@ -12591,9 +12591,9 @@ void TwistExpander_Antares_Arx::Twist_B(TwistWorkSpace *pWorkSpace,
             aScatter = TwistMix64::DiffuseA(aScatter);
             //
             aOrbiterE = ((aWandererE + RotL64(aCross, 51U)) + RotL64(aCarry, 29U)) + 0x9732E43D14D6F21BULL;
-            aOrbiterC = (((aWandererK + RotL64(aPrevious, 5U)) + RotL64(aCarry, 57U)) + 0xF190FD0CBBF81BA1ULL) + aPhaseFOrbiterAssignSaltE[(((31U - aIndex) + 21U)) & S_SALT1];
+            aOrbiterC = (((aWandererK + RotL64(aPrevious, 5U)) + RotL64(aCarry, 57U)) + 0xF190FD0CBBF81BA1ULL) + aPhaseFOrbiterAssignSaltE[(((31U - aIndex) + 21U)) & 31];
             aOrbiterB = (aWandererC + RotL64(aIngress, 11U)) + 0x2383249C6BED0E71ULL;
-            aOrbiterJ = ((aWandererI + RotL64(aScatter, 57U)) + 0x1CD17C4657E830A9ULL) + aPhaseFOrbiterAssignSaltA[(((31U - aIndex) + 6U)) & S_SALT1];
+            aOrbiterJ = ((aWandererI + RotL64(aScatter, 57U)) + 0x1CD17C4657E830A9ULL) + aPhaseFOrbiterAssignSaltA[(((31U - aIndex) + 6U)) & 31];
             aOrbiterD = (aWandererJ + RotL64(aIngress, 39U)) + 0x776CEACD19B6F6B5ULL;
             aOrbiterA = ((aWandererB + RotL64(aScatter, 26U)) + RotL64(aCarry, 13U)) + 0xD6C42D15EC4C1D02ULL;
             aOrbiterH = (aWandererH + RotL64(aCross, 19U)) + 0xAE80C9A14232BF61ULL;
@@ -12602,8 +12602,8 @@ void TwistExpander_Antares_Arx::Twist_B(TwistWorkSpace *pWorkSpace,
             aOrbiterB = (aOrbiterB ^ aOrbiterE) ^ 0x26521CEBCC895D7FULL;
             aOrbiterB = RotL64((aOrbiterB * 0xB763441A82619C8BULL), 51U);
             //
-            aOrbiterB = ((aOrbiterB + aOrbiterJ) + 0x933CCA2DAF95DA88ULL) + aPhaseFOrbiterUpdateSaltF[((aIndex + 10U)) & S_SALT1];
-            aOrbiterD = ((aOrbiterD ^ aOrbiterB) ^ 0xD36488825F3474B6ULL) ^ aPhaseFOrbiterUpdateSaltA[((aIndex + 18U)) & S_SALT1];
+            aOrbiterB = ((aOrbiterB + aOrbiterJ) + 0x933CCA2DAF95DA88ULL) + aPhaseFOrbiterUpdateSaltF[((aIndex + 10U)) & 31];
+            aOrbiterD = ((aOrbiterD ^ aOrbiterB) ^ 0xD36488825F3474B6ULL) ^ aPhaseFOrbiterUpdateSaltA[((aIndex + 18U)) & 31];
             aOrbiterD = RotL64((aOrbiterD * 0x161D96E3F2FDD067ULL), 13U);
             //
             aOrbiterJ = (aOrbiterJ + aOrbiterA) + 0xB30418E9A41EFE6EULL;
@@ -12611,7 +12611,7 @@ void TwistExpander_Antares_Arx::Twist_B(TwistWorkSpace *pWorkSpace,
             aOrbiterE = RotL64((aOrbiterE * 0xE451CA3F04425879ULL), 19U);
             //
             aOrbiterH = (aOrbiterH + aOrbiterB) + 0x169D3EE8332544A5ULL;
-            aOrbiterA = ((aOrbiterA ^ aOrbiterH) ^ 0x69519A8D25F2B924ULL) ^ aPhaseFOrbiterUpdateSaltB[(((31U - aIndex) + 11U)) & S_SALT1];
+            aOrbiterA = ((aOrbiterA ^ aOrbiterH) ^ 0x69519A8D25F2B924ULL) ^ aPhaseFOrbiterUpdateSaltB[(((31U - aIndex) + 11U)) & 31];
             aOrbiterA = RotL64((aOrbiterA * 0x9711FA8D13B0B9BFULL), 3U);
             //
             aOrbiterC = (aOrbiterC + aOrbiterH) + 0x283E5EB3AB98FC95ULL;
@@ -12619,7 +12619,7 @@ void TwistExpander_Antares_Arx::Twist_B(TwistWorkSpace *pWorkSpace,
             aOrbiterJ = RotL64((aOrbiterJ * 0xF896D40EA21833B5ULL), 41U);
             //
             aOrbiterA = (aOrbiterA + aOrbiterD) + 0x5761DEFE307EEAB0ULL;
-            aOrbiterC = ((aOrbiterC ^ aOrbiterA) ^ 0xF8647CAC2663BEAAULL) ^ aPhaseFOrbiterUpdateSaltD[((aIndex + 8U)) & S_SALT1];
+            aOrbiterC = ((aOrbiterC ^ aOrbiterA) ^ 0xF8647CAC2663BEAAULL) ^ aPhaseFOrbiterUpdateSaltD[((aIndex + 8U)) & 31];
             aOrbiterC = RotL64((aOrbiterC * 0xD883BEA359E758D5ULL), 57U);
             //
             aOrbiterD = (aOrbiterD + aOrbiterE) + 0xDE2745E9490DE6ECULL;
@@ -12636,8 +12636,8 @@ void TwistExpander_Antares_Arx::Twist_B(TwistWorkSpace *pWorkSpace,
             aWandererE = aWandererE ^ ((RotL64(aPrevious, 47U) + RotL64(aOrbiterE, 3U)) + aOrbiterJ);
             aWandererI = aWandererI + (((RotL64(aCross, 57U) + aOrbiterJ) + RotL64(aOrbiterB, 44U)) + RotL64(aCarry, 21U));
             aWandererH = aWandererH ^ ((RotL64(aScatter, 13U) + RotL64(aOrbiterC, 35U)) + aOrbiterH);
-            aWandererJ = aWandererJ + (((RotL64(aPrevious, 3U) + aOrbiterH) + RotL64(aOrbiterA, 57U)) + aPhaseFWandererUpdateSaltD[((aIndex + 23U)) & S_SALT1]);
-            aWandererB = aWandererB ^ (((RotL64(aIngress, 39U) + RotL64(aOrbiterJ, 11U)) + aOrbiterH) + aPhaseFWandererUpdateSaltA[(((31U - aIndex) + 22U)) & S_SALT1]);
+            aWandererJ = aWandererJ + (((RotL64(aPrevious, 3U) + aOrbiterH) + RotL64(aOrbiterA, 57U)) + aPhaseFWandererUpdateSaltD[((aIndex + 23U)) & 31]);
+            aWandererB = aWandererB ^ (((RotL64(aIngress, 39U) + RotL64(aOrbiterJ, 11U)) + aOrbiterH) + aPhaseFWandererUpdateSaltA[(((31U - aIndex) + 22U)) & 31]);
             aWandererK = aWandererK + ((RotL64(aCross, 20U) + aOrbiterD) + RotL64(aOrbiterA, 51U));
             //
             aCarry = aCarry + (aWandererB ^ RotL64(aWandererJ, 27U));
@@ -12677,9 +12677,9 @@ void TwistExpander_Antares_Arx::Twist_B(TwistWorkSpace *pWorkSpace,
             aScatter = TwistMix64::DiffuseA(aScatter);
             //
             aOrbiterJ = ((aWandererI + RotL64(aPrevious, 35U)) + RotL64(aCarry, 39U)) + 0xB7446AB6C3E333B9ULL;
-            aOrbiterF = ((aWandererK + RotL64(aCross, 47U)) + 0xDAC3F35EB730855EULL) + aPhaseBOrbiterAssignSaltB[((aIndex + 13U)) & S_SALT1];
+            aOrbiterF = ((aWandererK + RotL64(aCross, 47U)) + 0xDAC3F35EB730855EULL) + aPhaseBOrbiterAssignSaltB[((aIndex + 13U)) & 31];
             aOrbiterA = ((aWandererB + RotL64(aScatter, 20U)) + RotL64(aCarry, 5U)) + 0x5DEBA56CDCB899C3ULL;
-            aOrbiterG = (((aWandererD + RotL64(aIngress, 41U)) + RotL64(aCarry, 53U)) + 0xAEBD34B983C1227CULL) + aPhaseBOrbiterAssignSaltD[(((31U - aIndex) + 6U)) & S_SALT1];
+            aOrbiterG = (((aWandererD + RotL64(aIngress, 41U)) + RotL64(aCarry, 53U)) + 0xAEBD34B983C1227CULL) + aPhaseBOrbiterAssignSaltD[(((31U - aIndex) + 6U)) & 31];
             aOrbiterI = (aWandererG + RotL64(aScatter, 57U)) + 0x8FA26A0F57A7BCC7ULL;
             aOrbiterH = (aWandererE + RotL64(aIngress, 3U)) + 0xAC1D94DD1AC13128ULL;
             aOrbiterB = (aWandererC + RotL64(aPrevious, 13U)) + 0x2754E4DC64693014ULL;
@@ -12688,11 +12688,11 @@ void TwistExpander_Antares_Arx::Twist_B(TwistWorkSpace *pWorkSpace,
             aOrbiterA = (aOrbiterA ^ aOrbiterJ) ^ 0x3D316DC181CB7CD9ULL;
             aOrbiterA = RotL64((aOrbiterA * 0x23A1C1C118E84587ULL), 29U);
             //
-            aOrbiterF = ((aOrbiterF + aOrbiterA) + 0xC919295435F2FBC3ULL) + aPhaseBOrbiterUpdateSaltB[(((31U - aIndex) + 16U)) & S_SALT1];
+            aOrbiterF = ((aOrbiterF + aOrbiterA) + 0xC919295435F2FBC3ULL) + aPhaseBOrbiterUpdateSaltB[(((31U - aIndex) + 16U)) & 31];
             aOrbiterG = (aOrbiterG ^ aOrbiterF) ^ 0x9C567ABCF3E05EB0ULL;
             aOrbiterG = RotL64((aOrbiterG * 0x910DAFBD1C18A503ULL), 19U);
             //
-            aOrbiterI = ((aOrbiterI + aOrbiterH) + 0xA283391881859AC9ULL) + aPhaseBOrbiterUpdateSaltE[(((31U - aIndex) + 5U)) & S_SALT1];
+            aOrbiterI = ((aOrbiterI + aOrbiterH) + 0xA283391881859AC9ULL) + aPhaseBOrbiterUpdateSaltE[(((31U - aIndex) + 5U)) & 31];
             aOrbiterB = (aOrbiterB ^ aOrbiterI) ^ 0xEC29F9B6196D02BDULL;
             aOrbiterB = RotL64((aOrbiterB * 0x781FD025A95DC515ULL), 3U);
             //
@@ -12700,7 +12700,7 @@ void TwistExpander_Antares_Arx::Twist_B(TwistWorkSpace *pWorkSpace,
             aOrbiterF = (aOrbiterF ^ aOrbiterB) ^ 0x738F4471833644E2ULL;
             aOrbiterF = RotL64((aOrbiterF * 0x4C64D7B6CCBF263FULL), 51U);
             //
-            aOrbiterA = ((aOrbiterA + aOrbiterG) + 0x6ECE326D96F0BC16ULL) + aPhaseBOrbiterUpdateSaltA[(((31U - aIndex) + 3U)) & S_SALT1];
+            aOrbiterA = ((aOrbiterA + aOrbiterG) + 0x6ECE326D96F0BC16ULL) + aPhaseBOrbiterUpdateSaltA[(((31U - aIndex) + 3U)) & 31];
             aOrbiterI = (aOrbiterI ^ aOrbiterA) ^ 0x3CE06F0218B8990AULL;
             aOrbiterI = RotL64((aOrbiterI * 0xD5C0584FC6D3E243ULL), 57U);
             //
@@ -12709,7 +12709,7 @@ void TwistExpander_Antares_Arx::Twist_B(TwistWorkSpace *pWorkSpace,
             aOrbiterH = RotL64((aOrbiterH * 0x53B9FD794EECF7E5ULL), 41U);
             //
             aOrbiterH = (aOrbiterH + aOrbiterB) + 0x6E5CDE4B74D69B9CULL;
-            aOrbiterJ = ((aOrbiterJ ^ aOrbiterH) ^ 0x5A846CF576CF3D70ULL) ^ aPhaseBOrbiterUpdateSaltC[(((31U - aIndex) + 10U)) & S_SALT1];
+            aOrbiterJ = ((aOrbiterJ ^ aOrbiterH) ^ 0x5A846CF576CF3D70ULL) ^ aPhaseBOrbiterUpdateSaltC[(((31U - aIndex) + 10U)) & 31];
             aOrbiterJ = RotL64((aOrbiterJ * 0xC0675A2C4B547629ULL), 35U);
             //
             aIngress = aOrbiterA ^ RotL64(aOrbiterG, 43U);
@@ -12720,10 +12720,10 @@ void TwistExpander_Antares_Arx::Twist_B(TwistWorkSpace *pWorkSpace,
             //
             aWandererE = aWandererE + (((RotL64(aIngress, 54U) + RotL64(aOrbiterG, 3U)) + aOrbiterI) + RotL64(aCarry, 23U));
             aWandererK = aWandererK ^ ((RotL64(aPrevious, 47U) + aOrbiterF) + RotL64(aOrbiterB, 41U));
-            aWandererB = aWandererB + ((((RotL64(aCross, 3U) + aOrbiterI) + RotL64(aOrbiterB, 29U)) + RotL64(aCarry, 35U)) + aPhaseBWandererUpdateSaltA[((aIndex + 7U)) & S_SALT1]);
+            aWandererB = aWandererB + ((((RotL64(aCross, 3U) + aOrbiterI) + RotL64(aOrbiterB, 29U)) + RotL64(aCarry, 35U)) + aPhaseBWandererUpdateSaltA[((aIndex + 7U)) & 31]);
             aWandererC = aWandererC ^ ((RotL64(aScatter, 29U) + aOrbiterA) + RotL64(aOrbiterF, 14U));
             aWandererG = aWandererG + ((RotL64(aPrevious, 35U) + RotL64(aOrbiterB, 57U)) + aOrbiterH);
-            aWandererD = aWandererD ^ (((RotL64(aScatter, 13U) + aOrbiterA) + RotL64(aOrbiterI, 23U)) + aPhaseBWandererUpdateSaltF[((aIndex + 11U)) & S_SALT1]);
+            aWandererD = aWandererD ^ (((RotL64(aScatter, 13U) + aOrbiterA) + RotL64(aOrbiterI, 23U)) + aPhaseBWandererUpdateSaltF[((aIndex + 11U)) & 31]);
             aWandererI = aWandererI + ((RotL64(aCross, 23U) + aOrbiterJ) + RotL64(aOrbiterB, 51U));
             //
             aCarry = aCarry + (aWandererK ^ RotL64(aWandererE, 37U));
@@ -12767,11 +12767,11 @@ void TwistExpander_Antares_Arx::Twist_B(TwistWorkSpace *pWorkSpace,
             aOrbiterC = ((aWandererG + RotL64(aCross, 21U)) + RotL64(aCarry, 5U)) + 0xB1D715193A485514ULL;
             aOrbiterH = ((aWandererD + RotL64(aScatter, 39U)) + RotL64(aCarry, 53U)) + 0x7A8EF6AFDADF4F7CULL;
             aOrbiterD = ((aWandererB + RotL64(aIngress, 57U)) + RotL64(aCarry, 21U)) + 0xF840BD8742C8C32AULL;
-            aOrbiterA = ((aWandererI + RotL64(aScatter, 29U)) + 0x887E0FE415C115D5ULL) + aPhaseDOrbiterAssignSaltC[(((31U - aIndex) + 29U)) & S_SALT1];
-            aOrbiterB = ((aWandererC + RotL64(aCross, 13U)) + 0x8080F26A9924A308ULL) + aPhaseDOrbiterAssignSaltF[((aIndex + 4U)) & S_SALT1];
+            aOrbiterA = ((aWandererI + RotL64(aScatter, 29U)) + 0x887E0FE415C115D5ULL) + aPhaseDOrbiterAssignSaltC[(((31U - aIndex) + 29U)) & 31];
+            aOrbiterB = ((aWandererC + RotL64(aCross, 13U)) + 0x8080F26A9924A308ULL) + aPhaseDOrbiterAssignSaltF[((aIndex + 4U)) & 31];
             //
-            aOrbiterI = ((aOrbiterI + aOrbiterK) + 0x953BDCEB17DBBBBEULL) + aPhaseDOrbiterUpdateSaltE[(((31U - aIndex) + 25U)) & S_SALT1];
-            aOrbiterC = ((aOrbiterC ^ aOrbiterI) ^ 0x623D033BCA85683EULL) ^ aPhaseDOrbiterUpdateSaltD[((aIndex + 13U)) & S_SALT1];
+            aOrbiterI = ((aOrbiterI + aOrbiterK) + 0x953BDCEB17DBBBBEULL) + aPhaseDOrbiterUpdateSaltE[(((31U - aIndex) + 25U)) & 31];
+            aOrbiterC = ((aOrbiterC ^ aOrbiterI) ^ 0x623D033BCA85683EULL) ^ aPhaseDOrbiterUpdateSaltD[((aIndex + 13U)) & 31];
             aOrbiterC = RotL64((aOrbiterC * 0xD1F6D2FDCAF34E51ULL), 13U);
             //
             aOrbiterC = (aOrbiterC + aOrbiterH) + 0x1233DBCA88484351ULL;
@@ -12782,8 +12782,8 @@ void TwistExpander_Antares_Arx::Twist_B(TwistWorkSpace *pWorkSpace,
             aOrbiterA = (aOrbiterA ^ aOrbiterH) ^ 0x6AE0A031AE664D0DULL;
             aOrbiterA = RotL64((aOrbiterA * 0x1A164D620655B5B9ULL), 53U);
             //
-            aOrbiterB = ((aOrbiterB + aOrbiterI) + 0x6D57BE5B12E358C5ULL) + aPhaseDOrbiterUpdateSaltC[(((31U - aIndex) + 5U)) & S_SALT1];
-            aOrbiterK = ((aOrbiterK ^ aOrbiterB) ^ 0x489B53A5F7F15708ULL) ^ aPhaseDOrbiterUpdateSaltB[(((31U - aIndex) + 22U)) & S_SALT1];
+            aOrbiterB = ((aOrbiterB + aOrbiterI) + 0x6D57BE5B12E358C5ULL) + aPhaseDOrbiterUpdateSaltC[(((31U - aIndex) + 5U)) & 31];
+            aOrbiterK = ((aOrbiterK ^ aOrbiterB) ^ 0x489B53A5F7F15708ULL) ^ aPhaseDOrbiterUpdateSaltB[(((31U - aIndex) + 22U)) & 31];
             aOrbiterK = RotL64((aOrbiterK * 0x77602153A51B21CFULL), 47U);
             //
             aOrbiterA = (aOrbiterA + aOrbiterB) + 0xA1A295E878258159ULL;
@@ -12806,8 +12806,8 @@ void TwistExpander_Antares_Arx::Twist_B(TwistWorkSpace *pWorkSpace,
             //
             aWandererC = aWandererC ^ ((RotL64(aPrevious, 53U) + RotL64(aOrbiterA, 60U)) + aOrbiterD);
             aWandererK = aWandererK + ((RotL64(aScatter, 37U) + RotL64(aOrbiterC, 35U)) + aOrbiterA);
-            aWandererB = aWandererB ^ (((RotL64(aCross, 60U) + aOrbiterA) + RotL64(aOrbiterB, 19U)) + aPhaseDWandererUpdateSaltF[((aIndex + 11U)) & S_SALT1]);
-            aWandererJ = aWandererJ + ((((RotL64(aIngress, 3U) + RotL64(aOrbiterH, 41U)) + aOrbiterK) + RotL64(aCarry, 51U)) + aPhaseDWandererUpdateSaltA[(((31U - aIndex) + 7U)) & S_SALT1]);
+            aWandererB = aWandererB ^ (((RotL64(aCross, 60U) + aOrbiterA) + RotL64(aOrbiterB, 19U)) + aPhaseDWandererUpdateSaltF[((aIndex + 11U)) & 31]);
+            aWandererJ = aWandererJ + ((((RotL64(aIngress, 3U) + RotL64(aOrbiterH, 41U)) + aOrbiterK) + RotL64(aCarry, 51U)) + aPhaseDWandererUpdateSaltA[(((31U - aIndex) + 7U)) & 31]);
             aWandererD = aWandererD ^ ((RotL64(aPrevious, 21U) + RotL64(aOrbiterK, 53U)) + aOrbiterI);
             aWandererI = aWandererI + (((RotL64(aScatter, 11U) + RotL64(aOrbiterK, 5U)) + aOrbiterB) + RotL64(aCarry, 19U));
             aWandererG = aWandererG ^ ((RotL64(aIngress, 29U) + aOrbiterH) + RotL64(aOrbiterA, 11U));
@@ -12850,10 +12850,10 @@ void TwistExpander_Antares_Arx::Twist_B(TwistWorkSpace *pWorkSpace,
             //
             aOrbiterF = ((aWandererH + RotL64(aPrevious, 28U)) + RotL64(aCarry, 35U)) + 0xDC7F7D6636E8F81AULL;
             aOrbiterA = ((aWandererB + RotL64(aCross, 13U)) + RotL64(aCarry, 3U)) + 0xA33C4EBB196B120BULL;
-            aOrbiterC = (((aWandererD + RotL64(aIngress, 3U)) + RotL64(aCarry, 47U)) + 0xCC7D149D15D986D7ULL) + aPhaseEOrbiterAssignSaltC[(((31U - aIndex) + 29U)) & S_SALT1];
+            aOrbiterC = (((aWandererD + RotL64(aIngress, 3U)) + RotL64(aCarry, 47U)) + 0xCC7D149D15D986D7ULL) + aPhaseEOrbiterAssignSaltC[(((31U - aIndex) + 29U)) & 31];
             aOrbiterB = (aWandererA + RotL64(aScatter, 19U)) + 0xC665F98460DCA6C0ULL;
             aOrbiterE = (aWandererJ + RotL64(aIngress, 47U)) + 0xE9DAD0571665E1B4ULL;
-            aOrbiterK = ((aWandererK + RotL64(aPrevious, 53U)) + 0x8F5DF585591683ECULL) + aPhaseEOrbiterAssignSaltD[(((31U - aIndex) + 21U)) & S_SALT1];
+            aOrbiterK = ((aWandererK + RotL64(aPrevious, 53U)) + 0x8F5DF585591683ECULL) + aPhaseEOrbiterAssignSaltD[(((31U - aIndex) + 21U)) & 31];
             aOrbiterD = (aWandererF + RotL64(aCross, 35U)) + 0x48503C99BC281924ULL;
             //
             aOrbiterF = (aOrbiterF + aOrbiterA) + 0x288F7ADFDD8249DBULL;
@@ -12864,15 +12864,15 @@ void TwistExpander_Antares_Arx::Twist_B(TwistWorkSpace *pWorkSpace,
             aOrbiterE = (aOrbiterE ^ aOrbiterA) ^ 0x0F8E70132E9B54C2ULL;
             aOrbiterE = RotL64((aOrbiterE * 0x2251570A08604FD1ULL), 11U);
             //
-            aOrbiterK = ((aOrbiterK + aOrbiterD) + 0x4BF4D4A20B04B0C3ULL) + aPhaseEOrbiterUpdateSaltC[((aIndex + 19U)) & S_SALT1];
+            aOrbiterK = ((aOrbiterK + aOrbiterD) + 0x4BF4D4A20B04B0C3ULL) + aPhaseEOrbiterUpdateSaltC[((aIndex + 19U)) & 31];
             aOrbiterA = (aOrbiterA ^ aOrbiterK) ^ 0xB5CFA10C6A22C099ULL;
             aOrbiterA = RotL64((aOrbiterA * 0x0170B5959BEEF763ULL), 57U);
             //
             aOrbiterD = (aOrbiterD + aOrbiterF) + 0xAFDF0C85762AF8C7ULL;
-            aOrbiterB = ((aOrbiterB ^ aOrbiterD) ^ 0xA5493C6E2D60A7A1ULL) ^ aPhaseEOrbiterUpdateSaltB[(((31U - aIndex) + 15U)) & S_SALT1];
+            aOrbiterB = ((aOrbiterB ^ aOrbiterD) ^ 0xA5493C6E2D60A7A1ULL) ^ aPhaseEOrbiterUpdateSaltB[(((31U - aIndex) + 15U)) & 31];
             aOrbiterB = RotL64((aOrbiterB * 0x565D5D9BE74EAEA3ULL), 41U);
             //
-            aOrbiterC = ((aOrbiterC + aOrbiterE) + 0x980D822772B0E90DULL) + aPhaseEOrbiterUpdateSaltA[(((31U - aIndex) + 28U)) & S_SALT1];
+            aOrbiterC = ((aOrbiterC + aOrbiterE) + 0x980D822772B0E90DULL) + aPhaseEOrbiterUpdateSaltA[(((31U - aIndex) + 28U)) & 31];
             aOrbiterD = (aOrbiterD ^ aOrbiterC) ^ 0x280C623ACDF2A34BULL;
             aOrbiterD = RotL64((aOrbiterD * 0xEBAE42205E42D92FULL), 23U);
             //
@@ -12881,7 +12881,7 @@ void TwistExpander_Antares_Arx::Twist_B(TwistWorkSpace *pWorkSpace,
             aOrbiterF = RotL64((aOrbiterF * 0xAE5A4DACB1858B5BULL), 29U);
             //
             aOrbiterB = (aOrbiterB + aOrbiterC) + 0x0147265366B9E99FULL;
-            aOrbiterK = ((aOrbiterK ^ aOrbiterB) ^ 0x06354CFE6625B54EULL) ^ aPhaseEOrbiterUpdateSaltE[((aIndex + 12U)) & S_SALT1];
+            aOrbiterK = ((aOrbiterK ^ aOrbiterB) ^ 0x06354CFE6625B54EULL) ^ aPhaseEOrbiterUpdateSaltE[((aIndex + 12U)) & 31];
             aOrbiterK = RotL64((aOrbiterK * 0xA26122132289632FULL), 3U);
             //
             aIngress = aOrbiterE ^ RotL64(aOrbiterB, 29U);
@@ -12894,8 +12894,8 @@ void TwistExpander_Antares_Arx::Twist_B(TwistWorkSpace *pWorkSpace,
             aWandererB = aWandererB + ((RotL64(aScatter, 47U) + aOrbiterK) + RotL64(aOrbiterA, 26U));
             aWandererK = aWandererK ^ ((RotL64(aCross, 11U) + RotL64(aOrbiterD, 37U)) + aOrbiterA);
             aWandererH = aWandererH + (((RotL64(aPrevious, 35U) + RotL64(aOrbiterC, 19U)) + aOrbiterB) + RotL64(aCarry, 41U));
-            aWandererJ = aWandererJ ^ (((RotL64(aIngress, 41U) + aOrbiterE) + RotL64(aOrbiterK, 5U)) + aPhaseEWandererUpdateSaltF[(((31U - aIndex) + 11U)) & S_SALT1]);
-            aWandererF = aWandererF + ((((RotL64(aScatter, 29U) + aOrbiterD) + RotL64(aOrbiterK, 11U)) + RotL64(aCarry, 19U)) + aPhaseEWandererUpdateSaltA[((aIndex + 5U)) & S_SALT1]);
+            aWandererJ = aWandererJ ^ (((RotL64(aIngress, 41U) + aOrbiterE) + RotL64(aOrbiterK, 5U)) + aPhaseEWandererUpdateSaltF[(((31U - aIndex) + 11U)) & 31]);
+            aWandererF = aWandererF + ((((RotL64(aScatter, 29U) + aOrbiterD) + RotL64(aOrbiterK, 11U)) + RotL64(aCarry, 19U)) + aPhaseEWandererUpdateSaltA[((aIndex + 5U)) & 31]);
             aWandererA = aWandererA ^ ((RotL64(aPrevious, 56U) + RotL64(aOrbiterC, 53U)) + aOrbiterE);
             //
             aCarry = aCarry + (aWandererF ^ RotL64(aWandererK, 52U));
@@ -12934,19 +12934,19 @@ void TwistExpander_Antares_Arx::Twist_B(TwistWorkSpace *pWorkSpace,
             aScatter = TwistMix64::DiffuseC(aScatter);
             //
             aOrbiterF = ((aWandererE + RotL64(aIngress, 29U)) + RotL64(aCarry, 11U)) + 0x1FAFB8E8E46C575EULL;
-            aOrbiterC = (((aWandererD + RotL64(aPrevious, 41U)) + RotL64(aCarry, 43U)) + 0xD7E4869A2D7EB221ULL) + aPhaseAOrbiterAssignSaltA[(((31U - aIndex) + 18U)) & S_SALT1];
-            aOrbiterK = ((aWandererB + RotL64(aScatter, 3U)) + 0x94A34DF0FC9955F6ULL) + aPhaseAOrbiterAssignSaltC[(((31U - aIndex) + 17U)) & S_SALT1];
+            aOrbiterC = (((aWandererD + RotL64(aPrevious, 41U)) + RotL64(aCarry, 43U)) + 0xD7E4869A2D7EB221ULL) + aPhaseAOrbiterAssignSaltA[(((31U - aIndex) + 18U)) & 31];
+            aOrbiterK = ((aWandererB + RotL64(aScatter, 3U)) + 0x94A34DF0FC9955F6ULL) + aPhaseAOrbiterAssignSaltC[(((31U - aIndex) + 17U)) & 31];
             aOrbiterD = (aWandererC + RotL64(aCross, 35U)) + 0xD1A49150C22188E3ULL;
             aOrbiterG = (aWandererI + RotL64(aScatter, 48U)) + 0x8C1CAE8501AB3226ULL;
             aOrbiterI = ((aWandererH + RotL64(aCross, 13U)) + RotL64(aCarry, 27U)) + 0x1A4742A42CCDF909ULL;
             aOrbiterH = (aWandererF + RotL64(aPrevious, 19U)) + 0xE868B0C09937D2F6ULL;
             //
-            aOrbiterF = ((aOrbiterF + aOrbiterC) + 0xC8A610F1085E4E8BULL) + aPhaseAOrbiterUpdateSaltA[(((31U - aIndex) + 24U)) & S_SALT1];
+            aOrbiterF = ((aOrbiterF + aOrbiterC) + 0xC8A610F1085E4E8BULL) + aPhaseAOrbiterUpdateSaltA[(((31U - aIndex) + 24U)) & 31];
             aOrbiterK = (aOrbiterK ^ aOrbiterF) ^ 0x1B7D109781BF2FA2ULL;
             aOrbiterK = RotL64((aOrbiterK * 0x469422CB5D75DAC5ULL), 47U);
             //
             aOrbiterD = (aOrbiterD + aOrbiterK) + 0x1F1F63D768652358ULL;
-            aOrbiterG = ((aOrbiterG ^ aOrbiterD) ^ 0x907895639B2F149CULL) ^ aPhaseAOrbiterUpdateSaltC[((aIndex + 16U)) & S_SALT1];
+            aOrbiterG = ((aOrbiterG ^ aOrbiterD) ^ 0x907895639B2F149CULL) ^ aPhaseAOrbiterUpdateSaltC[((aIndex + 16U)) & 31];
             aOrbiterG = RotL64((aOrbiterG * 0xB15690CEC2DF5743ULL), 21U);
             //
             aOrbiterI = (aOrbiterI + aOrbiterD) + 0xCCDE3727A894C301ULL;
@@ -12954,10 +12954,10 @@ void TwistExpander_Antares_Arx::Twist_B(TwistWorkSpace *pWorkSpace,
             aOrbiterC = RotL64((aOrbiterC * 0x825C1D514462EB8DULL), 41U);
             //
             aOrbiterG = (aOrbiterG + aOrbiterI) + 0xE8A4B7634BA49441ULL;
-            aOrbiterF = ((aOrbiterF ^ aOrbiterG) ^ 0x8EE4596FE799B44DULL) ^ aPhaseAOrbiterUpdateSaltE[((aIndex + 19U)) & S_SALT1];
+            aOrbiterF = ((aOrbiterF ^ aOrbiterG) ^ 0x8EE4596FE799B44DULL) ^ aPhaseAOrbiterUpdateSaltE[((aIndex + 19U)) & 31];
             aOrbiterF = RotL64((aOrbiterF * 0x246C6D46F281454FULL), 35U);
             //
-            aOrbiterK = ((aOrbiterK + aOrbiterH) + 0xC441CE4566406A5FULL) + aPhaseAOrbiterUpdateSaltD[((aIndex + 26U)) & S_SALT1];
+            aOrbiterK = ((aOrbiterK + aOrbiterH) + 0xC441CE4566406A5FULL) + aPhaseAOrbiterUpdateSaltD[((aIndex + 26U)) & 31];
             aOrbiterI = (aOrbiterI ^ aOrbiterK) ^ 0xD3548F57E357A15FULL;
             aOrbiterI = RotL64((aOrbiterI * 0x530172DC906CA425ULL), 27U);
             //
@@ -12977,8 +12977,8 @@ void TwistExpander_Antares_Arx::Twist_B(TwistWorkSpace *pWorkSpace,
             //
             aWandererF = aWandererF ^ ((RotL64(aScatter, 21U) + RotL64(aOrbiterI, 47U)) + aOrbiterG);
             aWandererI = aWandererI + (((RotL64(aIngress, 29U) + aOrbiterC) + RotL64(aOrbiterH, 11U)) + RotL64(aCarry, 41U));
-            aWandererC = aWandererC ^ (((RotL64(aCross, 41U) + RotL64(aOrbiterF, 57U)) + aOrbiterG) + aPhaseAWandererUpdateSaltD[(((31U - aIndex) + 7U)) & S_SALT1]);
-            aWandererD = aWandererD + (((RotL64(aPrevious, 35U) + aOrbiterF) + RotL64(aOrbiterK, 27U)) + aPhaseAWandererUpdateSaltB[(((31U - aIndex) + 23U)) & S_SALT1]);
+            aWandererC = aWandererC ^ (((RotL64(aCross, 41U) + RotL64(aOrbiterF, 57U)) + aOrbiterG) + aPhaseAWandererUpdateSaltD[(((31U - aIndex) + 7U)) & 31]);
+            aWandererD = aWandererD + (((RotL64(aPrevious, 35U) + aOrbiterF) + RotL64(aOrbiterK, 27U)) + aPhaseAWandererUpdateSaltB[(((31U - aIndex) + 23U)) & 31]);
             aWandererB = aWandererB ^ ((RotL64(aIngress, 14U) + aOrbiterD) + RotL64(aOrbiterK, 41U));
             aWandererE = aWandererE + (((RotL64(aCross, 5U) + aOrbiterK) + RotL64(aOrbiterH, 34U)) + RotL64(aCarry, 29U));
             aWandererH = aWandererH ^ ((RotL64(aScatter, 51U) + aOrbiterI) + RotL64(aOrbiterD, 21U));
@@ -13135,19 +13135,19 @@ void TwistExpander_Antares_Arx::Twist_C(TwistWorkSpace *pWorkSpace,
             aScatter = TwistMix64::DiffuseC(aScatter);
             //
             aOrbiterF = (aWandererJ + RotL64(aPrevious, 13U)) + 0x68395654F7CEFEEDULL;
-            aOrbiterD = ((aWandererA + RotL64(aCross, 23U)) + 0xE26EA321DA7386FBULL) + aPhaseFOrbiterAssignSaltC[((aIndex + 22U)) & S_SALT1];
+            aOrbiterD = ((aWandererA + RotL64(aCross, 23U)) + 0xE26EA321DA7386FBULL) + aPhaseFOrbiterAssignSaltC[((aIndex + 22U)) & 31];
             aOrbiterI = (aWandererE + RotL64(aScatter, 43U)) + 0x691821DC0E83A158ULL;
             aOrbiterH = ((aWandererI + RotL64(aIngress, 3U)) + RotL64(aCarry, 53U)) + 0xDB11EE1681343913ULL;
-            aOrbiterB = (((aWandererC + RotL64(aCross, 51U)) + RotL64(aCarry, 23U)) + 0x92A33B23373A0263ULL) + aPhaseFOrbiterAssignSaltE[(((31U - aIndex) + 9U)) & S_SALT1];
+            aOrbiterB = (((aWandererC + RotL64(aCross, 51U)) + RotL64(aCarry, 23U)) + 0x92A33B23373A0263ULL) + aPhaseFOrbiterAssignSaltE[(((31U - aIndex) + 9U)) & 31];
             aOrbiterK = (aWandererF + RotL64(aIngress, 60U)) + 0x2B90D810113F6406ULL;
             aOrbiterG = ((aWandererG + RotL64(aScatter, 37U)) + RotL64(aCarry, 37U)) + 0xAB4859C75A901C0CULL;
             //
             aOrbiterF = (aOrbiterF + aOrbiterD) + 0xED3267E123AA10E0ULL;
-            aOrbiterI = ((aOrbiterI ^ aOrbiterF) ^ 0x17BAF044D865C65BULL) ^ aPhaseFOrbiterUpdateSaltE[(((31U - aIndex) + 28U)) & S_SALT1];
+            aOrbiterI = ((aOrbiterI ^ aOrbiterF) ^ 0x17BAF044D865C65BULL) ^ aPhaseFOrbiterUpdateSaltE[(((31U - aIndex) + 28U)) & 31];
             aOrbiterI = RotL64((aOrbiterI * 0x9FD6CDF701AAEC15ULL), 53U);
             //
             aOrbiterH = (aOrbiterH + aOrbiterF) + 0xD8128FADDDAB2F48ULL;
-            aOrbiterB = ((aOrbiterB ^ aOrbiterH) ^ 0xD19C1D514941E2ADULL) ^ aPhaseFOrbiterUpdateSaltA[(((31U - aIndex) + 14U)) & S_SALT1];
+            aOrbiterB = ((aOrbiterB ^ aOrbiterH) ^ 0xD19C1D514941E2ADULL) ^ aPhaseFOrbiterUpdateSaltA[(((31U - aIndex) + 14U)) & 31];
             aOrbiterB = RotL64((aOrbiterB * 0xAD071F945355B359ULL), 27U);
             //
             aOrbiterK = (aOrbiterK + aOrbiterG) + 0x6D4E160649306E17ULL;
@@ -13158,7 +13158,7 @@ void TwistExpander_Antares_Arx::Twist_C(TwistWorkSpace *pWorkSpace,
             aOrbiterK = (aOrbiterK ^ aOrbiterB) ^ 0x595AF5469A0D2323ULL;
             aOrbiterK = RotL64((aOrbiterK * 0x705DC90DCD639AC7ULL), 21U);
             //
-            aOrbiterG = ((aOrbiterG + aOrbiterB) + 0xA09280C9E659297DULL) + aPhaseFOrbiterUpdateSaltD[(((31U - aIndex) + 27U)) & S_SALT1];
+            aOrbiterG = ((aOrbiterG + aOrbiterB) + 0xA09280C9E659297DULL) + aPhaseFOrbiterUpdateSaltD[(((31U - aIndex) + 27U)) & 31];
             aOrbiterD = (aOrbiterD ^ aOrbiterG) ^ 0x9AF9E1B1B4E07D78ULL;
             aOrbiterD = RotL64((aOrbiterD * 0x162634EB3E3CFA59ULL), 35U);
             //
@@ -13166,7 +13166,7 @@ void TwistExpander_Antares_Arx::Twist_C(TwistWorkSpace *pWorkSpace,
             aOrbiterH = (aOrbiterH ^ aOrbiterD) ^ 0x29CBF6ED6A161A81ULL;
             aOrbiterH = RotL64((aOrbiterH * 0xC1D5A4260B5192DBULL), 3U);
             //
-            aOrbiterI = ((aOrbiterI + aOrbiterH) + 0xF192859950F65BE1ULL) + aPhaseFOrbiterUpdateSaltB[((aIndex + 21U)) & S_SALT1];
+            aOrbiterI = ((aOrbiterI + aOrbiterH) + 0xF192859950F65BE1ULL) + aPhaseFOrbiterUpdateSaltB[((aIndex + 21U)) & 31];
             aOrbiterG = (aOrbiterG ^ aOrbiterI) ^ 0x8371E2D16D13250EULL;
             aOrbiterG = RotL64((aOrbiterG * 0x498D62414AC04D43ULL), 41U);
             //
@@ -13176,12 +13176,12 @@ void TwistExpander_Antares_Arx::Twist_C(TwistWorkSpace *pWorkSpace,
             aIngress = aIngress + RotL64(aOrbiterI, 21U);
             aIngress = TwistMix64::DiffuseB((aIngress + aScatter));
             //
-            aWandererI = aWandererI ^ (((RotL64(aCross, 11U) + aOrbiterI) + RotL64(aOrbiterB, 41U)) + aPhaseFWandererUpdateSaltC[((aIndex + 4U)) & S_SALT1]);
+            aWandererI = aWandererI ^ (((RotL64(aCross, 11U) + aOrbiterI) + RotL64(aOrbiterB, 41U)) + aPhaseFWandererUpdateSaltC[((aIndex + 4U)) & 31]);
             aWandererA = aWandererA + (((RotL64(aScatter, 3U) + RotL64(aOrbiterF, 23U)) + aOrbiterG) + RotL64(aCarry, 11U));
             aWandererC = aWandererC ^ ((RotL64(aPrevious, 41U) + RotL64(aOrbiterH, 58U)) + aOrbiterI);
             aWandererG = aWandererG + ((RotL64(aIngress, 29U) + aOrbiterF) + RotL64(aOrbiterK, 35U));
             aWandererF = aWandererF ^ ((RotL64(aScatter, 35U) + RotL64(aOrbiterG, 51U)) + aOrbiterK);
-            aWandererJ = aWandererJ + ((((RotL64(aIngress, 19U) + aOrbiterG) + RotL64(aOrbiterD, 13U)) + RotL64(aCarry, 43U)) + aPhaseFWandererUpdateSaltA[((aIndex + 20U)) & S_SALT1]);
+            aWandererJ = aWandererJ + ((((RotL64(aIngress, 19U) + aOrbiterG) + RotL64(aOrbiterD, 13U)) + RotL64(aCarry, 43U)) + aPhaseFWandererUpdateSaltA[((aIndex + 20U)) & 31]);
             aWandererE = aWandererE ^ ((RotL64(aPrevious, 48U) + RotL64(aOrbiterH, 5U)) + aOrbiterF);
             //
             aCarry = aCarry + (RotL64(aWandererA, 5U) ^ aWandererG);
@@ -13224,8 +13224,8 @@ void TwistExpander_Antares_Arx::Twist_C(TwistWorkSpace *pWorkSpace,
             aOrbiterE = ((aWandererC + RotL64(aScatter, 53U)) + RotL64(aCarry, 37U)) + 0xBB1E0DF9295E8EA8ULL;
             aOrbiterD = (aWandererK + RotL64(aCross, 13U)) + 0xFC7EEC34E4376B71ULL;
             aOrbiterB = ((aWandererF + RotL64(aPrevious, 35U)) + RotL64(aCarry, 53U)) + 0xFB5697D4F4F9EACAULL;
-            aOrbiterJ = (((aWandererB + RotL64(aIngress, 41U)) + RotL64(aCarry, 19U)) + 0x2FE5D75CACA103F0ULL) + aPhaseCOrbiterAssignSaltF[(((31U - aIndex) + 16U)) & S_SALT1];
-            aOrbiterK = ((aWandererA + RotL64(aPrevious, 3U)) + 0x97DE1B21BFB90FEEULL) + aPhaseCOrbiterAssignSaltE[((aIndex + 25U)) & S_SALT1];
+            aOrbiterJ = (((aWandererB + RotL64(aIngress, 41U)) + RotL64(aCarry, 19U)) + 0x2FE5D75CACA103F0ULL) + aPhaseCOrbiterAssignSaltF[(((31U - aIndex) + 16U)) & 31];
+            aOrbiterK = ((aWandererA + RotL64(aPrevious, 3U)) + 0x97DE1B21BFB90FEEULL) + aPhaseCOrbiterAssignSaltE[((aIndex + 25U)) & 31];
             aOrbiterA = (aWandererJ + RotL64(aScatter, 22U)) + 0x7754F2527668A686ULL;
             aOrbiterI = (aWandererD + RotL64(aIngress, 29U)) + 0xEF39C6AD8B06562CULL;
             //
@@ -13241,7 +13241,7 @@ void TwistExpander_Antares_Arx::Twist_C(TwistWorkSpace *pWorkSpace,
             aOrbiterI = (aOrbiterI ^ aOrbiterB) ^ 0xDC37AE0EE0957471ULL;
             aOrbiterI = RotL64((aOrbiterI * 0xEB93A643C234916BULL), 53U);
             //
-            aOrbiterA = ((aOrbiterA + aOrbiterK) + 0xD4F7015086597338ULL) + aPhaseCOrbiterUpdateSaltA[((aIndex + 22U)) & S_SALT1];
+            aOrbiterA = ((aOrbiterA + aOrbiterK) + 0xD4F7015086597338ULL) + aPhaseCOrbiterUpdateSaltA[((aIndex + 22U)) & 31];
             aOrbiterE = (aOrbiterE ^ aOrbiterA) ^ 0xAC214D6B3E13686DULL;
             aOrbiterE = RotL64((aOrbiterE * 0xC2078FA4971588ADULL), 5U);
             //
@@ -13250,11 +13250,11 @@ void TwistExpander_Antares_Arx::Twist_C(TwistWorkSpace *pWorkSpace,
             aOrbiterJ = RotL64((aOrbiterJ * 0x9218D2944663E0D9ULL), 11U);
             //
             aOrbiterK = (aOrbiterK + aOrbiterI) + 0xF8D03B6CD7723A1EULL;
-            aOrbiterD = ((aOrbiterD ^ aOrbiterK) ^ 0x7EC27387420CF918ULL) ^ aPhaseCOrbiterUpdateSaltD[((aIndex + 13U)) & S_SALT1];
+            aOrbiterD = ((aOrbiterD ^ aOrbiterK) ^ 0x7EC27387420CF918ULL) ^ aPhaseCOrbiterUpdateSaltD[((aIndex + 13U)) & 31];
             aOrbiterD = RotL64((aOrbiterD * 0x866850D8DBA9C527ULL), 43U);
             //
-            aOrbiterD = ((aOrbiterD + aOrbiterJ) + 0xAFE68B90C0929127ULL) + aPhaseCOrbiterUpdateSaltF[(((31U - aIndex) + 29U)) & S_SALT1];
-            aOrbiterA = ((aOrbiterA ^ aOrbiterD) ^ 0x1B0511D7C84AEDD2ULL) ^ aPhaseCOrbiterUpdateSaltC[((aIndex + 9U)) & S_SALT1];
+            aOrbiterD = ((aOrbiterD + aOrbiterJ) + 0xAFE68B90C0929127ULL) + aPhaseCOrbiterUpdateSaltF[(((31U - aIndex) + 29U)) & 31];
+            aOrbiterA = ((aOrbiterA ^ aOrbiterD) ^ 0x1B0511D7C84AEDD2ULL) ^ aPhaseCOrbiterUpdateSaltC[((aIndex + 9U)) & 31];
             aOrbiterA = RotL64((aOrbiterA * 0x02C2C71BC6C99709ULL), 21U);
             //
             aIngress = RotL64(aOrbiterJ, 21U) ^ aOrbiterB;
@@ -13263,11 +13263,11 @@ void TwistExpander_Antares_Arx::Twist_C(TwistWorkSpace *pWorkSpace,
             aIngress = aIngress + RotL64(aOrbiterK, 11U);
             aIngress = TwistMix64::DiffuseC((aIngress + aScatter));
             //
-            aWandererF = aWandererF + (((RotL64(aScatter, 57U) + RotL64(aOrbiterK, 27U)) + aOrbiterA) + aPhaseCWandererUpdateSaltD[((aIndex + 23U)) & S_SALT1]);
+            aWandererF = aWandererF + (((RotL64(aScatter, 57U) + RotL64(aOrbiterK, 27U)) + aOrbiterA) + aPhaseCWandererUpdateSaltD[((aIndex + 23U)) & 31]);
             aWandererJ = aWandererJ ^ ((RotL64(aPrevious, 51U) + aOrbiterA) + RotL64(aOrbiterB, 41U));
             aWandererD = aWandererD + ((RotL64(aCross, 5U) + RotL64(aOrbiterB, 11U)) + aOrbiterE);
             aWandererB = aWandererB ^ ((RotL64(aIngress, 36U) + RotL64(aOrbiterJ, 50U)) + aOrbiterI);
-            aWandererC = aWandererC + ((((RotL64(aPrevious, 21U) + RotL64(aOrbiterI, 57U)) + aOrbiterK) + RotL64(aCarry, 53U)) + aPhaseCWandererUpdateSaltB[(((31U - aIndex) + 21U)) & S_SALT1]);
+            aWandererC = aWandererC + ((((RotL64(aPrevious, 21U) + RotL64(aOrbiterI, 57U)) + aOrbiterK) + RotL64(aCarry, 53U)) + aPhaseCWandererUpdateSaltB[(((31U - aIndex) + 21U)) & 31]);
             aWandererA = aWandererA ^ ((RotL64(aCross, 29U) + aOrbiterE) + RotL64(aOrbiterA, 21U));
             aWandererK = aWandererK + (((RotL64(aIngress, 11U) + RotL64(aOrbiterK, 5U)) + aOrbiterD) + RotL64(aCarry, 35U));
             //
@@ -13309,11 +13309,11 @@ void TwistExpander_Antares_Arx::Twist_C(TwistWorkSpace *pWorkSpace,
             aScatter = TwistMix64::DiffuseC(aScatter);
             //
             aOrbiterF = ((aWandererG + RotL64(aIngress, 41U)) + RotL64(aCarry, 47U)) + 0x6682D0F6FED74224ULL;
-            aOrbiterB = ((aWandererE + RotL64(aPrevious, 29U)) + 0x90DCB12651508680ULL) + aPhaseCOrbiterAssignSaltB[((aIndex + 29U)) & S_SALT1];
+            aOrbiterB = ((aWandererE + RotL64(aPrevious, 29U)) + 0x90DCB12651508680ULL) + aPhaseCOrbiterAssignSaltB[((aIndex + 29U)) & 31];
             aOrbiterK = ((aWandererI + RotL64(aScatter, 35U)) + RotL64(aCarry, 27U)) + 0xF374B0F32E6D2AECULL;
             aOrbiterH = ((aWandererF + RotL64(aCross, 58U)) + RotL64(aCarry, 13U)) + 0x2361338ECCE5EE77ULL;
             aOrbiterA = (aWandererB + RotL64(aIngress, 19U)) + 0xF83A976779AA7692ULL;
-            aOrbiterI = ((aWandererJ + RotL64(aScatter, 3U)) + 0xDF8CBAB33388328CULL) + aPhaseCOrbiterAssignSaltE[(((31U - aIndex) + 4U)) & S_SALT1];
+            aOrbiterI = ((aWandererJ + RotL64(aScatter, 3U)) + 0xDF8CBAB33388328CULL) + aPhaseCOrbiterAssignSaltE[(((31U - aIndex) + 4U)) & 31];
             aOrbiterC = (aWandererH + RotL64(aPrevious, 11U)) + 0xA6BB1F31ED9A5A4DULL;
             //
             aOrbiterF = (aOrbiterF + aOrbiterB) + 0xADF030DBB9E694D9ULL;
@@ -13321,19 +13321,19 @@ void TwistExpander_Antares_Arx::Twist_C(TwistWorkSpace *pWorkSpace,
             aOrbiterK = RotL64((aOrbiterK * 0x24950A8A70E5FC2DULL), 51U);
             //
             aOrbiterH = (aOrbiterH + aOrbiterF) + 0x3B5712258AFEEFB8ULL;
-            aOrbiterB = ((aOrbiterB ^ aOrbiterH) ^ 0x32A7DBD867B157E2ULL) ^ aPhaseCOrbiterUpdateSaltE[((aIndex + 3U)) & S_SALT1];
+            aOrbiterB = ((aOrbiterB ^ aOrbiterH) ^ 0x32A7DBD867B157E2ULL) ^ aPhaseCOrbiterUpdateSaltE[((aIndex + 3U)) & 31];
             aOrbiterB = RotL64((aOrbiterB * 0x6412EE80D9965BF1ULL), 29U);
             //
             aOrbiterK = (aOrbiterK + aOrbiterA) + 0x2E98A0A6E9D4413FULL;
-            aOrbiterI = ((aOrbiterI ^ aOrbiterK) ^ 0xF8DCA28448C5E7E4ULL) ^ aPhaseCOrbiterUpdateSaltA[(((31U - aIndex) + 14U)) & S_SALT1];
+            aOrbiterI = ((aOrbiterI ^ aOrbiterK) ^ 0xF8DCA28448C5E7E4ULL) ^ aPhaseCOrbiterUpdateSaltA[(((31U - aIndex) + 14U)) & 31];
             aOrbiterI = RotL64((aOrbiterI * 0x40EF9BC105021837ULL), 57U);
             //
             aOrbiterA = (aOrbiterA + aOrbiterI) + 0x8257481DDA90FBA2ULL;
-            aOrbiterC = ((aOrbiterC ^ aOrbiterA) ^ 0xD171CC902E2E3C68ULL) ^ aPhaseCOrbiterUpdateSaltC[((aIndex + 7U)) & S_SALT1];
+            aOrbiterC = ((aOrbiterC ^ aOrbiterA) ^ 0xD171CC902E2E3C68ULL) ^ aPhaseCOrbiterUpdateSaltC[((aIndex + 7U)) & 31];
             aOrbiterC = RotL64((aOrbiterC * 0x0E32CFC4054B173FULL), 35U);
             //
             aOrbiterB = (aOrbiterB + aOrbiterK) + 0x39BCC799E8103E21ULL;
-            aOrbiterA = ((aOrbiterA ^ aOrbiterB) ^ 0x747422155C770DA7ULL) ^ aPhaseCOrbiterUpdateSaltF[(((31U - aIndex) + 26U)) & S_SALT1];
+            aOrbiterA = ((aOrbiterA ^ aOrbiterB) ^ 0x747422155C770DA7ULL) ^ aPhaseCOrbiterUpdateSaltF[(((31U - aIndex) + 26U)) & 31];
             aOrbiterA = RotL64((aOrbiterA * 0x412AB66153D9DD79ULL), 5U);
             //
             aOrbiterC = (aOrbiterC + aOrbiterH) + 0x3C4DFA688F5E1E85ULL;
@@ -13354,8 +13354,8 @@ void TwistExpander_Antares_Arx::Twist_C(TwistWorkSpace *pWorkSpace,
             aWandererJ = aWandererJ ^ ((RotL64(aIngress, 23U) + RotL64(aOrbiterK, 35U)) + aOrbiterI);
             aWandererH = aWandererH + ((RotL64(aCross, 43U) + RotL64(aOrbiterK, 51U)) + aOrbiterA);
             aWandererG = aWandererG ^ ((RotL64(aScatter, 29U) + aOrbiterC) + RotL64(aOrbiterA, 11U));
-            aWandererI = aWandererI + ((((RotL64(aCross, 53U) + RotL64(aOrbiterC, 19U)) + aOrbiterF) + RotL64(aCarry, 23U)) + aPhaseCWandererUpdateSaltB[((aIndex + 21U)) & S_SALT1]);
-            aWandererE = aWandererE ^ (((RotL64(aScatter, 35U) + aOrbiterB) + RotL64(aOrbiterF, 26U)) + aPhaseCWandererUpdateSaltF[(((31U - aIndex) + 20U)) & S_SALT1]);
+            aWandererI = aWandererI + ((((RotL64(aCross, 53U) + RotL64(aOrbiterC, 19U)) + aOrbiterF) + RotL64(aCarry, 23U)) + aPhaseCWandererUpdateSaltB[((aIndex + 21U)) & 31]);
+            aWandererE = aWandererE ^ (((RotL64(aScatter, 35U) + aOrbiterB) + RotL64(aOrbiterF, 26U)) + aPhaseCWandererUpdateSaltF[(((31U - aIndex) + 20U)) & 31]);
             aWandererF = aWandererF + (((RotL64(aIngress, 6U) + aOrbiterB) + RotL64(aOrbiterH, 41U)) + RotL64(aCarry, 53U));
             //
             aCarry = aCarry + (RotL64(aWandererB, 35U) ^ aWandererI);
@@ -13394,19 +13394,19 @@ void TwistExpander_Antares_Arx::Twist_C(TwistWorkSpace *pWorkSpace,
             aScatter = (RotL64(aPrevious, 57U) + RotL64(aCross, 39U)) ^ (RotL64(aCarry, 26U) ^ RotL64(aIngress, 5U));
             aScatter = TwistMix64::DiffuseC(aScatter);
             //
-            aOrbiterF = (((aWandererH + RotL64(aScatter, 19U)) + RotL64(aCarry, 11U)) + 0xC23F0FBABA4B1626ULL) + aPhaseDOrbiterAssignSaltC[(((31U - aIndex) + 20U)) & S_SALT1];
+            aOrbiterF = (((aWandererH + RotL64(aScatter, 19U)) + RotL64(aCarry, 11U)) + 0xC23F0FBABA4B1626ULL) + aPhaseDOrbiterAssignSaltC[(((31U - aIndex) + 20U)) & 31];
             aOrbiterJ = (aWandererB + RotL64(aPrevious, 13U)) + 0x456482ED40DCC973ULL;
             aOrbiterD = ((aWandererE + RotL64(aCross, 27U)) + RotL64(aCarry, 23U)) + 0xFB586F7A375A55D5ULL;
-            aOrbiterA = ((aWandererI + RotL64(aIngress, 60U)) + 0xA6D834875B71B347ULL) + aPhaseDOrbiterAssignSaltE[((aIndex + 26U)) & S_SALT1];
+            aOrbiterA = ((aWandererI + RotL64(aIngress, 60U)) + 0xA6D834875B71B347ULL) + aPhaseDOrbiterAssignSaltE[((aIndex + 26U)) & 31];
             aOrbiterI = (aWandererJ + RotL64(aCross, 3U)) + 0x06EAFCCCA879DF25ULL;
             aOrbiterK = ((aWandererA + RotL64(aPrevious, 41U)) + RotL64(aCarry, 41U)) + 0xC3E36648408787C6ULL;
             aOrbiterC = (aWandererD + RotL64(aIngress, 51U)) + 0xC373A85F489C3CBBULL;
             //
             aOrbiterF = (aOrbiterF + aOrbiterJ) + 0x1C2F87A58CD833B0ULL;
-            aOrbiterD = ((aOrbiterD ^ aOrbiterF) ^ 0x87D69E8CB5D12926ULL) ^ aPhaseDOrbiterUpdateSaltD[(((31U - aIndex) + 22U)) & S_SALT1];
+            aOrbiterD = ((aOrbiterD ^ aOrbiterF) ^ 0x87D69E8CB5D12926ULL) ^ aPhaseDOrbiterUpdateSaltD[(((31U - aIndex) + 22U)) & 31];
             aOrbiterD = RotL64((aOrbiterD * 0x28796212D80D3293ULL), 57U);
             //
-            aOrbiterA = ((aOrbiterA + aOrbiterI) + 0xB0DA09A6790CC633ULL) + aPhaseDOrbiterUpdateSaltC[((aIndex + 7U)) & S_SALT1];
+            aOrbiterA = ((aOrbiterA + aOrbiterI) + 0xB0DA09A6790CC633ULL) + aPhaseDOrbiterUpdateSaltC[((aIndex + 7U)) & 31];
             aOrbiterK = (aOrbiterK ^ aOrbiterA) ^ 0x2109DDCF51A7D211ULL;
             aOrbiterK = RotL64((aOrbiterK * 0x5B535C1D5EB48DB5ULL), 35U);
             //
@@ -13426,8 +13426,8 @@ void TwistExpander_Antares_Arx::Twist_C(TwistWorkSpace *pWorkSpace,
             aOrbiterC = (aOrbiterC ^ aOrbiterJ) ^ 0xA5259CDD3DD7E03FULL;
             aOrbiterC = RotL64((aOrbiterC * 0x3772149D70D38267ULL), 27U);
             //
-            aOrbiterK = ((aOrbiterK + aOrbiterF) + 0xA0ED86C8AD559285ULL) + aPhaseDOrbiterUpdateSaltB[(((31U - aIndex) + 23U)) & S_SALT1];
-            aOrbiterJ = ((aOrbiterJ ^ aOrbiterK) ^ 0xF02B44D6149DDBBEULL) ^ aPhaseDOrbiterUpdateSaltE[(((31U - aIndex) + 13U)) & S_SALT1];
+            aOrbiterK = ((aOrbiterK + aOrbiterF) + 0xA0ED86C8AD559285ULL) + aPhaseDOrbiterUpdateSaltB[(((31U - aIndex) + 23U)) & 31];
+            aOrbiterJ = ((aOrbiterJ ^ aOrbiterK) ^ 0xF02B44D6149DDBBEULL) ^ aPhaseDOrbiterUpdateSaltE[(((31U - aIndex) + 13U)) & 31];
             aOrbiterJ = RotL64((aOrbiterJ * 0x74123E8A63604987ULL), 13U);
             //
             aIngress = aOrbiterK ^ RotL64(aOrbiterC, 5U);
@@ -13437,12 +13437,12 @@ void TwistExpander_Antares_Arx::Twist_C(TwistWorkSpace *pWorkSpace,
             aIngress = TwistMix64::DiffuseA((aIngress + aScatter));
             //
             aWandererJ = aWandererJ + ((RotL64(aScatter, 21U) + RotL64(aOrbiterI, 35U)) + aOrbiterK);
-            aWandererE = aWandererE ^ (((RotL64(aIngress, 53U) + RotL64(aOrbiterC, 3U)) + aOrbiterD) + aPhaseDWandererUpdateSaltD[((aIndex + 14U)) & S_SALT1]);
+            aWandererE = aWandererE ^ (((RotL64(aIngress, 53U) + RotL64(aOrbiterC, 3U)) + aOrbiterD) + aPhaseDWandererUpdateSaltD[((aIndex + 14U)) & 31]);
             aWandererB = aWandererB + (((RotL64(aPrevious, 46U) + aOrbiterK) + RotL64(aOrbiterJ, 51U)) + RotL64(aCarry, 43U));
             aWandererH = aWandererH ^ ((RotL64(aCross, 37U) + aOrbiterD) + RotL64(aOrbiterJ, 12U));
             aWandererA = aWandererA + ((RotL64(aIngress, 11U) + RotL64(aOrbiterJ, 43U)) + aOrbiterF);
             aWandererD = aWandererD ^ ((RotL64(aPrevious, 5U) + aOrbiterA) + RotL64(aOrbiterD, 23U));
-            aWandererI = aWandererI + ((((RotL64(aCross, 29U) + aOrbiterK) + RotL64(aOrbiterC, 29U)) + RotL64(aCarry, 19U)) + aPhaseDWandererUpdateSaltC[((aIndex + 15U)) & S_SALT1]);
+            aWandererI = aWandererI + ((((RotL64(aCross, 29U) + aOrbiterK) + RotL64(aOrbiterC, 29U)) + RotL64(aCarry, 19U)) + aPhaseDWandererUpdateSaltC[((aIndex + 15U)) & 31]);
             //
             aCarry = aCarry + (RotL64(aWandererH, 36U) ^ aWandererB);
             aCarry = aCarry + (RotL64(aWandererJ, 43U) ^ aWandererE);
@@ -13483,12 +13483,12 @@ void TwistExpander_Antares_Arx::Twist_C(TwistWorkSpace *pWorkSpace,
             aOrbiterC = (aWandererA + RotL64(aPrevious, 43U)) + 0x0A0351447C933C23ULL;
             aOrbiterJ = ((aWandererH + RotL64(aCross, 23U)) + RotL64(aCarry, 53U)) + 0xCD3E2DC5219E2CCEULL;
             aOrbiterE = ((aWandererG + RotL64(aIngress, 29U)) + RotL64(aCarry, 11U)) + 0xF62C6545CAEF1D55ULL;
-            aOrbiterB = ((aWandererB + RotL64(aScatter, 60U)) + 0x47241935CECFB3F0ULL) + aPhaseDOrbiterAssignSaltD[(((31U - aIndex) + 8U)) & S_SALT1];
+            aOrbiterB = ((aWandererB + RotL64(aScatter, 60U)) + 0x47241935CECFB3F0ULL) + aPhaseDOrbiterAssignSaltD[(((31U - aIndex) + 8U)) & 31];
             aOrbiterA = (aWandererF + RotL64(aCross, 13U)) + 0xF0517D25F8A84614ULL;
             aOrbiterK = ((aWandererI + RotL64(aPrevious, 53U)) + RotL64(aCarry, 39U)) + 0x84DB1187D9610AD1ULL;
-            aOrbiterF = ((aWandererC + RotL64(aIngress, 35U)) + 0xFBE944A2122BFAF8ULL) + aPhaseDOrbiterAssignSaltB[(((31U - aIndex) + 29U)) & S_SALT1];
+            aOrbiterF = ((aWandererC + RotL64(aIngress, 35U)) + 0xFBE944A2122BFAF8ULL) + aPhaseDOrbiterAssignSaltB[(((31U - aIndex) + 29U)) & 31];
             //
-            aOrbiterC = ((aOrbiterC + aOrbiterJ) + 0x13AACA5302556A13ULL) + aPhaseDOrbiterUpdateSaltF[((aIndex + 7U)) & S_SALT1];
+            aOrbiterC = ((aOrbiterC + aOrbiterJ) + 0x13AACA5302556A13ULL) + aPhaseDOrbiterUpdateSaltF[((aIndex + 7U)) & 31];
             aOrbiterE = (aOrbiterE ^ aOrbiterC) ^ 0x270A15349A18BD68ULL;
             aOrbiterE = RotL64((aOrbiterE * 0xBB17C65441D1E97DULL), 3U);
             //
@@ -13496,12 +13496,12 @@ void TwistExpander_Antares_Arx::Twist_C(TwistWorkSpace *pWorkSpace,
             aOrbiterA = (aOrbiterA ^ aOrbiterB) ^ 0x8F31DDDDB86497DBULL;
             aOrbiterA = RotL64((aOrbiterA * 0x7DDA5B3C394161E9ULL), 41U);
             //
-            aOrbiterE = ((aOrbiterE + aOrbiterK) + 0x740574B5F4845261ULL) + aPhaseDOrbiterUpdateSaltC[((aIndex + 14U)) & S_SALT1];
+            aOrbiterE = ((aOrbiterE + aOrbiterK) + 0x740574B5F4845261ULL) + aPhaseDOrbiterUpdateSaltC[((aIndex + 14U)) & 31];
             aOrbiterF = (aOrbiterF ^ aOrbiterE) ^ 0xC995B6FED374D810ULL;
             aOrbiterF = RotL64((aOrbiterF * 0xF66C9BAE03366045ULL), 47U);
             //
             aOrbiterK = (aOrbiterK + aOrbiterA) + 0x4D54F239A343580DULL;
-            aOrbiterC = ((aOrbiterC ^ aOrbiterK) ^ 0x916F3C387577B926ULL) ^ aPhaseDOrbiterUpdateSaltE[(((31U - aIndex) + 3U)) & S_SALT1];
+            aOrbiterC = ((aOrbiterC ^ aOrbiterK) ^ 0x916F3C387577B926ULL) ^ aPhaseDOrbiterUpdateSaltE[(((31U - aIndex) + 3U)) & 31];
             aOrbiterC = RotL64((aOrbiterC * 0x6B5C47E20E475E99ULL), 29U);
             //
             aOrbiterA = (aOrbiterA + aOrbiterF) + 0x4768FD788599C3C4ULL;
@@ -13512,7 +13512,7 @@ void TwistExpander_Antares_Arx::Twist_C(TwistWorkSpace *pWorkSpace,
             aOrbiterK = (aOrbiterK ^ aOrbiterJ) ^ 0xD2578082F38FD71CULL;
             aOrbiterK = RotL64((aOrbiterK * 0xB9AA08FC962BC2BDULL), 57U);
             //
-            aOrbiterF = ((aOrbiterF + aOrbiterC) + 0xDECB25E52557CD73ULL) + aPhaseDOrbiterUpdateSaltB[(((31U - aIndex) + 21U)) & S_SALT1];
+            aOrbiterF = ((aOrbiterF + aOrbiterC) + 0xDECB25E52557CD73ULL) + aPhaseDOrbiterUpdateSaltB[(((31U - aIndex) + 21U)) & 31];
             aOrbiterB = (aOrbiterB ^ aOrbiterF) ^ 0xF1F74D56F9D97540ULL;
             aOrbiterB = RotL64((aOrbiterB * 0x5C1191477DDD9B93ULL), 35U);
             //
@@ -13524,11 +13524,11 @@ void TwistExpander_Antares_Arx::Twist_C(TwistWorkSpace *pWorkSpace,
             //
             aWandererB = aWandererB ^ ((RotL64(aPrevious, 53U) + aOrbiterB) + RotL64(aOrbiterF, 23U));
             aWandererG = aWandererG + (((RotL64(aCross, 3U) + RotL64(aOrbiterC, 53U)) + aOrbiterK) + RotL64(aCarry, 53U));
-            aWandererH = aWandererH ^ (((RotL64(aScatter, 11U) + RotL64(aOrbiterB, 60U)) + aOrbiterJ) + aPhaseDWandererUpdateSaltC[((aIndex + 12U)) & S_SALT1]);
+            aWandererH = aWandererH ^ (((RotL64(aScatter, 11U) + RotL64(aOrbiterB, 60U)) + aOrbiterJ) + aPhaseDWandererUpdateSaltC[((aIndex + 12U)) & 31]);
             aWandererA = aWandererA + ((RotL64(aIngress, 47U) + aOrbiterA) + RotL64(aOrbiterB, 3U));
             aWandererI = aWandererI ^ ((RotL64(aScatter, 24U) + RotL64(aOrbiterK, 13U)) + aOrbiterE);
             aWandererF = aWandererF + (((RotL64(aIngress, 35U) + aOrbiterB) + RotL64(aOrbiterK, 35U)) + RotL64(aCarry, 13U));
-            aWandererC = aWandererC ^ (((RotL64(aCross, 41U) + RotL64(aOrbiterJ, 43U)) + aOrbiterA) + aPhaseDWandererUpdateSaltE[(((31U - aIndex) + 15U)) & S_SALT1]);
+            aWandererC = aWandererC ^ (((RotL64(aCross, 41U) + RotL64(aOrbiterJ, 43U)) + aOrbiterA) + aPhaseDWandererUpdateSaltE[(((31U - aIndex) + 15U)) & 31]);
             //
             aCarry = aCarry + (RotL64(aWandererB, 39U) ^ aWandererC);
             aCarry = aCarry + (aWandererF ^ RotL64(aWandererG, 12U));
@@ -13568,22 +13568,22 @@ void TwistExpander_Antares_Arx::Twist_C(TwistWorkSpace *pWorkSpace,
             //
             aOrbiterB = ((aWandererB + RotL64(aScatter, 3U)) + RotL64(aCarry, 27U)) + 0xAA808198A71598ACULL;
             aOrbiterJ = (aWandererG + RotL64(aIngress, 19U)) + 0xB8A8B84C6E8F4878ULL;
-            aOrbiterE = (((aWandererF + RotL64(aPrevious, 35U)) + RotL64(aCarry, 53U)) + 0xC8B59C94DFC623A7ULL) + aPhaseBOrbiterAssignSaltF[((aIndex + 10U)) & S_SALT1];
-            aOrbiterI = (((aWandererD + RotL64(aCross, 27U)) + RotL64(aCarry, 3U)) + 0xB4DF344253427B87ULL) + aPhaseBOrbiterAssignSaltC[(((31U - aIndex) + 3U)) & S_SALT1];
+            aOrbiterE = (((aWandererF + RotL64(aPrevious, 35U)) + RotL64(aCarry, 53U)) + 0xC8B59C94DFC623A7ULL) + aPhaseBOrbiterAssignSaltF[((aIndex + 10U)) & 31];
+            aOrbiterI = (((aWandererD + RotL64(aCross, 27U)) + RotL64(aCarry, 3U)) + 0xB4DF344253427B87ULL) + aPhaseBOrbiterAssignSaltC[(((31U - aIndex) + 3U)) & 31];
             aOrbiterD = (aWandererI + RotL64(aScatter, 53U)) + 0x2664EB047B172ACEULL;
             aOrbiterG = (aWandererA + RotL64(aCross, 42U)) + 0x58198A9F3F690775ULL;
             aOrbiterC = (aWandererH + RotL64(aPrevious, 11U)) + 0xEFC9FDDA296B0326ULL;
             //
             aOrbiterB = (aOrbiterB + aOrbiterJ) + 0x252C07C3B987D576ULL;
-            aOrbiterE = ((aOrbiterE ^ aOrbiterB) ^ 0x6F39DBEA8A27B8D4ULL) ^ aPhaseBOrbiterUpdateSaltB[(((31U - aIndex) + 15U)) & S_SALT1];
+            aOrbiterE = ((aOrbiterE ^ aOrbiterB) ^ 0x6F39DBEA8A27B8D4ULL) ^ aPhaseBOrbiterUpdateSaltB[(((31U - aIndex) + 15U)) & 31];
             aOrbiterE = RotL64((aOrbiterE * 0x470CAE692D55680DULL), 19U);
             //
             aOrbiterI = (aOrbiterI + aOrbiterB) + 0x62C57764F2C80B24ULL;
-            aOrbiterD = ((aOrbiterD ^ aOrbiterI) ^ 0x3911A303A04776F4ULL) ^ aPhaseBOrbiterUpdateSaltF[(((31U - aIndex) + 19U)) & S_SALT1];
+            aOrbiterD = ((aOrbiterD ^ aOrbiterI) ^ 0x3911A303A04776F4ULL) ^ aPhaseBOrbiterUpdateSaltF[(((31U - aIndex) + 19U)) & 31];
             aOrbiterD = RotL64((aOrbiterD * 0x01BD88DEEA414C37ULL), 57U);
             //
             aOrbiterE = (aOrbiterE + aOrbiterI) + 0x870C8409D4051FA5ULL;
-            aOrbiterG = ((aOrbiterG ^ aOrbiterE) ^ 0x2A935D73F8536255ULL) ^ aPhaseBOrbiterUpdateSaltA[((aIndex + 6U)) & S_SALT1];
+            aOrbiterG = ((aOrbiterG ^ aOrbiterE) ^ 0x2A935D73F8536255ULL) ^ aPhaseBOrbiterUpdateSaltA[((aIndex + 6U)) & 31];
             aOrbiterG = RotL64((aOrbiterG * 0x4E8D9FC24A28E8E5ULL), 41U);
             //
             aOrbiterJ = (aOrbiterJ + aOrbiterC) + 0xF8D8237DB96302A9ULL;
@@ -13594,7 +13594,7 @@ void TwistExpander_Antares_Arx::Twist_C(TwistWorkSpace *pWorkSpace,
             aOrbiterJ = (aOrbiterJ ^ aOrbiterG) ^ 0x1F6A9C8BF41E9E7BULL;
             aOrbiterJ = RotL64((aOrbiterJ * 0xD24CFC5B1B2AA2CDULL), 47U);
             //
-            aOrbiterC = ((aOrbiterC + aOrbiterG) + 0xA62D7E76CC8FDD23ULL) + aPhaseBOrbiterUpdateSaltC[((aIndex + 5U)) & S_SALT1];
+            aOrbiterC = ((aOrbiterC + aOrbiterG) + 0xA62D7E76CC8FDD23ULL) + aPhaseBOrbiterUpdateSaltC[((aIndex + 5U)) & 31];
             aOrbiterB = (aOrbiterB ^ aOrbiterC) ^ 0xC0A0A7341CFE5605ULL;
             aOrbiterB = RotL64((aOrbiterB * 0x2D049F587E509A71ULL), 11U);
             //
@@ -13610,9 +13610,9 @@ void TwistExpander_Antares_Arx::Twist_C(TwistWorkSpace *pWorkSpace,
             //
             aWandererH = aWandererH ^ ((RotL64(aCross, 12U) + aOrbiterD) + RotL64(aOrbiterC, 41U));
             aWandererF = aWandererF + ((RotL64(aIngress, 19U) + aOrbiterB) + RotL64(aOrbiterI, 58U));
-            aWandererG = aWandererG ^ (((RotL64(aScatter, 29U) + RotL64(aOrbiterC, 27U)) + aOrbiterG) + aPhaseBWandererUpdateSaltD[((aIndex + 9U)) & S_SALT1]);
+            aWandererG = aWandererG ^ (((RotL64(aScatter, 29U) + RotL64(aOrbiterC, 27U)) + aOrbiterG) + aPhaseBWandererUpdateSaltD[((aIndex + 9U)) & 31]);
             aWandererI = aWandererI + (((RotL64(aPrevious, 43U) + aOrbiterE) + RotL64(aOrbiterI, 19U)) + RotL64(aCarry, 37U));
-            aWandererB = aWandererB ^ (((RotL64(aScatter, 3U) + aOrbiterJ) + RotL64(aOrbiterI, 35U)) + aPhaseBWandererUpdateSaltB[(((31U - aIndex) + 21U)) & S_SALT1]);
+            aWandererB = aWandererB ^ (((RotL64(aScatter, 3U) + aOrbiterJ) + RotL64(aOrbiterI, 35U)) + aPhaseBWandererUpdateSaltB[(((31U - aIndex) + 21U)) & 31]);
             aWandererA = aWandererA + (((RotL64(aIngress, 53U) + aOrbiterJ) + RotL64(aOrbiterG, 13U)) + RotL64(aCarry, 51U));
             aWandererD = aWandererD ^ ((RotL64(aCross, 37U) + RotL64(aOrbiterJ, 51U)) + aOrbiterB);
             //
@@ -13777,10 +13777,10 @@ void TwistExpander_Antares_Arx::Twist_D(TwistWorkSpace *pWorkSpace,
             aOrbiterC = (aWandererD + RotL64(aCross, 43U)) + 0xE349D1F478BB2B90ULL;
             aOrbiterG = (aWandererJ + RotL64(aPrevious, 47U)) + 0x9A9C9338A56F3953ULL;
             aOrbiterA = (aWandererK + RotL64(aIngress, 21U)) + 0x25286EDDC5590767ULL;
-            aOrbiterH = ((aWandererE + RotL64(aScatter, 57U)) + 0xFE6A3436106AE07AULL) + aPhaseFOrbiterAssignSaltD[(((31U - aIndex) + 25U)) & S_SALT1];
+            aOrbiterH = ((aWandererE + RotL64(aScatter, 57U)) + 0xFE6A3436106AE07AULL) + aPhaseFOrbiterAssignSaltD[(((31U - aIndex) + 25U)) & 31];
             aOrbiterE = (aWandererC + RotL64(aCross, 34U)) + 0x8BB139FBE35A6A52ULL;
             aOrbiterK = (aWandererH + RotL64(aPrevious, 41U)) + 0xF7CA4D973F217E3EULL;
-            aOrbiterI = ((aWandererA + RotL64(aScatter, 11U)) + 0x9D143EE8B9A042A3ULL) + aPhaseFOrbiterAssignSaltE[((aIndex + 10U)) & S_SALT1];
+            aOrbiterI = ((aWandererA + RotL64(aScatter, 11U)) + 0x9D143EE8B9A042A3ULL) + aPhaseFOrbiterAssignSaltE[((aIndex + 10U)) & 31];
             aOrbiterD = ((aWandererB + RotL64(aPrevious, 29U)) + RotL64(aCarry, 13U)) + 0x5E522C70A641597EULL;
             aOrbiterB = (aWandererI + RotL64(aCross, 37U)) + 0x95AE4E6DA8941736ULL;
             //
@@ -13797,22 +13797,22 @@ void TwistExpander_Antares_Arx::Twist_D(TwistWorkSpace *pWorkSpace,
             aOrbiterK = RotL64((aOrbiterK * 0x6B2837C5387C9E0FULL), 11U);
             //
             aOrbiterI = (aOrbiterI + aOrbiterD) + 0x4B3565DF437CD1E4ULL;
-            aOrbiterG = ((aOrbiterG ^ aOrbiterI) ^ 0xA6CAE8C3AE02C865ULL) ^ aPhaseFOrbiterUpdateSaltD[(((31U - aIndex) + 23U)) & S_SALT1];
+            aOrbiterG = ((aOrbiterG ^ aOrbiterI) ^ 0xA6CAE8C3AE02C865ULL) ^ aPhaseFOrbiterUpdateSaltD[(((31U - aIndex) + 23U)) & 31];
             aOrbiterG = RotL64((aOrbiterG * 0x0F5F85ECAD129D95ULL), 27U);
             //
             aOrbiterB = (aOrbiterB + aOrbiterK) + 0x3360A9CB90682E71ULL;
-            aOrbiterJ = ((aOrbiterJ ^ aOrbiterB) ^ 0x2B2BFB397D75EE69ULL) ^ aPhaseFOrbiterUpdateSaltC[((aIndex + 13U)) & S_SALT1];
+            aOrbiterJ = ((aOrbiterJ ^ aOrbiterB) ^ 0x2B2BFB397D75EE69ULL) ^ aPhaseFOrbiterUpdateSaltC[((aIndex + 13U)) & 31];
             aOrbiterJ = RotL64((aOrbiterJ * 0x0C709C4F79A3E2FBULL), 53U);
             //
             aOrbiterJ = (aOrbiterJ + aOrbiterI) + 0x3B081DDEBF515C51ULL;
-            aOrbiterE = ((aOrbiterE ^ aOrbiterJ) ^ 0xB24B0A75945E08FAULL) ^ aPhaseFOrbiterUpdateSaltF[((aIndex + 28U)) & S_SALT1];
+            aOrbiterE = ((aOrbiterE ^ aOrbiterJ) ^ 0xB24B0A75945E08FAULL) ^ aPhaseFOrbiterUpdateSaltF[((aIndex + 28U)) & 31];
             aOrbiterE = RotL64((aOrbiterE * 0x12878952D41398CBULL), 35U);
             //
             aOrbiterD = (aOrbiterD + aOrbiterC) + 0x2E3B9C7ADA5068EBULL;
             aOrbiterA = (aOrbiterA ^ aOrbiterD) ^ 0x4D83EA833E688B1DULL;
             aOrbiterA = RotL64((aOrbiterA * 0xA7E035D0647F7281ULL), 43U);
             //
-            aOrbiterA = ((aOrbiterA + aOrbiterB) + 0xB69DC9215BAEDEEBULL) + aPhaseFOrbiterUpdateSaltB[(((31U - aIndex) + 21U)) & S_SALT1];
+            aOrbiterA = ((aOrbiterA + aOrbiterB) + 0xB69DC9215BAEDEEBULL) + aPhaseFOrbiterUpdateSaltB[(((31U - aIndex) + 21U)) & 31];
             aOrbiterF = (aOrbiterF ^ aOrbiterA) ^ 0x5408C366D5AE8E71ULL;
             aOrbiterF = RotL64((aOrbiterF * 0xB115F93E32EB2A37ULL), 47U);
             //
@@ -13836,14 +13836,14 @@ void TwistExpander_Antares_Arx::Twist_D(TwistWorkSpace *pWorkSpace,
             aIngress = aIngress + RotL64(aOrbiterF, 13U);
             aIngress = TwistMix64::DiffuseB((aIngress + aScatter));
             //
-            aWandererD = aWandererD + (((RotL64(aCross, 58U) + aOrbiterH) + RotL64(aOrbiterD, 41U)) + aPhaseFWandererUpdateSaltD[((aIndex + 17U)) & S_SALT1]);
+            aWandererD = aWandererD + (((RotL64(aCross, 58U) + aOrbiterH) + RotL64(aOrbiterD, 41U)) + aPhaseFWandererUpdateSaltD[((aIndex + 17U)) & 31]);
             aWandererC = aWandererC ^ ((RotL64(aPrevious, 39U) + RotL64(aOrbiterD, 30U)) + aOrbiterB);
             aWandererB = aWandererB + (((RotL64(aScatter, 13U) + RotL64(aOrbiterK, 13U)) + aOrbiterH) + RotL64(aCarry, 47U));
             aWandererA = aWandererA ^ ((RotL64(aIngress, 5U) + RotL64(aOrbiterA, 47U)) + aOrbiterB);
             aWandererF = aWandererF + ((RotL64(aPrevious, 47U) + RotL64(aOrbiterC, 5U)) + aOrbiterI);
             aWandererG = aWandererG ^ ((RotL64(aIngress, 53U) + RotL64(aOrbiterH, 38U)) + aOrbiterF);
             aWandererE = aWandererE + ((RotL64(aCross, 3U) + RotL64(aOrbiterE, 53U)) + aOrbiterG);
-            aWandererH = aWandererH ^ (((RotL64(aScatter, 23U) + aOrbiterE) + RotL64(aOrbiterJ, 19U)) + aPhaseFWandererUpdateSaltF[(((31U - aIndex) + 7U)) & S_SALT1]);
+            aWandererH = aWandererH ^ (((RotL64(aScatter, 23U) + aOrbiterE) + RotL64(aOrbiterJ, 19U)) + aPhaseFWandererUpdateSaltF[(((31U - aIndex) + 7U)) & 31]);
             aWandererI = aWandererI + ((RotL64(aPrevious, 29U) + aOrbiterD) + RotL64(aOrbiterG, 51U));
             aWandererJ = aWandererJ ^ ((RotL64(aCross, 21U) + RotL64(aOrbiterD, 43U)) + aOrbiterI);
             aWandererK = aWandererK + (((RotL64(aIngress, 36U) + RotL64(aOrbiterF, 3U)) + aOrbiterE) + RotL64(aCarry, 27U));
@@ -13889,9 +13889,9 @@ void TwistExpander_Antares_Arx::Twist_D(TwistWorkSpace *pWorkSpace,
             //
             aOrbiterK = ((aWandererA + RotL64(aIngress, 11U)) + RotL64(aCarry, 39U)) + 0x5ED3BEF6305F123AULL;
             aOrbiterF = (aWandererG + RotL64(aCross, 43U)) + 0xF12AD42C5437A3F6ULL;
-            aOrbiterJ = ((aWandererH + RotL64(aScatter, 46U)) + 0xAFC88F39C14208BEULL) + aPhaseCOrbiterAssignSaltC[(((31U - aIndex) + 7U)) & S_SALT1];
+            aOrbiterJ = ((aWandererH + RotL64(aScatter, 46U)) + 0xAFC88F39C14208BEULL) + aPhaseCOrbiterAssignSaltC[(((31U - aIndex) + 7U)) & 31];
             aOrbiterI = (aWandererB + RotL64(aPrevious, 19U)) + 0xC2EB30BEB523B411ULL;
-            aOrbiterA = (((aWandererF + RotL64(aCross, 13U)) + RotL64(aCarry, 47U)) + 0x0D121F0D7AD17023ULL) + aPhaseCOrbiterAssignSaltF[((aIndex + 27U)) & S_SALT1];
+            aOrbiterA = (((aWandererF + RotL64(aCross, 13U)) + RotL64(aCarry, 47U)) + 0x0D121F0D7AD17023ULL) + aPhaseCOrbiterAssignSaltF[((aIndex + 27U)) & 31];
             aOrbiterC = (aWandererK + RotL64(aScatter, 21U)) + 0x13291667B83B38BAULL;
             aOrbiterD = (aWandererE + RotL64(aIngress, 3U)) + 0xB8BB32A3D93AB633ULL;
             aOrbiterH = ((aWandererJ + RotL64(aPrevious, 57U)) + RotL64(aCarry, 19U)) + 0xF519BA116EFB5460ULL;
@@ -13907,15 +13907,15 @@ void TwistExpander_Antares_Arx::Twist_D(TwistWorkSpace *pWorkSpace,
             aOrbiterA = (aOrbiterA ^ aOrbiterI) ^ 0x0EC0E238A8F99C6EULL;
             aOrbiterA = RotL64((aOrbiterA * 0x6145F2DCADE16CC7ULL), 27U);
             //
-            aOrbiterF = ((aOrbiterF + aOrbiterC) + 0x2CF1DDA115D6224EULL) + aPhaseCOrbiterUpdateSaltF[(((31U - aIndex) + 29U)) & S_SALT1];
+            aOrbiterF = ((aOrbiterF + aOrbiterC) + 0x2CF1DDA115D6224EULL) + aPhaseCOrbiterUpdateSaltF[(((31U - aIndex) + 29U)) & 31];
             aOrbiterD = (aOrbiterD ^ aOrbiterF) ^ 0x69F5AAC82C3E6C2CULL;
             aOrbiterD = RotL64((aOrbiterD * 0xB982DDA2F976ED71ULL), 41U);
             //
             aOrbiterH = (aOrbiterH + aOrbiterI) + 0x77E309130D9053D7ULL;
-            aOrbiterC = ((aOrbiterC ^ aOrbiterH) ^ 0x67343ECAD9CF7C8CULL) ^ aPhaseCOrbiterUpdateSaltE[((aIndex + 21U)) & S_SALT1];
+            aOrbiterC = ((aOrbiterC ^ aOrbiterH) ^ 0x67343ECAD9CF7C8CULL) ^ aPhaseCOrbiterUpdateSaltE[((aIndex + 21U)) & 31];
             aOrbiterC = RotL64((aOrbiterC * 0x30F3D8B470CE674FULL), 53U);
             //
-            aOrbiterD = ((aOrbiterD + aOrbiterG) + 0xC80AE5F408361087ULL) + aPhaseCOrbiterUpdateSaltC[((aIndex + 28U)) & S_SALT1];
+            aOrbiterD = ((aOrbiterD + aOrbiterG) + 0xC80AE5F408361087ULL) + aPhaseCOrbiterUpdateSaltC[((aIndex + 28U)) & 31];
             aOrbiterH = (aOrbiterH ^ aOrbiterD) ^ 0x46B061126ECC89DAULL;
             aOrbiterH = RotL64((aOrbiterH * 0xA992AE711E7EAB0FULL), 35U);
             //
@@ -13928,7 +13928,7 @@ void TwistExpander_Antares_Arx::Twist_D(TwistWorkSpace *pWorkSpace,
             aOrbiterG = RotL64((aOrbiterG * 0x328833F994F65B37ULL), 13U);
             //
             aOrbiterE = (aOrbiterE + aOrbiterH) + 0x216B5231560A75A2ULL;
-            aOrbiterF = ((aOrbiterF ^ aOrbiterE) ^ 0xD0A38D0E84CB472BULL) ^ aPhaseCOrbiterUpdateSaltB[(((31U - aIndex) + 24U)) & S_SALT1];
+            aOrbiterF = ((aOrbiterF ^ aOrbiterE) ^ 0xD0A38D0E84CB472BULL) ^ aPhaseCOrbiterUpdateSaltB[(((31U - aIndex) + 24U)) & 31];
             aOrbiterF = RotL64((aOrbiterF * 0x72389602471D3A59ULL), 19U);
             //
             aOrbiterJ = (aOrbiterJ + aOrbiterD) + 0xD19F3AD960E95991ULL;
@@ -13951,8 +13951,8 @@ void TwistExpander_Antares_Arx::Twist_D(TwistWorkSpace *pWorkSpace,
             aIngress = aIngress + RotL64(aOrbiterB, 18U);
             aIngress = TwistMix64::DiffuseC((aIngress + aScatter));
             //
-            aWandererF = aWandererF ^ (((RotL64(aIngress, 39U) + RotL64(aOrbiterC, 57U)) + aOrbiterF) + aPhaseCWandererUpdateSaltE[(((31U - aIndex) + 19U)) & S_SALT1]);
-            aWandererH = aWandererH + ((((RotL64(aCross, 53U) + RotL64(aOrbiterD, 60U)) + aOrbiterJ) + RotL64(aCarry, 47U)) + aPhaseCWandererUpdateSaltA[((aIndex + 12U)) & S_SALT1]);
+            aWandererF = aWandererF ^ (((RotL64(aIngress, 39U) + RotL64(aOrbiterC, 57U)) + aOrbiterF) + aPhaseCWandererUpdateSaltE[(((31U - aIndex) + 19U)) & 31]);
+            aWandererH = aWandererH + ((((RotL64(aCross, 53U) + RotL64(aOrbiterD, 60U)) + aOrbiterJ) + RotL64(aCarry, 47U)) + aPhaseCWandererUpdateSaltA[((aIndex + 12U)) & 31]);
             aWandererA = aWandererA ^ ((RotL64(aPrevious, 12U) + aOrbiterF) + RotL64(aOrbiterD, 11U));
             aWandererC = aWandererC + ((RotL64(aScatter, 51U) + RotL64(aOrbiterE, 35U)) + aOrbiterH);
             aWandererJ = aWandererJ ^ ((RotL64(aCross, 5U) + aOrbiterK) + RotL64(aOrbiterG, 47U));
@@ -14008,11 +14008,11 @@ void TwistExpander_Antares_Arx::Twist_D(TwistWorkSpace *pWorkSpace,
             aOrbiterE = (aWandererB + RotL64(aIngress, 46U)) + 0x02AEBEC7D68BDBC9ULL;
             aOrbiterK = ((aWandererF + RotL64(aPrevious, 3U)) + RotL64(aCarry, 19U)) + 0xD55C19CDA8DB62F1ULL;
             aOrbiterF = (aWandererE + RotL64(aScatter, 53U)) + 0xB84FBD66445503D3ULL;
-            aOrbiterG = ((aWandererC + RotL64(aCross, 27U)) + 0x3B75B92A58FA60D2ULL) + aPhaseFOrbiterAssignSaltB[(((31U - aIndex) + 23U)) & S_SALT1];
+            aOrbiterG = ((aWandererC + RotL64(aCross, 27U)) + 0x3B75B92A58FA60D2ULL) + aPhaseFOrbiterAssignSaltB[(((31U - aIndex) + 23U)) & 31];
             aOrbiterB = (aWandererH + RotL64(aIngress, 11U)) + 0x3DE9861AA721492BULL;
             aOrbiterI = ((aWandererK + RotL64(aScatter, 57U)) + RotL64(aCarry, 35U)) + 0xD88BDE54620E8524ULL;
             aOrbiterH = (aWandererI + RotL64(aCross, 43U)) + 0xDA4ADCAAE435B5E1ULL;
-            aOrbiterD = (((aWandererJ + RotL64(aIngress, 60U)) + RotL64(aCarry, 51U)) + 0x969C65DF3D42289BULL) + aPhaseFOrbiterAssignSaltA[((aIndex + 22U)) & S_SALT1];
+            aOrbiterD = (((aWandererJ + RotL64(aIngress, 60U)) + RotL64(aCarry, 51U)) + 0x969C65DF3D42289BULL) + aPhaseFOrbiterAssignSaltA[((aIndex + 22U)) & 31];
             //
             aOrbiterJ = (aOrbiterJ + aOrbiterC) + 0x046E18719913A0EFULL;
             aOrbiterA = (aOrbiterA ^ aOrbiterJ) ^ 0xD67AFB98F5412404ULL;
@@ -14026,7 +14026,7 @@ void TwistExpander_Antares_Arx::Twist_D(TwistWorkSpace *pWorkSpace,
             aOrbiterG = (aOrbiterG ^ aOrbiterF) ^ 0x72078195975765FAULL;
             aOrbiterG = RotL64((aOrbiterG * 0x082BA29EA661373FULL), 19U);
             //
-            aOrbiterC = ((aOrbiterC + aOrbiterB) + 0xB3220BE351528680ULL) + aPhaseFOrbiterUpdateSaltF[(((31U - aIndex) + 11U)) & S_SALT1];
+            aOrbiterC = ((aOrbiterC + aOrbiterB) + 0xB3220BE351528680ULL) + aPhaseFOrbiterUpdateSaltF[(((31U - aIndex) + 11U)) & 31];
             aOrbiterI = (aOrbiterI ^ aOrbiterC) ^ 0x7CE0E4ACA1609C2AULL;
             aOrbiterI = RotL64((aOrbiterI * 0xD4B3D0B830227011ULL), 23U);
             //
@@ -14038,11 +14038,11 @@ void TwistExpander_Antares_Arx::Twist_D(TwistWorkSpace *pWorkSpace,
             aOrbiterK = (aOrbiterK ^ aOrbiterD) ^ 0x6796F6B6C1E2994BULL;
             aOrbiterK = RotL64((aOrbiterK * 0xD3FA8263B610788DULL), 37U);
             //
-            aOrbiterG = ((aOrbiterG + aOrbiterJ) + 0x24488A5051708FB8ULL) + aPhaseFOrbiterUpdateSaltD[(((31U - aIndex) + 17U)) & S_SALT1];
+            aOrbiterG = ((aOrbiterG + aOrbiterJ) + 0x24488A5051708FB8ULL) + aPhaseFOrbiterUpdateSaltD[(((31U - aIndex) + 17U)) & 31];
             aOrbiterH = (aOrbiterH ^ aOrbiterG) ^ 0xE95708E9247845C7ULL;
             aOrbiterH = RotL64((aOrbiterH * 0x074DB41280CA8DD7ULL), 29U);
             //
-            aOrbiterB = ((aOrbiterB + aOrbiterF) + 0xD2105B5DFA2242C2ULL) + aPhaseFOrbiterUpdateSaltE[(((31U - aIndex) + 13U)) & S_SALT1];
+            aOrbiterB = ((aOrbiterB + aOrbiterF) + 0xD2105B5DFA2242C2ULL) + aPhaseFOrbiterUpdateSaltE[(((31U - aIndex) + 13U)) & 31];
             aOrbiterD = (aOrbiterD ^ aOrbiterB) ^ 0x9AAAE02B7796B727ULL;
             aOrbiterD = RotL64((aOrbiterD * 0xC6224FE4DAC0CB8FULL), 35U);
             //
@@ -14051,7 +14051,7 @@ void TwistExpander_Antares_Arx::Twist_D(TwistWorkSpace *pWorkSpace,
             aOrbiterE = RotL64((aOrbiterE * 0xC9479499DAF49811ULL), 51U);
             //
             aOrbiterA = (aOrbiterA + aOrbiterI) + 0x3BB9A6964BCEE29EULL;
-            aOrbiterF = ((aOrbiterF ^ aOrbiterA) ^ 0x7630E92E85AEF305ULL) ^ aPhaseFOrbiterUpdateSaltA[(((31U - aIndex) + 19U)) & S_SALT1];
+            aOrbiterF = ((aOrbiterF ^ aOrbiterA) ^ 0x7630E92E85AEF305ULL) ^ aPhaseFOrbiterUpdateSaltA[(((31U - aIndex) + 19U)) & 31];
             aOrbiterF = RotL64((aOrbiterF * 0xC5D2C3B454BA924DULL), 11U);
             //
             aOrbiterH = (aOrbiterH + aOrbiterA) + 0x06ABBD8846025787ULL;
@@ -14068,13 +14068,13 @@ void TwistExpander_Antares_Arx::Twist_D(TwistWorkSpace *pWorkSpace,
             //
             aWandererA = aWandererA ^ ((RotL64(aPrevious, 3U) + aOrbiterB) + RotL64(aOrbiterJ, 34U));
             aWandererD = aWandererD + ((RotL64(aScatter, 39U) + RotL64(aOrbiterA, 23U)) + aOrbiterJ);
-            aWandererK = aWandererK ^ (((RotL64(aIngress, 23U) + aOrbiterK) + RotL64(aOrbiterD, 43U)) + aPhaseFWandererUpdateSaltB[((aIndex + 10U)) & S_SALT1]);
+            aWandererK = aWandererK ^ (((RotL64(aIngress, 23U) + aOrbiterK) + RotL64(aOrbiterD, 43U)) + aPhaseFWandererUpdateSaltB[((aIndex + 10U)) & 31]);
             aWandererE = aWandererE + (((RotL64(aCross, 35U) + aOrbiterK) + RotL64(aOrbiterG, 19U)) + RotL64(aCarry, 41U));
             aWandererC = aWandererC ^ ((RotL64(aScatter, 50U) + aOrbiterB) + RotL64(aOrbiterG, 39U));
             aWandererJ = aWandererJ + ((RotL64(aCross, 11U) + aOrbiterF) + RotL64(aOrbiterG, 51U));
             aWandererF = aWandererF ^ ((RotL64(aIngress, 37U) + RotL64(aOrbiterH, 29U)) + aOrbiterA);
             aWandererG = aWandererG + (((RotL64(aPrevious, 19U) + aOrbiterI) + RotL64(aOrbiterG, 13U)) + RotL64(aCarry, 5U));
-            aWandererI = aWandererI ^ (((RotL64(aScatter, 13U) + RotL64(aOrbiterJ, 47U)) + aOrbiterD) + aPhaseFWandererUpdateSaltA[(((31U - aIndex) + 24U)) & S_SALT1]);
+            aWandererI = aWandererI ^ (((RotL64(aScatter, 13U) + RotL64(aOrbiterJ, 47U)) + aOrbiterD) + aPhaseFWandererUpdateSaltA[(((31U - aIndex) + 24U)) & 31]);
             aWandererB = aWandererB + ((RotL64(aCross, 21U) + RotL64(aOrbiterC, 58U)) + aOrbiterF);
             aWandererH = aWandererH ^ ((RotL64(aPrevious, 52U) + RotL64(aOrbiterH, 53U)) + aOrbiterE);
             //
@@ -14119,18 +14119,18 @@ void TwistExpander_Antares_Arx::Twist_D(TwistWorkSpace *pWorkSpace,
             //
             aOrbiterF = (aWandererD + RotL64(aScatter, 11U)) + 0x6C7724A21A482EEEULL;
             aOrbiterA = (aWandererI + RotL64(aPrevious, 3U)) + 0x434BD7F1EB8CB554ULL;
-            aOrbiterK = ((aWandererE + RotL64(aIngress, 56U)) + 0x1637418A70E0BD81ULL) + aPhaseDOrbiterAssignSaltD[(((31U - aIndex) + 29U)) & S_SALT1];
+            aOrbiterK = ((aWandererE + RotL64(aIngress, 56U)) + 0x1637418A70E0BD81ULL) + aPhaseDOrbiterAssignSaltD[(((31U - aIndex) + 29U)) & 31];
             aOrbiterH = (aWandererH + RotL64(aCross, 53U)) + 0xDC9695AC44D1DAB7ULL;
             aOrbiterD = ((aWandererC + RotL64(aPrevious, 37U)) + RotL64(aCarry, 23U)) + 0x7D3112FA36EDFCF6ULL;
             aOrbiterI = (aWandererB + RotL64(aCross, 35U)) + 0xF3095747C30A3308ULL;
             aOrbiterJ = (aWandererG + RotL64(aScatter, 13U)) + 0xE6FB41B917573CD7ULL;
-            aOrbiterC = ((aWandererF + RotL64(aIngress, 39U)) + 0x787D62A77075D89AULL) + aPhaseDOrbiterAssignSaltF[(((31U - aIndex) + 7U)) & S_SALT1];
+            aOrbiterC = ((aWandererF + RotL64(aIngress, 39U)) + 0x787D62A77075D89AULL) + aPhaseDOrbiterAssignSaltF[(((31U - aIndex) + 7U)) & 31];
             aOrbiterG = ((aWandererJ + RotL64(aCross, 5U)) + RotL64(aCarry, 37U)) + 0x6567CB395F81C17EULL;
             aOrbiterB = (aWandererA + RotL64(aIngress, 19U)) + 0xE49CEB51E79C0D4FULL;
             aOrbiterE = ((aWandererK + RotL64(aScatter, 60U)) + RotL64(aCarry, 13U)) + 0xEBC98AA451F010BEULL;
             //
             aOrbiterF = (aOrbiterF + aOrbiterA) + 0x6C7A7B8C0FAAD714ULL;
-            aOrbiterK = ((aOrbiterK ^ aOrbiterF) ^ 0xDDD023CC622E28C7ULL) ^ aPhaseDOrbiterUpdateSaltA[((aIndex + 18U)) & S_SALT1];
+            aOrbiterK = ((aOrbiterK ^ aOrbiterF) ^ 0xDDD023CC622E28C7ULL) ^ aPhaseDOrbiterUpdateSaltA[((aIndex + 18U)) & 31];
             aOrbiterK = RotL64((aOrbiterK * 0x17DAEC074DBEC91DULL), 51U);
             //
             aOrbiterH = (aOrbiterH + aOrbiterD) + 0x68EF97A4F86D02F5ULL;
@@ -14145,7 +14145,7 @@ void TwistExpander_Antares_Arx::Twist_D(TwistWorkSpace *pWorkSpace,
             aOrbiterC = (aOrbiterC ^ aOrbiterJ) ^ 0x882FC427C6216598ULL;
             aOrbiterC = RotL64((aOrbiterC * 0x5C79465647C3F9AFULL), 53U);
             //
-            aOrbiterD = ((aOrbiterD + aOrbiterF) + 0x52A79AD77BBE56F8ULL) + aPhaseDOrbiterUpdateSaltD[((aIndex + 25U)) & S_SALT1];
+            aOrbiterD = ((aOrbiterD + aOrbiterF) + 0x52A79AD77BBE56F8ULL) + aPhaseDOrbiterUpdateSaltD[((aIndex + 25U)) & 31];
             aOrbiterJ = (aOrbiterJ ^ aOrbiterD) ^ 0xB4EF7534E6DB30A5ULL;
             aOrbiterJ = RotL64((aOrbiterJ * 0xF8CC4C275B3CFCFBULL), 35U);
             //
@@ -14166,10 +14166,10 @@ void TwistExpander_Antares_Arx::Twist_D(TwistWorkSpace *pWorkSpace,
             aOrbiterE = RotL64((aOrbiterE * 0x73D661A71AB63247ULL), 29U);
             //
             aOrbiterE = (aOrbiterE + aOrbiterI) + 0x08D6C97BC940C48EULL;
-            aOrbiterD = ((aOrbiterD ^ aOrbiterE) ^ 0x13AE4790625D8CFCULL) ^ aPhaseDOrbiterUpdateSaltB[(((31U - aIndex) + 8U)) & S_SALT1];
+            aOrbiterD = ((aOrbiterD ^ aOrbiterE) ^ 0x13AE4790625D8CFCULL) ^ aPhaseDOrbiterUpdateSaltB[(((31U - aIndex) + 8U)) & 31];
             aOrbiterD = RotL64((aOrbiterD * 0x7B5697C6DDB0EACDULL), 13U);
             //
-            aOrbiterK = ((aOrbiterK + aOrbiterB) + 0x0E3D0E14A274A8E9ULL) + aPhaseDOrbiterUpdateSaltC[(((31U - aIndex) + 23U)) & S_SALT1];
+            aOrbiterK = ((aOrbiterK + aOrbiterB) + 0x0E3D0E14A274A8E9ULL) + aPhaseDOrbiterUpdateSaltC[(((31U - aIndex) + 23U)) & 31];
             aOrbiterG = (aOrbiterG ^ aOrbiterK) ^ 0xE8959F99F2C5BDB7ULL;
             aOrbiterG = RotL64((aOrbiterG * 0x0C496D0FE836219FULL), 23U);
             //
@@ -14188,10 +14188,10 @@ void TwistExpander_Antares_Arx::Twist_D(TwistWorkSpace *pWorkSpace,
             aWandererA = aWandererA + (((RotL64(aCross, 3U) + aOrbiterH) + RotL64(aOrbiterK, 26U)) + RotL64(aCarry, 23U));
             aWandererC = aWandererC ^ ((RotL64(aScatter, 41U) + RotL64(aOrbiterE, 19U)) + aOrbiterJ);
             aWandererD = aWandererD + ((RotL64(aPrevious, 51U) + RotL64(aOrbiterD, 11U)) + aOrbiterF);
-            aWandererK = aWandererK ^ (((RotL64(aIngress, 47U) + aOrbiterG) + RotL64(aOrbiterD, 23U)) + aPhaseDWandererUpdateSaltD[((aIndex + 19U)) & S_SALT1]);
+            aWandererK = aWandererK ^ (((RotL64(aIngress, 47U) + aOrbiterG) + RotL64(aOrbiterD, 23U)) + aPhaseDWandererUpdateSaltD[((aIndex + 19U)) & 31]);
             aWandererJ = aWandererJ + ((RotL64(aPrevious, 53U) + RotL64(aOrbiterE, 51U)) + aOrbiterB);
             aWandererF = aWandererF ^ ((RotL64(aCross, 28U) + RotL64(aOrbiterI, 39U)) + aOrbiterC);
-            aWandererB = aWandererB + (((RotL64(aScatter, 37U) + RotL64(aOrbiterA, 35U)) + aOrbiterG) + aPhaseDWandererUpdateSaltA[((aIndex + 22U)) & S_SALT1]);
+            aWandererB = aWandererB + (((RotL64(aScatter, 37U) + RotL64(aOrbiterA, 35U)) + aOrbiterG) + aPhaseDWandererUpdateSaltA[((aIndex + 22U)) & 31]);
             //
             aCarry = aCarry + (RotL64(aWandererF, 21U) ^ aWandererD);
             aCarry = aCarry + (RotL64(aWandererC, 6U) ^ aWandererK);
@@ -14232,8 +14232,8 @@ void TwistExpander_Antares_Arx::Twist_D(TwistWorkSpace *pWorkSpace,
             aScatter = (RotL64(aCarry, 53U) + RotL64(aPrevious, 24U)) ^ (RotL64(aCross, 41U) ^ RotL64(aIngress, 5U));
             aScatter = TwistMix64::DiffuseA(aScatter);
             //
-            aOrbiterF = (((aWandererG + RotL64(aScatter, 23U)) + RotL64(aCarry, 27U)) + 0x92C5255BC7B0AEC9ULL) + aPhaseBOrbiterAssignSaltA[(((31U - aIndex) + 15U)) & S_SALT1];
-            aOrbiterA = (((aWandererK + RotL64(aCross, 60U)) + RotL64(aCarry, 23U)) + 0xE74A25847327CDF1ULL) + aPhaseBOrbiterAssignSaltC[((aIndex + 10U)) & S_SALT1];
+            aOrbiterF = (((aWandererG + RotL64(aScatter, 23U)) + RotL64(aCarry, 27U)) + 0x92C5255BC7B0AEC9ULL) + aPhaseBOrbiterAssignSaltA[(((31U - aIndex) + 15U)) & 31];
+            aOrbiterA = (((aWandererK + RotL64(aCross, 60U)) + RotL64(aCarry, 23U)) + 0xE74A25847327CDF1ULL) + aPhaseBOrbiterAssignSaltC[((aIndex + 10U)) & 31];
             aOrbiterG = ((aWandererI + RotL64(aIngress, 35U)) + RotL64(aCarry, 13U)) + 0xCBDDB72295D83227ULL;
             aOrbiterE = (aWandererD + RotL64(aPrevious, 5U)) + 0xA83E15C370D23A86ULL;
             aOrbiterK = (aWandererE + RotL64(aScatter, 43U)) + 0x50BC16763185F8B4ULL;
@@ -14244,8 +14244,8 @@ void TwistExpander_Antares_Arx::Twist_D(TwistWorkSpace *pWorkSpace,
             aOrbiterC = (aWandererB + RotL64(aCross, 3U)) + 0xA485CDF9BDEF8D4EULL;
             aOrbiterJ = (aWandererC + RotL64(aPrevious, 11U)) + 0xAA1AC8A11A146C24ULL;
             //
-            aOrbiterF = ((aOrbiterF + aOrbiterA) + 0x5F277AF8B3ABBB11ULL) + aPhaseBOrbiterUpdateSaltB[(((31U - aIndex) + 9U)) & S_SALT1];
-            aOrbiterG = ((aOrbiterG ^ aOrbiterF) ^ 0x3D4934BDF93A9E76ULL) ^ aPhaseBOrbiterUpdateSaltE[(((31U - aIndex) + 21U)) & S_SALT1];
+            aOrbiterF = ((aOrbiterF + aOrbiterA) + 0x5F277AF8B3ABBB11ULL) + aPhaseBOrbiterUpdateSaltB[(((31U - aIndex) + 9U)) & 31];
+            aOrbiterG = ((aOrbiterG ^ aOrbiterF) ^ 0x3D4934BDF93A9E76ULL) ^ aPhaseBOrbiterUpdateSaltE[(((31U - aIndex) + 21U)) & 31];
             aOrbiterG = RotL64((aOrbiterG * 0x36EBB4546A87475BULL), 29U);
             //
             aOrbiterA = (aOrbiterA + aOrbiterE) + 0x93AB45D0EE6CE213ULL;
@@ -14268,7 +14268,7 @@ void TwistExpander_Antares_Arx::Twist_D(TwistWorkSpace *pWorkSpace,
             aOrbiterF = (aOrbiterF ^ aOrbiterH) ^ 0x671FDE893B914846ULL;
             aOrbiterF = RotL64((aOrbiterF * 0x45DAE79B488AF67BULL), 41U);
             //
-            aOrbiterJ = ((aOrbiterJ + aOrbiterG) + 0xFE86B683BBC30BF0ULL) + aPhaseBOrbiterUpdateSaltC[(((31U - aIndex) + 27U)) & S_SALT1];
+            aOrbiterJ = ((aOrbiterJ + aOrbiterG) + 0xFE86B683BBC30BF0ULL) + aPhaseBOrbiterUpdateSaltC[(((31U - aIndex) + 27U)) & 31];
             aOrbiterC = (aOrbiterC ^ aOrbiterJ) ^ 0xE853D471C138832BULL;
             aOrbiterC = RotL64((aOrbiterC * 0x391916B9C2091551ULL), 3U);
             //
@@ -14277,7 +14277,7 @@ void TwistExpander_Antares_Arx::Twist_D(TwistWorkSpace *pWorkSpace,
             aOrbiterJ = RotL64((aOrbiterJ * 0x0E98D2DB83CA12C9ULL), 5U);
             //
             aOrbiterC = (aOrbiterC + aOrbiterI) + 0x290C636E415E192DULL;
-            aOrbiterA = ((aOrbiterA ^ aOrbiterC) ^ 0x3BB3775F2743DC4CULL) ^ aPhaseBOrbiterUpdateSaltA[((aIndex + 28U)) & S_SALT1];
+            aOrbiterA = ((aOrbiterA ^ aOrbiterC) ^ 0x3BB3775F2743DC4CULL) ^ aPhaseBOrbiterUpdateSaltA[((aIndex + 28U)) & 31];
             aOrbiterA = RotL64((aOrbiterA * 0xEFEC2535DAA0A84DULL), 11U);
             //
             aOrbiterB = (aOrbiterB + aOrbiterJ) + 0x2298FBFB59229CF4ULL;
@@ -14302,8 +14302,8 @@ void TwistExpander_Antares_Arx::Twist_D(TwistWorkSpace *pWorkSpace,
             aWandererJ = aWandererJ ^ ((RotL64(aPrevious, 47U) + RotL64(aOrbiterA, 13U)) + aOrbiterC);
             aWandererD = aWandererD + ((RotL64(aIngress, 29U) + aOrbiterG) + RotL64(aOrbiterB, 5U));
             aWandererH = aWandererH ^ ((RotL64(aCross, 39U) + aOrbiterH) + RotL64(aOrbiterE, 47U));
-            aWandererI = aWandererI + ((((RotL64(aScatter, 5U) + aOrbiterA) + RotL64(aOrbiterF, 58U)) + RotL64(aCarry, 5U)) + aPhaseBWandererUpdateSaltD[((aIndex + 29U)) & S_SALT1]);
-            aWandererB = aWandererB ^ (((RotL64(aPrevious, 13U) + aOrbiterI) + RotL64(aOrbiterG, 3U)) + aPhaseBWandererUpdateSaltC[((aIndex + 24U)) & S_SALT1]);
+            aWandererI = aWandererI + ((((RotL64(aScatter, 5U) + aOrbiterA) + RotL64(aOrbiterF, 58U)) + RotL64(aCarry, 5U)) + aPhaseBWandererUpdateSaltD[((aIndex + 29U)) & 31]);
+            aWandererB = aWandererB ^ (((RotL64(aPrevious, 13U) + aOrbiterI) + RotL64(aOrbiterG, 3U)) + aPhaseBWandererUpdateSaltC[((aIndex + 24U)) & 31]);
             aWandererA = aWandererA + (((RotL64(aIngress, 56U) + aOrbiterJ) + RotL64(aOrbiterF, 19U)) + RotL64(aCarry, 37U));
             aWandererG = aWandererG ^ ((RotL64(aPrevious, 11U) + aOrbiterD) + RotL64(aOrbiterK, 21U));
             aWandererC = aWandererC + ((RotL64(aScatter, 27U) + aOrbiterC) + RotL64(aOrbiterH, 29U));
@@ -14353,9 +14353,9 @@ void TwistExpander_Antares_Arx::Twist_D(TwistWorkSpace *pWorkSpace,
             aOrbiterA = (aWandererG + RotL64(aScatter, 51U)) + 0xE98B6DC15F9198D9ULL;
             aOrbiterG = (aWandererF + RotL64(aIngress, 27U)) + 0x227D37874FB0F828ULL;
             aOrbiterJ = (aWandererD + RotL64(aCross, 41U)) + 0xE619C6028BEA6727ULL;
-            aOrbiterB = ((aWandererJ + RotL64(aPrevious, 47U)) + 0xAE80E8C9C58AFDDFULL) + aPhaseDOrbiterAssignSaltE[(((31U - aIndex) + 5U)) & S_SALT1];
+            aOrbiterB = ((aWandererJ + RotL64(aPrevious, 47U)) + 0xAE80E8C9C58AFDDFULL) + aPhaseDOrbiterAssignSaltE[(((31U - aIndex) + 5U)) & 31];
             aOrbiterE = (aWandererI + RotL64(aIngress, 13U)) + 0xD2D025510AFEEB10ULL;
-            aOrbiterI = (((aWandererC + RotL64(aScatter, 43U)) + RotL64(aCarry, 51U)) + 0x9E92F64CC8FB3B24ULL) + aPhaseDOrbiterAssignSaltD[(((31U - aIndex) + 7U)) & S_SALT1];
+            aOrbiterI = (((aWandererC + RotL64(aScatter, 43U)) + RotL64(aCarry, 51U)) + 0x9E92F64CC8FB3B24ULL) + aPhaseDOrbiterAssignSaltD[(((31U - aIndex) + 7U)) & 31];
             aOrbiterC = ((aWandererA + RotL64(aCross, 34U)) + RotL64(aCarry, 41U)) + 0xBF8B4BC3A9D61F8CULL;
             //
             aOrbiterH = (aOrbiterH + aOrbiterF) + 0xDEC983AE772E568CULL;
@@ -14366,7 +14366,7 @@ void TwistExpander_Antares_Arx::Twist_D(TwistWorkSpace *pWorkSpace,
             aOrbiterA = (aOrbiterA ^ aOrbiterD) ^ 0x47DBF5307B7285B5ULL;
             aOrbiterA = RotL64((aOrbiterA * 0x1C2E19490F168419ULL), 35U);
             //
-            aOrbiterG = ((aOrbiterG + aOrbiterJ) + 0xB306AD1B9CAB8232ULL) + aPhaseDOrbiterUpdateSaltF[(((31U - aIndex) + 27U)) & S_SALT1];
+            aOrbiterG = ((aOrbiterG + aOrbiterJ) + 0xB306AD1B9CAB8232ULL) + aPhaseDOrbiterUpdateSaltF[(((31U - aIndex) + 27U)) & 31];
             aOrbiterD = (aOrbiterD ^ aOrbiterG) ^ 0x8CA5B5F9C5BED32CULL;
             aOrbiterD = RotL64((aOrbiterD * 0xAEE99237E5046487ULL), 19U);
             //
@@ -14378,12 +14378,12 @@ void TwistExpander_Antares_Arx::Twist_D(TwistWorkSpace *pWorkSpace,
             aOrbiterE = (aOrbiterE ^ aOrbiterA) ^ 0x69073C38D352C20FULL;
             aOrbiterE = RotL64((aOrbiterE * 0x62CA41F0544B031DULL), 37U);
             //
-            aOrbiterK = ((aOrbiterK + aOrbiterB) + 0x3BE7F2E2A698DC2AULL) + aPhaseDOrbiterUpdateSaltA[((aIndex + 15U)) & S_SALT1];
-            aOrbiterI = ((aOrbiterI ^ aOrbiterK) ^ 0x3DBF8B2D4E641214ULL) ^ aPhaseDOrbiterUpdateSaltB[((aIndex + 17U)) & S_SALT1];
+            aOrbiterK = ((aOrbiterK + aOrbiterB) + 0x3BE7F2E2A698DC2AULL) + aPhaseDOrbiterUpdateSaltA[((aIndex + 15U)) & 31];
+            aOrbiterI = ((aOrbiterI ^ aOrbiterK) ^ 0x3DBF8B2D4E641214ULL) ^ aPhaseDOrbiterUpdateSaltB[((aIndex + 17U)) & 31];
             aOrbiterI = RotL64((aOrbiterI * 0x53480E5432853A8DULL), 51U);
             //
             aOrbiterC = (aOrbiterC + aOrbiterD) + 0x28736AB2A0B2530FULL;
-            aOrbiterF = ((aOrbiterF ^ aOrbiterC) ^ 0x49D833D7ADD79D20ULL) ^ aPhaseDOrbiterUpdateSaltD[(((31U - aIndex) + 4U)) & S_SALT1];
+            aOrbiterF = ((aOrbiterF ^ aOrbiterC) ^ 0x49D833D7ADD79D20ULL) ^ aPhaseDOrbiterUpdateSaltD[(((31U - aIndex) + 4U)) & 31];
             aOrbiterF = RotL64((aOrbiterF * 0x0499B5299C183C8DULL), 21U);
             //
             aOrbiterI = (aOrbiterI + aOrbiterG) + 0x1A6FDEF5A9B07088ULL;
@@ -14410,13 +14410,13 @@ void TwistExpander_Antares_Arx::Twist_D(TwistWorkSpace *pWorkSpace,
             aIngress = aIngress + RotL64(aOrbiterC, 38U);
             aIngress = TwistMix64::DiffuseB((aIngress + aScatter));
             //
-            aWandererF = aWandererF ^ (((RotL64(aPrevious, 29U) + aOrbiterF) + RotL64(aOrbiterI, 41U)) + aPhaseDWandererUpdateSaltF[(((31U - aIndex) + 20U)) & S_SALT1]);
+            aWandererF = aWandererF ^ (((RotL64(aPrevious, 29U) + aOrbiterF) + RotL64(aOrbiterI, 41U)) + aPhaseDWandererUpdateSaltF[(((31U - aIndex) + 20U)) & 31]);
             aWandererI = aWandererI + ((RotL64(aIngress, 13U) + RotL64(aOrbiterC, 21U)) + aOrbiterB);
             aWandererE = aWandererE ^ ((RotL64(aScatter, 47U) + aOrbiterK) + RotL64(aOrbiterJ, 36U));
             aWandererJ = aWandererJ + ((RotL64(aCross, 19U) + RotL64(aOrbiterB, 11U)) + aOrbiterE);
             aWandererH = aWandererH ^ ((RotL64(aScatter, 24U) + aOrbiterG) + RotL64(aOrbiterK, 3U));
             aWandererD = aWandererD + (((RotL64(aCross, 3U) + aOrbiterE) + RotL64(aOrbiterJ, 57U)) + RotL64(aCarry, 23U));
-            aWandererB = aWandererB ^ (((RotL64(aIngress, 39U) + aOrbiterG) + RotL64(aOrbiterF, 18U)) + aPhaseDWandererUpdateSaltB[((aIndex + 23U)) & S_SALT1]);
+            aWandererB = aWandererB ^ (((RotL64(aIngress, 39U) + aOrbiterG) + RotL64(aOrbiterF, 18U)) + aPhaseDWandererUpdateSaltB[((aIndex + 23U)) & 31]);
             aWandererC = aWandererC + (((RotL64(aPrevious, 41U) + aOrbiterD) + RotL64(aOrbiterE, 5U)) + RotL64(aCarry, 5U));
             aWandererG = aWandererG ^ ((RotL64(aCross, 11U) + RotL64(aOrbiterH, 23U)) + aOrbiterJ);
             aWandererA = aWandererA + ((RotL64(aScatter, 36U) + aOrbiterA) + RotL64(aOrbiterE, 51U));
@@ -14583,13 +14583,13 @@ void TwistExpander_Antares_Arx::Twist_E(TwistWorkSpace *pWorkSpace,
             aScatter = TwistMix64::DiffuseA(aScatter);
             //
             aOrbiterI = (aWandererF + RotL64(aScatter, 11U)) + 0x17D9DAA12409B75DULL;
-            aOrbiterH = ((aWandererG + RotL64(aCross, 23U)) + 0x5E88D3C48703C675ULL) + aPhaseBOrbiterAssignSaltB[(((31U - aIndex) + 15U)) & S_SALT1];
+            aOrbiterH = ((aWandererG + RotL64(aCross, 23U)) + 0x5E88D3C48703C675ULL) + aPhaseBOrbiterAssignSaltB[(((31U - aIndex) + 15U)) & 31];
             aOrbiterF = (aWandererH + RotL64(aPrevious, 44U)) + 0x5E478ACDB8C75AAAULL;
             aOrbiterD = ((aWandererI + RotL64(aIngress, 53U)) + RotL64(aCarry, 41U)) + 0x599E3ADD9CDDAECBULL;
             aOrbiterA = ((aWandererA + RotL64(aCross, 35U)) + RotL64(aCarry, 53U)) + 0xCAB96117EAC45024ULL;
             aOrbiterK = (aWandererD + RotL64(aIngress, 3U)) + 0x5BA986EF30A7914EULL;
             aOrbiterJ = ((aWandererK + RotL64(aScatter, 57U)) + RotL64(aCarry, 13U)) + 0x141232CC560D9C69ULL;
-            aOrbiterC = ((aWandererB + RotL64(aPrevious, 30U)) + 0xCF9AADC74AB1A4E4ULL) + aPhaseBOrbiterAssignSaltA[((aIndex + 21U)) & S_SALT1];
+            aOrbiterC = ((aWandererB + RotL64(aPrevious, 30U)) + 0xCF9AADC74AB1A4E4ULL) + aPhaseBOrbiterAssignSaltA[((aIndex + 21U)) & 31];
             aOrbiterB = (aWandererE + RotL64(aCross, 39U)) + 0x78D9372D89A3FAEFULL;
             //
             aOrbiterI = (aOrbiterI + aOrbiterH) + 0xDD4F15F22BA83BF8ULL;
@@ -14601,15 +14601,15 @@ void TwistExpander_Antares_Arx::Twist_E(TwistWorkSpace *pWorkSpace,
             aOrbiterK = RotL64((aOrbiterK * 0xB48941E189685943ULL), 11U);
             //
             aOrbiterK = (aOrbiterK + aOrbiterJ) + 0x16605932091567D1ULL;
-            aOrbiterI = ((aOrbiterI ^ aOrbiterK) ^ 0xD20574D8CCC313B1ULL) ^ aPhaseBOrbiterUpdateSaltF[(((31U - aIndex) + 29U)) & S_SALT1];
+            aOrbiterI = ((aOrbiterI ^ aOrbiterK) ^ 0xD20574D8CCC313B1ULL) ^ aPhaseBOrbiterUpdateSaltF[(((31U - aIndex) + 29U)) & 31];
             aOrbiterI = RotL64((aOrbiterI * 0x62D2335C8AAA3673ULL), 53U);
             //
             aOrbiterF = (aOrbiterF + aOrbiterD) + 0xD06A4ABE57811C44ULL;
-            aOrbiterC = ((aOrbiterC ^ aOrbiterF) ^ 0xDB5939B6944E54A6ULL) ^ aPhaseBOrbiterUpdateSaltD[(((31U - aIndex) + 5U)) & S_SALT1];
+            aOrbiterC = ((aOrbiterC ^ aOrbiterF) ^ 0xDB5939B6944E54A6ULL) ^ aPhaseBOrbiterUpdateSaltD[(((31U - aIndex) + 5U)) & 31];
             aOrbiterC = RotL64((aOrbiterC * 0xE321C9CECFB8DE15ULL), 19U);
             //
             aOrbiterH = (aOrbiterH + aOrbiterB) + 0x64D3ECD3A9A41487ULL;
-            aOrbiterD = ((aOrbiterD ^ aOrbiterH) ^ 0x3B6638C404AAC9DEULL) ^ aPhaseBOrbiterUpdateSaltA[(((31U - aIndex) + 6U)) & S_SALT1];
+            aOrbiterD = ((aOrbiterD ^ aOrbiterH) ^ 0x3B6638C404AAC9DEULL) ^ aPhaseBOrbiterUpdateSaltA[(((31U - aIndex) + 6U)) & 31];
             aOrbiterD = RotL64((aOrbiterD * 0xC671F41B18FAD019ULL), 5U);
             //
             aOrbiterA = (aOrbiterA + aOrbiterF) + 0xC9D88FAA4DBE9443ULL;
@@ -14624,7 +14624,7 @@ void TwistExpander_Antares_Arx::Twist_E(TwistWorkSpace *pWorkSpace,
             aOrbiterB = (aOrbiterB ^ aOrbiterC) ^ 0x20FDC535B0EE613DULL;
             aOrbiterB = RotL64((aOrbiterB * 0xB6E8913ED8F359E5ULL), 27U);
             //
-            aOrbiterJ = ((aOrbiterJ + aOrbiterC) + 0xDA309E8FA458782FULL) + aPhaseBOrbiterUpdateSaltB[((aIndex + 3U)) & S_SALT1];
+            aOrbiterJ = ((aOrbiterJ + aOrbiterC) + 0xDA309E8FA458782FULL) + aPhaseBOrbiterUpdateSaltB[((aIndex + 3U)) & 31];
             aOrbiterH = (aOrbiterH ^ aOrbiterJ) ^ 0xF68DF07135DAAE38ULL;
             aOrbiterH = RotL64((aOrbiterH * 0x26A0EEF37DBA8155ULL), 57U);
             //
@@ -14637,8 +14637,8 @@ void TwistExpander_Antares_Arx::Twist_E(TwistWorkSpace *pWorkSpace,
             //
             aWandererB = aWandererB ^ ((RotL64(aScatter, 39U) + aOrbiterH) + RotL64(aOrbiterI, 46U));
             aWandererI = aWandererI + (((RotL64(aPrevious, 57U) + RotL64(aOrbiterC, 3U)) + aOrbiterJ) + RotL64(aCarry, 23U));
-            aWandererD = aWandererD ^ (((RotL64(aCross, 48U) + RotL64(aOrbiterF, 27U)) + aOrbiterI) + aPhaseBWandererUpdateSaltA[((aIndex + 14U)) & S_SALT1]);
-            aWandererA = aWandererA + (((RotL64(aIngress, 5U) + aOrbiterD) + RotL64(aOrbiterH, 11U)) + aPhaseBWandererUpdateSaltE[(((31U - aIndex) + 9U)) & S_SALT1]);
+            aWandererD = aWandererD ^ (((RotL64(aCross, 48U) + RotL64(aOrbiterF, 27U)) + aOrbiterI) + aPhaseBWandererUpdateSaltA[((aIndex + 14U)) & 31]);
+            aWandererA = aWandererA + (((RotL64(aIngress, 5U) + aOrbiterD) + RotL64(aOrbiterH, 11U)) + aPhaseBWandererUpdateSaltE[(((31U - aIndex) + 9U)) & 31]);
             aWandererH = aWandererH ^ ((RotL64(aPrevious, 13U) + aOrbiterB) + RotL64(aOrbiterC, 58U));
             aWandererG = aWandererG + (((RotL64(aIngress, 53U) + RotL64(aOrbiterA, 53U)) + aOrbiterF) + RotL64(aCarry, 39U));
             aWandererK = aWandererK ^ ((RotL64(aScatter, 43U) + aOrbiterC) + RotL64(aOrbiterK, 19U));
@@ -14684,20 +14684,20 @@ void TwistExpander_Antares_Arx::Twist_E(TwistWorkSpace *pWorkSpace,
             aScatter = TwistMix64::DiffuseA(aScatter);
             //
             aOrbiterF = (aWandererJ + RotL64(aIngress, 44U)) + 0x78DDBFB7496C0BE7ULL;
-            aOrbiterA = (((aWandererB + RotL64(aCross, 53U)) + RotL64(aCarry, 19U)) + 0x57D06A56BBF868FAULL) + aPhaseFOrbiterAssignSaltF[(((31U - aIndex) + 19U)) & S_SALT1];
+            aOrbiterA = (((aWandererB + RotL64(aCross, 53U)) + RotL64(aCarry, 19U)) + 0x57D06A56BBF868FAULL) + aPhaseFOrbiterAssignSaltF[(((31U - aIndex) + 19U)) & 31];
             aOrbiterH = (aWandererK + RotL64(aScatter, 29U)) + 0x2C325B58783F38CCULL;
             aOrbiterI = ((aWandererI + RotL64(aPrevious, 57U)) + RotL64(aCarry, 29U)) + 0x41BE51105F8A85ECULL;
-            aOrbiterC = ((aWandererG + RotL64(aIngress, 23U)) + 0x4AEAA0DC8FCEC8E4ULL) + aPhaseFOrbiterAssignSaltC[(((31U - aIndex) + 4U)) & S_SALT1];
+            aOrbiterC = ((aWandererG + RotL64(aIngress, 23U)) + 0x4AEAA0DC8FCEC8E4ULL) + aPhaseFOrbiterAssignSaltC[(((31U - aIndex) + 4U)) & 31];
             aOrbiterG = (aWandererA + RotL64(aPrevious, 35U)) + 0x4DCF6D7A7CA8F51BULL;
             aOrbiterB = (aWandererE + RotL64(aCross, 39U)) + 0xEC305A5859EDA5EFULL;
             aOrbiterJ = ((aWandererC + RotL64(aScatter, 11U)) + RotL64(aCarry, 57U)) + 0xFD65D1276216669AULL;
             aOrbiterE = (aWandererD + RotL64(aCross, 4U)) + 0x9B119196BBCE38BCULL;
             //
-            aOrbiterF = ((aOrbiterF + aOrbiterA) + 0xB0C1C5E3AD058C74ULL) + aPhaseFOrbiterUpdateSaltF[(((31U - aIndex) + 9U)) & S_SALT1];
+            aOrbiterF = ((aOrbiterF + aOrbiterA) + 0xB0C1C5E3AD058C74ULL) + aPhaseFOrbiterUpdateSaltF[(((31U - aIndex) + 9U)) & 31];
             aOrbiterH = (aOrbiterH ^ aOrbiterF) ^ 0x6FA6796E7652AB39ULL;
             aOrbiterH = RotL64((aOrbiterH * 0x3B2F0CE64ED963EDULL), 21U);
             //
-            aOrbiterI = ((aOrbiterI + aOrbiterC) + 0xE344F85829FA1A74ULL) + aPhaseFOrbiterUpdateSaltC[((aIndex + 17U)) & S_SALT1];
+            aOrbiterI = ((aOrbiterI + aOrbiterC) + 0xE344F85829FA1A74ULL) + aPhaseFOrbiterUpdateSaltC[((aIndex + 17U)) & 31];
             aOrbiterG = (aOrbiterG ^ aOrbiterI) ^ 0x797419B31B2AB48CULL;
             aOrbiterG = RotL64((aOrbiterG * 0x5957A5820E3821FDULL), 43U);
             //
@@ -14709,11 +14709,11 @@ void TwistExpander_Antares_Arx::Twist_E(TwistWorkSpace *pWorkSpace,
             aOrbiterI = (aOrbiterI ^ aOrbiterA) ^ 0xDABBD1489DF4BDD0ULL;
             aOrbiterI = RotL64((aOrbiterI * 0x29EDDC585FDFC56BULL), 57U);
             //
-            aOrbiterH = ((aOrbiterH + aOrbiterI) + 0xCFAB23088C8A47D0ULL) + aPhaseFOrbiterUpdateSaltE[((aIndex + 16U)) & S_SALT1];
+            aOrbiterH = ((aOrbiterH + aOrbiterI) + 0xCFAB23088C8A47D0ULL) + aPhaseFOrbiterUpdateSaltE[((aIndex + 16U)) & 31];
             aOrbiterB = (aOrbiterB ^ aOrbiterH) ^ 0x19DB37A3B972F933ULL;
             aOrbiterB = RotL64((aOrbiterB * 0x2BADDD5C249718B3ULL), 27U);
             //
-            aOrbiterC = ((aOrbiterC + aOrbiterH) + 0x73CDBF58422A2173ULL) + aPhaseFOrbiterUpdateSaltB[((aIndex + 21U)) & S_SALT1];
+            aOrbiterC = ((aOrbiterC + aOrbiterH) + 0x73CDBF58422A2173ULL) + aPhaseFOrbiterUpdateSaltB[((aIndex + 21U)) & 31];
             aOrbiterE = (aOrbiterE ^ aOrbiterC) ^ 0xA04C33090CF22FD6ULL;
             aOrbiterE = RotL64((aOrbiterE * 0x8CB820C42B087D8BULL), 35U);
             //
@@ -14739,12 +14739,12 @@ void TwistExpander_Antares_Arx::Twist_E(TwistWorkSpace *pWorkSpace,
             aWandererD = aWandererD ^ ((RotL64(aIngress, 11U) + RotL64(aOrbiterH, 14U)) + aOrbiterI);
             aWandererI = aWandererI + (((RotL64(aCross, 47U) + aOrbiterI) + RotL64(aOrbiterC, 47U)) + RotL64(aCarry, 3U));
             aWandererJ = aWandererJ ^ ((RotL64(aPrevious, 5U) + RotL64(aOrbiterI, 53U)) + aOrbiterA);
-            aWandererE = aWandererE + ((((RotL64(aScatter, 57U) + RotL64(aOrbiterA, 43U)) + aOrbiterE) + RotL64(aCarry, 47U)) + aPhaseFWandererUpdateSaltB[((aIndex + 29U)) & S_SALT1]);
+            aWandererE = aWandererE + ((((RotL64(aScatter, 57U) + RotL64(aOrbiterA, 43U)) + aOrbiterE) + RotL64(aCarry, 47U)) + aPhaseFWandererUpdateSaltB[((aIndex + 29U)) & 31]);
             aWandererG = aWandererG ^ ((RotL64(aPrevious, 52U) + aOrbiterI) + RotL64(aOrbiterG, 57U));
             aWandererA = aWandererA + ((RotL64(aIngress, 23U) + RotL64(aOrbiterF, 29U)) + aOrbiterE);
             aWandererC = aWandererC ^ ((RotL64(aScatter, 37U) + aOrbiterJ) + RotL64(aOrbiterC, 24U));
             aWandererK = aWandererK + ((RotL64(aCross, 19U) + aOrbiterH) + RotL64(aOrbiterB, 3U));
-            aWandererB = aWandererB ^ (((RotL64(aPrevious, 30U) + aOrbiterJ) + RotL64(aOrbiterB, 19U)) + aPhaseFWandererUpdateSaltA[((aIndex + 6U)) & S_SALT1]);
+            aWandererB = aWandererB ^ (((RotL64(aPrevious, 30U) + aOrbiterJ) + RotL64(aOrbiterB, 19U)) + aPhaseFWandererUpdateSaltA[((aIndex + 6U)) & 31]);
             //
             aCarry = aCarry + (RotL64(aWandererI, 57U) ^ aWandererB);
             aCarry = aCarry + (RotL64(aWandererA, 40U) ^ aWandererE);
@@ -14785,8 +14785,8 @@ void TwistExpander_Antares_Arx::Twist_E(TwistWorkSpace *pWorkSpace,
             aScatter = TwistMix64::DiffuseC(aScatter);
             //
             aOrbiterI = ((aWandererG + RotL64(aScatter, 13U)) + RotL64(aCarry, 21U)) + 0xDA41FCF6355A5F57ULL;
-            aOrbiterB = (((aWandererF + RotL64(aPrevious, 35U)) + RotL64(aCarry, 51U)) + 0xDBBB3437976DEDE5ULL) + aPhaseBOrbiterAssignSaltE[(((31U - aIndex) + 27U)) & S_SALT1];
-            aOrbiterJ = ((aWandererK + RotL64(aIngress, 48U)) + 0x0D6DAEE0D78425FCULL) + aPhaseBOrbiterAssignSaltB[(((31U - aIndex) + 11U)) & S_SALT1];
+            aOrbiterB = (((aWandererF + RotL64(aPrevious, 35U)) + RotL64(aCarry, 51U)) + 0xDBBB3437976DEDE5ULL) + aPhaseBOrbiterAssignSaltE[(((31U - aIndex) + 27U)) & 31];
+            aOrbiterJ = ((aWandererK + RotL64(aIngress, 48U)) + 0x0D6DAEE0D78425FCULL) + aPhaseBOrbiterAssignSaltB[(((31U - aIndex) + 11U)) & 31];
             aOrbiterE = (aWandererI + RotL64(aCross, 19U)) + 0x76F011E539DD4657ULL;
             aOrbiterK = (aWandererH + RotL64(aPrevious, 29U)) + 0xF7B5FBE267E3917DULL;
             aOrbiterD = ((aWandererE + RotL64(aIngress, 57U)) + RotL64(aCarry, 3U)) + 0x722179D589A97C83ULL;
@@ -14799,14 +14799,14 @@ void TwistExpander_Antares_Arx::Twist_E(TwistWorkSpace *pWorkSpace,
             aOrbiterJ = RotL64((aOrbiterJ * 0x5D1E512FC888137DULL), 47U);
             //
             aOrbiterE = (aOrbiterE + aOrbiterK) + 0x8D50D64551056426ULL;
-            aOrbiterB = ((aOrbiterB ^ aOrbiterE) ^ 0x4DC39DB5E4FCFA49ULL) ^ aPhaseBOrbiterUpdateSaltF[((aIndex + 28U)) & S_SALT1];
+            aOrbiterB = ((aOrbiterB ^ aOrbiterE) ^ 0x4DC39DB5E4FCFA49ULL) ^ aPhaseBOrbiterUpdateSaltF[((aIndex + 28U)) & 31];
             aOrbiterB = RotL64((aOrbiterB * 0x21CA6DE102DB02C1ULL), 53U);
             //
             aOrbiterJ = (aOrbiterJ + aOrbiterD) + 0x4FBBD72F615F2CB0ULL;
-            aOrbiterH = ((aOrbiterH ^ aOrbiterJ) ^ 0xEF3E3B3707B209E7ULL) ^ aPhaseBOrbiterUpdateSaltD[((aIndex + 13U)) & S_SALT1];
+            aOrbiterH = ((aOrbiterH ^ aOrbiterJ) ^ 0xEF3E3B3707B209E7ULL) ^ aPhaseBOrbiterUpdateSaltD[((aIndex + 13U)) & 31];
             aOrbiterH = RotL64((aOrbiterH * 0x58C774909DDAC723ULL), 39U);
             //
-            aOrbiterB = ((aOrbiterB + aOrbiterA) + 0x5AF516AC78B993CDULL) + aPhaseBOrbiterUpdateSaltE[(((31U - aIndex) + 29U)) & S_SALT1];
+            aOrbiterB = ((aOrbiterB + aOrbiterA) + 0x5AF516AC78B993CDULL) + aPhaseBOrbiterUpdateSaltE[(((31U - aIndex) + 29U)) & 31];
             aOrbiterD = (aOrbiterD ^ aOrbiterB) ^ 0xEF380E8283A81698ULL;
             aOrbiterD = RotL64((aOrbiterD * 0xFB7A4EEC06320E95ULL), 43U);
             //
@@ -14827,7 +14827,7 @@ void TwistExpander_Antares_Arx::Twist_E(TwistWorkSpace *pWorkSpace,
             aOrbiterK = RotL64((aOrbiterK * 0x9CB292F75DB2A2ADULL), 5U);
             //
             aOrbiterK = (aOrbiterK + aOrbiterH) + 0x64DCD71AF14A1749ULL;
-            aOrbiterA = ((aOrbiterA ^ aOrbiterK) ^ 0x248CF577CF474AC8ULL) ^ aPhaseBOrbiterUpdateSaltA[(((31U - aIndex) + 17U)) & S_SALT1];
+            aOrbiterA = ((aOrbiterA ^ aOrbiterK) ^ 0x248CF577CF474AC8ULL) ^ aPhaseBOrbiterUpdateSaltA[(((31U - aIndex) + 17U)) & 31];
             aOrbiterA = RotL64((aOrbiterA * 0x44EA101C78C5BB47ULL), 35U);
             //
             aIngress = RotL64(aOrbiterG, 51U) ^ aOrbiterJ;
@@ -14841,8 +14841,8 @@ void TwistExpander_Antares_Arx::Twist_E(TwistWorkSpace *pWorkSpace,
             aWandererD = aWandererD ^ ((RotL64(aPrevious, 57U) + RotL64(aOrbiterK, 21U)) + aOrbiterA);
             aWandererB = aWandererB + (((RotL64(aIngress, 29U) + aOrbiterG) + RotL64(aOrbiterK, 28U)) + RotL64(aCarry, 27U));
             aWandererH = aWandererH ^ ((RotL64(aScatter, 19U) + RotL64(aOrbiterB, 47U)) + aOrbiterE);
-            aWandererF = aWandererF + ((((RotL64(aCross, 23U) + aOrbiterB) + RotL64(aOrbiterD, 35U)) + RotL64(aCarry, 13U)) + aPhaseBWandererUpdateSaltA[(((31U - aIndex) + 23U)) & S_SALT1]);
-            aWandererK = aWandererK ^ (((RotL64(aIngress, 43U) + RotL64(aOrbiterJ, 11U)) + aOrbiterH) + aPhaseBWandererUpdateSaltC[((aIndex + 3U)) & S_SALT1]);
+            aWandererF = aWandererF + ((((RotL64(aCross, 23U) + aOrbiterB) + RotL64(aOrbiterD, 35U)) + RotL64(aCarry, 13U)) + aPhaseBWandererUpdateSaltA[(((31U - aIndex) + 23U)) & 31]);
+            aWandererK = aWandererK ^ (((RotL64(aIngress, 43U) + RotL64(aOrbiterJ, 11U)) + aOrbiterH) + aPhaseBWandererUpdateSaltC[((aIndex + 3U)) & 31]);
             aWandererG = aWandererG + ((RotL64(aPrevious, 11U) + aOrbiterK) + RotL64(aOrbiterE, 40U));
             aWandererC = aWandererC ^ ((RotL64(aScatter, 4U) + aOrbiterK) + RotL64(aOrbiterB, 51U));
             aWandererI = aWandererI + ((RotL64(aCross, 53U) + aOrbiterG) + RotL64(aOrbiterJ, 5U));
@@ -14887,15 +14887,15 @@ void TwistExpander_Antares_Arx::Twist_E(TwistWorkSpace *pWorkSpace,
             //
             aOrbiterJ = (aWandererI + RotL64(aScatter, 39U)) + 0xEC46888D607CB3F3ULL;
             aOrbiterK = (aWandererE + RotL64(aCross, 3U)) + 0x6554B9ED808E4158ULL;
-            aOrbiterF = (((aWandererK + RotL64(aPrevious, 51U)) + RotL64(aCarry, 51U)) + 0x0E75891277239BA3ULL) + aPhaseDOrbiterAssignSaltF[(((31U - aIndex) + 15U)) & S_SALT1];
+            aOrbiterF = (((aWandererK + RotL64(aPrevious, 51U)) + RotL64(aCarry, 51U)) + 0x0E75891277239BA3ULL) + aPhaseDOrbiterAssignSaltF[(((31U - aIndex) + 15U)) & 31];
             aOrbiterB = (aWandererG + RotL64(aIngress, 19U)) + 0xA3ECB251AFA8149EULL;
-            aOrbiterE = ((aWandererA + RotL64(aScatter, 60U)) + 0x4051D67251C7DB3CULL) + aPhaseDOrbiterAssignSaltE[(((31U - aIndex) + 20U)) & S_SALT1];
+            aOrbiterE = ((aWandererA + RotL64(aScatter, 60U)) + 0x4051D67251C7DB3CULL) + aPhaseDOrbiterAssignSaltE[(((31U - aIndex) + 20U)) & 31];
             aOrbiterI = (aWandererD + RotL64(aPrevious, 27U)) + 0x71DC7D6C921A737DULL;
             aOrbiterA = ((aWandererC + RotL64(aIngress, 35U)) + RotL64(aCarry, 37U)) + 0x0F2F29835ED43AD2ULL;
             aOrbiterD = ((aWandererB + RotL64(aCross, 13U)) + RotL64(aCarry, 29U)) + 0x38CF2C90C5E4386FULL;
             aOrbiterC = (aWandererJ + RotL64(aIngress, 44U)) + 0xE8B3C4A03843E5DEULL;
             //
-            aOrbiterJ = ((aOrbiterJ + aOrbiterK) + 0xF62E5F31516A484AULL) + aPhaseDOrbiterUpdateSaltF[((aIndex + 3U)) & S_SALT1];
+            aOrbiterJ = ((aOrbiterJ + aOrbiterK) + 0xF62E5F31516A484AULL) + aPhaseDOrbiterUpdateSaltF[((aIndex + 3U)) & 31];
             aOrbiterF = (aOrbiterF ^ aOrbiterJ) ^ 0xC2752489C5FD891EULL;
             aOrbiterF = RotL64((aOrbiterF * 0x69934547B2F7DAE5ULL), 57U);
             //
@@ -14904,7 +14904,7 @@ void TwistExpander_Antares_Arx::Twist_E(TwistWorkSpace *pWorkSpace,
             aOrbiterK = RotL64((aOrbiterK * 0xBC9781FC424686D5ULL), 43U);
             //
             aOrbiterF = (aOrbiterF + aOrbiterI) + 0x250C732F994EA829ULL;
-            aOrbiterA = ((aOrbiterA ^ aOrbiterF) ^ 0xBF71E0831451823AULL) ^ aPhaseDOrbiterUpdateSaltB[((aIndex + 27U)) & S_SALT1];
+            aOrbiterA = ((aOrbiterA ^ aOrbiterF) ^ 0xBF71E0831451823AULL) ^ aPhaseDOrbiterUpdateSaltB[((aIndex + 27U)) & 31];
             aOrbiterA = RotL64((aOrbiterA * 0x576892317A95BCF5ULL), 29U);
             //
             aOrbiterI = (aOrbiterI + aOrbiterD) + 0xB962E5C532C3EBC9ULL;
@@ -14915,11 +14915,11 @@ void TwistExpander_Antares_Arx::Twist_E(TwistWorkSpace *pWorkSpace,
             aOrbiterE = (aOrbiterE ^ aOrbiterD) ^ 0x1BC79D872EE835EAULL;
             aOrbiterE = RotL64((aOrbiterE * 0x02E5F96B30819F87ULL), 3U);
             //
-            aOrbiterC = ((aOrbiterC + aOrbiterF) + 0xEE2DABBE0343B7C3ULL) + aPhaseDOrbiterUpdateSaltC[((aIndex + 21U)) & S_SALT1];
+            aOrbiterC = ((aOrbiterC + aOrbiterF) + 0xEE2DABBE0343B7C3ULL) + aPhaseDOrbiterUpdateSaltC[((aIndex + 21U)) & 31];
             aOrbiterD = (aOrbiterD ^ aOrbiterC) ^ 0x08CEA9E7B32D97DEULL;
             aOrbiterD = RotL64((aOrbiterD * 0xF3C3469A4EEB4461ULL), 53U);
             //
-            aOrbiterA = ((aOrbiterA + aOrbiterB) + 0x08D6F1BB08F2CEC1ULL) + aPhaseDOrbiterUpdateSaltD[((aIndex + 26U)) & S_SALT1];
+            aOrbiterA = ((aOrbiterA + aOrbiterB) + 0x08D6F1BB08F2CEC1ULL) + aPhaseDOrbiterUpdateSaltD[((aIndex + 26U)) & 31];
             aOrbiterJ = (aOrbiterJ ^ aOrbiterA) ^ 0xD2E07261CDDA5B9BULL;
             aOrbiterJ = RotL64((aOrbiterJ * 0x365E5A5532860C05ULL), 21U);
             //
@@ -14941,11 +14941,11 @@ void TwistExpander_Antares_Arx::Twist_E(TwistWorkSpace *pWorkSpace,
             aWandererA = aWandererA ^ ((RotL64(aCross, 60U) + aOrbiterE) + RotL64(aOrbiterC, 48U));
             aWandererB = aWandererB + ((RotL64(aPrevious, 23U) + RotL64(aOrbiterC, 43U)) + aOrbiterF);
             aWandererE = aWandererE ^ ((RotL64(aIngress, 43U) + RotL64(aOrbiterD, 5U)) + aOrbiterI);
-            aWandererK = aWandererK + (((RotL64(aScatter, 13U) + aOrbiterB) + RotL64(aOrbiterI, 11U)) + aPhaseDWandererUpdateSaltE[(((31U - aIndex) + 23U)) & S_SALT1]);
+            aWandererK = aWandererK + (((RotL64(aScatter, 13U) + aOrbiterB) + RotL64(aOrbiterI, 11U)) + aPhaseDWandererUpdateSaltE[(((31U - aIndex) + 23U)) & 31]);
             aWandererI = aWandererI ^ ((RotL64(aCross, 4U) + aOrbiterF) + RotL64(aOrbiterI, 53U));
             aWandererC = aWandererC + (((RotL64(aScatter, 27U) + RotL64(aOrbiterB, 29U)) + aOrbiterD) + RotL64(aCarry, 23U));
             aWandererG = aWandererG ^ ((RotL64(aPrevious, 47U) + RotL64(aOrbiterF, 19U)) + aOrbiterJ);
-            aWandererJ = aWandererJ + ((((RotL64(aIngress, 37U) + RotL64(aOrbiterI, 37U)) + aOrbiterK) + RotL64(aCarry, 11U)) + aPhaseDWandererUpdateSaltA[(((31U - aIndex) + 7U)) & S_SALT1]);
+            aWandererJ = aWandererJ + ((((RotL64(aIngress, 37U) + RotL64(aOrbiterI, 37U)) + aOrbiterK) + RotL64(aCarry, 11U)) + aPhaseDWandererUpdateSaltA[(((31U - aIndex) + 7U)) & 31]);
             aWandererD = aWandererD ^ ((RotL64(aCross, 19U) + aOrbiterI) + RotL64(aOrbiterA, 58U));
             //
             aCarry = aCarry + (aWandererG ^ RotL64(aWandererD, 42U));
@@ -14991,12 +14991,12 @@ void TwistExpander_Antares_Arx::Twist_E(TwistWorkSpace *pWorkSpace,
             aOrbiterG = ((aWandererC + RotL64(aCross, 19U)) + RotL64(aCarry, 39U)) + 0x8FC761E118BEF790ULL;
             aOrbiterB = ((aWandererH + RotL64(aIngress, 29U)) + RotL64(aCarry, 3U)) + 0x4DB0FB0388F1B7DFULL;
             aOrbiterE = (aWandererF + RotL64(aCross, 10U)) + 0x7F453057193D252CULL;
-            aOrbiterH = ((aWandererG + RotL64(aIngress, 23U)) + 0xFC82E877891CE895ULL) + aPhaseEOrbiterAssignSaltA[(((31U - aIndex) + 3U)) & S_SALT1];
+            aOrbiterH = ((aWandererG + RotL64(aIngress, 23U)) + 0xFC82E877891CE895ULL) + aPhaseEOrbiterAssignSaltA[(((31U - aIndex) + 3U)) & 31];
             aOrbiterJ = (aWandererK + RotL64(aScatter, 43U)) + 0x1C4FD23B3E2DEF06ULL;
             aOrbiterI = (aWandererD + RotL64(aPrevious, 39U)) + 0x75E74144B628CDB7ULL;
-            aOrbiterA = ((aWandererJ + RotL64(aScatter, 58U)) + 0x71AD1A9280E27B0BULL) + aPhaseEOrbiterAssignSaltE[(((31U - aIndex) + 26U)) & S_SALT1];
+            aOrbiterA = ((aWandererJ + RotL64(aScatter, 58U)) + 0x71AD1A9280E27B0BULL) + aPhaseEOrbiterAssignSaltE[(((31U - aIndex) + 26U)) & 31];
             //
-            aOrbiterF = ((aOrbiterF + aOrbiterD) + 0xC218E0F2701C9AA1ULL) + aPhaseEOrbiterUpdateSaltF[((aIndex + 11U)) & S_SALT1];
+            aOrbiterF = ((aOrbiterF + aOrbiterD) + 0xC218E0F2701C9AA1ULL) + aPhaseEOrbiterUpdateSaltF[((aIndex + 11U)) & 31];
             aOrbiterG = (aOrbiterG ^ aOrbiterF) ^ 0x4FC95EE83874AE7FULL;
             aOrbiterG = RotL64((aOrbiterG * 0xC85F0DA0B377CA39ULL), 3U);
             //
@@ -15017,7 +15017,7 @@ void TwistExpander_Antares_Arx::Twist_E(TwistWorkSpace *pWorkSpace,
             aOrbiterF = RotL64((aOrbiterF * 0x2611D1AD47AD2509ULL), 43U);
             //
             aOrbiterA = (aOrbiterA + aOrbiterJ) + 0x7DC40DA8F9B5B15BULL;
-            aOrbiterD = ((aOrbiterD ^ aOrbiterA) ^ 0x746EA5FBED8B63DFULL) ^ aPhaseEOrbiterUpdateSaltB[((aIndex + 23U)) & S_SALT1];
+            aOrbiterD = ((aOrbiterD ^ aOrbiterA) ^ 0x746EA5FBED8B63DFULL) ^ aPhaseEOrbiterUpdateSaltB[((aIndex + 23U)) & 31];
             aOrbiterD = RotL64((aOrbiterD * 0x7404B08DFA7E35ADULL), 39U);
             //
             aOrbiterI = (aOrbiterI + aOrbiterF) + 0x8328467A6DE4082FULL;
@@ -15028,8 +15028,8 @@ void TwistExpander_Antares_Arx::Twist_E(TwistWorkSpace *pWorkSpace,
             aOrbiterJ = (aOrbiterJ ^ aOrbiterG) ^ 0x5DD2C9F7E066BDA5ULL;
             aOrbiterJ = RotL64((aOrbiterJ * 0x0C3A75FD5F378ACDULL), 11U);
             //
-            aOrbiterD = ((aOrbiterD + aOrbiterI) + 0x7941ACCC6CC86C9DULL) + aPhaseEOrbiterUpdateSaltC[((aIndex + 13U)) & S_SALT1];
-            aOrbiterB = ((aOrbiterB ^ aOrbiterD) ^ 0x2074C92C81B2E9CCULL) ^ aPhaseEOrbiterUpdateSaltE[(((31U - aIndex) + 15U)) & S_SALT1];
+            aOrbiterD = ((aOrbiterD + aOrbiterI) + 0x7941ACCC6CC86C9DULL) + aPhaseEOrbiterUpdateSaltC[((aIndex + 13U)) & 31];
+            aOrbiterB = ((aOrbiterB ^ aOrbiterD) ^ 0x2074C92C81B2E9CCULL) ^ aPhaseEOrbiterUpdateSaltE[(((31U - aIndex) + 15U)) & 31];
             aOrbiterB = RotL64((aOrbiterB * 0x1C17F51248EE5931ULL), 27U);
             //
             aIngress = RotL64(aOrbiterD, 23U) ^ aOrbiterI;
@@ -15042,8 +15042,8 @@ void TwistExpander_Antares_Arx::Twist_E(TwistWorkSpace *pWorkSpace,
             aWandererE = aWandererE ^ ((RotL64(aCross, 29U) + aOrbiterJ) + RotL64(aOrbiterI, 14U));
             aWandererC = aWandererC + (((RotL64(aPrevious, 12U) + RotL64(aOrbiterG, 29U)) + aOrbiterJ) + RotL64(aCarry, 3U));
             aWandererK = aWandererK ^ ((RotL64(aScatter, 39U) + aOrbiterD) + RotL64(aOrbiterE, 35U));
-            aWandererG = aWandererG + (((RotL64(aIngress, 43U) + RotL64(aOrbiterJ, 51U)) + aOrbiterF) + aPhaseEWandererUpdateSaltE[(((31U - aIndex) + 24U)) & S_SALT1]);
-            aWandererF = aWandererF ^ (((RotL64(aCross, 5U) + RotL64(aOrbiterA, 19U)) + aOrbiterJ) + aPhaseEWandererUpdateSaltB[((aIndex + 17U)) & S_SALT1]);
+            aWandererG = aWandererG + (((RotL64(aIngress, 43U) + RotL64(aOrbiterJ, 51U)) + aOrbiterF) + aPhaseEWandererUpdateSaltE[(((31U - aIndex) + 24U)) & 31]);
+            aWandererF = aWandererF ^ (((RotL64(aCross, 5U) + RotL64(aOrbiterA, 19U)) + aOrbiterJ) + aPhaseEWandererUpdateSaltB[((aIndex + 17U)) & 31]);
             aWandererH = aWandererH + (((RotL64(aScatter, 35U) + aOrbiterD) + RotL64(aOrbiterF, 43U)) + RotL64(aCarry, 11U));
             aWandererD = aWandererD ^ ((RotL64(aIngress, 51U) + RotL64(aOrbiterA, 47U)) + aOrbiterE);
             aWandererB = aWandererB + ((RotL64(aPrevious, 22U) + RotL64(aOrbiterH, 23U)) + aOrbiterE);
@@ -15088,16 +15088,16 @@ void TwistExpander_Antares_Arx::Twist_E(TwistWorkSpace *pWorkSpace,
             aScatter = TwistMix64::DiffuseB(aScatter);
             //
             aOrbiterK = (aWandererH + RotL64(aCross, 23U)) + 0x39CB5398D247F164ULL;
-            aOrbiterA = (((aWandererK + RotL64(aPrevious, 10U)) + RotL64(aCarry, 21U)) + 0xFE3746F0A22DF540ULL) + aPhaseAOrbiterAssignSaltE[(((31U - aIndex) + 7U)) & S_SALT1];
+            aOrbiterA = (((aWandererK + RotL64(aPrevious, 10U)) + RotL64(aCarry, 21U)) + 0xFE3746F0A22DF540ULL) + aPhaseAOrbiterAssignSaltE[(((31U - aIndex) + 7U)) & 31];
             aOrbiterH = (aWandererD + RotL64(aScatter, 39U)) + 0xB8D7A577F1BFBAD8ULL;
             aOrbiterE = ((aWandererG + RotL64(aIngress, 43U)) + RotL64(aCarry, 35U)) + 0x87B19B2D697ED4AEULL;
-            aOrbiterI = ((aWandererF + RotL64(aPrevious, 51U)) + 0x04445286ECA99393ULL) + aPhaseAOrbiterAssignSaltF[(((31U - aIndex) + 13U)) & S_SALT1];
+            aOrbiterI = ((aWandererF + RotL64(aPrevious, 51U)) + 0x04445286ECA99393ULL) + aPhaseAOrbiterAssignSaltF[(((31U - aIndex) + 13U)) & 31];
             aOrbiterD = (aWandererI + RotL64(aIngress, 27U)) + 0xD95745640B8918B5ULL;
             aOrbiterF = (aWandererA + RotL64(aCross, 47U)) + 0x689876FD25D6D3BAULL;
             aOrbiterJ = ((aWandererC + RotL64(aScatter, 5U)) + RotL64(aCarry, 13U)) + 0x7F5E73E40D443F25ULL;
             aOrbiterB = (aWandererE + RotL64(aPrevious, 58U)) + 0x6ADF4285DA98737AULL;
             //
-            aOrbiterK = ((aOrbiterK + aOrbiterA) + 0x6673FA692114C812ULL) + aPhaseAOrbiterUpdateSaltA[(((31U - aIndex) + 17U)) & S_SALT1];
+            aOrbiterK = ((aOrbiterK + aOrbiterA) + 0x6673FA692114C812ULL) + aPhaseAOrbiterUpdateSaltA[(((31U - aIndex) + 17U)) & 31];
             aOrbiterH = (aOrbiterH ^ aOrbiterK) ^ 0xEDEBA32D3307BBB4ULL;
             aOrbiterH = RotL64((aOrbiterH * 0x42F2F2FA0CF5EB8DULL), 29U);
             //
@@ -15106,7 +15106,7 @@ void TwistExpander_Antares_Arx::Twist_E(TwistWorkSpace *pWorkSpace,
             aOrbiterI = RotL64((aOrbiterI * 0xACEC4B3D6DA706C3ULL), 41U);
             //
             aOrbiterD = (aOrbiterD + aOrbiterF) + 0xBA83BA0892D913D2ULL;
-            aOrbiterA = ((aOrbiterA ^ aOrbiterD) ^ 0xAA53393F203381EDULL) ^ aPhaseAOrbiterUpdateSaltC[((aIndex + 5U)) & S_SALT1];
+            aOrbiterA = ((aOrbiterA ^ aOrbiterD) ^ 0xAA53393F203381EDULL) ^ aPhaseAOrbiterUpdateSaltC[((aIndex + 5U)) & 31];
             aOrbiterA = RotL64((aOrbiterA * 0x3D0A9AF1CEA8DE7DULL), 3U);
             //
             aOrbiterJ = (aOrbiterJ + aOrbiterH) + 0x325582A19E6ED5D4ULL;
@@ -15126,10 +15126,10 @@ void TwistExpander_Antares_Arx::Twist_E(TwistWorkSpace *pWorkSpace,
             aOrbiterF = RotL64((aOrbiterF * 0x8E3D44A76F08F597ULL), 35U);
             //
             aOrbiterH = (aOrbiterH + aOrbiterI) + 0x3DF9247EC1A88D7AULL;
-            aOrbiterD = ((aOrbiterD ^ aOrbiterH) ^ 0x9C9248F2CEEDDD5CULL) ^ aPhaseAOrbiterUpdateSaltE[((aIndex + 29U)) & S_SALT1];
+            aOrbiterD = ((aOrbiterD ^ aOrbiterH) ^ 0x9C9248F2CEEDDD5CULL) ^ aPhaseAOrbiterUpdateSaltE[((aIndex + 29U)) & 31];
             aOrbiterD = RotL64((aOrbiterD * 0x0DE1B3298AC87F0BULL), 51U);
             //
-            aOrbiterB = ((aOrbiterB + aOrbiterD) + 0xD5DA2B608B44C061ULL) + aPhaseAOrbiterUpdateSaltB[((aIndex + 8U)) & S_SALT1];
+            aOrbiterB = ((aOrbiterB + aOrbiterD) + 0xD5DA2B608B44C061ULL) + aPhaseAOrbiterUpdateSaltB[((aIndex + 8U)) & 31];
             aOrbiterK = (aOrbiterK ^ aOrbiterB) ^ 0xE04995A0B4178EADULL;
             aOrbiterK = RotL64((aOrbiterK * 0x422316417B47BD37ULL), 13U);
             //
@@ -15141,14 +15141,14 @@ void TwistExpander_Antares_Arx::Twist_E(TwistWorkSpace *pWorkSpace,
             aIngress = TwistMix64::DiffuseB((aIngress + aScatter));
             //
             aWandererF = aWandererF ^ ((RotL64(aIngress, 43U) + aOrbiterF) + RotL64(aOrbiterE, 13U));
-            aWandererE = aWandererE + ((((RotL64(aScatter, 3U) + aOrbiterJ) + RotL64(aOrbiterH, 39U)) + RotL64(aCarry, 41U)) + aPhaseAWandererUpdateSaltB[(((31U - aIndex) + 20U)) & S_SALT1]);
+            aWandererE = aWandererE + ((((RotL64(aScatter, 3U) + aOrbiterJ) + RotL64(aOrbiterH, 39U)) + RotL64(aCarry, 41U)) + aPhaseAWandererUpdateSaltB[(((31U - aIndex) + 20U)) & 31]);
             aWandererD = aWandererD ^ ((RotL64(aCross, 34U) + aOrbiterA) + RotL64(aOrbiterI, 26U));
             aWandererI = aWandererI + ((RotL64(aPrevious, 39U) + aOrbiterF) + RotL64(aOrbiterA, 47U));
             aWandererK = aWandererK ^ ((RotL64(aScatter, 11U) + aOrbiterJ) + RotL64(aOrbiterD, 35U));
             aWandererA = aWandererA + (((RotL64(aCross, 27U) + aOrbiterK) + RotL64(aOrbiterJ, 53U)) + RotL64(aCarry, 3U));
             aWandererC = aWandererC ^ ((RotL64(aIngress, 48U) + RotL64(aOrbiterE, 3U)) + aOrbiterJ);
             aWandererH = aWandererH + ((RotL64(aPrevious, 23U) + aOrbiterJ) + RotL64(aOrbiterB, 20U));
-            aWandererG = aWandererG ^ (((RotL64(aIngress, 19U) + RotL64(aOrbiterF, 57U)) + aOrbiterK) + aPhaseAWandererUpdateSaltC[((aIndex + 9U)) & S_SALT1]);
+            aWandererG = aWandererG ^ (((RotL64(aIngress, 19U) + RotL64(aOrbiterF, 57U)) + aOrbiterK) + aPhaseAWandererUpdateSaltC[((aIndex + 9U)) & 31]);
             //
             aCarry = aCarry + (aWandererK ^ RotL64(aWandererF, 60U));
             aCarry = aCarry + (aWandererA ^ RotL64(aWandererG, 41U));
@@ -15313,14 +15313,14 @@ void TwistExpander_Antares_Arx::Twist_F(TwistWorkSpace *pWorkSpace,
             aScatter = (RotL64(aIngress, 21U) ^ RotL64(aCross, 53U)) + (RotL64(aPrevious, 37U) + RotL64(aCarry, 4U));
             aScatter = TwistMix64::DiffuseC(aScatter);
             //
-            aOrbiterA = ((aWandererI + RotL64(aScatter, 23U)) + 0xAEC08CCAE999D55FULL) + aPhaseFOrbiterAssignSaltF[(((31U - aIndex) + 11U)) & S_SALT1];
+            aOrbiterA = ((aWandererI + RotL64(aScatter, 23U)) + 0xAEC08CCAE999D55FULL) + aPhaseFOrbiterAssignSaltF[(((31U - aIndex) + 11U)) & 31];
             aOrbiterI = ((aWandererC + RotL64(aPrevious, 19U)) + RotL64(aCarry, 23U)) + 0x66D17AA0AA85B0EFULL;
             aOrbiterH = ((aWandererH + RotL64(aIngress, 56U)) + RotL64(aCarry, 47U)) + 0x8AFAC483AEC40548ULL;
             aOrbiterF = (aWandererG + RotL64(aCross, 41U)) + 0x8FD149DBEF364D03ULL;
             aOrbiterJ = (aWandererA + RotL64(aPrevious, 51U)) + 0xCD8709F83F2361CBULL;
             aOrbiterK = (aWandererJ + RotL64(aIngress, 3U)) + 0xC05148895A7054D8ULL;
             aOrbiterD = (aWandererB + RotL64(aScatter, 27U)) + 0x90EE84D7DD3EA4B7ULL;
-            aOrbiterE = (((aWandererE + RotL64(aCross, 47U)) + RotL64(aCarry, 3U)) + 0x3F8841FD21BE8C5CULL) + aPhaseFOrbiterAssignSaltC[(((31U - aIndex) + 15U)) & S_SALT1];
+            aOrbiterE = (((aWandererE + RotL64(aCross, 47U)) + RotL64(aCarry, 3U)) + 0x3F8841FD21BE8C5CULL) + aPhaseFOrbiterAssignSaltC[(((31U - aIndex) + 15U)) & 31];
             aOrbiterC = (aWandererD + RotL64(aIngress, 12U)) + 0x97EBD5D45EC8830AULL;
             //
             aOrbiterA = (aOrbiterA + aOrbiterI) + 0x8208E93D0D57E9DCULL;
@@ -15328,7 +15328,7 @@ void TwistExpander_Antares_Arx::Twist_F(TwistWorkSpace *pWorkSpace,
             aOrbiterH = RotL64((aOrbiterH * 0xC885CF08CBB0B231ULL), 41U);
             //
             aOrbiterF = (aOrbiterF + aOrbiterH) + 0x1D9F3A031B51EBB6ULL;
-            aOrbiterJ = ((aOrbiterJ ^ aOrbiterF) ^ 0xCB5FC2DC2203B76FULL) ^ aPhaseFOrbiterUpdateSaltB[((aIndex + 12U)) & S_SALT1];
+            aOrbiterJ = ((aOrbiterJ ^ aOrbiterF) ^ 0xCB5FC2DC2203B76FULL) ^ aPhaseFOrbiterUpdateSaltB[((aIndex + 12U)) & 31];
             aOrbiterJ = RotL64((aOrbiterJ * 0x06E27A93475E56BFULL), 13U);
             //
             aOrbiterK = (aOrbiterK + aOrbiterD) + 0x6B9A40F9EF2C4E48ULL;
@@ -15340,11 +15340,11 @@ void TwistExpander_Antares_Arx::Twist_F(TwistWorkSpace *pWorkSpace,
             aOrbiterC = RotL64((aOrbiterC * 0xDAA1C8FAA50AC4E7ULL), 47U);
             //
             aOrbiterE = (aOrbiterE + aOrbiterA) + 0xA4C0B0F9947B2C0AULL;
-            aOrbiterF = ((aOrbiterF ^ aOrbiterE) ^ 0xD35389E8F3F7D2CAULL) ^ aPhaseFOrbiterUpdateSaltA[((aIndex + 22U)) & S_SALT1];
+            aOrbiterF = ((aOrbiterF ^ aOrbiterE) ^ 0xD35389E8F3F7D2CAULL) ^ aPhaseFOrbiterUpdateSaltA[((aIndex + 22U)) & 31];
             aOrbiterF = RotL64((aOrbiterF * 0xF33647333A462FE5ULL), 19U);
             //
             aOrbiterJ = (aOrbiterJ + aOrbiterK) + 0xE96E97D0C2A83020ULL;
-            aOrbiterI = ((aOrbiterI ^ aOrbiterJ) ^ 0x56A1C5247318580BULL) ^ aPhaseFOrbiterUpdateSaltC[(((31U - aIndex) + 4U)) & S_SALT1];
+            aOrbiterI = ((aOrbiterI ^ aOrbiterJ) ^ 0x56A1C5247318580BULL) ^ aPhaseFOrbiterUpdateSaltC[(((31U - aIndex) + 4U)) & 31];
             aOrbiterI = RotL64((aOrbiterI * 0xB6F8FDC2F6B618CFULL), 57U);
             //
             aOrbiterH = (aOrbiterH + aOrbiterC) + 0x29B45DDFCE6D7C44ULL;
@@ -15355,7 +15355,7 @@ void TwistExpander_Antares_Arx::Twist_F(TwistWorkSpace *pWorkSpace,
             aOrbiterD = (aOrbiterD ^ aOrbiterC) ^ 0x2F5C67A08269414BULL;
             aOrbiterD = RotL64((aOrbiterD * 0xD132EF9EA355E58DULL), 35U);
             //
-            aOrbiterD = ((aOrbiterD + aOrbiterJ) + 0xCA1F93E0F739BF04ULL) + aPhaseFOrbiterUpdateSaltE[(((31U - aIndex) + 6U)) & S_SALT1];
+            aOrbiterD = ((aOrbiterD + aOrbiterJ) + 0xCA1F93E0F739BF04ULL) + aPhaseFOrbiterUpdateSaltE[(((31U - aIndex) + 6U)) & 31];
             aOrbiterA = (aOrbiterA ^ aOrbiterD) ^ 0x9C1AF98B0BA6E1D9ULL;
             aOrbiterA = RotL64((aOrbiterA * 0xF6AE2542729789D9ULL), 29U);
             //
@@ -15371,8 +15371,8 @@ void TwistExpander_Antares_Arx::Twist_F(TwistWorkSpace *pWorkSpace,
             aWandererG = aWandererG ^ ((RotL64(aCross, 47U) + aOrbiterD) + RotL64(aOrbiterC, 57U));
             aWandererA = aWandererA + ((RotL64(aScatter, 57U) + RotL64(aOrbiterJ, 51U)) + aOrbiterD);
             aWandererJ = aWandererJ ^ ((RotL64(aIngress, 30U) + aOrbiterI) + RotL64(aOrbiterA, 5U));
-            aWandererB = aWandererB + ((((RotL64(aScatter, 51U) + RotL64(aOrbiterJ, 35U)) + aOrbiterC) + RotL64(aCarry, 21U)) + aPhaseFWandererUpdateSaltE[((aIndex + 25U)) & S_SALT1]);
-            aWandererH = aWandererH ^ (((RotL64(aCross, 11U) + aOrbiterA) + RotL64(aOrbiterH, 39U)) + aPhaseFWandererUpdateSaltF[(((31U - aIndex) + 26U)) & S_SALT1]);
+            aWandererB = aWandererB + ((((RotL64(aScatter, 51U) + RotL64(aOrbiterJ, 35U)) + aOrbiterC) + RotL64(aCarry, 21U)) + aPhaseFWandererUpdateSaltE[((aIndex + 25U)) & 31]);
+            aWandererH = aWandererH ^ (((RotL64(aCross, 11U) + aOrbiterA) + RotL64(aOrbiterH, 39U)) + aPhaseFWandererUpdateSaltF[(((31U - aIndex) + 26U)) & 31]);
             aWandererC = aWandererC + (((RotL64(aPrevious, 5U) + aOrbiterK) + RotL64(aOrbiterI, 30U)) + RotL64(aCarry, 47U));
             aWandererI = aWandererI ^ ((RotL64(aScatter, 23U) + aOrbiterC) + RotL64(aOrbiterI, 23U));
             //
@@ -15418,8 +15418,8 @@ void TwistExpander_Antares_Arx::Twist_F(TwistWorkSpace *pWorkSpace,
             aOrbiterC = (aWandererI + RotL64(aPrevious, 11U)) + 0x7D21E63BB69B86BAULL;
             aOrbiterB = ((aWandererJ + RotL64(aScatter, 60U)) + RotL64(aCarry, 11U)) + 0x8F32CF1202910AF3ULL;
             aOrbiterI = ((aWandererG + RotL64(aIngress, 47U)) + RotL64(aCarry, 51U)) + 0xCF38D01E430E3DCBULL;
-            aOrbiterE = ((aWandererK + RotL64(aCross, 29U)) + 0x0B41912A084A5A5FULL) + aPhaseCOrbiterAssignSaltA[(((31U - aIndex) + 7U)) & S_SALT1];
-            aOrbiterA = ((aWandererD + RotL64(aScatter, 23U)) + 0x96EAB593C1340839ULL) + aPhaseCOrbiterAssignSaltC[(((31U - aIndex) + 17U)) & S_SALT1];
+            aOrbiterE = ((aWandererK + RotL64(aCross, 29U)) + 0x0B41912A084A5A5FULL) + aPhaseCOrbiterAssignSaltA[(((31U - aIndex) + 7U)) & 31];
+            aOrbiterA = ((aWandererD + RotL64(aScatter, 23U)) + 0x96EAB593C1340839ULL) + aPhaseCOrbiterAssignSaltC[(((31U - aIndex) + 17U)) & 31];
             aOrbiterH = (aWandererA + RotL64(aIngress, 51U)) + 0x6C0AAF92CA2610DEULL;
             aOrbiterF = (aWandererB + RotL64(aPrevious, 34U)) + 0x395B6FA4E32E8DCEULL;
             aOrbiterD = (aWandererE + RotL64(aScatter, 41U)) + 0x2E9F60BE18C0D063ULL;
@@ -15428,19 +15428,19 @@ void TwistExpander_Antares_Arx::Twist_F(TwistWorkSpace *pWorkSpace,
             aOrbiterB = (aOrbiterB ^ aOrbiterK) ^ 0xBC2C64444D641A1FULL;
             aOrbiterB = RotL64((aOrbiterB * 0x02F96C6DD851DAA1ULL), 53U);
             //
-            aOrbiterI = ((aOrbiterI + aOrbiterK) + 0x41145C6FA37118A8ULL) + aPhaseCOrbiterUpdateSaltB[((aIndex + 19U)) & S_SALT1];
+            aOrbiterI = ((aOrbiterI + aOrbiterK) + 0x41145C6FA37118A8ULL) + aPhaseCOrbiterUpdateSaltB[((aIndex + 19U)) & 31];
             aOrbiterE = (aOrbiterE ^ aOrbiterI) ^ 0xD213FAF7BD208109ULL;
             aOrbiterE = RotL64((aOrbiterE * 0xC045A29461855239ULL), 47U);
             //
             aOrbiterB = (aOrbiterB + aOrbiterA) + 0x14BB7489C869064CULL;
-            aOrbiterH = ((aOrbiterH ^ aOrbiterB) ^ 0x39F9E761E28532BDULL) ^ aPhaseCOrbiterUpdateSaltA[((aIndex + 18U)) & S_SALT1];
+            aOrbiterH = ((aOrbiterH ^ aOrbiterB) ^ 0x39F9E761E28532BDULL) ^ aPhaseCOrbiterUpdateSaltA[((aIndex + 18U)) & 31];
             aOrbiterH = RotL64((aOrbiterH * 0xF7AA09A36D818DDBULL), 11U);
             //
             aOrbiterF = (aOrbiterF + aOrbiterH) + 0x8776317E781C4AB5ULL;
             aOrbiterK = (aOrbiterK ^ aOrbiterF) ^ 0x74C876024135CDA5ULL;
             aOrbiterK = RotL64((aOrbiterK * 0xA7BA8F80F9D69847ULL), 57U);
             //
-            aOrbiterA = ((aOrbiterA + aOrbiterE) + 0x42F143CC5AF2E46CULL) + aPhaseCOrbiterUpdateSaltE[(((31U - aIndex) + 5U)) & S_SALT1];
+            aOrbiterA = ((aOrbiterA + aOrbiterE) + 0x42F143CC5AF2E46CULL) + aPhaseCOrbiterUpdateSaltE[(((31U - aIndex) + 5U)) & 31];
             aOrbiterD = (aOrbiterD ^ aOrbiterA) ^ 0x89DF0914D9F15E32ULL;
             aOrbiterD = RotL64((aOrbiterD * 0x85ECDEA25849F2E5ULL), 35U);
             //
@@ -15448,7 +15448,7 @@ void TwistExpander_Antares_Arx::Twist_F(TwistWorkSpace *pWorkSpace,
             aOrbiterA = (aOrbiterA ^ aOrbiterC) ^ 0x6321CE3E6EBC7EDCULL;
             aOrbiterA = RotL64((aOrbiterA * 0x5A5AE3DCC3E6AD0DULL), 27U);
             //
-            aOrbiterH = ((aOrbiterH + aOrbiterD) + 0xBBFAAC23107A80BAULL) + aPhaseCOrbiterUpdateSaltF[((aIndex + 11U)) & S_SALT1];
+            aOrbiterH = ((aOrbiterH + aOrbiterD) + 0xBBFAAC23107A80BAULL) + aPhaseCOrbiterUpdateSaltF[((aIndex + 11U)) & 31];
             aOrbiterC = (aOrbiterC ^ aOrbiterH) ^ 0xC4C79E2763DA4CA3ULL;
             aOrbiterC = RotL64((aOrbiterC * 0x4B0ECF1DDDCDC1DBULL), 43U);
             //
@@ -15467,8 +15467,8 @@ void TwistExpander_Antares_Arx::Twist_F(TwistWorkSpace *pWorkSpace,
             aIngress = aIngress + RotL64(aOrbiterI, 43U);
             aIngress = TwistMix64::DiffuseA((aIngress + aScatter));
             //
-            aWandererE = aWandererE ^ (((RotL64(aPrevious, 19U) + aOrbiterB) + RotL64(aOrbiterK, 47U)) + aPhaseCWandererUpdateSaltD[(((31U - aIndex) + 21U)) & S_SALT1]);
-            aWandererA = aWandererA + (((RotL64(aScatter, 57U) + aOrbiterI) + RotL64(aOrbiterC, 21U)) + aPhaseCWandererUpdateSaltE[(((31U - aIndex) + 13U)) & S_SALT1]);
+            aWandererE = aWandererE ^ (((RotL64(aPrevious, 19U) + aOrbiterB) + RotL64(aOrbiterK, 47U)) + aPhaseCWandererUpdateSaltD[(((31U - aIndex) + 21U)) & 31]);
+            aWandererA = aWandererA + (((RotL64(aScatter, 57U) + aOrbiterI) + RotL64(aOrbiterC, 21U)) + aPhaseCWandererUpdateSaltE[(((31U - aIndex) + 13U)) & 31]);
             aWandererK = aWandererK ^ ((RotL64(aIngress, 52U) + aOrbiterK) + RotL64(aOrbiterC, 26U));
             aWandererI = aWandererI + (((RotL64(aCross, 39U) + RotL64(aOrbiterC, 43U)) + aOrbiterB) + RotL64(aCarry, 53U));
             aWandererF = aWandererF ^ ((RotL64(aIngress, 29U) + RotL64(aOrbiterA, 53U)) + aOrbiterK);
@@ -15520,10 +15520,10 @@ void TwistExpander_Antares_Arx::Twist_F(TwistWorkSpace *pWorkSpace,
             aOrbiterF = (aWandererF + RotL64(aIngress, 53U)) + 0xCDF4EF188D464EEDULL;
             aOrbiterE = (aWandererK + RotL64(aScatter, 43U)) + 0xFDC75DE4C7AB0908ULL;
             aOrbiterJ = (aWandererB + RotL64(aPrevious, 29U)) + 0xD483A33E1521C091ULL;
-            aOrbiterG = (((aWandererJ + RotL64(aScatter, 3U)) + RotL64(aCarry, 3U)) + 0x9DD143DB7ADB62AEULL) + aPhaseDOrbiterAssignSaltC[(((31U - aIndex) + 29U)) & S_SALT1];
+            aOrbiterG = (((aWandererJ + RotL64(aScatter, 3U)) + RotL64(aCarry, 3U)) + 0x9DD143DB7ADB62AEULL) + aPhaseDOrbiterAssignSaltC[(((31U - aIndex) + 29U)) & 31];
             aOrbiterK = ((aWandererA + RotL64(aCross, 37U)) + RotL64(aCarry, 41U)) + 0x385043CC156406E6ULL;
             aOrbiterA = (aWandererE + RotL64(aIngress, 57U)) + 0x426D26B653C0965DULL;
-            aOrbiterI = ((aWandererD + RotL64(aPrevious, 24U)) + 0xED11F5ED8D257D31ULL) + aPhaseDOrbiterAssignSaltD[((aIndex + 23U)) & S_SALT1];
+            aOrbiterI = ((aWandererD + RotL64(aPrevious, 24U)) + 0xED11F5ED8D257D31ULL) + aPhaseDOrbiterAssignSaltD[((aIndex + 23U)) & 31];
             //
             aOrbiterH = (aOrbiterH + aOrbiterB) + 0xC2D066C212F064A4ULL;
             aOrbiterF = (aOrbiterF ^ aOrbiterH) ^ 0xBF55DF67C06DBBE7ULL;
@@ -15542,10 +15542,10 @@ void TwistExpander_Antares_Arx::Twist_F(TwistWorkSpace *pWorkSpace,
             aOrbiterA = RotL64((aOrbiterA * 0xCE5027E483D2466BULL), 57U);
             //
             aOrbiterA = (aOrbiterA + aOrbiterG) + 0x5DDF71E293CB9A20ULL;
-            aOrbiterH = ((aOrbiterH ^ aOrbiterA) ^ 0xB96F1115034BB548ULL) ^ aPhaseDOrbiterUpdateSaltB[(((31U - aIndex) + 27U)) & S_SALT1];
+            aOrbiterH = ((aOrbiterH ^ aOrbiterA) ^ 0xB96F1115034BB548ULL) ^ aPhaseDOrbiterUpdateSaltB[(((31U - aIndex) + 27U)) & 31];
             aOrbiterH = RotL64((aOrbiterH * 0x0DC9D58371FD9E03ULL), 43U);
             //
-            aOrbiterI = ((aOrbiterI + aOrbiterH) + 0x196B90629E764C7FULL) + aPhaseDOrbiterUpdateSaltF[(((31U - aIndex) + 7U)) & S_SALT1];
+            aOrbiterI = ((aOrbiterI + aOrbiterH) + 0x196B90629E764C7FULL) + aPhaseDOrbiterUpdateSaltF[(((31U - aIndex) + 7U)) & 31];
             aOrbiterJ = (aOrbiterJ ^ aOrbiterI) ^ 0xED93070153CC7CDCULL;
             aOrbiterJ = RotL64((aOrbiterJ * 0x1F1E27A8F48A2387ULL), 19U);
             //
@@ -15554,11 +15554,11 @@ void TwistExpander_Antares_Arx::Twist_F(TwistWorkSpace *pWorkSpace,
             aOrbiterK = RotL64((aOrbiterK * 0x3926E2F6991B8D4DULL), 39U);
             //
             aOrbiterF = (aOrbiterF + aOrbiterA) + 0xC9FD263BBC2E82EFULL;
-            aOrbiterI = ((aOrbiterI ^ aOrbiterF) ^ 0x947C159DC9425FC4ULL) ^ aPhaseDOrbiterUpdateSaltA[((aIndex + 13U)) & S_SALT1];
+            aOrbiterI = ((aOrbiterI ^ aOrbiterF) ^ 0x947C159DC9425FC4ULL) ^ aPhaseDOrbiterUpdateSaltA[((aIndex + 13U)) & 31];
             aOrbiterI = RotL64((aOrbiterI * 0x533C3BCEFBB72BCFULL), 13U);
             //
             aOrbiterK = (aOrbiterK + aOrbiterI) + 0xBB1A9BB9F2435509ULL;
-            aOrbiterE = ((aOrbiterE ^ aOrbiterK) ^ 0x99EA917CA2B48543ULL) ^ aPhaseDOrbiterUpdateSaltC[(((31U - aIndex) + 18U)) & S_SALT1];
+            aOrbiterE = ((aOrbiterE ^ aOrbiterK) ^ 0x99EA917CA2B48543ULL) ^ aPhaseDOrbiterUpdateSaltC[(((31U - aIndex) + 18U)) & 31];
             aOrbiterE = RotL64((aOrbiterE * 0x27A7CA5B799286B7ULL), 23U);
             //
             aIngress = RotL64(aOrbiterA, 35U) ^ aOrbiterB;
@@ -15571,11 +15571,11 @@ void TwistExpander_Antares_Arx::Twist_F(TwistWorkSpace *pWorkSpace,
             aWandererC = aWandererC ^ ((RotL64(aPrevious, 37U) + RotL64(aOrbiterH, 14U)) + aOrbiterG);
             aWandererK = aWandererK + (((RotL64(aScatter, 12U) + aOrbiterF) + RotL64(aOrbiterI, 23U)) + RotL64(aCarry, 13U));
             aWandererA = aWandererA ^ ((RotL64(aIngress, 47U) + aOrbiterE) + RotL64(aOrbiterK, 35U));
-            aWandererJ = aWandererJ + (((RotL64(aCross, 43U) + RotL64(aOrbiterE, 41U)) + aOrbiterG) + aPhaseDWandererUpdateSaltD[(((31U - aIndex) + 4U)) & S_SALT1]);
+            aWandererJ = aWandererJ + (((RotL64(aCross, 43U) + RotL64(aOrbiterE, 41U)) + aOrbiterG) + aPhaseDWandererUpdateSaltD[(((31U - aIndex) + 4U)) & 31]);
             aWandererF = aWandererF ^ ((RotL64(aScatter, 3U) + RotL64(aOrbiterA, 47U)) + aOrbiterI);
             aWandererD = aWandererD + (((RotL64(aCross, 29U) + RotL64(aOrbiterB, 30U)) + aOrbiterK) + RotL64(aCarry, 51U));
             aWandererG = aWandererG ^ ((RotL64(aPrevious, 58U) + aOrbiterF) + RotL64(aOrbiterH, 5U));
-            aWandererB = aWandererB + (((RotL64(aIngress, 53U) + aOrbiterE) + RotL64(aOrbiterJ, 57U)) + aPhaseDWandererUpdateSaltE[((aIndex + 10U)) & S_SALT1]);
+            aWandererB = aWandererB + (((RotL64(aIngress, 53U) + aOrbiterE) + RotL64(aOrbiterJ, 57U)) + aPhaseDWandererUpdateSaltE[((aIndex + 10U)) & 31]);
             aWandererE = aWandererE ^ ((RotL64(aScatter, 19U) + RotL64(aOrbiterB, 19U)) + aOrbiterJ);
             //
             aCarry = aCarry + (aWandererA ^ RotL64(aWandererC, 47U));
@@ -15617,24 +15617,24 @@ void TwistExpander_Antares_Arx::Twist_F(TwistWorkSpace *pWorkSpace,
             aScatter = TwistMix64::DiffuseB(aScatter);
             //
             aOrbiterJ = (aWandererJ + RotL64(aPrevious, 13U)) + 0x9E0D3A8540C5ACD6ULL;
-            aOrbiterB = ((aWandererF + RotL64(aScatter, 47U)) + 0xFC70443DE9B2B2BAULL) + aPhaseCOrbiterAssignSaltB[((aIndex + 23U)) & S_SALT1];
+            aOrbiterB = ((aWandererF + RotL64(aScatter, 47U)) + 0xFC70443DE9B2B2BAULL) + aPhaseCOrbiterAssignSaltB[((aIndex + 23U)) & 31];
             aOrbiterH = ((aWandererE + RotL64(aCross, 37U)) + RotL64(aCarry, 19U)) + 0x4953F46D6425C355ULL;
             aOrbiterE = ((aWandererB + RotL64(aIngress, 60U)) + RotL64(aCarry, 43U)) + 0x4C21E48BBD4E78ECULL;
-            aOrbiterA = ((aWandererD + RotL64(aPrevious, 19U)) + 0x359CEDE68E0A0264ULL) + aPhaseCOrbiterAssignSaltA[((aIndex + 8U)) & S_SALT1];
+            aOrbiterA = ((aWandererD + RotL64(aPrevious, 19U)) + 0x359CEDE68E0A0264ULL) + aPhaseCOrbiterAssignSaltA[((aIndex + 8U)) & 31];
             aOrbiterI = ((aWandererK + RotL64(aScatter, 43U)) + RotL64(aCarry, 57U)) + 0x9C6DB6497907A98EULL;
             aOrbiterK = (aWandererC + RotL64(aIngress, 3U)) + 0x834C736646B0F08FULL;
             aOrbiterC = (aWandererA + RotL64(aCross, 28U)) + 0xDCC908789914D246ULL;
             aOrbiterF = (aWandererG + RotL64(aIngress, 23U)) + 0x992FD4465C82C1ECULL;
             //
             aOrbiterJ = (aOrbiterJ + aOrbiterB) + 0xC789AA845B40E124ULL;
-            aOrbiterH = ((aOrbiterH ^ aOrbiterJ) ^ 0xCDEE3CA3828726DEULL) ^ aPhaseCOrbiterUpdateSaltA[((aIndex + 13U)) & S_SALT1];
+            aOrbiterH = ((aOrbiterH ^ aOrbiterJ) ^ 0xCDEE3CA3828726DEULL) ^ aPhaseCOrbiterUpdateSaltA[((aIndex + 13U)) & 31];
             aOrbiterH = RotL64((aOrbiterH * 0x8A48E8682E61A90FULL), 19U);
             //
             aOrbiterB = (aOrbiterB + aOrbiterE) + 0x7B21BDFD23A32F5FULL;
-            aOrbiterA = ((aOrbiterA ^ aOrbiterB) ^ 0xAB2DF7A06693CA90ULL) ^ aPhaseCOrbiterUpdateSaltF[((aIndex + 21U)) & S_SALT1];
+            aOrbiterA = ((aOrbiterA ^ aOrbiterB) ^ 0xAB2DF7A06693CA90ULL) ^ aPhaseCOrbiterUpdateSaltF[((aIndex + 21U)) & 31];
             aOrbiterA = RotL64((aOrbiterA * 0x4A90F5C52A8DFA35ULL), 11U);
             //
-            aOrbiterI = ((aOrbiterI + aOrbiterK) + 0x78CB58C0747037E2ULL) + aPhaseCOrbiterUpdateSaltC[(((31U - aIndex) + 15U)) & S_SALT1];
+            aOrbiterI = ((aOrbiterI + aOrbiterK) + 0x78CB58C0747037E2ULL) + aPhaseCOrbiterUpdateSaltC[(((31U - aIndex) + 15U)) & 31];
             aOrbiterJ = (aOrbiterJ ^ aOrbiterI) ^ 0xAEEE4B73B6F890AFULL;
             aOrbiterJ = RotL64((aOrbiterJ * 0x12D81C2DF0ECC92DULL), 51U);
             //
@@ -15646,7 +15646,7 @@ void TwistExpander_Antares_Arx::Twist_F(TwistWorkSpace *pWorkSpace,
             aOrbiterK = (aOrbiterK ^ aOrbiterA) ^ 0xEE98EFB55D0B4766ULL;
             aOrbiterK = RotL64((aOrbiterK * 0x936BE389150348C7ULL), 37U);
             //
-            aOrbiterF = ((aOrbiterF + aOrbiterJ) + 0xFB3768C3C823E99DULL) + aPhaseCOrbiterUpdateSaltB[((aIndex + 6U)) & S_SALT1];
+            aOrbiterF = ((aOrbiterF + aOrbiterJ) + 0xFB3768C3C823E99DULL) + aPhaseCOrbiterUpdateSaltB[((aIndex + 6U)) & 31];
             aOrbiterE = (aOrbiterE ^ aOrbiterF) ^ 0x2A109791AEA66E95ULL;
             aOrbiterE = RotL64((aOrbiterE * 0xACBC65546F815955ULL), 57U);
             //
@@ -15673,8 +15673,8 @@ void TwistExpander_Antares_Arx::Twist_F(TwistWorkSpace *pWorkSpace,
             aWandererJ = aWandererJ ^ ((RotL64(aScatter, 43U) + aOrbiterE) + RotL64(aOrbiterH, 19U));
             aWandererG = aWandererG + ((RotL64(aIngress, 27U) + aOrbiterK) + RotL64(aOrbiterA, 57U));
             aWandererC = aWandererC ^ ((RotL64(aCross, 39U) + aOrbiterC) + RotL64(aOrbiterF, 23U));
-            aWandererB = aWandererB + (((RotL64(aPrevious, 13U) + aOrbiterK) + RotL64(aOrbiterF, 51U)) + aPhaseCWandererUpdateSaltC[((aIndex + 27U)) & S_SALT1]);
-            aWandererD = aWandererD ^ (((RotL64(aCross, 3U) + RotL64(aOrbiterK, 47U)) + aOrbiterI) + aPhaseCWandererUpdateSaltF[(((31U - aIndex) + 9U)) & S_SALT1]);
+            aWandererB = aWandererB + (((RotL64(aPrevious, 13U) + aOrbiterK) + RotL64(aOrbiterF, 51U)) + aPhaseCWandererUpdateSaltC[((aIndex + 27U)) & 31]);
+            aWandererD = aWandererD ^ (((RotL64(aCross, 3U) + RotL64(aOrbiterK, 47U)) + aOrbiterI) + aPhaseCWandererUpdateSaltF[(((31U - aIndex) + 9U)) & 31]);
             aWandererA = aWandererA + (((RotL64(aIngress, 19U) + RotL64(aOrbiterH, 29U)) + aOrbiterI) + RotL64(aCarry, 5U));
             aWandererF = aWandererF ^ ((RotL64(aScatter, 58U) + aOrbiterJ) + RotL64(aOrbiterE, 11U));
             aWandererE = aWandererE + ((RotL64(aIngress, 35U) + RotL64(aOrbiterB, 4U)) + aOrbiterF);
@@ -15717,9 +15717,9 @@ void TwistExpander_Antares_Arx::Twist_F(TwistWorkSpace *pWorkSpace,
             aScatter = (RotL64(aPrevious, 3U) + RotL64(aCross, 21U)) ^ (RotL64(aCarry, 54U) ^ RotL64(aIngress, 41U));
             aScatter = TwistMix64::DiffuseA(aScatter);
             //
-            aOrbiterK = ((aWandererD + RotL64(aPrevious, 23U)) + 0x1B3A2F5789B35B4CULL) + aPhaseEOrbiterAssignSaltC[((aIndex + 13U)) & S_SALT1];
+            aOrbiterK = ((aWandererD + RotL64(aPrevious, 23U)) + 0x1B3A2F5789B35B4CULL) + aPhaseEOrbiterAssignSaltC[((aIndex + 13U)) & 31];
             aOrbiterA = (aWandererB + RotL64(aScatter, 10U)) + 0xDB0C0419508422F1ULL;
-            aOrbiterE = ((aWandererH + RotL64(aCross, 19U)) + 0x789415398F7B2254ULL) + aPhaseEOrbiterAssignSaltD[((aIndex + 21U)) & S_SALT1];
+            aOrbiterE = ((aWandererH + RotL64(aCross, 19U)) + 0x789415398F7B2254ULL) + aPhaseEOrbiterAssignSaltD[((aIndex + 21U)) & 31];
             aOrbiterC = ((aWandererI + RotL64(aIngress, 3U)) + RotL64(aCarry, 39U)) + 0x7A408C9E36726B9AULL;
             aOrbiterH = (aWandererA + RotL64(aScatter, 57U)) + 0x385F5B8197E3E044ULL;
             aOrbiterF = ((aWandererC + RotL64(aPrevious, 37U)) + RotL64(aCarry, 27U)) + 0xFE7B069E0F3179C2ULL;
@@ -15743,7 +15743,7 @@ void TwistExpander_Antares_Arx::Twist_F(TwistWorkSpace *pWorkSpace,
             aOrbiterG = (aOrbiterG ^ aOrbiterH) ^ 0xEFB2D105589C44E5ULL;
             aOrbiterG = RotL64((aOrbiterG * 0xFB9792EEA67BA44DULL), 19U);
             //
-            aOrbiterB = ((aOrbiterB + aOrbiterG) + 0xC9587D6281453234ULL) + aPhaseEOrbiterUpdateSaltE[((aIndex + 4U)) & S_SALT1];
+            aOrbiterB = ((aOrbiterB + aOrbiterG) + 0xC9587D6281453234ULL) + aPhaseEOrbiterUpdateSaltE[((aIndex + 4U)) & 31];
             aOrbiterK = (aOrbiterK ^ aOrbiterB) ^ 0x7DF9AEBEEAB7D4EEULL;
             aOrbiterK = RotL64((aOrbiterK * 0xDEF2A9FABD8D17C3ULL), 11U);
             //
@@ -15755,11 +15755,11 @@ void TwistExpander_Antares_Arx::Twist_F(TwistWorkSpace *pWorkSpace,
             aOrbiterF = (aOrbiterF ^ aOrbiterE) ^ 0x7778A194186E4A93ULL;
             aOrbiterF = RotL64((aOrbiterF * 0x523EB1B72E1F916FULL), 51U);
             //
-            aOrbiterG = ((aOrbiterG + aOrbiterF) + 0x74EB71D5C5622D96ULL) + aPhaseEOrbiterUpdateSaltC[((aIndex + 9U)) & S_SALT1];
-            aOrbiterA = ((aOrbiterA ^ aOrbiterG) ^ 0x5D16F82E69A19424ULL) ^ aPhaseEOrbiterUpdateSaltA[((aIndex + 29U)) & S_SALT1];
+            aOrbiterG = ((aOrbiterG + aOrbiterF) + 0x74EB71D5C5622D96ULL) + aPhaseEOrbiterUpdateSaltC[((aIndex + 9U)) & 31];
+            aOrbiterA = ((aOrbiterA ^ aOrbiterG) ^ 0x5D16F82E69A19424ULL) ^ aPhaseEOrbiterUpdateSaltA[((aIndex + 29U)) & 31];
             aOrbiterA = RotL64((aOrbiterA * 0x1B474F0DBB8C7E19ULL), 39U);
             //
-            aOrbiterI = ((aOrbiterI + aOrbiterH) + 0x144C31A23E827C4EULL) + aPhaseEOrbiterUpdateSaltB[(((31U - aIndex) + 8U)) & S_SALT1];
+            aOrbiterI = ((aOrbiterI + aOrbiterH) + 0x144C31A23E827C4EULL) + aPhaseEOrbiterUpdateSaltB[(((31U - aIndex) + 8U)) & 31];
             aOrbiterB = (aOrbiterB ^ aOrbiterI) ^ 0xDBD7EB72E5DAB6BDULL;
             aOrbiterB = RotL64((aOrbiterB * 0x431FA860A78DFDE9ULL), 35U);
             //
@@ -15771,9 +15771,9 @@ void TwistExpander_Antares_Arx::Twist_F(TwistWorkSpace *pWorkSpace,
             aIngress = TwistMix64::DiffuseB((aIngress + aScatter));
             //
             aWandererI = aWandererI + ((RotL64(aScatter, 51U) + RotL64(aOrbiterA, 47U)) + aOrbiterF);
-            aWandererE = aWandererE ^ (((RotL64(aPrevious, 30U) + RotL64(aOrbiterE, 10U)) + aOrbiterK) + aPhaseEWandererUpdateSaltB[(((31U - aIndex) + 14U)) & S_SALT1]);
+            aWandererE = aWandererE ^ (((RotL64(aPrevious, 30U) + RotL64(aOrbiterE, 10U)) + aOrbiterK) + aPhaseEWandererUpdateSaltB[(((31U - aIndex) + 14U)) & 31]);
             aWandererF = aWandererF + (((RotL64(aCross, 47U) + aOrbiterG) + RotL64(aOrbiterA, 39U)) + RotL64(aCarry, 27U));
-            aWandererA = aWandererA ^ (((RotL64(aIngress, 43U) + aOrbiterI) + RotL64(aOrbiterH, 21U)) + aPhaseEWandererUpdateSaltC[((aIndex + 18U)) & S_SALT1]);
+            aWandererA = aWandererA ^ (((RotL64(aIngress, 43U) + aOrbiterI) + RotL64(aOrbiterH, 21U)) + aPhaseEWandererUpdateSaltC[((aIndex + 18U)) & 31]);
             aWandererG = aWandererG + ((RotL64(aCross, 57U) + aOrbiterH) + RotL64(aOrbiterC, 53U));
             aWandererB = aWandererB ^ ((RotL64(aScatter, 13U) + aOrbiterC) + RotL64(aOrbiterG, 3U));
             aWandererH = aWandererH + (((RotL64(aIngress, 26U) + aOrbiterC) + RotL64(aOrbiterK, 35U)) + RotL64(aCarry, 51U));
@@ -15819,16 +15819,16 @@ void TwistExpander_Antares_Arx::Twist_F(TwistWorkSpace *pWorkSpace,
             aScatter = TwistMix64::DiffuseC(aScatter);
             //
             aOrbiterA = ((aWandererJ + RotL64(aCross, 11U)) + RotL64(aCarry, 11U)) + 0xAA30309F7F45A98BULL;
-            aOrbiterG = ((aWandererI + RotL64(aIngress, 23U)) + 0x14390A23F71C1A4FULL) + aPhaseFOrbiterAssignSaltB[(((31U - aIndex) + 26U)) & S_SALT1];
+            aOrbiterG = ((aWandererI + RotL64(aIngress, 23U)) + 0x14390A23F71C1A4FULL) + aPhaseFOrbiterAssignSaltB[(((31U - aIndex) + 26U)) & 31];
             aOrbiterI = (aWandererF + RotL64(aScatter, 4U)) + 0xE90B5556F5B19655ULL;
-            aOrbiterJ = ((aWandererE + RotL64(aPrevious, 35U)) + 0x46E5893205AD94F4ULL) + aPhaseFOrbiterAssignSaltC[((aIndex + 22U)) & S_SALT1];
+            aOrbiterJ = ((aWandererE + RotL64(aPrevious, 35U)) + 0x46E5893205AD94F4ULL) + aPhaseFOrbiterAssignSaltC[((aIndex + 22U)) & 31];
             aOrbiterB = ((aWandererA + RotL64(aIngress, 19U)) + RotL64(aCarry, 37U)) + 0x6E41FA83AE360463ULL;
             aOrbiterH = ((aWandererH + RotL64(aPrevious, 47U)) + RotL64(aCarry, 19U)) + 0x258AFB9339F16076ULL;
             aOrbiterD = (aWandererC + RotL64(aCross, 30U)) + 0xD759253E0DC7075FULL;
             aOrbiterE = (aWandererB + RotL64(aScatter, 57U)) + 0x25557866A26425E9ULL;
             aOrbiterK = (aWandererD + RotL64(aIngress, 41U)) + 0x8FC8F1141C2050E1ULL;
             //
-            aOrbiterA = ((aOrbiterA + aOrbiterG) + 0x7E7CD5809FB241DCULL) + aPhaseFOrbiterUpdateSaltF[((aIndex + 29U)) & S_SALT1];
+            aOrbiterA = ((aOrbiterA + aOrbiterG) + 0x7E7CD5809FB241DCULL) + aPhaseFOrbiterUpdateSaltF[((aIndex + 29U)) & 31];
             aOrbiterI = (aOrbiterI ^ aOrbiterA) ^ 0x7BF94DE6B7BB6312ULL;
             aOrbiterI = RotL64((aOrbiterI * 0x1A4D82543E9F7F17ULL), 23U);
             //
@@ -15844,7 +15844,7 @@ void TwistExpander_Antares_Arx::Twist_F(TwistWorkSpace *pWorkSpace,
             aOrbiterE = (aOrbiterE ^ aOrbiterG) ^ 0x67CDE5A52919B889ULL;
             aOrbiterE = RotL64((aOrbiterE * 0x03A7F1904511893FULL), 57U);
             //
-            aOrbiterD = ((aOrbiterD + aOrbiterA) + 0x5AC95540593B570CULL) + aPhaseFOrbiterUpdateSaltB[((aIndex + 9U)) & S_SALT1];
+            aOrbiterD = ((aOrbiterD + aOrbiterA) + 0x5AC95540593B570CULL) + aPhaseFOrbiterUpdateSaltB[((aIndex + 9U)) & 31];
             aOrbiterK = (aOrbiterK ^ aOrbiterD) ^ 0x7B73D687704083A6ULL;
             aOrbiterK = RotL64((aOrbiterK * 0xDA523D113E5A98B7ULL), 51U);
             //
@@ -15852,11 +15852,11 @@ void TwistExpander_Antares_Arx::Twist_F(TwistWorkSpace *pWorkSpace,
             aOrbiterJ = (aOrbiterJ ^ aOrbiterI) ^ 0x3C5C0BB944B8F791ULL;
             aOrbiterJ = RotL64((aOrbiterJ * 0x82A95923F50E0C63ULL), 19U);
             //
-            aOrbiterK = ((aOrbiterK + aOrbiterI) + 0xD4F414277911485AULL) + aPhaseFOrbiterUpdateSaltD[((aIndex + 11U)) & S_SALT1];
+            aOrbiterK = ((aOrbiterK + aOrbiterI) + 0xD4F414277911485AULL) + aPhaseFOrbiterUpdateSaltD[((aIndex + 11U)) & 31];
             aOrbiterH = (aOrbiterH ^ aOrbiterK) ^ 0x279AEC5E5B14D275ULL;
             aOrbiterH = RotL64((aOrbiterH * 0xC59EFDE39F78B779ULL), 35U);
             //
-            aOrbiterE = ((aOrbiterE + aOrbiterK) + 0x58CA8ED1D16F587BULL) + aPhaseFOrbiterUpdateSaltA[(((31U - aIndex) + 5U)) & S_SALT1];
+            aOrbiterE = ((aOrbiterE + aOrbiterK) + 0x58CA8ED1D16F587BULL) + aPhaseFOrbiterUpdateSaltA[(((31U - aIndex) + 5U)) & 31];
             aOrbiterB = (aOrbiterB ^ aOrbiterE) ^ 0xCBB7C8526995A9FCULL;
             aOrbiterB = RotL64((aOrbiterB * 0xE7E305A26F8D2677ULL), 29U);
             //
@@ -15876,8 +15876,8 @@ void TwistExpander_Antares_Arx::Twist_F(TwistWorkSpace *pWorkSpace,
             aWandererC = aWandererC + ((RotL64(aPrevious, 37U) + RotL64(aOrbiterJ, 43U)) + aOrbiterA);
             aWandererB = aWandererB ^ ((RotL64(aCross, 56U) + aOrbiterK) + RotL64(aOrbiterG, 56U));
             aWandererA = aWandererA + (((RotL64(aScatter, 47U) + RotL64(aOrbiterI, 29U)) + aOrbiterA) + RotL64(aCarry, 11U));
-            aWandererD = aWandererD ^ (((RotL64(aPrevious, 51U) + aOrbiterB) + RotL64(aOrbiterD, 3U)) + aPhaseFWandererUpdateSaltC[((aIndex + 17U)) & S_SALT1]);
-            aWandererE = aWandererE + ((((RotL64(aCross, 43U) + RotL64(aOrbiterA, 39U)) + aOrbiterH) + RotL64(aCarry, 39U)) + aPhaseFWandererUpdateSaltD[((aIndex + 16U)) & S_SALT1]);
+            aWandererD = aWandererD ^ (((RotL64(aPrevious, 51U) + aOrbiterB) + RotL64(aOrbiterD, 3U)) + aPhaseFWandererUpdateSaltC[((aIndex + 17U)) & 31]);
+            aWandererE = aWandererE + ((((RotL64(aCross, 43U) + RotL64(aOrbiterA, 39U)) + aOrbiterH) + RotL64(aCarry, 39U)) + aPhaseFWandererUpdateSaltD[((aIndex + 16U)) & 31]);
             aWandererI = aWandererI ^ ((RotL64(aIngress, 21U) + RotL64(aOrbiterD, 12U)) + aOrbiterG);
             aWandererH = aWandererH + ((RotL64(aCross, 4U) + RotL64(aOrbiterE, 51U)) + aOrbiterI);
             //
@@ -16041,12 +16041,12 @@ void TwistExpander_Antares_Arx::Twist_G(TwistWorkSpace *pWorkSpace,
             aOrbiterD = (aWandererF + RotL64(aPrevious, 19U)) + 0x8567C6710BA04792ULL;
             aOrbiterC = (aWandererE + RotL64(aIngress, 51U)) + 0x841ACE5EDC234BC0ULL;
             aOrbiterH = (aWandererH + RotL64(aPrevious, 43U)) + 0x20E97EBB0C2B5392ULL;
-            aOrbiterB = (((aWandererD + RotL64(aCross, 57U)) + RotL64(aCarry, 29U)) + 0x390B2DC25C9E0F78ULL) + aPhaseEOrbiterAssignSaltD[((aIndex + 11U)) & S_SALT1];
+            aOrbiterB = (((aWandererD + RotL64(aCross, 57U)) + RotL64(aCarry, 29U)) + 0x390B2DC25C9E0F78ULL) + aPhaseEOrbiterAssignSaltD[((aIndex + 11U)) & 31];
             aOrbiterK = (aWandererG + RotL64(aIngress, 24U)) + 0xBDDB79073549C7EDULL;
             aOrbiterI = (aWandererI + RotL64(aScatter, 35U)) + 0x42F9F192693216BAULL;
-            aOrbiterA = (((aWandererK + RotL64(aIngress, 5U)) + RotL64(aCarry, 43U)) + 0x5192D1D71DA387D2ULL) + aPhaseEOrbiterAssignSaltC[((aIndex + 6U)) & S_SALT1];
+            aOrbiterA = (((aWandererK + RotL64(aIngress, 5U)) + RotL64(aCarry, 43U)) + 0x5192D1D71DA387D2ULL) + aPhaseEOrbiterAssignSaltC[((aIndex + 6U)) & 31];
             //
-            aOrbiterJ = ((aOrbiterJ + aOrbiterG) + 0x8AABFA68EDBE3CBFULL) + aPhaseEOrbiterUpdateSaltF[((aIndex + 19U)) & S_SALT1];
+            aOrbiterJ = ((aOrbiterJ + aOrbiterG) + 0x8AABFA68EDBE3CBFULL) + aPhaseEOrbiterUpdateSaltF[((aIndex + 19U)) & 31];
             aOrbiterD = (aOrbiterD ^ aOrbiterJ) ^ 0x09FDCB820896E268ULL;
             aOrbiterD = RotL64((aOrbiterD * 0x02483D8A91C8E4D7ULL), 57U);
             //
@@ -16058,7 +16058,7 @@ void TwistExpander_Antares_Arx::Twist_G(TwistWorkSpace *pWorkSpace,
             aOrbiterH = (aOrbiterH ^ aOrbiterK) ^ 0x76A9718FA02E14CBULL;
             aOrbiterH = RotL64((aOrbiterH * 0xF6391D7ACF1D59E9ULL), 43U);
             //
-            aOrbiterI = ((aOrbiterI + aOrbiterD) + 0x464441071CC9635AULL) + aPhaseEOrbiterUpdateSaltE[(((31U - aIndex) + 25U)) & S_SALT1];
+            aOrbiterI = ((aOrbiterI + aOrbiterD) + 0x464441071CC9635AULL) + aPhaseEOrbiterUpdateSaltE[(((31U - aIndex) + 25U)) & 31];
             aOrbiterA = (aOrbiterA ^ aOrbiterI) ^ 0xD80E09509FCFCE4CULL;
             aOrbiterA = RotL64((aOrbiterA * 0x03ABF48CB6A5E1FDULL), 21U);
             //
@@ -16066,7 +16066,7 @@ void TwistExpander_Antares_Arx::Twist_G(TwistWorkSpace *pWorkSpace,
             aOrbiterI = (aOrbiterI ^ aOrbiterB) ^ 0xCE9EDF122B84CC75ULL;
             aOrbiterI = RotL64((aOrbiterI * 0x581CEF367A2F716DULL), 35U);
             //
-            aOrbiterG = ((aOrbiterG + aOrbiterB) + 0xBF3A1AB5BB107BAAULL) + aPhaseEOrbiterUpdateSaltC[(((31U - aIndex) + 21U)) & S_SALT1];
+            aOrbiterG = ((aOrbiterG + aOrbiterB) + 0xBF3A1AB5BB107BAAULL) + aPhaseEOrbiterUpdateSaltC[(((31U - aIndex) + 21U)) & 31];
             aOrbiterK = (aOrbiterK ^ aOrbiterG) ^ 0x358446F155810CCCULL;
             aOrbiterK = RotL64((aOrbiterK * 0x792D26F868A0CDADULL), 39U);
             //
@@ -16075,7 +16075,7 @@ void TwistExpander_Antares_Arx::Twist_G(TwistWorkSpace *pWorkSpace,
             aOrbiterG = RotL64((aOrbiterG * 0xEDCC74F824142091ULL), 13U);
             //
             aOrbiterD = (aOrbiterD + aOrbiterK) + 0x43DD53EC19F8D067ULL;
-            aOrbiterC = ((aOrbiterC ^ aOrbiterD) ^ 0xCD2A3B7A6E3B8B67ULL) ^ aPhaseEOrbiterUpdateSaltA[((aIndex + 17U)) & S_SALT1];
+            aOrbiterC = ((aOrbiterC ^ aOrbiterD) ^ 0xCD2A3B7A6E3B8B67ULL) ^ aPhaseEOrbiterUpdateSaltA[((aIndex + 17U)) & 31];
             aOrbiterC = RotL64((aOrbiterC * 0x7215B892BD67C6FBULL), 53U);
             //
             aOrbiterH = (aOrbiterH + aOrbiterA) + 0x340CF9BC1708BDE9ULL;
@@ -16089,9 +16089,9 @@ void TwistExpander_Antares_Arx::Twist_G(TwistWorkSpace *pWorkSpace,
             aIngress = aIngress + RotL64(aOrbiterA, 48U);
             aIngress = TwistMix64::DiffuseC((aIngress + aScatter));
             //
-            aWandererE = aWandererE ^ (((RotL64(aPrevious, 3U) + aOrbiterJ) + RotL64(aOrbiterH, 51U)) + aPhaseEWandererUpdateSaltE[(((31U - aIndex) + 5U)) & S_SALT1]);
+            aWandererE = aWandererE ^ (((RotL64(aPrevious, 3U) + aOrbiterJ) + RotL64(aOrbiterH, 51U)) + aPhaseEWandererUpdateSaltE[(((31U - aIndex) + 5U)) & 31]);
             aWandererD = aWandererD + (((RotL64(aIngress, 28U) + aOrbiterK) + RotL64(aOrbiterG, 11U)) + RotL64(aCarry, 47U));
-            aWandererB = aWandererB ^ (((RotL64(aCross, 57U) + aOrbiterA) + RotL64(aOrbiterC, 60U)) + aPhaseEWandererUpdateSaltF[(((31U - aIndex) + 10U)) & S_SALT1]);
+            aWandererB = aWandererB ^ (((RotL64(aCross, 57U) + aOrbiterA) + RotL64(aOrbiterC, 60U)) + aPhaseEWandererUpdateSaltF[(((31U - aIndex) + 10U)) & 31]);
             aWandererF = aWandererF + ((RotL64(aScatter, 13U) + RotL64(aOrbiterG, 29U)) + aOrbiterB);
             aWandererI = aWandererI ^ ((RotL64(aCross, 35U) + aOrbiterG) + RotL64(aOrbiterJ, 47U));
             aWandererG = aWandererG + ((RotL64(aIngress, 41U) + RotL64(aOrbiterD, 37U)) + aOrbiterI);
@@ -16141,18 +16141,18 @@ void TwistExpander_Antares_Arx::Twist_G(TwistWorkSpace *pWorkSpace,
             aOrbiterF = (aWandererB + RotL64(aScatter, 10U)) + 0x614E9F9261EF44C6ULL;
             aOrbiterD = (aWandererJ + RotL64(aPrevious, 57U)) + 0x706D31C11A661EBBULL;
             aOrbiterG = (aWandererH + RotL64(aCross, 35U)) + 0x3A0A8DEE4D2F40BEULL;
-            aOrbiterK = (((aWandererC + RotL64(aIngress, 51U)) + RotL64(aCarry, 29U)) + 0xCF9639FCC6DB03B0ULL) + aPhaseFOrbiterAssignSaltB[((aIndex + 23U)) & S_SALT1];
-            aOrbiterA = (((aWandererA + RotL64(aCross, 39U)) + RotL64(aCarry, 51U)) + 0x68EF4B879977B1ECULL) + aPhaseFOrbiterAssignSaltF[((aIndex + 26U)) & S_SALT1];
+            aOrbiterK = (((aWandererC + RotL64(aIngress, 51U)) + RotL64(aCarry, 29U)) + 0xCF9639FCC6DB03B0ULL) + aPhaseFOrbiterAssignSaltB[((aIndex + 23U)) & 31];
+            aOrbiterA = (((aWandererA + RotL64(aCross, 39U)) + RotL64(aCarry, 51U)) + 0x68EF4B879977B1ECULL) + aPhaseFOrbiterAssignSaltF[((aIndex + 26U)) & 31];
             aOrbiterE = ((aWandererG + RotL64(aPrevious, 19U)) + RotL64(aCarry, 19U)) + 0xD7D9B2F986E98851ULL;
             aOrbiterI = (aWandererK + RotL64(aScatter, 47U)) + 0x27383511EB47171EULL;
             aOrbiterH = (aWandererF + RotL64(aCross, 26U)) + 0x3C66E5256C347D89ULL;
             //
             aOrbiterC = (aOrbiterC + aOrbiterF) + 0xDEECFEB463A4549FULL;
-            aOrbiterD = ((aOrbiterD ^ aOrbiterC) ^ 0xFD45942F62E125F4ULL) ^ aPhaseFOrbiterUpdateSaltB[(((31U - aIndex) + 9U)) & S_SALT1];
+            aOrbiterD = ((aOrbiterD ^ aOrbiterC) ^ 0xFD45942F62E125F4ULL) ^ aPhaseFOrbiterUpdateSaltB[(((31U - aIndex) + 9U)) & 31];
             aOrbiterD = RotL64((aOrbiterD * 0x4E405C1CFCDA0F43ULL), 5U);
             //
             aOrbiterF = (aOrbiterF + aOrbiterG) + 0x32C928F2995E9DB2ULL;
-            aOrbiterK = ((aOrbiterK ^ aOrbiterF) ^ 0x2F0E22D49808090EULL) ^ aPhaseFOrbiterUpdateSaltD[((aIndex + 24U)) & S_SALT1];
+            aOrbiterK = ((aOrbiterK ^ aOrbiterF) ^ 0x2F0E22D49808090EULL) ^ aPhaseFOrbiterUpdateSaltD[((aIndex + 24U)) & 31];
             aOrbiterK = RotL64((aOrbiterK * 0xA9703A39D7E90911ULL), 13U);
             //
             aOrbiterA = (aOrbiterA + aOrbiterD) + 0x6030C2FD72FCC2D4ULL;
@@ -16163,8 +16163,8 @@ void TwistExpander_Antares_Arx::Twist_G(TwistWorkSpace *pWorkSpace,
             aOrbiterI = (aOrbiterI ^ aOrbiterD) ^ 0x8316FCFA2EEA3E50ULL;
             aOrbiterI = RotL64((aOrbiterI * 0xD834C3B6858D1615ULL), 41U);
             //
-            aOrbiterK = ((aOrbiterK + aOrbiterA) + 0x5A1DF3367AB84EA0ULL) + aPhaseFOrbiterUpdateSaltC[(((31U - aIndex) + 12U)) & S_SALT1];
-            aOrbiterH = ((aOrbiterH ^ aOrbiterK) ^ 0x7B885B794885ED63ULL) ^ aPhaseFOrbiterUpdateSaltE[(((31U - aIndex) + 10U)) & S_SALT1];
+            aOrbiterK = ((aOrbiterK + aOrbiterA) + 0x5A1DF3367AB84EA0ULL) + aPhaseFOrbiterUpdateSaltC[(((31U - aIndex) + 12U)) & 31];
+            aOrbiterH = ((aOrbiterH ^ aOrbiterK) ^ 0x7B885B794885ED63ULL) ^ aPhaseFOrbiterUpdateSaltE[(((31U - aIndex) + 10U)) & 31];
             aOrbiterH = RotL64((aOrbiterH * 0xE74B8A0DF387ED27ULL), 57U);
             //
             aOrbiterI = (aOrbiterI + aOrbiterH) + 0xE1318C786C8BD951ULL;
@@ -16190,13 +16190,13 @@ void TwistExpander_Antares_Arx::Twist_G(TwistWorkSpace *pWorkSpace,
             aIngress = aIngress + RotL64(aOrbiterH, 43U);
             aIngress = TwistMix64::DiffuseC((aIngress + aScatter));
             //
-            aWandererG = aWandererG ^ (((RotL64(aScatter, 53U) + RotL64(aOrbiterI, 36U)) + aOrbiterD) + aPhaseFWandererUpdateSaltC[(((31U - aIndex) + 18U)) & S_SALT1]);
+            aWandererG = aWandererG ^ (((RotL64(aScatter, 53U) + RotL64(aOrbiterI, 36U)) + aOrbiterD) + aPhaseFWandererUpdateSaltC[(((31U - aIndex) + 18U)) & 31]);
             aWandererJ = aWandererJ + (((RotL64(aIngress, 21U) + RotL64(aOrbiterF, 23U)) + aOrbiterE) + RotL64(aCarry, 23U));
             aWandererA = aWandererA ^ ((RotL64(aPrevious, 47U) + aOrbiterF) + RotL64(aOrbiterI, 47U));
             aWandererC = aWandererC + ((RotL64(aCross, 30U) + aOrbiterH) + RotL64(aOrbiterI, 53U));
             aWandererE = aWandererE ^ ((RotL64(aScatter, 43U) + RotL64(aOrbiterD, 3U)) + aOrbiterC);
             aWandererF = aWandererF + (((RotL64(aCross, 11U) + aOrbiterC) + RotL64(aOrbiterK, 27U)) + RotL64(aCarry, 3U));
-            aWandererB = aWandererB ^ (((RotL64(aPrevious, 37U) + aOrbiterG) + RotL64(aOrbiterH, 40U)) + aPhaseFWandererUpdateSaltA[((aIndex + 5U)) & S_SALT1]);
+            aWandererB = aWandererB ^ (((RotL64(aPrevious, 37U) + aOrbiterG) + RotL64(aOrbiterH, 40U)) + aPhaseFWandererUpdateSaltA[((aIndex + 5U)) & 31]);
             aWandererK = aWandererK + ((RotL64(aIngress, 3U) + aOrbiterA) + RotL64(aOrbiterG, 57U));
             aWandererH = aWandererH ^ ((RotL64(aPrevious, 58U) + aOrbiterE) + RotL64(aOrbiterA, 13U));
             //
@@ -16238,7 +16238,7 @@ void TwistExpander_Antares_Arx::Twist_G(TwistWorkSpace *pWorkSpace,
             aScatter = (RotL64(aIngress, 41U) ^ RotL64(aCarry, 11U)) + (RotL64(aPrevious, 56U) ^ RotL64(aCross, 23U));
             aScatter = TwistMix64::DiffuseC(aScatter);
             //
-            aOrbiterA = (((aWandererE + RotL64(aScatter, 36U)) + RotL64(aCarry, 3U)) + 0x9EBDEDBF39A191F7ULL) + aPhaseEOrbiterAssignSaltD[((aIndex + 21U)) & S_SALT1];
+            aOrbiterA = (((aWandererE + RotL64(aScatter, 36U)) + RotL64(aCarry, 3U)) + 0x9EBDEDBF39A191F7ULL) + aPhaseEOrbiterAssignSaltD[((aIndex + 21U)) & 31];
             aOrbiterB = ((aWandererF + RotL64(aIngress, 27U)) + RotL64(aCarry, 29U)) + 0x3854422727F33E0EULL;
             aOrbiterJ = (aWandererH + RotL64(aCross, 21U)) + 0xB3FBF9F18AE60738ULL;
             aOrbiterG = ((aWandererG + RotL64(aPrevious, 5U)) + RotL64(aCarry, 47U)) + 0xFBDBE96B960E81E2ULL;
@@ -16246,9 +16246,9 @@ void TwistExpander_Antares_Arx::Twist_G(TwistWorkSpace *pWorkSpace,
             aOrbiterE = (aWandererA + RotL64(aPrevious, 13U)) + 0xE3EA6859053AE732ULL;
             aOrbiterK = (aWandererC + RotL64(aCross, 51U)) + 0x7E52B4D7435024EAULL;
             aOrbiterF = (aWandererK + RotL64(aIngress, 57U)) + 0xD391F325BAA766F3ULL;
-            aOrbiterI = ((aWandererB + RotL64(aCross, 46U)) + 0xDD45A8905D18ADE3ULL) + aPhaseEOrbiterAssignSaltF[((aIndex + 27U)) & S_SALT1];
+            aOrbiterI = ((aWandererB + RotL64(aCross, 46U)) + 0xDD45A8905D18ADE3ULL) + aPhaseEOrbiterAssignSaltF[((aIndex + 27U)) & 31];
             //
-            aOrbiterA = ((aOrbiterA + aOrbiterB) + 0xE22AABE59029E214ULL) + aPhaseEOrbiterUpdateSaltC[(((31U - aIndex) + 19U)) & S_SALT1];
+            aOrbiterA = ((aOrbiterA + aOrbiterB) + 0xE22AABE59029E214ULL) + aPhaseEOrbiterUpdateSaltC[(((31U - aIndex) + 19U)) & 31];
             aOrbiterJ = (aOrbiterJ ^ aOrbiterA) ^ 0xA07E1F6DC856DDBCULL;
             aOrbiterJ = RotL64((aOrbiterJ * 0xE727E3CBE4F7C7DBULL), 13U);
             //
@@ -16257,18 +16257,18 @@ void TwistExpander_Antares_Arx::Twist_G(TwistWorkSpace *pWorkSpace,
             aOrbiterA = RotL64((aOrbiterA * 0x185E68D86BDF2847ULL), 5U);
             //
             aOrbiterB = (aOrbiterB + aOrbiterE) + 0x03637B5205310A0BULL;
-            aOrbiterG = ((aOrbiterG ^ aOrbiterB) ^ 0x5390A708645FAD0DULL) ^ aPhaseEOrbiterUpdateSaltB[(((31U - aIndex) + 14U)) & S_SALT1];
+            aOrbiterG = ((aOrbiterG ^ aOrbiterB) ^ 0x5390A708645FAD0DULL) ^ aPhaseEOrbiterUpdateSaltB[(((31U - aIndex) + 14U)) & 31];
             aOrbiterG = RotL64((aOrbiterG * 0x65D4D7D5ACB2383DULL), 43U);
             //
             aOrbiterE = (aOrbiterE + aOrbiterK) + 0x3ABF5F419383F4EFULL;
             aOrbiterH = (aOrbiterH ^ aOrbiterE) ^ 0x535753A55E576539ULL;
             aOrbiterH = RotL64((aOrbiterH * 0xE9DFCDA1F1B83035ULL), 57U);
             //
-            aOrbiterK = ((aOrbiterK + aOrbiterJ) + 0x915E232E19F9CF6EULL) + aPhaseEOrbiterUpdateSaltD[(((31U - aIndex) + 8U)) & S_SALT1];
+            aOrbiterK = ((aOrbiterK + aOrbiterJ) + 0x915E232E19F9CF6EULL) + aPhaseEOrbiterUpdateSaltD[(((31U - aIndex) + 8U)) & 31];
             aOrbiterF = (aOrbiterF ^ aOrbiterK) ^ 0xF5AA76CA392EB52BULL;
             aOrbiterF = RotL64((aOrbiterF * 0x2C1CED17ABD89527ULL), 21U);
             //
-            aOrbiterI = ((aOrbiterI + aOrbiterA) + 0x6F4AE727205A0899ULL) + aPhaseEOrbiterUpdateSaltE[((aIndex + 6U)) & S_SALT1];
+            aOrbiterI = ((aOrbiterI + aOrbiterA) + 0x6F4AE727205A0899ULL) + aPhaseEOrbiterUpdateSaltE[((aIndex + 6U)) & 31];
             aOrbiterK = (aOrbiterK ^ aOrbiterI) ^ 0x973AA0BF90D02104ULL;
             aOrbiterK = RotL64((aOrbiterK * 0x71562E5EF8AD832DULL), 47U);
             //
@@ -16291,10 +16291,10 @@ void TwistExpander_Antares_Arx::Twist_G(TwistWorkSpace *pWorkSpace,
             aIngress = aIngress + RotL64(aOrbiterK, 53U);
             aIngress = TwistMix64::DiffuseA((aIngress + aScatter));
             //
-            aWandererC = aWandererC ^ (((RotL64(aIngress, 5U) + aOrbiterF) + RotL64(aOrbiterI, 11U)) + aPhaseEWandererUpdateSaltE[((aIndex + 10U)) & S_SALT1]);
+            aWandererC = aWandererC ^ (((RotL64(aIngress, 5U) + aOrbiterF) + RotL64(aOrbiterI, 11U)) + aPhaseEWandererUpdateSaltE[((aIndex + 10U)) & 31]);
             aWandererE = aWandererE + ((RotL64(aCross, 42U) + RotL64(aOrbiterE, 53U)) + aOrbiterB);
             aWandererA = aWandererA ^ ((RotL64(aPrevious, 47U) + RotL64(aOrbiterG, 18U)) + aOrbiterJ);
-            aWandererH = aWandererH + (((RotL64(aScatter, 29U) + aOrbiterK) + RotL64(aOrbiterH, 37U)) + aPhaseEWandererUpdateSaltC[((aIndex + 29U)) & S_SALT1]);
+            aWandererH = aWandererH + (((RotL64(aScatter, 29U) + aOrbiterK) + RotL64(aOrbiterH, 37U)) + aPhaseEWandererUpdateSaltC[((aIndex + 29U)) & 31]);
             aWandererB = aWandererB ^ ((RotL64(aPrevious, 51U) + aOrbiterJ) + RotL64(aOrbiterB, 57U));
             aWandererJ = aWandererJ + (((RotL64(aScatter, 13U) + RotL64(aOrbiterE, 5U)) + aOrbiterH) + RotL64(aCarry, 51U));
             aWandererG = aWandererG ^ ((RotL64(aCross, 58U) + RotL64(aOrbiterA, 27U)) + aOrbiterK);
@@ -16339,14 +16339,14 @@ void TwistExpander_Antares_Arx::Twist_G(TwistWorkSpace *pWorkSpace,
             aScatter = (RotL64(aIngress, 40U) + RotL64(aCross, 3U)) ^ (RotL64(aPrevious, 53U) ^ RotL64(aCarry, 23U));
             aScatter = TwistMix64::DiffuseB(aScatter);
             //
-            aOrbiterH = ((aWandererF + RotL64(aPrevious, 57U)) + 0x3C928E5F5427DDC4ULL) + aPhaseAOrbiterAssignSaltF[(((31U - aIndex) + 25U)) & S_SALT1];
+            aOrbiterH = ((aWandererF + RotL64(aPrevious, 57U)) + 0x3C928E5F5427DDC4ULL) + aPhaseAOrbiterAssignSaltF[(((31U - aIndex) + 25U)) & 31];
             aOrbiterB = ((aWandererG + RotL64(aScatter, 51U)) + RotL64(aCarry, 57U)) + 0xC33CB3F9BFBAC654ULL;
             aOrbiterI = (aWandererE + RotL64(aIngress, 43U)) + 0x8396DBDA8227D6D6ULL;
             aOrbiterE = ((aWandererK + RotL64(aCross, 34U)) + RotL64(aCarry, 37U)) + 0xA915B0F4FA4999B1ULL;
             aOrbiterD = (aWandererA + RotL64(aScatter, 47U)) + 0xCD51C5A5CBCB1E8CULL;
             aOrbiterA = (aWandererB + RotL64(aIngress, 3U)) + 0x147CD8FA91594E7FULL;
             aOrbiterJ = (aWandererH + RotL64(aPrevious, 13U)) + 0xDA0393C3B3D6BB8BULL;
-            aOrbiterG = ((aWandererI + RotL64(aCross, 38U)) + 0x0A2901412EDB3E15ULL) + aPhaseAOrbiterAssignSaltC[(((31U - aIndex) + 4U)) & S_SALT1];
+            aOrbiterG = ((aWandererI + RotL64(aCross, 38U)) + 0x0A2901412EDB3E15ULL) + aPhaseAOrbiterAssignSaltC[(((31U - aIndex) + 4U)) & 31];
             aOrbiterC = ((aWandererJ + RotL64(aPrevious, 19U)) + RotL64(aCarry, 3U)) + 0xD2955B4282ABDD97ULL;
             //
             aOrbiterH = (aOrbiterH + aOrbiterB) + 0x9C35315FD45C6735ULL;
@@ -16354,14 +16354,14 @@ void TwistExpander_Antares_Arx::Twist_G(TwistWorkSpace *pWorkSpace,
             aOrbiterI = RotL64((aOrbiterI * 0x7E8AE861A69D4BDFULL), 47U);
             //
             aOrbiterB = (aOrbiterB + aOrbiterE) + 0x5521EFEF3230C32FULL;
-            aOrbiterD = ((aOrbiterD ^ aOrbiterB) ^ 0xF442A24B75C06894ULL) ^ aPhaseAOrbiterUpdateSaltD[((aIndex + 8U)) & S_SALT1];
+            aOrbiterD = ((aOrbiterD ^ aOrbiterB) ^ 0xF442A24B75C06894ULL) ^ aPhaseAOrbiterUpdateSaltD[((aIndex + 8U)) & 31];
             aOrbiterD = RotL64((aOrbiterD * 0x89E67AFBA6919339ULL), 57U);
             //
-            aOrbiterI = ((aOrbiterI + aOrbiterD) + 0x5A4DF8CEFE14D78EULL) + aPhaseAOrbiterUpdateSaltC[((aIndex + 5U)) & S_SALT1];
+            aOrbiterI = ((aOrbiterI + aOrbiterD) + 0x5A4DF8CEFE14D78EULL) + aPhaseAOrbiterUpdateSaltC[((aIndex + 5U)) & 31];
             aOrbiterA = (aOrbiterA ^ aOrbiterI) ^ 0xE4FA335A4B2924CBULL;
             aOrbiterA = RotL64((aOrbiterA * 0x3DBD52EA6A8D48A9ULL), 23U);
             //
-            aOrbiterJ = ((aOrbiterJ + aOrbiterH) + 0x896ABA9D1584231AULL) + aPhaseAOrbiterUpdateSaltA[(((31U - aIndex) + 9U)) & S_SALT1];
+            aOrbiterJ = ((aOrbiterJ + aOrbiterH) + 0x896ABA9D1584231AULL) + aPhaseAOrbiterUpdateSaltA[(((31U - aIndex) + 9U)) & 31];
             aOrbiterE = (aOrbiterE ^ aOrbiterJ) ^ 0xEBC20AD4EE8C746FULL;
             aOrbiterE = RotL64((aOrbiterE * 0x9D448DC67DBFB6C9ULL), 19U);
             //
@@ -16370,7 +16370,7 @@ void TwistExpander_Antares_Arx::Twist_G(TwistWorkSpace *pWorkSpace,
             aOrbiterJ = RotL64((aOrbiterJ * 0xFCE9793CF1353605ULL), 3U);
             //
             aOrbiterA = (aOrbiterA + aOrbiterC) + 0xADD1246FAEA4BE12ULL;
-            aOrbiterH = ((aOrbiterH ^ aOrbiterA) ^ 0x6730218FEBD40E92ULL) ^ aPhaseAOrbiterUpdateSaltE[(((31U - aIndex) + 13U)) & S_SALT1];
+            aOrbiterH = ((aOrbiterH ^ aOrbiterA) ^ 0x6730218FEBD40E92ULL) ^ aPhaseAOrbiterUpdateSaltE[(((31U - aIndex) + 13U)) & 31];
             aOrbiterH = RotL64((aOrbiterH * 0x3BCD202A96DE8E3FULL), 11U);
             //
             aOrbiterE = (aOrbiterE + aOrbiterI) + 0x03F4EF1F51344941ULL;
@@ -16394,9 +16394,9 @@ void TwistExpander_Antares_Arx::Twist_G(TwistWorkSpace *pWorkSpace,
             //
             aWandererF = aWandererF + ((RotL64(aCross, 19U) + aOrbiterC) + RotL64(aOrbiterJ, 28U));
             aWandererJ = aWandererJ ^ ((RotL64(aPrevious, 23U) + RotL64(aOrbiterG, 5U)) + aOrbiterH);
-            aWandererE = aWandererE + (((RotL64(aIngress, 57U) + RotL64(aOrbiterJ, 19U)) + aOrbiterE) + aPhaseAWandererUpdateSaltD[(((31U - aIndex) + 11U)) & S_SALT1]);
+            aWandererE = aWandererE + (((RotL64(aIngress, 57U) + RotL64(aOrbiterJ, 19U)) + aOrbiterE) + aPhaseAWandererUpdateSaltD[(((31U - aIndex) + 11U)) & 31]);
             aWandererA = aWandererA ^ ((RotL64(aScatter, 53U) + aOrbiterG) + RotL64(aOrbiterI, 35U));
-            aWandererB = aWandererB + (((RotL64(aPrevious, 14U) + RotL64(aOrbiterE, 57U)) + aOrbiterB) + aPhaseAWandererUpdateSaltC[((aIndex + 7U)) & S_SALT1]);
+            aWandererB = aWandererB + (((RotL64(aPrevious, 14U) + RotL64(aOrbiterE, 57U)) + aOrbiterB) + aPhaseAWandererUpdateSaltC[((aIndex + 7U)) & 31]);
             aWandererG = aWandererG ^ ((RotL64(aCross, 5U) + RotL64(aOrbiterC, 23U)) + aOrbiterG);
             aWandererI = aWandererI + (((RotL64(aIngress, 41U) + RotL64(aOrbiterH, 51U)) + aOrbiterB) + RotL64(aCarry, 3U));
             aWandererK = aWandererK ^ ((RotL64(aScatter, 37U) + RotL64(aOrbiterI, 41U)) + aOrbiterA);
@@ -16442,13 +16442,13 @@ void TwistExpander_Antares_Arx::Twist_G(TwistWorkSpace *pWorkSpace,
             //
             aOrbiterB = (aWandererK + RotL64(aCross, 56U)) + 0x3B2F1D0461CE5DA3ULL;
             aOrbiterJ = (aWandererI + RotL64(aPrevious, 41U)) + 0x5CE7EF01AB73F5AAULL;
-            aOrbiterD = ((aWandererD + RotL64(aIngress, 5U)) + 0x3CF56F96330B8B95ULL) + aPhaseAOrbiterAssignSaltB[(((31U - aIndex) + 28U)) & S_SALT1];
+            aOrbiterD = ((aWandererD + RotL64(aIngress, 5U)) + 0x3CF56F96330B8B95ULL) + aPhaseAOrbiterAssignSaltB[(((31U - aIndex) + 28U)) & 31];
             aOrbiterC = ((aWandererF + RotL64(aScatter, 51U)) + RotL64(aCarry, 5U)) + 0xC6CB26DEA27BF250ULL;
             aOrbiterA = (aWandererH + RotL64(aPrevious, 30U)) + 0xC4627308F3C4C3F8ULL;
             aOrbiterI = ((aWandererA + RotL64(aIngress, 37U)) + RotL64(aCarry, 57U)) + 0xA51EA85A14934A6DULL;
             aOrbiterK = (aWandererG + RotL64(aScatter, 23U)) + 0x72688D79BE8A8C30ULL;
             aOrbiterG = ((aWandererE + RotL64(aCross, 19U)) + RotL64(aCarry, 19U)) + 0xC6092629E17E972DULL;
-            aOrbiterH = ((aWandererB + RotL64(aScatter, 13U)) + 0x937BC0AEC9EFDA7EULL) + aPhaseAOrbiterAssignSaltD[((aIndex + 21U)) & S_SALT1];
+            aOrbiterH = ((aWandererB + RotL64(aScatter, 13U)) + 0x937BC0AEC9EFDA7EULL) + aPhaseAOrbiterAssignSaltD[((aIndex + 21U)) & 31];
             //
             aOrbiterB = (aOrbiterB + aOrbiterJ) + 0xCEBB824216C3E5CEULL;
             aOrbiterD = (aOrbiterD ^ aOrbiterB) ^ 0x19283C222880AC24ULL;
@@ -16462,7 +16462,7 @@ void TwistExpander_Antares_Arx::Twist_G(TwistWorkSpace *pWorkSpace,
             aOrbiterK = (aOrbiterK ^ aOrbiterJ) ^ 0x05F4F4BE971E7127ULL;
             aOrbiterK = RotL64((aOrbiterK * 0x7983B7CC97BE2231ULL), 27U);
             //
-            aOrbiterD = ((aOrbiterD + aOrbiterK) + 0x4F1F8A69332963B9ULL) + aPhaseAOrbiterUpdateSaltF[(((31U - aIndex) + 7U)) & S_SALT1];
+            aOrbiterD = ((aOrbiterD + aOrbiterK) + 0x4F1F8A69332963B9ULL) + aPhaseAOrbiterUpdateSaltF[(((31U - aIndex) + 7U)) & 31];
             aOrbiterA = (aOrbiterA ^ aOrbiterD) ^ 0xC86246F0CE346D41ULL;
             aOrbiterA = RotL64((aOrbiterA * 0xB35438C07BDE1F47ULL), 41U);
             //
@@ -16471,7 +16471,7 @@ void TwistExpander_Antares_Arx::Twist_G(TwistWorkSpace *pWorkSpace,
             aOrbiterB = RotL64((aOrbiterB * 0xA070AFEC702DDB57ULL), 3U);
             //
             aOrbiterI = (aOrbiterI + aOrbiterB) + 0xBF9C668825ED93F9ULL;
-            aOrbiterH = ((aOrbiterH ^ aOrbiterI) ^ 0xE186C6456B5F4F54ULL) ^ aPhaseAOrbiterUpdateSaltB[(((31U - aIndex) + 3U)) & S_SALT1];
+            aOrbiterH = ((aOrbiterH ^ aOrbiterI) ^ 0xE186C6456B5F4F54ULL) ^ aPhaseAOrbiterUpdateSaltB[(((31U - aIndex) + 3U)) & 31];
             aOrbiterH = RotL64((aOrbiterH * 0x9D8B1B1CBF22268FULL), 53U);
             //
             aOrbiterA = (aOrbiterA + aOrbiterG) + 0x2128A8E576904799ULL;
@@ -16479,11 +16479,11 @@ void TwistExpander_Antares_Arx::Twist_G(TwistWorkSpace *pWorkSpace,
             aOrbiterI = RotL64((aOrbiterI * 0x4EF2BDC5AD1BE1BFULL), 21U);
             //
             aOrbiterH = (aOrbiterH + aOrbiterD) + 0x08FACE5C3F782D86ULL;
-            aOrbiterC = ((aOrbiterC ^ aOrbiterH) ^ 0x9E10ABD97BA0A570ULL) ^ aPhaseAOrbiterUpdateSaltC[(((31U - aIndex) + 25U)) & S_SALT1];
+            aOrbiterC = ((aOrbiterC ^ aOrbiterH) ^ 0x9E10ABD97BA0A570ULL) ^ aPhaseAOrbiterUpdateSaltC[(((31U - aIndex) + 25U)) & 31];
             aOrbiterC = RotL64((aOrbiterC * 0x7A032ABDFCB142F7ULL), 47U);
             //
             aOrbiterK = (aOrbiterK + aOrbiterH) + 0x1B23D5DF2EA8EAA1ULL;
-            aOrbiterG = ((aOrbiterG ^ aOrbiterK) ^ 0xACA897E664B4A89DULL) ^ aPhaseAOrbiterUpdateSaltD[((aIndex + 26U)) & S_SALT1];
+            aOrbiterG = ((aOrbiterG ^ aOrbiterK) ^ 0xACA897E664B4A89DULL) ^ aPhaseAOrbiterUpdateSaltD[((aIndex + 26U)) & 31];
             aOrbiterG = RotL64((aOrbiterG * 0xA3D773E442241429ULL), 57U);
             //
             aIngress = RotL64(aOrbiterC, 29U) ^ aOrbiterA;
@@ -16494,13 +16494,13 @@ void TwistExpander_Antares_Arx::Twist_G(TwistWorkSpace *pWorkSpace,
             aIngress = TwistMix64::DiffuseB((aIngress + aScatter));
             //
             aWandererK = aWandererK + (((RotL64(aPrevious, 18U) + RotL64(aOrbiterC, 40U)) + aOrbiterH) + RotL64(aCarry, 13U));
-            aWandererF = aWandererF ^ (((RotL64(aIngress, 43U) + RotL64(aOrbiterK, 35U)) + aOrbiterH) + aPhaseAWandererUpdateSaltC[((aIndex + 29U)) & S_SALT1]);
+            aWandererF = aWandererF ^ (((RotL64(aIngress, 43U) + RotL64(aOrbiterK, 35U)) + aOrbiterH) + aPhaseAWandererUpdateSaltC[((aIndex + 29U)) & 31]);
             aWandererE = aWandererE + (((RotL64(aCross, 23U) + RotL64(aOrbiterI, 57U)) + aOrbiterH) + RotL64(aCarry, 29U));
             aWandererA = aWandererA ^ ((RotL64(aScatter, 35U) + RotL64(aOrbiterC, 19U)) + aOrbiterG);
             aWandererB = aWandererB + ((RotL64(aPrevious, 27U) + aOrbiterB) + RotL64(aOrbiterJ, 5U));
             aWandererG = aWandererG ^ ((RotL64(aIngress, 3U) + RotL64(aOrbiterD, 29U)) + aOrbiterB);
             aWandererD = aWandererD + ((RotL64(aCross, 53U) + RotL64(aOrbiterH, 44U)) + aOrbiterB);
-            aWandererI = aWandererI ^ (((RotL64(aScatter, 60U) + aOrbiterI) + RotL64(aOrbiterJ, 13U)) + aPhaseAWandererUpdateSaltD[((aIndex + 24U)) & S_SALT1]);
+            aWandererI = aWandererI ^ (((RotL64(aScatter, 60U) + aOrbiterI) + RotL64(aOrbiterJ, 13U)) + aPhaseAWandererUpdateSaltD[((aIndex + 24U)) & 31]);
             aWandererH = aWandererH + ((RotL64(aIngress, 39U) + RotL64(aOrbiterD, 53U)) + aOrbiterA);
             //
             aCarry = aCarry + (aWandererB ^ RotL64(aWandererD, 47U));
@@ -16545,18 +16545,18 @@ void TwistExpander_Antares_Arx::Twist_G(TwistWorkSpace *pWorkSpace,
             aOrbiterK = (aWandererG + RotL64(aCross, 43U)) + 0x8DC20EEF4F1A6AE9ULL;
             aOrbiterB = ((aWandererF + RotL64(aScatter, 24U)) + RotL64(aCarry, 13U)) + 0x4A962B80939AF8C3ULL;
             aOrbiterA = (aWandererK + RotL64(aIngress, 53U)) + 0xA441C10E7B06EDEFULL;
-            aOrbiterD = ((aWandererE + RotL64(aPrevious, 57U)) + 0xD473845669DBA602ULL) + aPhaseAOrbiterAssignSaltE[(((31U - aIndex) + 7U)) & S_SALT1];
+            aOrbiterD = ((aWandererE + RotL64(aPrevious, 57U)) + 0xD473845669DBA602ULL) + aPhaseAOrbiterAssignSaltE[(((31U - aIndex) + 7U)) & 31];
             aOrbiterI = (aWandererI + RotL64(aCross, 5U)) + 0x855E796FB4C5D5BDULL;
             aOrbiterC = (aWandererA + RotL64(aScatter, 28U)) + 0x640BA9F4A6D5C54AULL;
             aOrbiterH = ((aWandererJ + RotL64(aIngress, 35U)) + RotL64(aCarry, 5U)) + 0x50BF606B682F31C9ULL;
-            aOrbiterE = (((aWandererC + RotL64(aPrevious, 39U)) + RotL64(aCarry, 43U)) + 0x8C4B1BC8BD459D1AULL) + aPhaseAOrbiterAssignSaltF[(((31U - aIndex) + 28U)) & S_SALT1];
+            aOrbiterE = (((aWandererC + RotL64(aPrevious, 39U)) + RotL64(aCarry, 43U)) + 0x8C4B1BC8BD459D1AULL) + aPhaseAOrbiterAssignSaltF[(((31U - aIndex) + 28U)) & 31];
             //
             aOrbiterJ = (aOrbiterJ + aOrbiterK) + 0x4DA67C413828ED19ULL;
-            aOrbiterB = ((aOrbiterB ^ aOrbiterJ) ^ 0xA21CDA0D1F40B27BULL) ^ aPhaseAOrbiterUpdateSaltB[(((31U - aIndex) + 20U)) & S_SALT1];
+            aOrbiterB = ((aOrbiterB ^ aOrbiterJ) ^ 0xA21CDA0D1F40B27BULL) ^ aPhaseAOrbiterUpdateSaltB[(((31U - aIndex) + 20U)) & 31];
             aOrbiterB = RotL64((aOrbiterB * 0x31B5C66CB0F4E36FULL), 13U);
             //
             aOrbiterK = (aOrbiterK + aOrbiterA) + 0x149E77986E0C79EEULL;
-            aOrbiterD = ((aOrbiterD ^ aOrbiterK) ^ 0x19BFA44CF354A3E2ULL) ^ aPhaseAOrbiterUpdateSaltC[(((31U - aIndex) + 24U)) & S_SALT1];
+            aOrbiterD = ((aOrbiterD ^ aOrbiterK) ^ 0x19BFA44CF354A3E2ULL) ^ aPhaseAOrbiterUpdateSaltC[(((31U - aIndex) + 24U)) & 31];
             aOrbiterD = RotL64((aOrbiterD * 0x2094BC059E92C92BULL), 27U);
             //
             aOrbiterD = (aOrbiterD + aOrbiterI) + 0x1587F51521B184E7ULL;
@@ -16579,8 +16579,8 @@ void TwistExpander_Antares_Arx::Twist_G(TwistWorkSpace *pWorkSpace,
             aOrbiterJ = (aOrbiterJ ^ aOrbiterH) ^ 0xA5F695F3FACF89C3ULL;
             aOrbiterJ = RotL64((aOrbiterJ * 0xAA9CE96DD1096E03ULL), 23U);
             //
-            aOrbiterA = ((aOrbiterA + aOrbiterJ) + 0x4829B758E4827445ULL) + aPhaseAOrbiterUpdateSaltD[((aIndex + 17U)) & S_SALT1];
-            aOrbiterI = ((aOrbiterI ^ aOrbiterA) ^ 0xD2B3EC3A80B69362ULL) ^ aPhaseAOrbiterUpdateSaltA[((aIndex + 29U)) & S_SALT1];
+            aOrbiterA = ((aOrbiterA + aOrbiterJ) + 0x4829B758E4827445ULL) + aPhaseAOrbiterUpdateSaltD[((aIndex + 17U)) & 31];
+            aOrbiterI = ((aOrbiterI ^ aOrbiterA) ^ 0xD2B3EC3A80B69362ULL) ^ aPhaseAOrbiterUpdateSaltA[((aIndex + 29U)) & 31];
             aOrbiterI = RotL64((aOrbiterI * 0x5E5F17BB0CF61D61ULL), 57U);
             //
             aOrbiterI = (aOrbiterI + aOrbiterB) + 0xCAED2B22443490CFULL;
@@ -16594,10 +16594,10 @@ void TwistExpander_Antares_Arx::Twist_G(TwistWorkSpace *pWorkSpace,
             aIngress = aIngress + RotL64(aOrbiterI, 35U);
             aIngress = TwistMix64::DiffuseB((aIngress + aScatter));
             //
-            aWandererJ = aWandererJ + ((((RotL64(aCross, 13U) + aOrbiterH) + RotL64(aOrbiterK, 24U)) + RotL64(aCarry, 29U)) + aPhaseAWandererUpdateSaltD[((aIndex + 23U)) & S_SALT1]);
+            aWandererJ = aWandererJ + ((((RotL64(aCross, 13U) + aOrbiterH) + RotL64(aOrbiterK, 24U)) + RotL64(aCarry, 29U)) + aPhaseAWandererUpdateSaltD[((aIndex + 23U)) & 31]);
             aWandererI = aWandererI ^ ((RotL64(aScatter, 47U) + RotL64(aOrbiterC, 3U)) + aOrbiterD);
             aWandererF = aWandererF + (((RotL64(aIngress, 5U) + RotL64(aOrbiterA, 19U)) + aOrbiterK) + RotL64(aCarry, 53U));
-            aWandererG = aWandererG ^ (((RotL64(aPrevious, 37U) + RotL64(aOrbiterK, 57U)) + aOrbiterD) + aPhaseAWandererUpdateSaltC[((aIndex + 25U)) & S_SALT1]);
+            aWandererG = aWandererG ^ (((RotL64(aPrevious, 37U) + RotL64(aOrbiterK, 57U)) + aOrbiterD) + aPhaseAWandererUpdateSaltC[((aIndex + 25U)) & 31]);
             aWandererA = aWandererA + ((RotL64(aIngress, 58U) + RotL64(aOrbiterB, 46U)) + aOrbiterI);
             aWandererK = aWandererK ^ ((RotL64(aPrevious, 29U) + RotL64(aOrbiterJ, 53U)) + aOrbiterA);
             aWandererC = aWandererC + ((RotL64(aCross, 51U) + RotL64(aOrbiterB, 11U)) + aOrbiterE);
@@ -16745,11 +16745,11 @@ void TwistExpander_Antares_Arx::GROW_A(TwistWorkSpace *pWorkSpace,
             //
             aOrbiterE = (aWandererG + RotL64(aScatter, 23U)) + 0xD53CB194D41D6C69ULL;
             aOrbiterF = (aWandererK + RotL64(aIngress, 47U)) + 0x88E4C5E89AAA4D7DULL;
-            aOrbiterH = ((aWandererC + RotL64(aCross, 27U)) + 0x6F9568C5BE723FA3ULL) + aPhaseGOrbiterAssignSaltB[(((31U - aIndex) + 3U)) & S_SALT1];
+            aOrbiterH = ((aWandererC + RotL64(aCross, 27U)) + 0x6F9568C5BE723FA3ULL) + aPhaseGOrbiterAssignSaltB[(((31U - aIndex) + 3U)) & 31];
             aOrbiterG = ((aWandererB + RotL64(aPrevious, 56U)) + RotL64(aCarry, 5U)) + 0xA4512A19CD06EB34ULL;
             aOrbiterI = (aWandererF + RotL64(aCross, 35U)) + 0x69FC1A164277A4DEULL;
             aOrbiterB = ((aWandererD + RotL64(aScatter, 3U)) + RotL64(aCarry, 21U)) + 0xB0558E2E99A7DA73ULL;
-            aOrbiterK = ((aWandererE + RotL64(aIngress, 11U)) + 0xA435B04C316526D7ULL) + aPhaseGOrbiterAssignSaltE[(((31U - aIndex) + 23U)) & S_SALT1];
+            aOrbiterK = ((aWandererE + RotL64(aIngress, 11U)) + 0xA435B04C316526D7ULL) + aPhaseGOrbiterAssignSaltE[(((31U - aIndex) + 23U)) & 31];
             aOrbiterC = (aWandererA + RotL64(aPrevious, 53U)) + 0x5B4D21CCE5427BDBULL;
             aOrbiterJ = (aWandererH + RotL64(aIngress, 13U)) + 0x146496AB7D554119ULL;
             aOrbiterD = ((aWandererJ + RotL64(aCross, 19U)) + RotL64(aCarry, 57U)) + 0x4BA76BC551FD89DEULL;
@@ -16783,16 +16783,16 @@ void TwistExpander_Antares_Arx::GROW_A(TwistWorkSpace *pWorkSpace,
             aOrbiterF = (aOrbiterF ^ aOrbiterJ) ^ 0x30373DD7368CA1FAULL;
             aOrbiterF = RotL64((aOrbiterF * 0x35851591B5775B87ULL), 43U);
             //
-            aOrbiterA = ((aOrbiterA + aOrbiterD) + 0x16F246602CDF8CD7ULL) + aPhaseGOrbiterUpdateSaltF[(((31U - aIndex) + 13U)) & S_SALT1];
+            aOrbiterA = ((aOrbiterA + aOrbiterD) + 0x16F246602CDF8CD7ULL) + aPhaseGOrbiterUpdateSaltF[(((31U - aIndex) + 13U)) & 31];
             aOrbiterB = (aOrbiterB ^ aOrbiterA) ^ 0x1CD1E2C26047EE9EULL;
             aOrbiterB = RotL64((aOrbiterB * 0x9567350921F04C6DULL), 41U);
             //
-            aOrbiterK = ((aOrbiterK + aOrbiterC) + 0x90B94653D07BD553ULL) + aPhaseGOrbiterUpdateSaltB[((aIndex + 20U)) & S_SALT1];
+            aOrbiterK = ((aOrbiterK + aOrbiterC) + 0x90B94653D07BD553ULL) + aPhaseGOrbiterUpdateSaltB[((aIndex + 20U)) & 31];
             aOrbiterA = (aOrbiterA ^ aOrbiterK) ^ 0x4291943E879EAA93ULL;
             aOrbiterA = RotL64((aOrbiterA * 0x585E25AC56485DCDULL), 23U);
             //
-            aOrbiterI = ((aOrbiterI + aOrbiterJ) + 0x88426CD79196DB7AULL) + aPhaseGOrbiterUpdateSaltA[((aIndex + 22U)) & S_SALT1];
-            aOrbiterE = ((aOrbiterE ^ aOrbiterI) ^ 0x7A7C56F986A37A1AULL) ^ aPhaseGOrbiterUpdateSaltE[((aIndex + 21U)) & S_SALT1];
+            aOrbiterI = ((aOrbiterI + aOrbiterJ) + 0x88426CD79196DB7AULL) + aPhaseGOrbiterUpdateSaltA[((aIndex + 22U)) & 31];
+            aOrbiterE = ((aOrbiterE ^ aOrbiterI) ^ 0x7A7C56F986A37A1AULL) ^ aPhaseGOrbiterUpdateSaltE[((aIndex + 21U)) & 31];
             aOrbiterE = RotL64((aOrbiterE * 0x791F506BF21ADED9ULL), 3U);
             //
             aOrbiterD = (aOrbiterD + aOrbiterE) + 0x6559C5FBD8AA7BE6ULL;
@@ -16809,8 +16809,8 @@ void TwistExpander_Antares_Arx::GROW_A(TwistWorkSpace *pWorkSpace,
             //
             aWandererK = aWandererK + (((RotL64(aIngress, 56U) + aOrbiterI) + RotL64(aOrbiterF, 5U)) + RotL64(aCarry, 53U));
             aWandererA = aWandererA ^ ((RotL64(aCross, 29U) + aOrbiterG) + RotL64(aOrbiterH, 23U));
-            aWandererG = aWandererG + (((RotL64(aScatter, 5U) + aOrbiterD) + RotL64(aOrbiterC, 52U)) + aPhaseGWandererUpdateSaltD[(((31U - aIndex) + 9U)) & S_SALT1]);
-            aWandererI = aWandererI ^ (((RotL64(aPrevious, 53U) + RotL64(aOrbiterF, 37U)) + aOrbiterE) + aPhaseGWandererUpdateSaltA[((aIndex + 5U)) & S_SALT1]);
+            aWandererG = aWandererG + (((RotL64(aScatter, 5U) + aOrbiterD) + RotL64(aOrbiterC, 52U)) + aPhaseGWandererUpdateSaltD[(((31U - aIndex) + 9U)) & 31]);
+            aWandererI = aWandererI ^ (((RotL64(aPrevious, 53U) + RotL64(aOrbiterF, 37U)) + aOrbiterE) + aPhaseGWandererUpdateSaltA[((aIndex + 5U)) & 31]);
             aWandererD = aWandererD + ((RotL64(aIngress, 43U) + RotL64(aOrbiterA, 41U)) + aOrbiterJ);
             aWandererF = aWandererF ^ ((RotL64(aCross, 3U) + RotL64(aOrbiterF, 57U)) + aOrbiterC);
             aWandererB = aWandererB + ((RotL64(aScatter, 18U) + RotL64(aOrbiterA, 21U)) + aOrbiterK);
@@ -16864,14 +16864,14 @@ void TwistExpander_Antares_Arx::GROW_A(TwistWorkSpace *pWorkSpace,
             aOrbiterE = (aWandererH + RotL64(aScatter, 21U)) + 0x60F34B72658C70F7ULL;
             aOrbiterB = (aWandererC + RotL64(aCross, 18U)) + 0x38FA63713865245FULL;
             aOrbiterA = (aWandererA + RotL64(aScatter, 5U)) + 0xE983F72DC3CF6703ULL;
-            aOrbiterJ = ((aWandererB + RotL64(aIngress, 41U)) + 0x6C1CA44FE3808437ULL) + aPhaseGOrbiterAssignSaltC[((aIndex + 8U)) & S_SALT1];
+            aOrbiterJ = ((aWandererB + RotL64(aIngress, 41U)) + 0x6C1CA44FE3808437ULL) + aPhaseGOrbiterAssignSaltC[((aIndex + 8U)) & 31];
             aOrbiterK = ((aWandererG + RotL64(aPrevious, 3U)) + RotL64(aCarry, 13U)) + 0xA1E53CBAE0C6CBDAULL;
             aOrbiterD = ((aWandererE + RotL64(aCross, 28U)) + RotL64(aCarry, 5U)) + 0x3651F4DE5E378F02ULL;
             aOrbiterG = ((aWandererJ + RotL64(aIngress, 23U)) + RotL64(aCarry, 53U)) + 0x49E10DCA7873935DULL;
-            aOrbiterC = ((aWandererK + RotL64(aPrevious, 35U)) + 0x0D9C732A485DB891ULL) + aPhaseGOrbiterAssignSaltD[(((31U - aIndex) + 9U)) & S_SALT1];
+            aOrbiterC = ((aWandererK + RotL64(aPrevious, 35U)) + 0x0D9C732A485DB891ULL) + aPhaseGOrbiterAssignSaltD[(((31U - aIndex) + 9U)) & 31];
             //
-            aOrbiterI = ((aOrbiterI + aOrbiterF) + 0xA3052A7BC1258D87ULL) + aPhaseGOrbiterUpdateSaltC[(((31U - aIndex) + 25U)) & S_SALT1];
-            aOrbiterH = ((aOrbiterH ^ aOrbiterI) ^ 0x48B989C37BEDF453ULL) ^ aPhaseGOrbiterUpdateSaltA[((aIndex + 12U)) & S_SALT1];
+            aOrbiterI = ((aOrbiterI + aOrbiterF) + 0xA3052A7BC1258D87ULL) + aPhaseGOrbiterUpdateSaltC[(((31U - aIndex) + 25U)) & 31];
+            aOrbiterH = ((aOrbiterH ^ aOrbiterI) ^ 0x48B989C37BEDF453ULL) ^ aPhaseGOrbiterUpdateSaltA[((aIndex + 12U)) & 31];
             aOrbiterH = RotL64((aOrbiterH * 0x5C13609D4239A029ULL), 29U);
             //
             aOrbiterE = (aOrbiterE + aOrbiterB) + 0x5D4D350F518469D4ULL;
@@ -16906,12 +16906,12 @@ void TwistExpander_Antares_Arx::GROW_A(TwistWorkSpace *pWorkSpace,
             aOrbiterI = (aOrbiterI ^ aOrbiterB) ^ 0xBC4A90785EBBDD4BULL;
             aOrbiterI = RotL64((aOrbiterI * 0x25D1229A3212AC7BULL), 3U);
             //
-            aOrbiterG = ((aOrbiterG + aOrbiterA) + 0x537862AA3528BB4BULL) + aPhaseGOrbiterUpdateSaltD[(((31U - aIndex) + 28U)) & S_SALT1];
+            aOrbiterG = ((aOrbiterG + aOrbiterA) + 0x537862AA3528BB4BULL) + aPhaseGOrbiterUpdateSaltD[(((31U - aIndex) + 28U)) & 31];
             aOrbiterJ = (aOrbiterJ ^ aOrbiterG) ^ 0x0B34E8A34875FA5FULL;
             aOrbiterJ = RotL64((aOrbiterJ * 0x89E663DC3D209553ULL), 43U);
             //
             aOrbiterA = (aOrbiterA + aOrbiterI) + 0x81ED0CB8774B455EULL;
-            aOrbiterK = ((aOrbiterK ^ aOrbiterA) ^ 0xF0CBF7817E697534ULL) ^ aPhaseGOrbiterUpdateSaltB[((aIndex + 17U)) & S_SALT1];
+            aOrbiterK = ((aOrbiterK ^ aOrbiterA) ^ 0xF0CBF7817E697534ULL) ^ aPhaseGOrbiterUpdateSaltB[((aIndex + 17U)) & 31];
             aOrbiterK = RotL64((aOrbiterK * 0xD43765557DA277EFULL), 11U);
             //
             aIngress = aOrbiterA ^ RotL64(aOrbiterE, 29U);
@@ -16923,11 +16923,11 @@ void TwistExpander_Antares_Arx::GROW_A(TwistWorkSpace *pWorkSpace,
             aIngress = TwistMix64::DiffuseB((aIngress + aScatter));
             //
             aWandererE = aWandererE ^ ((RotL64(aIngress, 47U) + RotL64(aOrbiterJ, 27U)) + aOrbiterF);
-            aWandererF = aWandererF + (((RotL64(aCross, 41U) + RotL64(aOrbiterJ, 54U)) + aOrbiterB) + aPhaseGWandererUpdateSaltF[(((31U - aIndex) + 18U)) & S_SALT1]);
+            aWandererF = aWandererF + (((RotL64(aCross, 41U) + RotL64(aOrbiterJ, 54U)) + aOrbiterB) + aPhaseGWandererUpdateSaltF[(((31U - aIndex) + 18U)) & 31]);
             aWandererA = aWandererA ^ ((RotL64(aScatter, 21U) + RotL64(aOrbiterD, 47U)) + aOrbiterH);
             aWandererD = aWandererD + ((RotL64(aPrevious, 35U) + aOrbiterC) + RotL64(aOrbiterK, 43U));
             aWandererI = aWandererI ^ ((RotL64(aCross, 51U) + aOrbiterF) + RotL64(aOrbiterA, 41U));
-            aWandererJ = aWandererJ + ((((RotL64(aPrevious, 6U) + aOrbiterE) + RotL64(aOrbiterG, 21U)) + RotL64(aCarry, 47U)) + aPhaseGWandererUpdateSaltC[((aIndex + 4U)) & S_SALT1]);
+            aWandererJ = aWandererJ + ((((RotL64(aPrevious, 6U) + aOrbiterE) + RotL64(aOrbiterG, 21U)) + RotL64(aCarry, 47U)) + aPhaseGWandererUpdateSaltC[((aIndex + 4U)) & 31]);
             aWandererG = aWandererG ^ ((RotL64(aIngress, 27U) + RotL64(aOrbiterJ, 37U)) + aOrbiterH);
             aWandererK = aWandererK + (((RotL64(aScatter, 37U) + RotL64(aOrbiterC, 23U)) + aOrbiterE) + RotL64(aCarry, 57U));
             aWandererH = aWandererH ^ ((RotL64(aPrevious, 19U) + aOrbiterK) + RotL64(aOrbiterF, 29U));
@@ -16982,8 +16982,8 @@ void TwistExpander_Antares_Arx::GROW_A(TwistWorkSpace *pWorkSpace,
             aOrbiterJ = (aWandererK + RotL64(aPrevious, 18U)) + 0x4EE7A962CB97CE5CULL;
             aOrbiterA = (aWandererH + RotL64(aScatter, 11U)) + 0x48CB287DAD8D15ABULL;
             aOrbiterI = (aWandererA + RotL64(aCross, 53U)) + 0xA3C166998BE7421DULL;
-            aOrbiterH = ((aWandererB + RotL64(aIngress, 39U)) + 0xBF18B859B98FB45AULL) + aPhaseGOrbiterAssignSaltA[(((31U - aIndex) + 17U)) & S_SALT1];
-            aOrbiterK = ((aWandererE + RotL64(aPrevious, 35U)) + 0x51651F933182B406ULL) + aPhaseGOrbiterAssignSaltF[((aIndex + 26U)) & S_SALT1];
+            aOrbiterH = ((aWandererB + RotL64(aIngress, 39U)) + 0xBF18B859B98FB45AULL) + aPhaseGOrbiterAssignSaltA[(((31U - aIndex) + 17U)) & 31];
+            aOrbiterK = ((aWandererE + RotL64(aPrevious, 35U)) + 0x51651F933182B406ULL) + aPhaseGOrbiterAssignSaltF[((aIndex + 26U)) & 31];
             //
             aOrbiterD = (aOrbiterD + aOrbiterB) + 0x270F2C12E613FB32ULL;
             aOrbiterE = (aOrbiterE ^ aOrbiterD) ^ 0xDB988C0FBE4BC854ULL;
@@ -16998,15 +16998,15 @@ void TwistExpander_Antares_Arx::GROW_A(TwistWorkSpace *pWorkSpace,
             aOrbiterD = RotL64((aOrbiterD * 0xCD868E09B57B7CBDULL), 11U);
             //
             aOrbiterA = (aOrbiterA + aOrbiterI) + 0x22B7767CCD98EF49ULL;
-            aOrbiterC = ((aOrbiterC ^ aOrbiterA) ^ 0xDD73C6F274919213ULL) ^ aPhaseGOrbiterUpdateSaltC[((aIndex + 12U)) & S_SALT1];
+            aOrbiterC = ((aOrbiterC ^ aOrbiterA) ^ 0xDD73C6F274919213ULL) ^ aPhaseGOrbiterUpdateSaltC[((aIndex + 12U)) & 31];
             aOrbiterC = RotL64((aOrbiterC * 0xF9F429D68C96A279ULL), 47U);
             //
             aOrbiterI = (aOrbiterI + aOrbiterG) + 0x214AA0D2D41ADD8AULL;
             aOrbiterJ = (aOrbiterJ ^ aOrbiterI) ^ 0xE41EA96F34F71C24ULL;
             aOrbiterJ = RotL64((aOrbiterJ * 0x434C841A95BF32CFULL), 19U);
             //
-            aOrbiterF = ((aOrbiterF + aOrbiterE) + 0x9134D125E6EF86D1ULL) + aPhaseGOrbiterUpdateSaltD[((aIndex + 18U)) & S_SALT1];
-            aOrbiterH = ((aOrbiterH ^ aOrbiterF) ^ 0x8CC95B5BD0FAB7E2ULL) ^ aPhaseGOrbiterUpdateSaltA[((aIndex + 27U)) & S_SALT1];
+            aOrbiterF = ((aOrbiterF + aOrbiterE) + 0x9134D125E6EF86D1ULL) + aPhaseGOrbiterUpdateSaltD[((aIndex + 18U)) & 31];
+            aOrbiterH = ((aOrbiterH ^ aOrbiterF) ^ 0x8CC95B5BD0FAB7E2ULL) ^ aPhaseGOrbiterUpdateSaltA[((aIndex + 27U)) & 31];
             aOrbiterH = RotL64((aOrbiterH * 0x68B6ADEE56CD9F49ULL), 13U);
             //
             aOrbiterJ = (aOrbiterJ + aOrbiterF) + 0xA34DC6EEA458C7AEULL;
@@ -17021,7 +17021,7 @@ void TwistExpander_Antares_Arx::GROW_A(TwistWorkSpace *pWorkSpace,
             aOrbiterA = (aOrbiterA ^ aOrbiterB) ^ 0x44C9D2FD5119D039ULL;
             aOrbiterA = RotL64((aOrbiterA * 0x05D2F33E69622563ULL), 41U);
             //
-            aOrbiterK = ((aOrbiterK + aOrbiterC) + 0x7D96B46BC5E145F4ULL) + aPhaseGOrbiterUpdateSaltF[((aIndex + 16U)) & S_SALT1];
+            aOrbiterK = ((aOrbiterK + aOrbiterC) + 0x7D96B46BC5E145F4ULL) + aPhaseGOrbiterUpdateSaltF[((aIndex + 16U)) & 31];
             aOrbiterG = (aOrbiterG ^ aOrbiterK) ^ 0xA9A3736490128168ULL;
             aOrbiterG = RotL64((aOrbiterG * 0x29D6E868A8888459ULL), 21U);
             //
@@ -17046,8 +17046,8 @@ void TwistExpander_Antares_Arx::GROW_A(TwistWorkSpace *pWorkSpace,
             aWandererJ = aWandererJ + ((RotL64(aScatter, 29U) + aOrbiterD) + RotL64(aOrbiterB, 37U));
             aWandererC = aWandererC ^ ((RotL64(aCross, 53U) + RotL64(aOrbiterC, 3U)) + aOrbiterE);
             aWandererA = aWandererA + (((RotL64(aScatter, 23U) + aOrbiterA) + RotL64(aOrbiterI, 13U)) + RotL64(aCarry, 13U));
-            aWandererD = aWandererD ^ (((RotL64(aIngress, 11U) + RotL64(aOrbiterF, 23U)) + aOrbiterK) + aPhaseGWandererUpdateSaltB[(((31U - aIndex) + 9U)) & S_SALT1]);
-            aWandererB = aWandererB + ((((RotL64(aCross, 46U) + aOrbiterB) + RotL64(aOrbiterH, 60U)) + RotL64(aCarry, 5U)) + aPhaseGWandererUpdateSaltE[((aIndex + 13U)) & S_SALT1]);
+            aWandererD = aWandererD ^ (((RotL64(aIngress, 11U) + RotL64(aOrbiterF, 23U)) + aOrbiterK) + aPhaseGWandererUpdateSaltB[(((31U - aIndex) + 9U)) & 31]);
+            aWandererB = aWandererB + ((((RotL64(aCross, 46U) + aOrbiterB) + RotL64(aOrbiterH, 60U)) + RotL64(aCarry, 5U)) + aPhaseGWandererUpdateSaltE[((aIndex + 13U)) & 31]);
             //
             aCarry = aCarry + (aWandererA ^ RotL64(aWandererB, 34U));
             aCarry = aCarry + (aWandererG ^ RotL64(aWandererE, 27U));
@@ -17088,19 +17088,19 @@ void TwistExpander_Antares_Arx::GROW_A(TwistWorkSpace *pWorkSpace,
             aScatter = (RotL64(aIngress, 53U) ^ RotL64(aCross, 24U)) + (RotL64(aPrevious, 3U) + RotL64(aCarry, 39U));
             aScatter = TwistMix64::DiffuseC(aScatter);
             //
-            aOrbiterG = ((aWandererA + RotL64(aScatter, 24U)) + 0xF773BDAA7D0880A9ULL) + aPhaseGOrbiterAssignSaltE[((aIndex + 28U)) & S_SALT1];
+            aOrbiterG = ((aWandererA + RotL64(aScatter, 24U)) + 0xF773BDAA7D0880A9ULL) + aPhaseGOrbiterAssignSaltE[((aIndex + 28U)) & 31];
             aOrbiterA = (aWandererG + RotL64(aIngress, 53U)) + 0x1D9B24BDC69AF095ULL;
             aOrbiterF = (aWandererB + RotL64(aPrevious, 41U)) + 0xDC96F433DBB11A37ULL;
             aOrbiterK = (aWandererI + RotL64(aCross, 51U)) + 0x6D1F67D4C55B3F99ULL;
             aOrbiterE = ((aWandererD + RotL64(aScatter, 39U)) + RotL64(aCarry, 39U)) + 0xDE504A759B3CAEDDULL;
-            aOrbiterB = (((aWandererE + RotL64(aCross, 35U)) + RotL64(aCarry, 53U)) + 0x4251AE2333F54223ULL) + aPhaseGOrbiterAssignSaltB[((aIndex + 13U)) & S_SALT1];
+            aOrbiterB = (((aWandererE + RotL64(aCross, 35U)) + RotL64(aCarry, 53U)) + 0x4251AE2333F54223ULL) + aPhaseGOrbiterAssignSaltB[((aIndex + 13U)) & 31];
             aOrbiterJ = (aWandererC + RotL64(aIngress, 12U)) + 0xA1EB7AF5AEE29B92ULL;
             aOrbiterC = ((aWandererH + RotL64(aPrevious, 29U)) + RotL64(aCarry, 47U)) + 0x839E5BDF629FA735ULL;
             aOrbiterD = (aWandererK + RotL64(aCross, 47U)) + 0x8C67C417A6B13706ULL;
             aOrbiterH = (aWandererJ + RotL64(aIngress, 57U)) + 0xCF41BABB4A3F3E61ULL;
             aOrbiterI = (aWandererF + RotL64(aPrevious, 37U)) + 0x4B09FD83A189BF12ULL;
             //
-            aOrbiterG = ((aOrbiterG + aOrbiterA) + 0xEF10A757F3BC918FULL) + aPhaseGOrbiterUpdateSaltE[(((31U - aIndex) + 11U)) & S_SALT1];
+            aOrbiterG = ((aOrbiterG + aOrbiterA) + 0xEF10A757F3BC918FULL) + aPhaseGOrbiterUpdateSaltE[(((31U - aIndex) + 11U)) & 31];
             aOrbiterF = (aOrbiterF ^ aOrbiterG) ^ 0xB5E4B19102F8A249ULL;
             aOrbiterF = RotL64((aOrbiterF * 0xF0D94D6436082A69ULL), 3U);
             //
@@ -17113,11 +17113,11 @@ void TwistExpander_Antares_Arx::GROW_A(TwistWorkSpace *pWorkSpace,
             aOrbiterJ = RotL64((aOrbiterJ * 0xFB6DD2FD390B5B69ULL), 11U);
             //
             aOrbiterC = (aOrbiterC + aOrbiterD) + 0x2F128535AF17C0ECULL;
-            aOrbiterA = ((aOrbiterA ^ aOrbiterC) ^ 0x1B78228EBC052CD4ULL) ^ aPhaseGOrbiterUpdateSaltD[((aIndex + 5U)) & S_SALT1];
+            aOrbiterA = ((aOrbiterA ^ aOrbiterC) ^ 0x1B78228EBC052CD4ULL) ^ aPhaseGOrbiterUpdateSaltD[((aIndex + 5U)) & 31];
             aOrbiterA = RotL64((aOrbiterA * 0x5554CFB4F9616E73ULL), 47U);
             //
             aOrbiterD = (aOrbiterD + aOrbiterG) + 0xCA8E213A88F38675ULL;
-            aOrbiterK = ((aOrbiterK ^ aOrbiterD) ^ 0x7C5B76ED6AF026EAULL) ^ aPhaseGOrbiterUpdateSaltC[(((31U - aIndex) + 10U)) & S_SALT1];
+            aOrbiterK = ((aOrbiterK ^ aOrbiterD) ^ 0x7C5B76ED6AF026EAULL) ^ aPhaseGOrbiterUpdateSaltC[(((31U - aIndex) + 10U)) & 31];
             aOrbiterK = RotL64((aOrbiterK * 0x6D22366C6AE32087ULL), 57U);
             //
             aOrbiterH = (aOrbiterH + aOrbiterJ) + 0x68DEA0715B20DC21ULL;
@@ -17137,7 +17137,7 @@ void TwistExpander_Antares_Arx::GROW_A(TwistWorkSpace *pWorkSpace,
             aOrbiterI = RotL64((aOrbiterI * 0x18F479A2473661B3ULL), 41U);
             //
             aOrbiterJ = (aOrbiterJ + aOrbiterI) + 0x6E91C972C95C88A7ULL;
-            aOrbiterD = ((aOrbiterD ^ aOrbiterJ) ^ 0xB7F0FB7E73D6FC14ULL) ^ aPhaseGOrbiterUpdateSaltB[((aIndex + 23U)) & S_SALT1];
+            aOrbiterD = ((aOrbiterD ^ aOrbiterJ) ^ 0xB7F0FB7E73D6FC14ULL) ^ aPhaseGOrbiterUpdateSaltB[((aIndex + 23U)) & 31];
             aOrbiterD = RotL64((aOrbiterD * 0x9E378CC1B11DD5EFULL), 35U);
             //
             aOrbiterF = (aOrbiterF + aOrbiterB) + 0xC53A86FB670B3F10ULL;
@@ -17158,8 +17158,8 @@ void TwistExpander_Antares_Arx::GROW_A(TwistWorkSpace *pWorkSpace,
             aWandererC = aWandererC ^ ((RotL64(aIngress, 3U) + aOrbiterG) + RotL64(aOrbiterB, 27U));
             aWandererH = aWandererH + (((RotL64(aScatter, 5U) + aOrbiterH) + RotL64(aOrbiterJ, 29U)) + RotL64(aCarry, 23U));
             aWandererF = aWandererF ^ ((RotL64(aIngress, 23U) + RotL64(aOrbiterK, 13U)) + aOrbiterH);
-            aWandererE = aWandererE + ((((RotL64(aCross, 43U) + aOrbiterG) + RotL64(aOrbiterA, 39U)) + RotL64(aCarry, 47U)) + aPhaseGWandererUpdateSaltA[(((31U - aIndex) + 26U)) & S_SALT1]);
-            aWandererA = aWandererA ^ (((RotL64(aPrevious, 27U) + aOrbiterF) + RotL64(aOrbiterH, 43U)) + aPhaseGWandererUpdateSaltD[((aIndex + 17U)) & S_SALT1]);
+            aWandererE = aWandererE + ((((RotL64(aCross, 43U) + aOrbiterG) + RotL64(aOrbiterA, 39U)) + RotL64(aCarry, 47U)) + aPhaseGWandererUpdateSaltA[(((31U - aIndex) + 26U)) & 31]);
+            aWandererA = aWandererA ^ (((RotL64(aPrevious, 27U) + aOrbiterF) + RotL64(aOrbiterH, 43U)) + aPhaseGWandererUpdateSaltD[((aIndex + 17U)) & 31]);
             aWandererG = aWandererG + ((RotL64(aScatter, 30U) + RotL64(aOrbiterE, 10U)) + aOrbiterH);
             aWandererD = aWandererD ^ ((RotL64(aIngress, 47U) + aOrbiterC) + RotL64(aOrbiterH, 35U));
             aWandererI = aWandererI + ((RotL64(aCross, 39U) + RotL64(aOrbiterC, 21U)) + aOrbiterD);
@@ -17204,8 +17204,8 @@ void TwistExpander_Antares_Arx::GROW_A(TwistWorkSpace *pWorkSpace,
             aScatter = TwistMix64::DiffuseB(aScatter);
             //
             aOrbiterE = ((aWandererD + RotL64(aScatter, 53U)) + RotL64(aCarry, 23U)) + 0x8F9E2E2845CA975DULL;
-            aOrbiterJ = (((aWandererE + RotL64(aIngress, 13U)) + RotL64(aCarry, 47U)) + 0x4DB518566D9C107BULL) + aPhaseGOrbiterAssignSaltC[((aIndex + 6U)) & S_SALT1];
-            aOrbiterF = (((aWandererB + RotL64(aCross, 37U)) + RotL64(aCarry, 51U)) + 0xB9C0B21A16CAC307ULL) + aPhaseGOrbiterAssignSaltD[((aIndex + 27U)) & S_SALT1];
+            aOrbiterJ = (((aWandererE + RotL64(aIngress, 13U)) + RotL64(aCarry, 47U)) + 0x4DB518566D9C107BULL) + aPhaseGOrbiterAssignSaltC[((aIndex + 6U)) & 31];
+            aOrbiterF = (((aWandererB + RotL64(aCross, 37U)) + RotL64(aCarry, 51U)) + 0xB9C0B21A16CAC307ULL) + aPhaseGOrbiterAssignSaltD[((aIndex + 27U)) & 31];
             aOrbiterB = (aWandererH + RotL64(aPrevious, 3U)) + 0xAED2DA91AFE73B13ULL;
             aOrbiterC = (aWandererA + RotL64(aScatter, 40U)) + 0x1ED46A1EA0B2DAB6ULL;
             aOrbiterD = (aWandererJ + RotL64(aIngress, 23U)) + 0xCF9F13787ED2E828ULL;
@@ -17223,7 +17223,7 @@ void TwistExpander_Antares_Arx::GROW_A(TwistWorkSpace *pWorkSpace,
             aOrbiterD = (aOrbiterD ^ aOrbiterB) ^ 0x3028A7CC5AB1FA56ULL;
             aOrbiterD = RotL64((aOrbiterD * 0xECC85687A3EA37C9ULL), 47U);
             //
-            aOrbiterG = ((aOrbiterG + aOrbiterK) + 0xBE2B0EF2E6F95D0EULL) + aPhaseGOrbiterUpdateSaltD[((aIndex + 11U)) & S_SALT1];
+            aOrbiterG = ((aOrbiterG + aOrbiterK) + 0xBE2B0EF2E6F95D0EULL) + aPhaseGOrbiterUpdateSaltD[((aIndex + 11U)) & 31];
             aOrbiterB = (aOrbiterB ^ aOrbiterG) ^ 0x2D138FCDE1CBEE35ULL;
             aOrbiterB = RotL64((aOrbiterB * 0xDF89B10D2C168BC7ULL), 29U);
             //
@@ -17236,18 +17236,18 @@ void TwistExpander_Antares_Arx::GROW_A(TwistWorkSpace *pWorkSpace,
             aOrbiterI = RotL64((aOrbiterI * 0xDB060EF9C9F3F7CDULL), 23U);
             //
             aOrbiterI = (aOrbiterI + aOrbiterB) + 0x30614C842E9C5FA8ULL;
-            aOrbiterH = ((aOrbiterH ^ aOrbiterI) ^ 0x9381558C8FC83D25ULL) ^ aPhaseGOrbiterUpdateSaltB[((aIndex + 19U)) & S_SALT1];
+            aOrbiterH = ((aOrbiterH ^ aOrbiterI) ^ 0x9381558C8FC83D25ULL) ^ aPhaseGOrbiterUpdateSaltB[((aIndex + 19U)) & 31];
             aOrbiterH = RotL64((aOrbiterH * 0x512ACB61464C7895ULL), 43U);
             //
             aOrbiterC = (aOrbiterC + aOrbiterF) + 0x5D7BDBA611668656ULL;
-            aOrbiterA = ((aOrbiterA ^ aOrbiterC) ^ 0x62B2D59DEB8CA478ULL) ^ aPhaseGOrbiterUpdateSaltF[((aIndex + 14U)) & S_SALT1];
+            aOrbiterA = ((aOrbiterA ^ aOrbiterC) ^ 0x62B2D59DEB8CA478ULL) ^ aPhaseGOrbiterUpdateSaltF[((aIndex + 14U)) & 31];
             aOrbiterA = RotL64((aOrbiterA * 0x1A27DEB577B4C4DBULL), 13U);
             //
             aOrbiterK = (aOrbiterK + aOrbiterE) + 0xF933A1903CC4FA3AULL;
             aOrbiterC = (aOrbiterC ^ aOrbiterK) ^ 0xB8A45D83390E780CULL;
             aOrbiterC = RotL64((aOrbiterC * 0x9423BD61AE6F26B5ULL), 57U);
             //
-            aOrbiterD = ((aOrbiterD + aOrbiterA) + 0x4E774C8DD52428C6ULL) + aPhaseGOrbiterUpdateSaltE[(((31U - aIndex) + 12U)) & S_SALT1];
+            aOrbiterD = ((aOrbiterD + aOrbiterA) + 0x4E774C8DD52428C6ULL) + aPhaseGOrbiterUpdateSaltE[(((31U - aIndex) + 12U)) & 31];
             aOrbiterE = (aOrbiterE ^ aOrbiterD) ^ 0x7DD797896971A4D5ULL;
             aOrbiterE = RotL64((aOrbiterE * 0x7B84EE8AF47F7305ULL), 27U);
             //
@@ -17267,10 +17267,10 @@ void TwistExpander_Antares_Arx::GROW_A(TwistWorkSpace *pWorkSpace,
             aIngress = aIngress + RotL64(aOrbiterC, 10U);
             aIngress = TwistMix64::DiffuseB((aIngress + aScatter));
             //
-            aWandererE = aWandererE ^ (((RotL64(aIngress, 57U) + RotL64(aOrbiterA, 5U)) + aOrbiterH) + aPhaseGWandererUpdateSaltF[(((31U - aIndex) + 28U)) & S_SALT1]);
+            aWandererE = aWandererE ^ (((RotL64(aIngress, 57U) + RotL64(aOrbiterA, 5U)) + aOrbiterH) + aPhaseGWandererUpdateSaltF[(((31U - aIndex) + 28U)) & 31]);
             aWandererC = aWandererC + (((RotL64(aPrevious, 43U) + aOrbiterI) + RotL64(aOrbiterB, 51U)) + RotL64(aCarry, 23U));
             aWandererG = aWandererG ^ ((RotL64(aScatter, 50U) + RotL64(aOrbiterJ, 37U)) + aOrbiterD);
-            aWandererF = aWandererF + (((RotL64(aCross, 27U) + RotL64(aOrbiterI, 24U)) + aOrbiterA) + aPhaseGWandererUpdateSaltC[((aIndex + 8U)) & S_SALT1]);
+            aWandererF = aWandererF + (((RotL64(aCross, 27U) + RotL64(aOrbiterI, 24U)) + aOrbiterA) + aPhaseGWandererUpdateSaltC[((aIndex + 8U)) & 31]);
             aWandererH = aWandererH ^ ((RotL64(aPrevious, 23U) + RotL64(aOrbiterG, 39U)) + aOrbiterD);
             aWandererD = aWandererD + ((RotL64(aIngress, 53U) + RotL64(aOrbiterA, 41U)) + aOrbiterC);
             aWandererB = aWandererB ^ ((RotL64(aCross, 47U) + RotL64(aOrbiterE, 11U)) + aOrbiterF);
@@ -17321,8 +17321,8 @@ void TwistExpander_Antares_Arx::GROW_A(TwistWorkSpace *pWorkSpace,
             aOrbiterG = (aWandererF + RotL64(aPrevious, 24U)) + 0x23C4D713639A59BBULL;
             aOrbiterF = (aWandererH + RotL64(aIngress, 47U)) + 0x3D70E2B154D50EDFULL;
             aOrbiterE = ((aWandererC + RotL64(aCross, 37U)) + RotL64(aCarry, 35U)) + 0xC71DB5607CFC12AFULL;
-            aOrbiterH = ((aWandererJ + RotL64(aScatter, 51U)) + 0x2F9CAFCEE496823EULL) + aPhaseGOrbiterAssignSaltA[(((31U - aIndex) + 3U)) & S_SALT1];
-            aOrbiterJ = (((aWandererE + RotL64(aPrevious, 10U)) + RotL64(aCarry, 43U)) + 0x5A86947BD72DED11ULL) + aPhaseGOrbiterAssignSaltF[(((31U - aIndex) + 14U)) & S_SALT1];
+            aOrbiterH = ((aWandererJ + RotL64(aScatter, 51U)) + 0x2F9CAFCEE496823EULL) + aPhaseGOrbiterAssignSaltA[(((31U - aIndex) + 3U)) & 31];
+            aOrbiterJ = (((aWandererE + RotL64(aPrevious, 10U)) + RotL64(aCarry, 43U)) + 0x5A86947BD72DED11ULL) + aPhaseGOrbiterAssignSaltF[(((31U - aIndex) + 14U)) & 31];
             aOrbiterD = (aWandererD + RotL64(aIngress, 27U)) + 0x50B21C0F634A875FULL;
             aOrbiterA = (aWandererG + RotL64(aCross, 21U)) + 0x14CE8B0710E8FDD9ULL;
             aOrbiterI = (aWandererA + RotL64(aScatter, 39U)) + 0x9FB5DA69E1F5432AULL;
@@ -17335,15 +17335,15 @@ void TwistExpander_Antares_Arx::GROW_A(TwistWorkSpace *pWorkSpace,
             aOrbiterE = RotL64((aOrbiterE * 0xB0DEEDD467E2ED39ULL), 41U);
             //
             aOrbiterH = (aOrbiterH + aOrbiterJ) + 0xCE67C61101309540ULL;
-            aOrbiterD = ((aOrbiterD ^ aOrbiterH) ^ 0x9576FB133A6E540BULL) ^ aPhaseGOrbiterUpdateSaltE[((aIndex + 19U)) & S_SALT1];
+            aOrbiterD = ((aOrbiterD ^ aOrbiterH) ^ 0x9576FB133A6E540BULL) ^ aPhaseGOrbiterUpdateSaltE[((aIndex + 19U)) & 31];
             aOrbiterD = RotL64((aOrbiterD * 0xD231F2965E9F4C87ULL), 5U);
             //
             aOrbiterD = (aOrbiterD + aOrbiterA) + 0x05B0E03C89B42473ULL;
-            aOrbiterG = ((aOrbiterG ^ aOrbiterD) ^ 0x494502288BF9BA9EULL) ^ aPhaseGOrbiterUpdateSaltF[((aIndex + 10U)) & S_SALT1];
+            aOrbiterG = ((aOrbiterG ^ aOrbiterD) ^ 0x494502288BF9BA9EULL) ^ aPhaseGOrbiterUpdateSaltF[((aIndex + 10U)) & 31];
             aOrbiterG = RotL64((aOrbiterG * 0xAF497BD025411187ULL), 47U);
             //
             aOrbiterI = (aOrbiterI + aOrbiterH) + 0x3B8E2A40B1A71C7CULL;
-            aOrbiterC = ((aOrbiterC ^ aOrbiterI) ^ 0x67BA735CD879CC71ULL) ^ aPhaseGOrbiterUpdateSaltA[(((31U - aIndex) + 28U)) & S_SALT1];
+            aOrbiterC = ((aOrbiterC ^ aOrbiterI) ^ 0x67BA735CD879CC71ULL) ^ aPhaseGOrbiterUpdateSaltA[(((31U - aIndex) + 28U)) & 31];
             aOrbiterC = RotL64((aOrbiterC * 0x4DC1DE41B41CD525ULL), 57U);
             //
             aOrbiterF = (aOrbiterF + aOrbiterK) + 0x9F7B6B6C3938E037ULL;
@@ -17354,7 +17354,7 @@ void TwistExpander_Antares_Arx::GROW_A(TwistWorkSpace *pWorkSpace,
             aOrbiterB = (aOrbiterB ^ aOrbiterC) ^ 0x9A94A95A216CB06EULL;
             aOrbiterB = RotL64((aOrbiterB * 0xEEDFD4677A87C1A7ULL), 23U);
             //
-            aOrbiterB = ((aOrbiterB + aOrbiterG) + 0x79A7647746438324ULL) + aPhaseGOrbiterUpdateSaltD[((aIndex + 15U)) & S_SALT1];
+            aOrbiterB = ((aOrbiterB + aOrbiterG) + 0x79A7647746438324ULL) + aPhaseGOrbiterUpdateSaltD[((aIndex + 15U)) & 31];
             aOrbiterK = (aOrbiterK ^ aOrbiterB) ^ 0x5E0AE346B62441C9ULL;
             aOrbiterK = RotL64((aOrbiterK * 0x0C0993B3DCA9135DULL), 11U);
             //
@@ -17389,8 +17389,8 @@ void TwistExpander_Antares_Arx::GROW_A(TwistWorkSpace *pWorkSpace,
             aWandererF = aWandererF ^ ((RotL64(aScatter, 11U) + RotL64(aOrbiterK, 37U)) + aOrbiterE);
             aWandererC = aWandererC + ((RotL64(aIngress, 3U) + RotL64(aOrbiterF, 3U)) + aOrbiterG);
             aWandererG = aWandererG ^ ((RotL64(aPrevious, 51U) + RotL64(aOrbiterB, 13U)) + aOrbiterI);
-            aWandererA = aWandererA + ((((RotL64(aCross, 48U) + RotL64(aOrbiterF, 51U)) + aOrbiterC) + RotL64(aCarry, 41U)) + aPhaseGWandererUpdateSaltE[((aIndex + 12U)) & S_SALT1]);
-            aWandererD = aWandererD ^ (((RotL64(aPrevious, 5U) + RotL64(aOrbiterA, 19U)) + aOrbiterH) + aPhaseGWandererUpdateSaltB[(((31U - aIndex) + 21U)) & S_SALT1]);
+            aWandererA = aWandererA + ((((RotL64(aCross, 48U) + RotL64(aOrbiterF, 51U)) + aOrbiterC) + RotL64(aCarry, 41U)) + aPhaseGWandererUpdateSaltE[((aIndex + 12U)) & 31]);
+            aWandererD = aWandererD ^ (((RotL64(aPrevious, 5U) + RotL64(aOrbiterA, 19U)) + aOrbiterH) + aPhaseGWandererUpdateSaltB[(((31U - aIndex) + 21U)) & 31]);
             aWandererK = aWandererK + ((RotL64(aIngress, 57U) + aOrbiterC) + RotL64(aOrbiterI, 54U));
             aWandererE = aWandererE ^ ((RotL64(aCross, 35U) + aOrbiterH) + RotL64(aOrbiterB, 39U));
             //
@@ -17534,9 +17534,9 @@ void TwistExpander_Antares_Arx::GROW_B(TwistWorkSpace *pWorkSpace,
             aScatter = (RotL64(aCross, 56U) + RotL64(aPrevious, 39U)) + (RotL64(aCarry, 11U) ^ RotL64(aIngress, 23U));
             aScatter = TwistMix64::DiffuseB(aScatter);
             //
-            aOrbiterH = ((aWandererI + RotL64(aScatter, 47U)) + 0x71A30B31C20A4229ULL) + aPhaseHOrbiterAssignSaltE[((aIndex + 3U)) & S_SALT1];
+            aOrbiterH = ((aWandererI + RotL64(aScatter, 47U)) + 0x71A30B31C20A4229ULL) + aPhaseHOrbiterAssignSaltE[((aIndex + 3U)) & 31];
             aOrbiterD = ((aWandererH + RotL64(aPrevious, 18U)) + RotL64(aCarry, 11U)) + 0x386A10AD625576CFULL;
-            aOrbiterK = ((aWandererK + RotL64(aIngress, 41U)) + 0x1B0ED744B96A1D6BULL) + aPhaseHOrbiterAssignSaltC[((aIndex + 17U)) & S_SALT1];
+            aOrbiterK = ((aWandererK + RotL64(aIngress, 41U)) + 0x1B0ED744B96A1D6BULL) + aPhaseHOrbiterAssignSaltC[((aIndex + 17U)) & 31];
             aOrbiterB = (aWandererE + RotL64(aCross, 11U)) + 0xC617BF6CB41F36C9ULL;
             aOrbiterF = (aWandererF + RotL64(aIngress, 35U)) + 0x6FED010ECA4E4EE9ULL;
             aOrbiterG = ((aWandererB + RotL64(aCross, 3U)) + RotL64(aCarry, 43U)) + 0x753D3E0B8E91C366ULL;
@@ -17564,8 +17564,8 @@ void TwistExpander_Antares_Arx::GROW_B(TwistWorkSpace *pWorkSpace,
             aOrbiterE = (aOrbiterE ^ aOrbiterD) ^ 0x333F2428AAF74635ULL;
             aOrbiterE = RotL64((aOrbiterE * 0xB099BA91AC252091ULL), 23U);
             //
-            aOrbiterJ = ((aOrbiterJ + aOrbiterK) + 0xD9A35F0CF5621795ULL) + aPhaseHOrbiterUpdateSaltA[(((31U - aIndex) + 14U)) & S_SALT1];
-            aOrbiterF = ((aOrbiterF ^ aOrbiterJ) ^ 0x12B6A31D184CD6ECULL) ^ aPhaseHOrbiterUpdateSaltD[((aIndex + 21U)) & S_SALT1];
+            aOrbiterJ = ((aOrbiterJ + aOrbiterK) + 0xD9A35F0CF5621795ULL) + aPhaseHOrbiterUpdateSaltA[(((31U - aIndex) + 14U)) & 31];
+            aOrbiterF = ((aOrbiterF ^ aOrbiterJ) ^ 0x12B6A31D184CD6ECULL) ^ aPhaseHOrbiterUpdateSaltD[((aIndex + 21U)) & 31];
             aOrbiterF = RotL64((aOrbiterF * 0x13556B638C3ABF81ULL), 3U);
             //
             aOrbiterK = (aOrbiterK + aOrbiterE) + 0xB4135633E6CB68CFULL;
@@ -17576,8 +17576,8 @@ void TwistExpander_Antares_Arx::GROW_B(TwistWorkSpace *pWorkSpace,
             aOrbiterJ = (aOrbiterJ ^ aOrbiterA) ^ 0x2383BC62277ADC6BULL;
             aOrbiterJ = RotL64((aOrbiterJ * 0x5681506BD6077CDDULL), 53U);
             //
-            aOrbiterE = ((aOrbiterE + aOrbiterJ) + 0x1E576AD158F4CAC5ULL) + aPhaseHOrbiterUpdateSaltE[(((31U - aIndex) + 20U)) & S_SALT1];
-            aOrbiterB = ((aOrbiterB ^ aOrbiterE) ^ 0xD19F421963341709ULL) ^ aPhaseHOrbiterUpdateSaltC[((aIndex + 9U)) & S_SALT1];
+            aOrbiterE = ((aOrbiterE + aOrbiterJ) + 0x1E576AD158F4CAC5ULL) + aPhaseHOrbiterUpdateSaltE[(((31U - aIndex) + 20U)) & 31];
+            aOrbiterB = ((aOrbiterB ^ aOrbiterE) ^ 0xD19F421963341709ULL) ^ aPhaseHOrbiterUpdateSaltC[((aIndex + 9U)) & 31];
             aOrbiterB = RotL64((aOrbiterB * 0xA12A23715353F2F9ULL), 47U);
             //
             aIngress = RotL64(aOrbiterF, 35U) ^ aOrbiterE;
@@ -17590,8 +17590,8 @@ void TwistExpander_Antares_Arx::GROW_B(TwistWorkSpace *pWorkSpace,
             aWandererH = aWandererH + ((RotL64(aPrevious, 37U) + aOrbiterB) + RotL64(aOrbiterF, 52U));
             aWandererI = aWandererI ^ ((RotL64(aCross, 10U) + RotL64(aOrbiterE, 23U)) + aOrbiterH);
             aWandererC = aWandererC + ((RotL64(aIngress, 23U) + RotL64(aOrbiterE, 11U)) + aOrbiterA);
-            aWandererB = aWandererB ^ (((RotL64(aScatter, 43U) + aOrbiterD) + RotL64(aOrbiterJ, 47U)) + aPhaseHWandererUpdateSaltA[(((31U - aIndex) + 12U)) & S_SALT1]);
-            aWandererG = aWandererG + ((((RotL64(aPrevious, 47U) + RotL64(aOrbiterA, 39U)) + aOrbiterJ) + RotL64(aCarry, 53U)) + aPhaseHWandererUpdateSaltC[((aIndex + 5U)) & S_SALT1]);
+            aWandererB = aWandererB ^ (((RotL64(aScatter, 43U) + aOrbiterD) + RotL64(aOrbiterJ, 47U)) + aPhaseHWandererUpdateSaltA[(((31U - aIndex) + 12U)) & 31]);
+            aWandererG = aWandererG + ((((RotL64(aPrevious, 47U) + RotL64(aOrbiterA, 39U)) + aOrbiterJ) + RotL64(aCarry, 53U)) + aPhaseHWandererUpdateSaltC[((aIndex + 5U)) & 31]);
             aWandererK = aWandererK ^ ((RotL64(aScatter, 19U) + aOrbiterH) + RotL64(aOrbiterD, 58U));
             aWandererD = aWandererD + ((RotL64(aIngress, 3U) + RotL64(aOrbiterK, 43U)) + aOrbiterG);
             aWandererF = aWandererF ^ ((RotL64(aCross, 53U) + RotL64(aOrbiterF, 27U)) + aOrbiterJ);
@@ -17636,8 +17636,8 @@ void TwistExpander_Antares_Arx::GROW_B(TwistWorkSpace *pWorkSpace,
             aScatter = TwistMix64::DiffuseB(aScatter);
             //
             aOrbiterJ = (aWandererE + RotL64(aScatter, 39U)) + 0xC8399A891F443484ULL;
-            aOrbiterK = ((aWandererJ + RotL64(aCross, 5U)) + 0xBED490C0E3884D36ULL) + aPhaseHOrbiterAssignSaltD[(((31U - aIndex) + 5U)) & S_SALT1];
-            aOrbiterB = ((aWandererC + RotL64(aIngress, 56U)) + 0xCC5FC8DF12497F01ULL) + aPhaseHOrbiterAssignSaltB[((aIndex + 27U)) & S_SALT1];
+            aOrbiterK = ((aWandererJ + RotL64(aCross, 5U)) + 0xBED490C0E3884D36ULL) + aPhaseHOrbiterAssignSaltD[(((31U - aIndex) + 5U)) & 31];
+            aOrbiterB = ((aWandererC + RotL64(aIngress, 56U)) + 0xCC5FC8DF12497F01ULL) + aPhaseHOrbiterAssignSaltB[((aIndex + 27U)) & 31];
             aOrbiterD = (aWandererI + RotL64(aPrevious, 27U)) + 0xE7DF903329CCA48FULL;
             aOrbiterH = ((aWandererF + RotL64(aIngress, 19U)) + RotL64(aCarry, 11U)) + 0x355BD6BD02EE75D6ULL;
             aOrbiterE = (aWandererK + RotL64(aPrevious, 13U)) + 0x955A6BF19C7809D5ULL;
@@ -17653,7 +17653,7 @@ void TwistExpander_Antares_Arx::GROW_B(TwistWorkSpace *pWorkSpace,
             aOrbiterH = (aOrbiterH ^ aOrbiterK) ^ 0xB18AFC9CCBDCA105ULL;
             aOrbiterH = RotL64((aOrbiterH * 0x49BF8E3AA25154ABULL), 5U);
             //
-            aOrbiterD = ((aOrbiterD + aOrbiterJ) + 0xCBEB17649A4366A3ULL) + aPhaseHOrbiterUpdateSaltD[((aIndex + 26U)) & S_SALT1];
+            aOrbiterD = ((aOrbiterD + aOrbiterJ) + 0xCBEB17649A4366A3ULL) + aPhaseHOrbiterUpdateSaltD[((aIndex + 26U)) & 31];
             aOrbiterE = (aOrbiterE ^ aOrbiterD) ^ 0x470AD5C780EC8E71ULL;
             aOrbiterE = RotL64((aOrbiterE * 0xCA1320BDACECF177ULL), 19U);
             //
@@ -17662,15 +17662,15 @@ void TwistExpander_Antares_Arx::GROW_B(TwistWorkSpace *pWorkSpace,
             aOrbiterI = RotL64((aOrbiterI * 0xEBAB5185E0B7704DULL), 47U);
             //
             aOrbiterA = (aOrbiterA + aOrbiterF) + 0x62943B834CC7AD12ULL;
-            aOrbiterD = ((aOrbiterD ^ aOrbiterA) ^ 0xDA32F05595972391ULL) ^ aPhaseHOrbiterUpdateSaltA[((aIndex + 23U)) & S_SALT1];
+            aOrbiterD = ((aOrbiterD ^ aOrbiterA) ^ 0xDA32F05595972391ULL) ^ aPhaseHOrbiterUpdateSaltA[((aIndex + 23U)) & 31];
             aOrbiterD = RotL64((aOrbiterD * 0x93CAAFE6A2B6A9B7ULL), 57U);
             //
-            aOrbiterF = ((aOrbiterF + aOrbiterI) + 0x736BCEC1A79CCE21ULL) + aPhaseHOrbiterUpdateSaltB[((aIndex + 16U)) & S_SALT1];
+            aOrbiterF = ((aOrbiterF + aOrbiterI) + 0x736BCEC1A79CCE21ULL) + aPhaseHOrbiterUpdateSaltB[((aIndex + 16U)) & 31];
             aOrbiterJ = (aOrbiterJ ^ aOrbiterF) ^ 0x33E949EDCB6AA708ULL;
             aOrbiterJ = RotL64((aOrbiterJ * 0x604604885E46D713ULL), 41U);
             //
             aOrbiterI = (aOrbiterI + aOrbiterA) + 0xC4EF45904ACEB290ULL;
-            aOrbiterK = ((aOrbiterK ^ aOrbiterI) ^ 0x0C76AD4B8DFD9519ULL) ^ aPhaseHOrbiterUpdateSaltF[((aIndex + 22U)) & S_SALT1];
+            aOrbiterK = ((aOrbiterK ^ aOrbiterI) ^ 0x0C76AD4B8DFD9519ULL) ^ aPhaseHOrbiterUpdateSaltF[((aIndex + 22U)) & 31];
             aOrbiterK = RotL64((aOrbiterK * 0x9AFC6B5B283D31BFULL), 11U);
             //
             aOrbiterH = (aOrbiterH + aOrbiterE) + 0x1FB84D326AE6FC8BULL;
@@ -17691,11 +17691,11 @@ void TwistExpander_Antares_Arx::GROW_B(TwistWorkSpace *pWorkSpace,
             aWandererD = aWandererD + ((RotL64(aScatter, 11U) + aOrbiterE) + RotL64(aOrbiterB, 27U));
             aWandererJ = aWandererJ ^ ((RotL64(aPrevious, 35U) + RotL64(aOrbiterB, 23U)) + aOrbiterD);
             aWandererK = aWandererK + (((RotL64(aCross, 48U) + aOrbiterF) + RotL64(aOrbiterA, 6U)) + RotL64(aCarry, 23U));
-            aWandererC = aWandererC ^ (((RotL64(aIngress, 57U) + aOrbiterF) + RotL64(aOrbiterI, 39U)) + aPhaseHWandererUpdateSaltF[(((31U - aIndex) + 8U)) & S_SALT1]);
+            aWandererC = aWandererC ^ (((RotL64(aIngress, 57U) + aOrbiterF) + RotL64(aOrbiterI, 39U)) + aPhaseHWandererUpdateSaltF[(((31U - aIndex) + 8U)) & 31]);
             aWandererF = aWandererF + ((RotL64(aCross, 43U) + aOrbiterH) + RotL64(aOrbiterE, 35U));
             aWandererI = aWandererI ^ ((RotL64(aIngress, 53U) + aOrbiterF) + RotL64(aOrbiterH, 19U));
             aWandererE = aWandererE + (((RotL64(aScatter, 27U) + RotL64(aOrbiterJ, 14U)) + aOrbiterK) + RotL64(aCarry, 35U));
-            aWandererH = aWandererH ^ (((RotL64(aPrevious, 39U) + aOrbiterI) + RotL64(aOrbiterE, 53U)) + aPhaseHWandererUpdateSaltE[(((31U - aIndex) + 4U)) & S_SALT1]);
+            aWandererH = aWandererH ^ (((RotL64(aPrevious, 39U) + aOrbiterI) + RotL64(aOrbiterE, 53U)) + aPhaseHWandererUpdateSaltE[(((31U - aIndex) + 4U)) & 31]);
             aWandererG = aWandererG + ((RotL64(aIngress, 22U) + RotL64(aOrbiterH, 43U)) + aOrbiterK);
             //
             aCarry = aCarry + (RotL64(aWandererF, 51U) ^ aWandererC);
@@ -17736,7 +17736,7 @@ void TwistExpander_Antares_Arx::GROW_B(TwistWorkSpace *pWorkSpace,
             aScatter = (RotL64(aPrevious, 23U) + RotL64(aCross, 37U)) ^ (RotL64(aIngress, 50U) ^ RotL64(aCarry, 5U));
             aScatter = TwistMix64::DiffuseA(aScatter);
             //
-            aOrbiterJ = (((aWandererA + RotL64(aScatter, 11U)) + RotL64(aCarry, 37U)) + 0x89B041C23ACA6372ULL) + aPhaseHOrbiterAssignSaltF[(((31U - aIndex) + 20U)) & S_SALT1];
+            aOrbiterJ = (((aWandererA + RotL64(aScatter, 11U)) + RotL64(aCarry, 37U)) + 0x89B041C23ACA6372ULL) + aPhaseHOrbiterAssignSaltF[(((31U - aIndex) + 20U)) & 31];
             aOrbiterB = (aWandererH + RotL64(aPrevious, 29U)) + 0x7B4FA08226231946ULL;
             aOrbiterH = (aWandererB + RotL64(aCross, 60U)) + 0x505BD926D26B6268ULL;
             aOrbiterK = (aWandererF + RotL64(aIngress, 37U)) + 0xBACABCDE4D27ADF8ULL;
@@ -17744,10 +17744,10 @@ void TwistExpander_Antares_Arx::GROW_B(TwistWorkSpace *pWorkSpace,
             aOrbiterF = (aWandererI + RotL64(aIngress, 51U)) + 0x4375885332953C9BULL;
             aOrbiterI = (aWandererJ + RotL64(aCross, 43U)) + 0x95BADA2D89BF6D3EULL;
             aOrbiterG = ((aWandererG + RotL64(aPrevious, 47U)) + RotL64(aCarry, 51U)) + 0xAB4841FB48C04C3BULL;
-            aOrbiterA = (((aWandererK + RotL64(aCross, 24U)) + RotL64(aCarry, 23U)) + 0x3F311B2AAE8B5FCFULL) + aPhaseHOrbiterAssignSaltA[((aIndex + 5U)) & S_SALT1];
+            aOrbiterA = (((aWandererK + RotL64(aCross, 24U)) + RotL64(aCarry, 23U)) + 0x3F311B2AAE8B5FCFULL) + aPhaseHOrbiterAssignSaltA[((aIndex + 5U)) & 31];
             //
             aOrbiterJ = (aOrbiterJ + aOrbiterB) + 0x3A8F4F89C309AAD3ULL;
-            aOrbiterH = ((aOrbiterH ^ aOrbiterJ) ^ 0xC662B2F4C6665881ULL) ^ aPhaseHOrbiterUpdateSaltB[(((31U - aIndex) + 18U)) & S_SALT1];
+            aOrbiterH = ((aOrbiterH ^ aOrbiterJ) ^ 0xC662B2F4C6665881ULL) ^ aPhaseHOrbiterUpdateSaltB[(((31U - aIndex) + 18U)) & 31];
             aOrbiterH = RotL64((aOrbiterH * 0x50C569DCC691BDCFULL), 43U);
             //
             aOrbiterK = (aOrbiterK + aOrbiterC) + 0xAF21A38332BAF8DDULL;
@@ -17766,16 +17766,16 @@ void TwistExpander_Antares_Arx::GROW_B(TwistWorkSpace *pWorkSpace,
             aOrbiterK = (aOrbiterK ^ aOrbiterA) ^ 0xD49CCE60EFD1B9D4ULL;
             aOrbiterK = RotL64((aOrbiterK * 0x6103CC6176A29D49ULL), 57U);
             //
-            aOrbiterC = ((aOrbiterC + aOrbiterH) + 0xD648EEC9FC103BC9ULL) + aPhaseHOrbiterUpdateSaltC[((aIndex + 22U)) & S_SALT1];
+            aOrbiterC = ((aOrbiterC + aOrbiterH) + 0xD648EEC9FC103BC9ULL) + aPhaseHOrbiterUpdateSaltC[((aIndex + 22U)) & 31];
             aOrbiterA = (aOrbiterA ^ aOrbiterC) ^ 0xD681A91FD42A9AEBULL;
             aOrbiterA = RotL64((aOrbiterA * 0xBBB98197BDC79FD3ULL), 13U);
             //
             aOrbiterF = (aOrbiterF + aOrbiterA) + 0x4C7AC22993EB563FULL;
-            aOrbiterB = ((aOrbiterB ^ aOrbiterF) ^ 0x777F3BA6ABEAED1DULL) ^ aPhaseHOrbiterUpdateSaltE[(((31U - aIndex) + 23U)) & S_SALT1];
+            aOrbiterB = ((aOrbiterB ^ aOrbiterF) ^ 0x777F3BA6ABEAED1DULL) ^ aPhaseHOrbiterUpdateSaltE[(((31U - aIndex) + 23U)) & 31];
             aOrbiterB = RotL64((aOrbiterB * 0xD6D15AE2D6C38C51ULL), 5U);
             //
             aOrbiterI = (aOrbiterI + aOrbiterF) + 0xE50BAD3D8645AB85ULL;
-            aOrbiterJ = ((aOrbiterJ ^ aOrbiterI) ^ 0x51A6FB9E6B4FB919ULL) ^ aPhaseHOrbiterUpdateSaltA[(((31U - aIndex) + 12U)) & S_SALT1];
+            aOrbiterJ = ((aOrbiterJ ^ aOrbiterI) ^ 0x51A6FB9E6B4FB919ULL) ^ aPhaseHOrbiterUpdateSaltA[(((31U - aIndex) + 12U)) & 31];
             aOrbiterJ = RotL64((aOrbiterJ * 0x45457EE151AADCEBULL), 19U);
             //
             aOrbiterH = (aOrbiterH + aOrbiterI) + 0xDAAB51F2F204F2CFULL;
@@ -17792,11 +17792,11 @@ void TwistExpander_Antares_Arx::GROW_B(TwistWorkSpace *pWorkSpace,
             aWandererH = aWandererH ^ ((RotL64(aScatter, 51U) + RotL64(aOrbiterC, 18U)) + aOrbiterK);
             aWandererJ = aWandererJ + ((RotL64(aCross, 6U) + RotL64(aOrbiterG, 5U)) + aOrbiterH);
             aWandererA = aWandererA ^ ((RotL64(aIngress, 35U) + RotL64(aOrbiterF, 29U)) + aOrbiterI);
-            aWandererG = aWandererG + ((((RotL64(aPrevious, 13U) + RotL64(aOrbiterI, 37U)) + aOrbiterH) + RotL64(aCarry, 5U)) + aPhaseHWandererUpdateSaltB[(((31U - aIndex) + 4U)) & S_SALT1]);
+            aWandererG = aWandererG + ((((RotL64(aPrevious, 13U) + RotL64(aOrbiterI, 37U)) + aOrbiterH) + RotL64(aCarry, 5U)) + aPhaseHWandererUpdateSaltB[(((31U - aIndex) + 4U)) & 31]);
             aWandererI = aWandererI ^ ((RotL64(aScatter, 57U) + RotL64(aOrbiterA, 41U)) + aOrbiterG);
             aWandererB = aWandererB + ((RotL64(aPrevious, 39U) + aOrbiterH) + RotL64(aOrbiterJ, 56U));
             aWandererK = aWandererK ^ ((RotL64(aIngress, 47U) + aOrbiterK) + RotL64(aOrbiterF, 51U));
-            aWandererF = aWandererF + ((((RotL64(aCross, 22U) + aOrbiterI) + RotL64(aOrbiterB, 47U)) + RotL64(aCarry, 41U)) + aPhaseHWandererUpdateSaltD[((aIndex + 13U)) & S_SALT1]);
+            aWandererF = aWandererF + ((((RotL64(aCross, 22U) + aOrbiterI) + RotL64(aOrbiterB, 47U)) + RotL64(aCarry, 41U)) + aPhaseHWandererUpdateSaltD[((aIndex + 13U)) & 31]);
             aWandererC = aWandererC ^ ((RotL64(aScatter, 43U) + aOrbiterH) + RotL64(aOrbiterB, 23U));
             //
             aCarry = aCarry + (RotL64(aWandererK, 53U) ^ aWandererA);
@@ -17842,8 +17842,8 @@ void TwistExpander_Antares_Arx::GROW_B(TwistWorkSpace *pWorkSpace,
             aOrbiterJ = (aWandererJ + RotL64(aIngress, 39U)) + 0x4CE0D3484E7F372FULL;
             aOrbiterB = (aWandererD + RotL64(aPrevious, 47U)) + 0x0216384C41B9C9F7ULL;
             aOrbiterF = ((aWandererK + RotL64(aIngress, 23U)) + RotL64(aCarry, 39U)) + 0x90FE9AC6B0F706C3ULL;
-            aOrbiterK = ((aWandererG + RotL64(aScatter, 19U)) + 0x4575E8D44B2E4279ULL) + aPhaseHOrbiterAssignSaltC[(((31U - aIndex) + 13U)) & S_SALT1];
-            aOrbiterD = ((aWandererC + RotL64(aCross, 10U)) + 0x43E42516A3306979ULL) + aPhaseHOrbiterAssignSaltE[(((31U - aIndex) + 14U)) & S_SALT1];
+            aOrbiterK = ((aWandererG + RotL64(aScatter, 19U)) + 0x4575E8D44B2E4279ULL) + aPhaseHOrbiterAssignSaltC[(((31U - aIndex) + 13U)) & 31];
+            aOrbiterD = ((aWandererC + RotL64(aCross, 10U)) + 0x43E42516A3306979ULL) + aPhaseHOrbiterAssignSaltE[(((31U - aIndex) + 14U)) & 31];
             aOrbiterH = ((aWandererA + RotL64(aPrevious, 27U)) + RotL64(aCarry, 53U)) + 0xA4F3AC1F6471E4CFULL;
             aOrbiterE = (aWandererF + RotL64(aIngress, 5U)) + 0x49C770C1386AD150ULL;
             //
@@ -17852,7 +17852,7 @@ void TwistExpander_Antares_Arx::GROW_B(TwistWorkSpace *pWorkSpace,
             aOrbiterJ = RotL64((aOrbiterJ * 0xB43A365E50D36F57ULL), 47U);
             //
             aOrbiterB = (aOrbiterB + aOrbiterF) + 0x2814372E0F72082EULL;
-            aOrbiterA = ((aOrbiterA ^ aOrbiterB) ^ 0x915B59BA64FDFA1AULL) ^ aPhaseHOrbiterUpdateSaltD[((aIndex + 21U)) & S_SALT1];
+            aOrbiterA = ((aOrbiterA ^ aOrbiterB) ^ 0x915B59BA64FDFA1AULL) ^ aPhaseHOrbiterUpdateSaltD[((aIndex + 21U)) & 31];
             aOrbiterA = RotL64((aOrbiterA * 0x877279379C967125ULL), 57U);
             //
             aOrbiterA = (aOrbiterA + aOrbiterK) + 0xB5E4F4A0F0AF35B5ULL;
@@ -17860,7 +17860,7 @@ void TwistExpander_Antares_Arx::GROW_B(TwistWorkSpace *pWorkSpace,
             aOrbiterD = RotL64((aOrbiterD * 0x05728919ACFD80F3ULL), 43U);
             //
             aOrbiterJ = (aOrbiterJ + aOrbiterD) + 0xAFEDE205E1261525ULL;
-            aOrbiterH = ((aOrbiterH ^ aOrbiterJ) ^ 0xED4EA26027B73F24ULL) ^ aPhaseHOrbiterUpdateSaltE[((aIndex + 18U)) & S_SALT1];
+            aOrbiterH = ((aOrbiterH ^ aOrbiterJ) ^ 0xED4EA26027B73F24ULL) ^ aPhaseHOrbiterUpdateSaltE[((aIndex + 18U)) & 31];
             aOrbiterH = RotL64((aOrbiterH * 0x718122C58B4090E9ULL), 23U);
             //
             aOrbiterE = (aOrbiterE + aOrbiterH) + 0x1E65215741BF78CAULL;
@@ -17872,10 +17872,10 @@ void TwistExpander_Antares_Arx::GROW_B(TwistWorkSpace *pWorkSpace,
             aOrbiterK = RotL64((aOrbiterK * 0xA968E51B4C9C955FULL), 3U);
             //
             aOrbiterH = (aOrbiterH + aOrbiterB) + 0x1BABEA42D55C876EULL;
-            aOrbiterG = ((aOrbiterG ^ aOrbiterH) ^ 0xCF188A57F183BC79ULL) ^ aPhaseHOrbiterUpdateSaltC[((aIndex + 3U)) & S_SALT1];
+            aOrbiterG = ((aOrbiterG ^ aOrbiterH) ^ 0xCF188A57F183BC79ULL) ^ aPhaseHOrbiterUpdateSaltC[((aIndex + 3U)) & 31];
             aOrbiterG = RotL64((aOrbiterG * 0x272D739625A4F9D3ULL), 39U);
             //
-            aOrbiterK = ((aOrbiterK + aOrbiterJ) + 0x6FA58365A044A57AULL) + aPhaseHOrbiterUpdateSaltB[(((31U - aIndex) + 7U)) & S_SALT1];
+            aOrbiterK = ((aOrbiterK + aOrbiterJ) + 0x6FA58365A044A57AULL) + aPhaseHOrbiterUpdateSaltB[(((31U - aIndex) + 7U)) & 31];
             aOrbiterE = (aOrbiterE ^ aOrbiterK) ^ 0x381146298094D7D6ULL;
             aOrbiterE = RotL64((aOrbiterE * 0x8A0C6476116B216DULL), 51U);
             //
@@ -17894,11 +17894,11 @@ void TwistExpander_Antares_Arx::GROW_B(TwistWorkSpace *pWorkSpace,
             aWandererK = aWandererK ^ ((RotL64(aIngress, 5U) + aOrbiterK) + RotL64(aOrbiterJ, 53U));
             aWandererG = aWandererG + ((RotL64(aCross, 53U) + RotL64(aOrbiterE, 35U)) + aOrbiterJ);
             aWandererF = aWandererF ^ ((RotL64(aPrevious, 12U) + aOrbiterA) + RotL64(aOrbiterJ, 19U));
-            aWandererH = aWandererH + (((RotL64(aIngress, 39U) + aOrbiterH) + RotL64(aOrbiterG, 30U)) + aPhaseHWandererUpdateSaltA[(((31U - aIndex) + 15U)) & S_SALT1]);
+            aWandererH = aWandererH + (((RotL64(aIngress, 39U) + aOrbiterH) + RotL64(aOrbiterG, 30U)) + aPhaseHWandererUpdateSaltA[(((31U - aIndex) + 15U)) & 31]);
             aWandererA = aWandererA ^ ((RotL64(aPrevious, 23U) + aOrbiterF) + RotL64(aOrbiterK, 39U));
             aWandererC = aWandererC + ((RotL64(aCross, 27U) + RotL64(aOrbiterB, 57U)) + aOrbiterD);
             aWandererE = aWandererE ^ ((RotL64(aScatter, 48U) + aOrbiterG) + RotL64(aOrbiterE, 43U));
-            aWandererD = aWandererD + ((((RotL64(aCross, 35U) + RotL64(aOrbiterD, 26U)) + aOrbiterJ) + RotL64(aCarry, 27U)) + aPhaseHWandererUpdateSaltC[((aIndex + 8U)) & S_SALT1]);
+            aWandererD = aWandererD + ((((RotL64(aCross, 35U) + RotL64(aOrbiterD, 26U)) + aOrbiterJ) + RotL64(aCarry, 27U)) + aPhaseHWandererUpdateSaltC[((aIndex + 8U)) & 31]);
             //
             aCarry = aCarry + (aWandererK ^ RotL64(aWandererD, 51U));
             aCarry = aCarry + (aWandererJ ^ RotL64(aWandererG, 13U));
@@ -17942,18 +17942,18 @@ void TwistExpander_Antares_Arx::GROW_B(TwistWorkSpace *pWorkSpace,
             aOrbiterJ = ((aWandererA + RotL64(aIngress, 28U)) + RotL64(aCarry, 51U)) + 0xB39484632D420C7EULL;
             aOrbiterI = ((aWandererG + RotL64(aCross, 5U)) + RotL64(aCarry, 19U)) + 0x464F38FE6135F3B8ULL;
             aOrbiterF = (aWandererF + RotL64(aScatter, 57U)) + 0x7263051384A4267DULL;
-            aOrbiterC = ((aWandererH + RotL64(aCross, 23U)) + 0x901169CB9983E185ULL) + aPhaseHOrbiterAssignSaltB[(((31U - aIndex) + 23U)) & S_SALT1];
+            aOrbiterC = ((aWandererH + RotL64(aCross, 23U)) + 0x901169CB9983E185ULL) + aPhaseHOrbiterAssignSaltB[(((31U - aIndex) + 23U)) & 31];
             aOrbiterG = (aWandererE + RotL64(aPrevious, 11U)) + 0x93A2E9A22AABC747ULL;
             aOrbiterE = (aWandererB + RotL64(aIngress, 19U)) + 0xFE15BFB5B9CBBE32ULL;
             aOrbiterD = ((aWandererD + RotL64(aScatter, 47U)) + RotL64(aCarry, 11U)) + 0xEC085E5C9AB1AEADULL;
-            aOrbiterH = ((aWandererI + RotL64(aIngress, 34U)) + 0x1B2851484A7419EAULL) + aPhaseHOrbiterAssignSaltD[((aIndex + 19U)) & S_SALT1];
+            aOrbiterH = ((aWandererI + RotL64(aIngress, 34U)) + 0x1B2851484A7419EAULL) + aPhaseHOrbiterAssignSaltD[((aIndex + 19U)) & 31];
             //
             aOrbiterK = (aOrbiterK + aOrbiterJ) + 0xB4F3E2DD9BE4A26CULL;
             aOrbiterI = (aOrbiterI ^ aOrbiterK) ^ 0x0DED438A54FAD299ULL;
             aOrbiterI = RotL64((aOrbiterI * 0xCDFB7C865F520931ULL), 57U);
             //
             aOrbiterI = (aOrbiterI + aOrbiterF) + 0x9A3CF8FAA44D9384ULL;
-            aOrbiterC = ((aOrbiterC ^ aOrbiterI) ^ 0xC31C9799C199AD2EULL) ^ aPhaseHOrbiterUpdateSaltB[(((31U - aIndex) + 5U)) & S_SALT1];
+            aOrbiterC = ((aOrbiterC ^ aOrbiterI) ^ 0xC31C9799C199AD2EULL) ^ aPhaseHOrbiterUpdateSaltB[(((31U - aIndex) + 5U)) & 31];
             aOrbiterC = RotL64((aOrbiterC * 0x61F28B66C8F83A95ULL), 47U);
             //
             aOrbiterG = (aOrbiterG + aOrbiterE) + 0x3D0B1DF974097283ULL;
@@ -17961,7 +17961,7 @@ void TwistExpander_Antares_Arx::GROW_B(TwistWorkSpace *pWorkSpace,
             aOrbiterK = RotL64((aOrbiterK * 0xD2FE6D3AD112568BULL), 35U);
             //
             aOrbiterD = (aOrbiterD + aOrbiterK) + 0x32A12BD44C2F7E1FULL;
-            aOrbiterH = ((aOrbiterH ^ aOrbiterD) ^ 0x411D278C331C9722ULL) ^ aPhaseHOrbiterUpdateSaltA[((aIndex + 28U)) & S_SALT1];
+            aOrbiterH = ((aOrbiterH ^ aOrbiterD) ^ 0x411D278C331C9722ULL) ^ aPhaseHOrbiterUpdateSaltA[((aIndex + 28U)) & 31];
             aOrbiterH = RotL64((aOrbiterH * 0xCDDAD13932D0AB25ULL), 5U);
             //
             aOrbiterH = (aOrbiterH + aOrbiterI) + 0xE217E0AE4E0740F4ULL;
@@ -17973,14 +17973,14 @@ void TwistExpander_Antares_Arx::GROW_B(TwistWorkSpace *pWorkSpace,
             aOrbiterD = RotL64((aOrbiterD * 0xE57A940754C515BDULL), 27U);
             //
             aOrbiterE = (aOrbiterE + aOrbiterC) + 0x7CAE4603EFEDDEDFULL;
-            aOrbiterJ = ((aOrbiterJ ^ aOrbiterE) ^ 0xAEDD1E90E4EAC34BULL) ^ aPhaseHOrbiterUpdateSaltF[(((31U - aIndex) + 20U)) & S_SALT1];
+            aOrbiterJ = ((aOrbiterJ ^ aOrbiterE) ^ 0xAEDD1E90E4EAC34BULL) ^ aPhaseHOrbiterUpdateSaltF[(((31U - aIndex) + 20U)) & 31];
             aOrbiterJ = RotL64((aOrbiterJ * 0x93F2FA45898CDF57ULL), 51U);
             //
             aOrbiterF = (aOrbiterF + aOrbiterH) + 0x886275A265069EEAULL;
             aOrbiterG = (aOrbiterG ^ aOrbiterF) ^ 0x1AEE7C0609E0317BULL;
             aOrbiterG = RotL64((aOrbiterG * 0x5CD14B96271DDCAFULL), 41U);
             //
-            aOrbiterJ = ((aOrbiterJ + aOrbiterD) + 0x71D2F8925ED41C5DULL) + aPhaseHOrbiterUpdateSaltC[((aIndex + 25U)) & S_SALT1];
+            aOrbiterJ = ((aOrbiterJ + aOrbiterD) + 0x71D2F8925ED41C5DULL) + aPhaseHOrbiterUpdateSaltC[((aIndex + 25U)) & 31];
             aOrbiterF = (aOrbiterF ^ aOrbiterJ) ^ 0x7A457C5C73CD5A12ULL;
             aOrbiterF = RotL64((aOrbiterF * 0xC0FA1D05E31C8323ULL), 23U);
             //
@@ -17991,11 +17991,11 @@ void TwistExpander_Antares_Arx::GROW_B(TwistWorkSpace *pWorkSpace,
             aIngress = aIngress + RotL64(aOrbiterG, 5U);
             aIngress = TwistMix64::DiffuseB((aIngress + aScatter));
             //
-            aWandererD = aWandererD ^ (((RotL64(aScatter, 22U) + RotL64(aOrbiterI, 35U)) + aOrbiterG) + aPhaseHWandererUpdateSaltE[((aIndex + 13U)) & S_SALT1]);
+            aWandererD = aWandererD ^ (((RotL64(aScatter, 22U) + RotL64(aOrbiterI, 35U)) + aOrbiterG) + aPhaseHWandererUpdateSaltE[((aIndex + 13U)) & 31]);
             aWandererB = aWandererB + ((RotL64(aCross, 57U) + RotL64(aOrbiterK, 57U)) + aOrbiterE);
             aWandererC = aWandererC ^ ((RotL64(aPrevious, 3U) + RotL64(aOrbiterF, 28U)) + aOrbiterC);
             aWandererH = aWandererH + (((RotL64(aIngress, 47U) + RotL64(aOrbiterI, 3U)) + aOrbiterC) + RotL64(aCarry, 11U));
-            aWandererE = aWandererE ^ (((RotL64(aCross, 26U) + RotL64(aOrbiterC, 51U)) + aOrbiterD) + aPhaseHWandererUpdateSaltF[(((31U - aIndex) + 9U)) & S_SALT1]);
+            aWandererE = aWandererE ^ (((RotL64(aCross, 26U) + RotL64(aOrbiterC, 51U)) + aOrbiterD) + aPhaseHWandererUpdateSaltF[(((31U - aIndex) + 9U)) & 31]);
             aWandererF = aWandererF + ((RotL64(aPrevious, 51U) + RotL64(aOrbiterI, 13U)) + aOrbiterK);
             aWandererI = aWandererI ^ ((RotL64(aIngress, 13U) + aOrbiterG) + RotL64(aOrbiterJ, 47U));
             aWandererG = aWandererG + (((RotL64(aScatter, 37U) + RotL64(aOrbiterH, 18U)) + aOrbiterF) + RotL64(aCarry, 41U));
@@ -18040,9 +18040,9 @@ void TwistExpander_Antares_Arx::GROW_B(TwistWorkSpace *pWorkSpace,
             aScatter = TwistMix64::DiffuseC(aScatter);
             //
             aOrbiterB = (aWandererI + RotL64(aScatter, 53U)) + 0xC5C62868DC2B2CDFULL;
-            aOrbiterA = ((aWandererC + RotL64(aPrevious, 29U)) + 0x9D9A4629EAFD1EB3ULL) + aPhaseHOrbiterAssignSaltA[(((31U - aIndex) + 4U)) & S_SALT1];
+            aOrbiterA = ((aWandererC + RotL64(aPrevious, 29U)) + 0x9D9A4629EAFD1EB3ULL) + aPhaseHOrbiterAssignSaltA[(((31U - aIndex) + 4U)) & 31];
             aOrbiterH = (aWandererA + RotL64(aCross, 35U)) + 0xAEB2179871CB98ABULL;
-            aOrbiterJ = ((aWandererJ + RotL64(aIngress, 18U)) + 0x4370AA34791E8B4CULL) + aPhaseHOrbiterAssignSaltF[((aIndex + 8U)) & S_SALT1];
+            aOrbiterJ = ((aWandererJ + RotL64(aIngress, 18U)) + 0x4370AA34791E8B4CULL) + aPhaseHOrbiterAssignSaltF[((aIndex + 8U)) & 31];
             aOrbiterE = (aWandererK + RotL64(aCross, 5U)) + 0x3257D9E2E60FB78BULL;
             aOrbiterD = ((aWandererH + RotL64(aPrevious, 23U)) + RotL64(aCarry, 57U)) + 0x60A60A1BBBCDCB56ULL;
             aOrbiterI = ((aWandererD + RotL64(aIngress, 47U)) + RotL64(aCarry, 3U)) + 0xFD99652269F4A69CULL;
@@ -18058,7 +18058,7 @@ void TwistExpander_Antares_Arx::GROW_B(TwistWorkSpace *pWorkSpace,
             aOrbiterD = RotL64((aOrbiterD * 0x34C25CFCCBD4985BULL), 23U);
             //
             aOrbiterH = (aOrbiterH + aOrbiterJ) + 0x382E15B7027D61EAULL;
-            aOrbiterI = ((aOrbiterI ^ aOrbiterH) ^ 0x51C0576B763E30ACULL) ^ aPhaseHOrbiterUpdateSaltE[(((31U - aIndex) + 17U)) & S_SALT1];
+            aOrbiterI = ((aOrbiterI ^ aOrbiterH) ^ 0x51C0576B763E30ACULL) ^ aPhaseHOrbiterUpdateSaltE[(((31U - aIndex) + 17U)) & 31];
             aOrbiterI = RotL64((aOrbiterI * 0xDA2648A1D399A479ULL), 51U);
             //
             aOrbiterI = (aOrbiterI + aOrbiterD) + 0xCE892E92C1F8A407ULL;
@@ -18066,7 +18066,7 @@ void TwistExpander_Antares_Arx::GROW_B(TwistWorkSpace *pWorkSpace,
             aOrbiterA = RotL64((aOrbiterA * 0x63AD32DF7C6A31DDULL), 29U);
             //
             aOrbiterC = (aOrbiterC + aOrbiterB) + 0x74BCAF12B5418CC8ULL;
-            aOrbiterE = ((aOrbiterE ^ aOrbiterC) ^ 0x63CFE5C4829534FAULL) ^ aPhaseHOrbiterUpdateSaltA[(((31U - aIndex) + 15U)) & S_SALT1];
+            aOrbiterE = ((aOrbiterE ^ aOrbiterC) ^ 0x63CFE5C4829534FAULL) ^ aPhaseHOrbiterUpdateSaltA[(((31U - aIndex) + 15U)) & 31];
             aOrbiterE = RotL64((aOrbiterE * 0x9ACBCC21EABA3C11ULL), 47U);
             //
             aOrbiterF = (aOrbiterF + aOrbiterI) + 0x3196AE1AA6613ED0ULL;
@@ -18081,8 +18081,8 @@ void TwistExpander_Antares_Arx::GROW_B(TwistWorkSpace *pWorkSpace,
             aOrbiterC = (aOrbiterC ^ aOrbiterD) ^ 0x76832B2603AA413AULL;
             aOrbiterC = RotL64((aOrbiterC * 0xD5132D6B929EBC83ULL), 41U);
             //
-            aOrbiterE = ((aOrbiterE + aOrbiterH) + 0x9EEFBB1E60A3E1AFULL) + aPhaseHOrbiterUpdateSaltF[(((31U - aIndex) + 21U)) & S_SALT1];
-            aOrbiterF = ((aOrbiterF ^ aOrbiterE) ^ 0xF9BADA6A2B4DE81DULL) ^ aPhaseHOrbiterUpdateSaltD[((aIndex + 29U)) & S_SALT1];
+            aOrbiterE = ((aOrbiterE + aOrbiterH) + 0x9EEFBB1E60A3E1AFULL) + aPhaseHOrbiterUpdateSaltF[(((31U - aIndex) + 21U)) & 31];
+            aOrbiterF = ((aOrbiterF ^ aOrbiterE) ^ 0xF9BADA6A2B4DE81DULL) ^ aPhaseHOrbiterUpdateSaltD[((aIndex + 29U)) & 31];
             aOrbiterF = RotL64((aOrbiterF * 0xE10461176D3CAB9BULL), 57U);
             //
             aIngress = RotL64(aOrbiterD, 47U) ^ aOrbiterF;
@@ -18097,10 +18097,10 @@ void TwistExpander_Antares_Arx::GROW_B(TwistWorkSpace *pWorkSpace,
             aWandererB = aWandererB + (((RotL64(aIngress, 47U) + aOrbiterF) + RotL64(aOrbiterE, 11U)) + RotL64(aCarry, 37U));
             aWandererK = aWandererK ^ ((RotL64(aCross, 57U) + RotL64(aOrbiterI, 57U)) + aOrbiterF);
             aWandererI = aWandererI + ((RotL64(aScatter, 43U) + RotL64(aOrbiterD, 3U)) + aOrbiterF);
-            aWandererJ = aWandererJ ^ (((RotL64(aPrevious, 34U) + aOrbiterH) + RotL64(aOrbiterF, 46U)) + aPhaseHWandererUpdateSaltD[((aIndex + 9U)) & S_SALT1]);
+            aWandererJ = aWandererJ ^ (((RotL64(aPrevious, 34U) + aOrbiterH) + RotL64(aOrbiterF, 46U)) + aPhaseHWandererUpdateSaltD[((aIndex + 9U)) & 31]);
             aWandererA = aWandererA + ((RotL64(aIngress, 23U) + aOrbiterH) + RotL64(aOrbiterJ, 29U));
             aWandererC = aWandererC ^ ((RotL64(aCross, 27U) + RotL64(aOrbiterC, 53U)) + aOrbiterF);
-            aWandererG = aWandererG + (((RotL64(aIngress, 11U) + aOrbiterA) + RotL64(aOrbiterI, 19U)) + aPhaseHWandererUpdateSaltB[((aIndex + 3U)) & S_SALT1]);
+            aWandererG = aWandererG + (((RotL64(aIngress, 11U) + aOrbiterA) + RotL64(aOrbiterI, 19U)) + aPhaseHWandererUpdateSaltB[((aIndex + 3U)) & 31]);
             //
             aCarry = aCarry + (RotL64(aWandererI, 19U) ^ aWandererC);
             aCarry = aCarry + (aWandererH ^ RotL64(aWandererD, 47U));

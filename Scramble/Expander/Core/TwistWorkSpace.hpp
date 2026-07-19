@@ -21,10 +21,6 @@
 #define S_SALT 32
 #define S_SALT_DIVIDE_BITSHIFT 5
 
-
-#define S_SBOX1 255
-#define S_SALT1 31
-
 #define W_KEY 2048
 #define W_KEY1 2047
 #define H_KEY 8

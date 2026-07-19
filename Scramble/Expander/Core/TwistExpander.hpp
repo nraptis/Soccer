@@ -91,16 +91,10 @@ public:
     std::size_t                             mIndexList256C[256];
     std::size_t                             mIndexList256D[256];
     
-    TwistDomainConstants                    *mActiveConstants;
-    TwistDomainSaltSet                      *mActiveSaltSet;
-    
     std::uint8_t                            *mSource;
     std::uint8_t                            *mDest;
     
     M88                                     mMatrix;
-    
-    TwistFarmSalt                           *GetFarmSalt() const;
-    std::uint64_t                           GetSessionNonce() const;
     
     TwistDomainBundle                       mDomainBundleInbuilt;
     TwistDomainBundle                       mDomainBundleEphemeral;
@@ -112,11 +106,6 @@ public:
     void                                    Zero();
     
 protected:
-    
-    
-    TwistFarmSalt                           *mFarmSalt;
-    std::uint64_t                           mKDFCallCounter;
-    std::uint64_t                           mKDFSessionNonce;
     
 };
 

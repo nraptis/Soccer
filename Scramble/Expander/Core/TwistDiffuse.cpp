@@ -30,8 +30,8 @@ void DiffuseLaneWithDomainWords(std::uint8_t *pInputLaneA,
     std::size_t aReadIndexB = 0U;
     
     for (std::size_t aMatrixDiffusionIndex = 0U; aMatrixDiffusionIndex < static_cast<std::size_t>(256); aMatrixDiffusionIndex += 1U) {
-        aReadIndexA = (pIndexListLeft[aMatrixDiffusionIndex & S_SBOX1] * 128U) + static_cast<std::size_t>(pInputOffsetA);
-        aReadIndexB = (pIndexListRight[aMatrixDiffusionIndex & S_SBOX1] * 128U) + static_cast<std::size_t>(pInputOffsetB);
+        aReadIndexA = (pIndexListLeft[aMatrixDiffusionIndex & 255] * 128U) + static_cast<std::size_t>(pInputOffsetA);
+        aReadIndexB = (pIndexListRight[aMatrixDiffusionIndex & 255] * 128U) + static_cast<std::size_t>(pInputOffsetB);
         if (((pOperationSourceLane[aWriteIndex] ^ pMatrixSelect) & 0x7E) > 62) {
             pMatrix->Dispatch(pOperationSourceLane,
                               aWriteIndex,

@@ -25,13 +25,8 @@ inline std::uint64_t Mix64(std::uint64_t pValue) {
 
 TwistExpander::TwistExpander() {
     mWorkspace = nullptr;
-    mFarmSalt = nullptr;
     mSource = nullptr;
     mDest = nullptr;
-    mKDFCallCounter = 0ULL;
-    mKDFSessionNonce = 0ULL;
-    mActiveConstants = nullptr;
-    mActiveSaltSet = nullptr;
     std::memset(&mDomainBundleInbuilt, 0, sizeof(mDomainBundleInbuilt));
     std::memset(&mDomainBundleEphemeral, 0, sizeof(mDomainBundleEphemeral));
     std::memset(mIndexList256A, 0, sizeof(mIndexList256A));
@@ -51,10 +46,6 @@ void TwistExpander::KDF(std::uint64_t pNonce,
         (pDomainSaltSet == nullptr)) {
         return;
     }
-
-    mKDFSessionNonce = pNonce;
-    mActiveConstants = pDomainConstants;
-    mActiveSaltSet = pDomainSaltSet;
 }
 
 void TwistExpander::KDF_A(std::uint64_t pNonce,
@@ -99,12 +90,9 @@ void TwistExpander::Seed(TwistWorkSpace *pWorkSpace,
     }
 
     mWorkspace = pWorkSpace;
-    mFarmSalt = pFarmSalt;
     mSource = pWorkSpace->mSource;
     mDest = pDestination;
     UnrollPasswordToSource(pWorkSpace->mSource, pPassword, pPasswordByteLength);
-    mKDFCallCounter = 0ULL;
-    mKDFSessionNonce = Mix64(pNonce);
     mDomainBundleEphemeral.Zero();
     pWorkSpace->mDomainBundle.Zero();
 }
@@ -174,14 +162,6 @@ void TwistExpander::GrowKeyB(TwistWorkSpace *pWorkSpace) {
     if (pWorkSpace != nullptr) {
         mWorkspace = pWorkSpace;
     }
-}
-
-TwistFarmSalt *TwistExpander::GetFarmSalt() const {
-    return mFarmSalt;
-}
-
-std::uint64_t TwistExpander::GetSessionNonce() const {
-    return mKDFSessionNonce;
 }
 
 void TwistExpander::Twist(TwistWorkSpace *pWorkSpace,
@@ -351,11 +331,16 @@ void TwistExpander::UnrollPasswordToSource(std::uint8_t *pSource,
 }
 
 void TwistExpander::Zero() {
-    Zero_PostSeed();
-    mDomainBundleInbuilt.Zero();
     if (mWorkspace != NULL) {
         mWorkspace->Zero();
     }
+    
+    memset(mIndexList256A, 0, sizeof(mIndexList256A));
+    memset(mIndexList256B, 0, sizeof(mIndexList256B));
+    memset(mIndexList256C, 0, sizeof(mIndexList256C));
+    memset(mIndexList256D, 0, sizeof(mIndexList256D));
+    
+    mDomainBundleEphemeral.Zero();
 }
 
 void TwistExpander::Zero_PostSeed() {
@@ -369,6 +354,4 @@ void TwistExpander::Zero_PostSeed() {
     memset(mIndexList256D, 0, sizeof(mIndexList256D));
     
     mDomainBundleEphemeral.Zero();
-    
-    mKDFSessionNonce = 0;
 }

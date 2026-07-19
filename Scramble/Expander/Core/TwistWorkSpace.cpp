@@ -317,12 +317,6 @@ std::uint8_t *TwistWorkSpace::GetBuffer(TwistWorkSpace *pWorkSpace,
             break;
     }
 
-    if (DecodeParamSaltSlot(pSlot, nullptr, nullptr)) {
-        return reinterpret_cast<std::uint8_t *>(
-            GetParamSaltSlot(pExpander->mActiveSaltSet, pSlot)
-        );
-    }
-
     if (DecodePhaseSaltSlot(pSlot, nullptr, nullptr, nullptr)) {
         return reinterpret_cast<std::uint8_t *>(GetPhaseSaltSlot(pWorkSpace, pSlot));
     }
@@ -429,7 +423,73 @@ bool TwistWorkSpace::IsSalt(TwistBufferKey pKey) {
 }
 
 void TwistWorkSpace::Zero() {
-    Zero_PostSeed();
+    memset(mSource, 0, sizeof(mSource));
+
+    memset(mExpansionLaneA, 0, sizeof(mExpansionLaneA));
+    memset(mExpansionLaneB, 0, sizeof(mExpansionLaneB));
+    memset(mExpansionLaneC, 0, sizeof(mExpansionLaneC));
+    memset(mExpansionLaneD, 0, sizeof(mExpansionLaneD));
+    
+    memset(mWorkLaneA, 0, sizeof(mWorkLaneA));
+    memset(mWorkLaneB, 0, sizeof(mWorkLaneB));
+    memset(mWorkLaneC, 0, sizeof(mWorkLaneC));
+    memset(mWorkLaneD, 0, sizeof(mWorkLaneD));
+    
+    memset(mOperationLaneA, 0, sizeof(mOperationLaneA));
+    memset(mOperationLaneB, 0, sizeof(mOperationLaneB));
+    memset(mOperationLaneC, 0, sizeof(mOperationLaneC));
+    memset(mOperationLaneD, 0, sizeof(mOperationLaneD));
+    
+    memset(mSnowLaneA, 0, sizeof(mSnowLaneA));
+    memset(mSnowLaneB, 0, sizeof(mSnowLaneB));
+    memset(mSnowLaneC, 0, sizeof(mSnowLaneC));
+    memset(mSnowLaneD, 0, sizeof(mSnowLaneD));
+
+    memset(mFireLaneA, 0, sizeof(mFireLaneA));
+    memset(mFireLaneB, 0, sizeof(mFireLaneB));
+    memset(mFireLaneC, 0, sizeof(mFireLaneC));
+    memset(mFireLaneD, 0, sizeof(mFireLaneD));
+
+    memset(mWaterLaneA, 0, sizeof(mWaterLaneA));
+    memset(mWaterLaneB, 0, sizeof(mWaterLaneB));
+    memset(mWaterLaneC, 0, sizeof(mWaterLaneC));
+    memset(mWaterLaneD, 0, sizeof(mWaterLaneD));
+
+    memset(mEarthLaneA, 0, sizeof(mEarthLaneA));
+    memset(mEarthLaneB, 0, sizeof(mEarthLaneB));
+    memset(mEarthLaneC, 0, sizeof(mEarthLaneC));
+    memset(mEarthLaneD, 0, sizeof(mEarthLaneD));
+
+    memset(mWindLaneA, 0, sizeof(mWindLaneA));
+    memset(mWindLaneB, 0, sizeof(mWindLaneB));
+    memset(mWindLaneC, 0, sizeof(mWindLaneC));
+    memset(mWindLaneD, 0, sizeof(mWindLaneD));
+
+    memset(mFuseLaneA, 0, sizeof(mFuseLaneA));
+    memset(mFuseLaneB, 0, sizeof(mFuseLaneB));
+    memset(mFuseLaneC, 0, sizeof(mFuseLaneC));
+    memset(mFuseLaneD, 0, sizeof(mFuseLaneD));
+
+    memset(mScrapLaneA, 0, sizeof(mScrapLaneA));
+    memset(mScrapLaneB, 0, sizeof(mScrapLaneB));
+    memset(mScrapLaneC, 0, sizeof(mScrapLaneC));
+    memset(mScrapLaneD, 0, sizeof(mScrapLaneD));
+
+    memset(mMergeLaneA, 0, sizeof(mMergeLaneA));
+    memset(mMergeLaneB, 0, sizeof(mMergeLaneB));
+    memset(mMergeLaneC, 0, sizeof(mMergeLaneC));
+    memset(mMergeLaneD, 0, sizeof(mMergeLaneD));
+    
+    memset(mInvestLaneA, 0, sizeof(mInvestLaneA));
+    memset(mInvestLaneB, 0, sizeof(mInvestLaneB));
+    memset(mInvestLaneC, 0, sizeof(mInvestLaneC));
+    memset(mInvestLaneD, 0, sizeof(mInvestLaneD));
+    
+    memset(mInvestLaneE, 0, sizeof(mInvestLaneE));
+    memset(mInvestLaneF, 0, sizeof(mInvestLaneF));
+    memset(mInvestLaneG, 0, sizeof(mInvestLaneG));
+    memset(mInvestLaneH, 0, sizeof(mInvestLaneH));
+    
     mDomainBundle.Zero();
 }
 
