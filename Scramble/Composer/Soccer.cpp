@@ -778,7 +778,7 @@ bool Soccer::SeedPrelude(std::uint8_t *pPassword,
     mWorkSpaces[ 4] = &mWorkSpaceE; mWorkSpaces[ 5] = &mWorkSpaceF; mWorkSpaces[ 6] = &mWorkSpaceG; mWorkSpaces[ 7] = &mWorkSpaceH;
     mWorkSpaces[ 8] = &mWorkSpaceI; mWorkSpaces[ 9] = &mWorkSpaceJ; mWorkSpaces[10] = &mWorkSpaceK; mWorkSpaces[11] = &mWorkSpaceL;
     mWorkSpaces[12] = &mWorkSpaceM; mWorkSpaces[13] = &mWorkSpaceN; mWorkSpaces[14] = &mWorkSpaceO; mWorkSpaces[15] = &mWorkSpaceP;
-
+    
     mMasks[0] = 0xF0u; mMasks[1] = 0x0Fu; mMasks[2] = 0x33u; mMasks[3] = 0xCCu;
     mMasks[4] = 0x55u; mMasks[5] = 0xAAu; mMasks[6] = 0x69u; mMasks[7] = 0x96u;
     mMasks[8] = 0x19u; mMasks[9] = 0x98u; mMasks[10] = 0x1Au; mMasks[11] = 0x58u;
@@ -858,12 +858,12 @@ bool Soccer::SeedPrelude(std::uint8_t *pPassword,
     }
     
     mStarter.Seed(&mWorkSpaceA,
-                &mFarmSalt,
-                pNonce,
-                pPassword,
-                pPasswordByteLength,
-                mRandom);
-
+                  &mFarmSalt,
+                  pNonce,
+                  pPassword,
+                  pPasswordByteLength,
+                  mRandom);
+    
     // Block 0: masks, 32 entries
     for (std::size_t aIndex=0; aIndex<4096; aIndex+=2) {
         std::uint8_t aIndexA = mRandom[aIndex + 0] & 31U;
@@ -872,7 +872,7 @@ bool Soccer::SeedPrelude(std::uint8_t *pPassword,
         mMasks[aIndexA] = mMasks[aIndexB];
         mMasks[aIndexB] = aHold;
     }
-
+    
     // Block 1: expanders, 32 entries
     for (std::size_t aIndex=4096; aIndex<8192; aIndex+=2) {
         std::uint8_t aIndexA = mRandom[aIndex + 0] & 31U;
@@ -881,7 +881,7 @@ bool Soccer::SeedPrelude(std::uint8_t *pPassword,
         mExpanders[aIndexA] = mExpanders[aIndexB];
         mExpanders[aIndexB] = aHold;
     }
-
+    
     // Block 2: work spaces, 16 entries
     for (std::size_t aIndex=8192; aIndex<12288; aIndex+=2) {
         std::uint8_t aIndexA = mRandom[aIndex + 0] & 15U;
@@ -908,7 +908,7 @@ bool Soccer::SeedPrelude(std::uint8_t *pPassword,
         mCiphersIdentifiersA[aIndexA] = mCiphersIdentifiersA[aIndexB];
         mCiphersIdentifiersA[aIndexB] = aHold;
     }
-
+    
     // Block 5: cipher identifiers B, 64 entries
     for (std::size_t aIndex=20480; aIndex<24576; aIndex+=2) {
         std::uint8_t aIndexA = mRandom[aIndex + 0] & 63U;
@@ -917,7 +917,7 @@ bool Soccer::SeedPrelude(std::uint8_t *pPassword,
         mCiphersIdentifiersB[aIndexA] = mCiphersIdentifiersB[aIndexB];
         mCiphersIdentifiersB[aIndexB] = aHold;
     }
-
+    
     // Block 6: re-shuffle expanders, 32 entries
     for (std::size_t aIndex=24576; aIndex<28672; aIndex+=2) {
         std::uint8_t aIndexA = mRandom[aIndex + 0] & 31U;
@@ -926,7 +926,7 @@ bool Soccer::SeedPrelude(std::uint8_t *pPassword,
         mExpanders[aIndexA] = mExpanders[aIndexB];
         mExpanders[aIndexB] = aHold;
     }
-
+    
     // Block 7: re-shuffle work spaces, 16 entries
     for (std::size_t aIndex=28672; aIndex<32768; aIndex+=2) {
         std::uint8_t aIndexA = mRandom[aIndex + 0] & 15U;
@@ -944,7 +944,7 @@ void Soccer::SeedEpilogue() {
     for (std::size_t aIndex=0; aIndex<16; aIndex++) {
         mMaterials[aIndex] = mClaimedMaterials[aIndex];
     }
-
+    
     for (std::size_t aIndex=0; aIndex<16; aIndex++) {
         mWorkSpaces[aIndex] = mClaimedWorkSpaces[aIndex];
     }
@@ -994,7 +994,7 @@ void Soccer::SeedEpilogue() {
         for (std::size_t aMaterialIndex=6U; aMaterialIndex<8U; aMaterialIndex++) {
             std::reverse(mMaterials[aMaterialIndex] + aDestinationIndex, mMaterials[aMaterialIndex] + aReverseEndIndex);
         }
-
+        
         if (aBlockIndex == (BLOCK_COUNT - 1U)) {
             for (std::size_t aMaterialIndex=0U; aMaterialIndex<8U; aMaterialIndex++) {
                 std::reverse(mMaterials[aMaterialIndex], mMaterials[aMaterialIndex] + SOCCER_BLOCK_SIZE);
@@ -1034,7 +1034,7 @@ void Soccer::SeedEpilogue() {
     
     constexpr std::size_t aRotSampleCount = S_BLOCK - sizeof(std::uint64_t) + 1U;
     std::size_t aRotSampleIndex = 0U;
-
+    
     aRotSampleIndex += static_cast<std::size_t>(mMaterialM[13268U]) + static_cast<std::size_t>(mMaterialI[30513U]);
     aRandFinalB = RotL64(aRandFinalB, 3U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialD[15984U]) + static_cast<std::size_t>(mMaterialC[5212U]);
@@ -1051,12 +1051,12 @@ void Soccer::SeedEpilogue() {
     aRandL2B = RotL64(aRandL2B, 3U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialO[1324U]) + static_cast<std::size_t>(mMaterialK[26568U]);
     aRandL3A = RotL64(aRandL3A, 3U) ^ aRotSampleIndex;
-
-
+    
+    
     //
     // $$$$$$$$$$$$$$$$
     //
-
+    
     aRotSampleIndex += static_cast<std::size_t>(mMaterialD[38745U]) + static_cast<std::size_t>(mMaterialC[55734U]);
     aRandL3A = RotL64(aRandL3A, 3U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialN[41262U]) + static_cast<std::size_t>(mMaterialG[49571U]);
@@ -1073,11 +1073,11 @@ void Soccer::SeedEpilogue() {
     aRandL3B = RotL64(aRandL3B, 3U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialE[41577U]) + static_cast<std::size_t>(mMaterialM[50988U]);
     aRandFinalA = RotL64(aRandFinalA, 3U) ^ aRotSampleIndex;
-
+    
     //
     // $$$$$$$$$$$$$$$$
     //
-
+    
     aRotSampleIndex += static_cast<std::size_t>(mMaterialB[94774U]) + static_cast<std::size_t>(mMaterialD[86657U]);
     aRandL1A = RotL64(aRandL1A, 3U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialC[68044U]) + static_cast<std::size_t>(mMaterialH[74747U]);
@@ -1094,11 +1094,11 @@ void Soccer::SeedEpilogue() {
     aRandL1B = RotL64(aRandL1B, 3U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialA[69167U]) + static_cast<std::size_t>(mMaterialF[88235U]);
     aRandL2A = RotL64(aRandL2A, 3U) ^ aRotSampleIndex;
-
+    
     //
     // $$$$$$$$$$$$$$$$
     //
-
+    
     aRotSampleIndex += static_cast<std::size_t>(mMaterialP[104812U]) + static_cast<std::size_t>(mMaterialF[109521U]);
     aRandL2B = RotL64(aRandL2B, 3U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialJ[117056U]) + static_cast<std::size_t>(mMaterialB[108739U]);
@@ -1115,11 +1115,11 @@ void Soccer::SeedEpilogue() {
     aRandL1A = RotL64(aRandL1A, 3U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialM[120270U]) + static_cast<std::size_t>(mMaterialG[103658U]);
     aRandFinalB = RotL64(aRandFinalB, 3U) ^ aRotSampleIndex;
-
+    
     //
     // $$$$$$$$$$$$$$$$
     //
-
+    
     aRotSampleIndex += static_cast<std::size_t>(mMaterialM[132394U]) + static_cast<std::size_t>(mMaterialE[137953U]);
     aRandL1B = RotL64(aRandL1B, 3U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialJ[161854U]) + static_cast<std::size_t>(mMaterialA[150384U]);
@@ -1136,11 +1136,11 @@ void Soccer::SeedEpilogue() {
     aRandL2B = RotL64(aRandL2B, 3U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialO[156910U]) + static_cast<std::size_t>(mMaterialH[161195U]);
     aRandL1A = RotL64(aRandL1A, 3U) ^ aRotSampleIndex;
-
+    
     //
     // $$$$$$$$$$$$$$$$
     //
-
+    
     aRotSampleIndex += static_cast<std::size_t>(mMaterialD[187307U]) + static_cast<std::size_t>(mMaterialB[181489U]);
     aRandL2A = RotL64(aRandL2A, 3U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialO[169473U]) + static_cast<std::size_t>(mMaterialH[196592U]);
@@ -1157,11 +1157,11 @@ void Soccer::SeedEpilogue() {
     aRandL3B = RotL64(aRandL3B, 3U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialL[178363U]) + static_cast<std::size_t>(mMaterialA[183673U]);
     aRandL1B = RotL64(aRandL1B, 3U) ^ aRotSampleIndex;
-
+    
     //
     // $$$$$$$$$$$$$$$$
     //
-
+    
     aRotSampleIndex += static_cast<std::size_t>(mMaterialP[211932U]) + static_cast<std::size_t>(mMaterialC[218710U]);
     aRandL3B = RotL64(aRandL3B, 3U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialO[201968U]) + static_cast<std::size_t>(mMaterialL[226759U]);
@@ -1178,11 +1178,11 @@ void Soccer::SeedEpilogue() {
     aRandFinalA = RotL64(aRandFinalA, 3U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialJ[217627U]) + static_cast<std::size_t>(mMaterialF[198664U]);
     aRandL3A = RotL64(aRandL3A, 3U) ^ aRotSampleIndex;
-
+    
     //
     // $$$$$$$$$$$$$$$$
     //
-
+    
     aRotSampleIndex += static_cast<std::size_t>(mMaterialL[261204U]) + static_cast<std::size_t>(mMaterialG[241114U]);
     aRandFinalA = RotL64(aRandFinalA, 3U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialO[247579U]) + static_cast<std::size_t>(mMaterialD[255244U]);
@@ -1199,11 +1199,11 @@ void Soccer::SeedEpilogue() {
     aRandFinalB = RotL64(aRandFinalB, 3U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialF[242244U]) + static_cast<std::size_t>(mMaterialJ[231564U]);
     aRandL1B = RotL64(aRandL1B, 3U) ^ aRotSampleIndex;
-
+    
     //
     // $$$$$$$$$$$$$$$$
     //
-
+    
     aRotSampleIndex += static_cast<std::size_t>(mMaterialM[289199U]) + static_cast<std::size_t>(mMaterialG[284934U]);
     aRandL1B = RotL64(aRandL1B, 7U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialN[271838U]) + static_cast<std::size_t>(mMaterialF[282298U]);
@@ -1220,11 +1220,11 @@ void Soccer::SeedEpilogue() {
     aRandFinalB = RotL64(aRandFinalB, 7U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialB[266832U]) + static_cast<std::size_t>(mMaterialH[281535U]);
     aRandL3A = RotL64(aRandL3A, 7U) ^ aRotSampleIndex;
-
+    
     //
     // $$$$$$$$$$$$$$$$
     //
-
+    
     aRotSampleIndex += static_cast<std::size_t>(mMaterialM[295544U]) + static_cast<std::size_t>(mMaterialE[311717U]);
     aRandL3A = RotL64(aRandL3A, 7U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialJ[308822U]) + static_cast<std::size_t>(mMaterialC[326128U]);
@@ -1241,11 +1241,11 @@ void Soccer::SeedEpilogue() {
     aRandL3B = RotL64(aRandL3B, 7U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialN[300877U]) + static_cast<std::size_t>(mMaterialH[323727U]);
     aRandL1B = RotL64(aRandL1B, 7U) ^ aRotSampleIndex;
-
+    
     //
     // $$$$$$$$$$$$$$$$
     //
-
+    
     aRotSampleIndex += static_cast<std::size_t>(mMaterialP[339827U]) + static_cast<std::size_t>(mMaterialA[355078U]);
     aRandL1A = RotL64(aRandL1A, 7U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialG[335802U]) + static_cast<std::size_t>(mMaterialM[355659U]);
@@ -1262,11 +1262,11 @@ void Soccer::SeedEpilogue() {
     aRandL3B = RotL64(aRandL3B, 7U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialO[354197U]) + static_cast<std::size_t>(mMaterialH[354898U]);
     aRandFinalA = RotL64(aRandFinalA, 7U) ^ aRotSampleIndex;
-
+    
     //
     // $$$$$$$$$$$$$$$$
     //
-
+    
     aRotSampleIndex += static_cast<std::size_t>(mMaterialO[384911U]) + static_cast<std::size_t>(mMaterialJ[378878U]);
     aRandFinalA = RotL64(aRandFinalA, 7U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialB[365488U]) + static_cast<std::size_t>(mMaterialF[363254U]);
@@ -1283,11 +1283,11 @@ void Soccer::SeedEpilogue() {
     aRandL1B = RotL64(aRandL1B, 7U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialE[384517U]) + static_cast<std::size_t>(mMaterialG[366763U]);
     aRandL2A = RotL64(aRandL2A, 7U) ^ aRotSampleIndex;
-
+    
     //
     // $$$$$$$$$$$$$$$$
     //
-
+    
     aRotSampleIndex += static_cast<std::size_t>(mMaterialD[401902U]) + static_cast<std::size_t>(mMaterialF[407371U]);
     aRandL1B = RotL64(aRandL1B, 7U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialM[414243U]) + static_cast<std::size_t>(mMaterialC[418099U]);
@@ -1304,11 +1304,11 @@ void Soccer::SeedEpilogue() {
     aRandL3A = RotL64(aRandL3A, 7U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialN[403884U]) + static_cast<std::size_t>(mMaterialL[398186U]);
     aRandFinalB = RotL64(aRandFinalB, 7U) ^ aRotSampleIndex;
-
+    
     //
     // $$$$$$$$$$$$$$$$
     //
-
+    
     aRotSampleIndex += static_cast<std::size_t>(mMaterialH[439857U]) + static_cast<std::size_t>(mMaterialP[454953U]);
     aRandFinalB = RotL64(aRandFinalB, 7U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialD[440296U]) + static_cast<std::size_t>(mMaterialO[432647U]);
@@ -1325,11 +1325,11 @@ void Soccer::SeedEpilogue() {
     aRandFinalA = RotL64(aRandFinalA, 7U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialI[445984U]) + static_cast<std::size_t>(mMaterialL[449910U]);
     aRandL3B = RotL64(aRandL3B, 7U) ^ aRotSampleIndex;
-
+    
     //
     // $$$$$$$$$$$$$$$$
     //
-
+    
     aRotSampleIndex += static_cast<std::size_t>(mMaterialN[462450U]) + static_cast<std::size_t>(mMaterialD[463266U]);
     aRandL1A = RotL64(aRandL1A, 7U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialA[485381U]) + static_cast<std::size_t>(mMaterialJ[464590U]);
@@ -1346,11 +1346,11 @@ void Soccer::SeedEpilogue() {
     aRandL2A = RotL64(aRandL2A, 7U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialG[485153U]) + static_cast<std::size_t>(mMaterialE[482590U]);
     aRandL2B = RotL64(aRandL2B, 7U) ^ aRotSampleIndex;
-
+    
     //
     // $$$$$$$$$$$$$$$$
     //
-
+    
     aRotSampleIndex += static_cast<std::size_t>(mMaterialE[507751U]) + static_cast<std::size_t>(mMaterialH[507618U]);
     aRandFinalB = RotL64(aRandFinalB, 7U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialF[504392U]) + static_cast<std::size_t>(mMaterialJ[509705U]);
@@ -1367,11 +1367,11 @@ void Soccer::SeedEpilogue() {
     aRandL2B = RotL64(aRandL2B, 7U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialD[521756U]) + static_cast<std::size_t>(mMaterialG[516312U]);
     aRandL1A = RotL64(aRandL1A, 7U) ^ aRotSampleIndex;
-
+    
     //
     // $$$$$$$$$$$$$$$$
     //
-
+    
     aRotSampleIndex += static_cast<std::size_t>(mMaterialC[544509U]) + static_cast<std::size_t>(mMaterialO[549635U]);
     aRandL3B = RotL64(aRandL3B, 1U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialA[554357U]) + static_cast<std::size_t>(mMaterialI[525244U]);
@@ -1388,11 +1388,11 @@ void Soccer::SeedEpilogue() {
     aRandFinalA = RotL64(aRandFinalA, 1U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialD[540454U]) + static_cast<std::size_t>(mMaterialN[538284U]);
     aRandL3A = RotL64(aRandL3A, 1U) ^ aRotSampleIndex;
-
+    
     //
     // $$$$$$$$$$$$$$$$
     //
-
+    
     aRotSampleIndex += static_cast<std::size_t>(mMaterialJ[583530U]) + static_cast<std::size_t>(mMaterialM[577695U]);
     aRandFinalB = RotL64(aRandFinalB, 1U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialB[574875U]) + static_cast<std::size_t>(mMaterialE[588001U]);
@@ -1409,11 +1409,11 @@ void Soccer::SeedEpilogue() {
     aRandL3B = RotL64(aRandL3B, 1U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialL[570459U]) + static_cast<std::size_t>(mMaterialN[570244U]);
     aRandL1B = RotL64(aRandL1B, 1U) ^ aRotSampleIndex;
-
+    
     //
     // $$$$$$$$$$$$$$$$
     //
-
+    
     aRotSampleIndex += static_cast<std::size_t>(mMaterialE[614514U]) + static_cast<std::size_t>(mMaterialM[619422U]);
     aRandL2B = RotL64(aRandL2B, 1U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialO[622497U]) + static_cast<std::size_t>(mMaterialC[612127U]);
@@ -1430,11 +1430,11 @@ void Soccer::SeedEpilogue() {
     aRandL1B = RotL64(aRandL1B, 1U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialN[614098U]) + static_cast<std::size_t>(mMaterialK[613571U]);
     aRandFinalA = RotL64(aRandFinalA, 1U) ^ aRotSampleIndex;
-
+    
     //
     // $$$$$$$$$$$$$$$$
     //
-
+    
     aRotSampleIndex += static_cast<std::size_t>(mMaterialB[645188U]) + static_cast<std::size_t>(mMaterialO[652313U]);
     aRandFinalB = RotL64(aRandFinalB, 1U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialG[639822U]) + static_cast<std::size_t>(mMaterialP[635806U]);
@@ -1451,11 +1451,11 @@ void Soccer::SeedEpilogue() {
     aRandL1A = RotL64(aRandL1A, 1U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialN[623348U]) + static_cast<std::size_t>(mMaterialH[628267U]);
     aRandL2A = RotL64(aRandL2A, 1U) ^ aRotSampleIndex;
-
+    
     //
     // $$$$$$$$$$$$$$$$
     //
-
+    
     aRotSampleIndex += static_cast<std::size_t>(mMaterialP[684337U]) + static_cast<std::size_t>(mMaterialA[672059U]);
     aRandL2B = RotL64(aRandL2B, 1U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialM[684332U]) + static_cast<std::size_t>(mMaterialH[664698U]);
@@ -1472,11 +1472,11 @@ void Soccer::SeedEpilogue() {
     aRandL3B = RotL64(aRandL3B, 1U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialB[679164U]) + static_cast<std::size_t>(mMaterialL[686758U]);
     aRandFinalB = RotL64(aRandFinalB, 1U) ^ aRotSampleIndex;
-
+    
     //
     // $$$$$$$$$$$$$$$$
     //
-
+    
     aRotSampleIndex += static_cast<std::size_t>(mMaterialO[699239U]) + static_cast<std::size_t>(mMaterialC[713876U]);
     aRandFinalB = RotL64(aRandFinalB, 1U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialB[703484U]) + static_cast<std::size_t>(mMaterialK[716869U]);
@@ -1493,11 +1493,11 @@ void Soccer::SeedEpilogue() {
     aRandFinalA = RotL64(aRandFinalA, 1U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialP[688926U]) + static_cast<std::size_t>(mMaterialI[697302U]);
     aRandL3B = RotL64(aRandL3B, 1U) ^ aRotSampleIndex;
-
+    
     //
     // $$$$$$$$$$$$$$$$
     //
-
+    
     aRotSampleIndex += static_cast<std::size_t>(mMaterialB[733135U]) + static_cast<std::size_t>(mMaterialM[735711U]);
     aRandL1A = RotL64(aRandL1A, 1U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialH[752864U]) + static_cast<std::size_t>(mMaterialJ[724037U]);
@@ -1514,11 +1514,11 @@ void Soccer::SeedEpilogue() {
     aRandFinalA = RotL64(aRandFinalA, 1U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialG[740138U]) + static_cast<std::size_t>(mMaterialN[745793U]);
     aRandL2B = RotL64(aRandL2B, 1U) ^ aRotSampleIndex;
-
+    
     //
     // $$$$$$$$$$$$$$$$
     //
-
+    
     aRotSampleIndex += static_cast<std::size_t>(mMaterialB[766501U]) + static_cast<std::size_t>(mMaterialM[779762U]);
     aRandFinalB = RotL64(aRandFinalB, 1U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialH[773129U]) + static_cast<std::size_t>(mMaterialN[763739U]);
@@ -1535,11 +1535,11 @@ void Soccer::SeedEpilogue() {
     aRandL2B = RotL64(aRandL2B, 1U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialG[758793U]) + static_cast<std::size_t>(mMaterialE[781759U]);
     aRandL1A = RotL64(aRandL1A, 1U) ^ aRotSampleIndex;
-
+    
     //
     // $$$$$$$$$$$$$$$$
     //
-
+    
     aRotSampleIndex += static_cast<std::size_t>(mMaterialP[795437U]) + static_cast<std::size_t>(mMaterialL[795423U]);
     aRandL1B = RotL64(aRandL1B, 5U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialK[790773U]) + static_cast<std::size_t>(mMaterialB[808087U]);
@@ -1556,11 +1556,11 @@ void Soccer::SeedEpilogue() {
     aRandL2B = RotL64(aRandL2B, 5U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialH[802903U]) + static_cast<std::size_t>(mMaterialE[788237U]);
     aRandL3A = RotL64(aRandL3A, 5U) ^ aRotSampleIndex;
-
+    
     //
     // $$$$$$$$$$$$$$$$
     //
-
+    
     aRotSampleIndex += static_cast<std::size_t>(mMaterialA[850732U]) + static_cast<std::size_t>(mMaterialK[829947U]);
     aRandFinalB = RotL64(aRandFinalB, 5U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialD[839105U]) + static_cast<std::size_t>(mMaterialN[836154U]);
@@ -1577,11 +1577,11 @@ void Soccer::SeedEpilogue() {
     aRandL2B = RotL64(aRandL2B, 5U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialL[850853U]) + static_cast<std::size_t>(mMaterialB[851958U]);
     aRandL1B = RotL64(aRandL1B, 5U) ^ aRotSampleIndex;
-
+    
     //
     // $$$$$$$$$$$$$$$$
     //
-
+    
     aRotSampleIndex += static_cast<std::size_t>(mMaterialN[873358U]) + static_cast<std::size_t>(mMaterialB[877900U]);
     aRandL1A = RotL64(aRandL1A, 5U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialA[883750U]) + static_cast<std::size_t>(mMaterialK[854137U]);
@@ -1598,11 +1598,11 @@ void Soccer::SeedEpilogue() {
     aRandL2B = RotL64(aRandL2B, 5U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialC[857354U]) + static_cast<std::size_t>(mMaterialF[858285U]);
     aRandFinalA = RotL64(aRandFinalA, 5U) ^ aRotSampleIndex;
-
+    
     //
     // $$$$$$$$$$$$$$$$
     //
-
+    
     aRotSampleIndex += static_cast<std::size_t>(mMaterialL[892563U]) + static_cast<std::size_t>(mMaterialK[892550U]);
     aRandFinalA = RotL64(aRandFinalA, 5U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialP[888653U]) + static_cast<std::size_t>(mMaterialD[887665U]);
@@ -1619,11 +1619,11 @@ void Soccer::SeedEpilogue() {
     aRandL3A = RotL64(aRandL3A, 5U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialN[911521U]) + static_cast<std::size_t>(mMaterialF[909916U]);
     aRandL2A = RotL64(aRandL2A, 5U) ^ aRotSampleIndex;
-
+    
     //
     // $$$$$$$$$$$$$$$$
     //
-
+    
     aRotSampleIndex += static_cast<std::size_t>(mMaterialM[949288U]) + static_cast<std::size_t>(mMaterialB[924299U]);
     aRandL1B = RotL64(aRandL1B, 5U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialP[932354U]) + static_cast<std::size_t>(mMaterialG[941653U]);
@@ -1640,11 +1640,11 @@ void Soccer::SeedEpilogue() {
     aRandFinalA = RotL64(aRandFinalA, 5U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialH[945302U]) + static_cast<std::size_t>(mMaterialC[939366U]);
     aRandFinalB = RotL64(aRandFinalB, 5U) ^ aRotSampleIndex;
-
+    
     //
     // $$$$$$$$$$$$$$$$
     //
-
+    
     aRotSampleIndex += static_cast<std::size_t>(mMaterialL[959567U]) + static_cast<std::size_t>(mMaterialB[959340U]);
     aRandFinalB = RotL64(aRandFinalB, 5U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialM[960313U]) + static_cast<std::size_t>(mMaterialK[962440U]);
@@ -1661,11 +1661,11 @@ void Soccer::SeedEpilogue() {
     aRandL2A = RotL64(aRandL2A, 5U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialJ[975885U]) + static_cast<std::size_t>(mMaterialN[975679U]);
     aRandL3B = RotL64(aRandL3B, 5U) ^ aRotSampleIndex;
-
+    
     //
     // $$$$$$$$$$$$$$$$
     //
-
+    
     aRotSampleIndex += static_cast<std::size_t>(mMaterialC[985284U]) + static_cast<std::size_t>(mMaterialG[1006527U]);
     aRandL1B = RotL64(aRandL1B, 5U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialD[999589U]) + static_cast<std::size_t>(mMaterialN[1008638U]);
@@ -1682,11 +1682,11 @@ void Soccer::SeedEpilogue() {
     aRandL3B = RotL64(aRandL3B, 5U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialI[989712U]) + static_cast<std::size_t>(mMaterialB[1002161U]);
     aRandL2B = RotL64(aRandL2B, 5U) ^ aRotSampleIndex;
-
+    
     //
     // $$$$$$$$$$$$$$$$
     //
-
+    
     aRotSampleIndex += static_cast<std::size_t>(mMaterialI[1027619U]) + static_cast<std::size_t>(mMaterialO[1038909U]);
     aRandFinalB = RotL64(aRandFinalB, 5U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialD[1019834U]) + static_cast<std::size_t>(mMaterialG[1031464U]);
@@ -1703,25 +1703,25 @@ void Soccer::SeedEpilogue() {
     aRandL2B = RotL64(aRandL2B, 5U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialC[1027927U]) + static_cast<std::size_t>(mMaterialK[1042061U]);
     aRandL1A = RotL64(aRandL1A, 5U) ^ aRotSampleIndex;
-
+    
     aRotSampleIndex %= aRotSampleCount;
-
+    
     auto AdvanceRotSample = [&](std::uint64_t pMix, std::size_t pHop) {
         
         const std::size_t aNearIndex = (aRotSampleIndex + 8U + pHop) % S_BLOCK;
         const std::size_t aFarIndex = static_cast<std::size_t>((pMix ^ (pMix >> 32U)) % S_BLOCK);
         aRotSampleIndex = (aRotSampleIndex + mRandom[aNearIndex] + mRandom[aFarIndex] + pHop) % aRotSampleCount;
     };
-
+    
     auto MixRotRoundA = [&](std::uint64_t &pValue, std::size_t pHop, std::uint64_t pRotation) {
-
+        
         const std::uint64_t aSample = Read64(&mRandom[aRotSampleIndex]);
         pValue = (pValue ^ aSample) + RotL64(pValue + pHop, pRotation);
         AdvanceRotSample(pValue ^ RotL64(aSample, pRotation), pHop);
     };
-
+    
     auto MixRotRoundB = [&](std::uint64_t &pValue, std::size_t pHop, std::uint64_t pRotation) {
-
+        
         const std::uint64_t aSample = Read64(&mRandom[aRotSampleIndex]);
         pValue = RotL64(pValue ^ aSample, pRotation) + (aSample ^ static_cast<std::uint64_t>(pHop));
         AdvanceRotSample(pValue + RotL64(aSample + pValue, pRotation), pHop);
@@ -1734,11 +1734,11 @@ void Soccer::SeedEpilogue() {
     MixRotRoundA(aRandL1A, mMaterialH[593380U], mMaterialO[511517U]);
     MixRotRoundA(aRandFinalA, mMaterialL[563785U], mMaterialC[206397U]);
     MixRotRoundA(aRandL2B, mMaterialP[58922U], mMaterialK[881986U]);
-
+    
     //
     // $$$$$$$$$$$$$$$$
     //
-
+    
     MixRotRoundB(aRandL1A, mMaterialB[269845U], mMaterialH[27020U]);
     MixRotRoundB(aRandFinalB, mMaterialC[929180U], mMaterialE[1005140U]);
     MixRotRoundB(aRandL3B, mMaterialJ[767414U], mMaterialP[670183U]);
@@ -1747,11 +1747,11 @@ void Soccer::SeedEpilogue() {
     MixRotRoundB(aRandL3A, mMaterialD[530148U], mMaterialO[335396U]);
     MixRotRoundB(aRandL2B, mMaterialA[833777U], mMaterialG[83401U]);
     MixRotRoundB(aRandFinalA, mMaterialN[750176U], mMaterialL[519737U]);
-
+    
     //
     // $$$$$$$$$$$$$$$$
     //
-
+    
     MixRotRoundA(aRandFinalB, mMaterialP[1008089U], mMaterialN[57836U]);
     MixRotRoundA(aRandL2B, mMaterialA[448999U], mMaterialC[339057U]);
     MixRotRoundA(aRandL2A, mMaterialL[862794U], mMaterialE[93666U]);
@@ -1760,11 +1760,11 @@ void Soccer::SeedEpilogue() {
     MixRotRoundA(aRandL3B, mMaterialF[487023U], mMaterialH[560705U]);
     MixRotRoundA(aRandL3A, mMaterialD[659129U], mMaterialM[283406U]);
     MixRotRoundA(aRandFinalA, mMaterialK[146018U], mMaterialJ[205171U]);
-
+    
     //
     // $$$$$$$$$$$$$$$$
     //
-
+    
     MixRotRoundB(aRandL1B, mMaterialH[867028U], mMaterialG[292700U]);
     MixRotRoundB(aRandL1A, mMaterialL[142575U], mMaterialP[885737U]);
     MixRotRoundB(aRandL2A, mMaterialE[303190U], mMaterialI[716722U]);
@@ -1773,11 +1773,11 @@ void Soccer::SeedEpilogue() {
     MixRotRoundB(aRandFinalB, mMaterialM[757929U], mMaterialO[619374U]);
     MixRotRoundB(aRandL3A, mMaterialJ[342837U], mMaterialD[410937U]);
     MixRotRoundB(aRandL3B, mMaterialB[197481U], mMaterialK[529312U]);
-
+    
     //
     // $$$$$$$$$$$$$$$$
     //
-
+    
     MixRotRoundA(aRandL3B, mMaterialN[549770U], mMaterialC[109163U]);
     MixRotRoundA(aRandFinalB, mMaterialA[739898U], mMaterialG[916076U]);
     MixRotRoundA(aRandL3A, mMaterialM[441530U], mMaterialO[695127U]);
@@ -1786,11 +1786,11 @@ void Soccer::SeedEpilogue() {
     MixRotRoundA(aRandL1A, mMaterialL[356795U], mMaterialB[953693U]);
     MixRotRoundA(aRandL2B, mMaterialP[796007U], mMaterialD[580443U]);
     MixRotRoundA(aRandL1B, mMaterialK[622691U], mMaterialE[393461U]);
-
+    
     //
     // $$$$$$$$$$$$$$$$
     //
-
+    
     MixRotRoundB(aRandL1A, mMaterialE[844595U], mMaterialO[261395U]);
     MixRotRoundB(aRandL3B, mMaterialB[179335U], mMaterialJ[122434U]);
     MixRotRoundB(aRandL3A, mMaterialM[387845U], mMaterialK[29279U]);
@@ -1799,11 +1799,11 @@ void Soccer::SeedEpilogue() {
     MixRotRoundB(aRandFinalB, mMaterialL[632005U], mMaterialF[596385U]);
     MixRotRoundB(aRandL2B, mMaterialD[883644U], mMaterialI[319398U]);
     MixRotRoundB(aRandFinalA, mMaterialP[472844U], mMaterialA[675296U]);
-
+    
     //
     // $$$$$$$$$$$$$$$$
     //
-
+    
     MixRotRoundA(aRandFinalA, mMaterialO[84995U], mMaterialH[965632U]);
     MixRotRoundA(aRandL2A, mMaterialC[1011322U], mMaterialK[124942U]);
     MixRotRoundA(aRandL1A, mMaterialP[6112U], mMaterialJ[44835U]);
@@ -1812,11 +1812,11 @@ void Soccer::SeedEpilogue() {
     MixRotRoundA(aRandFinalB, mMaterialB[831763U], mMaterialA[1027342U]);
     MixRotRoundA(aRandL2B, mMaterialE[580031U], mMaterialI[655372U]);
     MixRotRoundA(aRandL1B, mMaterialM[458897U], mMaterialG[801368U]);
-
+    
     //
     // $$$$$$$$$$$$$$$$
     //
-
+    
     MixRotRoundB(aRandFinalB, mMaterialA[705520U], mMaterialH[56286U]);
     MixRotRoundB(aRandL2A, mMaterialK[888772U], mMaterialG[501582U]);
     MixRotRoundB(aRandL1A, mMaterialI[572237U], mMaterialM[1021214U]);
@@ -1825,11 +1825,11 @@ void Soccer::SeedEpilogue() {
     MixRotRoundB(aRandL2B, mMaterialD[971461U], mMaterialJ[537403U]);
     MixRotRoundB(aRandL3B, mMaterialP[765326U], mMaterialL[1003704U]);
     MixRotRoundB(aRandL1B, mMaterialB[142424U], mMaterialN[264601U]);
-
+    
     //
     // $$$$$$$$$$$$$$$$
     //
-
+    
     MixRotRoundA(aRandL1A, mMaterialK[604423U], mMaterialF[145669U]);
     MixRotRoundA(aRandL2A, mMaterialO[631724U], mMaterialA[41042U]);
     MixRotRoundA(aRandL3A, mMaterialJ[927216U], mMaterialI[117139U]);
@@ -1838,11 +1838,11 @@ void Soccer::SeedEpilogue() {
     MixRotRoundA(aRandFinalA, mMaterialG[296252U], mMaterialB[758749U]);
     MixRotRoundA(aRandL2B, mMaterialN[684133U], mMaterialM[964694U]);
     MixRotRoundA(aRandL1B, mMaterialL[1042425U], mMaterialP[397732U]);
-
+    
     //
     // $$$$$$$$$$$$$$$$
     //
-
+    
     MixRotRoundB(aRandL1A, mMaterialJ[492149U], mMaterialH[798612U]);
     MixRotRoundB(aRandFinalA, mMaterialC[1040816U], mMaterialF[825192U]);
     MixRotRoundB(aRandL3A, mMaterialB[25725U], mMaterialN[366056U]);
@@ -1851,11 +1851,11 @@ void Soccer::SeedEpilogue() {
     MixRotRoundB(aRandFinalB, mMaterialI[360092U], mMaterialE[115770U]);
     MixRotRoundB(aRandL2A, mMaterialG[718701U], mMaterialO[144529U]);
     MixRotRoundB(aRandL3B, mMaterialL[472935U], mMaterialD[1005709U]);
-
+    
     //
     // $$$$$$$$$$$$$$$$
     //
-
+    
     MixRotRoundA(aRandFinalA, mMaterialM[639687U], mMaterialB[612313U]);
     MixRotRoundA(aRandL3B, mMaterialF[913119U], mMaterialD[380614U]);
     MixRotRoundA(aRandFinalB, mMaterialH[664393U], mMaterialL[416474U]);
@@ -1864,11 +1864,11 @@ void Soccer::SeedEpilogue() {
     MixRotRoundA(aRandL1A, mMaterialK[846700U], mMaterialN[969983U]);
     MixRotRoundA(aRandL3A, mMaterialC[860868U], mMaterialG[333044U]);
     MixRotRoundA(aRandL2A, mMaterialI[492378U], mMaterialO[468357U]);
-
+    
     //
     // $$$$$$$$$$$$$$$$
     //
-
+    
     MixRotRoundB(aRandL2B, mMaterialP[630442U], mMaterialJ[823318U]);
     MixRotRoundB(aRandL3B, mMaterialD[719815U], mMaterialA[512968U]);
     MixRotRoundB(aRandFinalB, mMaterialK[166989U], mMaterialB[411820U]);
@@ -1877,11 +1877,11 @@ void Soccer::SeedEpilogue() {
     MixRotRoundB(aRandL2A, mMaterialF[775543U], mMaterialL[950859U]);
     MixRotRoundB(aRandL1A, mMaterialH[305357U], mMaterialG[525402U]);
     MixRotRoundB(aRandL3A, mMaterialM[797077U], mMaterialC[63483U]);
-
+    
     //
     // $$$$$$$$$$$$$$$$
     //
-
+    
     MixRotRoundA(aRandL2B, mMaterialH[109254U], mMaterialN[503078U]);
     MixRotRoundA(aRandFinalB, mMaterialK[769014U], mMaterialO[953570U]);
     MixRotRoundA(aRandL3A, mMaterialM[669439U], mMaterialJ[901540U]);
@@ -1890,11 +1890,11 @@ void Soccer::SeedEpilogue() {
     MixRotRoundA(aRandL2A, mMaterialD[346572U], mMaterialA[569629U]);
     MixRotRoundA(aRandL3B, mMaterialC[437690U], mMaterialB[1015700U]);
     MixRotRoundA(aRandL1A, mMaterialF[231142U], mMaterialP[1040917U]);
-
+    
     //
     // $$$$$$$$$$$$$$$$
     //
-
+    
     MixRotRoundB(aRandL3A, mMaterialD[608915U], mMaterialJ[969915U]);
     MixRotRoundB(aRandL2A, mMaterialO[936276U], mMaterialG[984451U]);
     MixRotRoundB(aRandL2B, mMaterialE[673847U], mMaterialK[358121U]);
@@ -1903,11 +1903,11 @@ void Soccer::SeedEpilogue() {
     MixRotRoundB(aRandL3B, mMaterialM[894834U], mMaterialA[474208U]);
     MixRotRoundB(aRandL1B, mMaterialN[145225U], mMaterialC[169001U]);
     MixRotRoundB(aRandFinalA, mMaterialB[301872U], mMaterialP[551681U]);
-
+    
     //
     // $$$$$$$$$$$$$$$$
     //
-
+    
     MixRotRoundA(aRandL2B, mMaterialM[994369U], mMaterialL[256880U]);
     MixRotRoundA(aRandFinalA, mMaterialD[1040831U], mMaterialP[151007U]);
     MixRotRoundA(aRandL3B, mMaterialO[756230U], mMaterialA[812553U]);
@@ -1916,11 +1916,11 @@ void Soccer::SeedEpilogue() {
     MixRotRoundA(aRandL3A, mMaterialH[690200U], mMaterialK[208297U]);
     MixRotRoundA(aRandL2A, mMaterialJ[309350U], mMaterialG[63021U]);
     MixRotRoundA(aRandL1B, mMaterialF[27496U], mMaterialE[747330U]);
-
+    
     //
     // $$$$$$$$$$$$$$$$
     //
-
+    
     MixRotRoundB(aRandL2A, mMaterialB[950048U], mMaterialA[1003994U]);
     MixRotRoundB(aRandL3B, mMaterialD[469570U], mMaterialK[585608U]);
     MixRotRoundB(aRandL1B, mMaterialI[280842U], mMaterialF[543062U]);
@@ -1929,11 +1929,11 @@ void Soccer::SeedEpilogue() {
     MixRotRoundB(aRandFinalB, mMaterialP[839350U], mMaterialC[246350U]);
     MixRotRoundB(aRandL3A, mMaterialH[1021723U], mMaterialM[179852U]);
     MixRotRoundB(aRandFinalA, mMaterialO[21774U], mMaterialL[604851U]);
-
+    
     //
     // $$$$$$$$$$$$$$$$
     //
-
+    
     MixRotRoundA(aRandL2B, mMaterialL[938535U], mMaterialA[152176U]);
     MixRotRoundA(aRandL1A, mMaterialG[417795U], mMaterialD[5200U]);
     MixRotRoundA(aRandL3A, mMaterialB[430475U], mMaterialO[124941U]);
@@ -1942,11 +1942,11 @@ void Soccer::SeedEpilogue() {
     MixRotRoundA(aRandFinalA, mMaterialI[1000278U], mMaterialN[600757U]);
     MixRotRoundA(aRandL3B, mMaterialP[570744U], mMaterialE[789140U]);
     MixRotRoundA(aRandL2A, mMaterialH[755584U], mMaterialM[837551U]);
-
+    
     //
     // $$$$$$$$$$$$$$$$
     //
-
+    
     MixRotRoundB(aRandFinalA, mMaterialJ[802449U], mMaterialA[235346U]);
     MixRotRoundB(aRandL1A, mMaterialG[1028472U], mMaterialF[314646U]);
     MixRotRoundB(aRandFinalB, mMaterialK[435187U], mMaterialC[479251U]);
@@ -1955,11 +1955,11 @@ void Soccer::SeedEpilogue() {
     MixRotRoundB(aRandL2A, mMaterialP[917939U], mMaterialE[338689U]);
     MixRotRoundB(aRandL3A, mMaterialD[174247U], mMaterialM[593926U]);
     MixRotRoundB(aRandL1B, mMaterialH[1012593U], mMaterialL[901046U]);
-
+    
     //
     // $$$$$$$$$$$$$$$$
     //
-
+    
     MixRotRoundA(aRandL1A, mMaterialJ[740542U], mMaterialC[685395U]);
     MixRotRoundA(aRandL3B, mMaterialP[245174U], mMaterialA[336508U]);
     MixRotRoundA(aRandL2B, mMaterialO[986953U], mMaterialL[381512U]);
@@ -1968,11 +1968,11 @@ void Soccer::SeedEpilogue() {
     MixRotRoundA(aRandFinalB, mMaterialM[858509U], mMaterialH[452160U]);
     MixRotRoundA(aRandFinalA, mMaterialD[291535U], mMaterialF[189121U]);
     MixRotRoundA(aRandL1B, mMaterialN[712395U], mMaterialG[566720U]);
-
+    
     //
     // $$$$$$$$$$$$$$$$
     //
-
+    
     MixRotRoundB(aRandL1B, mMaterialH[843737U], mMaterialK[996917U]);
     MixRotRoundB(aRandL3B, mMaterialN[113189U], mMaterialC[529931U]);
     MixRotRoundB(aRandL2B, mMaterialJ[149459U], mMaterialA[944549U]);
@@ -1981,11 +1981,11 @@ void Soccer::SeedEpilogue() {
     MixRotRoundB(aRandFinalA, mMaterialI[598776U], mMaterialP[267400U]);
     MixRotRoundB(aRandL1A, mMaterialD[317913U], mMaterialF[391263U]);
     MixRotRoundB(aRandFinalB, mMaterialB[876745U], mMaterialG[7083U]);
-
+    
     //
     // $$$$$$$$$$$$$$$$
     //
-
+    
     MixRotRoundA(aRandL1A, mMaterialL[530622U], mMaterialE[974847U]);
     MixRotRoundA(aRandL1B, mMaterialH[137527U], mMaterialJ[625430U]);
     MixRotRoundA(aRandFinalB, mMaterialG[780387U], mMaterialK[816087U]);
@@ -1994,11 +1994,11 @@ void Soccer::SeedEpilogue() {
     MixRotRoundA(aRandL3B, mMaterialB[339953U], mMaterialO[580301U]);
     MixRotRoundA(aRandL3A, mMaterialI[233289U], mMaterialA[77849U]);
     MixRotRoundA(aRandL2A, mMaterialP[432902U], mMaterialN[897788U]);
-
+    
     //
     // $$$$$$$$$$$$$$$$
     //
-
+    
     MixRotRoundB(aRandL1A, mMaterialH[262166U], mMaterialO[175188U]);
     MixRotRoundB(aRandFinalB, mMaterialC[364617U], mMaterialM[396300U]);
     MixRotRoundB(aRandL3A, mMaterialD[625559U], mMaterialF[201638U]);
@@ -2007,11 +2007,11 @@ void Soccer::SeedEpilogue() {
     MixRotRoundB(aRandL1B, mMaterialJ[431963U], mMaterialG[668671U]);
     MixRotRoundB(aRandL2B, mMaterialL[782617U], mMaterialB[893740U]);
     MixRotRoundB(aRandL2A, mMaterialK[922068U], mMaterialI[52580U]);
-
+    
     //
     // $$$$$$$$$$$$$$$$
     //
-
+    
     MixRotRoundA(aRandL1B, mMaterialF[55872U], mMaterialL[740134U]);
     MixRotRoundA(aRandFinalB, mMaterialA[179038U], mMaterialG[247435U]);
     MixRotRoundA(aRandL1A, mMaterialI[623501U], mMaterialE[262543U]);
@@ -2020,11 +2020,11 @@ void Soccer::SeedEpilogue() {
     MixRotRoundA(aRandL3A, mMaterialP[301134U], mMaterialO[533025U]);
     MixRotRoundA(aRandL3B, mMaterialM[199565U], mMaterialK[665019U]);
     MixRotRoundA(aRandL2B, mMaterialJ[1036362U], mMaterialN[77097U]);
-
+    
     //
     // $$$$$$$$$$$$$$$$
     //
-
+    
     MixRotRoundB(aRandFinalA, mMaterialP[507917U], mMaterialL[107383U]);
     MixRotRoundB(aRandL3A, mMaterialK[266244U], mMaterialO[317555U]);
     MixRotRoundB(aRandL1B, mMaterialC[891864U], mMaterialA[605928U]);
@@ -2033,11 +2033,11 @@ void Soccer::SeedEpilogue() {
     MixRotRoundB(aRandFinalB, mMaterialH[166804U], mMaterialM[744387U]);
     MixRotRoundB(aRandL3B, mMaterialJ[1005277U], mMaterialN[10002U]);
     MixRotRoundB(aRandL1A, mMaterialI[399980U], mMaterialF[692401U]);
-
+    
     //
     // $$$$$$$$$$$$$$$$
     //
-
+    
     MixRotRoundA(aRandFinalB, mMaterialP[701762U], mMaterialH[901996U]);
     MixRotRoundA(aRandL3B, mMaterialC[741159U], mMaterialE[639549U]);
     MixRotRoundA(aRandL1B, mMaterialL[458735U], mMaterialJ[489906U]);
@@ -2046,11 +2046,11 @@ void Soccer::SeedEpilogue() {
     MixRotRoundA(aRandL2A, mMaterialK[373420U], mMaterialO[45194U]);
     MixRotRoundA(aRandL3A, mMaterialI[150009U], mMaterialN[947428U]);
     MixRotRoundA(aRandL2B, mMaterialD[101547U], mMaterialB[812699U]);
-
+    
     //
     // $$$$$$$$$$$$$$$$
     //
-
+    
     MixRotRoundB(aRandL3A, mMaterialF[436142U], mMaterialL[838773U]);
     MixRotRoundB(aRandL2A, mMaterialA[761760U], mMaterialI[1033951U]);
     MixRotRoundB(aRandL1B, mMaterialK[51923U], mMaterialD[66517U]);
@@ -2059,11 +2059,11 @@ void Soccer::SeedEpilogue() {
     MixRotRoundB(aRandL1A, mMaterialJ[863440U], mMaterialC[157432U]);
     MixRotRoundB(aRandL3B, mMaterialB[571102U], mMaterialN[167909U]);
     MixRotRoundB(aRandFinalA, mMaterialM[4204U], mMaterialO[726391U]);
-
+    
     //
     // $$$$$$$$$$$$$$$$
     //
-
+    
     MixRotRoundA(aRandL2A, mMaterialA[116592U], mMaterialD[439252U]);
     MixRotRoundA(aRandFinalA, mMaterialN[296898U], mMaterialJ[606629U]);
     MixRotRoundA(aRandL3A, mMaterialO[810179U], mMaterialG[209142U]);
@@ -2072,11 +2072,11 @@ void Soccer::SeedEpilogue() {
     MixRotRoundA(aRandL1B, mMaterialI[4002U], mMaterialP[975460U]);
     MixRotRoundA(aRandFinalB, mMaterialB[1016701U], mMaterialM[355986U]);
     MixRotRoundA(aRandL3B, mMaterialK[421021U], mMaterialH[741113U]);
-
+    
     //
     // $$$$$$$$$$$$$$$$
     //
-
+    
     MixRotRoundB(aRandL1B, mMaterialP[196980U], mMaterialC[398027U]);
     MixRotRoundB(aRandL2A, mMaterialJ[662985U], mMaterialG[875389U]);
     MixRotRoundB(aRandL3B, mMaterialK[296088U], mMaterialE[505158U]);
@@ -2085,11 +2085,11 @@ void Soccer::SeedEpilogue() {
     MixRotRoundB(aRandL1A, mMaterialF[105426U], mMaterialL[97998U]);
     MixRotRoundB(aRandFinalA, mMaterialO[889941U], mMaterialI[807068U]);
     MixRotRoundB(aRandL2B, mMaterialB[737451U], mMaterialM[158327U]);
-
+    
     //
     // $$$$$$$$$$$$$$$$
     //
-
+    
     MixRotRoundA(aRandFinalB, mMaterialA[319888U], mMaterialM[713848U]);
     MixRotRoundA(aRandFinalA, mMaterialO[876536U], mMaterialE[186055U]);
     MixRotRoundA(aRandL2A, mMaterialH[540381U], mMaterialD[47151U]);
@@ -2098,11 +2098,11 @@ void Soccer::SeedEpilogue() {
     MixRotRoundA(aRandL2B, mMaterialP[374062U], mMaterialL[815956U]);
     MixRotRoundA(aRandL3A, mMaterialK[464254U], mMaterialB[634428U]);
     MixRotRoundA(aRandL1B, mMaterialG[936635U], mMaterialI[200677U]);
-
+    
     //
     // $$$$$$$$$$$$$$$$
     //
-
+    
     MixRotRoundB(aRandL2B, mMaterialL[22813U], mMaterialI[951946U]);
     MixRotRoundB(aRandL2A, mMaterialD[140100U], mMaterialK[504626U]);
     MixRotRoundB(aRandL1A, mMaterialB[101627U], mMaterialP[739481U]);
@@ -2111,11 +2111,11 @@ void Soccer::SeedEpilogue() {
     MixRotRoundB(aRandFinalA, mMaterialG[384633U], mMaterialN[463247U]);
     MixRotRoundB(aRandL1B, mMaterialM[84629U], mMaterialE[57739U]);
     MixRotRoundB(aRandFinalB, mMaterialO[221550U], mMaterialC[778680U]);
-
+    
     //
     // $$$$$$$$$$$$$$$$
     //
-
+    
     MixRotRoundA(aRandL3A, mMaterialE[1033309U], mMaterialJ[394026U]);
     MixRotRoundA(aRandFinalB, mMaterialG[146966U], mMaterialP[328457U]);
     MixRotRoundA(aRandL3B, mMaterialF[269921U], mMaterialL[306040U]);
@@ -2124,11 +2124,11 @@ void Soccer::SeedEpilogue() {
     MixRotRoundA(aRandL1B, mMaterialD[930491U], mMaterialO[429016U]);
     MixRotRoundA(aRandFinalA, mMaterialC[821071U], mMaterialK[965720U]);
     MixRotRoundA(aRandL1A, mMaterialA[16867U], mMaterialN[205734U]);
-
+    
     //
     // $$$$$$$$$$$$$$$$
     //
-
+    
     MixRotRoundB(aRandL3B, mMaterialD[504174U], mMaterialO[282854U]);
     MixRotRoundB(aRandL2B, mMaterialJ[68553U], mMaterialH[949572U]);
     MixRotRoundB(aRandL1A, mMaterialF[630456U], mMaterialA[547174U]);
@@ -2137,7 +2137,7 @@ void Soccer::SeedEpilogue() {
     MixRotRoundB(aRandL3A, mMaterialP[865157U], mMaterialN[580924U]);
     MixRotRoundB(aRandL1B, mMaterialM[44338U], mMaterialB[387378U]);
     MixRotRoundB(aRandL2A, mMaterialI[889934U], mMaterialE[482256U]);
-
+    
     aRandFinalB = TwistMix64::DiffuseA(aRandFinalB);
     aRandL1B = TwistMix64::DiffuseA(aRandL1B);
     aRandFinalA = TwistMix64::DiffuseA(aRandFinalA);

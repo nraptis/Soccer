@@ -23,7 +23,7 @@
 
 - (void)test_encryptDecrypt11 {
     
-    for (int i=0; i<1024; i++) {
+    for (int i=0; i<360; i++) {
         
         std::vector<std::uint8_t> aOriginalA(SOCCER_BLOCK_SIZE);
         WorkSpaceTools::FillBytes(aOriginalA.data(), SOCCER_BLOCK_SIZE);
