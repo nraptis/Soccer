@@ -803,38 +803,38 @@ bool Soccer::SeedPrelude(std::uint8_t *pPassword,
     mExpanders[28] = &mSaiph; mExpanders[29] = &mSirius; mExpanders[30] = &mSuhail; mExpanders[31] = &mVega;
     
     
-    mCiphersIdentifiersA[40] = 1; mCiphersIdentifiersA[41] = 2; mCiphersIdentifiersA[42] = 0; mCiphersIdentifiersA[43] = 1;
+    mCiphersIdentifiersB[48] = 3; mCiphersIdentifiersB[49] = 4; mCiphersIdentifiersB[50] = 0; mCiphersIdentifiersB[51] = 1;
+    mCiphersIdentifiersA[24] = 0; mCiphersIdentifiersA[25] = 1; mCiphersIdentifiersA[26] = 2; mCiphersIdentifiersA[27] = 0;
+    mCiphersIdentifiersB[ 8] = 3; mCiphersIdentifiersB[ 9] = 4; mCiphersIdentifiersB[10] = 0; mCiphersIdentifiersB[11] = 1;
     mCiphersIdentifiersA[12] = 0; mCiphersIdentifiersA[13] = 1; mCiphersIdentifiersA[14] = 2; mCiphersIdentifiersA[15] = 0;
-    mCiphersIdentifiersB[ 0] = 0; mCiphersIdentifiersB[ 1] = 1; mCiphersIdentifiersB[ 2] = 2; mCiphersIdentifiersB[ 3] = 3;
-    mCiphersIdentifiersB[ 4] = 4; mCiphersIdentifiersB[ 5] = 0; mCiphersIdentifiersB[ 6] = 1; mCiphersIdentifiersB[ 7] = 2;
+    mCiphersIdentifiersA[ 0] = 0; mCiphersIdentifiersA[ 1] = 1; mCiphersIdentifiersA[ 2] = 2; mCiphersIdentifiersA[ 3] = 0;
+    mCiphersIdentifiersB[16] = 1; mCiphersIdentifiersB[17] = 2; mCiphersIdentifiersB[18] = 3; mCiphersIdentifiersB[19] = 4;
+    mCiphersIdentifiersA[60] = 0; mCiphersIdentifiersA[61] = 1; mCiphersIdentifiersA[62] = 2; mCiphersIdentifiersA[63] = 0;
+    mCiphersIdentifiersB[32] = 2; mCiphersIdentifiersB[33] = 3; mCiphersIdentifiersB[34] = 4; mCiphersIdentifiersB[35] = 0;
+    mCiphersIdentifiersA[ 8] = 2; mCiphersIdentifiersA[ 9] = 0; mCiphersIdentifiersA[10] = 1; mCiphersIdentifiersA[11] = 2;
+    mCiphersIdentifiersA[48] = 0; mCiphersIdentifiersA[49] = 1; mCiphersIdentifiersA[50] = 2; mCiphersIdentifiersA[51] = 0;
+    mCiphersIdentifiersA[52] = 1; mCiphersIdentifiersA[53] = 2; mCiphersIdentifiersA[54] = 0; mCiphersIdentifiersA[55] = 1;
+    mCiphersIdentifiersB[36] = 1; mCiphersIdentifiersB[37] = 2; mCiphersIdentifiersB[38] = 3; mCiphersIdentifiersB[39] = 4;
     mCiphersIdentifiersB[52] = 2; mCiphersIdentifiersB[53] = 3; mCiphersIdentifiersB[54] = 5; mCiphersIdentifiersB[55] = 5;
     mCiphersIdentifiersA[16] = 1; mCiphersIdentifiersA[17] = 2; mCiphersIdentifiersA[18] = 0; mCiphersIdentifiersA[19] = 1;
     mCiphersIdentifiersA[20] = 2; mCiphersIdentifiersA[21] = 0; mCiphersIdentifiersA[22] = 1; mCiphersIdentifiersA[23] = 2;
     mCiphersIdentifiersA[36] = 0; mCiphersIdentifiersA[37] = 1; mCiphersIdentifiersA[38] = 2; mCiphersIdentifiersA[39] = 0;
-    mCiphersIdentifiersA[44] = 2; mCiphersIdentifiersA[45] = 0; mCiphersIdentifiersA[46] = 1; mCiphersIdentifiersA[47] = 2;
-    mCiphersIdentifiersB[48] = 3; mCiphersIdentifiersB[49] = 4; mCiphersIdentifiersB[50] = 0; mCiphersIdentifiersB[51] = 1;
+    mCiphersIdentifiersB[ 0] = 0; mCiphersIdentifiersB[ 1] = 1; mCiphersIdentifiersB[ 2] = 2; mCiphersIdentifiersB[ 3] = 3;
+    mCiphersIdentifiersB[ 4] = 4; mCiphersIdentifiersB[ 5] = 0; mCiphersIdentifiersB[ 6] = 1; mCiphersIdentifiersB[ 7] = 2;
+    mCiphersIdentifiersB[56] = 6; mCiphersIdentifiersB[57] = 6; mCiphersIdentifiersB[58] = 7; mCiphersIdentifiersB[59] = 7;
     mCiphersIdentifiersA[56] = 2; mCiphersIdentifiersA[57] = 0; mCiphersIdentifiersA[58] = 1; mCiphersIdentifiersA[59] = 2;
     mCiphersIdentifiersA[ 4] = 1; mCiphersIdentifiersA[ 5] = 2; mCiphersIdentifiersA[ 6] = 0; mCiphersIdentifiersA[ 7] = 1;
-    mCiphersIdentifiersA[ 8] = 2; mCiphersIdentifiersA[ 9] = 0; mCiphersIdentifiersA[10] = 1; mCiphersIdentifiersA[11] = 2;
     mCiphersIdentifiersB[40] = 0; mCiphersIdentifiersB[41] = 1; mCiphersIdentifiersB[42] = 2; mCiphersIdentifiersB[43] = 3;
     mCiphersIdentifiersB[44] = 4; mCiphersIdentifiersB[45] = 0; mCiphersIdentifiersB[46] = 1; mCiphersIdentifiersB[47] = 2;
-    mCiphersIdentifiersA[ 0] = 0; mCiphersIdentifiersA[ 1] = 1; mCiphersIdentifiersA[ 2] = 2; mCiphersIdentifiersA[ 3] = 0;
-    mCiphersIdentifiersA[48] = 0; mCiphersIdentifiersA[49] = 1; mCiphersIdentifiersA[50] = 2; mCiphersIdentifiersA[51] = 0;
-    mCiphersIdentifiersA[52] = 1; mCiphersIdentifiersA[53] = 2; mCiphersIdentifiersA[54] = 0; mCiphersIdentifiersA[55] = 1;
-    mCiphersIdentifiersB[20] = 0; mCiphersIdentifiersB[21] = 1; mCiphersIdentifiersB[22] = 2; mCiphersIdentifiersB[23] = 3;
-    mCiphersIdentifiersB[32] = 2; mCiphersIdentifiersB[33] = 3; mCiphersIdentifiersB[34] = 4; mCiphersIdentifiersB[35] = 0;
-    mCiphersIdentifiersB[36] = 1; mCiphersIdentifiersB[37] = 2; mCiphersIdentifiersB[38] = 3; mCiphersIdentifiersB[39] = 4;
-    mCiphersIdentifiersA[24] = 0; mCiphersIdentifiersA[25] = 1; mCiphersIdentifiersA[26] = 2; mCiphersIdentifiersA[27] = 0;
-    mCiphersIdentifiersB[56] = 6; mCiphersIdentifiersB[57] = 6; mCiphersIdentifiersB[58] = 7; mCiphersIdentifiersB[59] = 7;
-    mCiphersIdentifiersB[60] = 8; mCiphersIdentifiersB[61] = 8; mCiphersIdentifiersB[62] = 9; mCiphersIdentifiersB[63] = 9;
-    mCiphersIdentifiersA[32] = 2; mCiphersIdentifiersA[33] = 0; mCiphersIdentifiersA[34] = 1; mCiphersIdentifiersA[35] = 2;
-    mCiphersIdentifiersB[ 8] = 3; mCiphersIdentifiersB[ 9] = 4; mCiphersIdentifiersB[10] = 0; mCiphersIdentifiersB[11] = 1;
-    mCiphersIdentifiersB[12] = 2; mCiphersIdentifiersB[13] = 3; mCiphersIdentifiersB[14] = 4; mCiphersIdentifiersB[15] = 0;
-    mCiphersIdentifiersA[28] = 1; mCiphersIdentifiersA[29] = 2; mCiphersIdentifiersA[30] = 0; mCiphersIdentifiersA[31] = 1;
-    mCiphersIdentifiersB[16] = 1; mCiphersIdentifiersB[17] = 2; mCiphersIdentifiersB[18] = 3; mCiphersIdentifiersB[19] = 4;
-    mCiphersIdentifiersA[60] = 0; mCiphersIdentifiersA[61] = 1; mCiphersIdentifiersA[62] = 2; mCiphersIdentifiersA[63] = 0;
+    mCiphersIdentifiersA[44] = 2; mCiphersIdentifiersA[45] = 0; mCiphersIdentifiersA[46] = 1; mCiphersIdentifiersA[47] = 2;
     mCiphersIdentifiersB[24] = 4; mCiphersIdentifiersB[25] = 0; mCiphersIdentifiersB[26] = 1; mCiphersIdentifiersB[27] = 2;
     mCiphersIdentifiersB[28] = 3; mCiphersIdentifiersB[29] = 4; mCiphersIdentifiersB[30] = 0; mCiphersIdentifiersB[31] = 1;
+    mCiphersIdentifiersA[40] = 1; mCiphersIdentifiersA[41] = 2; mCiphersIdentifiersA[42] = 0; mCiphersIdentifiersA[43] = 1;
+    mCiphersIdentifiersB[20] = 0; mCiphersIdentifiersB[21] = 1; mCiphersIdentifiersB[22] = 2; mCiphersIdentifiersB[23] = 3;
+    mCiphersIdentifiersB[60] = 8; mCiphersIdentifiersB[61] = 8; mCiphersIdentifiersB[62] = 9; mCiphersIdentifiersB[63] = 9;
+    mCiphersIdentifiersA[32] = 2; mCiphersIdentifiersA[33] = 0; mCiphersIdentifiersA[34] = 1; mCiphersIdentifiersA[35] = 2;
+    mCiphersIdentifiersB[12] = 2; mCiphersIdentifiersB[13] = 3; mCiphersIdentifiersB[14] = 4; mCiphersIdentifiersB[15] = 0;
+    mCiphersIdentifiersA[28] = 1; mCiphersIdentifiersA[29] = 2; mCiphersIdentifiersA[30] = 0; mCiphersIdentifiersA[31] = 1;
     
     std::uint8_t aNonceBytes[8] = {
         static_cast<std::uint8_t>(pNonce >>  0),
@@ -944,6 +944,7 @@ void Soccer::SeedEpilogue() {
     for (std::size_t aIndex=0; aIndex<16; aIndex++) {
         mMaterials[aIndex] = mClaimedMaterials[aIndex];
     }
+
     for (std::size_t aIndex=0; aIndex<16; aIndex++) {
         mWorkSpaces[aIndex] = mClaimedWorkSpaces[aIndex];
     }
@@ -990,15 +991,13 @@ void Soccer::SeedEpilogue() {
         FoldAllMaterialsIntoRandomForBlock(aBlockIndex);
         
         const std::size_t aReverseEndIndex = aDestinationIndex + S_BLOCK;
-        for (std::size_t aMaterialIndex=0U; aMaterialIndex<4U; aMaterialIndex++) {
-            std::reverse(mMaterials[aMaterialIndex] + aDestinationIndex,
-                         mMaterials[aMaterialIndex] + aReverseEndIndex);
+        for (std::size_t aMaterialIndex=6U; aMaterialIndex<8U; aMaterialIndex++) {
+            std::reverse(mMaterials[aMaterialIndex] + aDestinationIndex, mMaterials[aMaterialIndex] + aReverseEndIndex);
         }
 
         if (aBlockIndex == (BLOCK_COUNT - 1U)) {
             for (std::size_t aMaterialIndex=0U; aMaterialIndex<8U; aMaterialIndex++) {
-                std::reverse(mMaterials[aMaterialIndex],
-                             mMaterials[aMaterialIndex] + SOCCER_BLOCK_SIZE);
+                std::reverse(mMaterials[aMaterialIndex], mMaterials[aMaterialIndex] + SOCCER_BLOCK_SIZE);
             }
         }
         
@@ -1037,420 +1036,678 @@ void Soccer::SeedEpilogue() {
     std::size_t aRotSampleIndex = 0U;
 
     aRotSampleIndex += static_cast<std::size_t>(mMaterialM[13268U]) + static_cast<std::size_t>(mMaterialI[30513U]);
+    aRandFinalB = RotL64(aRandFinalB, 3U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialD[15984U]) + static_cast<std::size_t>(mMaterialC[5212U]);
+    aRandL1B = RotL64(aRandL1B, 3U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialF[4492U]) + static_cast<std::size_t>(mMaterialJ[436U]);
+    aRandFinalA = RotL64(aRandFinalA, 3U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialG[22270U]) + static_cast<std::size_t>(mMaterialP[5459U]);
+    aRandL3B = RotL64(aRandL3B, 3U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialN[27873U]) + static_cast<std::size_t>(mMaterialL[28586U]);
+    aRandL2A = RotL64(aRandL2A, 3U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialB[20892U]) + static_cast<std::size_t>(mMaterialH[20567U]);
+    aRandL1A = RotL64(aRandL1A, 3U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialA[20398U]) + static_cast<std::size_t>(mMaterialE[19163U]);
+    aRandL2B = RotL64(aRandL2B, 3U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialO[1324U]) + static_cast<std::size_t>(mMaterialK[26568U]);
+    aRandL3A = RotL64(aRandL3A, 3U) ^ aRotSampleIndex;
+
 
     //
     // $$$$$$$$$$$$$$$$
     //
 
     aRotSampleIndex += static_cast<std::size_t>(mMaterialD[38745U]) + static_cast<std::size_t>(mMaterialC[55734U]);
+    aRandL3A = RotL64(aRandL3A, 3U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialN[41262U]) + static_cast<std::size_t>(mMaterialG[49571U]);
+    aRandL2A = RotL64(aRandL2A, 3U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialB[51479U]) + static_cast<std::size_t>(mMaterialH[40893U]);
+    aRandL1B = RotL64(aRandL1B, 3U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialL[52507U]) + static_cast<std::size_t>(mMaterialF[45388U]);
+    aRandL2B = RotL64(aRandL2B, 3U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialO[63366U]) + static_cast<std::size_t>(mMaterialJ[56760U]);
+    aRandL1A = RotL64(aRandL1A, 3U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialP[33278U]) + static_cast<std::size_t>(mMaterialA[52877U]);
+    aRandFinalB = RotL64(aRandFinalB, 3U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialI[40064U]) + static_cast<std::size_t>(mMaterialK[58191U]);
+    aRandL3B = RotL64(aRandL3B, 3U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialE[41577U]) + static_cast<std::size_t>(mMaterialM[50988U]);
+    aRandFinalA = RotL64(aRandFinalA, 3U) ^ aRotSampleIndex;
 
     //
     // $$$$$$$$$$$$$$$$
     //
 
     aRotSampleIndex += static_cast<std::size_t>(mMaterialB[94774U]) + static_cast<std::size_t>(mMaterialD[86657U]);
+    aRandL1A = RotL64(aRandL1A, 3U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialC[68044U]) + static_cast<std::size_t>(mMaterialH[74747U]);
+    aRandL3B = RotL64(aRandL3B, 3U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialO[86906U]) + static_cast<std::size_t>(mMaterialL[91324U]);
+    aRandFinalB = RotL64(aRandFinalB, 3U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialG[68382U]) + static_cast<std::size_t>(mMaterialI[76843U]);
+    aRandL3A = RotL64(aRandL3A, 3U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialK[68523U]) + static_cast<std::size_t>(mMaterialJ[66795U]);
+    aRandFinalA = RotL64(aRandFinalA, 3U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialN[66792U]) + static_cast<std::size_t>(mMaterialE[88548U]);
+    aRandL2B = RotL64(aRandL2B, 3U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialM[75513U]) + static_cast<std::size_t>(mMaterialP[71661U]);
+    aRandL1B = RotL64(aRandL1B, 3U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialA[69167U]) + static_cast<std::size_t>(mMaterialF[88235U]);
+    aRandL2A = RotL64(aRandL2A, 3U) ^ aRotSampleIndex;
 
     //
     // $$$$$$$$$$$$$$$$
     //
 
     aRotSampleIndex += static_cast<std::size_t>(mMaterialP[104812U]) + static_cast<std::size_t>(mMaterialF[109521U]);
+    aRandL2B = RotL64(aRandL2B, 3U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialJ[117056U]) + static_cast<std::size_t>(mMaterialB[108739U]);
+    aRandFinalA = RotL64(aRandFinalA, 3U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialD[119108U]) + static_cast<std::size_t>(mMaterialA[113218U]);
+    aRandL3A = RotL64(aRandL3A, 3U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialO[127689U]) + static_cast<std::size_t>(mMaterialC[118949U]);
+    aRandL1B = RotL64(aRandL1B, 3U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialL[130668U]) + static_cast<std::size_t>(mMaterialK[107028U]);
+    aRandL2A = RotL64(aRandL2A, 3U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialN[107307U]) + static_cast<std::size_t>(mMaterialI[128068U]);
+    aRandL3B = RotL64(aRandL3B, 3U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialH[99570U]) + static_cast<std::size_t>(mMaterialE[106756U]);
+    aRandL1A = RotL64(aRandL1A, 3U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialM[120270U]) + static_cast<std::size_t>(mMaterialG[103658U]);
+    aRandFinalB = RotL64(aRandFinalB, 3U) ^ aRotSampleIndex;
 
     //
     // $$$$$$$$$$$$$$$$
     //
 
     aRotSampleIndex += static_cast<std::size_t>(mMaterialM[132394U]) + static_cast<std::size_t>(mMaterialE[137953U]);
+    aRandL1B = RotL64(aRandL1B, 3U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialJ[161854U]) + static_cast<std::size_t>(mMaterialA[150384U]);
+    aRandL3A = RotL64(aRandL3A, 3U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialI[151689U]) + static_cast<std::size_t>(mMaterialL[156551U]);
+    aRandL2A = RotL64(aRandL2A, 3U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialD[140289U]) + static_cast<std::size_t>(mMaterialC[140674U]);
+    aRandFinalB = RotL64(aRandFinalB, 3U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialP[157717U]) + static_cast<std::size_t>(mMaterialK[144926U]);
+    aRandL3B = RotL64(aRandL3B, 3U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialB[159621U]) + static_cast<std::size_t>(mMaterialN[136868U]);
+    aRandFinalA = RotL64(aRandFinalA, 3U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialG[144853U]) + static_cast<std::size_t>(mMaterialF[138709U]);
+    aRandL2B = RotL64(aRandL2B, 3U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialO[156910U]) + static_cast<std::size_t>(mMaterialH[161195U]);
+    aRandL1A = RotL64(aRandL1A, 3U) ^ aRotSampleIndex;
 
     //
     // $$$$$$$$$$$$$$$$
     //
 
     aRotSampleIndex += static_cast<std::size_t>(mMaterialD[187307U]) + static_cast<std::size_t>(mMaterialB[181489U]);
+    aRandL2A = RotL64(aRandL2A, 3U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialO[169473U]) + static_cast<std::size_t>(mMaterialH[196592U]);
+    aRandL2B = RotL64(aRandL2B, 3U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialF[179235U]) + static_cast<std::size_t>(mMaterialK[191425U]);
+    aRandL1A = RotL64(aRandL1A, 3U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialM[174812U]) + static_cast<std::size_t>(mMaterialE[175796U]);
+    aRandFinalA = RotL64(aRandFinalA, 3U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialI[164849U]) + static_cast<std::size_t>(mMaterialP[172225U]);
+    aRandFinalB = RotL64(aRandFinalB, 3U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialC[186664U]) + static_cast<std::size_t>(mMaterialG[195640U]);
+    aRandL3A = RotL64(aRandL3A, 3U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialN[191568U]) + static_cast<std::size_t>(mMaterialJ[184323U]);
+    aRandL3B = RotL64(aRandL3B, 3U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialL[178363U]) + static_cast<std::size_t>(mMaterialA[183673U]);
+    aRandL1B = RotL64(aRandL1B, 3U) ^ aRotSampleIndex;
 
     //
     // $$$$$$$$$$$$$$$$
     //
 
     aRotSampleIndex += static_cast<std::size_t>(mMaterialP[211932U]) + static_cast<std::size_t>(mMaterialC[218710U]);
+    aRandL3B = RotL64(aRandL3B, 3U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialO[201968U]) + static_cast<std::size_t>(mMaterialL[226759U]);
+    aRandFinalB = RotL64(aRandFinalB, 3U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialG[198442U]) + static_cast<std::size_t>(mMaterialK[218036U]);
+    aRandL2B = RotL64(aRandL2B, 3U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialI[213409U]) + static_cast<std::size_t>(mMaterialH[205177U]);
+    aRandL2A = RotL64(aRandL2A, 3U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialN[212609U]) + static_cast<std::size_t>(mMaterialM[220554U]);
+    aRandL1B = RotL64(aRandL1B, 3U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialD[209314U]) + static_cast<std::size_t>(mMaterialB[197919U]);
+    aRandL1A = RotL64(aRandL1A, 3U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialE[218906U]) + static_cast<std::size_t>(mMaterialA[228713U]);
+    aRandFinalA = RotL64(aRandFinalA, 3U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialJ[217627U]) + static_cast<std::size_t>(mMaterialF[198664U]);
+    aRandL3A = RotL64(aRandL3A, 3U) ^ aRotSampleIndex;
 
     //
     // $$$$$$$$$$$$$$$$
     //
 
     aRotSampleIndex += static_cast<std::size_t>(mMaterialL[261204U]) + static_cast<std::size_t>(mMaterialG[241114U]);
+    aRandFinalA = RotL64(aRandFinalA, 3U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialO[247579U]) + static_cast<std::size_t>(mMaterialD[255244U]);
+    aRandL1A = RotL64(aRandL1A, 3U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialN[240948U]) + static_cast<std::size_t>(mMaterialI[229401U]);
+    aRandL3B = RotL64(aRandL3B, 3U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialM[242206U]) + static_cast<std::size_t>(mMaterialE[258546U]);
+    aRandL2B = RotL64(aRandL2B, 3U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialA[239034U]) + static_cast<std::size_t>(mMaterialH[239382U]);
+    aRandL3A = RotL64(aRandL3A, 3U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialP[252940U]) + static_cast<std::size_t>(mMaterialB[231241U]);
+    aRandL2A = RotL64(aRandL2A, 3U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialK[240244U]) + static_cast<std::size_t>(mMaterialC[242944U]);
+    aRandFinalB = RotL64(aRandFinalB, 3U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialF[242244U]) + static_cast<std::size_t>(mMaterialJ[231564U]);
+    aRandL1B = RotL64(aRandL1B, 3U) ^ aRotSampleIndex;
 
     //
     // $$$$$$$$$$$$$$$$
     //
 
     aRotSampleIndex += static_cast<std::size_t>(mMaterialM[289199U]) + static_cast<std::size_t>(mMaterialG[284934U]);
+    aRandL1B = RotL64(aRandL1B, 7U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialN[271838U]) + static_cast<std::size_t>(mMaterialF[282298U]);
+    aRandL2A = RotL64(aRandL2A, 7U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialJ[262167U]) + static_cast<std::size_t>(mMaterialP[274745U]);
+    aRandL1A = RotL64(aRandL1A, 7U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialE[286991U]) + static_cast<std::size_t>(mMaterialD[280662U]);
+    aRandL3B = RotL64(aRandL3B, 7U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialA[263585U]) + static_cast<std::size_t>(mMaterialL[282215U]);
+    aRandFinalA = RotL64(aRandFinalA, 7U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialK[282308U]) + static_cast<std::size_t>(mMaterialI[293778U]);
+    aRandL2B = RotL64(aRandL2B, 7U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialC[274903U]) + static_cast<std::size_t>(mMaterialO[292511U]);
+    aRandFinalB = RotL64(aRandFinalB, 7U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialB[266832U]) + static_cast<std::size_t>(mMaterialH[281535U]);
+    aRandL3A = RotL64(aRandL3A, 7U) ^ aRotSampleIndex;
 
     //
     // $$$$$$$$$$$$$$$$
     //
 
     aRotSampleIndex += static_cast<std::size_t>(mMaterialM[295544U]) + static_cast<std::size_t>(mMaterialE[311717U]);
+    aRandL3A = RotL64(aRandL3A, 7U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialJ[308822U]) + static_cast<std::size_t>(mMaterialC[326128U]);
+    aRandL1A = RotL64(aRandL1A, 7U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialF[316482U]) + static_cast<std::size_t>(mMaterialP[295895U]);
+    aRandFinalA = RotL64(aRandFinalA, 7U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialA[301620U]) + static_cast<std::size_t>(mMaterialK[313162U]);
+    aRandL2A = RotL64(aRandL2A, 7U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialD[298493U]) + static_cast<std::size_t>(mMaterialG[310481U]);
+    aRandFinalB = RotL64(aRandFinalB, 7U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialB[313204U]) + static_cast<std::size_t>(mMaterialI[309897U]);
+    aRandL2B = RotL64(aRandL2B, 7U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialO[316368U]) + static_cast<std::size_t>(mMaterialL[317617U]);
+    aRandL3B = RotL64(aRandL3B, 7U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialN[300877U]) + static_cast<std::size_t>(mMaterialH[323727U]);
+    aRandL1B = RotL64(aRandL1B, 7U) ^ aRotSampleIndex;
 
     //
     // $$$$$$$$$$$$$$$$
     //
 
     aRotSampleIndex += static_cast<std::size_t>(mMaterialP[339827U]) + static_cast<std::size_t>(mMaterialA[355078U]);
+    aRandL1A = RotL64(aRandL1A, 7U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialG[335802U]) + static_cast<std::size_t>(mMaterialM[355659U]);
+    aRandFinalB = RotL64(aRandFinalB, 7U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialI[359973U]) + static_cast<std::size_t>(mMaterialN[346964U]);
+    aRandL1B = RotL64(aRandL1B, 7U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialD[359275U]) + static_cast<std::size_t>(mMaterialF[347361U]);
+    aRandL2A = RotL64(aRandL2A, 7U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialC[344016U]) + static_cast<std::size_t>(mMaterialL[353493U]);
+    aRandL2B = RotL64(aRandL2B, 7U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialB[345613U]) + static_cast<std::size_t>(mMaterialE[334565U]);
+    aRandL3A = RotL64(aRandL3A, 7U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialK[330169U]) + static_cast<std::size_t>(mMaterialJ[357581U]);
+    aRandL3B = RotL64(aRandL3B, 7U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialO[354197U]) + static_cast<std::size_t>(mMaterialH[354898U]);
+    aRandFinalA = RotL64(aRandFinalA, 7U) ^ aRotSampleIndex;
 
     //
     // $$$$$$$$$$$$$$$$
     //
 
     aRotSampleIndex += static_cast<std::size_t>(mMaterialO[384911U]) + static_cast<std::size_t>(mMaterialJ[378878U]);
+    aRandFinalA = RotL64(aRandFinalA, 7U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialB[365488U]) + static_cast<std::size_t>(mMaterialF[363254U]);
+    aRandL2B = RotL64(aRandL2B, 7U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialN[365168U]) + static_cast<std::size_t>(mMaterialI[386579U]);
+    aRandL3A = RotL64(aRandL3A, 7U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialH[374397U]) + static_cast<std::size_t>(mMaterialM[373939U]);
+    aRandL1A = RotL64(aRandL1A, 7U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialD[390897U]) + static_cast<std::size_t>(mMaterialA[371999U]);
+    aRandFinalB = RotL64(aRandFinalB, 7U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialK[383709U]) + static_cast<std::size_t>(mMaterialP[379418U]);
+    aRandL3B = RotL64(aRandL3B, 7U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialL[383860U]) + static_cast<std::size_t>(mMaterialC[376620U]);
+    aRandL1B = RotL64(aRandL1B, 7U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialE[384517U]) + static_cast<std::size_t>(mMaterialG[366763U]);
+    aRandL2A = RotL64(aRandL2A, 7U) ^ aRotSampleIndex;
 
     //
     // $$$$$$$$$$$$$$$$
     //
 
     aRotSampleIndex += static_cast<std::size_t>(mMaterialD[401902U]) + static_cast<std::size_t>(mMaterialF[407371U]);
+    aRandL1B = RotL64(aRandL1B, 7U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialM[414243U]) + static_cast<std::size_t>(mMaterialC[418099U]);
+    aRandL3B = RotL64(aRandL3B, 7U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialB[409905U]) + static_cast<std::size_t>(mMaterialK[424303U]);
+    aRandL2B = RotL64(aRandL2B, 7U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialE[403810U]) + static_cast<std::size_t>(mMaterialG[411002U]);
+    aRandL2A = RotL64(aRandL2A, 7U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialP[399709U]) + static_cast<std::size_t>(mMaterialA[413204U]);
+    aRandL1A = RotL64(aRandL1A, 7U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialJ[415594U]) + static_cast<std::size_t>(mMaterialI[399048U]);
+    aRandFinalA = RotL64(aRandFinalA, 7U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialH[393593U]) + static_cast<std::size_t>(mMaterialO[394616U]);
+    aRandL3A = RotL64(aRandL3A, 7U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialN[403884U]) + static_cast<std::size_t>(mMaterialL[398186U]);
+    aRandFinalB = RotL64(aRandFinalB, 7U) ^ aRotSampleIndex;
 
     //
     // $$$$$$$$$$$$$$$$
     //
 
     aRotSampleIndex += static_cast<std::size_t>(mMaterialH[439857U]) + static_cast<std::size_t>(mMaterialP[454953U]);
+    aRandFinalB = RotL64(aRandFinalB, 7U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialD[440296U]) + static_cast<std::size_t>(mMaterialO[432647U]);
+    aRandL3A = RotL64(aRandL3A, 7U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialA[449308U]) + static_cast<std::size_t>(mMaterialJ[447170U]);
+    aRandL2A = RotL64(aRandL2A, 7U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialC[433906U]) + static_cast<std::size_t>(mMaterialE[435043U]);
+    aRandL1B = RotL64(aRandL1B, 7U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialG[454273U]) + static_cast<std::size_t>(mMaterialK[428607U]);
+    aRandL2B = RotL64(aRandL2B, 7U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialN[428201U]) + static_cast<std::size_t>(mMaterialF[446589U]);
+    aRandL1A = RotL64(aRandL1A, 7U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialM[433265U]) + static_cast<std::size_t>(mMaterialB[446442U]);
+    aRandFinalA = RotL64(aRandFinalA, 7U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialI[445984U]) + static_cast<std::size_t>(mMaterialL[449910U]);
+    aRandL3B = RotL64(aRandL3B, 7U) ^ aRotSampleIndex;
 
     //
     // $$$$$$$$$$$$$$$$
     //
 
     aRotSampleIndex += static_cast<std::size_t>(mMaterialN[462450U]) + static_cast<std::size_t>(mMaterialD[463266U]);
+    aRandL1A = RotL64(aRandL1A, 7U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialA[485381U]) + static_cast<std::size_t>(mMaterialJ[464590U]);
+    aRandFinalB = RotL64(aRandFinalB, 7U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialF[486761U]) + static_cast<std::size_t>(mMaterialC[484466U]);
+    aRandL1B = RotL64(aRandL1B, 7U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialM[468125U]) + static_cast<std::size_t>(mMaterialI[482900U]);
+    aRandL3A = RotL64(aRandL3A, 7U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialL[467497U]) + static_cast<std::size_t>(mMaterialK[465566U]);
+    aRandL3B = RotL64(aRandL3B, 7U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialO[484294U]) + static_cast<std::size_t>(mMaterialH[468756U]);
+    aRandFinalA = RotL64(aRandFinalA, 7U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialP[486189U]) + static_cast<std::size_t>(mMaterialB[464936U]);
+    aRandL2A = RotL64(aRandL2A, 7U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialG[485153U]) + static_cast<std::size_t>(mMaterialE[482590U]);
+    aRandL2B = RotL64(aRandL2B, 7U) ^ aRotSampleIndex;
 
     //
     // $$$$$$$$$$$$$$$$
     //
 
     aRotSampleIndex += static_cast<std::size_t>(mMaterialE[507751U]) + static_cast<std::size_t>(mMaterialH[507618U]);
+    aRandFinalB = RotL64(aRandFinalB, 7U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialF[504392U]) + static_cast<std::size_t>(mMaterialJ[509705U]);
+    aRandL3B = RotL64(aRandL3B, 7U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialC[507610U]) + static_cast<std::size_t>(mMaterialB[513273U]);
+    aRandFinalA = RotL64(aRandFinalA, 7U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialP[516566U]) + static_cast<std::size_t>(mMaterialA[498440U]);
+    aRandL2A = RotL64(aRandL2A, 7U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialL[519531U]) + static_cast<std::size_t>(mMaterialO[522681U]);
+    aRandL3A = RotL64(aRandL3A, 7U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialM[499823U]) + static_cast<std::size_t>(mMaterialI[507965U]);
+    aRandL1B = RotL64(aRandL1B, 7U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialK[522963U]) + static_cast<std::size_t>(mMaterialN[511604U]);
+    aRandL2B = RotL64(aRandL2B, 7U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialD[521756U]) + static_cast<std::size_t>(mMaterialG[516312U]);
+    aRandL1A = RotL64(aRandL1A, 7U) ^ aRotSampleIndex;
 
     //
     // $$$$$$$$$$$$$$$$
     //
 
     aRotSampleIndex += static_cast<std::size_t>(mMaterialC[544509U]) + static_cast<std::size_t>(mMaterialO[549635U]);
+    aRandL3B = RotL64(aRandL3B, 1U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialA[554357U]) + static_cast<std::size_t>(mMaterialI[525244U]);
+    aRandL1A = RotL64(aRandL1A, 1U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialP[551625U]) + static_cast<std::size_t>(mMaterialM[544810U]);
+    aRandL2A = RotL64(aRandL2A, 1U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialL[539168U]) + static_cast<std::size_t>(mMaterialJ[537109U]);
+    aRandFinalB = RotL64(aRandFinalB, 1U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialE[544432U]) + static_cast<std::size_t>(mMaterialH[539688U]);
+    aRandL1B = RotL64(aRandL1B, 1U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialG[551986U]) + static_cast<std::size_t>(mMaterialB[525753U]);
+    aRandL2B = RotL64(aRandL2B, 1U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialK[532976U]) + static_cast<std::size_t>(mMaterialF[553087U]);
+    aRandFinalA = RotL64(aRandFinalA, 1U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialD[540454U]) + static_cast<std::size_t>(mMaterialN[538284U]);
+    aRandL3A = RotL64(aRandL3A, 1U) ^ aRotSampleIndex;
 
     //
     // $$$$$$$$$$$$$$$$
     //
 
     aRotSampleIndex += static_cast<std::size_t>(mMaterialJ[583530U]) + static_cast<std::size_t>(mMaterialM[577695U]);
+    aRandFinalB = RotL64(aRandFinalB, 1U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialB[574875U]) + static_cast<std::size_t>(mMaterialE[588001U]);
+    aRandL2B = RotL64(aRandL2B, 1U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialK[585932U]) + static_cast<std::size_t>(mMaterialA[582584U]);
+    aRandL3A = RotL64(aRandL3A, 1U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialP[569287U]) + static_cast<std::size_t>(mMaterialG[575832U]);
+    aRandL2A = RotL64(aRandL2A, 1U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialO[574205U]) + static_cast<std::size_t>(mMaterialI[561789U]);
+    aRandFinalA = RotL64(aRandFinalA, 1U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialH[579853U]) + static_cast<std::size_t>(mMaterialD[573244U]);
+    aRandL1A = RotL64(aRandL1A, 1U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialC[573238U]) + static_cast<std::size_t>(mMaterialF[576687U]);
+    aRandL3B = RotL64(aRandL3B, 1U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialL[570459U]) + static_cast<std::size_t>(mMaterialN[570244U]);
+    aRandL1B = RotL64(aRandL1B, 1U) ^ aRotSampleIndex;
 
     //
     // $$$$$$$$$$$$$$$$
     //
 
     aRotSampleIndex += static_cast<std::size_t>(mMaterialE[614514U]) + static_cast<std::size_t>(mMaterialM[619422U]);
+    aRandL2B = RotL64(aRandL2B, 1U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialO[622497U]) + static_cast<std::size_t>(mMaterialC[612127U]);
+    aRandL3A = RotL64(aRandL3A, 1U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialP[608756U]) + static_cast<std::size_t>(mMaterialL[605583U]);
+    aRandL1A = RotL64(aRandL1A, 1U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialG[591090U]) + static_cast<std::size_t>(mMaterialJ[619085U]);
+    aRandL3B = RotL64(aRandL3B, 1U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialH[619587U]) + static_cast<std::size_t>(mMaterialD[594601U]);
+    aRandFinalB = RotL64(aRandFinalB, 1U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialF[620385U]) + static_cast<std::size_t>(mMaterialI[621479U]);
+    aRandL2A = RotL64(aRandL2A, 1U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialB[600900U]) + static_cast<std::size_t>(mMaterialA[620380U]);
+    aRandL1B = RotL64(aRandL1B, 1U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialN[614098U]) + static_cast<std::size_t>(mMaterialK[613571U]);
+    aRandFinalA = RotL64(aRandFinalA, 1U) ^ aRotSampleIndex;
 
     //
     // $$$$$$$$$$$$$$$$
     //
 
     aRotSampleIndex += static_cast<std::size_t>(mMaterialB[645188U]) + static_cast<std::size_t>(mMaterialO[652313U]);
+    aRandFinalB = RotL64(aRandFinalB, 1U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialG[639822U]) + static_cast<std::size_t>(mMaterialP[635806U]);
+    aRandFinalA = RotL64(aRandFinalA, 1U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialD[634871U]) + static_cast<std::size_t>(mMaterialL[623014U]);
+    aRandL3B = RotL64(aRandL3B, 1U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialK[651477U]) + static_cast<std::size_t>(mMaterialE[632442U]);
+    aRandL2B = RotL64(aRandL2B, 1U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialM[638256U]) + static_cast<std::size_t>(mMaterialJ[654813U]);
+    aRandL3A = RotL64(aRandL3A, 1U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialA[643378U]) + static_cast<std::size_t>(mMaterialC[632347U]);
+    aRandL1B = RotL64(aRandL1B, 1U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialF[624374U]) + static_cast<std::size_t>(mMaterialI[645649U]);
+    aRandL1A = RotL64(aRandL1A, 1U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialN[623348U]) + static_cast<std::size_t>(mMaterialH[628267U]);
+    aRandL2A = RotL64(aRandL2A, 1U) ^ aRotSampleIndex;
 
     //
     // $$$$$$$$$$$$$$$$
     //
 
     aRotSampleIndex += static_cast<std::size_t>(mMaterialP[684337U]) + static_cast<std::size_t>(mMaterialA[672059U]);
+    aRandL2B = RotL64(aRandL2B, 1U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialM[684332U]) + static_cast<std::size_t>(mMaterialH[664698U]);
+    aRandL1A = RotL64(aRandL1A, 1U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialE[673913U]) + static_cast<std::size_t>(mMaterialD[680812U]);
+    aRandL1B = RotL64(aRandL1B, 1U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialC[682340U]) + static_cast<std::size_t>(mMaterialJ[687321U]);
+    aRandL3A = RotL64(aRandL3A, 1U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialO[680674U]) + static_cast<std::size_t>(mMaterialF[679257U]);
+    aRandL2A = RotL64(aRandL2A, 1U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialK[656338U]) + static_cast<std::size_t>(mMaterialN[661272U]);
+    aRandFinalA = RotL64(aRandFinalA, 1U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialI[676617U]) + static_cast<std::size_t>(mMaterialG[667505U]);
+    aRandL3B = RotL64(aRandL3B, 1U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialB[679164U]) + static_cast<std::size_t>(mMaterialL[686758U]);
+    aRandFinalB = RotL64(aRandFinalB, 1U) ^ aRotSampleIndex;
 
     //
     // $$$$$$$$$$$$$$$$
     //
 
     aRotSampleIndex += static_cast<std::size_t>(mMaterialO[699239U]) + static_cast<std::size_t>(mMaterialC[713876U]);
+    aRandFinalB = RotL64(aRandFinalB, 1U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialB[703484U]) + static_cast<std::size_t>(mMaterialK[716869U]);
+    aRandL1A = RotL64(aRandL1A, 1U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialH[705999U]) + static_cast<std::size_t>(mMaterialA[693965U]);
+    aRandL2B = RotL64(aRandL2B, 1U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialG[692060U]) + static_cast<std::size_t>(mMaterialN[717931U]);
+    aRandL1B = RotL64(aRandL1B, 1U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialJ[702279U]) + static_cast<std::size_t>(mMaterialF[690651U]);
+    aRandL3A = RotL64(aRandL3A, 1U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialM[705119U]) + static_cast<std::size_t>(mMaterialE[707062U]);
+    aRandL2A = RotL64(aRandL2A, 1U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialL[697354U]) + static_cast<std::size_t>(mMaterialD[696520U]);
+    aRandFinalA = RotL64(aRandFinalA, 1U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialP[688926U]) + static_cast<std::size_t>(mMaterialI[697302U]);
+    aRandL3B = RotL64(aRandL3B, 1U) ^ aRotSampleIndex;
 
     //
     // $$$$$$$$$$$$$$$$
     //
 
     aRotSampleIndex += static_cast<std::size_t>(mMaterialB[733135U]) + static_cast<std::size_t>(mMaterialM[735711U]);
+    aRandL1A = RotL64(aRandL1A, 1U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialH[752864U]) + static_cast<std::size_t>(mMaterialJ[724037U]);
+    aRandFinalB = RotL64(aRandFinalB, 1U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialE[729452U]) + static_cast<std::size_t>(mMaterialD[751740U]);
+    aRandL3A = RotL64(aRandL3A, 1U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialL[737294U]) + static_cast<std::size_t>(mMaterialC[739772U]);
+    aRandL3B = RotL64(aRandL3B, 1U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialF[727143U]) + static_cast<std::size_t>(mMaterialK[745821U]);
+    aRandL1B = RotL64(aRandL1B, 1U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialP[725289U]) + static_cast<std::size_t>(mMaterialO[736921U]);
+    aRandL2A = RotL64(aRandL2A, 1U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialI[739153U]) + static_cast<std::size_t>(mMaterialA[728092U]);
+    aRandFinalA = RotL64(aRandFinalA, 1U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialG[740138U]) + static_cast<std::size_t>(mMaterialN[745793U]);
+    aRandL2B = RotL64(aRandL2B, 1U) ^ aRotSampleIndex;
 
     //
     // $$$$$$$$$$$$$$$$
     //
 
     aRotSampleIndex += static_cast<std::size_t>(mMaterialB[766501U]) + static_cast<std::size_t>(mMaterialM[779762U]);
+    aRandFinalB = RotL64(aRandFinalB, 1U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialH[773129U]) + static_cast<std::size_t>(mMaterialN[763739U]);
+    aRandL1B = RotL64(aRandL1B, 1U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialF[762885U]) + static_cast<std::size_t>(mMaterialK[770178U]);
+    aRandL3A = RotL64(aRandL3A, 1U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialP[757919U]) + static_cast<std::size_t>(mMaterialD[776353U]);
+    aRandL3B = RotL64(aRandL3B, 1U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialI[762886U]) + static_cast<std::size_t>(mMaterialA[762786U]);
+    aRandFinalA = RotL64(aRandFinalA, 1U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialC[764405U]) + static_cast<std::size_t>(mMaterialO[761119U]);
+    aRandL2A = RotL64(aRandL2A, 1U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialJ[783562U]) + static_cast<std::size_t>(mMaterialL[758191U]);
+    aRandL2B = RotL64(aRandL2B, 1U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialG[758793U]) + static_cast<std::size_t>(mMaterialE[781759U]);
+    aRandL1A = RotL64(aRandL1A, 1U) ^ aRotSampleIndex;
 
     //
     // $$$$$$$$$$$$$$$$
     //
 
     aRotSampleIndex += static_cast<std::size_t>(mMaterialP[795437U]) + static_cast<std::size_t>(mMaterialL[795423U]);
+    aRandL1B = RotL64(aRandL1B, 5U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialK[790773U]) + static_cast<std::size_t>(mMaterialB[808087U]);
+    aRandFinalA = RotL64(aRandFinalA, 5U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialI[810342U]) + static_cast<std::size_t>(mMaterialG[818398U]);
+    aRandL1A = RotL64(aRandL1A, 5U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialD[802603U]) + static_cast<std::size_t>(mMaterialA[791631U]);
+    aRandL3B = RotL64(aRandL3B, 5U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialM[809189U]) + static_cast<std::size_t>(mMaterialJ[799138U]);
+    aRandL2A = RotL64(aRandL2A, 5U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialF[813067U]) + static_cast<std::size_t>(mMaterialO[809290U]);
+    aRandFinalB = RotL64(aRandFinalB, 5U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialN[814041U]) + static_cast<std::size_t>(mMaterialC[811438U]);
+    aRandL2B = RotL64(aRandL2B, 5U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialH[802903U]) + static_cast<std::size_t>(mMaterialE[788237U]);
+    aRandL3A = RotL64(aRandL3A, 5U) ^ aRotSampleIndex;
 
     //
     // $$$$$$$$$$$$$$$$
     //
 
     aRotSampleIndex += static_cast<std::size_t>(mMaterialA[850732U]) + static_cast<std::size_t>(mMaterialK[829947U]);
+    aRandFinalB = RotL64(aRandFinalB, 5U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialD[839105U]) + static_cast<std::size_t>(mMaterialN[836154U]);
+    aRandL1A = RotL64(aRandL1A, 5U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialC[849400U]) + static_cast<std::size_t>(mMaterialM[822791U]);
+    aRandL3A = RotL64(aRandL3A, 5U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialH[841669U]) + static_cast<std::size_t>(mMaterialJ[820010U]);
+    aRandL3B = RotL64(aRandL3B, 5U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialP[838629U]) + static_cast<std::size_t>(mMaterialG[839139U]);
+    aRandFinalA = RotL64(aRandFinalA, 5U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialF[828192U]) + static_cast<std::size_t>(mMaterialI[848232U]);
+    aRandL2A = RotL64(aRandL2A, 5U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialE[836131U]) + static_cast<std::size_t>(mMaterialO[832316U]);
+    aRandL2B = RotL64(aRandL2B, 5U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialL[850853U]) + static_cast<std::size_t>(mMaterialB[851958U]);
+    aRandL1B = RotL64(aRandL1B, 5U) ^ aRotSampleIndex;
 
     //
     // $$$$$$$$$$$$$$$$
     //
 
     aRotSampleIndex += static_cast<std::size_t>(mMaterialN[873358U]) + static_cast<std::size_t>(mMaterialB[877900U]);
+    aRandL1A = RotL64(aRandL1A, 5U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialA[883750U]) + static_cast<std::size_t>(mMaterialK[854137U]);
+    aRandFinalB = RotL64(aRandFinalB, 5U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialE[868611U]) + static_cast<std::size_t>(mMaterialG[866538U]);
+    aRandL1B = RotL64(aRandL1B, 5U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialI[873826U]) + static_cast<std::size_t>(mMaterialP[864045U]);
+    aRandL3A = RotL64(aRandL3A, 5U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialD[875026U]) + static_cast<std::size_t>(mMaterialM[860471U]);
+    aRandL3B = RotL64(aRandL3B, 5U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialL[879346U]) + static_cast<std::size_t>(mMaterialO[860869U]);
+    aRandL2A = RotL64(aRandL2A, 5U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialJ[862795U]) + static_cast<std::size_t>(mMaterialH[854505U]);
+    aRandL2B = RotL64(aRandL2B, 5U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialC[857354U]) + static_cast<std::size_t>(mMaterialF[858285U]);
+    aRandFinalA = RotL64(aRandFinalA, 5U) ^ aRotSampleIndex;
 
     //
     // $$$$$$$$$$$$$$$$
     //
 
     aRotSampleIndex += static_cast<std::size_t>(mMaterialL[892563U]) + static_cast<std::size_t>(mMaterialK[892550U]);
+    aRandFinalA = RotL64(aRandFinalA, 5U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialP[888653U]) + static_cast<std::size_t>(mMaterialD[887665U]);
+    aRandL1B = RotL64(aRandL1B, 5U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialH[887390U]) + static_cast<std::size_t>(mMaterialB[900944U]);
+    aRandFinalB = RotL64(aRandFinalB, 5U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialA[914585U]) + static_cast<std::size_t>(mMaterialO[910856U]);
+    aRandL3B = RotL64(aRandL3B, 5U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialJ[887233U]) + static_cast<std::size_t>(mMaterialG[888527U]);
+    aRandL2B = RotL64(aRandL2B, 5U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialE[895821U]) + static_cast<std::size_t>(mMaterialM[916848U]);
+    aRandL1A = RotL64(aRandL1A, 5U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialC[903483U]) + static_cast<std::size_t>(mMaterialI[900346U]);
+    aRandL3A = RotL64(aRandL3A, 5U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialN[911521U]) + static_cast<std::size_t>(mMaterialF[909916U]);
+    aRandL2A = RotL64(aRandL2A, 5U) ^ aRotSampleIndex;
 
     //
     // $$$$$$$$$$$$$$$$
     //
 
     aRotSampleIndex += static_cast<std::size_t>(mMaterialM[949288U]) + static_cast<std::size_t>(mMaterialB[924299U]);
+    aRandL1B = RotL64(aRandL1B, 5U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialP[932354U]) + static_cast<std::size_t>(mMaterialG[941653U]);
+    aRandL3A = RotL64(aRandL3A, 5U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialL[929589U]) + static_cast<std::size_t>(mMaterialN[946555U]);
+    aRandL2B = RotL64(aRandL2B, 5U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialE[924973U]) + static_cast<std::size_t>(mMaterialD[941864U]);
+    aRandL3B = RotL64(aRandL3B, 5U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialK[927145U]) + static_cast<std::size_t>(mMaterialJ[931193U]);
+    aRandL1A = RotL64(aRandL1A, 5U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialO[933582U]) + static_cast<std::size_t>(mMaterialF[934661U]);
+    aRandL2A = RotL64(aRandL2A, 5U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialI[937576U]) + static_cast<std::size_t>(mMaterialA[943642U]);
+    aRandFinalA = RotL64(aRandFinalA, 5U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialH[945302U]) + static_cast<std::size_t>(mMaterialC[939366U]);
+    aRandFinalB = RotL64(aRandFinalB, 5U) ^ aRotSampleIndex;
 
     //
     // $$$$$$$$$$$$$$$$
     //
 
     aRotSampleIndex += static_cast<std::size_t>(mMaterialL[959567U]) + static_cast<std::size_t>(mMaterialB[959340U]);
+    aRandFinalB = RotL64(aRandFinalB, 5U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialM[960313U]) + static_cast<std::size_t>(mMaterialK[962440U]);
+    aRandL1A = RotL64(aRandL1A, 5U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialI[971702U]) + static_cast<std::size_t>(mMaterialD[953867U]);
+    aRandFinalA = RotL64(aRandFinalA, 5U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialO[962026U]) + static_cast<std::size_t>(mMaterialC[972456U]);
+    aRandL3A = RotL64(aRandL3A, 5U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialE[979830U]) + static_cast<std::size_t>(mMaterialA[958890U]);
+    aRandL2B = RotL64(aRandL2B, 5U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialG[975957U]) + static_cast<std::size_t>(mMaterialF[977655U]);
+    aRandL1B = RotL64(aRandL1B, 5U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialH[965135U]) + static_cast<std::size_t>(mMaterialP[974020U]);
+    aRandL2A = RotL64(aRandL2A, 5U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialJ[975885U]) + static_cast<std::size_t>(mMaterialN[975679U]);
+    aRandL3B = RotL64(aRandL3B, 5U) ^ aRotSampleIndex;
 
     //
     // $$$$$$$$$$$$$$$$
     //
 
     aRotSampleIndex += static_cast<std::size_t>(mMaterialC[985284U]) + static_cast<std::size_t>(mMaterialG[1006527U]);
+    aRandL1B = RotL64(aRandL1B, 5U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialD[999589U]) + static_cast<std::size_t>(mMaterialN[1008638U]);
+    aRandFinalB = RotL64(aRandFinalB, 5U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialK[999491U]) + static_cast<std::size_t>(mMaterialJ[1000953U]);
+    aRandL1A = RotL64(aRandL1A, 5U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialE[998854U]) + static_cast<std::size_t>(mMaterialA[1004381U]);
+    aRandL3A = RotL64(aRandL3A, 5U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialM[1012716U]) + static_cast<std::size_t>(mMaterialP[1002843U]);
+    aRandL2A = RotL64(aRandL2A, 5U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialL[1003486U]) + static_cast<std::size_t>(mMaterialH[991200U]);
+    aRandFinalA = RotL64(aRandFinalA, 5U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialO[996922U]) + static_cast<std::size_t>(mMaterialF[1004393U]);
+    aRandL3B = RotL64(aRandL3B, 5U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialI[989712U]) + static_cast<std::size_t>(mMaterialB[1002161U]);
+    aRandL2B = RotL64(aRandL2B, 5U) ^ aRotSampleIndex;
 
     //
     // $$$$$$$$$$$$$$$$
     //
 
     aRotSampleIndex += static_cast<std::size_t>(mMaterialI[1027619U]) + static_cast<std::size_t>(mMaterialO[1038909U]);
+    aRandFinalB = RotL64(aRandFinalB, 5U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialD[1019834U]) + static_cast<std::size_t>(mMaterialG[1031464U]);
+    aRandFinalA = RotL64(aRandFinalA, 5U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialM[1041729U]) + static_cast<std::size_t>(mMaterialF[1046005U]);
+    aRandL3A = RotL64(aRandL3A, 5U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialE[1033633U]) + static_cast<std::size_t>(mMaterialL[1047040U]);
+    aRandL2A = RotL64(aRandL2A, 5U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialP[1031293U]) + static_cast<std::size_t>(mMaterialB[1045749U]);
+    aRandL1B = RotL64(aRandL1B, 5U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialA[1037084U]) + static_cast<std::size_t>(mMaterialN[1040007U]);
+    aRandL3B = RotL64(aRandL3B, 5U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialJ[1032171U]) + static_cast<std::size_t>(mMaterialH[1041811U]);
+    aRandL2B = RotL64(aRandL2B, 5U) ^ aRotSampleIndex;
     aRotSampleIndex += static_cast<std::size_t>(mMaterialC[1027927U]) + static_cast<std::size_t>(mMaterialK[1042061U]);
+    aRandL1A = RotL64(aRandL1A, 5U) ^ aRotSampleIndex;
 
     aRotSampleIndex %= aRotSampleCount;
 
     auto AdvanceRotSample = [&](std::uint64_t pMix, std::size_t pHop) {
+        
         const std::size_t aNearIndex = (aRotSampleIndex + 8U + pHop) % S_BLOCK;
         const std::size_t aFarIndex = static_cast<std::size_t>((pMix ^ (pMix >> 32U)) % S_BLOCK);
         aRotSampleIndex = (aRotSampleIndex + mRandom[aNearIndex] + mRandom[aFarIndex] + pHop) % aRotSampleCount;
@@ -1910,13 +2167,6 @@ void Soccer::SeedEpilogue() {
             ++aLaneIndex;
             aLaneOffset = 0u;
         }
-        
-        /*
-         if (aLaneIndex == 16u) {
-         aLaneIndex = 0u;
-         }
-         */
-        
         std::uint8_t *aResult = mMaterials[aLaneIndex] + aLaneOffset;
         aLaneOffset += pByteCount;
         return aResult;

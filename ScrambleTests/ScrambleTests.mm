@@ -9,6 +9,7 @@
 
 #include "Random.hpp"
 #include "Soccer.hpp"
+#include "WorkSpaceTools.hpp"
 
 #include <cstdint>
 #include <cstring>
@@ -20,76 +21,27 @@
 
 @implementation ScrambleTests
 
-- (void)test_encryptDecrypt {
-    std::vector<std::uint8_t> aOriginal(SOCCER_BLOCK_SIZE);
-    for (std::uint8_t &aByte : aOriginal) {
-        aByte = Random::GetByte();
-    }
-    
-    std::vector<std::uint8_t> aPassword(256U);
-    for (std::uint8_t &aByte : aPassword) {
-        aByte = Random::GetByte();
-    }
-    
-    const std::uint64_t aNonce = Random::Get64();
-    
-    std::vector<std::uint8_t> aEncrypted(SOCCER_BLOCK_SIZE);
-    for (std::uint8_t &aByte : aEncrypted) {
-        aByte = Random::GetByte();
-    }
-    
-    std::uint32_t aAckWord = 0U;
-    
-    XCTAssertTrue(Soccer::AttemptSeed_Encrypt(aPassword.data(),
-                                              aPassword.size(),
-                                              aNonce,
-                                              &aAckWord));
-    
-    XCTAssertTrue(Soccer::EncryptBlock(aOriginal.data(), aEncrypted.data()));
-    
-    XCTAssertTrue(Soccer::AttemptSeed_Decrypt(aPassword.data(),
-                                              aPassword.size(),
-                                              aNonce,
-                                              aAckWord));
-    
-    std::vector<std::uint8_t> aDecrypted(SOCCER_BLOCK_SIZE);
-    XCTAssertTrue(Soccer::DecryptBlock(aEncrypted.data(), aDecrypted.data()));
-    XCTAssertEqual(std::memcmp(aOriginal.data(), aDecrypted.data(), aOriginal.size()), 0);
-}
-
 - (void)test_encryptDecrypt11 {
     
     for (int i=0; i<1024; i++) {
         
         std::vector<std::uint8_t> aOriginalA(SOCCER_BLOCK_SIZE);
-        for (std::uint8_t &aByte : aOriginalA) {
-            aByte = Random::GetByte();
-        }
+        WorkSpaceTools::FillBytes(aOriginalA.data(), SOCCER_BLOCK_SIZE);
         
         std::vector<std::uint8_t> aOriginalB(SOCCER_BLOCK_SIZE);
-        for (std::uint8_t &aByte : aOriginalB) {
-            aByte = Random::GetByte();
-        }
+        WorkSpaceTools::FillBytes(aOriginalB.data(), SOCCER_BLOCK_SIZE);
         
         std::vector<std::uint8_t> aOriginalC(SOCCER_BLOCK_SIZE);
-        for (std::uint8_t &aByte : aOriginalC) {
-            aByte = Random::GetByte();
-        }
+        WorkSpaceTools::FillBytes(aOriginalC.data(), SOCCER_BLOCK_SIZE);
         
         std::vector<std::uint8_t> aOriginalD(SOCCER_BLOCK_SIZE);
-        for (std::uint8_t &aByte : aOriginalD) {
-            aByte = Random::GetByte();
-        }
+        WorkSpaceTools::FillBytes(aOriginalD.data(), SOCCER_BLOCK_SIZE);
         
         std::vector<std::uint8_t> aOriginalE(SOCCER_BLOCK_SIZE);
-        for (std::uint8_t &aByte : aOriginalE) {
-            aByte = Random::GetByte();
-        }
+        WorkSpaceTools::FillBytes(aOriginalE.data(), SOCCER_BLOCK_SIZE);
         
         std::vector<std::uint8_t> aPassword(256U);
-        for (std::uint8_t &aByte : aPassword) {
-            aByte = Random::GetByte();
-        }
+        WorkSpaceTools::FillBytes(aPassword.data(), 256U);
         
         const std::uint64_t aNonce = Random::Get64();
         

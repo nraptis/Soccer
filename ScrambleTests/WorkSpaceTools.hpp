@@ -189,6 +189,14 @@ public:
             pWords[aIndex] = Random::Get64();
         }
     }
+
+    static std::uint64_t FlipBit(std::uint64_t pOriginal,
+                                 std::size_t pBitIndex) {
+        if (pBitIndex >= 64U) {
+            return pOriginal;
+        }
+        return pOriginal ^ (std::uint64_t{1U} << pBitIndex);
+    }
     
     static void FillConstants(TwistDomainConstants *pConstants) {
         pConstants->mIngress = Random::Get64();
