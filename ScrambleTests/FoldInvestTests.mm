@@ -43,14 +43,10 @@ namespace {
     }
     
     void CopyWorkSpace(TwistWorkSpace *pSource, TwistWorkSpace *pDestination) {
-        memcpy(pDestination->mInvestLaneA, pSource->mInvestLaneA, S_BLOCK);
-        memcpy(pDestination->mInvestLaneB, pSource->mInvestLaneB, S_BLOCK);
-        memcpy(pDestination->mInvestLaneC, pSource->mInvestLaneC, S_BLOCK);
-        memcpy(pDestination->mInvestLaneD, pSource->mInvestLaneD, S_BLOCK);
-        memcpy(pDestination->mInvestLaneE, pSource->mInvestLaneE, S_BLOCK);
-        memcpy(pDestination->mInvestLaneF, pSource->mInvestLaneF, S_BLOCK);
-        memcpy(pDestination->mInvestLaneG, pSource->mInvestLaneG, S_BLOCK);
-        memcpy(pDestination->mInvestLaneH, pSource->mInvestLaneH, S_BLOCK);
+        memcpy(pDestination->mIceLaneA, pSource->mIceLaneA, S_BLOCK);
+        memcpy(pDestination->mIceLaneB, pSource->mIceLaneB, S_BLOCK);
+        memcpy(pDestination->mIceLaneC, pSource->mIceLaneC, S_BLOCK);
+        memcpy(pDestination->mIceLaneD, pSource->mIceLaneD, S_BLOCK);
         
         memcpy(&pDestination->mKeyBoxA[0][0], &pSource->mKeyBoxA[0][0], S_KEY);
         memcpy(&pDestination->mKeyBoxB[0][0], &pSource->mKeyBoxB[0][0], S_KEY);
@@ -118,19 +114,17 @@ namespace {
         TwistWorkSpace *aTestWorkSpace = new TwistWorkSpace();
         SeedWorkSpace(aTestWorkSpace);
         
-        aExpanderItem.mExpander->mWorkspace = aOriginalWorkSpace;
-        aExpanderItem.mExpander->SquashInvestToKeyBoxes();
+        aExpanderItem.mExpander->SquashInvestToKeyBoxes(aOriginalWorkSpace);
         
-        for (std::size_t aInvestLaneIndex=0; aInvestLaneIndex<8; aInvestLaneIndex++) {
+        for (std::size_t aIceLaneIndex=0; aIceLaneIndex<4; aIceLaneIndex++) {
             
-            printf("Checking %s, lane %zu!\n", aExpanderItem.mName.c_str(), aInvestLaneIndex);
+            printf("Checking %s, lane %zu!\n", aExpanderItem.mName.c_str(), aIceLaneIndex);
             
             for (std::size_t aByteIndex=0; aByteIndex<S_BLOCK; aByteIndex++) {
                 
                 CopyWorkSpace(aOriginalWorkSpace, aTestWorkSpace);
                 
-                aExpanderItem.mExpander->mWorkspace = aTestWorkSpace;
-                aExpanderItem.mExpander->SquashInvestToKeyBoxes();
+                aExpanderItem.mExpander->SquashInvestToKeyBoxes(aTestWorkSpace);
                 
                 if (!ValidateKeyASame(aOriginalWorkSpace, aTestWorkSpace)) {
                     delete aOriginalWorkSpace;
@@ -150,14 +144,10 @@ namespace {
                 
                 
                 // Now we want to make sure changing the byte influences the key...
-                std::uint8_t *aLane = aTestWorkSpace->mInvestLaneA;
-                if (aInvestLaneIndex == 1) { aLane = aTestWorkSpace->mInvestLaneB; }
-                if (aInvestLaneIndex == 2) { aLane = aTestWorkSpace->mInvestLaneC; }
-                if (aInvestLaneIndex == 3) { aLane = aTestWorkSpace->mInvestLaneD; }
-                if (aInvestLaneIndex == 4) { aLane = aTestWorkSpace->mInvestLaneE; }
-                if (aInvestLaneIndex == 5) { aLane = aTestWorkSpace->mInvestLaneF; }
-                if (aInvestLaneIndex == 6) { aLane = aTestWorkSpace->mInvestLaneG; }
-                if (aInvestLaneIndex == 7) { aLane = aTestWorkSpace->mInvestLaneH; }
+                std::uint8_t *aLane = aTestWorkSpace->mIceLaneA;
+                if (aIceLaneIndex == 1) { aLane = aTestWorkSpace->mIceLaneB; }
+                if (aIceLaneIndex == 2) { aLane = aTestWorkSpace->mIceLaneC; }
+                if (aIceLaneIndex == 3) { aLane = aTestWorkSpace->mIceLaneD; }
                 
                 bool aFoundSolution = false;
                 
@@ -167,7 +157,7 @@ namespace {
                     memcpy(&aTestWorkSpace->mKeyBoxB[0][0], &aOriginalWorkSpace->mKeyBoxB[0][0], S_KEY);
                     
                     aLane[aByteIndex] = aByteValue;
-                    aExpanderItem.mExpander->SquashInvestToKeyBoxes();
+                    aExpanderItem.mExpander->SquashInvestToKeyBoxes(aTestWorkSpace);
                     
                     bool aExactlyOneRowChangedA = ValidateKeyAExactlyOneRowDifferent(aOriginalWorkSpace, aTestWorkSpace);
                     bool aExactlyOneRowChangedB = ValidateKeyBExactlyOneRowDifferent(aOriginalWorkSpace, aTestWorkSpace);

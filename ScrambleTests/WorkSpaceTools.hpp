@@ -78,57 +78,7 @@ public:
         return aResult;
     }
 
-    static bool EnsureExpansionLanesAreNotEqual(TwistWorkSpace *pWorkSpaceA, TwistWorkSpace *pWorkSpaceB) {
-        return EnsureByteLaneIsNotEqual("EnsureExpansionLanesAreNotEqual", "mExpansionLaneA", pWorkSpaceA->mExpansionLaneA, pWorkSpaceB->mExpansionLaneA) &&
-               EnsureByteLaneIsNotEqual("EnsureExpansionLanesAreNotEqual", "mExpansionLaneB", pWorkSpaceA->mExpansionLaneB, pWorkSpaceB->mExpansionLaneB) &&
-               EnsureByteLaneIsNotEqual("EnsureExpansionLanesAreNotEqual", "mExpansionLaneC", pWorkSpaceA->mExpansionLaneC, pWorkSpaceB->mExpansionLaneC) &&
-               EnsureByteLaneIsNotEqual("EnsureExpansionLanesAreNotEqual", "mExpansionLaneD", pWorkSpaceA->mExpansionLaneD, pWorkSpaceB->mExpansionLaneD);
-    }
-
-    static bool EnsureExpansionLanesAreEqual(TwistWorkSpace *pWorkSpaceA, TwistWorkSpace *pWorkSpaceB) {
-        return EnsureByteLaneIsEqual("EnsureExpansionLanesAreEqual", "mExpansionLaneA", pWorkSpaceA->mExpansionLaneA, pWorkSpaceB->mExpansionLaneA) &&
-               EnsureByteLaneIsEqual("EnsureExpansionLanesAreEqual", "mExpansionLaneB", pWorkSpaceA->mExpansionLaneB, pWorkSpaceB->mExpansionLaneB) &&
-               EnsureByteLaneIsEqual("EnsureExpansionLanesAreEqual", "mExpansionLaneC", pWorkSpaceA->mExpansionLaneC, pWorkSpaceB->mExpansionLaneC) &&
-               EnsureByteLaneIsEqual("EnsureExpansionLanesAreEqual", "mExpansionLaneD", pWorkSpaceA->mExpansionLaneD, pWorkSpaceB->mExpansionLaneD);
-    }
     
-    static bool EnsureOperationLanesAreNotEqual(TwistWorkSpace *pWorkSpaceA, TwistWorkSpace *pWorkSpaceB) {
-        return EnsureByteLaneIsNotEqual("EnsureOperationLanesAreNotEqual", "mOperationLaneA", pWorkSpaceA->mOperationLaneA, pWorkSpaceB->mOperationLaneA) &&
-               EnsureByteLaneIsNotEqual("EnsureOperationLanesAreNotEqual", "mOperationLaneB", pWorkSpaceA->mOperationLaneB, pWorkSpaceB->mOperationLaneB) &&
-               EnsureByteLaneIsNotEqual("EnsureOperationLanesAreNotEqual", "mOperationLaneC", pWorkSpaceA->mOperationLaneC, pWorkSpaceB->mOperationLaneC) &&
-               EnsureByteLaneIsNotEqual("EnsureOperationLanesAreNotEqual", "mOperationLaneD", pWorkSpaceA->mOperationLaneD, pWorkSpaceB->mOperationLaneD);
-    }
-
-    static bool EnsureOperationLanesAreEqual(TwistWorkSpace *pWorkSpaceA, TwistWorkSpace *pWorkSpaceB) {
-        return EnsureByteLaneIsEqual("EnsureOperationLanesAreEqual", "mOperationLaneA", pWorkSpaceA->mOperationLaneA, pWorkSpaceB->mOperationLaneA) &&
-               EnsureByteLaneIsEqual("EnsureOperationLanesAreEqual", "mOperationLaneB", pWorkSpaceA->mOperationLaneB, pWorkSpaceB->mOperationLaneB) &&
-               EnsureByteLaneIsEqual("EnsureOperationLanesAreEqual", "mOperationLaneC", pWorkSpaceA->mOperationLaneC, pWorkSpaceB->mOperationLaneC) &&
-               EnsureByteLaneIsEqual("EnsureOperationLanesAreEqual", "mOperationLaneD", pWorkSpaceA->mOperationLaneD, pWorkSpaceB->mOperationLaneD);
-    }
-    
-    static bool EnsureWorkLanesAreNotEqual(TwistWorkSpace *pWorkSpaceA, TwistWorkSpace *pWorkSpaceB) {
-        return EnsureByteLaneIsNotEqual("EnsureWorkLanesAreNotEqual", "mWorkLaneA", pWorkSpaceA->mWorkLaneA, pWorkSpaceB->mWorkLaneA) &&
-               EnsureByteLaneIsNotEqual("EnsureWorkLanesAreNotEqual", "mWorkLaneB", pWorkSpaceA->mWorkLaneB, pWorkSpaceB->mWorkLaneB) &&
-               EnsureByteLaneIsNotEqual("EnsureWorkLanesAreNotEqual", "mWorkLaneC", pWorkSpaceA->mWorkLaneC, pWorkSpaceB->mWorkLaneC) &&
-               EnsureByteLaneIsNotEqual("EnsureWorkLanesAreNotEqual", "mWorkLaneD", pWorkSpaceA->mWorkLaneD, pWorkSpaceB->mWorkLaneD);
-    }
-
-    static bool EnsureWorkLanesAreEqual(TwistWorkSpace *pWorkSpaceA, TwistWorkSpace *pWorkSpaceB) {
-        return EnsureByteLaneIsEqual("EnsureWorkLanesAreEqual", "mWorkLaneA", pWorkSpaceA->mWorkLaneA, pWorkSpaceB->mWorkLaneA) &&
-               EnsureByteLaneIsEqual("EnsureWorkLanesAreEqual", "mWorkLaneB", pWorkSpaceA->mWorkLaneB, pWorkSpaceB->mWorkLaneB) &&
-               EnsureByteLaneIsEqual("EnsureWorkLanesAreEqual", "mWorkLaneC", pWorkSpaceA->mWorkLaneC, pWorkSpaceB->mWorkLaneC) &&
-               EnsureByteLaneIsEqual("EnsureWorkLanesAreEqual", "mWorkLaneD", pWorkSpaceA->mWorkLaneD, pWorkSpaceB->mWorkLaneD);
-    }
-
-    static bool EnsureWorkLanesABAreNotEqual(TwistWorkSpace *pWorkSpaceA, TwistWorkSpace *pWorkSpaceB) {
-        return EnsureByteLaneIsNotEqual("EnsureWorkLanesABAreNotEqual", "mWorkLaneA", pWorkSpaceA->mWorkLaneA, pWorkSpaceB->mWorkLaneA) &&
-               EnsureByteLaneIsNotEqual("EnsureWorkLanesABAreNotEqual", "mWorkLaneB", pWorkSpaceA->mWorkLaneB, pWorkSpaceB->mWorkLaneB);
-    }
-
-    static bool EnsureWorkLanesABAreEqual(TwistWorkSpace *pWorkSpaceA, TwistWorkSpace *pWorkSpaceB) {
-        return EnsureByteLaneIsEqual("EnsureWorkLanesABAreEqual", "mWorkLaneA", pWorkSpaceA->mWorkLaneA, pWorkSpaceB->mWorkLaneA) &&
-               EnsureByteLaneIsEqual("EnsureWorkLanesABAreEqual", "mWorkLaneB", pWorkSpaceA->mWorkLaneB, pWorkSpaceB->mWorkLaneB);
-    }
     
     static bool EnsureByteLaneIsNotEqual(const char *pFunctionName,
                                          const char *pLaneName,
@@ -246,34 +196,26 @@ public:
         FillConstants(&pBundle->mPhaseCConstants);
         FillSaltSet(&pBundle->mPhaseDSalts);
         FillConstants(&pBundle->mPhaseDConstants);
-        FillSaltSet(&pBundle->mPhaseESalts);
-        FillConstants(&pBundle->mPhaseEConstants);
-        FillSaltSet(&pBundle->mPhaseFSalts);
-        FillConstants(&pBundle->mPhaseFConstants);
-        FillSaltSet(&pBundle->mPhaseGSalts);
-        FillConstants(&pBundle->mPhaseGConstants);
-        FillSaltSet(&pBundle->mPhaseHSalts);
-        FillConstants(&pBundle->mPhaseHConstants);
     }
     
     static void FillWorkSpace(TwistWorkSpace *pWorkSpace) {
         FillBytes(&pWorkSpace->mKeyBoxA[0][0], S_KEY);
         FillBytes(&pWorkSpace->mKeyBoxB[0][0], S_KEY);
         
-        FillBytes(pWorkSpace->mExpansionLaneA, S_BLOCK);
-        FillBytes(pWorkSpace->mExpansionLaneB, S_BLOCK);
-        FillBytes(pWorkSpace->mExpansionLaneC, S_BLOCK);
-        FillBytes(pWorkSpace->mExpansionLaneD, S_BLOCK);
+        FillBytes(pWorkSpace->mPoisonLaneA, S_BLOCK);
+        FillBytes(pWorkSpace->mPoisonLaneB, S_BLOCK);
+        FillBytes(pWorkSpace->mPoisonLaneC, S_BLOCK);
+        FillBytes(pWorkSpace->mPoisonLaneD, S_BLOCK);
         
-        FillBytes(pWorkSpace->mWorkLaneA, S_BLOCK);
-        FillBytes(pWorkSpace->mWorkLaneB, S_BLOCK);
-        FillBytes(pWorkSpace->mWorkLaneC, S_BLOCK);
-        FillBytes(pWorkSpace->mWorkLaneD, S_BLOCK);
+        FillBytes(pWorkSpace->mHeartLaneA, S_BLOCK);
+        FillBytes(pWorkSpace->mHeartLaneB, S_BLOCK);
+        FillBytes(pWorkSpace->mHeartLaneC, S_BLOCK);
+        FillBytes(pWorkSpace->mHeartLaneD, S_BLOCK);
         
-        FillBytes(pWorkSpace->mOperationLaneA, S_BLOCK);
-        FillBytes(pWorkSpace->mOperationLaneB, S_BLOCK);
-        FillBytes(pWorkSpace->mOperationLaneC, S_BLOCK);
-        FillBytes(pWorkSpace->mOperationLaneD, S_BLOCK);
+        FillBytes(pWorkSpace->mSpiritLaneA, S_BLOCK);
+        FillBytes(pWorkSpace->mSpiritLaneB, S_BLOCK);
+        FillBytes(pWorkSpace->mSpiritLaneC, S_BLOCK);
+        FillBytes(pWorkSpace->mSpiritLaneD, S_BLOCK);
         
         FillBytes(pWorkSpace->mEarthLaneA, S_BLOCK);
         FillBytes(pWorkSpace->mEarthLaneB, S_BLOCK);
@@ -290,10 +232,10 @@ public:
         FillBytes(pWorkSpace->mWindLaneC, S_BLOCK);
         FillBytes(pWorkSpace->mWindLaneD, S_BLOCK);
         
-        FillBytes(pWorkSpace->mSnowLaneA, S_BLOCK);
-        FillBytes(pWorkSpace->mSnowLaneB, S_BLOCK);
-        FillBytes(pWorkSpace->mSnowLaneC, S_BLOCK);
-        FillBytes(pWorkSpace->mSnowLaneD, S_BLOCK);
+        FillBytes(pWorkSpace->mWoodLaneA, S_BLOCK);
+        FillBytes(pWorkSpace->mWoodLaneB, S_BLOCK);
+        FillBytes(pWorkSpace->mWoodLaneC, S_BLOCK);
+        FillBytes(pWorkSpace->mWoodLaneD, S_BLOCK);
         
         FillBytes(pWorkSpace->mWaterLaneA, S_BLOCK);
         FillBytes(pWorkSpace->mWaterLaneB, S_BLOCK);
@@ -305,20 +247,11 @@ public:
         FillBytes(pWorkSpace->mFuseLaneC, S_BLOCK);
         FillBytes(pWorkSpace->mFuseLaneD, S_BLOCK);
         
-        FillBytes(pWorkSpace->mMergeLaneA, S_QUARTER);
-        FillBytes(pWorkSpace->mMergeLaneB, S_QUARTER);
-        FillBytes(pWorkSpace->mMergeLaneC, S_QUARTER);
-        FillBytes(pWorkSpace->mMergeLaneD, S_QUARTER);
-        
-        FillBytes(pWorkSpace->mInvestLaneA, S_BLOCK);
-        FillBytes(pWorkSpace->mInvestLaneB, S_BLOCK);
-        FillBytes(pWorkSpace->mInvestLaneC, S_BLOCK);
-        FillBytes(pWorkSpace->mInvestLaneD, S_BLOCK);
-        FillBytes(pWorkSpace->mInvestLaneE, S_BLOCK);
-        FillBytes(pWorkSpace->mInvestLaneF, S_BLOCK);
-        FillBytes(pWorkSpace->mInvestLaneG, S_BLOCK);
-        FillBytes(pWorkSpace->mInvestLaneH, S_BLOCK);
-        
+        FillBytes(pWorkSpace->mIceLaneA, S_BLOCK);
+        FillBytes(pWorkSpace->mIceLaneB, S_BLOCK);
+        FillBytes(pWorkSpace->mIceLaneC, S_BLOCK);
+        FillBytes(pWorkSpace->mIceLaneC, S_BLOCK);
+
         FillBytes(pWorkSpace->mSource, S_BLOCK);
         
         FillDomainBundle(&pWorkSpace->mDomainBundle);

@@ -9,6 +9,7 @@
 
 #include "ExpanderFactory.hpp"
 #include "TwistFarmSalt.hpp"
+#include "TwistSnow.hpp"
 
 #include <cstddef>
 #include <cstdint>
@@ -28,6 +29,16 @@
         'R', 'e', 'p', 'e', 'a', 't', 'A', 'c', 't', 'i', 'o', 'n'
     };
     constexpr std::uint64_t aNonce = 0x7AB19D42E6503FC8ULL;
+    
+    std::uint8_t mSnowLaneA[S_BLOCK];
+    std::uint8_t mSnowLaneB[S_BLOCK];
+    std::uint8_t mSnowLaneC[S_BLOCK];
+    std::uint8_t mSnowLaneD[S_BLOCK];
+    
+    TwistSnow::Sha256Counter(aPassword, mSnowLaneA);
+    TwistSnow::AES256Counter(aPassword, mSnowLaneB);
+    TwistSnow::ChaCha20Counter(aPassword, mSnowLaneC);
+    TwistSnow::Aria256Counter(aPassword, mSnowLaneD);
 
     std::vector<ExpanderItem> aExpanderItems = ExpanderFactory::Get();
     for (ExpanderItem &aExpanderItem : aExpanderItems) {
@@ -42,6 +53,10 @@
                                                    aPassword,
                                                    sizeof(aPassword),
                                                    aEncryptedA,
+                                                   mSnowLaneA,
+                                                   mSnowLaneB,
+                                                   mSnowLaneC,
+                                                   mSnowLaneD,
                                                    S_BLOCK);
 
         aWorkSpace.Zero();
@@ -53,6 +68,10 @@
                                                    aPassword,
                                                    sizeof(aPassword),
                                                    aEncryptedB,
+                                                   mSnowLaneA,
+                                                   mSnowLaneB,
+                                                   mSnowLaneC,
+                                                   mSnowLaneD,
                                                    S_BLOCK);
 
         const bool aMatches = std::memcmp(aEncryptedA, aEncryptedB, S_BLOCK) == 0;

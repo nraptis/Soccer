@@ -23,10 +23,10 @@ namespace {
     }
     
     void CopyWorkSpace(TwistWorkSpace *pSource, TwistWorkSpace *pDestination) {
-        memcpy(pDestination->mWorkLaneA, pSource->mWorkLaneA, S_BLOCK);
-        memcpy(pDestination->mWorkLaneB, pSource->mWorkLaneB, S_BLOCK);
-        memcpy(pDestination->mWorkLaneC, pSource->mWorkLaneC, S_BLOCK);
-        memcpy(pDestination->mWorkLaneD, pSource->mWorkLaneD, S_BLOCK);
+        memcpy(pDestination->mSpiritLaneA, pSource->mSpiritLaneA, S_BLOCK);
+        memcpy(pDestination->mSpiritLaneB, pSource->mSpiritLaneB, S_BLOCK);
+        memcpy(pDestination->mSpiritLaneC, pSource->mSpiritLaneC, S_BLOCK);
+        memcpy(pDestination->mSpiritLaneD, pSource->mSpiritLaneD, S_BLOCK);
         
         memcpy(&pDestination->mKeyBoxB[0][0], &pSource->mKeyBoxB[0][0], S_KEY);
     }
@@ -83,9 +83,9 @@ namespace {
         CopyWorkSpace(aOriginalWorkSpace, aOriginalWorkSpaceMutated);
         aExpanderItem.mExpander->GrowKeyB(aOriginalWorkSpaceMutated);
         
-        for (std::size_t aWorkLaneIndex=0; aWorkLaneIndex<4; aWorkLaneIndex++) {
+        for (std::size_t aSpiritLaneIndex=0; aSpiritLaneIndex<4; aSpiritLaneIndex++) {
             
-            printf("Checking %s, lane %zu!\n", aExpanderItem.mName.c_str(), aWorkLaneIndex);
+            printf("Checking %s, lane %zu!\n", aExpanderItem.mName.c_str(), aSpiritLaneIndex);
             
             for (std::size_t aByteIndex=0; aByteIndex<S_BLOCK; aByteIndex++) {
                 
@@ -105,10 +105,10 @@ namespace {
                 
                 
                 // Now we want to make sure changing the byte influences the key...
-                std::uint8_t *aLane = aTestWorkSpaceB->mWorkLaneA;
-                if (aWorkLaneIndex == 1) { aLane = aTestWorkSpaceB->mWorkLaneB; }
-                if (aWorkLaneIndex == 2) { aLane = aTestWorkSpaceB->mWorkLaneC; }
-                if (aWorkLaneIndex == 3) { aLane = aTestWorkSpaceB->mWorkLaneD; }
+                std::uint8_t *aLane = aTestWorkSpaceB->mSpiritLaneA;
+                if (aSpiritLaneIndex == 1) { aLane = aTestWorkSpaceB->mSpiritLaneB; }
+                if (aSpiritLaneIndex == 2) { aLane = aTestWorkSpaceB->mSpiritLaneC; }
+                if (aSpiritLaneIndex == 3) { aLane = aTestWorkSpaceB->mSpiritLaneD; }
                 
                 bool aFoundSolution = false;
                 

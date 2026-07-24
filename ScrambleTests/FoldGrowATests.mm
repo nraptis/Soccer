@@ -24,10 +24,10 @@ namespace {
     }
     
     void CopyWorkSpace(TwistWorkSpace *pSource, TwistWorkSpace *pDestination) {
-        memcpy(pDestination->mExpansionLaneA, pSource->mExpansionLaneA, S_BLOCK);
-        memcpy(pDestination->mExpansionLaneB, pSource->mExpansionLaneB, S_BLOCK);
-        memcpy(pDestination->mExpansionLaneC, pSource->mExpansionLaneC, S_BLOCK);
-        memcpy(pDestination->mExpansionLaneD, pSource->mExpansionLaneD, S_BLOCK);
+        memcpy(pDestination->mIceLaneA, pSource->mIceLaneA, S_BLOCK);
+        memcpy(pDestination->mIceLaneB, pSource->mIceLaneB, S_BLOCK);
+        memcpy(pDestination->mIceLaneC, pSource->mIceLaneC, S_BLOCK);
+        memcpy(pDestination->mIceLaneD, pSource->mIceLaneD, S_BLOCK);
         
         memcpy(&pDestination->mKeyBoxA[0][0], &pSource->mKeyBoxA[0][0], S_KEY);
     }
@@ -85,9 +85,9 @@ namespace {
         
         aExpanderItem.mExpander->GrowKeyA(aOriginalWorkSpaceMutated);
         
-        for (std::size_t aExpansionLaneIndex=0; aExpansionLaneIndex<4; aExpansionLaneIndex++) {
+        for (std::size_t aIceLaneIndex=0; aIceLaneIndex<4; aIceLaneIndex++) {
             
-            printf("Checking %s, lane %zu!\n", aExpanderItem.mName.c_str(), aExpansionLaneIndex);
+            printf("Checking %s, lane %zu!\n", aExpanderItem.mName.c_str(), aIceLaneIndex);
             
             for (std::size_t aByteIndex=0; aByteIndex<S_BLOCK; aByteIndex++) {
                 
@@ -106,10 +106,10 @@ namespace {
                 }
                 
                 // Now we want to make sure changing the byte influences the key...
-                std::uint8_t *aLane = aTestWorkSpaceB->mExpansionLaneA;
-                if (aExpansionLaneIndex == 1) { aLane = aTestWorkSpaceB->mExpansionLaneB; }
-                if (aExpansionLaneIndex == 2) { aLane = aTestWorkSpaceB->mExpansionLaneC; }
-                if (aExpansionLaneIndex == 3) { aLane = aTestWorkSpaceB->mExpansionLaneD; }
+                std::uint8_t *aLane = aTestWorkSpaceB->mIceLaneA;
+                if (aIceLaneIndex == 1) { aLane = aTestWorkSpaceB->mIceLaneB; }
+                if (aIceLaneIndex == 2) { aLane = aTestWorkSpaceB->mIceLaneC; }
+                if (aIceLaneIndex == 3) { aLane = aTestWorkSpaceB->mIceLaneD; }
                 
                 bool aFoundSolution = false;
                 
