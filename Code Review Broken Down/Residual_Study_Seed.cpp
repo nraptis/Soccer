@@ -1,29 +1,10 @@
-Seed_AConfig() {
+Seed_AConfig(()) {
     
     aPrimarySources = {
         Slot::kSource, Slot::kKeyRowReadA, Slot::kKeyRowReadB,
     };
     aWarmUpLanes = {
-        Slot::kWorkLaneA, Slot::kWorkLaneB,
-    };
-    aDestinations = {
-        Slot::kExpansionLaneA, Slot::kExpansionLaneB,
-        Slot::kExpansionLaneC, Slot::kExpansionLaneD,
-    };
-}
-
-Seed_BConfig() {
-    
-    aPrimarySources = {
-        Slot::kExpansionLaneA, Slot::kExpansionLaneB,
-        Slot::kExpansionLaneC, Slot::kExpansionLaneD,
-    };
-    aResidualSources = {
-        Slot::kSource, Slot::kKeyRowReadA, Slot::kKeyRowReadB,
-        Slot::kWorkLaneA, Slot::kWorkLaneB,
-    };
-    aWarmUpLanes = {
-        Slot::kWorkLaneC, Slot::kWorkLaneD,
+        Slot::kPoisonLaneA, Slot::kPoisonLaneB,
     };
     aDestinations = {
         Slot::kEarthLaneA, Slot::kEarthLaneB,
@@ -31,49 +12,47 @@ Seed_BConfig() {
     };
 }
 
-Seed_CConfig() {
+// [poi-a] x 0, [poi-b] x 0
+
+Seed_BConfig(()) {
     
     aPrimarySources = {
         Slot::kEarthLaneA, Slot::kEarthLaneB,
         Slot::kEarthLaneC, Slot::kEarthLaneD,
     };
     aResidualSources = {
-        Slot::kSource,
-        Slot::kWorkLaneA, Slot::kWorkLaneB,
-        Slot::kWorkLaneC, Slot::kWorkLaneD,
-        Slot::kExpansionLaneA, Slot::kExpansionLaneB,
-        Slot::kExpansionLaneC, Slot::kExpansionLaneD,
+        Slot::kSource, Slot::kKeyRowReadA, Slot::kKeyRowReadB,
+        Slot::kPoisonLaneA, Slot::kPoisonLaneB,
     };
-    aPrefixDestinations = {
-        Slot::kScrapLaneA, Slot::kScrapLaneB,
+    aWarmUpLanes = {
+        Slot::kPoisonLaneC, Slot::kPoisonLaneD,
     };
-    aBodyDestinations = {
-        Slot::kOperationLaneA, Slot::kOperationLaneB,
-        Slot::kOperationLaneC, Slot::kOperationLaneD,
+    aDestinations = {
+        Slot::kFireLaneA, Slot::kFireLaneB,
+        Slot::kFireLaneC, Slot::kFireLaneD,
     };
 }
 
-Seed_DConfig() {
+// [poi-a] x 1, [poi-b] x 1, [poi-c] x 0, [poi-d] x 0
+// [ear-a] x 0, [ear-b] x 0, [ear-c] x 0, [ear-d] x 0
+
+Seed_CConfig(()) {
     
     aPrimarySources = {
-        Slot::kOperationLaneA, Slot::kOperationLaneB,
-        Slot::kOperationLaneC, Slot::kOperationLaneD,
+        Slot::kFireLaneA, Slot::kFireLaneB,
+        Slot::kFireLaneC, Slot::kFireLaneD,
     };
     aResidualSources = {
-        Slot::kKeyRowReadA,
-        
-        Slot::kWorkLaneD,
-        Slot::kScrapLaneA, Slot::kScrapLaneB,
-        
-        Slot::kExpansionLaneA, Slot::kExpansionLaneB,
-        Slot::kExpansionLaneC, Slot::kExpansionLaneD,
+        Slot::kSource, Slot::kKeyRowReadA, Slot::kKeyRowReadB,
         
         Slot::kEarthLaneA, Slot::kEarthLaneB,
         Slot::kEarthLaneC, Slot::kEarthLaneD,
         
+        Slot::kPoisonLaneA, Slot::kPoisonLaneB,
+        Slot::kPoisonLaneC, Slot::kPoisonLaneD,
     };
     aPrefixDestinations = {
-        Slot::kScrapLaneC, Slot::kScrapLaneD,
+        Slot::kHeartLaneA, Slot::kHeartLaneB,
     };
     aBodyDestinations = {
         Slot::kFuseLaneA, Slot::kFuseLaneB,
@@ -81,119 +60,115 @@ Seed_DConfig() {
     };
 }
 
-// Here we diffuse [fuse] to [fire]
+// [poi-a] x 2, [poi-b] x 2, [poi-c] x 1, [poi-d] x 1
+// [ear-a] x 1, [ear-b] x 1, [ear-c] x 1, [ear-d] x 1
+// [fir-a] x 0, [fir-b] x 0, [fir-c] x 0, [fir-d] x 0
+// [ice-a] x 0, [ice-b] x 0, [ice-c] x 0, [ice-d] x 0
 
-Seed_EConfig() {
+// Here we diffuse [fuse] through [fire] to [wind]
+
+Seed_DConfig(()) {
     
     aPrimarySources = {
-        Slot::kFireLaneA, Slot::kFireLaneB,
-        Slot::kFireLaneC, Slot::kFireLaneD,
+        Slot::kWindLaneA, Slot::kWindLaneB,
+        Slot::kWindLaneC, Slot::kWindLaneD,
     };
     aResidualSources = {
-        Slot::kKeyRowReadB,
-        
-        Slot::kOperationLaneA, Slot::kOperationLaneB,
-        Slot::kOperationLaneC, Slot::kOperationLaneD,
+        Slot::kSource, Slot::kKeyRowReadA, Slot::kKeyRowReadB,
         
         Slot::kEarthLaneA, Slot::kEarthLaneB,
         Slot::kEarthLaneC, Slot::kEarthLaneD,
         
-        Slot::kScrapLaneA, Slot::kScrapLaneB,
-        Slot::kScrapLaneC, Slot::kScrapLaneD,
-        
-        Slot::kWorkLaneC,
-    };
-    aPrefixDestinations = {
-        Slot::kWaterLaneC, Slot::kWaterLaneD,
-    };
-    aBodyDestinations = {
-        Slot::kInvestA, Slot::kInvestB,
-        Slot::kInvestC, Slot::kInvestD,
-    };
-}
-
-Seed_FConfig() {
-    
-    aPrimarySources = {
-        Slot::kInvestA, Slot::kInvestB,
-        Slot::kInvestC, Slot::kInvestD,
-    };
-    aResidualSources = {
-        Slot::kSource,
-        
-        Slot::kWaterLaneC, Slot::kWaterLaneD,
+        Slot::kPoisonLaneA, Slot::kPoisonLaneB,
+        Slot::kPoisonLaneC, Slot::kPoisonLaneD,
         
         Slot::kFireLaneA, Slot::kFireLaneB,
         Slot::kFireLaneC, Slot::kFireLaneD,
         
-        Slot::kOperationLaneA, Slot::kOperationLaneB,
-        Slot::kOperationLaneC, Slot::kOperationLaneD,
-        
-        Slot::kScrapLaneA, Slot::kScrapLaneB,
-        Slot::kScrapLaneC, Slot::kScrapLaneD,
-        
-        Slot::kEarthLaneD
+        Slot::kHeartLaneA, Slot::kHeartLaneB,
     };
-    
     aPrefixDestinations = {
-        Slot::kSnowLaneC, Slot::kSnowLaneD,
+        Slot::kHeartLaneC, Slot::kHeartLaneD,
     };
     aBodyDestinations = {
-        Slot::kWindLaneA, Slot::kWindLaneB,
-        Slot::kWindLaneC, Slot::kWindLaneD,
+        Slot::kWaterLaneA, Slot::kWaterLaneB,
+        Slot::kWaterLaneC, Slot::kWaterLaneD,
     };
 }
 
-Seed_GConfig() {
+// [poi-a] x 3, [poi-b] x 3, [poi-c] x 2, [poi-d] x 2
+// [ear-a] x 2, [ear-b] x 2, [ear-c] x 2, [ear-d] x 2
+// [fir-a] x 1, [fir-b] x 1, [fir-c] x 1, [fir-d] x 1
+// [ice-a] x 1, [ice-b] x 1, [ice-c] x 0, [ice-d] x 0
+// [win-a] x 0, [win-b] x 0, [win-c] x 0, [win-d] x 0
+
+Seed_EConfig(()) {
     
     aPrimarySources = {
-        Slot::kWindLaneA, Slot::kWindLaneB,
-        Slot::kWindLaneC, Slot::kWindLaneD,
+        Slot::kWaterLaneA, Slot::kWaterLaneB,
+        Slot::kWaterLaneC, Slot::kWaterLaneD,
     };
     aResidualSources = {
-        Slot::kKeyRowReadA,
+        Slot::kSource, Slot::kKeyRowReadA, Slot::kKeyRowReadB,
         
-        Slot::kEarthLaneA, Slot::kEarthLaneB, Slot::kEarthLaneC,
+        Slot::kWindLaneA, Slot::kWindLaneB,
+        Slot::kWindLaneC, Slot::kWindLaneD,
         
-        Slot::kWaterLaneC, Slot::kWaterLaneD,
-        Slot::kScrapLaneC, Slot::kScrapLaneD,
-        Slot::kSnowLaneC, Slot::kSnowLaneD,
+        Slot::kEarthLaneA, Slot::kEarthLaneB,
+        Slot::kEarthLaneC, Slot::kEarthLaneD,
         
-        Slot::kInvestA, Slot::kInvestB,
-        Slot::kInvestC, Slot::kInvestD,
+        Slot::kPoisonLaneA, Slot::kPoisonLaneB,
+        Slot::kPoisonLaneC, Slot::kPoisonLaneD,
+        
         Slot::kFireLaneA, Slot::kFireLaneB,
         Slot::kFireLaneC, Slot::kFireLaneD,
+        
+        Slot::kHeartLaneA, Slot::kHeartLaneB,
+        Slot::kHeartLaneC, Slot::kHeartLaneD,
     };
-    
     aPrefixDestinations = {
-        Slot::kWaterLaneA, Slot::kWaterLaneB,
+        Slot::kWoodLaneA, Slot::kWoodLaneB,
     };
     aBodyDestinations = {
-        Slot::kOperationLaneA, Slot::kOperationLaneB,
-        Slot::kOperationLaneC, Slot::kOperationLaneD,
+        Slot::kIceLaneA, Slot::kIceLaneB,
+        Slot::kIceLaneC, Slot::kIceLaneD,
     };
 }
 
-Seed_HConfig() {
+// [poi-a] x 4, [poi-b] x 4, [poi-c] x 3, [poi-d] x 3
+// [ear-a] x 3, [ear-b] x 3, [ear-c] x 3, [ear-d] x 3
+// [fir-a] x 2, [fir-b] x 2, [fir-c] x 2, [fir-d] x 2
+// [ice-a] x 2, [ice-b] x 2, [ice-c] x 1, [ice-d] x 1
+// [win-a] x 1, [win-b] x 1, [win-c] x 1, [win-d] x 1
+// [wat-a] x 0, [wat-b] x 0, [wat-c] x 0, [wat-d] x 0
+// [wod-a] x 0, [wod-b] x 0
+
+Seed_FConfig(()) {
     
     aPrimarySources = {
-        Slot::kOperationLaneA, Slot::kOperationLaneB,
-        Slot::kOperationLaneC, Slot::kOperationLaneD,
+        Slot::kIceLaneA, Slot::kIceLaneB,
+        Slot::kIceLaneC, Slot::kIceLaneD,
     };
     aResidualSources = {
-        Slot::kKeyRowReadB,
-        Slot::kExpansionLaneD,
-        Slot::kWaterLaneA, Slot::kWaterLaneB,
+        Slot::kSource, Slot::kKeyRowReadA, Slot::kKeyRowReadB,
+        Slot::kEarthLaneB, Slot::kEarthLaneC, Slot::kEarthLaneD,
+        
         Slot::kWindLaneA, Slot::kWindLaneB,
         Slot::kWindLaneC, Slot::kWindLaneD,
-        Slot::kSnowLaneC, Slot::kSnowLaneD,
-        Slot::kInvestA, Slot::kInvestB,
-        Slot::kInvestC, Slot::kInvestD,
+        
         Slot::kFireLaneA, Slot::kFireLaneB,
+        Slot::kFireLaneC, Slot::kFireLaneD,
+        Slot::kHeartLaneA, Slot::kHeartLaneB,
+        Slot::kHeartLaneC, Slot::kHeartLaneD,
+        
+        Slot::kWaterLaneA, Slot::kWaterLaneB,
+        Slot::kWaterLaneC, Slot::kWaterLaneD,
+        
+        Slot::kWoodLaneA, Slot::kWoodLaneB,
     };
     
     aPrefixDestinations = {
-        Slot::kSnowLaneA, Slot::kSnowLaneB,
+        Slot::kWoodLaneC, Slot::kWoodLaneD,
     };
     aBodyDestinations = {
         Slot::kFuseLaneA, Slot::kFuseLaneB,
@@ -201,86 +176,134 @@ Seed_HConfig() {
     };
 }
 
-// Here we diffuse [fuse] to [invest_efgh]
+// [ear-a] x 3, [ear-b] x 4, [ear-c] x 4, [ear-d] x 4
+// [fir-a] x 3, [fir-b] x 3, [fir-c] x 3, [fir-d] x 3
+// [ice-a] x 3, [ice-b] x 3, [ice-c] x 2, [ice-d] x 2
+// [win-a] x 2, [win-b] x 2, [win-c] x 2, [win-d] x 2
+// [wat-a] x 1, [wat-b] x 1, [wat-c] x 1, [wat-d] x 1
+// [wod-a] x 1, [wod-b] x 1, [wod-c] x 0, [wod-d] x 0
+// [hrt-a] x 0, [hrt-b] x 0, [hrt-c] x 0, [hrt-d] x 0,
 
-Seed_IConfig() {
+// Here we diffuse [fuse] through [heart] to [spirit]
+
+Seed_GConfig(()) {
     
     aPrimarySources = {
-        Slot::kInvestE, Slot::kInvestF,
-        Slot::kInvestG, Slot::kInvestH,
+        Slot::kSpiritLaneA, Slot::kSpiritLaneB,
+        Slot::kSpiritLaneC, Slot::kSpiritLaneD,
     };
     aResidualSources = {
-        Slot::kSnowLaneA, Slot::kSnowLaneB,
-        Slot::kOperationLaneA, Slot::kOperationLaneB,
-        Slot::kOperationLaneC, Slot::kOperationLaneD,
+        Slot::kSource, Slot::kKeyRowReadA, Slot::kKeyRowReadB,
+        Slot::kEarthLaneA,
+        
         Slot::kWindLaneA, Slot::kWindLaneB,
         Slot::kWindLaneC, Slot::kWindLaneD,
+        
+        Slot::kHeartLaneA, Slot::kHeartLaneB,
+        Slot::kHeartLaneC, Slot::kHeartLaneD,
+        
+        Slot::kIceLaneA, Slot::kIceLaneB,
+        Slot::kIceLaneC, Slot::kIceLaneD,
+        
         Slot::kWaterLaneA, Slot::kWaterLaneB,
-        Slot::kExpansionLaneA, Slot::kExpansionLaneB,
-        Slot::kFireLaneC, Slot::kFireLaneD,
+        Slot::kWaterLaneC, Slot::kWaterLaneD,
+        
+        Slot::kWoodLaneA, Slot::kWoodLaneB,
+        Slot::kWoodLaneC, Slot::kWoodLaneD,
     };
+    
     aPrefixDestinations = {
-        Slot::kSnowLaneC, Slot::kSnowLaneD,
+        Slot::kEarthLaneC, Slot::kEarthLaneD,
     };
     aBodyDestinations = {
-        Slot::kWorkLaneA, Slot::kWorkLaneB,
-        Slot::kWorkLaneC, Slot::kWorkLaneD,
+        Slot::kFireLaneA, Slot::kFireLaneB,
+        Slot::kFireLaneC, Slot::kFireLaneD,
+    };
+}
+
+// [poi-a] x 4, [poi-b] x 4, [poi-c] x 3, [poi-d] x 3
+// [ear-a] x 4, [ear-b] x 4, [ear-c] x 0, [ear-d] x 0
+// [fir-a] x 0, [fir-b] x 0, [fir-c] x 0, [fir-d] x 0
+// [ice-a] x 4, [ice-b] x 4, [ice-c] x 3, [ice-d] x 3
+// [win-a] x 3, [win-b] x 3, [win-c] x 3, [win-d] x 3
+// [wat-a] x 2, [wat-b] x 2, [wat-c] x 2, [wat-d] x 2
+// [wod-a] x 2, [wod-b] x 2, [wod-c] x 1, [wod-d] x 1
+// [hrt-a] x 1, [hrt-b] x 1, [hrt-c] x 1, [hrt-d] x 1
+// [spi-a] x 0, [spi-b] x 0, [spi-c] x 0, [spi-d] x 0
+
+Seed_HConfig(()) {
+    aPrimarySources = {
+        Slot::kFireLaneA, Slot::kFireLaneB,
+        Slot::kFireLaneC, Slot::kFireLaneD,
+    };
+    aResidualSources = {
+        Slot::kKeyRowReadA, Slot::kKeyRowReadB,
+        Slot::kPoisonLaneC, Slot::kPoisonLaneD,
+        
+        Slot::kWindLaneA, Slot::kWindLaneB,
+        Slot::kWindLaneC, Slot::kWindLaneD,
+        
+        Slot::kIceLaneA, Slot::kIceLaneB,
+        Slot::kIceLaneC, Slot::kIceLaneD,
+        Slot::kWaterLaneA, Slot::kWaterLaneB,
+        Slot::kWaterLaneC, Slot::kWaterLaneD,
+        
+        Slot::kWoodLaneA, Slot::kWoodLaneB,
+        Slot::kWoodLaneC, Slot::kWoodLaneD,
+        Slot::kSpiritLaneA, Slot::kSpiritLaneB,
+        Slot::kSpiritLaneC, Slot::kSpiritLaneD,
+    };
+    aPrefixDestinations = {
+        Slot::kEarthLaneC, Slot::kEarthLaneD,
+    };
+    aBodyDestinations = {
+        Slot::kHeartLaneA, Slot::kHeartLaneB,
+        Slot::kHeartLaneC, Slot::kHeartLaneD,
     };
 }
 
 GrowAConfig() {
+    
     aInputs = {
-        Slot::kWorkLaneA, Slot::kWorkLaneB,
-        Slot::kWorkLaneC, Slot::kWorkLaneD,
+        Slot::kHeartLaneA, Slot::kHeartLaneB,
+        Slot::kHeartLaneC, Slot::kHeartLaneD,
     };
     aResiduals = {
-        Slot::kWaterLaneA, Slot::kWaterLaneC,
-        Slot::kEarthLaneB,Slot::kEarthLaneD,
-        Slot::kInvestA, Slot::kInvestB,
-        Slot::kInvestE, Slot::kInvestF,
-        
-        Slot::kScrapLaneA, Slot::kScrapLaneB,
-        Slot::kScrapLaneC, Slot::kScrapLaneD,
-        Slot::kFireLaneB, Slot::kFireLaneD,
-        Slot::kSnowLaneB, Slot::kSnowLaneD,
-        
-        Slot::kOperationLaneA, Slot::kOperationLaneC,
+        Slot::kWindLaneA, Slot::kWindLaneB,
+        Slot::kWaterLaneA, Slot::kWaterLaneB,
+        Slot::kFireLaneC, Slot::kFireLaneD,
+        Slot::kPoisonLaneA, Slot::kPoisonLaneB,
+        Slot::kEarthLaneC,Slot::kEarthLaneD,
+        Slot::kPoisonLaneC, Slot::kPoisonLaneD,
+        Slot::kSpiritLaneA, Slot::kSpiritLaneB,
+        Slot::kSpiritLaneC, Slot::kSpiritLaneD,
     };
-    aWarmUpLanes = {
-        Slot::kOperationLaneB, Slot::kOperationLaneD,
-    };
+    
     aDestinations = {
-        Slot::kExpansionLaneA, Slot::kExpansionLaneB,
-        Slot::kExpansionLaneC, Slot::kExpansionLaneD,
+        Slot::kIceLaneA, Slot::kIceLaneB,
+        Slot::kIceLaneC, Slot::kIceLaneD,
     };
 }
 
 GrowBConfig() {
     
     aInputs = {
-        Slot::kExpansionLaneA, Slot::kExpansionLaneB,
-        Slot::kExpansionLaneC, Slot::kExpansionLaneD,
+        Slot::kIceLaneA, Slot::kIceLaneB,
+        Slot::kIceLaneC, Slot::kIceLaneD,
     };
     aResiduals = {
-        
-        Slot::kWaterLaneB, Slot::kWaterLaneD,
-        Slot::kEarthLaneA,Slot::kEarthLaneC,
-        Slot::kWindLaneA, Slot::kWindLaneB,
+        Slot::kKeyRowReadA, Slot::kKeyRowReadB,
         Slot::kWindLaneC, Slot::kWindLaneD,
-        
-        Slot::kInvestC, Slot::kInvestD,
-        Slot::kInvestG, Slot::kInvestH,
-        Slot::kFireLaneA, Slot::kFireLaneC,
-        Slot::kSnowLaneA, Slot::kSnowLaneC,
-        
-        Slot::kOperationLaneB, Slot::kOperationLaneD,
+        Slot::kEarthLaneA,Slot::kEarthLaneB,
+        Slot::kWaterLaneC, Slot::kWaterLaneD,
+        Slot::kFireLaneA, Slot::kFireLaneB,
+        Slot::kHeartLaneA, Slot::kHeartLaneB,
+        Slot::kHeartLaneC, Slot::kHeartLaneD,
+        Slot::kWoodLaneA, Slot::kWoodLaneB,
     };
-    aWarmUpLanes = {
-        Slot::kFuseLaneC, Slot::kFuseLaneD,
-    };
+    
     aDestinations = {
-        Slot::kWorkLaneA, Slot::kWorkLaneB,
-        Slot::kWorkLaneC, Slot::kWorkLaneD,
+        Slot::kSpiritLaneA, Slot::kSpiritLaneB,
+        Slot::kSpiritLaneC, Slot::kSpiritLaneD,
     };
 }
-

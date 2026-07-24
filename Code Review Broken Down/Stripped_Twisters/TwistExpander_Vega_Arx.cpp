@@ -6,7 +6,8 @@
 #include <cstdint>
 
 void TwistExpander_Vega_Arx::KDF_A_A() {
-    // [kdf-a arx]
+
+
     // GSeedRunKDF_A_A kdf_a_loop_a (start)
     {
         //
@@ -19,59 +20,56 @@ void TwistExpander_Vega_Arx::KDF_A_A() {
         //      pSnow (<--), aSource (<--)
         //
         // Destination:
-        //      aScrapLaneA
+        //      aPoisonLaneA
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = RotL64(aSource[((aIndex + 3687U)) & S_BLOCK1], 57U) ^ RotL64(pSnow[((aIndex + 4243U)) & S_BLOCK1], 42U);
-
+            aIngress = aSource[aIndex] ^ pSnow[aIndex];
             //
-            aCross = RotL64(pSnow[((S_BLOCK1 - aIndex + 2997U)) & S_BLOCK1], 52U) ^ RotL64(aSource[((S_BLOCK1 - aIndex + 2643U)) & S_BLOCK1], 37U);
-
-            aScrapLaneA[aIndex] = aIngress;
+            aCross = pSnow[aIndex] ^ aSource[aIndex];
+            //
+            aPoisonLaneA[aIndex] = aIngress;
         }
     
         //
         // kdf_a_loop_a loop 2
         //
         // Ingress:
-        //      aScrapLaneA (-->), aSource (-->)
+        //      aPoisonLaneA (-->), aSource (-->)
         //
         // Cross:
-        //      aScrapLaneA (<--), pSnow (<--)
+        //      aPoisonLaneA (<--), pSnow (<--)
         //
         // Destination:
-        //      aScrapLaneB
+        //      aPoisonLaneB
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = RotL64(aScrapLaneA[((aIndex + 7439U)) & S_BLOCK1], 11U) ^ RotL64(aSource[((aIndex + 10089U)) & S_BLOCK1], 54U);
-
+            aIngress = aPoisonLaneA[aIndex] ^ aSource[aIndex];
             //
-            aCross = RotL64(aScrapLaneA[((S_BLOCK1 - aIndex + 8052U)) & S_BLOCK1], 30U) ^ RotL64(pSnow[((S_BLOCK1 - aIndex + 6103U)) & S_BLOCK1], 13U);
-
-            aScrapLaneB[S_BLOCK1 - aIndex] = aIngress;
+            aCross = aPoisonLaneA[aIndex] ^ pSnow[aIndex];
+            //
+            aPoisonLaneB[aIndex] = aIngress;
         }
     
         //
         // kdf_a_loop_a loop 3
         //
         // Ingress:
-        //      aScrapLaneB (-->), aSource (<-?->)
+        //      aPoisonLaneB (-->), aSource (<-?->)
         //
         // Cross:
-        //      pSnow (<--), aScrapLaneA (<-?->)
+        //      pSnow (<--), aPoisonLaneA (<-?->)
         //
         // Destination:
         //      aEarthLaneA
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = RotL64(aScrapLaneB[((aIndex + 15912U)) & S_BLOCK1], 40U) ^ RotL64(aSource[((aIndex + 15124U)) & S_BLOCK1], 51U);
-
+            aIngress = aPoisonLaneB[aIndex] ^ aSource[aIndex];
             //
-            aCross = RotL64(pSnow[((S_BLOCK1 - aIndex + 12623U)) & S_BLOCK1], 28U) ^ RotL64(aScrapLaneA[((S_BLOCK1 - aIndex + 11754U)) & S_BLOCK1], 5U);
-
+            aCross = pSnow[aIndex] ^ aPoisonLaneA[aIndex];
+            //
             aEarthLaneA[aIndex] = aIngress;
         }
     
@@ -79,29 +77,28 @@ void TwistExpander_Vega_Arx::KDF_A_A() {
         // kdf_a_loop_a loop 4
         //
         // Ingress:
-        //      aEarthLaneA (-->), aScrapLaneB (<-?->)
+        //      aEarthLaneA (-->), aPoisonLaneB (<-?->)
         //
         // Cross:
-        //      aScrapLaneA (<--), aSource (<-?->)
+        //      aPoisonLaneA (<--), aSource (<-?->)
         //
         // Destination:
         //      aEarthLaneB
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = RotL64(aEarthLaneA[((aIndex + 19199U)) & S_BLOCK1], 40U) ^ RotL64(aScrapLaneB[((S_BLOCK1 - aIndex + 20612U)) & S_BLOCK1], 21U);
-
+            aIngress = aEarthLaneA[aIndex] ^ aPoisonLaneB[aIndex];
             //
-            aCross = RotL64(aScrapLaneA[((S_BLOCK1 - aIndex + 18091U)) & S_BLOCK1], 39U) ^ RotL64(aSource[((S_BLOCK1 - aIndex + 21223U)) & S_BLOCK1], 48U);
-
-            aEarthLaneB[S_BLOCK1 - aIndex] = aIngress;
+            aCross = aPoisonLaneA[aIndex] ^ aSource[aIndex];
+            //
+            aEarthLaneB[aIndex] = aIngress;
         }
     
         //
         // kdf_a_loop_a loop 5
         //
         // Ingress:
-        //      aEarthLaneB (-->), aScrapLaneB (<-?->)
+        //      aEarthLaneB (-->), aPoisonLaneB (<-?->)
         //
         // Cross:
         //      aEarthLaneA (<--), pSnow (<-?->)
@@ -109,13 +106,12 @@ void TwistExpander_Vega_Arx::KDF_A_A() {
         // Destination:
         //      aEarthLaneC
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = RotL64(aEarthLaneB[((aIndex + 23481U)) & S_BLOCK1], 11U) ^ RotL64(aScrapLaneB[((S_BLOCK1 - aIndex + 24611U)) & S_BLOCK1], 24U);
-
+            aIngress = aEarthLaneB[aIndex] ^ aPoisonLaneB[aIndex];
             //
-            aCross = RotL64(aEarthLaneA[((S_BLOCK1 - aIndex + 22477U)) & S_BLOCK1], 3U) ^ RotL64(pSnow[((aIndex + 23244U)) & S_BLOCK1], 38U);
-
+            aCross = aEarthLaneA[aIndex] ^ pSnow[aIndex];
+            //
             aEarthLaneC[aIndex] = aIngress;
         }
     
@@ -126,670 +122,592 @@ void TwistExpander_Vega_Arx::KDF_A_A() {
         //      aEarthLaneC (-->), aEarthLaneA (<-?->)
         //
         // Cross:
-        //      aEarthLaneB (<--), aScrapLaneA (<-?->)
+        //      aEarthLaneB (<--), aPoisonLaneA (<-?->)
         //
         // Destination:
         //      aEarthLaneD
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = RotL64(aEarthLaneC[((aIndex + 31101U)) & S_BLOCK1], 51U) ^ RotL64(aEarthLaneA[((S_BLOCK1 - aIndex + 31475U)) & S_BLOCK1], 34U);
-
+            aIngress = aEarthLaneC[aIndex] ^ aEarthLaneA[aIndex];
             //
-            aCross = RotL64(aEarthLaneB[((S_BLOCK1 - aIndex + 27337U)) & S_BLOCK1], 11U) ^ RotL64(aScrapLaneA[((aIndex + 32021U)) & S_BLOCK1], 42U);
-
-            aEarthLaneD[S_BLOCK1 - aIndex] = aIngress;
+            aCross = aEarthLaneB[aIndex] ^ aPoisonLaneA[aIndex];
+            //
+            aEarthLaneD[aIndex] = aIngress;
         }
     }
     // GSeedRunKDF_A_A kdf_a_loop_a (end)
-    
+
 }
 
 void TwistExpander_Vega_Arx::KDF_A_B() {
-    // [kdf-a arx]
+
+
     // GSeedRunKDF_A_B kdf_a_loop_b (start)
     {
         //
         // kdf_a_loop_b loop 1
         //
         // Ingress:
-        //      aEarthLaneA (-->), aEarthLaneB (-->), aSource (<-?->)
+        //      aEarthLaneA (-->), aEarthLaneB (-->), aPoisonLaneA (<-?->)
         //
         // Cross:
         //      aEarthLaneC (<--), aEarthLaneD (<-?->)
         //
         // Destination:
-        //      aFireLaneA
+        //      aPoisonLaneC
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = (RotL64(aEarthLaneA[((aIndex + 4177U)) & S_BLOCK1], 30U) ^ RotL64(aEarthLaneB[((aIndex + 2997U)) & S_BLOCK1], 43U));
-            aIngress ^= RotL64(aSource[((aIndex + 7555U)) & S_BLOCK1], 51U);
-
+            aIngress = aEarthLaneA[aIndex] ^ aEarthLaneB[aIndex];
+            aIngress ^= aPoisonLaneA[aIndex];
             //
-            aCross = RotL64(aEarthLaneC[((S_BLOCK1 - aIndex + 2140U)) & S_BLOCK1], 58U) ^ RotL64(aEarthLaneD[((aIndex + 239U)) & S_BLOCK1], 47U);
-
-            aFireLaneA[aIndex] = aIngress;
+            aCross = aEarthLaneC[aIndex] ^ aEarthLaneD[aIndex];
+            //
+            aPoisonLaneC[aIndex] = aIngress;
         }
     
         //
         // kdf_a_loop_b loop 2
         //
         // Ingress:
-        //      aFireLaneA (-->), aEarthLaneC (-->), aScrapLaneB (<-?->)
+        //      aPoisonLaneC (-->), aEarthLaneC (-->), aSource (<-?->)
         //
         // Cross:
         //      aEarthLaneA (<--), aEarthLaneD (<--)
         //
         // Destination:
-        //      aFireLaneB
+        //      aPoisonLaneD
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = (RotL64(aFireLaneA[((aIndex + 8436U)) & S_BLOCK1], 21U) ^ RotL64(aEarthLaneC[((aIndex + 9394U)) & S_BLOCK1], 50U));
-            aIngress ^= RotL64(aScrapLaneB[((aIndex + 14164U)) & S_BLOCK1], 5U);
-
+            aIngress = aPoisonLaneC[aIndex] ^ aEarthLaneC[aIndex];
+            aIngress ^= aSource[aIndex];
             //
-            aCross = RotL64(aEarthLaneA[((S_BLOCK1 - aIndex + 10870U)) & S_BLOCK1], 37U) ^ RotL64(aEarthLaneD[((S_BLOCK1 - aIndex + 14542U)) & S_BLOCK1], 10U);
-
-            aFireLaneB[S_BLOCK1 - aIndex] = aIngress;
+            aCross = aEarthLaneA[aIndex] ^ aEarthLaneD[aIndex];
+            //
+            aPoisonLaneD[aIndex] = aIngress;
         }
     
         //
         // kdf_a_loop_b loop 3
         //
         // Ingress:
-        //      aFireLaneB (-->), aEarthLaneD (-->), aScrapLaneA (<-?->)
+        //      aPoisonLaneD (-->), aEarthLaneA (-->), aPoisonLaneB (<-?->)
         //
         // Cross:
-        //      aFireLaneA (<--), aEarthLaneB (<--)
+        //      aPoisonLaneC (<--), aEarthLaneC (<-?->)
         //
         // Destination:
-        //      aFireLaneC
+        //      aFireLaneA
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = (RotL64(aFireLaneB[((aIndex + 18346U)) & S_BLOCK1], 20U) ^ RotL64(aEarthLaneD[((aIndex + 19685U)) & S_BLOCK1], 35U));
-            aIngress ^= RotL64(aScrapLaneA[((S_BLOCK1 - aIndex + 22073U)) & S_BLOCK1], 5U);
-
+            aIngress = aPoisonLaneD[aIndex] ^ aEarthLaneA[aIndex];
+            aIngress ^= aPoisonLaneB[aIndex];
             //
-            aCross = RotL64(aFireLaneA[((S_BLOCK1 - aIndex + 24247U)) & S_BLOCK1], 41U) ^ RotL64(aEarthLaneB[((S_BLOCK1 - aIndex + 23236U)) & S_BLOCK1], 13U);
-
-            aFireLaneC[aIndex] = aIngress;
+            aCross = aPoisonLaneC[aIndex] ^ aEarthLaneC[aIndex];
+            //
+            aFireLaneA[aIndex] = aIngress;
         }
     
         //
         // kdf_a_loop_b loop 4
         //
         // Ingress:
-        //      aFireLaneC (-->), aFireLaneA (-->), pSnow (<-?->)
+        //      aFireLaneA (-->), aEarthLaneD (-->), pSnow (<-?->)
         //
         // Cross:
-        //      aFireLaneB (<--), aEarthLaneC (<-?->)
+        //      aPoisonLaneD (<--), aEarthLaneA (<-?->)
+        //
+        // Destination:
+        //      aFireLaneB
+        //
+        for (;;) {
+            //
+            aIngress = aFireLaneA[aIndex] ^ aEarthLaneD[aIndex];
+            aIngress ^= pSnow[aIndex];
+            //
+            aCross = aPoisonLaneD[aIndex] ^ aEarthLaneA[aIndex];
+            //
+            aFireLaneB[aIndex] = aIngress;
+        }
+    
+        //
+        // kdf_a_loop_b loop 5
+        //
+        // Ingress:
+        //      aFireLaneB (-->), aPoisonLaneD (<-?->)
+        //
+        // Cross:
+        //      aFireLaneA (<--), aPoisonLaneC (<-?->)
+        //
+        // Destination:
+        //      aFireLaneC
+        //
+        for (;;) {
+            //
+            aIngress = aFireLaneB[aIndex] ^ aPoisonLaneD[aIndex];
+            //
+            aCross = aFireLaneA[aIndex] ^ aPoisonLaneC[aIndex];
+            //
+            aFireLaneC[aIndex] = aIngress;
+        }
+    
+        //
+        // kdf_a_loop_b loop 6
+        //
+        // Ingress:
+        //      aFireLaneC (-->), aFireLaneA (<-?->)
+        //
+        // Cross:
+        //      aFireLaneB (<--), aEarthLaneB (<--)
         //
         // Destination:
         //      aFireLaneD
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = (RotL64(aFireLaneC[((aIndex + 30033U)) & S_BLOCK1], 57U) ^ RotL64(aFireLaneA[((aIndex + 30518U)) & S_BLOCK1], 41U));
-            aIngress ^= RotL64(pSnow[((aIndex + 31711U)) & S_BLOCK1], 11U);
-
+            aIngress = aFireLaneC[aIndex] ^ aFireLaneA[aIndex];
             //
-            aCross = RotL64(aFireLaneB[((S_BLOCK1 - aIndex + 29408U)) & S_BLOCK1], 3U) ^ RotL64(aEarthLaneC[((aIndex + 29443U)) & S_BLOCK1], 58U);
-
-            aFireLaneD[S_BLOCK1 - aIndex] = aIngress;
+            aCross = aFireLaneB[aIndex] ^ aEarthLaneB[aIndex];
+            //
+            aFireLaneD[aIndex] = aIngress;
         }
     }
     // GSeedRunKDF_A_B kdf_a_loop_b (end)
-    
+
 }
 
 void TwistExpander_Vega_Arx::KDF_A_C() {
-    // [kdf-a arx]
+
+
     // GSeedRunKDF_A_C kdf_a_loop_c (start)
     {
         //
         // kdf_a_loop_c loop 1
         //
         // Ingress:
-        //      aFireLaneA (-->), aFireLaneB (-->), aEarthLaneB (<-?->)
+        //      aFireLaneA (-->), aFireLaneB (-->), aPoisonLaneA (-->), aPoisonLaneB (<-?->)
         //
         // Cross:
-        //      aFireLaneC (<--), aFireLaneD (<--), aScrapLaneA (<-?->)
+        //      aFireLaneC (<--), aFireLaneD (<--), aEarthLaneC (<-?->)
         //
         // Destination:
-        //      aOperationLaneA
+        //      aFuseLaneA
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = (RotL64(aFireLaneA[((aIndex + 1224U)) & S_BLOCK1], 53U) ^ RotL64(aFireLaneB[((aIndex + 2291U)) & S_BLOCK1], 21U));
-            aIngress ^= RotL64(aEarthLaneB[((S_BLOCK1 - aIndex + 2555U)) & S_BLOCK1], 30U);
-
+            aIngress = aFireLaneA[aIndex] ^ aFireLaneB[aIndex];
+            aIngress ^= (aPoisonLaneA[aIndex] ^ aPoisonLaneB[aIndex];
             //
-            aCross = (RotL64(aFireLaneC[((S_BLOCK1 - aIndex + 686U)) & S_BLOCK1], 52U) ^ RotL64(aFireLaneD[((S_BLOCK1 - aIndex + 7652U)) & S_BLOCK1], 3U));
-            aCross ^= RotL64(aScrapLaneA[((S_BLOCK1 - aIndex + 3365U)) & S_BLOCK1], 21U);
-
-            aOperationLaneA[aIndex] = aIngress;
+            aCross = aFireLaneC[aIndex] ^ aFireLaneD[aIndex];
+            aCross ^= aEarthLaneC[aIndex];
+            //
+            aFuseLaneA[aIndex] = aIngress;
         }
     
         //
         // kdf_a_loop_c loop 2
         //
         // Ingress:
-        //      aOperationLaneA (-->), aFireLaneC (-->), pSnow (<-?->)
+        //      aFuseLaneA (-->), aFireLaneC (-->), aEarthLaneB (-->), aPoisonLaneC (<-?->)
         //
         // Cross:
-        //      aFireLaneA (<--), aFireLaneD (<--), aScrapLaneB (<-?->)
+        //      aFireLaneA (<--), aFireLaneD (<--), pSnow (<-?->)
         //
         // Destination:
-        //      aOperationLaneB
+        //      aFuseLaneB
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = (RotL64(aOperationLaneA[((aIndex + 8813U)) & S_BLOCK1], 54U) ^ RotL64(aFireLaneC[((aIndex + 13818U)) & S_BLOCK1], 19U));
-            aIngress ^= RotL64(pSnow[((aIndex + 10231U)) & S_BLOCK1], 39U);
-
+            aIngress = aFuseLaneA[aIndex] ^ aFireLaneC[aIndex];
+            aIngress ^= (aEarthLaneB[aIndex] ^ aPoisonLaneC[aIndex];
             //
-            aCross = (RotL64(aFireLaneA[((S_BLOCK1 - aIndex + 13804U)) & S_BLOCK1], 13U) ^ RotL64(aFireLaneD[((S_BLOCK1 - aIndex + 15891U)) & S_BLOCK1], 52U));
-            aCross ^= RotL64(aScrapLaneB[((S_BLOCK1 - aIndex + 12270U)) & S_BLOCK1], 23U);
-
-            aOperationLaneB[S_BLOCK1 - aIndex] = aIngress;
+            aCross = aFireLaneA[aIndex] ^ aFireLaneD[aIndex];
+            aCross ^= pSnow[aIndex];
+            //
+            aFuseLaneB[aIndex] = aIngress;
         }
     
         //
         // kdf_a_loop_c loop 3
         //
         // Ingress:
-        //      aOperationLaneB (-->), aFireLaneD (-->), aEarthLaneC (<-?->)
+        //      aFuseLaneB (-->), aFireLaneD (-->), aPoisonLaneD (<-?->)
         //
         // Cross:
-        //      aOperationLaneA (<--), aFireLaneB (<--), aSource (<-?->)
+        //      aFuseLaneA (<--), aFireLaneB (<--), aEarthLaneD (<-?->)
         //
         // Destination:
-        //      aOperationLaneC
+        //      aFuseLaneC
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = (RotL64(aOperationLaneB[((aIndex + 19863U)) & S_BLOCK1], 40U) ^ RotL64(aFireLaneD[((aIndex + 19984U)) & S_BLOCK1], 51U));
-            aIngress ^= RotL64(aEarthLaneC[((aIndex + 24260U)) & S_BLOCK1], 3U);
-
+            aIngress = aFuseLaneB[aIndex] ^ aFireLaneD[aIndex];
+            aIngress ^= aPoisonLaneD[aIndex];
             //
-            aCross = (RotL64(aOperationLaneA[((S_BLOCK1 - aIndex + 17260U)) & S_BLOCK1], 43U) ^ RotL64(aFireLaneB[((S_BLOCK1 - aIndex + 24004U)) & S_BLOCK1], 57U));
-            aCross ^= RotL64(aSource[((aIndex + 19364U)) & S_BLOCK1], 29U);
-
-            aOperationLaneC[aIndex] = aIngress;
+            aCross = aFuseLaneA[aIndex] ^ aFireLaneB[aIndex];
+            aCross ^= aEarthLaneD[aIndex];
+            //
+            aFuseLaneC[aIndex] = aIngress;
         }
     
         //
         // kdf_a_loop_c loop 4
         //
         // Ingress:
-        //      aOperationLaneC (-->), aOperationLaneA (-->), aEarthLaneD (<-?->)
+        //      aFuseLaneC (-->), aFuseLaneA (-->), aSource (<-?->)
         //
         // Cross:
-        //      aOperationLaneB (<--), aFireLaneC (<--), aEarthLaneA (<-?->)
+        //      aFuseLaneB (<--), aFireLaneC (<--), aEarthLaneA (<-?->)
         //
         // Destination:
-        //      aOperationLaneD
+        //      aFuseLaneD
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = (RotL64(aOperationLaneC[((aIndex + 30206U)) & S_BLOCK1], 19U) ^ RotL64(aOperationLaneA[((aIndex + 28992U)) & S_BLOCK1], 46U));
-            aIngress ^= RotL64(aEarthLaneD[((S_BLOCK1 - aIndex + 30711U)) & S_BLOCK1], 27U);
-
+            aIngress = aFuseLaneC[aIndex] ^ aFuseLaneA[aIndex];
+            aIngress ^= aSource[aIndex];
             //
-            aCross = (RotL64(aOperationLaneB[((S_BLOCK1 - aIndex + 32705U)) & S_BLOCK1], 40U) ^ RotL64(aFireLaneC[((S_BLOCK1 - aIndex + 26627U)) & S_BLOCK1], 57U));
-            aCross ^= RotL64(aEarthLaneA[((aIndex + 28606U)) & S_BLOCK1], 29U);
-
-            aOperationLaneD[S_BLOCK1 - aIndex] = aIngress;
+            aCross = aFuseLaneB[aIndex] ^ aFireLaneC[aIndex];
+            aCross ^= aEarthLaneA[aIndex];
+            //
+            aFuseLaneD[aIndex] = aIngress;
         }
     }
     // GSeedRunKDF_A_C kdf_a_loop_c (end)
-    
+
 }
 
 void TwistExpander_Vega_Arx::KDF_A_D() {
-    // [kdf-a arx]
+
+
     // GSeedRunKDF_A_D kdf_a_loop_d (start)
     {
         //
         // kdf_a_loop_d loop 1
         //
         // Ingress:
-        //      aOperationLaneA (-->), aOperationLaneB (-->), aScrapLaneB (-->), aFireLaneB (<-?->)
+        //      aWindLaneA (-->), aWindLaneB (-->), aFireLaneB (-->), aFireLaneC (<-?->)
         //
         // Cross:
-        //      aOperationLaneC (<--), aOperationLaneD (<--), pSnow (<-?->)
+        //      aWindLaneC (<--), aWindLaneD (<--), aEarthLaneD (<--), aPoisonLaneB (<-?->)
         //
         // Destination:
-        //      aFuseLaneA
+        //      aWaterLaneA
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = (RotL64(aOperationLaneA[((aIndex + 5403U)) & S_BLOCK1], 43U) ^ RotL64(aOperationLaneB[((aIndex + 614U)) & S_BLOCK1], 35U));
-            aIngress ^= (RotL64(aScrapLaneB[((aIndex + 2676U)) & S_BLOCK1], 11U) ^ RotL64(aFireLaneB[((aIndex + 1808U)) & S_BLOCK1], 24U));
-
+            aIngress = aWindLaneA[aIndex] ^ aWindLaneB[aIndex];
+            aIngress ^= (aFireLaneB[aIndex] ^ aFireLaneC[aIndex];
             //
-            aCross = (RotL64(aOperationLaneC[((S_BLOCK1 - aIndex + 2968U)) & S_BLOCK1], 38U) ^ RotL64(aOperationLaneD[((S_BLOCK1 - aIndex + 4006U)) & S_BLOCK1], 19U));
-            aCross ^= RotL64(pSnow[((aIndex + 7426U)) & S_BLOCK1], 5U);
-
-            aFuseLaneA[aIndex] = aIngress;
+            aCross = aWindLaneC[aIndex] ^ aWindLaneD[aIndex];
+            aCross ^= aEarthLaneD[aIndex] ^ aPoisonLaneB[aIndex];
+            //
+            aWaterLaneA[aIndex] = aIngress;
         }
     
         //
         // kdf_a_loop_d loop 2
         //
         // Ingress:
-        //      aFuseLaneA (-->), aOperationLaneC (-->), aScrapLaneA (-->), aEarthLaneC (<-?->)
+        //      aWaterLaneA (-->), aWindLaneC (-->), aFireLaneA (-->), pSnow (<-?->)
         //
         // Cross:
-        //      aOperationLaneA (<--), aOperationLaneD (<--), aFireLaneD (<-?->)
+        //      aWindLaneA (<--), aWindLaneD (<--), aPoisonLaneA (<--), aEarthLaneC (<-?->)
         //
         // Destination:
-        //      aFuseLaneB
+        //      aWaterLaneB
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = (RotL64(aFuseLaneA[((aIndex + 15467U)) & S_BLOCK1], 57U) ^ RotL64(aOperationLaneC[((aIndex + 13905U)) & S_BLOCK1], 41U));
-            aIngress ^= (RotL64(aScrapLaneA[((aIndex + 8743U)) & S_BLOCK1], 28U) ^ RotL64(aEarthLaneC[((S_BLOCK1 - aIndex + 11500U)) & S_BLOCK1], 3U));
-
+            aIngress = aWaterLaneA[aIndex] ^ aWindLaneC[aIndex];
+            aIngress ^= (aFireLaneA[aIndex] ^ pSnow[aIndex];
             //
-            aCross = (RotL64(aOperationLaneA[((S_BLOCK1 - aIndex + 9471U)) & S_BLOCK1], 47U) ^ RotL64(aOperationLaneD[((S_BLOCK1 - aIndex + 10547U)) & S_BLOCK1], 30U));
-            aCross ^= RotL64(aFireLaneD[((S_BLOCK1 - aIndex + 9519U)) & S_BLOCK1], 3U);
-
-            aFuseLaneB[S_BLOCK1 - aIndex] = aIngress;
+            aCross = aWindLaneA[aIndex] ^ aWindLaneD[aIndex];
+            aCross ^= aPoisonLaneA[aIndex] ^ aEarthLaneC[aIndex];
+            //
+            aWaterLaneB[aIndex] = aIngress;
         }
     
         //
         // kdf_a_loop_d loop 3
         //
         // Ingress:
-        //      aFuseLaneB (-->), aOperationLaneD (-->), aEarthLaneB (-->), aEarthLaneD (<-?->)
+        //      aWaterLaneB (-->), aWindLaneD (-->), aEarthLaneA (-->), aSource (<-?->)
         //
         // Cross:
-        //      aFuseLaneA (<--), aOperationLaneB (<--), aFireLaneC (<-?->)
+        //      aWaterLaneA (<--), aWindLaneB (<--), aPoisonLaneC (<-?->)
         //
         // Destination:
-        //      aFuseLaneC
+        //      aWaterLaneC
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = (RotL64(aFuseLaneB[((aIndex + 23920U)) & S_BLOCK1], 23U) ^ RotL64(aOperationLaneD[((aIndex + 23929U)) & S_BLOCK1], 4U));
-            aIngress ^= (RotL64(aEarthLaneB[((aIndex + 19092U)) & S_BLOCK1], 57U) ^ RotL64(aEarthLaneD[((aIndex + 17468U)) & S_BLOCK1], 13U));
-
+            aIngress = aWaterLaneB[aIndex] ^ aWindLaneD[aIndex];
+            aIngress ^= (aEarthLaneA[aIndex] ^ aSource[aIndex];
             //
-            aCross = (RotL64(aFuseLaneA[((S_BLOCK1 - aIndex + 16780U)) & S_BLOCK1], 52U) ^ RotL64(aOperationLaneB[((S_BLOCK1 - aIndex + 22463U)) & S_BLOCK1], 39U));
-            aCross ^= RotL64(aFireLaneC[((S_BLOCK1 - aIndex + 18516U)) & S_BLOCK1], 23U);
-
-            aFuseLaneC[aIndex] = aIngress;
+            aCross = aWaterLaneA[aIndex] ^ aWindLaneB[aIndex];
+            aCross ^= aPoisonLaneC[aIndex];
+            //
+            aWaterLaneC[aIndex] = aIngress;
         }
     
         //
         // kdf_a_loop_d loop 4
         //
         // Ingress:
-        //      aFuseLaneC (-->), aFuseLaneA (-->), aFireLaneA (-->), aSource (<-?->)
+        //      aWaterLaneC (-->), aWaterLaneA (-->), aFireLaneD (-->), aPoisonLaneD (<-?->)
         //
         // Cross:
-        //      aFuseLaneB (<--), aOperationLaneC (<--), aEarthLaneA (<-?->)
-        //
-        // Destination:
-        //      aFuseLaneD
-        //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
-            //
-            aIngress = (RotL64(aFuseLaneC[((aIndex + 29901U)) & S_BLOCK1], 19U) ^ RotL64(aFuseLaneA[((aIndex + 32035U)) & S_BLOCK1], 39U));
-            aIngress ^= (RotL64(aFireLaneA[((aIndex + 27499U)) & S_BLOCK1], 29U) ^ RotL64(aSource[((S_BLOCK1 - aIndex + 27444U)) & S_BLOCK1], 5U));
-
-            //
-            aCross = (RotL64(aFuseLaneB[((S_BLOCK1 - aIndex + 25269U)) & S_BLOCK1], 14U) ^ RotL64(aOperationLaneC[((S_BLOCK1 - aIndex + 25299U)) & S_BLOCK1], 51U));
-            aCross ^= RotL64(aEarthLaneA[((S_BLOCK1 - aIndex + 31183U)) & S_BLOCK1], 23U);
-
-            aFuseLaneD[S_BLOCK1 - aIndex] = aIngress;
-        }
-    }
-    // GSeedRunKDF_A_D kdf_a_loop_d (end)
-    
-}
-
-void TwistExpander_Vega_Arx::KDF_A_E() {
-    // [kdf-a arx]
-    // GSeedRunKDF_A_E kdf_a_loop_e (start)
-    {
-        //
-        // kdf_a_loop_e loop 1
-        //
-        // Ingress:
-        //      aWindLaneA (-->), aWindLaneB (-->), aFireLaneB (-->), aOperationLaneB (<-?->)
-        //
-        // Cross:
-        //      aWindLaneC (<--), aWindLaneD (<--), aEarthLaneA (<--), aFireLaneA (<-?->)
-        //
-        // Destination:
-        //      aWaterLaneA
-        //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
-            //
-            aIngress = (RotL64(aWindLaneA[((aIndex + 902U)) & S_BLOCK1], 12U) ^ RotL64(aWindLaneB[((aIndex + 1336U)) & S_BLOCK1], 43U));
-            aIngress ^= (RotL64(aFireLaneB[((aIndex + 7629U)) & S_BLOCK1], 53U) ^ RotL64(aOperationLaneB[((S_BLOCK1 - aIndex + 2627U)) & S_BLOCK1], 21U));
-
-            //
-            aCross = (RotL64(aWindLaneC[((S_BLOCK1 - aIndex + 3586U)) & S_BLOCK1], 27U) ^ RotL64(aWindLaneD[((S_BLOCK1 - aIndex + 2736U)) & S_BLOCK1], 40U));
-            aCross ^= (RotL64(aEarthLaneA[((S_BLOCK1 - aIndex + 5808U)) & S_BLOCK1], 53U) ^ RotL64(aFireLaneA[((S_BLOCK1 - aIndex + 3582U)) & S_BLOCK1], 3U));
-
-            aWaterLaneA[aIndex] = aIngress;
-        }
-    
-        //
-        // kdf_a_loop_e loop 2
-        //
-        // Ingress:
-        //      aWaterLaneA (-->), aWindLaneC (-->), pSnow (-->), aEarthLaneD (<-?->)
-        //
-        // Cross:
-        //      aWindLaneA (<--), aWindLaneD (<--), aEarthLaneC (<--), aSource (<-?->)
-        //
-        // Destination:
-        //      aWaterLaneB
-        //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
-            //
-            aIngress = (RotL64(aWaterLaneA[((aIndex + 11185U)) & S_BLOCK1], 38U) ^ RotL64(aWindLaneC[((aIndex + 13212U)) & S_BLOCK1], 11U));
-            aIngress ^= (RotL64(pSnow[((aIndex + 16278U)) & S_BLOCK1], 51U) ^ RotL64(aEarthLaneD[((S_BLOCK1 - aIndex + 10025U)) & S_BLOCK1], 29U));
-
-            //
-            aCross = (RotL64(aWindLaneA[((S_BLOCK1 - aIndex + 12830U)) & S_BLOCK1], 41U) ^ RotL64(aWindLaneD[((S_BLOCK1 - aIndex + 14468U)) & S_BLOCK1], 3U));
-            aCross ^= (RotL64(aEarthLaneC[((S_BLOCK1 - aIndex + 9773U)) & S_BLOCK1], 13U) ^ RotL64(aSource[((aIndex + 8767U)) & S_BLOCK1], 28U));
-
-            aWaterLaneB[S_BLOCK1 - aIndex] = aIngress;
-        }
-    
-        //
-        // kdf_a_loop_e loop 3
-        //
-        // Ingress:
-        //      aWaterLaneB (-->), aWindLaneD (-->), aOperationLaneC (-->), aFireLaneD (<-?->)
-        //
-        // Cross:
-        //      aWaterLaneA (<--), aWindLaneB (<--), aOperationLaneA (<-?->)
-        //
-        // Destination:
-        //      aWaterLaneC
-        //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
-            //
-            aIngress = (RotL64(aWaterLaneB[((aIndex + 17937U)) & S_BLOCK1], 27U) ^ RotL64(aWindLaneD[((aIndex + 16832U)) & S_BLOCK1], 12U));
-            aIngress ^= (RotL64(aOperationLaneC[((aIndex + 22578U)) & S_BLOCK1], 39U) ^ RotL64(aFireLaneD[((S_BLOCK1 - aIndex + 20691U)) & S_BLOCK1], 3U));
-
-            //
-            aCross = (RotL64(aWaterLaneA[((S_BLOCK1 - aIndex + 23052U)) & S_BLOCK1], 35U) ^ RotL64(aWindLaneB[((S_BLOCK1 - aIndex + 21505U)) & S_BLOCK1], 43U));
-            aCross ^= RotL64(aOperationLaneA[((S_BLOCK1 - aIndex + 24439U)) & S_BLOCK1], 21U);
-
-            aWaterLaneC[aIndex] = aIngress;
-        }
-    
-        //
-        // kdf_a_loop_e loop 4
-        //
-        // Ingress:
-        //      aWaterLaneC (-->), aWaterLaneA (-->), aFireLaneC (-->), aEarthLaneB (<-?->)
-        //
-        // Cross:
-        //      aWaterLaneB (<--), aWindLaneC (<--), aOperationLaneD (<-?->)
+        //      aWaterLaneB (<--), aWindLaneC (<--), aEarthLaneB (<-?->)
         //
         // Destination:
         //      aWaterLaneD
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = (RotL64(aWaterLaneC[((aIndex + 27601U)) & S_BLOCK1], 29U) ^ RotL64(aWaterLaneA[((aIndex + 31936U)) & S_BLOCK1], 13U));
-            aIngress ^= (RotL64(aFireLaneC[((aIndex + 31450U)) & S_BLOCK1], 53U) ^ RotL64(aEarthLaneB[((aIndex + 29537U)) & S_BLOCK1], 4U));
-
+            aIngress = aWaterLaneC[aIndex] ^ aWaterLaneA[aIndex];
+            aIngress ^= (aFireLaneD[aIndex] ^ aPoisonLaneD[aIndex];
             //
-            aCross = (RotL64(aWaterLaneB[((S_BLOCK1 - aIndex + 29424U)) & S_BLOCK1], 48U) ^ RotL64(aWindLaneC[((S_BLOCK1 - aIndex + 25443U)) & S_BLOCK1], 3U));
-            aCross ^= RotL64(aOperationLaneD[((S_BLOCK1 - aIndex + 27422U)) & S_BLOCK1], 11U);
-
-            aWaterLaneD[S_BLOCK1 - aIndex] = aIngress;
+            aCross = aWaterLaneB[aIndex] ^ aWindLaneC[aIndex];
+            aCross ^= aEarthLaneB[aIndex];
+            //
+            aWaterLaneD[aIndex] = aIngress;
         }
     }
-    // GSeedRunKDF_A_E kdf_a_loop_e (end)
-    
+    // GSeedRunKDF_A_D kdf_a_loop_d (end)
+
 }
 
 void TwistExpander_Vega_Arx::KDF_B_A() {
-    // [kdf-a arx]
+
+
     // GSeedRunKDF_B_A kdf_b_loop_a (start)
     {
         //
         // kdf_b_loop_a loop 1
         //
         // Ingress:
-        //      aWaterLaneA (-->), aWaterLaneB (-->), aOperationLaneA (-->), aOperationLaneD (<-?->)
+        //      aWaterLaneA (-->), aWaterLaneB (-->), aFireLaneA (-->), aPoisonLaneB (<-?->)
         //
         // Cross:
-        //      aWaterLaneC (<--), aWaterLaneD (<--), aWindLaneA (<-?->)
+        //      aWaterLaneC (<--), aWaterLaneD (<--), aWindLaneA (<--), aWindLaneC (<-?->)
         //
         // Destination:
-        //      aScrapLaneA
+        //      aWoodLaneA
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = (RotL64(aWaterLaneA[((aIndex + 4628U)) & S_BLOCK1], 13U) ^ RotL64(aWaterLaneB[((aIndex + 5961U)) & S_BLOCK1], 50U));
-            aIngress ^= (RotL64(aOperationLaneA[((aIndex + 7921U)) & S_BLOCK1], 35U) ^ RotL64(aOperationLaneD[((aIndex + 2834U)) & S_BLOCK1], 5U));
-
+            aIngress = aWaterLaneA[aIndex] ^ aWaterLaneB[aIndex];
+            aIngress ^= (aFireLaneA[aIndex] ^ aPoisonLaneB[aIndex];
             //
-            aCross = (RotL64(aWaterLaneC[((S_BLOCK1 - aIndex + 2878U)) & S_BLOCK1], 44U) ^ RotL64(aWaterLaneD[((S_BLOCK1 - aIndex + 3834U)) & S_BLOCK1], 35U));
-            aCross ^= RotL64(aWindLaneA[((aIndex + 2306U)) & S_BLOCK1], 27U);
-
-            aScrapLaneA[aIndex] = aIngress;
+            aCross = aWaterLaneC[aIndex] ^ aWaterLaneD[aIndex];
+            aCross ^= aWindLaneA[aIndex] ^ aWindLaneC[aIndex];
+            //
+            aWoodLaneA[aIndex] = aIngress;
         }
     
         //
         // kdf_b_loop_a loop 2
         //
         // Ingress:
-        //      aScrapLaneA (-->), aWaterLaneC (-->), aOperationLaneB (-->), aWindLaneD (<-?->)
+        //      aWoodLaneA (-->), aWaterLaneC (-->), aFireLaneB (-->), aEarthLaneB (<-?->)
         //
         // Cross:
-        //      aWaterLaneA (<--), aWaterLaneD (<--), aWindLaneC (<-?->)
+        //      aWaterLaneA (<--), aWaterLaneD (<--), aEarthLaneC (<--), aWindLaneD (<-?->)
         //
         // Destination:
-        //      aScrapLaneB
+        //      aWoodLaneB
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = (RotL64(aScrapLaneA[((aIndex + 10388U)) & S_BLOCK1], 3U) ^ RotL64(aWaterLaneC[((aIndex + 12640U)) & S_BLOCK1], 53U));
-            aIngress ^= (RotL64(aOperationLaneB[((aIndex + 11103U)) & S_BLOCK1], 23U) ^ RotL64(aWindLaneD[((S_BLOCK1 - aIndex + 13711U)) & S_BLOCK1], 36U));
-
+            aIngress = aWoodLaneA[aIndex] ^ aWaterLaneC[aIndex];
+            aIngress ^= (aFireLaneB[aIndex] ^ aEarthLaneB[aIndex];
             //
-            aCross = (RotL64(aWaterLaneA[((S_BLOCK1 - aIndex + 15604U)) & S_BLOCK1], 37U) ^ RotL64(aWaterLaneD[((S_BLOCK1 - aIndex + 10995U)) & S_BLOCK1], 54U));
-            aCross ^= RotL64(aWindLaneC[((S_BLOCK1 - aIndex + 15797U)) & S_BLOCK1], 11U);
-
-            aScrapLaneB[S_BLOCK1 - aIndex] = aIngress;
+            aCross = aWaterLaneA[aIndex] ^ aWaterLaneD[aIndex];
+            aCross ^= aEarthLaneC[aIndex] ^ aWindLaneD[aIndex];
+            //
+            aWoodLaneB[aIndex] = aIngress;
         }
     
         //
         // kdf_b_loop_a loop 3
         //
         // Ingress:
-        //      aScrapLaneB (-->), aWaterLaneD (-->), aFireLaneD (-->), aFireLaneB (<-?->)
+        //      aWoodLaneB (-->), aWaterLaneD (-->), aEarthLaneD (-->), aFireLaneC (<-?->)
         //
         // Cross:
-        //      aScrapLaneA (<--), aWaterLaneB (<--), aSource (<-?->)
+        //      aWoodLaneA (<--), aWaterLaneB (<--), aEarthLaneA (<--), aPoisonLaneA (<-?->)
         //
         // Destination:
-        //      aScrapLaneC
+        //      aWoodLaneC
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = (RotL64(aScrapLaneB[((aIndex + 22548U)) & S_BLOCK1], 37U) ^ RotL64(aWaterLaneD[((aIndex + 18213U)) & S_BLOCK1], 29U));
-            aIngress ^= (RotL64(aFireLaneD[((aIndex + 22270U)) & S_BLOCK1], 46U) ^ RotL64(aFireLaneB[((aIndex + 22133U)) & S_BLOCK1], 19U));
-
+            aIngress = aWoodLaneB[aIndex] ^ aWaterLaneD[aIndex];
+            aIngress ^= (aEarthLaneD[aIndex] ^ aFireLaneC[aIndex];
             //
-            aCross = (RotL64(aScrapLaneA[((S_BLOCK1 - aIndex + 18229U)) & S_BLOCK1], 39U) ^ RotL64(aWaterLaneB[((S_BLOCK1 - aIndex + 17434U)) & S_BLOCK1], 13U));
-            aCross ^= RotL64(aSource[((S_BLOCK1 - aIndex + 21380U)) & S_BLOCK1], 48U);
-
-            aScrapLaneC[aIndex] = aIngress;
+            aCross = aWoodLaneA[aIndex] ^ aWaterLaneB[aIndex];
+            aCross ^= aEarthLaneA[aIndex] ^ aPoisonLaneA[aIndex];
+            //
+            aWoodLaneC[aIndex] = aIngress;
         }
     
         //
         // kdf_b_loop_a loop 4
         //
         // Ingress:
-        //      aScrapLaneC (-->), aScrapLaneA (-->), aWindLaneB (-->), aOperationLaneC (<-?->)
+        //      aWoodLaneC (-->), aWoodLaneA (-->), aSource (-->), aWindLaneB (<-?->)
         //
         // Cross:
-        //      aScrapLaneB (<--), aWaterLaneC (<--), aFireLaneC (<-?->)
+        //      aWoodLaneB (<--), aFireLaneD (<--), aPoisonLaneD (<--), aPoisonLaneC (<-?->)
         //
         // Destination:
-        //      aScrapLaneD
+        //      aWoodLaneD
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = (RotL64(aScrapLaneC[((aIndex + 25751U)) & S_BLOCK1], 35U) ^ RotL64(aScrapLaneA[((aIndex + 25977U)) & S_BLOCK1], 21U));
-            aIngress ^= (RotL64(aWindLaneB[((aIndex + 28462U)) & S_BLOCK1], 43U) ^ RotL64(aOperationLaneC[((aIndex + 25357U)) & S_BLOCK1], 51U));
-
+            aIngress = aWoodLaneC[aIndex] ^ aWoodLaneA[aIndex];
+            aIngress ^= (aSource[aIndex] ^ aWindLaneB[aIndex];
             //
-            aCross = (RotL64(aScrapLaneB[((S_BLOCK1 - aIndex + 28602U)) & S_BLOCK1], 29U) ^ RotL64(aWaterLaneC[((S_BLOCK1 - aIndex + 26592U)) & S_BLOCK1], 11U));
-            aCross ^= RotL64(aFireLaneC[((S_BLOCK1 - aIndex + 31780U)) & S_BLOCK1], 3U);
-
-            aScrapLaneD[S_BLOCK1 - aIndex] = aIngress;
+            aCross = aWoodLaneB[aIndex] ^ aFireLaneD[aIndex];
+            aCross ^= aPoisonLaneD[aIndex] ^ aPoisonLaneC[aIndex];
+            //
+            aWoodLaneD[aIndex] = aIngress;
         }
     }
     // GSeedRunKDF_B_A kdf_b_loop_a (end)
-    
+
 }
 
 void TwistExpander_Vega_Arx::KDF_B_B() {
-    // [kdf-a arx]
+
+
     // GSeedRunKDF_B_B kdf_b_loop_b (start)
     {
         //
         // kdf_b_loop_b loop 1
         //
         // Ingress:
-        //      aScrapLaneA (-->), aScrapLaneB (-->), aEarthLaneC (-->), aEarthLaneB (<-?->)
+        //      aWoodLaneA (-->), aWoodLaneB (-->), aFireLaneC (-->), aFireLaneA (<-?->)
         //
         // Cross:
-        //      aScrapLaneC (<--), aScrapLaneD (<--), aSource (<--), aWindLaneC (<-?->)
+        //      aWoodLaneC (<--), aWoodLaneD (<--), aWindLaneD (<--), aFireLaneD (<-?->)
         //
         // Destination:
-        //      aOperationLaneA
+        //      aSpiritLaneA
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = (RotL64(aScrapLaneA[((aIndex + 2629U)) & S_BLOCK1], 27U) ^ RotL64(aScrapLaneB[((aIndex + 1683U)) & S_BLOCK1], 57U));
-            aIngress ^= (RotL64(aEarthLaneC[((aIndex + 3832U)) & S_BLOCK1], 39U) ^ RotL64(aEarthLaneB[((aIndex + 5752U)) & S_BLOCK1], 3U));
-
+            aIngress = aWoodLaneA[aIndex] ^ aWoodLaneB[aIndex];
+            aIngress ^= (aFireLaneC[aIndex] ^ aFireLaneA[aIndex];
             //
-            aCross = (RotL64(aScrapLaneC[((S_BLOCK1 - aIndex + 2757U)) & S_BLOCK1], 58U) ^ RotL64(aScrapLaneD[((S_BLOCK1 - aIndex + 4582U)) & S_BLOCK1], 43U));
-            aCross ^= (RotL64(aSource[((S_BLOCK1 - aIndex + 1288U)) & S_BLOCK1], 35U) ^ RotL64(aWindLaneC[((S_BLOCK1 - aIndex + 4662U)) & S_BLOCK1], 5U));
-
-            aOperationLaneA[aIndex] = aIngress;
+            aCross = aWoodLaneC[aIndex] ^ aWoodLaneD[aIndex];
+            aCross ^= aWindLaneD[aIndex] ^ aFireLaneD[aIndex];
+            //
+            aSpiritLaneA[aIndex] = aIngress;
         }
     
         //
         // kdf_b_loop_b loop 2
         //
         // Ingress:
-        //      aOperationLaneA (-->), aScrapLaneC (-->), aWaterLaneA (-->), aEarthLaneA (<-?->)
+        //      aSpiritLaneA (-->), aWoodLaneC (-->), aWaterLaneD (-->), aEarthLaneA (<-?->)
         //
         // Cross:
-        //      aScrapLaneA (<--), aScrapLaneD (<--), aWindLaneA (<--), aWindLaneB (<-?->)
+        //      aWoodLaneA (<--), aWoodLaneD (<--), aEarthLaneC (<--), aWaterLaneA (<-?->)
         //
         // Destination:
-        //      aOperationLaneB
+        //      aSpiritLaneB
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = (RotL64(aOperationLaneA[((aIndex + 14782U)) & S_BLOCK1], 52U) ^ RotL64(aScrapLaneC[((aIndex + 11235U)) & S_BLOCK1], 5U));
-            aIngress ^= (RotL64(aWaterLaneA[((aIndex + 14031U)) & S_BLOCK1], 35U) ^ RotL64(aEarthLaneA[((S_BLOCK1 - aIndex + 10901U)) & S_BLOCK1], 19U));
-
+            aIngress = aSpiritLaneA[aIndex] ^ aWoodLaneC[aIndex];
+            aIngress ^= (aWaterLaneD[aIndex] ^ aEarthLaneA[aIndex];
             //
-            aCross = (RotL64(aScrapLaneA[((S_BLOCK1 - aIndex + 14114U)) & S_BLOCK1], 39U) ^ RotL64(aScrapLaneD[((S_BLOCK1 - aIndex + 11265U)) & S_BLOCK1], 51U));
-            aCross ^= (RotL64(aWindLaneA[((S_BLOCK1 - aIndex + 10833U)) & S_BLOCK1], 3U) ^ RotL64(aWindLaneB[((S_BLOCK1 - aIndex + 12457U)) & S_BLOCK1], 12U));
-
-            aOperationLaneB[S_BLOCK1 - aIndex] = aIngress;
+            aCross = aWoodLaneA[aIndex] ^ aWoodLaneD[aIndex];
+            aCross ^= aEarthLaneC[aIndex] ^ aWaterLaneA[aIndex];
+            //
+            aSpiritLaneB[aIndex] = aIngress;
         }
     
         //
         // kdf_b_loop_b loop 3
         //
         // Ingress:
-        //      aOperationLaneB (-->), aScrapLaneD (-->), aEarthLaneD (-->), aFireLaneA (<-?->)
+        //      aSpiritLaneB (-->), aWoodLaneD (-->), aWindLaneA (-->), aFireLaneB (<-?->)
         //
         // Cross:
-        //      aOperationLaneA (<--), aScrapLaneB (<--), aWaterLaneB (<-?->)
+        //      aSpiritLaneA (<--), aWoodLaneB (<--), aEarthLaneB (<--), aWaterLaneB (<-?->)
         //
         // Destination:
-        //      aOperationLaneC
+        //      aSpiritLaneC
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = (RotL64(aOperationLaneB[((aIndex + 21148U)) & S_BLOCK1], 57U) ^ RotL64(aScrapLaneD[((aIndex + 19197U)) & S_BLOCK1], 40U));
-            aIngress ^= (RotL64(aEarthLaneD[((aIndex + 17508U)) & S_BLOCK1], 21U) ^ RotL64(aFireLaneA[((aIndex + 21788U)) & S_BLOCK1], 29U));
-
+            aIngress = aSpiritLaneB[aIndex] ^ aWoodLaneD[aIndex];
+            aIngress ^= (aWindLaneA[aIndex] ^ aFireLaneB[aIndex];
             //
-            aCross = (RotL64(aOperationLaneA[((S_BLOCK1 - aIndex + 24233U)) & S_BLOCK1], 3U) ^ RotL64(aScrapLaneB[((S_BLOCK1 - aIndex + 20578U)) & S_BLOCK1], 57U));
-            aCross ^= RotL64(aWaterLaneB[((S_BLOCK1 - aIndex + 16734U)) & S_BLOCK1], 43U);
-
-            aOperationLaneC[aIndex] = aIngress;
+            aCross = aSpiritLaneA[aIndex] ^ aWoodLaneB[aIndex];
+            aCross ^= aEarthLaneB[aIndex] ^ aWaterLaneB[aIndex];
+            //
+            aSpiritLaneC[aIndex] = aIngress;
         }
     
         //
         // kdf_b_loop_b loop 4
         //
         // Ingress:
-        //      aOperationLaneC (-->), aOperationLaneA (-->), aWindLaneD (-->), aWaterLaneC (<-?->)
+        //      aSpiritLaneC (-->), aSpiritLaneA (-->), aWindLaneC (-->), aSource (<-?->)
         //
         // Cross:
-        //      aOperationLaneB (<--), aScrapLaneC (<--), aWaterLaneD (<-?->)
+        //      aSpiritLaneB (<--), aWoodLaneC (<--), aWindLaneB (<--), aWaterLaneC (<-?->)
         //
         // Destination:
-        //      aOperationLaneD
+        //      aSpiritLaneD
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = (RotL64(aOperationLaneC[((aIndex + 29261U)) & S_BLOCK1], 51U) ^ RotL64(aOperationLaneA[((aIndex + 29707U)) & S_BLOCK1], 4U));
-            aIngress ^= (RotL64(aWindLaneD[((aIndex + 27309U)) & S_BLOCK1], 39U) ^ RotL64(aWaterLaneC[((aIndex + 32710U)) & S_BLOCK1], 29U));
-
+            aIngress = aSpiritLaneC[aIndex] ^ aSpiritLaneA[aIndex];
+            aIngress ^= (aWindLaneC[aIndex] ^ aSource[aIndex];
             //
-            aCross = (RotL64(aOperationLaneB[((S_BLOCK1 - aIndex + 29747U)) & S_BLOCK1], 19U) ^ RotL64(aScrapLaneC[((S_BLOCK1 - aIndex + 30961U)) & S_BLOCK1], 51U));
-            aCross ^= RotL64(aWaterLaneD[((aIndex + 32132U)) & S_BLOCK1], 39U);
-
-            aOperationLaneD[S_BLOCK1 - aIndex] = aIngress;
+            aCross = aSpiritLaneB[aIndex] ^ aWoodLaneC[aIndex];
+            aCross ^= aWindLaneB[aIndex] ^ aWaterLaneC[aIndex];
+            //
+            aSpiritLaneD[aIndex] = aIngress;
         }
     }
     // GSeedRunKDF_B_B kdf_b_loop_b (end)
-    
+
 }
 
 void TwistExpander_Vega_Arx::KDF_B_C() {
-    // [kdf-a arx]
+
+
     // GSeedRunKDF_B_C kdf_b_loop_c (start)
     {
         //
         // kdf_b_loop_c loop 1
         //
         // Ingress:
-        //      aOperationLaneA (-->), aOperationLaneB (-->), aWaterLaneD (-->), aScrapLaneB (<-?->)
+        //      aSpiritLaneA (-->), aSpiritLaneB (-->), aWaterLaneC (-->), aFireLaneC (<-?->)
         //
         // Cross:
-        //      aOperationLaneC (<--), aOperationLaneD (<--), aScrapLaneA (<--), aWindLaneA (<-?->)
+        //      aSpiritLaneC (<--), aSpiritLaneD (<--), aWindLaneA (<--), aWoodLaneC (<-?->)
         //
         // Destination:
         //      aFuseLaneA
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = (RotL64(aOperationLaneA[((aIndex + 5523U)) & S_BLOCK1], 29U) ^ RotL64(aOperationLaneB[((aIndex + 1367U)) & S_BLOCK1], 54U));
-            aIngress ^= (RotL64(aWaterLaneD[((aIndex + 4758U)) & S_BLOCK1], 21U) ^ RotL64(aScrapLaneB[((aIndex + 4044U)) & S_BLOCK1], 13U));
-
+            aIngress = aSpiritLaneA[aIndex] ^ aSpiritLaneB[aIndex];
+            aIngress ^= (aWaterLaneC[aIndex] ^ aFireLaneC[aIndex];
             //
-            aCross = (RotL64(aOperationLaneC[((S_BLOCK1 - aIndex + 1555U)) & S_BLOCK1], 3U) ^ RotL64(aOperationLaneD[((S_BLOCK1 - aIndex + 7766U)) & S_BLOCK1], 29U));
-            aCross ^= (RotL64(aScrapLaneA[((S_BLOCK1 - aIndex + 762U)) & S_BLOCK1], 57U) ^ RotL64(aWindLaneA[((S_BLOCK1 - aIndex + 7296U)) & S_BLOCK1], 21U));
-
+            aCross = aSpiritLaneC[aIndex] ^ aSpiritLaneD[aIndex];
+            aCross ^= aWindLaneA[aIndex] ^ aWoodLaneC[aIndex];
+            //
             aFuseLaneA[aIndex] = aIngress;
         }
     
@@ -797,47 +715,45 @@ void TwistExpander_Vega_Arx::KDF_B_C() {
         // kdf_b_loop_c loop 2
         //
         // Ingress:
-        //      aFuseLaneA (-->), aOperationLaneC (-->), aWindLaneC (-->), aWaterLaneB (<-?->)
+        //      aFuseLaneA (-->), aSpiritLaneC (-->), aWaterLaneA (-->), aWaterLaneD (<-?->)
         //
         // Cross:
-        //      aOperationLaneA (<--), aOperationLaneD (<--), aScrapLaneC (<--), aScrapLaneD (<-?->)
+        //      aSpiritLaneA (<--), aSpiritLaneD (<--), aWindLaneD (<--), aWindLaneC (<-?->)
         //
         // Destination:
         //      aFuseLaneB
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = (RotL64(aFuseLaneA[((aIndex + 14245U)) & S_BLOCK1], 3U) ^ RotL64(aOperationLaneC[((aIndex + 12402U)) & S_BLOCK1], 35U));
-            aIngress ^= (RotL64(aWindLaneC[((aIndex + 15848U)) & S_BLOCK1], 48U) ^ RotL64(aWaterLaneB[((aIndex + 9147U)) & S_BLOCK1], 11U));
-
+            aIngress = aFuseLaneA[aIndex] ^ aSpiritLaneC[aIndex];
+            aIngress ^= (aWaterLaneA[aIndex] ^ aWaterLaneD[aIndex];
             //
-            aCross = (RotL64(aOperationLaneA[((S_BLOCK1 - aIndex + 14940U)) & S_BLOCK1], 29U) ^ RotL64(aOperationLaneD[((S_BLOCK1 - aIndex + 14513U)) & S_BLOCK1], 58U));
-            aCross ^= (RotL64(aScrapLaneC[((S_BLOCK1 - aIndex + 9283U)) & S_BLOCK1], 19U) ^ RotL64(aScrapLaneD[((aIndex + 11160U)) & S_BLOCK1], 39U));
-
-            aFuseLaneB[S_BLOCK1 - aIndex] = aIngress;
+            aCross = aSpiritLaneA[aIndex] ^ aSpiritLaneD[aIndex];
+            aCross ^= aWindLaneD[aIndex] ^ aWindLaneC[aIndex];
+            //
+            aFuseLaneB[aIndex] = aIngress;
         }
     
         //
         // kdf_b_loop_c loop 3
         //
         // Ingress:
-        //      aFuseLaneB (-->), aOperationLaneD (-->), aFireLaneA (-->), aWindLaneD (<-?->)
+        //      aFuseLaneB (-->), aSpiritLaneD (-->), aSource (-->), aWaterLaneB (<-?->)
         //
         // Cross:
-        //      aFuseLaneA (<--), aOperationLaneB (<--), aFireLaneC (<--), aWaterLaneC (<-?->)
+        //      aFuseLaneA (<--), aSpiritLaneB (<--), aWoodLaneD (<--), aWoodLaneB (<-?->)
         //
         // Destination:
         //      aFuseLaneC
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = (RotL64(aFuseLaneB[((aIndex + 20477U)) & S_BLOCK1], 13U) ^ RotL64(aOperationLaneD[((aIndex + 20544U)) & S_BLOCK1], 5U));
-            aIngress ^= (RotL64(aFireLaneA[((aIndex + 24072U)) & S_BLOCK1], 41U) ^ RotL64(aWindLaneD[((aIndex + 22330U)) & S_BLOCK1], 30U));
-
+            aIngress = aFuseLaneB[aIndex] ^ aSpiritLaneD[aIndex];
+            aIngress ^= (aSource[aIndex] ^ aWaterLaneB[aIndex];
             //
-            aCross = (RotL64(aFuseLaneA[((S_BLOCK1 - aIndex + 18578U)) & S_BLOCK1], 27U) ^ RotL64(aOperationLaneB[((S_BLOCK1 - aIndex + 22148U)) & S_BLOCK1], 13U));
-            aCross ^= (RotL64(aFireLaneC[((S_BLOCK1 - aIndex + 18716U)) & S_BLOCK1], 48U) ^ RotL64(aWaterLaneC[((S_BLOCK1 - aIndex + 21664U)) & S_BLOCK1], 37U));
-
+            aCross = aFuseLaneA[aIndex] ^ aSpiritLaneB[aIndex];
+            aCross ^= aWoodLaneD[aIndex] ^ aWoodLaneB[aIndex];
+            //
             aFuseLaneC[aIndex] = aIngress;
         }
     
@@ -845,148 +761,133 @@ void TwistExpander_Vega_Arx::KDF_B_C() {
         // kdf_b_loop_c loop 4
         //
         // Ingress:
-        //      aFuseLaneC (-->), aFuseLaneA (-->), aFireLaneB (-->), aWaterLaneA (<-?->)
+        //      aFuseLaneC (-->), aFuseLaneA (-->), aWindLaneB (-->), aWoodLaneA (<-?->)
         //
         // Cross:
-        //      aFuseLaneB (<--), aOperationLaneC (<--), aWindLaneB (<--), aFireLaneD (<-?->)
+        //      aFuseLaneB (<--), aSpiritLaneC (<--), aEarthLaneD (<--), aFireLaneD (<-?->)
         //
         // Destination:
         //      aFuseLaneD
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = (RotL64(aFuseLaneC[((aIndex + 29384U)) & S_BLOCK1], 3U) ^ RotL64(aFuseLaneA[((aIndex + 26593U)) & S_BLOCK1], 23U));
-            aIngress ^= (RotL64(aFireLaneB[((aIndex + 24698U)) & S_BLOCK1], 58U) ^ RotL64(aWaterLaneA[((aIndex + 31768U)) & S_BLOCK1], 13U));
-
+            aIngress = aFuseLaneC[aIndex] ^ aFuseLaneA[aIndex];
+            aIngress ^= (aWindLaneB[aIndex] ^ aWoodLaneA[aIndex];
             //
-            aCross = (RotL64(aFuseLaneB[((S_BLOCK1 - aIndex + 26788U)) & S_BLOCK1], 11U) ^ RotL64(aOperationLaneC[((S_BLOCK1 - aIndex + 25825U)) & S_BLOCK1], 26U));
-            aCross ^= (RotL64(aWindLaneB[((S_BLOCK1 - aIndex + 26341U)) & S_BLOCK1], 3U) ^ RotL64(aFireLaneD[((aIndex + 25610U)) & S_BLOCK1], 39U));
-
-            aFuseLaneD[S_BLOCK1 - aIndex] = aIngress;
+            aCross = aFuseLaneB[aIndex] ^ aSpiritLaneC[aIndex];
+            aCross ^= aEarthLaneD[aIndex] ^ aFireLaneD[aIndex];
+            //
+            aFuseLaneD[aIndex] = aIngress;
         }
     }
     // GSeedRunKDF_B_C kdf_b_loop_c (end)
-    
+
 }
 
 void TwistExpander_Vega_Arx::KDF_B_D() {
-    // [kdf-a arx]
+
+
     // GSeedRunKDF_B_D kdf_b_loop_d (start)
     {
         //
         // kdf_b_loop_d loop 1
         //
         // Ingress:
-        //      aWorkLaneA (-->), aWorkLaneB (-->), aWindLaneB (-->), aScrapLaneA (<-?->)
+        //      aPoisonLaneA (-->), aPoisonLaneB (-->), aWindLaneC (-->), aSpiritLaneB (<-?->)
         //
         // Cross:
-        //      aWorkLaneC (<--), aWorkLaneD (<--), aOperationLaneB (<--), aWindLaneD (<-?->)
+        //      aPoisonLaneC (<--), aPoisonLaneD (<--), aWaterLaneA (<--), aSpiritLaneD (<-?->)
         //
         // Destination:
-        //      aExpandLaneA
+        //      aHeartLaneA
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = (RotL64(aWorkLaneA[((aIndex + 1881U)) & S_BLOCK1], 3U) ^ RotL64(aWorkLaneB[((aIndex + 5756U)) & S_BLOCK1], 22U));
-            aIngress ^= (RotL64(aWindLaneB[((aIndex + 345U)) & S_BLOCK1], 47U) ^ RotL64(aScrapLaneA[((aIndex + 4484U)) & S_BLOCK1], 13U));
-
+            aIngress = aPoisonLaneA[aIndex] ^ aPoisonLaneB[aIndex];
+            aIngress ^= (aWindLaneC[aIndex] ^ aSpiritLaneB[aIndex];
             //
-            aCross = (RotL64(aWorkLaneC[((S_BLOCK1 - aIndex + 4417U)) & S_BLOCK1], 5U) ^ RotL64(aWorkLaneD[((S_BLOCK1 - aIndex + 58U)) & S_BLOCK1], 23U));
-            aCross ^= (RotL64(aOperationLaneB[((S_BLOCK1 - aIndex + 2433U)) & S_BLOCK1], 38U) ^ RotL64(aWindLaneD[((aIndex + 376U)) & S_BLOCK1], 13U));
-
-            aExpandLaneA[aIndex] = aIngress;
+            aCross = aPoisonLaneC[aIndex] ^ aPoisonLaneD[aIndex];
+            aCross ^= aWaterLaneA[aIndex] ^ aSpiritLaneD[aIndex];
+            //
+            aHeartLaneA[aIndex] = aIngress;
         }
     
         //
         // kdf_b_loop_d loop 2
         //
         // Ingress:
-        //      aExpandLaneA (-->), aWorkLaneC (-->), aOperationLaneD (-->), aWaterLaneB (<-?->)
+        //      aHeartLaneA (-->), aPoisonLaneC (-->), aSpiritLaneC (-->), aWoodLaneA (<-?->)
         //
         // Cross:
-        //      aWorkLaneA (<--), aWorkLaneD (<--), aOperationLaneA (<--), aScrapLaneC (<-?->)
+        //      aPoisonLaneA (<--), aPoisonLaneD (<--), aSpiritLaneA (<--), aWaterLaneC (<-?->)
         //
         // Destination:
-        //      aExpandLaneB
+        //      aHeartLaneB
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = (RotL64(aExpandLaneA[((aIndex + 14607U)) & S_BLOCK1], 5U) ^ RotL64(aWorkLaneC[((aIndex + 14827U)) & S_BLOCK1], 53U));
-            aIngress ^= (RotL64(aOperationLaneD[((aIndex + 13634U)) & S_BLOCK1], 41U) ^ RotL64(aWaterLaneB[((S_BLOCK1 - aIndex + 14731U)) & S_BLOCK1], 18U));
-
+            aIngress = aHeartLaneA[aIndex] ^ aPoisonLaneC[aIndex];
+            aIngress ^= (aSpiritLaneC[aIndex] ^ aWoodLaneA[aIndex];
             //
-            aCross = (RotL64(aWorkLaneA[((S_BLOCK1 - aIndex + 13796U)) & S_BLOCK1], 43U) ^ RotL64(aWorkLaneD[((S_BLOCK1 - aIndex + 8820U)) & S_BLOCK1], 35U));
-            aCross ^= (RotL64(aOperationLaneA[((S_BLOCK1 - aIndex + 12736U)) & S_BLOCK1], 27U) ^ RotL64(aScrapLaneC[((aIndex + 15719U)) & S_BLOCK1], 53U));
-
-            aExpandLaneB[S_BLOCK1 - aIndex] = aIngress;
+            aCross = aPoisonLaneA[aIndex] ^ aPoisonLaneD[aIndex];
+            aCross ^= aSpiritLaneA[aIndex] ^ aWaterLaneC[aIndex];
+            //
+            aHeartLaneB[aIndex] = aIngress;
         }
     
         //
         // kdf_b_loop_d loop 3
         //
         // Ingress:
-        //      aExpandLaneB (-->), aWorkLaneD (-->), aWaterLaneA (-->), aWaterLaneD (<-?->)
+        //      aHeartLaneB (-->), aPoisonLaneD (-->), aWoodLaneB (-->), aWaterLaneD (<-?->)
         //
         // Cross:
-        //      aExpandLaneA (<--), aWorkLaneB (<--), aWaterLaneC (<--), aOperationLaneC (<-?->)
+        //      aHeartLaneA (<--), aPoisonLaneB (<--), aFireLaneB (<--), aWoodLaneD (<-?->)
         //
         // Destination:
-        //      aExpandLaneC
+        //      aHeartLaneC
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = (RotL64(aExpandLaneB[((aIndex + 21577U)) & S_BLOCK1], 27U) ^ RotL64(aWorkLaneD[((aIndex + 24203U)) & S_BLOCK1], 43U));
-            aIngress ^= (RotL64(aWaterLaneA[((aIndex + 19570U)) & S_BLOCK1], 35U) ^ RotL64(aWaterLaneD[((aIndex + 22866U)) & S_BLOCK1], 18U));
-
+            aIngress = aHeartLaneB[aIndex] ^ aPoisonLaneD[aIndex];
+            aIngress ^= (aWoodLaneB[aIndex] ^ aWaterLaneD[aIndex];
             //
-            aCross = (RotL64(aExpandLaneA[((S_BLOCK1 - aIndex + 22747U)) & S_BLOCK1], 27U) ^ RotL64(aWorkLaneB[((S_BLOCK1 - aIndex + 23711U)) & S_BLOCK1], 5U));
-            aCross ^= (RotL64(aWaterLaneC[((S_BLOCK1 - aIndex + 16594U)) & S_BLOCK1], 54U) ^ RotL64(aOperationLaneC[((S_BLOCK1 - aIndex + 24427U)) & S_BLOCK1], 13U));
-
-            aExpandLaneC[aIndex] = aIngress;
+            aCross = aHeartLaneA[aIndex] ^ aPoisonLaneB[aIndex];
+            aCross ^= aFireLaneB[aIndex] ^ aWoodLaneD[aIndex];
+            //
+            aHeartLaneC[aIndex] = aIngress;
         }
     
         //
         // kdf_b_loop_d loop 4
         //
         // Ingress:
-        //      aExpandLaneC (-->), aExpandLaneA (-->), aWindLaneC (-->), aScrapLaneD (<-?->)
+        //      aHeartLaneC (-->), aHeartLaneA (-->), aFireLaneA (-->), aWoodLaneC (<-?->)
         //
         // Cross:
-        //      aExpandLaneB (<--), aWorkLaneC (<--), aScrapLaneB (<--), aSource (<-?->)
+        //      aHeartLaneB (<--), aPoisonLaneC (<--), aWindLaneD (<--), aWaterLaneB (<-?->)
         //
         // Destination:
-        //      aExpandLaneD
+        //      aHeartLaneD
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = (RotL64(aExpandLaneC[((aIndex + 30756U)) & S_BLOCK1], 57U) ^ RotL64(aExpandLaneA[((aIndex + 25704U)) & S_BLOCK1], 11U));
-            aIngress ^= (RotL64(aWindLaneC[((aIndex + 29762U)) & S_BLOCK1], 21U) ^ RotL64(aScrapLaneD[((S_BLOCK1 - aIndex + 27443U)) & S_BLOCK1], 34U));
-
+            aIngress = aHeartLaneC[aIndex] ^ aHeartLaneA[aIndex];
+            aIngress ^= (aFireLaneA[aIndex] ^ aWoodLaneC[aIndex];
             //
-            aCross = (RotL64(aExpandLaneB[((S_BLOCK1 - aIndex + 25347U)) & S_BLOCK1], 19U) ^ RotL64(aWorkLaneC[((S_BLOCK1 - aIndex + 27129U)) & S_BLOCK1], 43U));
-            aCross ^= (RotL64(aScrapLaneB[((S_BLOCK1 - aIndex + 29312U)) & S_BLOCK1], 27U) ^ RotL64(aSource[((aIndex + 31359U)) & S_BLOCK1], 52U));
-
-            aExpandLaneD[S_BLOCK1 - aIndex] = aIngress;
+            aCross = aHeartLaneB[aIndex] ^ aPoisonLaneC[aIndex];
+            aCross ^= aWindLaneD[aIndex] ^ aWaterLaneB[aIndex];
+            //
+            aHeartLaneD[aIndex] = aIngress;
         }
     }
     // GSeedRunKDF_B_D kdf_b_loop_d (end)
-    
+
 }
 
 void TwistExpander_Vega_Arx::Seed_A() {
-    const std::uint64_t &aPhaseADomainWordIngress = pWorkSpace->mDomainBundle.mPhaseAConstants.mIngress;
-    const std::uint64_t &aPhaseADomainWordScatter = pWorkSpace->mDomainBundle.mPhaseAConstants.mScatter;
-    const std::uint64_t &aPhaseADomainWordCross = pWorkSpace->mDomainBundle.mPhaseAConstants.mCross;
-    const std::uint64_t &aPhaseCDomainWordIngress = pWorkSpace->mDomainBundle.mPhaseCConstants.mIngress;
-    const std::uint64_t &aPhaseCDomainWordScatter = pWorkSpace->mDomainBundle.mPhaseCConstants.mScatter;
-    const std::uint64_t &aPhaseCDomainWordCross = pWorkSpace->mDomainBundle.mPhaseCConstants.mCross;
-    const std::uint64_t &aPhaseDDomainWordIngress = pWorkSpace->mDomainBundle.mPhaseDConstants.mIngress;
-    const std::uint64_t &aPhaseDDomainWordScatter = pWorkSpace->mDomainBundle.mPhaseDConstants.mScatter;
-    const std::uint64_t &aPhaseDDomainWordCross = pWorkSpace->mDomainBundle.mPhaseDConstants.mCross;
-    const std::uint64_t &aPhaseFDomainWordIngress = pWorkSpace->mDomainBundle.mPhaseFConstants.mIngress;
-    const std::uint64_t &aPhaseFDomainWordScatter = pWorkSpace->mDomainBundle.mPhaseFConstants.mScatter;
-    const std::uint64_t &aPhaseFDomainWordCross = pWorkSpace->mDomainBundle.mPhaseFConstants.mCross;
-    // [seed arx]
+
+
     // GSeedRunSeed_A seed_loop_a (start)
     {
         //
@@ -999,1431 +900,1151 @@ void TwistExpander_Vega_Arx::Seed_A() {
         //      aSource (<--), aKeyRowReadB (<--)
         //
         // Destination:
-        //      aWorkLaneA
+        //      aPoisonLaneA
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = RotL64(aSource[((aIndex + 4404U)) & S_BLOCK1], 37U) ^ RotL64(aKeyRowReadA[((aIndex + 2672U)) & W_KEY1], 56U);
-
+            aIngress = aSource[aIndex] ^ aKeyRowReadA[aIndex];
             //
-            aCross = RotL64(aSource[((S_BLOCK1 - aIndex + 2960U)) & S_BLOCK1], 11U) ^ RotL64(aKeyRowReadB[(((2047U - aIndex) + 3969U)) & W_KEY1], 27U);
-
-            aWorkLaneA[aIndex] = aIngress;
+            aCross = aSource[aIndex] ^ aKeyRowReadB[W_KEY1 - aIndex];
+            //
+            aPoisonLaneA[aIndex] = aIngress;
         }
     
         //
         // seed_loop_a loop 2
         //
         // Ingress:
-        //      aWorkLaneA (-->), aKeyRowReadB (-->)
+        //      aPoisonLaneA (-->), aKeyRowReadB (-->)
         //
         // Cross:
         //      aSource (<--), aKeyRowReadA (<--)
         //
         // Destination:
-        //      aWorkLaneB
+        //      aPoisonLaneB
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = RotL64(aWorkLaneA[((aIndex + 7250U)) & S_BLOCK1], 23U) ^ RotL64(aKeyRowReadB[((aIndex + 6585U)) & W_KEY1], 36U);
-
+            aIngress = aPoisonLaneA[aIndex] ^ aKeyRowReadB[aIndex];
             //
-            aCross = RotL64(aSource[((S_BLOCK1 - aIndex + 8548U)) & S_BLOCK1], 54U) ^ RotL64(aKeyRowReadA[(((2047U - aIndex) + 8256U)) & W_KEY1], 11U);
-
-            aWorkLaneB[S_BLOCK1 - aIndex] = aIngress;
+            aCross = aSource[aIndex] ^ aKeyRowReadA[W_KEY1 - aIndex];
+            //
+            aPoisonLaneB[aIndex] = aIngress;
         }
     
         //
         // seed_loop_a loop 3
         //
         // Ingress:
-        //      aWorkLaneB (-->), aSource (-->), aKeyRowReadB (-->)
+        //      aPoisonLaneB (-->), aSource (-->), aKeyRowReadB (-->)
         //
         // Cross:
-        //      aKeyRowReadA (<--), aWorkLaneA (<-?->)
+        //      aKeyRowReadA (<--), aPoisonLaneA (<-?->)
         //
         // Destination:
-        //      aExpandLaneA
+        //      aEarthLaneA
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = (RotL64(aWorkLaneB[((aIndex + 11268U)) & S_BLOCK1], 3U) ^ RotL64(aSource[((aIndex + 11384U)) & S_BLOCK1], 13U));
-            aIngress ^= RotL64(aKeyRowReadB[((aIndex + 14902U)) & W_KEY1], 46U);
-
+            aIngress = aPoisonLaneB[aIndex] ^ aSource[aIndex];
+            aIngress ^= aKeyRowReadB[aIndex];
             //
-            aCross = RotL64(aKeyRowReadA[(((2047U - aIndex) + 14805U)) & W_KEY1], 20U) ^ RotL64(aWorkLaneA[((S_BLOCK1 - aIndex + 13788U)) & S_BLOCK1], 41U);
-
-            aExpandLaneA[aIndex] = aIngress;
+            aCross = aKeyRowReadA[W_KEY1 - aIndex] ^ aPoisonLaneA[aIndex];
+            //
+            aEarthLaneA[aIndex] = aIngress;
         }
     
         //
         // seed_loop_a loop 4
         //
         // Ingress:
-        //      aExpandLaneA (-->), aWorkLaneA (<-?->)
+        //      aEarthLaneA (-->), aPoisonLaneA (<-?->)
         //
         // Cross:
-        //      aWorkLaneB (<--), aKeyRowReadB (<-?->)
+        //      aPoisonLaneB (<--), aKeyRowReadB (<-?->)
         //
         // Destination:
-        //      aExpandLaneB
+        //      aEarthLaneB
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = RotL64(aExpandLaneA[((aIndex + 20624U)) & S_BLOCK1], 51U) ^ RotL64(aWorkLaneA[((aIndex + 20555U)) & S_BLOCK1], 27U);
-
+            aIngress = aEarthLaneA[aIndex] ^ aPoisonLaneA[aIndex];
             //
-            aCross = RotL64(aWorkLaneB[((S_BLOCK1 - aIndex + 19717U)) & S_BLOCK1], 24U) ^ RotL64(aKeyRowReadB[((aIndex + 20749U)) & W_KEY1], 13U);
-
-            aExpandLaneB[S_BLOCK1 - aIndex] = aIngress;
+            aCross = aPoisonLaneB[aIndex] ^ aKeyRowReadB[aIndex];
+            //
+            aEarthLaneB[aIndex] = aIngress;
         }
     
         //
         // seed_loop_a loop 5
         //
         // Ingress:
-        //      aExpandLaneB (-->), aWorkLaneB (<-?->)
+        //      aEarthLaneB (-->), aPoisonLaneB (<-?->)
         //
         // Cross:
-        //      aExpandLaneA (<--), aKeyRowReadA (<-?->)
+        //      aEarthLaneA (<--), aKeyRowReadA (<-?->)
         //
         // Destination:
-        //      aExpandLaneC
+        //      aEarthLaneC
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = RotL64(aExpandLaneB[((aIndex + 23978U)) & S_BLOCK1], 39U) ^ RotL64(aWorkLaneB[((aIndex + 23271U)) & S_BLOCK1], 52U);
-
+            aIngress = aEarthLaneB[aIndex] ^ aPoisonLaneB[aIndex];
             //
-            aCross = RotL64(aExpandLaneA[((S_BLOCK1 - aIndex + 26881U)) & S_BLOCK1], 47U) ^ RotL64(aKeyRowReadA[((aIndex + 25689U)) & W_KEY1], 4U);
-
-            aExpandLaneC[aIndex] = aIngress;
+            aCross = aEarthLaneA[aIndex] ^ aKeyRowReadA[W_KEY1 - aIndex];
+            //
+            aEarthLaneC[aIndex] = aIngress;
         }
     
         //
         // seed_loop_a loop 6
         //
         // Ingress:
-        //      aExpandLaneC (-->), aExpandLaneA (<-?->)
-        //
-        // Cross:
-        //      aExpandLaneB (<--), aWorkLaneB (<-?->)
-        //
-        // Destination:
-        //      aExpandLaneD
-        //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
-            //
-            aIngress = RotL64(aExpandLaneC[((aIndex + 28393U)) & S_BLOCK1], 46U) ^ RotL64(aExpandLaneA[((aIndex + 31819U)) & S_BLOCK1], 37U);
-
-            //
-            aCross = RotL64(aExpandLaneB[((S_BLOCK1 - aIndex + 28797U)) & S_BLOCK1], 54U) ^ RotL64(aWorkLaneB[((aIndex + 31691U)) & S_BLOCK1], 37U);
-
-            aExpandLaneD[S_BLOCK1 - aIndex] = aIngress;
-        }
-    }
-    // GSeedRunSeed_A seed_loop_a (end)
-    
-}
-
-void TwistExpander_Vega_Arx::Seed_B() {
-    const std::uint64_t &aPhaseADomainWordIngress = pWorkSpace->mDomainBundle.mPhaseAConstants.mIngress;
-    const std::uint64_t &aPhaseADomainWordScatter = pWorkSpace->mDomainBundle.mPhaseAConstants.mScatter;
-    const std::uint64_t &aPhaseADomainWordCross = pWorkSpace->mDomainBundle.mPhaseAConstants.mCross;
-    const std::uint64_t &aPhaseBDomainWordIngress = pWorkSpace->mDomainBundle.mPhaseBConstants.mIngress;
-    const std::uint64_t &aPhaseBDomainWordScatter = pWorkSpace->mDomainBundle.mPhaseBConstants.mScatter;
-    const std::uint64_t &aPhaseBDomainWordCross = pWorkSpace->mDomainBundle.mPhaseBConstants.mCross;
-    const std::uint64_t &aPhaseDDomainWordIngress = pWorkSpace->mDomainBundle.mPhaseDConstants.mIngress;
-    const std::uint64_t &aPhaseDDomainWordScatter = pWorkSpace->mDomainBundle.mPhaseDConstants.mScatter;
-    const std::uint64_t &aPhaseDDomainWordCross = pWorkSpace->mDomainBundle.mPhaseDConstants.mCross;
-    const std::uint64_t &aPhaseEDomainWordIngress = pWorkSpace->mDomainBundle.mPhaseEConstants.mIngress;
-    const std::uint64_t &aPhaseEDomainWordScatter = pWorkSpace->mDomainBundle.mPhaseEConstants.mScatter;
-    const std::uint64_t &aPhaseEDomainWordCross = pWorkSpace->mDomainBundle.mPhaseEConstants.mCross;
-    // [seed arx]
-    // GSeedRunSeed_B seed_loop_e (start)
-    {
-        //
-        // seed_loop_e loop 1
-        //
-        // Ingress:
-        //      aExpandLaneA (-->), aExpandLaneB (-->), aSource (<-?->)
-        //
-        // Cross:
-        //      aExpandLaneC (<--), aExpandLaneD (<-?->)
-        //
-        // Destination:
-        //      aWorkLaneC
-        //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
-            //
-            aIngress = (RotL64(aExpandLaneA[((aIndex + 1093U)) & S_BLOCK1], 35U) ^ RotL64(aExpandLaneB[((aIndex + 564U)) & S_BLOCK1], 43U));
-            aIngress ^= RotL64(aSource[((aIndex + 4852U)) & S_BLOCK1], 23U);
-
-            //
-            aCross = RotL64(aExpandLaneC[((S_BLOCK1 - aIndex + 567U)) & S_BLOCK1], 24U) ^ RotL64(aExpandLaneD[((aIndex + 3701U)) & S_BLOCK1], 11U);
-
-            aWorkLaneC[aIndex] = aIngress;
-        }
-    
-        //
-        // seed_loop_e loop 2
-        //
-        // Ingress:
-        //      aWorkLaneC (-->), aExpandLaneC (-->), aKeyRowReadA (<-?->)
-        //
-        // Cross:
-        //      aExpandLaneA (<--), aExpandLaneD (<--)
-        //
-        // Destination:
-        //      aWorkLaneD
-        //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
-            //
-            aIngress = (RotL64(aWorkLaneC[((aIndex + 6118U)) & S_BLOCK1], 47U) ^ RotL64(aExpandLaneC[((aIndex + 6790U)) & S_BLOCK1], 14U));
-            aIngress ^= RotL64(aKeyRowReadA[((aIndex + 7436U)) & W_KEY1], 23U);
-
-            //
-            aCross = RotL64(aExpandLaneA[((S_BLOCK1 - aIndex + 10431U)) & S_BLOCK1], 20U) ^ RotL64(aExpandLaneD[((S_BLOCK1 - aIndex + 7180U)) & S_BLOCK1], 3U);
-
-            aWorkLaneD[S_BLOCK1 - aIndex] = aIngress;
-        }
-    
-        //
-        // seed_loop_e loop 3
-        //
-        // Ingress:
-        //      aWorkLaneD (-->), aExpandLaneA (-->), aKeyRowReadB (<-?->)
-        //
-        // Cross:
-        //      aWorkLaneC (<--), aExpandLaneC (<-?->)
-        //
-        // Destination:
-        //      aEarthLaneA
-        //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
-            //
-            aIngress = (RotL64(aWorkLaneD[((aIndex + 14246U)) & S_BLOCK1], 19U) ^ RotL64(aExpandLaneA[((aIndex + 14680U)) & S_BLOCK1], 3U));
-            aIngress ^= RotL64(aKeyRowReadB[((aIndex + 15176U)) & W_KEY1], 40U);
-
-            //
-            aCross = RotL64(aWorkLaneC[((S_BLOCK1 - aIndex + 14200U)) & S_BLOCK1], 26U) ^ RotL64(aExpandLaneC[((S_BLOCK1 - aIndex + 11601U)) & S_BLOCK1], 37U);
-
-            aEarthLaneA[aIndex] = aIngress;
-        }
-    
-        //
-        // seed_loop_e loop 4
-        //
-        // Ingress:
-        //      aEarthLaneA (-->), aExpandLaneD (-->), aWorkLaneB (<-?->)
-        //
-        // Cross:
-        //      aWorkLaneD (<--), aExpandLaneA (<-?->)
-        //
-        // Destination:
-        //      aEarthLaneB
-        //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
-            //
-            aIngress = (RotL64(aEarthLaneA[((aIndex + 20656U)) & S_BLOCK1], 29U) ^ RotL64(aExpandLaneD[((aIndex + 18878U)) & S_BLOCK1], 3U));
-            aIngress ^= RotL64(aWorkLaneB[((aIndex + 20845U)) & S_BLOCK1], 19U);
-
-            //
-            aCross = RotL64(aWorkLaneD[((S_BLOCK1 - aIndex + 21152U)) & S_BLOCK1], 23U) ^ RotL64(aExpandLaneA[((S_BLOCK1 - aIndex + 20465U)) & S_BLOCK1], 51U);
-
-            aEarthLaneB[S_BLOCK1 - aIndex] = aIngress;
-        }
-    
-        //
-        // seed_loop_e loop 5
-        //
-        // Ingress:
-        //      aEarthLaneB (-->), aWorkLaneD (-->), aWorkLaneA (<-?->)
-        //
-        // Cross:
-        //      aEarthLaneA (<--), aWorkLaneC (<-?->)
-        //
-        // Destination:
-        //      aEarthLaneC
-        //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
-            //
-            aIngress = (RotL64(aEarthLaneB[((aIndex + 27102U)) & S_BLOCK1], 24U) ^ RotL64(aWorkLaneD[((aIndex + 25146U)) & S_BLOCK1], 3U));
-            aIngress ^= RotL64(aWorkLaneA[((S_BLOCK1 - aIndex + 25289U)) & S_BLOCK1], 57U);
-
-            //
-            aCross = RotL64(aEarthLaneA[((S_BLOCK1 - aIndex + 26083U)) & S_BLOCK1], 39U) ^ RotL64(aWorkLaneC[((aIndex + 25331U)) & S_BLOCK1], 11U);
-
-            aEarthLaneC[aIndex] = aIngress;
-        }
-    
-        //
-        // seed_loop_e loop 6
-        //
-        // Ingress:
         //      aEarthLaneC (-->), aEarthLaneA (<-?->)
         //
         // Cross:
-        //      aEarthLaneB (<--), aExpandLaneB (<--)
+        //      aEarthLaneB (<--), aPoisonLaneB (<-?->)
         //
         // Destination:
         //      aEarthLaneD
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = RotL64(aEarthLaneC[((aIndex + 30312U)) & S_BLOCK1], 21U) ^ RotL64(aEarthLaneA[((S_BLOCK1 - aIndex + 28913U)) & S_BLOCK1], 38U);
-
+            aIngress = aEarthLaneC[aIndex] ^ aEarthLaneA[aIndex];
             //
-            aCross = RotL64(aEarthLaneB[((S_BLOCK1 - aIndex + 32247U)) & S_BLOCK1], 36U) ^ RotL64(aExpandLaneB[((S_BLOCK1 - aIndex + 30744U)) & S_BLOCK1], 57U);
-
-            aEarthLaneD[S_BLOCK1 - aIndex] = aIngress;
+            aCross = aEarthLaneB[aIndex] ^ aPoisonLaneB[aIndex];
+            //
+            aEarthLaneD[aIndex] = aIngress;
         }
     }
-    // GSeedRunSeed_B seed_loop_e (end)
-    
+    // GSeedRunSeed_A seed_loop_a (end)
+
 }
 
-void TwistExpander_Vega_Arx::Seed_C() {
-    const std::uint64_t &aPhaseBDomainWordIngress = pWorkSpace->mDomainBundle.mPhaseBConstants.mIngress;
-    const std::uint64_t &aPhaseBDomainWordScatter = pWorkSpace->mDomainBundle.mPhaseBConstants.mScatter;
-    const std::uint64_t &aPhaseBDomainWordCross = pWorkSpace->mDomainBundle.mPhaseBConstants.mCross;
-    const std::uint64_t &aPhaseCDomainWordIngress = pWorkSpace->mDomainBundle.mPhaseCConstants.mIngress;
-    const std::uint64_t &aPhaseCDomainWordScatter = pWorkSpace->mDomainBundle.mPhaseCConstants.mScatter;
-    const std::uint64_t &aPhaseCDomainWordCross = pWorkSpace->mDomainBundle.mPhaseCConstants.mCross;
-    const std::uint64_t &aPhaseDDomainWordIngress = pWorkSpace->mDomainBundle.mPhaseDConstants.mIngress;
-    const std::uint64_t &aPhaseDDomainWordScatter = pWorkSpace->mDomainBundle.mPhaseDConstants.mScatter;
-    const std::uint64_t &aPhaseDDomainWordCross = pWorkSpace->mDomainBundle.mPhaseDConstants.mCross;
-    const std::uint64_t &aPhaseFDomainWordIngress = pWorkSpace->mDomainBundle.mPhaseFConstants.mIngress;
-    const std::uint64_t &aPhaseFDomainWordScatter = pWorkSpace->mDomainBundle.mPhaseFConstants.mScatter;
-    const std::uint64_t &aPhaseFDomainWordCross = pWorkSpace->mDomainBundle.mPhaseFConstants.mCross;
-    // [seed arx]
-    // GSeedRunSeed_C seed_loop_d (start)
-    {
-        //
-        // seed_loop_d loop 1
-        //
-        // Ingress:
-        //      aEarthLaneA (-->), aEarthLaneB (-->), aWorkLaneB (<-?->)
-        //
-        // Cross:
-        //      aEarthLaneC (<--), aEarthLaneD (<--), aExpandLaneA (<-?->)
-        //
-        // Destination:
-        //      aScrapLaneA
-        //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
-            //
-            aIngress = (RotL64(aEarthLaneA[((aIndex + 3742U)) & S_BLOCK1], 43U) ^ RotL64(aEarthLaneB[((aIndex + 4611U)) & S_BLOCK1], 28U));
-            aIngress ^= RotL64(aWorkLaneB[((aIndex + 3014U)) & S_BLOCK1], 13U);
+void TwistExpander_Vega_Arx::Seed_B() {
 
-            //
-            aCross = (RotL64(aEarthLaneC[((S_BLOCK1 - aIndex + 355U)) & S_BLOCK1], 35U) ^ RotL64(aEarthLaneD[((S_BLOCK1 - aIndex + 1956U)) & S_BLOCK1], 10U));
-            aCross ^= RotL64(aExpandLaneA[((S_BLOCK1 - aIndex + 5426U)) & S_BLOCK1], 51U);
 
-            aScrapLaneA[aIndex] = aIngress;
-        }
-    
-        //
-        // seed_loop_d loop 2
-        //
-        // Ingress:
-        //      aScrapLaneA (-->), aEarthLaneC (-->), aWorkLaneC (<-?->)
-        //
-        // Cross:
-        //      aEarthLaneA (<--), aEarthLaneD (<--), aExpandLaneC (<-?->)
-        //
-        // Destination:
-        //      aScrapLaneB
-        //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
-            //
-            aIngress = (RotL64(aScrapLaneA[((aIndex + 9542U)) & S_BLOCK1], 37U) ^ RotL64(aEarthLaneC[((aIndex + 9951U)) & S_BLOCK1], 21U));
-            aIngress ^= RotL64(aWorkLaneC[((S_BLOCK1 - aIndex + 8261U)) & S_BLOCK1], 48U);
-
-            //
-            aCross = (RotL64(aEarthLaneA[((S_BLOCK1 - aIndex + 6347U)) & S_BLOCK1], 19U) ^ RotL64(aEarthLaneD[((S_BLOCK1 - aIndex + 6358U)) & S_BLOCK1], 27U));
-            aCross ^= RotL64(aExpandLaneC[((S_BLOCK1 - aIndex + 9010U)) & S_BLOCK1], 6U);
-
-            aScrapLaneB[S_BLOCK1 - aIndex] = aIngress;
-        }
-    
-        //
-        // seed_loop_d loop 3
-        //
-        // Ingress:
-        //      aScrapLaneB (-->), aEarthLaneA (-->), aSource (<-?->)
-        //
-        // Cross:
-        //      aScrapLaneA (<--), aEarthLaneC (<--), aExpandLaneB (<-?->)
-        //
-        // Destination:
-        //      aOperationLaneA
-        //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
-            //
-            aIngress = (RotL64(aScrapLaneB[((aIndex + 15108U)) & S_BLOCK1], 26U) ^ RotL64(aEarthLaneA[((aIndex + 14616U)) & S_BLOCK1], 5U));
-            aIngress ^= RotL64(aSource[((S_BLOCK1 - aIndex + 11014U)) & S_BLOCK1], 43U);
-
-            //
-            aCross = (RotL64(aScrapLaneA[((S_BLOCK1 - aIndex + 16012U)) & S_BLOCK1], 3U) ^ RotL64(aEarthLaneC[((S_BLOCK1 - aIndex + 13115U)) & S_BLOCK1], 22U));
-            aCross ^= RotL64(aExpandLaneB[((aIndex + 11880U)) & S_BLOCK1], 43U);
-
-            aOperationLaneA[aIndex] = aIngress;
-        }
-    
-        //
-        // seed_loop_d loop 4
-        //
-        // Ingress:
-        //      aOperationLaneA (-->), aEarthLaneD (-->), aExpandLaneD (<-?->)
-        //
-        // Cross:
-        //      aScrapLaneB (<--), aEarthLaneA (<-?->)
-        //
-        // Destination:
-        //      aOperationLaneB
-        //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
-            //
-            aIngress = (RotL64(aOperationLaneA[((aIndex + 20450U)) & S_BLOCK1], 47U) ^ RotL64(aEarthLaneD[((aIndex + 20809U)) & S_BLOCK1], 27U));
-            aIngress ^= RotL64(aExpandLaneD[((S_BLOCK1 - aIndex + 19947U)) & S_BLOCK1], 14U);
-
-            //
-            aCross = RotL64(aScrapLaneB[((S_BLOCK1 - aIndex + 18532U)) & S_BLOCK1], 60U) ^ RotL64(aEarthLaneA[((aIndex + 16531U)) & S_BLOCK1], 47U);
-
-            aOperationLaneB[S_BLOCK1 - aIndex] = aIngress;
-        }
-    
-        //
-        // seed_loop_d loop 5
-        //
-        // Ingress:
-        //      aOperationLaneB (-->), aScrapLaneB (-->), aWorkLaneD (<-?->)
-        //
-        // Cross:
-        //      aOperationLaneA (<--), aScrapLaneA (<-?->)
-        //
-        // Destination:
-        //      aOperationLaneC
-        //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
-            //
-            aIngress = (RotL64(aOperationLaneB[((aIndex + 24216U)) & S_BLOCK1], 6U) ^ RotL64(aScrapLaneB[((aIndex + 26470U)) & S_BLOCK1], 47U));
-            aIngress ^= RotL64(aWorkLaneD[((S_BLOCK1 - aIndex + 23660U)) & S_BLOCK1], 57U);
-
-            //
-            aCross = RotL64(aOperationLaneA[((S_BLOCK1 - aIndex + 25206U)) & S_BLOCK1], 19U) ^ RotL64(aScrapLaneA[((S_BLOCK1 - aIndex + 27271U)) & S_BLOCK1], 4U);
-
-            aOperationLaneC[aIndex] = aIngress;
-        }
-    
-        //
-        // seed_loop_d loop 6
-        //
-        // Ingress:
-        //      aOperationLaneC (-->), aOperationLaneA (-->), aWorkLaneA (<-?->)
-        //
-        // Cross:
-        //      aOperationLaneB (<--), aEarthLaneB (<--)
-        //
-        // Destination:
-        //      aOperationLaneD
-        //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
-            //
-            aIngress = (RotL64(aOperationLaneC[((aIndex + 28422U)) & S_BLOCK1], 29U) ^ RotL64(aOperationLaneA[((aIndex + 30899U)) & S_BLOCK1], 38U));
-            aIngress ^= RotL64(aWorkLaneA[((S_BLOCK1 - aIndex + 27851U)) & S_BLOCK1], 13U);
-
-            //
-            aCross = RotL64(aOperationLaneB[((S_BLOCK1 - aIndex + 28899U)) & S_BLOCK1], 13U) ^ RotL64(aEarthLaneB[((S_BLOCK1 - aIndex + 31394U)) & S_BLOCK1], 46U);
-
-            aOperationLaneD[S_BLOCK1 - aIndex] = aIngress;
-        }
-    }
-    // GSeedRunSeed_C seed_loop_d (end)
-    
-}
-
-void TwistExpander_Vega_Arx::Seed_D() {
-    const std::uint64_t &aPhaseBDomainWordIngress = pWorkSpace->mDomainBundle.mPhaseBConstants.mIngress;
-    const std::uint64_t &aPhaseBDomainWordScatter = pWorkSpace->mDomainBundle.mPhaseBConstants.mScatter;
-    const std::uint64_t &aPhaseBDomainWordCross = pWorkSpace->mDomainBundle.mPhaseBConstants.mCross;
-    const std::uint64_t &aPhaseDDomainWordIngress = pWorkSpace->mDomainBundle.mPhaseDConstants.mIngress;
-    const std::uint64_t &aPhaseDDomainWordScatter = pWorkSpace->mDomainBundle.mPhaseDConstants.mScatter;
-    const std::uint64_t &aPhaseDDomainWordCross = pWorkSpace->mDomainBundle.mPhaseDConstants.mCross;
-    const std::uint64_t &aPhaseEDomainWordIngress = pWorkSpace->mDomainBundle.mPhaseEConstants.mIngress;
-    const std::uint64_t &aPhaseEDomainWordScatter = pWorkSpace->mDomainBundle.mPhaseEConstants.mScatter;
-    const std::uint64_t &aPhaseEDomainWordCross = pWorkSpace->mDomainBundle.mPhaseEConstants.mCross;
-    // [seed arx]
-    // GSeedRunSeed_D seed_loop_c (start)
-    {
-        //
-        // seed_loop_c loop 1
-        //
-        // Ingress:
-        //      aOperationLaneA (-->), aOperationLaneB (-->), aExpandLaneA (<-?->)
-        //
-        // Cross:
-        //      aOperationLaneC (<--), aOperationLaneD (<--), aExpandLaneC (<-?->)
-        //
-        // Destination:
-        //      aScrapLaneC
-        //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
-            //
-            aIngress = (RotL64(aOperationLaneA[((aIndex + 3118U)) & S_BLOCK1], 57U) ^ RotL64(aOperationLaneB[((aIndex + 1572U)) & S_BLOCK1], 3U));
-            aIngress ^= RotL64(aExpandLaneA[((S_BLOCK1 - aIndex + 1933U)) & S_BLOCK1], 39U);
-
-            //
-            aCross = (RotL64(aOperationLaneC[((S_BLOCK1 - aIndex + 4362U)) & S_BLOCK1], 23U) ^ RotL64(aOperationLaneD[((S_BLOCK1 - aIndex + 3051U)) & S_BLOCK1], 43U));
-            aCross ^= RotL64(aExpandLaneC[((aIndex + 1366U)) & S_BLOCK1], 58U);
-
-            aScrapLaneC[aIndex] = aIngress;
-        }
-    
-        //
-        // seed_loop_c loop 2
-        //
-        // Ingress:
-        //      aScrapLaneC (-->), aOperationLaneC (-->), aExpandLaneB (<-?->)
-        //
-        // Cross:
-        //      aOperationLaneA (<--), aOperationLaneD (<--), aWorkLaneD (<-?->)
-        //
-        // Destination:
-        //      aScrapLaneD
-        //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
-            //
-            aIngress = (RotL64(aScrapLaneC[((aIndex + 10150U)) & S_BLOCK1], 51U) ^ RotL64(aOperationLaneC[((aIndex + 5811U)) & S_BLOCK1], 39U));
-            aIngress ^= RotL64(aExpandLaneB[((aIndex + 6741U)) & S_BLOCK1], 11U);
-
-            //
-            aCross = (RotL64(aOperationLaneA[((S_BLOCK1 - aIndex + 7740U)) & S_BLOCK1], 35U) ^ RotL64(aOperationLaneD[((S_BLOCK1 - aIndex + 10545U)) & S_BLOCK1], 5U));
-            aCross ^= RotL64(aWorkLaneD[((aIndex + 8702U)) & S_BLOCK1], 51U);
-
-            aScrapLaneD[S_BLOCK1 - aIndex] = aIngress;
-        }
-    
-        //
-        // seed_loop_c loop 3
-        //
-        // Ingress:
-        //      aScrapLaneD (-->), aOperationLaneA (-->), aEarthLaneC (<-?->)
-        //
-        // Cross:
-        //      aScrapLaneC (<--), aOperationLaneC (<--), aScrapLaneB (<-?->)
-        //
-        // Destination:
-        //      aFuseLaneA
-        //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
-            //
-            aIngress = (RotL64(aScrapLaneD[((aIndex + 13598U)) & S_BLOCK1], 57U) ^ RotL64(aOperationLaneA[((aIndex + 11833U)) & S_BLOCK1], 19U));
-            aIngress ^= RotL64(aEarthLaneC[((aIndex + 14376U)) & S_BLOCK1], 39U);
-
-            //
-            aCross = (RotL64(aScrapLaneC[((S_BLOCK1 - aIndex + 13941U)) & S_BLOCK1], 50U) ^ RotL64(aOperationLaneC[((S_BLOCK1 - aIndex + 12858U)) & S_BLOCK1], 19U));
-            aCross ^= RotL64(aScrapLaneB[((aIndex + 15943U)) & S_BLOCK1], 3U);
-
-            aFuseLaneA[aIndex] = aIngress;
-        }
-    
-        //
-        // seed_loop_c loop 4
-        //
-        // Ingress:
-        //      aFuseLaneA (-->), aOperationLaneD (-->), aEarthLaneD (<-?->)
-        //
-        // Cross:
-        //      aScrapLaneD (<--), aOperationLaneA (<--), aEarthLaneA (<-?->)
-        //
-        // Destination:
-        //      aFuseLaneB
-        //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
-            //
-            aIngress = (RotL64(aFuseLaneA[((aIndex + 17706U)) & S_BLOCK1], 56U) ^ RotL64(aOperationLaneD[((aIndex + 20638U)) & S_BLOCK1], 37U));
-            aIngress ^= RotL64(aEarthLaneD[((S_BLOCK1 - aIndex + 21537U)) & S_BLOCK1], 19U);
-
-            //
-            aCross = (RotL64(aScrapLaneD[((S_BLOCK1 - aIndex + 17799U)) & S_BLOCK1], 11U) ^ RotL64(aOperationLaneA[((S_BLOCK1 - aIndex + 17488U)) & S_BLOCK1], 23U));
-            aCross ^= RotL64(aEarthLaneA[((S_BLOCK1 - aIndex + 18408U)) & S_BLOCK1], 35U);
-
-            aFuseLaneB[S_BLOCK1 - aIndex] = aIngress;
-        }
-    
-        //
-        // seed_loop_c loop 5
-        //
-        // Ingress:
-        //      aFuseLaneB (-->), aScrapLaneD (-->), aEarthLaneB (<-?->)
-        //
-        // Cross:
-        //      aFuseLaneA (<--), aScrapLaneC (<--), aKeyRowReadA (<-?->)
-        //
-        // Destination:
-        //      aFuseLaneC
-        //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
-            //
-            aIngress = (RotL64(aFuseLaneB[((aIndex + 25949U)) & S_BLOCK1], 14U) ^ RotL64(aScrapLaneD[((aIndex + 25557U)) & S_BLOCK1], 39U));
-            aIngress ^= RotL64(aEarthLaneB[((S_BLOCK1 - aIndex + 25498U)) & S_BLOCK1], 57U);
-
-            //
-            aCross = (RotL64(aFuseLaneA[((S_BLOCK1 - aIndex + 24664U)) & S_BLOCK1], 27U) ^ RotL64(aScrapLaneC[((S_BLOCK1 - aIndex + 25922U)) & S_BLOCK1], 51U));
-            aCross ^= RotL64(aKeyRowReadA[(((2047U - aIndex) + 22110U)) & W_KEY1], 60U);
-
-            aFuseLaneC[aIndex] = aIngress;
-        }
-    
-        //
-        // seed_loop_c loop 6
-        //
-        // Ingress:
-        //      aFuseLaneC (-->), aFuseLaneA (-->), aScrapLaneA (<-?->)
-        //
-        // Cross:
-        //      aFuseLaneB (<--), aOperationLaneB (<--), aExpandLaneD (<-?->)
-        //
-        // Destination:
-        //      aFuseLaneD
-        //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
-            //
-            aIngress = (RotL64(aFuseLaneC[((aIndex + 27515U)) & S_BLOCK1], 13U) ^ RotL64(aFuseLaneA[((aIndex + 30358U)) & S_BLOCK1], 57U));
-            aIngress ^= RotL64(aScrapLaneA[((aIndex + 27715U)) & S_BLOCK1], 47U);
-
-            //
-            aCross = (RotL64(aFuseLaneB[((S_BLOCK1 - aIndex + 31464U)) & S_BLOCK1], 3U) ^ RotL64(aOperationLaneB[((S_BLOCK1 - aIndex + 30826U)) & S_BLOCK1], 35U));
-            aCross ^= RotL64(aExpandLaneD[((S_BLOCK1 - aIndex + 29321U)) & S_BLOCK1], 27U);
-
-            aFuseLaneD[S_BLOCK1 - aIndex] = aIngress;
-        }
-    }
-    // GSeedRunSeed_D seed_loop_c (end)
-    
-}
-
-void TwistExpander_Vega_Arx::Seed_E() {
-    const std::uint64_t &aPhaseADomainWordIngress = pWorkSpace->mDomainBundle.mPhaseAConstants.mIngress;
-    const std::uint64_t &aPhaseADomainWordScatter = pWorkSpace->mDomainBundle.mPhaseAConstants.mScatter;
-    const std::uint64_t &aPhaseADomainWordCross = pWorkSpace->mDomainBundle.mPhaseAConstants.mCross;
-    const std::uint64_t &aPhaseCDomainWordIngress = pWorkSpace->mDomainBundle.mPhaseCConstants.mIngress;
-    const std::uint64_t &aPhaseCDomainWordScatter = pWorkSpace->mDomainBundle.mPhaseCConstants.mScatter;
-    const std::uint64_t &aPhaseCDomainWordCross = pWorkSpace->mDomainBundle.mPhaseCConstants.mCross;
-    const std::uint64_t &aPhaseFDomainWordIngress = pWorkSpace->mDomainBundle.mPhaseFConstants.mIngress;
-    const std::uint64_t &aPhaseFDomainWordScatter = pWorkSpace->mDomainBundle.mPhaseFConstants.mScatter;
-    const std::uint64_t &aPhaseFDomainWordCross = pWorkSpace->mDomainBundle.mPhaseFConstants.mCross;
-    // [seed arx]
-    // GSeedRunSeed_E seed_loop_b (start)
+    // GSeedRunSeed_B seed_loop_b (start)
     {
         //
         // seed_loop_b loop 1
         //
         // Ingress:
-        //      aFireLaneA (-->), aFireLaneB (-->), aEarthLaneB (-->), aOperationLaneB (<-?->)
+        //      aEarthLaneA (-->), aEarthLaneB (-->), aKeyRowReadA (<-?->)
         //
         // Cross:
-        //      aFireLaneC (<--), aFireLaneD (<--), aOperationLaneC (<-?->)
+        //      aEarthLaneC (<--), aEarthLaneD (<-?->)
         //
         // Destination:
-        //      aWaterLaneC
+        //      aPoisonLaneC
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = (RotL64(aFireLaneA[((aIndex + 1100U)) & S_BLOCK1], 11U) ^ RotL64(aFireLaneB[((aIndex + 106U)) & S_BLOCK1], 58U));
-            aIngress ^= (RotL64(aEarthLaneB[((aIndex + 112U)) & S_BLOCK1], 19U) ^ RotL64(aOperationLaneB[((aIndex + 2345U)) & S_BLOCK1], 43U));
-
+            aIngress = aEarthLaneA[aIndex] ^ aEarthLaneB[aIndex];
+            aIngress ^= aKeyRowReadA[W_KEY1 - aIndex];
             //
-            aCross = (RotL64(aFireLaneC[((S_BLOCK1 - aIndex + 3820U)) & S_BLOCK1], 37U) ^ RotL64(aFireLaneD[((S_BLOCK1 - aIndex + 1782U)) & S_BLOCK1], 60U));
-            aCross ^= RotL64(aOperationLaneC[((S_BLOCK1 - aIndex + 4109U)) & S_BLOCK1], 5U);
-
-            aWaterLaneC[aIndex] = aIngress;
+            aCross = aEarthLaneC[aIndex] ^ aEarthLaneD[aIndex];
+            //
+            aPoisonLaneC[aIndex] = aIngress;
         }
     
         //
         // seed_loop_b loop 2
         //
         // Ingress:
-        //      aWaterLaneC (-->), aFireLaneC (-->), aWorkLaneC (-->), aEarthLaneD (<-?->)
+        //      aPoisonLaneC (-->), aEarthLaneC (-->), aPoisonLaneA (<-?->)
         //
         // Cross:
-        //      aFireLaneA (<--), aFireLaneD (<--), aScrapLaneA (<-?->)
+        //      aEarthLaneA (<--), aEarthLaneD (<--)
         //
         // Destination:
-        //      aWaterLaneD
+        //      aPoisonLaneD
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = (RotL64(aWaterLaneC[((aIndex + 9697U)) & S_BLOCK1], 56U) ^ RotL64(aFireLaneC[((aIndex + 6805U)) & S_BLOCK1], 19U));
-            aIngress ^= (RotL64(aWorkLaneC[((aIndex + 7242U)) & S_BLOCK1], 35U) ^ RotL64(aEarthLaneD[((aIndex + 7184U)) & S_BLOCK1], 47U));
-
+            aIngress = aPoisonLaneC[aIndex] ^ aEarthLaneC[aIndex];
+            aIngress ^= aPoisonLaneA[aIndex];
             //
-            aCross = (RotL64(aFireLaneA[((S_BLOCK1 - aIndex + 9011U)) & S_BLOCK1], 37U) ^ RotL64(aFireLaneD[((S_BLOCK1 - aIndex + 6771U)) & S_BLOCK1], 6U));
-            aCross ^= RotL64(aScrapLaneA[((S_BLOCK1 - aIndex + 6950U)) & S_BLOCK1], 21U);
-
-            aWaterLaneD[S_BLOCK1 - aIndex] = aIngress;
+            aCross = aEarthLaneA[aIndex] ^ aEarthLaneD[aIndex];
+            //
+            aPoisonLaneD[aIndex] = aIngress;
         }
     
         //
         // seed_loop_b loop 3
         //
         // Ingress:
-        //      aWaterLaneD (-->), aFireLaneA (-->), aKeyRowReadB (<-?->)
+        //      aPoisonLaneD (-->), aEarthLaneA (-->), aSource (<-?->)
         //
         // Cross:
-        //      aWaterLaneC (<--), aFireLaneC (<--), aScrapLaneD (<-?->)
+        //      aPoisonLaneC (<--), aEarthLaneC (<-?->)
         //
         // Destination:
-        //      aInvestLaneA
+        //      aFireLaneA
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = (RotL64(aWaterLaneD[((aIndex + 11898U)) & S_BLOCK1], 35U) ^ RotL64(aFireLaneA[((aIndex + 12918U)) & S_BLOCK1], 51U));
-            aIngress ^= RotL64(aKeyRowReadB[(((2047U - aIndex) + 11683U)) & W_KEY1], 5U);
-
+            aIngress = aPoisonLaneD[aIndex] ^ aEarthLaneA[aIndex];
+            aIngress ^= aSource[aIndex];
             //
-            aCross = (RotL64(aWaterLaneC[((S_BLOCK1 - aIndex + 11898U)) & S_BLOCK1], 47U) ^ RotL64(aFireLaneC[((S_BLOCK1 - aIndex + 11013U)) & S_BLOCK1], 4U));
-            aCross ^= RotL64(aScrapLaneD[((S_BLOCK1 - aIndex + 11196U)) & S_BLOCK1], 29U);
-
-            aInvestLaneA[aIndex] = aIngress;
+            aCross = aPoisonLaneC[aIndex] ^ aEarthLaneC[aIndex];
+            //
+            aFireLaneA[aIndex] = aIngress;
         }
     
         //
         // seed_loop_b loop 4
         //
         // Ingress:
-        //      aInvestLaneA (-->), aFireLaneD (-->), aEarthLaneA (<-?->)
+        //      aFireLaneA (-->), aEarthLaneD (-->), aKeyRowReadB (<-?->)
         //
         // Cross:
-        //      aWaterLaneD (<--), aFireLaneA (<--), aScrapLaneC (<-?->)
+        //      aPoisonLaneD (<--), aEarthLaneA (<-?->)
         //
         // Destination:
-        //      aInvestLaneB
+        //      aFireLaneB
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = (RotL64(aInvestLaneA[((aIndex + 16948U)) & S_BLOCK1], 19U) ^ RotL64(aFireLaneD[((aIndex + 19572U)) & S_BLOCK1], 41U));
-            aIngress ^= RotL64(aEarthLaneA[((aIndex + 17707U)) & S_BLOCK1], 10U);
-
+            aIngress = aFireLaneA[aIndex] ^ aEarthLaneD[aIndex];
+            aIngress ^= aKeyRowReadB[W_KEY1 - aIndex];
             //
-            aCross = (RotL64(aWaterLaneD[((S_BLOCK1 - aIndex + 19061U)) & S_BLOCK1], 57U) ^ RotL64(aFireLaneA[((S_BLOCK1 - aIndex + 20680U)) & S_BLOCK1], 23U));
-            aCross ^= RotL64(aScrapLaneC[((aIndex + 20627U)) & S_BLOCK1], 6U);
-
-            aInvestLaneB[S_BLOCK1 - aIndex] = aIngress;
+            aCross = aPoisonLaneD[aIndex] ^ aEarthLaneA[aIndex];
+            //
+            aFireLaneB[aIndex] = aIngress;
         }
     
         //
         // seed_loop_b loop 5
         //
         // Ingress:
-        //      aInvestLaneB (-->), aWaterLaneD (-->), aScrapLaneB (<-?->)
+        //      aFireLaneB (-->), aPoisonLaneD (-->), aPoisonLaneB (<-?->)
         //
         // Cross:
-        //      aInvestLaneA (<--), aWaterLaneC (<--), aOperationLaneD (<-?->)
+        //      aFireLaneA (<--), aPoisonLaneC (<-?->)
         //
         // Destination:
-        //      aInvestLaneC
+        //      aFireLaneC
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = (RotL64(aInvestLaneB[((aIndex + 23164U)) & S_BLOCK1], 5U) ^ RotL64(aWaterLaneD[((aIndex + 25518U)) & S_BLOCK1], 26U));
-            aIngress ^= RotL64(aScrapLaneB[((aIndex + 22364U)) & S_BLOCK1], 53U);
-
+            aIngress = aFireLaneB[aIndex] ^ aPoisonLaneD[aIndex];
+            aIngress ^= aPoisonLaneB[aIndex];
             //
-            aCross = (RotL64(aInvestLaneA[((S_BLOCK1 - aIndex + 27094U)) & S_BLOCK1], 34U) ^ RotL64(aWaterLaneC[((S_BLOCK1 - aIndex + 22239U)) & S_BLOCK1], 19U));
-            aCross ^= RotL64(aOperationLaneD[((aIndex + 23830U)) & S_BLOCK1], 51U);
-
-            aInvestLaneC[aIndex] = aIngress;
+            aCross = aFireLaneA[aIndex] ^ aPoisonLaneC[aIndex];
+            //
+            aFireLaneC[aIndex] = aIngress;
         }
     
         //
         // seed_loop_b loop 6
         //
         // Ingress:
-        //      aInvestLaneC (-->), aInvestLaneA (-->), aEarthLaneC (<-?->)
+        //      aFireLaneC (-->), aFireLaneA (<-?->)
         //
         // Cross:
-        //      aInvestLaneB (<--), aFireLaneB (<--), aOperationLaneA (<-?->)
+        //      aFireLaneB (<--), aEarthLaneB (<--)
         //
         // Destination:
-        //      aInvestLaneD
+        //      aFireLaneD
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = (RotL64(aInvestLaneC[((aIndex + 30314U)) & S_BLOCK1], 43U) ^ RotL64(aInvestLaneA[((aIndex + 29805U)) & S_BLOCK1], 21U));
-            aIngress ^= RotL64(aEarthLaneC[((aIndex + 30822U)) & S_BLOCK1], 11U);
-
+            aIngress = aFireLaneC[aIndex] ^ aFireLaneA[aIndex];
             //
-            aCross = (RotL64(aInvestLaneB[((S_BLOCK1 - aIndex + 29187U)) & S_BLOCK1], 58U) ^ RotL64(aFireLaneB[((S_BLOCK1 - aIndex + 30639U)) & S_BLOCK1], 47U));
-            aCross ^= RotL64(aOperationLaneA[((aIndex + 29397U)) & S_BLOCK1], 5U);
-
-            aInvestLaneD[S_BLOCK1 - aIndex] = aIngress;
+            aCross = aFireLaneB[aIndex] ^ aEarthLaneB[aIndex];
+            //
+            aFireLaneD[aIndex] = aIngress;
         }
     }
-    // GSeedRunSeed_E seed_loop_b (end)
-    
+    // GSeedRunSeed_B seed_loop_b (end)
+
 }
 
-void TwistExpander_Vega_Arx::Seed_F() {
-    const std::uint64_t &aPhaseADomainWordIngress = pWorkSpace->mDomainBundle.mPhaseAConstants.mIngress;
-    const std::uint64_t &aPhaseADomainWordScatter = pWorkSpace->mDomainBundle.mPhaseAConstants.mScatter;
-    const std::uint64_t &aPhaseADomainWordCross = pWorkSpace->mDomainBundle.mPhaseAConstants.mCross;
-    const std::uint64_t &aPhaseCDomainWordIngress = pWorkSpace->mDomainBundle.mPhaseCConstants.mIngress;
-    const std::uint64_t &aPhaseCDomainWordScatter = pWorkSpace->mDomainBundle.mPhaseCConstants.mScatter;
-    const std::uint64_t &aPhaseCDomainWordCross = pWorkSpace->mDomainBundle.mPhaseCConstants.mCross;
-    const std::uint64_t &aPhaseEDomainWordIngress = pWorkSpace->mDomainBundle.mPhaseEConstants.mIngress;
-    const std::uint64_t &aPhaseEDomainWordScatter = pWorkSpace->mDomainBundle.mPhaseEConstants.mScatter;
-    const std::uint64_t &aPhaseEDomainWordCross = pWorkSpace->mDomainBundle.mPhaseEConstants.mCross;
-    const std::uint64_t &aPhaseFDomainWordIngress = pWorkSpace->mDomainBundle.mPhaseFConstants.mIngress;
-    const std::uint64_t &aPhaseFDomainWordScatter = pWorkSpace->mDomainBundle.mPhaseFConstants.mScatter;
-    const std::uint64_t &aPhaseFDomainWordCross = pWorkSpace->mDomainBundle.mPhaseFConstants.mCross;
-    // [seed arx]
-    // GSeedRunSeed_F seed_loop_c (start)
+void TwistExpander_Vega_Arx::Seed_C() {
+
+
+    // GSeedRunSeed_C seed_loop_c (start)
     {
         //
         // seed_loop_c loop 1
         //
         // Ingress:
-        //      aInvestLaneA (-->), aInvestLaneB (-->), aFireLaneB (-->), aOperationLaneD (<-?->)
+        //      aFireLaneA (-->), aFireLaneB (-->), aEarthLaneA (<-?->)
         //
         // Cross:
-        //      aInvestLaneC (<--), aInvestLaneD (<--), aWaterLaneD (<-?->)
+        //      aFireLaneC (<--), aFireLaneD (<--), aPoisonLaneA (<-?->)
         //
         // Destination:
-        //      aSnowLaneC
+        //      aHeartLaneA
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = (RotL64(aInvestLaneA[((aIndex + 5358U)) & S_BLOCK1], 10U) ^ RotL64(aInvestLaneB[((aIndex + 2072U)) & S_BLOCK1], 35U));
-            aIngress ^= (RotL64(aFireLaneB[((aIndex + 2494U)) & S_BLOCK1], 57U) ^ RotL64(aOperationLaneD[((aIndex + 1676U)) & S_BLOCK1], 23U));
-
+            aIngress = aFireLaneA[aIndex] ^ aFireLaneB[aIndex];
+            aIngress ^= aEarthLaneA[aIndex];
             //
-            aCross = (RotL64(aInvestLaneC[((S_BLOCK1 - aIndex + 3148U)) & S_BLOCK1], 41U) ^ RotL64(aInvestLaneD[((S_BLOCK1 - aIndex + 2862U)) & S_BLOCK1], 51U));
-            aCross ^= RotL64(aWaterLaneD[((aIndex + 984U)) & S_BLOCK1], 28U);
-
-            aSnowLaneC[aIndex] = aIngress;
+            aCross = aFireLaneC[aIndex] ^ aFireLaneD[aIndex];
+            aCross ^= aPoisonLaneA[aIndex];
+            //
+            aHeartLaneA[aIndex] = aIngress;
         }
     
         //
         // seed_loop_c loop 2
         //
         // Ingress:
-        //      aSnowLaneC (-->), aInvestLaneC (-->), aWaterLaneC (-->), aSource (<-?->)
+        //      aHeartLaneA (-->), aFireLaneC (-->), aPoisonLaneB (<-?->)
         //
         // Cross:
-        //      aInvestLaneA (<--), aInvestLaneD (<--), aFireLaneA (<-?->)
+        //      aFireLaneA (<--), aFireLaneD (<--), aKeyRowReadB (<-?->)
         //
         // Destination:
-        //      aSnowLaneD
+        //      aHeartLaneB
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = (RotL64(aSnowLaneC[((aIndex + 6315U)) & S_BLOCK1], 11U) ^ RotL64(aInvestLaneC[((aIndex + 6780U)) & S_BLOCK1], 29U));
-            aIngress ^= (RotL64(aWaterLaneC[((aIndex + 10694U)) & S_BLOCK1], 46U) ^ RotL64(aSource[((aIndex + 7752U)) & S_BLOCK1], 57U));
-
+            aIngress = aHeartLaneA[aIndex] ^ aFireLaneC[aIndex];
+            aIngress ^= aPoisonLaneB[aIndex];
             //
-            aCross = (RotL64(aInvestLaneA[((S_BLOCK1 - aIndex + 9968U)) & S_BLOCK1], 4U) ^ RotL64(aInvestLaneD[((S_BLOCK1 - aIndex + 9875U)) & S_BLOCK1], 29U));
-            aCross ^= RotL64(aFireLaneA[((S_BLOCK1 - aIndex + 8449U)) & S_BLOCK1], 53U);
-
-            aSnowLaneD[S_BLOCK1 - aIndex] = aIngress;
+            aCross = aFireLaneA[aIndex] ^ aFireLaneD[aIndex];
+            aCross ^= aKeyRowReadB[W_KEY1 - aIndex];
+            //
+            aHeartLaneB[aIndex] = aIngress;
         }
     
         //
         // seed_loop_c loop 3
         //
         // Ingress:
-        //      aSnowLaneD (-->), aInvestLaneA (-->), aScrapLaneB (-->), aFireLaneD (<-?->)
+        //      aHeartLaneB (-->), aFireLaneA (-->), aEarthLaneD (<-?->)
         //
         // Cross:
-        //      aSnowLaneC (<--), aInvestLaneC (<--), aScrapLaneC (<-?->)
+        //      aHeartLaneA (<--), aFireLaneC (<--), aEarthLaneB (<-?->)
         //
         // Destination:
-        //      aWindLaneA
+        //      aFuseLaneA
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = (RotL64(aSnowLaneD[((aIndex + 11310U)) & S_BLOCK1], 23U) ^ RotL64(aInvestLaneA[((aIndex + 15833U)) & S_BLOCK1], 39U));
-            aIngress ^= (RotL64(aScrapLaneB[((aIndex + 15650U)) & S_BLOCK1], 13U) ^ RotL64(aFireLaneD[((S_BLOCK1 - aIndex + 12168U)) & S_BLOCK1], 5U));
-
+            aIngress = aHeartLaneB[aIndex] ^ aFireLaneA[aIndex];
+            aIngress ^= aEarthLaneD[aIndex];
             //
-            aCross = (RotL64(aSnowLaneC[((S_BLOCK1 - aIndex + 15357U)) & S_BLOCK1], 11U) ^ RotL64(aInvestLaneC[((S_BLOCK1 - aIndex + 12978U)) & S_BLOCK1], 27U));
-            aCross ^= RotL64(aScrapLaneC[((aIndex + 12033U)) & S_BLOCK1], 19U);
-
-            aWindLaneA[aIndex] = aIngress;
+            aCross = aHeartLaneA[aIndex] ^ aFireLaneC[aIndex];
+            aCross ^= aEarthLaneB[aIndex];
+            //
+            aFuseLaneA[aIndex] = aIngress;
         }
     
         //
         // seed_loop_c loop 4
         //
         // Ingress:
-        //      aWindLaneA (-->), aInvestLaneD (-->), aFireLaneC (-->), aOperationLaneA (<-?->)
+        //      aFuseLaneA (-->), aFireLaneD (-->), aPoisonLaneC (<-?->)
         //
         // Cross:
-        //      aSnowLaneD (<--), aInvestLaneA (<--), aOperationLaneB (<-?->)
+        //      aHeartLaneB (<--), aFireLaneA (<--), aKeyRowReadA (<-?->)
         //
         // Destination:
-        //      aWindLaneB
+        //      aFuseLaneB
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = (RotL64(aWindLaneA[((aIndex + 16430U)) & S_BLOCK1], 48U) ^ RotL64(aInvestLaneD[((aIndex + 21447U)) & S_BLOCK1], 3U));
-            aIngress ^= (RotL64(aFireLaneC[((aIndex + 18694U)) & S_BLOCK1], 39U) ^ RotL64(aOperationLaneA[((aIndex + 18528U)) & S_BLOCK1], 29U));
-
+            aIngress = aFuseLaneA[aIndex] ^ aFireLaneD[aIndex];
+            aIngress ^= aPoisonLaneC[aIndex];
             //
-            aCross = (RotL64(aSnowLaneD[((S_BLOCK1 - aIndex + 19066U)) & S_BLOCK1], 6U) ^ RotL64(aInvestLaneA[((S_BLOCK1 - aIndex + 19412U)) & S_BLOCK1], 29U));
-            aCross ^= RotL64(aOperationLaneB[((aIndex + 16883U)) & S_BLOCK1], 21U);
-
-            aWindLaneB[S_BLOCK1 - aIndex] = aIngress;
+            aCross = aHeartLaneB[aIndex] ^ aFireLaneA[aIndex];
+            aCross ^= aKeyRowReadA[aIndex];
+            //
+            aFuseLaneB[aIndex] = aIngress;
         }
     
         //
         // seed_loop_c loop 5
         //
         // Ingress:
-        //      aWindLaneB (-->), aSnowLaneD (-->), aOperationLaneC (<-?->)
+        //      aFuseLaneB (-->), aHeartLaneB (-->), aEarthLaneC (<-?->)
         //
         // Cross:
-        //      aWindLaneA (<--), aSnowLaneC (<--), aScrapLaneD (<-?->)
+        //      aFuseLaneA (<--), aHeartLaneA (<--), aSource (<-?->)
         //
         // Destination:
-        //      aWindLaneC
+        //      aFuseLaneC
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = (RotL64(aWindLaneB[((aIndex + 25422U)) & S_BLOCK1], 60U) ^ RotL64(aSnowLaneD[((aIndex + 22059U)) & S_BLOCK1], 51U));
-            aIngress ^= RotL64(aOperationLaneC[((S_BLOCK1 - aIndex + 22537U)) & S_BLOCK1], 27U);
-
+            aIngress = aFuseLaneB[aIndex] ^ aHeartLaneB[aIndex];
+            aIngress ^= aEarthLaneC[aIndex];
             //
-            aCross = (RotL64(aWindLaneA[((S_BLOCK1 - aIndex + 27164U)) & S_BLOCK1], 29U) ^ RotL64(aSnowLaneC[((S_BLOCK1 - aIndex + 25519U)) & S_BLOCK1], 57U));
-            aCross ^= RotL64(aScrapLaneD[((S_BLOCK1 - aIndex + 25615U)) & S_BLOCK1], 4U);
-
-            aWindLaneC[aIndex] = aIngress;
+            aCross = aFuseLaneA[aIndex] ^ aHeartLaneA[aIndex];
+            aCross ^= aSource[aIndex];
+            //
+            aFuseLaneC[aIndex] = aIngress;
         }
     
         //
         // seed_loop_c loop 6
         //
         // Ingress:
-        //      aWindLaneC (-->), aWindLaneA (-->), aScrapLaneA (<-?->)
+        //      aFuseLaneC (-->), aFuseLaneA (-->), aPoisonLaneD (<-?->)
         //
         // Cross:
-        //      aWindLaneB (<--), aInvestLaneB (<--), aEarthLaneD (<-?->)
+        //      aFuseLaneB (<--), aFireLaneB (<--)
         //
         // Destination:
-        //      aWindLaneD
+        //      aFuseLaneD
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = (RotL64(aWindLaneC[((aIndex + 30649U)) & S_BLOCK1], 39U) ^ RotL64(aWindLaneA[((aIndex + 27652U)) & S_BLOCK1], 56U));
-            aIngress ^= RotL64(aScrapLaneA[((S_BLOCK1 - aIndex + 29658U)) & S_BLOCK1], 3U);
-
+            aIngress = aFuseLaneC[aIndex] ^ aFuseLaneA[aIndex];
+            aIngress ^= aPoisonLaneD[aIndex];
             //
-            aCross = (RotL64(aWindLaneB[((S_BLOCK1 - aIndex + 31545U)) & S_BLOCK1], 52U) ^ RotL64(aInvestLaneB[((S_BLOCK1 - aIndex + 29645U)) & S_BLOCK1], 5U));
-            aCross ^= RotL64(aEarthLaneD[((aIndex + 29201U)) & S_BLOCK1], 39U);
-
-            aWindLaneD[S_BLOCK1 - aIndex] = aIngress;
+            aCross = aFuseLaneB[aIndex] ^ aFireLaneB[aIndex];
+            //
+            aFuseLaneD[aIndex] = aIngress;
         }
     }
-    // GSeedRunSeed_F seed_loop_c (end)
-    
+    // GSeedRunSeed_C seed_loop_c (end)
+
 }
 
-void TwistExpander_Vega_Arx::Seed_G() {
-    const std::uint64_t &aPhaseADomainWordIngress = pWorkSpace->mDomainBundle.mPhaseAConstants.mIngress;
-    const std::uint64_t &aPhaseADomainWordScatter = pWorkSpace->mDomainBundle.mPhaseAConstants.mScatter;
-    const std::uint64_t &aPhaseADomainWordCross = pWorkSpace->mDomainBundle.mPhaseAConstants.mCross;
-    const std::uint64_t &aPhaseBDomainWordIngress = pWorkSpace->mDomainBundle.mPhaseBConstants.mIngress;
-    const std::uint64_t &aPhaseBDomainWordScatter = pWorkSpace->mDomainBundle.mPhaseBConstants.mScatter;
-    const std::uint64_t &aPhaseBDomainWordCross = pWorkSpace->mDomainBundle.mPhaseBConstants.mCross;
-    const std::uint64_t &aPhaseEDomainWordIngress = pWorkSpace->mDomainBundle.mPhaseEConstants.mIngress;
-    const std::uint64_t &aPhaseEDomainWordScatter = pWorkSpace->mDomainBundle.mPhaseEConstants.mScatter;
-    const std::uint64_t &aPhaseEDomainWordCross = pWorkSpace->mDomainBundle.mPhaseEConstants.mCross;
-    const std::uint64_t &aPhaseFDomainWordIngress = pWorkSpace->mDomainBundle.mPhaseFConstants.mIngress;
-    const std::uint64_t &aPhaseFDomainWordScatter = pWorkSpace->mDomainBundle.mPhaseFConstants.mScatter;
-    const std::uint64_t &aPhaseFDomainWordCross = pWorkSpace->mDomainBundle.mPhaseFConstants.mCross;
-    // [seed arx]
-    // GSeedRunSeed_G seed_loop_d (start)
+void TwistExpander_Vega_Arx::Seed_D() {
+
+
+    // GSeedRunSeed_D seed_loop_d (start)
     {
         //
         // seed_loop_d loop 1
         //
         // Ingress:
-        //      aWindLaneA (-->), aWindLaneB (-->), aFireLaneB (-->), aFireLaneD (<-?->)
+        //      aWindLaneA (-->), aWindLaneB (-->), aKeyRowReadA (-->), aSource (<-?->)
         //
         // Cross:
-        //      aWindLaneC (<--), aWindLaneD (<--), aWaterLaneC (<-?->)
+        //      aWindLaneC (<--), aWindLaneD (<--), aEarthLaneD (<-?->)
         //
         // Destination:
-        //      aWaterLaneA
+        //      aHeartLaneC
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = (RotL64(aWindLaneA[((aIndex + 773U)) & S_BLOCK1], 60U) ^ RotL64(aWindLaneB[((aIndex + 3550U)) & S_BLOCK1], 47U));
-            aIngress ^= (RotL64(aFireLaneB[((aIndex + 4995U)) & S_BLOCK1], 11U) ^ RotL64(aFireLaneD[((S_BLOCK1 - aIndex + 380U)) & S_BLOCK1], 39U));
-
+            aIngress = aWindLaneA[aIndex] ^ aWindLaneB[aIndex];
+            aIngress ^= (aKeyRowReadA[aIndex] ^ aSource[aIndex];
             //
-            aCross = (RotL64(aWindLaneC[((S_BLOCK1 - aIndex + 4846U)) & S_BLOCK1], 53U) ^ RotL64(aWindLaneD[((S_BLOCK1 - aIndex + 1876U)) & S_BLOCK1], 11U));
-            aCross ^= RotL64(aWaterLaneC[((S_BLOCK1 - aIndex + 2145U)) & S_BLOCK1], 35U);
-
-            aWaterLaneA[aIndex] = aIngress;
+            aCross = aWindLaneC[aIndex] ^ aWindLaneD[aIndex];
+            aCross ^= aEarthLaneD[aIndex];
+            //
+            aHeartLaneC[aIndex] = aIngress;
         }
     
         //
         // seed_loop_d loop 2
         //
         // Ingress:
-        //      aWaterLaneA (-->), aWindLaneC (-->), aSnowLaneC (-->), aEarthLaneA (<-?->)
+        //      aHeartLaneC (-->), aWindLaneC (-->), aEarthLaneA (-->), aPoisonLaneC (<-?->)
         //
         // Cross:
-        //      aWindLaneA (<--), aWindLaneD (<--), aInvestLaneC (<-?->)
+        //      aWindLaneA (<--), aWindLaneD (<--), aKeyRowReadB (<-?->)
         //
         // Destination:
-        //      aWaterLaneB
+        //      aHeartLaneD
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = (RotL64(aWaterLaneA[((aIndex + 6597U)) & S_BLOCK1], 19U) ^ RotL64(aWindLaneC[((aIndex + 7018U)) & S_BLOCK1], 28U));
-            aIngress ^= (RotL64(aSnowLaneC[((aIndex + 6847U)) & S_BLOCK1], 37U) ^ RotL64(aEarthLaneA[((S_BLOCK1 - aIndex + 8619U)) & S_BLOCK1], 53U));
-
+            aIngress = aHeartLaneC[aIndex] ^ aWindLaneC[aIndex];
+            aIngress ^= (aEarthLaneA[aIndex] ^ aPoisonLaneC[aIndex];
             //
-            aCross = (RotL64(aWindLaneA[((S_BLOCK1 - aIndex + 8851U)) & S_BLOCK1], 48U) ^ RotL64(aWindLaneD[((S_BLOCK1 - aIndex + 8312U)) & S_BLOCK1], 5U));
-            aCross ^= RotL64(aInvestLaneC[((S_BLOCK1 - aIndex + 9959U)) & S_BLOCK1], 35U);
-
-            aWaterLaneB[S_BLOCK1 - aIndex] = aIngress;
+            aCross = aWindLaneA[aIndex] ^ aWindLaneD[aIndex];
+            aCross ^= aKeyRowReadB[aIndex];
+            //
+            aHeartLaneD[aIndex] = aIngress;
         }
     
         //
         // seed_loop_d loop 3
         //
         // Ingress:
-        //      aWaterLaneB (-->), aWindLaneA (-->), aFireLaneA (-->), aKeyRowReadA (<-?->)
+        //      aHeartLaneD (-->), aWindLaneA (-->), aHeartLaneA (-->), aFireLaneD (<-?->)
         //
         // Cross:
-        //      aWaterLaneA (<--), aWindLaneC (<--), aEarthLaneC (<-?->)
+        //      aHeartLaneC (<--), aWindLaneC (<--), aEarthLaneC (<-?->)
         //
         // Destination:
-        //      aOperationLaneA
+        //      aWaterLaneA
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = (RotL64(aWaterLaneB[((aIndex + 13803U)) & S_BLOCK1], 21U) ^ RotL64(aWindLaneA[((aIndex + 13273U)) & S_BLOCK1], 53U));
-            aIngress ^= (RotL64(aFireLaneA[((aIndex + 12647U)) & S_BLOCK1], 30U) ^ RotL64(aKeyRowReadA[((aIndex + 12783U)) & W_KEY1], 43U));
-
+            aIngress = aHeartLaneD[aIndex] ^ aWindLaneA[aIndex];
+            aIngress ^= (aHeartLaneA[aIndex] ^ aFireLaneD[aIndex];
             //
-            aCross = (RotL64(aWaterLaneA[((S_BLOCK1 - aIndex + 14788U)) & S_BLOCK1], 27U) ^ RotL64(aWindLaneC[((S_BLOCK1 - aIndex + 15583U)) & S_BLOCK1], 11U));
-            aCross ^= RotL64(aEarthLaneC[((S_BLOCK1 - aIndex + 14177U)) & S_BLOCK1], 38U);
-
-            aOperationLaneA[aIndex] = aIngress;
+            aCross = aHeartLaneC[aIndex] ^ aWindLaneC[aIndex];
+            aCross ^= aEarthLaneC[aIndex];
+            //
+            aWaterLaneA[aIndex] = aIngress;
         }
     
         //
         // seed_loop_d loop 4
         //
         // Ingress:
-        //      aOperationLaneA (-->), aWindLaneD (-->), aInvestLaneA (-->), aScrapLaneC (<-?->)
+        //      aWaterLaneA (-->), aWindLaneD (-->), aPoisonLaneA (-->), aFireLaneB (<-?->)
         //
         // Cross:
-        //      aWaterLaneB (<--), aWindLaneA (<--), aFireLaneC (<-?->)
+        //      aHeartLaneD (<--), aWindLaneA (<--), aEarthLaneB (<-?->)
         //
         // Destination:
-        //      aOperationLaneB
+        //      aWaterLaneB
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = (RotL64(aOperationLaneA[((aIndex + 17440U)) & S_BLOCK1], 11U) ^ RotL64(aWindLaneD[((aIndex + 16490U)) & S_BLOCK1], 29U));
-            aIngress ^= (RotL64(aInvestLaneA[((aIndex + 19738U)) & S_BLOCK1], 44U) ^ RotL64(aScrapLaneC[((aIndex + 18359U)) & S_BLOCK1], 3U));
-
+            aIngress = aWaterLaneA[aIndex] ^ aWindLaneD[aIndex];
+            aIngress ^= (aPoisonLaneA[aIndex] ^ aFireLaneB[aIndex];
             //
-            aCross = (RotL64(aWaterLaneB[((S_BLOCK1 - aIndex + 19381U)) & S_BLOCK1], 13U) ^ RotL64(aWindLaneA[((S_BLOCK1 - aIndex + 21093U)) & S_BLOCK1], 40U));
-            aCross ^= RotL64(aFireLaneC[((S_BLOCK1 - aIndex + 17291U)) & S_BLOCK1], 53U);
-
-            aOperationLaneB[S_BLOCK1 - aIndex] = aIngress;
+            aCross = aHeartLaneD[aIndex] ^ aWindLaneA[aIndex];
+            aCross ^= aEarthLaneB[aIndex];
+            //
+            aWaterLaneB[aIndex] = aIngress;
         }
     
         //
         // seed_loop_d loop 5
         //
         // Ingress:
-        //      aOperationLaneB (-->), aWaterLaneB (-->), aInvestLaneB (-->), aScrapLaneD (<-?->)
+        //      aWaterLaneB (-->), aHeartLaneD (-->), aFireLaneA (-->), aPoisonLaneD (<-?->)
         //
         // Cross:
-        //      aOperationLaneA (<--), aWaterLaneA (<--), aEarthLaneB (<-?->)
+        //      aWaterLaneA (<--), aHeartLaneC (<--), aPoisonLaneB (<-?->)
         //
         // Destination:
-        //      aOperationLaneC
+        //      aWaterLaneC
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = (RotL64(aOperationLaneB[((aIndex + 27133U)) & S_BLOCK1], 41U) ^ RotL64(aWaterLaneB[((aIndex + 22026U)) & S_BLOCK1], 51U));
-            aIngress ^= (RotL64(aInvestLaneB[((aIndex + 22686U)) & S_BLOCK1], 18U) ^ RotL64(aScrapLaneD[((aIndex + 23262U)) & S_BLOCK1], 27U));
-
+            aIngress = aWaterLaneB[aIndex] ^ aHeartLaneD[aIndex];
+            aIngress ^= (aFireLaneA[aIndex] ^ aPoisonLaneD[aIndex];
             //
-            aCross = (RotL64(aOperationLaneA[((S_BLOCK1 - aIndex + 25620U)) & S_BLOCK1], 39U) ^ RotL64(aWaterLaneA[((S_BLOCK1 - aIndex + 24563U)) & S_BLOCK1], 47U));
-            aCross ^= RotL64(aEarthLaneB[((S_BLOCK1 - aIndex + 25346U)) & S_BLOCK1], 57U);
-
-            aOperationLaneC[aIndex] = aIngress;
+            aCross = aWaterLaneA[aIndex] ^ aHeartLaneC[aIndex];
+            aCross ^= aPoisonLaneB[aIndex];
+            //
+            aWaterLaneC[aIndex] = aIngress;
         }
     
         //
         // seed_loop_d loop 6
         //
         // Ingress:
-        //      aOperationLaneC (-->), aOperationLaneA (-->), aInvestLaneD (-->), aWaterLaneD (<-?->)
+        //      aWaterLaneC (-->), aWaterLaneA (-->), aFireLaneC (<-?->)
         //
         // Cross:
-        //      aOperationLaneB (<--), aWindLaneB (<--), aSnowLaneD (<-?->)
+        //      aWaterLaneB (<--), aWindLaneB (<--), aHeartLaneB (<-?->)
         //
         // Destination:
-        //      aOperationLaneD
+        //      aWaterLaneD
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = (RotL64(aOperationLaneC[((aIndex + 27764U)) & S_BLOCK1], 10U) ^ RotL64(aOperationLaneA[((aIndex + 31751U)) & S_BLOCK1], 41U));
-            aIngress ^= (RotL64(aInvestLaneD[((aIndex + 27541U)) & S_BLOCK1], 29U) ^ RotL64(aWaterLaneD[((S_BLOCK1 - aIndex + 28728U)) & S_BLOCK1], 51U));
-
+            aIngress = aWaterLaneC[aIndex] ^ aWaterLaneA[aIndex];
+            aIngress ^= aFireLaneC[aIndex];
             //
-            aCross = (RotL64(aOperationLaneB[((S_BLOCK1 - aIndex + 30232U)) & S_BLOCK1], 19U) ^ RotL64(aWindLaneB[((S_BLOCK1 - aIndex + 27511U)) & S_BLOCK1], 57U));
-            aCross ^= RotL64(aSnowLaneD[((S_BLOCK1 - aIndex + 30735U)) & S_BLOCK1], 28U);
-
-            aOperationLaneD[S_BLOCK1 - aIndex] = aIngress;
+            aCross = aWaterLaneB[aIndex] ^ aWindLaneB[aIndex];
+            aCross ^= aHeartLaneB[aIndex];
+            //
+            aWaterLaneD[aIndex] = aIngress;
         }
     }
-    // GSeedRunSeed_G seed_loop_d (end)
-    
+    // GSeedRunSeed_D seed_loop_d (end)
+
 }
 
-void TwistExpander_Vega_Arx::Seed_H() {
-    const std::uint64_t &aPhaseBDomainWordIngress = pWorkSpace->mDomainBundle.mPhaseBConstants.mIngress;
-    const std::uint64_t &aPhaseBDomainWordScatter = pWorkSpace->mDomainBundle.mPhaseBConstants.mScatter;
-    const std::uint64_t &aPhaseBDomainWordCross = pWorkSpace->mDomainBundle.mPhaseBConstants.mCross;
-    const std::uint64_t &aPhaseCDomainWordIngress = pWorkSpace->mDomainBundle.mPhaseCConstants.mIngress;
-    const std::uint64_t &aPhaseCDomainWordScatter = pWorkSpace->mDomainBundle.mPhaseCConstants.mScatter;
-    const std::uint64_t &aPhaseCDomainWordCross = pWorkSpace->mDomainBundle.mPhaseCConstants.mCross;
-    const std::uint64_t &aPhaseDDomainWordIngress = pWorkSpace->mDomainBundle.mPhaseDConstants.mIngress;
-    const std::uint64_t &aPhaseDDomainWordScatter = pWorkSpace->mDomainBundle.mPhaseDConstants.mScatter;
-    const std::uint64_t &aPhaseDDomainWordCross = pWorkSpace->mDomainBundle.mPhaseDConstants.mCross;
-    const std::uint64_t &aPhaseFDomainWordIngress = pWorkSpace->mDomainBundle.mPhaseFConstants.mIngress;
-    const std::uint64_t &aPhaseFDomainWordScatter = pWorkSpace->mDomainBundle.mPhaseFConstants.mScatter;
-    const std::uint64_t &aPhaseFDomainWordCross = pWorkSpace->mDomainBundle.mPhaseFConstants.mCross;
-    // [seed arx]
-    // GSeedRunSeed_H seed_loop_e (start)
+void TwistExpander_Vega_Arx::Seed_E() {
+
+
+    // GSeedRunSeed_E seed_loop_e (start)
     {
         //
         // seed_loop_e loop 1
         //
         // Ingress:
-        //      aOperationLaneA (-->), aOperationLaneB (-->), aFireLaneB (-->), aKeyRowReadB (<-?->)
+        //      aWaterLaneA (-->), aWaterLaneB (-->), aFireLaneC (-->), aKeyRowReadB (<-?->)
         //
         // Cross:
-        //      aOperationLaneC (<--), aOperationLaneD (<--), aInvestLaneB (<-?->)
+        //      aWaterLaneC (<--), aWaterLaneD (<--), aPoisonLaneD (<--), aHeartLaneD (<-?->)
         //
         // Destination:
-        //      aSnowLaneA
+        //      aWoodLaneA
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = (RotL64(aOperationLaneA[((aIndex + 4250U)) & S_BLOCK1], 19U) ^ RotL64(aOperationLaneB[((aIndex + 2782U)) & S_BLOCK1], 29U));
-            aIngress ^= (RotL64(aFireLaneB[((aIndex + 5412U)) & S_BLOCK1], 3U) ^ RotL64(aKeyRowReadB[((aIndex + 1952U)) & W_KEY1], 51U));
-
+            aIngress = aWaterLaneA[aIndex] ^ aWaterLaneB[aIndex];
+            aIngress ^= (aFireLaneC[aIndex] ^ aKeyRowReadB[W_KEY1 - aIndex];
             //
-            aCross = (RotL64(aOperationLaneC[((S_BLOCK1 - aIndex + 4632U)) & S_BLOCK1], 19U) ^ RotL64(aOperationLaneD[((S_BLOCK1 - aIndex + 1761U)) & S_BLOCK1], 4U));
-            aCross ^= RotL64(aInvestLaneB[((S_BLOCK1 - aIndex + 1459U)) & S_BLOCK1], 29U);
-
-            aSnowLaneA[aIndex] = aIngress;
+            aCross = aWaterLaneC[aIndex] ^ aWaterLaneD[aIndex];
+            aCross ^= aPoisonLaneD[aIndex] ^ aHeartLaneD[aIndex];
+            //
+            aWoodLaneA[aIndex] = aIngress;
         }
     
         //
         // seed_loop_e loop 2
         //
         // Ingress:
-        //      aSnowLaneA (-->), aOperationLaneC (-->), aWindLaneA (-->), aInvestLaneD (<-?->)
+        //      aWoodLaneA (-->), aWaterLaneC (-->), aFireLaneD (-->), aHeartLaneB (<-?->)
         //
         // Cross:
-        //      aOperationLaneA (<--), aOperationLaneD (<--), aInvestLaneC (<-?->)
+        //      aWaterLaneA (<--), aWaterLaneD (<--), aWindLaneC (<--), aEarthLaneA (<-?->)
         //
         // Destination:
-        //      aSnowLaneB
+        //      aWoodLaneB
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = (RotL64(aSnowLaneA[((aIndex + 8475U)) & S_BLOCK1], 4U) ^ RotL64(aOperationLaneC[((aIndex + 7057U)) & S_BLOCK1], 13U));
-            aIngress ^= (RotL64(aWindLaneA[((aIndex + 8280U)) & S_BLOCK1], 57U) ^ RotL64(aInvestLaneD[((S_BLOCK1 - aIndex + 6601U)) & S_BLOCK1], 35U));
-
+            aIngress = aWoodLaneA[aIndex] ^ aWaterLaneC[aIndex];
+            aIngress ^= (aFireLaneD[aIndex] ^ aHeartLaneB[aIndex];
             //
-            aCross = (RotL64(aOperationLaneA[((S_BLOCK1 - aIndex + 9286U)) & S_BLOCK1], 19U) ^ RotL64(aOperationLaneD[((S_BLOCK1 - aIndex + 5690U)) & S_BLOCK1], 41U));
-            aCross ^= RotL64(aInvestLaneC[((S_BLOCK1 - aIndex + 7307U)) & S_BLOCK1], 4U);
-
-            aSnowLaneB[S_BLOCK1 - aIndex] = aIngress;
+            aCross = aWaterLaneA[aIndex] ^ aWaterLaneD[aIndex];
+            aCross ^= aWindLaneC[aIndex] ^ aEarthLaneA[aIndex];
+            //
+            aWoodLaneB[aIndex] = aIngress;
         }
     
         //
         // seed_loop_e loop 3
         //
         // Ingress:
-        //      aSnowLaneB (-->), aOperationLaneA (-->), aWindLaneC (-->), aInvestLaneA (<-?->)
+        //      aWoodLaneB (-->), aWaterLaneA (-->), aWindLaneD (-->), aPoisonLaneA (<-?->)
         //
         // Cross:
-        //      aSnowLaneA (<--), aOperationLaneC (<--), aWaterLaneB (<-?->)
+        //      aWoodLaneA (<--), aWaterLaneC (<--), aHeartLaneA (<--), aPoisonLaneC (<-?->)
         //
         // Destination:
-        //      aFuseLaneA
+        //      aIceLaneA
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = (RotL64(aSnowLaneB[((aIndex + 11089U)) & S_BLOCK1], 11U) ^ RotL64(aOperationLaneA[((aIndex + 12444U)) & S_BLOCK1], 35U));
-            aIngress ^= (RotL64(aWindLaneC[((aIndex + 11855U)) & S_BLOCK1], 56U) ^ RotL64(aInvestLaneA[((S_BLOCK1 - aIndex + 16063U)) & S_BLOCK1], 23U));
-
+            aIngress = aWoodLaneB[aIndex] ^ aWaterLaneA[aIndex];
+            aIngress ^= (aWindLaneD[aIndex] ^ aPoisonLaneA[aIndex];
             //
-            aCross = (RotL64(aSnowLaneA[((S_BLOCK1 - aIndex + 11817U)) & S_BLOCK1], 36U) ^ RotL64(aOperationLaneC[((S_BLOCK1 - aIndex + 11741U)) & S_BLOCK1], 3U));
-            aCross ^= RotL64(aWaterLaneB[((S_BLOCK1 - aIndex + 13515U)) & S_BLOCK1], 13U);
-
-            aFuseLaneA[aIndex] = aIngress;
+            aCross = aWoodLaneA[aIndex] ^ aWaterLaneC[aIndex];
+            aCross ^= aHeartLaneA[aIndex] ^ aPoisonLaneC[aIndex];
+            //
+            aIceLaneA[aIndex] = aIngress;
         }
     
         //
         // seed_loop_e loop 4
         //
         // Ingress:
-        //      aFuseLaneA (-->), aOperationLaneD (-->), aSnowLaneD (-->), aWindLaneB (<-?->)
+        //      aIceLaneA (-->), aWaterLaneD (-->), aWindLaneA (-->), aKeyRowReadA (<-?->)
         //
         // Cross:
-        //      aSnowLaneB (<--), aOperationLaneA (<--), aExpandLaneD (<-?->)
+        //      aWoodLaneB (<--), aWaterLaneA (<--), aSource (<--), aEarthLaneB (<-?->)
         //
         // Destination:
-        //      aFuseLaneB
+        //      aIceLaneB
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = (RotL64(aFuseLaneA[((aIndex + 20660U)) & S_BLOCK1], 60U) ^ RotL64(aOperationLaneD[((aIndex + 16993U)) & S_BLOCK1], 51U));
-            aIngress ^= (RotL64(aSnowLaneD[((aIndex + 18647U)) & S_BLOCK1], 21U) ^ RotL64(aWindLaneB[((S_BLOCK1 - aIndex + 20320U)) & S_BLOCK1], 43U));
-
+            aIngress = aIceLaneA[aIndex] ^ aWaterLaneD[aIndex];
+            aIngress ^= (aWindLaneA[aIndex] ^ aKeyRowReadA[aIndex];
             //
-            aCross = (RotL64(aSnowLaneB[((S_BLOCK1 - aIndex + 19916U)) & S_BLOCK1], 29U) ^ RotL64(aOperationLaneA[((S_BLOCK1 - aIndex + 19106U)) & S_BLOCK1], 39U));
-            aCross ^= RotL64(aExpandLaneD[((S_BLOCK1 - aIndex + 21490U)) & S_BLOCK1], 52U);
-
-            aFuseLaneB[S_BLOCK1 - aIndex] = aIngress;
+            aCross = aWoodLaneB[aIndex] ^ aWaterLaneA[aIndex];
+            aCross ^= aSource[aIndex] ^ aEarthLaneB[aIndex];
+            //
+            aIceLaneB[aIndex] = aIngress;
         }
     
         //
         // seed_loop_e loop 5
         //
         // Ingress:
-        //      aFuseLaneB (-->), aSnowLaneB (-->), aWaterLaneA (<-?->)
+        //      aIceLaneB (-->), aWoodLaneB (-->), aPoisonLaneB (-->), aHeartLaneC (<-?->)
         //
         // Cross:
-        //      aFuseLaneA (<--), aSnowLaneA (<--), aWindLaneD (<-?->)
+        //      aIceLaneA (<--), aWoodLaneA (<--), aWindLaneB (<--), aFireLaneB (<-?->)
         //
         // Destination:
-        //      aFuseLaneC
+        //      aIceLaneC
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = (RotL64(aFuseLaneB[((aIndex + 22043U)) & S_BLOCK1], 53U) ^ RotL64(aSnowLaneB[((aIndex + 24735U)) & S_BLOCK1], 39U));
-            aIngress ^= RotL64(aWaterLaneA[((S_BLOCK1 - aIndex + 25761U)) & S_BLOCK1], 29U);
-
+            aIngress = aIceLaneB[aIndex] ^ aWoodLaneB[aIndex];
+            aIngress ^= (aPoisonLaneB[aIndex] ^ aHeartLaneC[aIndex];
             //
-            aCross = (RotL64(aFuseLaneA[((S_BLOCK1 - aIndex + 26523U)) & S_BLOCK1], 27U) ^ RotL64(aSnowLaneA[((S_BLOCK1 - aIndex + 25414U)) & S_BLOCK1], 37U));
-            aCross ^= RotL64(aWindLaneD[((aIndex + 21996U)) & S_BLOCK1], 60U);
-
-            aFuseLaneC[aIndex] = aIngress;
+            aCross = aIceLaneA[aIndex] ^ aWoodLaneA[aIndex];
+            aCross ^= aWindLaneB[aIndex] ^ aFireLaneB[aIndex];
+            //
+            aIceLaneC[aIndex] = aIngress;
         }
     
         //
         // seed_loop_e loop 6
         //
         // Ingress:
-        //      aFuseLaneC (-->), aFuseLaneA (-->), aFireLaneA (<-?->)
+        //      aIceLaneC (-->), aIceLaneA (-->), aEarthLaneC (-->), aEarthLaneD (<-?->)
         //
         // Cross:
-        //      aFuseLaneB (<--), aOperationLaneB (<--), aSnowLaneC (<-?->)
+        //      aIceLaneB (<--), aWaterLaneB (<--), aFireLaneA (<-?->)
         //
         // Destination:
-        //      aFuseLaneD
+        //      aIceLaneD
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = (RotL64(aFuseLaneC[((aIndex + 30057U)) & S_BLOCK1], 54U) ^ RotL64(aFuseLaneA[((aIndex + 32210U)) & S_BLOCK1], 29U));
-            aIngress ^= RotL64(aFireLaneA[((aIndex + 30460U)) & S_BLOCK1], 3U);
-
+            aIngress = aIceLaneC[aIndex] ^ aIceLaneA[aIndex];
+            aIngress ^= (aEarthLaneC[aIndex] ^ aEarthLaneD[aIndex];
             //
-            aCross = (RotL64(aFuseLaneB[((S_BLOCK1 - aIndex + 31288U)) & S_BLOCK1], 24U) ^ RotL64(aOperationLaneB[((S_BLOCK1 - aIndex + 28984U)) & S_BLOCK1], 39U));
-            aCross ^= RotL64(aSnowLaneC[((S_BLOCK1 - aIndex + 28623U)) & S_BLOCK1], 3U);
-
-            aFuseLaneD[S_BLOCK1 - aIndex] = aIngress;
+            aCross = aIceLaneB[aIndex] ^ aWaterLaneB[aIndex];
+            aCross ^= aFireLaneA[aIndex];
+            //
+            aIceLaneD[aIndex] = aIngress;
         }
     }
-    // GSeedRunSeed_H seed_loop_e (end)
-    
+    // GSeedRunSeed_E seed_loop_e (end)
+
 }
 
-void TwistExpander_Vega_Arx::Seed_I() {
-    const std::uint64_t &aPhaseADomainWordIngress = pWorkSpace->mDomainBundle.mPhaseAConstants.mIngress;
-    const std::uint64_t &aPhaseADomainWordScatter = pWorkSpace->mDomainBundle.mPhaseAConstants.mScatter;
-    const std::uint64_t &aPhaseADomainWordCross = pWorkSpace->mDomainBundle.mPhaseAConstants.mCross;
-    const std::uint64_t &aPhaseCDomainWordIngress = pWorkSpace->mDomainBundle.mPhaseCConstants.mIngress;
-    const std::uint64_t &aPhaseCDomainWordScatter = pWorkSpace->mDomainBundle.mPhaseCConstants.mScatter;
-    const std::uint64_t &aPhaseCDomainWordCross = pWorkSpace->mDomainBundle.mPhaseCConstants.mCross;
-    const std::uint64_t &aPhaseDDomainWordIngress = pWorkSpace->mDomainBundle.mPhaseDConstants.mIngress;
-    const std::uint64_t &aPhaseDDomainWordScatter = pWorkSpace->mDomainBundle.mPhaseDConstants.mScatter;
-    const std::uint64_t &aPhaseDDomainWordCross = pWorkSpace->mDomainBundle.mPhaseDConstants.mCross;
-    const std::uint64_t &aPhaseEDomainWordIngress = pWorkSpace->mDomainBundle.mPhaseEConstants.mIngress;
-    const std::uint64_t &aPhaseEDomainWordScatter = pWorkSpace->mDomainBundle.mPhaseEConstants.mScatter;
-    const std::uint64_t &aPhaseEDomainWordCross = pWorkSpace->mDomainBundle.mPhaseEConstants.mCross;
-    // [seed arx]
-    // GSeedRunSeed_I seed_loop_f (start)
+void TwistExpander_Vega_Arx::Seed_F() {
+
+
+    // GSeedRunSeed_F seed_loop_f (start)
     {
         //
         // seed_loop_f loop 1
         //
         // Ingress:
-        //      aInvestLaneE (-->), aInvestLaneF (-->), aWaterLaneA (-->), aSnowLaneB (<-?->)
+        //      aIceLaneA (-->), aIceLaneB (-->), aWindLaneD (-->), aHeartLaneB (<-?->)
         //
         // Cross:
-        //      aInvestLaneG (<--), aInvestLaneH (<--), aOperationLaneD (<-?->)
+        //      aIceLaneC (<--), aIceLaneD (<--), aFireLaneB (<--), aSource (<-?->)
         //
         // Destination:
-        //      aSnowLaneC
+        //      aWoodLaneC
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = (RotL64(aInvestLaneE[((aIndex + 2379U)) & S_BLOCK1], 53U) ^ RotL64(aInvestLaneF[((aIndex + 2026U)) & S_BLOCK1], 29U));
-            aIngress ^= (RotL64(aWaterLaneA[((aIndex + 3263U)) & S_BLOCK1], 13U) ^ RotL64(aSnowLaneB[((S_BLOCK1 - aIndex + 1627U)) & S_BLOCK1], 3U));
-
+            aIngress = aIceLaneA[aIndex] ^ aIceLaneB[aIndex];
+            aIngress ^= (aWindLaneD[aIndex] ^ aHeartLaneB[aIndex];
             //
-            aCross = (RotL64(aInvestLaneG[((S_BLOCK1 - aIndex + 252U)) & S_BLOCK1], 4U) ^ RotL64(aInvestLaneH[((S_BLOCK1 - aIndex + 5294U)) & S_BLOCK1], 53U));
-            aCross ^= RotL64(aOperationLaneD[((S_BLOCK1 - aIndex + 1501U)) & S_BLOCK1], 41U);
-
-            aSnowLaneC[aIndex] = aIngress;
+            aCross = aIceLaneC[aIndex] ^ aIceLaneD[aIndex];
+            aCross ^= aFireLaneB[aIndex] ^ aSource[aIndex];
+            //
+            aWoodLaneC[aIndex] = aIngress;
         }
     
         //
         // seed_loop_f loop 2
         //
         // Ingress:
-        //      aSnowLaneC (-->), aInvestLaneG (-->), aWindLaneC (-->), aOperationLaneB (<-?->)
+        //      aWoodLaneC (-->), aIceLaneC (-->), aKeyRowReadB (-->), aWoodLaneB (<-?->)
         //
         // Cross:
-        //      aInvestLaneE (<--), aInvestLaneH (<--), aWindLaneA (<-?->)
+        //      aIceLaneA (<--), aIceLaneD (<--), aFireLaneC (<--), aHeartLaneD (<-?->)
         //
         // Destination:
-        //      aSnowLaneD
+        //      aWoodLaneD
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = (RotL64(aSnowLaneC[((aIndex + 8584U)) & S_BLOCK1], 57U) ^ RotL64(aInvestLaneG[((aIndex + 7551U)) & S_BLOCK1], 3U));
-            aIngress ^= (RotL64(aWindLaneC[((aIndex + 8177U)) & S_BLOCK1], 35U) ^ RotL64(aOperationLaneB[((S_BLOCK1 - aIndex + 10826U)) & S_BLOCK1], 47U));
-
+            aIngress = aWoodLaneC[aIndex] ^ aIceLaneC[aIndex];
+            aIngress ^= (aKeyRowReadB[aIndex] ^ aWoodLaneB[aIndex];
             //
-            aCross = (RotL64(aInvestLaneE[((S_BLOCK1 - aIndex + 6098U)) & S_BLOCK1], 5U) ^ RotL64(aInvestLaneH[((S_BLOCK1 - aIndex + 9401U)) & S_BLOCK1], 35U));
-            aCross ^= RotL64(aWindLaneA[((S_BLOCK1 - aIndex + 10332U)) & S_BLOCK1], 13U);
-
-            aSnowLaneD[S_BLOCK1 - aIndex] = aIngress;
+            aCross = aIceLaneA[aIndex] ^ aIceLaneD[aIndex];
+            aCross ^= aFireLaneC[aIndex] ^ aHeartLaneD[aIndex];
+            //
+            aWoodLaneD[aIndex] = aIngress;
         }
     
         //
         // seed_loop_f loop 3
         //
         // Ingress:
-        //      aSnowLaneD (-->), aInvestLaneE (-->), aWindLaneB (-->), aOperationLaneA (<-?->)
+        //      aWoodLaneD (-->), aIceLaneA (-->), aWaterLaneB (-->), aWoodLaneA (<-?->)
         //
         // Cross:
-        //      aSnowLaneC (<--), aInvestLaneG (<--), aExpandLaneA (<-?->)
+        //      aWoodLaneC (<--), aIceLaneC (<--), aWaterLaneC (<--), aEarthLaneB (<-?->)
         //
         // Destination:
-        //      aWorkLaneA
+        //      aFuseLaneA
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = (RotL64(aSnowLaneD[((aIndex + 11368U)) & S_BLOCK1], 41U) ^ RotL64(aInvestLaneE[((aIndex + 16027U)) & S_BLOCK1], 57U));
-            aIngress ^= (RotL64(aWindLaneB[((aIndex + 11939U)) & S_BLOCK1], 27U) ^ RotL64(aOperationLaneA[((S_BLOCK1 - aIndex + 13826U)) & S_BLOCK1], 13U));
-
+            aIngress = aWoodLaneD[aIndex] ^ aIceLaneA[aIndex];
+            aIngress ^= (aWaterLaneB[aIndex] ^ aWoodLaneA[aIndex];
             //
-            aCross = (RotL64(aSnowLaneC[((S_BLOCK1 - aIndex + 15750U)) & S_BLOCK1], 29U) ^ RotL64(aInvestLaneG[((S_BLOCK1 - aIndex + 11482U)) & S_BLOCK1], 41U));
-            aCross ^= RotL64(aExpandLaneA[((aIndex + 14764U)) & S_BLOCK1], 19U);
-
-            aWorkLaneA[aIndex] = aIngress;
+            aCross = aWoodLaneC[aIndex] ^ aIceLaneC[aIndex];
+            aCross ^= aWaterLaneC[aIndex] ^ aEarthLaneB[aIndex];
+            //
+            aFuseLaneA[aIndex] = aIngress;
         }
     
         //
         // seed_loop_f loop 4
         //
         // Ingress:
-        //      aWorkLaneA (-->), aInvestLaneH (-->), aOperationLaneC (-->), aExpandLaneB (<-?->)
+        //      aFuseLaneA (-->), aIceLaneD (-->), aKeyRowReadA (-->), aEarthLaneD (<-?->)
         //
         // Cross:
-        //      aSnowLaneD (<--), aInvestLaneE (<--), aSnowLaneA (<-?->)
+        //      aWoodLaneD (<--), aIceLaneA (<--), aWindLaneB (<--), aEarthLaneC (<-?->)
         //
         // Destination:
-        //      aWorkLaneB
+        //      aFuseLaneB
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = (RotL64(aWorkLaneA[((aIndex + 17404U)) & S_BLOCK1], 27U) ^ RotL64(aInvestLaneH[((aIndex + 17315U)) & S_BLOCK1], 57U));
-            aIngress ^= (RotL64(aOperationLaneC[((aIndex + 19120U)) & S_BLOCK1], 19U) ^ RotL64(aExpandLaneB[((aIndex + 18802U)) & S_BLOCK1], 35U));
-
+            aIngress = aFuseLaneA[aIndex] ^ aIceLaneD[aIndex];
+            aIngress ^= (aKeyRowReadA[aIndex] ^ aEarthLaneD[aIndex];
             //
-            aCross = (RotL64(aSnowLaneD[((S_BLOCK1 - aIndex + 21248U)) & S_BLOCK1], 43U) ^ RotL64(aInvestLaneE[((S_BLOCK1 - aIndex + 21388U)) & S_BLOCK1], 57U));
-            aCross ^= RotL64(aSnowLaneA[((S_BLOCK1 - aIndex + 17426U)) & S_BLOCK1], 34U);
-
-            aWorkLaneB[S_BLOCK1 - aIndex] = aIngress;
+            aCross = aWoodLaneD[aIndex] ^ aIceLaneA[aIndex];
+            aCross ^= aWindLaneB[aIndex] ^ aEarthLaneC[aIndex];
+            //
+            aFuseLaneB[aIndex] = aIngress;
         }
     
         //
         // seed_loop_f loop 5
         //
         // Ingress:
-        //      aWorkLaneB (-->), aSnowLaneD (-->), aWindLaneD (<-?->)
+        //      aFuseLaneB (-->), aWoodLaneD (-->), aHeartLaneC (-->), aFireLaneD (<-?->)
         //
         // Cross:
-        //      aWorkLaneA (<--), aSnowLaneC (<--), aFireLaneC (<-?->)
+        //      aFuseLaneA (<--), aWoodLaneC (<--), aWaterLaneA (<--), aFireLaneA (<-?->)
         //
         // Destination:
-        //      aWorkLaneC
+        //      aFuseLaneC
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = (RotL64(aWorkLaneB[((aIndex + 25280U)) & S_BLOCK1], 51U) ^ RotL64(aSnowLaneD[((aIndex + 26188U)) & S_BLOCK1], 40U));
-            aIngress ^= RotL64(aWindLaneD[((aIndex + 23170U)) & S_BLOCK1], 13U);
-
+            aIngress = aFuseLaneB[aIndex] ^ aWoodLaneD[aIndex];
+            aIngress ^= (aHeartLaneC[aIndex] ^ aFireLaneD[aIndex];
             //
-            aCross = (RotL64(aWorkLaneA[((S_BLOCK1 - aIndex + 26021U)) & S_BLOCK1], 35U) ^ RotL64(aSnowLaneC[((S_BLOCK1 - aIndex + 26818U)) & S_BLOCK1], 43U));
-            aCross ^= RotL64(aFireLaneC[((aIndex + 26331U)) & S_BLOCK1], 5U);
-
-            aWorkLaneC[aIndex] = aIngress;
+            aCross = aFuseLaneA[aIndex] ^ aWoodLaneC[aIndex];
+            aCross ^= aWaterLaneA[aIndex] ^ aFireLaneA[aIndex];
+            //
+            aFuseLaneC[aIndex] = aIngress;
         }
     
         //
         // seed_loop_f loop 6
         //
         // Ingress:
-        //      aWorkLaneC (-->), aWorkLaneA (-->), aWaterLaneB (<-?->)
+        //      aFuseLaneC (-->), aFuseLaneA (-->), aWindLaneC (-->), aWaterLaneD (<-?->)
         //
         // Cross:
-        //      aWorkLaneB (<--), aInvestLaneF (<--), aFireLaneD (<-?->)
+        //      aFuseLaneB (<--), aIceLaneB (<--), aWindLaneA (<--), aHeartLaneA (<-?->)
         //
         // Destination:
-        //      aWorkLaneD
+        //      aFuseLaneD
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = (RotL64(aWorkLaneC[((aIndex + 32665U)) & S_BLOCK1], 43U) ^ RotL64(aWorkLaneA[((aIndex + 27335U)) & S_BLOCK1], 21U));
-            aIngress ^= RotL64(aWaterLaneB[((aIndex + 31405U)) & S_BLOCK1], 34U);
-
+            aIngress = aFuseLaneC[aIndex] ^ aFuseLaneA[aIndex];
+            aIngress ^= (aWindLaneC[aIndex] ^ aWaterLaneD[aIndex];
             //
-            aCross = (RotL64(aWorkLaneB[((S_BLOCK1 - aIndex + 32161U)) & S_BLOCK1], 57U) ^ RotL64(aInvestLaneF[((S_BLOCK1 - aIndex + 32132U)) & S_BLOCK1], 21U));
-            aCross ^= RotL64(aFireLaneD[((aIndex + 30828U)) & S_BLOCK1], 5U);
-
-            aWorkLaneD[S_BLOCK1 - aIndex] = aIngress;
+            aCross = aFuseLaneB[aIndex] ^ aIceLaneB[aIndex];
+            aCross ^= aWindLaneA[aIndex] ^ aHeartLaneA[aIndex];
+            //
+            aFuseLaneD[aIndex] = aIngress;
         }
     }
-    // GSeedRunSeed_I seed_loop_f (end)
+    // GSeedRunSeed_F seed_loop_f (end)
+
+}
+
+void TwistExpander_Vega_Arx::Seed_G() {
+
+
+    // GSeedRunSeed_G seed_loop_g (start)
+    {
+        //
+        // seed_loop_g loop 1
+        //
+        // Ingress:
+        //      aSpiritLaneA (-->), aSpiritLaneB (-->), aSource (-->), aHeartLaneD (<-?->)
+        //
+        // Cross:
+        //      aSpiritLaneC (<--), aSpiritLaneD (<--), aWaterLaneC (<--), aWindLaneD (<-?->)
+        //
+        // Destination:
+        //      aEarthLaneC
+        //
+        for (;;) {
+            //
+            aIngress = aSpiritLaneA[aIndex] ^ aSpiritLaneB[aIndex];
+            aIngress ^= (aSource[aIndex] ^ aHeartLaneD[aIndex];
+            //
+            aCross = aSpiritLaneC[aIndex] ^ aSpiritLaneD[aIndex];
+            aCross ^= aWaterLaneC[aIndex] ^ aWindLaneD[aIndex];
+            //
+            aEarthLaneC[aIndex] = aIngress;
+        }
     
+        //
+        // seed_loop_g loop 2
+        //
+        // Ingress:
+        //      aEarthLaneC (-->), aSpiritLaneC (-->), aHeartLaneB (-->), aKeyRowReadA (<-?->)
+        //
+        // Cross:
+        //      aSpiritLaneA (<--), aSpiritLaneD (<--), aWoodLaneC (<--), aWaterLaneA (<-?->)
+        //
+        // Destination:
+        //      aEarthLaneD
+        //
+        for (;;) {
+            //
+            aIngress = aEarthLaneC[aIndex] ^ aSpiritLaneC[aIndex];
+            aIngress ^= (aHeartLaneB[aIndex] ^ aKeyRowReadA[aIndex];
+            //
+            aCross = aSpiritLaneA[aIndex] ^ aSpiritLaneD[aIndex];
+            aCross ^= aWoodLaneC[aIndex] ^ aWaterLaneA[aIndex];
+            //
+            aEarthLaneD[aIndex] = aIngress;
+        }
+    
+        //
+        // seed_loop_g loop 3
+        //
+        // Ingress:
+        //      aEarthLaneD (-->), aSpiritLaneA (-->), aEarthLaneA (-->), aWindLaneB (<-?->)
+        //
+        // Cross:
+        //      aEarthLaneC (<--), aSpiritLaneC (<--), aWoodLaneA (<--), aWaterLaneD (<-?->)
+        //
+        // Destination:
+        //      aFireLaneA
+        //
+        for (;;) {
+            //
+            aIngress = aEarthLaneD[aIndex] ^ aSpiritLaneA[aIndex];
+            aIngress ^= (aEarthLaneA[aIndex] ^ aWindLaneB[aIndex];
+            //
+            aCross = aEarthLaneC[aIndex] ^ aSpiritLaneC[aIndex];
+            aCross ^= aWoodLaneA[aIndex] ^ aWaterLaneD[aIndex];
+            //
+            aFireLaneA[aIndex] = aIngress;
+        }
+    
+        //
+        // seed_loop_g loop 4
+        //
+        // Ingress:
+        //      aFireLaneA (-->), aSpiritLaneD (-->), aWindLaneA (-->), aKeyRowReadB (<-?->)
+        //
+        // Cross:
+        //      aEarthLaneD (<--), aSpiritLaneA (<--), aIceLaneD (<--), aWoodLaneD (<-?->)
+        //
+        // Destination:
+        //      aFireLaneB
+        //
+        for (;;) {
+            //
+            aIngress = aFireLaneA[aIndex] ^ aSpiritLaneD[aIndex];
+            aIngress ^= (aWindLaneA[aIndex] ^ aKeyRowReadB[aIndex];
+            //
+            aCross = aEarthLaneD[aIndex] ^ aSpiritLaneA[aIndex];
+            aCross ^= aIceLaneD[aIndex] ^ aWoodLaneD[aIndex];
+            //
+            aFireLaneB[aIndex] = aIngress;
+        }
+    
+        //
+        // seed_loop_g loop 5
+        //
+        // Ingress:
+        //      aFireLaneB (-->), aEarthLaneD (-->), aIceLaneC (-->), aWoodLaneB (<-?->)
+        //
+        // Cross:
+        //      aFireLaneA (<--), aEarthLaneC (<--), aWindLaneC (<--), aIceLaneB (<-?->)
+        //
+        // Destination:
+        //      aFireLaneC
+        //
+        for (;;) {
+            //
+            aIngress = aFireLaneB[aIndex] ^ aEarthLaneD[aIndex];
+            aIngress ^= (aIceLaneC[aIndex] ^ aWoodLaneB[aIndex];
+            //
+            aCross = aFireLaneA[aIndex] ^ aEarthLaneC[aIndex];
+            aCross ^= aWindLaneC[aIndex] ^ aIceLaneB[aIndex];
+            //
+            aFireLaneC[aIndex] = aIngress;
+        }
+    
+        //
+        // seed_loop_g loop 6
+        //
+        // Ingress:
+        //      aFireLaneC (-->), aFireLaneA (-->), aIceLaneA (-->), aHeartLaneC (<-?->)
+        //
+        // Cross:
+        //      aFireLaneB (<--), aSpiritLaneB (<--), aHeartLaneA (<--), aWaterLaneB (<-?->)
+        //
+        // Destination:
+        //      aFireLaneD
+        //
+        for (;;) {
+            //
+            aIngress = aFireLaneC[aIndex] ^ aFireLaneA[aIndex];
+            aIngress ^= (aIceLaneA[aIndex] ^ aHeartLaneC[aIndex];
+            //
+            aCross = aFireLaneB[aIndex] ^ aSpiritLaneB[aIndex];
+            aCross ^= aHeartLaneA[aIndex] ^ aWaterLaneB[aIndex];
+            //
+            aFireLaneD[aIndex] = aIngress;
+        }
+    }
+    // GSeedRunSeed_G seed_loop_g (end)
+
+}
+
+void TwistExpander_Vega_Arx::Seed_H() {
+
+
+    // GSeedRunSeed_H seed_loop_h (start)
+    {
+        //
+        // seed_loop_h loop 1
+        //
+        // Ingress:
+        //      aFireLaneA (-->), aFireLaneB (-->), aIceLaneA (-->), aSpiritLaneB (<-?->)
+        //
+        // Cross:
+        //      aFireLaneC (<--), aFireLaneD (<--), aWaterLaneA (<--), aWindLaneC (<-?->)
+        //
+        // Destination:
+        //      aEarthLaneC
+        //
+        for (;;) {
+            //
+            aIngress = aFireLaneA[aIndex] ^ aFireLaneB[aIndex];
+            aIngress ^= (aIceLaneA[aIndex] ^ aSpiritLaneB[aIndex];
+            //
+            aCross = aFireLaneC[aIndex] ^ aFireLaneD[aIndex];
+            aCross ^= aWaterLaneA[aIndex] ^ aWindLaneC[aIndex];
+            //
+            aEarthLaneC[aIndex] = aIngress;
+        }
+    
+        //
+        // seed_loop_h loop 2
+        //
+        // Ingress:
+        //      aEarthLaneC (-->), aFireLaneC (-->), aWaterLaneD (-->), aSpiritLaneD (<-?->)
+        //
+        // Cross:
+        //      aFireLaneA (<--), aFireLaneD (<--), aWaterLaneB (<--), aIceLaneC (<-?->)
+        //
+        // Destination:
+        //      aEarthLaneD
+        //
+        for (;;) {
+            //
+            aIngress = aEarthLaneC[aIndex] ^ aFireLaneC[aIndex];
+            aIngress ^= (aWaterLaneD[aIndex] ^ aSpiritLaneD[aIndex];
+            //
+            aCross = aFireLaneA[aIndex] ^ aFireLaneD[aIndex];
+            aCross ^= aWaterLaneB[aIndex] ^ aIceLaneC[aIndex];
+            //
+            aEarthLaneD[aIndex] = aIngress;
+        }
+    
+        //
+        // seed_loop_h loop 3
+        //
+        // Ingress:
+        //      aEarthLaneD (-->), aFireLaneA (-->), aIceLaneD (-->), aKeyRowReadA (<-?->)
+        //
+        // Cross:
+        //      aEarthLaneC (<--), aFireLaneC (<--), aWindLaneA (<--), aSpiritLaneC (<-?->)
+        //
+        // Destination:
+        //      aHeartLaneA
+        //
+        for (;;) {
+            //
+            aIngress = aEarthLaneD[aIndex] ^ aFireLaneA[aIndex];
+            aIngress ^= (aIceLaneD[aIndex] ^ aKeyRowReadA[W_KEY1 - aIndex];
+            //
+            aCross = aEarthLaneC[aIndex] ^ aFireLaneC[aIndex];
+            aCross ^= aWindLaneA[aIndex] ^ aSpiritLaneC[aIndex];
+            //
+            aHeartLaneA[aIndex] = aIngress;
+        }
+    
+        //
+        // seed_loop_h loop 4
+        //
+        // Ingress:
+        //      aHeartLaneA (-->), aFireLaneD (-->), aWoodLaneA (-->), aKeyRowReadB (<-?->)
+        //
+        // Cross:
+        //      aEarthLaneD (<--), aFireLaneA (<--), aSpiritLaneA (<--), aWindLaneD (<-?->)
+        //
+        // Destination:
+        //      aHeartLaneB
+        //
+        for (;;) {
+            //
+            aIngress = aHeartLaneA[aIndex] ^ aFireLaneD[aIndex];
+            aIngress ^= (aWoodLaneA[aIndex] ^ aKeyRowReadB[aIndex];
+            //
+            aCross = aEarthLaneD[aIndex] ^ aFireLaneA[aIndex];
+            aCross ^= aSpiritLaneA[aIndex] ^ aWindLaneD[aIndex];
+            //
+            aHeartLaneB[aIndex] = aIngress;
+        }
+    
+        //
+        // seed_loop_h loop 5
+        //
+        // Ingress:
+        //      aHeartLaneB (-->), aEarthLaneD (-->), aWoodLaneB (-->), aWoodLaneD (<-?->)
+        //
+        // Cross:
+        //      aHeartLaneA (<--), aEarthLaneC (<--), aWaterLaneC (<--), aWindLaneB (<-?->)
+        //
+        // Destination:
+        //      aHeartLaneC
+        //
+        for (;;) {
+            //
+            aIngress = aHeartLaneB[aIndex] ^ aEarthLaneD[aIndex];
+            aIngress ^= (aWoodLaneB[aIndex] ^ aWoodLaneD[aIndex];
+            //
+            aCross = aHeartLaneA[aIndex] ^ aEarthLaneC[aIndex];
+            aCross ^= aWaterLaneC[aIndex] ^ aWindLaneB[aIndex];
+            //
+            aHeartLaneC[aIndex] = aIngress;
+        }
+    
+        //
+        // seed_loop_h loop 6
+        //
+        // Ingress:
+        //      aHeartLaneC (-->), aHeartLaneA (-->), aPoisonLaneD (-->), aIceLaneB (<-?->)
+        //
+        // Cross:
+        //      aHeartLaneB (<--), aFireLaneB (<--), aPoisonLaneC (<--), aWoodLaneC (<-?->)
+        //
+        // Destination:
+        //      aHeartLaneD
+        //
+        for (;;) {
+            //
+            aIngress = aHeartLaneC[aIndex] ^ aHeartLaneA[aIndex];
+            aIngress ^= (aPoisonLaneD[aIndex] ^ aIceLaneB[aIndex];
+            //
+            aCross = aHeartLaneB[aIndex] ^ aFireLaneB[aIndex];
+            aCross ^= aPoisonLaneC[aIndex] ^ aWoodLaneC[aIndex];
+            //
+            aHeartLaneD[aIndex] = aIngress;
+        }
+    }
+    // GSeedRunSeed_H seed_loop_h (end)
+
 }
 
 void TwistExpander_Vega_Arx::Twist_A() {
-    // [twist arx]
+
+
     // GTwistRunTwist_A twist_loop_a (start)
     {
         //
@@ -2436,500 +2057,484 @@ void TwistExpander_Vega_Arx::Twist_A() {
         //      aSource (<--), aKeyRowReadB (<--)
         //
         // Destination:
-        //      aScrapLaneA
+        //      aPoisonLaneA
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = RotL64(aSource[((aIndex + 4705U)) & S_BLOCK1], 21U) ^ RotL64(aKeyRowReadA[((aIndex + 1933U)) & W_KEY1], 36U);
-
+            aIngress = aSource[aIndex] ^ aKeyRowReadA[aIndex];
             //
-            aCross = RotL64(aSource[((S_BLOCK1 - aIndex + 192U)) & S_BLOCK1], 57U) ^ RotL64(aKeyRowReadB[(((2047U - aIndex) + 1191U)) & W_KEY1], 44U);
-
-            aScrapLaneA[aIndex] = aIngress;
+            aCross = aSource[aIndex] ^ aKeyRowReadB[W_KEY1 - aIndex];
+            //
+            aPoisonLaneA[aIndex] = aIngress;
         }
     
         //
         // twist_loop_a loop 2
         //
         // Ingress:
-        //      aScrapLaneA (-->), aKeyRowReadB (-->)
+        //      aPoisonLaneA (-->), aKeyRowReadB (-->)
         //
         // Cross:
         //      aSource (<--), aKeyRowReadA (<--)
         //
         // Destination:
-        //      aScrapLaneB
+        //      aPoisonLaneB
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = RotL64(aScrapLaneA[((aIndex + 8915U)) & S_BLOCK1], 28U) ^ RotL64(aKeyRowReadB[((aIndex + 8173U)) & W_KEY1], 19U);
-
+            aIngress = aPoisonLaneA[aIndex] ^ aKeyRowReadB[aIndex];
             //
-            aCross = RotL64(aSource[((S_BLOCK1 - aIndex + 8212U)) & S_BLOCK1], 35U) ^ RotL64(aKeyRowReadA[(((2047U - aIndex) + 9651U)) & W_KEY1], 4U);
-
-            aScrapLaneB[S_BLOCK1 - aIndex] = aIngress;
+            aCross = aSource[aIndex] ^ aKeyRowReadA[W_KEY1 - aIndex];
+            //
+            aPoisonLaneB[aIndex] = aIngress;
         }
     
         //
         // twist_loop_a loop 3
         //
         // Ingress:
-        //      aScrapLaneB (-->), aSource (-->), aKeyRowReadB (-->)
+        //      aPoisonLaneB (-->), aSource (-->), aKeyRowReadB (-->)
         //
         // Cross:
-        //      aKeyRowReadA (<--), aScrapLaneA (<-?->)
+        //      aKeyRowReadA (<--), aPoisonLaneA (<-?->)
         //
         // Destination:
-        //      aWindLaneA
+        //      aEarthLaneA
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = (RotL64(aScrapLaneB[((aIndex + 14495U)) & S_BLOCK1], 28U) ^ RotL64(aSource[((aIndex + 14322U)) & S_BLOCK1], 19U));
-            aIngress ^= RotL64(aKeyRowReadB[((aIndex + 11914U)) & W_KEY1], 37U);
-
+            aIngress = aPoisonLaneB[aIndex] ^ aSource[aIndex];
+            aIngress ^= aKeyRowReadB[aIndex];
             //
-            aCross = RotL64(aKeyRowReadA[(((2047U - aIndex) + 11674U)) & W_KEY1], 27U) ^ RotL64(aScrapLaneA[((S_BLOCK1 - aIndex + 15974U)) & S_BLOCK1], 52U);
-
-            aWindLaneA[aIndex] = aIngress;
+            aCross = aKeyRowReadA[W_KEY1 - aIndex] ^ aPoisonLaneA[aIndex];
+            //
+            aEarthLaneA[aIndex] = aIngress;
         }
     
         //
         // twist_loop_a loop 4
         //
         // Ingress:
-        //      aWindLaneA (-->), aScrapLaneA (<-?->)
+        //      aEarthLaneA (-->), aPoisonLaneA (<-?->)
         //
         // Cross:
-        //      aScrapLaneB (<--), aKeyRowReadB (<-?->)
+        //      aPoisonLaneB (<--), aKeyRowReadB (<-?->)
         //
         // Destination:
-        //      aWindLaneB
+        //      aEarthLaneB
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = RotL64(aWindLaneA[((aIndex + 20025U)) & S_BLOCK1], 48U) ^ RotL64(aScrapLaneA[((S_BLOCK1 - aIndex + 18013U)) & S_BLOCK1], 57U);
-
+            aIngress = aEarthLaneA[aIndex] ^ aPoisonLaneA[aIndex];
             //
-            aCross = RotL64(aScrapLaneB[((S_BLOCK1 - aIndex + 17120U)) & S_BLOCK1], 53U) ^ RotL64(aKeyRowReadB[((aIndex + 18411U)) & W_KEY1], 24U);
-
-            aWindLaneB[S_BLOCK1 - aIndex] = aIngress;
+            aCross = aPoisonLaneB[aIndex] ^ aKeyRowReadB[W_KEY1 - aIndex];
+            //
+            aEarthLaneB[aIndex] = aIngress;
         }
     
         //
         // twist_loop_a loop 5
         //
         // Ingress:
-        //      aWindLaneB (-->), aScrapLaneB (<-?->)
+        //      aEarthLaneB (-->), aPoisonLaneB (<-?->)
         //
         // Cross:
-        //      aWindLaneA (<--), aKeyRowReadA (<-?->)
+        //      aEarthLaneA (<--), aKeyRowReadA (<-?->)
         //
         // Destination:
-        //      aWindLaneC
+        //      aEarthLaneC
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = RotL64(aWindLaneB[((aIndex + 26636U)) & S_BLOCK1], 54U) ^ RotL64(aScrapLaneB[((S_BLOCK1 - aIndex + 24050U)) & S_BLOCK1], 43U);
-
+            aIngress = aEarthLaneB[aIndex] ^ aPoisonLaneB[aIndex];
             //
-            aCross = RotL64(aWindLaneA[((S_BLOCK1 - aIndex + 26422U)) & S_BLOCK1], 42U) ^ RotL64(aKeyRowReadA[((aIndex + 23441U)) & W_KEY1], 53U);
-
-            aWindLaneC[aIndex] = aIngress;
+            aCross = aEarthLaneA[aIndex] ^ aKeyRowReadA[W_KEY1 - aIndex];
+            //
+            aEarthLaneC[aIndex] = aIngress;
         }
     
         //
         // twist_loop_a loop 6
         //
         // Ingress:
-        //      aWindLaneC (-->), aWindLaneA (<-?->)
+        //      aEarthLaneC (-->), aEarthLaneA (<-?->)
         //
         // Cross:
-        //      aWindLaneB (<--), aScrapLaneB (<-?->)
+        //      aEarthLaneB (<--), aPoisonLaneB (<-?->)
         //
         // Destination:
-        //      aWindLaneD
+        //      aEarthLaneD
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = RotL64(aWindLaneC[((aIndex + 28555U)) & S_BLOCK1], 23U) ^ RotL64(aWindLaneA[((S_BLOCK1 - aIndex + 31706U)) & S_BLOCK1], 50U);
-
+            aIngress = aEarthLaneC[aIndex] ^ aEarthLaneA[aIndex];
             //
-            aCross = RotL64(aWindLaneB[((S_BLOCK1 - aIndex + 31676U)) & S_BLOCK1], 52U) ^ RotL64(aScrapLaneB[((aIndex + 32056U)) & S_BLOCK1], 21U);
-
-            aWindLaneD[S_BLOCK1 - aIndex] = aIngress;
+            aCross = aEarthLaneB[aIndex] ^ aPoisonLaneB[aIndex];
+            //
+            aEarthLaneD[aIndex] = aIngress;
         }
     }
     // GTwistRunTwist_A twist_loop_a (end)
-    
+
 }
 
 void TwistExpander_Vega_Arx::Twist_B() {
-    // [twist arx]
+
+
     // GTwistRunTwist_B twist_loop_b (start)
     {
         //
         // twist_loop_b loop 1
         //
         // Ingress:
-        //      aWindLaneA (-->), aWindLaneB (-->), aKeyRowReadB (<-?->)
+        //      aEarthLaneA (-->), aEarthLaneB (-->), aPoisonLaneA (<-?->)
         //
         // Cross:
-        //      aWindLaneC (<--), aWindLaneD (<-?->)
+        //      aEarthLaneC (<--), aEarthLaneD (<-?->)
         //
         // Destination:
-        //      aWorkLaneA
+        //      aPoisonLaneC
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = (RotL64(aWindLaneA[((aIndex + 2722U)) & S_BLOCK1], 47U) ^ RotL64(aWindLaneB[((aIndex + 4823U)) & S_BLOCK1], 5U));
-            aIngress ^= RotL64(aKeyRowReadB[(((2047U - aIndex) + 1444U)) & W_KEY1], 18U);
-
+            aIngress = aEarthLaneA[aIndex] ^ aEarthLaneB[aIndex];
+            aIngress ^= aPoisonLaneA[aIndex];
             //
-            aCross = RotL64(aWindLaneC[((S_BLOCK1 - aIndex + 5271U)) & S_BLOCK1], 11U) ^ RotL64(aWindLaneD[((S_BLOCK1 - aIndex + 426U)) & S_BLOCK1], 54U);
-
-            aWorkLaneA[aIndex] = aIngress;
+            aCross = aEarthLaneC[aIndex] ^ aEarthLaneD[aIndex];
+            //
+            aPoisonLaneC[aIndex] = aIngress;
         }
     
         //
         // twist_loop_b loop 2
         //
         // Ingress:
-        //      aWorkLaneA (-->), aWindLaneC (-->), aScrapLaneA (<-?->)
+        //      aPoisonLaneC (-->), aEarthLaneC (-->), aPoisonLaneB (<-?->)
         //
         // Cross:
-        //      aWindLaneA (<--), aWindLaneD (<--)
+        //      aEarthLaneA (<--), aEarthLaneD (<--)
         //
         // Destination:
-        //      aWorkLaneB
+        //      aPoisonLaneD
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = (RotL64(aWorkLaneA[((aIndex + 6648U)) & S_BLOCK1], 53U) ^ RotL64(aWindLaneC[((aIndex + 8736U)) & S_BLOCK1], 41U));
-            aIngress ^= RotL64(aScrapLaneA[((aIndex + 8580U)) & S_BLOCK1], 4U);
-
+            aIngress = aPoisonLaneC[aIndex] ^ aEarthLaneC[aIndex];
+            aIngress ^= aPoisonLaneB[aIndex];
             //
-            aCross = RotL64(aWindLaneA[((S_BLOCK1 - aIndex + 6093U)) & S_BLOCK1], 56U) ^ RotL64(aWindLaneD[((S_BLOCK1 - aIndex + 10511U)) & S_BLOCK1], 39U);
-
-            aWorkLaneB[S_BLOCK1 - aIndex] = aIngress;
+            aCross = aEarthLaneA[aIndex] ^ aEarthLaneD[aIndex];
+            //
+            aPoisonLaneD[aIndex] = aIngress;
         }
     
         //
         // twist_loop_b loop 3
         //
         // Ingress:
-        //      aWorkLaneB (-->), aWindLaneA (-->), aKeyRowReadA (<-?->)
+        //      aPoisonLaneD (-->), aEarthLaneA (-->), aSource (<-?->)
         //
         // Cross:
-        //      aWorkLaneA (<--), aWindLaneC (<-?->)
+        //      aPoisonLaneC (<--), aEarthLaneC (<-?->)
         //
         // Destination:
-        //      aSnowLaneA
+        //      aFireLaneA
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = (RotL64(aWorkLaneB[((aIndex + 14548U)) & S_BLOCK1], 43U) ^ RotL64(aWindLaneA[((aIndex + 13101U)) & S_BLOCK1], 54U));
-            aIngress ^= RotL64(aKeyRowReadA[((aIndex + 11148U)) & W_KEY1], 27U);
-
+            aIngress = aPoisonLaneD[aIndex] ^ aEarthLaneA[aIndex];
+            aIngress ^= aSource[aIndex];
             //
-            aCross = RotL64(aWorkLaneA[((S_BLOCK1 - aIndex + 12841U)) & S_BLOCK1], 13U) ^ RotL64(aWindLaneC[((S_BLOCK1 - aIndex + 14410U)) & S_BLOCK1], 40U);
-
-            aSnowLaneA[aIndex] = aIngress;
+            aCross = aPoisonLaneC[aIndex] ^ aEarthLaneC[aIndex];
+            //
+            aFireLaneA[aIndex] = aIngress;
         }
     
         //
         // twist_loop_b loop 4
         //
         // Ingress:
-        //      aSnowLaneA (-->), aWindLaneD (-->), aScrapLaneB (<-?->)
+        //      aFireLaneA (-->), aEarthLaneD (-->), aKeyRowReadB (<-?->)
         //
         // Cross:
-        //      aWorkLaneB (<--), aWindLaneA (<-?->)
+        //      aPoisonLaneD (<--), aEarthLaneA (<-?->)
         //
         // Destination:
-        //      aSnowLaneB
+        //      aFireLaneB
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = (RotL64(aSnowLaneA[((aIndex + 19277U)) & S_BLOCK1], 10U) ^ RotL64(aWindLaneD[((aIndex + 17435U)) & S_BLOCK1], 47U));
-            aIngress ^= RotL64(aScrapLaneB[((aIndex + 17516U)) & S_BLOCK1], 39U);
-
+            aIngress = aFireLaneA[aIndex] ^ aEarthLaneD[aIndex];
+            aIngress ^= aKeyRowReadB[aIndex];
             //
-            aCross = RotL64(aWorkLaneB[((S_BLOCK1 - aIndex + 19294U)) & S_BLOCK1], 3U) ^ RotL64(aWindLaneA[((S_BLOCK1 - aIndex + 16518U)) & S_BLOCK1], 58U);
-
-            aSnowLaneB[S_BLOCK1 - aIndex] = aIngress;
+            aCross = aPoisonLaneD[aIndex] ^ aEarthLaneA[aIndex];
+            //
+            aFireLaneB[aIndex] = aIngress;
         }
     
         //
         // twist_loop_b loop 5
         //
         // Ingress:
-        //      aSnowLaneB (-->), aWorkLaneB (-->), aSource (<-?->)
+        //      aFireLaneB (-->), aPoisonLaneD (-->), aKeyRowReadA (<-?->)
         //
         // Cross:
-        //      aSnowLaneA (<--), aWorkLaneA (<-?->)
+        //      aFireLaneA (<--), aPoisonLaneC (<-?->)
         //
         // Destination:
-        //      aSnowLaneC
+        //      aFireLaneC
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = (RotL64(aSnowLaneB[((aIndex + 21908U)) & S_BLOCK1], 57U) ^ RotL64(aWorkLaneB[((aIndex + 27154U)) & S_BLOCK1], 10U));
-            aIngress ^= RotL64(aSource[((aIndex + 22262U)) & S_BLOCK1], 37U);
-
+            aIngress = aFireLaneB[aIndex] ^ aPoisonLaneD[aIndex];
+            aIngress ^= aKeyRowReadA[aIndex];
             //
-            aCross = RotL64(aSnowLaneA[((S_BLOCK1 - aIndex + 27302U)) & S_BLOCK1], 41U) ^ RotL64(aWorkLaneA[((aIndex + 23448U)) & S_BLOCK1], 50U);
-
-            aSnowLaneC[aIndex] = aIngress;
+            aCross = aFireLaneA[aIndex] ^ aPoisonLaneC[aIndex];
+            //
+            aFireLaneC[aIndex] = aIngress;
         }
     
         //
         // twist_loop_b loop 6
         //
         // Ingress:
-        //      aSnowLaneC (-->), aSnowLaneA (<-?->)
+        //      aFireLaneC (-->), aFireLaneA (<-?->)
         //
         // Cross:
-        //      aSnowLaneB (<--), aWindLaneB (<--)
+        //      aFireLaneB (<--), aEarthLaneB (<--)
         //
         // Destination:
-        //      aSnowLaneD
+        //      aFireLaneD
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = RotL64(aSnowLaneC[((aIndex + 28856U)) & S_BLOCK1], 42U) ^ RotL64(aSnowLaneA[((aIndex + 31450U)) & S_BLOCK1], 3U);
-
+            aIngress = aFireLaneC[aIndex] ^ aFireLaneA[aIndex];
             //
-            aCross = RotL64(aSnowLaneB[((S_BLOCK1 - aIndex + 32205U)) & S_BLOCK1], 20U) ^ RotL64(aWindLaneB[((S_BLOCK1 - aIndex + 30655U)) & S_BLOCK1], 3U);
-
-            aSnowLaneD[S_BLOCK1 - aIndex] = aIngress;
+            aCross = aFireLaneB[aIndex] ^ aEarthLaneB[aIndex];
+            //
+            aFireLaneD[aIndex] = aIngress;
         }
     }
     // GTwistRunTwist_B twist_loop_b (end)
-    
+
 }
 
 void TwistExpander_Vega_Arx::Twist_C() {
-    // [twist arx]
+
+
     // GTwistRunTwist_C twist_loop_c (start)
     {
         //
         // twist_loop_c loop 1
         //
         // Ingress:
-        //      aSnowLaneA (-->), aSnowLaneB (-->), aWindLaneD (<-?->)
+        //      aFireLaneA (-->), aFireLaneB (-->), aPoisonLaneC (<-?->)
         //
         // Cross:
-        //      aSnowLaneC (<--), aSnowLaneD (<--), aWorkLaneB (<-?->)
+        //      aFireLaneC (<--), aFireLaneD (<--), aSource (<-?->)
         //
         // Destination:
-        //      aInvestLaneA
+        //      aWoodLaneA
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = (RotL64(aSnowLaneA[((aIndex + 1926U)) & S_BLOCK1], 29U) ^ RotL64(aSnowLaneB[((aIndex + 808U)) & S_BLOCK1], 47U));
-            aIngress ^= RotL64(aWindLaneD[((aIndex + 1510U)) & S_BLOCK1], 60U);
-
+            aIngress = aFireLaneA[aIndex] ^ aFireLaneB[aIndex];
+            aIngress ^= aPoisonLaneC[aIndex];
             //
-            aCross = (RotL64(aSnowLaneC[((S_BLOCK1 - aIndex + 569U)) & S_BLOCK1], 5U) ^ RotL64(aSnowLaneD[((S_BLOCK1 - aIndex + 3583U)) & S_BLOCK1], 58U));
-            aCross ^= RotL64(aWorkLaneB[((S_BLOCK1 - aIndex + 5245U)) & S_BLOCK1], 35U);
-
-            aInvestLaneA[aIndex] = aIngress;
+            aCross = aFireLaneC[aIndex] ^ aFireLaneD[aIndex];
+            aCross ^= aSource[aIndex];
+            //
+            aWoodLaneA[aIndex] = aIngress;
         }
     
         //
         // twist_loop_c loop 2
         //
         // Ingress:
-        //      aInvestLaneA (-->), aSnowLaneC (-->), aScrapLaneA (<-?->)
+        //      aWoodLaneA (-->), aFireLaneC (-->), aEarthLaneB (<-?->)
         //
         // Cross:
-        //      aSnowLaneA (<--), aSnowLaneD (<--), aWindLaneB (<-?->)
+        //      aFireLaneA (<--), aFireLaneD (<--), aKeyRowReadB (<-?->)
         //
         // Destination:
-        //      aInvestLaneB
+        //      aWoodLaneB
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = (RotL64(aInvestLaneA[((aIndex + 6817U)) & S_BLOCK1], 27U) ^ RotL64(aSnowLaneC[((aIndex + 7283U)) & S_BLOCK1], 41U));
-            aIngress ^= RotL64(aScrapLaneA[((S_BLOCK1 - aIndex + 10154U)) & S_BLOCK1], 56U);
-
+            aIngress = aWoodLaneA[aIndex] ^ aFireLaneC[aIndex];
+            aIngress ^= aEarthLaneB[aIndex];
             //
-            aCross = (RotL64(aSnowLaneA[((S_BLOCK1 - aIndex + 9531U)) & S_BLOCK1], 3U) ^ RotL64(aSnowLaneD[((S_BLOCK1 - aIndex + 9995U)) & S_BLOCK1], 27U));
-            aCross ^= RotL64(aWindLaneB[((S_BLOCK1 - aIndex + 7962U)) & S_BLOCK1], 54U);
-
-            aInvestLaneB[S_BLOCK1 - aIndex] = aIngress;
+            aCross = aFireLaneA[aIndex] ^ aFireLaneD[aIndex];
+            aCross ^= aKeyRowReadB[aIndex];
+            //
+            aWoodLaneB[aIndex] = aIngress;
         }
     
         //
         // twist_loop_c loop 3
         //
         // Ingress:
-        //      aInvestLaneB (-->), aSnowLaneA (-->), aWindLaneC (<-?->)
+        //      aWoodLaneB (-->), aFireLaneA (-->), aPoisonLaneB (<-?->)
         //
         // Cross:
-        //      aInvestLaneA (<--), aSnowLaneC (<--), aWorkLaneA (<-?->)
+        //      aWoodLaneA (<--), aFireLaneC (<--), aEarthLaneC (<-?->)
         //
         // Destination:
-        //      aOperationLaneA
+        //      aFuseLaneA
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = (RotL64(aInvestLaneB[((aIndex + 11724U)) & S_BLOCK1], 53U) ^ RotL64(aSnowLaneA[((aIndex + 12404U)) & S_BLOCK1], 27U));
-            aIngress ^= RotL64(aWindLaneC[((S_BLOCK1 - aIndex + 13045U)) & S_BLOCK1], 44U);
-
+            aIngress = aWoodLaneB[aIndex] ^ aFireLaneA[aIndex];
+            aIngress ^= aPoisonLaneB[aIndex];
             //
-            aCross = (RotL64(aInvestLaneA[((S_BLOCK1 - aIndex + 15239U)) & S_BLOCK1], 11U) ^ RotL64(aSnowLaneC[((S_BLOCK1 - aIndex + 11842U)) & S_BLOCK1], 37U));
-            aCross ^= RotL64(aWorkLaneA[((S_BLOCK1 - aIndex + 14342U)) & S_BLOCK1], 20U);
-
-            aOperationLaneA[aIndex] = aIngress;
+            aCross = aWoodLaneA[aIndex] ^ aFireLaneC[aIndex];
+            aCross ^= aEarthLaneC[aIndex];
+            //
+            aFuseLaneA[aIndex] = aIngress;
         }
     
         //
         // twist_loop_c loop 4
         //
         // Ingress:
-        //      aOperationLaneA (-->), aSnowLaneD (-->), aScrapLaneB (<-?->)
+        //      aFuseLaneA (-->), aFireLaneD (-->), aPoisonLaneA (<-?->)
         //
         // Cross:
-        //      aInvestLaneB (<--), aSnowLaneA (<-?->)
+        //      aWoodLaneB (<--), aFireLaneA (<--), aKeyRowReadA (<-?->)
         //
         // Destination:
-        //      aOperationLaneB
+        //      aFuseLaneB
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = (RotL64(aOperationLaneA[((aIndex + 18464U)) & S_BLOCK1], 13U) ^ RotL64(aSnowLaneD[((aIndex + 20329U)) & S_BLOCK1], 5U));
-            aIngress ^= RotL64(aScrapLaneB[((S_BLOCK1 - aIndex + 18113U)) & S_BLOCK1], 40U);
-
+            aIngress = aFuseLaneA[aIndex] ^ aFireLaneD[aIndex];
+            aIngress ^= aPoisonLaneA[aIndex];
             //
-            aCross = RotL64(aInvestLaneB[((S_BLOCK1 - aIndex + 17983U)) & S_BLOCK1], 39U) ^ RotL64(aSnowLaneA[((aIndex + 18752U)) & S_BLOCK1], 60U);
-
-            aOperationLaneB[S_BLOCK1 - aIndex] = aIngress;
+            aCross = aWoodLaneB[aIndex] ^ aFireLaneA[aIndex];
+            aCross ^= aKeyRowReadA[aIndex];
+            //
+            aFuseLaneB[aIndex] = aIngress;
         }
     
         //
         // twist_loop_c loop 5
         //
         // Ingress:
-        //      aOperationLaneB (-->), aInvestLaneB (-->), aSource (<-?->)
+        //      aFuseLaneB (-->), aWoodLaneB (-->), aPoisonLaneD (<-?->)
         //
         // Cross:
-        //      aOperationLaneA (<--), aInvestLaneA (<-?->)
+        //      aFuseLaneA (<--), aWoodLaneA (<--), aEarthLaneD (<-?->)
         //
         // Destination:
-        //      aOperationLaneC
+        //      aFuseLaneC
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = (RotL64(aOperationLaneB[((aIndex + 25982U)) & S_BLOCK1], 3U) ^ RotL64(aInvestLaneB[((aIndex + 22601U)) & S_BLOCK1], 37U));
-            aIngress ^= RotL64(aSource[((aIndex + 22236U)) & S_BLOCK1], 48U);
-
+            aIngress = aFuseLaneB[aIndex] ^ aWoodLaneB[aIndex];
+            aIngress ^= aPoisonLaneD[aIndex];
             //
-            aCross = RotL64(aOperationLaneA[((S_BLOCK1 - aIndex + 24943U)) & S_BLOCK1], 53U) ^ RotL64(aInvestLaneA[((aIndex + 23257U)) & S_BLOCK1], 38U);
-
-            aOperationLaneC[aIndex] = aIngress;
+            aCross = aFuseLaneA[aIndex] ^ aWoodLaneA[aIndex];
+            aCross ^= aEarthLaneD[aIndex];
+            //
+            aFuseLaneC[aIndex] = aIngress;
         }
     
         //
         // twist_loop_c loop 6
         //
         // Ingress:
-        //      aOperationLaneC (-->), aOperationLaneA (-->), aWindLaneA (<-?->)
+        //      aFuseLaneC (-->), aFuseLaneA (-->), aEarthLaneA (<-?->)
         //
         // Cross:
-        //      aOperationLaneB (<--), aSnowLaneB (<--)
+        //      aFuseLaneB (<--), aFireLaneB (<--)
         //
         // Destination:
-        //      aOperationLaneD
+        //      aFuseLaneD
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = (RotL64(aOperationLaneC[((aIndex + 28763U)) & S_BLOCK1], 51U) ^ RotL64(aOperationLaneA[((aIndex + 28549U)) & S_BLOCK1], 37U));
-            aIngress ^= RotL64(aWindLaneA[((aIndex + 31639U)) & S_BLOCK1], 24U);
-
+            aIngress = aFuseLaneC[aIndex] ^ aFuseLaneA[aIndex];
+            aIngress ^= aEarthLaneA[aIndex];
             //
-            aCross = RotL64(aOperationLaneB[((S_BLOCK1 - aIndex + 30830U)) & S_BLOCK1], 13U) ^ RotL64(aSnowLaneB[((S_BLOCK1 - aIndex + 27655U)) & S_BLOCK1], 22U);
-
-            aOperationLaneD[S_BLOCK1 - aIndex] = aIngress;
+            aCross = aFuseLaneB[aIndex] ^ aFireLaneB[aIndex];
+            //
+            aFuseLaneD[aIndex] = aIngress;
         }
     }
     // GTwistRunTwist_C twist_loop_c (end)
-    
+
 }
 
 void TwistExpander_Vega_Arx::Twist_D() {
-    // [twist arx]
+
+
     // GTwistRunTwist_D twist_loop_d (start)
     {
         //
         // twist_loop_d loop 1
         //
         // Ingress:
-        //      aOperationLaneA (-->), aOperationLaneB (-->), aSnowLaneC (<-?->)
+        //      aWindLaneA (-->), aWindLaneB (-->), aPoisonLaneA (-->), aPoisonLaneC (<-?->)
         //
         // Cross:
-        //      aOperationLaneC (<--), aOperationLaneD (<--), aWindLaneB (<-?->)
+        //      aWindLaneC (<--), aWindLaneD (<--), aPoisonLaneD (<-?->)
         //
         // Destination:
-        //      aScrapLaneC
+        //      aSpiritLaneA
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = (RotL64(aOperationLaneA[((aIndex + 1356U)) & S_BLOCK1], 14U) ^ RotL64(aOperationLaneB[((aIndex + 3550U)) & S_BLOCK1], 23U));
-            aIngress ^= RotL64(aSnowLaneC[((aIndex + 491U)) & S_BLOCK1], 53U);
-
+            aIngress = aWindLaneA[aIndex] ^ aWindLaneB[aIndex];
+            aIngress ^= (aPoisonLaneA[aIndex] ^ aPoisonLaneC[aIndex];
             //
-            aCross = (RotL64(aOperationLaneC[((S_BLOCK1 - aIndex + 3965U)) & S_BLOCK1], 21U) ^ RotL64(aOperationLaneD[((S_BLOCK1 - aIndex + 460U)) & S_BLOCK1], 37U));
-            aCross ^= RotL64(aWindLaneB[((S_BLOCK1 - aIndex + 2664U)) & S_BLOCK1], 10U);
-
-            aScrapLaneC[aIndex] = aIngress;
+            aCross = aWindLaneC[aIndex] ^ aWindLaneD[aIndex];
+            aCross ^= aPoisonLaneD[aIndex];
+            //
+            aSpiritLaneA[aIndex] = aIngress;
         }
     
         //
         // twist_loop_d loop 2
         //
         // Ingress:
-        //      aScrapLaneC (-->), aOperationLaneC (-->), aWindLaneC (<-?->)
+        //      aSpiritLaneA (-->), aWindLaneC (-->), aEarthLaneC (-->), aFireLaneC (<-?->)
         //
         // Cross:
-        //      aOperationLaneA (<--), aOperationLaneD (<--), aWindLaneD (<-?->)
+        //      aWindLaneA (<--), aWindLaneD (<--), aFireLaneD (<-?->)
         //
         // Destination:
-        //      aScrapLaneD
+        //      aSpiritLaneB
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = (RotL64(aScrapLaneC[((aIndex + 6596U)) & S_BLOCK1], 23U) ^ RotL64(aOperationLaneC[((aIndex + 10138U)) & S_BLOCK1], 54U));
-            aIngress ^= RotL64(aWindLaneC[((S_BLOCK1 - aIndex + 5611U)) & S_BLOCK1], 37U);
-
+            aIngress = aSpiritLaneA[aIndex] ^ aWindLaneC[aIndex];
+            aIngress ^= (aEarthLaneC[aIndex] ^ aFireLaneC[aIndex];
             //
-            aCross = (RotL64(aOperationLaneA[((S_BLOCK1 - aIndex + 9133U)) & S_BLOCK1], 37U) ^ RotL64(aOperationLaneD[((S_BLOCK1 - aIndex + 6587U)) & S_BLOCK1], 3U));
-            aCross ^= RotL64(aWindLaneD[((aIndex + 8647U)) & S_BLOCK1], 48U);
-
-            aScrapLaneD[S_BLOCK1 - aIndex] = aIngress;
+            aCross = aWindLaneA[aIndex] ^ aWindLaneD[aIndex];
+            aCross ^= aFireLaneD[aIndex];
+            //
+            aSpiritLaneB[aIndex] = aIngress;
         }
     
         //
         // twist_loop_d loop 3
         //
         // Ingress:
-        //      aScrapLaneD (-->), aOperationLaneA (-->), aWindLaneA (<-?->)
+        //      aSpiritLaneB (-->), aWindLaneA (-->), aSource (-->), aKeyRowReadB (<-?->)
         //
         // Cross:
-        //      aScrapLaneC (<--), aOperationLaneC (<--), aSnowLaneB (<-?->)
+        //      aSpiritLaneA (<--), aWindLaneC (<--), aFireLaneB (<-?->)
         //
         // Destination:
         //      aWaterLaneA
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = (RotL64(aScrapLaneD[((aIndex + 13334U)) & S_BLOCK1], 4U) ^ RotL64(aOperationLaneA[((aIndex + 11290U)) & S_BLOCK1], 57U));
-            aIngress ^= RotL64(aWindLaneA[((aIndex + 13480U)) & S_BLOCK1], 23U);
-
+            aIngress = aSpiritLaneB[aIndex] ^ aWindLaneA[aIndex];
+            aIngress ^= (aSource[aIndex] ^ aKeyRowReadB[W_KEY1 - aIndex];
             //
-            aCross = (RotL64(aScrapLaneC[((S_BLOCK1 - aIndex + 11075U)) & S_BLOCK1], 57U) ^ RotL64(aOperationLaneC[((S_BLOCK1 - aIndex + 16013U)) & S_BLOCK1], 12U));
-            aCross ^= RotL64(aSnowLaneB[((aIndex + 15229U)) & S_BLOCK1], 43U);
-
+            aCross = aSpiritLaneA[aIndex] ^ aWindLaneC[aIndex];
+            aCross ^= aFireLaneB[aIndex];
+            //
             aWaterLaneA[aIndex] = aIngress;
         }
     
@@ -2937,47 +2542,45 @@ void TwistExpander_Vega_Arx::Twist_D() {
         // twist_loop_d loop 4
         //
         // Ingress:
-        //      aWaterLaneA (-->), aOperationLaneD (-->), aInvestLaneA (<-?->)
+        //      aWaterLaneA (-->), aWindLaneD (-->), aFireLaneA (-->), aEarthLaneA (<-?->)
         //
         // Cross:
-        //      aScrapLaneD (<--), aOperationLaneA (<--), aSnowLaneD (<-?->)
+        //      aSpiritLaneB (<--), aWindLaneA (<--), aEarthLaneD (<-?->)
         //
         // Destination:
         //      aWaterLaneB
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = (RotL64(aWaterLaneA[((aIndex + 18393U)) & S_BLOCK1], 43U) ^ RotL64(aOperationLaneD[((aIndex + 18650U)) & S_BLOCK1], 5U));
-            aIngress ^= RotL64(aInvestLaneA[((S_BLOCK1 - aIndex + 19017U)) & S_BLOCK1], 18U);
-
+            aIngress = aWaterLaneA[aIndex] ^ aWindLaneD[aIndex];
+            aIngress ^= (aFireLaneA[aIndex] ^ aEarthLaneA[aIndex];
             //
-            aCross = (RotL64(aScrapLaneD[((S_BLOCK1 - aIndex + 20260U)) & S_BLOCK1], 52U) ^ RotL64(aOperationLaneA[((S_BLOCK1 - aIndex + 18764U)) & S_BLOCK1], 37U));
-            aCross ^= RotL64(aSnowLaneD[((aIndex + 18933U)) & S_BLOCK1], 27U);
-
-            aWaterLaneB[S_BLOCK1 - aIndex] = aIngress;
+            aCross = aSpiritLaneB[aIndex] ^ aWindLaneA[aIndex];
+            aCross ^= aEarthLaneD[aIndex];
+            //
+            aWaterLaneB[aIndex] = aIngress;
         }
     
         //
         // twist_loop_d loop 5
         //
         // Ingress:
-        //      aWaterLaneB (-->), aScrapLaneD (-->), aSnowLaneA (<-?->)
+        //      aWaterLaneB (-->), aSpiritLaneB (-->), aPoisonLaneB (-->), aWoodLaneB (<-?->)
         //
         // Cross:
-        //      aWaterLaneA (<--), aScrapLaneC (<--), aInvestLaneB (<-?->)
+        //      aWaterLaneA (<--), aSpiritLaneA (<--), aEarthLaneB (<-?->)
         //
         // Destination:
         //      aWaterLaneC
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = (RotL64(aWaterLaneB[((aIndex + 23022U)) & S_BLOCK1], 48U) ^ RotL64(aScrapLaneD[((aIndex + 24445U)) & S_BLOCK1], 21U));
-            aIngress ^= RotL64(aSnowLaneA[((S_BLOCK1 - aIndex + 22482U)) & S_BLOCK1], 39U);
-
+            aIngress = aWaterLaneB[aIndex] ^ aSpiritLaneB[aIndex];
+            aIngress ^= (aPoisonLaneB[aIndex] ^ aWoodLaneB[aIndex];
             //
-            aCross = (RotL64(aWaterLaneA[((S_BLOCK1 - aIndex + 22934U)) & S_BLOCK1], 51U) ^ RotL64(aScrapLaneC[((S_BLOCK1 - aIndex + 27005U)) & S_BLOCK1], 42U));
-            aCross ^= RotL64(aInvestLaneB[((aIndex + 25884U)) & S_BLOCK1], 3U);
-
+            aCross = aWaterLaneA[aIndex] ^ aSpiritLaneA[aIndex];
+            aCross ^= aEarthLaneB[aIndex];
+            //
             aWaterLaneC[aIndex] = aIngress;
         }
     
@@ -2988,782 +2591,371 @@ void TwistExpander_Vega_Arx::Twist_D() {
         //      aWaterLaneC (-->), aWaterLaneA (-->), aKeyRowReadA (<-?->)
         //
         // Cross:
-        //      aWaterLaneB (<--), aOperationLaneB (<--)
+        //      aWaterLaneB (<--), aWindLaneB (<--), aWoodLaneA (<-?->)
         //
         // Destination:
         //      aWaterLaneD
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = (RotL64(aWaterLaneC[((aIndex + 29270U)) & S_BLOCK1], 53U) ^ RotL64(aWaterLaneA[((aIndex + 30511U)) & S_BLOCK1], 10U));
-            aIngress ^= RotL64(aKeyRowReadA[(((2047U - aIndex) + 27651U)) & W_KEY1], 41U);
-
+            aIngress = aWaterLaneC[aIndex] ^ aWaterLaneA[aIndex];
+            aIngress ^= aKeyRowReadA[W_KEY1 - aIndex];
             //
-            aCross = RotL64(aWaterLaneB[((S_BLOCK1 - aIndex + 32116U)) & S_BLOCK1], 37U) ^ RotL64(aOperationLaneB[((S_BLOCK1 - aIndex + 32386U)) & S_BLOCK1], 14U);
-
-            aWaterLaneD[S_BLOCK1 - aIndex] = aIngress;
+            aCross = aWaterLaneB[aIndex] ^ aWindLaneB[aIndex];
+            aCross ^= aWoodLaneA[aIndex];
+            //
+            aWaterLaneD[aIndex] = aIngress;
         }
     }
     // GTwistRunTwist_D twist_loop_d (end)
-    
+
 }
 
 void TwistExpander_Vega_Arx::Twist_E() {
-    // [twist arx]
+
+
     // GTwistRunTwist_E twist_loop_e (start)
     {
         //
         // twist_loop_e loop 1
         //
         // Ingress:
-        //      aWaterLaneA (-->), aWaterLaneB (-->), aKeyRowReadB (<-?->)
+        //      aWaterLaneA (-->), aWaterLaneB (-->), aEarthLaneC (-->), aWindLaneD (<-?->)
         //
         // Cross:
-        //      aWaterLaneC (<--), aWaterLaneD (<--), aInvestLaneA (<-?->)
+        //      aWaterLaneC (<--), aWaterLaneD (<--), aFireLaneA (<--), aWoodLaneB (<-?->)
         //
         // Destination:
-        //      aInvestLaneC
+        //      aFuseLaneA
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = (RotL64(aWaterLaneA[((aIndex + 802U)) & S_BLOCK1], 34U) ^ RotL64(aWaterLaneB[((aIndex + 2U)) & S_BLOCK1], 57U));
-            aIngress ^= RotL64(aKeyRowReadB[(((2047U - aIndex) + 704U)) & W_KEY1], 11U);
-
+            aIngress = aWaterLaneA[aIndex] ^ aWaterLaneB[aIndex];
+            aIngress ^= (aEarthLaneC[aIndex] ^ aWindLaneD[aIndex];
             //
-            aCross = (RotL64(aWaterLaneC[((S_BLOCK1 - aIndex + 4626U)) & S_BLOCK1], 57U) ^ RotL64(aWaterLaneD[((S_BLOCK1 - aIndex + 3489U)) & S_BLOCK1], 12U));
-            aCross ^= RotL64(aInvestLaneA[((S_BLOCK1 - aIndex + 4302U)) & S_BLOCK1], 37U);
-
-            aInvestLaneC[aIndex] = aIngress;
+            aCross = aWaterLaneC[aIndex] ^ aWaterLaneD[aIndex];
+            aCross ^= aFireLaneA[aIndex] ^ aWoodLaneB[aIndex];
+            //
+            aFuseLaneA[aIndex] = aIngress;
         }
     
         //
         // twist_loop_e loop 2
         //
         // Ingress:
-        //      aInvestLaneC (-->), aWaterLaneC (-->), aOperationLaneD (<-?->)
+        //      aFuseLaneA (-->), aWaterLaneC (-->), aWindLaneB (-->), aEarthLaneB (<-?->)
         //
         // Cross:
-        //      aWaterLaneA (<--), aWaterLaneD (<--), aSnowLaneB (<-?->)
+        //      aWaterLaneA (<--), aWaterLaneD (<--), aWoodLaneA (<-?->)
         //
         // Destination:
-        //      aInvestLaneD
+        //      aFuseLaneB
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = (RotL64(aInvestLaneC[((aIndex + 6896U)) & S_BLOCK1], 21U) ^ RotL64(aWaterLaneC[((aIndex + 10212U)) & S_BLOCK1], 3U));
-            aIngress ^= RotL64(aOperationLaneD[((aIndex + 7182U)) & S_BLOCK1], 42U);
-
+            aIngress = aFuseLaneA[aIndex] ^ aWaterLaneC[aIndex];
+            aIngress ^= (aWindLaneB[aIndex] ^ aEarthLaneB[aIndex];
             //
-            aCross = (RotL64(aWaterLaneA[((S_BLOCK1 - aIndex + 9892U)) & S_BLOCK1], 47U) ^ RotL64(aWaterLaneD[((S_BLOCK1 - aIndex + 9094U)) & S_BLOCK1], 11U));
-            aCross ^= RotL64(aSnowLaneB[((aIndex + 7170U)) & S_BLOCK1], 56U);
-
-            aInvestLaneD[S_BLOCK1 - aIndex] = aIngress;
+            aCross = aWaterLaneA[aIndex] ^ aWaterLaneD[aIndex];
+            aCross ^= aWoodLaneA[aIndex];
+            //
+            aFuseLaneB[aIndex] = aIngress;
         }
     
         //
         // twist_loop_e loop 3
         //
         // Ingress:
-        //      aInvestLaneD (-->), aWaterLaneA (-->), aSnowLaneA (<-?->)
+        //      aFuseLaneB (-->), aWaterLaneA (-->), aKeyRowReadB (-->), aWindLaneC (<-?->)
         //
         // Cross:
-        //      aInvestLaneC (<--), aWaterLaneC (<--), aScrapLaneC (<-?->)
+        //      aFuseLaneA (<--), aWaterLaneC (<--), aSource (<-?->)
         //
         // Destination:
-        //      aFuseLaneA
+        //      aHeartLaneA
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = (RotL64(aInvestLaneD[((aIndex + 11901U)) & S_BLOCK1], 11U) ^ RotL64(aWaterLaneA[((aIndex + 14926U)) & S_BLOCK1], 41U));
-            aIngress ^= RotL64(aSnowLaneA[((aIndex + 14656U)) & S_BLOCK1], 50U);
-
+            aIngress = aFuseLaneB[aIndex] ^ aWaterLaneA[aIndex];
+            aIngress ^= (aKeyRowReadB[aIndex] ^ aWindLaneC[aIndex];
             //
-            aCross = (RotL64(aInvestLaneC[((S_BLOCK1 - aIndex + 12874U)) & S_BLOCK1], 36U) ^ RotL64(aWaterLaneC[((S_BLOCK1 - aIndex + 11797U)) & S_BLOCK1], 47U));
-            aCross ^= RotL64(aScrapLaneC[((aIndex + 15672U)) & S_BLOCK1], 27U);
-
-            aFuseLaneA[aIndex] = aIngress;
+            aCross = aFuseLaneA[aIndex] ^ aWaterLaneC[aIndex];
+            aCross ^= aSource[aIndex];
+            //
+            aHeartLaneA[aIndex] = aIngress;
         }
     
         //
         // twist_loop_e loop 4
         //
         // Ingress:
-        //      aFuseLaneA (-->), aWaterLaneD (-->), aOperationLaneB (<-?->)
+        //      aHeartLaneA (-->), aWaterLaneD (-->), aEarthLaneD (-->), aKeyRowReadA (<-?->)
         //
         // Cross:
-        //      aInvestLaneD (<--), aWaterLaneA (<--), aOperationLaneC (<-?->)
+        //      aFuseLaneB (<--), aWaterLaneA (<--), aEarthLaneA (<-?->)
         //
         // Destination:
-        //      aFuseLaneB
+        //      aHeartLaneB
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = (RotL64(aFuseLaneA[((aIndex + 21519U)) & S_BLOCK1], 24U) ^ RotL64(aWaterLaneD[((aIndex + 18479U)) & S_BLOCK1], 57U));
-            aIngress ^= RotL64(aOperationLaneB[((aIndex + 16730U)) & S_BLOCK1], 3U);
-
+            aIngress = aHeartLaneA[aIndex] ^ aWaterLaneD[aIndex];
+            aIngress ^= (aEarthLaneD[aIndex] ^ aKeyRowReadA[W_KEY1 - aIndex];
             //
-            aCross = (RotL64(aInvestLaneD[((S_BLOCK1 - aIndex + 21441U)) & S_BLOCK1], 19U) ^ RotL64(aWaterLaneA[((S_BLOCK1 - aIndex + 20408U)) & S_BLOCK1], 3U));
-            aCross ^= RotL64(aOperationLaneC[((aIndex + 20695U)) & S_BLOCK1], 46U);
-
-            aFuseLaneB[S_BLOCK1 - aIndex] = aIngress;
+            aCross = aFuseLaneB[aIndex] ^ aWaterLaneA[aIndex];
+            aCross ^= aEarthLaneA[aIndex];
+            //
+            aHeartLaneB[aIndex] = aIngress;
         }
     
         //
         // twist_loop_e loop 5
         //
         // Ingress:
-        //      aFuseLaneB (-->), aInvestLaneD (-->), aSnowLaneD (<-?->)
+        //      aHeartLaneB (-->), aFuseLaneB (-->), aPoisonLaneC (-->), aWindLaneA (<-?->)
         //
         // Cross:
-        //      aFuseLaneA (<--), aInvestLaneC (<--), aSnowLaneC (<-?->)
+        //      aHeartLaneA (<--), aFuseLaneA (<--), aPoisonLaneD (<-?->)
         //
         // Destination:
-        //      aFuseLaneC
+        //      aHeartLaneC
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = (RotL64(aFuseLaneB[((aIndex + 24624U)) & S_BLOCK1], 48U) ^ RotL64(aInvestLaneD[((aIndex + 25119U)) & S_BLOCK1], 13U));
-            aIngress ^= RotL64(aSnowLaneD[((S_BLOCK1 - aIndex + 26617U)) & S_BLOCK1], 35U);
-
+            aIngress = aHeartLaneB[aIndex] ^ aFuseLaneB[aIndex];
+            aIngress ^= (aPoisonLaneC[aIndex] ^ aWindLaneA[aIndex];
             //
-            aCross = (RotL64(aFuseLaneA[((S_BLOCK1 - aIndex + 24531U)) & S_BLOCK1], 11U) ^ RotL64(aInvestLaneC[((S_BLOCK1 - aIndex + 26832U)) & S_BLOCK1], 58U));
-            aCross ^= RotL64(aSnowLaneC[((aIndex + 23689U)) & S_BLOCK1], 29U);
-
-            aFuseLaneC[aIndex] = aIngress;
+            aCross = aHeartLaneA[aIndex] ^ aFuseLaneA[aIndex];
+            aCross ^= aPoisonLaneD[aIndex];
+            //
+            aHeartLaneC[aIndex] = aIngress;
         }
     
         //
         // twist_loop_e loop 6
         //
         // Ingress:
-        //      aFuseLaneC (-->), aFuseLaneA (-->), aOperationLaneA (<-?->)
+        //      aHeartLaneC (-->), aHeartLaneA (-->), aFireLaneC (-->), aFireLaneB (<-?->)
         //
         // Cross:
-        //      aFuseLaneB (<--), aWaterLaneB (<--), aScrapLaneD (<-?->)
+        //      aHeartLaneB (<--), aWaterLaneB (<--), aFireLaneD (<-?->)
         //
         // Destination:
-        //      aFuseLaneD
+        //      aHeartLaneD
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = (RotL64(aFuseLaneC[((aIndex + 29411U)) & S_BLOCK1], 37U) ^ RotL64(aFuseLaneA[((aIndex + 27365U)) & S_BLOCK1], 50U));
-            aIngress ^= RotL64(aOperationLaneA[((S_BLOCK1 - aIndex + 32580U)) & S_BLOCK1], 13U);
-
+            aIngress = aHeartLaneC[aIndex] ^ aHeartLaneA[aIndex];
+            aIngress ^= (aFireLaneC[aIndex] ^ aFireLaneB[aIndex];
             //
-            aCross = (RotL64(aFuseLaneB[((S_BLOCK1 - aIndex + 31529U)) & S_BLOCK1], 47U) ^ RotL64(aWaterLaneB[((S_BLOCK1 - aIndex + 27975U)) & S_BLOCK1], 60U));
-            aCross ^= RotL64(aScrapLaneD[((aIndex + 31639U)) & S_BLOCK1], 23U);
-
-            aFuseLaneD[S_BLOCK1 - aIndex] = aIngress;
+            aCross = aHeartLaneB[aIndex] ^ aWaterLaneB[aIndex];
+            aCross ^= aFireLaneD[aIndex];
+            //
+            aHeartLaneD[aIndex] = aIngress;
         }
     }
     // GTwistRunTwist_E twist_loop_e (end)
-    
-}
 
-void TwistExpander_Vega_Arx::Twist_F() {
-    // [twist arx]
-    // GTwistRunTwist_F twist_loop_f (start)
-    {
-        //
-        // twist_loop_f loop 1
-        //
-        // Ingress:
-        //      aFireLaneA (-->), aFireLaneB (-->), aWaterLaneD (-->), aSnowLaneA (<-?->)
-        //
-        // Cross:
-        //      aFireLaneC (<--), aFireLaneD (<--), aWaterLaneA (<-?->)
-        //
-        // Destination:
-        //      aInvestLaneE
-        //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
-            //
-            aIngress = (RotL64(aFireLaneA[((aIndex + 5198U)) & S_BLOCK1], 52U) ^ RotL64(aFireLaneB[((aIndex + 2425U)) & S_BLOCK1], 3U));
-            aIngress ^= (RotL64(aWaterLaneD[((aIndex + 4313U)) & S_BLOCK1], 43U) ^ RotL64(aSnowLaneA[((aIndex + 221U)) & S_BLOCK1], 19U));
-
-            //
-            aCross = (RotL64(aFireLaneC[((S_BLOCK1 - aIndex + 675U)) & S_BLOCK1], 41U) ^ RotL64(aFireLaneD[((S_BLOCK1 - aIndex + 130U)) & S_BLOCK1], 23U));
-            aCross ^= RotL64(aWaterLaneA[((S_BLOCK1 - aIndex + 3739U)) & S_BLOCK1], 56U);
-
-            aInvestLaneE[aIndex] = aIngress;
-        }
-    
-        //
-        // twist_loop_f loop 2
-        //
-        // Ingress:
-        //      aInvestLaneE (-->), aFireLaneC (-->), aOperationLaneB (-->), aInvestLaneB (<-?->)
-        //
-        // Cross:
-        //      aFireLaneA (<--), aFireLaneD (<--), aScrapLaneB (<-?->)
-        //
-        // Destination:
-        //      aInvestLaneF
-        //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
-            //
-            aIngress = (RotL64(aInvestLaneE[((aIndex + 7371U)) & S_BLOCK1], 37U) ^ RotL64(aFireLaneC[((aIndex + 8223U)) & S_BLOCK1], 56U));
-            aIngress ^= (RotL64(aOperationLaneB[((aIndex + 8928U)) & S_BLOCK1], 29U) ^ RotL64(aInvestLaneB[((aIndex + 10061U)) & S_BLOCK1], 5U));
-
-            //
-            aCross = (RotL64(aFireLaneA[((S_BLOCK1 - aIndex + 8223U)) & S_BLOCK1], 10U) ^ RotL64(aFireLaneD[((S_BLOCK1 - aIndex + 10741U)) & S_BLOCK1], 57U));
-            aCross ^= RotL64(aScrapLaneB[((S_BLOCK1 - aIndex + 7081U)) & S_BLOCK1], 21U);
-
-            aInvestLaneF[S_BLOCK1 - aIndex] = aIngress;
-        }
-    
-        //
-        // twist_loop_f loop 3
-        //
-        // Ingress:
-        //      aInvestLaneF (-->), aFireLaneA (-->), aScrapLaneD (-->), aInvestLaneD (<-?->)
-        //
-        // Cross:
-        //      aInvestLaneE (<--), aFireLaneC (<--), aWaterLaneB (<-?->)
-        //
-        // Destination:
-        //      aEarthLaneA
-        //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
-            //
-            aIngress = (RotL64(aInvestLaneF[((aIndex + 14902U)) & S_BLOCK1], 47U) ^ RotL64(aFireLaneA[((aIndex + 14965U)) & S_BLOCK1], 13U));
-            aIngress ^= (RotL64(aScrapLaneD[((aIndex + 14760U)) & S_BLOCK1], 5U) ^ RotL64(aInvestLaneD[((aIndex + 13531U)) & S_BLOCK1], 56U));
-
-            //
-            aCross = (RotL64(aInvestLaneE[((S_BLOCK1 - aIndex + 13244U)) & S_BLOCK1], 21U) ^ RotL64(aFireLaneC[((S_BLOCK1 - aIndex + 15089U)) & S_BLOCK1], 57U));
-            aCross ^= RotL64(aWaterLaneB[((S_BLOCK1 - aIndex + 15727U)) & S_BLOCK1], 12U);
-
-            aEarthLaneA[aIndex] = aIngress;
-        }
-    
-        //
-        // twist_loop_f loop 4
-        //
-        // Ingress:
-        //      aEarthLaneA (-->), aFireLaneD (-->), aSnowLaneB (-->), aSource (<-?->)
-        //
-        // Cross:
-        //      aInvestLaneF (<--), aFireLaneA (<--), aScrapLaneA (<-?->)
-        //
-        // Destination:
-        //      aEarthLaneB
-        //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
-            //
-            aIngress = (RotL64(aEarthLaneA[((aIndex + 20147U)) & S_BLOCK1], 19U) ^ RotL64(aFireLaneD[((aIndex + 16729U)) & S_BLOCK1], 43U));
-            aIngress ^= (RotL64(aSnowLaneB[((aIndex + 16728U)) & S_BLOCK1], 3U) ^ RotL64(aSource[((aIndex + 18629U)) & S_BLOCK1], 56U));
-
-            //
-            aCross = (RotL64(aInvestLaneF[((S_BLOCK1 - aIndex + 20741U)) & S_BLOCK1], 53U) ^ RotL64(aFireLaneA[((S_BLOCK1 - aIndex + 21068U)) & S_BLOCK1], 23U));
-            aCross ^= RotL64(aScrapLaneA[((S_BLOCK1 - aIndex + 16703U)) & S_BLOCK1], 42U);
-
-            aEarthLaneB[S_BLOCK1 - aIndex] = aIngress;
-        }
-    
-        //
-        // twist_loop_f loop 5
-        //
-        // Ingress:
-        //      aEarthLaneB (-->), aInvestLaneF (-->), aWaterLaneC (-->), aOperationLaneA (<-?->)
-        //
-        // Cross:
-        //      aEarthLaneA (<--), aInvestLaneE (<--), aOperationLaneD (<-?->)
-        //
-        // Destination:
-        //      aEarthLaneC
-        //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
-            //
-            aIngress = (RotL64(aEarthLaneB[((aIndex + 26394U)) & S_BLOCK1], 34U) ^ RotL64(aInvestLaneF[((aIndex + 24697U)) & S_BLOCK1], 21U));
-            aIngress ^= (RotL64(aWaterLaneC[((aIndex + 23052U)) & S_BLOCK1], 11U) ^ RotL64(aOperationLaneA[((aIndex + 25108U)) & S_BLOCK1], 43U));
-
-            //
-            aCross = (RotL64(aEarthLaneA[((S_BLOCK1 - aIndex + 26983U)) & S_BLOCK1], 19U) ^ RotL64(aInvestLaneE[((S_BLOCK1 - aIndex + 27158U)) & S_BLOCK1], 4U));
-            aCross ^= RotL64(aOperationLaneD[((aIndex + 22966U)) & S_BLOCK1], 41U);
-
-            aEarthLaneC[aIndex] = aIngress;
-        }
-    
-        //
-        // twist_loop_f loop 6
-        //
-        // Ingress:
-        //      aEarthLaneC (-->), aEarthLaneA (-->), aScrapLaneC (-->), aInvestLaneC (<-?->)
-        //
-        // Cross:
-        //      aEarthLaneB (<--), aFireLaneB (<--), aOperationLaneC (<-?->)
-        //
-        // Destination:
-        //      aEarthLaneD
-        //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
-            //
-            aIngress = (RotL64(aEarthLaneC[((aIndex + 28133U)) & S_BLOCK1], 19U) ^ RotL64(aEarthLaneA[((aIndex + 30356U)) & S_BLOCK1], 5U));
-            aIngress ^= (RotL64(aScrapLaneC[((aIndex + 28594U)) & S_BLOCK1], 34U) ^ RotL64(aInvestLaneC[((S_BLOCK1 - aIndex + 28654U)) & S_BLOCK1], 53U));
-
-            //
-            aCross = (RotL64(aEarthLaneB[((S_BLOCK1 - aIndex + 28065U)) & S_BLOCK1], 12U) ^ RotL64(aFireLaneB[((S_BLOCK1 - aIndex + 31535U)) & S_BLOCK1], 41U));
-            aCross ^= RotL64(aOperationLaneC[((aIndex + 30294U)) & S_BLOCK1], 53U);
-
-            aEarthLaneD[S_BLOCK1 - aIndex] = aIngress;
-        }
-    }
-    // GTwistRunTwist_F twist_loop_f (end)
-    
-}
-
-void TwistExpander_Vega_Arx::Twist_G() {
-    // [twist arx]
-    // GTwistRunTwist_G twist_loop_g (start)
-    {
-        //
-        // twist_loop_g loop 1
-        //
-        // Ingress:
-        //      aEarthLaneA (-->), aEarthLaneB (-->), aSnowLaneD (-->), aInvestLaneC (<-?->)
-        //
-        // Cross:
-        //      aEarthLaneC (<--), aEarthLaneD (<--), aKeyRowReadB (<-?->)
-        //
-        // Destination:
-        //      aInvestLaneG
-        //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
-            //
-            aIngress = (RotL64(aEarthLaneA[((aIndex + 2837U)) & S_BLOCK1], 26U) ^ RotL64(aEarthLaneB[((aIndex + 5158U)) & S_BLOCK1], 35U));
-            aIngress ^= (RotL64(aSnowLaneD[((aIndex + 2343U)) & S_BLOCK1], 5U) ^ RotL64(aInvestLaneC[((S_BLOCK1 - aIndex + 2388U)) & S_BLOCK1], 57U));
-
-            //
-            aCross = (RotL64(aEarthLaneC[((S_BLOCK1 - aIndex + 1536U)) & S_BLOCK1], 12U) ^ RotL64(aEarthLaneD[((S_BLOCK1 - aIndex + 2871U)) & S_BLOCK1], 47U));
-            aCross ^= RotL64(aKeyRowReadB[(((2047U - aIndex) + 73U)) & W_KEY1], 29U);
-
-            aInvestLaneG[aIndex] = aIngress;
-        }
-    
-        //
-        // twist_loop_g loop 2
-        //
-        // Ingress:
-        //      aInvestLaneG (-->), aEarthLaneC (-->), aInvestLaneF (-->), aInvestLaneE (<-?->)
-        //
-        // Cross:
-        //      aEarthLaneA (<--), aEarthLaneD (<--), aWaterLaneD (<-?->)
-        //
-        // Destination:
-        //      aInvestLaneH
-        //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
-            //
-            aIngress = (RotL64(aInvestLaneG[((aIndex + 6813U)) & S_BLOCK1], 29U) ^ RotL64(aEarthLaneC[((aIndex + 8125U)) & S_BLOCK1], 58U));
-            aIngress ^= (RotL64(aInvestLaneF[((aIndex + 10438U)) & S_BLOCK1], 41U) ^ RotL64(aInvestLaneE[((S_BLOCK1 - aIndex + 7014U)) & S_BLOCK1], 13U));
-
-            //
-            aCross = (RotL64(aEarthLaneA[((S_BLOCK1 - aIndex + 8401U)) & S_BLOCK1], 56U) ^ RotL64(aEarthLaneD[((S_BLOCK1 - aIndex + 10736U)) & S_BLOCK1], 39U));
-            aCross ^= RotL64(aWaterLaneD[((S_BLOCK1 - aIndex + 9571U)) & S_BLOCK1], 13U);
-
-            aInvestLaneH[S_BLOCK1 - aIndex] = aIngress;
-        }
-    
-        //
-        // twist_loop_g loop 3
-        //
-        // Ingress:
-        //      aInvestLaneH (-->), aEarthLaneA (-->), aFireLaneD (-->), aWaterLaneC (<-?->)
-        //
-        // Cross:
-        //      aInvestLaneG (<--), aEarthLaneC (<--), aFireLaneA (<-?->)
-        //
-        // Destination:
-        //      aWorkLaneA
-        //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
-            //
-            aIngress = (RotL64(aInvestLaneH[((aIndex + 15237U)) & S_BLOCK1], 35U) ^ RotL64(aEarthLaneA[((aIndex + 11380U)) & S_BLOCK1], 3U));
-            aIngress ^= (RotL64(aFireLaneD[((aIndex + 14358U)) & S_BLOCK1], 54U) ^ RotL64(aWaterLaneC[((aIndex + 14881U)) & S_BLOCK1], 11U));
-
-            //
-            aCross = (RotL64(aInvestLaneG[((S_BLOCK1 - aIndex + 13652U)) & S_BLOCK1], 44U) ^ RotL64(aEarthLaneC[((S_BLOCK1 - aIndex + 14276U)) & S_BLOCK1], 35U));
-            aCross ^= RotL64(aFireLaneA[((S_BLOCK1 - aIndex + 16281U)) & S_BLOCK1], 5U);
-
-            aWorkLaneA[aIndex] = aIngress;
-        }
-    
-        //
-        // twist_loop_g loop 4
-        //
-        // Ingress:
-        //      aWorkLaneA (-->), aEarthLaneD (-->), aInvestLaneB (-->), aWaterLaneA (<-?->)
-        //
-        // Cross:
-        //      aInvestLaneH (<--), aEarthLaneA (<--), aFireLaneB (<-?->)
-        //
-        // Destination:
-        //      aWorkLaneB
-        //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
-            //
-            aIngress = (RotL64(aWorkLaneA[((aIndex + 18061U)) & S_BLOCK1], 11U) ^ RotL64(aEarthLaneD[((aIndex + 17579U)) & S_BLOCK1], 57U));
-            aIngress ^= (RotL64(aInvestLaneB[((aIndex + 19229U)) & S_BLOCK1], 39U) ^ RotL64(aWaterLaneA[((S_BLOCK1 - aIndex + 17027U)) & S_BLOCK1], 30U));
-
-            //
-            aCross = (RotL64(aInvestLaneH[((S_BLOCK1 - aIndex + 19301U)) & S_BLOCK1], 3U) ^ RotL64(aEarthLaneA[((S_BLOCK1 - aIndex + 19016U)) & S_BLOCK1], 23U));
-            aCross ^= RotL64(aFireLaneB[((aIndex + 21748U)) & S_BLOCK1], 14U);
-
-            aWorkLaneB[S_BLOCK1 - aIndex] = aIngress;
-        }
-    
-        //
-        // twist_loop_g loop 5
-        //
-        // Ingress:
-        //      aWorkLaneB (-->), aInvestLaneH (-->), aSnowLaneC (-->), aFireLaneC (<-?->)
-        //
-        // Cross:
-        //      aWorkLaneA (<--), aInvestLaneG (<--), aWaterLaneB (<-?->)
-        //
-        // Destination:
-        //      aWorkLaneC
-        //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
-            //
-            aIngress = (RotL64(aWorkLaneB[((aIndex + 25601U)) & S_BLOCK1], 56U) ^ RotL64(aInvestLaneH[((aIndex + 25233U)) & S_BLOCK1], 29U));
-            aIngress ^= (RotL64(aSnowLaneC[((aIndex + 23693U)) & S_BLOCK1], 11U) ^ RotL64(aFireLaneC[((aIndex + 23465U)) & S_BLOCK1], 37U));
-
-            //
-            aCross = (RotL64(aWorkLaneA[((S_BLOCK1 - aIndex + 23039U)) & S_BLOCK1], 58U) ^ RotL64(aInvestLaneG[((S_BLOCK1 - aIndex + 25735U)) & S_BLOCK1], 29U));
-            aCross ^= RotL64(aWaterLaneB[((S_BLOCK1 - aIndex + 25751U)) & S_BLOCK1], 3U);
-
-            aWorkLaneC[aIndex] = aIngress;
-        }
-    
-        //
-        // twist_loop_g loop 6
-        //
-        // Ingress:
-        //      aWorkLaneC (-->), aWorkLaneA (-->), aInvestLaneA (-->), aKeyRowReadA (<-?->)
-        //
-        // Cross:
-        //      aWorkLaneB (<--), aEarthLaneB (<--), aInvestLaneD (<-?->)
-        //
-        // Destination:
-        //      aWorkLaneD
-        //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
-            //
-            aIngress = (RotL64(aWorkLaneC[((aIndex + 32497U)) & S_BLOCK1], 57U) ^ RotL64(aWorkLaneA[((aIndex + 31728U)) & S_BLOCK1], 39U));
-            aIngress ^= (RotL64(aInvestLaneA[((aIndex + 28380U)) & S_BLOCK1], 47U) ^ RotL64(aKeyRowReadA[((aIndex + 31184U)) & W_KEY1], 26U));
-
-            //
-            aCross = (RotL64(aWorkLaneB[((S_BLOCK1 - aIndex + 30533U)) & S_BLOCK1], 11U) ^ RotL64(aEarthLaneB[((S_BLOCK1 - aIndex + 28026U)) & S_BLOCK1], 29U));
-            aCross ^= RotL64(aInvestLaneD[((S_BLOCK1 - aIndex + 27355U)) & S_BLOCK1], 60U);
-
-            aWorkLaneD[S_BLOCK1 - aIndex] = aIngress;
-        }
-    }
-    // GTwistRunTwist_G twist_loop_g (end)
-    
 }
 
 void TwistExpander_Vega_Arx::GROW_A() {
-    // [grow arx]
+
+
     // GROW_A grow_key_a (start)
     {
         //
         // grow_key_a loop 1
         //
         // Ingress:
-        //      aWorkLaneA (-->), aWorkLaneB (-->), aFireLaneD (-->), aScrapLaneB (<-?->)
+        //      aHeartLaneA (-->), aHeartLaneB (-->), aEarthLaneC (-->), aPoisonLaneC (<-?->)
         //
         // Cross:
-        //      aWorkLaneC (<--), aWorkLaneD (<--), aEarthLaneB (<-?->)
+        //      aHeartLaneC (<--), aHeartLaneD (<--), aPoisonLaneB (<--), aSpiritLaneA (<-?->)
         //
         // Destination:
-        //      aOperationLaneB
+        //      aIceLaneA
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = (RotL64(aWorkLaneA[((aIndex + 1088U)) & S_BLOCK1], 23U) ^ RotL64(aWorkLaneB[((aIndex + 123U)) & S_BLOCK1], 43U));
-            aIngress ^= (RotL64(aFireLaneD[((aIndex + 687U)) & S_BLOCK1], 5U) ^ RotL64(aScrapLaneB[((aIndex + 4613U)) & S_BLOCK1], 34U));
-
+            aIngress = aHeartLaneA[aIndex] ^ aHeartLaneB[aIndex];
+            aIngress ^= (aEarthLaneC[aIndex] ^ aPoisonLaneC[aIndex];
             //
-            aCross = (RotL64(aWorkLaneC[((S_BLOCK1 - aIndex + 4243U)) & S_BLOCK1], 11U) ^ RotL64(aWorkLaneD[((S_BLOCK1 - aIndex + 3160U)) & S_BLOCK1], 37U));
-            aCross ^= RotL64(aEarthLaneB[((aIndex + 4058U)) & S_BLOCK1], 50U);
-
-            aOperationLaneB[aIndex] = aIngress;
+            aCross = aHeartLaneC[aIndex] ^ aHeartLaneD[aIndex];
+            aCross ^= aPoisonLaneB[aIndex] ^ aSpiritLaneA[aIndex];
+            //
+            aIceLaneA[aIndex] = aIngress;
         }
     
         //
         // grow_key_a loop 2
         //
         // Ingress:
-        //      aOperationLaneB (-->), aWorkLaneC (-->), aEarthLaneD (-->), aInvestLaneA (<-?->)
+        //      aIceLaneA (-->), aHeartLaneC (-->), aSpiritLaneB (-->), aWaterLaneB (<-?->)
         //
         // Cross:
-        //      aWorkLaneA (<--), aWorkLaneD (<--), aOperationLaneA (<-?->)
+        //      aHeartLaneA (<--), aHeartLaneD (<--), aWindLaneB (<--), aFireLaneD (<-?->)
         //
         // Destination:
-        //      aOperationLaneD
+        //      aIceLaneB
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = (RotL64(aOperationLaneB[((aIndex + 8485U)) & S_BLOCK1], 3U) ^ RotL64(aWorkLaneC[((aIndex + 6364U)) & S_BLOCK1], 43U));
-            aIngress ^= (RotL64(aEarthLaneD[((aIndex + 10856U)) & S_BLOCK1], 35U) ^ RotL64(aInvestLaneA[((S_BLOCK1 - aIndex + 9622U)) & S_BLOCK1], 54U));
-
+            aIngress = aIceLaneA[aIndex] ^ aHeartLaneC[aIndex];
+            aIngress ^= (aSpiritLaneB[aIndex] ^ aWaterLaneB[aIndex];
             //
-            aCross = (RotL64(aWorkLaneA[((S_BLOCK1 - aIndex + 9899U)) & S_BLOCK1], 10U) ^ RotL64(aWorkLaneD[((S_BLOCK1 - aIndex + 6065U)) & S_BLOCK1], 57U));
-            aCross ^= RotL64(aOperationLaneA[((S_BLOCK1 - aIndex + 10763U)) & S_BLOCK1], 27U);
-
-            aOperationLaneD[S_BLOCK1 - aIndex] = aIngress;
+            aCross = aHeartLaneA[aIndex] ^ aHeartLaneD[aIndex];
+            aCross ^= aWindLaneB[aIndex] ^ aFireLaneD[aIndex];
+            //
+            aIceLaneB[aIndex] = aIngress;
         }
     
         //
         // grow_key_a loop 3
         //
         // Ingress:
-        //      aOperationLaneD (-->), aWorkLaneA (-->), aInvestLaneB (-->), aWaterLaneC (<-?->)
+        //      aIceLaneB (-->), aHeartLaneD (-->), aSpiritLaneD (-->), aWindLaneA (<-?->)
         //
         // Cross:
-        //      aOperationLaneB (<--), aWorkLaneC (<--), aScrapLaneD (<-?->)
+        //      aIceLaneA (<--), aHeartLaneB (<--), aWaterLaneA (<--), aPoisonLaneD (<-?->)
         //
         // Destination:
-        //      aExpandLaneA
+        //      aIceLaneC
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = (RotL64(aOperationLaneD[((aIndex + 14022U)) & S_BLOCK1], 41U) ^ RotL64(aWorkLaneA[((aIndex + 13472U)) & S_BLOCK1], 5U));
-            aIngress ^= (RotL64(aInvestLaneB[((aIndex + 15963U)) & S_BLOCK1], 53U) ^ RotL64(aWaterLaneC[((aIndex + 16128U)) & S_BLOCK1], 26U));
-
+            aIngress = aIceLaneB[aIndex] ^ aHeartLaneD[aIndex];
+            aIngress ^= (aSpiritLaneD[aIndex] ^ aWindLaneA[aIndex];
             //
-            aCross = (RotL64(aOperationLaneB[((S_BLOCK1 - aIndex + 14686U)) & S_BLOCK1], 26U) ^ RotL64(aWorkLaneC[((S_BLOCK1 - aIndex + 15394U)) & S_BLOCK1], 39U));
-            aCross ^= RotL64(aScrapLaneD[((S_BLOCK1 - aIndex + 13911U)) & S_BLOCK1], 11U);
-
-            aExpandLaneA[aIndex] = aIngress;
+            aCross = aIceLaneA[aIndex] ^ aHeartLaneB[aIndex];
+            aCross ^= aWaterLaneA[aIndex] ^ aPoisonLaneD[aIndex];
+            //
+            aIceLaneC[aIndex] = aIngress;
         }
     
         //
         // grow_key_a loop 4
         //
         // Ingress:
-        //      aExpandLaneA (-->), aWorkLaneD (-->), aSnowLaneD (-->), aInvestLaneF (<-?->)
+        //      aIceLaneC (-->), aIceLaneA (-->), aFireLaneC (-->), aSpiritLaneC (<-?->)
         //
         // Cross:
-        //      aOperationLaneD (<--), aWorkLaneA (<--), aWaterLaneA (<-?->)
+        //      aIceLaneB (<--), aHeartLaneC (<--), aEarthLaneD (<--), aPoisonLaneA (<-?->)
         //
         // Destination:
-        //      aExpandLaneB
+        //      aIceLaneD
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = (RotL64(aExpandLaneA[((aIndex + 19737U)) & S_BLOCK1], 12U) ^ RotL64(aWorkLaneD[((aIndex + 16469U)) & S_BLOCK1], 37U));
-            aIngress ^= (RotL64(aSnowLaneD[((aIndex + 18107U)) & S_BLOCK1], 47U) ^ RotL64(aInvestLaneF[((S_BLOCK1 - aIndex + 17631U)) & S_BLOCK1], 3U));
-
+            aIngress = aIceLaneC[aIndex] ^ aIceLaneA[aIndex];
+            aIngress ^= (aFireLaneC[aIndex] ^ aSpiritLaneC[aIndex];
             //
-            aCross = (RotL64(aOperationLaneD[((S_BLOCK1 - aIndex + 20301U)) & S_BLOCK1], 26U) ^ RotL64(aWorkLaneA[((S_BLOCK1 - aIndex + 18034U)) & S_BLOCK1], 57U));
-            aCross ^= RotL64(aWaterLaneA[((S_BLOCK1 - aIndex + 18425U)) & S_BLOCK1], 37U);
-
-            aExpandLaneB[S_BLOCK1 - aIndex] = aIngress;
-        }
-    
-        //
-        // grow_key_a loop 5
-        //
-        // Ingress:
-        //      aExpandLaneB (-->), aOperationLaneD (-->), aScrapLaneA (-->), aInvestLaneE (<-?->)
-        //
-        // Cross:
-        //      aExpandLaneA (<--), aOperationLaneB (<--), aScrapLaneC (<-?->)
-        //
-        // Destination:
-        //      aExpandLaneC
-        //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+            aCross = aIceLaneB[aIndex] ^ aHeartLaneC[aIndex];
+            aCross ^= aEarthLaneD[aIndex] ^ aPoisonLaneA[aIndex];
             //
-            aIngress = (RotL64(aExpandLaneB[((aIndex + 26044U)) & S_BLOCK1], 13U) ^ RotL64(aOperationLaneD[((aIndex + 22784U)) & S_BLOCK1], 5U));
-            aIngress ^= (RotL64(aScrapLaneA[((aIndex + 22152U)) & S_BLOCK1], 30U) ^ RotL64(aInvestLaneE[((S_BLOCK1 - aIndex + 24703U)) & S_BLOCK1], 53U));
-
-            //
-            aCross = (RotL64(aExpandLaneA[((S_BLOCK1 - aIndex + 24154U)) & S_BLOCK1], 3U) ^ RotL64(aOperationLaneB[((S_BLOCK1 - aIndex + 24432U)) & S_BLOCK1], 27U));
-            aCross ^= RotL64(aScrapLaneC[((aIndex + 23599U)) & S_BLOCK1], 52U);
-
-            aExpandLaneC[aIndex] = aIngress;
-        }
-    
-        //
-        // grow_key_a loop 6
-        //
-        // Ingress:
-        //      aExpandLaneC (-->), aExpandLaneA (-->), aSnowLaneB (-->), aFireLaneB (<-?->)
-        //
-        // Cross:
-        //      aExpandLaneB (<--), aWorkLaneB (<--), aOperationLaneC (<-?->)
-        //
-        // Destination:
-        //      aExpandLaneD
-        //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
-            //
-            aIngress = (RotL64(aExpandLaneC[((aIndex + 30398U)) & S_BLOCK1], 47U) ^ RotL64(aExpandLaneA[((aIndex + 27759U)) & S_BLOCK1], 56U));
-            aIngress ^= (RotL64(aSnowLaneB[((aIndex + 30946U)) & S_BLOCK1], 11U) ^ RotL64(aFireLaneB[((S_BLOCK1 - aIndex + 31524U)) & S_BLOCK1], 39U));
-
-            //
-            aCross = (RotL64(aExpandLaneB[((S_BLOCK1 - aIndex + 30552U)) & S_BLOCK1], 21U) ^ RotL64(aWorkLaneB[((S_BLOCK1 - aIndex + 29881U)) & S_BLOCK1], 60U));
-            aCross ^= RotL64(aOperationLaneC[((aIndex + 31217U)) & S_BLOCK1], 11U);
-
-            aExpandLaneD[S_BLOCK1 - aIndex] = aIngress;
+            aIceLaneD[aIndex] = aIngress;
         }
     }
     // GROW_A grow_key_a (end)
-    
+
 }
 
 void TwistExpander_Vega_Arx::GROW_B() {
-    // [grow arx]
+
+
     // GROW_B grow_key_b (start)
     {
         //
         // grow_key_b loop 1
         //
         // Ingress:
-        //      aExpandLaneA (-->), aExpandLaneB (-->), aWindLaneB (-->), aOperationLaneB (<-?->)
+        //      aIceLaneA (-->), aIceLaneB (-->), aWindLaneD (-->), aWoodLaneB (<-?->)
         //
         // Cross:
-        //      aExpandLaneC (<--), aExpandLaneD (<--), aWaterLaneD (<-?->)
+        //      aIceLaneC (<--), aIceLaneD (<--), aWindLaneC (<--), aWaterLaneC (<-?->)
         //
         // Destination:
-        //      aFuseLaneC
+        //      aSpiritLaneA
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = (RotL64(aExpandLaneA[((aIndex + 3193U)) & S_BLOCK1], 21U) ^ RotL64(aExpandLaneB[((aIndex + 3577U)) & S_BLOCK1], 13U));
-            aIngress ^= (RotL64(aWindLaneB[((aIndex + 355U)) & S_BLOCK1], 51U) ^ RotL64(aOperationLaneB[((aIndex + 3527U)) & S_BLOCK1], 40U));
-
+            aIngress = aIceLaneA[aIndex] ^ aIceLaneB[aIndex];
+            aIngress ^= (aWindLaneD[aIndex] ^ aWoodLaneB[aIndex];
             //
-            aCross = (RotL64(aExpandLaneC[((S_BLOCK1 - aIndex + 1124U)) & S_BLOCK1], 5U) ^ RotL64(aExpandLaneD[((S_BLOCK1 - aIndex + 3649U)) & S_BLOCK1], 13U));
-            aCross ^= RotL64(aWaterLaneD[((aIndex + 4646U)) & S_BLOCK1], 30U);
-
-            aFuseLaneC[aIndex] = aIngress;
+            aCross = aIceLaneC[aIndex] ^ aIceLaneD[aIndex];
+            aCross ^= aWindLaneC[aIndex] ^ aWaterLaneC[aIndex];
+            //
+            aSpiritLaneA[aIndex] = aIngress;
         }
     
         //
         // grow_key_b loop 2
         //
         // Ingress:
-        //      aFuseLaneC (-->), aExpandLaneC (-->), aFireLaneA (-->), aEarthLaneA (<-?->)
+        //      aSpiritLaneA (-->), aIceLaneC (-->), aHeartLaneA (-->), aHeartLaneD (<-?->)
         //
         // Cross:
-        //      aExpandLaneA (<--), aExpandLaneD (<--), aWindLaneA (<-?->)
+        //      aIceLaneA (<--), aIceLaneD (<--), aWoodLaneA (<--), aHeartLaneB (<-?->)
         //
         // Destination:
-        //      aFuseLaneD
+        //      aSpiritLaneB
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = (RotL64(aFuseLaneC[((aIndex + 8720U)) & S_BLOCK1], 41U) ^ RotL64(aExpandLaneC[((aIndex + 6843U)) & S_BLOCK1], 3U));
-            aIngress ^= (RotL64(aFireLaneA[((aIndex + 6948U)) & S_BLOCK1], 13U) ^ RotL64(aEarthLaneA[((S_BLOCK1 - aIndex + 6293U)) & S_BLOCK1], 26U));
-
+            aIngress = aSpiritLaneA[aIndex] ^ aIceLaneC[aIndex];
+            aIngress ^= (aHeartLaneA[aIndex] ^ aHeartLaneD[aIndex];
             //
-            aCross = (RotL64(aExpandLaneA[((S_BLOCK1 - aIndex + 7201U)) & S_BLOCK1], 5U) ^ RotL64(aExpandLaneD[((S_BLOCK1 - aIndex + 7374U)) & S_BLOCK1], 50U));
-            aCross ^= RotL64(aWindLaneA[((S_BLOCK1 - aIndex + 7598U)) & S_BLOCK1], 27U);
-
-            aFuseLaneD[S_BLOCK1 - aIndex] = aIngress;
+            aCross = aIceLaneA[aIndex] ^ aIceLaneD[aIndex];
+            aCross ^= aWoodLaneA[aIndex] ^ aHeartLaneB[aIndex];
+            //
+            aSpiritLaneB[aIndex] = aIngress;
         }
     
         //
         // grow_key_b loop 3
         //
         // Ingress:
-        //      aFuseLaneD (-->), aExpandLaneA (-->), aFireLaneC (-->), aSnowLaneA (<-?->)
+        //      aSpiritLaneB (-->), aIceLaneD (-->), aKeyRowReadB (-->), aEarthLaneB (<-?->)
         //
         // Cross:
-        //      aFuseLaneC (<--), aExpandLaneC (<--), aSnowLaneC (<-?->)
+        //      aSpiritLaneA (<--), aIceLaneB (<--), aHeartLaneC (<--), aEarthLaneA (<-?->)
         //
         // Destination:
-        //      aWorkLaneA
+        //      aSpiritLaneC
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = (RotL64(aFuseLaneD[((aIndex + 12933U)) & S_BLOCK1], 47U) ^ RotL64(aExpandLaneA[((aIndex + 11159U)) & S_BLOCK1], 30U));
-            aIngress ^= (RotL64(aFireLaneC[((aIndex + 14076U)) & S_BLOCK1], 19U) ^ RotL64(aSnowLaneA[((aIndex + 13202U)) & S_BLOCK1], 11U));
-
+            aIngress = aSpiritLaneB[aIndex] ^ aIceLaneD[aIndex];
+            aIngress ^= (aKeyRowReadB[aIndex] ^ aEarthLaneB[aIndex];
             //
-            aCross = (RotL64(aFuseLaneC[((S_BLOCK1 - aIndex + 13241U)) & S_BLOCK1], 21U) ^ RotL64(aExpandLaneC[((S_BLOCK1 - aIndex + 11457U)) & S_BLOCK1], 39U));
-            aCross ^= RotL64(aSnowLaneC[((aIndex + 15519U)) & S_BLOCK1], 56U);
-
-            aWorkLaneA[aIndex] = aIngress;
+            aCross = aSpiritLaneA[aIndex] ^ aIceLaneB[aIndex];
+            aCross ^= aHeartLaneC[aIndex] ^ aEarthLaneA[aIndex];
+            //
+            aSpiritLaneC[aIndex] = aIngress;
         }
     
         //
         // grow_key_b loop 4
         //
         // Ingress:
-        //      aWorkLaneA (-->), aExpandLaneD (-->), aWaterLaneB (-->), aOperationLaneD (<-?->)
+        //      aSpiritLaneC (-->), aSpiritLaneA (-->), aWaterLaneD (-->), aFireLaneB (<-?->)
         //
         // Cross:
-        //      aFuseLaneD (<--), aExpandLaneA (<--), aInvestLaneD (<-?->)
+        //      aSpiritLaneB (<--), aIceLaneC (<--), aFireLaneA (<--), aKeyRowReadA (<-?->)
         //
         // Destination:
-        //      aWorkLaneB
+        //      aSpiritLaneD
         //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+        for (;;) {
             //
-            aIngress = (RotL64(aWorkLaneA[((aIndex + 17531U)) & S_BLOCK1], 43U) ^ RotL64(aExpandLaneD[((aIndex + 19127U)) & S_BLOCK1], 20U));
-            aIngress ^= (RotL64(aWaterLaneB[((aIndex + 16566U)) & S_BLOCK1], 35U) ^ RotL64(aOperationLaneD[((aIndex + 19423U)) & S_BLOCK1], 51U));
-
+            aIngress = aSpiritLaneC[aIndex] ^ aSpiritLaneA[aIndex];
+            aIngress ^= (aWaterLaneD[aIndex] ^ aFireLaneB[aIndex];
             //
-            aCross = (RotL64(aFuseLaneD[((S_BLOCK1 - aIndex + 20218U)) & S_BLOCK1], 29U) ^ RotL64(aExpandLaneA[((S_BLOCK1 - aIndex + 18150U)) & S_BLOCK1], 57U));
-            aCross ^= RotL64(aInvestLaneD[((aIndex + 20300U)) & S_BLOCK1], 48U);
-
-            aWorkLaneB[S_BLOCK1 - aIndex] = aIngress;
-        }
-    
-        //
-        // grow_key_b loop 5
-        //
-        // Ingress:
-        //      aWorkLaneB (-->), aFuseLaneD (-->), aWindLaneC (-->), aInvestLaneH (<-?->)
-        //
-        // Cross:
-        //      aWorkLaneA (<--), aFuseLaneC (<--), aWindLaneD (<-?->)
-        //
-        // Destination:
-        //      aWorkLaneC
-        //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
+            aCross = aSpiritLaneB[aIndex] ^ aIceLaneC[aIndex];
+            aCross ^= aFireLaneA[aIndex] ^ aKeyRowReadA[aIndex];
             //
-            aIngress = (RotL64(aWorkLaneB[((aIndex + 25579U)) & S_BLOCK1], 19U) ^ RotL64(aFuseLaneD[((aIndex + 27237U)) & S_BLOCK1], 30U));
-            aIngress ^= (RotL64(aWindLaneC[((aIndex + 26689U)) & S_BLOCK1], 11U) ^ RotL64(aInvestLaneH[((S_BLOCK1 - aIndex + 25115U)) & S_BLOCK1], 57U));
-
-            //
-            aCross = (RotL64(aWorkLaneA[((S_BLOCK1 - aIndex + 22519U)) & S_BLOCK1], 60U) ^ RotL64(aFuseLaneC[((S_BLOCK1 - aIndex + 23932U)) & S_BLOCK1], 21U));
-            aCross ^= RotL64(aWindLaneD[((S_BLOCK1 - aIndex + 24419U)) & S_BLOCK1], 5U);
-
-            aWorkLaneC[aIndex] = aIngress;
-        }
-    
-        //
-        // grow_key_b loop 6
-        //
-        // Ingress:
-        //      aWorkLaneC (-->), aWorkLaneA (-->), aInvestLaneG (-->), aInvestLaneC (<-?->)
-        //
-        // Cross:
-        //      aWorkLaneB (<--), aExpandLaneB (<--), aEarthLaneC (<-?->)
-        //
-        // Destination:
-        //      aWorkLaneD
-        //
-        for (std::size_t aIndex = 0U; aIndex < static_cast<std::size_t>(S_BLOCK); aIndex += 1U) {
-            //
-            aIngress = (RotL64(aWorkLaneC[((aIndex + 30754U)) & S_BLOCK1], 36U) ^ RotL64(aWorkLaneA[((aIndex + 28071U)) & S_BLOCK1], 51U));
-            aIngress ^= (RotL64(aInvestLaneG[((aIndex + 30957U)) & S_BLOCK1], 3U) ^ RotL64(aInvestLaneC[((aIndex + 32051U)) & S_BLOCK1], 11U));
-
-            //
-            aCross = (RotL64(aWorkLaneB[((S_BLOCK1 - aIndex + 27640U)) & S_BLOCK1], 53U) ^ RotL64(aExpandLaneB[((S_BLOCK1 - aIndex + 30946U)) & S_BLOCK1], 11U));
-            aCross ^= RotL64(aEarthLaneC[((aIndex + 27882U)) & S_BLOCK1], 40U);
-
-            aWorkLaneD[S_BLOCK1 - aIndex] = aIngress;
+            aSpiritLaneD[aIndex] = aIngress;
         }
     }
     // GROW_B grow_key_b (end)
-    
+
 }

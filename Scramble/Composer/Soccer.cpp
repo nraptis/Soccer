@@ -23,6 +23,7 @@
 #include "TwistMix32.hpp"
 #include "TwistMix64.hpp"
 #include "TwistFunctional.hpp"
+#include "TwistSnow.hpp"
 
 #include <memory>
 #include <algorithm>
@@ -82,6 +83,12 @@ std::uint8_t mCrushC[S_BLOCK];
 std::uint8_t mCrushD[S_BLOCK];
 
 std::uint8_t mCryptTemp[SOCCER_BLOCK_SIZE];
+
+
+std::uint8_t mSnowLaneA[S_BLOCK];
+std::uint8_t mSnowLaneB[S_BLOCK];
+std::uint8_t mSnowLaneC[S_BLOCK];
+std::uint8_t mSnowLaneD[S_BLOCK];
 
 } // namespace
 
@@ -431,6 +438,9 @@ bool Soccer::AttemptSeed_Encrypt(std::uint8_t *pPassword,
         return false;
     }
     
+    
+    
+    
     mClaimedExpanders[0] = mExpanders[0];
     mClaimedExpanders[1] = mExpanders[1];
     mClaimedExpanderCount += 2;
@@ -443,8 +453,12 @@ bool Soccer::AttemptSeed_Encrypt(std::uint8_t *pPassword,
     mClaimedWorkSpaces[1] = mWorkSpaces[1];
     mClaimedWorkSpaceCount += 2;
     
-    mClaimedExpanders[0]->Seed(mClaimedWorkSpaces[0], &mFarmSalt, pNonce, pPassword, pPasswordByteLength, &mClaimedMaterials[0][0]);
-    mClaimedExpanders[1]->Seed(mClaimedWorkSpaces[1], &mFarmSalt, pNonce, &mClaimedMaterials[0][0], S_BLOCK, &mClaimedMaterials[1][0]);
+    mClaimedExpanders[0]->Seed(mClaimedWorkSpaces[0], &mFarmSalt, pNonce, pPassword, pPasswordByteLength,
+                               mSnowLaneA, mSnowLaneB, mSnowLaneC, mSnowLaneD,
+                               &mClaimedMaterials[0][0]);
+    mClaimedExpanders[1]->Seed(mClaimedWorkSpaces[1], &mFarmSalt, pNonce, &mClaimedMaterials[0][0], S_BLOCK,
+                               mSnowLaneA, mSnowLaneB, mSnowLaneC, mSnowLaneD,
+                               &mClaimedMaterials[1][0]);
     
     ShuffleMEWBlockZero(&mClaimedMaterials[1][0]);
     
@@ -460,8 +474,12 @@ bool Soccer::AttemptSeed_Encrypt(std::uint8_t *pPassword,
     mClaimedWorkSpaces[3] = mWorkSpaces[1];
     mClaimedWorkSpaceCount += 2;
     
-    mClaimedExpanders[2]->Seed(mClaimedWorkSpaces[2], &mFarmSalt, pNonce, pPassword, pPasswordByteLength, &mClaimedMaterials[2][0]);
-    mClaimedExpanders[3]->Seed(mClaimedWorkSpaces[3], &mFarmSalt, pNonce, &mClaimedMaterials[2][0], S_BLOCK, &mClaimedMaterials[3][0]);
+    mClaimedExpanders[2]->Seed(mClaimedWorkSpaces[2], &mFarmSalt, pNonce, pPassword, pPasswordByteLength,
+                               mSnowLaneA, mSnowLaneB, mSnowLaneC, mSnowLaneD,
+                               &mClaimedMaterials[2][0]);
+    mClaimedExpanders[3]->Seed(mClaimedWorkSpaces[3], &mFarmSalt, pNonce, &mClaimedMaterials[2][0], S_BLOCK,
+                               mSnowLaneA, mSnowLaneB, mSnowLaneC, mSnowLaneD,
+                               &mClaimedMaterials[3][0]);
     
     // Acknowledge byte 1 after four seeds.
     std::uint32_t aAckWord = static_cast<std::uint32_t>(mClaimedMaterials[3][S_BLOCK - 1]);
@@ -480,8 +498,12 @@ bool Soccer::AttemptSeed_Encrypt(std::uint8_t *pPassword,
     mClaimedWorkSpaces[5] = mWorkSpaces[1];
     mClaimedWorkSpaceCount += 2;
     
-    mClaimedExpanders[4]->Seed(mClaimedWorkSpaces[4], &mFarmSalt, pNonce, pPassword, pPasswordByteLength, &mClaimedMaterials[4][0]);
-    mClaimedExpanders[5]->Seed(mClaimedWorkSpaces[5], &mFarmSalt, pNonce, &mClaimedMaterials[4][0], S_BLOCK, &mClaimedMaterials[5][0]);
+    mClaimedExpanders[4]->Seed(mClaimedWorkSpaces[4], &mFarmSalt, pNonce, pPassword, pPasswordByteLength,
+                               mSnowLaneA, mSnowLaneB, mSnowLaneC, mSnowLaneD,
+                               &mClaimedMaterials[4][0]);
+    mClaimedExpanders[5]->Seed(mClaimedWorkSpaces[5], &mFarmSalt, pNonce, &mClaimedMaterials[4][0], S_BLOCK,
+                               mSnowLaneA, mSnowLaneB, mSnowLaneC, mSnowLaneD,
+                               &mClaimedMaterials[5][0]);
     
     ShuffleMEWBlockZero(&mClaimedMaterials[5][0]);
     
@@ -497,8 +519,12 @@ bool Soccer::AttemptSeed_Encrypt(std::uint8_t *pPassword,
     mClaimedWorkSpaces[7] = mWorkSpaces[1];
     mClaimedWorkSpaceCount += 2;
     
-    mClaimedExpanders[6]->Seed(mClaimedWorkSpaces[6], &mFarmSalt, pNonce, pPassword, pPasswordByteLength, &mClaimedMaterials[6][0]);
-    mClaimedExpanders[7]->Seed(mClaimedWorkSpaces[7], &mFarmSalt, pNonce, &mClaimedMaterials[6][0], S_BLOCK, &mClaimedMaterials[7][0]);
+    mClaimedExpanders[6]->Seed(mClaimedWorkSpaces[6], &mFarmSalt, pNonce, pPassword, pPasswordByteLength,
+                               mSnowLaneA, mSnowLaneB, mSnowLaneC, mSnowLaneD,
+                               &mClaimedMaterials[6][0]);
+    mClaimedExpanders[7]->Seed(mClaimedWorkSpaces[7], &mFarmSalt, pNonce, &mClaimedMaterials[6][0], S_BLOCK,
+                               mSnowLaneA, mSnowLaneB, mSnowLaneC, mSnowLaneD,
+                               &mClaimedMaterials[7][0]);
     
     // Acknowledge byte 2 after eight seeds.
     aAckWord |= static_cast<std::uint32_t>(mClaimedMaterials[7][S_BLOCK - 1]) << 8U;
@@ -517,8 +543,12 @@ bool Soccer::AttemptSeed_Encrypt(std::uint8_t *pPassword,
     mClaimedWorkSpaces[9] = mWorkSpaces[1];
     mClaimedWorkSpaceCount += 2;
     
-    mClaimedExpanders[8]->Seed(mClaimedWorkSpaces[8], &mFarmSalt, pNonce, pPassword, pPasswordByteLength, &mClaimedMaterials[8][0]);
-    mClaimedExpanders[9]->Seed(mClaimedWorkSpaces[9], &mFarmSalt, pNonce, &mClaimedMaterials[8][0], S_BLOCK, &mClaimedMaterials[9][0]);
+    mClaimedExpanders[8]->Seed(mClaimedWorkSpaces[8], &mFarmSalt, pNonce, pPassword, pPasswordByteLength,
+                               mSnowLaneA, mSnowLaneB, mSnowLaneC, mSnowLaneD,
+                               &mClaimedMaterials[8][0]);
+    mClaimedExpanders[9]->Seed(mClaimedWorkSpaces[9], &mFarmSalt, pNonce, &mClaimedMaterials[8][0], S_BLOCK,
+                               mSnowLaneA, mSnowLaneB, mSnowLaneC, mSnowLaneD,
+                               &mClaimedMaterials[9][0]);
     
     ShuffleMEWBlockZero(&mClaimedMaterials[9][0]);
     
@@ -534,8 +564,12 @@ bool Soccer::AttemptSeed_Encrypt(std::uint8_t *pPassword,
     mClaimedWorkSpaces[11] = mWorkSpaces[1];
     mClaimedWorkSpaceCount += 2;
     
-    mClaimedExpanders[10]->Seed(mClaimedWorkSpaces[10], &mFarmSalt, pNonce, pPassword, pPasswordByteLength, &mClaimedMaterials[10][0]);
-    mClaimedExpanders[11]->Seed(mClaimedWorkSpaces[11], &mFarmSalt, pNonce, &mClaimedMaterials[10][0], S_BLOCK, &mClaimedMaterials[11][0]);
+    mClaimedExpanders[10]->Seed(mClaimedWorkSpaces[10], &mFarmSalt, pNonce, pPassword, pPasswordByteLength,
+                                mSnowLaneA, mSnowLaneB, mSnowLaneC, mSnowLaneD,
+                                &mClaimedMaterials[10][0]);
+    mClaimedExpanders[11]->Seed(mClaimedWorkSpaces[11], &mFarmSalt, pNonce, &mClaimedMaterials[10][0], S_BLOCK,
+                                mSnowLaneA, mSnowLaneB, mSnowLaneC, mSnowLaneD,
+                                &mClaimedMaterials[11][0]);
     
     // Acknowledge byte 3 after twelve seeds.
     aAckWord |= static_cast<std::uint32_t>(mClaimedMaterials[11][S_BLOCK - 1]) << 16U;
@@ -554,8 +588,12 @@ bool Soccer::AttemptSeed_Encrypt(std::uint8_t *pPassword,
     mClaimedWorkSpaces[13] = mWorkSpaces[1];
     mClaimedWorkSpaceCount += 2;
     
-    mClaimedExpanders[12]->Seed(mClaimedWorkSpaces[12], &mFarmSalt, pNonce, pPassword, pPasswordByteLength, &mClaimedMaterials[12][0]);
-    mClaimedExpanders[13]->Seed(mClaimedWorkSpaces[13], &mFarmSalt, pNonce, &mClaimedMaterials[12][0], S_BLOCK, &mClaimedMaterials[13][0]);
+    mClaimedExpanders[12]->Seed(mClaimedWorkSpaces[12], &mFarmSalt, pNonce, pPassword, pPasswordByteLength,
+                                mSnowLaneA, mSnowLaneB, mSnowLaneC, mSnowLaneD,
+                                &mClaimedMaterials[12][0]);
+    mClaimedExpanders[13]->Seed(mClaimedWorkSpaces[13], &mFarmSalt, pNonce, &mClaimedMaterials[12][0], S_BLOCK,
+                                mSnowLaneA, mSnowLaneB, mSnowLaneC, mSnowLaneD,
+                                &mClaimedMaterials[13][0]);
     
     ShuffleMEWBlockZero(&mClaimedMaterials[13][0]);
     
@@ -571,8 +609,12 @@ bool Soccer::AttemptSeed_Encrypt(std::uint8_t *pPassword,
     mClaimedWorkSpaces[15] = mWorkSpaces[1];
     mClaimedWorkSpaceCount += 2;
     
-    mClaimedExpanders[14]->Seed(mClaimedWorkSpaces[14], &mFarmSalt, pNonce, pPassword, pPasswordByteLength, &mClaimedMaterials[14][0]);
-    mClaimedExpanders[15]->Seed(mClaimedWorkSpaces[15], &mFarmSalt, pNonce, &mClaimedMaterials[14][0], S_BLOCK, &mClaimedMaterials[15][0]);
+    mClaimedExpanders[14]->Seed(mClaimedWorkSpaces[14], &mFarmSalt, pNonce, pPassword, pPasswordByteLength,
+                                mSnowLaneA, mSnowLaneB, mSnowLaneC, mSnowLaneD,
+                                &mClaimedMaterials[14][0]);
+    mClaimedExpanders[15]->Seed(mClaimedWorkSpaces[15], &mFarmSalt, pNonce, &mClaimedMaterials[14][0], S_BLOCK,
+                                mSnowLaneA, mSnowLaneB, mSnowLaneC, mSnowLaneD,
+                                &mClaimedMaterials[15][0]);
     
     // Acknowledge byte 4 after sixteen seeds.
     aAckWord |= static_cast<std::uint32_t>(mClaimedMaterials[15][S_BLOCK - 1]) << 24U;
@@ -605,8 +647,12 @@ bool Soccer::AttemptSeed_Decrypt(std::uint8_t *pPassword,
     mClaimedWorkSpaces[1] = mWorkSpaces[1];
     mClaimedWorkSpaceCount += 2;
     
-    mClaimedExpanders[0]->Seed(mClaimedWorkSpaces[0], &mFarmSalt, pNonce, pPassword, pPasswordByteLength, &mClaimedMaterials[0][0]);
-    mClaimedExpanders[1]->Seed(mClaimedWorkSpaces[1], &mFarmSalt, pNonce, &mClaimedMaterials[0][0], S_BLOCK, &mClaimedMaterials[1][0]);
+    mClaimedExpanders[0]->Seed(mClaimedWorkSpaces[0], &mFarmSalt, pNonce, pPassword, pPasswordByteLength,
+                               mSnowLaneA, mSnowLaneB, mSnowLaneC, mSnowLaneD,
+                               &mClaimedMaterials[0][0]);
+    mClaimedExpanders[1]->Seed(mClaimedWorkSpaces[1], &mFarmSalt, pNonce, &mClaimedMaterials[0][0], S_BLOCK,
+                               mSnowLaneA, mSnowLaneB, mSnowLaneC, mSnowLaneD,
+                               &mClaimedMaterials[1][0]);
     
     ShuffleMEWBlockZero(&mClaimedMaterials[1][0]);
     
@@ -622,8 +668,12 @@ bool Soccer::AttemptSeed_Decrypt(std::uint8_t *pPassword,
     mClaimedWorkSpaces[3] = mWorkSpaces[1];
     mClaimedWorkSpaceCount += 2;
     
-    mClaimedExpanders[2]->Seed(mClaimedWorkSpaces[2], &mFarmSalt, pNonce, pPassword, pPasswordByteLength, &mClaimedMaterials[2][0]);
-    mClaimedExpanders[3]->Seed(mClaimedWorkSpaces[3], &mFarmSalt, pNonce, &mClaimedMaterials[2][0], S_BLOCK, &mClaimedMaterials[3][0]);
+    mClaimedExpanders[2]->Seed(mClaimedWorkSpaces[2], &mFarmSalt, pNonce, pPassword, pPasswordByteLength,
+                               mSnowLaneA, mSnowLaneB, mSnowLaneC, mSnowLaneD,
+                               &mClaimedMaterials[2][0]);
+    mClaimedExpanders[3]->Seed(mClaimedWorkSpaces[3], &mFarmSalt, pNonce, &mClaimedMaterials[2][0], S_BLOCK,
+                               mSnowLaneA, mSnowLaneB, mSnowLaneC, mSnowLaneD,
+                               &mClaimedMaterials[3][0]);
     
     // Check acknowledge byte 1 after four seeds.
     if (static_cast<std::uint32_t>(mClaimedMaterials[3][S_BLOCK - 1]) != (pAckWord & 0x000000FFU)) {
@@ -644,8 +694,12 @@ bool Soccer::AttemptSeed_Decrypt(std::uint8_t *pPassword,
     mClaimedWorkSpaces[5] = mWorkSpaces[1];
     mClaimedWorkSpaceCount += 2;
     
-    mClaimedExpanders[4]->Seed(mClaimedWorkSpaces[4], &mFarmSalt, pNonce, pPassword, pPasswordByteLength, &mClaimedMaterials[4][0]);
-    mClaimedExpanders[5]->Seed(mClaimedWorkSpaces[5], &mFarmSalt, pNonce, &mClaimedMaterials[4][0], S_BLOCK, &mClaimedMaterials[5][0]);
+    mClaimedExpanders[4]->Seed(mClaimedWorkSpaces[4], &mFarmSalt, pNonce, pPassword, pPasswordByteLength,
+                               mSnowLaneA, mSnowLaneB, mSnowLaneC, mSnowLaneD,
+                               &mClaimedMaterials[4][0]);
+    mClaimedExpanders[5]->Seed(mClaimedWorkSpaces[5], &mFarmSalt, pNonce, &mClaimedMaterials[4][0], S_BLOCK,
+                               mSnowLaneA, mSnowLaneB, mSnowLaneC, mSnowLaneD,
+                               &mClaimedMaterials[5][0]);
     
     ShuffleMEWBlockZero(&mClaimedMaterials[5][0]);
     
@@ -661,8 +715,12 @@ bool Soccer::AttemptSeed_Decrypt(std::uint8_t *pPassword,
     mClaimedWorkSpaces[7] = mWorkSpaces[1];
     mClaimedWorkSpaceCount += 2;
     
-    mClaimedExpanders[6]->Seed(mClaimedWorkSpaces[6], &mFarmSalt, pNonce, pPassword, pPasswordByteLength, &mClaimedMaterials[6][0]);
-    mClaimedExpanders[7]->Seed(mClaimedWorkSpaces[7], &mFarmSalt, pNonce, &mClaimedMaterials[6][0], S_BLOCK, &mClaimedMaterials[7][0]);
+    mClaimedExpanders[6]->Seed(mClaimedWorkSpaces[6], &mFarmSalt, pNonce, pPassword, pPasswordByteLength,
+                               mSnowLaneA, mSnowLaneB, mSnowLaneC, mSnowLaneD,
+                               &mClaimedMaterials[6][0]);
+    mClaimedExpanders[7]->Seed(mClaimedWorkSpaces[7], &mFarmSalt, pNonce, &mClaimedMaterials[6][0], S_BLOCK,
+                               mSnowLaneA, mSnowLaneB, mSnowLaneC, mSnowLaneD,
+                               &mClaimedMaterials[7][0]);
     
     // Check acknowledge byte 2 after eight seeds.
     if (static_cast<std::uint32_t>(mClaimedMaterials[7][S_BLOCK - 1]) != ((pAckWord >> 8U) & 0x000000FFU)) {
@@ -683,8 +741,12 @@ bool Soccer::AttemptSeed_Decrypt(std::uint8_t *pPassword,
     mClaimedWorkSpaces[9] = mWorkSpaces[1];
     mClaimedWorkSpaceCount += 2;
     
-    mClaimedExpanders[8]->Seed(mClaimedWorkSpaces[8], &mFarmSalt, pNonce, pPassword, pPasswordByteLength, &mClaimedMaterials[8][0]);
-    mClaimedExpanders[9]->Seed(mClaimedWorkSpaces[9], &mFarmSalt, pNonce, &mClaimedMaterials[8][0], S_BLOCK, &mClaimedMaterials[9][0]);
+    mClaimedExpanders[8]->Seed(mClaimedWorkSpaces[8], &mFarmSalt, pNonce, pPassword, pPasswordByteLength,
+                               mSnowLaneA, mSnowLaneB, mSnowLaneC, mSnowLaneD,
+                               &mClaimedMaterials[8][0]);
+    mClaimedExpanders[9]->Seed(mClaimedWorkSpaces[9], &mFarmSalt, pNonce, &mClaimedMaterials[8][0], S_BLOCK,
+                               mSnowLaneA, mSnowLaneB, mSnowLaneC, mSnowLaneD,
+                               &mClaimedMaterials[9][0]);
     
     ShuffleMEWBlockZero(&mClaimedMaterials[9][0]);
     
@@ -700,8 +762,12 @@ bool Soccer::AttemptSeed_Decrypt(std::uint8_t *pPassword,
     mClaimedWorkSpaces[11] = mWorkSpaces[1];
     mClaimedWorkSpaceCount += 2;
     
-    mClaimedExpanders[10]->Seed(mClaimedWorkSpaces[10], &mFarmSalt, pNonce, pPassword, pPasswordByteLength, &mClaimedMaterials[10][0]);
-    mClaimedExpanders[11]->Seed(mClaimedWorkSpaces[11], &mFarmSalt, pNonce, &mClaimedMaterials[10][0], S_BLOCK, &mClaimedMaterials[11][0]);
+    mClaimedExpanders[10]->Seed(mClaimedWorkSpaces[10], &mFarmSalt, pNonce, pPassword, pPasswordByteLength,
+                                mSnowLaneA, mSnowLaneB, mSnowLaneC, mSnowLaneD,
+                                &mClaimedMaterials[10][0]);
+    mClaimedExpanders[11]->Seed(mClaimedWorkSpaces[11], &mFarmSalt, pNonce, &mClaimedMaterials[10][0], S_BLOCK,
+                                mSnowLaneA, mSnowLaneB, mSnowLaneC, mSnowLaneD,
+                                &mClaimedMaterials[11][0]);
     
     // Check acknowledge byte 3 after twelve seeds.
     if (static_cast<std::uint32_t>(mClaimedMaterials[11][S_BLOCK - 1]) != ((pAckWord >> 16U) & 0x000000FFU)) {
@@ -722,8 +788,12 @@ bool Soccer::AttemptSeed_Decrypt(std::uint8_t *pPassword,
     mClaimedWorkSpaces[13] = mWorkSpaces[1];
     mClaimedWorkSpaceCount += 2;
     
-    mClaimedExpanders[12]->Seed(mClaimedWorkSpaces[12], &mFarmSalt, pNonce, pPassword, pPasswordByteLength, &mClaimedMaterials[12][0]);
-    mClaimedExpanders[13]->Seed(mClaimedWorkSpaces[13], &mFarmSalt, pNonce, &mClaimedMaterials[12][0], S_BLOCK, &mClaimedMaterials[13][0]);
+    mClaimedExpanders[12]->Seed(mClaimedWorkSpaces[12], &mFarmSalt, pNonce, pPassword, pPasswordByteLength,
+                                mSnowLaneA, mSnowLaneB, mSnowLaneC, mSnowLaneD,
+                                &mClaimedMaterials[12][0]);
+    mClaimedExpanders[13]->Seed(mClaimedWorkSpaces[13], &mFarmSalt, pNonce, &mClaimedMaterials[12][0], S_BLOCK,
+                                mSnowLaneA, mSnowLaneB, mSnowLaneC, mSnowLaneD,
+                                &mClaimedMaterials[13][0]);
     
     ShuffleMEWBlockZero(&mClaimedMaterials[13][0]);
     
@@ -739,8 +809,12 @@ bool Soccer::AttemptSeed_Decrypt(std::uint8_t *pPassword,
     mClaimedWorkSpaces[15] = mWorkSpaces[1];
     mClaimedWorkSpaceCount += 2;
     
-    mClaimedExpanders[14]->Seed(mClaimedWorkSpaces[14], &mFarmSalt, pNonce, pPassword, pPasswordByteLength, &mClaimedMaterials[14][0]);
-    mClaimedExpanders[15]->Seed(mClaimedWorkSpaces[15], &mFarmSalt, pNonce, &mClaimedMaterials[14][0], S_BLOCK, &mClaimedMaterials[15][0]);
+    mClaimedExpanders[14]->Seed(mClaimedWorkSpaces[14], &mFarmSalt, pNonce, pPassword, pPasswordByteLength,
+                                mSnowLaneA, mSnowLaneB, mSnowLaneC, mSnowLaneD,
+                                &mClaimedMaterials[14][0]);
+    mClaimedExpanders[15]->Seed(mClaimedWorkSpaces[15], &mFarmSalt, pNonce, &mClaimedMaterials[14][0], S_BLOCK,
+                                mSnowLaneA, mSnowLaneB, mSnowLaneC, mSnowLaneD,
+                                &mClaimedMaterials[15][0]);
     
     // Check acknowledge byte 4 after sixteen seeds.
     if (static_cast<std::uint32_t>(mClaimedMaterials[15][S_BLOCK - 1]) != ((pAckWord >> 24U) & 0x000000FFU)) {
@@ -758,6 +832,11 @@ bool Soccer::SeedPrelude(std::uint8_t *pPassword,
     
     if (pPassword == nullptr) { return false; }
     if (pPasswordByteLength == 0) { return false; }
+    
+    TwistSnow::Sha256Counter(pPassword, mSnowLaneA);
+    TwistSnow::AES256Counter(pPassword, mSnowLaneB);
+    TwistSnow::ChaCha20Counter(pPassword, mSnowLaneC);
+    TwistSnow::Aria256Counter(pPassword, mSnowLaneD);
     
     for (std::size_t aIndex=0; aIndex<16; aIndex++) {
         mClaimedExpanders[aIndex] = nullptr;
@@ -862,6 +941,7 @@ bool Soccer::SeedPrelude(std::uint8_t *pPassword,
                   pNonce,
                   pPassword,
                   pPasswordByteLength,
+                  mSnowLaneA, mSnowLaneB, mSnowLaneC, mSnowLaneD,
                   mRandom);
     
     // Block 0: masks, 32 entries

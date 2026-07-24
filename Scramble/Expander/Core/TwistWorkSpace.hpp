@@ -21,6 +21,8 @@
 #define S_SALT 32
 #define S_SALT_DIVIDE_BITSHIFT 5
 
+#define S_SALT1 31
+
 #define W_KEY 2048
 #define W_KEY1 2047
 #define H_KEY 8
@@ -34,10 +36,6 @@ enum class TwistDomain : std::uint8_t {
     kPhaseB,
     kPhaseC,
     kPhaseD,
-    kPhaseE,
-    kPhaseF,
-    kPhaseG,
-    kPhaseH,
 };
 
 enum class TwistWorkSpaceSlot : std::uint16_t;
@@ -49,25 +47,7 @@ enum class TwistBufferKind : std::uint8_t {
     kConstants = 4
 };
 
-enum class TwistSBoxLane : std::uint16_t {
-    kInvalid = 0,
-    kA = 1,
-    kB = 2,
-    kC = 3,
-    kD = 4,
-    kE = 5,
-    kF = 6,
-    kG = 7,
-    kH = 8
-};
-
 enum class TwistSaltOwner : std::uint16_t {
-    kInvalid = 0,
-    kInbuilt = 2,
-    kEphemeral = 3
-};
-
-enum class TwistSBoxOwner : std::uint16_t {
     kInvalid = 0,
     kInbuilt = 2,
     kEphemeral = 3
@@ -79,8 +59,6 @@ struct TwistBufferKey {
     std::uint16_t                            mSlot = 255U;
     
     TwistSaltOwner                           mSaltOwner = TwistSaltOwner::kInvalid;
-    TwistSBoxOwner                           mSBoxOwner = TwistSBoxOwner::kInvalid;
-    TwistSBoxLane                            mSBoxLane = TwistSBoxLane::kInvalid;
 
     static TwistBufferKey                    Salt(TwistSaltOwner pOwner,
                                                   TwistDomain pDomain,
@@ -103,20 +81,20 @@ enum class TwistWorkSpaceSlot : std::uint16_t {
     kParamDestination=3,
     kParamSnow=4,
     
-    kExpansionLaneA=80,
-    kExpansionLaneB=81,
-    kExpansionLaneC=82,
-    kExpansionLaneD=83,
+    kHeartLaneA=80,
+    kHeartLaneB=81,
+    kHeartLaneC=82,
+    kHeartLaneD=83,
 
-    kWorkLaneA=90,
-    kWorkLaneB=91,
-    kWorkLaneC=92,
-    kWorkLaneD=93,
+    kPoisonLaneA=90,
+    kPoisonLaneB=91,
+    kPoisonLaneC=92,
+    kPoisonLaneD=93,
 
-    kOperationLaneA=100,
-    kOperationLaneB=101,
-    kOperationLaneC=102,
-    kOperationLaneD=103,
+    kSpiritLaneA=100,
+    kSpiritLaneB=101,
+    kSpiritLaneC=102,
+    kSpiritLaneD=103,
 
     kSnowLaneA=106,
     kSnowLaneB=107,
@@ -148,24 +126,15 @@ enum class TwistWorkSpaceSlot : std::uint16_t {
     kFuseLaneC=150,
     kFuseLaneD=151,
 
-    kScrapLaneA=152,
-    kScrapLaneB=153,
-    kScrapLaneC=154,
-    kScrapLaneD=155,
+    kWoodLaneA=152,
+    kWoodLaneB=153,
+    kWoodLaneC=154,
+    kWoodLaneD=155,
 
-    kMergeLaneA=156,
-    kMergeLaneB=157,
-    kMergeLaneC=158,
-    kMergeLaneD=159,
-
-    kInvestA=130,
-    kInvestB=131,
-    kInvestC=132,
-    kInvestD=133,
-    kInvestE=134,
-    kInvestF=135,
-    kInvestG=136,
-    kInvestH=137,
+    kIceLaneA=130,
+    kIceLaneB=131,
+    kIceLaneC=132,
+    kIceLaneD=133,
     
     
     // These are confusing.
@@ -283,82 +252,6 @@ enum class TwistWorkSpaceSlot : std::uint16_t {
     kPhaseDSaltWandererUpdateE,
     kPhaseDSaltWandererUpdateF,
 
-    kPhaseESaltOrbiterAssignA=372,
-    kPhaseESaltOrbiterAssignB,
-    kPhaseESaltOrbiterAssignC,
-    kPhaseESaltOrbiterAssignD,
-    kPhaseESaltOrbiterAssignE,
-    kPhaseESaltOrbiterAssignF,
-    kPhaseESaltOrbiterUpdateA,
-    kPhaseESaltOrbiterUpdateB,
-    kPhaseESaltOrbiterUpdateC,
-    kPhaseESaltOrbiterUpdateD,
-    kPhaseESaltOrbiterUpdateE,
-    kPhaseESaltOrbiterUpdateF,
-    kPhaseESaltWandererUpdateA,
-    kPhaseESaltWandererUpdateB,
-    kPhaseESaltWandererUpdateC,
-    kPhaseESaltWandererUpdateD,
-    kPhaseESaltWandererUpdateE,
-    kPhaseESaltWandererUpdateF,
-
-    kPhaseFSaltOrbiterAssignA=390,
-    kPhaseFSaltOrbiterAssignB,
-    kPhaseFSaltOrbiterAssignC,
-    kPhaseFSaltOrbiterAssignD,
-    kPhaseFSaltOrbiterAssignE,
-    kPhaseFSaltOrbiterAssignF,
-    kPhaseFSaltOrbiterUpdateA,
-    kPhaseFSaltOrbiterUpdateB,
-    kPhaseFSaltOrbiterUpdateC,
-    kPhaseFSaltOrbiterUpdateD,
-    kPhaseFSaltOrbiterUpdateE,
-    kPhaseFSaltOrbiterUpdateF,
-    kPhaseFSaltWandererUpdateA,
-    kPhaseFSaltWandererUpdateB,
-    kPhaseFSaltWandererUpdateC,
-    kPhaseFSaltWandererUpdateD,
-    kPhaseFSaltWandererUpdateE,
-    kPhaseFSaltWandererUpdateF,
-
-    kPhaseGSaltOrbiterAssignA=408,
-    kPhaseGSaltOrbiterAssignB,
-    kPhaseGSaltOrbiterAssignC,
-    kPhaseGSaltOrbiterAssignD,
-    kPhaseGSaltOrbiterAssignE,
-    kPhaseGSaltOrbiterAssignF,
-    kPhaseGSaltOrbiterUpdateA,
-    kPhaseGSaltOrbiterUpdateB,
-    kPhaseGSaltOrbiterUpdateC,
-    kPhaseGSaltOrbiterUpdateD,
-    kPhaseGSaltOrbiterUpdateE,
-    kPhaseGSaltOrbiterUpdateF,
-    kPhaseGSaltWandererUpdateA,
-    kPhaseGSaltWandererUpdateB,
-    kPhaseGSaltWandererUpdateC,
-    kPhaseGSaltWandererUpdateD,
-    kPhaseGSaltWandererUpdateE,
-    kPhaseGSaltWandererUpdateF,
-
-    kPhaseHSaltOrbiterAssignA=426,
-    kPhaseHSaltOrbiterAssignB,
-    kPhaseHSaltOrbiterAssignC,
-    kPhaseHSaltOrbiterAssignD,
-    kPhaseHSaltOrbiterAssignE,
-    kPhaseHSaltOrbiterAssignF,
-    kPhaseHSaltOrbiterUpdateA,
-    kPhaseHSaltOrbiterUpdateB,
-    kPhaseHSaltOrbiterUpdateC,
-    kPhaseHSaltOrbiterUpdateD,
-    kPhaseHSaltOrbiterUpdateE,
-    kPhaseHSaltOrbiterUpdateF,
-    kPhaseHSaltWandererUpdateA,
-    kPhaseHSaltWandererUpdateB,
-    kPhaseHSaltWandererUpdateC,
-    kPhaseHSaltWandererUpdateD,
-    kPhaseHSaltWandererUpdateE,
-    kPhaseHSaltWandererUpdateF,
-    
 };
 
 struct TwistDomainConstants {
@@ -445,18 +338,6 @@ public:
     TwistDomainSaltSet                      mPhaseDSalts;
     TwistDomainConstants                    mPhaseDConstants;
 
-    TwistDomainSaltSet                      mPhaseESalts;
-    TwistDomainConstants                    mPhaseEConstants;
-
-    TwistDomainSaltSet                      mPhaseFSalts;
-    TwistDomainConstants                    mPhaseFConstants;
-
-    TwistDomainSaltSet                      mPhaseGSalts;
-    TwistDomainConstants                    mPhaseGConstants;
-
-    TwistDomainSaltSet                      mPhaseHSalts;
-    TwistDomainConstants                    mPhaseHConstants;
-    
     void                                    Zero() {
         mPhaseASalts.Zero();
         mPhaseAConstants.Zero();
@@ -470,18 +351,6 @@ public:
         mPhaseDSalts.Zero();
         mPhaseDConstants.Zero();
 
-        mPhaseESalts.Zero();
-        mPhaseEConstants.Zero();
-
-        mPhaseFSalts.Zero();
-        mPhaseFConstants.Zero();
-
-        mPhaseGSalts.Zero();
-        mPhaseGConstants.Zero();
-
-        mPhaseHSalts.Zero();
-        mPhaseHConstants.Zero();
-        
     }
     
 };
@@ -497,25 +366,20 @@ public:
 
     std::uint8_t                            mSource[S_BLOCK];
 
-    std::uint8_t                            mExpansionLaneA[S_BLOCK];
-    std::uint8_t                            mExpansionLaneB[S_BLOCK];
-    std::uint8_t                            mExpansionLaneC[S_BLOCK];
-    std::uint8_t                            mExpansionLaneD[S_BLOCK];
+    std::uint8_t                            mHeartLaneA[S_BLOCK];
+    std::uint8_t                            mHeartLaneB[S_BLOCK];
+    std::uint8_t                            mHeartLaneC[S_BLOCK];
+    std::uint8_t                            mHeartLaneD[S_BLOCK];
 
-    std::uint8_t                            mWorkLaneA[S_BLOCK];
-    std::uint8_t                            mWorkLaneB[S_BLOCK];
-    std::uint8_t                            mWorkLaneC[S_BLOCK];
-    std::uint8_t                            mWorkLaneD[S_BLOCK];
+    std::uint8_t                            mPoisonLaneA[S_BLOCK];
+    std::uint8_t                            mPoisonLaneB[S_BLOCK];
+    std::uint8_t                            mPoisonLaneC[S_BLOCK];
+    std::uint8_t                            mPoisonLaneD[S_BLOCK];
 
-    std::uint8_t                            mOperationLaneA[S_BLOCK];
-    std::uint8_t                            mOperationLaneB[S_BLOCK];
-    std::uint8_t                            mOperationLaneC[S_BLOCK];
-    std::uint8_t                            mOperationLaneD[S_BLOCK];
-
-    std::uint8_t                            mSnowLaneA[S_BLOCK];
-    std::uint8_t                            mSnowLaneB[S_BLOCK];
-    std::uint8_t                            mSnowLaneC[S_BLOCK];
-    std::uint8_t                            mSnowLaneD[S_BLOCK];
+    std::uint8_t                            mSpiritLaneA[S_BLOCK];
+    std::uint8_t                            mSpiritLaneB[S_BLOCK];
+    std::uint8_t                            mSpiritLaneC[S_BLOCK];
+    std::uint8_t                            mSpiritLaneD[S_BLOCK];
 
     std::uint8_t                            mFireLaneA[S_BLOCK];
     std::uint8_t                            mFireLaneB[S_BLOCK];
@@ -542,26 +406,17 @@ public:
     std::uint8_t                            mFuseLaneC[S_BLOCK];
     std::uint8_t                            mFuseLaneD[S_BLOCK];
 
-    std::uint8_t                            mScrapLaneA[S_BLOCK];
-    std::uint8_t                            mScrapLaneB[S_BLOCK];
-    std::uint8_t                            mScrapLaneC[S_BLOCK];
-    std::uint8_t                            mScrapLaneD[S_BLOCK];
+    std::uint8_t                            mWoodLaneA[S_BLOCK];
+    std::uint8_t                            mWoodLaneB[S_BLOCK];
+    std::uint8_t                            mWoodLaneC[S_BLOCK];
+    std::uint8_t                            mWoodLaneD[S_BLOCK];
 
-    std::uint8_t                            mMergeLaneA[S_QUARTER];
-    std::uint8_t                            mMergeLaneB[S_QUARTER];
-    std::uint8_t                            mMergeLaneC[S_QUARTER];
-    std::uint8_t                            mMergeLaneD[S_QUARTER];
-    
-    std::uint8_t                            mInvestLaneA[S_BLOCK];
-    std::uint8_t                            mInvestLaneB[S_BLOCK];
-    std::uint8_t                            mInvestLaneC[S_BLOCK];
-    std::uint8_t                            mInvestLaneD[S_BLOCK];
+    std::uint8_t                            mIceLaneA[S_BLOCK];
+    std::uint8_t                            mIceLaneB[S_BLOCK];
+    std::uint8_t                            mIceLaneC[S_BLOCK];
+    std::uint8_t                            mIceLaneD[S_BLOCK];
 
-    std::uint8_t                            mInvestLaneE[S_BLOCK];
-    std::uint8_t                            mInvestLaneF[S_BLOCK];
-    std::uint8_t                            mInvestLaneG[S_BLOCK];
-    std::uint8_t                            mInvestLaneH[S_BLOCK];
-    
+
     TwistDomainBundle                       mDomainBundle;
     
     // Rotate stays byte-wide across the workspace helpers.
@@ -571,6 +426,17 @@ public:
     static std::uint8_t                     *GetBuffer(TwistWorkSpace *pWorkSpace,
                                                        TwistExpander *pExpander,
                                                        TwistWorkSpaceSlot pSlot);
+    static std::uint8_t                     *GetBuffer(TwistWorkSpace *pWorkSpace,
+                                                       TwistExpander *pExpander,
+                                                       TwistWorkSpaceSlot pSlot,
+                                                       std::uint8_t *pParamSource,
+                                                       std::uint8_t *pParamDestination);
+    static std::uint8_t                     *GetBuffer(TwistWorkSpace *pWorkSpace,
+                                                       TwistExpander *pExpander,
+                                                       TwistWorkSpaceSlot pSlot,
+                                                       std::uint8_t *pParamSource,
+                                                       std::uint8_t *pParamDestination,
+                                                       TwistDomainSaltSet *pParamSaltSet);
     static std::uint8_t                     *GetBuffer(TwistWorkSpace *pWorkSpace,
                                                        TwistWorkSpaceSlot pSlot);
     static std::uint8_t                     *GetBuffer(TwistWorkSpace *pWorkSpace,
@@ -587,6 +453,10 @@ public:
     
     void                                    Zero_PostSeed();
     void                                    Zero();
+
+private:
+    static TwistDomainBundle                *GetSaltDomainBundle(TwistExpander *pExpander,
+                                                                 TwistSaltOwner pOwner);
     
 };
 

@@ -75,6 +75,16 @@ void Rig::Run(TwistExpander *pExpander,
         }
     }
     
+    std::uint8_t mSnowLaneA[S_BLOCK];
+    std::uint8_t mSnowLaneB[S_BLOCK];
+    std::uint8_t mSnowLaneC[S_BLOCK];
+    std::uint8_t mSnowLaneD[S_BLOCK];
+    
+    TwistSnow::Sha256Counter(pPassword, mSnowLaneA);
+    TwistSnow::AES256Counter(pPassword, mSnowLaneB);
+    TwistSnow::ChaCha20Counter(pPassword, mSnowLaneC);
+    TwistSnow::Aria256Counter(pPassword, mSnowLaneD);
+    
     TwistWorkSpace aWorkSpace;
     TwistFarmSalt aFarmSalt;
     
@@ -83,6 +93,10 @@ void Rig::Run(TwistExpander *pExpander,
                     0ULL,
                     pPassword,
                     static_cast<unsigned int>(pPasswordLength),
+                    mSnowLaneA,
+                    mSnowLaneB,
+                    mSnowLaneC,
+                    mSnowLaneD,
                     mData);
     
     for (int aBlockIndex=1; aBlockIndex<mBlockCount; aBlockIndex++) {

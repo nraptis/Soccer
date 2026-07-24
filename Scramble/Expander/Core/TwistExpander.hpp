@@ -14,8 +14,6 @@
 #include <vector>
 #include "M88.hpp"
 
-
-
 class TwistFarmSalt;
 
 class TwistExpander {
@@ -37,13 +35,15 @@ public:
                                                 TwistDomainConstants *pDomainConstants,
                                                 TwistDomainSaltSet *pDomainSaltSet);
     
-    virtual void                            KDF_A(std::uint64_t pNonce,
+    virtual void                            KDF_A(TwistWorkSpace *pWorkSpace,
+                                                  std::uint64_t pNonce,
                                                   TwistDomainConstants *pDomainConstants,
                                                   TwistDomainSaltSet *pDomainSaltSet,
                                                   std::uint8_t *pSnow,
                                                   int pIndexKDF);
     
-    virtual void                            KDF_B(std::uint64_t pNonce,
+    virtual void                            KDF_B(TwistWorkSpace *pWorkSpace,
+                                                  std::uint64_t pNonce,
                                                   TwistDomainConstants *pDomainConstants,
                                                   TwistDomainSaltSet *pDomainSaltSet,
                                                   int pIndexKDF);
@@ -53,13 +53,17 @@ public:
                                                  std::uint64_t pNonce,
                                                  std::uint8_t *pPassword,
                                                  std::size_t pPasswordByteLength,
+                                                 std::uint8_t *pSnowLaneA,
+                                                 std::uint8_t *pSnowLaneB,
+                                                 std::uint8_t *pSnowLaneC,
+                                                 std::uint8_t *pSnowLaneD,
                                                  std::uint8_t *pDestination);
     
     virtual void                            TwistBlock(TwistWorkSpace *pWorkSpace,
                                                        std::uint8_t *pSource,
                                                        std::uint8_t *pDestination);
     
-    virtual void                            SquashInvestToKeyBoxes();
+    virtual void                            SquashInvestToKeyBoxes(TwistWorkSpace *pWorkSpace);
     
     virtual void                            GrowKeyA(TwistWorkSpace *pWorkSpace);
     virtual void                            GrowKeyB(TwistWorkSpace *pWorkSpace);
@@ -76,6 +80,10 @@ public:
                                                               std::uint64_t pNonce,
                                                               std::uint8_t *pPassword,
                                                               std::size_t pPasswordByteLength,
+                                                              std::uint8_t *pSnowLaneA,
+                                                              std::uint8_t *pSnowLaneB,
+                                                              std::uint8_t *pSnowLaneC,
+                                                              std::uint8_t *pSnowLaneD,
                                                               std::uint8_t *pDestination,
                                                               std::size_t pDestinationByteLength);
     
@@ -91,21 +99,29 @@ public:
     std::size_t                             mIndexList256C[256];
     std::size_t                             mIndexList256D[256];
     
-    std::uint8_t                            *mSource;
-    std::uint8_t                            *mDest;
-    
     M88                                     mMatrix;
     
-    TwistDomainBundle                       mDomainBundleInbuilt;
-    TwistDomainBundle                       mDomainBundleEphemeral;
-    
-    TwistWorkSpace                          *mWorkspace;
+    TwistDomainBundle                       *GetDomainBundleInbuilt() {
+        return &mDomainBundleInbuilt;
+    }
+    const TwistDomainBundle                 *GetDomainBundleInbuilt() const {
+        return &mDomainBundleInbuilt;
+    }
+    TwistDomainBundle                       *GetDomainBundleEphemeral() {
+        return &mDomainBundleEphemeral;
+    }
+    const TwistDomainBundle                 *GetDomainBundleEphemeral() const {
+        return &mDomainBundleEphemeral;
+    }
     
     void                                    Zero_PostSeed();
     
     void                                    Zero();
     
 protected:
+    
+    TwistDomainBundle                       mDomainBundleInbuilt;
+    TwistDomainBundle                       mDomainBundleEphemeral;
     
 };
 

@@ -39,19 +39,19 @@ bool TwistBufferKey::IsConstants() const {
     return mKind == TwistBufferKind::kConstants;
 }
 
-namespace {
-
-TwistDomainBundle *GetSaltDomainBundle(TwistExpander *pExpander,
-                                       TwistSaltOwner pOwner) {
+TwistDomainBundle *TwistWorkSpace::GetSaltDomainBundle(TwistExpander *pExpander,
+                                                        TwistSaltOwner pOwner) {
     switch (pOwner) {
         case TwistSaltOwner::kInbuilt:
-            return pExpander ? &pExpander->mDomainBundleInbuilt : nullptr;
+            return pExpander ? pExpander->GetDomainBundleInbuilt() : nullptr;
         case TwistSaltOwner::kEphemeral:
-            return pExpander ? &pExpander->mDomainBundleEphemeral : nullptr;
+            return pExpander ? pExpander->GetDomainBundleEphemeral() : nullptr;
         default:
             return nullptr;
     }
 }
+
+namespace {
 
 TwistDomainSaltSet *GetSaltSet(TwistDomainBundle *pBundle,
                                TwistDomain pDomain) {
@@ -63,10 +63,6 @@ TwistDomainSaltSet *GetSaltSet(TwistDomainBundle *pBundle,
         case TwistDomain::kPhaseB: return &pBundle->mPhaseBSalts;
         case TwistDomain::kPhaseC: return &pBundle->mPhaseCSalts;
         case TwistDomain::kPhaseD: return &pBundle->mPhaseDSalts;
-        case TwistDomain::kPhaseE: return &pBundle->mPhaseESalts;
-        case TwistDomain::kPhaseF: return &pBundle->mPhaseFSalts;
-        case TwistDomain::kPhaseG: return &pBundle->mPhaseGSalts;
-        case TwistDomain::kPhaseH: return &pBundle->mPhaseHSalts;
         default: return nullptr;
     }
 }
@@ -81,10 +77,6 @@ TwistDomainConstants *GetDomainConstants(TwistDomainBundle *pBundle,
         case TwistDomain::kPhaseB: return &pBundle->mPhaseBConstants;
         case TwistDomain::kPhaseC: return &pBundle->mPhaseCConstants;
         case TwistDomain::kPhaseD: return &pBundle->mPhaseDConstants;
-        case TwistDomain::kPhaseE: return &pBundle->mPhaseEConstants;
-        case TwistDomain::kPhaseF: return &pBundle->mPhaseFConstants;
-        case TwistDomain::kPhaseG: return &pBundle->mPhaseGConstants;
-        case TwistDomain::kPhaseH: return &pBundle->mPhaseHConstants;
         default: return nullptr;
     }
 }
@@ -144,7 +136,7 @@ bool DecodePhaseSaltSlot(TwistWorkSpaceSlot pSlot,
     const int aValue = static_cast<int>(pSlot);
     const int aBase = static_cast<int>(TwistWorkSpaceSlot::kPhaseASaltOrbiterAssignA);
     const int aCountPerPhase = 18;
-    const int aPhaseCount = 8;
+    const int aPhaseCount = 4;
     if ((aValue < aBase) || (aValue >= (aBase + aCountPerPhase * aPhaseCount))) {
         return false;
     }
@@ -223,17 +215,42 @@ void TwistWorkSpace::ShiftKeyBoxB(std::uint8_t *pBox) {
 std::uint8_t *TwistWorkSpace::GetBuffer(TwistWorkSpace *pWorkSpace,
                                         TwistExpander *pExpander,
                                         TwistWorkSpaceSlot pSlot) {
+    return GetBuffer(pWorkSpace,
+                     pExpander,
+                     pSlot,
+                     nullptr,
+                     nullptr);
+}
+
+std::uint8_t *TwistWorkSpace::GetBuffer(TwistWorkSpace *pWorkSpace,
+                                        TwistExpander *pExpander,
+                                        TwistWorkSpaceSlot pSlot,
+                                        std::uint8_t *pParamSource,
+                                        std::uint8_t *pParamDestination) {
+    return GetBuffer(pWorkSpace,
+                     pExpander,
+                     pSlot,
+                     pParamSource,
+                     pParamDestination,
+                     nullptr);
+}
+
+std::uint8_t *TwistWorkSpace::GetBuffer(TwistWorkSpace *pWorkSpace,
+                                        TwistExpander *pExpander,
+                                        TwistWorkSpaceSlot pSlot,
+                                        std::uint8_t *pParamSource,
+                                        std::uint8_t *pParamDestination,
+                                        TwistDomainSaltSet *pParamSaltSet) {
     if (pWorkSpace == nullptr) {
         return nullptr;
     }
 
     if (pExpander == nullptr) {
-        if (DecodeParamSaltSlot(pSlot, nullptr, nullptr)) {
+        if (DecodeParamSaltSlot(pSlot, nullptr, nullptr) &&
+            (pParamSaltSet == nullptr)) {
             return nullptr;
         }
         switch (pSlot) {
-            case TwistWorkSpaceSlot::kParamSource:
-            case TwistWorkSpaceSlot::kParamDestination:
             case TwistWorkSpaceSlot::kParamSnow:
             case TwistWorkSpaceSlot::kIndexList256A:
             case TwistWorkSpaceSlot::kIndexList256B:
@@ -247,25 +264,25 @@ std::uint8_t *TwistWorkSpace::GetBuffer(TwistWorkSpace *pWorkSpace,
 
     switch (pSlot) {
         case TwistWorkSpaceSlot::kSource: return pWorkSpace->mSource;
-        case TwistWorkSpaceSlot::kParamSource: return pExpander->mSource;
-        case TwistWorkSpaceSlot::kParamDestination: return pExpander->mDest;
+        case TwistWorkSpaceSlot::kParamSource: return pParamSource;
+        case TwistWorkSpaceSlot::kParamDestination: return pParamDestination;
         case TwistWorkSpaceSlot::kParamSnow: return nullptr;
-        case TwistWorkSpaceSlot::kExpansionLaneA: return pWorkSpace->mExpansionLaneA;
-        case TwistWorkSpaceSlot::kExpansionLaneB: return pWorkSpace->mExpansionLaneB;
-        case TwistWorkSpaceSlot::kExpansionLaneC: return pWorkSpace->mExpansionLaneC;
-        case TwistWorkSpaceSlot::kExpansionLaneD: return pWorkSpace->mExpansionLaneD;
-        case TwistWorkSpaceSlot::kWorkLaneA: return pWorkSpace->mWorkLaneA;
-        case TwistWorkSpaceSlot::kWorkLaneB: return pWorkSpace->mWorkLaneB;
-        case TwistWorkSpaceSlot::kWorkLaneC: return pWorkSpace->mWorkLaneC;
-        case TwistWorkSpaceSlot::kWorkLaneD: return pWorkSpace->mWorkLaneD;
-        case TwistWorkSpaceSlot::kOperationLaneA: return pWorkSpace->mOperationLaneA;
-        case TwistWorkSpaceSlot::kOperationLaneB: return pWorkSpace->mOperationLaneB;
-        case TwistWorkSpaceSlot::kOperationLaneC: return pWorkSpace->mOperationLaneC;
-        case TwistWorkSpaceSlot::kOperationLaneD: return pWorkSpace->mOperationLaneD;
-        case TwistWorkSpaceSlot::kSnowLaneA: return pWorkSpace->mSnowLaneA;
-        case TwistWorkSpaceSlot::kSnowLaneB: return pWorkSpace->mSnowLaneB;
-        case TwistWorkSpaceSlot::kSnowLaneC: return pWorkSpace->mSnowLaneC;
-        case TwistWorkSpaceSlot::kSnowLaneD: return pWorkSpace->mSnowLaneD;
+        case TwistWorkSpaceSlot::kHeartLaneA: return pWorkSpace->mHeartLaneA;
+        case TwistWorkSpaceSlot::kHeartLaneB: return pWorkSpace->mHeartLaneB;
+        case TwistWorkSpaceSlot::kHeartLaneC: return pWorkSpace->mHeartLaneC;
+        case TwistWorkSpaceSlot::kHeartLaneD: return pWorkSpace->mHeartLaneD;
+        case TwistWorkSpaceSlot::kPoisonLaneA: return pWorkSpace->mPoisonLaneA;
+        case TwistWorkSpaceSlot::kPoisonLaneB: return pWorkSpace->mPoisonLaneB;
+        case TwistWorkSpaceSlot::kPoisonLaneC: return pWorkSpace->mPoisonLaneC;
+        case TwistWorkSpaceSlot::kPoisonLaneD: return pWorkSpace->mPoisonLaneD;
+        case TwistWorkSpaceSlot::kSpiritLaneA: return pWorkSpace->mSpiritLaneA;
+        case TwistWorkSpaceSlot::kSpiritLaneB: return pWorkSpace->mSpiritLaneB;
+        case TwistWorkSpaceSlot::kSpiritLaneC: return pWorkSpace->mSpiritLaneC;
+        case TwistWorkSpaceSlot::kSpiritLaneD: return pWorkSpace->mSpiritLaneD;
+        case TwistWorkSpaceSlot::kSnowLaneA: return pWorkSpace->mHeartLaneA;
+        case TwistWorkSpaceSlot::kSnowLaneB: return pWorkSpace->mHeartLaneB;
+        case TwistWorkSpaceSlot::kSnowLaneC: return pWorkSpace->mHeartLaneC;
+        case TwistWorkSpaceSlot::kSnowLaneD: return pWorkSpace->mHeartLaneD;
         case TwistWorkSpaceSlot::kFireLaneA: return pWorkSpace->mFireLaneA;
         case TwistWorkSpaceSlot::kFireLaneB: return pWorkSpace->mFireLaneB;
         case TwistWorkSpaceSlot::kFireLaneC: return pWorkSpace->mFireLaneC;
@@ -286,22 +303,14 @@ std::uint8_t *TwistWorkSpace::GetBuffer(TwistWorkSpace *pWorkSpace,
         case TwistWorkSpaceSlot::kFuseLaneB: return pWorkSpace->mFuseLaneB;
         case TwistWorkSpaceSlot::kFuseLaneC: return pWorkSpace->mFuseLaneC;
         case TwistWorkSpaceSlot::kFuseLaneD: return pWorkSpace->mFuseLaneD;
-        case TwistWorkSpaceSlot::kScrapLaneA: return pWorkSpace->mScrapLaneA;
-        case TwistWorkSpaceSlot::kScrapLaneB: return pWorkSpace->mScrapLaneB;
-        case TwistWorkSpaceSlot::kScrapLaneC: return pWorkSpace->mScrapLaneC;
-        case TwistWorkSpaceSlot::kScrapLaneD: return pWorkSpace->mScrapLaneD;
-        case TwistWorkSpaceSlot::kMergeLaneA: return pWorkSpace->mMergeLaneA;
-        case TwistWorkSpaceSlot::kMergeLaneB: return pWorkSpace->mMergeLaneB;
-        case TwistWorkSpaceSlot::kMergeLaneC: return pWorkSpace->mMergeLaneC;
-        case TwistWorkSpaceSlot::kMergeLaneD: return pWorkSpace->mMergeLaneD;
-        case TwistWorkSpaceSlot::kInvestA: return pWorkSpace->mInvestLaneA;
-        case TwistWorkSpaceSlot::kInvestB: return pWorkSpace->mInvestLaneB;
-        case TwistWorkSpaceSlot::kInvestC: return pWorkSpace->mInvestLaneC;
-        case TwistWorkSpaceSlot::kInvestD: return pWorkSpace->mInvestLaneD;
-        case TwistWorkSpaceSlot::kInvestE: return pWorkSpace->mInvestLaneE;
-        case TwistWorkSpaceSlot::kInvestF: return pWorkSpace->mInvestLaneF;
-        case TwistWorkSpaceSlot::kInvestG: return pWorkSpace->mInvestLaneG;
-        case TwistWorkSpaceSlot::kInvestH: return pWorkSpace->mInvestLaneH;
+        case TwistWorkSpaceSlot::kWoodLaneA: return pWorkSpace->mWoodLaneA;
+        case TwistWorkSpaceSlot::kWoodLaneB: return pWorkSpace->mWoodLaneB;
+        case TwistWorkSpaceSlot::kWoodLaneC: return pWorkSpace->mWoodLaneC;
+        case TwistWorkSpaceSlot::kWoodLaneD: return pWorkSpace->mWoodLaneD;
+        case TwistWorkSpaceSlot::kIceLaneA: return pWorkSpace->mIceLaneA;
+        case TwistWorkSpaceSlot::kIceLaneB: return pWorkSpace->mIceLaneB;
+        case TwistWorkSpaceSlot::kIceLaneC: return pWorkSpace->mIceLaneC;
+        case TwistWorkSpaceSlot::kIceLaneD: return pWorkSpace->mIceLaneD;
         case TwistWorkSpaceSlot::kIndexList256A: return reinterpret_cast<std::uint8_t *>(pExpander->mIndexList256A);
         case TwistWorkSpaceSlot::kIndexList256B: return reinterpret_cast<std::uint8_t *>(pExpander->mIndexList256B);
         case TwistWorkSpaceSlot::kIndexList256C: return reinterpret_cast<std::uint8_t *>(pExpander->mIndexList256C);
@@ -317,11 +326,17 @@ std::uint8_t *TwistWorkSpace::GetBuffer(TwistWorkSpace *pWorkSpace,
             break;
     }
 
+    if (DecodeParamSaltSlot(pSlot, nullptr, nullptr)) {
+        return reinterpret_cast<std::uint8_t *>(
+            GetParamSaltSlot(pParamSaltSet, pSlot)
+        );
+    }
+
     if (DecodePhaseSaltSlot(pSlot, nullptr, nullptr, nullptr)) {
         return reinterpret_cast<std::uint8_t *>(GetPhaseSaltSlot(pWorkSpace, pSlot));
     }
 
-    return pWorkSpace->mWorkLaneA;
+    return pWorkSpace->mPoisonLaneA;
 }
 
 std::uint8_t *TwistWorkSpace::GetBuffer(TwistWorkSpace *pWorkSpace,
@@ -386,12 +401,6 @@ int TwistWorkSpace::GetBufferLength(TwistWorkSpaceSlot pSlot) {
         case TwistWorkSpaceSlot::kIndexList256D:
             return static_cast<int>(256U * sizeof(std::size_t));
 
-        case TwistWorkSpaceSlot::kMergeLaneA:
-        case TwistWorkSpaceSlot::kMergeLaneB:
-        case TwistWorkSpaceSlot::kMergeLaneC:
-        case TwistWorkSpaceSlot::kMergeLaneD:
-            return S_QUARTER;
-
         default:
             return S_BLOCK;
     }
@@ -423,73 +432,7 @@ bool TwistWorkSpace::IsSalt(TwistBufferKey pKey) {
 }
 
 void TwistWorkSpace::Zero() {
-    memset(mSource, 0, sizeof(mSource));
-
-    memset(mExpansionLaneA, 0, sizeof(mExpansionLaneA));
-    memset(mExpansionLaneB, 0, sizeof(mExpansionLaneB));
-    memset(mExpansionLaneC, 0, sizeof(mExpansionLaneC));
-    memset(mExpansionLaneD, 0, sizeof(mExpansionLaneD));
-    
-    memset(mWorkLaneA, 0, sizeof(mWorkLaneA));
-    memset(mWorkLaneB, 0, sizeof(mWorkLaneB));
-    memset(mWorkLaneC, 0, sizeof(mWorkLaneC));
-    memset(mWorkLaneD, 0, sizeof(mWorkLaneD));
-    
-    memset(mOperationLaneA, 0, sizeof(mOperationLaneA));
-    memset(mOperationLaneB, 0, sizeof(mOperationLaneB));
-    memset(mOperationLaneC, 0, sizeof(mOperationLaneC));
-    memset(mOperationLaneD, 0, sizeof(mOperationLaneD));
-    
-    memset(mSnowLaneA, 0, sizeof(mSnowLaneA));
-    memset(mSnowLaneB, 0, sizeof(mSnowLaneB));
-    memset(mSnowLaneC, 0, sizeof(mSnowLaneC));
-    memset(mSnowLaneD, 0, sizeof(mSnowLaneD));
-
-    memset(mFireLaneA, 0, sizeof(mFireLaneA));
-    memset(mFireLaneB, 0, sizeof(mFireLaneB));
-    memset(mFireLaneC, 0, sizeof(mFireLaneC));
-    memset(mFireLaneD, 0, sizeof(mFireLaneD));
-
-    memset(mWaterLaneA, 0, sizeof(mWaterLaneA));
-    memset(mWaterLaneB, 0, sizeof(mWaterLaneB));
-    memset(mWaterLaneC, 0, sizeof(mWaterLaneC));
-    memset(mWaterLaneD, 0, sizeof(mWaterLaneD));
-
-    memset(mEarthLaneA, 0, sizeof(mEarthLaneA));
-    memset(mEarthLaneB, 0, sizeof(mEarthLaneB));
-    memset(mEarthLaneC, 0, sizeof(mEarthLaneC));
-    memset(mEarthLaneD, 0, sizeof(mEarthLaneD));
-
-    memset(mWindLaneA, 0, sizeof(mWindLaneA));
-    memset(mWindLaneB, 0, sizeof(mWindLaneB));
-    memset(mWindLaneC, 0, sizeof(mWindLaneC));
-    memset(mWindLaneD, 0, sizeof(mWindLaneD));
-
-    memset(mFuseLaneA, 0, sizeof(mFuseLaneA));
-    memset(mFuseLaneB, 0, sizeof(mFuseLaneB));
-    memset(mFuseLaneC, 0, sizeof(mFuseLaneC));
-    memset(mFuseLaneD, 0, sizeof(mFuseLaneD));
-
-    memset(mScrapLaneA, 0, sizeof(mScrapLaneA));
-    memset(mScrapLaneB, 0, sizeof(mScrapLaneB));
-    memset(mScrapLaneC, 0, sizeof(mScrapLaneC));
-    memset(mScrapLaneD, 0, sizeof(mScrapLaneD));
-
-    memset(mMergeLaneA, 0, sizeof(mMergeLaneA));
-    memset(mMergeLaneB, 0, sizeof(mMergeLaneB));
-    memset(mMergeLaneC, 0, sizeof(mMergeLaneC));
-    memset(mMergeLaneD, 0, sizeof(mMergeLaneD));
-    
-    memset(mInvestLaneA, 0, sizeof(mInvestLaneA));
-    memset(mInvestLaneB, 0, sizeof(mInvestLaneB));
-    memset(mInvestLaneC, 0, sizeof(mInvestLaneC));
-    memset(mInvestLaneD, 0, sizeof(mInvestLaneD));
-    
-    memset(mInvestLaneE, 0, sizeof(mInvestLaneE));
-    memset(mInvestLaneF, 0, sizeof(mInvestLaneF));
-    memset(mInvestLaneG, 0, sizeof(mInvestLaneG));
-    memset(mInvestLaneH, 0, sizeof(mInvestLaneH));
-    
+    Zero_PostSeed();
     mDomainBundle.Zero();
 }
 
@@ -497,26 +440,21 @@ void TwistWorkSpace::Zero_PostSeed() {
  
     memset(mSource, 0, sizeof(mSource));
 
-    memset(mExpansionLaneA, 0, sizeof(mExpansionLaneA));
-    memset(mExpansionLaneB, 0, sizeof(mExpansionLaneB));
-    memset(mExpansionLaneC, 0, sizeof(mExpansionLaneC));
-    memset(mExpansionLaneD, 0, sizeof(mExpansionLaneD));
+    memset(mHeartLaneA, 0, sizeof(mHeartLaneA));
+    memset(mHeartLaneB, 0, sizeof(mHeartLaneB));
+    memset(mHeartLaneC, 0, sizeof(mHeartLaneC));
+    memset(mHeartLaneD, 0, sizeof(mHeartLaneD));
     
-    memset(mWorkLaneA, 0, sizeof(mWorkLaneA));
-    memset(mWorkLaneB, 0, sizeof(mWorkLaneB));
-    memset(mWorkLaneC, 0, sizeof(mWorkLaneC));
-    memset(mWorkLaneD, 0, sizeof(mWorkLaneD));
+    memset(mPoisonLaneA, 0, sizeof(mPoisonLaneA));
+    memset(mPoisonLaneB, 0, sizeof(mPoisonLaneB));
+    memset(mPoisonLaneC, 0, sizeof(mPoisonLaneC));
+    memset(mPoisonLaneD, 0, sizeof(mPoisonLaneD));
     
-    memset(mOperationLaneA, 0, sizeof(mOperationLaneA));
-    memset(mOperationLaneB, 0, sizeof(mOperationLaneB));
-    memset(mOperationLaneC, 0, sizeof(mOperationLaneC));
-    memset(mOperationLaneD, 0, sizeof(mOperationLaneD));
+    memset(mSpiritLaneA, 0, sizeof(mSpiritLaneA));
+    memset(mSpiritLaneB, 0, sizeof(mSpiritLaneB));
+    memset(mSpiritLaneC, 0, sizeof(mSpiritLaneC));
+    memset(mSpiritLaneD, 0, sizeof(mSpiritLaneD));
     
-    memset(mSnowLaneA, 0, sizeof(mSnowLaneA));
-    memset(mSnowLaneB, 0, sizeof(mSnowLaneB));
-    memset(mSnowLaneC, 0, sizeof(mSnowLaneC));
-    memset(mSnowLaneD, 0, sizeof(mSnowLaneD));
-
     memset(mFireLaneA, 0, sizeof(mFireLaneA));
     memset(mFireLaneB, 0, sizeof(mFireLaneB));
     memset(mFireLaneC, 0, sizeof(mFireLaneC));
@@ -542,24 +480,14 @@ void TwistWorkSpace::Zero_PostSeed() {
     memset(mFuseLaneC, 0, sizeof(mFuseLaneC));
     memset(mFuseLaneD, 0, sizeof(mFuseLaneD));
 
-    memset(mScrapLaneA, 0, sizeof(mScrapLaneA));
-    memset(mScrapLaneB, 0, sizeof(mScrapLaneB));
-    memset(mScrapLaneC, 0, sizeof(mScrapLaneC));
-    memset(mScrapLaneD, 0, sizeof(mScrapLaneD));
+    memset(mWoodLaneA, 0, sizeof(mWoodLaneA));
+    memset(mWoodLaneB, 0, sizeof(mWoodLaneB));
+    memset(mWoodLaneC, 0, sizeof(mWoodLaneC));
+    memset(mWoodLaneD, 0, sizeof(mWoodLaneD));
 
-    memset(mMergeLaneA, 0, sizeof(mMergeLaneA));
-    memset(mMergeLaneB, 0, sizeof(mMergeLaneB));
-    memset(mMergeLaneC, 0, sizeof(mMergeLaneC));
-    memset(mMergeLaneD, 0, sizeof(mMergeLaneD));
-    
-    memset(mInvestLaneA, 0, sizeof(mInvestLaneA));
-    memset(mInvestLaneB, 0, sizeof(mInvestLaneB));
-    memset(mInvestLaneC, 0, sizeof(mInvestLaneC));
-    memset(mInvestLaneD, 0, sizeof(mInvestLaneD));
-    
-    memset(mInvestLaneE, 0, sizeof(mInvestLaneE));
-    memset(mInvestLaneF, 0, sizeof(mInvestLaneF));
-    memset(mInvestLaneG, 0, sizeof(mInvestLaneG));
-    memset(mInvestLaneH, 0, sizeof(mInvestLaneH));
+    memset(mIceLaneA, 0, sizeof(mIceLaneA));
+    memset(mIceLaneB, 0, sizeof(mIceLaneB));
+    memset(mIceLaneC, 0, sizeof(mIceLaneC));
+    memset(mIceLaneD, 0, sizeof(mIceLaneD));
     
 }

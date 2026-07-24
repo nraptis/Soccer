@@ -8,12 +8,14 @@ public:
     TwistExpander_Vega();
     ~TwistExpander_Vega() override = default;
 
-    void KDF_A(std::uint64_t pNonce,
+    void KDF_A(TwistWorkSpace *pWorkSpace,
+               std::uint64_t pNonce,
                TwistDomainConstants *pConstants,
                TwistDomainSaltSet *pDomainSaltSet,
                std::uint8_t *pSnow,
                int pIndexKDF) override;
-    void KDF_B(std::uint64_t pNonce,
+    void KDF_B(TwistWorkSpace *pWorkSpace,
+               std::uint64_t pNonce,
                TwistDomainConstants *pConstants,
                TwistDomainSaltSet *pDomainSaltSet,
                int pIndexKDF) override;
@@ -22,11 +24,15 @@ public:
               std::uint64_t pNonce,
               std::uint8_t *pPassword,
               std::size_t pPasswordByteLength,
+              std::uint8_t *pSnowLaneA,
+              std::uint8_t *pSnowLaneB,
+              std::uint8_t *pSnowLaneC,
+              std::uint8_t *pSnowLaneD,
               std::uint8_t *pDestination) override;
     void TwistBlock(TwistWorkSpace *pWorkSpace,
                     std::uint8_t *pSource,
                     std::uint8_t *pDestination) override;
-    void SquashInvestToKeyBoxes() override;
+    void SquashInvestToKeyBoxes(TwistWorkSpace *pWorkSpace) override;
     void GrowKeyA(TwistWorkSpace *pWorkSpace) override;
     void GrowKeyB(TwistWorkSpace *pWorkSpace) override;
 
@@ -39,12 +45,4 @@ private:
     static const TwistDomainConstants kPhaseCConstants;
     static const TwistDomainSaltSet kPhaseDSalts;
     static const TwistDomainConstants kPhaseDConstants;
-    static const TwistDomainSaltSet kPhaseESalts;
-    static const TwistDomainConstants kPhaseEConstants;
-    static const TwistDomainSaltSet kPhaseFSalts;
-    static const TwistDomainConstants kPhaseFConstants;
-    static const TwistDomainSaltSet kPhaseGSalts;
-    static const TwistDomainConstants kPhaseGConstants;
-    static const TwistDomainSaltSet kPhaseHSalts;
-    static const TwistDomainConstants kPhaseHConstants;
 };
