@@ -188,14 +188,14 @@ public:
     }
     
     static void FillDomainBundle(TwistDomainBundle *pBundle) {
-        FillSaltSet(&pBundle->mPhaseASalts);
-        FillConstants(&pBundle->mPhaseAConstants);
-        FillSaltSet(&pBundle->mPhaseBSalts);
-        FillConstants(&pBundle->mPhaseBConstants);
-        FillSaltSet(&pBundle->mPhaseCSalts);
-        FillConstants(&pBundle->mPhaseCConstants);
-        FillSaltSet(&pBundle->mPhaseDSalts);
-        FillConstants(&pBundle->mPhaseDConstants);
+        FillSaltSet(&pBundle->mKeySpawnSalts);
+        FillConstants(&pBundle->mKeySpawnConstants);
+        FillSaltSet(&pBundle->mSeedSalts);
+        FillConstants(&pBundle->mSeedConstants);
+        FillSaltSet(&pBundle->mTwistSalts);
+        FillConstants(&pBundle->mTwistConstants);
+        FillSaltSet(&pBundle->mKeyRotateSalts);
+        FillConstants(&pBundle->mKeyRotateConstants);
     }
     
     static void FillWorkSpace(TwistWorkSpace *pWorkSpace) {

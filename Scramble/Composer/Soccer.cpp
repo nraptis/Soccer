@@ -1051,22 +1051,23 @@ void Soccer::SeedEpilogue() {
         const std::size_t aSourceIndex = (aBlockIndex - 1U) * S_BLOCK;
         const std::size_t aDestinationIndex = aBlockIndex * S_BLOCK;
         
-        mExpanders[11]->TwistBlock(mWorkSpaces[14], &mSources[ 2][aSourceIndex], &mMaterials[ 7][aDestinationIndex]);
-        mExpanders[ 4]->TwistBlock(mWorkSpaces[ 7], &mSources[11][aSourceIndex], &mMaterials[ 0][aDestinationIndex]);
-        mExpanders[15]->TwistBlock(mWorkSpaces[ 2], &mSources[ 6][aSourceIndex], &mMaterials[11][aDestinationIndex]);
-        mExpanders[ 2]->TwistBlock(mWorkSpaces[ 5], &mSources[ 9][aSourceIndex], &mMaterials[14][aDestinationIndex]);
-        mExpanders[ 9]->TwistBlock(mWorkSpaces[12], &mSources[ 0][aSourceIndex], &mMaterials[ 5][aDestinationIndex]);
-        mExpanders[ 0]->TwistBlock(mWorkSpaces[ 3], &mSources[ 7][aSourceIndex], &mMaterials[12][aDestinationIndex]);
-        mExpanders[13]->TwistBlock(mWorkSpaces[ 6], &mSources[ 4][aSourceIndex], &mMaterials[ 9][aDestinationIndex]);
-        mExpanders[ 6]->TwistBlock(mWorkSpaces[ 9], &mSources[13][aSourceIndex], &mMaterials[ 2][aDestinationIndex]);
-        mExpanders[ 1]->TwistBlock(mWorkSpaces[ 4], &mSources[ 8][aSourceIndex], &mMaterials[13][aDestinationIndex]);
-        mExpanders[14]->TwistBlock(mWorkSpaces[ 1], &mSources[ 5][aSourceIndex], &mMaterials[10][aDestinationIndex]);
-        mExpanders[ 7]->TwistBlock(mWorkSpaces[10], &mSources[14][aSourceIndex], &mMaterials[ 3][aDestinationIndex]);
-        mExpanders[10]->TwistBlock(mWorkSpaces[13], &mSources[ 1][aSourceIndex], &mMaterials[ 6][aDestinationIndex]);
-        mExpanders[ 3]->TwistBlock(mWorkSpaces[ 0], &mSources[10][aSourceIndex], &mMaterials[15][aDestinationIndex]);
-        mExpanders[12]->TwistBlock(mWorkSpaces[15], &mSources[ 3][aSourceIndex], &mMaterials[ 8][aDestinationIndex]);
-        mExpanders[ 5]->TwistBlock(mWorkSpaces[ 8], &mSources[12][aSourceIndex], &mMaterials[ 1][aDestinationIndex]);
-        mExpanders[ 8]->TwistBlock(mWorkSpaces[11], &mSources[15][aSourceIndex], &mMaterials[ 4][aDestinationIndex]);
+        
+        mExpanders[11]->TwistBlock(mWorkSpaces[14], &mSources[ 2][aSourceIndex], mSnowLaneA, mSnowLaneB, mSnowLaneC, mSnowLaneD, &mMaterials[ 7][aDestinationIndex]);
+        mExpanders[ 4]->TwistBlock(mWorkSpaces[ 7], &mSources[11][aSourceIndex], mSnowLaneA, mSnowLaneB, mSnowLaneC, mSnowLaneD, &mMaterials[ 0][aDestinationIndex]);
+        mExpanders[15]->TwistBlock(mWorkSpaces[ 2], &mSources[ 6][aSourceIndex], mSnowLaneA, mSnowLaneB, mSnowLaneC, mSnowLaneD, &mMaterials[11][aDestinationIndex]);
+        mExpanders[ 2]->TwistBlock(mWorkSpaces[ 5], &mSources[ 9][aSourceIndex], mSnowLaneA, mSnowLaneB, mSnowLaneC, mSnowLaneD, &mMaterials[14][aDestinationIndex]);
+        mExpanders[ 9]->TwistBlock(mWorkSpaces[12], &mSources[ 0][aSourceIndex], mSnowLaneA, mSnowLaneB, mSnowLaneC, mSnowLaneD, &mMaterials[ 5][aDestinationIndex]);
+        mExpanders[ 0]->TwistBlock(mWorkSpaces[ 3], &mSources[ 7][aSourceIndex], mSnowLaneA, mSnowLaneB, mSnowLaneC, mSnowLaneD, &mMaterials[12][aDestinationIndex]);
+        mExpanders[13]->TwistBlock(mWorkSpaces[ 6], &mSources[ 4][aSourceIndex], mSnowLaneA, mSnowLaneB, mSnowLaneC, mSnowLaneD, &mMaterials[ 9][aDestinationIndex]);
+        mExpanders[ 6]->TwistBlock(mWorkSpaces[ 9], &mSources[13][aSourceIndex], mSnowLaneA, mSnowLaneB, mSnowLaneC, mSnowLaneD, &mMaterials[ 2][aDestinationIndex]);
+        mExpanders[ 1]->TwistBlock(mWorkSpaces[ 4], &mSources[ 8][aSourceIndex], mSnowLaneA, mSnowLaneB, mSnowLaneC, mSnowLaneD, &mMaterials[13][aDestinationIndex]);
+        mExpanders[14]->TwistBlock(mWorkSpaces[ 1], &mSources[ 5][aSourceIndex], mSnowLaneA, mSnowLaneB, mSnowLaneC, mSnowLaneD, &mMaterials[10][aDestinationIndex]);
+        mExpanders[ 7]->TwistBlock(mWorkSpaces[10], &mSources[14][aSourceIndex], mSnowLaneA, mSnowLaneB, mSnowLaneC, mSnowLaneD, &mMaterials[ 3][aDestinationIndex]);
+        mExpanders[10]->TwistBlock(mWorkSpaces[13], &mSources[ 1][aSourceIndex], mSnowLaneA, mSnowLaneB, mSnowLaneC, mSnowLaneD, &mMaterials[ 6][aDestinationIndex]);
+        mExpanders[ 3]->TwistBlock(mWorkSpaces[ 0], &mSources[10][aSourceIndex], mSnowLaneA, mSnowLaneB, mSnowLaneC, mSnowLaneD, &mMaterials[15][aDestinationIndex]);
+        mExpanders[12]->TwistBlock(mWorkSpaces[15], &mSources[ 3][aSourceIndex], mSnowLaneA, mSnowLaneB, mSnowLaneC, mSnowLaneD, &mMaterials[ 8][aDestinationIndex]);
+        mExpanders[ 5]->TwistBlock(mWorkSpaces[ 8], &mSources[12][aSourceIndex], mSnowLaneA, mSnowLaneB, mSnowLaneC, mSnowLaneD, &mMaterials[ 1][aDestinationIndex]);
+        mExpanders[ 8]->TwistBlock(mWorkSpaces[11], &mSources[15][aSourceIndex], mSnowLaneA, mSnowLaneB, mSnowLaneC, mSnowLaneD, &mMaterials[ 4][aDestinationIndex]);
         
         FoldAllMaterialsIntoRandomForBlock(aBlockIndex);
         

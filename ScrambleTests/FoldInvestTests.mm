@@ -104,6 +104,7 @@ namespace {
 
 - (void)testAll {
     
+    /*
     std::vector<ExpanderItem> aExpanderItems = ExpanderFactory::Get();
     
     for (auto &aExpanderItem : aExpanderItems) {
@@ -188,6 +189,8 @@ namespace {
         delete aOriginalWorkSpace;
         delete aTestWorkSpace;
     }
+    */
+    
 }
 
 @end

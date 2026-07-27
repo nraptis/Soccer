@@ -14,6 +14,8 @@
 #include <vector>
 #include "M88.hpp"
 
+
+
 class TwistFarmSalt;
 
 class TwistExpander {
@@ -39,14 +41,25 @@ public:
                                                   std::uint64_t pNonce,
                                                   TwistDomainConstants *pDomainConstants,
                                                   TwistDomainSaltSet *pDomainSaltSet,
-                                                  std::uint8_t *pSnow,
-                                                  int pIndexKDF);
+                                                  std::uint8_t *pSnow);
     
     virtual void                            KDF_B(TwistWorkSpace *pWorkSpace,
                                                   std::uint64_t pNonce,
                                                   TwistDomainConstants *pDomainConstants,
                                                   TwistDomainSaltSet *pDomainSaltSet,
-                                                  int pIndexKDF);
+                                                  std::uint8_t *pSnow);
+
+    virtual void                            KDF_C(TwistWorkSpace *pWorkSpace,
+                                                  std::uint64_t pNonce,
+                                                  TwistDomainConstants *pDomainConstants,
+                                                  TwistDomainSaltSet *pDomainSaltSet,
+                                                  std::uint8_t *pSnow);
+
+    virtual void                            KDF_D(TwistWorkSpace *pWorkSpace,
+                                                  std::uint64_t pNonce,
+                                                  TwistDomainConstants *pDomainConstants,
+                                                  TwistDomainSaltSet *pDomainSaltSet,
+                                                  std::uint8_t *pSnow);
     
     virtual void                            Seed(TwistWorkSpace *pWorkSpace,
                                                  TwistFarmSalt *pFarmSalt,
@@ -61,17 +74,56 @@ public:
     
     virtual void                            TwistBlock(TwistWorkSpace *pWorkSpace,
                                                        std::uint8_t *pSource,
+                                                       std::uint8_t *pSnowLaneA,
+                                                       std::uint8_t *pSnowLaneB,
+                                                       std::uint8_t *pSnowLaneC,
+                                                       std::uint8_t *pSnowLaneD,
                                                        std::uint8_t *pDestination);
+
+    virtual void                            FoldSeed(TwistWorkSpace *pWorkSpace,
+                                                     std::uint8_t *pDestination);
+    virtual void                            FoldTwist(TwistWorkSpace *pWorkSpace,
+                                                      std::uint8_t *pDestination);
     
-    virtual void                            SquashInvestToKeyBoxes(TwistWorkSpace *pWorkSpace);
-    
-    virtual void                            GrowKeyA(TwistWorkSpace *pWorkSpace);
-    virtual void                            GrowKeyB(TwistWorkSpace *pWorkSpace);
+    virtual void                            GrowKeyA(TwistWorkSpace *pWorkSpace,
+                                                     std::uint64_t *pPrevious,
+                                                     std::uint64_t *pIngress,
+                                                     std::uint64_t *pCarry,
+                                                     std::uint64_t *pWandererA,
+                                                     std::uint64_t *pWandererB,
+                                                     std::uint64_t *pWandererC,
+                                                     std::uint64_t *pWandererD,
+                                                     std::uint64_t *pWandererE,
+                                                     std::uint64_t *pWandererF,
+                                                     std::uint64_t *pWandererG,
+                                                     std::uint64_t *pWandererH,
+                                                     std::uint64_t *pWandererI,
+                                                     std::uint64_t *pWandererJ,
+                                                     std::uint64_t *pWandererK);
+    virtual void                            GrowKeyB(TwistWorkSpace *pWorkSpace,
+                                                     std::uint64_t *pPrevious,
+                                                     std::uint64_t *pIngress,
+                                                     std::uint64_t *pCarry,
+                                                     std::uint64_t *pWandererA,
+                                                     std::uint64_t *pWandererB,
+                                                     std::uint64_t *pWandererC,
+                                                     std::uint64_t *pWandererD,
+                                                     std::uint64_t *pWandererE,
+                                                     std::uint64_t *pWandererF,
+                                                     std::uint64_t *pWandererG,
+                                                     std::uint64_t *pWandererH,
+                                                     std::uint64_t *pWandererI,
+                                                     std::uint64_t *pWandererJ,
+                                                     std::uint64_t *pWandererK);
     
     
     // this is not virtual, it calls TwistBlock on every block
     void                                    Twist(TwistWorkSpace *pWorkSpace,
                                                   std::uint8_t *pSource,
+                                                  std::uint8_t *pSnowLaneA,
+                                                  std::uint8_t *pSnowLaneB,
+                                                  std::uint8_t *pSnowLaneC,
+                                                  std::uint8_t *pSnowLaneD,
                                                   std::uint8_t *pDestination,
                                                   std::size_t pDestinationByteLength);
     
@@ -91,6 +143,10 @@ public:
     // Assumes pSource has at least S_BLOCK bytes...
     void                                    AutoTwist(TwistWorkSpace *pWorkSpace,
                                                       std::uint8_t *pSource,
+                                                      std::uint8_t *pSnowLaneA,
+                                                      std::uint8_t *pSnowLaneB,
+                                                      std::uint8_t *pSnowLaneC,
+                                                      std::uint8_t *pSnowLaneD,
                                                       std::uint8_t *pDestination,
                                                       std::size_t pDestinationByteLength);
     
