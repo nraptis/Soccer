@@ -62,18 +62,24 @@ int TwistCryptoScoring::ComputeByteSpread_Salt(const std::uint64_t *pData) {
 
     std::memset(mHistogram, 0, sizeof(mHistogram));
 
-    int aUnique = 0;
     const std::uint8_t *aBytes = reinterpret_cast<const std::uint8_t *>(pData);
 
     for (int i = 0; i < S_SALT * static_cast<int>(sizeof(std::uint64_t)); i++) {
         const std::uint8_t v = aBytes[i];
-        if (mHistogram[v] == 0) {
-            mHistogram[v] = 1;
-            aUnique++;
-        }
+        mHistogram[v]++;
     }
 
-    return aUnique;
+    const int aExpectedPerByte =
+        (S_SALT * static_cast<int>(sizeof(std::uint64_t))) / 256;
+
+    int aScore = 0;
+    for (int i = 0; i < 256; i++) {
+        aScore += std::min<int>(
+            static_cast<int>(mHistogram[i]),
+            aExpectedPerByte);
+    }
+
+    return aScore;
 }
 
 int TwistCryptoScoring::ComputeAdjacencyPenalty_Salt(const std::uint64_t *pData) {
@@ -174,14 +180,14 @@ void TwistCryptoScoring::ComputeCombinedSaltGrade_Component_BitBalance(int pBitB
     }
     
     *pScore += ScorePercentileWeighted(pBitBalance,
-                                       847,
-                                       863,
-                                       869,
-                                       877,
-                                       884,
-                                       892,
-                                       898,
-                                       912,
+                                       7689,
+                                       7734,
+                                       7751,
+                                       7775,
+                                       7795,
+                                       7817,
+                                       7833,
+                                       7871,
                                        30,
                                        pRedFlagPoints);
 }
@@ -195,14 +201,14 @@ void TwistCryptoScoring::ComputeCombinedSaltGrade_Component_ByteSpread(int pByte
     }
     
     *pScore += ScorePercentileWeighted(pByteSpread,
-                                       150,
-                                       156,
-                                       158,
-                                       161,
-                                       163,
-                                       166,
-                                       168,
-                                       174,
+                                       1731,
+                                       1745,
+                                       1751,
+                                       1759,
+                                       1766,
+                                       1774,
+                                       1780,
+                                       1794,
                                        35,
                                        pRedFlagPoints);
 }
@@ -216,14 +222,14 @@ void TwistCryptoScoring::ComputeCombinedSaltGrade_Component_XorDrift(int pXorDri
     }
     
     *pScore += ScorePercentileWeighted(pXorDrift,
-                                       972,
-                                       996,
-                                       1004,
-                                       1018,
-                                       1030,
-                                       1044,
-                                       1052,
-                                       1076,
+                                       8044,
+                                       8110,
+                                       8138,
+                                       8176,
+                                       8208,
+                                       8246,
+                                       8274,
+                                       8340,
                                        30,
                                        pRedFlagPoints);
 }
@@ -281,4 +287,3 @@ int TwistCryptoScoring::ComputeXorDrift_Salt(const std::uint64_t *pData) {
     
     return aScore;
 }
-

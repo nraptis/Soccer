@@ -8,6 +8,12 @@
 
 #include <cstdint>
 
+/*
+ 
+ TODO: We need to re-avaluate this, again to see how it works with some real data.
+
+*/
+
 struct TwistCryptoMaxAverageResponse {
     std::uint32_t mMax;
     float         mAverage;
@@ -33,31 +39,31 @@ public:
     std::int32_t ComputeSaltHammingDistance_Salt(const std::uint64_t *pDataA,
                                                  const std::uint64_t *pDataB);
     
-    // Range for S_SALT=32: 0..1024.
-    // Typical random values from testing: ~850..910, centered near 881.
+    // Range for S_SALT=256: 0..8192.
+    // Typical random values from testing: ~7689..7871, centered near 7785.
     // 0 means every bit column is completely one-sided, such as all 0 or all 1.
-    // 1024 means every bit column is perfectly balanced: exactly 16 of 32 words set.
+    // 8192 means every bit column is perfectly balanced: exactly 128 of 256 words set.
     // That can happen with artificial small cycles, so max is suspicious, not best.
     int ComputeBitBalance_Salt(const std::uint64_t *pData);
 
-    // Range for S_SALT=32: 1..256.
-    // Typical random values from testing: ~150..174, centered near 162.
-    // All 0 / all 1 gives 1.
-    // Small repeating patterns give very low values.
-    // Sequential bytes 0..255 gives 256, which is "too perfect" / structured,
+    // Range for S_SALT=256: 8..2048.
+    // Typical random values from testing: ~1731..1794, centered near 1763.
+    // Each byte value earns credit up to its uniform target count of eight.
+    // All 0 / all 1 gives 8. Small repeating patterns give very low values.
+    // A perfectly uniform byte histogram gives 2048, which is too structured,
     // not healthier than random.
     int ComputeByteSpread_Salt(const std::uint64_t *pData);
 
-    // Range for S_SALT=32: 0..1984.
+    // Range for S_SALT=256: 0..16320.
     // Typical random value is 0.
     // This is mostly a catastrophic local-similarity detector, not a ranking score.
-    // 1984 means all 31 adjacent word pairs are identical.
+    // 16320 means all 255 adjacent word pairs are identical.
     int ComputeAdjacencyPenalty_Salt(const std::uint64_t *pData);
 
-    // Range for S_SALT=32: 0..2048.
-    // Typical random values from testing: ~972..1078, centered near 1024.
+    // Range for S_SALT=256: 0..16384.
+    // Typical random values from testing: ~8044..8340, centered near 8192.
     // All 0 / all 1 gives 0.
-    // Alternating complement words can give 2048, which is catastrophic structure,
+    // Alternating complement words can give 16384, which is catastrophic structure,
     // not good drift.
     int ComputeXorDrift_Salt(const std::uint64_t *pData);
     

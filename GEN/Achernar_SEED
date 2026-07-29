@@ -1,0 +1,367 @@
+========================================================================
+FLOW: SEED
+EXPANDER: Achernar (candidate 0)
+========================================================================
+
+SEED_A
+  LOOP  | INPUTS                                | DEST
+  ------+---------------------------------------+------
+  A     | sourc + nonce + nonce + sourc         | plasm_a
+  B     | plasm_a + sourc + sourc + nonce       | plasm_b
+  C     | plasm_b + nonce + plasm_a + sourc     | water_a
+  D     | water_a + plasm_a + nonce + plasm_b   | water_b
+        | sourc                                 | 
+  E     | water_b + plasm_b + sourc + water_a   | water_c
+        | plasm_a                               | 
+  F     | water_c + water_a + sourc + water_b   | water_d
+        | plasm_b                               | 
+
+SEED_B
+  LOOP  | INPUTS                                | DEST
+  ------+---------------------------------------+------
+  A     | water_d + water_b + plasm_b + water_c | plasm_c
+        | water_a + plasm_a                     | 
+  B     | plasm_c + water_c + sourc + water_d   | plasm_d
+        | water_b                               | 
+  C     | plasm_d + water_d + plasm_c + water_c | magma_a
+  D     | magma_a + plasm_c + plasm_d + water_d | magma_b
+  E     | magma_b + plasm_d + magma_a + plasm_c | magma_c
+  F     | magma_c + magma_a + magma_b + plasm_d | magma_d
+
+SEED_C
+  LOOP  | INPUTS                                | DEST
+  ------+---------------------------------------+------
+  A     | magma_d + magma_b + water_b + plasm_a | fuse_a
+        | magma_c + magma_a + water_d           | 
+  B     | fuse_a + magma_c + plasm_b + magma_d  | fuse_b
+        | magma_b + plasm_d                     | 
+  C     | fuse_b + magma_d + sourc + fuse_a     | fuse_c
+        | magma_c + water_c                     | 
+  D     | fuse_c + fuse_a + water_a + fuse_b    | fuse_d
+        | magma_d + plasm_c                     | 
+
+MATRIX DIFFUSION AFTER SEED_C [SEED]
+  TYPE  | LANES                                
+  ------+--------------------------------------
+  INPUT | fuse_a + fuse_b + fuse_c + fuse_d    
+  SHUFL | plasm_c + plasm_d + magma_c + magma_d
+  OPER  | magma_a + magma_b                    
+
+  OUT   | heart_a + heart_b + heart_c + heart_d
+
+SEED_D
+  LOOP  | INPUTS                                | DEST
+  ------+---------------------------------------+------
+  A     | heart_a + heart_b + sourc + heart_c   | cryst_a
+        | heart_d + water_c                     | 
+  B     | cryst_a + heart_c + magma_d + heart_a | cryst_b
+        | heart_b + water_b                     | 
+  C     | cryst_b + heart_d + water_a + cryst_a | shadw_a
+        | heart_b + plasm_c                     | 
+  D     | shadw_a + cryst_a + plasm_d + cryst_b | shadw_b
+        | water_d + magma_a                     | 
+  E     | shadw_b + cryst_b + magma_c + shadw_a | shadw_c
+        | cryst_a + plasm_a                     | 
+  F     | shadw_c + shadw_a + plasm_b + shadw_b | shadw_d
+        | cryst_b + magma_b                     | 
+
+SEED_E
+  LOOP  | INPUTS                                | DEST
+  ------+---------------------------------------+------
+  A     | shadw_d + shadw_b + water_b + cryst_b | cryst_c
+        | shadw_c + shadw_a + heart_a + plasm_b | 
+  B     | cryst_c + shadw_c + magma_a + water_c | cryst_d
+        | shadw_d + shadw_b + plasm_d + magma_d | 
+  C     | cryst_d + shadw_d + sourc + plasm_a   | earth_a
+        | cryst_c + shadw_c + magma_b + water_d | 
+  D     | earth_a + cryst_c + plasm_c + magma_c | earth_b
+        | cryst_d + shadw_d + heart_c           | 
+  E     | earth_b + cryst_d + heart_b + earth_a | earth_c
+        | cryst_c + heart_d                     | 
+  F     | earth_c + earth_a + water_a + earth_b | earth_d
+        | cryst_d + cryst_a                     | 
+
+SEED_F
+  LOOP  | INPUTS                                | DEST
+  ------+---------------------------------------+------
+  A     | earth_d + earth_b + cryst_b + magma_d | fuse_a
+        | earth_c + earth_a + sourc + heart_b   | 
+  B     | fuse_a + earth_c + heart_c + shadw_a  | fuse_b
+        | earth_d + earth_b + magma_b + shadw_d | 
+  C     | fuse_b + earth_d + magma_c + shadw_c  | fuse_c
+        | fuse_a + earth_c + cryst_a + heart_a  | 
+  D     | fuse_c + fuse_a + cryst_d + cryst_c   | fuse_d
+        | fuse_b + earth_d + heart_d + shadw_b  | 
+
+MATRIX DIFFUSION AFTER SEED_F [SEED]
+  TYPE  | LANES                                
+  ------+--------------------------------------
+  INPUT | fuse_a + fuse_b + fuse_c + fuse_d    
+  SHUFL | cryst_c + cryst_d + earth_c + earth_d
+  OPER  | earth_a + earth_b                    
+
+  OUT   | wind_a + wind_b + wind_c + wind_d    
+
+SEED_G
+  LOOP  | INPUTS                                | DEST
+  ------+---------------------------------------+------
+  A     | wind_a + wind_b + water_b + heart_b   | aethr_a
+        | wind_c + wind_d + plasm_c + heart_d   | 
+  B     | aethr_a + wind_c + shadw_a + plasm_d  | aethr_b
+        | wind_a + wind_b + shadw_d + water_a   | 
+  C     | aethr_b + wind_d + cryst_b + heart_c  | vapor_a
+        | aethr_a + wind_b + earth_b + earth_d  | 
+  D     | vapor_a + aethr_a + cryst_d + shadw_b | vapor_b
+        | aethr_b + earth_c + earth_a + magma_a | 
+  E     | vapor_b + aethr_b + shadw_c + water_c | vapor_c
+        | vapor_a + aethr_a + cryst_a + cryst_c | 
+  F     | vapor_c + vapor_a + heart_a + magma_b | vapor_d
+        | vapor_b + aethr_b + water_d           | 
+
+SEED_H
+  LOOP  | INPUTS                                | DEST
+  ------+---------------------------------------+------
+  A     | vapor_d + vapor_b + shadw_a + shadw_d | aethr_c
+        | vapor_c + vapor_a + earth_a + heart_c | 
+  B     | aethr_c + vapor_c + wind_c + magma_d  | aethr_d
+        | vapor_d + vapor_b + aethr_a + cryst_d | 
+  C     | aethr_d + vapor_d + heart_b + magma_c | fire_a
+        | aethr_c + vapor_c + earth_c + cryst_c | 
+  D     | fire_a + aethr_c + shadw_b + magma_a  | fire_b
+        | aethr_d + vapor_d + shadw_c + wind_a  | 
+  E     | fire_b + aethr_d + cryst_b + cryst_a  | fire_c
+        | fire_a + aethr_c + aethr_b + wind_b   | 
+  F     | fire_c + fire_a + earth_b + wind_d    | fire_d
+        | fire_b + aethr_d + earth_d + heart_d  | 
+
+SEED_I
+  LOOP  | INPUTS                                | DEST
+  ------+---------------------------------------+------
+  A     | fire_d + fire_b + sourc + earth_d     | fuse_a
+        | fire_c + fire_a + aethr_b + aethr_d   | 
+  B     | fuse_a + fire_c + earth_a + vapor_b   | fuse_b
+        | fire_d + fire_b + wind_d + earth_b    | 
+  C     | fuse_b + fire_d + wind_a + vapor_c    | fuse_c
+        | fuse_a + fire_c + vapor_d + vapor_a   | 
+  D     | fuse_c + fuse_a + wind_b + aethr_c    | fuse_d
+        | fuse_b + fire_d + wind_c + aethr_a    | 
+
+MATRIX DIFFUSION AFTER SEED_I [SEED]
+  TYPE  | LANES                                
+  ------+--------------------------------------
+  INPUT | fuse_a + fuse_b + fuse_c + fuse_d    
+  SHUFL | aethr_c + aethr_d + fire_c + fire_d  
+  OPER  | fire_a + fire_b                      
+
+  OUT   | celst_a + celst_b + celst_c + celst_d
+
+SEED_J
+  LOOP  | INPUTS                                | DEST
+  ------+---------------------------------------+------
+  A     | celst_a + celst_b + shadw_a + wind_c  | light_a
+        | celst_c + celst_d + fire_c + vapor_b  | 
+  B     | light_a + celst_c + wind_b + fire_a   | light_b
+        | celst_a + celst_b + aethr_a + vapor_a | 
+  C     | light_b + celst_d + wind_a + fire_d   | soil_a
+        | light_a + celst_b + aethr_b + shadw_d | 
+  D     | soil_a + light_a + aethr_d + wind_d   | soil_b
+        | light_b + sourc + aethr_c + earth_b   | 
+  E     | soil_b + light_b + shadw_b + vapor_c  | soil_c
+        | soil_a + light_a + fire_b + cryst_c   | 
+  F     | soil_c + soil_a + earth_c + vapor_d   | soil_d
+        | soil_b + light_b + cryst_d            | 
+
+SEED_K
+  LOOP  | INPUTS                                | DEST
+  ------+---------------------------------------+------
+  A     | soil_d + soil_b + celst_c + celst_b   | light_c
+        | soil_c + soil_a + vapor_a + fire_d    | 
+  B     | light_c + soil_c + celst_d + earth_a  | light_d
+        | soil_d + soil_b + fire_b + vapor_c    | 
+  C     | light_d + soil_d + light_a + shadw_c  | ice_a
+        | light_c + soil_c + earth_c + fire_c   | 
+  D     | ice_a + light_c + vapor_b + aethr_b   | ice_b
+        | light_d + soil_d + celst_a + wind_d   | 
+  E     | ice_b + light_d + heart_a + vapor_d   | ice_c
+        | ice_a + light_c + fire_a + wind_b     | 
+  F     | ice_c + ice_a + aethr_d + aethr_c     | ice_d
+        | ice_b + light_d + light_b + sourc     | 
+
+SEED_L
+  LOOP  | INPUTS                                | DEST
+  ------+---------------------------------------+------
+  A     | ice_d + ice_b + light_a + light_b     | fuse_a
+        | ice_c + ice_a + celst_d + fire_d      | 
+  B     | fuse_a + ice_c + soil_d + soil_c      | fuse_b
+        | ice_d + ice_b + soil_b + celst_c      | 
+  C     | fuse_b + ice_d + celst_a + light_d    | fuse_c
+        | fuse_a + ice_c + fire_a + sourc       | 
+  D     | fuse_c + fuse_a + celst_b + light_c   | fuse_d
+        | fuse_b + ice_d + soil_a + fire_b      | 
+
+MATRIX DIFFUSION AFTER SEED_L [SEED]
+  TYPE  | LANES                                
+  ------+--------------------------------------
+  INPUT | fuse_a + fuse_b + fuse_c + fuse_d    
+  SHUFL | light_c + light_d + ice_c + ice_d    
+  OPER  | ice_a + ice_b                        
+
+  OUT   | wood_a + wood_b + wood_c + wood_d    
+
+SEED_M
+  LOOP  | INPUTS                                | DEST
+  ------+---------------------------------------+------
+  A     | wood_a + wood_b + aethr_a + celst_d   | plasm_a
+        | wood_c + wood_d + ice_b + aethr_d     | 
+  B     | plasm_a + wood_c + light_a + soil_c   | plasm_b
+        | wood_a + wood_b + ice_d + vapor_c     | 
+  C     | plasm_b + wood_d + light_d + celst_a  | magma_a
+        | plasm_a + wood_b + vapor_a + ice_a    | 
+  D     | magma_a + plasm_a + celst_c + aethr_c | magma_b
+        | plasm_b + soil_d + light_c + fire_c   | 
+  E     | magma_b + plasm_b + soil_b + celst_b  | magma_c
+        | magma_a + plasm_a + ice_c + vapor_d   | 
+  F     | magma_c + magma_a + light_b + soil_a  | magma_d
+        | magma_b + plasm_b + sourc             | 
+
+SEED_N
+  LOOP  | INPUTS                                | DEST
+  ------+---------------------------------------+------
+  A     | magma_d + magma_b + ice_c + ice_a     | plasm_c
+        | magma_c + magma_a + celst_c + soil_b  | 
+  B     | plasm_c + magma_c + wood_c + light_d  | plasm_d
+        | magma_d + magma_b + plasm_a + light_b | 
+  C     | plasm_d + magma_d + celst_d + wood_a  | poisn_a
+        | plasm_c + magma_c + light_a + fire_c  | 
+  D     | poisn_a + plasm_c + celst_a + plasm_b | poisn_b
+        | plasm_d + magma_d + wood_d + wind_c   | 
+  E     | poisn_b + plasm_d + soil_a + light_c  | poisn_c
+        | poisn_a + plasm_c + wood_b + ice_d    | 
+  F     | poisn_c + poisn_a + vapor_b + soil_d  | poisn_d
+        | poisn_b + plasm_d + ice_b + soil_c    | 
+
+GROW_A_A
+  LOOP  | INPUTS                                | DEST
+  ------+---------------------------------------+------
+  A     | poisn_d + poisn_b + light_a + key_b   | shadw_a
+        | poisn_c + poisn_a + light_c + key_a   | 
+  B     | shadw_a + poisn_c + soil_b + plasm_c  | shadw_b
+        | poisn_d + poisn_b + wood_b + fire_b   | 
+  C     | shadw_b + poisn_d + soil_a + soil_d   | shadw_c
+        | shadw_a + poisn_c + plasm_b + plasm_a | 
+  D     | shadw_c + shadw_a + magma_c + magma_b | shadw_d
+        | shadw_b + poisn_d + heart_a + light_b | 
+
+GROW_A_B
+  LOOP  | INPUTS                                | DEST
+  ------+---------------------------------------+------
+  A     | shadw_d + shadw_b + plasm_c + plasm_a | wind_a
+        | shadw_c + shadw_a + poisn_c + wood_b  | 
+  B     | wind_a + shadw_c + key_b + water_b    | wind_b
+        | shadw_d + shadw_b + light_b + magma_c | 
+  C     | wind_b + shadw_d + poisn_d + plasm_b  | wind_c
+        | wind_a + shadw_c + light_a + poisn_b  | 
+  D     | wind_c + wind_a + soil_a + magma_b    | wind_d
+        | wind_b + shadw_d + key_a + poisn_a    | 
+
+GROW_A_C
+  LOOP  | INPUTS                                | DEST
+  ------+---------------------------------------+------
+  A     | wind_d + wind_b + wood_b + magma_b    | fuse_a
+        | wind_c + wind_a + plasm_b + magma_c   | 
+  B     | fuse_a + wind_c + shadw_b + key_a     | fuse_b
+        | wind_d + wind_b + poisn_d + heart_b   | 
+  C     | fuse_b + wind_d + poisn_b + key_b     | fuse_c
+        | fuse_a + wind_c + poisn_c + shadw_a   | 
+  D     | fuse_c + fuse_a + shadw_c + shadw_d   | fuse_d
+        | fuse_b + wind_d + plasm_c + poisn_a   | 
+
+MATRIX DIFFUSION AFTER GROW_A_C [GROW_A]
+  TYPE  | LANES                                
+  ------+--------------------------------------
+  INPUT | fuse_a + fuse_b + fuse_c + fuse_d    
+  SHUFL | shadw_c + shadw_d + wind_c + wind_d  
+  OPER  | wind_a + wind_b                      
+
+  OUT   | vapor_a + vapor_b + vapor_c + vapor_d
+
+GROW_A_D
+  LOOP  | INPUTS                                | DEST
+  ------+---------------------------------------+------
+  A     | vapor_a + vapor_b + light_c + poisn_d | aethr_a
+        | vapor_c + vapor_d + poisn_a + shadw_d | 
+  B     | aethr_a + vapor_c + poisn_c + wind_a  | aethr_b
+        | vapor_a + vapor_b + plasm_c + fire_d  | 
+  C     | aethr_b + vapor_d + key_a + soil_b    | aethr_c
+        | aethr_a + vapor_b + shadw_b + wind_c  | 
+  D     | aethr_c + wind_b + shadw_c + shadw_a  | aethr_d
+        | aethr_b + key_b + wind_d + poisn_b    | 
+
+GROW_B_A
+  LOOP  | INPUTS                                | DEST
+  ------+---------------------------------------+------
+  A     | aethr_d + aethr_b + vapor_b + ice_b   | kinet_a
+        | aethr_c + aethr_a + ice_d + vapor_a   | 
+  B     | kinet_a + aethr_c + wind_b + ice_c    | kinet_b
+        | aethr_d + aethr_b + plasm_d + earth_d | 
+  C     | kinet_b + aethr_d + wood_d + magma_d  | sprit_a
+        | kinet_a + aethr_c + wood_a + wind_d   | 
+  D     | sprit_a + kinet_a + vapor_d + light_d | sprit_b
+        | kinet_b + aethr_d + vapor_c + key_b   | 
+  E     | sprit_b + kinet_b + soil_c + wood_c   | sprit_c
+        | sprit_a + kinet_a + water_c + key_a   | 
+  F     | sprit_c + sprit_a + wind_c + ice_a    | sprit_d
+        | sprit_b + kinet_b + magma_a + wind_a  | 
+
+GROW_B_B
+  LOOP  | INPUTS                                | DEST
+  ------+---------------------------------------+------
+  A     | sprit_d + sprit_b + wind_c + wind_b   | kinet_c
+        | sprit_c + sprit_a + kinet_b + aethr_b | 
+  B     | kinet_c + sprit_c + plasm_d + wind_a  | kinet_d
+        | sprit_d + sprit_b + vapor_d + light_d | 
+  C     | kinet_d + sprit_d + key_a + aethr_a   | celst_a
+        | kinet_c + sprit_c + kinet_a + aethr_c | 
+  D     | celst_a + kinet_c + aethr_d + wood_d  | celst_b
+        | kinet_d + sprit_d + vapor_b + water_a | 
+  E     | celst_b + kinet_d + vapor_c + magma_d | celst_c
+        | celst_a + kinet_c + wood_c + magma_a  | 
+  F     | celst_c + celst_a + key_b + wind_d    | celst_d
+        | celst_b + kinet_d + wood_a + vapor_a  | 
+
+GROW_B_C
+  LOOP  | INPUTS                                | DEST
+  ------+---------------------------------------+------
+  A     | celst_d + celst_b + sprit_a + magma_a | fuse_a
+        | celst_c + celst_a + key_b + kinet_d   | 
+  B     | fuse_a + celst_c + key_a + aethr_d    | fuse_b
+        | celst_d + celst_b + kinet_c + aethr_b | 
+  C     | fuse_b + celst_d + kinet_b + kinet_a  | fuse_c
+        | fuse_a + celst_c + aethr_a + sprit_c  | 
+  D     | fuse_c + fuse_a + aethr_c + sprit_d   | fuse_d
+        | fuse_b + celst_d + vapor_d + sprit_b  | 
+
+MATRIX DIFFUSION AFTER GROW_B_C [GROW_B]
+  TYPE  | LANES                                
+  ------+--------------------------------------
+  INPUT | fuse_a + fuse_b + fuse_c + fuse_d    
+  SHUFL | kinet_c + kinet_d + celst_c + celst_d
+  OPER  | celst_a + celst_b                    
+
+  OUT   | chanc_a + chanc_b + chanc_c + chanc_d
+
+GROW_B_D
+  LOOP  | INPUTS                                | DEST
+  ------+---------------------------------------+------
+  A     | chanc_a + chanc_b + key_a + vapor_c   | cryst_a
+        | chanc_c + chanc_d + key_b + magma_d   | 
+  B     | cryst_a + chanc_c + kinet_d + kinet_c | cryst_b
+        | chanc_a + chanc_b + celst_b + celst_d | 
+  C     | cryst_b + chanc_d + kinet_b + celst_c | cryst_c
+        | cryst_a + chanc_b + sprit_a + sprit_b | 
+  D     | cryst_c + plasm_d + sprit_d + celst_a | cryst_d
+        | cryst_b + aethr_b + vapor_a + sprit_c | 
+
+========================================================================
+END FLOW: SEED
+========================================================================

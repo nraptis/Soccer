@@ -15,10 +15,11 @@
 #include "TwistCryptoScoring.hpp"
 #include "TwistWorkSpace.hpp"
 
-//16384 / 32 = 512 / / 8 = 64
-
-// ((c / 8) / S_SALT)
+// A source lane is partitioned into disjoint S_SALT-word candidates.
 #define SALT_CANDIDATE_COUNT ((S_BLOCK >> 3) >> S_SALT_DIVIDE_BITSHIFT)
+
+static_assert(SALT_CANDIDATE_COUNT >= 6,
+              "TwistFarmSalt requires at least six salt candidates.");
 
 struct TwistFarmSaltStats {
     std::uint64_t mCandidatesTested;
@@ -52,6 +53,10 @@ public:
                                    std::uint64_t *pSaltF);
     void                    Derive(const std::uint8_t *pSource,
                                    TwistDomainSeedRoundMaterial *pRoundMaterial);
+    void                    DeriveThree(const std::uint8_t *pSourceLaneA,
+                                        const std::uint8_t *pSourceLaneB,
+                                        const std::uint8_t *pSourceLaneC,
+                                        TwistDomainSaltSet *pSaltSet);
     
     void                    Zero();
     

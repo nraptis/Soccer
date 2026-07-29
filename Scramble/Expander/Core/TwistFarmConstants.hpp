@@ -15,11 +15,11 @@ class TwistFarmConstants {
 public:
     TwistFarmConstants();
     
-    static void                 Derive(const std::uint8_t *pSource, TwistDomainConstants *pConstants);
-    
-private:
-    static std::uint64_t        ReadU64(const std::uint8_t *pSource, int *pIndex);
-    static std::uint8_t         ReadU8(const std::uint8_t *pSource, int *pIndex);
+    static void                 Derive(const std::uint8_t *pSource,
+                                       std::uint8_t *pFoldLaneA,
+                                       std::uint8_t *pFoldLaneB,
+                                       std::uint8_t *pFoldLaneC,
+                                       TwistDomainConstants *pConstants);
 };
 
 #endif /* TwistFarmConstants_hpp */

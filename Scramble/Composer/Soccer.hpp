@@ -152,6 +152,10 @@ private:
     static std::uint8_t                         *mShuffleMaterials[16];
     static TwistExpander                        *mShuffleExpanders[32];
     static TwistWorkSpace                       *mShuffleWorkSpaces[16];
+    
+    
+    
+    
 };
 
 #endif /* Soccer_hpp */

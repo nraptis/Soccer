@@ -18,10 +18,17 @@
 #define S_QUARTER (S_BLOCK >> 2U)
 #define S_QUARTER1 (S_QUARTER - 1U)
 
-#define S_SALT 32
-#define S_SALT_DIVIDE_BITSHIFT 5
+#define S_SALT 256
+#define S_SALT_DIVIDE_BITSHIFT 8
 
-#define S_SALT1 31
+#define S_SALT1 255
+
+static_assert((1U << S_SALT_DIVIDE_BITSHIFT) == S_SALT,
+              "S_SALT_DIVIDE_BITSHIFT must describe S_SALT.");
+static_assert((S_SALT & S_SALT1) == 0U,
+              "S_SALT must be a power of two for masked salt indexing.");
+static_assert(S_SALT1 == (S_SALT - 1U),
+              "S_SALT1 must be the mask for S_SALT.");
 
 #define W_KEY 2048
 #define W_KEY1 2047
@@ -32,10 +39,13 @@ class TwistExpander;
 
 enum class TwistDomain : std::uint8_t {
     kInvalid = 0,
-    kKeyRotate,
-    kKeySpawn,
-    kSeed,
-    kTwist,
+    // Keep the original serialized values stable for existing control assets.
+    kKeyRotateA = 1,
+    kKeySpawnA = 2,
+    kSeed = 3,
+    kTwist = 4,
+    kKeyRotateB = 5,
+    kKeySpawnB = 6,
 };
 
 enum class TwistWorkSpaceSlot : std::uint16_t;
@@ -82,10 +92,15 @@ enum class TwistWorkSpaceSlot : std::uint16_t {
 
     kInvalid=255,
 
-    kSource=0, // workspace-owned source block
+    kSourceLane=0, // workspace-owned source lane
+    kNonceLane=1,
     kParamSource=2,
     kParamDestination=3,
-    kParamSnow=4,
+
+    kParamCrossA=8,
+    kParamCrossB=9,
+    kParamCrossC=10,
+    kParamCrossD=11,
     
     
     kEarthLaneA=140,
@@ -178,11 +193,6 @@ enum class TwistWorkSpaceSlot : std::uint16_t {
     kChanceLaneC=66,
     kChanceLaneD=67,
 
-    kDomainLaneKeyRotate=68,
-    kDomainLaneKeySpawn=69,
-    kDomainLaneSeed=70,
-    kDomainLaneTwist=71,
-
     kPoisonLaneA=90,
     kPoisonLaneB=91,
     kPoisonLaneC=92,
@@ -192,11 +202,6 @@ enum class TwistWorkSpaceSlot : std::uint16_t {
     kSpiritLaneB=101,
     kSpiritLaneC=102,
     kSpiritLaneD=103,
-    
-    kSnowLaneA=106,
-    kSnowLaneB=107,
-    kSnowLaneC=108,
-    kSnowLaneD=109,
     
     kFuseLaneA=148,
     kFuseLaneB=149,
@@ -264,43 +269,43 @@ enum class TwistWorkSpaceSlot : std::uint16_t {
     kIndexList256C=192,
     kIndexList256D=193,
 
-    kKeyRotateSaltOrbiterAssignA=300,
-    kKeyRotateSaltOrbiterAssignB,
-    kKeyRotateSaltOrbiterAssignC,
-    kKeyRotateSaltOrbiterAssignD,
-    kKeyRotateSaltOrbiterAssignE,
-    kKeyRotateSaltOrbiterAssignF,
-    kKeyRotateSaltOrbiterUpdateA,
-    kKeyRotateSaltOrbiterUpdateB,
-    kKeyRotateSaltOrbiterUpdateC,
-    kKeyRotateSaltOrbiterUpdateD,
-    kKeyRotateSaltOrbiterUpdateE,
-    kKeyRotateSaltOrbiterUpdateF,
-    kKeyRotateSaltWandererUpdateA,
-    kKeyRotateSaltWandererUpdateB,
-    kKeyRotateSaltWandererUpdateC,
-    kKeyRotateSaltWandererUpdateD,
-    kKeyRotateSaltWandererUpdateE,
-    kKeyRotateSaltWandererUpdateF,
+    kKeyRotateASaltOrbiterAssignA=300,
+    kKeyRotateASaltOrbiterAssignB,
+    kKeyRotateASaltOrbiterAssignC,
+    kKeyRotateASaltOrbiterAssignD,
+    kKeyRotateASaltOrbiterAssignE,
+    kKeyRotateASaltOrbiterAssignF,
+    kKeyRotateASaltOrbiterUpdateA,
+    kKeyRotateASaltOrbiterUpdateB,
+    kKeyRotateASaltOrbiterUpdateC,
+    kKeyRotateASaltOrbiterUpdateD,
+    kKeyRotateASaltOrbiterUpdateE,
+    kKeyRotateASaltOrbiterUpdateF,
+    kKeyRotateASaltWandererUpdateA,
+    kKeyRotateASaltWandererUpdateB,
+    kKeyRotateASaltWandererUpdateC,
+    kKeyRotateASaltWandererUpdateD,
+    kKeyRotateASaltWandererUpdateE,
+    kKeyRotateASaltWandererUpdateF,
 
-    kKeySpawnSaltOrbiterAssignA=318,
-    kKeySpawnSaltOrbiterAssignB,
-    kKeySpawnSaltOrbiterAssignC,
-    kKeySpawnSaltOrbiterAssignD,
-    kKeySpawnSaltOrbiterAssignE,
-    kKeySpawnSaltOrbiterAssignF,
-    kKeySpawnSaltOrbiterUpdateA,
-    kKeySpawnSaltOrbiterUpdateB,
-    kKeySpawnSaltOrbiterUpdateC,
-    kKeySpawnSaltOrbiterUpdateD,
-    kKeySpawnSaltOrbiterUpdateE,
-    kKeySpawnSaltOrbiterUpdateF,
-    kKeySpawnSaltWandererUpdateA,
-    kKeySpawnSaltWandererUpdateB,
-    kKeySpawnSaltWandererUpdateC,
-    kKeySpawnSaltWandererUpdateD,
-    kKeySpawnSaltWandererUpdateE,
-    kKeySpawnSaltWandererUpdateF,
+    kKeySpawnASaltOrbiterAssignA=318,
+    kKeySpawnASaltOrbiterAssignB,
+    kKeySpawnASaltOrbiterAssignC,
+    kKeySpawnASaltOrbiterAssignD,
+    kKeySpawnASaltOrbiterAssignE,
+    kKeySpawnASaltOrbiterAssignF,
+    kKeySpawnASaltOrbiterUpdateA,
+    kKeySpawnASaltOrbiterUpdateB,
+    kKeySpawnASaltOrbiterUpdateC,
+    kKeySpawnASaltOrbiterUpdateD,
+    kKeySpawnASaltOrbiterUpdateE,
+    kKeySpawnASaltOrbiterUpdateF,
+    kKeySpawnASaltWandererUpdateA,
+    kKeySpawnASaltWandererUpdateB,
+    kKeySpawnASaltWandererUpdateC,
+    kKeySpawnASaltWandererUpdateD,
+    kKeySpawnASaltWandererUpdateE,
+    kKeySpawnASaltWandererUpdateF,
 
     kSeedSaltOrbiterAssignA=336,
     kSeedSaltOrbiterAssignB,
@@ -340,6 +345,44 @@ enum class TwistWorkSpaceSlot : std::uint16_t {
     kTwistSaltWandererUpdateE,
     kTwistSaltWandererUpdateF,
 
+    kKeyRotateBSaltOrbiterAssignA=372,
+    kKeyRotateBSaltOrbiterAssignB,
+    kKeyRotateBSaltOrbiterAssignC,
+    kKeyRotateBSaltOrbiterAssignD,
+    kKeyRotateBSaltOrbiterAssignE,
+    kKeyRotateBSaltOrbiterAssignF,
+    kKeyRotateBSaltOrbiterUpdateA,
+    kKeyRotateBSaltOrbiterUpdateB,
+    kKeyRotateBSaltOrbiterUpdateC,
+    kKeyRotateBSaltOrbiterUpdateD,
+    kKeyRotateBSaltOrbiterUpdateE,
+    kKeyRotateBSaltOrbiterUpdateF,
+    kKeyRotateBSaltWandererUpdateA,
+    kKeyRotateBSaltWandererUpdateB,
+    kKeyRotateBSaltWandererUpdateC,
+    kKeyRotateBSaltWandererUpdateD,
+    kKeyRotateBSaltWandererUpdateE,
+    kKeyRotateBSaltWandererUpdateF,
+
+    kKeySpawnBSaltOrbiterAssignA=390,
+    kKeySpawnBSaltOrbiterAssignB,
+    kKeySpawnBSaltOrbiterAssignC,
+    kKeySpawnBSaltOrbiterAssignD,
+    kKeySpawnBSaltOrbiterAssignE,
+    kKeySpawnBSaltOrbiterAssignF,
+    kKeySpawnBSaltOrbiterUpdateA,
+    kKeySpawnBSaltOrbiterUpdateB,
+    kKeySpawnBSaltOrbiterUpdateC,
+    kKeySpawnBSaltOrbiterUpdateD,
+    kKeySpawnBSaltOrbiterUpdateE,
+    kKeySpawnBSaltOrbiterUpdateF,
+    kKeySpawnBSaltWandererUpdateA,
+    kKeySpawnBSaltWandererUpdateB,
+    kKeySpawnBSaltWandererUpdateC,
+    kKeySpawnBSaltWandererUpdateD,
+    kKeySpawnBSaltWandererUpdateE,
+    kKeySpawnBSaltWandererUpdateF,
+
 };
 
 struct TwistDomainConstants {
@@ -348,10 +391,6 @@ public:
     std::uint64_t                           mIngress;
     std::uint64_t                           mScatter;
     std::uint64_t                           mCross;
-
-    std::uint64_t                           mDomainConstantPublicIngress;
-    std::uint64_t                           mDomainConstantPrivateIngress;
-    std::uint64_t                           mDomainConstantCrossIngress;
 
     std::uint64_t                           mMatrixSelectA;
     std::uint64_t                           mMatrixSelectB;
@@ -364,16 +403,11 @@ public:
     std::uint8_t                            mMatrixArgC;
     std::uint8_t                            mMatrixArgD;
 
-    std::uint8_t                            mMaskMutateA;
-    std::uint8_t                            mMaskMutateB;
-
     void                                    Zero() {
         mIngress = 0; mScatter = 0; mCross = 0;
-        mDomainConstantPublicIngress = 0; mDomainConstantPrivateIngress = 0; mDomainConstantCrossIngress = 0;
         mMatrixSelectA = 0; mMatrixSelectB = 0;
         mMatrixUnrollA = 0; mMatrixUnrollB = 0;
         mMatrixArgA = 0; mMatrixArgB = 0; mMatrixArgC = 0; mMatrixArgD = 0;
-        mMaskMutateA = 0; mMaskMutateB = 0;
     }
 
 };
@@ -414,11 +448,17 @@ public:
 
 class TwistDomainBundle {
 public:
-    TwistDomainSaltSet                      mKeyRotateSalts;
-    TwistDomainConstants                    mKeyRotateConstants;
+    TwistDomainSaltSet                      mKeyRotateASalts;
+    TwistDomainConstants                    mKeyRotateAConstants;
 
-    TwistDomainSaltSet                      mKeySpawnSalts;
-    TwistDomainConstants                    mKeySpawnConstants;
+    TwistDomainSaltSet                      mKeyRotateBSalts;
+    TwistDomainConstants                    mKeyRotateBConstants;
+
+    TwistDomainSaltSet                      mKeySpawnASalts;
+    TwistDomainConstants                    mKeySpawnAConstants;
+
+    TwistDomainSaltSet                      mKeySpawnBSalts;
+    TwistDomainConstants                    mKeySpawnBConstants;
 
     TwistDomainSaltSet                      mSeedSalts;
     TwistDomainConstants                    mSeedConstants;
@@ -427,11 +467,17 @@ public:
     TwistDomainConstants                    mTwistConstants;
 
     void                                    Zero() {
-        mKeyRotateSalts.Zero();
-        mKeyRotateConstants.Zero();
+        mKeyRotateASalts.Zero();
+        mKeyRotateAConstants.Zero();
 
-        mKeySpawnSalts.Zero();
-        mKeySpawnConstants.Zero();
+        mKeyRotateBSalts.Zero();
+        mKeyRotateBConstants.Zero();
+
+        mKeySpawnASalts.Zero();
+        mKeySpawnAConstants.Zero();
+
+        mKeySpawnBSalts.Zero();
+        mKeySpawnBConstants.Zero();
 
         mSeedSalts.Zero();
         mSeedConstants.Zero();
@@ -452,7 +498,8 @@ public:
     uint8_t                                 mKeyBoxA[H_KEY][W_KEY];
     uint8_t                                 mKeyBoxB[H_KEY][W_KEY];
 
-    std::uint8_t                            mSource[S_BLOCK];
+    std::uint8_t                            mSourceLane[S_BLOCK];
+    std::uint8_t                            mNonceLane[S_BLOCK];
 
     std::uint8_t                            mEarthLaneA[S_BLOCK];
     std::uint8_t                            mEarthLaneB[S_BLOCK];
@@ -544,11 +591,6 @@ public:
     std::uint8_t                            mChanceLaneC[S_BLOCK];
     std::uint8_t                            mChanceLaneD[S_BLOCK];
 
-    std::uint8_t                            mDomainLaneKeyRotate[S_BLOCK];
-    std::uint8_t                            mDomainLaneKeySpawn[S_BLOCK];
-    std::uint8_t                            mDomainLaneSeed[S_BLOCK];
-    std::uint8_t                            mDomainLaneTwist[S_BLOCK];
-    
     std::uint8_t                            mPoisonLaneA[S_BLOCK];
     std::uint8_t                            mPoisonLaneB[S_BLOCK];
     std::uint8_t                            mPoisonLaneC[S_BLOCK];

@@ -83,8 +83,10 @@ TwistDomainSaltSet *GetSaltSet(TwistDomainBundle *pBundle,
         return nullptr;
     }
     switch (pDomain) {
-        case TwistDomain::kKeyRotate: return &pBundle->mKeyRotateSalts;
-        case TwistDomain::kKeySpawn: return &pBundle->mKeySpawnSalts;
+        case TwistDomain::kKeyRotateA: return &pBundle->mKeyRotateASalts;
+        case TwistDomain::kKeyRotateB: return &pBundle->mKeyRotateBSalts;
+        case TwistDomain::kKeySpawnA: return &pBundle->mKeySpawnASalts;
+        case TwistDomain::kKeySpawnB: return &pBundle->mKeySpawnBSalts;
         case TwistDomain::kSeed: return &pBundle->mSeedSalts;
         case TwistDomain::kTwist: return &pBundle->mTwistSalts;
         default: return nullptr;
@@ -97,8 +99,10 @@ TwistDomainConstants *GetDomainConstants(TwistDomainBundle *pBundle,
         return nullptr;
     }
     switch (pDomain) {
-        case TwistDomain::kKeyRotate: return &pBundle->mKeyRotateConstants;
-        case TwistDomain::kKeySpawn: return &pBundle->mKeySpawnConstants;
+        case TwistDomain::kKeyRotateA: return &pBundle->mKeyRotateAConstants;
+        case TwistDomain::kKeyRotateB: return &pBundle->mKeyRotateBConstants;
+        case TwistDomain::kKeySpawnA: return &pBundle->mKeySpawnAConstants;
+        case TwistDomain::kKeySpawnB: return &pBundle->mKeySpawnBConstants;
         case TwistDomain::kSeed: return &pBundle->mSeedConstants;
         case TwistDomain::kTwist: return &pBundle->mTwistConstants;
         default: return nullptr;
@@ -158,10 +162,18 @@ bool DecodePhaseSaltSlot(TwistWorkSpaceSlot pSlot,
                          int *pRoleOut,
                          int *pLaneOut) {
     const int aValue = static_cast<int>(pSlot);
-    const int aBase = static_cast<int>(TwistWorkSpaceSlot::kKeyRotateSaltOrbiterAssignA);
+    const int aBase = static_cast<int>(TwistWorkSpaceSlot::kKeyRotateASaltOrbiterAssignA);
     const int aCountPerPhase = 18;
-    const int aPhaseCount = 4;
-    if ((aValue < aBase) || (aValue >= (aBase + aCountPerPhase * aPhaseCount))) {
+    constexpr int kPhaseCount = 6;
+    constexpr TwistDomain kDomains[kPhaseCount] = {
+        TwistDomain::kKeyRotateA,
+        TwistDomain::kKeySpawnA,
+        TwistDomain::kSeed,
+        TwistDomain::kTwist,
+        TwistDomain::kKeyRotateB,
+        TwistDomain::kKeySpawnB,
+    };
+    if ((aValue < aBase) || (aValue >= (aBase + aCountPerPhase * kPhaseCount))) {
         return false;
     }
 
@@ -169,7 +181,7 @@ bool DecodePhaseSaltSlot(TwistWorkSpaceSlot pSlot,
     const int aPhaseIndex = aOffset / aCountPerPhase;
     const int aRoleLaneOffset = aOffset % aCountPerPhase;
     if (pDomainOut != nullptr) {
-        *pDomainOut = static_cast<TwistDomain>(static_cast<int>(TwistDomain::kKeyRotate) + aPhaseIndex);
+        *pDomainOut = kDomains[aPhaseIndex];
     }
     if (pRoleOut != nullptr) {
         *pRoleOut = aRoleLaneOffset / 6;
@@ -275,7 +287,10 @@ std::uint8_t *TwistWorkSpace::GetBuffer(TwistWorkSpace *pWorkSpace,
             return nullptr;
         }
         switch (pSlot) {
-            case TwistWorkSpaceSlot::kParamSnow:
+            case TwistWorkSpaceSlot::kParamCrossA:
+            case TwistWorkSpaceSlot::kParamCrossB:
+            case TwistWorkSpaceSlot::kParamCrossC:
+            case TwistWorkSpaceSlot::kParamCrossD:
             case TwistWorkSpaceSlot::kIndexList256A:
             case TwistWorkSpaceSlot::kIndexList256B:
             case TwistWorkSpaceSlot::kIndexList256C:
@@ -287,10 +302,14 @@ std::uint8_t *TwistWorkSpace::GetBuffer(TwistWorkSpace *pWorkSpace,
     }
 
     switch (pSlot) {
-        case TwistWorkSpaceSlot::kSource: return pWorkSpace->mSource;
+        case TwistWorkSpaceSlot::kSourceLane: return pWorkSpace->mSourceLane;
+        case TwistWorkSpaceSlot::kNonceLane: return pWorkSpace->mNonceLane;
         case TwistWorkSpaceSlot::kParamSource: return pParamSource;
         case TwistWorkSpaceSlot::kParamDestination: return pParamDestination;
-        case TwistWorkSpaceSlot::kParamSnow: return nullptr;
+        case TwistWorkSpaceSlot::kParamCrossA: return nullptr;
+        case TwistWorkSpaceSlot::kParamCrossB: return nullptr;
+        case TwistWorkSpaceSlot::kParamCrossC: return nullptr;
+        case TwistWorkSpaceSlot::kParamCrossD: return nullptr;
         case TwistWorkSpaceSlot::kHeartLaneA: return pWorkSpace->mHeartLaneA;
         case TwistWorkSpaceSlot::kHeartLaneB: return pWorkSpace->mHeartLaneB;
         case TwistWorkSpaceSlot::kHeartLaneC: return pWorkSpace->mHeartLaneC;
@@ -303,10 +322,6 @@ std::uint8_t *TwistWorkSpace::GetBuffer(TwistWorkSpace *pWorkSpace,
         case TwistWorkSpaceSlot::kSpiritLaneB: return pWorkSpace->mSpiritLaneB;
         case TwistWorkSpaceSlot::kSpiritLaneC: return pWorkSpace->mSpiritLaneC;
         case TwistWorkSpaceSlot::kSpiritLaneD: return pWorkSpace->mSpiritLaneD;
-        case TwistWorkSpaceSlot::kSnowLaneA: return pWorkSpace->mHeartLaneA;
-        case TwistWorkSpaceSlot::kSnowLaneB: return pWorkSpace->mHeartLaneB;
-        case TwistWorkSpaceSlot::kSnowLaneC: return pWorkSpace->mHeartLaneC;
-        case TwistWorkSpaceSlot::kSnowLaneD: return pWorkSpace->mHeartLaneD;
         case TwistWorkSpaceSlot::kFireLaneA: return pWorkSpace->mFireLaneA;
         case TwistWorkSpaceSlot::kFireLaneB: return pWorkSpace->mFireLaneB;
         case TwistWorkSpaceSlot::kFireLaneC: return pWorkSpace->mFireLaneC;
@@ -375,10 +390,6 @@ std::uint8_t *TwistWorkSpace::GetBuffer(TwistWorkSpace *pWorkSpace,
         case TwistWorkSpaceSlot::kChanceLaneB: return pWorkSpace->mChanceLaneB;
         case TwistWorkSpaceSlot::kChanceLaneC: return pWorkSpace->mChanceLaneC;
         case TwistWorkSpaceSlot::kChanceLaneD: return pWorkSpace->mChanceLaneD;
-        case TwistWorkSpaceSlot::kDomainLaneKeyRotate: return pWorkSpace->mDomainLaneKeyRotate;
-        case TwistWorkSpaceSlot::kDomainLaneKeySpawn: return pWorkSpace->mDomainLaneKeySpawn;
-        case TwistWorkSpaceSlot::kDomainLaneSeed: return pWorkSpace->mDomainLaneSeed;
-        case TwistWorkSpaceSlot::kDomainLaneTwist: return pWorkSpace->mDomainLaneTwist;
         case TwistWorkSpaceSlot::kIceLaneA: return pWorkSpace->mIceLaneA;
         case TwistWorkSpaceSlot::kIceLaneB: return pWorkSpace->mIceLaneB;
         case TwistWorkSpaceSlot::kIceLaneC: return pWorkSpace->mIceLaneC;
@@ -562,17 +573,13 @@ bool TwistWorkSpace::IsSalt(TwistBufferKey pKey) {
 void TwistWorkSpace::Zero() {
     Zero_PostSeed();
 
-    memset(mDomainLaneKeyRotate, 0, sizeof(mDomainLaneKeyRotate));
-    memset(mDomainLaneKeySpawn, 0, sizeof(mDomainLaneKeySpawn));
-    memset(mDomainLaneSeed, 0, sizeof(mDomainLaneSeed));
-    memset(mDomainLaneTwist, 0, sizeof(mDomainLaneTwist));
-
     mDomainBundle.Zero();
 }
 
 void TwistWorkSpace::Zero_PostSeed() {
 
-    memset(mSource, 0, sizeof(mSource));
+    memset(mSourceLane, 0, sizeof(mSourceLane));
+    memset(mNonceLane, 0, sizeof(mNonceLane));
 
     memset(mHeartLaneA, 0, sizeof(mHeartLaneA));
     memset(mHeartLaneB, 0, sizeof(mHeartLaneB));

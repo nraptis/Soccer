@@ -124,6 +124,25 @@ void TwistFarmSalt::Derive(const std::uint8_t *pSource,
            pRoundMaterial->mSaltF);
 }
 
+void TwistFarmSalt::DeriveThree(const std::uint8_t *pSourceLaneA,
+                                const std::uint8_t *pSourceLaneB,
+                                const std::uint8_t *pSourceLaneC,
+                                TwistDomainSaltSet *pSaltSet) {
+    if ((pSourceLaneA == nullptr) ||
+        (pSourceLaneB == nullptr) ||
+        (pSourceLaneC == nullptr) ||
+        (pSaltSet == nullptr)) {
+        return;
+    }
+
+    Derive(pSourceLaneA,
+           &(pSaltSet->mOrbiterAssign));
+    Derive(pSourceLaneB,
+           &(pSaltSet->mOrbiterUpdate));
+    Derive(pSourceLaneC,
+           &(pSaltSet->mWandererUpdate));
+}
+
 void TwistFarmSalt::Zero() {
     
 }

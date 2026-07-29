@@ -1,0 +1,237 @@
+========================================================================
+FLOW: KDF
+EXPANDER: Mimosa (candidate 18)
+========================================================================
+
+KDF_A_A
+  LOOP  | INPUTS                                | DEST
+  ------+---------------------------------------+------
+  A     | sourc + nonce + nonce + sourc         | fire_a
+  B     | fire_a + sourc + sourc + nonce        | fire_b
+  C     | fire_b + nonce + fire_a + sourc       | earth_a
+  D     | earth_a + fire_a + sourc + fire_b     | earth_b
+        | nonce                                 | 
+  E     | earth_b + fire_b + sourc + earth_a    | earth_c
+        | nonce                                 | 
+  F     | earth_c + earth_a + sourc + earth_b   | earth_d
+        | nonce                                 | 
+
+KDF_A_B
+  LOOP  | INPUTS                                | DEST
+  ------+---------------------------------------+------
+  A     | earth_d + earth_b + sourc + earth_c   | fire_c
+        | earth_a + nonce                       | 
+  B     | fire_c + earth_c + fire_b + earth_d   | fire_d
+        | earth_b + fire_a                      | 
+  C     | fire_d + earth_d + fire_c + earth_c   | wind_a
+  D     | wind_a + fire_c + fire_d + earth_d    | wind_b
+  E     | wind_b + fire_d + wind_a + fire_c     | wind_c
+  F     | wind_c + wind_a + wind_b + fire_d     | wind_d
+
+KDF_A_C
+  LOOP  | INPUTS                                | DEST
+  ------+---------------------------------------+------
+  A     | wind_d + wind_b + fire_c + sourc      | fuse_a
+        | wind_c + wind_a + nonce + fire_d      | 
+  B     | fuse_a + wind_c + earth_c + wind_d    | fuse_b
+        | wind_b + fire_b                       | 
+  C     | fuse_b + wind_d + earth_a + fuse_a    | fuse_c
+        | wind_c + earth_b                      | 
+  D     | fuse_c + fuse_a + fire_a + fuse_b     | fuse_d
+        | wind_d + earth_d                      | 
+
+MATRIX DIFFUSION AFTER KDF_A_C [KDF_A]
+  TYPE  | LANES                                
+  ------+--------------------------------------
+  INPUT | fuse_a + fuse_b + fuse_c + fuse_d    
+  SHUFL | fire_c + fire_d + wind_c + wind_d    
+  OPER  | wind_a + wind_b                      
+
+  OUT   | water_a + water_b + water_c + water_d
+
+KDF_A_D
+  LOOP  | INPUTS                                | DEST
+  ------+---------------------------------------+------
+  A     | water_a + water_b + wind_d + fire_d   | heart_a
+        | water_c + water_d + earth_a + earth_c | 
+  B     | heart_a + water_c + wind_c + fire_b   | heart_b
+        | water_a + water_b + fire_c + fire_a   | 
+  C     | heart_b + water_d + sourc + earth_d   | heart_c
+        | heart_a + water_b + wind_b            | 
+  D     | heart_c + heart_a + wind_a + heart_b  | heart_d
+        | earth_b + nonce                       | 
+
+KDF_B_A
+  LOOP  | INPUTS                                | DEST
+  ------+---------------------------------------+------
+  A     | heart_d + heart_b + earth_d + wind_c  | soil_a
+        | heart_c + heart_a + wind_d + fire_d   | 
+  B     | soil_a + heart_c + wind_b + earth_a   | soil_b
+        | heart_d + heart_b + water_c + sourc   | 
+  C     | soil_b + heart_d + water_b + fire_b   | soil_c
+        | soil_a + heart_c + water_a + earth_c  | 
+  D     | soil_c + soil_a + water_d + earth_b   | soil_d
+        | soil_b + heart_d + fire_c + wind_a    | 
+
+KDF_B_B
+  LOOP  | INPUTS                                | DEST
+  ------+---------------------------------------+------
+  A     | soil_d + soil_b + sourc + water_d     | light_a
+        | soil_c + soil_a + earth_a + wind_b    | 
+  B     | light_a + soil_c + heart_c + water_a  | light_b
+        | soil_d + soil_b + wind_c + heart_a    | 
+  C     | light_b + soil_d + fire_c + wind_a    | light_c
+        | light_a + soil_c + heart_b + water_b  | 
+  D     | light_c + light_a + heart_d + wind_d  | light_d
+        | light_b + soil_d + fire_a + water_c   | 
+
+KDF_B_C
+  LOOP  | INPUTS                                | DEST
+  ------+---------------------------------------+------
+  A     | light_d + light_b + heart_a + heart_c | fuse_a
+        | light_c + light_a + water_a + water_d | 
+  B     | fuse_a + light_c + soil_b + heart_d   | fuse_b
+        | light_d + light_b + soil_a + sourc    | 
+  C     | fuse_b + light_d + soil_d + wind_b    | fuse_c
+        | fuse_a + light_c + wind_c + water_b   | 
+  D     | fuse_c + fuse_a + heart_b + soil_c    | fuse_d
+        | fuse_b + light_d + water_c + earth_c  | 
+
+MATRIX DIFFUSION AFTER KDF_B_C [KDF_B]
+  TYPE  | LANES                                
+  ------+--------------------------------------
+  INPUT | fuse_a + fuse_b + fuse_c + fuse_d    
+  SHUFL | soil_c + soil_d + light_c + light_d  
+  OPER  | light_a + light_b                    
+
+  OUT   | ice_a + ice_b + ice_c + ice_d        
+
+KDF_B_D
+  LOOP  | INPUTS                                | DEST
+  ------+---------------------------------------+------
+  A     | ice_a + ice_b + light_d + heart_c     | wood_a
+        | ice_c + ice_d + light_b + heart_b     | 
+  B     | wood_a + ice_c + heart_a + soil_a     | wood_b
+        | ice_a + ice_b + water_c + fire_d      | 
+  C     | wood_b + ice_d + soil_d + light_c     | wood_c
+        | wood_a + ice_b + soil_b + heart_d     | 
+  D     | wood_c + wood_a + light_a + soil_c    | wood_d
+        | wood_b + sourc + water_b              | 
+
+KDF_C_A
+  LOOP  | INPUTS                                | DEST
+  ------+---------------------------------------+------
+  A     | wood_d + wood_b + light_d + soil_a    | magma_a
+        | wood_c + wood_a + light_a + soil_d    | 
+  B     | magma_a + wood_c + sourc + ice_d      | magma_b
+        | wood_d + wood_b + soil_c + ice_b      | 
+  C     | magma_b + wood_d + light_c + heart_b  | magma_c
+        | magma_a + wood_c + soil_b + light_b   | 
+  D     | magma_c + magma_a + ice_a + heart_c   | magma_d
+        | magma_b + wood_d + ice_c + heart_a    | 
+
+KDF_C_B
+  LOOP  | INPUTS                                | DEST
+  ------+---------------------------------------+------
+  A     | magma_d + magma_b + wood_d + water_a  | plasm_a
+        | magma_c + magma_a + wood_a + sourc    | 
+  B     | plasm_a + magma_c + water_d + ice_d   | plasm_b
+        | magma_d + magma_b + ice_b + ice_c     | 
+  C     | plasm_b + magma_d + wood_c + light_c  | plasm_c
+        | plasm_a + magma_c + wood_b + light_a  | 
+  D     | plasm_c + plasm_a + soil_b + ice_a    | plasm_d
+        | plasm_b + magma_d + light_b + light_d | 
+
+KDF_C_C
+  LOOP  | INPUTS                                | DEST
+  ------+---------------------------------------+------
+  A     | plasm_d + plasm_b + ice_d + light_d   | fuse_a
+        | plasm_c + plasm_a + wood_b + soil_d   | 
+  B     | fuse_a + plasm_c + light_c + ice_c    | fuse_b
+        | plasm_d + plasm_b + magma_a + magma_c | 
+  C     | fuse_b + plasm_d + wood_c + wood_a    | fuse_c
+        | fuse_a + plasm_c + sourc + magma_d    | 
+  D     | fuse_c + fuse_a + magma_b + ice_b     | fuse_d
+        | fuse_b + plasm_d + ice_a + wood_d     | 
+
+MATRIX DIFFUSION AFTER KDF_C_C [KDF_C]
+  TYPE  | LANES                                
+  ------+--------------------------------------
+  INPUT | fuse_a + fuse_b + fuse_c + fuse_d    
+  SHUFL | magma_c + magma_d + plasm_c + plasm_d
+  OPER  | plasm_a + plasm_b                    
+
+  OUT   | shadw_a + shadw_b + shadw_c + shadw_d
+
+KDF_C_D
+  LOOP  | INPUTS                                | DEST
+  ------+---------------------------------------+------
+  A     | shadw_a + shadw_b + plasm_a + plasm_b | cryst_a
+        | shadw_c + shadw_d + magma_c + wood_a  | 
+  B     | cryst_a + shadw_c + wood_d + ice_c    | cryst_b
+        | shadw_a + shadw_b + wood_c + magma_b  | 
+  C     | cryst_b + shadw_d + plasm_c + magma_a | cryst_c
+        | cryst_a + shadw_b + plasm_d + wood_b  | 
+  D     | cryst_c + cryst_a + magma_d + ice_d   | cryst_d
+        | cryst_b + wind_d + sourc              | 
+
+KDF_D_A
+  LOOP  | INPUTS                                | DEST
+  ------+---------------------------------------+------
+  A     | cryst_d + cryst_b + shadw_c + sourc   | aethr_a
+        | cryst_c + cryst_a + plasm_a + magma_b | 
+  B     | aethr_a + cryst_c + shadw_a + plasm_c | aethr_b
+        | cryst_d + cryst_b + plasm_b + ice_a   | 
+  C     | aethr_b + cryst_d + magma_d + wood_c  | aethr_c
+        | aethr_a + cryst_c + plasm_d + shadw_d | 
+  D     | aethr_c + aethr_a + magma_a + earth_d | aethr_d
+        | aethr_b + cryst_d + shadw_b + magma_c | 
+
+KDF_D_B
+  LOOP  | INPUTS                                | DEST
+  ------+---------------------------------------+------
+  A     | aethr_d + aethr_b + wood_d + cryst_d  | celst_a
+        | aethr_c + aethr_a + soil_a + sourc    | 
+  B     | celst_a + aethr_c + cryst_c + cryst_a | celst_b
+        | aethr_d + aethr_b + plasm_d + plasm_c | 
+  C     | celst_b + aethr_d + cryst_b + shadw_c | celst_c
+        | celst_a + aethr_c + shadw_d + shadw_b | 
+  D     | celst_c + celst_a + plasm_a + plasm_b | celst_d
+        | celst_b + aethr_d + soil_c + shadw_a  | 
+
+KDF_D_C
+  LOOP  | INPUTS                                | DEST
+  ------+---------------------------------------+------
+  A     | celst_d + celst_b + magma_c + sourc   | fuse_a
+        | celst_c + celst_a + shadw_b + magma_a | 
+  B     | fuse_a + celst_c + shadw_a + cryst_a  | fuse_b
+        | celst_d + celst_b + aethr_c + cryst_b | 
+  C     | fuse_b + celst_d + shadw_d + aethr_b  | fuse_c
+        | fuse_a + celst_c + cryst_c + heart_d  | 
+  D     | fuse_c + fuse_a + shadw_c + cryst_d   | fuse_d
+        | fuse_b + celst_d + aethr_a + aethr_d  | 
+
+MATRIX DIFFUSION AFTER KDF_D_C [KDF_D]
+  TYPE  | LANES                                
+  ------+--------------------------------------
+  INPUT | fuse_a + fuse_b + fuse_c + fuse_d    
+  SHUFL | aethr_c + aethr_d + celst_c + celst_d
+  OPER  | celst_a + celst_b                    
+
+  OUT   | vapor_a + vapor_b + vapor_c + vapor_d
+
+KDF_D_D
+  LOOP  | INPUTS                                | DEST
+  ------+---------------------------------------+------
+  A     | vapor_a + vapor_b + cryst_c + aethr_d | poisn_a
+        | vapor_c + vapor_d + aethr_a + celst_c | 
+  B     | poisn_a + vapor_c + cryst_b + cryst_d | poisn_b
+        | vapor_a + vapor_b + celst_b + celst_d | 
+  C     | poisn_b + vapor_d + shadw_c + sourc   | poisn_c
+        | poisn_a + vapor_b + aethr_c + plasm_a | 
+  D     | poisn_c + poisn_a + cryst_a + aethr_b | poisn_d
+        | poisn_b + wood_a + celst_a            | 
+
+========================================================================
+END FLOW: KDF
+========================================================================
