@@ -7,7 +7,7 @@
 #include "Jelly.hpp"
 #include "Crypt.hpp"
 
-// Input shape: pLength must be 0 or a multiple of 32; password buffer is pLength bytes.
+// [RELEASE] [44.7 us] [OK]
 
 class PasswordXORCipher final : public Crypt {
 public:

@@ -153,10 +153,6 @@ public:
         pConstants->mScatter = Random::Get64();
         pConstants->mCross = Random::Get64();
         
-        pConstants->mDomainConstantPublicIngress = Random::Get64();
-        pConstants->mDomainConstantPrivateIngress = Random::Get64();
-        pConstants->mDomainConstantCrossIngress = Random::Get64();
-        
         pConstants->mMatrixSelectA = Random::Get64();
         pConstants->mMatrixSelectB = Random::Get64();
         
@@ -167,9 +163,6 @@ public:
         pConstants->mMatrixArgB = Random::GetByte();
         pConstants->mMatrixArgC = Random::GetByte();
         pConstants->mMatrixArgD = Random::GetByte();
-        
-        pConstants->mMaskMutateA = Random::GetByte();
-        pConstants->mMaskMutateB = Random::GetByte();
     }
     
     static void FillSeedRoundMaterial(TwistDomainSeedRoundMaterial *pMaterial) {
@@ -179,6 +172,8 @@ public:
         Fill64(pMaterial->mSaltD, S_SALT);
         Fill64(pMaterial->mSaltE, S_SALT);
         Fill64(pMaterial->mSaltF, S_SALT);
+        Fill64(pMaterial->mSaltG, S_SALT);
+        Fill64(pMaterial->mSaltH, S_SALT);
     }
     
     static void FillSaltSet(TwistDomainSaltSet *pSaltSet) {
@@ -188,34 +183,51 @@ public:
     }
     
     static void FillDomainBundle(TwistDomainBundle *pBundle) {
-        FillSaltSet(&pBundle->mKeySpawnSalts);
-        FillConstants(&pBundle->mKeySpawnConstants);
+        FillSaltSet(&pBundle->mKeySpawnASalts);
+        FillConstants(&pBundle->mKeySpawnAConstants);
+        FillSaltSet(&pBundle->mKeySpawnBSalts);
+        FillConstants(&pBundle->mKeySpawnBConstants);
         FillSaltSet(&pBundle->mSeedSalts);
         FillConstants(&pBundle->mSeedConstants);
         FillSaltSet(&pBundle->mTwistSalts);
         FillConstants(&pBundle->mTwistConstants);
-        FillSaltSet(&pBundle->mKeyRotateSalts);
-        FillConstants(&pBundle->mKeyRotateConstants);
+        FillSaltSet(&pBundle->mKeyRotateASalts);
+        FillConstants(&pBundle->mKeyRotateAConstants);
+        FillSaltSet(&pBundle->mKeyRotateBSalts);
+        FillConstants(&pBundle->mKeyRotateBConstants);
     }
     
     static void FillWorkSpace(TwistWorkSpace *pWorkSpace) {
+        
         FillBytes(&pWorkSpace->mKeyBoxA[0][0], S_KEY);
         FillBytes(&pWorkSpace->mKeyBoxB[0][0], S_KEY);
         
-        FillBytes(pWorkSpace->mPoisonLaneA, S_BLOCK);
-        FillBytes(pWorkSpace->mPoisonLaneB, S_BLOCK);
-        FillBytes(pWorkSpace->mPoisonLaneC, S_BLOCK);
-        FillBytes(pWorkSpace->mPoisonLaneD, S_BLOCK);
+        FillBytes(pWorkSpace->mSourceLane, S_BLOCK);
+        FillBytes(pWorkSpace->mNonceLane, S_BLOCK);
         
-        FillBytes(pWorkSpace->mHeartLaneA, S_BLOCK);
-        FillBytes(pWorkSpace->mHeartLaneB, S_BLOCK);
-        FillBytes(pWorkSpace->mHeartLaneC, S_BLOCK);
-        FillBytes(pWorkSpace->mHeartLaneD, S_BLOCK);
+        for (std::size_t aIndex=0; aIndex<256; aIndex++) {
+            pWorkSpace->mIndexList256A[aIndex] = aIndex;
+            pWorkSpace->mIndexList256B[aIndex] = aIndex;
+            pWorkSpace->mIndexList256C[aIndex] = aIndex;
+            pWorkSpace->mIndexList256D[aIndex] = aIndex;
+        }
         
-        FillBytes(pWorkSpace->mSpiritLaneA, S_BLOCK);
-        FillBytes(pWorkSpace->mSpiritLaneB, S_BLOCK);
-        FillBytes(pWorkSpace->mSpiritLaneC, S_BLOCK);
-        FillBytes(pWorkSpace->mSpiritLaneD, S_BLOCK);
+        for (std::size_t i = 1U; i < 256; ++i) {
+            const std::size_t aSwapIndex = static_cast<std::size_t>(Random::Get(static_cast<int>(i + 1U)));
+            std::swap(pWorkSpace->mIndexList256A[i], pWorkSpace->mIndexList256A[aSwapIndex]);
+        }
+        for (std::size_t i = 1U; i < 256; ++i) {
+            const std::size_t aSwapIndex = static_cast<std::size_t>(Random::Get(static_cast<int>(i + 1U)));
+            std::swap(pWorkSpace->mIndexList256B[i], pWorkSpace->mIndexList256B[aSwapIndex]);
+        }
+        for (std::size_t i = 1U; i < 256; ++i) {
+            const std::size_t aSwapIndex = static_cast<std::size_t>(Random::Get(static_cast<int>(i + 1U)));
+            std::swap(pWorkSpace->mIndexList256C[i], pWorkSpace->mIndexList256C[aSwapIndex]);
+        }
+        for (std::size_t i = 1U; i < 256; ++i) {
+            const std::size_t aSwapIndex = static_cast<std::size_t>(Random::Get(static_cast<int>(i + 1U)));
+            std::swap(pWorkSpace->mIndexList256D[i], pWorkSpace->mIndexList256D[aSwapIndex]);
+        }
         
         FillBytes(pWorkSpace->mEarthLaneA, S_BLOCK);
         FillBytes(pWorkSpace->mEarthLaneB, S_BLOCK);
@@ -226,33 +238,92 @@ public:
         FillBytes(pWorkSpace->mFireLaneB, S_BLOCK);
         FillBytes(pWorkSpace->mFireLaneC, S_BLOCK);
         FillBytes(pWorkSpace->mFireLaneD, S_BLOCK);
-        
+
         FillBytes(pWorkSpace->mWindLaneA, S_BLOCK);
         FillBytes(pWorkSpace->mWindLaneB, S_BLOCK);
         FillBytes(pWorkSpace->mWindLaneC, S_BLOCK);
         FillBytes(pWorkSpace->mWindLaneD, S_BLOCK);
-        
-        FillBytes(pWorkSpace->mWoodLaneA, S_BLOCK);
-        FillBytes(pWorkSpace->mWoodLaneB, S_BLOCK);
-        FillBytes(pWorkSpace->mWoodLaneC, S_BLOCK);
-        FillBytes(pWorkSpace->mWoodLaneD, S_BLOCK);
-        
+
         FillBytes(pWorkSpace->mWaterLaneA, S_BLOCK);
         FillBytes(pWorkSpace->mWaterLaneB, S_BLOCK);
         FillBytes(pWorkSpace->mWaterLaneC, S_BLOCK);
         FillBytes(pWorkSpace->mWaterLaneD, S_BLOCK);
-        
+
+        FillBytes(pWorkSpace->mHeartLaneA, S_BLOCK);
+        FillBytes(pWorkSpace->mHeartLaneB, S_BLOCK);
+        FillBytes(pWorkSpace->mHeartLaneC, S_BLOCK);
+        FillBytes(pWorkSpace->mHeartLaneD, S_BLOCK);
+
+        FillBytes(pWorkSpace->mSoilLaneA, S_BLOCK);
+        FillBytes(pWorkSpace->mSoilLaneB, S_BLOCK);
+        FillBytes(pWorkSpace->mSoilLaneC, S_BLOCK);
+        FillBytes(pWorkSpace->mSoilLaneD, S_BLOCK);
+
+        FillBytes(pWorkSpace->mLightningLaneA, S_BLOCK);
+        FillBytes(pWorkSpace->mLightningLaneB, S_BLOCK);
+        FillBytes(pWorkSpace->mLightningLaneC, S_BLOCK);
+        FillBytes(pWorkSpace->mLightningLaneD, S_BLOCK);
+
+        FillBytes(pWorkSpace->mIceLaneA, S_BLOCK);
+        FillBytes(pWorkSpace->mIceLaneB, S_BLOCK);
+        FillBytes(pWorkSpace->mIceLaneC, S_BLOCK);
+        FillBytes(pWorkSpace->mIceLaneD, S_BLOCK);
+
+        FillBytes(pWorkSpace->mWoodLaneA, S_BLOCK);
+        FillBytes(pWorkSpace->mWoodLaneB, S_BLOCK);
+        FillBytes(pWorkSpace->mWoodLaneC, S_BLOCK);
+        FillBytes(pWorkSpace->mWoodLaneD, S_BLOCK);
+
+        FillBytes(pWorkSpace->mMagmaLaneA, S_BLOCK);
+        FillBytes(pWorkSpace->mMagmaLaneB, S_BLOCK);
+        FillBytes(pWorkSpace->mMagmaLaneC, S_BLOCK);
+        FillBytes(pWorkSpace->mMagmaLaneD, S_BLOCK);
+
+        FillBytes(pWorkSpace->mPlasmaLaneA, S_BLOCK);
+        FillBytes(pWorkSpace->mPlasmaLaneB, S_BLOCK);
+        FillBytes(pWorkSpace->mPlasmaLaneC, S_BLOCK);
+        FillBytes(pWorkSpace->mPlasmaLaneD, S_BLOCK);
+
+        FillBytes(pWorkSpace->mShadowLaneA, S_BLOCK);
+        FillBytes(pWorkSpace->mShadowLaneB, S_BLOCK);
+        FillBytes(pWorkSpace->mShadowLaneC, S_BLOCK);
+        FillBytes(pWorkSpace->mShadowLaneD, S_BLOCK);
+
+        FillBytes(pWorkSpace->mCrystalLaneA, S_BLOCK);
+        FillBytes(pWorkSpace->mCrystalLaneB, S_BLOCK);
+        FillBytes(pWorkSpace->mCrystalLaneC, S_BLOCK);
+        FillBytes(pWorkSpace->mCrystalLaneD, S_BLOCK);
+
+        FillBytes(pWorkSpace->mAetherLaneA, S_BLOCK);
+        FillBytes(pWorkSpace->mAetherLaneB, S_BLOCK);
+        FillBytes(pWorkSpace->mAetherLaneC, S_BLOCK);
+        FillBytes(pWorkSpace->mAetherLaneD, S_BLOCK);
+
+        FillBytes(pWorkSpace->mCelestialLaneA, S_BLOCK);
+        FillBytes(pWorkSpace->mCelestialLaneB, S_BLOCK);
+        FillBytes(pWorkSpace->mCelestialLaneC, S_BLOCK);
+        FillBytes(pWorkSpace->mCelestialLaneD, S_BLOCK);
+
+        FillBytes(pWorkSpace->mKineticLaneA, S_BLOCK);
+        FillBytes(pWorkSpace->mKineticLaneB, S_BLOCK);
+        FillBytes(pWorkSpace->mKineticLaneC, S_BLOCK);
+        FillBytes(pWorkSpace->mKineticLaneD, S_BLOCK);
+
+        FillBytes(pWorkSpace->mVaporLaneA, S_BLOCK);
+        FillBytes(pWorkSpace->mVaporLaneB, S_BLOCK);
+        FillBytes(pWorkSpace->mVaporLaneC, S_BLOCK);
+        FillBytes(pWorkSpace->mVaporLaneD, S_BLOCK);
+
+        FillBytes(pWorkSpace->mSpiritLaneA, S_BLOCK);
+        FillBytes(pWorkSpace->mSpiritLaneB, S_BLOCK);
+        FillBytes(pWorkSpace->mSpiritLaneC, S_BLOCK);
+        FillBytes(pWorkSpace->mSpiritLaneD, S_BLOCK);
+
         FillBytes(pWorkSpace->mFuseLaneA, S_BLOCK);
         FillBytes(pWorkSpace->mFuseLaneB, S_BLOCK);
         FillBytes(pWorkSpace->mFuseLaneC, S_BLOCK);
         FillBytes(pWorkSpace->mFuseLaneD, S_BLOCK);
         
-        FillBytes(pWorkSpace->mIceLaneA, S_BLOCK);
-        FillBytes(pWorkSpace->mIceLaneB, S_BLOCK);
-        FillBytes(pWorkSpace->mIceLaneC, S_BLOCK);
-        FillBytes(pWorkSpace->mIceLaneC, S_BLOCK);
-
-        FillBytes(pWorkSpace->mSource, S_BLOCK);
         
         FillDomainBundle(&pWorkSpace->mDomainBundle);
     }

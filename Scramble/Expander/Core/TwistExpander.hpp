@@ -59,6 +59,31 @@
     &aWandererJ, \
     &aWandererK
 
+#define PARAMS_KDF \
+    pWorkSpace, \
+    pNonce, \
+    pConstants, \
+    pDomainSaltSet, \
+    MUTABLE_PARAMS_PASSED
+
+#define PARAMS_SEED \
+    pWorkSpace, \
+    pNonce, \
+    ARX_STATE_VARS
+
+#define PARAMS_TWIST \
+    pWorkSpace, \
+    pSource, \
+    pCrossLaneA, \
+    pCrossLaneB, \
+    pCrossLaneC, \
+    pCrossLaneD, \
+    ARX_STATE_VARS
+
+#define PARAMS_GROW \
+    pWorkSpace, \
+    MUTABLE_PARAMS_PASSED
+
 #define READ_IN_MUTABLE_PARAMS \
     std::uint64_t aPrevious = 0U; \
     std::uint64_t aIngress = *pIngress; \
@@ -192,11 +217,6 @@ public:
                                                       std::uint8_t *pCrossLaneD,
                                                       std::uint8_t *pDestination,
                                                       std::size_t pDestinationByteLength);
-    
-    std::size_t                             mIndexList256A[256];
-    std::size_t                             mIndexList256B[256];
-    std::size_t                             mIndexList256C[256];
-    std::size_t                             mIndexList256D[256];
     
     M88                                     mMatrix;
     

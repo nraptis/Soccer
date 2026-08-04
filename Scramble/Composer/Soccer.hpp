@@ -153,9 +153,6 @@ private:
     static TwistExpander                        *mShuffleExpanders[32];
     static TwistWorkSpace                       *mShuffleWorkSpaces[16];
     
-    
-    
-    
 };
 
 #endif /* Soccer_hpp */

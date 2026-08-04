@@ -8,8 +8,8 @@
 #include "Soccer.hpp"
 
 #include "PasswordXORCipher.hpp"
-#include "CascadeJumpXORCipher.hpp"
-#include "CascadeXORCipher.hpp"
+#include "CascadeJumpCipher.hpp"
+#include "CascadeCipher.hpp"
 #include "PasswordAddCipher.hpp"
 #include "PasswordJumpAddCipher.hpp"
 #include "PasswordJumpXORCipher.hpp"
@@ -2331,15 +2331,15 @@ void Soccer::SeedEpilogue() {
             }
                 
             case 5: {
-                std::uint8_t *aMask = TakeMaterial("CascadeJumpXORCipher", "pMask");
-                std::uint8_t *aJumps = TakeMaterial("CascadeJumpXORCipher", "pJumps");
-                pLayer.AddCipher(std::make_unique<CascadeJumpXORCipher>(aMask, aJumps));
+                std::uint8_t *aMask = TakeMaterial("CascadeJumpCipher", "pMask");
+                std::uint8_t *aJumps = TakeMaterial("CascadeJumpCipher", "pJumps");
+                pLayer.AddCipher(std::make_unique<CascadeJumpCipher>(aMask, aJumps));
                 break;
             }
                 
             case 6: {
-                std::uint8_t *aMask = TakeMaterial("CascadeXORCipher", "pMask");
-                pLayer.AddCipher(std::make_unique<CascadeXORCipher>(aMask));
+                std::uint8_t *aMask = TakeMaterial("CascadeCipher", "pMask");
+                pLayer.AddCipher(std::make_unique<CascadeCipher>(aMask));
                 break;
             }
                 

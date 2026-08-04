@@ -7,7 +7,7 @@
 #include "Jelly.hpp"
 #include "Crypt.hpp"
 
-// Input shape: pLength must be 0 or a multiple of 16; mask is a single byte.
+// [RELEASE] [636.7 us] [OK]
 
 class RotateMaskCipher final : public Crypt {
  public:

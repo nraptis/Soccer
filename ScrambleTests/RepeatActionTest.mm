@@ -9,7 +9,6 @@
 
 #include "ExpanderFactory.hpp"
 #include "TwistFarmSalt.hpp"
-#include "TwistSnow.hpp"
 
 #include <cstddef>
 #include <cstdint>
@@ -34,12 +33,12 @@
     std::uint8_t mSnowLaneB[S_BLOCK];
     std::uint8_t mSnowLaneC[S_BLOCK];
     std::uint8_t mSnowLaneD[S_BLOCK];
-    
-    TwistSnow::Sha256Counter(aPassword, mSnowLaneA);
-    TwistSnow::AES256Counter(aPassword, mSnowLaneB);
-    TwistSnow::ChaCha20Counter(aPassword, mSnowLaneC);
-    TwistSnow::Aria256Counter(aPassword, mSnowLaneD);
 
+    std::memset(mSnowLaneA, 0xAB, S_BLOCK);
+    std::memset(mSnowLaneB, 0xCD, S_BLOCK);
+    std::memset(mSnowLaneC, 0xEF, S_BLOCK);
+    std::memset(mSnowLaneD, 0x58, S_BLOCK);
+    
     std::vector<ExpanderItem> aExpanderItems = ExpanderFactory::Get();
     for (ExpanderItem &aExpanderItem : aExpanderItems) {
         TwistWorkSpace aWorkSpace;

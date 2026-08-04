@@ -13,10 +13,6 @@
 TwistExpander::TwistExpander() {
     std::memset(&mDomainBundleInbuilt, 0, sizeof(mDomainBundleInbuilt));
     std::memset(&mDomainBundleEphemeral, 0, sizeof(mDomainBundleEphemeral));
-    std::memset(mIndexList256A, 0, sizeof(mIndexList256A));
-    std::memset(mIndexList256B, 0, sizeof(mIndexList256B));
-    std::memset(mIndexList256C, 0, sizeof(mIndexList256C));
-    std::memset(mIndexList256D, 0, sizeof(mIndexList256D));
 }
 
 TwistExpander::~TwistExpander() {
@@ -97,7 +93,7 @@ void TwistExpander::Seed(TwistWorkSpace *pWorkSpace,
         return;
     }
     if (pFarmSalt == nullptr) {
-        std::printf("fatal: TwistExpander::Seed requires farm salt PoisonLane\n");
+        std::printf("fatal: TwistExpander::Seed requires farm salt\n");
         return;
     }
     UnrollPassword(pWorkSpace->mSourceLane, pPassword, pPasswordByteLength);
@@ -420,9 +416,5 @@ void TwistExpander::Zero() {
 }
 
 void TwistExpander::Zero_PostSeed() {
-    memset(mIndexList256A, 0, sizeof(mIndexList256A));
-    memset(mIndexList256B, 0, sizeof(mIndexList256B));
-    memset(mIndexList256C, 0, sizeof(mIndexList256C));
-    memset(mIndexList256D, 0, sizeof(mIndexList256D));
     mDomainBundleEphemeral.Zero();
 }

@@ -7,6 +7,9 @@
 #include "Jelly.hpp"
 #include "Crypt.hpp"
 
+// Note, we do not have this benchmark, this is from 48, but they are all same category.
+// [RELEASE] [25.0 us] [OK]
+
 class ReverseMaskByteBlockCipher64 final : public Crypt {
  public:
   explicit ReverseMaskByteBlockCipher64(std::uint8_t pMask) : mMask(pMask) {}

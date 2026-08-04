@@ -42,6 +42,12 @@ add_library(soccer STATIC
 
 add_library(Soccer::soccer ALIAS soccer)
 
+add_executable(LaneCountTool
+    Tools/LaneCountTool.cpp
+)
+
+target_compile_features(LaneCountTool PRIVATE cxx_std_20)
+
 target_compile_features(soccer PUBLIC cxx_std_20)
 
 set_target_properties(soccer PROPERTIES

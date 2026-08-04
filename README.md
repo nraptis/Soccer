@@ -346,3 +346,253 @@ Soccer is available under the
 and redistribute the software for noncommercial purposes. Commercial use,
 including selling the software or derivatives, is not permitted under this
 license.
+
+## How the ARX loop recipes are farmed
+
+Soccer's generated ARX loops are assembled from three independently saved
+structural pieces:
+
+```text
+head + heart + tail = loop recipe
+```
+
+- The **head** assigns one of the eleven wanderers A-K to initialize each of
+  the eleven orbiters A-K.
+- The **heart** is the ordered eleven-round ARX dance between those orbiters.
+- The **tail** selects two orbiters to feed back into each wanderer update.
+
+These assets contain structure, not keys or secret data. Farming them is a
+search for well-connected and varied information-flow plans. It is not a
+cryptographic proof, and it deliberately does not grade ciphertext bit
+balance, empirical avalanche, constants, rotations, salts, or nonce values.
+Those belong to other parts of the construction and to separate testing.
+
+### The structural model
+
+For scoring, every starting wanderer and every fresh context input is given a
+symbolic dependency marker. When two values interact, their marker sets are
+joined. This lets the farmer follow where information *could* travel without
+pretending to predict the numerical output of the real ARX arithmetic.
+
+A simplified journey through one loop is:
+
+```text
+wanderers
+    -> head assignments and context injection
+    -> orbiters
+    -> eleven ordered heart rounds
+    -> two tail-selected orbiters per wanderer
+    -> updated wanderers, ingress, and carry
+    -> next iteration
+```
+
+The simulation runs this complete route twice. Consequently, the principal
+tail score is not just a property of an isolated graph: it follows each
+wanderer's influence into the orbiters, through the ordered ARX heart, back
+through the tail, and into the updated wanderers.
+
+### Heart farming
+
+Each heart has eleven ordered triplets:
+
+```text
+{ lead, source, feedback }
+```
+
+One triplet represents the structural roles in a real ARX statement group:
+
+```cpp
+lead = lead + source;
+feedback = feedback ^ lead;
+feedback = rotate_and_finalize(feedback);
+```
+
+The real generated statements also contain constants and other inputs. The
+heart records only which abstract role leads, supplies the source, and receives
+feedback in each ordered round.
+
+#### From six skeletons to 180 hearts
+
+The earlier generator used six fixed eleven-round skeletons. Concrete orbiter
+names could be permuted around those skeletons, producing many-looking loops,
+but a global rename does not create a new information-flow topology. Under the
+later canonical definition, globally swapping roles such as A and D leaves the
+same heart.
+
+The 180-heart system revisited that foundation. It did not make 30 renamed
+versions of each old skeleton. Instead, it searched a much larger canonical
+space and treated role-renamed copies as one candidate. The old six were the
+prototype that established the eleven-round, three-role heart; the new 180 are
+independently selected structural replacements that give the recipe system 180
+different canonical ordered-heart structures.
+
+Every candidate uses each role A-K exactly once in each of the `lead`, `source`,
+and `feedback` columns. The roles within a row also obey the accepted cyclic
+gap families `{2, 4, 5}` or `{3, 3, 5}`, which keep the three participants from
+clustering together. The saved search evaluated 2,667,804 canonical candidates,
+257,350 passed the immediate structural filters, and the strongest 180 were
+kept.
+
+#### Heart eligibility and metrics
+
+The following measurements were considered. Hard failures were removed before
+ranking; the remaining metrics were compared in the order shown.
+
+| Metric | Preference | Plain-language meaning |
+| --- | :---: | --- |
+| Eligibility | Required | A candidate that fails any immediate graph rule cannot outrank an eligible candidate. |
+| Distinct directed edges | Higher | Rewards using more different one-way relationships instead of repeating the same interaction. The eleven triplets can supply at most 22. |
+| Reciprocal edges | Lower | Avoids immediately reusing the same relationship in both directions. |
+| Strong connectivity | Required | Starting from any role, information must have a directed route to every other role. |
+| Articulation points | Zero required | Removing one role must not split the undirected flow graph. This rejects single-role bottlenecks. |
+| Bridges | Zero required | Removing one relationship must not split the undirected graph. This rejects single-edge bottlenecks. |
+| Floor balance | Higher | Takes the weaker of two worst cases: the least-informed destination and the least-travelled source. It prevents excellent flow in one direction from hiding weak flow in the other. |
+| Floor total | Higher | Adds those incoming and outgoing floors after their balance has been protected. |
+| Journey balance | Higher | Takes the weaker of the incoming and outgoing journey scores, which reward early and sustained influence during the ordered rounds. |
+| Journey total | Higher | Adds the incoming and outgoing journey scores after their balance has been protected. |
+| Influence-curve area | Higher | Adds the dependency reach after every round, rewarding flow that spreads early rather than arriving only at the end. |
+| Final influence total | Higher | Counts the total dependency reach present after all eleven rounds. |
+| Directed diameter | Lower | Measures the worst shortest route between two roles. A diameter of four means every role can reach every other in at most four directed steps. |
+
+Heart sorting is **lexicographic**, not a weighted sum. The first metric that
+differs decides the comparison. Thus a later excellent score cannot compensate
+for an earlier structural weakness. When all score fields tie, the canonical
+heart bytes provide a deterministic final ordering.
+
+### Head farming
+
+A head is a permutation of A-K. For example, `A<-K` means that orbiter A is
+initialized from wanderer K. Because every wanderer appears exactly once, a
+head redistributes roles without duplicating or omitting one.
+
+There are `11! = 39,916,800` possible heads. A deterministic preselection keeps
+the identity mapping, takes an approximately 1/32 hash sample of the complete
+space, and processes that sample in hash order. Whenever a head is retained,
+candidates within four changed assignments are forbidden. This produces 19,800
+heads with a minimum pairwise distance of five. The retained set is then
+compared exactly against itself.
+
+| Metric | Preference | Plain-language meaning |
+| --- | :---: | --- |
+| Valid permutation | Required | Every orbiter receives one wanderer and every wanderer is used exactly once. |
+| Worst distance | Higher | The number of assignments changed between a head and its closest neighbor in the retained collection. It protects against near-duplicates. |
+| Average distance | Higher | The average number of changed assignments between this head and every other retained head. It rewards broad collection-wide variety. |
+| Permutation rank | Lower tie-break | A stable lexicographic ID from `0` through `11! - 1`; it is an identifier, not a strength score. |
+
+Head ordering is also lexicographic: maximize the nearest-neighbor distance,
+then maximize average distance, then use the permutation rank only to break an
+exact tie.
+
+#### Why the head is journey-agnostic
+
+The head farmer intentionally does not declare that one role permutation has a
+better journey through one particular heart. A head only decides who plays each
+starting role. Scoring it against a favored heart at this stage would overfit
+an otherwise reusable permutation and would partly reward labels rather than
+structure.
+
+Instead, heads are selected for validity and mutual distance. They are sorted
+by diversity and dealt round-robin so each of the 180 hearts receives 110 heads,
+one from every consecutive 180-head quality band. The complete journey is then
+evaluated later, when the tail farmer sees the exact heart and head together.
+
+### Tail farming
+
+The tail completes the loop. For each wanderer A-K it chooses two orbiters whose
+post-heart values are mixed into that wanderer's update. Each of the two tail
+columns is a permutation, so every orbiter appears once in each column.
+
+Tail generation is conditional: a candidate is generated and scored for one
+specific heart/head pair. It must pass these immediate rules:
+
+- the two selected orbiters for a wanderer must be different;
+- an unordered orbiter pair cannot be repeated elsewhere in the tail;
+- the pair cannot be equal or directly adjacent in the heart's temporal flow;
+- the combined head/tail transition graph must be strongly connected.
+
+#### Tail measurements
+
+The farmer records the following measurements. The `Use` column distinguishes
+active sort keys from diagnostics retained for analysis.
+
+| Metric | Use | Plain-language meaning |
+| --- | --- | --- |
+| First minimum wanderer influence | Exploration 1, Safe 1 | After one complete journey, counts the distinct sources reaching the least-informed wanderer. This is the primary worst-case flow floor. |
+| First minimum input coverage | Diagnostic | Finds the least-travelled input and counts how many wanderers it reached after the first journey. |
+| Second minimum wanderer influence | Diagnostic | Repeats the least-informed-wanderer check after a second complete journey. |
+| Second minimum input coverage | Diagnostic | Repeats the least-travelled-input check after the second journey. |
+| Minimum pair union | Exploration 2, Safe 2 | For the weakest tail pair, counts the distinct dependencies supplied by its two orbiters together. |
+| Minimum heart separation | Hard floor and diagnostic | Measures the closest temporal relationship used by any tail pair. Equal or directly related pairs are rejected. |
+| Total heart separation | Exploration 5 | Adds the separation of all eleven tail pairs, favoring pairings drawn from different parts of the heart's dance. |
+| Minimum pair balance | Diagnostic | Checks whether the weakest pair contributes both shared history and information unique to each side. |
+| Minimum complement | Diagnostic | Measures how different the two dependency sets are in the least-different pair. |
+| Dominated-pair count | Diagnostic | Counts pairs where one side adds no dependency absent from the other. Lower is better. |
+| Flow area | Diagnostic | Adds influence after each assignment, heart round, and update. Higher means information spreads earlier and remains broad. |
+| Arrival total | Diagnostic | Adds the first-arrival times of every tracked source at every wanderer. Lower means faster overall delivery. |
+| Maximum arrival skew | Diagnostic | Measures the largest timing imbalance for one source reaching different wanderers. Lower means fewer laggards. |
+| Directed diameter | Exploration 3, Safe 5 | The worst shortest route through the head/tail transition graph. Lower means fewer long directional bottlenecks. |
+| Pair components | Exploration 4, Safe 3 | Counts disconnected islands in the undirected graph made by the eleven tail pairs. One is preferred. |
+| Minimum subset expansion | Safe 4 | Finds the most isolated small group of roles and measures how many edges escape it. Higher means no small cluster is easy to cut off. |
+| Total subset expansion | Safe 6 | Adds expansion across all tested small subsets, measuring graph-wide outward connectivity. |
+| Spectral gap | Diagnostic | Estimates the graph's overall mixing rate. A larger gap generally indicates faster, more even circulation and fewer soft bottlenecks. |
+
+The dependency measurements above track structural reachability, not
+independent bit paths. Spectral gap is calculated during the Safe phase but is
+currently diagnostic; it is not one of the six active Safe sort keys.
+
+#### The three tail phases
+
+Tail selection is deliberately split so cheap broad exploration happens before
+the expensive graph checks.
+
+1. **Exploration** generates a large candidate population independently for
+   every fixed heart/head pair. Valid candidates are sorted lexicographically
+   by first minimum wanderer influence, minimum pair union, lower directed
+   diameter, fewer pair components, and total heart separation. Only the
+   strongest pool is saved. Subset expansion and spectral gap are not computed
+   here, so zero in an Exploration-only log means "not measured," not a zero-
+   quality graph.
+2. **Safe** reloads those pools, calculates exact subset expansion and the
+   spectral diagnostic, and sorts lexicographically by first minimum wanderer
+   influence, minimum pair union, fewer pair components, minimum subset
+   expansion, lower directed diameter, and total subset expansion. A smaller
+   pool is saved for every heart/head pair.
+3. **Final** chooses one tail from each Safe pool while considering all tails
+   already chosen. It first maximizes the candidate's distance from its nearest
+   selected tail, then its total distance from the selected collection, and
+   finally its Safe flow rank. Tail distance is the number of different entries
+   across the two eleven-item orbiter-selection columns. This turns 19,800 local
+   choices into one globally varied tail asset.
+
+As in heart and head farming, these are ordered comparisons rather than a
+single composite number. An earlier floor takes priority over a later
+refinement. This prevents a very strong average from hiding one conspicuously
+weak route.
+
+### Recipe assembly and distribution
+
+Each completed recipe contains one fixed heart, one of that heart's 110 heads,
+and the tail farmed specifically for that pair:
+
+```text
+180 hearts x 110 head/tail choices = 19,800 recipes
+19,800 recipes / 33 expanders = 600 recipes per expander
+```
+
+The assembler first shuffles the 110 recipes inside every heart bucket, then
+shuffles the order of the 180 buckets. It processes one bucket at a time and
+deals that bucket's recipes round-robin across the 33 expanders. This preserves
+the heart grouping during the deal while distributing the complete collection
+evenly. The current code generator consumes 584 recipes per expander and leaves
+16 available as spares.
+
+The saved assets are validated when loaded: heart columns must remain
+permutations, heads must be one-to-one, tails must obey their pair and
+connectivity rules, recipes must be structurally valid, and the final recipe
+files must contain the expected unique record count.
+
+This farming process is best understood as structural risk reduction. It
+removes obvious bottlenecks, rejects disconnected or repetitive plans, and
+selects a broad family of well-braided flows. It does not establish the security
+of the complete cipher by itself; that still requires cryptanalysis, empirical
+testing, and independent review.

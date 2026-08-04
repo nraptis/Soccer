@@ -7,6 +7,8 @@
 #include "Jelly.hpp"
 #include "Crypt.hpp"
 
+// [RELEASE] [25.2 us] [OK]
+
 class ReverseMaskByteBlockCipher32 final : public Crypt {
  public:
   explicit ReverseMaskByteBlockCipher32(std::uint8_t pMask) : mMask(pMask) {}
