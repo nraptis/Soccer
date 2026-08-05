@@ -19,6 +19,70 @@ public:
     static void                         Execute(std::size_t *pIndexList256,
                                                 const std::uint8_t *pBlockSizedEntropySource);
 
+    template <typename T>
+    static void                         MoveClaimedToEnd16(bool *pClaimed,
+                                                           T *pArray) {
+        if ((pClaimed == nullptr) || (pArray == nullptr)) {
+            return;
+        }
+
+        std::size_t aFrontIndex = 0U;
+        std::size_t aUnclaimedCount = 16U;
+
+        while (aFrontIndex < aUnclaimedCount) {
+            while ((aFrontIndex < aUnclaimedCount) && (!pClaimed[aFrontIndex])) {
+                aFrontIndex++;
+            }
+            while ((aFrontIndex < aUnclaimedCount) && (pClaimed[aUnclaimedCount - 1U])) {
+                aUnclaimedCount--;
+            }
+
+            if (aFrontIndex < aUnclaimedCount) {
+                aUnclaimedCount--;
+
+                T aHold = pArray[aFrontIndex];
+                pArray[aFrontIndex] = pArray[aUnclaimedCount];
+                pArray[aUnclaimedCount] = aHold;
+
+                pClaimed[aFrontIndex] = false;
+                pClaimed[aUnclaimedCount] = true;
+                aFrontIndex++;
+            }
+        }
+    }
+
+    template <typename T>
+    static void                         MoveClaimedToEnd32(bool *pClaimed,
+                                                           T *pArray) {
+        if ((pClaimed == nullptr) || (pArray == nullptr)) {
+            return;
+        }
+
+        std::size_t aFrontIndex = 0U;
+        std::size_t aUnclaimedCount = 32U;
+
+        while (aFrontIndex < aUnclaimedCount) {
+            while ((aFrontIndex < aUnclaimedCount) && (!pClaimed[aFrontIndex])) {
+                aFrontIndex++;
+            }
+            while ((aFrontIndex < aUnclaimedCount) && (pClaimed[aUnclaimedCount - 1U])) {
+                aUnclaimedCount--;
+            }
+
+            if (aFrontIndex < aUnclaimedCount) {
+                aUnclaimedCount--;
+
+                T aHold = pArray[aFrontIndex];
+                pArray[aFrontIndex] = pArray[aUnclaimedCount];
+                pArray[aUnclaimedCount] = aHold;
+
+                pClaimed[aFrontIndex] = false;
+                pClaimed[aUnclaimedCount] = true;
+                aFrontIndex++;
+            }
+        }
+    }
+
     //
     // Each supported size intentionally owns a complete loop body. Keep these
     // separate: their constant bounds let the optimizer specialize each hot
@@ -459,4 +523,3 @@ public:
 };
 
 #endif /* TwistShuffle_hpp */
-

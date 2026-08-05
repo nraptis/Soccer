@@ -22,6 +22,11 @@ enum class EncryptionPlanError : std::uint8_t {
     kKeySimpleNotFound = 1,
     kKeyComplexNotFound = 2,
     kKeyAnyNotFound = 3,
+
+    kMoverPrimaryRotationNotFound = 4,
+    kMoverSecondaryOrPrimaryNotFound = 8,
+    kMoverSecondaryOnlyNotFound = 9,
+    kMoverNonRotationAnyNotFound = 10,
     
     
 };
@@ -58,24 +63,15 @@ struct EncryptionPlan {
     CipherType mTypeL2[12];
     CipherType mTypeL1[12];
     CipherType mTypeF3[12];
-    std::size_t mCountL3;
-    std::size_t mCountL2;
-    std::size_t mCountL1;
-    std::size_t mCountF3;
-};
-
-struct EncryptionPlanBudget {
-    std::size_t mRotationCountS3 = 5;
-    std::size_t mRotationCountS2 = 3;
-    std::size_t mRotationCountS1 = 3;
-    std::size_t mWeaveCount = 2;
+    std::size_t mCountL3 = 0;
+    std::size_t mCountL2 = 0;
+    std::size_t mCountL1 = 0;
+    std::size_t mCountF3 = 0;
 };
 
 class EncryptionPlanTool {
   
     static EncryptionPlan               MakePlanWeak(std::uint64_t pLaneSelect,
-                                                     EncryptionPlanBudget pBudget,
-                                                     EncryptionStrength pStrength,
                                                      CipherType *pShuffledCiphers,
                                                      EncryptionPlanError *pError);
     
@@ -90,8 +86,24 @@ private:
     static CipherType                   RingFetchKeySimple(CipherType *pShuffledCiphers, std::uint8_t pLaneCount, std::size_t *pIndex, EncryptionPlanError *pError);
     static CipherType                   RingFetchKeyComplex(CipherType *pShuffledCiphers, std::uint8_t pLaneCount, std::size_t *pIndex, EncryptionPlanError *pError);
     static CipherType                   RingFetchKeyAny(CipherType *pShuffledCiphers, std::uint8_t pLaneCount, std::size_t *pIndex, EncryptionPlanError *pError);
-    
-    
+
+    // masked or not masked
+    static CipherType                   RingFetchMoverPrimaryRotation(CipherType *pShuffledCiphers, std::size_t *pIndex, EncryptionPlanError *pError);
+
+    // Any mover without the rotation flag, including primary and secondary movers.
+    static CipherType                   RingFetchMoverNonRotationAny(CipherType *pShuffledCiphers, std::size_t *pIndex, EncryptionPlanError *pError);
+
+
+    // kSplintMaskBlockCipher32, kSplintMaskBlockCipher64, kRippleMaskBlockCipher32, kRippleMaskBlockCipher64, kReverseMaskByteBlockCipher32, kReverseMaskByteBlockCipher64
+    // kRotateMaskCipher, kReverseMaskCipher, kInvertMaskCipher, kWeaveMaskCipher, kWeaveMaskBlockCipher32, kWeaveMaskBlockCipher64, kRotateCipher
+    static CipherType                   RingFetchMoverSecondaryOrPrimary(CipherType *pShuffledCiphers, std::size_t *pIndex, EncryptionPlanError *pError);
+
+
+    // kSplintMaskBlockCipher32, kSplintMaskBlockCipher64, kRippleMaskBlockCipher32, kRippleMaskBlockCipher64, kReverseMaskByteBlockCipher32, kReverseMaskByteBlockCipher64
+    static CipherType                   RingFetchMoverSecondaryOnly(CipherType *pShuffledCiphers, std::size_t *pIndex, EncryptionPlanError *pError);
+
+
+
 };
 
 

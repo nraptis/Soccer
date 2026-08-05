@@ -61,6 +61,13 @@
 class Soccer2 {
 public:
     
+    static void                                 ConfigureTestBuffers(std::uint32_t pTestBlockLength); // SOCCER_BLOCK_SIZE (L3 size)
+    
+//#define SOCCER_BLOCK_SIZE_L1 262144
+//#define SOCCER_BLOCK_SIZE_L2 524288
+//#define SOCCER_BLOCK_SIZE 1048576
+    
+    
     static bool                                 AttemptSeed_Encrypt(EncryptionStrength pStrength,
                                                                     std::uint8_t *pPassword,
                                                                     std::size_t pPasswordByteLength,
@@ -73,21 +80,33 @@ public:
                                                                     std::uint64_t pNonce,
                                                                     std::uint32_t pAckWord);
     
+    
+    
+    
+    
+    //prologue
+    
+    
     static void                                 EncryptBlock(std::uint8_t *pSource,
                                                              std::uint8_t *pDestination);
     static void                                 DecryptBlock(std::uint8_t *pSource,
                                                              std::uint8_t *pDestination);
     
-private:
+//private:
     
     static void                                 InitializeMasks();
+    static void                                 InitializeCiphers();
     static void                                 InitializeExpanders();
     static void                                 InitializeWorkSpaces();
     static void                                 InitializeMaterials();
     
-    static void                                 UnrollNonceAndPasswordToScratch(std::uint8_t *pPassword,
+    static void                                 UnrollNonceAndPasswordToScratch_Test(std::uint8_t *pPassword,
                                                                                 std::size_t pPasswordByteLength,
                                                                                 std::uint64_t pNonce);
+    static void                                 UnrollNonceAndPasswordToScratch_Regular(std::uint8_t *pPassword,
+                                                                                std::size_t pPasswordByteLength,
+                                                                                std::uint64_t pNonce);
+    
     
     static bool                                 SeedPrelude_Test(std::uint8_t *pPassword,
                                                             std::size_t pPasswordByteLength,
@@ -97,25 +116,45 @@ private:
                                                             std::uint64_t pNonce);
     
     
+    static bool                                 SeedPrologue_A(std::uint8_t *pPassword,
+                                                               std::size_t pPasswordByteLength,
+                                                               std::uint64_t pNonce,
+                                                               std::uint32_t *pAckWord,
+                                                               bool pForwardDeploy);
+    
+    static void                                 SeedPrologue_B();
+    
+    static void                                 TwistRound(std::size_t pBlockIndex);
+    
+    
+    
     
     static void                                 SeedEpilogue();
     
     static void                                 ShuffleMEWBlockZero(std::uint8_t *pMaterial);
     
-    static void                                 ShuffleSEWMMCC();
+    // MAT WS CI EX MAS SOR CRO1 CRO2 CRO3 CRO4
+    static void                                 Shuffle_CROWSCIMASSORMATEX();
     
-    static void                                 FoldAllMaterialsIntoRandomForBlock(std::size_t pBlockIndex);
+    static void                                 FoldMaterialsIntoRandomForBlock_4(std::size_t pBlockIndex);
+    static void                                 FoldMaterialsIntoRandomForBlock_8(std::size_t pBlockIndex);
+    static void                                 FoldMaterialsIntoRandomForBlock_16(std::size_t pBlockIndex);
+    
+    static void                                 RotateSourcesIntoCross();
+    
     
     static std::uint8_t                         mMasks[32];
 
     static std::uint8_t                         *mMaterials[16];
     static TwistExpander                        *mExpanders[32];
     static TwistWorkSpace                       *mWorkSpaces[16];
+    
     static std::uint8_t                         *mSources[16];
-    
     static std::uint8_t                         *mCross[4][16];
+    static CipherType                           mCiphers[256];
     
-    static bool                                 mClaimed[16];
+    
+    static bool                                 mClaimed[32];
     
     static TwistExpander                        *mClaimedExpanders[16];
     static std::size_t                          mClaimedExpanderCount;
@@ -133,15 +172,11 @@ private:
     static TwistExpander                        *mShuffleExpanders[32];
     static TwistWorkSpace                       *mShuffleWorkSpaces[16];
     
-    static CipherType                           mCiphersMoveA[32];
-    static CipherType                           mCiphersMixA[32];
-    
-    static CipherType                           mCiphersMoveB[32];
-    static CipherType                           mCiphersMixB[32];
-    
-    static CipherType                           mCiphersMoveC[32];
     
     
+    static EncryptionStrength                   mStrength;
+    
+    static uint32_t                             mTestBlockLength;
     
     
 };

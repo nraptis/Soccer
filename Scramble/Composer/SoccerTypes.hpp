@@ -57,13 +57,14 @@ F3: [kKeyConsumeSimple,    kMoverPrimary, kMoverAny]
 #define CIPHER_FLAG_MOVER                 0x00002000U
 #define CIPHER_FLAG_ROTATION              0x00004000U
 #define CIPHER_FLAG_WANDERER              0x00008000U
+#define CIPHER_FLAG_MOVER_SECONDARY        0x00010000U
 
 #define IS_KEY(pType) \
     ((static_cast<std::uint32_t>(pType) & 0x00000400U) == 0x00000400U)
 #define IS_KEY_SIMPLE(pType) \
-    ((static_cast<std::uint32_t>(pType) & 0x00001C00U) == 0x00000C00U)
+    ((static_cast<std::uint32_t>(pType) & 0x00000C00U) == 0x00000C00U)
 #define IS_KEY_COMPLEX(pType) \
-    ((static_cast<std::uint32_t>(pType) & 0x00001C00U) == 0x00001400U)
+    ((static_cast<std::uint32_t>(pType) & 0x00001400U) == 0x00001400U)
 
 #define IS_MOVER_NON_ROTATION_NON_WANDERER(pType) \
     ((static_cast<std::uint32_t>(pType) & 0x0000E000U) == 0x00002000U)
@@ -73,6 +74,44 @@ F3: [kKeyConsumeSimple,    kMoverPrimary, kMoverAny]
     ((static_cast<std::uint32_t>(pType) & 0x00006000U) == 0x00002000U)
 #define IS_MOVER_ANY(pType) \
     ((static_cast<std::uint32_t>(pType) & 0x00002000U) == 0x00002000U)
+#define IS_MOVER_SECONDARY(pType) \
+    ((static_cast<std::uint32_t>(pType) & 0x00012000U) == 0x00012000U)
+
+
+/*
+kPasswordXORCipher
+kPasswordAddCipher
+kPasswordSubtractCipher
+
+kPasswordJumpXORCipher
+kPasswordJumpAddCipher
+kPasswordJumpSubtractCipher
+
+kPepperNoiseXORCipher
+kPepperJumpNoiseXORCipher
+kPepperDualJumpNoiseXORCipher
+
+kCascadeCipher
+kCascadeJumpCipher
+
+kReverseMaskCipher
+kRippleMaskBlockCipher32
+kRippleMaskBlockCipher64
+
+kWeaveMaskCipher
+kWeaveMaskBlockCipher32
+kWeaveMaskBlockCipher64
+
+kSplintMaskBlockCipher32
+kSplintMaskBlockCipher64
+
+kReverseMaskByteBlockCipher32
+kReverseMaskByteBlockCipher64
+
+kInvertMaskCipher
+kRotateMaskCipher
+kRotateCipher
+*/
 
 enum class CipherType : std::uint32_t {
     kNone = 0U,
@@ -85,9 +124,9 @@ enum class CipherType : std::uint32_t {
     kPasswordJumpAddCipher = 0x05U | CIPHER_MASK_LANE_COUNT_2 | CIPHER_FLAG_KEY | CIPHER_FLAG_KEY_SIMPLE,
     kPasswordJumpSubtractCipher = 0x06U | CIPHER_MASK_LANE_COUNT_2 | CIPHER_FLAG_KEY | CIPHER_FLAG_KEY_SIMPLE,
 
-    kPepperNoiseXORCipher = 0x07U | CIPHER_MASK_LANE_COUNT_2 | CIPHER_FLAG_KEY | CIPHER_FLAG_KEY_COMPLEX,
-    kPepperJumpNoiseXORCipher = 0x08U | CIPHER_MASK_LANE_COUNT_3 | CIPHER_FLAG_KEY | CIPHER_FLAG_KEY_COMPLEX,
-    kPepperDualJumpNoiseXORCipher = 0x09U | CIPHER_MASK_LANE_COUNT_4 | CIPHER_FLAG_KEY | CIPHER_FLAG_KEY_COMPLEX,
+    kPepperNoiseXORCipher = 0x07U | CIPHER_MASK_LANE_COUNT_2 | CIPHER_FLAG_KEY | CIPHER_FLAG_KEY_SIMPLE | CIPHER_FLAG_KEY_COMPLEX,
+    kPepperJumpNoiseXORCipher = 0x08U | CIPHER_MASK_LANE_COUNT_3 | CIPHER_FLAG_KEY | CIPHER_FLAG_KEY_SIMPLE | CIPHER_FLAG_KEY_COMPLEX,
+    kPepperDualJumpNoiseXORCipher = 0x09U | CIPHER_MASK_LANE_COUNT_4 | CIPHER_FLAG_KEY | CIPHER_FLAG_KEY_SIMPLE | CIPHER_FLAG_KEY_COMPLEX,
     
     kCascadeCipher = 0x12U | CIPHER_MASK_LANE_COUNT_1 | CIPHER_FLAG_KEY | CIPHER_FLAG_KEY_COMPLEX,
     kCascadeJumpCipher = 0x13U | CIPHER_MASK_LANE_COUNT_2 | CIPHER_FLAG_KEY | CIPHER_FLAG_KEY_COMPLEX,
@@ -98,13 +137,13 @@ enum class CipherType : std::uint32_t {
     kReverseMaskCipher = 0x0BU | CIPHER_MASK_LANE_COUNT_0 | CIPHER_FLAG_MOVER,
     kInvertMaskCipher = 0x0CU | CIPHER_MASK_LANE_COUNT_0 | CIPHER_FLAG_MOVER,
 
-    kReverseMaskByteBlockCipher32 = 0x0DU | CIPHER_MASK_LANE_COUNT_0 | CIPHER_FLAG_MOVER,
-    kReverseMaskByteBlockCipher64 = 0x0EU | CIPHER_MASK_LANE_COUNT_0 | CIPHER_FLAG_MOVER,
+    kReverseMaskByteBlockCipher32 = 0x0DU | CIPHER_MASK_LANE_COUNT_0 | CIPHER_FLAG_MOVER | CIPHER_FLAG_MOVER_SECONDARY,
+    kReverseMaskByteBlockCipher64 = 0x0EU | CIPHER_MASK_LANE_COUNT_0 | CIPHER_FLAG_MOVER | CIPHER_FLAG_MOVER_SECONDARY,
 
     
 
-    kSplintMaskBlockCipher32 = 0x10U | CIPHER_MASK_LANE_COUNT_0 | CIPHER_FLAG_MOVER,
-    kSplintMaskBlockCipher64 = 0x11U | CIPHER_MASK_LANE_COUNT_0 | CIPHER_FLAG_MOVER,
+    kSplintMaskBlockCipher32 = 0x10U | CIPHER_MASK_LANE_COUNT_0 | CIPHER_FLAG_MOVER | CIPHER_FLAG_MOVER_SECONDARY,
+    kSplintMaskBlockCipher64 = 0x11U | CIPHER_MASK_LANE_COUNT_0 | CIPHER_FLAG_MOVER | CIPHER_FLAG_MOVER_SECONDARY,
 
     
 
@@ -114,8 +153,8 @@ enum class CipherType : std::uint32_t {
 
     kRotateCipher = 0x0FU | CIPHER_MASK_LANE_COUNT_0 | CIPHER_FLAG_MOVER | CIPHER_FLAG_ROTATION,
     
-    kRippleMaskBlockCipher32 = 0x17U | CIPHER_MASK_LANE_COUNT_0 | CIPHER_FLAG_MOVER,
-    kRippleMaskBlockCipher64 = 0x18U | CIPHER_MASK_LANE_COUNT_0 | CIPHER_FLAG_MOVER,
+    kRippleMaskBlockCipher32 = 0x17U | CIPHER_MASK_LANE_COUNT_0 | CIPHER_FLAG_MOVER | CIPHER_FLAG_MOVER_SECONDARY,
+    kRippleMaskBlockCipher64 = 0x18U | CIPHER_MASK_LANE_COUNT_0 | CIPHER_FLAG_MOVER | CIPHER_FLAG_MOVER_SECONDARY,
 };
 
 static_assert(sizeof(CipherType) == sizeof(std::uint32_t));

@@ -8,7 +8,7 @@
 #import <XCTest/XCTest.h>
 
 #include "Random.hpp"
-#include "Soccer.hpp"
+#include "Soccer2.hpp"
 #include "WorkSpaceTools.hpp"
 
 #include <cstdint>
@@ -53,40 +53,24 @@
         
         std::uint32_t aAckWord = 0U;
         
-        if (!Soccer::AttemptSeed_Encrypt(aPassword.data(),
-                                         aPassword.size(),
-                                         aNonce,
-                                         &aAckWord)) {
+        if (!Soccer2::AttemptSeed_Encrypt(EncryptionStrength::kTest,
+                                          aPassword.data(),
+                                          aPassword.size(),
+                                          aNonce,
+                                          &aAckWord)) {
             XCTFail("failed seed encrypt");
             return;
         }
+        Soccer2::EncryptBlock(aOriginalA.data(), aEncryptedA.data());
+        Soccer2::EncryptBlock(aOriginalB.data(), aEncryptedB.data());
+        Soccer2::EncryptBlock(aOriginalC.data(), aEncryptedC.data());
+        Soccer2::EncryptBlock(aOriginalD.data(), aEncryptedD.data());
+        Soccer2::EncryptBlock(aOriginalE.data(), aEncryptedE.data());
         
-        if (!Soccer::EncryptBlock(aOriginalA.data(), aEncryptedA.data())) {
-            XCTFail("failed encrypt a");
-            return;
-        }
-
-        if (!Soccer::EncryptBlock(aOriginalB.data(), aEncryptedB.data())) {
-            XCTFail("failed encrypt b");
-            return;
-        }
-
-        if (!Soccer::EncryptBlock(aOriginalC.data(), aEncryptedC.data())) {
-            XCTFail("failed encrypt c");
-            return;
-        }
-
-        if (!Soccer::EncryptBlock(aOriginalD.data(), aEncryptedD.data())) {
-            XCTFail("failed encrypt d");
-            return;
-        }
-
-        if (!Soccer::EncryptBlock(aOriginalE.data(), aEncryptedE.data())) {
-            XCTFail("failed encrypt e");
-            return;
-        }
         
-        if (!Soccer::AttemptSeed_Decrypt(aPassword.data(),
+        
+        if (!Soccer2::AttemptSeed_Decrypt(EncryptionStrength::kTest,
+                                         aPassword.data(),
                                          aPassword.size(),
                                          aNonce,
                                          aAckWord)) {
@@ -100,30 +84,11 @@
         std::vector<std::uint8_t> aDecryptedD(SOCCER_BLOCK_SIZE);
         std::vector<std::uint8_t> aDecryptedE(SOCCER_BLOCK_SIZE);
         
-        if (!Soccer::DecryptBlock(aEncryptedA.data(), aDecryptedA.data())) {
-            XCTFail("failed decrypt a");
-            return;
-        }
-
-        if (!Soccer::DecryptBlock(aEncryptedB.data(), aDecryptedB.data())) {
-            XCTFail("failed decrypt b");
-            return;
-        }
-
-        if (!Soccer::DecryptBlock(aEncryptedC.data(), aDecryptedC.data())) {
-            XCTFail("failed decrypt c");
-            return;
-        }
-
-        if (!Soccer::DecryptBlock(aEncryptedD.data(), aDecryptedD.data())) {
-            XCTFail("failed decrypt d");
-            return;
-        }
-
-        if (!Soccer::DecryptBlock(aEncryptedE.data(), aDecryptedE.data())) {
-            XCTFail("failed decrypt e");
-            return;
-        }
+        Soccer2::DecryptBlock(aEncryptedA.data(), aDecryptedA.data());
+        Soccer2::DecryptBlock(aEncryptedB.data(), aDecryptedB.data());
+        Soccer2::DecryptBlock(aEncryptedC.data(), aDecryptedC.data());
+        Soccer2::DecryptBlock(aEncryptedD.data(), aDecryptedD.data());
+        Soccer2::DecryptBlock(aEncryptedE.data(), aDecryptedE.data());
         
         if (std::memcmp(aOriginalA.data(), aDecryptedA.data(), aOriginalA.size()) != 0) {
             XCTFail("failed match a");

@@ -8,7 +8,7 @@
 #import "AppDelegate.h"
 
 #include "FileIO.hpp"
-#include "Soccer.hpp"
+#include "Soccer2.hpp"
 #include "Composer/LaneCombinations.hpp"
 #include "Composer/SoccerTypes.hpp"
 
@@ -479,6 +479,7 @@ static void AppendBytes(std::vector<std::uint8_t> &pBytes,
 
 static bool RunReadmeSoccerExample() {
     
+    /*
     const std::uint64_t aNonce = 0xF00DFACECAFEBEEFULL;
     const std::string aPassword = "readme-password";
     
@@ -531,6 +532,7 @@ static bool RunReadmeSoccerExample() {
     const std::string aRecovered(reinterpret_cast<const char *>(aUnencrypted.data()),
                                  aMessage.size());
     std::printf("Unencrypted: %s\n", aRecovered.c_str());
+    */
     
     return true;
 }
@@ -546,6 +548,7 @@ static bool RunReadmeSoccerExample() {
 
 void Make10_000Challnge() {
 
+    /*
     std::string aPassword = "????????????????????????????????";
 
     std::string aFileName = "missing.pdf";
@@ -624,19 +627,18 @@ void Make10_000Challnge() {
     if (!FileIO::Save(aDecryptedPath, aDecrypted)) {
         std::printf("Failed to save decrypted challenge file\n");
     }
+    */
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
+    
     
     if (IsRunningUnderXCTest()) {
         printf("RUNNING TEST ===> IGNORING APP DELEGATE CODE...\n");
         return;
     }
 
-    // Change this one value to print the Weak, Normal, or Strong source table.
-    constexpr EncryptionStrength cGeneratedStrength = EncryptionStrength::kWeak;
-    PrintLaneCombinationsAsCode(cGeneratedStrength);
-    
+    /*
     RunReadmeSoccerExample();
     
     std::uint8_t aPassword[] = {'s', 'o', 'c', 'c', 'e', 'r'};
@@ -655,7 +657,7 @@ void Make10_000Challnge() {
     
     std::vector<std::vector<std::uint8_t>> aOriginalMaterials(16U);
     const std::uint8_t *aAvalancheReferenceMaterials[16];
-    Soccer::InitializeAvalancheReferenceMaterials(aAvalancheReferenceMaterials);
+    Soccer2::InitializeAvalancheReferenceMaterials(aAvalancheReferenceMaterials);
     for (std::size_t aMaterialIndex = 0U; aMaterialIndex < 16U; aMaterialIndex += 1U) {
         const std::uint8_t *aMaterial = aAvalancheReferenceMaterials[aMaterialIndex];
         aOriginalMaterials[aMaterialIndex].assign(aMaterial,
@@ -706,6 +708,7 @@ void Make10_000Challnge() {
                                    aOriginalMaterials, aMaterialNames, 4U, 12U);
     PrintSoccerBitMaterialGridPair("Soccer bit material grid: mats I-L, M-P",
                                    aOriginalMaterials, aMaterialNames, 8U, 12U);
+    */
 }
 
 @end

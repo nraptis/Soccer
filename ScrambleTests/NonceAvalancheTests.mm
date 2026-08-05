@@ -8,7 +8,7 @@
 #import <XCTest/XCTest.h>
 
 #include "Random.hpp"
-#include "Soccer.hpp"
+#include "Soccer2.hpp"
 #include "WorkSpaceTools.hpp"
 
 #include <cstddef>
@@ -93,7 +93,8 @@ std::size_t CountDifferentBits(const std::uint8_t *pDataA,
 
     for (std::size_t aNonceIndex=0U; aNonceIndex<9U; aNonceIndex++) {
         std::uint32_t aAckWord = 0U;
-        if (!Soccer::AttemptSeed_Encrypt(aPassword,
+        if (!Soccer2::AttemptSeed_Encrypt(EncryptionStrength::kNormal,
+                                         aPassword,
                                          256U,
                                          aNonces[aNonceIndex],
                                          &aAckWord)) {
@@ -101,10 +102,8 @@ std::size_t CountDifferentBits(const std::uint8_t *pDataA,
             return;
         }
 
-        if (!Soccer::EncryptBlock(aOriginal, aEncrypted[aNonceIndex])) {
-            XCTFail("failed block encrypt");
-            return;
-        }
+        Soccer2::EncryptBlock(aOriginal, aEncrypted[aNonceIndex]);
+    
     }
 
     constexpr std::size_t aTotalBitCount = SOCCER_BLOCK_SIZE * 8U;

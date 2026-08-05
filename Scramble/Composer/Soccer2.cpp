@@ -6,8 +6,74 @@
 //
 
 #include "Soccer2.hpp"
+#include "TwistMix32.hpp"
+#include "TwistMix64.hpp"
+
+#include <algorithm>
 
 #define BLOCK_COUNT (SOCCER_BLOCK_SIZE / S_BLOCK)
+
+#define COMPLEXITY_STRONG 16
+#define COMPLEXITY_NORMAL 8
+#define COMPLEXITY_WEAK 4
+
+#define WARM_UP_BLOCKS 4
+
+static_assert((SOCCER_BLOCK_SIZE % S_BLOCK) == 0U);
+static_assert(BLOCK_COUNT >= WARM_UP_BLOCKS);
+
+namespace {
+
+template <typename T>
+void DebugCheckZero(const char *pName,
+                    std::size_t pCount,
+                    const T *pValues) {
+    if (pValues == nullptr) {
+        printf("DebugCheckZero: %s is null.\n", pName);
+        return;
+    }
+
+    for (std::size_t aIndex=0U; aIndex<pCount; aIndex++) {
+        if (pValues[aIndex] != static_cast<T>(0)) {
+            return;
+        }
+    }
+
+    printf("DebugCheckZero: %s is all zero at %p.\n",
+           pName,
+           static_cast<const void *>(pValues));
+}
+
+void DebugCheckZero(const char *pName,
+                    const TwistDomainSeedRoundMaterial &pMaterial) {
+    DebugCheckZero(pName, S_SALT, pMaterial.mSaltA);
+    DebugCheckZero(pName, S_SALT, pMaterial.mSaltB);
+    DebugCheckZero(pName, S_SALT, pMaterial.mSaltC);
+    DebugCheckZero(pName, S_SALT, pMaterial.mSaltD);
+    DebugCheckZero(pName, S_SALT, pMaterial.mSaltE);
+    DebugCheckZero(pName, S_SALT, pMaterial.mSaltF);
+    DebugCheckZero(pName, S_SALT, pMaterial.mSaltG);
+    DebugCheckZero(pName, S_SALT, pMaterial.mSaltH);
+}
+
+void DebugCheckZero(const char *pName,
+                    const TwistDomainSaltSet &pSaltSet) {
+    DebugCheckZero(pName, pSaltSet.mOrbiterAssign);
+    DebugCheckZero(pName, pSaltSet.mOrbiterUpdate);
+    DebugCheckZero(pName, pSaltSet.mWandererUpdate);
+}
+
+void DebugCheckZero(const char *pName,
+                    const TwistDomainBundle &pDomainBundle) {
+    DebugCheckZero(pName, pDomainBundle.mKeyRotateASalts);
+    DebugCheckZero(pName, pDomainBundle.mKeyRotateBSalts);
+    DebugCheckZero(pName, pDomainBundle.mKeySpawnASalts);
+    DebugCheckZero(pName, pDomainBundle.mKeySpawnBSalts);
+    DebugCheckZero(pName, pDomainBundle.mSeedSalts);
+    DebugCheckZero(pName, pDomainBundle.mTwistSalts);
+}
+
+}
 
 std::uint8_t                                cMaterialA[SOCCER_BLOCK_SIZE];
 std::uint8_t                                cMaterialB[SOCCER_BLOCK_SIZE];
@@ -101,6 +167,8 @@ TwistWorkSpace                              *Soccer2::mWorkSpaces[16];
 std::uint8_t                                *Soccer2::mSources[16];
 std::uint8_t                                *Soccer2::mCross[4][16];
 
+bool                                        Soccer2::mClaimed[32];
+
 TwistExpander                               *Soccer2::mClaimedExpanders[16];
 std::size_t                                 Soccer2::mClaimedExpanderCount;
 
@@ -117,8 +185,489 @@ std::uint8_t                                *Soccer2::mShuffleMaterials[16];
 TwistExpander                               *Soccer2::mShuffleExpanders[32];
 TwistWorkSpace                              *Soccer2::mShuffleWorkSpaces[16];
 
-CipherType                                  Soccer2::mCiphersMoveA[32];
+CipherType                                  Soccer2::mCiphers[256];
 
+EncryptionStrength                          Soccer2::mStrength = EncryptionStrength::kNormal;
+
+uint32_t                                    Soccer2::mTestBlockLength = SOCCER_BLOCK_SIZE;
+
+
+void Soccer2::Shuffle_CROWSCIMASSORMATEX() {
+    constexpr std::size_t cSpan = 1024U;
+    static_assert(S_BLOCK == (32U * cSpan));
+    
+    // Cross 0: entropy slices 5 and 25.
+    if (mStrength == EncryptionStrength::kWeak) {
+        TwistShuffle::ShuffleList4(mCross[0], cRandom,  5U * cSpan,  6U * cSpan, 1U);
+        TwistShuffle::ShuffleList4(mCross[0], cRandom, 25U * cSpan, 26U * cSpan, 1U);
+    } else if (mStrength == EncryptionStrength::kNormal) {
+        TwistShuffle::ShuffleList8(mCross[0], cRandom,  5U * cSpan,  6U * cSpan, 1U);
+        TwistShuffle::ShuffleList8(mCross[0], cRandom, 25U * cSpan, 26U * cSpan, 1U);
+    } else if (mStrength == EncryptionStrength::kStrong) {
+        TwistShuffle::ShuffleList16(mCross[0], cRandom,  5U * cSpan,  6U * cSpan, 1U);
+        TwistShuffle::ShuffleList16(mCross[0], cRandom, 25U * cSpan, 26U * cSpan, 1U);
+    } else {
+        return;
+    }
+
+    // Cross 1: entropy slices 7 and 27.
+    if (mStrength == EncryptionStrength::kWeak) {
+        TwistShuffle::ShuffleList4(mCross[1], cRandom,  7U * cSpan,  8U * cSpan, 1U);
+        TwistShuffle::ShuffleList4(mCross[1], cRandom, 27U * cSpan, 28U * cSpan, 1U);
+    } else if (mStrength == EncryptionStrength::kNormal) {
+        TwistShuffle::ShuffleList8(mCross[1], cRandom,  7U * cSpan,  8U * cSpan, 1U);
+        TwistShuffle::ShuffleList8(mCross[1], cRandom, 27U * cSpan, 28U * cSpan, 1U);
+    } else {
+        TwistShuffle::ShuffleList16(mCross[1], cRandom,  7U * cSpan,  8U * cSpan, 1U);
+        TwistShuffle::ShuffleList16(mCross[1], cRandom, 27U * cSpan, 28U * cSpan, 1U);
+    }
+
+    // Cross 2: entropy slices 9 and 29.
+    if (mStrength == EncryptionStrength::kWeak) {
+        TwistShuffle::ShuffleList4(mCross[2], cRandom,  9U * cSpan, 10U * cSpan, 1U);
+        TwistShuffle::ShuffleList4(mCross[2], cRandom, 29U * cSpan, 30U * cSpan, 1U);
+    } else if (mStrength == EncryptionStrength::kNormal) {
+        TwistShuffle::ShuffleList8(mCross[2], cRandom,  9U * cSpan, 10U * cSpan, 1U);
+        TwistShuffle::ShuffleList8(mCross[2], cRandom, 29U * cSpan, 30U * cSpan, 1U);
+    } else {
+        TwistShuffle::ShuffleList16(mCross[2], cRandom,  9U * cSpan, 10U * cSpan, 1U);
+        TwistShuffle::ShuffleList16(mCross[2], cRandom, 29U * cSpan, 30U * cSpan, 1U);
+    }
+
+    // Cross 3: entropy slices 11 and 31.
+    if (mStrength == EncryptionStrength::kWeak) {
+        TwistShuffle::ShuffleList4(mCross[3], cRandom, 11U * cSpan, 12U * cSpan, 1U);
+        TwistShuffle::ShuffleList4(mCross[3], cRandom, 31U * cSpan, 32U * cSpan, 1U);
+    } else if (mStrength == EncryptionStrength::kNormal) {
+        TwistShuffle::ShuffleList8(mCross[3], cRandom, 11U * cSpan, 12U * cSpan, 1U);
+        TwistShuffle::ShuffleList8(mCross[3], cRandom, 31U * cSpan, 32U * cSpan, 1U);
+    } else {
+        TwistShuffle::ShuffleList16(mCross[3], cRandom, 11U * cSpan, 12U * cSpan, 1U);
+        TwistShuffle::ShuffleList16(mCross[3], cRandom, 31U * cSpan, 32U * cSpan, 1U);
+    }
+
+    // Masks: entropy slices 0, 12, and 20.
+    TwistShuffle::ShuffleList32(mMasks, cRandom,  0U * cSpan,  1U * cSpan, 1U);
+    TwistShuffle::ShuffleList32(mMasks, cRandom, 12U * cSpan, 13U * cSpan, 1U);
+    TwistShuffle::ShuffleList32(mMasks, cRandom, 20U * cSpan, 21U * cSpan, 1U);
+
+    // Materials: entropy slices 4, 16, and 24.
+    if (mStrength == EncryptionStrength::kWeak) {
+        TwistShuffle::ShuffleList4(mMaterials, cRandom,  4U * cSpan,  5U * cSpan, 1U);
+        TwistShuffle::ShuffleList4(mMaterials, cRandom, 16U * cSpan, 17U * cSpan, 1U);
+        TwistShuffle::ShuffleList4(mMaterials, cRandom, 24U * cSpan, 25U * cSpan, 1U);
+    } else if (mStrength == EncryptionStrength::kNormal) {
+        TwistShuffle::ShuffleList8(mMaterials, cRandom,  4U * cSpan,  5U * cSpan, 1U);
+        TwistShuffle::ShuffleList8(mMaterials, cRandom, 16U * cSpan, 17U * cSpan, 1U);
+        TwistShuffle::ShuffleList8(mMaterials, cRandom, 24U * cSpan, 25U * cSpan, 1U);
+    } else {
+        TwistShuffle::ShuffleList16(mMaterials, cRandom,  4U * cSpan,  5U * cSpan, 1U);
+        TwistShuffle::ShuffleList16(mMaterials, cRandom, 16U * cSpan, 17U * cSpan, 1U);
+        TwistShuffle::ShuffleList16(mMaterials, cRandom, 24U * cSpan, 25U * cSpan, 1U);
+    }
+
+    // Expanders: entropy slices 8, 18, and 28.
+    TwistShuffle::ShuffleList32(mExpanders, cRandom,  8U * cSpan,  9U * cSpan, 1U);
+    TwistShuffle::ShuffleList32(mExpanders, cRandom, 18U * cSpan, 19U * cSpan, 1U);
+    TwistShuffle::ShuffleList32(mExpanders, cRandom, 28U * cSpan, 29U * cSpan, 1U);
+
+    // Work spaces: entropy slices 6, 17, and 26.
+    if (mStrength == EncryptionStrength::kWeak) {
+        TwistShuffle::ShuffleList4(mWorkSpaces, cRandom,  6U * cSpan,  7U * cSpan, 1U);
+        TwistShuffle::ShuffleList4(mWorkSpaces, cRandom, 17U * cSpan, 18U * cSpan, 1U);
+        TwistShuffle::ShuffleList4(mWorkSpaces, cRandom, 26U * cSpan, 27U * cSpan, 1U);
+    } else if (mStrength == EncryptionStrength::kNormal) {
+        TwistShuffle::ShuffleList8(mWorkSpaces, cRandom,  6U * cSpan,  7U * cSpan, 1U);
+        TwistShuffle::ShuffleList8(mWorkSpaces, cRandom, 17U * cSpan, 18U * cSpan, 1U);
+        TwistShuffle::ShuffleList8(mWorkSpaces, cRandom, 26U * cSpan, 27U * cSpan, 1U);
+    } else {
+        TwistShuffle::ShuffleList16(mWorkSpaces, cRandom,  6U * cSpan,  7U * cSpan, 1U);
+        TwistShuffle::ShuffleList16(mWorkSpaces, cRandom, 17U * cSpan, 18U * cSpan, 1U);
+        TwistShuffle::ShuffleList16(mWorkSpaces, cRandom, 26U * cSpan, 27U * cSpan, 1U);
+    }
+
+    // Ciphers: entropy slices 1-3, 13-15, and 21-23.
+    TwistShuffle::ShuffleList256(mCiphers, cRandom,  1U * cSpan,  4U * cSpan, 2U);
+    TwistShuffle::ShuffleList256(mCiphers, cRandom, 13U * cSpan, 16U * cSpan, 2U);
+    TwistShuffle::ShuffleList256(mCiphers, cRandom, 21U * cSpan, 24U * cSpan, 2U);
+
+    // Sources: entropy slices 10, 19, and 30.
+    if (mStrength == EncryptionStrength::kWeak) {
+        TwistShuffle::ShuffleList4(mSources, cRandom, 10U * cSpan, 11U * cSpan, 1U);
+        TwistShuffle::ShuffleList4(mSources, cRandom, 19U * cSpan, 20U * cSpan, 1U);
+        TwistShuffle::ShuffleList4(mSources, cRandom, 30U * cSpan, 31U * cSpan, 1U);
+    } else if (mStrength == EncryptionStrength::kNormal) {
+        TwistShuffle::ShuffleList8(mSources, cRandom, 10U * cSpan, 11U * cSpan, 1U);
+        TwistShuffle::ShuffleList8(mSources, cRandom, 19U * cSpan, 20U * cSpan, 1U);
+        TwistShuffle::ShuffleList8(mSources, cRandom, 30U * cSpan, 31U * cSpan, 1U);
+    } else {
+        TwistShuffle::ShuffleList16(mSources, cRandom, 10U * cSpan, 11U * cSpan, 1U);
+        TwistShuffle::ShuffleList16(mSources, cRandom, 19U * cSpan, 20U * cSpan, 1U);
+        TwistShuffle::ShuffleList16(mSources, cRandom, 30U * cSpan, 31U * cSpan, 1U);
+    }
+}
+
+void Soccer2::TwistRound(std::size_t pBlockIndex) {
+    if (pBlockIndex >= BLOCK_COUNT) {
+        return;
+    }
+
+    std::size_t aComplexity = 0U;
+    std::size_t aReverseCount = 0U;
+    if (mStrength == EncryptionStrength::kWeak) {
+        aComplexity = COMPLEXITY_WEAK;
+        aReverseCount = 1U;
+    } else if (mStrength == EncryptionStrength::kNormal) {
+        aComplexity = COMPLEXITY_NORMAL;
+        aReverseCount = 2U;
+    } else if (mStrength == EncryptionStrength::kStrong) {
+        aComplexity = COMPLEXITY_STRONG;
+        aReverseCount = 4U;
+    } else {
+        return;
+    }
+
+    const std::size_t aDestinationByteIndex = pBlockIndex * S_BLOCK;
+
+    for (std::size_t aLaneIndex=0U; aLaneIndex<aComplexity; aLaneIndex++) {
+        {
+            // test
+            DebugCheckZero("source", S_BLOCK, mSources[aLaneIndex]);
+            DebugCheckZero("cross 0", S_BLOCK, mCross[0][aLaneIndex]);
+            DebugCheckZero("cross 1", S_BLOCK, mCross[1][aLaneIndex]);
+            DebugCheckZero("cross 2", S_BLOCK, mCross[2][aLaneIndex]);
+            DebugCheckZero("cross 3", S_BLOCK, mCross[3][aLaneIndex]);
+            DebugCheckZero("salt", mWorkSpaces[aLaneIndex]->mDomainBundle);
+        }
+
+        mExpanders[aLaneIndex]->TwistBlock(mWorkSpaces[aLaneIndex],
+                                            mSources[aLaneIndex],
+                                            mCross[0][aLaneIndex],
+                                            mCross[1][aLaneIndex],
+                                            mCross[2][aLaneIndex],
+                                            mCross[3][aLaneIndex],
+                                            &mMaterials[aLaneIndex][aDestinationByteIndex]);
+    }
+
+    RotateSourcesIntoCross();
+
+    for (std::size_t aLaneIndex=0U; aLaneIndex<aComplexity; aLaneIndex++) {
+        mSources[aLaneIndex] = &mMaterials[aLaneIndex][aDestinationByteIndex];
+    }
+
+    if (mStrength == EncryptionStrength::kWeak) {
+        FoldMaterialsIntoRandomForBlock_4(pBlockIndex);
+    } else if (mStrength == EncryptionStrength::kNormal) {
+        FoldMaterialsIntoRandomForBlock_8(pBlockIndex);
+    } else {
+        FoldMaterialsIntoRandomForBlock_16(pBlockIndex);
+    }
+
+    for (std::size_t aMaterialIndex=0U; aMaterialIndex<aReverseCount; aMaterialIndex++) {
+        std::reverse(mMaterials[aMaterialIndex] + aDestinationByteIndex,
+                     mMaterials[aMaterialIndex] + aDestinationByteIndex + S_BLOCK);
+    }
+
+    Shuffle_CROWSCIMASSORMATEX();
+}
+
+bool Soccer2::SeedPrologue_A(std::uint8_t *pPassword,
+                             std::size_t pPasswordByteLength,
+                             std::uint64_t pNonce,
+                             std::uint32_t *pAckWord,
+                             bool pForwardDeploy) {
+    if ((pPassword == nullptr) ||
+        (pPasswordByteLength == 0U) ||
+        (pAckWord == nullptr)) {
+        return false;
+    }
+
+    std::size_t aPower = 0U;
+    if (mStrength == EncryptionStrength::kWeak) {
+        aPower = 1U;
+    } else if (mStrength == EncryptionStrength::kNormal) {
+        aPower = 2U;
+    } else if (mStrength == EncryptionStrength::kStrong) {
+        aPower = 4U;
+    } else {
+        return false;
+    }
+
+    if ((mClaimedExpanderCount != mClaimedMaterialCount) ||
+        (mClaimedExpanderCount != mClaimedWorkSpaceCount) ||
+        ((mClaimedMaterialCount + (4U * aPower)) > 16U)) {
+        return false;
+    }
+
+    const std::size_t aWarmUpStartIndex = (BLOCK_COUNT - WARM_UP_BLOCKS) * S_BLOCK;
+
+    for (std::size_t aAckByteIndex=0U; aAckByteIndex<4U; aAckByteIndex++) {
+        for (std::size_t aPowerIndex=0U; aPowerIndex<aPower; aPowerIndex++) {
+            const std::size_t aClaimedIndex = mClaimedMaterialCount;
+
+            mClaimedExpanders[aClaimedIndex] = mExpanders[aPowerIndex];
+            mClaimedExpanderCount++;
+
+            mClaimedMaterials[aClaimedIndex] = mMaterials[aPowerIndex];
+            mClaimedMaterialCount++;
+
+            mClaimedWorkSpaces[aClaimedIndex] = mWorkSpaces[aPowerIndex];
+            mClaimedWorkSpaceCount++;
+
+            mClaimedExpanders[aClaimedIndex]->Seed(mClaimedWorkSpaces[aClaimedIndex],
+                                                   &cFarmSalt,
+                                                   pNonce,
+                                                   pPassword,
+                                                   pPasswordByteLength,
+                                                   &mClaimedMaterials[aClaimedIndex][aWarmUpStartIndex]);
+        }
+
+        if (aAckByteIndex < 3U) {
+            ShuffleMEWBlockZero(
+                &mClaimedMaterials[mClaimedMaterialCount - 1U][aWarmUpStartIndex]);
+        }
+    }
+
+    InitializeExpanders();
+    
+    printf("Claimed a total of %zu materials.\n", mClaimedMaterialCount);
+    printf("Claimed a total of %zu expanders.\n", mClaimedExpanderCount);
+    printf("Claimed a total of %zu work spaces.\n", mClaimedWorkSpaceCount);
+    
+    for (std::size_t aIndex=0U; aIndex<mClaimedMaterialCount; aIndex++) {
+        mMaterials[aIndex] = mClaimedMaterials[aIndex];
+    }
+    
+    for (std::size_t aIndex=0U; aIndex<mClaimedWorkSpaceCount; aIndex++) {
+        mWorkSpaces[aIndex] = mClaimedWorkSpaces[aIndex];
+    }
+
+    const std::size_t aFirstWarmUpBlockIndex = BLOCK_COUNT - WARM_UP_BLOCKS;
+    const std::size_t aFirstWarmUpByteIndex = aFirstWarmUpBlockIndex * S_BLOCK;
+    if (mStrength == EncryptionStrength::kWeak) {
+        FoldMaterialsIntoRandomForBlock_4(aFirstWarmUpBlockIndex);
+        
+        for (std::size_t aIndex=0U; aIndex<COMPLEXITY_WEAK; aIndex++) {
+            mSources[aIndex] = &mMaterials[aIndex][aFirstWarmUpByteIndex];
+            mCross[0][aIndex] = &mMaterials[aIndex][aFirstWarmUpByteIndex];
+            mCross[1][aIndex] = &mMaterials[aIndex][aFirstWarmUpByteIndex];
+            mCross[2][aIndex] = &mMaterials[aIndex][aFirstWarmUpByteIndex];
+            mCross[3][aIndex] = &mMaterials[aIndex][aFirstWarmUpByteIndex];
+        }
+
+        mCross[0][0] = cScratch; mCross[0][1] = cScratch;
+        mCross[1][1] = cScratch; mCross[1][2] = cScratch;
+        mCross[2][2] = cScratch; mCross[2][3] = cScratch;
+        mCross[3][3] = cScratch; mCross[3][0] = cScratch;
+        
+    } else if (mStrength == EncryptionStrength::kNormal) {
+        FoldMaterialsIntoRandomForBlock_8(aFirstWarmUpBlockIndex);
+        
+        for (std::size_t aIndex=0U; aIndex<COMPLEXITY_NORMAL; aIndex++) {
+            mSources[aIndex] = &mMaterials[aIndex][aFirstWarmUpByteIndex];
+            mCross[0][aIndex] = &mMaterials[aIndex][aFirstWarmUpByteIndex];
+            mCross[1][aIndex] = &mMaterials[aIndex][aFirstWarmUpByteIndex];
+            mCross[2][aIndex] = &mMaterials[aIndex][aFirstWarmUpByteIndex];
+            mCross[3][aIndex] = &mMaterials[aIndex][aFirstWarmUpByteIndex];
+        }
+
+        mCross[0][0] = cScratch; mCross[0][4] = cScratch;
+        mCross[1][1] = cScratch; mCross[1][5] = cScratch;
+        mCross[2][2] = cScratch; mCross[2][6] = cScratch;
+        mCross[3][3] = cScratch; mCross[3][7] = cScratch;
+        
+    } else if (mStrength == EncryptionStrength::kStrong) {
+        FoldMaterialsIntoRandomForBlock_16(aFirstWarmUpBlockIndex);
+        
+        for (std::size_t aIndex=0U; aIndex<COMPLEXITY_STRONG; aIndex++) {
+            mSources[aIndex] = &mMaterials[aIndex][aFirstWarmUpByteIndex];
+            mCross[0][aIndex] = &mMaterials[aIndex][aFirstWarmUpByteIndex];
+            mCross[1][aIndex] = &mMaterials[aIndex][aFirstWarmUpByteIndex];
+            mCross[2][aIndex] = &mMaterials[aIndex][aFirstWarmUpByteIndex];
+            mCross[3][aIndex] = &mMaterials[aIndex][aFirstWarmUpByteIndex];
+        }
+
+        mCross[0][0] = cScratch; mCross[0][15] = cScratch;
+        mCross[1][1] = cScratch; mCross[1][14] = cScratch;
+        mCross[2][2] = cScratch; mCross[2][13] = cScratch;
+        mCross[3][3] = cScratch; mCross[3][12] = cScratch;
+    }
+    
+    Shuffle_CROWSCIMASSORMATEX();
+
+    for (std::size_t aWarmUpRound=1U; aWarmUpRound<WARM_UP_BLOCKS; aWarmUpRound++) {
+        TwistRound((BLOCK_COUNT - WARM_UP_BLOCKS) + aWarmUpRound);
+    }
+
+    const std::size_t aAckByteIndex = SOCCER_BLOCK_SIZE - 1U;
+    std::uint32_t aGeneratedAckWord = 0U;
+    if (mStrength == EncryptionStrength::kWeak) {
+        aGeneratedAckWord |= static_cast<std::uint32_t>(mMaterials[0][aAckByteIndex]) <<  0U;
+        aGeneratedAckWord |= static_cast<std::uint32_t>(mMaterials[1][aAckByteIndex]) <<  8U;
+        aGeneratedAckWord |= static_cast<std::uint32_t>(mMaterials[2][aAckByteIndex]) << 16U;
+        aGeneratedAckWord |= static_cast<std::uint32_t>(mMaterials[3][aAckByteIndex]) << 24U;
+    } else if (mStrength == EncryptionStrength::kNormal) {
+        aGeneratedAckWord |= static_cast<std::uint32_t>(mMaterials[1][aAckByteIndex]) <<  0U;
+        aGeneratedAckWord |= static_cast<std::uint32_t>(mMaterials[3][aAckByteIndex]) <<  8U;
+        aGeneratedAckWord |= static_cast<std::uint32_t>(mMaterials[5][aAckByteIndex]) << 16U;
+        aGeneratedAckWord |= static_cast<std::uint32_t>(mMaterials[7][aAckByteIndex]) << 24U;
+    } else if (mStrength == EncryptionStrength::kStrong) {
+        aGeneratedAckWord |= static_cast<std::uint32_t>(mMaterials[ 3][aAckByteIndex]) <<  0U;
+        aGeneratedAckWord |= static_cast<std::uint32_t>(mMaterials[ 7][aAckByteIndex]) <<  8U;
+        aGeneratedAckWord |= static_cast<std::uint32_t>(mMaterials[11][aAckByteIndex]) << 16U;
+        aGeneratedAckWord |= static_cast<std::uint32_t>(mMaterials[15][aAckByteIndex]) << 24U;
+    } else {
+        return false;
+    }
+
+    if (pForwardDeploy) {
+        *pAckWord = aGeneratedAckWord;
+        return true;
+    }
+
+    return aGeneratedAckWord == *pAckWord;
+}
+
+void Soccer2::SeedPrologue_B() {
+    for (std::size_t aRoundIndex=0U; aRoundIndex<BLOCK_COUNT; aRoundIndex++) {
+        TwistRound(aRoundIndex);
+        printf("SeedPrologue_B: completed round %zu.\n", aRoundIndex + 1U);
+    }
+    
+    cWorkSpaceN.Zero();
+    cWorkSpaceO.Zero();
+    cWorkSpaceP.Zero();
+    cWorkSpaceD.Zero();
+    cWorkSpaceE.Zero();
+    cWorkSpaceF.Zero();
+    cWorkSpaceJ.Zero();
+    cWorkSpaceI.Zero();
+    cWorkSpaceH.Zero();
+    cWorkSpaceG.Zero();
+    cWorkSpaceB.Zero();
+    cWorkSpaceK.Zero();
+    cWorkSpaceC.Zero();
+    cWorkSpaceM.Zero();
+    cWorkSpaceA.Zero();
+    cWorkSpaceL.Zero();
+
+    for (std::size_t aIndex=0U; aIndex<32U; aIndex++) {
+        mExpanders[aIndex] = nullptr;
+        mClaimed[aIndex] = false;
+        mShuffleExpanders[aIndex] = nullptr;
+    }
+
+    for (std::size_t aIndex=0U; aIndex<16U; aIndex++) {
+        mWorkSpaces[aIndex] = nullptr;
+        mSources[aIndex] = nullptr;
+
+        mClaimedExpanders[aIndex] = nullptr;
+        mClaimedMaterials[aIndex] = nullptr;
+        mClaimedWorkSpaces[aIndex] = nullptr;
+
+        mShuffleMaterials[aIndex] = nullptr;
+        mShuffleWorkSpaces[aIndex] = nullptr;
+    }
+
+    for (std::size_t aCrossIndex=0U; aCrossIndex<4U; aCrossIndex++) {
+        for (std::size_t aLaneIndex=0U; aLaneIndex<16U; aLaneIndex++) {
+            mCross[aCrossIndex][aLaneIndex] = nullptr;
+        }
+    }
+
+    mClaimedExpanderCount = 0U;
+    mClaimedMaterialCount = 0U;
+    mClaimedWorkSpaceCount = 0U;
+}
+
+void Soccer2::FoldMaterialsIntoRandomForBlock_4(std::size_t pBlockIndex) {
+    if ((pBlockIndex >= BLOCK_COUNT) || (mClaimedMaterialCount < 4U)) {
+        return;
+    }
+
+    const std::size_t aStartIndex = pBlockIndex * S_BLOCK;
+    for (std::size_t aByteIndex=0U; aByteIndex<S_BLOCK; aByteIndex++) {
+        const std::size_t aMaterialIndex = aStartIndex + aByteIndex;
+        const std::uint32_t aRandomIngress =
+            (static_cast<std::uint32_t>(mMaterials[0][aMaterialIndex]) <<  0U) |
+            (static_cast<std::uint32_t>(mMaterials[1][aMaterialIndex]) <<  8U) |
+            (static_cast<std::uint32_t>(mMaterials[2][aMaterialIndex]) << 16U) |
+            (static_cast<std::uint32_t>(mMaterials[3][aMaterialIndex]) << 24U);
+
+        cRandom[aByteIndex] = static_cast<std::uint8_t>(TwistMix32::DiffuseA(aRandomIngress));
+    }
+}
+
+void Soccer2::FoldMaterialsIntoRandomForBlock_8(std::size_t pBlockIndex) {
+    if ((pBlockIndex >= BLOCK_COUNT) || (mClaimedMaterialCount < 8U)) {
+        return;
+    }
+
+    const std::size_t aStartIndex = pBlockIndex * S_BLOCK;
+    for (std::size_t aByteIndex=0U; aByteIndex<S_BLOCK; aByteIndex++) {
+        const std::size_t aMaterialIndex = aStartIndex + aByteIndex;
+        const std::uint64_t aRandomIngress =
+            (static_cast<std::uint64_t>(mMaterials[0][aMaterialIndex]) <<  0U) |
+            (static_cast<std::uint64_t>(mMaterials[1][aMaterialIndex]) <<  8U) |
+            (static_cast<std::uint64_t>(mMaterials[2][aMaterialIndex]) << 16U) |
+            (static_cast<std::uint64_t>(mMaterials[3][aMaterialIndex]) << 24U) |
+            (static_cast<std::uint64_t>(mMaterials[4][aMaterialIndex]) << 32U) |
+            (static_cast<std::uint64_t>(mMaterials[5][aMaterialIndex]) << 40U) |
+            (static_cast<std::uint64_t>(mMaterials[6][aMaterialIndex]) << 48U) |
+            (static_cast<std::uint64_t>(mMaterials[7][aMaterialIndex]) << 56U);
+
+        cRandom[aByteIndex] = static_cast<std::uint8_t>(TwistMix64::DiffuseA(aRandomIngress));
+    }
+}
+
+void Soccer2::FoldMaterialsIntoRandomForBlock_16(std::size_t pBlockIndex) {
+    if ((pBlockIndex >= BLOCK_COUNT) || (mClaimedMaterialCount < 16U)) {
+        return;
+    }
+
+    const std::size_t aStartIndex = pBlockIndex * S_BLOCK;
+    for (std::size_t aByteIndex=0U; aByteIndex<S_BLOCK; aByteIndex++) {
+        const std::size_t aMaterialIndex = aStartIndex + aByteIndex;
+
+        const std::uint32_t aCrushIngressA =
+            (static_cast<std::uint32_t>(mMaterials[ 0][aMaterialIndex]) <<  0U) |
+            (static_cast<std::uint32_t>(mMaterials[ 1][aMaterialIndex]) <<  8U) |
+            (static_cast<std::uint32_t>(mMaterials[ 2][aMaterialIndex]) << 16U) |
+            (static_cast<std::uint32_t>(mMaterials[ 3][aMaterialIndex]) << 24U);
+        cCrushA[aByteIndex] = static_cast<std::uint8_t>(TwistMix32::DiffuseA(aCrushIngressA));
+
+        const std::uint32_t aCrushIngressB =
+            (static_cast<std::uint32_t>(mMaterials[ 4][aMaterialIndex]) <<  0U) |
+            (static_cast<std::uint32_t>(mMaterials[ 5][aMaterialIndex]) <<  8U) |
+            (static_cast<std::uint32_t>(mMaterials[ 6][aMaterialIndex]) << 16U) |
+            (static_cast<std::uint32_t>(mMaterials[ 7][aMaterialIndex]) << 24U);
+        cCrushB[aByteIndex] = static_cast<std::uint8_t>(TwistMix32::DiffuseA(aCrushIngressB));
+
+        const std::uint32_t aCrushIngressC =
+            (static_cast<std::uint32_t>(mMaterials[ 8][aMaterialIndex]) <<  0U) |
+            (static_cast<std::uint32_t>(mMaterials[ 9][aMaterialIndex]) <<  8U) |
+            (static_cast<std::uint32_t>(mMaterials[10][aMaterialIndex]) << 16U) |
+            (static_cast<std::uint32_t>(mMaterials[11][aMaterialIndex]) << 24U);
+        cCrushC[aByteIndex] = static_cast<std::uint8_t>(TwistMix32::DiffuseA(aCrushIngressC));
+
+        const std::uint32_t aCrushIngressD =
+            (static_cast<std::uint32_t>(mMaterials[12][aMaterialIndex]) <<  0U) |
+            (static_cast<std::uint32_t>(mMaterials[13][aMaterialIndex]) <<  8U) |
+            (static_cast<std::uint32_t>(mMaterials[14][aMaterialIndex]) << 16U) |
+            (static_cast<std::uint32_t>(mMaterials[15][aMaterialIndex]) << 24U);
+        cCrushD[aByteIndex] = static_cast<std::uint8_t>(TwistMix32::DiffuseA(aCrushIngressD));
+    }
+
+    for (std::size_t aByteIndex=0U; aByteIndex<S_BLOCK; aByteIndex++) {
+        const std::uint32_t aRandomIngress =
+            (static_cast<std::uint32_t>(cCrushA[aByteIndex]) <<  0U) |
+            (static_cast<std::uint32_t>(cCrushB[aByteIndex]) <<  8U) |
+            (static_cast<std::uint32_t>(cCrushC[aByteIndex]) << 16U) |
+            (static_cast<std::uint32_t>(cCrushD[aByteIndex]) << 24U);
+
+        cRandom[aByteIndex] = static_cast<std::uint8_t>(TwistMix32::DiffuseA(aRandomIngress));
+    }
+}
 
 bool Soccer2::AttemptSeed_Encrypt(EncryptionStrength pStrength,
                                   std::uint8_t *pPassword,
@@ -126,23 +675,38 @@ bool Soccer2::AttemptSeed_Encrypt(EncryptionStrength pStrength,
                                   std::uint64_t pNonce,
                                   std::uint32_t *pAckWord) {
     
-    std::uint32_t aAckWord = 0;
+    if ((pPassword == nullptr) || (pPasswordByteLength == 0U) || (pAckWord == nullptr)) {
+        return false;
+    }
+
+    std::uint32_t aAckWord = 0U;
+    mStrength = pStrength;
     
     if (pStrength == EncryptionStrength::kTest) {
         if (!SeedPrelude_Test(pPassword, pPasswordByteLength, pNonce)) {
             return false;
         }
-        aAckWord |= static_cast<std::uint32_t>(cMaterialA[S_BLOCK * 1]) << 24U;
-        aAckWord |= static_cast<std::uint32_t>(cMaterialA[S_BLOCK * 2]) << 16U;
-        aAckWord |= static_cast<std::uint32_t>(cMaterialA[S_BLOCK * 3]) << 8U;
-        aAckWord |= static_cast<std::uint32_t>(cMaterialA[S_BLOCK * 4]) << 0U;
+        aAckWord |= static_cast<std::uint32_t>(cMaterialA[S_BLOCK * 1]) <<  0U;
+        aAckWord |= static_cast<std::uint32_t>(cMaterialA[S_BLOCK * 2]) <<  8U;
+        aAckWord |= static_cast<std::uint32_t>(cMaterialA[S_BLOCK * 3]) << 16U;
+        aAckWord |= static_cast<std::uint32_t>(cMaterialA[S_BLOCK * 4]) << 24U;
         *pAckWord = aAckWord;
         return true;
     }
     
+    if (!SeedPrelude_Regular(pPassword, pPasswordByteLength, pNonce)) {
+        return false;
+    }
     
-    
-    
+    if (!SeedPrologue_A(pPassword,
+                        pPasswordByteLength,
+                        pNonce,
+                        pAckWord,
+                        true)) {
+        return false;
+    }
+
+    SeedPrologue_B();
     
     return true;
 }
@@ -152,17 +716,62 @@ bool Soccer2::AttemptSeed_Decrypt(EncryptionStrength pStrength,
                                   std::size_t pPasswordByteLength,
                                   std::uint64_t pNonce,
                                   std::uint32_t pAckWord) {
+    
+    if ((pPassword == nullptr) || (pPasswordByteLength == 0U)) {
+        return false;
+    }
+
+    mStrength = pStrength;
+    
+    if (pStrength == EncryptionStrength::kTest) {
+        if (!SeedPrelude_Test(pPassword, pPasswordByteLength, pNonce)) {
+            return false;
+        }
+        if (cMaterialA[S_BLOCK * 1] != static_cast<std::uint8_t>(((pAckWord >>  0) & 0xFFU))) { return false; }
+        if (cMaterialA[S_BLOCK * 2] != static_cast<std::uint8_t>(((pAckWord >>  8) & 0xFFU))) { return false; }
+        if (cMaterialA[S_BLOCK * 3] != static_cast<std::uint8_t>(((pAckWord >> 16) & 0xFFU))) { return false; }
+        if (cMaterialA[S_BLOCK * 4] != static_cast<std::uint8_t>(((pAckWord >> 24) & 0xFFU))) { return false; }
+        return true;
+    }
+    
+    if (!SeedPrelude_Regular(pPassword, pPasswordByteLength, pNonce)) {
+        return false;
+    }
+    
+    std::uint32_t aAckWord = pAckWord;
+    if (!SeedPrologue_A(pPassword, pPasswordByteLength, pNonce, &aAckWord, false)) {
+        return false;
+    }
+
+    SeedPrologue_B();
+    
     return true;
 }
 
+void Soccer2::ConfigureTestBuffers(std::uint32_t pTestBlockLength) {
+    mTestBlockLength = pTestBlockLength;
+}
+
+
 void Soccer2::EncryptBlock(std::uint8_t *pSource,
                            std::uint8_t *pDestination) {
+    if (mStrength == EncryptionStrength::kTest) {
+        for (std::size_t aIndex=0; aIndex<mTestBlockLength; aIndex++) {
+            pDestination[aIndex] = pSource[aIndex] ^ cMaterialA[aIndex];
+        }
+        return;
+    }
     
 }
 
 void Soccer2::DecryptBlock(std::uint8_t *pSource,
                            std::uint8_t *pDestination) {
-    
+    if (mStrength == EncryptionStrength::kTest) {
+        for (std::size_t aIndex=0; aIndex<mTestBlockLength; aIndex++) {
+            pDestination[aIndex] = pSource[aIndex] ^ cMaterialA[aIndex];
+        }
+        return;
+    }
 }
 
 void Soccer2::InitializeMasks() {
@@ -174,6 +783,48 @@ void Soccer2::InitializeMasks() {
     mMasks[20] = 0x43u; mMasks[21] = 0xC2u; mMasks[22] = 0x46u; mMasks[23] = 0x62u;
     mMasks[24] = 0x4Au; mMasks[25] = 0x52u; mMasks[26] = 0x83u; mMasks[27] = 0xC1u;
     mMasks[28] = 0x85u; mMasks[29] = 0xA1u; mMasks[30] = 0x89u; mMasks[31] = 0x91u;
+}
+
+void Soccer2::InitializeCiphers() {
+    std::size_t aCipherIndex = 0U;
+
+    for (std::size_t aIndex=0U; aIndex<4U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kPasswordXORCipher; }
+    for (std::size_t aIndex=0U; aIndex<4U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kPasswordAddCipher; }
+    for (std::size_t aIndex=0U; aIndex<4U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kPasswordSubtractCipher; }
+
+    for (std::size_t aIndex=0U; aIndex<3U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kPasswordJumpXORCipher; }
+    for (std::size_t aIndex=0U; aIndex<3U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kPasswordJumpAddCipher; }
+    for (std::size_t aIndex=0U; aIndex<3U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kPasswordJumpSubtractCipher; }
+
+    for (std::size_t aIndex=0U; aIndex<3U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kPepperNoiseXORCipher; }
+    for (std::size_t aIndex=0U; aIndex<3U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kPepperJumpNoiseXORCipher; }
+    for (std::size_t aIndex=0U; aIndex<3U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kPepperDualJumpNoiseXORCipher; }
+
+    for (std::size_t aIndex=0U; aIndex<3U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kCascadeCipher; }
+    for (std::size_t aIndex=0U; aIndex<3U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kCascadeJumpCipher; }
+
+    for (std::size_t aIndex=0U; aIndex<20U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kReverseMaskCipher; }
+    for (std::size_t aIndex=0U; aIndex<10U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kReverseMaskByteBlockCipher32; }
+    for (std::size_t aIndex=0U; aIndex<10U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kReverseMaskByteBlockCipher64; }
+    
+    for (std::size_t aIndex=0U; aIndex<10U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kRippleMaskBlockCipher32; }
+    for (std::size_t aIndex=0U; aIndex<10U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kRippleMaskBlockCipher64; }
+
+    for (std::size_t aIndex=0U; aIndex<20U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kWeaveMaskCipher; }
+    for (std::size_t aIndex=0U; aIndex<15U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kWeaveMaskBlockCipher32; }
+    for (std::size_t aIndex=0U; aIndex<15U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kWeaveMaskBlockCipher64; }
+
+    for (std::size_t aIndex=0U; aIndex<15U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kSplintMaskBlockCipher32; }
+    for (std::size_t aIndex=0U; aIndex<15U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kSplintMaskBlockCipher64; }
+    
+    for (std::size_t aIndex=0U; aIndex<10U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kInvertMaskCipher; }
+    for (std::size_t aIndex=0U; aIndex<20U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kRotateCipher; }
+    
+    // 50 kRotateMaskCipher entries fill the remaining slots.
+    while (aCipherIndex < 256) {
+        mCiphers[aCipherIndex] = CipherType::kRotateMaskCipher;
+        aCipherIndex++;
+    }
 }
 
 void Soccer2::InitializeExpanders() {
@@ -201,9 +852,35 @@ void Soccer2::InitializeWorkSpaces() {
     mWorkSpaces[12] = &cWorkSpaceM; mWorkSpaces[13] = &cWorkSpaceN; mWorkSpaces[14] = &cWorkSpaceO; mWorkSpaces[15] = &cWorkSpaceP;
 }
 
-void Soccer2::UnrollNonceAndPasswordToScratch(std::uint8_t *pPassword,
-                                              std::size_t pPasswordByteLength,
-                                              std::uint64_t pNonce) {
+void Soccer2::UnrollNonceAndPasswordToScratch_Test(std::uint8_t *pPassword,
+                                                   std::size_t pPasswordByteLength,
+                                                   std::uint64_t pNonce) {
+    std::uint8_t aNonceBytes[8];
+    aNonceBytes[0] = static_cast<std::uint8_t>(pNonce >>  0); aNonceBytes[1] = static_cast<std::uint8_t>(pNonce >>  8);
+    aNonceBytes[2] = static_cast<std::uint8_t>(pNonce >> 16); aNonceBytes[3] = static_cast<std::uint8_t>(pNonce >> 24);
+    aNonceBytes[4] = static_cast<std::uint8_t>(pNonce >> 32); aNonceBytes[5] = static_cast<std::uint8_t>(pNonce >> 40);
+    aNonceBytes[6] = static_cast<std::uint8_t>(pNonce >> 48); aNonceBytes[7] = static_cast<std::uint8_t>(pNonce >> 56);
+    
+    std::size_t aScratchIndex = 0;
+    while (aScratchIndex < SOCCER_BLOCK_SIZE) {
+        std::size_t aPasswordIndex = 0;
+        while ((aPasswordIndex < pPasswordByteLength) && (aScratchIndex < SOCCER_BLOCK_SIZE)) {
+            cScratch[aScratchIndex] = pPassword[aPasswordIndex];
+            aScratchIndex++;
+            aPasswordIndex++;
+        }
+        std::size_t aNonceIndex = 0;
+        while ((aNonceIndex < 8) && (aScratchIndex < SOCCER_BLOCK_SIZE)) {
+            cScratch[aScratchIndex] = aNonceBytes[aNonceIndex];
+            aScratchIndex++;
+            aNonceIndex++;
+        }
+    }
+}
+
+void Soccer2::UnrollNonceAndPasswordToScratch_Regular(std::uint8_t *pPassword,
+                                                      std::size_t pPasswordByteLength,
+                                                      std::uint64_t pNonce) {
     std::uint8_t aNonceBytes[8];
     aNonceBytes[0] = static_cast<std::uint8_t>(pNonce >>  0); aNonceBytes[1] = static_cast<std::uint8_t>(pNonce >>  8);
     aNonceBytes[2] = static_cast<std::uint8_t>(pNonce >> 16); aNonceBytes[3] = static_cast<std::uint8_t>(pNonce >> 24);
@@ -214,20 +891,25 @@ void Soccer2::UnrollNonceAndPasswordToScratch(std::uint8_t *pPassword,
     while (aScratchIndex < S_BLOCK) {
         std::size_t aPasswordIndex = 0;
         while ((aPasswordIndex < pPasswordByteLength) && (aScratchIndex < S_BLOCK)) {
-            cScratch[aScratchIndex++] = pPassword[aPasswordIndex];
+            cScratch[aScratchIndex] = pPassword[aPasswordIndex];
+            aScratchIndex++;
+            aPasswordIndex++;
         }
         std::size_t aNonceIndex = 0;
         while ((aNonceIndex < 8) && (aScratchIndex < S_BLOCK)) {
-            cScratch[aScratchIndex++] = aNonceBytes[aNonceIndex];
+            cScratch[aScratchIndex] = aNonceBytes[aNonceIndex];
+            aScratchIndex++;
+            aNonceIndex++;
         }
     }
 }
+
 
 bool Soccer2::SeedPrelude_Test(std::uint8_t *pPassword,
                                std::size_t pPasswordByteLength,
                                std::uint64_t pNonce) {
     
-    UnrollNonceAndPasswordToScratch(pPassword, pPasswordByteLength, pNonce);
+    UnrollNonceAndPasswordToScratch_Test(pPassword, pPasswordByteLength, pNonce);
     
     std::uint64_t aValue = 0x00;
     for (std::size_t aIndex=0; aIndex<SOCCER_BLOCK_SIZE; aIndex++) {
@@ -248,6 +930,7 @@ bool Soccer2::SeedPrelude_Regular(std::uint8_t *pPassword,
     InitializeWorkSpaces();
     InitializeMaterials();
     InitializeMasks();
+    InitializeCiphers();
     
     memset(mClaimedExpanders, 0, sizeof(mClaimedExpanders));
     mClaimedExpanderCount = 0;
@@ -258,7 +941,7 @@ bool Soccer2::SeedPrelude_Regular(std::uint8_t *pPassword,
     memset(mClaimedWorkSpaces, 0, sizeof(mClaimedWorkSpaces));
     mClaimedWorkSpaceCount = 0;
     
-    UnrollNonceAndPasswordToScratch(pPassword, pPasswordByteLength, pNonce);
+    UnrollNonceAndPasswordToScratch_Regular(pPassword, pPasswordByteLength, pNonce);
     
     cStarter.Seed(&cWorkSpaceA, &cFarmSalt, pNonce, pPassword, pPasswordByteLength, cRandom);
     
@@ -293,68 +976,10 @@ void Soccer2::SeedEpilogue() {
         mSources[aIndex] = mMaterials[aIndex];
     }
     
-    FoldAllMaterialsIntoRandomForBlock(0);
-    ShuffleSEWMMCC();
+    //FoldAllMaterialsIntoRandomForBlock(0);
+    Shuffle_CROWSCIMASSORMATEX();
     
-    std::size_t aBlockIndex = 1;
     
-    /*
-    while (aBlockIndex < BLOCK_COUNT) {
-        const std::size_t aSourceIndex = (aBlockIndex - 1U) * S_BLOCK;
-        const std::size_t aDestinationIndex = aBlockIndex * S_BLOCK;
-        
-        mExpanders[11]->TwistBlock(mWorkSpaces[14], &mSources[ 2][aSourceIndex], mCrossA[0], mCrossA[1], mCrossA[2], mCrossA[3], &mMaterials[ 7][aDestinationIndex]);
-        mExpanders[ 4]->TwistBlock(mWorkSpaces[ 7], &mSources[11][aSourceIndex], mCrossA[0], mCrossA[1], mCrossA[2], mCrossA[3], &mMaterials[ 0][aDestinationIndex]);
-        mExpanders[15]->TwistBlock(mWorkSpaces[ 2], &mSources[ 6][aSourceIndex], mCrossA[0], mCrossA[1], mCrossA[2], mCrossA[3], &mMaterials[11][aDestinationIndex]);
-        mExpanders[ 2]->TwistBlock(mWorkSpaces[ 5], &mSources[ 9][aSourceIndex], mCrossA[0], mCrossA[1], mCrossA[2], mCrossA[3], &mMaterials[14][aDestinationIndex]);
-        mExpanders[ 9]->TwistBlock(mWorkSpaces[12], &mSources[ 0][aSourceIndex], mCrossA[0], mCrossA[1], mCrossA[2], mCrossA[3], &mMaterials[ 5][aDestinationIndex]);
-        mExpanders[ 0]->TwistBlock(mWorkSpaces[ 3], &mSources[ 7][aSourceIndex], mCrossA[0], mCrossA[1], mCrossA[2], mCrossA[3], &mMaterials[12][aDestinationIndex]);
-        mExpanders[13]->TwistBlock(mWorkSpaces[ 6], &mSources[ 4][aSourceIndex], mCrossA[0], mCrossA[1], mCrossA[2], mCrossA[3], &mMaterials[ 9][aDestinationIndex]);
-        mExpanders[ 6]->TwistBlock(mWorkSpaces[ 9], &mSources[13][aSourceIndex], mCrossA[0], mCrossA[1], mCrossA[2], mCrossA[3], &mMaterials[ 2][aDestinationIndex]);
-        mExpanders[ 1]->TwistBlock(mWorkSpaces[ 4], &mSources[ 8][aSourceIndex], mCrossA[0], mCrossA[1], mCrossA[2], mCrossA[3], &mMaterials[13][aDestinationIndex]);
-        mExpanders[14]->TwistBlock(mWorkSpaces[ 1], &mSources[ 5][aSourceIndex], mCrossA[0], mCrossA[1], mCrossA[2], mCrossA[3], &mMaterials[10][aDestinationIndex]);
-        mExpanders[ 7]->TwistBlock(mWorkSpaces[10], &mSources[14][aSourceIndex], mCrossA[0], mCrossA[1], mCrossA[2], mCrossA[3], &mMaterials[ 3][aDestinationIndex]);
-        mExpanders[10]->TwistBlock(mWorkSpaces[13], &mSources[ 1][aSourceIndex], mCrossA[0], mCrossA[1], mCrossA[2], mCrossA[3], &mMaterials[ 6][aDestinationIndex]);
-        mExpanders[ 3]->TwistBlock(mWorkSpaces[ 0], &mSources[10][aSourceIndex], mCrossA[0], mCrossA[1], mCrossA[2], mCrossA[3], &mMaterials[15][aDestinationIndex]);
-        mExpanders[12]->TwistBlock(mWorkSpaces[15], &mSources[ 3][aSourceIndex], mCrossA[0], mCrossA[1], mCrossA[2], mCrossA[3], &mMaterials[ 8][aDestinationIndex]);
-        mExpanders[ 5]->TwistBlock(mWorkSpaces[ 8], &mSources[12][aSourceIndex], mCrossA[0], mCrossA[1], mCrossA[2], mCrossA[3], &mMaterials[ 1][aDestinationIndex]);
-        mExpanders[ 8]->TwistBlock(mWorkSpaces[11], &mSources[15][aSourceIndex], mCrossA[0], mCrossA[1], mCrossA[2], mCrossA[3], &mMaterials[ 4][aDestinationIndex]);
-        
-        FoldAllMaterialsIntoRandomForBlock(aBlockIndex);
-        
-        const std::size_t aReverseEndIndex = aDestinationIndex + S_BLOCK;
-        for (std::size_t aMaterialIndex=6U; aMaterialIndex<8U; aMaterialIndex++) {
-            std::reverse(mMaterials[aMaterialIndex] + aDestinationIndex, mMaterials[aMaterialIndex] + aReverseEndIndex);
-        }
-        
-        if (aBlockIndex == (BLOCK_COUNT - 1U)) {
-            for (std::size_t aMaterialIndex=0U; aMaterialIndex<8U; aMaterialIndex++) {
-                std::reverse(mMaterials[aMaterialIndex], mMaterials[aMaterialIndex] + SOCCER_BLOCK_SIZE);
-            }
-        }
-        
-        ShuffleSEWMMCC();
-        
-        aBlockIndex++;
-    }
-    */
-    
-    cWorkSpaceN.Zero();
-    cWorkSpaceO.Zero();
-    cWorkSpaceP.Zero();
-    cWorkSpaceD.Zero();
-    cWorkSpaceE.Zero();
-    cWorkSpaceF.Zero();
-    cWorkSpaceJ.Zero();
-    cWorkSpaceI.Zero();
-    cWorkSpaceH.Zero();
-    cWorkSpaceG.Zero();
-    cWorkSpaceB.Zero();
-    cWorkSpaceK.Zero();
-    cWorkSpaceC.Zero();
-    cWorkSpaceM.Zero();
-    cWorkSpaceA.Zero();
-    cWorkSpaceL.Zero();
     
 
 
@@ -401,104 +1026,56 @@ void Soccer2::ShuffleMEWBlockZero(std::uint8_t *pMaterial) {
         mShuffleWorkSpaces[aIndex] = mWorkSpaces[aIndex];
     }
     
-    //TwistShuffle::ShuffleExpanderList32(mShuffleExpanders, pMaterial, 0, 200, 4);
-    
-    //TwistShuffle::ShuffleCipherTypeList32(mCiphersMoveA, pMaterial, 200, 400, 4);
-    
+    TwistShuffle::ShuffleList16(mShuffleMaterials,  pMaterial,     0U,  3600U, 1U);
+    TwistShuffle::ShuffleList32(mShuffleExpanders,  pMaterial,  3600U,  7200U, 1U);
+    TwistShuffle::ShuffleList16(mShuffleWorkSpaces, pMaterial,  7200U, 10800U, 1U);
 
-    /*
-    // Materials: [2048, 4096) relative to the zero block.
-    for (std::size_t aIndex=2048; aIndex<4096; aIndex+=2) {
-        const std::uint8_t aIndexA = pMaterial[aIndex + 0U] & 15U;
-        const std::uint8_t aIndexB = pMaterial[aIndex + 1U] & 15U;
-        std::uint8_t *aHold = mShuffleMaterials[aIndexA];
-        mShuffleMaterials[aIndexA] = mShuffleMaterials[aIndexB];
-        mShuffleMaterials[aIndexB] = aHold;
-    }
+    TwistShuffle::ShuffleList16(mShuffleMaterials,  pMaterial, 10800U, 14400U, 1U);
+    TwistShuffle::ShuffleList32(mShuffleExpanders,  pMaterial, 14400U, 18000U, 1U);
+    TwistShuffle::ShuffleList16(mShuffleWorkSpaces, pMaterial, 18000U, 21600U, 1U);
 
-    // Expanders: [6144, 8192) relative to the zero block.
-    for (std::size_t aIndex=6144; aIndex<8192; aIndex+=2) {
-        const std::uint8_t aIndexA = pMaterial[aIndex + 0U] & 31U;
-        const std::uint8_t aIndexB = pMaterial[aIndex + 1U] & 31U;
-        TwistExpander *aHold = mShuffleExpanders[aIndexA];
-        mShuffleExpanders[aIndexA] = mShuffleExpanders[aIndexB];
-        mShuffleExpanders[aIndexB] = aHold;
-    }
+    TwistShuffle::ShuffleList16(mShuffleMaterials,  pMaterial, 21600U, 25200U, 1U);
+    TwistShuffle::ShuffleList32(mShuffleExpanders,  pMaterial, 25200U, 28800U, 1U);
+    TwistShuffle::ShuffleList16(mShuffleWorkSpaces, pMaterial, 28800U, 32400U, 1U);
 
-    // Work spaces: [10240, 12288) relative to the zero block.
-    for (std::size_t aIndex=10240; aIndex<12288; aIndex+=2) {
-        const std::uint8_t aIndexA = pMaterial[aIndex + 0U] & 15U;
-        const std::uint8_t aIndexB = pMaterial[aIndex + 1U] & 15U;
-        TwistWorkSpace *aHold = mShuffleWorkSpaces[aIndexA];
-        mShuffleWorkSpaces[aIndexA] = mShuffleWorkSpaces[aIndexB];
-        mShuffleWorkSpaces[aIndexB] = aHold;
-    }
-    
-    // Materials: [14336, 16384) relative to the zero block.
-    for (std::size_t aIndex=14336; aIndex<16384; aIndex+=2) {
-        const std::uint8_t aIndexA = pMaterial[aIndex + 0U] & 15U;
-        const std::uint8_t aIndexB = pMaterial[aIndex + 1U] & 15U;
-        std::uint8_t *aHold = mShuffleMaterials[aIndexA];
-        mShuffleMaterials[aIndexA] = mShuffleMaterials[aIndexB];
-        mShuffleMaterials[aIndexB] = aHold;
-    }
-
-    // Expanders: [18432, 20480) relative to the zero block.
-    for (std::size_t aIndex=18432; aIndex<20480; aIndex+=2) {
-        const std::uint8_t aIndexA = pMaterial[aIndex + 0U] & 31U;
-        const std::uint8_t aIndexB = pMaterial[aIndex + 1U] & 31U;
-        TwistExpander *aHold = mShuffleExpanders[aIndexA];
-        mShuffleExpanders[aIndexA] = mShuffleExpanders[aIndexB];
-        mShuffleExpanders[aIndexB] = aHold;
-    }
-
-    // Work spaces: [22528, 24576) relative to the zero block.
-    for (std::size_t aIndex=22528; aIndex<24576; aIndex+=2) {
-        const std::uint8_t aIndexA = pMaterial[aIndex + 0U] & 15U;
-        const std::uint8_t aIndexB = pMaterial[aIndex + 1U] & 15U;
-        TwistWorkSpace *aHold = mShuffleWorkSpaces[aIndexA];
-        mShuffleWorkSpaces[aIndexA] = mShuffleWorkSpaces[aIndexB];
-        mShuffleWorkSpaces[aIndexB] = aHold;
-    }
-    
-    std::size_t aUnclaimedMaterialCount = 16U;
-    for (std::size_t aClaimedIndex=0; aClaimedIndex<mClaimedMaterialCount; aClaimedIndex++) {
-        for (std::size_t aIndex=0; aIndex<aUnclaimedMaterialCount; aIndex++) {
+    // Move claimed materials to the back.
+    for (std::size_t aIndex=0; aIndex<16; aIndex++) {
+        mClaimed[aIndex] = false;
+        for (std::size_t aClaimedIndex=0; aClaimedIndex<mClaimedMaterialCount; aClaimedIndex++) {
             if (mShuffleMaterials[aIndex] == mClaimedMaterials[aClaimedIndex]) {
-                aUnclaimedMaterialCount--;
-                std::uint8_t *aHold = mShuffleMaterials[aIndex];
-                mShuffleMaterials[aIndex] = mShuffleMaterials[aUnclaimedMaterialCount];
-                mShuffleMaterials[aUnclaimedMaterialCount] = aHold;
+                mClaimed[aIndex] = true;
                 break;
             }
         }
     }
 
-    std::size_t aUnclaimedExpanderCount = 32U;
-    for (std::size_t aClaimedIndex=0; aClaimedIndex<mClaimedExpanderCount; aClaimedIndex++) {
-        for (std::size_t aIndex=0; aIndex<aUnclaimedExpanderCount; aIndex++) {
+    TwistShuffle::MoveClaimedToEnd16(mClaimed, mShuffleMaterials);
+
+    // Move claimed expanders to the back.
+    for (std::size_t aIndex=0; aIndex<32; aIndex++) {
+        mClaimed[aIndex] = false;
+        for (std::size_t aClaimedIndex=0; aClaimedIndex<mClaimedExpanderCount; aClaimedIndex++) {
             if (mShuffleExpanders[aIndex] == mClaimedExpanders[aClaimedIndex]) {
-                aUnclaimedExpanderCount--;
-                TwistExpander *aHold = mShuffleExpanders[aIndex];
-                mShuffleExpanders[aIndex] = mShuffleExpanders[aUnclaimedExpanderCount];
-                mShuffleExpanders[aUnclaimedExpanderCount] = aHold;
+                mClaimed[aIndex] = true;
                 break;
             }
         }
     }
 
-    std::size_t aUnclaimedWorkSpaceCount = 16U;
-    for (std::size_t aClaimedIndex=0; aClaimedIndex<mClaimedWorkSpaceCount; aClaimedIndex++) {
-        for (std::size_t aIndex=0; aIndex<aUnclaimedWorkSpaceCount; aIndex++) {
+    TwistShuffle::MoveClaimedToEnd32(mClaimed, mShuffleExpanders);
+
+    // Move claimed work spaces to the back.
+    for (std::size_t aIndex=0; aIndex<16; aIndex++) {
+        mClaimed[aIndex] = false;
+        for (std::size_t aClaimedIndex=0; aClaimedIndex<mClaimedWorkSpaceCount; aClaimedIndex++) {
             if (mShuffleWorkSpaces[aIndex] == mClaimedWorkSpaces[aClaimedIndex]) {
-                aUnclaimedWorkSpaceCount--;
-                TwistWorkSpace *aHold = mShuffleWorkSpaces[aIndex];
-                mShuffleWorkSpaces[aIndex] = mShuffleWorkSpaces[aUnclaimedWorkSpaceCount];
-                mShuffleWorkSpaces[aUnclaimedWorkSpaceCount] = aHold;
+                mClaimed[aIndex] = true;
                 break;
             }
         }
     }
+
+    TwistShuffle::MoveClaimedToEnd16(mClaimed, mShuffleWorkSpaces);
 
     for (std::size_t aIndex=0; aIndex<16; aIndex++) {
         mMaterials[aIndex] = mShuffleMaterials[aIndex];
@@ -509,13 +1086,32 @@ void Soccer2::ShuffleMEWBlockZero(std::uint8_t *pMaterial) {
     for (std::size_t aIndex=0; aIndex<16; aIndex++) {
         mWorkSpaces[aIndex] = mShuffleWorkSpaces[aIndex];
     }
-    */
 }
 
-void Soccer2::ShuffleSEWMMCC() {
-    
-}
 
-void Soccer2::FoldAllMaterialsIntoRandomForBlock(std::size_t pBlockIndex) {
-    
+
+void Soccer2::RotateSourcesIntoCross() {
+    std::size_t aComplexity = 0U;
+    if (mStrength == EncryptionStrength::kWeak) {
+        aComplexity = COMPLEXITY_WEAK;
+    } else if (mStrength == EncryptionStrength::kNormal) {
+        aComplexity = COMPLEXITY_NORMAL;
+    } else if (mStrength == EncryptionStrength::kStrong) {
+        aComplexity = COMPLEXITY_STRONG;
+    } else {
+        return;
+    }
+
+    for (std::size_t aIndex=0U; aIndex<aComplexity; aIndex++) {
+        mCross[0][aIndex] = mCross[1][aIndex];
+    }
+    for (std::size_t aIndex=0U; aIndex<aComplexity; aIndex++) {
+        mCross[1][aIndex] = mCross[2][aIndex];
+    }
+    for (std::size_t aIndex=0U; aIndex<aComplexity; aIndex++) {
+        mCross[2][aIndex] = mCross[3][aIndex];
+    }
+    for (std::size_t aIndex=0U; aIndex<aComplexity; aIndex++) {
+        mCross[3][aIndex] = mSources[aIndex];
+    }
 }

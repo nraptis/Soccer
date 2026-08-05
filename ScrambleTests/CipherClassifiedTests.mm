@@ -631,6 +631,10 @@
         return;
     }
     
+    if (IS_MOVER_SECONDARY(CipherType::kPasswordXORCipher)) {
+        XCTFail("test_kPasswordXORCipher: failed on IS_MOVER_SECONDARY");
+        return;
+    }
 }
 
 - (void)test_kPasswordAddCipher {
@@ -670,6 +674,10 @@
         return;
     }
     
+    if (IS_MOVER_SECONDARY(CipherType::kPasswordAddCipher)) {
+        XCTFail("test_kPasswordAddCipher: failed on IS_MOVER_SECONDARY");
+        return;
+    }
 }
 
 - (void)test_kPasswordSubtractCipher {
@@ -709,6 +717,10 @@
         return;
     }
     
+    if (IS_MOVER_SECONDARY(CipherType::kPasswordSubtractCipher)) {
+        XCTFail("test_kPasswordSubtractCipher: failed on IS_MOVER_SECONDARY");
+        return;
+    }
 }
 
 
@@ -749,6 +761,10 @@
         return;
     }
     
+    if (IS_MOVER_SECONDARY(CipherType::kPasswordJumpXORCipher)) {
+        XCTFail("test_kPasswordJumpXORCipher: failed on IS_MOVER_SECONDARY");
+        return;
+    }
 }
 
 - (void)test_kPasswordJumpAddCipher {
@@ -788,6 +804,10 @@
         return;
     }
     
+    if (IS_MOVER_SECONDARY(CipherType::kPasswordJumpAddCipher)) {
+        XCTFail("test_kPasswordJumpAddCipher: failed on IS_MOVER_SECONDARY");
+        return;
+    }
 }
 
 - (void)test_kPasswordJumpSubtractCipher {
@@ -827,6 +847,10 @@
         return;
     }
     
+    if (IS_MOVER_SECONDARY(CipherType::kPasswordJumpSubtractCipher)) {
+        XCTFail("test_kPasswordJumpSubtractCipher: failed on IS_MOVER_SECONDARY");
+        return;
+    }
 }
 
 - (void)test_kPepperNoiseXORCipher {
@@ -836,7 +860,7 @@
         return;
     }
     
-    if (IS_KEY_SIMPLE(CipherType::kPepperNoiseXORCipher)) {
+    if (!IS_KEY_SIMPLE(CipherType::kPepperNoiseXORCipher)) {
         XCTFail("test_kPepperNoiseXORCipher: failed on IS_KEY_SIMPLE");
         return;
     }
@@ -866,6 +890,10 @@
         return;
     }
     
+    if (IS_MOVER_SECONDARY(CipherType::kPepperNoiseXORCipher)) {
+        XCTFail("test_kPepperNoiseXORCipher: failed on IS_MOVER_SECONDARY");
+        return;
+    }
 }
 
 - (void)test_kPepperJumpNoiseXORCipher {
@@ -875,7 +903,7 @@
         return;
     }
     
-    if (IS_KEY_SIMPLE(CipherType::kPepperJumpNoiseXORCipher)) {
+    if (!IS_KEY_SIMPLE(CipherType::kPepperJumpNoiseXORCipher)) {
         XCTFail("test_kPepperJumpNoiseXORCipher: failed on IS_KEY_SIMPLE");
         return;
     }
@@ -905,6 +933,10 @@
         return;
     }
     
+    if (IS_MOVER_SECONDARY(CipherType::kPepperJumpNoiseXORCipher)) {
+        XCTFail("test_kPepperJumpNoiseXORCipher: failed on IS_MOVER_SECONDARY");
+        return;
+    }
 }
 
 - (void)test_kPepperDualJumpNoiseXORCipher {
@@ -914,7 +946,7 @@
         return;
     }
     
-    if (IS_KEY_SIMPLE(CipherType::kPepperDualJumpNoiseXORCipher)) {
+    if (!IS_KEY_SIMPLE(CipherType::kPepperDualJumpNoiseXORCipher)) {
         XCTFail("test_kPepperDualJumpNoiseXORCipher: failed on IS_KEY_SIMPLE");
         return;
     }
@@ -944,8 +976,11 @@
         return;
     }
     
+    if (IS_MOVER_SECONDARY(CipherType::kPepperDualJumpNoiseXORCipher)) {
+        XCTFail("test_kPepperDualJumpNoiseXORCipher: failed on IS_MOVER_SECONDARY");
+        return;
+    }
 }
-
 
 - (void)test_kCascadeCipher {
     
@@ -984,6 +1019,10 @@
         return;
     }
     
+    if (IS_MOVER_SECONDARY(CipherType::kCascadeCipher)) {
+        XCTFail("test_kCascadeCipher: failed on IS_MOVER_SECONDARY");
+        return;
+    }
 }
 
 - (void)test_kCascadeJumpCipher {
@@ -1023,6 +1062,10 @@
         return;
     }
     
+    if (IS_MOVER_SECONDARY(CipherType::kCascadeJumpCipher)) {
+        XCTFail("test_kCascadeJumpCipher: failed on IS_MOVER_SECONDARY");
+        return;
+    }
 }
 
 - (void)test_kRippleMaskBlockCipher32 {
@@ -1062,6 +1105,10 @@
         return;
     }
     
+    if (!IS_MOVER_SECONDARY(CipherType::kRippleMaskBlockCipher32)) {
+        XCTFail("test_kRippleMaskBlockCipher32: failed on IS_MOVER_SECONDARY");
+        return;
+    }
 }
 
 - (void)test_kRippleMaskBlockCipher64 {
@@ -1101,6 +1148,10 @@
         return;
     }
     
+    if (!IS_MOVER_SECONDARY(CipherType::kRippleMaskBlockCipher64)) {
+        XCTFail("test_kRippleMaskBlockCipher64: failed on IS_MOVER_SECONDARY");
+        return;
+    }
 }
 
 - (void)test_kInvertMaskCipher {
@@ -1140,6 +1191,10 @@
         return;
     }
     
+    if (IS_MOVER_SECONDARY(CipherType::kInvertMaskCipher)) {
+        XCTFail("test_kInvertMaskCipher: failed on IS_MOVER_SECONDARY");
+        return;
+    }
 }
 
 - (void)test_kReverseMaskCipher {
@@ -1179,6 +1234,10 @@
         return;
     }
     
+    if (IS_MOVER_SECONDARY(CipherType::kReverseMaskCipher)) {
+        XCTFail("test_kReverseMaskCipher: failed on IS_MOVER_SECONDARY");
+        return;
+    }
 }
 
 - (void)test_kReverseMaskByteBlockCipher32 {
@@ -1218,6 +1277,10 @@
         return;
     }
     
+    if (!IS_MOVER_SECONDARY(CipherType::kReverseMaskByteBlockCipher32)) {
+        XCTFail("test_kReverseMaskByteBlockCipher32: failed on IS_MOVER_SECONDARY");
+        return;
+    }
 }
 
 - (void)test_kReverseMaskByteBlockCipher64 {
@@ -1257,6 +1320,10 @@
         return;
     }
     
+    if (!IS_MOVER_SECONDARY(CipherType::kReverseMaskByteBlockCipher64)) {
+        XCTFail("test_kReverseMaskByteBlockCipher64: failed on IS_MOVER_SECONDARY");
+        return;
+    }
 }
 
 - (void)test_kSplintMaskBlockCipher32 {
@@ -1296,6 +1363,10 @@
         return;
     }
     
+    if (!IS_MOVER_SECONDARY(CipherType::kSplintMaskBlockCipher32)) {
+        XCTFail("test_kSplintMaskBlockCipher32: failed on IS_MOVER_SECONDARY");
+        return;
+    }
 }
 
 - (void)test_kSplintMaskBlockCipher64 {
@@ -1335,6 +1406,10 @@
         return;
     }
     
+    if (!IS_MOVER_SECONDARY(CipherType::kSplintMaskBlockCipher64)) {
+        XCTFail("test_kSplintMaskBlockCipher64: failed on IS_MOVER_SECONDARY");
+        return;
+    }
 }
 
 
@@ -1375,6 +1450,10 @@
         return;
     }
     
+    if (IS_MOVER_SECONDARY(CipherType::kRotateMaskCipher)) {
+        XCTFail("test_kRotateMaskCipher: failed on IS_MOVER_SECONDARY");
+        return;
+    }
 }
 
 - (void)test_kRotateCipher {
@@ -1414,6 +1493,10 @@
         return;
     }
     
+    if (IS_MOVER_SECONDARY(CipherType::kRotateCipher)) {
+        XCTFail("test_kRotateCipher: failed on IS_MOVER_SECONDARY");
+        return;
+    }
 }
 
 
@@ -1454,6 +1537,10 @@
         return;
     }
     
+    if (IS_MOVER_SECONDARY(CipherType::kWeaveMaskCipher)) {
+        XCTFail("test_kWeaveMaskCipher: failed on IS_MOVER_SECONDARY");
+        return;
+    }
 }
 
 - (void)test_kWeaveMaskBlockCipher32 {
@@ -1493,6 +1580,11 @@
         return;
     }
     
+    if (IS_MOVER_SECONDARY(CipherType::kWeaveMaskBlockCipher32)) {
+        XCTFail("test_kWeaveMaskBlockCipher32: failed on IS_MOVER_SECONDARY");
+        return;
+    }
+    
 }
 
 - (void)test_kWeaveMaskBlockCipher64 {
@@ -1529,6 +1621,11 @@
     
     if (!IS_MOVER_ANY(CipherType::kWeaveMaskBlockCipher64)) {
         XCTFail("test_kWeaveMaskBlockCipher64: failed on IS_MOVER_ANY");
+        return;
+    }
+    
+    if (IS_MOVER_SECONDARY(CipherType::kWeaveMaskBlockCipher64)) {
+        XCTFail("test_kWeaveMaskBlockCipher64: failed on IS_MOVER_SECONDARY");
         return;
     }
     
