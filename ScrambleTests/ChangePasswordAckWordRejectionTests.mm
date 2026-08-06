@@ -7,8 +7,6 @@
 
 #import <XCTest/XCTest.h>
 #include "Soccer2.hpp"
-#include "LaneCombinations.hpp"
-#include "Soccer2.hpp"
 #include "Random.hpp"
 #include <cstdint>
 #include <cstring>

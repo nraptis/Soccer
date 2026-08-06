@@ -19,6 +19,9 @@ public:
     
     static void                     PrintMismatch(std::string pName, std::uint8_t *pLaneA, std::uint8_t *pLaneB, std::size_t pIndex, std::size_t pSize);
     
+    static std::size_t              ByteRichness(std::uint8_t *pLane, std::size_t pSize);
+    
+    
 };
 
 #endif /* LaneTool_hpp */

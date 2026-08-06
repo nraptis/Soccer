@@ -60,6 +60,48 @@
 
 class Soccer2 {
 public:
+
+    static std::uint8_t                         mMaterialA[SOCCER_BLOCK_SIZE];
+    static std::uint8_t                         mMaterialB[SOCCER_BLOCK_SIZE];
+    static std::uint8_t                         mMaterialC[SOCCER_BLOCK_SIZE];
+    static std::uint8_t                         mMaterialD[SOCCER_BLOCK_SIZE];
+
+    static std::uint8_t                         mMaterialE[SOCCER_BLOCK_SIZE];
+    static std::uint8_t                         mMaterialF[SOCCER_BLOCK_SIZE];
+    static std::uint8_t                         mMaterialG[SOCCER_BLOCK_SIZE];
+    static std::uint8_t                         mMaterialH[SOCCER_BLOCK_SIZE];
+
+    static std::uint8_t                         mMaterialI[SOCCER_BLOCK_SIZE];
+    static std::uint8_t                         mMaterialJ[SOCCER_BLOCK_SIZE];
+    static std::uint8_t                         mMaterialK[SOCCER_BLOCK_SIZE];
+    static std::uint8_t                         mMaterialL[SOCCER_BLOCK_SIZE];
+
+    static std::uint8_t                         mMaterialM[SOCCER_BLOCK_SIZE];
+    static std::uint8_t                         mMaterialN[SOCCER_BLOCK_SIZE];
+    static std::uint8_t                         mMaterialO[SOCCER_BLOCK_SIZE];
+    static std::uint8_t                         mMaterialP[SOCCER_BLOCK_SIZE];
+
+    static TwistWorkSpace                       mWorkSpaceA;
+    static TwistWorkSpace                       mWorkSpaceB;
+    static TwistWorkSpace                       mWorkSpaceC;
+    static TwistWorkSpace                       mWorkSpaceD;
+    static TwistWorkSpace                       mWorkSpaceE;
+    static TwistWorkSpace                       mWorkSpaceF;
+    static TwistWorkSpace                       mWorkSpaceG;
+    static TwistWorkSpace                       mWorkSpaceH;
+    static TwistWorkSpace                       mWorkSpaceI;
+    static TwistWorkSpace                       mWorkSpaceJ;
+    static TwistWorkSpace                       mWorkSpaceK;
+    static TwistWorkSpace                       mWorkSpaceL;
+    static TwistWorkSpace                       mWorkSpaceM;
+    static TwistWorkSpace                       mWorkSpaceN;
+    static TwistWorkSpace                       mWorkSpaceO;
+    static TwistWorkSpace                       mWorkSpaceP;
+
+    static std::uint8_t                         mRandom[S_BLOCK];
+    static std::uint8_t                         mScratch[SOCCER_BLOCK_SIZE];
+
+    static void                                 Zero();
     
     static void                                 ConfigureTestBuffers(std::uint32_t pTestBlockLength); // SOCCER_BLOCK_SIZE (L3 size)
     
@@ -100,6 +142,7 @@ public:
     static void                                 InitializeWorkSpaces();
     static void                                 InitializeMaterials();
     
+    
     static void                                 UnrollNonceAndPasswordToScratch_Test(std::uint8_t *pPassword,
                                                                                 std::size_t pPasswordByteLength,
                                                                                 std::uint64_t pNonce);
@@ -111,18 +154,21 @@ public:
     static bool                                 SeedPrelude_Test(std::uint8_t *pPassword,
                                                             std::size_t pPasswordByteLength,
                                                             std::uint64_t pNonce);
-    static bool                                 SeedPrelude_Regular(std::uint8_t *pPassword,
+    static void                                 SeedPrelude_Regular_A(std::uint8_t *pPassword,
                                                             std::size_t pPasswordByteLength,
                                                             std::uint64_t pNonce);
+    static void                                 SeedPrelude_Regular_B(std::uint64_t pNonce);
+    static void                                 SeedPrelude_Regular_C();
     
     
-    static bool                                 SeedPrologue_A(std::uint8_t *pPassword,
-                                                               std::size_t pPasswordByteLength,
-                                                               std::uint64_t pNonce,
-                                                               std::uint32_t *pAckWord,
-                                                               bool pForwardDeploy);
+    static void                                 SeedPrologue_Regular_A(std::uint8_t *pPassword,
+                                                                       std::size_t pPasswordByteLength,
+                                                                       std::uint64_t pNonce);
+    static void                                 SeedPrologue_Regular_B();
+    static bool                                 SeedPrologue_Regular_C(std::uint32_t *pAckWord,
+                                                                       bool pForwardDeploy);
+    static void                                 SeedPrologue_Regular_D();
     
-    static void                                 SeedPrologue_B();
     
     static void                                 TwistRound(std::size_t pBlockIndex);
     

@@ -569,6 +569,9 @@ bool TwistWorkSpace::IsSalt(TwistBufferKey pKey) {
 }
 
 void TwistWorkSpace::Zero() {
+    memset(mKeyBoxA, 0, sizeof(mKeyBoxA));
+    memset(mKeyBoxB, 0, sizeof(mKeyBoxB));
+
     Zero_PostSeed();
 
     mDomainBundle.Zero();

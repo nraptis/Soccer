@@ -53,3 +53,30 @@ void LaneTool::PrintMismatch(std::string pName, std::uint8_t *pLaneA, std::uint8
     printf("\n");
     
 }
+
+std::size_t LaneTool::ByteRichness(std::uint8_t *pLane, std::size_t pSize) {
+    
+    std::size_t aCount[256];
+    memset(aCount, 0, sizeof(aCount));
+    for (std::size_t aIndex=0; aIndex<pSize; aIndex++) {
+        aCount[pLane[aIndex]]++;
+    }
+    
+    std::size_t aResult = 0;
+    
+    std::size_t aThreshA = pSize / 512;
+    std::size_t aThreshB = pSize / 1024;
+    std::size_t aThreshC = pSize / 2048;
+    
+    for (std::size_t aIndex=0; aIndex<256; aIndex++) {
+        if (aCount[aIndex] > aThreshA) {
+            aResult += 3;
+        } else if (aCount[aIndex] > aThreshB) {
+            aResult += 2;
+        } else if (aCount[aIndex] > aThreshC) {
+            aResult += 1;
+        }
+    }
+    
+    return aResult;
+}

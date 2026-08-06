@@ -8,8 +8,6 @@
 
 #import <XCTest/XCTest.h>
 #include "Soccer2.hpp"
-#include "LaneCombinations.hpp"
-#include "Soccer2.hpp"
 #include "Random.hpp"
 #include <cstdint>
 #include <cstring>
@@ -52,9 +50,6 @@
             XCTFail("test_aw_reject_weak_100: failed accept good nonce.");
             return;
         }
-        
-
-        
     }
 
     printf("all nonce trials went fine (weak)\n");
@@ -130,15 +125,10 @@
             XCTFail("test_aw_reject_strong_100: failed accept good nonce.");
             return;
         }
-        
-
-        
     }
-
+    
     printf("all nonce trials went fine (strong)\n");
     
 }
-
-
 
 @end
