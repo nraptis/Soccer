@@ -17,7 +17,7 @@
 
 #include "EncryptionLayer.hpp"
 
-#include "LayeredCrypt.hpp"
+#include "Cryptex.hpp"
 #include "Jelly.hpp"
 
 #include "TwistExpander_Achernar.hpp"
@@ -100,6 +100,23 @@ public:
 
     static std::uint8_t                         mRandom[S_BLOCK];
     static std::uint8_t                         mScratch[SOCCER_BLOCK_SIZE];
+    static std::uint8_t                         mCryptTemp[SOCCER_BLOCK_SIZE];
+    
+    static std::uint8_t                         mCollapseLaneA[SOCCER_BLOCK_SIZE];
+    static std::uint8_t                         mCollapseLaneB[SOCCER_BLOCK_SIZE];
+    static std::uint8_t                         mCollapseLaneC[SOCCER_BLOCK_SIZE];
+    static std::uint8_t                         mCollapseLaneD[SOCCER_BLOCK_SIZE];
+    
+    static std::uint8_t                         mShrinkLaneA[SOCCER_BLOCK_SIZE_L1];
+    static std::uint8_t                         mShrinkLaneB[SOCCER_BLOCK_SIZE_L1];
+    static std::uint8_t                         mShrinkLaneC[SOCCER_BLOCK_SIZE_L1];
+    static std::uint8_t                         mShrinkLaneD[SOCCER_BLOCK_SIZE_L1];
+
+    static std::uint8_t                         mCrushA[S_BLOCK];
+    static std::uint8_t                         mCrushB[S_BLOCK];
+    static std::uint8_t                         mCrushC[S_BLOCK];
+    static std::uint8_t                         mCrushD[S_BLOCK];
+    
 
     static void                                 Zero();
     
@@ -108,7 +125,6 @@ public:
 //#define SOCCER_BLOCK_SIZE_L1 262144
 //#define SOCCER_BLOCK_SIZE_L2 524288
 //#define SOCCER_BLOCK_SIZE 1048576
-    
     
     static bool                                 AttemptSeed_Encrypt(EncryptionStrength pStrength,
                                                                     std::uint8_t *pPassword,
@@ -188,7 +204,6 @@ public:
     
     static void                                 RotateSourcesIntoCross();
     
-    
     static std::uint8_t                         mMasks[32];
 
     static std::uint8_t                         *mMaterials[16];
@@ -211,14 +226,11 @@ public:
     static TwistWorkSpace                       *mClaimedWorkSpaces[16];
     static std::size_t                          mClaimedWorkSpaceCount;
 
-    static LayeredCrypt                         mCrypt;
-    static EncryptionLayer                      mFinalL3;
+    static Cryptex                              mCryptex;
     
     static std::uint8_t                         *mShuffleMaterials[16];
     static TwistExpander                        *mShuffleExpanders[32];
     static TwistWorkSpace                       *mShuffleWorkSpaces[16];
-    
-    
     
     static EncryptionStrength                   mStrength;
     

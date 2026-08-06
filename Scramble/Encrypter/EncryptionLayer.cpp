@@ -1,34 +1,42 @@
 #include "EncryptionLayer.hpp"
 #include "Jelly.hpp"
 
+#include <cstdio>
 #include <cstdint>
 #include <cstring>
 
-namespace {
-
-bool ValidateNonEmptyInputs(const std::uint8_t* pSource,
-                            const std::uint8_t* pScratch,
-                            const std::uint8_t* pDestination) {
-  if (pSource == nullptr || pScratch == nullptr || pDestination == nullptr) {
-    return false;
-  }
-  if (pSource == pDestination || pSource == pScratch || pDestination == pScratch) {
-    return false;
-  }
-  return true;
+EncryptionLayer::EncryptionLayer() {
+    mCipherCount = 0;
+    for (std::size_t aCipherIndex=0; aCipherIndex<ENCRYPTION_LAYER_MAX_CIPHER_COUNT; aCipherIndex++) {
+        mCiphers[aCipherIndex] = nullptr;
+    }
 }
 
-}  // namespace
-
-void EncryptionLayer::AddCipher(std::unique_ptr<Crypt> pCipher) {
-  if (pCipher) {
-    mCiphers.push_back(std::move(pCipher));
-  }
+EncryptionLayer::~EncryptionLayer() {
+    for (std::size_t aCipherIndex=0; aCipherIndex<mCipherCount; aCipherIndex++) {
+        delete mCiphers[aCipherIndex];
+        mCiphers[aCipherIndex] = nullptr;
+    }
+    mCipherCount = 0;
 }
 
-void EncryptionLayer::ClearCiphers() { mCiphers.clear(); }
+void EncryptionLayer::AddCipher(Crypt *pCipher) {
+    if (mCipherCount < ENCRYPTION_LAYER_MAX_CIPHER_COUNT) {
+        mCiphers[mCipherCount] = pCipher;
+        mCipherCount++;
+    } else {
+        printf("Fatal, already at %zu ciphers, cannot add %p\n", mCipherCount, pCipher);
+        delete pCipher;
+    }
+}
 
-std::size_t EncryptionLayer::CipherCount() const { return mCiphers.size(); }
+void EncryptionLayer::Free() {
+    for (std::size_t aCipherIndex=0; aCipherIndex<mCipherCount; aCipherIndex++) {
+        delete mCiphers[aCipherIndex];
+        mCiphers[aCipherIndex] = nullptr;
+    }
+    mCipherCount = 0;
+}
 
 bool EncryptionLayer::SealData(const std::uint8_t* pSource,
                                std::uint8_t* pScratch,
@@ -48,7 +56,7 @@ bool EncryptionLayer::SealData(const std::uint8_t* pSource,
         return false;
     }
     
-    if (mCiphers.empty()) {
+    if (mCipherCount == 0) {
         if (pSource != pDestination) {
             std::memcpy(pDestination, pSource, pLength);
         }
@@ -56,17 +64,20 @@ bool EncryptionLayer::SealData(const std::uint8_t* pSource,
         return true;
     }
     
-    if (!ValidateNonEmptyInputs(pSource, pScratch, pDestination)) {
+    if ((pSource == pDestination) ||
+        (pSource == pScratch) ||
+        (pDestination == pScratch)) {
         SetCipherErrorCode(pErrorCode, CipherErrorCode::kAliasedBuffer);
         return false;
     }
     
     const std::uint8_t* aInput = pSource;
     std::uint8_t* aOutput =
-    ((mCiphers.size() & 1u) == 0u) ? pScratch : pDestination;
+    ((mCipherCount & 1U) == 0U) ? pScratch : pDestination;
     
-    for (const std::unique_ptr<Crypt>& aCipher : mCiphers) {
-        if (!aCipher) {
+    for (std::size_t aCipherIndex=0; aCipherIndex<mCipherCount; aCipherIndex++) {
+        Crypt *aCipher = mCiphers[aCipherIndex];
+        if (aCipher == nullptr) {
             SetCipherErrorCode(pErrorCode, CipherErrorCode::kNullCipher);
             return false;
         }
@@ -99,7 +110,7 @@ bool EncryptionLayer::UnsealData(const std::uint8_t* pSource,
         return false;
     }
     
-    if (mCiphers.empty()) {
+    if (mCipherCount == 0) {
         if (pSource != pDestination) {
             std::memcpy(pDestination, pSource, pLength);
         }
@@ -107,18 +118,22 @@ bool EncryptionLayer::UnsealData(const std::uint8_t* pSource,
         return true;
     }
     
-    if (!ValidateNonEmptyInputs(pSource, pScratch, pDestination)) {
+    if ((pSource == pDestination) ||
+        (pSource == pScratch) ||
+        (pDestination == pScratch)) {
         SetCipherErrorCode(pErrorCode, CipherErrorCode::kAliasedBuffer);
         return false;
     }
     
     const std::uint8_t* aInput = pSource;
     std::uint8_t* aOutput =
-    ((mCiphers.size() & 1u) == 0u) ? pScratch : pDestination;
+    ((mCipherCount & 1U) == 0U) ? pScratch : pDestination;
     
-    for (auto aIt = mCiphers.rbegin(); aIt != mCiphers.rend(); ++aIt) {
-        const std::unique_ptr<Crypt>& aCipher = *aIt;
-        if (!aCipher) {
+    std::size_t aCipherIndex = mCipherCount;
+    while (aCipherIndex > 0) {
+        aCipherIndex--;
+        Crypt *aCipher = mCiphers[aCipherIndex];
+        if (aCipher == nullptr) {
             SetCipherErrorCode(pErrorCode, CipherErrorCode::kNullCipher);
             return false;
         }
@@ -133,4 +148,3 @@ bool EncryptionLayer::UnsealData(const std::uint8_t* pSource,
     SetCipherErrorCode(pErrorCode, CipherErrorCode::kNone);
     return true;
 }
-

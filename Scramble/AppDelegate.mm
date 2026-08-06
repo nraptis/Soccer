@@ -10,6 +10,7 @@
 #include "FileIO.hpp"
 #include "Soccer2.hpp"
 #include "Composer/LaneCombinations.hpp"
+#include "Composer/SoccerFoldingTool.hpp"
 #include "Composer/SoccerTypes.hpp"
 
 #include <cstddef>
@@ -18,15 +19,11 @@
 #include <cstdlib>
 #include <cstring>
 #include <algorithm>
+#include <limits>
 #include <string>
 #include <vector>
 
 namespace {
-
-bool IsRunningUnderXCTest() {
-    return (std::getenv("XCTestConfigurationFilePath") != nullptr) ||
-    (std::getenv("XCTestBundlePath") != nullptr);
-}
 
 using LaneCountOptions = std::vector<std::uint8_t>;
 using LaneStageOptions = std::vector<LaneCountOptions>;
@@ -631,84 +628,25 @@ void Make10_000Challnge() {
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
-    
-    
-    if (IsRunningUnderXCTest()) {
-        printf("RUNNING TEST ===> IGNORING APP DELEGATE CODE...\n");
-        return;
-    }
+    constexpr std::uint64_t aRunSeed = 0xD1B54F32DC92ED03ULL;
+    std::size_t aRandomTrialCount = 250U;
 
-    /*
-    RunReadmeSoccerExample();
-    
-    std::uint8_t aPassword[] = {'s', 'o', 'c', 'c', 'e', 'r'};
-    std::uint8_t *aPasswordData = aPassword;
-    int aPasswordLength = static_cast<int>(sizeof(aPassword));
-    
-    std::uint32_t aAckWord = 0U;
-    
-    Soccer::AttemptSeed_Encrypt(aPasswordData,
-                                aPasswordLength,
-                                11746948407655524690U,
-                                &aAckWord);
-    
-    std::printf("\nSoccer seed ack: %08X\n",
-                static_cast<unsigned int>(aAckWord));
-    
-    std::vector<std::vector<std::uint8_t>> aOriginalMaterials(16U);
-    const std::uint8_t *aAvalancheReferenceMaterials[16];
-    Soccer2::InitializeAvalancheReferenceMaterials(aAvalancheReferenceMaterials);
-    for (std::size_t aMaterialIndex = 0U; aMaterialIndex < 16U; aMaterialIndex += 1U) {
-        const std::uint8_t *aMaterial = aAvalancheReferenceMaterials[aMaterialIndex];
-        aOriginalMaterials[aMaterialIndex].assign(aMaterial,
-                                                   aMaterial + SOCCER_BLOCK_SIZE);
-    }
-    
-    const std::vector<const char *> aMaterialNames = {
-        "mMaterialA",
-        "mMaterialB",
-        "mMaterialC",
-        "mMaterialD",
-        "mMaterialE",
-        "mMaterialF",
-        "mMaterialG",
-        "mMaterialH",
-        "mMaterialI",
-        "mMaterialJ",
-        "mMaterialK",
-        "mMaterialL",
-        "mMaterialM",
-        "mMaterialN",
-        "mMaterialO",
-        "mMaterialP"
-    };
-    
-    PrintSoccerByteMaterialGridPair("Soccer byte material grid: mats A-D, E-H",
-                                    aOriginalMaterials, aMaterialNames, 0U, 4U);
-    PrintSoccerByteMaterialGridPair("Soccer byte material grid: mats A-D, I-L",
-                                    aOriginalMaterials, aMaterialNames, 0U, 8U);
-    PrintSoccerByteMaterialGridPair("Soccer byte material grid: mats A-D, M-P",
-                                    aOriginalMaterials, aMaterialNames, 0U, 12U);
-    PrintSoccerByteMaterialGridPair("Soccer byte material grid: mats E-H, I-L",
-                                    aOriginalMaterials, aMaterialNames, 4U, 8U);
-    PrintSoccerByteMaterialGridPair("Soccer byte material grid: mats E-H, M-P",
-                                    aOriginalMaterials, aMaterialNames, 4U, 12U);
-    PrintSoccerByteMaterialGridPair("Soccer byte material grid: mats I-L, M-P",
-                                    aOriginalMaterials, aMaterialNames, 8U, 12U);
+    while (true) {
+        std::printf("SoccerFoldingTool: starting %zu trials per roll.\n",
+                    aRandomTrialCount);
+        if (!SoccerFoldingTool::Run(aRandomTrialCount, aRunSeed)) {
+            std::printf("SoccerFoldingTool failed at %zu trials per roll.\n",
+                        aRandomTrialCount);
+            return;
+        }
 
-    PrintSoccerBitMaterialGridPair("Soccer bit material grid: mats A-D, E-H",
-                                   aOriginalMaterials, aMaterialNames, 0U, 4U);
-    PrintSoccerBitMaterialGridPair("Soccer bit material grid: mats A-D, I-L",
-                                   aOriginalMaterials, aMaterialNames, 0U, 8U);
-    PrintSoccerBitMaterialGridPair("Soccer bit material grid: mats A-D, M-P",
-                                   aOriginalMaterials, aMaterialNames, 0U, 12U);
-    PrintSoccerBitMaterialGridPair("Soccer bit material grid: mats E-H, I-L",
-                                   aOriginalMaterials, aMaterialNames, 4U, 8U);
-    PrintSoccerBitMaterialGridPair("Soccer bit material grid: mats E-H, M-P",
-                                   aOriginalMaterials, aMaterialNames, 4U, 12U);
-    PrintSoccerBitMaterialGridPair("Soccer bit material grid: mats I-L, M-P",
-                                   aOriginalMaterials, aMaterialNames, 8U, 12U);
-    */
+        if (aRandomTrialCount >
+            (std::numeric_limits<std::size_t>::max() / 2U)) {
+            std::printf("SoccerFoldingTool: trial count cannot be doubled again.\n");
+            return;
+        }
+        aRandomTrialCount *= 2U;
+    }
 }
 
 @end

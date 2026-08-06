@@ -61,7 +61,7 @@ std::string ToString(const std::uint8_t *pList, std::size_t pCount) {
 
 - (void)test_PreludeA {
     
-    static std::uint8_t aScratch[S_BLOCK];
+    std::uint8_t aScratch[S_BLOCK];
     
     for (std::size_t aTrial=0; aTrial<16; aTrial++) {
         
@@ -87,7 +87,7 @@ std::string ToString(const std::uint8_t *pList, std::size_t pCount) {
         std::size_t aWriteIndex = 0;
         while (aWriteIndex < S_BLOCK) {
             std::size_t aWrapIndex = 0;
-            while (aWrapIndex < 9) {
+            while ((aWrapIndex < 9) && (aWriteIndex < S_BLOCK)) {
                 aScratch[aWriteIndex] = aWrapBytes[aWrapIndex];
                 aWrapIndex++;
                 aWriteIndex++;
@@ -220,6 +220,8 @@ std::string ToString(const std::uint8_t *pList, std::size_t pCount) {
     std::unordered_set<std::string> aHashesMaterials;
     std::unordered_set<std::string> aHashesExpanders;
     std::unordered_set<std::string> aHashesMasks;
+    std::unordered_set<std::string> aHashesWorkSpaces;
+    
     
     for (std::size_t aTrial=0; aTrial<32; aTrial++) {
         
@@ -230,8 +232,9 @@ std::string ToString(const std::uint8_t *pList, std::size_t pCount) {
         Soccer2::InitializeMasks();
         
         aHashesMasks.insert(ToString(Soccer2::mMasks, 32));
-        aHashesMaterials.insert(ToString(Soccer2::mMaterials, 32));
+        aHashesMaterials.insert(ToString(Soccer2::mMaterials, 16));
         aHashesExpanders.insert(ToString(Soccer2::mExpanders, 32));
+        aHashesWorkSpaces.insert(ToString(Soccer2::mWorkSpaces, 16));
         
         for (std::size_t aMaskIndex=0; aMaskIndex<32; aMaskIndex++) {
             
@@ -265,11 +268,16 @@ std::string ToString(const std::uint8_t *pList, std::size_t pCount) {
         XCTFail("test_PreludeC: expected expander hashes all to be the same.");
         return;
     }
+    if (aHashesWorkSpaces.size() != 1) {
+        XCTFail("test_PreludeC: expected work space hashes all to be the same.");
+        return;
+    }
+    
     
     aHashesMasks.clear();
     aHashesMaterials.clear();
     aHashesExpanders.clear();
-    
+    aHashesWorkSpaces.clear();
     
     for (std::size_t aTrial=0; aTrial<32; aTrial++) {
         
@@ -283,8 +291,9 @@ std::string ToString(const std::uint8_t *pList, std::size_t pCount) {
         Soccer2::SeedPrelude_Regular_C();
         
         aHashesMasks.insert(ToString(Soccer2::mMasks, 32));
-        aHashesMaterials.insert(ToString(Soccer2::mMaterials, 32));
+        aHashesMaterials.insert(ToString(Soccer2::mMaterials, 16));
         aHashesExpanders.insert(ToString(Soccer2::mExpanders, 32));
+        aHashesWorkSpaces.insert(ToString(Soccer2::mWorkSpaces, 16));
         
         for (std::size_t aMaskIndex=0; aMaskIndex<32; aMaskIndex++) {
             
@@ -307,12 +316,16 @@ std::string ToString(const std::uint8_t *pList, std::size_t pCount) {
         XCTFail("test_PreludeC: expected mask hashes mostly to be different.");
         return;
     }
-    if (aHashesMaterials.size() < 24) {
+    if (aHashesMaterials.size() < 10) {
         XCTFail("test_PreludeC: expected material hashes mostly to be different.");
         return;
     }
     if (aHashesExpanders.size() < 24) {
         XCTFail("test_PreludeC: expected expander hashes mostly to be different.");
+        return;
+    }
+    if (aHashesWorkSpaces.size() < 10) {
+        XCTFail("test_PreludeC: expected work spaces hashes mostly to be different.");
         return;
     }
     

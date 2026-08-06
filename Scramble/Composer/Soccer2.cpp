@@ -23,59 +23,6 @@
 static_assert((SOCCER_BLOCK_SIZE % S_BLOCK) == 0U);
 static_assert(BLOCK_COUNT >= WARM_UP_BLOCKS);
 
-namespace {
-
-template <typename T>
-void DebugCheckZero(const char *pName,
-                    std::size_t pCount,
-                    const T *pValues) {
-    if (pValues == nullptr) {
-        printf("DebugCheckZero: %s is null.\n", pName);
-        return;
-    }
-
-    for (std::size_t aIndex=0U; aIndex<pCount; aIndex++) {
-        if (pValues[aIndex] != static_cast<T>(0)) {
-            return;
-        }
-    }
-
-    printf("DebugCheckZero: %s is all zero at %p.\n",
-           pName,
-           static_cast<const void *>(pValues));
-}
-
-void DebugCheckZero(const char *pName,
-                    const TwistDomainSeedRoundMaterial &pMaterial) {
-    DebugCheckZero(pName, S_SALT, pMaterial.mSaltA);
-    DebugCheckZero(pName, S_SALT, pMaterial.mSaltB);
-    DebugCheckZero(pName, S_SALT, pMaterial.mSaltC);
-    DebugCheckZero(pName, S_SALT, pMaterial.mSaltD);
-    DebugCheckZero(pName, S_SALT, pMaterial.mSaltE);
-    DebugCheckZero(pName, S_SALT, pMaterial.mSaltF);
-    DebugCheckZero(pName, S_SALT, pMaterial.mSaltG);
-    DebugCheckZero(pName, S_SALT, pMaterial.mSaltH);
-}
-
-void DebugCheckZero(const char *pName,
-                    const TwistDomainSaltSet &pSaltSet) {
-    DebugCheckZero(pName, pSaltSet.mOrbiterAssign);
-    DebugCheckZero(pName, pSaltSet.mOrbiterUpdate);
-    DebugCheckZero(pName, pSaltSet.mWandererUpdate);
-}
-
-void DebugCheckZero(const char *pName,
-                    const TwistDomainBundle &pDomainBundle) {
-    DebugCheckZero(pName, pDomainBundle.mKeyRotateASalts);
-    DebugCheckZero(pName, pDomainBundle.mKeyRotateBSalts);
-    DebugCheckZero(pName, pDomainBundle.mKeySpawnASalts);
-    DebugCheckZero(pName, pDomainBundle.mKeySpawnBSalts);
-    DebugCheckZero(pName, pDomainBundle.mSeedSalts);
-    DebugCheckZero(pName, pDomainBundle.mTwistSalts);
-}
-
-}
-
 std::uint8_t                                Soccer2::mMaterialA[SOCCER_BLOCK_SIZE];
 std::uint8_t                                Soccer2::mMaterialB[SOCCER_BLOCK_SIZE];
 std::uint8_t                                Soccer2::mMaterialC[SOCCER_BLOCK_SIZE];
@@ -152,13 +99,22 @@ TwistWorkSpace                              Soccer2::mWorkSpaceP;
 
 std::uint8_t                                Soccer2::mRandom[S_BLOCK];
 std::uint8_t                                Soccer2::mScratch[SOCCER_BLOCK_SIZE];
+std::uint8_t                                Soccer2::mCryptTemp[SOCCER_BLOCK_SIZE];
 
-std::uint8_t                                cCrushA[S_BLOCK];
-std::uint8_t                                cCrushB[S_BLOCK];
-std::uint8_t                                cCrushC[S_BLOCK];
-std::uint8_t                                cCrushD[S_BLOCK];
+std::uint8_t                                Soccer2::mCollapseLaneA[SOCCER_BLOCK_SIZE];
+std::uint8_t                                Soccer2::mCollapseLaneB[SOCCER_BLOCK_SIZE];
+std::uint8_t                                Soccer2::mCollapseLaneC[SOCCER_BLOCK_SIZE];
+std::uint8_t                                Soccer2::mCollapseLaneD[SOCCER_BLOCK_SIZE];
 
-std::uint8_t                                cCryptTemp[SOCCER_BLOCK_SIZE];
+std::uint8_t                                Soccer2::mShrinkLaneA[SOCCER_BLOCK_SIZE_L1];
+std::uint8_t                                Soccer2::mShrinkLaneB[SOCCER_BLOCK_SIZE_L1];
+std::uint8_t                                Soccer2::mShrinkLaneC[SOCCER_BLOCK_SIZE_L1];
+std::uint8_t                                Soccer2::mShrinkLaneD[SOCCER_BLOCK_SIZE_L1];
+
+std::uint8_t                                Soccer2::mCrushA[S_BLOCK];
+std::uint8_t                                Soccer2::mCrushB[S_BLOCK];
+std::uint8_t                                Soccer2::mCrushC[S_BLOCK];
+std::uint8_t                                Soccer2::mCrushD[S_BLOCK];
 
 std::uint8_t                                Soccer2::mMasks[32];
 
@@ -179,8 +135,7 @@ std::size_t                                 Soccer2::mClaimedMaterialCount;
 TwistWorkSpace                              *Soccer2::mClaimedWorkSpaces[16];
 std::size_t                                 Soccer2::mClaimedWorkSpaceCount;
 
-LayeredCrypt                                Soccer2::mCrypt;
-EncryptionLayer                             Soccer2::mFinalL3;
+Cryptex                                     Soccer2::mCryptex;
 
 std::uint8_t                                *Soccer2::mShuffleMaterials[16];
 TwistExpander                               *Soccer2::mShuffleExpanders[32];
@@ -213,11 +168,19 @@ void Soccer2::Zero() {
 
     std::memset(mRandom, 0, sizeof(mRandom));
     std::memset(mScratch, 0, sizeof(mScratch));
-    std::memset(cCrushA, 0, sizeof(cCrushA));
-    std::memset(cCrushB, 0, sizeof(cCrushB));
-    std::memset(cCrushC, 0, sizeof(cCrushC));
-    std::memset(cCrushD, 0, sizeof(cCrushD));
-    std::memset(cCryptTemp, 0, sizeof(cCryptTemp));
+    std::memset(mCollapseLaneA, 0, sizeof(mCollapseLaneA));
+    std::memset(mCollapseLaneB, 0, sizeof(mCollapseLaneB));
+    std::memset(mCollapseLaneC, 0, sizeof(mCollapseLaneC));
+    std::memset(mCollapseLaneD, 0, sizeof(mCollapseLaneD));
+    std::memset(mShrinkLaneA, 0, sizeof(mShrinkLaneA));
+    std::memset(mShrinkLaneB, 0, sizeof(mShrinkLaneB));
+    std::memset(mShrinkLaneC, 0, sizeof(mShrinkLaneC));
+    std::memset(mShrinkLaneD, 0, sizeof(mShrinkLaneD));
+    std::memset(mCrushA, 0, sizeof(mCrushA));
+    std::memset(mCrushB, 0, sizeof(mCrushB));
+    std::memset(mCrushC, 0, sizeof(mCrushC));
+    std::memset(mCrushD, 0, sizeof(mCrushD));
+    std::memset(mCryptTemp, 0, sizeof(mCryptTemp));
 
     mWorkSpaceA.Zero();
     mWorkSpaceB.Zero();
@@ -307,10 +270,11 @@ void Soccer2::Zero() {
     mClaimedMaterialCount = 0U;
     mClaimedWorkSpaceCount = 0U;
 
-    mCrypt.Layer1().ClearCiphers();
-    mCrypt.Layer2().ClearCiphers();
-    mCrypt.Layer3().ClearCiphers();
-    mFinalL3.ClearCiphers();
+    
+    //mCrypt.Layer1().ClearCiphers();
+    //mCrypt.Layer2().ClearCiphers();
+    //mCrypt.Layer3().ClearCiphers();
+    //mFinalL3.ClearCiphers();
 }
 
 
@@ -452,16 +416,6 @@ void Soccer2::TwistRound(std::size_t pBlockIndex) {
     const std::size_t aDestinationByteIndex = pBlockIndex * S_BLOCK;
 
     for (std::size_t aLaneIndex=0U; aLaneIndex<aComplexity; aLaneIndex++) {
-        {
-            // test
-            DebugCheckZero("source", S_BLOCK, mSources[aLaneIndex]);
-            DebugCheckZero("cross 0", S_BLOCK, mCross[0][aLaneIndex]);
-            DebugCheckZero("cross 1", S_BLOCK, mCross[1][aLaneIndex]);
-            DebugCheckZero("cross 2", S_BLOCK, mCross[2][aLaneIndex]);
-            DebugCheckZero("cross 3", S_BLOCK, mCross[3][aLaneIndex]);
-            DebugCheckZero("salt", mWorkSpaces[aLaneIndex]->mDomainBundle);
-        }
-
         mExpanders[aLaneIndex]->TwistBlock(mWorkSpaces[aLaneIndex],
                                             mSources[aLaneIndex],
                                             mCross[0][aLaneIndex],
@@ -533,22 +487,64 @@ void Soccer2::SeedPrologue_Regular_A(std::uint8_t *pPassword,
             ShuffleMEWBlockZero(&mClaimedMaterials[mClaimedMaterialCount - 1U][aWarmUpStartIndex]);
         }
     }
-    printf("Claimed a total of %zu materials.\n", mClaimedMaterialCount);
-    printf("Claimed a total of %zu expanders.\n", mClaimedExpanderCount);
-    printf("Claimed a total of %zu work spaces.\n", mClaimedWorkSpaceCount);
 }
 
 void Soccer2::SeedPrologue_Regular_B() {
-    
-
-    InitializeExpanders();
-    
     for (std::size_t aIndex=0U; aIndex<mClaimedMaterialCount; aIndex++) {
         mMaterials[aIndex] = mClaimedMaterials[aIndex];
     }
-    
+
+    std::size_t aMaterialWriteIndex = mClaimedMaterialCount;
+    for (std::size_t aShuffledIndex=0U; aShuffledIndex<16U; aShuffledIndex++) {
+        bool aIsClaimed = false;
+        for (std::size_t aClaimedIndex=0U; aClaimedIndex<mClaimedMaterialCount; aClaimedIndex++) {
+            if (mShuffleMaterials[aShuffledIndex] == mClaimedMaterials[aClaimedIndex]) {
+                aIsClaimed = true;
+                break;
+            }
+        }
+        if (!aIsClaimed) {
+            mMaterials[aMaterialWriteIndex] = mShuffleMaterials[aShuffledIndex];
+            aMaterialWriteIndex++;
+        }
+    }
+
+    for (std::size_t aIndex=0U; aIndex<mClaimedExpanderCount; aIndex++) {
+        mExpanders[aIndex] = mClaimedExpanders[aIndex];
+    }
+
+    std::size_t aExpanderWriteIndex = mClaimedExpanderCount;
+    for (std::size_t aShuffledIndex=0U; aShuffledIndex<32U; aShuffledIndex++) {
+        bool aIsClaimed = false;
+        for (std::size_t aClaimedIndex=0U; aClaimedIndex<mClaimedExpanderCount; aClaimedIndex++) {
+            if (mShuffleExpanders[aShuffledIndex] == mClaimedExpanders[aClaimedIndex]) {
+                aIsClaimed = true;
+                break;
+            }
+        }
+        if (!aIsClaimed) {
+            mExpanders[aExpanderWriteIndex] = mShuffleExpanders[aShuffledIndex];
+            aExpanderWriteIndex++;
+        }
+    }
+
     for (std::size_t aIndex=0U; aIndex<mClaimedWorkSpaceCount; aIndex++) {
         mWorkSpaces[aIndex] = mClaimedWorkSpaces[aIndex];
+    }
+
+    std::size_t aWorkSpaceWriteIndex = mClaimedWorkSpaceCount;
+    for (std::size_t aShuffledIndex=0U; aShuffledIndex<16U; aShuffledIndex++) {
+        bool aIsClaimed = false;
+        for (std::size_t aClaimedIndex=0U; aClaimedIndex<mClaimedWorkSpaceCount; aClaimedIndex++) {
+            if (mShuffleWorkSpaces[aShuffledIndex] == mClaimedWorkSpaces[aClaimedIndex]) {
+                aIsClaimed = true;
+                break;
+            }
+        }
+        if (!aIsClaimed) {
+            mWorkSpaces[aWorkSpaceWriteIndex] = mShuffleWorkSpaces[aShuffledIndex];
+            aWorkSpaceWriteIndex++;
+        }
     }
 
     const std::size_t aFirstWarmUpBlockIndex = BLOCK_COUNT - WARM_UP_BLOCKS;
@@ -601,8 +597,6 @@ void Soccer2::SeedPrologue_Regular_B() {
         mCross[2][2] = mScratch; mCross[2][13] = mScratch;
         mCross[3][3] = mScratch; mCross[3][12] = mScratch;
     }
-    
-    
 }
 
 bool Soccer2::SeedPrologue_Regular_C(std::uint32_t *pAckWord,
@@ -695,12 +689,7 @@ void Soccer2::SeedPrologue_Regular_D() {
     mClaimedWorkSpaceCount = 0U;
 }
 
-
 void Soccer2::FoldMaterialsIntoRandomForBlock_4(std::size_t pBlockIndex) {
-    if ((pBlockIndex >= BLOCK_COUNT) || (mClaimedMaterialCount < 4U)) {
-        return;
-    }
-
     const std::size_t aStartIndex = pBlockIndex * S_BLOCK;
     for (std::size_t aByteIndex=0U; aByteIndex<S_BLOCK; aByteIndex++) {
         const std::size_t aMaterialIndex = aStartIndex + aByteIndex;
@@ -715,10 +704,6 @@ void Soccer2::FoldMaterialsIntoRandomForBlock_4(std::size_t pBlockIndex) {
 }
 
 void Soccer2::FoldMaterialsIntoRandomForBlock_8(std::size_t pBlockIndex) {
-    if ((pBlockIndex >= BLOCK_COUNT) || (mClaimedMaterialCount < 8U)) {
-        return;
-    }
-
     const std::size_t aStartIndex = pBlockIndex * S_BLOCK;
     for (std::size_t aByteIndex=0U; aByteIndex<S_BLOCK; aByteIndex++) {
         const std::size_t aMaterialIndex = aStartIndex + aByteIndex;
@@ -737,10 +722,6 @@ void Soccer2::FoldMaterialsIntoRandomForBlock_8(std::size_t pBlockIndex) {
 }
 
 void Soccer2::FoldMaterialsIntoRandomForBlock_16(std::size_t pBlockIndex) {
-    if ((pBlockIndex >= BLOCK_COUNT) || (mClaimedMaterialCount < 16U)) {
-        return;
-    }
-
     const std::size_t aStartIndex = pBlockIndex * S_BLOCK;
     for (std::size_t aByteIndex=0U; aByteIndex<S_BLOCK; aByteIndex++) {
         const std::size_t aMaterialIndex = aStartIndex + aByteIndex;
@@ -750,36 +731,36 @@ void Soccer2::FoldMaterialsIntoRandomForBlock_16(std::size_t pBlockIndex) {
             (static_cast<std::uint32_t>(mMaterials[ 1][aMaterialIndex]) <<  8U) |
             (static_cast<std::uint32_t>(mMaterials[ 2][aMaterialIndex]) << 16U) |
             (static_cast<std::uint32_t>(mMaterials[ 3][aMaterialIndex]) << 24U);
-        cCrushA[aByteIndex] = static_cast<std::uint8_t>(TwistMix32::DiffuseA(aCrushIngressA));
+        mCrushA[aByteIndex] = static_cast<std::uint8_t>(TwistMix32::DiffuseA(aCrushIngressA));
 
         const std::uint32_t aCrushIngressB =
             (static_cast<std::uint32_t>(mMaterials[ 4][aMaterialIndex]) <<  0U) |
             (static_cast<std::uint32_t>(mMaterials[ 5][aMaterialIndex]) <<  8U) |
             (static_cast<std::uint32_t>(mMaterials[ 6][aMaterialIndex]) << 16U) |
             (static_cast<std::uint32_t>(mMaterials[ 7][aMaterialIndex]) << 24U);
-        cCrushB[aByteIndex] = static_cast<std::uint8_t>(TwistMix32::DiffuseA(aCrushIngressB));
+        mCrushB[aByteIndex] = static_cast<std::uint8_t>(TwistMix32::DiffuseA(aCrushIngressB));
 
         const std::uint32_t aCrushIngressC =
             (static_cast<std::uint32_t>(mMaterials[ 8][aMaterialIndex]) <<  0U) |
             (static_cast<std::uint32_t>(mMaterials[ 9][aMaterialIndex]) <<  8U) |
             (static_cast<std::uint32_t>(mMaterials[10][aMaterialIndex]) << 16U) |
             (static_cast<std::uint32_t>(mMaterials[11][aMaterialIndex]) << 24U);
-        cCrushC[aByteIndex] = static_cast<std::uint8_t>(TwistMix32::DiffuseA(aCrushIngressC));
+        mCrushC[aByteIndex] = static_cast<std::uint8_t>(TwistMix32::DiffuseA(aCrushIngressC));
 
         const std::uint32_t aCrushIngressD =
             (static_cast<std::uint32_t>(mMaterials[12][aMaterialIndex]) <<  0U) |
             (static_cast<std::uint32_t>(mMaterials[13][aMaterialIndex]) <<  8U) |
             (static_cast<std::uint32_t>(mMaterials[14][aMaterialIndex]) << 16U) |
             (static_cast<std::uint32_t>(mMaterials[15][aMaterialIndex]) << 24U);
-        cCrushD[aByteIndex] = static_cast<std::uint8_t>(TwistMix32::DiffuseA(aCrushIngressD));
+        mCrushD[aByteIndex] = static_cast<std::uint8_t>(TwistMix32::DiffuseA(aCrushIngressD));
     }
 
     for (std::size_t aByteIndex=0U; aByteIndex<S_BLOCK; aByteIndex++) {
         const std::uint32_t aRandomIngress =
-            (static_cast<std::uint32_t>(cCrushA[aByteIndex]) <<  0U) |
-            (static_cast<std::uint32_t>(cCrushB[aByteIndex]) <<  8U) |
-            (static_cast<std::uint32_t>(cCrushC[aByteIndex]) << 16U) |
-            (static_cast<std::uint32_t>(cCrushD[aByteIndex]) << 24U);
+            (static_cast<std::uint32_t>(mCrushA[aByteIndex]) <<  0U) |
+            (static_cast<std::uint32_t>(mCrushB[aByteIndex]) <<  8U) |
+            (static_cast<std::uint32_t>(mCrushC[aByteIndex]) << 16U) |
+            (static_cast<std::uint32_t>(mCrushD[aByteIndex]) << 24U);
 
         mRandom[aByteIndex] = static_cast<std::uint8_t>(TwistMix32::DiffuseA(aRandomIngress));
     }
