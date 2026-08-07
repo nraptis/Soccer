@@ -111,13 +111,29 @@ public:
     static std::uint8_t                         mShrinkLaneB[SOCCER_BLOCK_SIZE_L1];
     static std::uint8_t                         mShrinkLaneC[SOCCER_BLOCK_SIZE_L1];
     static std::uint8_t                         mShrinkLaneD[SOCCER_BLOCK_SIZE_L1];
+    
+    static std::uint8_t                         mCompressLaneA[SOCCER_BLOCK_SIZE_C2];
+    static std::uint8_t                         mCompressLaneB[SOCCER_BLOCK_SIZE_C2];
+    static std::uint8_t                         mCompressLaneC[SOCCER_BLOCK_SIZE_C2];
+    static std::uint8_t                         mCompressLaneD[SOCCER_BLOCK_SIZE_C2];
+    
+    //static std::uint8_t                         mCompactLaneA[SOCCER_BLOCK_SIZE_C1];
+    //static std::uint8_t                         mCompactLaneB[SOCCER_BLOCK_SIZE_C1];
+    //static std::uint8_t                         mCompactLaneC[SOCCER_BLOCK_SIZE_C1];
+    //static std::uint8_t                         mCompactLaneD[SOCCER_BLOCK_SIZE_C1];
 
+    // CrushFold_4 writes only [0, SOCCER_BLOCK_SIZE_C1) in these S_BLOCK buffers.
     static std::uint8_t                         mCrushA[S_BLOCK];
     static std::uint8_t                         mCrushB[S_BLOCK];
     static std::uint8_t                         mCrushC[S_BLOCK];
     static std::uint8_t                         mCrushD[S_BLOCK];
     
-
+    static std::size_t                          mIndexListA[2048];
+    static std::size_t                          mIndexListB[2048];
+    
+    static std::uint64_t                        mRolledA[256];
+    static std::uint64_t                        mRolledB[256];
+    
     static void                                 Zero();
     
     static void                                 ConfigureTestBuffers(std::uint32_t pTestBlockLength); // SOCCER_BLOCK_SIZE (L3 size)
@@ -191,7 +207,8 @@ public:
     
     
     
-    static void                                 SeedEpilogue();
+    static void                                 SeedEpilogue_Regular_A();
+    
     
     static void                                 ShuffleMEWBlockZero(std::uint8_t *pMaterial);
     

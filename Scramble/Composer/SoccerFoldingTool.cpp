@@ -36,11 +36,13 @@ struct SoccerFoldingScore {
 struct SoccerFoldingFinalScore {
     bool mCoveragePassed;
     bool mSlotBalancePassed;
+    bool mSourceLaneMultiplicityPassed;
     std::size_t mExpectedSourceBlockCount;
     std::size_t mUsedSourceBlockCount;
     std::size_t mUniqueSourceBlockCount;
     std::size_t mDuplicateSourceBlockCount;
     std::size_t mOutOfRangeItemCount;
+    std::size_t mInvalidSourceLaneMultiplicityRollCount;
     std::size_t mMinimumDistance;
     double mAverageDistance;
     double mCoverageScore;
@@ -199,6 +201,54 @@ static bool HasAvailableBlock(const std::vector<std::size_t> &pUnusedBlocks,
     return false;
 }
 
+static std::size_t SourceLaneUseLimitPerRoll(
+    const SoccerFoldingToolSpecification &pSpecification,
+    const SoccerFoldingDimensions &pDimensions) {
+    return (pSpecification.mFoldItemCount +
+            pDimensions.mInputLaneCount - 1U) /
+           pDimensions.mInputLaneCount;
+}
+
+static std::size_t CountSourceLaneUses(const SoccerFoldingRoll &pRoll,
+                                       std::size_t pSourceLaneIndex) {
+    std::size_t aUseCount = 0U;
+    for (const SoccerFoldingItem &aItem : pRoll) {
+        if (aItem.mSourceLaneIndex == pSourceLaneIndex) {
+            aUseCount++;
+        }
+    }
+    return aUseCount;
+}
+
+static bool CanUseSourceLane(
+    const SoccerFoldingToolSpecification &pSpecification,
+    const SoccerFoldingDimensions &pDimensions,
+    const std::vector<std::size_t> &pUnusedBlocks,
+    const SoccerFoldingRoll &pRoll,
+    std::size_t pSourceLaneIndex) {
+    if (CountSourceLaneUses(pRoll, pSourceLaneIndex) >=
+        SourceLaneUseLimitPerRoll(pSpecification, pDimensions)) {
+        return false;
+    }
+    return HasAvailableBlock(pUnusedBlocks, pRoll);
+}
+
+static bool HasValidSourceLaneMultiplicity(
+    const SoccerFoldingToolSpecification &pSpecification,
+    const SoccerFoldingDimensions &pDimensions,
+    const SoccerFoldingRoll &pRoll) {
+    const std::size_t aUseLimit =
+        SourceLaneUseLimitPerRoll(pSpecification, pDimensions);
+    for (std::size_t aSourceLaneIndex=0U;
+         aSourceLaneIndex<pDimensions.mInputLaneCount;
+         aSourceLaneIndex++) {
+        if (CountSourceLaneUses(pRoll, aSourceLaneIndex) > aUseLimit) {
+            return false;
+        }
+    }
+    return true;
+}
+
 static bool PickAvailableBlock(const std::vector<std::size_t> &pUnusedBlocks,
                                const SoccerFoldingRoll &pRoll,
                                std::mt19937_64 &pGenerator,
@@ -259,7 +309,14 @@ static bool MakeRandomRoll(
         for (std::size_t aSourceLaneIndex=0U;
              aSourceLaneIndex<pDimensions.mInputLaneCount;
              aSourceLaneIndex++) {
-            if (HasAvailableBlock(pUnusedBlocks[aSourceLaneIndex], pRoll)) {
+            if ((pDestinationSlotSourceLaneUseCounts[aSlotIndex]
+                                                     [aSourceLaneIndex] <
+                 pDimensions.mSourceLaneSlotUseCountPerOutputLane) &&
+                CanUseSourceLane(pSpecification,
+                                 pDimensions,
+                                 pUnusedBlocks[aSourceLaneIndex],
+                                 pRoll,
+                                 aSourceLaneIndex)) {
                 aMinimumSlotUseCount = std::min(
                     aMinimumSlotUseCount,
                     pDestinationSlotSourceLaneUseCounts[aSlotIndex]
@@ -279,7 +336,11 @@ static bool MakeRandomRoll(
             if ((pDestinationSlotSourceLaneUseCounts[aSlotIndex]
                                                     [aSourceLaneIndex] ==
                  aMinimumSlotUseCount) &&
-                HasAvailableBlock(pUnusedBlocks[aSourceLaneIndex], pRoll)) {
+                CanUseSourceLane(pSpecification,
+                                 pDimensions,
+                                 pUnusedBlocks[aSourceLaneIndex],
+                                 pRoll,
+                                 aSourceLaneIndex)) {
                 aMinimumUseCount = std::min(
                     aMinimumUseCount,
                     aTemporaryUseCounts[aSourceLaneIndex]);
@@ -298,8 +359,11 @@ static bool MakeRandomRoll(
                 (pDestinationSlotSourceLaneUseCounts[aSlotIndex]
                                                     [aSourceLaneIndex] ==
                  aMinimumSlotUseCount) &&
-                HasAvailableBlock(pUnusedBlocks[aSourceLaneIndex],
-                                  pRoll)) {
+                CanUseSourceLane(pSpecification,
+                                 pDimensions,
+                                 pUnusedBlocks[aSourceLaneIndex],
+                                 pRoll,
+                                 aSourceLaneIndex)) {
                 aMaximumRemainingBlockCount = std::max(
                     aMaximumRemainingBlockCount,
                     aTemporaryRemainingBlockCounts[aSourceLaneIndex]);
@@ -318,8 +382,11 @@ static bool MakeRandomRoll(
                  aMinimumSlotUseCount) &&
                 (aTemporaryRemainingBlockCounts[aSourceLaneIndex] ==
                  aMaximumRemainingBlockCount) &&
-                HasAvailableBlock(pUnusedBlocks[aSourceLaneIndex],
-                                  pRoll)) {
+                CanUseSourceLane(pSpecification,
+                                 pDimensions,
+                                 pUnusedBlocks[aSourceLaneIndex],
+                                 pRoll,
+                                 aSourceLaneIndex)) {
                 aEligibleSourceLanes.push_back(aSourceLaneIndex);
             }
         }
@@ -551,6 +618,14 @@ static bool GenerateRolls(const SoccerFoldingToolSpecification &pSpecification,
         }
     }
 
+    for (const SoccerFoldingRoll &aRoll : pRolls) {
+        if (!HasValidSourceLaneMultiplicity(pSpecification,
+                                            pDimensions,
+                                            aRoll)) {
+            return false;
+        }
+    }
+
     for (const std::vector<std::size_t> &aDestinationCounts :
          aSourceLaneUseCounts) {
         for (const std::size_t aUseCount : aDestinationCounts) {
@@ -600,6 +675,7 @@ static SoccerFoldingAnalysis AnalyzeFinalRolls(
     std::size_t aUsedSourceBlockCount = 0U;
     std::size_t aDuplicateSourceBlockCount = 0U;
     std::size_t aOutOfRangeItemCount = 0U;
+    std::size_t aInvalidSourceLaneMultiplicityRollCount = 0U;
 
     for (std::size_t aRollIndex=0U; aRollIndex<pRolls.size(); aRollIndex++) {
         const std::size_t aDestinationLaneIndex =
@@ -627,6 +703,12 @@ static SoccerFoldingAnalysis AnalyzeFinalRolls(
             aHistory[aDestinationLaneIndex]
                     [aSlotIndex]
                     [aItem.mSourceLaneIndex].insert(aItem.mSourceBlockIndex);
+        }
+
+        if (!HasValidSourceLaneMultiplicity(pSpecification,
+                                            pDimensions,
+                                            aRoll)) {
+            aInvalidSourceLaneMultiplicityRollCount++;
         }
     }
 
@@ -747,11 +829,13 @@ static SoccerFoldingAnalysis AnalyzeFinalRolls(
     aAnalysis.mScore = SoccerFoldingFinalScore{
         aCoveragePassed,
         aSlotBalancePassed,
+        aInvalidSourceLaneMultiplicityRollCount == 0U,
         aExpectedSourceBlockCount,
         aUsedSourceBlockCount,
         aUniqueSourceBlockCount,
         aDuplicateSourceBlockCount,
         aOutOfRangeItemCount,
+        aInvalidSourceLaneMultiplicityRollCount,
         aMinimumDistance,
         aAverageDistance,
         aCoverageScore,
@@ -832,6 +916,11 @@ static void PrintFinalAnalysis(
                  "  source-slot balance: expected %zu per destination/slot/source [%s]\n",
                  pDimensions.mSourceLaneSlotUseCountPerOutputLane,
                  aScore.mSlotBalancePassed ? "PASS" : "FAIL");
+    std::fprintf(stderr,
+                 "  source-lane multiplicity: maximum %zu use(s) per lane per roll (%zu invalid rolls) [%s]\n",
+                 SourceLaneUseLimitPerRoll(pSpecification, pDimensions),
+                 aScore.mInvalidSourceLaneMultiplicityRollCount,
+                 aScore.mSourceLaneMultiplicityPassed ? "PASS" : "FAIL");
     std::fprintf(stderr,
                  "  block spacing: %.2f/100 (minimum %zu blocks, average %.2f blocks)\n",
                  aScore.mSpacingScore,
@@ -1041,6 +1130,7 @@ static bool EmitToOutput(
                            aAnalysis);
         if (!aAnalysis.mScore.mCoveragePassed ||
             !aAnalysis.mScore.mSlotBalancePassed ||
+            !aAnalysis.mScore.mSourceLaneMultiplicityPassed ||
             (aAnalysis.mScore.mBalanceScore < 99.999)) {
             std::fprintf(stderr,
                          "SoccerFoldingTool: rejecting a roll that failed final verification.\n");
@@ -1133,7 +1223,15 @@ static bool EmitFinalHeader(FILE *pOutput,
                  "                             std::uint8_t *pDestinationB,\n"
                  "                             std::uint8_t *pDestinationC,\n"
                  "                             std::uint8_t *pDestinationD);\n\n"
-                 "    static void CrushFold(const std::uint8_t *pSourceA,\n"
+                 "    static void CompressFold_4(const std::uint8_t *pSourceA,\n"
+                 "                               const std::uint8_t *pSourceB,\n"
+                 "                               const std::uint8_t *pSourceC,\n"
+                 "                               const std::uint8_t *pSourceD,\n"
+                 "                               std::uint8_t *pDestinationA,\n"
+                 "                               std::uint8_t *pDestinationB,\n"
+                 "                               std::uint8_t *pDestinationC,\n"
+                 "                               std::uint8_t *pDestinationD);\n\n"
+                 "    static void CrushFold_4(const std::uint8_t *pSourceA,\n"
                  "                          const std::uint8_t *pSourceB,\n"
                  "                          const std::uint8_t *pSourceC,\n"
                  "                          const std::uint8_t *pSourceD,\n"
@@ -1208,9 +1306,24 @@ bool SoccerFoldingTool::Run(std::size_t pRandomTrialCount,
         return false;
     }
 
-    constexpr std::size_t aOuterInputBlockCount = 1024U;
-    constexpr std::size_t aShrinkInputBlockCount = 256U;
-    constexpr std::size_t aCrushInputBlockCount = 64U;
+    constexpr std::size_t aOuterBlockByteCount = 1024U;
+    constexpr std::size_t aShrinkBlockByteCount = 1024U;
+    constexpr std::size_t aCompressBlockByteCount = 256U;
+    constexpr std::size_t aCrushBlockByteCount = 64U;
+    constexpr std::size_t aOuterInputBlockCount =
+        SOCCER_BLOCK_SIZE / aOuterBlockByteCount;
+    constexpr std::size_t aShrinkInputBlockCount =
+        SOCCER_BLOCK_SIZE / aShrinkBlockByteCount;
+    constexpr std::size_t aCompressInputBlockCount =
+        SOCCER_BLOCK_SIZE_L1 / aCompressBlockByteCount;
+    constexpr std::size_t aCrushInputBlockCount =
+        SOCCER_BLOCK_SIZE_C2 / aCrushBlockByteCount;
+    static_assert((SOCCER_BLOCK_SIZE % aOuterBlockByteCount) == 0U);
+    static_assert((SOCCER_BLOCK_SIZE % aShrinkBlockByteCount) == 0U);
+    static_assert((SOCCER_BLOCK_SIZE_L1 % aCompressBlockByteCount) == 0U);
+    static_assert((SOCCER_BLOCK_SIZE_C2 % aCrushBlockByteCount) == 0U);
+    static_assert(aCompressInputBlockCount == 1024U);
+    static_assert(aCrushInputBlockCount == 1024U);
     const std::size_t aRandomTrialCount = pRandomTrialCount;
     const std::uint64_t aRunSeed = pRunSeed;
 
@@ -1288,7 +1401,7 @@ bool SoccerFoldingTool::Run(std::size_t pRandomTrialCount,
             aRunSeed ^ 0x8EBC6AF09C88C6E3ULL,
         },
         {
-            "void SoccerFolding::CrushFold("
+            "void SoccerFolding::CompressFold_4("
             "const std::uint8_t *pSourceA, const std::uint8_t *pSourceB, "
             "const std::uint8_t *pSourceC, const std::uint8_t *pSourceD, "
             "std::uint8_t *pDestinationA, std::uint8_t *pDestinationB, "
@@ -1297,42 +1410,70 @@ bool SoccerFoldingTool::Run(std::size_t pRandomTrialCount,
             {
                 "pSourceA", "pSourceB", "pSourceC", "pSourceD",
             },
-            S_BLOCK,
+            SOCCER_BLOCK_SIZE_C2,
+            {
+                "pDestinationA", "pDestinationB",
+                "pDestinationC", "pDestinationD",
+            },
+            aCompressInputBlockCount,
+            4U,
+            aRandomTrialCount,
+            aRunSeed ^ 0x589965CC75374CC3ULL,
+        },
+        {
+            "void SoccerFolding::CrushFold_4("
+            "const std::uint8_t *pSourceA, const std::uint8_t *pSourceB, "
+            "const std::uint8_t *pSourceC, const std::uint8_t *pSourceD, "
+            "std::uint8_t *pDestinationA, std::uint8_t *pDestinationB, "
+            "std::uint8_t *pDestinationC, std::uint8_t *pDestinationD)",
+            SOCCER_BLOCK_SIZE_C2,
+            {
+                "pSourceA", "pSourceB", "pSourceC", "pSourceD",
+            },
+            SOCCER_BLOCK_SIZE_C1,
             {
                 "pDestinationA", "pDestinationB",
                 "pDestinationC", "pDestinationD",
             },
             aCrushInputBlockCount,
-            8U,
+            4U,
             aRandomTrialCount,
-            aRunSeed ^ 0x589965CC75374CC3ULL,
+            aRunSeed ^ 0x1D8E4E27C47D124FULL,
         },
     };
 
-    std::filesystem::path aArchivePath;
-    if (!MakeArchivePath(pRandomTrialCount, aArchivePath)) {
+    std::filesystem::path aHeaderPath;
+    std::filesystem::path aSourcePath;
+    if (!MakeOutputPaths(pRandomTrialCount, aHeaderPath, aSourcePath)) {
         return false;
     }
 
-    FILE *aOutput = std::fopen(aArchivePath.string().c_str(), "wb");
-    if (aOutput == nullptr) {
+    FILE *aSourceOutput = std::fopen(aSourcePath.string().c_str(), "wb");
+    if (aSourceOutput == nullptr) {
         std::fprintf(stderr,
                      "SoccerFoldingTool: could not open %s for writing.\n",
-                     aArchivePath.string().c_str());
+                     aSourcePath.string().c_str());
         return false;
     }
 
-    std::fprintf(aOutput,
-                 "// Generated Soccer folding roll archive.\n"
-                 "// Do not edit; compare the embedded scores before promoting a roll.\n"
-                 "// Run seed: %llu.\n\n"
-                 "#pragma once\n\n"
-                 "#include \"../../Scramble/Composer/SoccerFolding.hpp\"\n"
+    const std::string aHeaderFileName = aHeaderPath.filename().string();
+    std::fprintf(aSourceOutput,
+                 "//\n"
+                 "//  SoccerFolding_%zu.cpp\n"
+                 "//  Generated by SoccerFoldingTool\n"
+                 "//\n"
+                 "// Trials per roll: %zu. Run seed: %llu.\n"
+                 "// Compile this source with only its matching generated header.\n"
+                 "//\n\n"
+                 "#include \"%s\"\n"
                  "#include \"../../Scramble/Expander/Core/TwistMix16.hpp\"\n"
                  "#include \"../../Scramble/Expander/Core/TwistMix32.hpp\"\n\n"
                  "#include <cstddef>\n"
                  "#include <cstdint>\n",
-                 static_cast<unsigned long long>(aRunSeed));
+                 pRandomTrialCount,
+                 pRandomTrialCount,
+                 static_cast<unsigned long long>(aRunSeed),
+                 aHeaderFileName.c_str());
 
     constexpr std::size_t aSpecificationCount =
         sizeof(aSpecifications) / sizeof(aSpecifications[0]);
@@ -1340,10 +1481,10 @@ bool SoccerFoldingTool::Run(std::size_t pRandomTrialCount,
     for (const SoccerFoldingToolSpecification &aSpecification :
          aSpecifications) {
         double aFinalScore = 0.0;
-        if (!EmitToOutput(aSpecification, aOutput, &aFinalScore)) {
-            std::fclose(aOutput);
+        if (!EmitToOutput(aSpecification, aSourceOutput, &aFinalScore)) {
+            std::fclose(aSourceOutput);
             std::error_code aError;
-            std::filesystem::remove(aArchivePath, aError);
+            std::filesystem::remove(aSourcePath, aError);
             return false;
         }
         aTotalFinalScore += aFinalScore;
@@ -1351,17 +1492,42 @@ bool SoccerFoldingTool::Run(std::size_t pRandomTrialCount,
 
     const double aOverallFinalScore =
         aTotalFinalScore / static_cast<double>(aSpecificationCount);
-    std::fprintf(aOutput,
+    std::fprintf(aSourceOutput,
                  "// Overall final score: %.2f/100 across %zu folding methods.\n",
                  aOverallFinalScore,
                  aSpecificationCount);
 
-    if (std::fclose(aOutput) != 0) {
+    if (std::fclose(aSourceOutput) != 0) {
         std::fprintf(stderr,
                      "SoccerFoldingTool: could not finish writing %s.\n",
-                     aArchivePath.string().c_str());
+                     aSourcePath.string().c_str());
         std::error_code aError;
-        std::filesystem::remove(aArchivePath, aError);
+        std::filesystem::remove(aSourcePath, aError);
+        return false;
+    }
+
+    FILE *aHeaderOutput = std::fopen(aHeaderPath.string().c_str(), "wb");
+    if (aHeaderOutput == nullptr) {
+        std::fprintf(stderr,
+                     "SoccerFoldingTool: could not open %s for writing.\n",
+                     aHeaderPath.string().c_str());
+        std::error_code aError;
+        std::filesystem::remove(aSourcePath, aError);
+        return false;
+    }
+
+    const bool aHeaderEmitted = EmitFinalHeader(aHeaderOutput,
+                                                pRandomTrialCount,
+                                                aRunSeed,
+                                                aOverallFinalScore);
+    if ((std::fclose(aHeaderOutput) != 0) || !aHeaderEmitted) {
+        std::fprintf(stderr,
+                     "SoccerFoldingTool: could not finish writing %s.\n",
+                     aHeaderPath.string().c_str());
+        std::error_code aError;
+        std::filesystem::remove(aHeaderPath, aError);
+        aError.clear();
+        std::filesystem::remove(aSourcePath, aError);
         return false;
     }
 
@@ -1370,7 +1536,9 @@ bool SoccerFoldingTool::Run(std::size_t pRandomTrialCount,
     std::printf("SoccerFoldingTool: run seed %llu.\n",
                 static_cast<unsigned long long>(aRunSeed));
     std::printf("SoccerFoldingTool: exported %s\n",
-                aArchivePath.string().c_str());
+                aHeaderPath.string().c_str());
+    std::printf("SoccerFoldingTool: exported %s\n",
+                aSourcePath.string().c_str());
 
     return true;
 }

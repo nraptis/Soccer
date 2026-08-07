@@ -6,6 +6,7 @@
 //
 
 #include "Soccer2.hpp"
+#include "SoccerFolding.hpp"
 #include "TwistMix32.hpp"
 #include "TwistMix64.hpp"
 
@@ -111,10 +112,27 @@ std::uint8_t                                Soccer2::mShrinkLaneB[SOCCER_BLOCK_S
 std::uint8_t                                Soccer2::mShrinkLaneC[SOCCER_BLOCK_SIZE_L1];
 std::uint8_t                                Soccer2::mShrinkLaneD[SOCCER_BLOCK_SIZE_L1];
 
+std::uint8_t                                Soccer2::mCompressLaneA[SOCCER_BLOCK_SIZE_C2];
+std::uint8_t                                Soccer2::mCompressLaneB[SOCCER_BLOCK_SIZE_C2];
+std::uint8_t                                Soccer2::mCompressLaneC[SOCCER_BLOCK_SIZE_C2];
+std::uint8_t                                Soccer2::mCompressLaneD[SOCCER_BLOCK_SIZE_C2];
+
+//std::uint8_t                                Soccer2::mCompactLaneA[SOCCER_BLOCK_SIZE_C1];
+//std::uint8_t                                Soccer2::mCompactLaneB[SOCCER_BLOCK_SIZE_C1];
+//std::uint8_t                                Soccer2::mCompactLaneC[SOCCER_BLOCK_SIZE_C1];
+//std::uint8_t                                Soccer2::mCompactLaneD[SOCCER_BLOCK_SIZE_C1];
+
 std::uint8_t                                Soccer2::mCrushA[S_BLOCK];
 std::uint8_t                                Soccer2::mCrushB[S_BLOCK];
 std::uint8_t                                Soccer2::mCrushC[S_BLOCK];
 std::uint8_t                                Soccer2::mCrushD[S_BLOCK];
+
+std::size_t                                 Soccer2::mIndexListA[2048];
+std::size_t                                 Soccer2::mIndexListB[2048];
+
+std::uint64_t                               Soccer2::mRolledA[256];
+std::uint64_t                               Soccer2::mRolledB[256];
+
 
 std::uint8_t                                Soccer2::mMasks[32];
 
@@ -176,10 +194,18 @@ void Soccer2::Zero() {
     std::memset(mShrinkLaneB, 0, sizeof(mShrinkLaneB));
     std::memset(mShrinkLaneC, 0, sizeof(mShrinkLaneC));
     std::memset(mShrinkLaneD, 0, sizeof(mShrinkLaneD));
+    std::memset(mCompressLaneA, 0, sizeof(mCompressLaneA));
+    std::memset(mCompressLaneB, 0, sizeof(mCompressLaneB));
+    std::memset(mCompressLaneC, 0, sizeof(mCompressLaneC));
+    std::memset(mCompressLaneD, 0, sizeof(mCompressLaneD));
     std::memset(mCrushA, 0, sizeof(mCrushA));
     std::memset(mCrushB, 0, sizeof(mCrushB));
     std::memset(mCrushC, 0, sizeof(mCrushC));
     std::memset(mCrushD, 0, sizeof(mCrushD));
+    std::memset(mIndexListA, 0, sizeof(mIndexListA));
+    std::memset(mIndexListB, 0, sizeof(mIndexListB));
+    std::memset(mRolledA, 0, sizeof(mRolledA));
+    std::memset(mRolledB, 0, sizeof(mRolledB));
     std::memset(mCryptTemp, 0, sizeof(mCryptTemp));
 
     mWorkSpaceA.Zero();
@@ -286,50 +312,48 @@ void Soccer2::Shuffle_CROWSCIMASSORMATEX() {
     if (mStrength == EncryptionStrength::kWeak) {
         TwistShuffle::ShuffleList4(mCross[0], mRandom,  5U * cSpan,  6U * cSpan, 1U);
         TwistShuffle::ShuffleList4(mCross[0], mRandom, 25U * cSpan, 26U * cSpan, 1U);
-    } else if (mStrength == EncryptionStrength::kNormal) {
-        TwistShuffle::ShuffleList8(mCross[0], mRandom,  5U * cSpan,  6U * cSpan, 1U);
-        TwistShuffle::ShuffleList8(mCross[0], mRandom, 25U * cSpan, 26U * cSpan, 1U);
     } else if (mStrength == EncryptionStrength::kStrong) {
         TwistShuffle::ShuffleList16(mCross[0], mRandom,  5U * cSpan,  6U * cSpan, 1U);
         TwistShuffle::ShuffleList16(mCross[0], mRandom, 25U * cSpan, 26U * cSpan, 1U);
     } else {
-        return;
+        TwistShuffle::ShuffleList8(mCross[0], mRandom,  5U * cSpan,  6U * cSpan, 1U);
+        TwistShuffle::ShuffleList8(mCross[0], mRandom, 25U * cSpan, 26U * cSpan, 1U);
     }
 
     // Cross 1: entropy slices 7 and 27.
     if (mStrength == EncryptionStrength::kWeak) {
         TwistShuffle::ShuffleList4(mCross[1], mRandom,  7U * cSpan,  8U * cSpan, 1U);
         TwistShuffle::ShuffleList4(mCross[1], mRandom, 27U * cSpan, 28U * cSpan, 1U);
-    } else if (mStrength == EncryptionStrength::kNormal) {
-        TwistShuffle::ShuffleList8(mCross[1], mRandom,  7U * cSpan,  8U * cSpan, 1U);
-        TwistShuffle::ShuffleList8(mCross[1], mRandom, 27U * cSpan, 28U * cSpan, 1U);
-    } else {
+    } else if (mStrength == EncryptionStrength::kStrong) {
         TwistShuffle::ShuffleList16(mCross[1], mRandom,  7U * cSpan,  8U * cSpan, 1U);
         TwistShuffle::ShuffleList16(mCross[1], mRandom, 27U * cSpan, 28U * cSpan, 1U);
+    } else {
+        TwistShuffle::ShuffleList8(mCross[1], mRandom,  7U * cSpan,  8U * cSpan, 1U);
+        TwistShuffle::ShuffleList8(mCross[1], mRandom, 27U * cSpan, 28U * cSpan, 1U);
     }
 
     // Cross 2: entropy slices 9 and 29.
     if (mStrength == EncryptionStrength::kWeak) {
         TwistShuffle::ShuffleList4(mCross[2], mRandom,  9U * cSpan, 10U * cSpan, 1U);
         TwistShuffle::ShuffleList4(mCross[2], mRandom, 29U * cSpan, 30U * cSpan, 1U);
-    } else if (mStrength == EncryptionStrength::kNormal) {
-        TwistShuffle::ShuffleList8(mCross[2], mRandom,  9U * cSpan, 10U * cSpan, 1U);
-        TwistShuffle::ShuffleList8(mCross[2], mRandom, 29U * cSpan, 30U * cSpan, 1U);
-    } else {
+    } else if (mStrength == EncryptionStrength::kStrong) {
         TwistShuffle::ShuffleList16(mCross[2], mRandom,  9U * cSpan, 10U * cSpan, 1U);
         TwistShuffle::ShuffleList16(mCross[2], mRandom, 29U * cSpan, 30U * cSpan, 1U);
+    } else {
+        TwistShuffle::ShuffleList8(mCross[2], mRandom,  9U * cSpan, 10U * cSpan, 1U);
+        TwistShuffle::ShuffleList8(mCross[2], mRandom, 29U * cSpan, 30U * cSpan, 1U);
     }
 
     // Cross 3: entropy slices 11 and 31.
     if (mStrength == EncryptionStrength::kWeak) {
         TwistShuffle::ShuffleList4(mCross[3], mRandom, 11U * cSpan, 12U * cSpan, 1U);
         TwistShuffle::ShuffleList4(mCross[3], mRandom, 31U * cSpan, 32U * cSpan, 1U);
-    } else if (mStrength == EncryptionStrength::kNormal) {
-        TwistShuffle::ShuffleList8(mCross[3], mRandom, 11U * cSpan, 12U * cSpan, 1U);
-        TwistShuffle::ShuffleList8(mCross[3], mRandom, 31U * cSpan, 32U * cSpan, 1U);
-    } else {
+    } else if (mStrength == EncryptionStrength::kStrong) {
         TwistShuffle::ShuffleList16(mCross[3], mRandom, 11U * cSpan, 12U * cSpan, 1U);
         TwistShuffle::ShuffleList16(mCross[3], mRandom, 31U * cSpan, 32U * cSpan, 1U);
+    } else {
+        TwistShuffle::ShuffleList8(mCross[3], mRandom, 11U * cSpan, 12U * cSpan, 1U);
+        TwistShuffle::ShuffleList8(mCross[3], mRandom, 31U * cSpan, 32U * cSpan, 1U);
     }
 
     // Masks: entropy slices 0, 12, and 20.
@@ -342,14 +366,14 @@ void Soccer2::Shuffle_CROWSCIMASSORMATEX() {
         TwistShuffle::ShuffleList4(mMaterials, mRandom,  4U * cSpan,  5U * cSpan, 1U);
         TwistShuffle::ShuffleList4(mMaterials, mRandom, 16U * cSpan, 17U * cSpan, 1U);
         TwistShuffle::ShuffleList4(mMaterials, mRandom, 24U * cSpan, 25U * cSpan, 1U);
-    } else if (mStrength == EncryptionStrength::kNormal) {
-        TwistShuffle::ShuffleList8(mMaterials, mRandom,  4U * cSpan,  5U * cSpan, 1U);
-        TwistShuffle::ShuffleList8(mMaterials, mRandom, 16U * cSpan, 17U * cSpan, 1U);
-        TwistShuffle::ShuffleList8(mMaterials, mRandom, 24U * cSpan, 25U * cSpan, 1U);
-    } else {
+    } else if (mStrength == EncryptionStrength::kStrong) {
         TwistShuffle::ShuffleList16(mMaterials, mRandom,  4U * cSpan,  5U * cSpan, 1U);
         TwistShuffle::ShuffleList16(mMaterials, mRandom, 16U * cSpan, 17U * cSpan, 1U);
         TwistShuffle::ShuffleList16(mMaterials, mRandom, 24U * cSpan, 25U * cSpan, 1U);
+    } else {
+        TwistShuffle::ShuffleList8(mMaterials, mRandom,  4U * cSpan,  5U * cSpan, 1U);
+        TwistShuffle::ShuffleList8(mMaterials, mRandom, 16U * cSpan, 17U * cSpan, 1U);
+        TwistShuffle::ShuffleList8(mMaterials, mRandom, 24U * cSpan, 25U * cSpan, 1U);
     }
 
     // Expanders: entropy slices 8, 18, and 28.
@@ -362,14 +386,14 @@ void Soccer2::Shuffle_CROWSCIMASSORMATEX() {
         TwistShuffle::ShuffleList4(mWorkSpaces, mRandom,  6U * cSpan,  7U * cSpan, 1U);
         TwistShuffle::ShuffleList4(mWorkSpaces, mRandom, 17U * cSpan, 18U * cSpan, 1U);
         TwistShuffle::ShuffleList4(mWorkSpaces, mRandom, 26U * cSpan, 27U * cSpan, 1U);
-    } else if (mStrength == EncryptionStrength::kNormal) {
-        TwistShuffle::ShuffleList8(mWorkSpaces, mRandom,  6U * cSpan,  7U * cSpan, 1U);
-        TwistShuffle::ShuffleList8(mWorkSpaces, mRandom, 17U * cSpan, 18U * cSpan, 1U);
-        TwistShuffle::ShuffleList8(mWorkSpaces, mRandom, 26U * cSpan, 27U * cSpan, 1U);
-    } else {
+    } else if (mStrength == EncryptionStrength::kStrong) {
         TwistShuffle::ShuffleList16(mWorkSpaces, mRandom,  6U * cSpan,  7U * cSpan, 1U);
         TwistShuffle::ShuffleList16(mWorkSpaces, mRandom, 17U * cSpan, 18U * cSpan, 1U);
         TwistShuffle::ShuffleList16(mWorkSpaces, mRandom, 26U * cSpan, 27U * cSpan, 1U);
+    } else {
+        TwistShuffle::ShuffleList8(mWorkSpaces, mRandom,  6U * cSpan,  7U * cSpan, 1U);
+        TwistShuffle::ShuffleList8(mWorkSpaces, mRandom, 17U * cSpan, 18U * cSpan, 1U);
+        TwistShuffle::ShuffleList8(mWorkSpaces, mRandom, 26U * cSpan, 27U * cSpan, 1U);
     }
 
     // Ciphers: entropy slices 1-3, 13-15, and 21-23.
@@ -382,14 +406,14 @@ void Soccer2::Shuffle_CROWSCIMASSORMATEX() {
         TwistShuffle::ShuffleList4(mSources, mRandom, 10U * cSpan, 11U * cSpan, 1U);
         TwistShuffle::ShuffleList4(mSources, mRandom, 19U * cSpan, 20U * cSpan, 1U);
         TwistShuffle::ShuffleList4(mSources, mRandom, 30U * cSpan, 31U * cSpan, 1U);
-    } else if (mStrength == EncryptionStrength::kNormal) {
-        TwistShuffle::ShuffleList8(mSources, mRandom, 10U * cSpan, 11U * cSpan, 1U);
-        TwistShuffle::ShuffleList8(mSources, mRandom, 19U * cSpan, 20U * cSpan, 1U);
-        TwistShuffle::ShuffleList8(mSources, mRandom, 30U * cSpan, 31U * cSpan, 1U);
-    } else {
+    } else if (mStrength == EncryptionStrength::kStrong) {
         TwistShuffle::ShuffleList16(mSources, mRandom, 10U * cSpan, 11U * cSpan, 1U);
         TwistShuffle::ShuffleList16(mSources, mRandom, 19U * cSpan, 20U * cSpan, 1U);
         TwistShuffle::ShuffleList16(mSources, mRandom, 30U * cSpan, 31U * cSpan, 1U);
+    } else {
+        TwistShuffle::ShuffleList8(mSources, mRandom, 10U * cSpan, 11U * cSpan, 1U);
+        TwistShuffle::ShuffleList8(mSources, mRandom, 19U * cSpan, 20U * cSpan, 1U);
+        TwistShuffle::ShuffleList8(mSources, mRandom, 30U * cSpan, 31U * cSpan, 1U);
     }
 }
 
@@ -403,14 +427,12 @@ void Soccer2::TwistRound(std::size_t pBlockIndex) {
     if (mStrength == EncryptionStrength::kWeak) {
         aComplexity = COMPLEXITY_WEAK;
         aReverseCount = 1U;
-    } else if (mStrength == EncryptionStrength::kNormal) {
-        aComplexity = COMPLEXITY_NORMAL;
-        aReverseCount = 2U;
     } else if (mStrength == EncryptionStrength::kStrong) {
         aComplexity = COMPLEXITY_STRONG;
         aReverseCount = 4U;
     } else {
-        return;
+        aComplexity = COMPLEXITY_NORMAL;
+        aReverseCount = 2U;
     }
 
     const std::size_t aDestinationByteIndex = pBlockIndex * S_BLOCK;
@@ -433,10 +455,10 @@ void Soccer2::TwistRound(std::size_t pBlockIndex) {
 
     if (mStrength == EncryptionStrength::kWeak) {
         FoldMaterialsIntoRandomForBlock_4(pBlockIndex);
-    } else if (mStrength == EncryptionStrength::kNormal) {
-        FoldMaterialsIntoRandomForBlock_8(pBlockIndex);
-    } else {
+    } else if (mStrength == EncryptionStrength::kStrong) {
         FoldMaterialsIntoRandomForBlock_16(pBlockIndex);
+    } else {
+        FoldMaterialsIntoRandomForBlock_8(pBlockIndex);
     }
 
     for (std::size_t aMaterialIndex=0U; aMaterialIndex<aReverseCount; aMaterialIndex++) {
@@ -565,22 +587,6 @@ void Soccer2::SeedPrologue_Regular_B() {
         mCross[2][2] = mScratch; mCross[2][3] = mScratch;
         mCross[3][3] = mScratch; mCross[3][0] = mScratch;
         
-    } else if (mStrength == EncryptionStrength::kNormal) {
-        FoldMaterialsIntoRandomForBlock_8(aFirstWarmUpBlockIndex);
-        
-        for (std::size_t aIndex=0U; aIndex<COMPLEXITY_NORMAL; aIndex++) {
-            mSources[aIndex] = &mMaterials[aIndex][aFirstWarmUpByteIndex];
-            mCross[0][aIndex] = &mMaterials[aIndex][aFirstWarmUpByteIndex];
-            mCross[1][aIndex] = &mMaterials[aIndex][aFirstWarmUpByteIndex];
-            mCross[2][aIndex] = &mMaterials[aIndex][aFirstWarmUpByteIndex];
-            mCross[3][aIndex] = &mMaterials[aIndex][aFirstWarmUpByteIndex];
-        }
-
-        mCross[0][0] = mScratch; mCross[0][4] = mScratch;
-        mCross[1][1] = mScratch; mCross[1][5] = mScratch;
-        mCross[2][2] = mScratch; mCross[2][6] = mScratch;
-        mCross[3][3] = mScratch; mCross[3][7] = mScratch;
-        
     } else if (mStrength == EncryptionStrength::kStrong) {
         FoldMaterialsIntoRandomForBlock_16(aFirstWarmUpBlockIndex);
         
@@ -596,6 +602,21 @@ void Soccer2::SeedPrologue_Regular_B() {
         mCross[1][1] = mScratch; mCross[1][14] = mScratch;
         mCross[2][2] = mScratch; mCross[2][13] = mScratch;
         mCross[3][3] = mScratch; mCross[3][12] = mScratch;
+    } else {
+        FoldMaterialsIntoRandomForBlock_8(aFirstWarmUpBlockIndex);
+        
+        for (std::size_t aIndex=0U; aIndex<COMPLEXITY_NORMAL; aIndex++) {
+            mSources[aIndex] = &mMaterials[aIndex][aFirstWarmUpByteIndex];
+            mCross[0][aIndex] = &mMaterials[aIndex][aFirstWarmUpByteIndex];
+            mCross[1][aIndex] = &mMaterials[aIndex][aFirstWarmUpByteIndex];
+            mCross[2][aIndex] = &mMaterials[aIndex][aFirstWarmUpByteIndex];
+            mCross[3][aIndex] = &mMaterials[aIndex][aFirstWarmUpByteIndex];
+        }
+
+        mCross[0][0] = mScratch; mCross[0][4] = mScratch;
+        mCross[1][1] = mScratch; mCross[1][5] = mScratch;
+        mCross[2][2] = mScratch; mCross[2][6] = mScratch;
+        mCross[3][3] = mScratch; mCross[3][7] = mScratch;
     }
 }
 
@@ -615,18 +636,16 @@ bool Soccer2::SeedPrologue_Regular_C(std::uint32_t *pAckWord,
         aGeneratedAckWord |= static_cast<std::uint32_t>(mMaterials[1][aAckByteIndex]) <<  8U;
         aGeneratedAckWord |= static_cast<std::uint32_t>(mMaterials[2][aAckByteIndex]) << 16U;
         aGeneratedAckWord |= static_cast<std::uint32_t>(mMaterials[3][aAckByteIndex]) << 24U;
-    } else if (mStrength == EncryptionStrength::kNormal) {
-        aGeneratedAckWord |= static_cast<std::uint32_t>(mMaterials[1][aAckByteIndex]) <<  0U;
-        aGeneratedAckWord |= static_cast<std::uint32_t>(mMaterials[3][aAckByteIndex]) <<  8U;
-        aGeneratedAckWord |= static_cast<std::uint32_t>(mMaterials[5][aAckByteIndex]) << 16U;
-        aGeneratedAckWord |= static_cast<std::uint32_t>(mMaterials[7][aAckByteIndex]) << 24U;
     } else if (mStrength == EncryptionStrength::kStrong) {
         aGeneratedAckWord |= static_cast<std::uint32_t>(mMaterials[ 3][aAckByteIndex]) <<  0U;
         aGeneratedAckWord |= static_cast<std::uint32_t>(mMaterials[ 7][aAckByteIndex]) <<  8U;
         aGeneratedAckWord |= static_cast<std::uint32_t>(mMaterials[11][aAckByteIndex]) << 16U;
         aGeneratedAckWord |= static_cast<std::uint32_t>(mMaterials[15][aAckByteIndex]) << 24U;
     } else {
-        return false;
+        aGeneratedAckWord |= static_cast<std::uint32_t>(mMaterials[1][aAckByteIndex]) <<  0U;
+        aGeneratedAckWord |= static_cast<std::uint32_t>(mMaterials[3][aAckByteIndex]) <<  8U;
+        aGeneratedAckWord |= static_cast<std::uint32_t>(mMaterials[5][aAckByteIndex]) << 16U;
+        aGeneratedAckWord |= static_cast<std::uint32_t>(mMaterials[7][aAckByteIndex]) << 24U;
     }
 
     if (pForwardDeploy) {
@@ -1055,30 +1074,163 @@ void Soccer2::SeedPrelude_Regular_C() {
     TwistShuffle::ShuffleList16(mMaterials,     mRandom, 28672, 32768, 4);
 }
 
-void Soccer2::SeedEpilogue() {
-    
-    /*
-    for (std::size_t aIndex=0; aIndex<16; aIndex++) {
-        mMaterials[aIndex] = mClaimedMaterials[aIndex];
-    }
-    
-    for (std::size_t aIndex=0; aIndex<16; aIndex++) {
-        mWorkSpaces[aIndex] = mClaimedWorkSpaces[aIndex];
-    }
-    */
-    
-    InitializeExpanders();
-    
-    for (std::size_t aIndex=0; aIndex<16; aIndex++) {
-        mSources[aIndex] = mMaterials[aIndex];
-    }
-    
-    //FoldAllMaterialsIntoRandomForBlock(0);
-    Shuffle_CROWSCIMASSORMATEX();
-    
-    
-    
+void Soccer2::SeedEpilogue_Regular_A() {
+    const std::uint8_t *aShrinkSourceA = nullptr;
+    const std::uint8_t *aShrinkSourceB = nullptr;
+    const std::uint8_t *aShrinkSourceC = nullptr;
+    const std::uint8_t *aShrinkSourceD = nullptr;
 
+    if (mStrength == EncryptionStrength::kWeak) {
+        aShrinkSourceA = mMaterials[0];
+        aShrinkSourceB = mMaterials[1];
+        aShrinkSourceC = mMaterials[2];
+        aShrinkSourceD = mMaterials[3];
+    } else if (mStrength == EncryptionStrength::kStrong) {
+        SoccerFolding::CollapseFold_Outer_16(mMaterials[0],
+                                             mMaterials[1],
+                                             mMaterials[2],
+                                             mMaterials[3],
+                                             mMaterials[4],
+                                             mMaterials[5],
+                                             mMaterials[6],
+                                             mMaterials[7],
+                                             mMaterials[8],
+                                             mMaterials[9],
+                                             mMaterials[10],
+                                             mMaterials[11],
+                                             mMaterials[12],
+                                             mMaterials[13],
+                                             mMaterials[14],
+                                             mMaterials[15],
+                                             mCollapseLaneA,
+                                             mCollapseLaneB,
+                                             mCollapseLaneC,
+                                             mCollapseLaneD);
+
+        aShrinkSourceA = mCollapseLaneA;
+        aShrinkSourceB = mCollapseLaneB;
+        aShrinkSourceC = mCollapseLaneC;
+        aShrinkSourceD = mCollapseLaneD;
+    } else {
+        SoccerFolding::CollapseFold_Outer_8(mMaterials[0],
+                                            mMaterials[1],
+                                            mMaterials[2],
+                                            mMaterials[3],
+                                            mMaterials[4],
+                                            mMaterials[5],
+                                            mMaterials[6],
+                                            mMaterials[7],
+                                            mCollapseLaneA,
+                                            mCollapseLaneB,
+                                            mCollapseLaneC,
+                                            mCollapseLaneD);
+
+        aShrinkSourceA = mCollapseLaneA;
+        aShrinkSourceB = mCollapseLaneB;
+        aShrinkSourceC = mCollapseLaneC;
+        aShrinkSourceD = mCollapseLaneD;
+    }
+
+    SoccerFolding::ShrinkFold_4(aShrinkSourceA,
+                                aShrinkSourceB,
+                                aShrinkSourceC,
+                                aShrinkSourceD,
+                                mShrinkLaneA,
+                                mShrinkLaneB,
+                                mShrinkLaneC,
+                                mShrinkLaneD);
+
+    SoccerFolding::CompressFold_4(mShrinkLaneA,
+                                  mShrinkLaneB,
+                                  mShrinkLaneC,
+                                  mShrinkLaneD,
+                                  mCompressLaneA,
+                                  mCompressLaneB,
+                                  mCompressLaneC,
+                                  mCompressLaneD);
+
+    SoccerFolding::CrushFold_4(mCompressLaneA,
+                             mCompressLaneB,
+                             mCompressLaneC,
+                             mCompressLaneD,
+                             mCrushA,
+                             mCrushB,
+                             mCrushC,
+                             mCrushD);
+    
+    
+    for (std::size_t aIndex=0; aIndex<2048; aIndex++) { mIndexListA[aIndex] = aIndex; }
+    for (std::size_t aIndex=0; aIndex<2048; aIndex++) { mIndexListB[aIndex] = aIndex; }
+
+    constexpr std::size_t aShuffleSpanByteCount = 256U;
+    static_assert((SOCCER_BLOCK_SIZE_C1 % aShuffleSpanByteCount) == 0U);
+    static_assert((aShuffleSpanByteCount % sizeof(std::uint32_t)) == 0U);
+
+    for (std::size_t aSpanIndex=0U;
+         aSpanIndex<(SOCCER_BLOCK_SIZE_C1 / aShuffleSpanByteCount);
+         aSpanIndex++) {
+        std::size_t *aIndexList = ((aSpanIndex & 1U) == 0U) ? mIndexListA : mIndexListB;
+        const std::size_t aStartIndex = aSpanIndex * aShuffleSpanByteCount;
+        const std::size_t aCeilingIndex = aStartIndex + aShuffleSpanByteCount;
+
+        for (std::size_t aIndex=aStartIndex; aIndex<aCeilingIndex; aIndex+=4U) {
+            const std::uint32_t aShuffleWord = TwistMix32::DiffuseA(Load32LE(&mCrushC[aIndex]));
+            const std::size_t aSwapIndexA = static_cast<std::size_t>(aShuffleWord & 2047U);
+            const std::size_t aSwapIndexB = static_cast<std::size_t>((aShuffleWord >> 11U) & 2047U);
+
+            const std::size_t aHold = aIndexList[aSwapIndexA];
+            aIndexList[aSwapIndexA] = aIndexList[aSwapIndexB];
+            aIndexList[aSwapIndexB] = aHold;
+        }
+    }
+
+    for (std::size_t aSpanIndex=0U;
+         aSpanIndex<(SOCCER_BLOCK_SIZE_C1 / aShuffleSpanByteCount);
+         aSpanIndex++) {
+        std::size_t *aIndexList = ((aSpanIndex & 1U) == 0U) ? mIndexListB : mIndexListA;
+        const std::size_t aStartIndex = aSpanIndex * aShuffleSpanByteCount;
+        const std::size_t aCeilingIndex = aStartIndex + aShuffleSpanByteCount;
+
+        for (std::size_t aIndex=aStartIndex; aIndex<aCeilingIndex; aIndex+=4U) {
+            const std::uint32_t aShuffleWord = TwistMix32::DiffuseA(Load32LE(&mCrushD[aIndex]));
+            const std::size_t aSwapIndexA = static_cast<std::size_t>(aShuffleWord & 2047U);
+            const std::size_t aSwapIndexB = static_cast<std::size_t>((aShuffleWord >> 11U) & 2047U);
+
+            const std::size_t aHold = aIndexList[aSwapIndexA];
+            aIndexList[aSwapIndexA] = aIndexList[aSwapIndexB];
+            aIndexList[aSwapIndexB] = aHold;
+        }
+    }
+    
+    static_assert(SOCCER_BLOCK_SIZE_C1 == (2048U * sizeof(std::uint64_t)));
+
+    for (std::size_t aRolledIndex=0U; aRolledIndex<256U; aRolledIndex++) {
+        const std::size_t aIndex = aRolledIndex * 8U;
+        std::uint64_t aFold = 0ULL;
+        aFold = TwistMix64::DiffuseA(aFold ^ Load64LE(&mCrushA[mIndexListA[aIndex + 0U] * 8U]));
+        aFold = TwistMix64::DiffuseA(aFold ^ Load64LE(&mCrushA[mIndexListA[aIndex + 1U] * 8U]));
+        aFold = TwistMix64::DiffuseA(aFold ^ Load64LE(&mCrushA[mIndexListA[aIndex + 2U] * 8U]));
+        aFold = TwistMix64::DiffuseA(aFold ^ Load64LE(&mCrushA[mIndexListA[aIndex + 3U] * 8U]));
+        aFold = TwistMix64::DiffuseA(aFold ^ Load64LE(&mCrushA[mIndexListA[aIndex + 4U] * 8U]));
+        aFold = TwistMix64::DiffuseA(aFold ^ Load64LE(&mCrushA[mIndexListA[aIndex + 5U] * 8U]));
+        aFold = TwistMix64::DiffuseA(aFold ^ Load64LE(&mCrushA[mIndexListA[aIndex + 6U] * 8U]));
+        aFold = TwistMix64::DiffuseA(aFold ^ Load64LE(&mCrushA[mIndexListA[aIndex + 7U] * 8U]));
+        mRolledA[aRolledIndex] = aFold;
+    }
+
+    for (std::size_t aRolledIndex=0U; aRolledIndex<256U; aRolledIndex++) {
+        const std::size_t aIndex = aRolledIndex * 8U;
+        std::uint64_t aFold = 0ULL;
+        aFold = TwistMix64::DiffuseA(aFold ^ Load64LE(&mCrushB[mIndexListB[aIndex + 0U] * 8U]));
+        aFold = TwistMix64::DiffuseA(aFold ^ Load64LE(&mCrushB[mIndexListB[aIndex + 1U] * 8U]));
+        aFold = TwistMix64::DiffuseA(aFold ^ Load64LE(&mCrushB[mIndexListB[aIndex + 2U] * 8U]));
+        aFold = TwistMix64::DiffuseA(aFold ^ Load64LE(&mCrushB[mIndexListB[aIndex + 3U] * 8U]));
+        aFold = TwistMix64::DiffuseA(aFold ^ Load64LE(&mCrushB[mIndexListB[aIndex + 4U] * 8U]));
+        aFold = TwistMix64::DiffuseA(aFold ^ Load64LE(&mCrushB[mIndexListB[aIndex + 5U] * 8U]));
+        aFold = TwistMix64::DiffuseA(aFold ^ Load64LE(&mCrushB[mIndexListB[aIndex + 6U] * 8U]));
+        aFold = TwistMix64::DiffuseA(aFold ^ Load64LE(&mCrushB[mIndexListB[aIndex + 7U] * 8U]));
+        mRolledB[aRolledIndex] = aFold;
+    }
 
     /*
     mCrypt.Layer1().ClearCiphers();
@@ -1191,12 +1343,10 @@ void Soccer2::RotateSourcesIntoCross() {
     std::size_t aComplexity = 0U;
     if (mStrength == EncryptionStrength::kWeak) {
         aComplexity = COMPLEXITY_WEAK;
-    } else if (mStrength == EncryptionStrength::kNormal) {
-        aComplexity = COMPLEXITY_NORMAL;
     } else if (mStrength == EncryptionStrength::kStrong) {
         aComplexity = COMPLEXITY_STRONG;
     } else {
-        return;
+        aComplexity = COMPLEXITY_NORMAL;
     }
 
     for (std::size_t aIndex=0U; aIndex<aComplexity; aIndex++) {

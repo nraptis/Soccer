@@ -9,7 +9,6 @@
 #include "Soccer2.hpp"
 #include "WorkSpaceTools.hpp"
 #include "LaneTool.hpp"
-#include "Soccer2.hpp"
 #include "Random.hpp"
 #include <cstdint>
 #include <cstring>

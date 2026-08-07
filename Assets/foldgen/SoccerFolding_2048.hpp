@@ -65,7 +65,7 @@ public:
                                std::uint8_t *pDestinationC,
                                std::uint8_t *pDestinationD);
 
-    static void CrushFold_4(const std::uint8_t *pSourceA,
+    static void CrushFold(const std::uint8_t *pSourceA,
                           const std::uint8_t *pSourceB,
                           const std::uint8_t *pSourceC,
                           const std::uint8_t *pSourceD,

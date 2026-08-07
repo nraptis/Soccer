@@ -628,8 +628,11 @@ void Make10_000Challnge() {
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
+    
+    
+    /*
     constexpr std::uint64_t aRunSeed = 0xD1B54F32DC92ED03ULL;
-    std::size_t aRandomTrialCount = 250U;
+    std::size_t aRandomTrialCount = 2048U;
 
     while (true) {
         std::printf("SoccerFoldingTool: starting %zu trials per roll.\n",
@@ -647,6 +650,9 @@ void Make10_000Challnge() {
         }
         aRandomTrialCount *= 2U;
     }
+    */
+     
+    
 }
 
 @end
