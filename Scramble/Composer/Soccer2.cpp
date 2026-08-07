@@ -9,6 +9,7 @@
 #include "SoccerFolding.hpp"
 #include "TwistMix32.hpp"
 #include "TwistMix64.hpp"
+#include "EncryptionPlan.hpp"
 
 #include <algorithm>
 #include <cstring>
@@ -164,6 +165,206 @@ CipherType                                  Soccer2::mCiphers[256];
 EncryptionStrength                          Soccer2::mStrength = EncryptionStrength::kNormal;
 
 uint32_t                                    Soccer2::mTestBlockLength = SOCCER_BLOCK_SIZE;
+
+std::uint32_t                               cRandIndexA = 0;
+std::uint32_t                               cRandIndexB = 0;
+bool                                        cRandLane = false;
+
+
+std::size_t                                 cMaskIndex = 0;
+
+std::size_t                                 cMaterialIndex = 0;
+std::size_t                                 cMaterialQuarter = 0;
+
+std::size_t                                 cRotationCipherCountS3 = 0;
+std::size_t                                 cRotationCipherIndexS3 = 0;
+
+std::size_t                                 cRotationCipherCountS2 = 0;
+std::size_t                                 cRotationCipherIndexS2 = 0;
+
+std::size_t                                 cRotationCipherCountS1 = 0;
+std::size_t                                 cRotationCipherIndexS1 = 0;
+
+std::uint64_t                               SoccerRand() {
+    if (cRandLane == true) {
+        cRandLane = false;
+        cRandIndexA = ((cRandIndexA + 1) & 0xFFU);
+        return Soccer2::mRolledA[cRandIndexA];
+    } else {
+        cRandLane = true;
+        cRandIndexB = ((cRandIndexB + 1) & 0xFFU);
+        return Soccer2::mRolledB[cRandIndexB];
+    }
+}
+
+std::uint8_t *Soccer2::PopLaneS3() {
+    if (cMaterialQuarter != 0U) {
+        cMaterialIndex++;
+        cMaterialQuarter = 0U;
+    }
+    if (cMaterialIndex >= 16U) {
+        return nullptr;
+    }
+
+    std::uint8_t *aResult = mMaterials[cMaterialIndex];
+    cMaterialIndex++;
+    return aResult;
+}
+
+std::uint8_t *Soccer2::PopLaneS2() {
+    if ((cMaterialQuarter + 2U) > 4U) {
+        cMaterialIndex++;
+        cMaterialQuarter = 0U;
+    }
+    if (cMaterialIndex >= 16U) {
+        return nullptr;
+    }
+
+    std::uint8_t *aResult = mMaterials[cMaterialIndex] + (cMaterialQuarter * SOCCER_BLOCK_SIZE_L1);
+    cMaterialQuarter += 2U;
+    if (cMaterialQuarter == 4U) {
+        cMaterialIndex++;
+        cMaterialQuarter = 0U;
+    }
+    return aResult;
+}
+
+std::uint8_t *Soccer2::PopLaneS1() {
+    if (cMaterialIndex >= 16U) {
+        return nullptr;
+    }
+
+    std::uint8_t *aResult = mMaterials[cMaterialIndex] + (cMaterialQuarter * SOCCER_BLOCK_SIZE_L1);
+    cMaterialQuarter++;
+    if (cMaterialQuarter == 4U) {
+        cMaterialIndex++;
+        cMaterialQuarter = 0U;
+    }
+    return aResult;
+}
+
+std::uint8_t Soccer2::PopMask() {
+    const std::uint8_t aResult = mMasks[cMaskIndex];
+    cMaskIndex++;
+    if (cMaskIndex == 32U) {
+        cMaskIndex = 0U;
+    }
+    return aResult;
+}
+
+Crypt *Soccer2::GenerateCipher(CipherType pType, std::uint8_t pLayer) {
+    auto PopLane = [pLayer]() -> std::uint8_t * {
+        if (pLayer == 3U) {
+            return PopLaneS3();
+        }
+        if (pLayer == 2U) {
+            return PopLaneS2();
+        }
+        return PopLaneS1();
+    };
+
+    switch (pType) {
+        case CipherType::kPasswordXORCipher:
+            return new PasswordXORCipher(PopLane());
+        case CipherType::kPasswordAddCipher:
+            return new PasswordAddCipher(PopLane());
+        case CipherType::kPasswordSubtractCipher:
+            return new PasswordSubtractCipher(PopLane());
+
+        case CipherType::kPasswordJumpXORCipher: {
+            std::uint8_t *aPassword = PopLane();
+            std::uint8_t *aJumps = PopLane();
+            return new PasswordJumpXORCipher(aPassword, aJumps);
+        }
+        case CipherType::kPasswordJumpAddCipher: {
+            std::uint8_t *aPassword = PopLane();
+            std::uint8_t *aJumps = PopLane();
+            return new PasswordJumpAddCipher(aPassword, aJumps);
+        }
+        case CipherType::kPasswordJumpSubtractCipher: {
+            std::uint8_t *aPassword = PopLane();
+            std::uint8_t *aJumps = PopLane();
+            return new PasswordJumpSubtractCipher(aPassword, aJumps);
+        }
+
+        case CipherType::kPepperNoiseXORCipher: {
+            std::uint8_t *aMask = PopLane();
+            std::uint8_t *aNoise = PopLane();
+            return new PepperNoiseXORCipher(aMask, aNoise);
+        }
+        case CipherType::kPepperJumpNoiseXORCipher: {
+            std::uint8_t *aMask = PopLane();
+            std::uint8_t *aNoise = PopLane();
+            std::uint8_t *aJumps = PopLane();
+            return new PepperJumpNoiseXORCipher(aMask, aNoise, aJumps);
+        }
+        case CipherType::kPepperDualJumpNoiseXORCipher: {
+            std::uint8_t *aMask = PopLane();
+            std::uint8_t *aNoise = PopLane();
+            std::uint8_t *aMaskJumps = PopLane();
+            std::uint8_t *aNoiseJumps = PopLane();
+            return new PepperDualJumpNoiseXORCipher(aMask, aNoise, aMaskJumps, aNoiseJumps);
+        }
+        case CipherType::kCascadeCipher:
+            return new CascadeCipher(PopLane());
+        case CipherType::kCascadeJumpCipher: {
+            std::uint8_t *aMask = PopLane();
+            std::uint8_t *aJumps = PopLane();
+            return new CascadeJumpCipher(aMask, aJumps);
+        }
+
+        case CipherType::kRotateMaskCipher: {
+            const std::uint8_t aMask = PopMask();
+            const std::size_t aShift = static_cast<std::size_t>(SoccerRand());
+            return new RotateMaskCipher(aMask, aShift);
+        }
+        case CipherType::kReverseMaskCipher:
+            return new ReverseMaskCipher(PopMask());
+        case CipherType::kInvertMaskCipher:
+            return new InvertMaskCipher(PopMask());
+        case CipherType::kReverseMaskByteBlockCipher32:
+            return new ReverseMaskByteBlockCipher32(PopMask());
+        case CipherType::kReverseMaskByteBlockCipher64:
+            return new ReverseMaskByteBlockCipher64(PopMask());
+        case CipherType::kSplintMaskBlockCipher32:
+            return new SplintMaskBlockCipher32(PopMask());
+        case CipherType::kSplintMaskBlockCipher64:
+            return new SplintMaskBlockCipher64(PopMask());
+        case CipherType::kRippleMaskBlockCipher32:
+            return new RippleMaskBlockCipher32(PopMask());
+        case CipherType::kRippleMaskBlockCipher64:
+            return new RippleMaskBlockCipher64(PopMask());
+        case CipherType::kRotateCipher:
+            return new RotateCipher(static_cast<std::size_t>(SoccerRand()));
+
+        case CipherType::kWeaveMaskCipher: {
+            const std::uint8_t aMask = PopMask();
+            const std::size_t aCount = 1U + static_cast<std::size_t>(SoccerRand() % 8ULL);
+            const std::size_t aFrontStride = 1U + static_cast<std::size_t>(SoccerRand() % 8ULL);
+            const std::size_t aBackStride = 1U + static_cast<std::size_t>(SoccerRand() % 8ULL);
+            return new WeaveMaskCipher(aMask, aCount, aFrontStride, aBackStride);
+        }
+        case CipherType::kWeaveMaskBlockCipher32: {
+            const std::uint8_t aMask = PopMask();
+            const std::size_t aCount = 1U + static_cast<std::size_t>(SoccerRand() % 4ULL);
+            const std::size_t aFrontStride = 1U + static_cast<std::size_t>(SoccerRand() % 4ULL);
+            const std::size_t aBackStride = 1U + static_cast<std::size_t>(SoccerRand() % 4ULL);
+            return new WeaveMaskBlockCipher32(aMask, aCount, aFrontStride, aBackStride);
+        }
+        case CipherType::kWeaveMaskBlockCipher64: {
+            const std::uint8_t aMask = PopMask();
+            const std::size_t aCount = 1U + static_cast<std::size_t>(SoccerRand() % 4ULL);
+            const std::size_t aFrontStride = 1U + static_cast<std::size_t>(SoccerRand() % 4ULL);
+            const std::size_t aBackStride = 1U + static_cast<std::size_t>(SoccerRand() % 4ULL);
+            return new WeaveMaskBlockCipher64(aMask, aCount, aFrontStride, aBackStride);
+        }
+
+        case CipherType::kNone:
+            return nullptr;
+    }
+
+    return nullptr;
+}
 
 
 void Soccer2::Zero() {
@@ -797,6 +998,7 @@ bool Soccer2::AttemptSeed_Encrypt(EncryptionStrength pStrength,
 
     std::uint32_t aAckWord = 0U;
     mStrength = pStrength;
+    mCryptex.Free();
     
     if (pStrength == EncryptionStrength::kTest) {
         if (!SeedPrelude_Test(pPassword, pPasswordByteLength, pNonce)) {
@@ -820,6 +1022,7 @@ bool Soccer2::AttemptSeed_Encrypt(EncryptionStrength pStrength,
         return false;
     }
     SeedPrologue_Regular_D();
+    SeedEpilogue_Regular_A();
     
     return true;
 }
@@ -835,6 +1038,7 @@ bool Soccer2::AttemptSeed_Decrypt(EncryptionStrength pStrength,
     }
 
     mStrength = pStrength;
+    mCryptex.Free();
     
     if (pStrength == EncryptionStrength::kTest) {
         if (!SeedPrelude_Test(pPassword, pPasswordByteLength, pNonce)) {
@@ -858,6 +1062,7 @@ bool Soccer2::AttemptSeed_Decrypt(EncryptionStrength pStrength,
         return false;
     }
     SeedPrologue_Regular_D();
+    SeedEpilogue_Regular_A();
     
     return true;
 }
@@ -869,22 +1074,51 @@ void Soccer2::ConfigureTestBuffers(std::uint32_t pTestBlockLength) {
 
 void Soccer2::EncryptBlock(std::uint8_t *pSource,
                            std::uint8_t *pDestination) {
+    if ((pSource == nullptr) || (pDestination == nullptr)) {
+        return;
+    }
+
     if (mStrength == EncryptionStrength::kTest) {
         for (std::size_t aIndex=0; aIndex<mTestBlockLength; aIndex++) {
             pDestination[aIndex] = pSource[aIndex] ^ mMaterialA[aIndex];
         }
         return;
     }
-    
+
+    CipherErrorCode aErrorCode = CipherErrorCode::kNone;
+    if (!mCryptex.SealData(pSource,
+                           mScratch,
+                           mCryptTemp,
+                           pDestination,
+                           SOCCER_BLOCK_SIZE,
+                           &aErrorCode)) {
+        printf("Soccer2::EncryptBlock failed with cipher error %u.\n",
+               static_cast<std::uint32_t>(aErrorCode));
+    }
 }
 
 void Soccer2::DecryptBlock(std::uint8_t *pSource,
                            std::uint8_t *pDestination) {
+    if ((pSource == nullptr) || (pDestination == nullptr)) {
+        return;
+    }
+
     if (mStrength == EncryptionStrength::kTest) {
         for (std::size_t aIndex=0; aIndex<mTestBlockLength; aIndex++) {
             pDestination[aIndex] = pSource[aIndex] ^ mMaterialA[aIndex];
         }
         return;
+    }
+
+    CipherErrorCode aErrorCode = CipherErrorCode::kNone;
+    if (!mCryptex.UnsealData(pSource,
+                             mScratch,
+                             mCryptTemp,
+                             pDestination,
+                             SOCCER_BLOCK_SIZE,
+                             &aErrorCode)) {
+        printf("Soccer2::DecryptBlock failed with cipher error %u.\n",
+               static_cast<std::uint32_t>(aErrorCode));
     }
 }
 
@@ -1165,7 +1399,11 @@ void Soccer2::SeedEpilogue_Regular_A() {
     constexpr std::size_t aShuffleSpanByteCount = 256U;
     static_assert((SOCCER_BLOCK_SIZE_C1 % aShuffleSpanByteCount) == 0U);
     static_assert((aShuffleSpanByteCount % sizeof(std::uint32_t)) == 0U);
-
+    
+    cRandIndexA = 0;
+    cRandIndexB = 0;
+    cRandLane = false;
+    
     for (std::size_t aSpanIndex=0U;
          aSpanIndex<(SOCCER_BLOCK_SIZE_C1 / aShuffleSpanByteCount);
          aSpanIndex++) {
@@ -1181,6 +1419,13 @@ void Soccer2::SeedEpilogue_Regular_A() {
             const std::size_t aHold = aIndexList[aSwapIndexA];
             aIndexList[aSwapIndexA] = aIndexList[aSwapIndexB];
             aIndexList[aSwapIndexB] = aHold;
+
+            cRandIndexA = TwistMix32::DiffuseA(cRandIndexA + ((aShuffleWord >> 22U) & 15U));
+            cRandIndexB = TwistMix32::DiffuseA(cRandIndexB + ((aShuffleWord >> 26U) & 15U));
+            const std::uint32_t aLaneBits = (aShuffleWord >> 30U) & 3U;
+            if ((aLaneBits == 1U) || (aLaneBits == 2U)) {
+                cRandLane = !cRandLane;
+            }
         }
     }
 
@@ -1199,6 +1444,13 @@ void Soccer2::SeedEpilogue_Regular_A() {
             const std::size_t aHold = aIndexList[aSwapIndexA];
             aIndexList[aSwapIndexA] = aIndexList[aSwapIndexB];
             aIndexList[aSwapIndexB] = aHold;
+
+            cRandIndexA = TwistMix32::DiffuseA(cRandIndexA + ((aShuffleWord >> 22U) & 15U));
+            cRandIndexB = TwistMix32::DiffuseA(cRandIndexB + ((aShuffleWord >> 26U) & 15U));
+            const std::uint32_t aLaneBits = (aShuffleWord >> 30U) & 3U;
+            if ((aLaneBits == 1U) || (aLaneBits == 2U)) {
+                cRandLane = !cRandLane;
+            }
         }
     }
     
@@ -1231,32 +1483,88 @@ void Soccer2::SeedEpilogue_Regular_A() {
         aFold = TwistMix64::DiffuseA(aFold ^ Load64LE(&mCrushB[mIndexListB[aIndex + 7U] * 8U]));
         mRolledB[aRolledIndex] = aFold;
     }
+    
+    
+    std::uint64_t aCipherWord = 0ULL;
+    aCipherWord = TwistMix64::DiffuseA(aCipherWord ^ SoccerRand());
+    aCipherWord = TwistMix64::DiffuseA(aCipherWord ^ SoccerRand());
+    aCipherWord = TwistMix64::DiffuseA(aCipherWord ^ SoccerRand());
+    aCipherWord = TwistMix64::DiffuseA(aCipherWord ^ SoccerRand());
+    //
+    aCipherWord = TwistMix64::DiffuseA(aCipherWord ^ SoccerRand());
+    aCipherWord = TwistMix64::DiffuseA(aCipherWord ^ SoccerRand());
+    aCipherWord = TwistMix64::DiffuseA(aCipherWord ^ SoccerRand());
+    aCipherWord = TwistMix64::DiffuseA(aCipherWord ^ SoccerRand());
+    //
+    aCipherWord = TwistMix64::DiffuseA(aCipherWord ^ SoccerRand());
+    aCipherWord = TwistMix64::DiffuseA(aCipherWord ^ SoccerRand());
+    aCipherWord = TwistMix64::DiffuseA(aCipherWord ^ SoccerRand());
+    aCipherWord = TwistMix64::DiffuseA(aCipherWord ^ SoccerRand());
+    //
+    aCipherWord = TwistMix64::DiffuseA(aCipherWord ^ SoccerRand());
+    aCipherWord = TwistMix64::DiffuseA(aCipherWord ^ SoccerRand());
+    aCipherWord = TwistMix64::DiffuseA(aCipherWord ^ SoccerRand());
+    aCipherWord = TwistMix64::DiffuseA(aCipherWord ^ SoccerRand());
+    
+    cMaterialIndex = 0;
+    cMaterialQuarter = 0;
+    
+    cMaskIndex = 0;
 
-    /*
-    mCrypt.Layer1().ClearCiphers();
-    AddCipherA(mCrypt.Layer1(), mCiphersIdentifiersA[0], SOCCER_BLOCK_SIZE_L1);
-    mCrypt.Layer1().AddCipher(std::make_unique<RotateMaskCipher>(mMasks[0], mRotationAmountsL1[0]));
-    AddCipherB(mCrypt.Layer1(), mCiphersIdentifiersB[0], SOCCER_BLOCK_SIZE_L1);
-    mCrypt.Layer1().AddCipher(std::make_unique<RotateMaskCipher>(mMasks[1], mRotationAmountsL1[1]));
+    cRotationCipherCountS3 = 0;
+    cRotationCipherIndexS3 = 0;
+
+    cRotationCipherCountS2 = 0;
+    cRotationCipherIndexS2 = 0;
+
+    cRotationCipherCountS1 = 0;
+    cRotationCipherIndexS1 = 0;
     
-    mCrypt.Layer2().ClearCiphers();
-    AddCipherA(mCrypt.Layer2(), mCiphersIdentifiersA[1], SOCCER_BLOCK_SIZE_L2);
-    mCrypt.Layer2().AddCipher(std::make_unique<RotateMaskCipher>(mMasks[2], mRotationAmountsL2[0]));
-    AddCipherB(mCrypt.Layer2(), mCiphersIdentifiersB[1], SOCCER_BLOCK_SIZE_L2);
-    mCrypt.Layer2().AddCipher(std::make_unique<RotateMaskCipher>(mMasks[3], mRotationAmountsL2[1]));
     
-    mCrypt.Layer3().ClearCiphers();
-    AddCipherA(mCrypt.Layer3(), mCiphersIdentifiersA[2], SOCCER_BLOCK_SIZE);
-    mCrypt.Layer3().AddCipher(std::make_unique<RotateMaskCipher>(mMasks[4], mRotationAmountsL3[0]));
-    AddCipherB(mCrypt.Layer3(), mCiphersIdentifiersB[2], SOCCER_BLOCK_SIZE);
-    mCrypt.Layer3().AddCipher(std::make_unique<RotateMaskCipher>(mMasks[5], mRotationAmountsL3[1]));
-    
-    mFinalL3.ClearCiphers();
-    AddCipherA(mFinalL3, mCiphersIdentifiersA[3], SOCCER_BLOCK_SIZE);
-    mFinalL3.AddCipher(std::make_unique<RotateMaskCipher>(mMasks[6], mRotationAmountsFinal[0]));
-    AddCipherB(mFinalL3, mCiphersIdentifiersB[3], SOCCER_BLOCK_SIZE);
-    mFinalL3.AddCipher(std::make_unique<RotateMaskCipher>(mMasks[7], mRotationAmountsFinal[1]));
-    */
+    EncryptionPlanError aError;
+    EncryptionPlan aPlan = EncryptionPlanTool::MakePlanWeak(aCipherWord, mCiphers, &aError);
+    if (aError != EncryptionPlanError::kNone) {
+        printf("Fatal: EncryptionPlanTool had error %xu\n", (std::uint32_t)aError);
+        exit(0);
+    }
+
+    // Consume the material in descending lane size so the quarter-lane cursor
+    // packs the selected key material without stranding larger spans.
+    for (std::size_t aCipherIndex=0U; aCipherIndex<aPlan.mCountL3; aCipherIndex++) {
+        Crypt *aCipher = GenerateCipher(aPlan.mTypeL3[aCipherIndex], 3U);
+        if (aCipher == nullptr) {
+            printf("Fatal: failed to generate L3 cipher %zu.\n", aCipherIndex);
+            exit(0);
+        }
+        mCryptex.AddCipherL3(aCipher);
+    }
+
+    for (std::size_t aCipherIndex=0U; aCipherIndex<aPlan.mCountF3; aCipherIndex++) {
+        Crypt *aCipher = GenerateCipher(aPlan.mTypeF3[aCipherIndex], 3U);
+        if (aCipher == nullptr) {
+            printf("Fatal: failed to generate F3 cipher %zu.\n", aCipherIndex);
+            exit(0);
+        }
+        mCryptex.AddCipherF3(aCipher);
+    }
+
+    for (std::size_t aCipherIndex=0U; aCipherIndex<aPlan.mCountL2; aCipherIndex++) {
+        Crypt *aCipher = GenerateCipher(aPlan.mTypeL2[aCipherIndex], 2U);
+        if (aCipher == nullptr) {
+            printf("Fatal: failed to generate L2 cipher %zu.\n", aCipherIndex);
+            exit(0);
+        }
+        mCryptex.AddCipherL2(aCipher);
+    }
+
+    for (std::size_t aCipherIndex=0U; aCipherIndex<aPlan.mCountL1; aCipherIndex++) {
+        Crypt *aCipher = GenerateCipher(aPlan.mTypeL1[aCipherIndex], 1U);
+        if (aCipher == nullptr) {
+            printf("Fatal: failed to generate L1 cipher %zu.\n", aCipherIndex);
+            exit(0);
+        }
+        mCryptex.AddCipherL1(aCipher);
+    }
 }
 
 void Soccer2::ShuffleMEWBlockZero(std::uint8_t *pMaterial) {

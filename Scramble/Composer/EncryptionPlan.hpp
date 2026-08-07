@@ -70,6 +70,8 @@ struct EncryptionPlan {
 };
 
 class EncryptionPlanTool {
+    
+public:
   
     static EncryptionPlan               MakePlanWeak(std::uint64_t pLaneSelect,
                                                      CipherType *pShuffledCiphers,
@@ -101,11 +103,7 @@ private:
 
     // kSplintMaskBlockCipher32, kSplintMaskBlockCipher64, kRippleMaskBlockCipher32, kRippleMaskBlockCipher64, kReverseMaskByteBlockCipher32, kReverseMaskByteBlockCipher64
     static CipherType                   RingFetchMoverSecondaryOnly(CipherType *pShuffledCiphers, std::size_t *pIndex, EncryptionPlanError *pError);
-
-
-
+    
 };
-
-
 
 #endif /* EncryptionPlan_hpp */

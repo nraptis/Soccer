@@ -5,6 +5,8 @@
 //  Created by nick on 8/1/26.
 //
 
+// Note: We want to remove weave ciphers
+
 #ifndef Soccer2_hpp
 #define Soccer2_hpp
 
@@ -252,6 +254,12 @@ public:
     static EncryptionStrength                   mStrength;
     
     static uint32_t                             mTestBlockLength;
+    
+    static Crypt                                *GenerateCipher(CipherType pType, std::uint8_t pLayer);
+    static std::uint8_t                         *PopLaneS3();
+    static std::uint8_t                         *PopLaneS2();
+    static std::uint8_t                         *PopLaneS1();
+    static std::uint8_t                         PopMask();
     
     
 };

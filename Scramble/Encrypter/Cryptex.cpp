@@ -98,9 +98,9 @@ bool Cryptex::SealData(const std::uint8_t *pSource,
     }
 
     // F3: one final full-width lane.
-    if (!mLayerF3.SealData(pSource,
+    if (!mLayerF3.SealData(pWorkerA,
                            pWorkerB,
-                           pWorkerA,
+                           pDestination,
                            pLength,
                            pErrorCode)) {
         return false;
@@ -176,9 +176,9 @@ bool Cryptex::UnsealData(const std::uint8_t *pSource,
     }
 
     // L3: undo the initial full-width lane last.
-    if (!mLayerL3.UnsealData(pSource,
+    if (!mLayerL3.UnsealData(pWorkerA,
                              pWorkerB,
-                             pWorkerA,
+                             pDestination,
                              pLength,
                              pErrorCode)) {
         return false;

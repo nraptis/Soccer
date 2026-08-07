@@ -21,6 +21,53 @@
 
 @implementation ScrambleTests
 
+- (void)test_encryptDecryptWeak {
+    static std::uint8_t aOriginal[SOCCER_BLOCK_SIZE];
+    static std::uint8_t aEncrypted[SOCCER_BLOCK_SIZE];
+    static std::uint8_t aDecrypted[SOCCER_BLOCK_SIZE];
+    std::uint8_t aPassword[32U];
+
+    for (std::size_t aIndex=0U; aIndex<SOCCER_BLOCK_SIZE; aIndex++) {
+        aOriginal[aIndex] = static_cast<std::uint8_t>((aIndex * 43U) + 7U);
+    }
+    for (std::size_t aIndex=0U; aIndex<32U; aIndex++) {
+        aPassword[aIndex] = static_cast<std::uint8_t>((aIndex * 29U) + 5U);
+    }
+
+    constexpr std::uint64_t aNonce = 0x123456789ABCDEF0ULL;
+    std::uint32_t aAckWord = 0U;
+
+    if (!Soccer2::AttemptSeed_Encrypt(EncryptionStrength::kWeak,
+                                      aPassword,
+                                      sizeof(aPassword),
+                                      aNonce,
+                                      &aAckWord)) {
+        XCTFail("test_encryptDecryptWeak: failed seed encrypt.");
+        return;
+    }
+
+    Soccer2::EncryptBlock(aOriginal, aEncrypted);
+    if (std::memcmp(aOriginal, aEncrypted, SOCCER_BLOCK_SIZE) == 0) {
+        XCTFail("test_encryptDecryptWeak: encrypted data matched source.");
+        return;
+    }
+
+    if (!Soccer2::AttemptSeed_Decrypt(EncryptionStrength::kWeak,
+                                      aPassword,
+                                      sizeof(aPassword),
+                                      aNonce,
+                                      aAckWord)) {
+        XCTFail("test_encryptDecryptWeak: failed seed decrypt.");
+        return;
+    }
+
+    Soccer2::DecryptBlock(aEncrypted, aDecrypted);
+    if (std::memcmp(aOriginal, aDecrypted, SOCCER_BLOCK_SIZE) != 0) {
+        XCTFail("test_encryptDecryptWeak: decrypted data did not match source.");
+        return;
+    }
+}
+
 - (void)test_encryptDecrypt11 {
     
     for (int i=0; i<256; i++) {

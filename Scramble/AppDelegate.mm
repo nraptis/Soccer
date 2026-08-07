@@ -629,12 +629,38 @@ void Make10_000Challnge() {
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     
+    return;
     
-    /*
     constexpr std::uint64_t aRunSeed = 0xD1B54F32DC92ED03ULL;
     std::size_t aRandomTrialCount = 2048U;
 
+    std::size_t aTrialSizes[16] = {
+        10000,
+        25000,
+        50000,
+        100000,
+        
+        250000,
+        500000,
+        1000000,
+        2500000,
+        
+        5000000,
+        10000000,
+        25000000,
+        50000000,
+        
+        100000000,
+        250000000,
+        500000000,
+        1000000000
+    };
+    
+    int aTrialIndex = 0;
     while (true) {
+        
+        aRandomTrialCount = aTrialSizes[aTrialIndex];
+        
         std::printf("SoccerFoldingTool: starting %zu trials per roll.\n",
                     aRandomTrialCount);
         if (!SoccerFoldingTool::Run(aRandomTrialCount, aRunSeed)) {
@@ -648,10 +674,9 @@ void Make10_000Challnge() {
             std::printf("SoccerFoldingTool: trial count cannot be doubled again.\n");
             return;
         }
-        aRandomTrialCount *= 2U;
+        
+        aTrialIndex++;
     }
-    */
-     
     
 }
 

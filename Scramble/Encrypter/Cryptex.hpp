@@ -13,6 +13,32 @@
 
 #include "EncryptionLayer.hpp"
 
+#include "PasswordXORCipher.hpp"
+#include "PasswordAddCipher.hpp"
+#include "PasswordSubtractCipher.hpp"
+#include "PasswordJumpXORCipher.hpp"
+#include "PasswordJumpAddCipher.hpp"
+#include "PasswordJumpSubtractCipher.hpp"
+#include "PepperNoiseXORCipher.hpp"
+#include "PepperJumpNoiseXORCipher.hpp"
+#include "PepperDualJumpNoiseXORCipher.hpp"
+#include "CascadeCipher.hpp"
+#include "CascadeJumpCipher.hpp"
+
+#include "RotateMaskCipher.hpp"
+#include "ReverseMaskCipher.hpp"
+#include "InvertMaskCipher.hpp"
+#include "ReverseMaskByteBlockCipher32.hpp"
+#include "ReverseMaskByteBlockCipher64.hpp"
+#include "SplintMaskBlockCipher32.hpp"
+#include "SplintMaskBlockCipher64.hpp"
+#include "WeaveMaskCipher.hpp"
+#include "WeaveMaskBlockCipher32.hpp"
+#include "WeaveMaskBlockCipher64.hpp"
+#include "RotateCipher.hpp"
+#include "RippleMaskBlockCipher32.hpp"
+#include "RippleMaskBlockCipher64.hpp"
+
 class Cryptex {
 public:
 
