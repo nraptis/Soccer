@@ -8,27 +8,42 @@
 #include "Cryptex.hpp"
 #include "Jelly.hpp"
 
-void Cryptex::AddCipherL3(Crypt *pCipher) {
-    mLayerL3.AddCipher(pCipher);
+void Cryptex::AddCipherL3A(Crypt *pCipher) {
+    mLayerL3A.AddCipher(pCipher);
 }
 
-void Cryptex::AddCipherL2(Crypt *pCipher) {
-    mLayerL2.AddCipher(pCipher);
+void Cryptex::AddCipherL2A(Crypt *pCipher) {
+    mLayerL2A.AddCipher(pCipher);
 }
 
-void Cryptex::AddCipherL1(Crypt *pCipher) {
-    mLayerL1.AddCipher(pCipher);
+void Cryptex::AddCipherL1A(Crypt *pCipher) {
+    mLayerL1A.AddCipher(pCipher);
 }
 
-void Cryptex::AddCipherF3(Crypt *pCipher) {
-    mLayerF3.AddCipher(pCipher);
+void Cryptex::AddCipherL3B(Crypt *pCipher) {
+    mLayerL3B.AddCipher(pCipher);
+}
+
+void Cryptex::AddCipherL2B(Crypt *pCipher) {
+    mLayerL2B.AddCipher(pCipher);
+}
+
+void Cryptex::AddCipherL1B(Crypt *pCipher) {
+    mLayerL1B.AddCipher(pCipher);
+}
+
+void Cryptex::AddCipherL3C(Crypt *pCipher) {
+    mLayerL3C.AddCipher(pCipher);
 }
 
 void Cryptex::Free() {
-    mLayerL3.Free();
-    mLayerL2.Free();
-    mLayerL1.Free();
-    mLayerF3.Free();
+    mLayerL3A.Free();
+    mLayerL2A.Free();
+    mLayerL1A.Free();
+    mLayerL3B.Free();
+    mLayerL2B.Free();
+    mLayerL1B.Free();
+    mLayerL3C.Free();
 }
 
 bool Cryptex::SealData(const std::uint8_t *pSource,
@@ -62,47 +77,81 @@ bool Cryptex::SealData(const std::uint8_t *pSource,
         return false;
     }
 
-    // L3: one full-width lane.
-    if (!mLayerL3.SealData(pSource,
-                           pWorkerB,
-                           pWorkerA,
-                           pLength,
-                           pErrorCode)) {
+    const std::size_t aLengthL2 = pLength >> 1U;
+    const std::size_t aLengthL1 = pLength >> 2U;
+
+    // L3A: one full-width lane.
+    if (!mLayerL3A.SealData(pSource,
+                            pWorkerB,
+                            pWorkerA,
+                            pLength,
+                            pErrorCode)) {
         return false;
     }
 
-    // L2: two half-width lanes.
-    const std::size_t aLengthL2 = pLength >> 1U;
+    // L2A: two half-width lanes.
     for (std::size_t aLaneIndex=0; aLaneIndex<2; aLaneIndex++) {
         const std::size_t aOffset = aLaneIndex * aLengthL2;
-        if (!mLayerL2.SealData(pWorkerA + aOffset,
-                               pDestination + aOffset,
-                               pWorkerB + aOffset,
-                               aLengthL2,
-                               pErrorCode)) {
+        if (!mLayerL2A.SealData(pWorkerA + aOffset,
+                                pDestination + aOffset,
+                                pWorkerB + aOffset,
+                                aLengthL2,
+                                pErrorCode)) {
             return false;
         }
     }
 
-    // L1: four quarter-width lanes.
-    const std::size_t aLengthL1 = pLength >> 2U;
+    // L1A: four quarter-width lanes.
     for (std::size_t aLaneIndex=0; aLaneIndex<4; aLaneIndex++) {
         const std::size_t aOffset = aLaneIndex * aLengthL1;
-        if (!mLayerL1.SealData(pWorkerB + aOffset,
-                               pDestination + aOffset,
-                               pWorkerA + aOffset,
-                               aLengthL1,
-                               pErrorCode)) {
+        if (!mLayerL1A.SealData(pWorkerB + aOffset,
+                                pDestination + aOffset,
+                                pWorkerA + aOffset,
+                                aLengthL1,
+                                pErrorCode)) {
             return false;
         }
     }
 
-    // F3: one final full-width lane.
-    if (!mLayerF3.SealData(pWorkerA,
-                           pWorkerB,
-                           pDestination,
-                           pLength,
-                           pErrorCode)) {
+    // L3B: one full-width lane.
+    if (!mLayerL3B.SealData(pWorkerA,
+                            pDestination,
+                            pWorkerB,
+                            pLength,
+                            pErrorCode)) {
+        return false;
+    }
+
+    // L2B: two half-width lanes.
+    for (std::size_t aLaneIndex=0; aLaneIndex<2; aLaneIndex++) {
+        const std::size_t aOffset = aLaneIndex * aLengthL2;
+        if (!mLayerL2B.SealData(pWorkerB + aOffset,
+                                pDestination + aOffset,
+                                pWorkerA + aOffset,
+                                aLengthL2,
+                                pErrorCode)) {
+            return false;
+        }
+    }
+
+    // L1B: four quarter-width lanes.
+    for (std::size_t aLaneIndex=0; aLaneIndex<4; aLaneIndex++) {
+        const std::size_t aOffset = aLaneIndex * aLengthL1;
+        if (!mLayerL1B.SealData(pWorkerA + aOffset,
+                                pDestination + aOffset,
+                                pWorkerB + aOffset,
+                                aLengthL1,
+                                pErrorCode)) {
+            return false;
+        }
+    }
+
+    // L3C: one final full-width lane.
+    if (!mLayerL3C.SealData(pWorkerB,
+                            pWorkerA,
+                            pDestination,
+                            pLength,
+                            pErrorCode)) {
         return false;
     }
 
@@ -140,47 +189,81 @@ bool Cryptex::UnsealData(const std::uint8_t *pSource,
         return false;
     }
 
-    // F3: undo the final full-width lane first.
-    if (!mLayerF3.UnsealData(pSource,
-                             pWorkerB,
-                             pWorkerA,
-                             pLength,
-                             pErrorCode)) {
+    const std::size_t aLengthL2 = pLength >> 1U;
+    const std::size_t aLengthL1 = pLength >> 2U;
+
+    // L3C: undo the final full-width lane first.
+    if (!mLayerL3C.UnsealData(pSource,
+                              pWorkerA,
+                              pWorkerB,
+                              pLength,
+                              pErrorCode)) {
         return false;
     }
 
-    // L1: undo the four quarter-width lanes.
-    const std::size_t aLengthL1 = pLength >> 2U;
+    // L1B: undo the four quarter-width lanes.
     for (std::size_t aLaneIndex=0; aLaneIndex<4; aLaneIndex++) {
         const std::size_t aOffset = aLaneIndex * aLengthL1;
-        if (!mLayerL1.UnsealData(pWorkerA + aOffset,
-                                 pDestination + aOffset,
-                                 pWorkerB + aOffset,
-                                 aLengthL1,
-                                 pErrorCode)) {
+        if (!mLayerL1B.UnsealData(pWorkerB + aOffset,
+                                  pDestination + aOffset,
+                                  pWorkerA + aOffset,
+                                  aLengthL1,
+                                  pErrorCode)) {
             return false;
         }
     }
 
-    // L2: undo the two half-width lanes.
-    const std::size_t aLengthL2 = pLength >> 1U;
+    // L2B: undo the two half-width lanes.
     for (std::size_t aLaneIndex=0; aLaneIndex<2; aLaneIndex++) {
         const std::size_t aOffset = aLaneIndex * aLengthL2;
-        if (!mLayerL2.UnsealData(pWorkerB + aOffset,
-                                 pDestination + aOffset,
-                                 pWorkerA + aOffset,
-                                 aLengthL2,
-                                 pErrorCode)) {
+        if (!mLayerL2B.UnsealData(pWorkerA + aOffset,
+                                  pDestination + aOffset,
+                                  pWorkerB + aOffset,
+                                  aLengthL2,
+                                  pErrorCode)) {
             return false;
         }
     }
 
-    // L3: undo the initial full-width lane last.
-    if (!mLayerL3.UnsealData(pWorkerA,
-                             pWorkerB,
-                             pDestination,
-                             pLength,
-                             pErrorCode)) {
+    // L3B: undo the middle full-width lane.
+    if (!mLayerL3B.UnsealData(pWorkerB,
+                              pDestination,
+                              pWorkerA,
+                              pLength,
+                              pErrorCode)) {
+        return false;
+    }
+
+    // L1A: undo the first four quarter-width lanes.
+    for (std::size_t aLaneIndex=0; aLaneIndex<4; aLaneIndex++) {
+        const std::size_t aOffset = aLaneIndex * aLengthL1;
+        if (!mLayerL1A.UnsealData(pWorkerA + aOffset,
+                                  pDestination + aOffset,
+                                  pWorkerB + aOffset,
+                                  aLengthL1,
+                                  pErrorCode)) {
+            return false;
+        }
+    }
+
+    // L2A: undo the first two half-width lanes.
+    for (std::size_t aLaneIndex=0; aLaneIndex<2; aLaneIndex++) {
+        const std::size_t aOffset = aLaneIndex * aLengthL2;
+        if (!mLayerL2A.UnsealData(pWorkerB + aOffset,
+                                  pDestination + aOffset,
+                                  pWorkerA + aOffset,
+                                  aLengthL2,
+                                  pErrorCode)) {
+            return false;
+        }
+    }
+
+    // L3A: undo the initial full-width lane last.
+    if (!mLayerL3A.UnsealData(pWorkerA,
+                              pWorkerB,
+                              pDestination,
+                              pLength,
+                              pErrorCode)) {
         return false;
     }
 

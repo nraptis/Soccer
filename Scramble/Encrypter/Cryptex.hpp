@@ -32,9 +32,6 @@
 #include "ReverseMaskByteBlockCipher64.hpp"
 #include "SplintMaskBlockCipher32.hpp"
 #include "SplintMaskBlockCipher64.hpp"
-#include "WeaveMaskCipher.hpp"
-#include "WeaveMaskBlockCipher32.hpp"
-#include "WeaveMaskBlockCipher64.hpp"
 #include "RotateCipher.hpp"
 #include "RippleMaskBlockCipher32.hpp"
 #include "RippleMaskBlockCipher64.hpp"
@@ -42,10 +39,17 @@
 class Cryptex {
 public:
 
-    void                        AddCipherL3(Crypt *pCipher);
-    void                        AddCipherL2(Crypt *pCipher);
-    void                        AddCipherL1(Crypt *pCipher);
-    void                        AddCipherF3(Crypt *pCipher);
+    void                        AddCipherL3A(Crypt *pCipher);
+    void                        AddCipherL2A(Crypt *pCipher);
+    void                        AddCipherL1A(Crypt *pCipher);
+    
+    void                        AddCipherL3B(Crypt *pCipher);
+    void                        AddCipherL2B(Crypt *pCipher);
+    void                        AddCipherL1B(Crypt *pCipher);
+    
+    void                        AddCipherL3C(Crypt *pCipher);
+    
+    
     
     void                        Free();
     
@@ -65,11 +69,13 @@ public:
     
 private:
 
-    EncryptionLayer             mLayerL3;
-    EncryptionLayer             mLayerL2;
-    EncryptionLayer             mLayerL1;
-    EncryptionLayer             mLayerF3;
-    
+    EncryptionLayer             mLayerL3A;
+    EncryptionLayer             mLayerL2A;
+    EncryptionLayer             mLayerL1A;
+    EncryptionLayer             mLayerL3B;
+    EncryptionLayer             mLayerL2B;
+    EncryptionLayer             mLayerL1B;
+    EncryptionLayer             mLayerL3C;
 };
 
 #endif /* Cryptex_hpp */

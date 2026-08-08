@@ -51,31 +51,34 @@ F3: [kKeyConsumeSimple,    kMoverPrimary, kMoverAny]
 #define CIPHER_MASK_LANE_COUNT_3          0x00000100U
 #define CIPHER_MASK_LANE_COUNT_4          0x00000200U
 
-#define CIPHER_FLAG_KEY                   0x00000400U
-#define CIPHER_FLAG_KEY_SIMPLE            0x00000800U
-#define CIPHER_FLAG_KEY_COMPLEX           0x00001000U
-#define CIPHER_FLAG_MOVER                 0x00002000U
-#define CIPHER_FLAG_ROTATION              0x00004000U
-#define CIPHER_FLAG_WANDERER              0x00008000U
-#define CIPHER_FLAG_MOVER_SECONDARY        0x00010000U
+#define CIPHER_FLAG_LEPTON                0x00000400U
+#define CIPHER_FLAG_BOSON                 0x00000800U
+#define CIPHER_FLAG_HADRON                0x00001000U
+#define CIPHER_FLAG_BARYON                0x00002000U
+#define CIPHER_FLAG_FERMION               0x00004000U
+#define CIPHER_FLAG_MESON                 0x00008000U
+#define CIPHER_FLAG_MUON                  0x00010000U
+#define CIPHER_FLAG_QUASIPARTICLE         0x00020000U
+#define CIPHER_FLAG_NEUTRINO              0x00040000U
 
-#define IS_KEY(pType) \
-    ((static_cast<std::uint32_t>(pType) & 0x00000400U) == 0x00000400U)
-#define IS_KEY_SIMPLE(pType) \
-    ((static_cast<std::uint32_t>(pType) & 0x00000C00U) == 0x00000C00U)
-#define IS_KEY_COMPLEX(pType) \
-    ((static_cast<std::uint32_t>(pType) & 0x00001400U) == 0x00001400U)
-
-#define IS_MOVER_NON_ROTATION_NON_WANDERER(pType) \
-    ((static_cast<std::uint32_t>(pType) & 0x0000E000U) == 0x00002000U)
-#define IS_MOVER_NON_WANDERER(pType) \
-    ((static_cast<std::uint32_t>(pType) & 0x0000A000U) == 0x00002000U)
-#define IS_MOVER_NON_ROTATION(pType) \
-    ((static_cast<std::uint32_t>(pType) & 0x00006000U) == 0x00002000U)
-#define IS_MOVER_ANY(pType) \
-    ((static_cast<std::uint32_t>(pType) & 0x00002000U) == 0x00002000U)
-#define IS_MOVER_SECONDARY(pType) \
-    ((static_cast<std::uint32_t>(pType) & 0x00012000U) == 0x00012000U)
+#define IS_LEPTON(pType) \
+    ((static_cast<std::uint32_t>(pType) & CIPHER_FLAG_LEPTON) != 0U)
+#define IS_BOSON(pType) \
+    ((static_cast<std::uint32_t>(pType) & CIPHER_FLAG_BOSON) != 0U)
+#define IS_HADRON(pType) \
+    ((static_cast<std::uint32_t>(pType) & CIPHER_FLAG_HADRON) != 0U)
+#define IS_BARYON(pType) \
+    ((static_cast<std::uint32_t>(pType) & CIPHER_FLAG_BARYON) != 0U)
+#define IS_FERMION(pType) \
+    ((static_cast<std::uint32_t>(pType) & CIPHER_FLAG_FERMION) != 0U)
+#define IS_MESON(pType) \
+    ((static_cast<std::uint32_t>(pType) & CIPHER_FLAG_MESON) != 0U)
+#define IS_MUON(pType) \
+    ((static_cast<std::uint32_t>(pType) & CIPHER_FLAG_MUON) != 0U)
+#define IS_QUASIPARTICLE(pType) \
+    ((static_cast<std::uint32_t>(pType) & CIPHER_FLAG_QUASIPARTICLE) != 0U)
+#define IS_NEUTRINO(pType) \
+    ((static_cast<std::uint32_t>(pType) & CIPHER_FLAG_NEUTRINO) != 0U)
 
 
 /*
@@ -98,10 +101,6 @@ kReverseMaskCipher
 kRippleMaskBlockCipher32
 kRippleMaskBlockCipher64
 
-kWeaveMaskCipher
-kWeaveMaskBlockCipher32
-kWeaveMaskBlockCipher64
-
 kSplintMaskBlockCipher32
 kSplintMaskBlockCipher64
 
@@ -116,45 +115,33 @@ kRotateCipher
 enum class CipherType : std::uint32_t {
     kNone = 0U,
     
-    kPasswordXORCipher = 0x01U | CIPHER_MASK_LANE_COUNT_1 | CIPHER_FLAG_KEY | CIPHER_FLAG_KEY_SIMPLE,
-    kPasswordAddCipher = 0x02U | CIPHER_MASK_LANE_COUNT_1 | CIPHER_FLAG_KEY | CIPHER_FLAG_KEY_SIMPLE,
-    kPasswordSubtractCipher = 0x03U | CIPHER_MASK_LANE_COUNT_1 | CIPHER_FLAG_KEY | CIPHER_FLAG_KEY_SIMPLE,
+    kPasswordXORCipher = 0x01U | CIPHER_MASK_LANE_COUNT_1 | CIPHER_FLAG_LEPTON | CIPHER_FLAG_HADRON,
+    kPasswordAddCipher = 0x02U | CIPHER_MASK_LANE_COUNT_1 | CIPHER_FLAG_LEPTON | CIPHER_FLAG_HADRON,
+    kPasswordSubtractCipher = 0x03U | CIPHER_MASK_LANE_COUNT_1 | CIPHER_FLAG_LEPTON | CIPHER_FLAG_HADRON,
 
-    kPasswordJumpXORCipher = 0x04U | CIPHER_MASK_LANE_COUNT_2 | CIPHER_FLAG_KEY | CIPHER_FLAG_KEY_SIMPLE,
-    kPasswordJumpAddCipher = 0x05U | CIPHER_MASK_LANE_COUNT_2 | CIPHER_FLAG_KEY | CIPHER_FLAG_KEY_SIMPLE,
-    kPasswordJumpSubtractCipher = 0x06U | CIPHER_MASK_LANE_COUNT_2 | CIPHER_FLAG_KEY | CIPHER_FLAG_KEY_SIMPLE,
+    kPasswordJumpXORCipher = 0x04U | CIPHER_MASK_LANE_COUNT_2 | CIPHER_FLAG_LEPTON | CIPHER_FLAG_BOSON | CIPHER_FLAG_HADRON,
+    kPasswordJumpAddCipher = 0x05U | CIPHER_MASK_LANE_COUNT_2 | CIPHER_FLAG_LEPTON | CIPHER_FLAG_BOSON | CIPHER_FLAG_HADRON,
+    kPasswordJumpSubtractCipher = 0x06U | CIPHER_MASK_LANE_COUNT_2 | CIPHER_FLAG_LEPTON | CIPHER_FLAG_BOSON | CIPHER_FLAG_HADRON,
 
-    kPepperNoiseXORCipher = 0x07U | CIPHER_MASK_LANE_COUNT_2 | CIPHER_FLAG_KEY | CIPHER_FLAG_KEY_SIMPLE | CIPHER_FLAG_KEY_COMPLEX,
-    kPepperJumpNoiseXORCipher = 0x08U | CIPHER_MASK_LANE_COUNT_3 | CIPHER_FLAG_KEY | CIPHER_FLAG_KEY_SIMPLE | CIPHER_FLAG_KEY_COMPLEX,
-    kPepperDualJumpNoiseXORCipher = 0x09U | CIPHER_MASK_LANE_COUNT_4 | CIPHER_FLAG_KEY | CIPHER_FLAG_KEY_SIMPLE | CIPHER_FLAG_KEY_COMPLEX,
+    kPepperNoiseXORCipher = 0x07U | CIPHER_MASK_LANE_COUNT_2 | CIPHER_FLAG_LEPTON | CIPHER_FLAG_BOSON | CIPHER_FLAG_HADRON,
+    kPepperJumpNoiseXORCipher = 0x08U | CIPHER_MASK_LANE_COUNT_3 | CIPHER_FLAG_LEPTON | CIPHER_FLAG_BOSON | CIPHER_FLAG_HADRON,
+    kPepperDualJumpNoiseXORCipher = 0x09U | CIPHER_MASK_LANE_COUNT_4 | CIPHER_FLAG_LEPTON | CIPHER_FLAG_BOSON | CIPHER_FLAG_HADRON,
     
-    kCascadeCipher = 0x12U | CIPHER_MASK_LANE_COUNT_1 | CIPHER_FLAG_KEY | CIPHER_FLAG_KEY_COMPLEX,
-    kCascadeJumpCipher = 0x13U | CIPHER_MASK_LANE_COUNT_2 | CIPHER_FLAG_KEY | CIPHER_FLAG_KEY_COMPLEX,
+    kCascadeCipher = 0x12U | CIPHER_MASK_LANE_COUNT_1 | CIPHER_FLAG_BOSON | CIPHER_FLAG_HADRON,
+    kCascadeJumpCipher = 0x13U | CIPHER_MASK_LANE_COUNT_2 | CIPHER_FLAG_BOSON | CIPHER_FLAG_HADRON,
     
+    kRotateMaskCipher = 0x0AU | CIPHER_MASK_LANE_COUNT_0 | CIPHER_FLAG_BARYON | CIPHER_FLAG_MESON,
+    kRotateCipher = 0x0FU | CIPHER_MASK_LANE_COUNT_0 | CIPHER_FLAG_FERMION | CIPHER_FLAG_MESON,
     
+    kReverseMaskCipher = 0x0BU | CIPHER_MASK_LANE_COUNT_0 | CIPHER_FLAG_MUON | CIPHER_FLAG_NEUTRINO,
+    kInvertMaskCipher = 0x0CU | CIPHER_MASK_LANE_COUNT_0 | CIPHER_FLAG_MUON | CIPHER_FLAG_NEUTRINO,
+    kSplintMaskBlockCipher32 = 0x10U | CIPHER_MASK_LANE_COUNT_0 | CIPHER_FLAG_MUON | CIPHER_FLAG_NEUTRINO,
+    kSplintMaskBlockCipher64 = 0x11U | CIPHER_MASK_LANE_COUNT_0 | CIPHER_FLAG_MUON | CIPHER_FLAG_NEUTRINO,
 
-    kRotateMaskCipher = 0x0AU | CIPHER_MASK_LANE_COUNT_0 | CIPHER_FLAG_MOVER | CIPHER_FLAG_ROTATION,
-    kReverseMaskCipher = 0x0BU | CIPHER_MASK_LANE_COUNT_0 | CIPHER_FLAG_MOVER,
-    kInvertMaskCipher = 0x0CU | CIPHER_MASK_LANE_COUNT_0 | CIPHER_FLAG_MOVER,
-
-    kReverseMaskByteBlockCipher32 = 0x0DU | CIPHER_MASK_LANE_COUNT_0 | CIPHER_FLAG_MOVER | CIPHER_FLAG_MOVER_SECONDARY,
-    kReverseMaskByteBlockCipher64 = 0x0EU | CIPHER_MASK_LANE_COUNT_0 | CIPHER_FLAG_MOVER | CIPHER_FLAG_MOVER_SECONDARY,
-
-    
-
-    kSplintMaskBlockCipher32 = 0x10U | CIPHER_MASK_LANE_COUNT_0 | CIPHER_FLAG_MOVER | CIPHER_FLAG_MOVER_SECONDARY,
-    kSplintMaskBlockCipher64 = 0x11U | CIPHER_MASK_LANE_COUNT_0 | CIPHER_FLAG_MOVER | CIPHER_FLAG_MOVER_SECONDARY,
-
-    
-
-    kWeaveMaskCipher = 0x14U | CIPHER_MASK_LANE_COUNT_0 | CIPHER_FLAG_MOVER | CIPHER_FLAG_WANDERER,
-    kWeaveMaskBlockCipher32 = 0x15U | CIPHER_MASK_LANE_COUNT_0 | CIPHER_FLAG_MOVER | CIPHER_FLAG_WANDERER,
-    kWeaveMaskBlockCipher64 = 0x16U | CIPHER_MASK_LANE_COUNT_0 | CIPHER_FLAG_MOVER | CIPHER_FLAG_WANDERER,
-
-    kRotateCipher = 0x0FU | CIPHER_MASK_LANE_COUNT_0 | CIPHER_FLAG_MOVER | CIPHER_FLAG_ROTATION,
-    
-    kRippleMaskBlockCipher32 = 0x17U | CIPHER_MASK_LANE_COUNT_0 | CIPHER_FLAG_MOVER | CIPHER_FLAG_MOVER_SECONDARY,
-    kRippleMaskBlockCipher64 = 0x18U | CIPHER_MASK_LANE_COUNT_0 | CIPHER_FLAG_MOVER | CIPHER_FLAG_MOVER_SECONDARY,
+    kReverseMaskByteBlockCipher32 = 0x0DU | CIPHER_MASK_LANE_COUNT_0 | CIPHER_FLAG_QUASIPARTICLE | CIPHER_FLAG_NEUTRINO,
+    kReverseMaskByteBlockCipher64 = 0x0EU | CIPHER_MASK_LANE_COUNT_0 | CIPHER_FLAG_QUASIPARTICLE | CIPHER_FLAG_NEUTRINO,
+    kRippleMaskBlockCipher32 = 0x17U | CIPHER_MASK_LANE_COUNT_0 | CIPHER_FLAG_QUASIPARTICLE | CIPHER_FLAG_NEUTRINO,
+    kRippleMaskBlockCipher64 = 0x18U | CIPHER_MASK_LANE_COUNT_0 | CIPHER_FLAG_QUASIPARTICLE | CIPHER_FLAG_NEUTRINO,
 };
 
 static_assert(sizeof(CipherType) == sizeof(std::uint32_t));

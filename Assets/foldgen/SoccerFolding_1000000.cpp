@@ -6,9 +6,9 @@
 // Compile this source with only its matching generated header.
 //
 
-#include "SoccerFolding.hpp"
-#include "TwistMix16.hpp"
-#include "TwistMix32.hpp"
+#include "SoccerFolding_1000000.hpp"
+#include "../../Scramble/Expander/Core/TwistMix16.hpp"
+#include "../../Scramble/Expander/Core/TwistMix32.hpp"
 
 #include <cstddef>
 #include <cstdint>

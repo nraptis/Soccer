@@ -10,9 +10,33 @@
 #include "TwistMix32.hpp"
 #include "TwistMix64.hpp"
 #include "EncryptionPlan.hpp"
+#include "SoccerRotationBank.hpp"
 
 #include <algorithm>
 #include <cstring>
+
+/*
+ Rotation-bank integration
+
+ Cryptex and SoccerRotationBank use the same seven stages: L3A, L2A, L1A,
+ L3B, L2B, L1B, and L3C.  Each stage owns one request count, one response
+ array, and one cursor.  There are no synthetic final-stage buckets and no
+ splitting at the middle L3B stage.
+
+ The complete EncryptionPlan is created before any cipher.  Its Meson members
+ are counted per stage and sent to SoccerRotationBank::Withdraw, which selects
+ mutually non-contending full-, half-, and quarter-lane rotations.  PopRotation
+ then advances a separate cursor for each stage.  A zero return is an
+ exhausted or invalid bank entry; GenerateCipher treats it as construction
+ failure instead of quietly creating a zero-distance rotation.
+
+ Bank values are canonical effective encryption shifts.  RotateMaskCipher uses
+ that value directly.  RotateCipher applies the inverse of its constructor value
+ while sealing, so GenerateCipher passes laneLength - bankRotation to it.  This
+ makes masked and non-masked rotation ciphers move in the same canonical
+ direction and lets the bank compare their real effects rather than their
+ differing constructor conventions.
+ */
 
 #define BLOCK_COUNT (SOCCER_BLOCK_SIZE / S_BLOCK)
 
@@ -21,6 +45,18 @@
 #define COMPLEXITY_WEAK 4
 
 #define WARM_UP_BLOCKS 4
+
+namespace {
+
+constexpr std::uint8_t kStageL3A = 0U;
+constexpr std::uint8_t kStageL2A = 1U;
+constexpr std::uint8_t kStageL1A = 2U;
+constexpr std::uint8_t kStageL3B = 3U;
+constexpr std::uint8_t kStageL2B = 4U;
+constexpr std::uint8_t kStageL1B = 5U;
+constexpr std::uint8_t kStageL3C = 6U;
+
+} // namespace
 
 static_assert((SOCCER_BLOCK_SIZE % S_BLOCK) == 0U);
 static_assert(BLOCK_COUNT >= WARM_UP_BLOCKS);
@@ -134,6 +170,14 @@ std::size_t                                 Soccer2::mIndexListB[2048];
 std::uint64_t                               Soccer2::mRolledA[256];
 std::uint64_t                               Soccer2::mRolledB[256];
 
+std::uint64_t                               Soccer2::mRotationSeedS3[SOCCER_ROTATION_WORD_COUNT_S3];
+std::uint64_t                               Soccer2::mRotationSeedS2[SOCCER_ROTATION_WORD_COUNT_S2];
+std::uint64_t                               Soccer2::mRotationSeedS1[SOCCER_ROTATION_WORD_COUNT_S1];
+
+
+
+
+
 
 std::uint8_t                                Soccer2::mMasks[32];
 
@@ -176,14 +220,17 @@ std::size_t                                 cMaskIndex = 0;
 std::size_t                                 cMaterialIndex = 0;
 std::size_t                                 cMaterialQuarter = 0;
 
-std::size_t                                 cRotationCipherCountS3 = 0;
-std::size_t                                 cRotationCipherIndexS3 = 0;
+std::size_t                                 Soccer2::mRotationBankCursorL3A = 0;
+std::size_t                                 Soccer2::mRotationBankCursorL2A = 0;
+std::size_t                                 Soccer2::mRotationBankCursorL1A = 0;
 
-std::size_t                                 cRotationCipherCountS2 = 0;
-std::size_t                                 cRotationCipherIndexS2 = 0;
+std::size_t                                 Soccer2::mRotationBankCursorL3B = 0;
+std::size_t                                 Soccer2::mRotationBankCursorL2B = 0;
+std::size_t                                 Soccer2::mRotationBankCursorL1B = 0;
 
-std::size_t                                 cRotationCipherCountS1 = 0;
-std::size_t                                 cRotationCipherIndexS1 = 0;
+std::size_t                                 Soccer2::mRotationBankCursorL3C = 0;
+
+SoccerRotationBankResponse                  cRotationBankResponse;
 
 std::uint64_t                               SoccerRand() {
     if (cRandLane == true) {
@@ -252,12 +299,50 @@ std::uint8_t Soccer2::PopMask() {
     return aResult;
 }
 
-Crypt *Soccer2::GenerateCipher(CipherType pType, std::uint8_t pLayer) {
-    auto PopLane = [pLayer]() -> std::uint8_t * {
-        if (pLayer == 3U) {
+std::int32_t Soccer2::PopRotation(std::uint8_t pStage) {
+    if (pStage == kStageL3A) {
+        if (mRotationBankCursorL3A >= 4U) { return 0U; }
+        return cRotationBankResponse.mAmountL3A[mRotationBankCursorL3A++];
+    }
+    if (pStage == kStageL2A) {
+        if (mRotationBankCursorL2A >= 4U) { return 0U; }
+        return cRotationBankResponse.mAmountL2A[mRotationBankCursorL2A++];
+    }
+    if (pStage == kStageL1A) {
+        if (mRotationBankCursorL1A >= 4U) { return 0U; }
+        return cRotationBankResponse.mAmountL1A[mRotationBankCursorL1A++];
+    }
+    if (pStage == kStageL3B) {
+        if (mRotationBankCursorL3B >= 4U) { return 0U; }
+        return cRotationBankResponse.mAmountL3B[mRotationBankCursorL3B++];
+    }
+    if (pStage == kStageL2B) {
+        if (mRotationBankCursorL2B >= 4U) { return 0U; }
+        return cRotationBankResponse.mAmountL2B[mRotationBankCursorL2B++];
+    }
+    if (pStage == kStageL1B) {
+        if (mRotationBankCursorL1B >= 4U) { return 0U; }
+        return cRotationBankResponse.mAmountL1B[mRotationBankCursorL1B++];
+    }
+    if (pStage == kStageL3C) {
+        if (mRotationBankCursorL3C >= 4U) { return 0U; }
+        return cRotationBankResponse.mAmountL3C[mRotationBankCursorL3C++];
+    }
+    return 0U;
+}
+
+Crypt *Soccer2::GenerateCipher(CipherType pType, std::uint8_t pStage) {
+    if (pStage > kStageL3C) {
+        return nullptr;
+    }
+
+    auto PopLane = [pStage]() -> std::uint8_t * {
+        if ((pStage == kStageL3A) ||
+            (pStage == kStageL3B) ||
+            (pStage == kStageL3C)) {
             return PopLaneS3();
         }
-        if (pLayer == 2U) {
+        if ((pStage == kStageL2A) || (pStage == kStageL2B)) {
             return PopLaneS2();
         }
         return PopLaneS1();
@@ -312,11 +397,11 @@ Crypt *Soccer2::GenerateCipher(CipherType pType, std::uint8_t pLayer) {
             std::uint8_t *aJumps = PopLane();
             return new CascadeJumpCipher(aMask, aJumps);
         }
-
         case CipherType::kRotateMaskCipher: {
+            const std::int32_t aRotation = PopRotation(pStage);
+            if (aRotation == 0) { return nullptr; }
             const std::uint8_t aMask = PopMask();
-            const std::size_t aShift = static_cast<std::size_t>(SoccerRand());
-            return new RotateMaskCipher(aMask, aShift);
+            return new RotateMaskCipher(aMask, aRotation);
         }
         case CipherType::kReverseMaskCipher:
             return new ReverseMaskCipher(PopMask());
@@ -334,36 +419,25 @@ Crypt *Soccer2::GenerateCipher(CipherType pType, std::uint8_t pLayer) {
             return new RippleMaskBlockCipher32(PopMask());
         case CipherType::kRippleMaskBlockCipher64:
             return new RippleMaskBlockCipher64(PopMask());
-        case CipherType::kRotateCipher:
-            return new RotateCipher(static_cast<std::size_t>(SoccerRand()));
+        case CipherType::kRotateCipher: {
+            const std::int32_t aRotation = PopRotation(pStage);
+            if (aRotation == 0) { return nullptr; }
 
-        case CipherType::kWeaveMaskCipher: {
-            const std::uint8_t aMask = PopMask();
-            const std::size_t aCount = 1U + static_cast<std::size_t>(SoccerRand() % 8ULL);
-            const std::size_t aFrontStride = 1U + static_cast<std::size_t>(SoccerRand() % 8ULL);
-            const std::size_t aBackStride = 1U + static_cast<std::size_t>(SoccerRand() % 8ULL);
-            return new WeaveMaskCipher(aMask, aCount, aFrontStride, aBackStride);
-        }
-        case CipherType::kWeaveMaskBlockCipher32: {
-            const std::uint8_t aMask = PopMask();
-            const std::size_t aCount = 1U + static_cast<std::size_t>(SoccerRand() % 4ULL);
-            const std::size_t aFrontStride = 1U + static_cast<std::size_t>(SoccerRand() % 4ULL);
-            const std::size_t aBackStride = 1U + static_cast<std::size_t>(SoccerRand() % 4ULL);
-            return new WeaveMaskBlockCipher32(aMask, aCount, aFrontStride, aBackStride);
-        }
-        case CipherType::kWeaveMaskBlockCipher64: {
-            const std::uint8_t aMask = PopMask();
-            const std::size_t aCount = 1U + static_cast<std::size_t>(SoccerRand() % 4ULL);
-            const std::size_t aFrontStride = 1U + static_cast<std::size_t>(SoccerRand() % 4ULL);
-            const std::size_t aBackStride = 1U + static_cast<std::size_t>(SoccerRand() % 4ULL);
-            return new WeaveMaskBlockCipher64(aMask, aCount, aFrontStride, aBackStride);
-        }
+            std::int32_t aLaneLength = static_cast<std::int32_t>(SOCCER_BLOCK_SIZE_L1);
+            if ((pStage == kStageL3A) ||
+                (pStage == kStageL3B) ||
+                (pStage == kStageL3C)) {
+                aLaneLength = static_cast<std::int32_t>(SOCCER_BLOCK_SIZE);
+            } else if ((pStage == kStageL2A) || (pStage == kStageL2B)) {
+                aLaneLength = static_cast<std::int32_t>(SOCCER_BLOCK_SIZE_L2);
+            }
 
-        case CipherType::kNone:
+            const std::int32_t aShift = aLaneLength - aRotation;
+            return new RotateCipher(aShift);
+        }
+        default:
             return nullptr;
     }
-
-    return nullptr;
 }
 
 
@@ -407,6 +481,19 @@ void Soccer2::Zero() {
     std::memset(mIndexListB, 0, sizeof(mIndexListB));
     std::memset(mRolledA, 0, sizeof(mRolledA));
     std::memset(mRolledB, 0, sizeof(mRolledB));
+    std::memset(mRotationSeedS1, 0, sizeof(mRotationSeedS1));
+    std::memset(mRotationSeedS2, 0, sizeof(mRotationSeedS2));
+    std::memset(mRotationSeedS3, 0, sizeof(mRotationSeedS3));
+
+    cRotationBankResponse = {};
+    mRotationBankCursorL3A = 0U;
+    mRotationBankCursorL2A = 0U;
+    mRotationBankCursorL1A = 0U;
+    mRotationBankCursorL3B = 0U;
+    mRotationBankCursorL2B = 0U;
+    mRotationBankCursorL1B = 0U;
+    mRotationBankCursorL3C = 0U;
+
     std::memset(mCryptTemp, 0, sizeof(mCryptTemp));
 
     mWorkSpaceA.Zero();
@@ -497,11 +584,8 @@ void Soccer2::Zero() {
     mClaimedMaterialCount = 0U;
     mClaimedWorkSpaceCount = 0U;
 
+    mCryptex.Free();
     
-    //mCrypt.Layer1().ClearCiphers();
-    //mCrypt.Layer2().ClearCiphers();
-    //mCrypt.Layer3().ClearCiphers();
-    //mFinalL3.ClearCiphers();
 }
 
 
@@ -1136,31 +1220,31 @@ void Soccer2::InitializeMasks() {
 void Soccer2::InitializeCiphers() {
     std::size_t aCipherIndex = 0U;
 
-    for (std::size_t aIndex=0U; aIndex<4U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kPasswordXORCipher; }
-    for (std::size_t aIndex=0U; aIndex<4U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kPasswordAddCipher; }
-    for (std::size_t aIndex=0U; aIndex<4U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kPasswordSubtractCipher; }
+    for (std::size_t aIndex=0U; aIndex<8U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kPasswordXORCipher; }
+    for (std::size_t aIndex=0U; aIndex<8U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kPasswordAddCipher; }
+    for (std::size_t aIndex=0U; aIndex<8U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kPasswordSubtractCipher; }
 
-    for (std::size_t aIndex=0U; aIndex<3U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kPasswordJumpXORCipher; }
-    for (std::size_t aIndex=0U; aIndex<3U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kPasswordJumpAddCipher; }
-    for (std::size_t aIndex=0U; aIndex<3U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kPasswordJumpSubtractCipher; }
+    for (std::size_t aIndex=0U; aIndex<7U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kPasswordJumpXORCipher; }
+    for (std::size_t aIndex=0U; aIndex<7U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kPasswordJumpAddCipher; }
+    for (std::size_t aIndex=0U; aIndex<7U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kPasswordJumpSubtractCipher; }
 
-    for (std::size_t aIndex=0U; aIndex<3U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kPepperNoiseXORCipher; }
-    for (std::size_t aIndex=0U; aIndex<3U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kPepperJumpNoiseXORCipher; }
-    for (std::size_t aIndex=0U; aIndex<3U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kPepperDualJumpNoiseXORCipher; }
+    for (std::size_t aIndex=0U; aIndex<7U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kPepperNoiseXORCipher; }
+    for (std::size_t aIndex=0U; aIndex<7U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kPepperJumpNoiseXORCipher; }
+    for (std::size_t aIndex=0U; aIndex<7U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kPepperDualJumpNoiseXORCipher; }
 
     for (std::size_t aIndex=0U; aIndex<3U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kCascadeCipher; }
     for (std::size_t aIndex=0U; aIndex<3U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kCascadeJumpCipher; }
 
     for (std::size_t aIndex=0U; aIndex<20U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kReverseMaskCipher; }
-    for (std::size_t aIndex=0U; aIndex<10U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kReverseMaskByteBlockCipher32; }
-    for (std::size_t aIndex=0U; aIndex<10U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kReverseMaskByteBlockCipher64; }
+    for (std::size_t aIndex=0U; aIndex<15U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kReverseMaskByteBlockCipher32; }
+    for (std::size_t aIndex=0U; aIndex<15U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kReverseMaskByteBlockCipher64; }
     
-    for (std::size_t aIndex=0U; aIndex<10U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kRippleMaskBlockCipher32; }
-    for (std::size_t aIndex=0U; aIndex<10U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kRippleMaskBlockCipher64; }
+    for (std::size_t aIndex=0U; aIndex<15U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kRippleMaskBlockCipher32; }
+    for (std::size_t aIndex=0U; aIndex<15U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kRippleMaskBlockCipher64; }
 
-    for (std::size_t aIndex=0U; aIndex<20U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kWeaveMaskCipher; }
-    for (std::size_t aIndex=0U; aIndex<15U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kWeaveMaskBlockCipher32; }
-    for (std::size_t aIndex=0U; aIndex<15U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kWeaveMaskBlockCipher64; }
+    //for (std::size_t aIndex=0U; aIndex<20U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kWeaveMaskCipher; }
+    //for (std::size_t aIndex=0U; aIndex<15U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kWeaveMaskBlockCipher32; }
+    //for (std::size_t aIndex=0U; aIndex<15U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kWeaveMaskBlockCipher64; }
 
     for (std::size_t aIndex=0U; aIndex<15U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kSplintMaskBlockCipher32; }
     for (std::size_t aIndex=0U; aIndex<15U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kSplintMaskBlockCipher64; }
@@ -1486,84 +1570,138 @@ void Soccer2::SeedEpilogue_Regular_A() {
     
     
     std::uint64_t aCipherWord = 0ULL;
-    aCipherWord = TwistMix64::DiffuseA(aCipherWord ^ SoccerRand());
-    aCipherWord = TwistMix64::DiffuseA(aCipherWord ^ SoccerRand());
-    aCipherWord = TwistMix64::DiffuseA(aCipherWord ^ SoccerRand());
-    aCipherWord = TwistMix64::DiffuseA(aCipherWord ^ SoccerRand());
-    //
-    aCipherWord = TwistMix64::DiffuseA(aCipherWord ^ SoccerRand());
-    aCipherWord = TwistMix64::DiffuseA(aCipherWord ^ SoccerRand());
-    aCipherWord = TwistMix64::DiffuseA(aCipherWord ^ SoccerRand());
-    aCipherWord = TwistMix64::DiffuseA(aCipherWord ^ SoccerRand());
-    //
-    aCipherWord = TwistMix64::DiffuseA(aCipherWord ^ SoccerRand());
-    aCipherWord = TwistMix64::DiffuseA(aCipherWord ^ SoccerRand());
-    aCipherWord = TwistMix64::DiffuseA(aCipherWord ^ SoccerRand());
-    aCipherWord = TwistMix64::DiffuseA(aCipherWord ^ SoccerRand());
-    //
-    aCipherWord = TwistMix64::DiffuseA(aCipherWord ^ SoccerRand());
-    aCipherWord = TwistMix64::DiffuseA(aCipherWord ^ SoccerRand());
-    aCipherWord = TwistMix64::DiffuseA(aCipherWord ^ SoccerRand());
-    aCipherWord = TwistMix64::DiffuseA(aCipherWord ^ SoccerRand());
+    
+    for (std::size_t aIndex=0; aIndex<16; aIndex++) {
+        aCipherWord = TwistMix64::DiffuseA(aCipherWord ^ SoccerRand());
+    }
+    
+    for (std::size_t aIndex=0; aIndex<SOCCER_ROTATION_WORD_COUNT_S3; aIndex++) {
+        mRotationSeedS3[aIndex] = SoccerRand();
+    }
+    for (std::size_t aIndex=0; aIndex<SOCCER_ROTATION_WORD_COUNT_S2; aIndex++) {
+        mRotationSeedS2[aIndex] = SoccerRand();
+    }
+    for (std::size_t aIndex=0; aIndex<SOCCER_ROTATION_WORD_COUNT_S1; aIndex++) {
+        mRotationSeedS1[aIndex] = SoccerRand();
+    }
     
     cMaterialIndex = 0;
     cMaterialQuarter = 0;
     
     cMaskIndex = 0;
-
-    cRotationCipherCountS3 = 0;
-    cRotationCipherIndexS3 = 0;
-
-    cRotationCipherCountS2 = 0;
-    cRotationCipherIndexS2 = 0;
-
-    cRotationCipherCountS1 = 0;
-    cRotationCipherIndexS1 = 0;
+    
+    mRotationBankCursorL3A = 0;
+    mRotationBankCursorL2A = 0;
+    mRotationBankCursorL1A = 0;
+    
+    mRotationBankCursorL3B = 0;
+    mRotationBankCursorL2B = 0;
+    mRotationBankCursorL1B = 0;
+    
+    mRotationBankCursorL3C = 0;
     
     
-    EncryptionPlanError aError;
-    EncryptionPlan aPlan = EncryptionPlanTool::MakePlanWeak(aCipherWord, mCiphers, &aError);
-    if (aError != EncryptionPlanError::kNone) {
-        printf("Fatal: EncryptionPlanTool had error %xu\n", (std::uint32_t)aError);
-        exit(0);
+    EncryptionPlan aPlan;
+    if (mStrength == EncryptionStrength::kWeak) {
+        aPlan = EncryptionPlanTool::MakePlanWeak(aCipherWord, mCiphers);
+    } else if (mStrength == EncryptionStrength::kStrong) {
+        aPlan = EncryptionPlanTool::MakePlanStrong(aCipherWord, mCiphers);
+    } else {
+        aPlan = EncryptionPlanTool::MakePlanNormal(aCipherWord, mCiphers);
     }
+
+    auto CountRotations = [](const EncryptionPlanStage &pStage) -> std::size_t {
+        std::size_t aCount = 0U;
+        for (std::size_t aIndex=0U; aIndex<pStage.mCount; aIndex++) {
+            if (IS_MESON(pStage.mType[aIndex])) {
+                aCount++;
+            }
+        }
+        return aCount;
+    };
+
+    auto MakeRotationCount = [](std::size_t pCount) -> SoccerRotationCount {
+        if (pCount == 4U) { return SoccerRotationCount::kFour; }
+        if (pCount == 3U) { return SoccerRotationCount::kThree; }
+        if (pCount == 2U) { return SoccerRotationCount::kTwo; }
+        if (pCount == 1U) { return SoccerRotationCount::kOne; }
+        return SoccerRotationCount::kNone;
+    };
+
+    SoccerRotationBankRequest aRotationBankRequest;
+    aRotationBankRequest.mL3A = MakeRotationCount(CountRotations(aPlan.mL3A));
+    aRotationBankRequest.mL2A = MakeRotationCount(CountRotations(aPlan.mL2A));
+    aRotationBankRequest.mL1A = MakeRotationCount(CountRotations(aPlan.mL1A));
+    aRotationBankRequest.mL3B = MakeRotationCount(CountRotations(aPlan.mL3B));
+    aRotationBankRequest.mL2B = MakeRotationCount(CountRotations(aPlan.mL2B));
+    aRotationBankRequest.mL1B = MakeRotationCount(CountRotations(aPlan.mL1B));
+    aRotationBankRequest.mL3C = MakeRotationCount(CountRotations(aPlan.mL3C));
+
+    cRotationBankResponse = SoccerRotationBank::Withdraw(aRotationBankRequest);
 
     // Consume the material in descending lane size so the quarter-lane cursor
     // packs the selected key material without stranding larger spans.
-    for (std::size_t aCipherIndex=0U; aCipherIndex<aPlan.mCountL3; aCipherIndex++) {
-        Crypt *aCipher = GenerateCipher(aPlan.mTypeL3[aCipherIndex], 3U);
+    for (std::size_t aCipherIndex=0U; aCipherIndex<aPlan.mL3A.mCount; aCipherIndex++) {
+        Crypt *aCipher = GenerateCipher(aPlan.mL3A.mType[aCipherIndex], kStageL3A);
         if (aCipher == nullptr) {
-            printf("Fatal: failed to generate L3 cipher %zu.\n", aCipherIndex);
+            printf("Fatal: failed to generate L3A cipher %zu.\n", aCipherIndex);
             exit(0);
         }
-        mCryptex.AddCipherL3(aCipher);
+        mCryptex.AddCipherL3A(aCipher);
     }
 
-    for (std::size_t aCipherIndex=0U; aCipherIndex<aPlan.mCountF3; aCipherIndex++) {
-        Crypt *aCipher = GenerateCipher(aPlan.mTypeF3[aCipherIndex], 3U);
+    for (std::size_t aCipherIndex=0U; aCipherIndex<aPlan.mL3B.mCount; aCipherIndex++) {
+        Crypt *aCipher = GenerateCipher(aPlan.mL3B.mType[aCipherIndex], kStageL3B);
         if (aCipher == nullptr) {
-            printf("Fatal: failed to generate F3 cipher %zu.\n", aCipherIndex);
+            printf("Fatal: failed to generate L3B cipher %zu.\n", aCipherIndex);
             exit(0);
         }
-        mCryptex.AddCipherF3(aCipher);
+        mCryptex.AddCipherL3B(aCipher);
     }
 
-    for (std::size_t aCipherIndex=0U; aCipherIndex<aPlan.mCountL2; aCipherIndex++) {
-        Crypt *aCipher = GenerateCipher(aPlan.mTypeL2[aCipherIndex], 2U);
+    for (std::size_t aCipherIndex=0U; aCipherIndex<aPlan.mL3C.mCount; aCipherIndex++) {
+        Crypt *aCipher = GenerateCipher(aPlan.mL3C.mType[aCipherIndex], kStageL3C);
         if (aCipher == nullptr) {
-            printf("Fatal: failed to generate L2 cipher %zu.\n", aCipherIndex);
+            printf("Fatal: failed to generate L3C cipher %zu.\n", aCipherIndex);
             exit(0);
         }
-        mCryptex.AddCipherL2(aCipher);
+        mCryptex.AddCipherL3C(aCipher);
     }
 
-    for (std::size_t aCipherIndex=0U; aCipherIndex<aPlan.mCountL1; aCipherIndex++) {
-        Crypt *aCipher = GenerateCipher(aPlan.mTypeL1[aCipherIndex], 1U);
+    for (std::size_t aCipherIndex=0U; aCipherIndex<aPlan.mL2A.mCount; aCipherIndex++) {
+        Crypt *aCipher = GenerateCipher(aPlan.mL2A.mType[aCipherIndex], kStageL2A);
         if (aCipher == nullptr) {
-            printf("Fatal: failed to generate L1 cipher %zu.\n", aCipherIndex);
+            printf("Fatal: failed to generate L2A cipher %zu.\n", aCipherIndex);
             exit(0);
         }
-        mCryptex.AddCipherL1(aCipher);
+        mCryptex.AddCipherL2A(aCipher);
+    }
+
+    for (std::size_t aCipherIndex=0U; aCipherIndex<aPlan.mL2B.mCount; aCipherIndex++) {
+        Crypt *aCipher = GenerateCipher(aPlan.mL2B.mType[aCipherIndex], kStageL2B);
+        if (aCipher == nullptr) {
+            printf("Fatal: failed to generate L2B cipher %zu.\n", aCipherIndex);
+            exit(0);
+        }
+        mCryptex.AddCipherL2B(aCipher);
+    }
+
+    for (std::size_t aCipherIndex=0U; aCipherIndex<aPlan.mL1A.mCount; aCipherIndex++) {
+        Crypt *aCipher = GenerateCipher(aPlan.mL1A.mType[aCipherIndex], kStageL1A);
+        if (aCipher == nullptr) {
+            printf("Fatal: failed to generate L1A cipher %zu.\n", aCipherIndex);
+            exit(0);
+        }
+        mCryptex.AddCipherL1A(aCipher);
+    }
+
+    for (std::size_t aCipherIndex=0U; aCipherIndex<aPlan.mL1B.mCount; aCipherIndex++) {
+        Crypt *aCipher = GenerateCipher(aPlan.mL1B.mType[aCipherIndex], kStageL1B);
+        if (aCipher == nullptr) {
+            printf("Fatal: failed to generate L1B cipher %zu.\n", aCipherIndex);
+            exit(0);
+        }
+        mCryptex.AddCipherL1B(aCipher);
     }
 }
 

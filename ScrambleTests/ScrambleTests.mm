@@ -68,6 +68,93 @@
     }
 }
 
+- (void)test_encryptDecryptFiveRunsEachStrength {
+    static std::uint8_t aOriginal[SOCCER_BLOCK_SIZE];
+    static std::uint8_t aEncrypted[SOCCER_BLOCK_SIZE];
+    static std::uint8_t aDecrypted[SOCCER_BLOCK_SIZE];
+
+    const EncryptionStrength aStrengths[3] = {
+        EncryptionStrength::kWeak,
+        EncryptionStrength::kNormal,
+        EncryptionStrength::kStrong
+    };
+    const char *aStrengthNames[3] = {
+        "Weak",
+        "Normal",
+        "Strong"
+    };
+
+    for (std::size_t aStrengthIndex=0U; aStrengthIndex<3U; aStrengthIndex++) {
+        for (std::size_t aTrial=0U; aTrial<5U; aTrial++) {
+            std::uint8_t aPassword[32U];
+
+            for (std::size_t aIndex=0U; aIndex<SOCCER_BLOCK_SIZE; aIndex++) {
+                aOriginal[aIndex] = static_cast<std::uint8_t>(
+                    (aIndex * 43U) +
+                    (aStrengthIndex * 67U) +
+                    (aTrial * 101U) +
+                    7U);
+            }
+            for (std::size_t aIndex=0U; aIndex<32U; aIndex++) {
+                aPassword[aIndex] = static_cast<std::uint8_t>(
+                    (aIndex * 29U) +
+                    (aStrengthIndex * 31U) +
+                    (aTrial * 47U) +
+                    5U);
+            }
+
+            const std::uint64_t aNonce =
+                0x123456789ABCDEF0ULL ^
+                (static_cast<std::uint64_t>(aStrengthIndex) << 56U) ^
+                static_cast<std::uint64_t>(aTrial);
+            std::uint32_t aAckWord = 0U;
+
+            if (!Soccer2::AttemptSeed_Encrypt(aStrengths[aStrengthIndex],
+                                              aPassword,
+                                              sizeof(aPassword),
+                                              aNonce,
+                                              &aAckWord)) {
+                XCTFail("test_encryptDecryptFiveRunsEachStrength: %s trial %zu failed seed encrypt.",
+                        aStrengthNames[aStrengthIndex],
+                        aTrial);
+                return;
+            }
+
+            Soccer2::EncryptBlock(aOriginal, aEncrypted);
+            if (std::memcmp(aOriginal, aEncrypted, SOCCER_BLOCK_SIZE) == 0) {
+                XCTFail("test_encryptDecryptFiveRunsEachStrength: %s trial %zu encrypted data matched source.",
+                        aStrengthNames[aStrengthIndex],
+                        aTrial);
+                return;
+            }
+
+            if (!Soccer2::AttemptSeed_Decrypt(aStrengths[aStrengthIndex],
+                                              aPassword,
+                                              sizeof(aPassword),
+                                              aNonce,
+                                              aAckWord)) {
+                XCTFail("test_encryptDecryptFiveRunsEachStrength: %s trial %zu failed seed decrypt.",
+                        aStrengthNames[aStrengthIndex],
+                        aTrial);
+                return;
+            }
+
+            Soccer2::DecryptBlock(aEncrypted, aDecrypted);
+            if (std::memcmp(aOriginal, aDecrypted, SOCCER_BLOCK_SIZE) != 0) {
+                XCTFail("test_encryptDecryptFiveRunsEachStrength: %s trial %zu decrypted data did not match source.",
+                        aStrengthNames[aStrengthIndex],
+                        aTrial);
+                return;
+            }
+
+            printf("test_encryptDecryptFiveRunsEachStrength: %s trial %zu of 5 passed.\n",
+                   aStrengthNames[aStrengthIndex],
+                   aTrial + 1U);
+            fflush(stdout);
+        }
+    }
+}
+
 - (void)test_encryptDecrypt11 {
     
     for (int i=0; i<256; i++) {
