@@ -22,30 +22,15 @@
 #include "Cryptex.hpp"
 #include "Jelly.hpp"
 
-#include "TwistExpander_Achernar.hpp"
-#include "TwistExpander_Alcor.hpp"
 #include "TwistExpander_Aldebaran.hpp"
-#include "TwistExpander_Alioth.hpp"
-#include "TwistExpander_Alkaid.hpp"
-#include "TwistExpander_Alnitak.hpp"
 #include "TwistExpander_Altair.hpp"
-#include "TwistExpander_Ankaa.hpp"
 #include "TwistExpander_Antares.hpp"
 #include "TwistExpander_Arcturus.hpp"
-#include "TwistExpander_Athebyne.hpp"
 #include "TwistExpander_Bellatrix.hpp"
 #include "TwistExpander_Betelgeuse.hpp"
-#include "TwistExpander_Canopus.hpp"
 #include "TwistExpander_Capella.hpp"
 #include "TwistExpander_Castor.hpp"
-#include "TwistExpander_Gemma.hpp"
-#include "TwistExpander_Mebsuta.hpp"
-#include "TwistExpander_Menkent.hpp"
 #include "TwistExpander_Mimosa.hpp"
-#include "TwistExpander_Miram.hpp"
-#include "TwistExpander_Mirfak.hpp"
-#include "TwistExpander_Mothallah.hpp"
-#include "TwistExpander_Naos.hpp"
 #include "TwistExpander_Polaris.hpp"
 #include "TwistExpander_Pollux.hpp"
 #include "TwistExpander_Procyon.hpp"
@@ -53,7 +38,6 @@
 #include "TwistExpander_Rigel.hpp"
 #include "TwistExpander_Saiph.hpp"
 #include "TwistExpander_Sirius.hpp"
-#include "TwistExpander_Suhail.hpp"
 #include "TwistExpander_Vega.hpp"
 
 #include <cstddef>
@@ -62,8 +46,9 @@
 #define SOCCER_ROTATION_WORD_COUNT_S3 248
 #define SOCCER_ROTATION_WORD_COUNT_S2 124
 #define SOCCER_ROTATION_WORD_COUNT_S1 124
+#define SOCCER_EXPANDER_COUNT 16
 
-class Soccer2 {
+class Soccer2Internal {
 public:
     
     static std::uint8_t                         mMaterialA[SOCCER_BLOCK_SIZE];
@@ -233,7 +218,7 @@ public:
     static std::uint8_t                         mMasks[32];
     
     static std::uint8_t                         *mMaterials[16];
-    static TwistExpander                        *mExpanders[32];
+    static TwistExpander                        *mExpanders[SOCCER_EXPANDER_COUNT];
     static TwistWorkSpace                       *mWorkSpaces[16];
     
     static std::uint8_t                         *mSources[16];
@@ -241,7 +226,7 @@ public:
     static CipherType                           mCiphers[256];
     
     
-    static bool                                 mClaimed[32];
+    static bool                                 mClaimed[SOCCER_EXPANDER_COUNT];
     
     static TwistExpander                        *mClaimedExpanders[16];
     static std::size_t                          mClaimedExpanderCount;
@@ -255,7 +240,7 @@ public:
     static Cryptex                              mCryptex;
     
     static std::uint8_t                         *mShuffleMaterials[16];
-    static TwistExpander                        *mShuffleExpanders[32];
+    static TwistExpander                        *mShuffleExpanders[SOCCER_EXPANDER_COUNT];
     static TwistWorkSpace                       *mShuffleWorkSpaces[16];
     
     static EncryptionStrength                   mStrength;
@@ -282,5 +267,9 @@ public:
     
     
 };
+
+#ifndef SOCCER2_DISABLE_COMPAT_ALIAS
+using Soccer2 = Soccer2Internal;
+#endif
 
 #endif /* Soccer2_hpp */

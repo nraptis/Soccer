@@ -232,7 +232,7 @@ std::string ToString(const std::uint8_t *pList, std::size_t pCount) {
         
         aHashesMasks.insert(ToString(Soccer2::mMasks, 32));
         aHashesMaterials.insert(ToString(Soccer2::mMaterials, 16));
-        aHashesExpanders.insert(ToString(Soccer2::mExpanders, 32));
+        aHashesExpanders.insert(ToString(Soccer2::mExpanders, SOCCER_EXPANDER_COUNT));
         aHashesWorkSpaces.insert(ToString(Soccer2::mWorkSpaces, 16));
         
         for (std::size_t aMaskIndex=0; aMaskIndex<32; aMaskIndex++) {
@@ -291,7 +291,7 @@ std::string ToString(const std::uint8_t *pList, std::size_t pCount) {
         
         aHashesMasks.insert(ToString(Soccer2::mMasks, 32));
         aHashesMaterials.insert(ToString(Soccer2::mMaterials, 16));
-        aHashesExpanders.insert(ToString(Soccer2::mExpanders, 32));
+        aHashesExpanders.insert(ToString(Soccer2::mExpanders, SOCCER_EXPANDER_COUNT));
         aHashesWorkSpaces.insert(ToString(Soccer2::mWorkSpaces, 16));
         
         for (std::size_t aMaskIndex=0; aMaskIndex<32; aMaskIndex++) {

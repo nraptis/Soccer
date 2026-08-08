@@ -164,7 +164,7 @@ std::string ToString(const std::uint8_t *pList, std::size_t pCount) {
                 aShuffleHashesWorkSpaces.insert(ToString(Soccer2::mWorkSpaces, Soccer2::mClaimedWorkSpaceCount));
                 
                 if (aShuffleTrialIndex == 0) {
-                    for (std::size_t aExpanderIndex=0; aExpanderIndex<32; aExpanderIndex++) {
+                    for (std::size_t aExpanderIndex=0; aExpanderIndex<SOCCER_EXPANDER_COUNT; aExpanderIndex++) {
                         if (aExpanderIndex < Soccer2::mClaimedExpanderCount) {
                             if (!aClaimedExpanderSet.contains(Soccer2::mExpanders[aExpanderIndex])) {
                                 XCTFail("test_Prologue_A_B_Shuffle_Weak: expecting claimed expander [%zu], was not claimed. (shuffle #%zu)", aExpanderIndex, aShuffleTrialIndex);
@@ -174,7 +174,7 @@ std::string ToString(const std::uint8_t *pList, std::size_t pCount) {
                         aCheckedExpanderSet.insert(Soccer2::mExpanders[aExpanderIndex]);
                     }
                 } else {
-                    for (std::size_t aExpanderIndex=0; aExpanderIndex<32; aExpanderIndex++) {
+                    for (std::size_t aExpanderIndex=0; aExpanderIndex<SOCCER_EXPANDER_COUNT; aExpanderIndex++) {
                         aCheckedExpanderSet.insert(Soccer2::mExpanders[aExpanderIndex]);
                     }
                 }
@@ -199,8 +199,8 @@ std::string ToString(const std::uint8_t *pList, std::size_t pCount) {
                     aCheckedWorkSpaceSet.insert(Soccer2::mWorkSpaces[aWorkSpaceIndex]);
                 }
                 
-                if (aCheckedExpanderSet.size() != 32) {
-                    XCTFail("test_Prologue_A_B_Shuffle_Weak: expecting 32 unique expanders. (shuffle #%zu)", aShuffleTrialIndex);
+                if (aCheckedExpanderSet.size() != SOCCER_EXPANDER_COUNT) {
+                    XCTFail("test_Prologue_A_B_Shuffle_Weak: expecting %d unique expanders. (shuffle #%zu)", SOCCER_EXPANDER_COUNT, aShuffleTrialIndex);
                     return;
                 }
                 if (aCheckedMaterialSet.size() != 16) {
@@ -377,7 +377,7 @@ std::string ToString(const std::uint8_t *pList, std::size_t pCount) {
                 aShuffleHashesWorkSpaces.insert(ToString(Soccer2::mWorkSpaces, Soccer2::mClaimedWorkSpaceCount));
                 
                 if (aShuffleTrialIndex == 0) {
-                    for (std::size_t aExpanderIndex=0; aExpanderIndex<32; aExpanderIndex++) {
+                    for (std::size_t aExpanderIndex=0; aExpanderIndex<SOCCER_EXPANDER_COUNT; aExpanderIndex++) {
                         if (aExpanderIndex < Soccer2::mClaimedExpanderCount) {
                             if (!aClaimedExpanderSet.contains(Soccer2::mExpanders[aExpanderIndex])) {
                                 XCTFail("test_Prologue_A_B_Shuffle_Normal: expecting claimed expander [%zu], was not claimed. (shuffle #%zu)", aExpanderIndex, aShuffleTrialIndex);
@@ -387,7 +387,7 @@ std::string ToString(const std::uint8_t *pList, std::size_t pCount) {
                         aCheckedExpanderSet.insert(Soccer2::mExpanders[aExpanderIndex]);
                     }
                 } else {
-                    for (std::size_t aExpanderIndex=0; aExpanderIndex<32; aExpanderIndex++) {
+                    for (std::size_t aExpanderIndex=0; aExpanderIndex<SOCCER_EXPANDER_COUNT; aExpanderIndex++) {
                         aCheckedExpanderSet.insert(Soccer2::mExpanders[aExpanderIndex]);
                     }
                 }
@@ -412,8 +412,8 @@ std::string ToString(const std::uint8_t *pList, std::size_t pCount) {
                     aCheckedWorkSpaceSet.insert(Soccer2::mWorkSpaces[aWorkSpaceIndex]);
                 }
                 
-                if (aCheckedExpanderSet.size() != 32) {
-                    XCTFail("test_Prologue_A_B_Shuffle_Normal: expecting 32 unique expanders. (shuffle #%zu)", aShuffleTrialIndex);
+                if (aCheckedExpanderSet.size() != SOCCER_EXPANDER_COUNT) {
+                    XCTFail("test_Prologue_A_B_Shuffle_Normal: expecting %d unique expanders. (shuffle #%zu)", SOCCER_EXPANDER_COUNT, aShuffleTrialIndex);
                     return;
                 }
                 if (aCheckedMaterialSet.size() != 16) {
@@ -590,7 +590,7 @@ std::string ToString(const std::uint8_t *pList, std::size_t pCount) {
                 aShuffleHashesWorkSpaces.insert(ToString(Soccer2::mWorkSpaces, Soccer2::mClaimedWorkSpaceCount));
                 
                 if (aShuffleTrialIndex == 0) {
-                    for (std::size_t aExpanderIndex=0; aExpanderIndex<32; aExpanderIndex++) {
+                    for (std::size_t aExpanderIndex=0; aExpanderIndex<SOCCER_EXPANDER_COUNT; aExpanderIndex++) {
                         if (aExpanderIndex < Soccer2::mClaimedExpanderCount) {
                             if (!aClaimedExpanderSet.contains(Soccer2::mExpanders[aExpanderIndex])) {
                                 XCTFail("test_Prologue_A_B_Shuffle_Strong: expecting claimed expander [%zu], was not claimed. (shuffle #%zu)", aExpanderIndex, aShuffleTrialIndex);
@@ -600,7 +600,7 @@ std::string ToString(const std::uint8_t *pList, std::size_t pCount) {
                         aCheckedExpanderSet.insert(Soccer2::mExpanders[aExpanderIndex]);
                     }
                 } else {
-                    for (std::size_t aExpanderIndex=0; aExpanderIndex<32; aExpanderIndex++) {
+                    for (std::size_t aExpanderIndex=0; aExpanderIndex<SOCCER_EXPANDER_COUNT; aExpanderIndex++) {
                         aCheckedExpanderSet.insert(Soccer2::mExpanders[aExpanderIndex]);
                     }
                 }
@@ -625,8 +625,8 @@ std::string ToString(const std::uint8_t *pList, std::size_t pCount) {
                     aCheckedWorkSpaceSet.insert(Soccer2::mWorkSpaces[aWorkSpaceIndex]);
                 }
                 
-                if (aCheckedExpanderSet.size() != 32) {
-                    XCTFail("test_Prologue_A_B_Shuffle_Strong: expecting 32 unique expanders. (shuffle #%zu)", aShuffleTrialIndex);
+                if (aCheckedExpanderSet.size() != SOCCER_EXPANDER_COUNT) {
+                    XCTFail("test_Prologue_A_B_Shuffle_Strong: expecting %d unique expanders. (shuffle #%zu)", SOCCER_EXPANDER_COUNT, aShuffleTrialIndex);
                     return;
                 }
                 if (aCheckedMaterialSet.size() != 16) {

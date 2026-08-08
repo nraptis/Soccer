@@ -16,21 +16,50 @@ set(SOCCER_ENCRYPTER_ROOT "${SOCCER_SOURCE_ROOT}/Encrypter")
 set(SOCCER_EXPANDER_ROOT "${SOCCER_SOURCE_ROOT}/Expander")
 
 set(SOCCER_PUBLIC_HEADERS
-    "${SOCCER_SOURCE_ROOT}/Public/Soccer.hpp"
+    "${SOCCER_SOURCE_ROOT}/Public/Soccer2.hpp"
 )
 
 file(GLOB SOCCER_CORE_SOURCES CONFIGURE_DEPENDS
     "${SOCCER_EXPANDER_ROOT}/Core/*.cpp"
 )
 
-file(GLOB SOCCER_FAMILY_SOURCES CONFIGURE_DEPENDS
-    "${SOCCER_EXPANDER_ROOT}/Family/*.cpp"
+set(SOCCER_EXPANDER_FAMILIES
+    Aldebaran
+    Altair
+    Antares
+    Arcturus
+    Bellatrix
+    Betelgeuse
+    Capella
+    Castor
+    Mimosa
+    Polaris
+    Pollux
+    Procyon
+    Regulus
+    Rigel
+    Saiph
+    Sirius
+    Vega
 )
 
+set(SOCCER_FAMILY_SOURCES)
+foreach(SOCCER_EXPANDER_FAMILY IN LISTS SOCCER_EXPANDER_FAMILIES)
+    list(APPEND SOCCER_FAMILY_SOURCES
+        "${SOCCER_EXPANDER_ROOT}/Family/TwistExpander_${SOCCER_EXPANDER_FAMILY}.cpp"
+        "${SOCCER_EXPANDER_ROOT}/Family/TwistExpander_${SOCCER_EXPANDER_FAMILY}_Arx.cpp"
+    )
+endforeach()
+
 set(SOCCER_LIBRARY_SOURCES
-    "${SOCCER_COMPOSER_ROOT}/Soccer.cpp"
+    "${SOCCER_SOURCE_ROOT}/Public/Soccer2.cpp"
+    "${SOCCER_COMPOSER_ROOT}/EncryptionPlan.cpp"
+    "${SOCCER_COMPOSER_ROOT}/LaneCombinations.cpp"
+    "${SOCCER_COMPOSER_ROOT}/Soccer2.cpp"
+    "${SOCCER_COMPOSER_ROOT}/SoccerFolding.cpp"
+    "${SOCCER_COMPOSER_ROOT}/SoccerRotationBank.cpp"
+    "${SOCCER_ENCRYPTER_ROOT}/Cryptex.cpp"
     "${SOCCER_ENCRYPTER_ROOT}/EncryptionLayer.cpp"
-    "${SOCCER_ENCRYPTER_ROOT}/LayeredCrypt.cpp"
     ${SOCCER_CORE_SOURCES}
     ${SOCCER_FAMILY_SOURCES}
     ${SOCCER_PUBLIC_HEADERS}

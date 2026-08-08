@@ -83,40 +83,24 @@ std::uint8_t                                Soccer2::mMaterialP[SOCCER_BLOCK_SIZ
 
 TwistFarmSalt                               cFarmSalt;
 
-TwistExpander_Gemma                         cStarter;
+TwistExpander_Betelgeuse                    cStarter;
 
-TwistExpander_Achernar                      cAchernar; // 1
-TwistExpander_Alcor                         cAlcor; // 2
-TwistExpander_Aldebaran                     cAldebaran; // 3
-TwistExpander_Alioth                        cAlioth; // 4
-TwistExpander_Alkaid                        cAlkaid; // 5
-TwistExpander_Alnitak                       cAlnitak; // 6
-TwistExpander_Altair                        cAltair; // 7
-TwistExpander_Ankaa                         cAnkaa; // 8
-TwistExpander_Antares                       cAntares; // 9
-TwistExpander_Arcturus                      cArcturus; // 10
-TwistExpander_Athebyne                      cAthebyne; // 11
-TwistExpander_Bellatrix                     cBellatrix; // 12
-TwistExpander_Betelgeuse                    cBetelgeuse; // 13
-TwistExpander_Canopus                       cCanopus; // 14
-TwistExpander_Capella                       cCapella; // 15
-TwistExpander_Castor                        cCastor; // 16
-TwistExpander_Mebsuta                       cMebsuta; // 17
-TwistExpander_Menkent                       cMenkent; // 18
-TwistExpander_Mimosa                        cMimosa; // 19
-TwistExpander_Miram                         cMiram; // 20
-TwistExpander_Mirfak                        cMirfak; // 21
-TwistExpander_Mothallah                     cMothallah; // 22
-TwistExpander_Naos                          cNaos; // 23
-TwistExpander_Polaris                       cPolaris; // 24
-TwistExpander_Pollux                        cPollux; // 25
-TwistExpander_Procyon                       cProcyon; // 26
-TwistExpander_Regulus                       cRegulus; // 27
-TwistExpander_Rigel                         cRigel; // 28
-TwistExpander_Saiph                         cSaiph; // 29
-TwistExpander_Sirius                        cSirius; // 30
-TwistExpander_Suhail                        cSuhail; // 31
-TwistExpander_Vega                          cVega; // 32
+TwistExpander_Aldebaran                     cAldebaran; // 1
+TwistExpander_Altair                        cAltair; // 2
+TwistExpander_Antares                       cAntares; // 3
+TwistExpander_Arcturus                      cArcturus; // 4
+TwistExpander_Bellatrix                     cBellatrix; // 5
+TwistExpander_Capella                       cCapella; // 6
+TwistExpander_Castor                        cCastor; // 7
+TwistExpander_Mimosa                        cMimosa; // 8
+TwistExpander_Polaris                       cPolaris; // 9
+TwistExpander_Pollux                        cPollux; // 10
+TwistExpander_Procyon                       cProcyon; // 11
+TwistExpander_Regulus                       cRegulus; // 12
+TwistExpander_Rigel                         cRigel; // 13
+TwistExpander_Saiph                         cSaiph; // 14
+TwistExpander_Sirius                        cSirius; // 15
+TwistExpander_Vega                          cVega; // 16
 
 TwistWorkSpace                              Soccer2::mWorkSpaceA;
 TwistWorkSpace                              Soccer2::mWorkSpaceB;
@@ -182,12 +166,12 @@ std::uint64_t                               Soccer2::mRotationSeedS1[SOCCER_ROTA
 std::uint8_t                                Soccer2::mMasks[32];
 
 std::uint8_t                                *Soccer2::mMaterials[16];
-TwistExpander                               *Soccer2::mExpanders[32];
+TwistExpander                               *Soccer2::mExpanders[SOCCER_EXPANDER_COUNT];
 TwistWorkSpace                              *Soccer2::mWorkSpaces[16];
 std::uint8_t                                *Soccer2::mSources[16];
 std::uint8_t                                *Soccer2::mCross[4][16];
 
-bool                                        Soccer2::mClaimed[32];
+bool                                        Soccer2::mClaimed[SOCCER_EXPANDER_COUNT];
 
 TwistExpander                               *Soccer2::mClaimedExpanders[16];
 std::size_t                                 Soccer2::mClaimedExpanderCount;
@@ -201,7 +185,7 @@ std::size_t                                 Soccer2::mClaimedWorkSpaceCount;
 Cryptex                                     Soccer2::mCryptex;
 
 std::uint8_t                                *Soccer2::mShuffleMaterials[16];
-TwistExpander                               *Soccer2::mShuffleExpanders[32];
+TwistExpander                               *Soccer2::mShuffleExpanders[SOCCER_EXPANDER_COUNT];
 TwistWorkSpace                              *Soccer2::mShuffleWorkSpaces[16];
 
 CipherType                                  Soccer2::mCiphers[256];
@@ -517,29 +501,14 @@ void Soccer2::Zero() {
     
     cStarter.Zero();
     
-    cAchernar.Zero();
-    cAlcor.Zero();
     cAldebaran.Zero();
-    cAlioth.Zero();
-    cAlkaid.Zero();
-    cAlnitak.Zero();
     cAltair.Zero();
-    cAnkaa.Zero();
     cAntares.Zero();
     cArcturus.Zero();
-    cAthebyne.Zero();
     cBellatrix.Zero();
-    cBetelgeuse.Zero();
-    cCanopus.Zero();
     cCapella.Zero();
     cCastor.Zero();
-    cMebsuta.Zero();
-    cMenkent.Zero();
     cMimosa.Zero();
-    cMiram.Zero();
-    cMirfak.Zero();
-    cMothallah.Zero();
-    cNaos.Zero();
     cPolaris.Zero();
     cPollux.Zero();
     cProcyon.Zero();
@@ -547,7 +516,6 @@ void Soccer2::Zero() {
     cRigel.Zero();
     cSaiph.Zero();
     cSirius.Zero();
-    cSuhail.Zero();
     cVega.Zero();
 
     std::memset(mMasks, 0, sizeof(mMasks));
@@ -555,7 +523,7 @@ void Soccer2::Zero() {
         mCiphers[aIndex] = CipherType::kNone;
     }
 
-    for (std::size_t aIndex=0U; aIndex<32U; aIndex++) {
+    for (std::size_t aIndex=0U; aIndex<SOCCER_EXPANDER_COUNT; aIndex++) {
         mExpanders[aIndex] = nullptr;
         mClaimed[aIndex] = false;
         mShuffleExpanders[aIndex] = nullptr;
@@ -662,9 +630,9 @@ void Soccer2::Shuffle_CROWSCIMASSORMATEX() {
     }
 
     // Expanders: entropy slices 8, 18, and 28.
-    TwistShuffle::ShuffleList32(mExpanders, mRandom,  8U * cSpan,  9U * cSpan, 1U);
-    TwistShuffle::ShuffleList32(mExpanders, mRandom, 18U * cSpan, 19U * cSpan, 1U);
-    TwistShuffle::ShuffleList32(mExpanders, mRandom, 28U * cSpan, 29U * cSpan, 1U);
+    TwistShuffle::ShuffleList16(mExpanders, mRandom,  8U * cSpan,  9U * cSpan, 1U);
+    TwistShuffle::ShuffleList16(mExpanders, mRandom, 18U * cSpan, 19U * cSpan, 1U);
+    TwistShuffle::ShuffleList16(mExpanders, mRandom, 28U * cSpan, 29U * cSpan, 1U);
 
     // Work spaces: entropy slices 6, 17, and 26.
     if (mStrength == EncryptionStrength::kWeak) {
@@ -821,7 +789,7 @@ void Soccer2::SeedPrologue_Regular_B() {
     }
 
     std::size_t aExpanderWriteIndex = mClaimedExpanderCount;
-    for (std::size_t aShuffledIndex=0U; aShuffledIndex<32U; aShuffledIndex++) {
+    for (std::size_t aShuffledIndex=0U; aShuffledIndex<SOCCER_EXPANDER_COUNT; aShuffledIndex++) {
         bool aIsClaimed = false;
         for (std::size_t aClaimedIndex=0U; aClaimedIndex<mClaimedExpanderCount; aClaimedIndex++) {
             if (mShuffleExpanders[aShuffledIndex] == mClaimedExpanders[aClaimedIndex]) {
@@ -964,7 +932,7 @@ void Soccer2::SeedPrologue_Regular_D() {
     mWorkSpaceA.Zero();
     mWorkSpaceL.Zero();
 
-    for (std::size_t aIndex=0U; aIndex<32U; aIndex++) {
+    for (std::size_t aIndex=0U; aIndex<SOCCER_EXPANDER_COUNT; aIndex++) {
         mExpanders[aIndex] = nullptr;
         mClaimed[aIndex] = false;
         mShuffleExpanders[aIndex] = nullptr;
@@ -1260,14 +1228,10 @@ void Soccer2::InitializeCiphers() {
 }
 
 void Soccer2::InitializeExpanders() {
-    mExpanders[0] = &cAchernar; mExpanders[1] = &cAlcor; mExpanders[2] = &cAldebaran; mExpanders[3] = &cAlioth;
-    mExpanders[4] = &cAlkaid; mExpanders[5] = &cAlnitak; mExpanders[6] = &cAltair; mExpanders[7] = &cAnkaa;
-    mExpanders[8] = &cAntares; mExpanders[9] = &cArcturus; mExpanders[10] = &cAthebyne; mExpanders[11] = &cBellatrix;
-    mExpanders[12] = &cBetelgeuse; mExpanders[13] = &cCanopus; mExpanders[14] = &cCapella; mExpanders[15] = &cCastor;
-    mExpanders[16] = &cMebsuta; mExpanders[17] = &cMenkent; mExpanders[18] = &cMimosa; mExpanders[19] = &cMiram;
-    mExpanders[20] = &cMirfak; mExpanders[21] = &cMothallah; mExpanders[22] = &cNaos; mExpanders[23] = &cPolaris;
-    mExpanders[24] = &cPollux; mExpanders[25] = &cProcyon; mExpanders[26] = &cRegulus; mExpanders[27] = &cRigel;
-    mExpanders[28] = &cSaiph; mExpanders[29] = &cSirius; mExpanders[30] = &cSuhail; mExpanders[31] = &cVega;
+    mExpanders[ 0] = &cAldebaran; mExpanders[ 1] = &cAltair;   mExpanders[ 2] = &cAntares; mExpanders[ 3] = &cArcturus;
+    mExpanders[ 4] = &cBellatrix; mExpanders[ 5] = &cCapella;  mExpanders[ 6] = &cCastor;   mExpanders[ 7] = &cMimosa;
+    mExpanders[ 8] = &cPolaris;   mExpanders[ 9] = &cPollux;   mExpanders[10] = &cProcyon;  mExpanders[11] = &cRegulus;
+    mExpanders[12] = &cRigel;     mExpanders[13] = &cSaiph;    mExpanders[14] = &cSirius;   mExpanders[15] = &cVega;
 }
 
 void Soccer2::InitializeMaterials() {
@@ -1382,12 +1346,12 @@ void Soccer2::SeedPrelude_Regular_B(std::uint64_t pNonce) {
 
 void Soccer2::SeedPrelude_Regular_C() {
     TwistShuffle::ShuffleList32(mMasks,         mRandom,     0,  4096, 4);
-    TwistShuffle::ShuffleList32(mExpanders,     mRandom,  4096,  8192, 4);
+    TwistShuffle::ShuffleList16(mExpanders,     mRandom,  4096,  8192, 4);
     TwistShuffle::ShuffleList16(mWorkSpaces,    mRandom,  8192, 12288, 4);
     TwistShuffle::ShuffleList16(mMaterials,     mRandom, 12288, 16384, 4);
     
     TwistShuffle::ShuffleList32(mMasks,         mRandom, 16384, 20480, 4);
-    TwistShuffle::ShuffleList32(mExpanders,     mRandom, 20480, 24576, 4);
+    TwistShuffle::ShuffleList16(mExpanders,     mRandom, 20480, 24576, 4);
     TwistShuffle::ShuffleList16(mWorkSpaces,    mRandom, 24576, 28672, 4);
     TwistShuffle::ShuffleList16(mMaterials,     mRandom, 28672, 32768, 4);
 }
@@ -1714,7 +1678,7 @@ void Soccer2::ShuffleMEWBlockZero(std::uint8_t *pMaterial) {
     for (std::size_t aIndex=0; aIndex<16; aIndex++) {
         mShuffleMaterials[aIndex] = mMaterials[aIndex];
     }
-    for (std::size_t aIndex=0; aIndex<32; aIndex++) {
+    for (std::size_t aIndex=0; aIndex<SOCCER_EXPANDER_COUNT; aIndex++) {
         mShuffleExpanders[aIndex] = mExpanders[aIndex];
     }
     for (std::size_t aIndex=0; aIndex<16; aIndex++) {
@@ -1722,15 +1686,15 @@ void Soccer2::ShuffleMEWBlockZero(std::uint8_t *pMaterial) {
     }
     
     TwistShuffle::ShuffleList16(mShuffleMaterials,  pMaterial,     0U,  3600U, 1U);
-    TwistShuffle::ShuffleList32(mShuffleExpanders,  pMaterial,  3600U,  7200U, 1U);
+    TwistShuffle::ShuffleList16(mShuffleExpanders,  pMaterial,  3600U,  7200U, 1U);
     TwistShuffle::ShuffleList16(mShuffleWorkSpaces, pMaterial,  7200U, 10800U, 1U);
 
     TwistShuffle::ShuffleList16(mShuffleMaterials,  pMaterial, 10800U, 14400U, 1U);
-    TwistShuffle::ShuffleList32(mShuffleExpanders,  pMaterial, 14400U, 18000U, 1U);
+    TwistShuffle::ShuffleList16(mShuffleExpanders,  pMaterial, 14400U, 18000U, 1U);
     TwistShuffle::ShuffleList16(mShuffleWorkSpaces, pMaterial, 18000U, 21600U, 1U);
 
     TwistShuffle::ShuffleList16(mShuffleMaterials,  pMaterial, 21600U, 25200U, 1U);
-    TwistShuffle::ShuffleList32(mShuffleExpanders,  pMaterial, 25200U, 28800U, 1U);
+    TwistShuffle::ShuffleList16(mShuffleExpanders,  pMaterial, 25200U, 28800U, 1U);
     TwistShuffle::ShuffleList16(mShuffleWorkSpaces, pMaterial, 28800U, 32400U, 1U);
 
     // Move claimed materials to the back.
@@ -1747,7 +1711,7 @@ void Soccer2::ShuffleMEWBlockZero(std::uint8_t *pMaterial) {
     TwistShuffle::MoveClaimedToEnd16(mClaimed, mShuffleMaterials);
 
     // Move claimed expanders to the back.
-    for (std::size_t aIndex=0; aIndex<32; aIndex++) {
+    for (std::size_t aIndex=0; aIndex<SOCCER_EXPANDER_COUNT; aIndex++) {
         mClaimed[aIndex] = false;
         for (std::size_t aClaimedIndex=0; aClaimedIndex<mClaimedExpanderCount; aClaimedIndex++) {
             if (mShuffleExpanders[aIndex] == mClaimedExpanders[aClaimedIndex]) {
@@ -1757,7 +1721,7 @@ void Soccer2::ShuffleMEWBlockZero(std::uint8_t *pMaterial) {
         }
     }
 
-    TwistShuffle::MoveClaimedToEnd32(mClaimed, mShuffleExpanders);
+    TwistShuffle::MoveClaimedToEnd16(mClaimed, mShuffleExpanders);
 
     // Move claimed work spaces to the back.
     for (std::size_t aIndex=0; aIndex<16; aIndex++) {
@@ -1775,7 +1739,7 @@ void Soccer2::ShuffleMEWBlockZero(std::uint8_t *pMaterial) {
     for (std::size_t aIndex=0; aIndex<16; aIndex++) {
         mMaterials[aIndex] = mShuffleMaterials[aIndex];
     }
-    for (std::size_t aIndex=0; aIndex<32; aIndex++) {
+    for (std::size_t aIndex=0; aIndex<SOCCER_EXPANDER_COUNT; aIndex++) {
         mExpanders[aIndex] = mShuffleExpanders[aIndex];
     }
     for (std::size_t aIndex=0; aIndex<16; aIndex++) {

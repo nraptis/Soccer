@@ -11,12 +11,15 @@
 #include <cstddef>
 #include <cstdint>
 
+#ifndef SOCCER_ENCRYPTION_STRENGTH_DEFINED
+#define SOCCER_ENCRYPTION_STRENGTH_DEFINED
 enum class EncryptionStrength : std::uint8_t {
     kTest = 3,
     kWeak = 0,
     kNormal = 1,
     kStrong = 2,
 };
+#endif
 
 /*
 

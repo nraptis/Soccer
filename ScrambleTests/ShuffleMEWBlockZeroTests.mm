@@ -24,7 +24,7 @@
 - (void)test_MEWBlockZero_Expanders {
     
     static std::uint8_t aRandom[S_BLOCK];
-    TwistExpander *aExpanders[32];
+    TwistExpander *aExpanders[SOCCER_EXPANDER_COUNT];
     
     for (std::size_t aTrial=0; aTrial<42; aTrial++) {
         
@@ -34,10 +34,10 @@
             Soccer2::Zero();
             
             Soccer2::InitializeExpanders();
-            for (int i=0; i<32; i++) {
+            for (std::size_t i=0; i<SOCCER_EXPANDER_COUNT; i++) {
                 aExpanders[i] = Soccer2::mExpanders[i];
             }
-            Random::Shuffle(aExpanders, 32);
+            Random::Shuffle(aExpanders, SOCCER_EXPANDER_COUNT);
             
             std::unordered_set<TwistExpander *> aClaimed;
             for (std::size_t aClaimIndex=0;aClaimIndex<aClaimCount;aClaimIndex++) {
@@ -46,13 +46,13 @@
             }
             Soccer2::mClaimedExpanderCount = aClaimCount;
             
-            Random::Shuffle(Soccer2::mExpanders, 32);
+            Random::Shuffle(Soccer2::mExpanders, SOCCER_EXPANDER_COUNT);
             
             Soccer2::ShuffleMEWBlockZero(aRandom);
             
             std::unordered_set<TwistExpander *> aSet;
             
-            std::size_t aShelf = 32 - aClaimCount;
+            std::size_t aShelf = SOCCER_EXPANDER_COUNT - aClaimCount;
             for (std::size_t aIndex=0; aIndex<aShelf; aIndex++) {
                 if (aClaimed.contains(Soccer2::mExpanders[aIndex])) {
                     XCTFail("test_MEWBlockZero_Expanders: claimed expander existed at head (index = %zu, claim count = %zu).", aIndex, aClaimCount);
@@ -61,7 +61,7 @@
                 aSet.insert(Soccer2::mExpanders[aIndex]);
             }
             
-            for (std::size_t aIndex=aShelf; aIndex<32; aIndex++) {
+            for (std::size_t aIndex=aShelf; aIndex<SOCCER_EXPANDER_COUNT; aIndex++) {
                 if (!aClaimed.contains(Soccer2::mExpanders[aIndex])) {
                     XCTFail("test_MEWBlockZero_Expanders: claimed expander didn't exist at tail (index = %zu, claim count = %zu).", aIndex, aClaimCount);
                     return;
@@ -69,8 +69,8 @@
                 aSet.insert(Soccer2::mExpanders[aIndex]);
             }
             
-            if (aSet.size() != 32) {
-                XCTFail("test_MEWBlockZero_Expanders: expected 32 unique expanders");
+            if (aSet.size() != SOCCER_EXPANDER_COUNT) {
+                XCTFail("test_MEWBlockZero_Expanders: expected %d unique expanders", SOCCER_EXPANDER_COUNT);
                 return;
             }
         }

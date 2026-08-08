@@ -67,7 +67,7 @@ std::string ToString(T **pList, std::size_t pCount) {
         }
         
         static std::uint8_t *aMaterials[16];
-        static TwistExpander *aExpanders[32];
+        static TwistExpander *aExpanders[SOCCER_EXPANDER_COUNT];
         static TwistWorkSpace *aWorkSpaces[16];
         
         for (std::size_t aIndex=0; aIndex<4; aIndex++) {
@@ -145,7 +145,7 @@ std::string ToString(T **pList, std::size_t pCount) {
         }
         
         static std::uint8_t *aMaterials[16];
-        static TwistExpander *aExpanders[32];
+        static TwistExpander *aExpanders[SOCCER_EXPANDER_COUNT];
         static TwistWorkSpace *aWorkSpaces[16];
         
         for (std::size_t aIndex=0; aIndex<8; aIndex++) {
@@ -222,7 +222,7 @@ std::string ToString(T **pList, std::size_t pCount) {
         }
         
         static std::uint8_t *aMaterials[16];
-        static TwistExpander *aExpanders[32];
+        static TwistExpander *aExpanders[SOCCER_EXPANDER_COUNT];
         static TwistWorkSpace *aWorkSpaces[16];
         
         for (std::size_t aIndex=0; aIndex<16; aIndex++) {
