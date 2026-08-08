@@ -7,11 +7,11 @@
 #include "Jelly.hpp"
 #include "Crypt.hpp"
 
-// [RELEASE] [636.7 us] [OK]
+// Input shape: pLength must be 0 or a multiple of 16; mask is a single byte.
 
 class RotateMaskCipher final : public Crypt {
  public:
-  RotateMaskCipher(std::uint8_t pMask, std::int32_t pShift)
+  RotateMaskCipher(std::uint8_t pMask, std::size_t pShift)
       : mMask(pMask),
         mShift(pShift) {}
 
@@ -21,7 +21,7 @@ class RotateMaskCipher final : public Crypt {
                 std::size_t pLength,
                 CipherErrorCode *pErrorCode) const override {
     (void)pWorker;
-    return Apply(pSource, pDestination, pLength, NormalizeShift(mShift, pLength),
+    return Apply(pSource, pDestination, pLength, InverseShift(mShift, pLength),
                  pErrorCode);
   }
 
@@ -31,43 +31,31 @@ class RotateMaskCipher final : public Crypt {
                   std::size_t pLength,
                   CipherErrorCode *pErrorCode) const override {
     (void)pWorker;
-    return Apply(pSource, pDestination, pLength, InverseShift(mShift, pLength),
+    return Apply(pSource, pDestination, pLength, NormalizeShift(mShift, pLength),
                  pErrorCode);
   }
 
  private:
   static constexpr std::size_t kLengthMultiple = 16u;
 
-  static std::int32_t NormalizeShift(std::int32_t pShift,
-                                     std::size_t pLength) {
-    if (pLength == 0u || pShift == 0) {
-      return 0;
-    }
-
-    std::int32_t aShift = pShift;
-    const std::int32_t aLength = static_cast<std::int32_t>(pLength);
-    if (aShift < 0) {
-      aShift += aLength;
-    }
-    if (aShift >= aLength) {
-      aShift -= aLength;
-    }
-    return aShift;
+  static std::size_t NormalizeShift(std::size_t pShift,
+                                    std::size_t pLength) {
+    return pLength == 0u ? 0u : pShift % pLength;
   }
 
-  static std::int32_t InverseShift(std::int32_t pShift,
-                                   std::size_t pLength) {
-    const std::int32_t aRotation = NormalizeShift(pShift, pLength);
-    if (aRotation == 0) {
-      return 0;
+  static std::size_t InverseShift(std::size_t pShift,
+                                  std::size_t pLength) {
+    const std::size_t aRotation = NormalizeShift(pShift, pLength);
+    if (aRotation == 0u) {
+      return 0u;
     }
-    return static_cast<std::int32_t>(pLength) - aRotation;
+    return pLength - aRotation;
   }
 
   bool Apply(const std::uint8_t *pSource,
              std::uint8_t *pDestination,
              std::size_t pLength,
-             std::int32_t pRotation,
+             std::size_t pRotation,
              CipherErrorCode *pErrorCode) const {
     if (pLength == 0u) {
       SetCipherErrorCode(pErrorCode, CipherErrorCode::kNone);
@@ -87,13 +75,12 @@ class RotateMaskCipher final : public Crypt {
     }
 
     SetCipherErrorCode(pErrorCode, CipherErrorCode::kNone);
-    const std::size_t aRotation = static_cast<std::size_t>(pRotation);
 #if JELLY_USE_NEON
-    ApplyNeon(pSource, pDestination, pLength, aRotation);
+    ApplyNeon(pSource, pDestination, pLength, pRotation);
 #elif JELLY_USE_SIMD
-    ApplySimd(pSource, pDestination, pLength, aRotation);
+    ApplySimd(pSource, pDestination, pLength, pRotation);
 #else
-    ApplyScalar(pSource, pDestination, pLength, aRotation);
+    ApplyScalar(pSource, pDestination, pLength, pRotation);
 #endif
     return true;
   }
@@ -209,7 +196,7 @@ class RotateMaskCipher final : public Crypt {
 #endif
 
   std::uint8_t mMask;
-  std::int32_t mShift;
+  std::size_t mShift;
 };
 
 #endif  // JELLY_ROTATE_MASK_CIPHER_HPP_

@@ -11,6 +11,7 @@
 
 #include <chrono>
 #include <cstddef>
+#include <cstdlib>
 #include <cstdio>
 #include <cstdint>
 #include <cstring>
@@ -22,6 +23,11 @@ namespace {
 constexpr std::size_t kMediumLaneCount = 8U;
 constexpr std::size_t kCiphertextPreviewByteCount = 128U;
 constexpr std::size_t kCiphertextPreviewLineByteCount = 32U;
+
+bool IsRunningUnderXCTest() {
+    return (std::getenv("XCTestConfigurationFilePath") != nullptr) ||
+           (std::getenv("XCTestBundlePath") != nullptr);
+}
 
 struct SoccerAvalancheScore {
     std::size_t mDifferentBytes = 0U;
@@ -226,6 +232,11 @@ bool RunReadmeSoccerExample() {
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     (void)aNotification;
+
+    if (IsRunningUnderXCTest()) {
+        std::printf("Skipping App Delegate Test Code, On Test Target\n");
+        return;
+    }
 
     if (!RunReadmeSoccerExample()) {
         std::printf("Soccer2 README example failed.\n");

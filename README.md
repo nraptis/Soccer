@@ -1,15 +1,8 @@
 # Soccer
 
-Soccer is a 19th generation password expander for offline file encryption,
-developed by a cryptography-focused engineer with 16 years of experience and
-about 10 months of concentrated work on this design.
-
-The proposal is that Soccer is many thousands of times stronger than AES for
-its intended offline password-encryption role, because each password attempt
-is deliberately expensive and expands into a large encryption state. That
-said, Soccer is not battle tested. It should be studied, attacked, benchmarked,
-and reviewed before anyone treats it like established cryptographic
-infrastructure.
+Soccer2 is a 21st generation password expander for offline file encryption,
+developed by a cryptography-focused engineer with 17+ years of experience and
+about 41 months of concentrated work on this design.
 
 ![alt text](https://raw.githubusercontent.com/nraptis/Soccer/refs/heads/main/image.png)
 
@@ -39,8 +32,6 @@ int main() {
     const std::string aMessage = "Hello, Soccer!";
     std::memcpy(aOriginal.data(), aMessage.data(), aMessage.size());
 
-    Soccer2::Zero();
-
     // Encrypt generates the ack word. You need this to decrypt.
     std::uint32_t aAckWord = 0U;
     if (!Soccer2::AttemptSeed_Encrypt(EncryptionStrength::kNormal,
@@ -49,12 +40,19 @@ int main() {
                                       aNonce,
                                       &aAckWord)) {
         std::printf("Failed to seed encryption\n");
+        
+        // Factory reset when finished with your task.
+        Soccer2::Zero();
+        
         return 1;
     }
 
     // Encrypt in 1 MiB blocks.
     std::vector<std::uint8_t> aEncrypted(SOCCER_BLOCK_SIZE, 0U);
     Soccer2::EncryptBlock(aOriginal.data(), aEncrypted.data());
+    
+    // Factory reset when finished with your task.
+    Soccer2::Zero();
 
     std::printf("Encrypted first 64 bytes:\n");
     for (std::size_t aIndex=0U; aIndex<64U; aIndex++) {
@@ -70,6 +68,10 @@ int main() {
                                       aNonce,
                                       aAckWord)) {
         std::printf("Failed to seed decryption\n");
+                                            
+        // Factory reset when finished with your task.
+        Soccer2::Zero();
+        
         return 1;
     }
 
@@ -78,8 +80,15 @@ int main() {
                     aUnencrypted.data(),
                     SOCCER_BLOCK_SIZE) != 0) {
         std::printf("Failed to decrypt block\n");
+            
+        // Factory reset when finished with your task.
+        Soccer2::Zero();
+        
         return 1;
     }
+    
+    // Factory reset when finished with your task.
+    Soccer2::Zero();
 
     const std::string aRecovered(
         reinterpret_cast<const char *>(aUnencrypted.data()),

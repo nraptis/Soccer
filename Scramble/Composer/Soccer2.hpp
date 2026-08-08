@@ -107,12 +107,6 @@ public:
     static std::uint8_t                         mCompressLaneC[SOCCER_BLOCK_SIZE_C2];
     static std::uint8_t                         mCompressLaneD[SOCCER_BLOCK_SIZE_C2];
     
-    //static std::uint8_t                         mCompactLaneA[SOCCER_BLOCK_SIZE_C1];
-    //static std::uint8_t                         mCompactLaneB[SOCCER_BLOCK_SIZE_C1];
-    //static std::uint8_t                         mCompactLaneC[SOCCER_BLOCK_SIZE_C1];
-    //static std::uint8_t                         mCompactLaneD[SOCCER_BLOCK_SIZE_C1];
-    
-    // CrushFold_4 writes only [0, SOCCER_BLOCK_SIZE_C1) in these S_BLOCK buffers.
     static std::uint8_t                         mCrushA[S_BLOCK];
     static std::uint8_t                         mCrushB[S_BLOCK];
     static std::uint8_t                         mCrushC[S_BLOCK];
@@ -202,6 +196,9 @@ public:
     
     
     static void                                 SeedEpilogue_Regular_A();
+    static std::uint64_t                        SeedEpilogue_Regular_B();
+    static void                                 SeedEpilogue_Regular_C(std::uint64_t pCipherWord);
+    
     
     
     static void                                 ShuffleMEWBlockZero(std::uint8_t *pMaterial);

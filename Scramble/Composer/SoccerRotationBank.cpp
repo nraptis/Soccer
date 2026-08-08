@@ -148,14 +148,7 @@ SoccerRotationBankResponse SoccerRotationBank::Withdraw(SoccerRotationBankReques
     mCacheCountS3 = 0U;
     mCacheCountS2 = 0U;
     mCacheCountS1 = 0U;
-
-    if ((aCountS3 > SOCCER_ROTATION_CACHE_COUNT_S3) ||
-        (aCountS2 > SOCCER_ROTATION_CACHE_COUNT_S2) ||
-        (aCountS1 > SOCCER_ROTATION_CACHE_COUNT_S1) ||
-        ((aCountS3 + aCountS2 + aCountS1) > SOCCER_ROTATION_CACHE_COUNT_TOTAL)) {
-        return {};
-    }
-
+    
     mCursorS3 = 0U; mCursorS2 = 0U; mCursorS1 = 0U;
     if (!Withdraw_PassA(aCountS3, aCountS2, aCountS1)) {
         mCursorS3 = 0U; mCursorS2 = 0U; mCursorS1 = 0U;
@@ -326,20 +319,10 @@ bool SoccerRotationBank::ContendWithAnything(std::int32_t pRotation) {
 
     bool aFinished = false;
     while (!aFinished) {
-
-        //
-        // At this point:
-        //
-        // mRotationConsidered[] = one unique combination
-        // aRotationSum          = sum of all considered rotations
-        //
-
-        if (BoundariesContend(aRotationSum)) {
-            return true;
-        }
-
+        
+        if (BoundariesContend(aRotationSum)) { return true; }
         if (RotationsContend(aRotationSum)) { return true; }
-
+        
         //
         // Advance to next combination.
         //
@@ -350,11 +333,7 @@ bool SoccerRotationBank::ContendWithAnything(std::int32_t pRotation) {
 
             mLoopCount++;
             if (mRotationConsidered[aIndex] == false) {
-
-                //
-                // false -> true
-                //
-
+                
                 mRotationConsidered[aIndex] = true;
                 aRotationSum += mRotationList[aIndex];
                 if (aRotationSum >= kRotationSizeL3) {
@@ -364,13 +343,7 @@ bool SoccerRotationBank::ContendWithAnything(std::int32_t pRotation) {
                 break;
 
             } else {
-
-                //
-                // true -> false
-                //
-                // Carry to next position.
-                //
-
+                
                 mRotationConsidered[aIndex] = false;
                 aRotationSum -= mRotationList[aIndex];
                 if (aRotationSum < 0) {

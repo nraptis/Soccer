@@ -30,12 +30,9 @@
  exhausted or invalid bank entry; GenerateCipher treats it as construction
  failure instead of quietly creating a zero-distance rotation.
 
- Bank values are canonical effective encryption shifts.  RotateMaskCipher uses
- that value directly.  RotateCipher applies the inverse of its constructor value
- while sealing, so GenerateCipher passes laneLength - bankRotation to it.  This
- makes masked and non-masked rotation ciphers move in the same canonical
- direction and lets the bank compare their real effects rather than their
- differing constructor conventions.
+ RotateCipher and RotateMaskCipher use the same constructor convention, so
+ GenerateCipher passes each rotation-bank value directly to either cipher.
+ This keeps the bank amounts and stored cipher amounts identical.
  */
 
 #define BLOCK_COUNT (SOCCER_BLOCK_SIZE / S_BLOCK)
@@ -82,7 +79,6 @@ std::uint8_t                                Soccer2::mMaterialO[SOCCER_BLOCK_SIZ
 std::uint8_t                                Soccer2::mMaterialP[SOCCER_BLOCK_SIZE];
 
 TwistFarmSalt                               cFarmSalt;
-
 TwistExpander_Betelgeuse                    cStarter;
 
 TwistExpander_Aldebaran                     cAldebaran; // 1
@@ -138,11 +134,6 @@ std::uint8_t                                Soccer2::mCompressLaneB[SOCCER_BLOCK
 std::uint8_t                                Soccer2::mCompressLaneC[SOCCER_BLOCK_SIZE_C2];
 std::uint8_t                                Soccer2::mCompressLaneD[SOCCER_BLOCK_SIZE_C2];
 
-//std::uint8_t                                Soccer2::mCompactLaneA[SOCCER_BLOCK_SIZE_C1];
-//std::uint8_t                                Soccer2::mCompactLaneB[SOCCER_BLOCK_SIZE_C1];
-//std::uint8_t                                Soccer2::mCompactLaneC[SOCCER_BLOCK_SIZE_C1];
-//std::uint8_t                                Soccer2::mCompactLaneD[SOCCER_BLOCK_SIZE_C1];
-
 std::uint8_t                                Soccer2::mCrushA[S_BLOCK];
 std::uint8_t                                Soccer2::mCrushB[S_BLOCK];
 std::uint8_t                                Soccer2::mCrushC[S_BLOCK];
@@ -157,11 +148,6 @@ std::uint64_t                               Soccer2::mRolledB[256];
 std::uint64_t                               Soccer2::mRotationSeedS3[SOCCER_ROTATION_WORD_COUNT_S3];
 std::uint64_t                               Soccer2::mRotationSeedS2[SOCCER_ROTATION_WORD_COUNT_S2];
 std::uint64_t                               Soccer2::mRotationSeedS1[SOCCER_ROTATION_WORD_COUNT_S1];
-
-
-
-
-
 
 std::uint8_t                                Soccer2::mMasks[32];
 
@@ -194,11 +180,6 @@ EncryptionStrength                          Soccer2::mStrength = EncryptionStren
 
 uint32_t                                    Soccer2::mTestBlockLength = SOCCER_BLOCK_SIZE;
 
-std::uint32_t                               cRandIndexA = 0;
-std::uint32_t                               cRandIndexB = 0;
-bool                                        cRandLane = false;
-
-
 std::size_t                                 cMaskIndex = 0;
 
 std::size_t                                 cMaterialIndex = 0;
@@ -216,15 +197,124 @@ std::size_t                                 Soccer2::mRotationBankCursorL3C = 0;
 
 SoccerRotationBankResponse                  cRotationBankResponse;
 
-std::uint64_t                               SoccerRand() {
-    if (cRandLane == true) {
-        cRandLane = false;
-        cRandIndexA = ((cRandIndexA + 1) & 0xFFU);
-        return Soccer2::mRolledA[cRandIndexA];
-    } else {
-        cRandLane = true;
-        cRandIndexB = ((cRandIndexB + 1) & 0xFFU);
-        return Soccer2::mRolledB[cRandIndexB];
+void Soccer2::InitializeMasks() {
+    mMasks[0] = 0xF0u;  mMasks[1] = 0x0Fu;  mMasks[2] = 0x33u;  mMasks[3] = 0xCCu;
+    mMasks[4] = 0x55u;  mMasks[5] = 0xAAu;  mMasks[6] = 0x69u;  mMasks[7] = 0x96u;
+    mMasks[8] = 0x19u;  mMasks[9] = 0x98u;  mMasks[10] = 0x1Au; mMasks[11] = 0x58u;
+    mMasks[12] = 0x1Cu; mMasks[13] = 0x38u; mMasks[14] = 0x25u; mMasks[15] = 0xA4u;
+    mMasks[16] = 0x26u; mMasks[17] = 0x64u; mMasks[18] = 0x2Cu; mMasks[19] = 0x34u;
+    mMasks[20] = 0x43u; mMasks[21] = 0xC2u; mMasks[22] = 0x46u; mMasks[23] = 0x62u;
+    mMasks[24] = 0x4Au; mMasks[25] = 0x52u; mMasks[26] = 0x83u; mMasks[27] = 0xC1u;
+    mMasks[28] = 0x85u; mMasks[29] = 0xA1u; mMasks[30] = 0x89u; mMasks[31] = 0x91u;
+}
+
+void Soccer2::InitializeCiphers() {
+    std::size_t aCipherIndex = 0U;
+
+    for (std::size_t aIndex=0U; aIndex<8U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kPasswordXORCipher; }
+    for (std::size_t aIndex=0U; aIndex<8U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kPasswordAddCipher; }
+    for (std::size_t aIndex=0U; aIndex<8U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kPasswordSubtractCipher; }
+
+    for (std::size_t aIndex=0U; aIndex<7U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kPasswordJumpXORCipher; }
+    for (std::size_t aIndex=0U; aIndex<7U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kPasswordJumpAddCipher; }
+    for (std::size_t aIndex=0U; aIndex<7U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kPasswordJumpSubtractCipher; }
+
+    for (std::size_t aIndex=0U; aIndex<7U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kPepperNoiseXORCipher; }
+    for (std::size_t aIndex=0U; aIndex<7U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kPepperJumpNoiseXORCipher; }
+    for (std::size_t aIndex=0U; aIndex<7U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kPepperDualJumpNoiseXORCipher; }
+
+    for (std::size_t aIndex=0U; aIndex<3U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kCascadeCipher; }
+    for (std::size_t aIndex=0U; aIndex<3U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kCascadeJumpCipher; }
+
+    for (std::size_t aIndex=0U; aIndex<20U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kReverseMaskCipher; }
+    for (std::size_t aIndex=0U; aIndex<15U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kReverseMaskByteBlockCipher32; }
+    for (std::size_t aIndex=0U; aIndex<15U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kReverseMaskByteBlockCipher64; }
+    
+    for (std::size_t aIndex=0U; aIndex<15U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kRippleMaskBlockCipher32; }
+    for (std::size_t aIndex=0U; aIndex<15U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kRippleMaskBlockCipher64; }
+    
+    for (std::size_t aIndex=0U; aIndex<15U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kSplintMaskBlockCipher32; }
+    for (std::size_t aIndex=0U; aIndex<15U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kSplintMaskBlockCipher64; }
+    
+    for (std::size_t aIndex=0U; aIndex<10U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kInvertMaskCipher; }
+    for (std::size_t aIndex=0U; aIndex<20U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kRotateCipher; }
+    
+    while (aCipherIndex < 256) {
+        mCiphers[aCipherIndex] = CipherType::kRotateMaskCipher;
+        aCipherIndex++;
+    }
+}
+
+void Soccer2::InitializeExpanders() {
+    mExpanders[ 0] = &cAldebaran; mExpanders[ 1] = &cAltair;   mExpanders[ 2] = &cAntares; mExpanders[ 3] = &cArcturus;
+    mExpanders[ 4] = &cBellatrix; mExpanders[ 5] = &cCapella;  mExpanders[ 6] = &cCastor;   mExpanders[ 7] = &cMimosa;
+    mExpanders[ 8] = &cPolaris;   mExpanders[ 9] = &cPollux;   mExpanders[10] = &cProcyon;  mExpanders[11] = &cRegulus;
+    mExpanders[12] = &cRigel;     mExpanders[13] = &cSaiph;    mExpanders[14] = &cSirius;   mExpanders[15] = &cVega;
+}
+
+void Soccer2::InitializeMaterials() {
+    mMaterials[ 0] = mMaterialA; mMaterials[ 1] = mMaterialB; mMaterials[ 2] = mMaterialC; mMaterials[ 3] = mMaterialD;
+    mMaterials[ 4] = mMaterialE; mMaterials[ 5] = mMaterialF; mMaterials[ 6] = mMaterialG; mMaterials[ 7] = mMaterialH;
+    mMaterials[ 8] = mMaterialI; mMaterials[ 9] = mMaterialJ; mMaterials[10] = mMaterialK; mMaterials[11] = mMaterialL;
+    mMaterials[12] = mMaterialM; mMaterials[13] = mMaterialN; mMaterials[14] = mMaterialO; mMaterials[15] = mMaterialP;
+}
+
+void Soccer2::InitializeWorkSpaces() {
+    mWorkSpaces[ 0] = &mWorkSpaceA; mWorkSpaces[ 1] = &mWorkSpaceB; mWorkSpaces[ 2] = &mWorkSpaceC; mWorkSpaces[ 3] = &mWorkSpaceD;
+    mWorkSpaces[ 4] = &mWorkSpaceE; mWorkSpaces[ 5] = &mWorkSpaceF; mWorkSpaces[ 6] = &mWorkSpaceG; mWorkSpaces[ 7] = &mWorkSpaceH;
+    mWorkSpaces[ 8] = &mWorkSpaceI; mWorkSpaces[ 9] = &mWorkSpaceJ; mWorkSpaces[10] = &mWorkSpaceK; mWorkSpaces[11] = &mWorkSpaceL;
+    mWorkSpaces[12] = &mWorkSpaceM; mWorkSpaces[13] = &mWorkSpaceN; mWorkSpaces[14] = &mWorkSpaceO; mWorkSpaces[15] = &mWorkSpaceP;
+}
+
+void Soccer2::UnrollNonceAndPasswordToScratch_Test(std::uint8_t *pPassword,
+                                                   std::size_t pPasswordByteLength,
+                                                   std::uint64_t pNonce) {
+    std::uint8_t aNonceBytes[8];
+    aNonceBytes[0] = static_cast<std::uint8_t>(pNonce >>  0); aNonceBytes[1] = static_cast<std::uint8_t>(pNonce >>  8);
+    aNonceBytes[2] = static_cast<std::uint8_t>(pNonce >> 16); aNonceBytes[3] = static_cast<std::uint8_t>(pNonce >> 24);
+    aNonceBytes[4] = static_cast<std::uint8_t>(pNonce >> 32); aNonceBytes[5] = static_cast<std::uint8_t>(pNonce >> 40);
+    aNonceBytes[6] = static_cast<std::uint8_t>(pNonce >> 48); aNonceBytes[7] = static_cast<std::uint8_t>(pNonce >> 56);
+    
+    std::size_t aScratchIndex = 0;
+    while (aScratchIndex < SOCCER_BLOCK_SIZE) {
+        std::size_t aPasswordIndex = 0;
+        while ((aPasswordIndex < pPasswordByteLength) && (aScratchIndex < SOCCER_BLOCK_SIZE)) {
+            mScratch[aScratchIndex] = pPassword[aPasswordIndex];
+            aScratchIndex++;
+            aPasswordIndex++;
+        }
+        std::size_t aNonceIndex = 0;
+        while ((aNonceIndex < 8) && (aScratchIndex < SOCCER_BLOCK_SIZE)) {
+            mScratch[aScratchIndex] = aNonceBytes[aNonceIndex];
+            aScratchIndex++;
+            aNonceIndex++;
+        }
+    }
+}
+
+void Soccer2::UnrollNonceAndPasswordToScratch_Regular(std::uint8_t *pPassword,
+                                                      std::size_t pPasswordByteLength,
+                                                      std::uint64_t pNonce) {
+    std::uint8_t aNonceBytes[8];
+    aNonceBytes[0] = static_cast<std::uint8_t>(pNonce >>  0); aNonceBytes[1] = static_cast<std::uint8_t>(pNonce >>  8);
+    aNonceBytes[2] = static_cast<std::uint8_t>(pNonce >> 16); aNonceBytes[3] = static_cast<std::uint8_t>(pNonce >> 24);
+    aNonceBytes[4] = static_cast<std::uint8_t>(pNonce >> 32); aNonceBytes[5] = static_cast<std::uint8_t>(pNonce >> 40);
+    aNonceBytes[6] = static_cast<std::uint8_t>(pNonce >> 48); aNonceBytes[7] = static_cast<std::uint8_t>(pNonce >> 56);
+    
+    std::size_t aScratchIndex = 0;
+    while (aScratchIndex < S_BLOCK) {
+        std::size_t aPasswordIndex = 0;
+        while ((aPasswordIndex < pPasswordByteLength) && (aScratchIndex < S_BLOCK)) {
+            mScratch[aScratchIndex] = pPassword[aPasswordIndex];
+            aScratchIndex++;
+            aPasswordIndex++;
+        }
+        std::size_t aNonceIndex = 0;
+        while ((aNonceIndex < 8) && (aScratchIndex < S_BLOCK)) {
+            mScratch[aScratchIndex] = aNonceBytes[aNonceIndex];
+            aScratchIndex++;
+            aNonceIndex++;
+        }
     }
 }
 
@@ -406,24 +496,12 @@ Crypt *Soccer2::GenerateCipher(CipherType pType, std::uint8_t pStage) {
         case CipherType::kRotateCipher: {
             const std::int32_t aRotation = PopRotation(pStage);
             if (aRotation == 0) { return nullptr; }
-
-            std::int32_t aLaneLength = static_cast<std::int32_t>(SOCCER_BLOCK_SIZE_L1);
-            if ((pStage == kStageL3A) ||
-                (pStage == kStageL3B) ||
-                (pStage == kStageL3C)) {
-                aLaneLength = static_cast<std::int32_t>(SOCCER_BLOCK_SIZE);
-            } else if ((pStage == kStageL2A) || (pStage == kStageL2B)) {
-                aLaneLength = static_cast<std::int32_t>(SOCCER_BLOCK_SIZE_L2);
-            }
-
-            const std::int32_t aShift = aLaneLength - aRotation;
-            return new RotateCipher(aShift);
+            return new RotateCipher(aRotation);
         }
         default:
             return nullptr;
     }
 }
-
 
 void Soccer2::Zero() {
     std::memset(mMaterialA, 0, sizeof(mMaterialA));
@@ -1064,17 +1142,23 @@ bool Soccer2::AttemptSeed_Encrypt(EncryptionStrength pStrength,
         return true;
     }
     
+    // Chapter I - Prelude
     SeedPrelude_Regular_A(pPassword, pPasswordByteLength, pNonce);
     SeedPrelude_Regular_B(pNonce);
     SeedPrelude_Regular_C();
     
+    // Chapter II - Prologue
     SeedPrologue_Regular_A(pPassword, pPasswordByteLength, pNonce);
     SeedPrologue_Regular_B();
     if (!SeedPrologue_Regular_C(pAckWord, true)) {
         return false;
     }
     SeedPrologue_Regular_D();
+    
+    // Chapter III - Epilogue
     SeedEpilogue_Regular_A();
+    std::uint64_t aCipherWord = SeedEpilogue_Regular_B();
+    SeedEpilogue_Regular_C(aCipherWord);
     
     return true;
 }
@@ -1103,10 +1187,12 @@ bool Soccer2::AttemptSeed_Decrypt(EncryptionStrength pStrength,
         return true;
     }
     
+    // Chapter I - Prelude
     SeedPrelude_Regular_A(pPassword, pPasswordByteLength, pNonce);
     SeedPrelude_Regular_B(pNonce);
     SeedPrelude_Regular_C();
     
+    // Chapter II - Prologue
     std::uint32_t aAckWord = pAckWord;
     SeedPrologue_Regular_A(pPassword, pPasswordByteLength, pNonce);
     SeedPrologue_Regular_B();
@@ -1114,7 +1200,11 @@ bool Soccer2::AttemptSeed_Decrypt(EncryptionStrength pStrength,
         return false;
     }
     SeedPrologue_Regular_D();
+    
+    // Chapter III - Epilogue
     SeedEpilogue_Regular_A();
+    std::uint64_t aCipherWord = SeedEpilogue_Regular_B();
+    SeedEpilogue_Regular_C(aCipherWord);
     
     return true;
 }
@@ -1173,133 +1263,6 @@ void Soccer2::DecryptBlock(std::uint8_t *pSource,
                static_cast<std::uint32_t>(aErrorCode));
     }
 }
-
-void Soccer2::InitializeMasks() {
-    mMasks[0] = 0xF0u;  mMasks[1] = 0x0Fu;  mMasks[2] = 0x33u;  mMasks[3] = 0xCCu;
-    mMasks[4] = 0x55u;  mMasks[5] = 0xAAu;  mMasks[6] = 0x69u;  mMasks[7] = 0x96u;
-    mMasks[8] = 0x19u;  mMasks[9] = 0x98u;  mMasks[10] = 0x1Au; mMasks[11] = 0x58u;
-    mMasks[12] = 0x1Cu; mMasks[13] = 0x38u; mMasks[14] = 0x25u; mMasks[15] = 0xA4u;
-    mMasks[16] = 0x26u; mMasks[17] = 0x64u; mMasks[18] = 0x2Cu; mMasks[19] = 0x34u;
-    mMasks[20] = 0x43u; mMasks[21] = 0xC2u; mMasks[22] = 0x46u; mMasks[23] = 0x62u;
-    mMasks[24] = 0x4Au; mMasks[25] = 0x52u; mMasks[26] = 0x83u; mMasks[27] = 0xC1u;
-    mMasks[28] = 0x85u; mMasks[29] = 0xA1u; mMasks[30] = 0x89u; mMasks[31] = 0x91u;
-}
-
-void Soccer2::InitializeCiphers() {
-    std::size_t aCipherIndex = 0U;
-
-    for (std::size_t aIndex=0U; aIndex<8U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kPasswordXORCipher; }
-    for (std::size_t aIndex=0U; aIndex<8U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kPasswordAddCipher; }
-    for (std::size_t aIndex=0U; aIndex<8U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kPasswordSubtractCipher; }
-
-    for (std::size_t aIndex=0U; aIndex<7U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kPasswordJumpXORCipher; }
-    for (std::size_t aIndex=0U; aIndex<7U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kPasswordJumpAddCipher; }
-    for (std::size_t aIndex=0U; aIndex<7U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kPasswordJumpSubtractCipher; }
-
-    for (std::size_t aIndex=0U; aIndex<7U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kPepperNoiseXORCipher; }
-    for (std::size_t aIndex=0U; aIndex<7U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kPepperJumpNoiseXORCipher; }
-    for (std::size_t aIndex=0U; aIndex<7U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kPepperDualJumpNoiseXORCipher; }
-
-    for (std::size_t aIndex=0U; aIndex<3U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kCascadeCipher; }
-    for (std::size_t aIndex=0U; aIndex<3U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kCascadeJumpCipher; }
-
-    for (std::size_t aIndex=0U; aIndex<20U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kReverseMaskCipher; }
-    for (std::size_t aIndex=0U; aIndex<15U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kReverseMaskByteBlockCipher32; }
-    for (std::size_t aIndex=0U; aIndex<15U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kReverseMaskByteBlockCipher64; }
-    
-    for (std::size_t aIndex=0U; aIndex<15U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kRippleMaskBlockCipher32; }
-    for (std::size_t aIndex=0U; aIndex<15U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kRippleMaskBlockCipher64; }
-
-    //for (std::size_t aIndex=0U; aIndex<20U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kWeaveMaskCipher; }
-    //for (std::size_t aIndex=0U; aIndex<15U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kWeaveMaskBlockCipher32; }
-    //for (std::size_t aIndex=0U; aIndex<15U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kWeaveMaskBlockCipher64; }
-
-    for (std::size_t aIndex=0U; aIndex<15U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kSplintMaskBlockCipher32; }
-    for (std::size_t aIndex=0U; aIndex<15U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kSplintMaskBlockCipher64; }
-    
-    for (std::size_t aIndex=0U; aIndex<10U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kInvertMaskCipher; }
-    for (std::size_t aIndex=0U; aIndex<20U; aIndex++) { mCiphers[aCipherIndex++] = CipherType::kRotateCipher; }
-    
-    // 50 kRotateMaskCipher entries fill the remaining slots.
-    while (aCipherIndex < 256) {
-        mCiphers[aCipherIndex] = CipherType::kRotateMaskCipher;
-        aCipherIndex++;
-    }
-}
-
-void Soccer2::InitializeExpanders() {
-    mExpanders[ 0] = &cAldebaran; mExpanders[ 1] = &cAltair;   mExpanders[ 2] = &cAntares; mExpanders[ 3] = &cArcturus;
-    mExpanders[ 4] = &cBellatrix; mExpanders[ 5] = &cCapella;  mExpanders[ 6] = &cCastor;   mExpanders[ 7] = &cMimosa;
-    mExpanders[ 8] = &cPolaris;   mExpanders[ 9] = &cPollux;   mExpanders[10] = &cProcyon;  mExpanders[11] = &cRegulus;
-    mExpanders[12] = &cRigel;     mExpanders[13] = &cSaiph;    mExpanders[14] = &cSirius;   mExpanders[15] = &cVega;
-}
-
-void Soccer2::InitializeMaterials() {
-    mMaterials[ 0] = mMaterialA; mMaterials[ 1] = mMaterialB; mMaterials[ 2] = mMaterialC; mMaterials[ 3] = mMaterialD;
-    mMaterials[ 4] = mMaterialE; mMaterials[ 5] = mMaterialF; mMaterials[ 6] = mMaterialG; mMaterials[ 7] = mMaterialH;
-    mMaterials[ 8] = mMaterialI; mMaterials[ 9] = mMaterialJ; mMaterials[10] = mMaterialK; mMaterials[11] = mMaterialL;
-    mMaterials[12] = mMaterialM; mMaterials[13] = mMaterialN; mMaterials[14] = mMaterialO; mMaterials[15] = mMaterialP;
-}
-
-void Soccer2::InitializeWorkSpaces() {
-    mWorkSpaces[ 0] = &mWorkSpaceA; mWorkSpaces[ 1] = &mWorkSpaceB; mWorkSpaces[ 2] = &mWorkSpaceC; mWorkSpaces[ 3] = &mWorkSpaceD;
-    mWorkSpaces[ 4] = &mWorkSpaceE; mWorkSpaces[ 5] = &mWorkSpaceF; mWorkSpaces[ 6] = &mWorkSpaceG; mWorkSpaces[ 7] = &mWorkSpaceH;
-    mWorkSpaces[ 8] = &mWorkSpaceI; mWorkSpaces[ 9] = &mWorkSpaceJ; mWorkSpaces[10] = &mWorkSpaceK; mWorkSpaces[11] = &mWorkSpaceL;
-    mWorkSpaces[12] = &mWorkSpaceM; mWorkSpaces[13] = &mWorkSpaceN; mWorkSpaces[14] = &mWorkSpaceO; mWorkSpaces[15] = &mWorkSpaceP;
-}
-
-void Soccer2::UnrollNonceAndPasswordToScratch_Test(std::uint8_t *pPassword,
-                                                   std::size_t pPasswordByteLength,
-                                                   std::uint64_t pNonce) {
-    std::uint8_t aNonceBytes[8];
-    aNonceBytes[0] = static_cast<std::uint8_t>(pNonce >>  0); aNonceBytes[1] = static_cast<std::uint8_t>(pNonce >>  8);
-    aNonceBytes[2] = static_cast<std::uint8_t>(pNonce >> 16); aNonceBytes[3] = static_cast<std::uint8_t>(pNonce >> 24);
-    aNonceBytes[4] = static_cast<std::uint8_t>(pNonce >> 32); aNonceBytes[5] = static_cast<std::uint8_t>(pNonce >> 40);
-    aNonceBytes[6] = static_cast<std::uint8_t>(pNonce >> 48); aNonceBytes[7] = static_cast<std::uint8_t>(pNonce >> 56);
-    
-    std::size_t aScratchIndex = 0;
-    while (aScratchIndex < SOCCER_BLOCK_SIZE) {
-        std::size_t aPasswordIndex = 0;
-        while ((aPasswordIndex < pPasswordByteLength) && (aScratchIndex < SOCCER_BLOCK_SIZE)) {
-            mScratch[aScratchIndex] = pPassword[aPasswordIndex];
-            aScratchIndex++;
-            aPasswordIndex++;
-        }
-        std::size_t aNonceIndex = 0;
-        while ((aNonceIndex < 8) && (aScratchIndex < SOCCER_BLOCK_SIZE)) {
-            mScratch[aScratchIndex] = aNonceBytes[aNonceIndex];
-            aScratchIndex++;
-            aNonceIndex++;
-        }
-    }
-}
-
-void Soccer2::UnrollNonceAndPasswordToScratch_Regular(std::uint8_t *pPassword,
-                                                      std::size_t pPasswordByteLength,
-                                                      std::uint64_t pNonce) {
-    std::uint8_t aNonceBytes[8];
-    aNonceBytes[0] = static_cast<std::uint8_t>(pNonce >>  0); aNonceBytes[1] = static_cast<std::uint8_t>(pNonce >>  8);
-    aNonceBytes[2] = static_cast<std::uint8_t>(pNonce >> 16); aNonceBytes[3] = static_cast<std::uint8_t>(pNonce >> 24);
-    aNonceBytes[4] = static_cast<std::uint8_t>(pNonce >> 32); aNonceBytes[5] = static_cast<std::uint8_t>(pNonce >> 40);
-    aNonceBytes[6] = static_cast<std::uint8_t>(pNonce >> 48); aNonceBytes[7] = static_cast<std::uint8_t>(pNonce >> 56);
-    
-    std::size_t aScratchIndex = 0;
-    while (aScratchIndex < S_BLOCK) {
-        std::size_t aPasswordIndex = 0;
-        while ((aPasswordIndex < pPasswordByteLength) && (aScratchIndex < S_BLOCK)) {
-            mScratch[aScratchIndex] = pPassword[aPasswordIndex];
-            aScratchIndex++;
-            aPasswordIndex++;
-        }
-        std::size_t aNonceIndex = 0;
-        while ((aNonceIndex < 8) && (aScratchIndex < S_BLOCK)) {
-            mScratch[aScratchIndex] = aNonceBytes[aNonceIndex];
-            aScratchIndex++;
-            aNonceIndex++;
-        }
-    }
-}
-
 
 bool Soccer2::SeedPrelude_Test(std::uint8_t *pPassword,
                                std::size_t pPasswordByteLength,
@@ -1440,6 +1403,17 @@ void Soccer2::SeedEpilogue_Regular_A() {
                              mCrushC,
                              mCrushD);
     
+    cMaterialIndex = 0;
+    cMaterialQuarter = 0;
+    
+    cMaskIndex = 0;
+    
+    mRotationBankCursorL3A = 0; mRotationBankCursorL2A = 0; mRotationBankCursorL1A = 0;
+    mRotationBankCursorL3B = 0; mRotationBankCursorL2B = 0; mRotationBankCursorL1B = 0;
+    mRotationBankCursorL3C = 0;
+}
+
+std::uint64_t Soccer2::SeedEpilogue_Regular_B() {
     
     for (std::size_t aIndex=0; aIndex<2048; aIndex++) { mIndexListA[aIndex] = aIndex; }
     for (std::size_t aIndex=0; aIndex<2048; aIndex++) { mIndexListB[aIndex] = aIndex; }
@@ -1448,9 +1422,9 @@ void Soccer2::SeedEpilogue_Regular_A() {
     static_assert((SOCCER_BLOCK_SIZE_C1 % aShuffleSpanByteCount) == 0U);
     static_assert((aShuffleSpanByteCount % sizeof(std::uint32_t)) == 0U);
     
-    cRandIndexA = 0;
-    cRandIndexB = 0;
-    cRandLane = false;
+    std::uint32_t aRandIndexA = 0;
+    std::uint32_t aRandIndexB = 0;
+    bool aRandLane = false;
     
     for (std::size_t aSpanIndex=0U;
          aSpanIndex<(SOCCER_BLOCK_SIZE_C1 / aShuffleSpanByteCount);
@@ -1468,11 +1442,11 @@ void Soccer2::SeedEpilogue_Regular_A() {
             aIndexList[aSwapIndexA] = aIndexList[aSwapIndexB];
             aIndexList[aSwapIndexB] = aHold;
 
-            cRandIndexA = TwistMix32::DiffuseA(cRandIndexA + ((aShuffleWord >> 22U) & 15U));
-            cRandIndexB = TwistMix32::DiffuseA(cRandIndexB + ((aShuffleWord >> 26U) & 15U));
+            aRandIndexA = TwistMix32::DiffuseA(aRandIndexA + ((aShuffleWord >> 22U) & 15U));
+            aRandIndexB = TwistMix32::DiffuseA(aRandIndexB + ((aShuffleWord >> 26U) & 15U));
             const std::uint32_t aLaneBits = (aShuffleWord >> 30U) & 3U;
             if ((aLaneBits == 1U) || (aLaneBits == 2U)) {
-                cRandLane = !cRandLane;
+                aRandLane = !aRandLane;
             }
         }
     }
@@ -1493,14 +1467,15 @@ void Soccer2::SeedEpilogue_Regular_A() {
             aIndexList[aSwapIndexA] = aIndexList[aSwapIndexB];
             aIndexList[aSwapIndexB] = aHold;
 
-            cRandIndexA = TwistMix32::DiffuseA(cRandIndexA + ((aShuffleWord >> 22U) & 15U));
-            cRandIndexB = TwistMix32::DiffuseA(cRandIndexB + ((aShuffleWord >> 26U) & 15U));
+            aRandIndexA = TwistMix32::DiffuseA(aRandIndexA + ((aShuffleWord >> 22U) & 15U));
+            aRandIndexB = TwistMix32::DiffuseA(aRandIndexB + ((aShuffleWord >> 26U) & 15U));
             const std::uint32_t aLaneBits = (aShuffleWord >> 30U) & 3U;
             if ((aLaneBits == 1U) || (aLaneBits == 2U)) {
-                cRandLane = !cRandLane;
+                aRandLane = !aRandLane;
             }
         }
     }
+    
     
     static_assert(SOCCER_BLOCK_SIZE_C1 == (2048U * sizeof(std::uint64_t)));
 
@@ -1536,42 +1511,80 @@ void Soccer2::SeedEpilogue_Regular_A() {
     std::uint64_t aCipherWord = 0ULL;
     
     for (std::size_t aIndex=0; aIndex<16; aIndex++) {
-        aCipherWord = TwistMix64::DiffuseA(aCipherWord ^ SoccerRand());
+        
+        std::uint64_t aRand = 0U;
+        if (aRandLane == true) {
+            aRandLane = false;
+            aRandIndexA = ((aRandIndexA + 1) & 0xFFU);
+            aRand = Soccer2::mRolledA[aRandIndexA];
+        } else {
+            aRandLane = true;
+            aRandIndexB = ((aRandIndexB + 1) & 0xFFU);
+            aRand = Soccer2::mRolledB[aRandIndexB];
+        }
+        
+        aCipherWord = TwistMix64::DiffuseA(aCipherWord ^ aRand);
     }
     
     for (std::size_t aIndex=0; aIndex<SOCCER_ROTATION_WORD_COUNT_S3; aIndex++) {
-        mRotationSeedS3[aIndex] = SoccerRand();
+        
+        std::uint64_t aRand = 0U;
+        if (aRandLane == true) {
+            aRandLane = false;
+            aRandIndexA = ((aRandIndexA + 1) & 0xFFU);
+            aRand = Soccer2::mRolledA[aRandIndexA];
+        } else {
+            aRandLane = true;
+            aRandIndexB = ((aRandIndexB + 1) & 0xFFU);
+            aRand = Soccer2::mRolledB[aRandIndexB];
+        }
+        
+        mRotationSeedS3[aIndex] = aRand;
     }
     for (std::size_t aIndex=0; aIndex<SOCCER_ROTATION_WORD_COUNT_S2; aIndex++) {
-        mRotationSeedS2[aIndex] = SoccerRand();
+        
+        std::uint64_t aRand = 0U;
+        if (aRandLane == true) {
+            aRandLane = false;
+            aRandIndexA = ((aRandIndexA + 1) & 0xFFU);
+            aRand = Soccer2::mRolledA[aRandIndexA];
+        } else {
+            aRandLane = true;
+            aRandIndexB = ((aRandIndexB + 1) & 0xFFU);
+            aRand = Soccer2::mRolledB[aRandIndexB];
+        }
+        
+        mRotationSeedS2[aIndex] = aRand;
     }
     for (std::size_t aIndex=0; aIndex<SOCCER_ROTATION_WORD_COUNT_S1; aIndex++) {
-        mRotationSeedS1[aIndex] = SoccerRand();
+        
+        std::uint64_t aRand = 0U;
+        if (aRandLane == true) {
+            aRandLane = false;
+            aRandIndexA = ((aRandIndexA + 1) & 0xFFU);
+            aRand = Soccer2::mRolledA[aRandIndexA];
+        } else {
+            aRandLane = true;
+            aRandIndexB = ((aRandIndexB + 1) & 0xFFU);
+            aRand = Soccer2::mRolledB[aRandIndexB];
+        }
+        
+        mRotationSeedS1[aIndex] = aRand;
     }
     
-    cMaterialIndex = 0;
-    cMaterialQuarter = 0;
-    
-    cMaskIndex = 0;
-    
-    mRotationBankCursorL3A = 0;
-    mRotationBankCursorL2A = 0;
-    mRotationBankCursorL1A = 0;
-    
-    mRotationBankCursorL3B = 0;
-    mRotationBankCursorL2B = 0;
-    mRotationBankCursorL1B = 0;
-    
-    mRotationBankCursorL3C = 0;
+    return aCipherWord;
+}
+
+void Soccer2::SeedEpilogue_Regular_C(std::uint64_t pCipherWord) {
     
     
     EncryptionPlan aPlan;
     if (mStrength == EncryptionStrength::kWeak) {
-        aPlan = EncryptionPlanTool::MakePlanWeak(aCipherWord, mCiphers);
+        aPlan = EncryptionPlanTool::MakePlanWeak(pCipherWord, mCiphers);
     } else if (mStrength == EncryptionStrength::kStrong) {
-        aPlan = EncryptionPlanTool::MakePlanStrong(aCipherWord, mCiphers);
+        aPlan = EncryptionPlanTool::MakePlanStrong(pCipherWord, mCiphers);
     } else {
-        aPlan = EncryptionPlanTool::MakePlanNormal(aCipherWord, mCiphers);
+        aPlan = EncryptionPlanTool::MakePlanNormal(pCipherWord, mCiphers);
     }
 
     auto CountRotations = [](const EncryptionPlanStage &pStage) -> std::size_t {
