@@ -620,13 +620,6 @@ void Soccer2::Shuffle_CROWSCIMASSORMATEX() {
      ciphers // block 31
     */
     
-    
-    
-    
-    
-    
-    
-    
     // Materials: blocks 0, 9, 18, and 27.
     if (mStrength == EncryptionStrength::kWeak) {
         TwistShuffle::ShuffleList4(mMaterials, mRandom,  0U * cBlockSpan,  1U * cBlockSpan, 1U);
@@ -670,16 +663,10 @@ void Soccer2::Shuffle_CROWSCIMASSORMATEX() {
     }
 
     // Ciphers: blocks 4, 13, 22, and 31.
-    constexpr std::size_t cCipherBlocks[] = {
-         4U, 13U, 22U, 31U,
-    };
-    for (const std::size_t aBlock : cCipherBlocks) {
-        TwistShuffle::ShuffleList256(mCiphers,
-                                     mRandom,
-                                     aBlock * cBlockSpan,
-                                     (aBlock + 1U) * cBlockSpan,
-                                     1U);
-    }
+    TwistShuffle::ShuffleList256(mCiphers, mRandom,  4U * cBlockSpan,  5U * cBlockSpan, 1U);
+    TwistShuffle::ShuffleList256(mCiphers, mRandom, 13U * cBlockSpan, 14U * cBlockSpan, 1U);
+    TwistShuffle::ShuffleList256(mCiphers, mRandom, 22U * cBlockSpan, 23U * cBlockSpan, 1U);
+    TwistShuffle::ShuffleList256(mCiphers, mRandom, 31U * cBlockSpan, 32U * cBlockSpan, 1U);
 
     // Sources: blocks 1, 10, 19, and 28.
     if (mStrength == EncryptionStrength::kWeak) {
@@ -709,23 +696,13 @@ void Soccer2::Shuffle_CROSSPERMUTATIONS(std::size_t pPermutationCount) {
         {23U, 24U, 25U, 26U},
     };
     static_assert(S_BLOCK == (32U * cBlockSpan));
-
-    if ((pPermutationCount != 4U) &&
-        (pPermutationCount != 8U) &&
-        (pPermutationCount != 16U) &&
-        (pPermutationCount != 32U) &&
-        (pPermutationCount != 64U)) {
-        printf("Fatal: invalid cross permutation count %zu.\n", pPermutationCount);
-        exit(0);
-    }
-
+    
     for (std::size_t aRoundIndex=0U; aRoundIndex<3U; aRoundIndex++) {
         for (std::size_t aLaneGroup=0U; aLaneGroup<4U; aLaneGroup++) {
             const std::size_t aBlockIndex = cCrossBlocks[aRoundIndex][aLaneGroup];
             for (std::size_t aQuarterIndex=0U; aQuarterIndex<4U; aQuarterIndex++) {
                 const std::size_t aLaneIndex = (aLaneGroup * 4U) + aQuarterIndex;
-                const std::size_t aStartIndex =
-                    (aBlockIndex * cBlockSpan) + (aQuarterIndex * cSpan);
+                const std::size_t aStartIndex = (aBlockIndex * cBlockSpan) + (aQuarterIndex * cSpan);
                 const std::size_t aCeilingIndex = aStartIndex + cSpan;
 
                 if (pPermutationCount == 4U) {
@@ -774,61 +751,6 @@ void Soccer2::TwistRound(std::size_t pBlockIndex) {
     } else if (mStrength == EncryptionStrength::kStrong) {
         aComplexity = COMPLEXITY_STRONG;
         aReverseCount = 4U;
-    }
-    
-    
-    {
-        // Verifying Sources
-        
-        std::size_t aVerified = 0;
-        std::size_t aBack1 = 0;
-        if (pBlockIndex == 0) {
-            aBack1 = 31;
-        } else {
-            aBack1 = pBlockIndex - 1;
-        }
-        
-        std::unordered_set<std::uint8_t *> aSourceSet;
-        for (std::size_t aLaneIndex=0U; aLaneIndex<aComplexity; aLaneIndex++) {
-            if (aSourceSet.contains(mSources[aLaneIndex])) {
-                printf("Fatal: Did not expect duplicate source.");
-                exit(0);
-            }
-            aSourceSet.insert(mSources[aLaneIndex]);
-        }
-        
-        std::size_t aExpectedByte = aBack1 * S_BLOCK;
-        
-        for (auto aSource : aSourceSet) {
-            aVerified++;
-            bool aIsMaterial = false;
-            for (std::size_t aMatIndex=0;aMatIndex<aComplexity;aMatIndex++) {
-                if (&mMaterials[aMatIndex][aExpectedByte] == aSource) {
-                    aIsMaterial = true;
-                    break;
-                }
-            }
-            if (aIsMaterial == false) {
-                printf("Fatal: Source was not a material.\n");
-                exit(0);
-            }
-            
-            std::size_t aCountz[256];
-            memset(aCountz, 0, sizeof(aCountz));
-            for (std::size_t aIndex=0; aIndex<S_BLOCK; aIndex++) {
-                aCountz[aSource[aIndex]]++;
-            }
-            for (std::size_t aIndex=0; aIndex<256; aIndex++) {
-                if (aCountz[aIndex] == 0) {
-                    printf("Hax, source lane didn't have all the bytes?!");
-                    for (std::size_t aIndexx=0; aIndexx<256; aIndexx++) {
-                        printf("countz[%zu] = %zu\n", aIndexx, aCountz[aIndexx]);
-                    }
-                    exit(0);
-                }
-            }
-        }
-        printf("Twist Round verified %zu sources, no issue.\n", aVerified);
     }
     
     const std::size_t aDestinationByteIndex = pBlockIndex * S_BLOCK;
@@ -1007,62 +929,6 @@ void Soccer2::ArrangeCrossPool(std::size_t pComplexity) {
                 exit(0);
             }
             mCross[aCrossIndex][aLaneIndex] = mCrossPool[aLaneIndex][aPoolIndex];
-        }
-    }
-    
-    // Dumb verification
-    {
-        
-        for (std::size_t aLaneIndex=0U; aLaneIndex<pComplexity; aLaneIndex++) {
-            std::size_t aCount = mCrossPoolCount[aLaneIndex];
-            std::unordered_set<std::size_t> aPermuItems;
-            
-            for (std::size_t aCrossIndex=0U; aCrossIndex<aCrossCount; aCrossIndex++) {
-                const std::size_t aPoolIndex = mCrossPermutations[aLaneIndex][aCrossIndex];
-                if (aPoolIndex >= aCount) {
-                    printf("Fatal: Invalid pool index: %zu / %zu\n", aPoolIndex, aCount);
-                    exit(0);
-                }
-                if (aPermuItems.contains(aPoolIndex)) {
-                    printf("Fatal: Dupe pool index: %zu\n", aPoolIndex);
-                    exit(0);
-                }
-                aPermuItems.insert(aPoolIndex);
-            }
-        }
-        for (std::size_t aLaneIndex=0U; aLaneIndex<pComplexity; aLaneIndex++) {
-            
-            std::unordered_set<std::uint8_t *> aLanez;
-            aLanez.insert(mSources[aLaneIndex]);
-            
-            for (std::size_t aCrossIndex=0U; aCrossIndex<4; aCrossIndex++) {
-                std::uint8_t *aCrossLane = mCross[aCrossIndex][aLaneIndex];
-                if (aLanez.contains(aCrossLane)) {
-                    printf("Fatal: Lane %zu has dupe entry.\n", aLaneIndex);
-                    exit(0);
-                }
-                aLanez.insert(aCrossLane);
-            }
-            
-            for (auto aLane: aLanez) {
-                
-                std::size_t aCountz[256];
-                memset(aCountz, 0, sizeof(aCountz));
-                for (std::size_t aIndex=0; aIndex<S_BLOCK; aIndex++) {
-                    aCountz[aLane[aIndex]]++;
-                }
-                for (std::size_t aIndex=0; aIndex<256; aIndex++) {
-                    if (aCountz[aIndex] == 0) {
-                        printf("Hax, cross lane didn't have all the bytes?!");
-                        for (std::size_t aIndexx=0; aIndexx<256; aIndexx++) {
-                            printf("countz[%zu] = %zu\n", aIndexx, aCountz[aIndexx]);
-                        }
-                        exit(0);
-                    }
-                }
-                
-            }
-            
         }
     }
 }
@@ -1251,12 +1117,9 @@ bool Soccer2::SeedPrologue_Regular_C(std::uint32_t *pAckWord,
     static_assert(WARM_UP_BLOCKS == 6U);
     const std::size_t aWarmUpSeedBlockIndex = BLOCK_COUNT - WARM_UP_BLOCKS;
     const std::size_t aWarmUpSeedByteIndex = aWarmUpSeedBlockIndex * S_BLOCK;
-    const std::size_t aWarmUp1ByteIndex =
-        (aWarmUpSeedBlockIndex + 1U) * S_BLOCK;
-    const std::size_t aWarmUp2ByteIndex =
-        (aWarmUpSeedBlockIndex + 2U) * S_BLOCK;
-    const std::size_t aWarmUp3ByteIndex =
-        (aWarmUpSeedBlockIndex + 3U) * S_BLOCK;
+    const std::size_t aWarmUp1ByteIndex = (aWarmUpSeedBlockIndex + 1U) * S_BLOCK;
+    const std::size_t aWarmUp2ByteIndex = (aWarmUpSeedBlockIndex + 2U) * S_BLOCK;
+    const std::size_t aWarmUp3ByteIndex = (aWarmUpSeedBlockIndex + 3U) * S_BLOCK;
 
     Shuffle_CROWSCIMASSORMATEX();
 
@@ -1587,7 +1450,6 @@ bool Soccer2::AttemptSeed_Decrypt(EncryptionStrength pStrength,
 void Soccer2::ConfigureTestBuffers(std::uint32_t pTestBlockLength) {
     mTestBlockLength = pTestBlockLength;
 }
-
 
 bool Soccer2::EncryptBlock(std::uint8_t *pSource,
                            std::uint8_t *pDestination) {
