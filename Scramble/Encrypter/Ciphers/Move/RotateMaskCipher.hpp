@@ -5,14 +5,15 @@
 #include <cstdint>
 
 #include "Jelly.hpp"
-#include "Crypt.hpp"
+#include "Cipher.hpp"
 
-// Input shape: pLength must be 0 or a multiple of 16; mask is a single byte.
+// [RELEASE] [655.3 us] [OK]
 
-class RotateMaskCipher final : public Crypt {
+class RotateMaskCipher final : public Cipher {
  public:
   RotateMaskCipher(std::uint8_t pMask, std::size_t pShift)
-      : mMask(pMask),
+      : Cipher(CipherType::kRotateMaskCipher),
+        mMask(pMask),
         mShift(pShift) {}
 
   bool SealData(const std::uint8_t *pSource,
@@ -33,6 +34,11 @@ class RotateMaskCipher final : public Crypt {
     (void)pWorker;
     return Apply(pSource, pDestination, pLength, NormalizeShift(mShift, pLength),
                  pErrorCode);
+  }
+
+  void Zero() override {
+    mMask = 0U;
+    mShift = 0U;
   }
 
  private:

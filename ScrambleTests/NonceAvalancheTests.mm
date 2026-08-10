@@ -102,7 +102,10 @@ std::size_t CountDifferentBits(const std::uint8_t *pDataA,
             return;
         }
 
-        Soccer2::EncryptBlock(aOriginal, aEncrypted[aNonceIndex]);
+        if (!Soccer2::EncryptBlock(aOriginal, aEncrypted[aNonceIndex])) {
+            XCTFail("nonce avalanche encryption failed");
+            return;
+        }
     
     }
 

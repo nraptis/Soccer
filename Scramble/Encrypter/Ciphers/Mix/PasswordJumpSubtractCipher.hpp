@@ -5,15 +5,18 @@
 #include <cstdint>
 
 #include "Jelly.hpp"
-#include "Crypt.hpp"
+#include "Cipher.hpp"
 
-// Input shape: pLength must be 0 or a multiple of 32; password and jump buffers are pLength bytes.
+// [RELEASE] [382.6 us] [OK]
+// Note: This is not a real measure, it's a clone of PasswordAddCipher's measurement.
+// However, it's essentially the same code. So, it's a good estimate.
 
-class PasswordJumpSubtractCipher final : public Crypt {
+class PasswordJumpSubtractCipher final : public Cipher {
  public:
   PasswordJumpSubtractCipher(const std::uint8_t *pPassword,
                              const std::uint8_t *pJumps)
-      : mPassword(pPassword),
+      : Cipher(CipherType::kPasswordJumpSubtractCipher),
+        mPassword(pPassword),
         mJumps(pJumps) {}
 
   bool SealData(const std::uint8_t *pSource,

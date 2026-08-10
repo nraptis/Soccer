@@ -6,11 +6,15 @@
 #include <cstring>
 
 #include "Jelly.hpp"
-#include "Crypt.hpp"
+#include "Cipher.hpp"
 
-class RippleMaskBlockCipher32 final : public Crypt {
+// [RELEASE] [179.2 us] [OK]
+
+class RippleMaskBlockCipher32 final : public Cipher {
  public:
-  explicit RippleMaskBlockCipher32(std::uint8_t pMask) : mMask(pMask) {}
+  explicit RippleMaskBlockCipher32(std::uint8_t pMask)
+      : Cipher(CipherType::kRippleMaskBlockCipher32),
+        mMask(pMask) {}
 
   bool SealData(const std::uint8_t *pSource,
                 std::uint8_t *pWorker,
@@ -28,6 +32,10 @@ class RippleMaskBlockCipher32 final : public Crypt {
                   CipherErrorCode *pErrorCode) const override {
     (void)pWorker;
     return Apply(pSource, pDestination, pLength, pErrorCode);
+  }
+
+  void Zero() override {
+    mMask = 0U;
   }
 
  private:

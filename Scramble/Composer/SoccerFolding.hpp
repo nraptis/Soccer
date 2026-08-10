@@ -13,66 +13,66 @@
 
 class SoccerFolding {
 public:
-    static void CollapseFold_Outer_16(const std::uint8_t *pSourceA,
-                                            const std::uint8_t *pSourceB,
-                                            const std::uint8_t *pSourceC,
-                                            const std::uint8_t *pSourceD,
-                                            const std::uint8_t *pSourceE,
-                                            const std::uint8_t *pSourceF,
-                                            const std::uint8_t *pSourceG,
-                                            const std::uint8_t *pSourceH,
-                                            const std::uint8_t *pSourceI,
-                                            const std::uint8_t *pSourceJ,
-                                            const std::uint8_t *pSourceK,
-                                            const std::uint8_t *pSourceL,
-                                            const std::uint8_t *pSourceM,
-                                            const std::uint8_t *pSourceN,
-                                            const std::uint8_t *pSourceO,
-                                            const std::uint8_t *pSourceP,
-                                            std::uint8_t *pDestinationA,
-                                            std::uint8_t *pDestinationB,
-                                            std::uint8_t *pDestinationC,
-                                            std::uint8_t *pDestinationD);
-
-    static void CollapseFold_Outer_8(const std::uint8_t *pSourceA,
-                                           const std::uint8_t *pSourceB,
-                                           const std::uint8_t *pSourceC,
-                                           const std::uint8_t *pSourceD,
-                                           const std::uint8_t *pSourceE,
-                                           const std::uint8_t *pSourceF,
-                                           const std::uint8_t *pSourceG,
-                                           const std::uint8_t *pSourceH,
-                                           std::uint8_t *pDestinationA,
-                                           std::uint8_t *pDestinationB,
-                                           std::uint8_t *pDestinationC,
-                                           std::uint8_t *pDestinationD);
-
-    static void ShrinkFold_4(const std::uint8_t *pSourceA,
-                             const std::uint8_t *pSourceB,
-                             const std::uint8_t *pSourceC,
-                             const std::uint8_t *pSourceD,
-                             std::uint8_t *pDestinationA,
-                             std::uint8_t *pDestinationB,
-                             std::uint8_t *pDestinationC,
-                             std::uint8_t *pDestinationD);
-
-    static void CompressFold_4(const std::uint8_t *pSourceA,
-                               const std::uint8_t *pSourceB,
-                               const std::uint8_t *pSourceC,
-                               const std::uint8_t *pSourceD,
-                               std::uint8_t *pDestinationA,
-                               std::uint8_t *pDestinationB,
-                               std::uint8_t *pDestinationC,
-                               std::uint8_t *pDestinationD);
-
-    static void CrushFold_4(const std::uint8_t *pSourceA,
-                          const std::uint8_t *pSourceB,
-                          const std::uint8_t *pSourceC,
-                          const std::uint8_t *pSourceD,
-                          std::uint8_t *pDestinationA,
-                          std::uint8_t *pDestinationB,
-                          std::uint8_t *pDestinationC,
-                          std::uint8_t *pDestinationD);
+    static void Collapse_Stage3_Outer_16(const std::uint8_t *pSourceA,
+                                         const std::uint8_t *pSourceB,
+                                         const std::uint8_t *pSourceC,
+                                         const std::uint8_t *pSourceD,
+                                         const std::uint8_t *pSourceE,
+                                         const std::uint8_t *pSourceF,
+                                         const std::uint8_t *pSourceG,
+                                         const std::uint8_t *pSourceH,
+                                         const std::uint8_t *pSourceI,
+                                         const std::uint8_t *pSourceJ,
+                                         const std::uint8_t *pSourceK,
+                                         const std::uint8_t *pSourceL,
+                                         const std::uint8_t *pSourceM,
+                                         const std::uint8_t *pSourceN,
+                                         const std::uint8_t *pSourceO,
+                                         const std::uint8_t *pSourceP,
+                                         std::uint8_t *pDestinationA,
+                                         std::uint8_t *pDestinationB,
+                                         std::uint8_t *pDestinationC,
+                                         std::uint8_t *pDestinationD);
+    
+    static void Collapse_Stage3_Outer_8(const std::uint8_t *pSourceA,
+                                        const std::uint8_t *pSourceB,
+                                        const std::uint8_t *pSourceC,
+                                        const std::uint8_t *pSourceD,
+                                        const std::uint8_t *pSourceE,
+                                        const std::uint8_t *pSourceF,
+                                        const std::uint8_t *pSourceG,
+                                        const std::uint8_t *pSourceH,
+                                        std::uint8_t *pDestinationA,
+                                        std::uint8_t *pDestinationB,
+                                        std::uint8_t *pDestinationC,
+                                        std::uint8_t *pDestinationD);
+    
+    static void Collapse_Stage2_4(const std::uint8_t *pSourceA,
+                                  const std::uint8_t *pSourceB,
+                                  const std::uint8_t *pSourceC,
+                                  const std::uint8_t *pSourceD,
+                                  std::uint8_t *pDestinationA,
+                                  std::uint8_t *pDestinationB,
+                                  std::uint8_t *pDestinationC,
+                                  std::uint8_t *pDestinationD);
+    
+    static void Collapse_Stage1_4(const std::uint8_t *pSourceA,
+                                  const std::uint8_t *pSourceB,
+                                  const std::uint8_t *pSourceC,
+                                  const std::uint8_t *pSourceD,
+                                  std::uint8_t *pDestinationA,
+                                  std::uint8_t *pDestinationB,
+                                  std::uint8_t *pDestinationC,
+                                  std::uint8_t *pDestinationD);
+    
+    static void Collapse_Stage0_4(const std::uint8_t *pSourceA,
+                                  const std::uint8_t *pSourceB,
+                                  const std::uint8_t *pSourceC,
+                                  const std::uint8_t *pSourceD,
+                                  std::uint8_t *pDestinationA,
+                                  std::uint8_t *pDestinationB,
+                                  std::uint8_t *pDestinationC,
+                                  std::uint8_t *pDestinationD);
 };
 
 #endif /* SoccerFolding_1000000_hpp */

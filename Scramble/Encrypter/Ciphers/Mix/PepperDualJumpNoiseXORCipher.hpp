@@ -5,17 +5,18 @@
 #include <cstdint>
 
 #include "Jelly.hpp"
-#include "Crypt.hpp"
+#include "Cipher.hpp"
 
 // [RELEASE] [457.1 us] [OK]
 
-class PepperDualJumpNoiseXORCipher final : public Crypt {
+class PepperDualJumpNoiseXORCipher final : public Cipher {
 public:
     PepperDualJumpNoiseXORCipher(const std::uint8_t *pMask,
                                  const std::uint8_t *pNoise,
                                  const std::uint8_t *pMaskJumps,
                                  const std::uint8_t *pNoiseJumps)
-    : mMask(pMask),
+    : Cipher(CipherType::kPepperDualJumpNoiseXORCipher),
+    mMask(pMask),
     mNoise(pNoise),
     mMaskJumps(pMaskJumps),
     mNoiseJumps(pNoiseJumps) {}

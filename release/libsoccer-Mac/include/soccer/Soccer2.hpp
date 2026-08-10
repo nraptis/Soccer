@@ -27,10 +27,10 @@ public:
                                     std::uint64_t pNonce,
                                     std::uint32_t pAckWord);
 
-    static void EncryptBlock(std::uint8_t *pSource,
+    static bool EncryptBlock(std::uint8_t *pSource,
                              std::uint8_t *pDestination);
 
-    static void DecryptBlock(std::uint8_t *pSource,
+    static bool DecryptBlock(std::uint8_t *pSource,
                              std::uint8_t *pDestination);
 
     static void Zero();

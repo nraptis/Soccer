@@ -24,6 +24,16 @@ constexpr std::int32_t kRotationBoundaryC = 524288;
 constexpr std::int32_t kRotationBoundaryD = 786432;
 constexpr std::int32_t kRotationBoundaryE = 1048576;
 
+void ZeroBytes(void *pMemory, std::size_t pByteCount) {
+    volatile std::uint8_t *aBytes =
+        static_cast<volatile std::uint8_t *>(pMemory);
+    while (pByteCount > 0U) {
+        *aBytes = 0U;
+        aBytes++;
+        pByteCount--;
+    }
+}
+
 
 
 #define TEST_CONTEND(A, B)                                      \
@@ -42,10 +52,6 @@ std::size_t                             SoccerRotationBank::mCacheCountS2 = 0;
 std::int32_t                            SoccerRotationBank::mCacheDataS1[SOCCER_ROTATION_CACHE_COUNT_S1];
 std::size_t                             SoccerRotationBank::mCacheCountS1 = 0;
 
-std::size_t                             SoccerRotationBank::mCursorS3 = 0U;
-std::size_t                             SoccerRotationBank::mCursorS2 = 0U;
-std::size_t                             SoccerRotationBank::mCursorS1 = 0U;
-
 SoccerRotationBankResponse              SoccerRotationBank::mResponse;
 
 std::int32_t                            SoccerRotationBank::mRotationList[SOCCER_ROTATION_CACHE_COUNT_TOTAL];
@@ -53,6 +59,23 @@ bool                                    SoccerRotationBank::mRotationConsidered[
 std::size_t                             SoccerRotationBank::mRotationListCount = 0;
 
 std::size_t                             SoccerRotationBank::mLoopCount = 0;
+
+void SoccerRotationBank::Zero() {
+    ZeroBytes(mCacheDataS3, sizeof(mCacheDataS3));
+    ZeroBytes(mCacheDataS2, sizeof(mCacheDataS2));
+    ZeroBytes(mCacheDataS1, sizeof(mCacheDataS1));
+
+    ZeroBytes(mRotationList, sizeof(mRotationList));
+    ZeroBytes(mRotationConsidered, sizeof(mRotationConsidered));
+    ZeroBytes(&mResponse, sizeof(mResponse));
+
+    mCacheCountS3 = 0U;
+    mCacheCountS2 = 0U;
+    mCacheCountS1 = 0U;
+
+    mRotationListCount = 0U;
+    mLoopCount = 0U;
+}
 
 
 bool SoccerRotationBank::RotationsContend(std::int32_t pRotationA, std::int32_t pRotationB) {
@@ -142,22 +165,16 @@ SoccerRotationBankResponse SoccerRotationBank::Withdraw(SoccerRotationBankReques
         CountRotations(pRequest.mL1A) +
         CountRotations(pRequest.mL1B);
 
-    mResponse = {};
-    mLoopCount = 0;
+    Zero();
 
-    mCacheCountS3 = 0U;
-    mCacheCountS2 = 0U;
-    mCacheCountS1 = 0U;
-    
-    mCursorS3 = 0U; mCursorS2 = 0U; mCursorS1 = 0U;
     if (!Withdraw_PassA(aCountS3, aCountS2, aCountS1)) {
-        mCursorS3 = 0U; mCursorS2 = 0U; mCursorS1 = 0U;
+        
         if (!Withdraw_PassB(aCountS3, aCountS2, aCountS1)) {
-            mCursorS3 = 0U; mCursorS2 = 0U; mCursorS1 = 0U;
+            
             if (!Withdraw_PassC(aCountS3, aCountS2, aCountS1)) {
-                mCursorS3 = 0U; mCursorS2 = 0U; mCursorS1 = 0U;
+                
                 if (!Withdraw_PassD(aCountS3, aCountS2, aCountS1)) {
-                    mCursorS3 = 0U; mCursorS2 = 0U; mCursorS1 = 0U;
+                    
                     Withdraw_PassE(aCountS3, aCountS2, aCountS1);
                 }
             }
@@ -260,55 +277,35 @@ SoccerRotationBankResponse SoccerRotationBank::Withdraw(SoccerRotationBankReques
 }
 
 bool SoccerRotationBank::RotationsContend(std::int32_t pRotation) {
-    if ((mCacheCountS3 > 0U) && RotationsContend(pRotation, mCacheDataS3[0])) { return true; }
-    if ((mCacheCountS3 > 1U) && RotationsContend(pRotation, mCacheDataS3[1])) { return true; }
-    if ((mCacheCountS3 > 2U) && RotationsContend(pRotation, mCacheDataS3[2])) { return true; }
-    if ((mCacheCountS3 > 3U) && RotationsContend(pRotation, mCacheDataS3[3])) { return true; }
-
-    if ((mCacheCountS2 > 0U) && RotationsContend(pRotation, mCacheDataS2[0])) { return true; }
-    if ((mCacheCountS2 > 1U) && RotationsContend(pRotation, mCacheDataS2[1])) { return true; }
-    if ((mCacheCountS2 > 2U) && RotationsContend(pRotation, mCacheDataS2[2])) { return true; }
-    if ((mCacheCountS2 > 3U) && RotationsContend(pRotation, mCacheDataS2[3])) { return true; }
-
-    if ((mCacheCountS1 > 0U) && RotationsContend(pRotation, mCacheDataS1[0])) { return true; }
-    if ((mCacheCountS1 > 1U) && RotationsContend(pRotation, mCacheDataS1[1])) { return true; }
-    if ((mCacheCountS1 > 2U) && RotationsContend(pRotation, mCacheDataS1[2])) { return true; }
-    if ((mCacheCountS1 > 3U) && RotationsContend(pRotation, mCacheDataS1[3])) { return true; }
+    for (std::size_t aIndex=0U; aIndex<mCacheCountS3; aIndex++) {
+        if (RotationsContend(pRotation, mCacheDataS3[aIndex])) { return true; }
+    }
+    for (std::size_t aIndex=0U; aIndex<mCacheCountS2; aIndex++) {
+        if (RotationsContend(pRotation, mCacheDataS2[aIndex])) { return true; }
+    }
+    for (std::size_t aIndex=0U; aIndex<mCacheCountS1; aIndex++) {
+        if (RotationsContend(pRotation, mCacheDataS1[aIndex])) { return true; }
+    }
 
     return false;
 }
 
-
 bool SoccerRotationBank::ContendWithAnything(std::int32_t pRotation) {
     mRotationListCount = 0U;
 
-    if (mCacheCountS3 > 0U) { mRotationList[mRotationListCount++] = mCacheDataS3[0]; }
-    if (mCacheCountS3 > 1U) { mRotationList[mRotationListCount++] = mCacheDataS3[1]; }
-    if (mCacheCountS3 > 2U) { mRotationList[mRotationListCount++] = mCacheDataS3[2]; }
-    if (mCacheCountS3 > 3U) { mRotationList[mRotationListCount++] = mCacheDataS3[3]; }
+    for (std::size_t aIndex=0U; aIndex<mCacheCountS3; aIndex++) {
+        mRotationList[mRotationListCount++] = mCacheDataS3[aIndex];
+    }
+    for (std::size_t aIndex=0U; aIndex<mCacheCountS2; aIndex++) {
+        mRotationList[mRotationListCount++] = mCacheDataS2[aIndex];
+    }
+    for (std::size_t aIndex=0U; aIndex<mCacheCountS1; aIndex++) {
+        mRotationList[mRotationListCount++] = mCacheDataS1[aIndex];
+    }
 
-    if (mCacheCountS2 > 0U) { mRotationList[mRotationListCount++] = mCacheDataS2[0]; }
-    if (mCacheCountS2 > 1U) { mRotationList[mRotationListCount++] = mCacheDataS2[1]; }
-    if (mCacheCountS2 > 2U) { mRotationList[mRotationListCount++] = mCacheDataS2[2]; }
-    if (mCacheCountS2 > 3U) { mRotationList[mRotationListCount++] = mCacheDataS2[3]; }
-
-    if (mCacheCountS1 > 0U) { mRotationList[mRotationListCount++] = mCacheDataS1[0]; }
-    if (mCacheCountS1 > 1U) { mRotationList[mRotationListCount++] = mCacheDataS1[1]; }
-    if (mCacheCountS1 > 2U) { mRotationList[mRotationListCount++] = mCacheDataS1[2]; }
-    if (mCacheCountS1 > 3U) { mRotationList[mRotationListCount++] = mCacheDataS1[3]; }
-
-    mRotationConsidered[0] = false;
-    mRotationConsidered[1] = false;
-    mRotationConsidered[2] = false;
-    mRotationConsidered[3] = false;
-    mRotationConsidered[4] = false;
-    mRotationConsidered[5] = false;
-    mRotationConsidered[6] = false;
-    mRotationConsidered[7] = false;
-    mRotationConsidered[8] = false;
-    mRotationConsidered[9] = false;
-    mRotationConsidered[10] = false;
-    mRotationConsidered[11] = false;
+    for (std::size_t aIndex=0U; aIndex<SOCCER_ROTATION_CACHE_COUNT_TOTAL; aIndex++) {
+        mRotationConsidered[aIndex] = false;
+    }
 
     std::int32_t aRotationSum = pRotation;
     if (aRotationSum >= kRotationSizeL3) {
@@ -323,33 +320,22 @@ bool SoccerRotationBank::ContendWithAnything(std::int32_t pRotation) {
         if (BoundariesContend(aRotationSum)) { return true; }
         if (RotationsContend(aRotationSum)) { return true; }
         
-        //
-        // Advance to next combination.
-        //
-
         std::size_t aIndex = 0;
-
         while (aIndex < mRotationListCount) {
-
             mLoopCount++;
             if (mRotationConsidered[aIndex] == false) {
-                
                 mRotationConsidered[aIndex] = true;
                 aRotationSum += mRotationList[aIndex];
                 if (aRotationSum >= kRotationSizeL3) {
                     aRotationSum -= kRotationSizeL3;
                 }
-
                 break;
-
             } else {
-                
                 mRotationConsidered[aIndex] = false;
                 aRotationSum -= mRotationList[aIndex];
                 if (aRotationSum < 0) {
                     aRotationSum += kRotationSizeL3;
                 }
-
                 aIndex++;
             }
         }
@@ -388,7 +374,6 @@ std::int32_t SoccerRotationBank::MakeRandomRotationS1(std::uint64_t pSeed) {
     return aLow + static_cast<std::int32_t>(pSeed % static_cast<std::uint64_t>(aSpan));
 }
 
-
 void SoccerRotationBank::CacheRotation(RotationSize pSize,
                                        std::int32_t pAmount) {
     if (pSize == RotationSize::kS3) {
@@ -410,28 +395,31 @@ void SoccerRotationBank::CacheRotation(RotationSize pSize,
 
 
 bool SoccerRotationBank::Withdraw_PassA(std::size_t pCountS3, std::size_t pCountS2, std::size_t pCountS1) {
-    while ((mCacheCountS3 < pCountS3) && (mCursorS3 < SOCCER_ROTATION_WORD_COUNT_S3)) {
-        const std::uint64_t aWord = Soccer2::mRotationSeedS3[mCursorS3];
+    std::size_t aCursorS3 = 0U;
+    while ((mCacheCountS3 < pCountS3) && (aCursorS3 < SOCCER_ROTATION_WORD_COUNT_S3)) {
+        const std::uint64_t aWord = Soccer2::mRotationSeedS3[aCursorS3];
         const std::int32_t aRotation = MakeRandomRotationS3(aWord);
-        mCursorS3++;
+        aCursorS3++;
         if (!ContendWithAnything(aRotation)) {
             CacheRotation(RotationSize::kS3, aRotation);
         }
     }
 
-    while ((mCacheCountS2 < pCountS2) && (mCursorS2 < SOCCER_ROTATION_WORD_COUNT_S2)) {
-        const std::uint64_t aWord = Soccer2::mRotationSeedS2[mCursorS2];
+    std::size_t aCursorS2 = 0U;
+    while ((mCacheCountS2 < pCountS2) && (aCursorS2 < SOCCER_ROTATION_WORD_COUNT_S2)) {
+        const std::uint64_t aWord = Soccer2::mRotationSeedS2[aCursorS2];
         const std::int32_t aRotation = MakeRandomRotationS2(aWord);
-        mCursorS2++;
+        aCursorS2++;
         if (!ContendWithAnything(aRotation)) {
             CacheRotation(RotationSize::kS2, aRotation);
         }
     }
 
-    while ((mCacheCountS1 < pCountS1) && (mCursorS1 < SOCCER_ROTATION_WORD_COUNT_S1)) {
-        const std::uint64_t aWord = Soccer2::mRotationSeedS1[mCursorS1];
+    std::size_t aCursorS1 = 0U;
+    while ((mCacheCountS1 < pCountS1) && (aCursorS1 < SOCCER_ROTATION_WORD_COUNT_S1)) {
+        const std::uint64_t aWord = Soccer2::mRotationSeedS1[aCursorS1];
         const std::int32_t aRotation = MakeRandomRotationS1(aWord);
-        mCursorS1++;
+        aCursorS1++;
         if (!ContendWithAnything(aRotation)) {
             CacheRotation(RotationSize::kS1, aRotation);
         }
@@ -446,28 +434,31 @@ bool SoccerRotationBank::Withdraw_PassA(std::size_t pCountS3, std::size_t pCount
 }
 
 bool SoccerRotationBank::Withdraw_PassB(std::size_t pCountS3, std::size_t pCountS2, std::size_t pCountS1) {
-    while ((mCacheCountS3 < pCountS3) && (mCursorS3 < SOCCER_ROTATION_WORD_COUNT_S3)) {
-        const std::uint64_t aWord = TwistMix64::DiffuseA(Soccer2::mRotationSeedS3[mCursorS3]);
+    std::size_t aCursorS3 = 0U;
+    while ((mCacheCountS3 < pCountS3) && (aCursorS3 < SOCCER_ROTATION_WORD_COUNT_S3)) {
+        const std::uint64_t aWord = TwistMix64::DiffuseA(Soccer2::mRotationSeedS3[aCursorS3]);
         const std::int32_t aRotation = MakeRandomRotationS3(aWord);
-        mCursorS3++;
+        aCursorS3++;
         if (!ContendWithAnything(aRotation)) {
             CacheRotation(RotationSize::kS3, aRotation);
         }
     }
 
-    while ((mCacheCountS2 < pCountS2) && (mCursorS2 < SOCCER_ROTATION_WORD_COUNT_S2)) {
-        const std::uint64_t aWord = TwistMix64::DiffuseA(Soccer2::mRotationSeedS2[mCursorS2]);
+    std::size_t aCursorS2 = 0U;
+    while ((mCacheCountS2 < pCountS2) && (aCursorS2 < SOCCER_ROTATION_WORD_COUNT_S2)) {
+        const std::uint64_t aWord = TwistMix64::DiffuseA(Soccer2::mRotationSeedS2[aCursorS2]);
         const std::int32_t aRotation = MakeRandomRotationS2(aWord);
-        mCursorS2++;
+        aCursorS2++;
         if (!ContendWithAnything(aRotation)) {
             CacheRotation(RotationSize::kS2, aRotation);
         }
     }
 
-    while ((mCacheCountS1 < pCountS1) && (mCursorS1 < SOCCER_ROTATION_WORD_COUNT_S1)) {
-        const std::uint64_t aWord = TwistMix64::DiffuseA(Soccer2::mRotationSeedS1[mCursorS1]);
+    std::size_t aCursorS1 = 0U;
+    while ((mCacheCountS1 < pCountS1) && (aCursorS1 < SOCCER_ROTATION_WORD_COUNT_S1)) {
+        const std::uint64_t aWord = TwistMix64::DiffuseA(Soccer2::mRotationSeedS1[aCursorS1]);
         const std::int32_t aRotation = MakeRandomRotationS1(aWord);
-        mCursorS1++;
+        aCursorS1++;
         if (!ContendWithAnything(aRotation)) {
             CacheRotation(RotationSize::kS1, aRotation);
         }
@@ -478,32 +469,36 @@ bool SoccerRotationBank::Withdraw_PassB(std::size_t pCountS3, std::size_t pCount
     if (mCacheCountS1 != pCountS1) { return false; }
     if (mCacheCountS2 != pCountS2) { return false; }
     if (mCacheCountS3 != pCountS3) { return false; }
+    
     return true;
 }
 
 bool SoccerRotationBank::Withdraw_PassC(std::size_t pCountS3, std::size_t pCountS2, std::size_t pCountS1) {
-    while ((mCacheCountS3 < pCountS3) && (mCursorS3 < SOCCER_ROTATION_WORD_COUNT_S3)) {
-        const std::uint64_t aWord = TwistMix64::DiffuseB(Soccer2::mRotationSeedS3[mCursorS3]);
+    std::size_t aCursorS3 = 0U;
+    while ((mCacheCountS3 < pCountS3) && (aCursorS3 < SOCCER_ROTATION_WORD_COUNT_S3)) {
+        const std::uint64_t aWord = TwistMix64::DiffuseB(Soccer2::mRotationSeedS3[aCursorS3]);
         const std::int32_t aRotation = MakeRandomRotationS3(aWord);
-        mCursorS3++;
+        aCursorS3++;
         if (!ContendWithAnything(aRotation)) {
             CacheRotation(RotationSize::kS3, aRotation);
         }
     }
 
-    while ((mCacheCountS2 < pCountS2) && (mCursorS2 < SOCCER_ROTATION_WORD_COUNT_S2)) {
-        const std::uint64_t aWord = TwistMix64::DiffuseB(Soccer2::mRotationSeedS2[mCursorS2]);
+    std::size_t aCursorS2 = 0U;
+    while ((mCacheCountS2 < pCountS2) && (aCursorS2 < SOCCER_ROTATION_WORD_COUNT_S2)) {
+        const std::uint64_t aWord = TwistMix64::DiffuseB(Soccer2::mRotationSeedS2[aCursorS2]);
         const std::int32_t aRotation = MakeRandomRotationS2(aWord);
-        mCursorS2++;
+        aCursorS2++;
         if (!ContendWithAnything(aRotation)) {
             CacheRotation(RotationSize::kS2, aRotation);
         }
     }
 
-    while ((mCacheCountS1 < pCountS1) && (mCursorS1 < SOCCER_ROTATION_WORD_COUNT_S1)) {
-        const std::uint64_t aWord = TwistMix64::DiffuseB(Soccer2::mRotationSeedS1[mCursorS1]);
+    std::size_t aCursorS1 = 0U;
+    while ((mCacheCountS1 < pCountS1) && (aCursorS1 < SOCCER_ROTATION_WORD_COUNT_S1)) {
+        const std::uint64_t aWord = TwistMix64::DiffuseB(Soccer2::mRotationSeedS1[aCursorS1]);
         const std::int32_t aRotation = MakeRandomRotationS1(aWord);
-        mCursorS1++;
+        aCursorS1++;
         if (!ContendWithAnything(aRotation)) {
             CacheRotation(RotationSize::kS1, aRotation);
         }
@@ -512,32 +507,36 @@ bool SoccerRotationBank::Withdraw_PassC(std::size_t pCountS3, std::size_t pCount
     if (mCacheCountS1 != pCountS1) { return false; }
     if (mCacheCountS2 != pCountS2) { return false; }
     if (mCacheCountS3 != pCountS3) { return false; }
+    
     return true;
 }
 
 bool SoccerRotationBank::Withdraw_PassD(std::size_t pCountS3, std::size_t pCountS2, std::size_t pCountS1) {
-    while ((mCacheCountS3 < pCountS3) && (mCursorS3 < SOCCER_ROTATION_WORD_COUNT_S3)) {
-        const std::uint64_t aWord = TwistMix64::DiffuseC(Soccer2::mRotationSeedS3[mCursorS3]);
+    std::size_t aCursorS3 = 0U;
+    while ((mCacheCountS3 < pCountS3) && (aCursorS3 < SOCCER_ROTATION_WORD_COUNT_S3)) {
+        const std::uint64_t aWord = TwistMix64::DiffuseC(Soccer2::mRotationSeedS3[aCursorS3]);
         const std::int32_t aRotation = MakeRandomRotationS3(aWord);
-        mCursorS3++;
+        aCursorS3++;
         if (!ContendWithAnything(aRotation)) {
             CacheRotation(RotationSize::kS3, aRotation);
         }
     }
 
-    while ((mCacheCountS2 < pCountS2) && (mCursorS2 < SOCCER_ROTATION_WORD_COUNT_S2)) {
-        const std::uint64_t aWord = TwistMix64::DiffuseC(Soccer2::mRotationSeedS2[mCursorS2]);
+    std::size_t aCursorS2 = 0U;
+    while ((mCacheCountS2 < pCountS2) && (aCursorS2 < SOCCER_ROTATION_WORD_COUNT_S2)) {
+        const std::uint64_t aWord = TwistMix64::DiffuseC(Soccer2::mRotationSeedS2[aCursorS2]);
         const std::int32_t aRotation = MakeRandomRotationS2(aWord);
-        mCursorS2++;
+        aCursorS2++;
         if (!ContendWithAnything(aRotation)) {
             CacheRotation(RotationSize::kS2, aRotation);
         }
     }
 
-    while ((mCacheCountS1 < pCountS1) && (mCursorS1 < SOCCER_ROTATION_WORD_COUNT_S1)) {
-        const std::uint64_t aWord = TwistMix64::DiffuseC(Soccer2::mRotationSeedS1[mCursorS1]);
+    std::size_t aCursorS1 = 0U;
+    while ((mCacheCountS1 < pCountS1) && (aCursorS1 < SOCCER_ROTATION_WORD_COUNT_S1)) {
+        const std::uint64_t aWord = TwistMix64::DiffuseC(Soccer2::mRotationSeedS1[aCursorS1]);
         const std::int32_t aRotation = MakeRandomRotationS1(aWord);
-        mCursorS1++;
+        aCursorS1++;
         if (!ContendWithAnything(aRotation)) {
             CacheRotation(RotationSize::kS1, aRotation);
         }
@@ -546,6 +545,7 @@ bool SoccerRotationBank::Withdraw_PassD(std::size_t pCountS3, std::size_t pCount
     if (mCacheCountS1 != pCountS1) { return false; }
     if (mCacheCountS2 != pCountS2) { return false; }
     if (mCacheCountS3 != pCountS3) { return false; }
+    
     return true;
 }
 
@@ -565,14 +565,13 @@ void SoccerRotationBank::Withdraw_PassE(std::size_t pCountS3, std::size_t pCount
     constexpr std::int32_t aAdvance = SOCCER_ROTATION_LEEWAY + 1;
     constexpr std::size_t aAttemptLimit = 2048U;
 
-    while ((mCacheCountS3 < pCountS3) && (mCursorS3 < SOCCER_ROTATION_WORD_COUNT_S3)) {
-        const std::uint64_t aWord = Soccer2::mRotationSeedS3[mCursorS3];
+    std::size_t aCursorS3 = 0U;
+    while ((mCacheCountS3 < pCountS3) && (aCursorS3 < SOCCER_ROTATION_WORD_COUNT_S3)) {
+        const std::uint64_t aWord = Soccer2::mRotationSeedS3[aCursorS3];
         std::int32_t aRotation = MakeRandomRotationS3(aWord);
         std::size_t aAttempt = 0U;
-        bool aAccepted = false;
         while (aAttempt < aAttemptLimit) {
             if (!ContendWithAnything(aRotation)) {
-                aAccepted = true;
                 break;
             }
             aRotation += aAdvance;
@@ -581,20 +580,17 @@ void SoccerRotationBank::Withdraw_PassE(std::size_t pCountS3, std::size_t pCount
             }
             aAttempt++;
         }
-        mCursorS3++;
-        if (aAccepted) {
-            CacheRotation(RotationSize::kS3, aRotation);
-        }
+        aCursorS3++;
+        CacheRotation(RotationSize::kS3, aRotation);
     }
 
-    while ((mCacheCountS2 < pCountS2) && (mCursorS2 < SOCCER_ROTATION_WORD_COUNT_S2)) {
-        const std::uint64_t aWord = Soccer2::mRotationSeedS2[mCursorS2];
+    std::size_t aCursorS2 = 0U;
+    while ((mCacheCountS2 < pCountS2) && (aCursorS2 < SOCCER_ROTATION_WORD_COUNT_S2)) {
+        const std::uint64_t aWord = Soccer2::mRotationSeedS2[aCursorS2];
         std::int32_t aRotation = MakeRandomRotationS2(aWord);
         std::size_t aAttempt = 0U;
-        bool aAccepted = false;
         while (aAttempt < aAttemptLimit) {
             if (!ContendWithAnything(aRotation)) {
-                aAccepted = true;
                 break;
             }
             aRotation += aAdvance;
@@ -603,20 +599,17 @@ void SoccerRotationBank::Withdraw_PassE(std::size_t pCountS3, std::size_t pCount
             }
             aAttempt++;
         }
-        mCursorS2++;
-        if (aAccepted) {
-            CacheRotation(RotationSize::kS2, aRotation);
-        }
+        aCursorS2++;
+        CacheRotation(RotationSize::kS2, aRotation);
     }
 
-    while ((mCacheCountS1 < pCountS1) && (mCursorS1 < SOCCER_ROTATION_WORD_COUNT_S1)) {
-        const std::uint64_t aWord = Soccer2::mRotationSeedS1[mCursorS1];
+    std::size_t aCursorS1 = 0U;
+    while ((mCacheCountS1 < pCountS1) && (aCursorS1 < SOCCER_ROTATION_WORD_COUNT_S1)) {
+        const std::uint64_t aWord = Soccer2::mRotationSeedS1[aCursorS1];
         std::int32_t aRotation = MakeRandomRotationS1(aWord);
         std::size_t aAttempt = 0U;
-        bool aAccepted = false;
         while (aAttempt < aAttemptLimit) {
             if (!ContendWithAnything(aRotation)) {
-                aAccepted = true;
                 break;
             }
             aRotation += aAdvance;
@@ -625,9 +618,7 @@ void SoccerRotationBank::Withdraw_PassE(std::size_t pCountS3, std::size_t pCount
             }
             aAttempt++;
         }
-        mCursorS1++;
-        if (aAccepted) {
-            CacheRotation(RotationSize::kS1, aRotation);
-        }
+        aCursorS1++;
+        CacheRotation(RotationSize::kS1, aRotation);
     }
 }

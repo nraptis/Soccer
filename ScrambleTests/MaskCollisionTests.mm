@@ -7,8 +7,24 @@
 
 #import <XCTest/XCTest.h>
 #include "Soccer2.hpp"
-#include "Random.hpp"
+#include "SoccerMaskBank.hpp"
+#include <cstdio>
 #include <cstdint>
+
+namespace {
+
+std::size_t CountOnes(std::uint8_t aByte) {
+    const std::size_t aResult = static_cast<std::size_t>(__builtin_popcount(static_cast<unsigned int>(aByte)));
+    return aResult;
+}
+
+std::size_t BitDifference(std::uint8_t aByteA, std::uint8_t aByteB) {
+    const std::uint8_t aDifferenceMap = aByteA ^ aByteB;
+    const std::size_t aDifference = CountOnes(aDifferenceMap);
+    return aDifference;
+}
+
+}
 
 @interface MaskCollisionTests : XCTestCase
 
@@ -17,71 +33,43 @@
 @implementation MaskCollisionTests
 
 - (void)test_MaskBalance {
+    
+    std::size_t aCount = SoccerMaskBank::mMaskGridHeight;
 
-    Soccer2::Zero();
-    Soccer2::InitializeMasks();
-    
-    std::size_t aMinDifference = 256;
-    std::size_t aMaxDifference = 0;
-    
-    for (std::size_t aIndexA = 1; aIndexA < 32; aIndexA++) {
-        for (std::size_t aIndexB = 0U; aIndexB < aIndexA; aIndexB++) {
+    for (std::size_t aMaskListIndex=0; aMaskListIndex<aCount; aMaskListIndex++) {
+        for (std::size_t aMaskIndex = 0; aMaskIndex < SoccerMaskBank::mMaskGridWidth; aMaskIndex++) {
+             
+            std::uint8_t aMask = SoccerMaskBank::mMaskGrid[aMaskListIndex][aMaskIndex];
             
-            const std::uint8_t aDifferenceMap = (Soccer2::mMasks[aIndexA] ^ Soccer2::mMasks[aIndexB]);
-            
-            const std::size_t aDifference = static_cast<std::size_t>(__builtin_popcount(static_cast<unsigned int>(aDifferenceMap)));
-            
-            if (aDifference < aMinDifference) {
-                aMinDifference = aDifference;
+            std::size_t aOnes = CountOnes(aMask);
+            if (aOnes < 3) {
+                XCTFail("test_MaskBalance: expected min ones to be 3, got %zu", aOnes);
+                return;
             }
-            if (aDifference > aMaxDifference) {
-                aMaxDifference = aDifference;
+            if (aOnes > 5) {
+                XCTFail("test_MaskBalance: expected max ones to be 5, got %zu", aOnes);
+                return;
             }
         }
     }
     
-    if (aMinDifference != 2) {
-        XCTFail("test_MaskBalance: expected min difference to be 2, got %zu", aMinDifference);
-        return;
-    }
-    if (aMaxDifference != 8) {
-        XCTFail("test_MaskBalance: expected max difference to be 2, got %zu", aMaxDifference);
-        return;
-    }
-
-    aMinDifference = 100000;
-    aMaxDifference = 4;
+    std::size_t aGlobalMin = 256;
+    std::size_t aGlobalMax = 0;
     
-    for (std::size_t aIndexA = 0; aIndexA < 32; aIndexA++) {
+    for (std::size_t aMaskListIndex=0; aMaskListIndex<aCount; aMaskListIndex++) {
         
-        bool aBitA[8];
-        for (std::size_t aShift=0; aShift<8; aShift++) {
-            if (((Soccer2::mMasks[aIndexA] >> aShift) & 1) == 0) {
-                aBitA[aShift] = false;
-            } else {
-                aBitA[aShift] = true;
-            }
-        }
+        std::size_t aMinDifference = 256;
+        std::size_t aMaxDifference = 0;
         
-        for (std::size_t aIndexB = 0U; aIndexB < 32; aIndexB++) {
-            if (aIndexA != aIndexB) {
+        for (std::size_t aIndexA = 1; aIndexA < SoccerMaskBank::mMaskGridWidth; aIndexA++) {
+            
+            std::uint8_t aMaskA = SoccerMaskBank::mMaskGrid[aMaskListIndex][aIndexA];
+            
+            for (std::size_t aIndexB = 0U; aIndexB < aIndexA; aIndexB++) {
                 
-                bool aBitB[8];
-                for (std::size_t aShift=0; aShift<8; aShift++) {
-                    if (((Soccer2::mMasks[aIndexB] >> aShift) & 1) == 0) {
-                        aBitB[aShift] = false;
-                    } else {
-                        aBitB[aShift] = true;
-                    }
-                }
+                std::uint8_t aMaskB = SoccerMaskBank::mMaskGrid[aMaskListIndex][aIndexB];
                 
-                std::size_t aDifference = 0;
-                for (std::size_t aIndex=0; aIndex<8; aIndex++) {
-                
-                    if (aBitA[aIndex] != aBitB[aIndex]) {
-                        aDifference++;
-                    }
-                }
+                const std::size_t aDifference = BitDifference(aMaskA, aMaskB);
                 
                 if (aDifference < aMinDifference) {
                     aMinDifference = aDifference;
@@ -91,23 +79,30 @@
                 }
             }
         }
+        
+        if (aMinDifference < 4) {
+            XCTFail("test_MaskBalance: expected min difference to be 4, got %zu", aMinDifference);
+            return;
+        }
+        
+        if (aMaxDifference < 8) {
+            XCTFail("test_MaskBalance: expected min difference to be 8, got %zu", aMaxDifference);
+            return;
+        }
+        
+        if (aMinDifference < aGlobalMin) {
+            aGlobalMin = aMinDifference;
+        }
+        
+        if (aMaxDifference > aGlobalMax) {
+            aGlobalMax = aMaxDifference;
+        }
+        
     }
     
-    if (aMinDifference != 2) {
-        XCTFail("test_MaskBalance: expected min difference to be 2, got %zu", aMinDifference);
-        return;
-    }
-    if (aMaxDifference != 8) {
-        XCTFail("test_MaskBalance: expected max difference to be 2, got %zu", aMaxDifference);
-        return;
-    }
-    
-    printf("*** test_MaskBalance: min difference %zu\n", aMinDifference);
-    printf("*** test_MaskBalance: max difference %zu\n", aMaxDifference);
-    printf("*** test_MaskBalance: [%zu - %zu] mask popcount range\n", aMinDifference, aMaxDifference);
+    printf("For all mask lists, global minmax differences [%zu and %zu]\n", aGlobalMin, aGlobalMax);
+    printf("%zu mask lists have been tested, each with %zu masks.\n", aCount, std::size_t(SoccerMaskBank::mMaskGridWidth));
     
 }
-
-
 
 @end

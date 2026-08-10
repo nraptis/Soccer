@@ -8,264 +8,431 @@
 #include "Cryptex.hpp"
 #include "Jelly.hpp"
 
-void Cryptex::AddCipherL3A(Crypt *pCipher) {
+namespace {
+
+bool ValidateBuffers(const std::uint8_t *pSource,
+                     std::uint8_t *pWorkerA,
+                     std::uint8_t *pWorkerB,
+                     std::uint8_t *pDestination,
+                     std::size_t pLength,
+                     CipherErrorCode *pErrorCode) {
+    if ((pLength % (SOCCER_BLOCK_GRANULARITY * 4U)) != 0U) {
+        SetCipherErrorCode(pErrorCode, CipherErrorCode::kInvalidLength);
+        return false;
+    }
+    if ((pSource == nullptr) ||
+        (pWorkerA == nullptr) ||
+        (pWorkerB == nullptr) ||
+        (pDestination == nullptr)) {
+        SetCipherErrorCode(pErrorCode, CipherErrorCode::kNullBuffer);
+        return false;
+    }
+    if ((pSource == pWorkerA) ||
+        (pSource == pWorkerB) ||
+        (pSource == pDestination) ||
+        (pWorkerA == pWorkerB) ||
+        (pWorkerA == pDestination) ||
+        (pWorkerB == pDestination)) {
+        SetCipherErrorCode(pErrorCode, CipherErrorCode::kAliasedBuffer);
+        return false;
+    }
+    return true;
+}
+
+bool SealL2(const EncryptionLayer &pLayer,
+            const std::uint8_t *pSource,
+            std::uint8_t *pScratch,
+            std::uint8_t *pDestination,
+            std::size_t pLength,
+            CipherErrorCode *pErrorCode) {
+    const std::size_t aLaneLength = pLength >> 1U;
+    for (std::size_t aLaneIndex=0U; aLaneIndex<2U; aLaneIndex++) {
+        const std::size_t aOffset = aLaneIndex * aLaneLength;
+        if (!pLayer.SealData(pSource + aOffset,
+                             pScratch + aOffset,
+                             pDestination + aOffset,
+                             aLaneLength,
+                             pErrorCode)) {
+            return false;
+        }
+    }
+    return true;
+}
+
+bool SealL1(const EncryptionLayer &pLayer,
+            const std::uint8_t *pSource,
+            std::uint8_t *pScratch,
+            std::uint8_t *pDestination,
+            std::size_t pLength,
+            CipherErrorCode *pErrorCode) {
+    const std::size_t aLaneLength = pLength >> 2U;
+    for (std::size_t aLaneIndex=0U; aLaneIndex<4U; aLaneIndex++) {
+        const std::size_t aOffset = aLaneIndex * aLaneLength;
+        if (!pLayer.SealData(pSource + aOffset,
+                             pScratch + aOffset,
+                             pDestination + aOffset,
+                             aLaneLength,
+                             pErrorCode)) {
+            return false;
+        }
+    }
+    return true;
+}
+
+bool UnsealL2(const EncryptionLayer &pLayer,
+              const std::uint8_t *pSource,
+              std::uint8_t *pScratch,
+              std::uint8_t *pDestination,
+              std::size_t pLength,
+              CipherErrorCode *pErrorCode) {
+    const std::size_t aLaneLength = pLength >> 1U;
+    for (std::size_t aLaneIndex=0U; aLaneIndex<2U; aLaneIndex++) {
+        const std::size_t aOffset = aLaneIndex * aLaneLength;
+        if (!pLayer.UnsealData(pSource + aOffset,
+                               pScratch + aOffset,
+                               pDestination + aOffset,
+                               aLaneLength,
+                               pErrorCode)) {
+            return false;
+        }
+    }
+    return true;
+}
+
+bool UnsealL1(const EncryptionLayer &pLayer,
+              const std::uint8_t *pSource,
+              std::uint8_t *pScratch,
+              std::uint8_t *pDestination,
+              std::size_t pLength,
+              CipherErrorCode *pErrorCode) {
+    const std::size_t aLaneLength = pLength >> 2U;
+    for (std::size_t aLaneIndex=0U; aLaneIndex<4U; aLaneIndex++) {
+        const std::size_t aOffset = aLaneIndex * aLaneLength;
+        if (!pLayer.UnsealData(pSource + aOffset,
+                               pScratch + aOffset,
+                               pDestination + aOffset,
+                               aLaneLength,
+                               pErrorCode)) {
+            return false;
+        }
+    }
+    return true;
+}
+
+} // namespace
+
+void Cryptex3::AddCipherL3A(Cipher *pCipher) {
     mLayerL3A.AddCipher(pCipher);
 }
 
-void Cryptex::AddCipherL2A(Crypt *pCipher) {
+void Cryptex3::AddCipherL2A(Cipher *pCipher) {
     mLayerL2A.AddCipher(pCipher);
 }
 
-void Cryptex::AddCipherL1A(Crypt *pCipher) {
+void Cryptex3::AddCipherL1A(Cipher *pCipher) {
     mLayerL1A.AddCipher(pCipher);
 }
 
-void Cryptex::AddCipherL3B(Crypt *pCipher) {
-    mLayerL3B.AddCipher(pCipher);
-}
-
-void Cryptex::AddCipherL2B(Crypt *pCipher) {
-    mLayerL2B.AddCipher(pCipher);
-}
-
-void Cryptex::AddCipherL1B(Crypt *pCipher) {
-    mLayerL1B.AddCipher(pCipher);
-}
-
-void Cryptex::AddCipherL3C(Crypt *pCipher) {
-    mLayerL3C.AddCipher(pCipher);
-}
-
-void Cryptex::Free() {
+void Cryptex3::Free() {
     mLayerL3A.Free();
     mLayerL2A.Free();
     mLayerL1A.Free();
+}
+
+void Cryptex3::Zero() {
+    mLayerL3A.Zero();
+    mLayerL2A.Zero();
+    mLayerL1A.Zero();
+}
+
+bool Cryptex3::SealData(const std::uint8_t *pSource,
+                        std::uint8_t *pWorkerA,
+                        std::uint8_t *pWorkerB,
+                        std::uint8_t *pDestination,
+                        std::size_t pLength,
+                        CipherErrorCode *pErrorCode) const {
+    if (pLength == 0U) {
+        SetCipherErrorCode(pErrorCode, CipherErrorCode::kNone);
+        return true;
+    }
+    if (!ValidateBuffers(pSource, pWorkerA, pWorkerB, pDestination,
+                         pLength, pErrorCode)) {
+        return false;
+    }
+
+    if (!mLayerL3A.SealData(pSource, pWorkerB, pWorkerA,
+                            pLength, pErrorCode)) {
+        return false;
+    }
+    if (!SealL2(mLayerL2A, pWorkerA, pDestination, pWorkerB,
+                pLength, pErrorCode)) {
+        return false;
+    }
+    return SealL1(mLayerL1A, pWorkerB, pWorkerA, pDestination,
+                  pLength, pErrorCode);
+}
+
+bool Cryptex3::UnsealData(const std::uint8_t *pSource,
+                          std::uint8_t *pWorkerA,
+                          std::uint8_t *pWorkerB,
+                          std::uint8_t *pDestination,
+                          std::size_t pLength,
+                          CipherErrorCode *pErrorCode) const {
+    if (pLength == 0U) {
+        SetCipherErrorCode(pErrorCode, CipherErrorCode::kNone);
+        return true;
+    }
+    if (!ValidateBuffers(pSource, pWorkerA, pWorkerB, pDestination,
+                         pLength, pErrorCode)) {
+        return false;
+    }
+
+    if (!UnsealL1(mLayerL1A, pSource, pWorkerA, pWorkerB,
+                  pLength, pErrorCode)) {
+        return false;
+    }
+    if (!UnsealL2(mLayerL2A, pWorkerB, pDestination, pWorkerA,
+                  pLength, pErrorCode)) {
+        return false;
+    }
+    return mLayerL3A.UnsealData(pWorkerA, pWorkerB, pDestination,
+                                pLength, pErrorCode);
+}
+
+void Cryptex6::AddCipherL3B(Cipher *pCipher) {
+    mLayerL3B.AddCipher(pCipher);
+}
+
+void Cryptex6::AddCipherL2B(Cipher *pCipher) {
+    mLayerL2B.AddCipher(pCipher);
+}
+
+void Cryptex6::AddCipherL1B(Cipher *pCipher) {
+    mLayerL1B.AddCipher(pCipher);
+}
+
+void Cryptex6::Free() {
+    Cryptex3::Free();
     mLayerL3B.Free();
     mLayerL2B.Free();
     mLayerL1B.Free();
+}
+
+void Cryptex6::Zero() {
+    Cryptex3::Zero();
+    mLayerL3B.Zero();
+    mLayerL2B.Zero();
+    mLayerL1B.Zero();
+}
+
+bool Cryptex6::SealData(const std::uint8_t *pSource,
+                        std::uint8_t *pWorkerA,
+                        std::uint8_t *pWorkerB,
+                        std::uint8_t *pDestination,
+                        std::size_t pLength,
+                        CipherErrorCode *pErrorCode) const {
+    if (pLength == 0U) {
+        SetCipherErrorCode(pErrorCode, CipherErrorCode::kNone);
+        return true;
+    }
+    if (!ValidateBuffers(pSource, pWorkerA, pWorkerB, pDestination,
+                         pLength, pErrorCode)) {
+        return false;
+    }
+
+    if (!mLayerL3A.SealData(pSource, pWorkerB, pWorkerA,
+                            pLength, pErrorCode)) {
+        return false;
+    }
+    if (!SealL2(mLayerL2A, pWorkerA, pDestination, pWorkerB,
+                pLength, pErrorCode)) {
+        return false;
+    }
+    if (!SealL1(mLayerL1A, pWorkerB, pDestination, pWorkerA,
+                pLength, pErrorCode)) {
+        return false;
+    }
+
+    if (!mLayerL3B.SealData(pWorkerA, pDestination, pWorkerB,
+                            pLength, pErrorCode)) {
+        return false;
+    }
+    if (!SealL2(mLayerL2B, pWorkerB, pDestination, pWorkerA,
+                pLength, pErrorCode)) {
+        return false;
+    }
+    return SealL1(mLayerL1B, pWorkerA, pWorkerB, pDestination,
+                  pLength, pErrorCode);
+}
+
+bool Cryptex6::UnsealData(const std::uint8_t *pSource,
+                          std::uint8_t *pWorkerA,
+                          std::uint8_t *pWorkerB,
+                          std::uint8_t *pDestination,
+                          std::size_t pLength,
+                          CipherErrorCode *pErrorCode) const {
+    if (pLength == 0U) {
+        SetCipherErrorCode(pErrorCode, CipherErrorCode::kNone);
+        return true;
+    }
+    if (!ValidateBuffers(pSource, pWorkerA, pWorkerB, pDestination,
+                         pLength, pErrorCode)) {
+        return false;
+    }
+
+    if (!UnsealL1(mLayerL1B, pSource, pWorkerB, pWorkerA,
+                  pLength, pErrorCode)) {
+        return false;
+    }
+    if (!UnsealL2(mLayerL2B, pWorkerA, pDestination, pWorkerB,
+                  pLength, pErrorCode)) {
+        return false;
+    }
+    if (!mLayerL3B.UnsealData(pWorkerB, pDestination, pWorkerA,
+                              pLength, pErrorCode)) {
+        return false;
+    }
+
+    if (!UnsealL1(mLayerL1A, pWorkerA, pDestination, pWorkerB,
+                  pLength, pErrorCode)) {
+        return false;
+    }
+    if (!UnsealL2(mLayerL2A, pWorkerB, pDestination, pWorkerA,
+                  pLength, pErrorCode)) {
+        return false;
+    }
+    return mLayerL3A.UnsealData(pWorkerA, pWorkerB, pDestination,
+                                pLength, pErrorCode);
+}
+
+void Cryptex9::AddCipherL3C(Cipher *pCipher) {
+    mLayerL3C.AddCipher(pCipher);
+}
+
+void Cryptex9::AddCipherL2C(Cipher *pCipher) {
+    mLayerL2C.AddCipher(pCipher);
+}
+
+void Cryptex9::AddCipherL1C(Cipher *pCipher) {
+    mLayerL1C.AddCipher(pCipher);
+}
+
+void Cryptex9::Free() {
+    Cryptex6::Free();
     mLayerL3C.Free();
+    mLayerL2C.Free();
+    mLayerL1C.Free();
 }
 
-bool Cryptex::SealData(const std::uint8_t *pSource,
-                       std::uint8_t *pWorkerA,
-                       std::uint8_t *pWorkerB,
-                       std::uint8_t *pDestination,
-                       std::size_t pLength,
-                       CipherErrorCode *pErrorCode) const {
-    if (pLength == 0) {
+void Cryptex9::Zero() {
+    Cryptex6::Zero();
+    mLayerL3C.Zero();
+    mLayerL2C.Zero();
+    mLayerL1C.Zero();
+}
+
+bool Cryptex9::SealData(const std::uint8_t *pSource,
+                        std::uint8_t *pWorkerA,
+                        std::uint8_t *pWorkerB,
+                        std::uint8_t *pDestination,
+                        std::size_t pLength,
+                        CipherErrorCode *pErrorCode) const {
+    if (pLength == 0U) {
         SetCipherErrorCode(pErrorCode, CipherErrorCode::kNone);
         return true;
     }
-    if ((pLength % (SOCCER_BLOCK_GRANULARITY * 4U)) != 0U) {
-        SetCipherErrorCode(pErrorCode, CipherErrorCode::kInvalidLength);
-        return false;
-    }
-    if ((pSource == nullptr) ||
-        (pWorkerA == nullptr) ||
-        (pWorkerB == nullptr) ||
-        (pDestination == nullptr)) {
-        SetCipherErrorCode(pErrorCode, CipherErrorCode::kNullBuffer);
-        return false;
-    }
-    if ((pSource == pWorkerA) ||
-        (pSource == pWorkerB) ||
-        (pSource == pDestination) ||
-        (pWorkerA == pWorkerB) ||
-        (pWorkerA == pDestination) ||
-        (pWorkerB == pDestination)) {
-        SetCipherErrorCode(pErrorCode, CipherErrorCode::kAliasedBuffer);
+    if (!ValidateBuffers(pSource, pWorkerA, pWorkerB, pDestination,
+                         pLength, pErrorCode)) {
         return false;
     }
 
-    const std::size_t aLengthL2 = pLength >> 1U;
-    const std::size_t aLengthL1 = pLength >> 2U;
-
-    // L3A: one full-width lane.
-    if (!mLayerL3A.SealData(pSource,
-                            pWorkerB,
-                            pWorkerA,
-                            pLength,
-                            pErrorCode)) {
+    if (!mLayerL3A.SealData(pSource, pWorkerB, pWorkerA,
+                            pLength, pErrorCode)) {
+        return false;
+    }
+    if (!SealL2(mLayerL2A, pWorkerA, pDestination, pWorkerB,
+                pLength, pErrorCode)) {
+        return false;
+    }
+    if (!SealL1(mLayerL1A, pWorkerB, pDestination, pWorkerA,
+                pLength, pErrorCode)) {
         return false;
     }
 
-    // L2A: two half-width lanes.
-    for (std::size_t aLaneIndex=0; aLaneIndex<2; aLaneIndex++) {
-        const std::size_t aOffset = aLaneIndex * aLengthL2;
-        if (!mLayerL2A.SealData(pWorkerA + aOffset,
-                                pDestination + aOffset,
-                                pWorkerB + aOffset,
-                                aLengthL2,
-                                pErrorCode)) {
-            return false;
-        }
+    if (!mLayerL3B.SealData(pWorkerA, pDestination, pWorkerB,
+                            pLength, pErrorCode)) {
+        return false;
     }
-
-    // L1A: four quarter-width lanes.
-    for (std::size_t aLaneIndex=0; aLaneIndex<4; aLaneIndex++) {
-        const std::size_t aOffset = aLaneIndex * aLengthL1;
-        if (!mLayerL1A.SealData(pWorkerB + aOffset,
-                                pDestination + aOffset,
-                                pWorkerA + aOffset,
-                                aLengthL1,
-                                pErrorCode)) {
-            return false;
-        }
+    if (!SealL2(mLayerL2B, pWorkerB, pDestination, pWorkerA,
+                pLength, pErrorCode)) {
+        return false;
     }
-
-    // L3B: one full-width lane.
-    if (!mLayerL3B.SealData(pWorkerA,
-                            pDestination,
-                            pWorkerB,
-                            pLength,
-                            pErrorCode)) {
+    if (!SealL1(mLayerL1B, pWorkerA, pDestination, pWorkerB,
+                pLength, pErrorCode)) {
         return false;
     }
 
-    // L2B: two half-width lanes.
-    for (std::size_t aLaneIndex=0; aLaneIndex<2; aLaneIndex++) {
-        const std::size_t aOffset = aLaneIndex * aLengthL2;
-        if (!mLayerL2B.SealData(pWorkerB + aOffset,
-                                pDestination + aOffset,
-                                pWorkerA + aOffset,
-                                aLengthL2,
-                                pErrorCode)) {
-            return false;
-        }
-    }
-
-    // L1B: four quarter-width lanes.
-    for (std::size_t aLaneIndex=0; aLaneIndex<4; aLaneIndex++) {
-        const std::size_t aOffset = aLaneIndex * aLengthL1;
-        if (!mLayerL1B.SealData(pWorkerA + aOffset,
-                                pDestination + aOffset,
-                                pWorkerB + aOffset,
-                                aLengthL1,
-                                pErrorCode)) {
-            return false;
-        }
-    }
-
-    // L3C: one final full-width lane.
-    if (!mLayerL3C.SealData(pWorkerB,
-                            pWorkerA,
-                            pDestination,
-                            pLength,
-                            pErrorCode)) {
+    if (!mLayerL3C.SealData(pWorkerB, pDestination, pWorkerA,
+                            pLength, pErrorCode)) {
         return false;
     }
-
-    return true;
+    if (!SealL2(mLayerL2C, pWorkerA, pDestination, pWorkerB,
+                pLength, pErrorCode)) {
+        return false;
+    }
+    return SealL1(mLayerL1C, pWorkerB, pWorkerA, pDestination,
+                  pLength, pErrorCode);
 }
 
-bool Cryptex::UnsealData(const std::uint8_t *pSource,
-                         std::uint8_t *pWorkerA,
-                         std::uint8_t *pWorkerB,
-                         std::uint8_t *pDestination,
-                         std::size_t pLength,
-                         CipherErrorCode *pErrorCode) const {
-    if (pLength == 0) {
+bool Cryptex9::UnsealData(const std::uint8_t *pSource,
+                          std::uint8_t *pWorkerA,
+                          std::uint8_t *pWorkerB,
+                          std::uint8_t *pDestination,
+                          std::size_t pLength,
+                          CipherErrorCode *pErrorCode) const {
+    if (pLength == 0U) {
         SetCipherErrorCode(pErrorCode, CipherErrorCode::kNone);
         return true;
     }
-    if ((pLength % (SOCCER_BLOCK_GRANULARITY * 4U)) != 0U) {
-        SetCipherErrorCode(pErrorCode, CipherErrorCode::kInvalidLength);
-        return false;
-    }
-    if ((pSource == nullptr) ||
-        (pWorkerA == nullptr) ||
-        (pWorkerB == nullptr) ||
-        (pDestination == nullptr)) {
-        SetCipherErrorCode(pErrorCode, CipherErrorCode::kNullBuffer);
-        return false;
-    }
-    if ((pSource == pWorkerA) ||
-        (pSource == pWorkerB) ||
-        (pSource == pDestination) ||
-        (pWorkerA == pWorkerB) ||
-        (pWorkerA == pDestination) ||
-        (pWorkerB == pDestination)) {
-        SetCipherErrorCode(pErrorCode, CipherErrorCode::kAliasedBuffer);
+    if (!ValidateBuffers(pSource, pWorkerA, pWorkerB, pDestination,
+                         pLength, pErrorCode)) {
         return false;
     }
 
-    const std::size_t aLengthL2 = pLength >> 1U;
-    const std::size_t aLengthL1 = pLength >> 2U;
-
-    // L3C: undo the final full-width lane first.
-    if (!mLayerL3C.UnsealData(pSource,
-                              pWorkerA,
-                              pWorkerB,
-                              pLength,
-                              pErrorCode)) {
+    if (!UnsealL1(mLayerL1C, pSource, pWorkerA, pWorkerB,
+                  pLength, pErrorCode)) {
+        return false;
+    }
+    if (!UnsealL2(mLayerL2C, pWorkerB, pDestination, pWorkerA,
+                  pLength, pErrorCode)) {
+        return false;
+    }
+    if (!mLayerL3C.UnsealData(pWorkerA, pDestination, pWorkerB,
+                              pLength, pErrorCode)) {
         return false;
     }
 
-    // L1B: undo the four quarter-width lanes.
-    for (std::size_t aLaneIndex=0; aLaneIndex<4; aLaneIndex++) {
-        const std::size_t aOffset = aLaneIndex * aLengthL1;
-        if (!mLayerL1B.UnsealData(pWorkerB + aOffset,
-                                  pDestination + aOffset,
-                                  pWorkerA + aOffset,
-                                  aLengthL1,
-                                  pErrorCode)) {
-            return false;
-        }
+    if (!UnsealL1(mLayerL1B, pWorkerB, pDestination, pWorkerA,
+                  pLength, pErrorCode)) {
+        return false;
     }
-
-    // L2B: undo the two half-width lanes.
-    for (std::size_t aLaneIndex=0; aLaneIndex<2; aLaneIndex++) {
-        const std::size_t aOffset = aLaneIndex * aLengthL2;
-        if (!mLayerL2B.UnsealData(pWorkerA + aOffset,
-                                  pDestination + aOffset,
-                                  pWorkerB + aOffset,
-                                  aLengthL2,
-                                  pErrorCode)) {
-            return false;
-        }
+    if (!UnsealL2(mLayerL2B, pWorkerA, pDestination, pWorkerB,
+                  pLength, pErrorCode)) {
+        return false;
     }
-
-    // L3B: undo the middle full-width lane.
-    if (!mLayerL3B.UnsealData(pWorkerB,
-                              pDestination,
-                              pWorkerA,
-                              pLength,
-                              pErrorCode)) {
+    if (!mLayerL3B.UnsealData(pWorkerB, pDestination, pWorkerA,
+                              pLength, pErrorCode)) {
         return false;
     }
 
-    // L1A: undo the first four quarter-width lanes.
-    for (std::size_t aLaneIndex=0; aLaneIndex<4; aLaneIndex++) {
-        const std::size_t aOffset = aLaneIndex * aLengthL1;
-        if (!mLayerL1A.UnsealData(pWorkerA + aOffset,
-                                  pDestination + aOffset,
-                                  pWorkerB + aOffset,
-                                  aLengthL1,
-                                  pErrorCode)) {
-            return false;
-        }
-    }
-
-    // L2A: undo the first two half-width lanes.
-    for (std::size_t aLaneIndex=0; aLaneIndex<2; aLaneIndex++) {
-        const std::size_t aOffset = aLaneIndex * aLengthL2;
-        if (!mLayerL2A.UnsealData(pWorkerB + aOffset,
-                                  pDestination + aOffset,
-                                  pWorkerA + aOffset,
-                                  aLengthL2,
-                                  pErrorCode)) {
-            return false;
-        }
-    }
-
-    // L3A: undo the initial full-width lane last.
-    if (!mLayerL3A.UnsealData(pWorkerA,
-                              pWorkerB,
-                              pDestination,
-                              pLength,
-                              pErrorCode)) {
+    if (!UnsealL1(mLayerL1A, pWorkerA, pDestination, pWorkerB,
+                  pLength, pErrorCode)) {
         return false;
     }
-
-    return true;
+    if (!UnsealL2(mLayerL2A, pWorkerB, pDestination, pWorkerA,
+                  pLength, pErrorCode)) {
+        return false;
+    }
+    return mLayerL3A.UnsealData(pWorkerA, pWorkerB, pDestination,
+                                pLength, pErrorCode);
 }

@@ -120,7 +120,7 @@ void PrintStreamAvalanche(const std::uint8_t *pCiphertextA,
 
 bool RunReadmeSoccerExample() {
     constexpr std::uint64_t aNonce = 0xF00DFACECAFEBEEFULL;
-    const std::string aMessage = "Hello, Soccer!";
+    const std::string aMessage = "Hello, Soccer!!";
     const std::string aPasswordA = "readme-password-A";
     const std::string aPasswordB = "readme-password-B";
 
@@ -149,7 +149,10 @@ bool RunReadmeSoccerExample() {
         std::printf("Soccer2 medium encryption seed failed.\n");
         return false;
     }
-    Soccer2::EncryptBlock(aPlaintext.data(), aCiphertextA.data());
+    if (!Soccer2::EncryptBlock(aPlaintext.data(), aCiphertextA.data())) {
+        std::printf("Soccer2 medium encryption failed.\n");
+        return false;
+    }
     const auto aEncryptionEnd = std::chrono::steady_clock::now();
 
     std::vector<std::vector<std::uint8_t>> aMaterialLanes(
@@ -174,7 +177,10 @@ bool RunReadmeSoccerExample() {
         std::printf("Soccer2 medium decryption seed failed.\n");
         return false;
     }
-    Soccer2::DecryptBlock(aCiphertextA.data(), aDecrypted.data());
+    if (!Soccer2::DecryptBlock(aCiphertextA.data(), aDecrypted.data())) {
+        std::printf("Soccer2 medium decryption failed.\n");
+        return false;
+    }
     const auto aDecryptionEnd = std::chrono::steady_clock::now();
 
     if (std::memcmp(aPlaintext.data(), aDecrypted.data(), SOCCER_BLOCK_SIZE) != 0) {
@@ -214,7 +220,10 @@ bool RunReadmeSoccerExample() {
         std::printf("Soccer2 second medium encryption seed failed.\n");
         return false;
     }
-    Soccer2::EncryptBlock(aPlaintext.data(), aCiphertextB.data());
+    if (!Soccer2::EncryptBlock(aPlaintext.data(), aCiphertextB.data())) {
+        std::printf("Soccer2 second medium encryption failed.\n");
+        return false;
+    }
 
     PrintStreamAvalanche(aCiphertextA.data(), aCiphertextB.data());
     return true;
@@ -232,15 +241,16 @@ bool RunReadmeSoccerExample() {
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     (void)aNotification;
-
+    
     if (IsRunningUnderXCTest()) {
         std::printf("Skipping App Delegate Test Code, On Test Target\n");
         return;
     }
-
+    
     if (!RunReadmeSoccerExample()) {
         std::printf("Soccer2 README example failed.\n");
     }
+    
 }
 
 @end

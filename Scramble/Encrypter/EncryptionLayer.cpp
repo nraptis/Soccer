@@ -20,7 +20,7 @@ EncryptionLayer::~EncryptionLayer() {
     mCipherCount = 0;
 }
 
-void EncryptionLayer::AddCipher(Crypt *pCipher) {
+void EncryptionLayer::AddCipher(Cipher *pCipher) {
     if (mCipherCount < ENCRYPTION_LAYER_MAX_CIPHER_COUNT) {
         mCiphers[mCipherCount] = pCipher;
         mCipherCount++;
@@ -36,6 +36,16 @@ void EncryptionLayer::Free() {
         mCiphers[aCipherIndex] = nullptr;
     }
     mCipherCount = 0;
+}
+
+void EncryptionLayer::Zero() {
+    for (std::size_t aCipherIndex=0U;
+         aCipherIndex<mCipherCount;
+         aCipherIndex++) {
+        if (mCiphers[aCipherIndex] != nullptr) {
+            mCiphers[aCipherIndex]->Zero();
+        }
+    }
 }
 
 bool EncryptionLayer::SealData(const std::uint8_t* pSource,
@@ -76,7 +86,7 @@ bool EncryptionLayer::SealData(const std::uint8_t* pSource,
     ((mCipherCount & 1U) == 0U) ? pScratch : pDestination;
     
     for (std::size_t aCipherIndex=0; aCipherIndex<mCipherCount; aCipherIndex++) {
-        Crypt *aCipher = mCiphers[aCipherIndex];
+        Cipher *aCipher = mCiphers[aCipherIndex];
         if (aCipher == nullptr) {
             SetCipherErrorCode(pErrorCode, CipherErrorCode::kNullCipher);
             return false;
@@ -132,7 +142,7 @@ bool EncryptionLayer::UnsealData(const std::uint8_t* pSource,
     std::size_t aCipherIndex = mCipherCount;
     while (aCipherIndex > 0) {
         aCipherIndex--;
-        Crypt *aCipher = mCiphers[aCipherIndex];
+        Cipher *aCipher = mCiphers[aCipherIndex];
         if (aCipher == nullptr) {
             SetCipherErrorCode(pErrorCode, CipherErrorCode::kNullCipher);
             return false;

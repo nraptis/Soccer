@@ -417,4 +417,8 @@ void TwistExpander::Zero() {
 
 void TwistExpander::Zero_PostSeed() {
     mDomainBundleEphemeral.Zero();
+    memset(mMatrix.mData, 0, sizeof(mMatrix.mData));
+    memset(mMatrix.mPermute, 0, sizeof(mMatrix.mPermute));
+    memset(mMatrix.mPermuteData, 0, sizeof(mMatrix.mPermuteData));
+    memset(mMatrix.mPermuteTemp, 0, sizeof(mMatrix.mPermuteTemp));
 }

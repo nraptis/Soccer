@@ -1,5 +1,5 @@
 //
-//  SFolding_ShrinkFold_4_Test.m
+//  SFolding_Collapse_Stage2_4_Test.m
 //  ScrambleTests
 //
 //  Created by nick on 8/6/26.
@@ -13,13 +13,13 @@
 #include <string>
 #include <unordered_set>
 
-@interface SFolding_CompressFold_4_Test : XCTestCase
+@interface SFolding_Collapse_Stage1_4_Test : XCTestCase
 
 @end
 
-@implementation SFolding_CompressFold_4_Test
+@implementation SFolding_Collapse_Stage1_4_Test
 
-- (void)test_CompressFold_4 {
+- (void)test_Collapse_Stage1_4 {
 
     struct FoldingPiece {
         std::uint8_t mLane;

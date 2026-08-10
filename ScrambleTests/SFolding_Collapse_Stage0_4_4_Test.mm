@@ -1,5 +1,5 @@
 //
-//  SFolding_ShrinkFold_4_Test.m
+//  SFolding_Collapse_Stage2_4_Test.m
 //  ScrambleTests
 //
 //  Created by nick on 8/6/26.
@@ -13,13 +13,13 @@
 #include <string>
 #include <unordered_set>
 
-@interface SFolding_CrushFold_4_4_Test : XCTestCase
+@interface SFolding_Collapse_Stage0_4_4_Test : XCTestCase
 
 @end
 
-@implementation SFolding_CrushFold_4_4_Test
+@implementation SFolding_Collapse_Stage0_4_4_Test
 
-- (void)test_CrushFold_4_4 {
+- (void)test_Collapse_Stage0_4_4 {
 
     struct FoldingPiece {
         std::uint8_t mLane;
@@ -1069,7 +1069,7 @@
         for (std::size_t aSourceIndex=0; aSourceIndex<4; aSourceIndex++) {
             FoldingPiece aSource = aRoll.mSources[aSourceIndex];
             if ((aSource.mLane >= 4U) || (aSource.mBlock >= 1024U)) {
-                XCTFail("test_CrushFold_4: source piece is out of range. (roll = %zu, source slot = %zu, lane = %zu, block = %zu)",
+                XCTFail("test_Collapse_Stage0_4: source piece is out of range. (roll = %zu, source slot = %zu, lane = %zu, block = %zu)",
                         aRollIndex,
                         aSourceIndex,
                         static_cast<std::size_t>(aSource.mLane),
@@ -1081,7 +1081,7 @@
         FoldingPiece aDestination = aRoll.mDestination;
         if ((aDestination.mLane >= 4U) ||
             (aDestination.mBlock >= 256U)) {
-            XCTFail("test_CrushFold_4: destination piece is out of range. (roll = %zu, lane = %zu, block = %zu)",
+            XCTFail("test_Collapse_Stage0_4: destination piece is out of range. (roll = %zu, lane = %zu, block = %zu)",
                     aRollIndex,
                     static_cast<std::size_t>(aDestination.mLane),
                     static_cast<std::size_t>(aDestination.mBlock));
@@ -1103,7 +1103,7 @@
     for (std::size_t aSourceLaneIndex=0; aSourceLaneIndex<4; aSourceLaneIndex++) {
         for (std::size_t aBlockIndex=0; aBlockIndex<1024; aBlockIndex++) {
             if (aCountSource[aSourceLaneIndex][aBlockIndex] != 1) {
-                XCTFail("test_CrushFold_4: expecting every source block index to be used exactly once. (source = %zu, block index = %zu, count = %zu)",
+                XCTFail("test_Collapse_Stage0_4: expecting every source block index to be used exactly once. (source = %zu, block index = %zu, count = %zu)",
                         aSourceLaneIndex,
                         aBlockIndex,
                         static_cast<std::size_t>(aCountSource[aSourceLaneIndex][aBlockIndex]));
@@ -1115,7 +1115,7 @@
     for (std::size_t aDestinationIndex=0; aDestinationIndex<4; aDestinationIndex++) {
         for (std::size_t aBlockIndex=0; aBlockIndex<256; aBlockIndex++) {
             if (aCountDestination[aDestinationIndex][aBlockIndex] != 1) {
-                XCTFail("test_CrushFold_4: expecting every destination piece to be written exactly once. (lane = %zu, block = %zu, count = %zu)",
+                XCTFail("test_Collapse_Stage0_4: expecting every destination piece to be written exactly once. (lane = %zu, block = %zu, count = %zu)",
                         aDestinationIndex,
                         aBlockIndex,
                         static_cast<std::size_t>(aCountDestination[aDestinationIndex][aBlockIndex]));

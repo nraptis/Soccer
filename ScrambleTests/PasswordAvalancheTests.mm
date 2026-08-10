@@ -100,7 +100,10 @@ std::size_t CountPasswordAvalancheDifferentBits(const std::uint8_t *pDataA,
             return;
         }
 
-        Soccer2::EncryptBlock(aOriginal, aEncrypted[aPasswordIndex]);
+        if (!Soccer2::EncryptBlock(aOriginal, aEncrypted[aPasswordIndex])) {
+            XCTFail("password avalanche encryption failed");
+            return;
+        }
         
     }
 

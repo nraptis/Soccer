@@ -5,13 +5,15 @@
 #include <cstdint>
 
 #include "Jelly.hpp"
-#include "Crypt.hpp"
+#include "Cipher.hpp"
 
 // [RELEASE] [107.5 us] [OK]
 
-class SplintMaskBlockCipher32 final : public Crypt {
+class SplintMaskBlockCipher32 final : public Cipher {
  public:
-  explicit SplintMaskBlockCipher32(std::uint8_t pMask) : mMask(pMask) {}
+  explicit SplintMaskBlockCipher32(std::uint8_t pMask)
+      : Cipher(CipherType::kSplintMaskBlockCipher32),
+        mMask(pMask) {}
 
   bool SealData(const std::uint8_t *pSource,
                 std::uint8_t *pWorker,
@@ -29,6 +31,10 @@ class SplintMaskBlockCipher32 final : public Crypt {
                   CipherErrorCode *pErrorCode) const override {
     (void)pWorker;
     return ApplyDecrypt(pSource, pDestination, pLength, pErrorCode);
+  }
+
+  void Zero() override {
+    mMask = 0U;
   }
 
  private:

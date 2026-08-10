@@ -93,7 +93,7 @@ std::string ToString(const std::uint8_t *pList, std::size_t pCount) {
             }
         }
         
-        if (std::memcmp(Soccer2::mScratch, aScratch, S_BLOCK) != 0) {
+        if (std::memcmp(Soccer2Internal::SOCCER_SCRATCH_WORKER_A, aScratch, S_BLOCK) != 0) {
             XCTFail("test_PreludeA_weak: failed unroll step.");
             return;
         }
@@ -123,61 +123,62 @@ std::string ToString(const std::uint8_t *pList, std::size_t pCount) {
         std::uint64_t aNonce = Random::Get64();
         
         Soccer2::Zero();
-        memcpy(Soccer2::mScratch, aZero, S_BLOCK);
+        memcpy(Soccer2::SOCCER_SCRATCH_WORKER_A, aZero, S_BLOCK);
         Soccer2::SeedPrelude_Regular_B(aNonce);
-        memcpy(aWriteA, Soccer2::mRandom, S_BLOCK);
+        memcpy(aWriteA, Soccer2::SOCCER_PRELUDE_RAND, S_BLOCK);
         
-        if (std::memcmp(Soccer2::mRandom, aZero, S_BLOCK) == 0) {
+        
+        if (std::memcmp(Soccer2::SOCCER_PRELUDE_RAND, aZero, S_BLOCK) == 0) {
             XCTFail("test_PreludeB: expected random not to be 0 (a).");
             return;
         }
         
-        if (LaneTool::ByteRichness(Soccer2::mRandom, S_BLOCK) < 512) {
+        if (LaneTool::ByteRichness(Soccer2::SOCCER_PRELUDE_RAND, S_BLOCK) < 512) {
             XCTFail("test_PreludeB: expected random to be byte rich (a).");
             return;
         }
         
         Soccer2::Zero();
         
-        memcpy(Soccer2::mScratch, aZero, S_BLOCK);
+        memcpy(Soccer2::SOCCER_SCRATCH_WORKER_A, aZero, S_BLOCK);
         Soccer2::SeedPrelude_Regular_B(aNonce);
-        memcpy(aWriteB, Soccer2::mRandom, S_BLOCK);
-        if (std::memcmp(Soccer2::mRandom, aZero, S_BLOCK) == 0) {
+        memcpy(aWriteB, Soccer2::SOCCER_PRELUDE_RAND, S_BLOCK);
+        if (std::memcmp(Soccer2::SOCCER_PRELUDE_RAND, aZero, S_BLOCK) == 0) {
             XCTFail("test_PreludeB: expected random not to be 0 (b).");
             return;
         }
         
-        if (LaneTool::ByteRichness(Soccer2::mRandom, S_BLOCK) < 512) {
+        if (LaneTool::ByteRichness(Soccer2::SOCCER_PRELUDE_RAND, S_BLOCK) < 512) {
             XCTFail("test_PreludeB: expected random to be byte rich (b).");
             return;
         }
         
         Soccer2::Zero();
         
-        memcpy(Soccer2::mScratch, aEntropy, S_BLOCK);
+        memcpy(Soccer2::SOCCER_SCRATCH_WORKER_A, aEntropy, S_BLOCK);
         Soccer2::SeedPrelude_Regular_B(aNonce);
-        memcpy(aWriteC, Soccer2::mRandom, S_BLOCK);
-        if (std::memcmp(Soccer2::mRandom, aZero, S_BLOCK) == 0) {
+        memcpy(aWriteC, Soccer2::SOCCER_PRELUDE_RAND, S_BLOCK);
+        if (std::memcmp(Soccer2::SOCCER_PRELUDE_RAND, aZero, S_BLOCK) == 0) {
             XCTFail("test_PreludeB: expected random not to be 0 (c).");
             return;
         }
         
-        if (LaneTool::ByteRichness(Soccer2::mRandom, S_BLOCK) < 512) {
+        if (LaneTool::ByteRichness(Soccer2::SOCCER_PRELUDE_RAND, S_BLOCK) < 512) {
             XCTFail("test_PreludeB: expected random to be byte rich (c).");
             return;
         }
         
         Soccer2::Zero();
         
-        memcpy(Soccer2::mScratch, aEntropy, S_BLOCK);
+        memcpy(Soccer2::SOCCER_SCRATCH_WORKER_A, aEntropy, S_BLOCK);
         Soccer2::SeedPrelude_Regular_B(aNonce);
-        memcpy(aWriteD, Soccer2::mRandom, S_BLOCK);
-        if (std::memcmp(Soccer2::mRandom, aZero, S_BLOCK) == 0) {
+        memcpy(aWriteD, Soccer2::SOCCER_PRELUDE_RAND, S_BLOCK);
+        if (std::memcmp(Soccer2::SOCCER_PRELUDE_RAND, aZero, S_BLOCK) == 0) {
             XCTFail("test_PreludeB: expected random not to be 0 (d).");
             return;
         }
         
-        if (LaneTool::ByteRichness(Soccer2::mRandom, S_BLOCK) < 512) {
+        if (LaneTool::ByteRichness(Soccer2::SOCCER_PRELUDE_RAND, S_BLOCK) < 512) {
             XCTFail("test_PreludeB: expected random to be byte rich (d).");
             return;
         }
@@ -206,21 +207,9 @@ std::string ToString(const std::uint8_t *pList, std::size_t pCount) {
 
 - (void)test_PreludeC {
     
-    std::uint8_t aMasks[32];
-    aMasks[0] = 0xF0u;  aMasks[1] = 0x0Fu;  aMasks[2] = 0x33u;  aMasks[3] = 0xCCu;
-    aMasks[4] = 0x55u;  aMasks[5] = 0xAAu;  aMasks[6] = 0x69u;  aMasks[7] = 0x96u;
-    aMasks[8] = 0x19u;  aMasks[9] = 0x98u;  aMasks[10] = 0x1Au; aMasks[11] = 0x58u;
-    aMasks[12] = 0x1Cu; aMasks[13] = 0x38u; aMasks[14] = 0x25u; aMasks[15] = 0xA4u;
-    aMasks[16] = 0x26u; aMasks[17] = 0x64u; aMasks[18] = 0x2Cu; aMasks[19] = 0x34u;
-    aMasks[20] = 0x43u; aMasks[21] = 0xC2u; aMasks[22] = 0x46u; aMasks[23] = 0x62u;
-    aMasks[24] = 0x4Au; aMasks[25] = 0x52u; aMasks[26] = 0x83u; aMasks[27] = 0xC1u;
-    aMasks[28] = 0x85u; aMasks[29] = 0xA1u; aMasks[30] = 0x89u; aMasks[31] = 0x91u;
-    
     std::unordered_set<std::string> aHashesMaterials;
     std::unordered_set<std::string> aHashesExpanders;
-    std::unordered_set<std::string> aHashesMasks;
     std::unordered_set<std::string> aHashesWorkSpaces;
-    
     
     for (std::size_t aTrial=0; aTrial<32; aTrial++) {
         
@@ -228,37 +217,12 @@ std::string ToString(const std::uint8_t *pList, std::size_t pCount) {
         Soccer2::InitializeExpanders();
         Soccer2::InitializeWorkSpaces();
         Soccer2::InitializeMaterials();
-        Soccer2::InitializeMasks();
         
-        aHashesMasks.insert(ToString(Soccer2::mMasks, 32));
         aHashesMaterials.insert(ToString(Soccer2::mMaterials, 16));
         aHashesExpanders.insert(ToString(Soccer2::mExpanders, SOCCER_EXPANDER_COUNT));
         aHashesWorkSpaces.insert(ToString(Soccer2::mWorkSpaces, 16));
-        
-        for (std::size_t aMaskIndex=0; aMaskIndex<32; aMaskIndex++) {
-            
-            std::uint8_t aMask = aMasks[aMaskIndex];
-            
-            bool aExists = false;
-            for (std::size_t aCheckIndex=0; aCheckIndex<32; aCheckIndex++) {
-                if (Soccer2::mMasks[aCheckIndex] == aMask) {
-                    aExists = true;
-                }
-            }
-            if (aExists == false) {
-                XCTFail("test_PreludeC: expected mask %zu to exist (a).", (std::size_t)aMask);
-                return;
-            }
-            
-            
-            
-        }
     }
     
-    if (aHashesMasks.size() != 1) {
-        XCTFail("test_PreludeC: expected mask hashes all to be the same.");
-        return;
-    }
     if (aHashesMaterials.size() != 1) {
         XCTFail("test_PreludeC: expected material hashes all to be the same.");
         return;
@@ -272,8 +236,6 @@ std::string ToString(const std::uint8_t *pList, std::size_t pCount) {
         return;
     }
     
-    
-    aHashesMasks.clear();
     aHashesMaterials.clear();
     aHashesExpanders.clear();
     aHashesWorkSpaces.clear();
@@ -284,37 +246,15 @@ std::string ToString(const std::uint8_t *pList, std::size_t pCount) {
         Soccer2::InitializeExpanders();
         Soccer2::InitializeWorkSpaces();
         Soccer2::InitializeMaterials();
-        Soccer2::InitializeMasks();
         
-        WorkSpaceTools::FillBytes(Soccer2::mRandom, S_BLOCK);
+        WorkSpaceTools::FillBytes(Soccer2::SOCCER_PRELUDE_RAND, S_BLOCK);
         Soccer2::SeedPrelude_Regular_C();
         
-        aHashesMasks.insert(ToString(Soccer2::mMasks, 32));
         aHashesMaterials.insert(ToString(Soccer2::mMaterials, 16));
         aHashesExpanders.insert(ToString(Soccer2::mExpanders, SOCCER_EXPANDER_COUNT));
         aHashesWorkSpaces.insert(ToString(Soccer2::mWorkSpaces, 16));
-        
-        for (std::size_t aMaskIndex=0; aMaskIndex<32; aMaskIndex++) {
-            
-            std::uint8_t aMask = aMasks[aMaskIndex];
-            
-            bool aExists = false;
-            for (std::size_t aCheckIndex=0; aCheckIndex<32; aCheckIndex++) {
-                if (Soccer2::mMasks[aCheckIndex] == aMask) {
-                    aExists = true;
-                }
-            }
-            if (aExists == false) {
-                XCTFail("test_PreludeC: expected mask %zu to exist (b).", (std::size_t)aMask);
-                return;
-            }
-        }
     }
     
-    if (aHashesMasks.size() < 24) {
-        XCTFail("test_PreludeC: expected mask hashes mostly to be different.");
-        return;
-    }
     if (aHashesMaterials.size() < 10) {
         XCTFail("test_PreludeC: expected material hashes mostly to be different.");
         return;

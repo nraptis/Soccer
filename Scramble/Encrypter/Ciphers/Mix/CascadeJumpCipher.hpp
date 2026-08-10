@@ -5,15 +5,16 @@
 #include <cstdint>
 
 #include "Jelly.hpp"
-#include "Crypt.hpp"
+#include "Cipher.hpp"
 
 // [RELEASE] [1033.1 us] [OK]
 
-class CascadeJumpCipher final : public Crypt {
+class CascadeJumpCipher final : public Cipher {
 public:
     CascadeJumpCipher(const std::uint8_t *pMask,
                          const std::uint8_t *pJumps)
-    : mMask(pMask),
+    : Cipher(CipherType::kCascadeJumpCipher),
+    mMask(pMask),
     mJumps(pJumps) {}
     
     bool SealData(const std::uint8_t *pSource,

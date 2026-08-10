@@ -1,5 +1,5 @@
 //
-//  ShuffleMEWBlockZeroTests.m
+//  Shuffle_MEWBlockZeroTests.m
 //  ScrambleTests
 //
 //  Created by nick on 8/5/26.
@@ -15,11 +15,11 @@
 #include <string>
 #include <unordered_set>
 
-@interface ShuffleMEWBlockZeroTests : XCTestCase
+@interface Shuffle_MEWBlockZeroTests : XCTestCase
 
 @end
 
-@implementation ShuffleMEWBlockZeroTests
+@implementation Shuffle_MEWBlockZeroTests
 
 - (void)test_MEWBlockZero_Expanders {
     
@@ -48,7 +48,7 @@
             
             Random::Shuffle(Soccer2::mExpanders, SOCCER_EXPANDER_COUNT);
             
-            Soccer2::ShuffleMEWBlockZero(aRandom);
+            Soccer2::Shuffle_MEWBlockZero(aRandom);
             
             std::unordered_set<TwistExpander *> aSet;
             
@@ -104,7 +104,7 @@
             
             Random::Shuffle(Soccer2::mWorkSpaces, 16);
             
-            Soccer2::ShuffleMEWBlockZero(aRandom);
+            Soccer2::Shuffle_MEWBlockZero(aRandom);
             
             std::unordered_set<TwistWorkSpace *> aSet;
             
@@ -160,7 +160,7 @@
             
             Random::Shuffle(Soccer2::mMaterials, 16);
             
-            Soccer2::ShuffleMEWBlockZero(aRandom);
+            Soccer2::Shuffle_MEWBlockZero(aRandom);
             
             std::unordered_set<std::uint8_t *> aSet;
             

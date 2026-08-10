@@ -5,14 +5,15 @@
 #include <cstdint>
 
 #include "Jelly.hpp"
-#include "Crypt.hpp"
+#include "Cipher.hpp"
 
 // [RELEASE] [44.7 us] [OK]
 
-class PasswordXORCipher final : public Crypt {
+class PasswordXORCipher final : public Cipher {
 public:
     explicit PasswordXORCipher(const std::uint8_t *pPassword)
-    : mPassword(pPassword) {}
+    : Cipher(CipherType::kPasswordXORCipher),
+    mPassword(pPassword) {}
     
     bool SealData(const std::uint8_t *pSource,
                   std::uint8_t *pWorker,

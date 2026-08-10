@@ -5,13 +5,15 @@
 #include <cstdint>
 
 #include "Jelly.hpp"
-#include "Crypt.hpp"
+#include "Cipher.hpp"
 
 // [RELEASE] [1019.1 us] [OK]
 
-class CascadeCipher final : public Crypt {
+class CascadeCipher final : public Cipher {
 public:
-    explicit CascadeCipher(const std::uint8_t *pMask) : mMask(pMask) {}
+    explicit CascadeCipher(const std::uint8_t *pMask)
+    : Cipher(CipherType::kCascadeCipher),
+    mMask(pMask) {}
     
     bool SealData(const std::uint8_t *pSource,
                   std::uint8_t *pWorker,

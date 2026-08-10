@@ -5,14 +5,16 @@
 #include <cstdint>
 
 #include "Jelly.hpp"
-#include "Crypt.hpp"
+#include "Cipher.hpp"
 
-// Note, we do not have this benchmark, this is from 48, but they are all same category.
 // [RELEASE] [25.0 us] [OK]
+// Note, we do not have this benchmark, this is from 48, but they are all same category.
 
-class ReverseMaskByteBlockCipher64 final : public Crypt {
+class ReverseMaskByteBlockCipher64 final : public Cipher {
  public:
-  explicit ReverseMaskByteBlockCipher64(std::uint8_t pMask) : mMask(pMask) {}
+  explicit ReverseMaskByteBlockCipher64(std::uint8_t pMask)
+      : Cipher(CipherType::kReverseMaskByteBlockCipher64),
+        mMask(pMask) {}
 
   bool SealData(const std::uint8_t *pSource,
                 std::uint8_t *pWorker,
@@ -30,6 +32,10 @@ class ReverseMaskByteBlockCipher64 final : public Crypt {
                   CipherErrorCode *pErrorCode) const override {
     (void)pWorker;
     return Apply(pSource, pDestination, pLength, pErrorCode);
+  }
+
+  void Zero() override {
+    mMask = 0U;
   }
 
  private:

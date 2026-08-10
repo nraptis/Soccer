@@ -12,9 +12,9 @@
 #include <cstdint>
 
 #define SOCCER_ROTATION_LEEWAY 256
-#define SOCCER_ROTATION_CACHE_COUNT_S3 4
+#define SOCCER_ROTATION_CACHE_COUNT_S3 5
 #define SOCCER_ROTATION_CACHE_COUNT_S2 4
-#define SOCCER_ROTATION_CACHE_COUNT_S1 4
+#define SOCCER_ROTATION_CACHE_COUNT_S1 3
 #define SOCCER_ROTATION_CACHE_COUNT_TOTAL (SOCCER_ROTATION_CACHE_COUNT_S3 + SOCCER_ROTATION_CACHE_COUNT_S2 + SOCCER_ROTATION_CACHE_COUNT_S1)
 
 
@@ -98,12 +98,10 @@ public:
     static bool                                     Withdraw_PassD(std::size_t pCountS3, std::size_t pCountS2, std::size_t pCountS1);
     static void                                     Withdraw_PassE(std::size_t pCountS3, std::size_t pCountS2, std::size_t pCountS1);
 
-    static std::size_t                              mCursorS3;
-    static std::size_t                              mCursorS2;
-    static std::size_t                              mCursorS1;
-    
     static std::size_t                              mLoopCount;
-
+    
+    static void                                     Zero();
+    
 };
 
 #endif /* SoccerRotationBank_hpp */

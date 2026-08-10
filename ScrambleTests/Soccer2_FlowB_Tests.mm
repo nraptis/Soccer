@@ -94,7 +94,6 @@ std::string ToString(const std::uint8_t *pList, std::size_t pCount) {
             return;
         }
         
-        
         std::unordered_set<TwistExpander *> aClaimedExpanderSet;
         for (std::size_t aExpanderIndex=0; aExpanderIndex<Soccer2::mClaimedExpanderCount; aExpanderIndex++) {
             aClaimedExpanderSet.insert(Soccer2::mClaimedExpanders[aExpanderIndex]);
@@ -253,7 +252,6 @@ std::string ToString(const std::uint8_t *pList, std::size_t pCount) {
                 }
             }
         }
-        
     }
     
     if (aHashesMaterials.size() < 12) {

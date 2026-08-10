@@ -36,46 +36,91 @@
 #include "RippleMaskBlockCipher32.hpp"
 #include "RippleMaskBlockCipher64.hpp"
 
-class Cryptex {
+class Cryptex3 {
 public:
+    void                        AddCipherL3A(Cipher *pCipher);
+    void                        AddCipherL2A(Cipher *pCipher);
+    void                        AddCipherL1A(Cipher *pCipher);
 
-    void                        AddCipherL3A(Crypt *pCipher);
-    void                        AddCipherL2A(Crypt *pCipher);
-    void                        AddCipherL1A(Crypt *pCipher);
-    
-    void                        AddCipherL3B(Crypt *pCipher);
-    void                        AddCipherL2B(Crypt *pCipher);
-    void                        AddCipherL1B(Crypt *pCipher);
-    
-    void                        AddCipherL3C(Crypt *pCipher);
-    
-    
-    
     void                        Free();
-    
+    void                        Zero();
+
     bool                        SealData(const std::uint8_t *pSource,
-                                        std::uint8_t *pWorkerA,
-                                        std::uint8_t *pWorkerB,
-                                        std::uint8_t *pDestination,
-                                        std::size_t pLength,
-                                        CipherErrorCode *pErrorCode) const;
+                                         std::uint8_t *pWorkerA,
+                                         std::uint8_t *pWorkerB,
+                                         std::uint8_t *pDestination,
+                                         std::size_t pLength,
+                                         CipherErrorCode *pErrorCode) const;
 
     bool                        UnsealData(const std::uint8_t *pSource,
-                                          std::uint8_t *pWorkerA,
-                                          std::uint8_t *pWorkerB,
-                                          std::uint8_t *pDestination,
-                                          std::size_t pLength,
-                                          CipherErrorCode *pErrorCode) const;
-    
-private:
+                                           std::uint8_t *pWorkerA,
+                                           std::uint8_t *pWorkerB,
+                                           std::uint8_t *pDestination,
+                                           std::size_t pLength,
+                                           CipherErrorCode *pErrorCode) const;
 
+protected:
     EncryptionLayer             mLayerL3A;
     EncryptionLayer             mLayerL2A;
     EncryptionLayer             mLayerL1A;
+};
+
+class Cryptex6 : public Cryptex3 {
+public:
+    void                        AddCipherL3B(Cipher *pCipher);
+    void                        AddCipherL2B(Cipher *pCipher);
+    void                        AddCipherL1B(Cipher *pCipher);
+
+    void                        Free();
+    void                        Zero();
+
+    bool                        SealData(const std::uint8_t *pSource,
+                                         std::uint8_t *pWorkerA,
+                                         std::uint8_t *pWorkerB,
+                                         std::uint8_t *pDestination,
+                                         std::size_t pLength,
+                                         CipherErrorCode *pErrorCode) const;
+
+    bool                        UnsealData(const std::uint8_t *pSource,
+                                           std::uint8_t *pWorkerA,
+                                           std::uint8_t *pWorkerB,
+                                           std::uint8_t *pDestination,
+                                           std::size_t pLength,
+                                           CipherErrorCode *pErrorCode) const;
+
+protected:
     EncryptionLayer             mLayerL3B;
     EncryptionLayer             mLayerL2B;
     EncryptionLayer             mLayerL1B;
+};
+
+class Cryptex9 : public Cryptex6 {
+public:
+    void                        AddCipherL3C(Cipher *pCipher);
+    void                        AddCipherL2C(Cipher *pCipher);
+    void                        AddCipherL1C(Cipher *pCipher);
+
+    void                        Free();
+    void                        Zero();
+    
+    bool                        SealData(const std::uint8_t *pSource,
+                                         std::uint8_t *pWorkerA,
+                                         std::uint8_t *pWorkerB,
+                                         std::uint8_t *pDestination,
+                                         std::size_t pLength,
+                                         CipherErrorCode *pErrorCode) const;
+
+    bool                        UnsealData(const std::uint8_t *pSource,
+                                           std::uint8_t *pWorkerA,
+                                           std::uint8_t *pWorkerB,
+                                           std::uint8_t *pDestination,
+                                           std::size_t pLength,
+                                           CipherErrorCode *pErrorCode) const;
+
+private:
     EncryptionLayer             mLayerL3C;
+    EncryptionLayer             mLayerL2C;
+    EncryptionLayer             mLayerL1C;
 };
 
 #endif /* Cryptex_hpp */

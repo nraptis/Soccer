@@ -5,15 +5,16 @@
 #include <cstdint>
 
 #include "Jelly.hpp"
-#include "Crypt.hpp"
+#include "Cipher.hpp"
 
 // [RELEASE] [382.6 us] [OK]
 
-class PasswordJumpAddCipher final : public Crypt {
+class PasswordJumpAddCipher final : public Cipher {
 public:
     PasswordJumpAddCipher(const std::uint8_t *pPassword,
                           const std::uint8_t *pJumps)
-    : mPassword(pPassword),
+    : Cipher(CipherType::kPasswordJumpAddCipher),
+    mPassword(pPassword),
     mJumps(pJumps) {}
     
     bool SealData(const std::uint8_t *pSource,

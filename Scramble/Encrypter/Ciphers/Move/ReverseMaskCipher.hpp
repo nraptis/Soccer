@@ -5,13 +5,15 @@
 #include <cstdint>
 
 #include "Jelly.hpp"
-#include "Crypt.hpp"
+#include "Cipher.hpp"
 
 // [RELEASE] [30.7 us] [OK]
 
-class ReverseMaskCipher final : public Crypt {
+class ReverseMaskCipher final : public Cipher {
  public:
-  explicit ReverseMaskCipher(std::uint8_t pMask) : mMask(pMask) {}
+  explicit ReverseMaskCipher(std::uint8_t pMask)
+      : Cipher(CipherType::kReverseMaskCipher),
+        mMask(pMask) {}
 
   bool SealData(const std::uint8_t *pSource,
                 std::uint8_t *pWorker,
@@ -29,6 +31,10 @@ class ReverseMaskCipher final : public Crypt {
                   CipherErrorCode *pErrorCode) const override {
     (void)pWorker;
     return Apply(pSource, pDestination, pLength, pErrorCode);
+  }
+
+  void Zero() override {
+    mMask = 0U;
   }
 
  private:

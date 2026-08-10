@@ -28,14 +28,14 @@ bool Soccer2::AttemptSeed_Decrypt(EncryptionStrength pStrength,
                                                 pAckWord);
 }
 
-void Soccer2::EncryptBlock(std::uint8_t *pSource,
+bool Soccer2::EncryptBlock(std::uint8_t *pSource,
                            std::uint8_t *pDestination) {
-    Soccer2Internal::EncryptBlock(pSource, pDestination);
+    return Soccer2Internal::EncryptBlock(pSource, pDestination);
 }
 
-void Soccer2::DecryptBlock(std::uint8_t *pSource,
+bool Soccer2::DecryptBlock(std::uint8_t *pSource,
                            std::uint8_t *pDestination) {
-    Soccer2Internal::DecryptBlock(pSource, pDestination);
+    return Soccer2Internal::DecryptBlock(pSource, pDestination);
 }
 
 void Soccer2::Zero() {

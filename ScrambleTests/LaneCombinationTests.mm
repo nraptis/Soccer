@@ -26,10 +26,10 @@
         const WeakLaneCombination aCombo = LaneCombinations::mWeak[aIndex];
         
         std::size_t aQuarters = 0;
-        aQuarters += aCombo.mL3A[0] * 4;
-        aQuarters += aCombo.mL2A[0] * 2;
-        aQuarters += aCombo.mL1A[0] * 1;
-        aQuarters += aCombo.mL3B[0] * 4;
+        aQuarters += aCombo.mL3[0] * 4;
+        aQuarters += aCombo.mL3[1] * 4;
+        aQuarters += aCombo.mL2[0] * 2;
+        aQuarters += aCombo.mL1[0] * 1;
         
         if ((aQuarters == 16) || (aQuarters == 15) || (aQuarters == 14) || (aQuarters == 13)) {
             // Fine
@@ -47,13 +47,13 @@
         const NormalLaneCombination aCombo = LaneCombinations::mNormal[aIndex];
         
         std::size_t aQuarters = 0;
-        aQuarters += aCombo.mL3A[0] * 4;
-        aQuarters += aCombo.mL2A[0] * 2;
-        aQuarters += aCombo.mL1A[0] * 1;
-        aQuarters += aCombo.mL3B[0] * 4;
-        aQuarters += aCombo.mL2B[0] * 2;
-        aQuarters += aCombo.mL1B[0] * 1;
-        aQuarters += aCombo.mL3C[0] * 4;
+        aQuarters += aCombo.mL3[0] * 4;
+        aQuarters += aCombo.mL3[1] * 4;
+        aQuarters += aCombo.mL3[2] * 4;
+        aQuarters += aCombo.mL2[0] * 2;
+        aQuarters += aCombo.mL2[1] * 2;
+        aQuarters += aCombo.mL1[0] * 1;
+        aQuarters += aCombo.mL1[1] * 1;
         
         if ((aQuarters == 29) || (aQuarters == 30) || (aQuarters == 31) || (aQuarters == 32)) {
             // Fine
@@ -71,20 +71,20 @@
         const StrongLaneCombination aCombo = LaneCombinations::mStrong[aIndex];
 
         std::size_t aQuarters = 0;
-        aQuarters += aCombo.mL3A[0] * 4;
-        aQuarters += aCombo.mL3A[1] * 4;
-        aQuarters += aCombo.mL2A[0] * 2;
-        aQuarters += aCombo.mL2A[1] * 2;
-        aQuarters += aCombo.mL1A[0] * 1;
-        aQuarters += aCombo.mL1A[1] * 1;
-        aQuarters += aCombo.mL3B[0] * 4;
-        aQuarters += aCombo.mL3B[1] * 4;
-        aQuarters += aCombo.mL2B[0] * 2;
-        aQuarters += aCombo.mL2B[1] * 2;
-        aQuarters += aCombo.mL1B[0] * 1;
-        aQuarters += aCombo.mL1B[1] * 1;
-        aQuarters += aCombo.mL3C[0] * 4;
-        aQuarters += aCombo.mL3C[1] * 4;
+        aQuarters += aCombo.mL3[0] * 4;
+        aQuarters += aCombo.mL3[1] * 4;
+        aQuarters += aCombo.mL3[2] * 4;
+        aQuarters += aCombo.mL3[3] * 4;
+        aQuarters += aCombo.mL3[4] * 4;
+        aQuarters += aCombo.mL3[5] * 4;
+        aQuarters += aCombo.mL2[0] * 2;
+        aQuarters += aCombo.mL2[1] * 2;
+        aQuarters += aCombo.mL2[2] * 2;
+        aQuarters += aCombo.mL2[3] * 2;
+        aQuarters += aCombo.mL1[0] * 1;
+        aQuarters += aCombo.mL1[1] * 1;
+        aQuarters += aCombo.mL1[2] * 1;
+        aQuarters += aCombo.mL1[3] * 1;
         
         if ((aQuarters == 61) || (aQuarters == 62) || (aQuarters == 63) || (aQuarters == 64)) {
             // Fine

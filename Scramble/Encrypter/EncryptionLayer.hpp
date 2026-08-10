@@ -4,7 +4,7 @@
 #include <cstddef>
 #include <cstdint>
 
-#include "Crypt.hpp"
+#include "Cipher.hpp"
 
 #define ENCRYPTION_LAYER_MAX_CIPHER_COUNT 32
 
@@ -13,8 +13,9 @@ public:
     EncryptionLayer();
     ~EncryptionLayer();
     
-    void                        AddCipher(Crypt *pCipher);
+    void                        AddCipher(Cipher *pCipher);
     void                        Free();
+    void                        Zero();
     
     bool                        SealData(const std::uint8_t* pSource,
                                          std::uint8_t* pScratch,
@@ -30,7 +31,7 @@ public:
     
 private:
     
-    Crypt                       *mCiphers[ENCRYPTION_LAYER_MAX_CIPHER_COUNT];
+    Cipher                      *mCiphers[ENCRYPTION_LAYER_MAX_CIPHER_COUNT];
     std::size_t                 mCipherCount;
     
 };

@@ -21,7 +21,6 @@ public:
     
     static std::size_t              ByteRichness(std::uint8_t *pLane, std::size_t pSize);
     
-    
 };
 
 #endif /* LaneTool_hpp */

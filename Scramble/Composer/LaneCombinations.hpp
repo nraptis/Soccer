@@ -11,33 +11,25 @@
 #include <cstddef>
 #include <cstdint>
 
-// Lane counts are distributed from the beginning in round-robin stage order:
-// L3A, L2A, L1A, L3B, L2B, L1B, L3C, then back to L3A.
+// Lane counts are distributed in L3, L2, L1 round-robin order.  Once all
+// four L2 or L1 layer slots are occupied, any surplus selections use L3.
+// Members are grouped by layer size so the plan can assign them to stages.
 struct WeakLaneCombination {
-    std::uint8_t mL3A[1];
-    std::uint8_t mL2A[1];
-    std::uint8_t mL1A[1];
-    std::uint8_t mL3B[1];
+    std::uint8_t mL3[2];
+    std::uint8_t mL2[1];
+    std::uint8_t mL1[1];
 };
 
 struct NormalLaneCombination {
-    std::uint8_t mL3A[1];
-    std::uint8_t mL2A[1];
-    std::uint8_t mL1A[1];
-    std::uint8_t mL3B[1];
-    std::uint8_t mL2B[1];
-    std::uint8_t mL1B[1];
-    std::uint8_t mL3C[1];
+    std::uint8_t mL3[3];
+    std::uint8_t mL2[2];
+    std::uint8_t mL1[2];
 };
 
 struct StrongLaneCombination {
-    std::uint8_t mL3A[2];
-    std::uint8_t mL2A[2];
-    std::uint8_t mL1A[2];
-    std::uint8_t mL3B[2];
-    std::uint8_t mL2B[2];
-    std::uint8_t mL1B[2];
-    std::uint8_t mL3C[2];
+    std::uint8_t mL3[6];
+    std::uint8_t mL2[4];
+    std::uint8_t mL1[4];
 };
 
 static_assert(sizeof(WeakLaneCombination) == 4U);

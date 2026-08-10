@@ -31,6 +31,12 @@ struct EncryptionPlan {
     EncryptionPlanStage             mL1B;
     
     EncryptionPlanStage             mL3C;
+    EncryptionPlanStage             mL2C;
+    EncryptionPlanStage             mL1C;
+
+    EncryptionPlanStage             mL3D;
+    EncryptionPlanStage             mL2D;
+    EncryptionPlanStage             mL1D;
 };
 
 class EncryptionPlanTool {
@@ -38,85 +44,76 @@ class EncryptionPlanTool {
 public:
 
     /*
-     The lane-combination tables remain the authority for key material use.
+     Weak uses groups A and B: 6 rotations, 4 simple mutations, 5 primary
+     movers, and 1 secondary mover. Three rotations are masked, for 9 masks
+     total.
 
-     WeakLaneCombination:
-     struct WeakLaneCombination {
-         std::uint8_t mL3A[1];
-         std::uint8_t mL2A[1];
-         std::uint8_t mL1A[1];
-         std::uint8_t mL3B[1];
-     };
+     Normal uses groups A and B: 6 rotations, 7 simple mutations, 6 primary
+     movers, and 2 secondary movers. Three rotations are masked, for 11 masks
+     total.
 
-     L3A { Baryon, Muon, Fermion, Lepton(mL3A[0]) }
-     L2A { Fermion, Quasiparticle, Fermion, Lepton(mL2A[0]) }
-     L1A { Baryon, Neutrino, Fermion, Lepton(mL1A[0]) }
+     Strong uses groups A through C: 9 rotations, 10 simple mutations,
+     4 complex mutations, 8 primary movers, and 1 secondary mover. Four
+     rotations are masked, for 13 masks total.
 
-     L3B { Fermion, Lepton(mL3B[0]) }
-     L2B { Muon }
-     L1B { }
+     Unlisted stages remain empty.
+     */
+    
+    /*
+     Strong:
 
-     L3C { Fermion }
+     L3A: [rotate masked] [mutate complex] [primary mover] [mutate simple]
+     L2A: [rotate masked] [mutate simple] [primary mover] [mutate simple]
+     L1A: [rotate masked] [mutate simple] [primary mover] [mutate simple]
 
-     Rotation total: 2 Baryon, 6 Fermion.
-     Key total: 4 Lepton, 0 Boson.
-     Non-rotation total: 2 Muon, 1 Quasiparticle, 1 Neutrino.
+     L3B: [rotate masked] [mutate simple] [primary mover] [mutate simple]
+     L2B: [rotate] [mutate complex] [primary mover]
+     L1B: [rotate] [mutate simple] [primary mover]
 
+     L3C: [rotate] [mutate simple] [primary mover] [mutate complex]
+     L2C: [rotate] [mutate simple] [primary mover]
+     L1C: [rotate] [mutate complex] [secondary mover]
 
-     NormalLaneCombination:
-     struct NormalLaneCombination {
-         std::uint8_t mL3A[1];
-         std::uint8_t mL2A[1];
-         std::uint8_t mL1A[1];
-         std::uint8_t mL3B[1];
-         std::uint8_t mL2B[1];
-         std::uint8_t mL1B[1];
-         std::uint8_t mL3C[1];
-     };
-
-     L3A { Baryon, Boson(mL3A[0]), Fermion }
-     L2A { Muon, Lepton(mL2A[0]), Baryon }
-     L1A { Lepton(mL1A[0]), Baryon }
-
-     L3B { Quasiparticle, Lepton(mL3B[0]), Fermion }
-     L2B { Lepton(mL2B[0]), Baryon }
-     L1B { Neutrino, Lepton(mL1B[0]), Fermion }
-
-     L3C { Lepton(mL3C[0]), Baryon }
-
-     Rotation total: 5 Baryon, 3 Fermion.
-     Key total: 6 Lepton, 1 Boson.
-     Non-rotation total: 1 Muon, 1 Quasiparticle, 1 Neutrino.
+     Rotate: 9
+     Mask: 13 / 13
+     Lane, L3: 6/6
+     Lane, L2: 4/4
+     Lane, L1: 4/4
 
 
-     StrongLaneCombination:
-     struct StrongLaneCombination {
-         std::uint8_t mL3A[2];
-         std::uint8_t mL2A[2];
-         std::uint8_t mL1A[2];
-         std::uint8_t mL3B[2];
-         std::uint8_t mL2B[2];
-         std::uint8_t mL1B[2];
-         std::uint8_t mL3C[2];
-     };
+     Normal:
 
-     L3A { Boson(mL3A[0]), Baryon, Lepton(mL3A[1]), Muon }
-     L2A { Boson(mL2A[0]), Baryon, Lepton(mL2A[1]), Quasiparticle }
-     L1A { Lepton(mL1A[0]), Baryon, Lepton(mL1A[1]), Neutrino }
+     L3A: [rotate masked] [mutate simple] [primary mover] [mutate simple]
+     L2A: [rotate masked] [mutate simple] [primary mover] [secondary mover]
+     L1A: [rotate masked] [mutate simple] [primary mover] [primary mover]
 
-     L3B { Lepton(mL3B[0]), Baryon, Lepton(mL3B[1]), Muon }
-     L2B { Lepton(mL2B[0]), Baryon, Lepton(mL2B[1]), Baryon }
-     L1B { Lepton(mL1B[0]), Baryon, Lepton(mL1B[1]), Muon }
+     L3B: [rotate] [mutate simple] [primary mover]
+     L2B: [rotate] [mutate simple] [primary mover]
+     L1B: [rotate] [mutate simple] [secondary mover]
 
-     L3C { Lepton(mL3C[0]), Baryon, Lepton(mL3C[1]) }
+     Rotate: 6
+     Mask: 11 / 11
+     Lane, L3: 3/3
+     Lane, L2: 2/2
+     Lane, L1: 2/2
 
-     Rotation total: 8 Baryon, 0 Fermion.
-     Key total: 12 Lepton, 2 Boson.
-     Non-rotation total: 3 Muon, 1 Quasiparticle, 1 Neutrino.
 
-     Across stage boundaries as well as within a stage:
-     - rotations are never adjacent;
-     - Lepton/Boson key ciphers are never adjacent.
+
+     Weak:
+
+     L3A: [rotate masked] [mutate simple] [primary mover]
+     L2A: [rotate masked] [mutate simple] [primary mover]
+     L1A: [rotate masked] [mutate simple] [primary mover]
+     
+     L3B: [rotate] [mutate simple] [primary mover]
+     L2B: [rotate] [primary mover]
+     L1B: [rotate] [secondary mover]
+
+     Rotate: 6
+     Mask: 9 / 9
+     Lane, L3: 3/2
+     Lane, L2: 2/1
+     Lane, L1: 2/1
      */
 
     static EncryptionPlan               MakePlanWeak(std::uint64_t pLaneSelect,
@@ -129,17 +126,17 @@ public:
 private:
     // pIndex can be [0...255]. If a category is absent from the shuffled
     // ring, the category's deterministic default is returned.
-    static CipherType                   RingFetchLepton(CipherType *pShuffledCiphers, std::uint8_t pLaneCount, std::size_t *pIndex);
-    static CipherType                   RingFetchBoson(CipherType *pShuffledCiphers, std::uint8_t pLaneCount, std::size_t *pIndex);
-    static CipherType                   RingFetchHadron(CipherType *pShuffledCiphers, std::uint8_t pLaneCount, std::size_t *pIndex);
+    static CipherType                   RingFetchMutateSimple(CipherType *pShuffledCiphers, std::uint8_t pLaneCount, std::size_t *pIndex);
+    static CipherType                   RingFetchMutateComplex(CipherType *pShuffledCiphers, std::uint8_t pLaneCount, std::size_t *pIndex);
+    static CipherType                   RingFetchMutateAny(CipherType *pShuffledCiphers, std::uint8_t pLaneCount, std::size_t *pIndex);
 
-    static CipherType                   RingFetchBaryon(CipherType *pShuffledCiphers, std::size_t *pIndex);
-    static CipherType                   RingFetchFermion(CipherType *pShuffledCiphers, std::size_t *pIndex);
-    static CipherType                   RingFetchMeson(CipherType *pShuffledCiphers, std::size_t *pIndex);
+    static CipherType                   RingFetchRotation(CipherType *pShuffledCiphers, std::size_t *pIndex);
+    static CipherType                   RingFetchRotationMasked(CipherType *pShuffledCiphers, std::size_t *pIndex);
+    static CipherType                   RingFetchRotationAny(CipherType *pShuffledCiphers, std::size_t *pIndex);
 
-    static CipherType                   RingFetchMuon(CipherType *pShuffledCiphers, std::size_t *pIndex);
-    static CipherType                   RingFetchQuasiparticle(CipherType *pShuffledCiphers, std::size_t *pIndex);
-    static CipherType                   RingFetchNeutrino(CipherType *pShuffledCiphers, std::size_t *pIndex);
+    static CipherType                   RingFetchPrimaryMover(CipherType *pShuffledCiphers, std::size_t *pIndex);
+    static CipherType                   RingFetchSecondaryMover(CipherType *pShuffledCiphers, std::size_t *pIndex);
+    static CipherType                   RingFetchMoverAny(CipherType *pShuffledCiphers, std::size_t *pIndex);
     
 };
 

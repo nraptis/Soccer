@@ -5,14 +5,15 @@
 #include <cstdint>
 
 #include "Jelly.hpp"
-#include "Crypt.hpp"
+#include "Cipher.hpp"
 
 // [RELEASE] [45.2 us] [OK]
 
-class PasswordSubtractCipher final : public Crypt {
+class PasswordSubtractCipher final : public Cipher {
  public:
   explicit PasswordSubtractCipher(const std::uint8_t *pPassword)
-      : mPassword(pPassword) {}
+      : Cipher(CipherType::kPasswordSubtractCipher),
+        mPassword(pPassword) {}
 
   bool SealData(const std::uint8_t *pSource,
                 std::uint8_t *pWorker,
