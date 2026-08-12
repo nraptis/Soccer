@@ -8,26 +8,6 @@ public:
     TwistExpander_Pollux();
     ~TwistExpander_Pollux() override = default;
 
-    void KDF_A(TwistWorkSpace *pWorkSpace,
-               std::uint64_t pNonce,
-               TwistDomainConstants *pConstants,
-               TwistDomainSaltSet *pDomainSaltSet,
-               MUTABLE_PARAMS) override;
-    void KDF_B(TwistWorkSpace *pWorkSpace,
-               std::uint64_t pNonce,
-               TwistDomainConstants *pConstants,
-               TwistDomainSaltSet *pDomainSaltSet,
-               MUTABLE_PARAMS) override;
-    void KDF_C(TwistWorkSpace *pWorkSpace,
-               std::uint64_t pNonce,
-               TwistDomainConstants *pConstants,
-               TwistDomainSaltSet *pDomainSaltSet,
-               MUTABLE_PARAMS) override;
-    void KDF_D(TwistWorkSpace *pWorkSpace,
-               std::uint64_t pNonce,
-               TwistDomainConstants *pConstants,
-               TwistDomainSaltSet *pDomainSaltSet,
-               MUTABLE_PARAMS) override;
     void KDF_A_A(TwistWorkSpace *pWorkSpace,
                std::uint64_t pNonce,
                TwistDomainConstants *pConstants,
@@ -39,11 +19,6 @@ public:
                TwistDomainSaltSet *pDomainSaltSet,
                MUTABLE_PARAMS);
     void KDF_C_A(TwistWorkSpace *pWorkSpace,
-               std::uint64_t pNonce,
-               TwistDomainConstants *pConstants,
-               TwistDomainSaltSet *pDomainSaltSet,
-               MUTABLE_PARAMS);
-    void KDF_D_A(TwistWorkSpace *pWorkSpace,
                std::uint64_t pNonce,
                TwistDomainConstants *pConstants,
                TwistDomainSaltSet *pDomainSaltSet,
@@ -63,11 +38,6 @@ public:
                TwistDomainConstants *pConstants,
                TwistDomainSaltSet *pDomainSaltSet,
                MUTABLE_PARAMS);
-    void KDF_D_B(TwistWorkSpace *pWorkSpace,
-               std::uint64_t pNonce,
-               TwistDomainConstants *pConstants,
-               TwistDomainSaltSet *pDomainSaltSet,
-               MUTABLE_PARAMS);
     void KDF_A_C(TwistWorkSpace *pWorkSpace,
                std::uint64_t pNonce,
                TwistDomainConstants *pConstants,
@@ -79,11 +49,6 @@ public:
                TwistDomainSaltSet *pDomainSaltSet,
                MUTABLE_PARAMS);
     void KDF_C_C(TwistWorkSpace *pWorkSpace,
-               std::uint64_t pNonce,
-               TwistDomainConstants *pConstants,
-               TwistDomainSaltSet *pDomainSaltSet,
-               MUTABLE_PARAMS);
-    void KDF_D_C(TwistWorkSpace *pWorkSpace,
                std::uint64_t pNonce,
                TwistDomainConstants *pConstants,
                TwistDomainSaltSet *pDomainSaltSet,
@@ -103,11 +68,6 @@ public:
                TwistDomainConstants *pConstants,
                TwistDomainSaltSet *pDomainSaltSet,
                MUTABLE_PARAMS);
-    void KDF_D_D(TwistWorkSpace *pWorkSpace,
-               std::uint64_t pNonce,
-               TwistDomainConstants *pConstants,
-               TwistDomainSaltSet *pDomainSaltSet,
-               MUTABLE_PARAMS);
     void KDF_A_E(TwistWorkSpace *pWorkSpace,
                std::uint64_t pNonce,
                TwistDomainConstants *pConstants,
@@ -119,11 +79,6 @@ public:
                TwistDomainSaltSet *pDomainSaltSet,
                MUTABLE_PARAMS);
     void KDF_C_E(TwistWorkSpace *pWorkSpace,
-               std::uint64_t pNonce,
-               TwistDomainConstants *pConstants,
-               TwistDomainSaltSet *pDomainSaltSet,
-               MUTABLE_PARAMS);
-    void KDF_D_E(TwistWorkSpace *pWorkSpace,
                std::uint64_t pNonce,
                TwistDomainConstants *pConstants,
                TwistDomainSaltSet *pDomainSaltSet,
@@ -143,11 +98,6 @@ public:
                TwistDomainConstants *pConstants,
                TwistDomainSaltSet *pDomainSaltSet,
                MUTABLE_PARAMS);
-    void KDF_D_F(TwistWorkSpace *pWorkSpace,
-               std::uint64_t pNonce,
-               TwistDomainConstants *pConstants,
-               TwistDomainSaltSet *pDomainSaltSet,
-               MUTABLE_PARAMS);
     void Seed(TwistWorkSpace *pWorkSpace,
               TwistFarmSalt *pFarmSalt,
               std::uint64_t pNonce,
@@ -160,7 +110,8 @@ public:
                     std::uint8_t *pCrossLaneB,
                     std::uint8_t *pCrossLaneC,
                     std::uint8_t *pCrossLaneD,
-                    std::uint8_t *pDestination) override;
+                    std::uint8_t *pDestination,
+                    bool pStifleKey) override;
     void GrowKeyA(TwistWorkSpace *pWorkSpace,
                   MUTABLE_PARAMS) override;
     void GrowKeyB(TwistWorkSpace *pWorkSpace,
@@ -169,6 +120,7 @@ public:
 private:
     void FoldKeyRowA(TwistWorkSpace *pWorkSpace);
     void FoldKeyRowB(TwistWorkSpace *pWorkSpace);
+    void KeyDiffuse(TwistWorkSpace *pWorkSpace);
     static const TwistDomainSaltSet kKeyRotateASalts;
     static const TwistDomainConstants kKeyRotateAConstants;
     static const TwistDomainSaltSet kKeyRotateBSalts;

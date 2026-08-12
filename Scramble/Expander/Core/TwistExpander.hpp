@@ -158,26 +158,21 @@ public:
                                                   TwistDomainSaltSet *pDomainSaltSet,
                                                   MUTABLE_PARAMS);
 
-    virtual void                            KDF_D(TwistWorkSpace *pWorkSpace,
-                                                  std::uint64_t pNonce,
-                                                  TwistDomainConstants *pDomainConstants,
-                                                  TwistDomainSaltSet *pDomainSaltSet,
-                                                  MUTABLE_PARAMS);
-    
     virtual void                            Seed(TwistWorkSpace *pWorkSpace,
                                                  TwistFarmSalt *pFarmSalt,
                                                  std::uint64_t pNonce,
                                                  std::uint8_t *pPassword,
                                                  std::size_t pPasswordByteLength,
                                                  std::uint8_t *pDestination);
-    
+
     virtual void                            TwistBlock(TwistWorkSpace *pWorkSpace,
                                                        std::uint8_t *pSource,
                                                        std::uint8_t *pCrossLaneA,
                                                        std::uint8_t *pCrossLaneB,
                                                        std::uint8_t *pCrossLaneC,
                                                        std::uint8_t *pCrossLaneD,
-                                                       std::uint8_t *pDestination);
+                                                       std::uint8_t *pDestination,
+                                                       bool pStifleKey);
 
     virtual void                            GrowKeyA(TwistWorkSpace *pWorkSpace,
                                                      MUTABLE_PARAMS);
@@ -226,11 +221,17 @@ public:
     const TwistDomainBundle                 *GetDomainBundleInbuilt() const {
         return &mDomainBundleInbuilt;
     }
-    TwistDomainBundle                       *GetDomainBundleEphemeral() {
-        return &mDomainBundleEphemeral;
+    TwistDomainBundle                       *GetDomainBundleEphemeralA() {
+        return &mDomainBundleEphemeralA;
     }
-    const TwistDomainBundle                 *GetDomainBundleEphemeral() const {
-        return &mDomainBundleEphemeral;
+    const TwistDomainBundle                 *GetDomainBundleEphemeralA() const {
+        return &mDomainBundleEphemeralA;
+    }
+    TwistDomainBundle                       *GetDomainBundleEphemeralB() {
+        return &mDomainBundleEphemeralB;
+    }
+    const TwistDomainBundle                 *GetDomainBundleEphemeralB() const {
+        return &mDomainBundleEphemeralB;
     }
     
     void                                    Zero_PostSeed();
@@ -240,7 +241,8 @@ public:
 protected:
     
     TwistDomainBundle                       mDomainBundleInbuilt;
-    TwistDomainBundle                       mDomainBundleEphemeral;
+    TwistDomainBundle                       mDomainBundleEphemeralA;
+    TwistDomainBundle                       mDomainBundleEphemeralB;
     
 };
 

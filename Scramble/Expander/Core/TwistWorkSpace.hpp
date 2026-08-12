@@ -64,7 +64,8 @@ enum class TwistBufferKind : std::uint8_t {
 enum class TwistSaltOwner : std::uint16_t {
     kInvalid = 0,
     kInbuilt = 2,
-    kEphemeral = 3
+    kEphemeralA = 3,
+    kEphemeralB = 4
 };
 
 struct TwistBufferKey {
@@ -126,16 +127,6 @@ enum class TwistWorkSpaceSlot : std::uint16_t {
     kWaterLaneC=116,
     kWaterLaneD=117,
 
-    kHeartLaneA=80,
-    kHeartLaneB=81,
-    kHeartLaneC=82,
-    kHeartLaneD=83,
-
-    kSoilLaneA=208,
-    kSoilLaneB=209,
-    kSoilLaneC=210,
-    kSoilLaneD=211,
-    
     kLightningLaneA=200,
     kLightningLaneB=201,
     kLightningLaneC=202,
@@ -146,16 +137,6 @@ enum class TwistWorkSpaceSlot : std::uint16_t {
     kIceLaneC=132,
     kIceLaneD=133,
     
-    kWoodLaneA=152,
-    kWoodLaneB=153,
-    kWoodLaneC=154,
-    kWoodLaneD=155,
-
-    kMagmaLaneA=204,
-    kMagmaLaneB=205,
-    kMagmaLaneC=206,
-    kMagmaLaneD=207,
-
     kPlasmaLaneA=212,
     kPlasmaLaneB=213,
     kPlasmaLaneC=214,
@@ -181,11 +162,6 @@ enum class TwistWorkSpaceSlot : std::uint16_t {
     kCelestialLaneC=54,
     kCelestialLaneD=55,
 
-    kKineticLaneA=56,
-    kKineticLaneB=57,
-    kKineticLaneC=58,
-    kKineticLaneD=59,
-
     kVaporLaneA=60,
     kVaporLaneB=61,
     kVaporLaneC=62,
@@ -199,7 +175,6 @@ enum class TwistWorkSpaceSlot : std::uint16_t {
     kFuseLaneA=148,
     kFuseLaneB=149,
     kFuseLaneC=150,
-    kFuseLaneD=151,
 
     
 
@@ -565,16 +540,6 @@ public:
     std::uint8_t                            mWaterLaneC[S_BLOCK];
     std::uint8_t                            mWaterLaneD[S_BLOCK];
     
-    std::uint8_t                            mHeartLaneA[S_BLOCK];
-    std::uint8_t                            mHeartLaneB[S_BLOCK];
-    std::uint8_t                            mHeartLaneC[S_BLOCK];
-    std::uint8_t                            mHeartLaneD[S_BLOCK];
-
-    std::uint8_t                            mSoilLaneA[S_BLOCK];
-    std::uint8_t                            mSoilLaneB[S_BLOCK];
-    std::uint8_t                            mSoilLaneC[S_BLOCK];
-    std::uint8_t                            mSoilLaneD[S_BLOCK];
-    
     std::uint8_t                            mLightningLaneA[S_BLOCK];
     std::uint8_t                            mLightningLaneB[S_BLOCK];
     std::uint8_t                            mLightningLaneC[S_BLOCK];
@@ -584,16 +549,6 @@ public:
     std::uint8_t                            mIceLaneB[S_BLOCK];
     std::uint8_t                            mIceLaneC[S_BLOCK];
     std::uint8_t                            mIceLaneD[S_BLOCK];
-    
-    std::uint8_t                            mWoodLaneA[S_BLOCK];
-    std::uint8_t                            mWoodLaneB[S_BLOCK];
-    std::uint8_t                            mWoodLaneC[S_BLOCK];
-    std::uint8_t                            mWoodLaneD[S_BLOCK];
-    
-    std::uint8_t                            mMagmaLaneA[S_BLOCK];
-    std::uint8_t                            mMagmaLaneB[S_BLOCK];
-    std::uint8_t                            mMagmaLaneC[S_BLOCK];
-    std::uint8_t                            mMagmaLaneD[S_BLOCK];
     
     std::uint8_t                            mPlasmaLaneA[S_BLOCK];
     std::uint8_t                            mPlasmaLaneB[S_BLOCK];
@@ -620,11 +575,6 @@ public:
     std::uint8_t                            mCelestialLaneC[S_BLOCK];
     std::uint8_t                            mCelestialLaneD[S_BLOCK];
 
-    alignas(std::uint32_t) std::uint8_t     mKineticLaneA[S_BLOCK];
-    alignas(std::uint32_t) std::uint8_t     mKineticLaneB[S_BLOCK];
-    alignas(std::uint32_t) std::uint8_t     mKineticLaneC[S_BLOCK];
-    alignas(std::uint32_t) std::uint8_t     mKineticLaneD[S_BLOCK];
-
     alignas(std::uint32_t) std::uint8_t     mVaporLaneA[S_BLOCK];
     alignas(std::uint32_t) std::uint8_t     mVaporLaneB[S_BLOCK];
     alignas(std::uint32_t) std::uint8_t     mVaporLaneC[S_BLOCK];
@@ -638,7 +588,6 @@ public:
     std::uint8_t                            mFuseLaneA[S_BLOCK];
     std::uint8_t                            mFuseLaneB[S_BLOCK];
     std::uint8_t                            mFuseLaneC[S_BLOCK];
-    std::uint8_t                            mFuseLaneD[S_BLOCK];
 
     TwistDomainBundle                       mDomainBundle;
 

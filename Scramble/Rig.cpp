@@ -104,7 +104,8 @@ void Rig::Run(TwistExpander *pExpander,
                               aSnowLaneB,
                               aSnowLaneC,
                               aSnowLaneD,
-                              aDest);
+                              aDest,
+                              false);
         
     }
 }

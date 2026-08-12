@@ -80,7 +80,7 @@
             Soccer2::mCross[3][aLaneIndex] = aCrosses_D_A[aLaneIndex];
         }
         
-        Soccer2::TwistRound(0);
+        Soccer2::TwistRound(0, false);
         
         for (std::size_t aLaneIndex=0; aLaneIndex<aLaneCount; aLaneIndex++) {
             const std::size_t aByteRichness = LaneTool::ByteRichness(Soccer2::mMaterials[aLaneIndex], S_BLOCK);
@@ -113,7 +113,7 @@
             Soccer2::mCross[3][aLaneIndex] = aCrosses_D_B[aLaneIndex];
         }
         
-        Soccer2::TwistRound(0);
+        Soccer2::TwistRound(0, false);
         
         for (std::size_t aLaneIndex=0; aLaneIndex<aLaneCount; aLaneIndex++) {
             const std::size_t aByteRichness = LaneTool::ByteRichness(Soccer2::mMaterials[aLaneIndex], S_BLOCK);
@@ -158,7 +158,7 @@
                 Soccer2::mCross[3][aLaneIndex] = aCrosses_D_A[aLaneIndex];
             }
             
-            Soccer2::TwistRound(aBlockIndex);
+            Soccer2::TwistRound(aBlockIndex, false);
             
             for (std::size_t aLaneIndex=0; aLaneIndex<aLaneCount; aLaneIndex++) {
                 
@@ -189,7 +189,7 @@
                 Soccer2::mCross[3][aLaneIndex] = aCrosses_D_B[aLaneIndex];
             }
             
-            Soccer2::TwistRound(aBlockIndex);
+            Soccer2::TwistRound(aBlockIndex, false);
             
             for (std::size_t aLaneIndex=0; aLaneIndex<aLaneCount; aLaneIndex++) {
                 
@@ -264,7 +264,7 @@
             Soccer2::mCross[3][aLaneIndex] = aCrosses_D_A[aLaneIndex];
         }
         
-        Soccer2::TwistRound(0);
+        Soccer2::TwistRound(0, false);
         
         for (std::size_t aLaneIndex=0; aLaneIndex<aLaneCount; aLaneIndex++) {
             const std::size_t aByteRichness = LaneTool::ByteRichness(Soccer2::mMaterials[aLaneIndex], S_BLOCK);
@@ -297,7 +297,7 @@
             Soccer2::mCross[3][aLaneIndex] = aCrosses_D_B[aLaneIndex];
         }
         
-        Soccer2::TwistRound(0);
+        Soccer2::TwistRound(0, false);
         
         for (std::size_t aLaneIndex=0; aLaneIndex<aLaneCount; aLaneIndex++) {
             const std::size_t aByteRichness = LaneTool::ByteRichness(Soccer2::mMaterials[aLaneIndex], S_BLOCK);
@@ -342,7 +342,7 @@
                 Soccer2::mCross[3][aLaneIndex] = aCrosses_D_A[aLaneIndex];
             }
             
-            Soccer2::TwistRound(aBlockIndex);
+            Soccer2::TwistRound(aBlockIndex, false);
             
             for (std::size_t aLaneIndex=0; aLaneIndex<aLaneCount; aLaneIndex++) {
                 
@@ -373,7 +373,7 @@
                 Soccer2::mCross[3][aLaneIndex] = aCrosses_D_B[aLaneIndex];
             }
             
-            Soccer2::TwistRound(aBlockIndex);
+            Soccer2::TwistRound(aBlockIndex, false);
             
             for (std::size_t aLaneIndex=0; aLaneIndex<aLaneCount; aLaneIndex++) {
                 
@@ -447,7 +447,7 @@
             Soccer2::mCross[3][aLaneIndex] = aCrosses_D_A[aLaneIndex];
         }
         
-        Soccer2::TwistRound(0);
+        Soccer2::TwistRound(0, false);
         
         for (std::size_t aLaneIndex=0; aLaneIndex<aLaneCount; aLaneIndex++) {
             const std::size_t aByteRichness = LaneTool::ByteRichness(Soccer2::mMaterials[aLaneIndex], S_BLOCK);
@@ -480,7 +480,7 @@
             Soccer2::mCross[3][aLaneIndex] = aCrosses_D_B[aLaneIndex];
         }
         
-        Soccer2::TwistRound(0);
+        Soccer2::TwistRound(0, false);
         
         for (std::size_t aLaneIndex=0; aLaneIndex<aLaneCount; aLaneIndex++) {
             const std::size_t aByteRichness = LaneTool::ByteRichness(Soccer2::mMaterials[aLaneIndex], S_BLOCK);
@@ -525,7 +525,7 @@
                 Soccer2::mCross[3][aLaneIndex] = aCrosses_D_A[aLaneIndex];
             }
             
-            Soccer2::TwistRound(aBlockIndex);
+            Soccer2::TwistRound(aBlockIndex, false);
             
             for (std::size_t aLaneIndex=0; aLaneIndex<aLaneCount; aLaneIndex++) {
                 
@@ -556,7 +556,7 @@
                 Soccer2::mCross[3][aLaneIndex] = aCrosses_D_B[aLaneIndex];
             }
             
-            Soccer2::TwistRound(aBlockIndex);
+            Soccer2::TwistRound(aBlockIndex, false);
             
             for (std::size_t aLaneIndex=0; aLaneIndex<aLaneCount; aLaneIndex++) {
                 

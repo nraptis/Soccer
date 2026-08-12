@@ -12,7 +12,8 @@
 
 TwistExpander::TwistExpander() {
     std::memset(&mDomainBundleInbuilt, 0, sizeof(mDomainBundleInbuilt));
-    std::memset(&mDomainBundleEphemeral, 0, sizeof(mDomainBundleEphemeral));
+    std::memset(&mDomainBundleEphemeralA, 0, sizeof(mDomainBundleEphemeralA));
+    std::memset(&mDomainBundleEphemeralB, 0, sizeof(mDomainBundleEphemeralB));
 }
 
 TwistExpander::~TwistExpander() {
@@ -69,15 +70,6 @@ void TwistExpander::KDF_C(TwistWorkSpace *pWorkSpace,
                          MUTABLE_PARAMS_PASSED);
 }
 
-void TwistExpander::KDF_D(TwistWorkSpace *pWorkSpace,
-                          std::uint64_t pNonce,
-                          TwistDomainConstants *pDomainConstants,
-                          TwistDomainSaltSet *pDomainSaltSet,
-                          MUTABLE_PARAMS) {
-    TwistExpander::KDF_A(pWorkSpace, pNonce, pDomainConstants, pDomainSaltSet,
-                         MUTABLE_PARAMS_PASSED);
-}
-
 void TwistExpander::Seed(TwistWorkSpace *pWorkSpace,
                          TwistFarmSalt *pFarmSalt,
                          std::uint64_t pNonce,
@@ -98,7 +90,8 @@ void TwistExpander::Seed(TwistWorkSpace *pWorkSpace,
     }
     UnrollPassword(pWorkSpace->mSourceLane, pPassword, pPasswordByteLength);
     UnrollNonce(pWorkSpace->mNonceLane, pNonce);
-    mDomainBundleEphemeral.Zero();
+    mDomainBundleEphemeralA.Zero();
+    mDomainBundleEphemeralB.Zero();
     pWorkSpace->mDomainBundle.Zero();
 }
 
@@ -108,7 +101,8 @@ void TwistExpander::TwistBlock(TwistWorkSpace *pWorkSpace,
                                std::uint8_t *pCrossLaneB,
                                std::uint8_t *pCrossLaneC,
                                std::uint8_t *pCrossLaneD,
-                               std::uint8_t *pDestination) {
+                               std::uint8_t *pDestination,
+                               const bool pStifleKey) {
     if ((pWorkSpace == nullptr) ||
         (pSource == nullptr) ||
         (pCrossLaneA == nullptr) ||
@@ -118,6 +112,8 @@ void TwistExpander::TwistBlock(TwistWorkSpace *pWorkSpace,
         (pDestination == nullptr)) {
         return;
     }
+
+    (void)pStifleKey;
 
 }
 
@@ -189,7 +185,8 @@ void TwistExpander::Twist(TwistWorkSpace *pWorkSpace,
                    pCrossLaneB,
                    pCrossLaneC,
                    pCrossLaneD,
-                   pDestination + aStartByte);
+                   pDestination + aStartByte,
+                   false);
     }
     
 }
@@ -226,7 +223,8 @@ void TwistExpander::AutoSeedThenTwist(TwistWorkSpace *pWorkSpace,
                    pCrossLaneB,
                    pCrossLaneC,
                    pCrossLaneD,
-                   &pDestination[aDestinationIndex]); // dest
+                   &pDestination[aDestinationIndex], // dest
+                   false);
         aDestinationIndex += S_BLOCK;
     }
     
@@ -248,7 +246,8 @@ void TwistExpander::AutoTwist(TwistWorkSpace *pWorkSpace,
                pCrossLaneB,
                pCrossLaneC,
                pCrossLaneD,
-               pDestination); // dest
+               pDestination, // dest
+               false);
     
     std::size_t aDestinationIndex = S_BLOCK;
     while (aDestinationIndex < pDestinationByteLength) {
@@ -258,7 +257,8 @@ void TwistExpander::AutoTwist(TwistWorkSpace *pWorkSpace,
                    pCrossLaneB,
                    pCrossLaneC,
                    pCrossLaneD,
-                   &pDestination[aDestinationIndex]); // dest
+                   &pDestination[aDestinationIndex], // dest
+                   false);
         aDestinationIndex += S_BLOCK;
     }
     
@@ -416,9 +416,10 @@ void TwistExpander::Zero() {
 }
 
 void TwistExpander::Zero_PostSeed() {
-    mDomainBundleEphemeral.Zero();
-    memset(mMatrix.mData, 0, sizeof(mMatrix.mData));
-    memset(mMatrix.mPermute, 0, sizeof(mMatrix.mPermute));
-    memset(mMatrix.mPermuteData, 0, sizeof(mMatrix.mPermuteData));
-    memset(mMatrix.mPermuteTemp, 0, sizeof(mMatrix.mPermuteTemp));
+    mDomainBundleEphemeralA.Zero();
+    mDomainBundleEphemeralB.Zero();
+    std::memset(mMatrix.mData, 0, sizeof(mMatrix.mData));
+    std::memset(mMatrix.mPermute, 0, sizeof(mMatrix.mPermute));
+    std::memset(mMatrix.mPermuteData, 0, sizeof(mMatrix.mPermuteData));
+    std::memset(mMatrix.mPermuteTemp, 0, sizeof(mMatrix.mPermuteTemp));
 }

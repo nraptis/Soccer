@@ -16,9 +16,6 @@ class TwistWorkSpace;
 
 class TwistShuffle {
 public:
-    static void                         Execute(std::size_t *pIndexList256,
-                                                const std::uint8_t *pBlockSizedEntropySource);
-
     template <typename T>
     static void                         MoveClaimedToEnd16(bool *pClaimed,
                                                            T *pArray) {

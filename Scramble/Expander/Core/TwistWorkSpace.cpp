@@ -76,8 +76,10 @@ TwistDomainBundle *TwistWorkSpace::GetSaltDomainBundle(TwistExpander *pExpander,
     switch (pOwner) {
         case TwistSaltOwner::kInbuilt:
             return pExpander ? pExpander->GetDomainBundleInbuilt() : nullptr;
-        case TwistSaltOwner::kEphemeral:
-            return pExpander ? pExpander->GetDomainBundleEphemeral() : nullptr;
+        case TwistSaltOwner::kEphemeralA:
+            return pExpander ? pExpander->GetDomainBundleEphemeralA() : nullptr;
+        case TwistSaltOwner::kEphemeralB:
+            return pExpander ? pExpander->GetDomainBundleEphemeralB() : nullptr;
         default:
             return nullptr;
     }
@@ -316,10 +318,6 @@ std::uint8_t *TwistWorkSpace::GetBuffer(TwistWorkSpace *pWorkSpace,
         case TwistWorkSpaceSlot::kParamCrossB: return nullptr;
         case TwistWorkSpaceSlot::kParamCrossC: return nullptr;
         case TwistWorkSpaceSlot::kParamCrossD: return nullptr;
-        case TwistWorkSpaceSlot::kHeartLaneA: return pWorkSpace->mHeartLaneA;
-        case TwistWorkSpaceSlot::kHeartLaneB: return pWorkSpace->mHeartLaneB;
-        case TwistWorkSpaceSlot::kHeartLaneC: return pWorkSpace->mHeartLaneC;
-        case TwistWorkSpaceSlot::kHeartLaneD: return pWorkSpace->mHeartLaneD;
         case TwistWorkSpaceSlot::kSpiritLaneA: return pWorkSpace->mSpiritLaneA;
         case TwistWorkSpaceSlot::kSpiritLaneB: return pWorkSpace->mSpiritLaneB;
         case TwistWorkSpaceSlot::kSpiritLaneC: return pWorkSpace->mSpiritLaneC;
@@ -343,23 +341,10 @@ std::uint8_t *TwistWorkSpace::GetBuffer(TwistWorkSpace *pWorkSpace,
         case TwistWorkSpaceSlot::kFuseLaneA: return pWorkSpace->mFuseLaneA;
         case TwistWorkSpaceSlot::kFuseLaneB: return pWorkSpace->mFuseLaneB;
         case TwistWorkSpaceSlot::kFuseLaneC: return pWorkSpace->mFuseLaneC;
-        case TwistWorkSpaceSlot::kFuseLaneD: return pWorkSpace->mFuseLaneD;
-        case TwistWorkSpaceSlot::kWoodLaneA: return pWorkSpace->mWoodLaneA;
-        case TwistWorkSpaceSlot::kWoodLaneB: return pWorkSpace->mWoodLaneB;
-        case TwistWorkSpaceSlot::kWoodLaneC: return pWorkSpace->mWoodLaneC;
-        case TwistWorkSpaceSlot::kWoodLaneD: return pWorkSpace->mWoodLaneD;
         case TwistWorkSpaceSlot::kLightningLaneA: return pWorkSpace->mLightningLaneA;
         case TwistWorkSpaceSlot::kLightningLaneB: return pWorkSpace->mLightningLaneB;
         case TwistWorkSpaceSlot::kLightningLaneC: return pWorkSpace->mLightningLaneC;
         case TwistWorkSpaceSlot::kLightningLaneD: return pWorkSpace->mLightningLaneD;
-        case TwistWorkSpaceSlot::kMagmaLaneA: return pWorkSpace->mMagmaLaneA;
-        case TwistWorkSpaceSlot::kMagmaLaneB: return pWorkSpace->mMagmaLaneB;
-        case TwistWorkSpaceSlot::kMagmaLaneC: return pWorkSpace->mMagmaLaneC;
-        case TwistWorkSpaceSlot::kMagmaLaneD: return pWorkSpace->mMagmaLaneD;
-        case TwistWorkSpaceSlot::kSoilLaneA: return pWorkSpace->mSoilLaneA;
-        case TwistWorkSpaceSlot::kSoilLaneB: return pWorkSpace->mSoilLaneB;
-        case TwistWorkSpaceSlot::kSoilLaneC: return pWorkSpace->mSoilLaneC;
-        case TwistWorkSpaceSlot::kSoilLaneD: return pWorkSpace->mSoilLaneD;
         case TwistWorkSpaceSlot::kPlasmaLaneA: return pWorkSpace->mPlasmaLaneA;
         case TwistWorkSpaceSlot::kPlasmaLaneB: return pWorkSpace->mPlasmaLaneB;
         case TwistWorkSpaceSlot::kPlasmaLaneC: return pWorkSpace->mPlasmaLaneC;
@@ -380,10 +365,6 @@ std::uint8_t *TwistWorkSpace::GetBuffer(TwistWorkSpace *pWorkSpace,
         case TwistWorkSpaceSlot::kCelestialLaneB: return pWorkSpace->mCelestialLaneB;
         case TwistWorkSpaceSlot::kCelestialLaneC: return pWorkSpace->mCelestialLaneC;
         case TwistWorkSpaceSlot::kCelestialLaneD: return pWorkSpace->mCelestialLaneD;
-        case TwistWorkSpaceSlot::kKineticLaneA: return pWorkSpace->mKineticLaneA;
-        case TwistWorkSpaceSlot::kKineticLaneB: return pWorkSpace->mKineticLaneB;
-        case TwistWorkSpaceSlot::kKineticLaneC: return pWorkSpace->mKineticLaneC;
-        case TwistWorkSpaceSlot::kKineticLaneD: return pWorkSpace->mKineticLaneD;
         case TwistWorkSpaceSlot::kVaporLaneA: return pWorkSpace->mVaporLaneA;
         case TwistWorkSpaceSlot::kVaporLaneB: return pWorkSpace->mVaporLaneB;
         case TwistWorkSpaceSlot::kVaporLaneC: return pWorkSpace->mVaporLaneC;
@@ -569,9 +550,6 @@ bool TwistWorkSpace::IsSalt(TwistBufferKey pKey) {
 }
 
 void TwistWorkSpace::Zero() {
-    memset(mKeyBoxA, 0, sizeof(mKeyBoxA));
-    memset(mKeyBoxB, 0, sizeof(mKeyBoxB));
-
     Zero_PostSeed();
 
     mDomainBundle.Zero();
@@ -586,11 +564,6 @@ void TwistWorkSpace::Zero_PostSeed() {
     memset(mIndexList256B, 0, sizeof(mIndexList256B));
     memset(mIndexList256C, 0, sizeof(mIndexList256C));
     memset(mIndexList256D, 0, sizeof(mIndexList256D));
-
-    memset(mHeartLaneA, 0, sizeof(mHeartLaneA));
-    memset(mHeartLaneB, 0, sizeof(mHeartLaneB));
-    memset(mHeartLaneC, 0, sizeof(mHeartLaneC));
-    memset(mHeartLaneD, 0, sizeof(mHeartLaneD));
 
     memset(mSpiritLaneA, 0, sizeof(mSpiritLaneA));
     memset(mSpiritLaneB, 0, sizeof(mSpiritLaneB));
@@ -620,27 +593,10 @@ void TwistWorkSpace::Zero_PostSeed() {
     memset(mFuseLaneA, 0, sizeof(mFuseLaneA));
     memset(mFuseLaneB, 0, sizeof(mFuseLaneB));
     memset(mFuseLaneC, 0, sizeof(mFuseLaneC));
-    memset(mFuseLaneD, 0, sizeof(mFuseLaneD));
-
-    memset(mWoodLaneA, 0, sizeof(mWoodLaneA));
-    memset(mWoodLaneB, 0, sizeof(mWoodLaneB));
-    memset(mWoodLaneC, 0, sizeof(mWoodLaneC));
-    memset(mWoodLaneD, 0, sizeof(mWoodLaneD));
-
     memset(mLightningLaneA, 0, sizeof(mLightningLaneA));
     memset(mLightningLaneB, 0, sizeof(mLightningLaneB));
     memset(mLightningLaneC, 0, sizeof(mLightningLaneC));
     memset(mLightningLaneD, 0, sizeof(mLightningLaneD));
-
-    memset(mMagmaLaneA, 0, sizeof(mMagmaLaneA));
-    memset(mMagmaLaneB, 0, sizeof(mMagmaLaneB));
-    memset(mMagmaLaneC, 0, sizeof(mMagmaLaneC));
-    memset(mMagmaLaneD, 0, sizeof(mMagmaLaneD));
-
-    memset(mSoilLaneA, 0, sizeof(mSoilLaneA));
-    memset(mSoilLaneB, 0, sizeof(mSoilLaneB));
-    memset(mSoilLaneC, 0, sizeof(mSoilLaneC));
-    memset(mSoilLaneD, 0, sizeof(mSoilLaneD));
 
     memset(mPlasmaLaneA, 0, sizeof(mPlasmaLaneA));
     memset(mPlasmaLaneB, 0, sizeof(mPlasmaLaneB));
@@ -666,11 +622,6 @@ void TwistWorkSpace::Zero_PostSeed() {
     memset(mCelestialLaneB, 0, sizeof(mCelestialLaneB));
     memset(mCelestialLaneC, 0, sizeof(mCelestialLaneC));
     memset(mCelestialLaneD, 0, sizeof(mCelestialLaneD));
-
-    memset(mKineticLaneA, 0, sizeof(mKineticLaneA));
-    memset(mKineticLaneB, 0, sizeof(mKineticLaneB));
-    memset(mKineticLaneC, 0, sizeof(mKineticLaneC));
-    memset(mKineticLaneD, 0, sizeof(mKineticLaneD));
 
     memset(mVaporLaneA, 0, sizeof(mVaporLaneA));
     memset(mVaporLaneB, 0, sizeof(mVaporLaneB));

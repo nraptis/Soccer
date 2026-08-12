@@ -262,7 +262,6 @@ bool VerifyPreTwist(std::size_t pBlockIndex, EncryptionStrength pStrength, bool 
                     printf("VerifyPreTwist, Fail: Early round material should be back [1, 2, 3, or 4] or pr seed rand.\n");
                     return false;
                 }
-                
             } else {
                 if (aIsMB) {
                     
@@ -400,17 +399,11 @@ bool VerifyPreTwist(std::size_t pBlockIndex, EncryptionStrength pStrength, bool 
             }
             FakeTwistRound(aWarmUpSeedBlockIndex + 5U, aStrength);
             
-            
-            
             for (std::size_t aRoundIndex=0U; aRoundIndex<BLOCK_COUNT; aRoundIndex++) {
-                const std::size_t aFourRoundsBackBlockIndex =
-                (aRoundIndex + BLOCK_COUNT - 5U) % BLOCK_COUNT;
-                const std::size_t aThreeRoundsBackBlockIndex =
-                (aRoundIndex + BLOCK_COUNT - 4U) % BLOCK_COUNT;
-                const std::size_t aTwoRoundsBackBlockIndex =
-                (aRoundIndex + BLOCK_COUNT - 3U) % BLOCK_COUNT;
-                const std::size_t aOneRoundBackBlockIndex =
-                (aRoundIndex + BLOCK_COUNT - 2U) % BLOCK_COUNT;
+                const std::size_t aFourRoundsBackBlockIndex = (aRoundIndex + BLOCK_COUNT - 5U) % BLOCK_COUNT;
+                const std::size_t aThreeRoundsBackBlockIndex = (aRoundIndex + BLOCK_COUNT - 4U) % BLOCK_COUNT;
+                const std::size_t aTwoRoundsBackBlockIndex = (aRoundIndex + BLOCK_COUNT - 3U) % BLOCK_COUNT;
+                const std::size_t aOneRoundBackBlockIndex = (aRoundIndex + BLOCK_COUNT - 2U) % BLOCK_COUNT;
                 Soccer2::BuildCrossPool_Regular(aComplexity,
                                                 aFourRoundsBackBlockIndex * S_BLOCK,
                                                 aThreeRoundsBackBlockIndex * S_BLOCK,

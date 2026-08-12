@@ -37,7 +37,6 @@
         }
         aPasswordB[5] += 1;
         
-        
         std::uint32_t aAckWord = 0xFF00FF00;
         
         if (!Soccer2::AttemptSeed_Encrypt(EncryptionStrength::kWeak, aPasswordA, 10, aNonce, &aAckWord)) {

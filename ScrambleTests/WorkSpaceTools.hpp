@@ -249,16 +249,6 @@ public:
         FillBytes(pWorkSpace->mWaterLaneC, S_BLOCK);
         FillBytes(pWorkSpace->mWaterLaneD, S_BLOCK);
 
-        FillBytes(pWorkSpace->mHeartLaneA, S_BLOCK);
-        FillBytes(pWorkSpace->mHeartLaneB, S_BLOCK);
-        FillBytes(pWorkSpace->mHeartLaneC, S_BLOCK);
-        FillBytes(pWorkSpace->mHeartLaneD, S_BLOCK);
-
-        FillBytes(pWorkSpace->mSoilLaneA, S_BLOCK);
-        FillBytes(pWorkSpace->mSoilLaneB, S_BLOCK);
-        FillBytes(pWorkSpace->mSoilLaneC, S_BLOCK);
-        FillBytes(pWorkSpace->mSoilLaneD, S_BLOCK);
-
         FillBytes(pWorkSpace->mLightningLaneA, S_BLOCK);
         FillBytes(pWorkSpace->mLightningLaneB, S_BLOCK);
         FillBytes(pWorkSpace->mLightningLaneC, S_BLOCK);
@@ -268,17 +258,7 @@ public:
         FillBytes(pWorkSpace->mIceLaneB, S_BLOCK);
         FillBytes(pWorkSpace->mIceLaneC, S_BLOCK);
         FillBytes(pWorkSpace->mIceLaneD, S_BLOCK);
-
-        FillBytes(pWorkSpace->mWoodLaneA, S_BLOCK);
-        FillBytes(pWorkSpace->mWoodLaneB, S_BLOCK);
-        FillBytes(pWorkSpace->mWoodLaneC, S_BLOCK);
-        FillBytes(pWorkSpace->mWoodLaneD, S_BLOCK);
-
-        FillBytes(pWorkSpace->mMagmaLaneA, S_BLOCK);
-        FillBytes(pWorkSpace->mMagmaLaneB, S_BLOCK);
-        FillBytes(pWorkSpace->mMagmaLaneC, S_BLOCK);
-        FillBytes(pWorkSpace->mMagmaLaneD, S_BLOCK);
-
+        
         FillBytes(pWorkSpace->mPlasmaLaneA, S_BLOCK);
         FillBytes(pWorkSpace->mPlasmaLaneB, S_BLOCK);
         FillBytes(pWorkSpace->mPlasmaLaneC, S_BLOCK);
@@ -303,12 +283,7 @@ public:
         FillBytes(pWorkSpace->mCelestialLaneB, S_BLOCK);
         FillBytes(pWorkSpace->mCelestialLaneC, S_BLOCK);
         FillBytes(pWorkSpace->mCelestialLaneD, S_BLOCK);
-
-        FillBytes(pWorkSpace->mKineticLaneA, S_BLOCK);
-        FillBytes(pWorkSpace->mKineticLaneB, S_BLOCK);
-        FillBytes(pWorkSpace->mKineticLaneC, S_BLOCK);
-        FillBytes(pWorkSpace->mKineticLaneD, S_BLOCK);
-
+        
         FillBytes(pWorkSpace->mVaporLaneA, S_BLOCK);
         FillBytes(pWorkSpace->mVaporLaneB, S_BLOCK);
         FillBytes(pWorkSpace->mVaporLaneC, S_BLOCK);
@@ -322,8 +297,6 @@ public:
         FillBytes(pWorkSpace->mFuseLaneA, S_BLOCK);
         FillBytes(pWorkSpace->mFuseLaneB, S_BLOCK);
         FillBytes(pWorkSpace->mFuseLaneC, S_BLOCK);
-        FillBytes(pWorkSpace->mFuseLaneD, S_BLOCK);
-        
         
         FillDomainBundle(&pWorkSpace->mDomainBundle);
     }

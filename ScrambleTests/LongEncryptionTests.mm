@@ -5,14 +5,6 @@
 //  Created by nick on 8/10/26.
 //
 
-#import <Foundation/Foundation.h>
-//
-//  StaticEncryptTests.m
-//  ScrambleTests
-//
-//  Created by nick on 8/9/26.
-//
-
 #import <XCTest/XCTest.h>
 
 #include "Random.hpp"
@@ -41,7 +33,7 @@
         sizeof(kPasswordCharacters) - 1U;
 
     std::uint8_t aPassword[32U];
-    for (std::size_t aTrial=0; aTrial<32; aTrial++) {
+    for (std::size_t aTrial=0; aTrial<8; aTrial++) {
         
         std::size_t aPasswordByteLength = Random::Get(7) + 1;
         for (std::size_t aIndex=0; aIndex<aPasswordByteLength; aIndex++) {

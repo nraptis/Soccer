@@ -8,6 +8,8 @@
 #import "AppDelegate.h"
 
 #include "Soccer2.hpp"
+#include "TimeLog.hpp"
+#include "Random.hpp"
 
 #include <chrono>
 #include <cstddef>
@@ -17,6 +19,77 @@
 #include <cstring>
 #include <string>
 #include <vector>
+
+/*
+ 
+4 exanders
+kdf: 19.16
+smain: 3.60
+sgrow: 1.90
+tmain: 60.71
+tgrow: 55.90
+ ------
+8 exanders
+kdf: 34.20
+smain: 6.45
+sgrow: 3.40
+tmain: 121.07
+tgrow: 111.47
+ ------
+16 exanders
+kdf: 64.66
+smain: 12.19
+sgrow: 6.42
+tmain: 243.09
+tgrow: 223.80
+ 
+*/
+
+/*
+
+4 exanders
+arx_a: 8.06 (6 loop)
+arx_b: 5.62 (4 loop)
+diffuse_a: 0.74
+diffuse_b: 0.77
+------
+8 exanders
+arx_a: 16.19 (6 loop)
+arx_b: 11.25 (4 loop)
+diffuse_a: 1.49
+diffuse_b: 1.53
+------
+16 exanders
+arx_a: 32.58
+arx_b: 22.60
+diffuse_a: 2.99
+diffuse_b: 3.09
+
+*/
+
+
+/*
+
+kdf: 19.13
+smain: 3.61
+sgrow: 1.16
+tmain: 61.48
+tgrow: 34.68
+
+kdf: 35.07
+smain: 6.63
+sgrow: 2.14
+tmain: 124.78
+tgrow: 70.45
+
+kdf: 66.69
+smain: 12.59
+sgrow: 4.06
+tmain: 249.68
+tgrow: 140.83
+
+*/
+
 
 namespace {
 
@@ -247,9 +320,61 @@ bool RunReadmeSoccerExample() {
         return;
     }
     
+    /*
     if (!RunReadmeSoccerExample()) {
         std::printf("Soccer2 README example failed.\n");
     }
+    */
+    
+    constexpr std::size_t kTrialCount = 10U;
+    std::vector<EncryptionStrength> aStrengthList = { EncryptionStrength::kWeak, EncryptionStrength::kNormal, EncryptionStrength::kStrong};
+    
+    
+    for (auto &aStrength : aStrengthList) {
+        
+        Time_Reset();
+        for (std::size_t aTrial=0U; aTrial<kTrialCount; aTrial++) {
+            
+            printf("str: %d, trial: %zu\n", (int)aStrength, aTrial);
+            
+            std::uint8_t aPassword[32U];
+            std::size_t aPasswordByteLength = 8;
+            for (std::size_t aIndex=0; aIndex<aPasswordByteLength; aIndex++) {
+                aPassword[aIndex] = static_cast<std::uint8_t>(aIndex);
+            }
+            std::uint64_t aNonce = Random::Get64();
+            
+            std::vector<std::uint8_t> aPlaintext(SOCCER_BLOCK_SIZE, 0U);
+            std::vector<std::uint8_t> aCiphertext(SOCCER_BLOCK_SIZE, 0U);
+            
+            Soccer2::Zero();
+            
+            std::uint32_t aAckWord = 0U;
+            
+            if (!Soccer2::AttemptSeed_Encrypt(aStrength,
+                                              aPassword,
+                                              aPasswordByteLength,
+                                              aNonce,
+                                              &aAckWord)) {
+                return;
+            }
+        }
+        
+        double aSeconds_ArxA = Time_Poll("arx_a");
+        double aSeconds_ArxB = Time_Poll("arx_b");
+        double aSeconds_DiffuseA = Time_Poll("diffuse_a");
+        double aSeconds_DiffuseB = Time_Poll("diffuse_b");
+        
+        printf("End Trial, Str = %d\n", (int)aStrength);
+        //printf("kdf: %.2f\n", aSeconds_KDF);
+        printf("arx_a: %.2f\n", aSeconds_ArxA);
+        printf("arx_b: %.2f\n", aSeconds_ArxB);
+        printf("diffuse_a: %.2f\n", aSeconds_DiffuseA);
+        printf("diffuse_b: %.2f\n", aSeconds_DiffuseB);
+        
+        
+    }
+    
     
 }
 

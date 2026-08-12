@@ -65,6 +65,8 @@ std::uint8_t                                Soccer2::mMaterialO[SOCCER_BLOCK_SIZ
 std::uint8_t                                Soccer2::mMaterialP[SOCCER_BLOCK_SIZE];
 
 TwistFarmSalt                               Soccer2::mFarmSalt;
+
+/*
 TwistExpander_Betelgeuse                    Soccer2::mStarter;
 
 TwistExpander_Aldebaran                     Soccer2::mAldebaran; // 1
@@ -83,6 +85,26 @@ TwistExpander_Rigel                         Soccer2::mRigel; // 13
 TwistExpander_Saiph                         Soccer2::mSaiph; // 14
 TwistExpander_Sirius                        Soccer2::mSirius; // 15
 TwistExpander_Vega                          Soccer2::mVega; // 16
+*/
+
+TwistExpander_Aldebaran                    Soccer2::mStarter;
+
+TwistExpander_Aldebaran                     Soccer2::mAldebaran; // 1
+TwistExpander_Aldebaran                     Soccer2::mAltair; // 2
+TwistExpander_Aldebaran                     Soccer2::mAntares; // 3
+TwistExpander_Aldebaran                     Soccer2::mArcturus; // 4
+TwistExpander_Aldebaran                     Soccer2::mBellatrix; // 5
+TwistExpander_Aldebaran                     Soccer2::mCapella; // 6
+TwistExpander_Aldebaran                     Soccer2::mCastor; // 7
+TwistExpander_Aldebaran                     Soccer2::mMimosa; // 8
+TwistExpander_Aldebaran                     Soccer2::mPolaris; // 9
+TwistExpander_Aldebaran                     Soccer2::mPollux; // 10
+TwistExpander_Aldebaran                     Soccer2::mProcyon; // 11
+TwistExpander_Aldebaran                     Soccer2::mRegulus; // 12
+TwistExpander_Aldebaran                     Soccer2::mRigel; // 13
+TwistExpander_Aldebaran                     Soccer2::mSaiph; // 14
+TwistExpander_Aldebaran                     Soccer2::mSirius; // 15
+TwistExpander_Aldebaran                     Soccer2::mVega; // 16
 
 TwistWorkSpace                              Soccer2::mWorkSpaceA;
 TwistWorkSpace                              Soccer2::mWorkSpaceB;
@@ -741,7 +763,7 @@ void Soccer2::Shuffle_CROSSPERMUTATIONS(std::size_t pPermutationCount) {
     }
 }
 
-void Soccer2::TwistRound(std::size_t pBlockIndex) {
+void Soccer2::TwistRound(std::size_t pBlockIndex, bool pIsWarmUpRound) {
     
     std::size_t aComplexity = COMPLEXITY_NORMAL;
     std::size_t aReverseCount = 2U;
@@ -753,6 +775,10 @@ void Soccer2::TwistRound(std::size_t pBlockIndex) {
         aReverseCount = 4U;
     }
     
+    static_assert(BLOCK_COUNT >= H_KEY);
+    const bool aStifleKey =
+        (!pIsWarmUpRound) && (pBlockIndex >= (BLOCK_COUNT - H_KEY));
+    
     const std::size_t aDestinationByteIndex = pBlockIndex * S_BLOCK;
     for (std::size_t aLaneIndex=0U; aLaneIndex<aComplexity; aLaneIndex++) {
         mExpanders[aLaneIndex]->TwistBlock(mWorkSpaces[aLaneIndex],
@@ -761,7 +787,8 @@ void Soccer2::TwistRound(std::size_t pBlockIndex) {
                                            mCross[1][aLaneIndex],
                                            mCross[2][aLaneIndex],
                                            mCross[3][aLaneIndex],
-                                           &mMaterials[aLaneIndex][aDestinationByteIndex]);
+                                           &mMaterials[aLaneIndex][aDestinationByteIndex],
+                                           aStifleKey);
     }
 
     for (std::size_t aLaneIndex=0U; aLaneIndex<aComplexity; aLaneIndex++) {
@@ -1062,10 +1089,8 @@ void Soccer2::BuildCrossPool_Regular(std::size_t pComplexity,
         for (std::size_t aPoolIndex=0U; aPoolIndex<64U; aPoolIndex++) {
             mCrossPool[aLaneIndex][aPoolIndex] = nullptr;
         }
-
-        for (std::size_t aMaterialIndex=0U;
-             aMaterialIndex<pComplexity;
-             aMaterialIndex++) {
+        
+        for (std::size_t aMaterialIndex=0U; aMaterialIndex<pComplexity; aMaterialIndex++) {
             if (mSources[aMaterialIndex] != mSources[aLaneIndex]) {
                 mCrossPool[aLaneIndex][mCrossPoolCount[aLaneIndex]] =
                     mSources[aMaterialIndex];
@@ -1073,31 +1098,21 @@ void Soccer2::BuildCrossPool_Regular(std::size_t pComplexity,
             }
         }
 
-        mCrossPool[aLaneIndex][mCrossPoolCount[aLaneIndex]] =
-            &mMaterials[aLaneIndex][pFourRoundsBackByteIndex];
+        mCrossPool[aLaneIndex][mCrossPoolCount[aLaneIndex]] = &mMaterials[aLaneIndex][pFourRoundsBackByteIndex];
         mCrossPoolCount[aLaneIndex]++;
 
-        for (std::size_t aMaterialIndex=0U;
-             aMaterialIndex<pComplexity;
-             aMaterialIndex++) {
-            mCrossPool[aLaneIndex][mCrossPoolCount[aLaneIndex]] =
-                &mMaterials[aMaterialIndex][pThreeRoundsBackByteIndex];
+        for (std::size_t aMaterialIndex=0U; aMaterialIndex<pComplexity; aMaterialIndex++) {
+            mCrossPool[aLaneIndex][mCrossPoolCount[aLaneIndex]] = &mMaterials[aMaterialIndex][pThreeRoundsBackByteIndex];
             mCrossPoolCount[aLaneIndex]++;
         }
 
-        for (std::size_t aMaterialIndex=0U;
-             aMaterialIndex<pComplexity;
-             aMaterialIndex++) {
-            mCrossPool[aLaneIndex][mCrossPoolCount[aLaneIndex]] =
-                &mMaterials[aMaterialIndex][pTwoRoundsBackByteIndex];
+        for (std::size_t aMaterialIndex=0U; aMaterialIndex<pComplexity; aMaterialIndex++) {
+            mCrossPool[aLaneIndex][mCrossPoolCount[aLaneIndex]] = &mMaterials[aMaterialIndex][pTwoRoundsBackByteIndex];
             mCrossPoolCount[aLaneIndex]++;
         }
 
-        for (std::size_t aMaterialIndex=0U;
-             aMaterialIndex<pComplexity;
-             aMaterialIndex++) {
-            mCrossPool[aLaneIndex][mCrossPoolCount[aLaneIndex]] =
-                &mMaterials[aMaterialIndex][pOneRoundBackByteIndex];
+        for (std::size_t aMaterialIndex=0U; aMaterialIndex<pComplexity; aMaterialIndex++) {
+            mCrossPool[aLaneIndex][mCrossPoolCount[aLaneIndex]] = &mMaterials[aMaterialIndex][pOneRoundBackByteIndex];
             mCrossPoolCount[aLaneIndex]++;
         }
     }
@@ -1126,21 +1141,21 @@ bool Soccer2::SeedPrologue_Regular_C(std::uint32_t *pAckWord,
     BuildCrossPool_WarmUp1(aComplexity, aWarmUpSeedByteIndex);
     Shuffle_CROSSPERMUTATIONS(mCrossPoolCount[0]);
     ArrangeCrossPool(aComplexity);
-    TwistRound(aWarmUpSeedBlockIndex + 1U);
+    TwistRound(aWarmUpSeedBlockIndex + 1U, true);
 
     BuildCrossPool_WarmUp2(aComplexity,
                            aWarmUpSeedByteIndex,
                            aWarmUp1ByteIndex);
     Shuffle_CROSSPERMUTATIONS(mCrossPoolCount[0]);
     ArrangeCrossPool(aComplexity);
-    TwistRound(aWarmUpSeedBlockIndex + 2U);
+    TwistRound(aWarmUpSeedBlockIndex + 2U, true);
 
     BuildCrossPool_WarmUp2(aComplexity,
                            aWarmUp1ByteIndex,
                            aWarmUp2ByteIndex);
     Shuffle_CROSSPERMUTATIONS(mCrossPoolCount[0]);
     ArrangeCrossPool(aComplexity);
-    TwistRound(aWarmUpSeedBlockIndex + 3U);
+    TwistRound(aWarmUpSeedBlockIndex + 3U, true);
 
     BuildCrossPool_WarmUp4(aComplexity,
                            aWarmUpSeedByteIndex,
@@ -1148,7 +1163,7 @@ bool Soccer2::SeedPrologue_Regular_C(std::uint32_t *pAckWord,
                            aWarmUp2ByteIndex);
     Shuffle_CROSSPERMUTATIONS(mCrossPoolCount[0]);
     ArrangeCrossPool(aComplexity);
-    TwistRound(aWarmUpSeedBlockIndex + 4U);
+    TwistRound(aWarmUpSeedBlockIndex + 4U, true);
 
     BuildCrossPool_Regular(aComplexity,
                            aWarmUpSeedByteIndex,
@@ -1157,7 +1172,7 @@ bool Soccer2::SeedPrologue_Regular_C(std::uint32_t *pAckWord,
                            aWarmUp3ByteIndex);
     Shuffle_CROSSPERMUTATIONS(mCrossPoolCount[0]);
     ArrangeCrossPool(aComplexity);
-    TwistRound(aWarmUpSeedBlockIndex + 5U);
+    TwistRound(aWarmUpSeedBlockIndex + 5U, true);
 
     const std::size_t aAckByteIndex = SOCCER_BLOCK_SIZE - 1U;
     std::uint32_t aGeneratedAckWord = 0U;
@@ -1195,14 +1210,10 @@ void Soccer2::SeedPrologue_Regular_D() {
     }
 
     for (std::size_t aRoundIndex=0U; aRoundIndex<BLOCK_COUNT; aRoundIndex++) {
-        const std::size_t aFourRoundsBackBlockIndex =
-            (aRoundIndex + BLOCK_COUNT - 5U) % BLOCK_COUNT;
-        const std::size_t aThreeRoundsBackBlockIndex =
-            (aRoundIndex + BLOCK_COUNT - 4U) % BLOCK_COUNT;
-        const std::size_t aTwoRoundsBackBlockIndex =
-            (aRoundIndex + BLOCK_COUNT - 3U) % BLOCK_COUNT;
-        const std::size_t aOneRoundBackBlockIndex =
-            (aRoundIndex + BLOCK_COUNT - 2U) % BLOCK_COUNT;
+        const std::size_t aFourRoundsBackBlockIndex = (aRoundIndex + BLOCK_COUNT - 5U) % BLOCK_COUNT;
+        const std::size_t aThreeRoundsBackBlockIndex = (aRoundIndex + BLOCK_COUNT - 4U) % BLOCK_COUNT;
+        const std::size_t aTwoRoundsBackBlockIndex = (aRoundIndex + BLOCK_COUNT - 3U) % BLOCK_COUNT;
+        const std::size_t aOneRoundBackBlockIndex = (aRoundIndex + BLOCK_COUNT - 2U) % BLOCK_COUNT;
         BuildCrossPool_Regular(aComplexity,
                                aFourRoundsBackBlockIndex * S_BLOCK,
                                aThreeRoundsBackBlockIndex * S_BLOCK,
@@ -1210,13 +1221,10 @@ void Soccer2::SeedPrologue_Regular_D() {
                                aOneRoundBackBlockIndex * S_BLOCK);
         Shuffle_CROSSPERMUTATIONS(mCrossPoolCount[0]);
         ArrangeCrossPool(aComplexity);
-        TwistRound(aRoundIndex);
-        
-        if (aRoundIndex == 0 || aRoundIndex == 7 || aRoundIndex == 15 || aRoundIndex == 23 || aRoundIndex == 31) {
-            printf("SeedPrologue_Regular_D: completed round %zu.\n", aRoundIndex + 1U);
-        }
+        TwistRound(aRoundIndex, false);
     }
     
+    /*
     mWorkSpaceN.Zero();
     mWorkSpaceO.Zero();
     mWorkSpaceP.Zero();
@@ -1269,6 +1277,7 @@ void Soccer2::SeedPrologue_Regular_D() {
     mClaimedExpanderCount = 0U;
     mClaimedMaterialCount = 0U;
     mClaimedWorkSpaceCount = 0U;
+    */
 }
 
 void Soccer2::FoldMaterialsIntoRandomForBlock_4(std::size_t pBlockIndex) {
