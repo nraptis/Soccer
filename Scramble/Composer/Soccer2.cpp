@@ -66,7 +66,6 @@ std::uint8_t                                Soccer2::mMaterialP[SOCCER_BLOCK_SIZ
 
 TwistFarmSalt                               Soccer2::mFarmSalt;
 
-/*
 TwistExpander_Betelgeuse                    Soccer2::mStarter;
 
 TwistExpander_Aldebaran                     Soccer2::mAldebaran; // 1
@@ -85,8 +84,8 @@ TwistExpander_Rigel                         Soccer2::mRigel; // 13
 TwistExpander_Saiph                         Soccer2::mSaiph; // 14
 TwistExpander_Sirius                        Soccer2::mSirius; // 15
 TwistExpander_Vega                          Soccer2::mVega; // 16
-*/
 
+/*
 TwistExpander_Aldebaran                    Soccer2::mStarter;
 
 TwistExpander_Aldebaran                     Soccer2::mAldebaran; // 1
@@ -105,6 +104,7 @@ TwistExpander_Aldebaran                     Soccer2::mRigel; // 13
 TwistExpander_Aldebaran                     Soccer2::mSaiph; // 14
 TwistExpander_Aldebaran                     Soccer2::mSirius; // 15
 TwistExpander_Aldebaran                     Soccer2::mVega; // 16
+*/
 
 TwistWorkSpace                              Soccer2::mWorkSpaceA;
 TwistWorkSpace                              Soccer2::mWorkSpaceB;

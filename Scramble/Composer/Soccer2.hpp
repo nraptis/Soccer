@@ -93,7 +93,7 @@ public:
     static TwistWorkSpace                       *mClaimedWorkSpaces[16];
     static std::size_t                          mClaimedWorkSpaceCount;
     
-    /*
+    
     static TwistExpander_Betelgeuse             mStarter;
     static TwistExpander_Aldebaran              mAldebaran; // 1
     static TwistExpander_Altair                 mAltair; // 2
@@ -111,8 +111,8 @@ public:
     static TwistExpander_Saiph                  mSaiph; // 14
     static TwistExpander_Sirius                 mSirius; // 15
     static TwistExpander_Vega                   mVega; // 16
-    */
     
+    /*
     static TwistExpander_Aldebaran             mStarter;
     static TwistExpander_Aldebaran              mAldebaran; // 1
     static TwistExpander_Aldebaran                 mAltair; // 2
@@ -130,7 +130,7 @@ public:
     static TwistExpander_Aldebaran                  mSaiph; // 14
     static TwistExpander_Aldebaran                 mSirius; // 15
     static TwistExpander_Aldebaran                   mVega; // 16
-    
+    */
     
     
     static TwistExpander                        *mExpanders[SOCCER_EXPANDER_COUNT];

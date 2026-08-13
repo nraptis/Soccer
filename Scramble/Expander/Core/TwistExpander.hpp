@@ -82,6 +82,8 @@
 
 #define PARAMS_GROW \
     pWorkSpace, \
+    pCrossLaneA, \
+    pCrossLaneB, \
     MUTABLE_PARAMS_PASSED
 
 #define READ_IN_MUTABLE_PARAMS \
@@ -140,24 +142,6 @@ public:
                                                 TwistDomainConstants *pDomainConstants,
                                                 TwistDomainSaltSet *pDomainSaltSet);
     
-    virtual void                            KDF_A(TwistWorkSpace *pWorkSpace,
-                                                  std::uint64_t pNonce,
-                                                  TwistDomainConstants *pDomainConstants,
-                                                  TwistDomainSaltSet *pDomainSaltSet,
-                                                  MUTABLE_PARAMS);
-    
-    virtual void                            KDF_B(TwistWorkSpace *pWorkSpace,
-                                                  std::uint64_t pNonce,
-                                                  TwistDomainConstants *pDomainConstants,
-                                                  TwistDomainSaltSet *pDomainSaltSet,
-                                                  MUTABLE_PARAMS);
-
-    virtual void                            KDF_C(TwistWorkSpace *pWorkSpace,
-                                                  std::uint64_t pNonce,
-                                                  TwistDomainConstants *pDomainConstants,
-                                                  TwistDomainSaltSet *pDomainSaltSet,
-                                                  MUTABLE_PARAMS);
-
     virtual void                            Seed(TwistWorkSpace *pWorkSpace,
                                                  TwistFarmSalt *pFarmSalt,
                                                  std::uint64_t pNonce,
@@ -175,8 +159,12 @@ public:
                                                        bool pStifleKey);
 
     virtual void                            GrowKeyA(TwistWorkSpace *pWorkSpace,
+                                                     std::uint8_t *pCrossLaneA,
+                                                     std::uint8_t *pCrossLaneB,
                                                      MUTABLE_PARAMS);
     virtual void                            GrowKeyB(TwistWorkSpace *pWorkSpace,
+                                                     std::uint8_t *pCrossLaneA,
+                                                     std::uint8_t *pCrossLaneB,
                                                      MUTABLE_PARAMS);
     
     

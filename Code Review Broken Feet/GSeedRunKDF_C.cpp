@@ -1,4 +1,99 @@
+//
+//  GSeedRunKDF_C.cpp
+//  MeanMachine
+//
 
+#include "GSeedRunKDF_C.hpp"
+#include "ArrangementFour.hpp"
+#include "GPassFactoryMidstage.hpp"
+#include "GPassFactoryTrunk.hpp"
+#include "GSeedRunStageConfigValidator.hpp"
+#include "ResidualBucket.hpp"
+
+namespace {
+
+std::vector<TwistWorkSpaceSlot> ParamOrbiterAssignSalts() {
+    using Slot = TwistWorkSpaceSlot;
+    return {
+        Slot::kParamDomainSaltOrbiterAssignA,
+        Slot::kParamDomainSaltOrbiterAssignB,
+        Slot::kParamDomainSaltOrbiterAssignC,
+        Slot::kParamDomainSaltOrbiterAssignD,
+        Slot::kParamDomainSaltOrbiterAssignE,
+        Slot::kParamDomainSaltOrbiterAssignF,
+        Slot::kParamDomainSaltOrbiterAssignG,
+        Slot::kParamDomainSaltOrbiterAssignH,
+    };
+}
+
+std::vector<TwistWorkSpaceSlot> ParamOrbiterUpdateSalts() {
+    using Slot = TwistWorkSpaceSlot;
+    return {
+        Slot::kParamDomainSaltOrbiterUpdateA,
+        Slot::kParamDomainSaltOrbiterUpdateB,
+        Slot::kParamDomainSaltOrbiterUpdateC,
+        Slot::kParamDomainSaltOrbiterUpdateD,
+        Slot::kParamDomainSaltOrbiterUpdateE,
+        Slot::kParamDomainSaltOrbiterUpdateF,
+        Slot::kParamDomainSaltOrbiterUpdateG,
+        Slot::kParamDomainSaltOrbiterUpdateH,
+    };
+}
+
+std::vector<TwistWorkSpaceSlot> ParamWandererUpdateSalts() {
+    using Slot = TwistWorkSpaceSlot;
+    return {
+        Slot::kParamDomainSaltWandererUpdateA,
+        Slot::kParamDomainSaltWandererUpdateB,
+        Slot::kParamDomainSaltWandererUpdateC,
+        Slot::kParamDomainSaltWandererUpdateD,
+        Slot::kParamDomainSaltWandererUpdateE,
+        Slot::kParamDomainSaltWandererUpdateF,
+        Slot::kParamDomainSaltWandererUpdateG,
+        Slot::kParamDomainSaltWandererUpdateH,
+    };
+}
+
+GSeedRunStageConfig BaseConfig(const std::string &pStageName,
+                               const std::string &pBatchName,
+                               GAXSFormat pFormat) {
+    GSeedRunStageConfig aConfig;
+    aConfig.mStageName = pStageName;
+    aConfig.mBatchName = pBatchName;
+    aConfig.mStartLine = "// " + pStageName + " " + pBatchName + " (start)";
+    aConfig.mEndLine = "// " + pStageName + " " + pBatchName + " (end)";
+    aConfig.mFormat = pFormat;
+    aConfig.mIgnoreNonces = false;
+    aConfig.mDomain = TwistDomain::kInvalid;
+    aConfig.mIsNonKDF = false;
+    aConfig.mExpectedSkeletonCount = 6;
+    aConfig.mLoopCeiling = S_BLOCK;
+    aConfig.mLoopEndText = "S_BLOCK";
+    aConfig.mHotPackCount = 12;
+    aConfig.mSaltsOrbiterAssign = ParamOrbiterAssignSalts();
+    aConfig.mSaltsOrbiterUpdate = ParamOrbiterUpdateSalts();
+    aConfig.mSaltsWandererUpdate = ParamWandererUpdateSalts();
+    return aConfig;
+}
+
+void AddKDF_CPrologue(TwistProgramBranch &pBranch) {
+    pBranch.AddLine("std::uint64_t aDomainWordIngress = pConstants->mIngress;");
+    pBranch.AddLine("std::uint64_t aDomainWordScatter = pConstants->mScatter;");
+    pBranch.AddLine("std::uint64_t aDomainWordCross = pConstants->mCross;");
+    pBranch.AddLine("std::uint64_t aDomainWordMatrixSelectA = pConstants->mMatrixSelectA;");
+    pBranch.AddLine("std::uint64_t aDomainWordMatrixSelectB = pConstants->mMatrixSelectB;");
+    pBranch.AddLine("std::uint8_t aDomainWordMatrixUnrollA = pConstants->mMatrixUnrollA;");
+    pBranch.AddLine("std::uint8_t aDomainWordMatrixUnrollB = pConstants->mMatrixUnrollB;");
+    pBranch.AddLine("std::uint8_t aDomainWordMatrixArgA = pConstants->mMatrixArgA;");
+    pBranch.AddLine("std::uint8_t aDomainWordMatrixArgB = pConstants->mMatrixArgB;");
+    pBranch.AddLine("std::uint8_t aDomainWordMatrixArgC = pConstants->mMatrixArgC;");
+    pBranch.AddLine("std::uint8_t aDomainWordMatrixArgD = pConstants->mMatrixArgD;");
+    pBranch.AddLine("");
+}
+
+} // namespace
+
+namespace GSeedRunKDF_CConfig {
 
 KDFStageConfigs MakeKDF_CConfig(ResidualBucket &pResidualBucket,
                                 const std::size_t pCandidateIndex) {
@@ -23,6 +118,9 @@ KDFStageConfigs MakeKDF_CConfig(ResidualBucket &pResidualBucket,
 
     pResidualBucket.Remove(GPassFactoryMidstage::ToVector(aPrimarySourcesA));
     pResidualBucket.Remove(GPassFactoryMidstage::ToVector(aDestinationsA));
+
+    printf("at KDF C — Stage A, there were %zu residuals available\n",
+           pResidualBucket.CountValidResiduals());
 
     aResidualsPool = pResidualBucket.Withdraw("KDF C — Stage A", 15);
 
@@ -57,6 +155,9 @@ KDFStageConfigs MakeKDF_CConfig(ResidualBucket &pResidualBucket,
 
     pResidualBucket.Remove(GPassFactoryMidstage::ToVector(aPrimarySourcesB));
     pResidualBucket.Remove(GPassFactoryMidstage::ToVector(aDestinationsB));
+
+    printf("at KDF C — Stage B, there were %zu residuals available\n",
+           pResidualBucket.CountValidResiduals());
 
     aResidualsPool = pResidualBucket.Withdraw("KDF C — Stage B", 15);
 
@@ -101,6 +202,9 @@ KDFStageConfigs MakeKDF_CConfig(ResidualBucket &pResidualBucket,
     pResidualBucket.Remove(GPassFactoryMidstage::ToVector(aPrimarySourcesC));
     pResidualBucket.Remove(GPassFactoryMidstage::ToVector(aDestinationsC));
 
+    printf("at KDF C — Stage C, there were %zu residuals available\n",
+           pResidualBucket.CountValidResiduals());
+
     aResidualsPool = pResidualBucket.Withdraw("KDF C — Stage C", 15);
 
     const GPassFactoryMidstage::SlotArray16 aResidualsC = {
@@ -122,4 +226,117 @@ KDFStageConfigs MakeKDF_CConfig(ResidualBucket &pResidualBucket,
         Slot::kShadowLaneD,
     });
 
+    // Stage Construction
+
+    //
+    // Build and validate KDF C — Stage A
+    //
+    GSeedRunStageConfig aConfigA = BaseConfig("GSeedRunKDF_C_A",
+                                              "kdf_c_loop_a",
+                                              GAXSFormat::kN11);
+    aConfigA.mSlices =
+        GPassFactoryMidstage::FourPassSixteenResidualSlices(aPrimarySourcesA,
+                                                    aResidualsA,
+                                                    aDestinationsA);
+    aConfigA.mExpectedSkeletonCount =
+        static_cast<int>(aDestinationsA.size());
+    aConfigA.mHotPackCount =
+        static_cast<int>(aDestinationsA.size());
+
+    std::string aErrorMessageA;
+    if (!GSeedRunStageConfigValidator::ValidateMidstage(
+            aConfigA,
+            GPassFactoryMidstage::ToVector(aPrimarySourcesA),
+            GPassFactoryMidstage::ToVector(aResidualsA),
+            GPassFactoryMidstage::ToVector(aDestinationsA),
+            &aErrorMessageA)) {
+        printf("MakeKDF_CConfig stage A was not valid with ValidateMidstage");
+        printf("%s\n", aErrorMessageA.c_str());
+        exit(0);
+    }
+    aConfigs[0] = aConfigA;
+
+    //
+    // Build and validate KDF C — Stage B
+    //
+    GSeedRunStageConfig aConfigB = BaseConfig("GSeedRunKDF_C_B",
+                                              "kdf_c_loop_b",
+                                              GAXSFormat::kN11);
+    aConfigB.mSlices =
+        GPassFactoryMidstage::FourPassSixteenResidualSlices(aPrimarySourcesB,
+                                                    aResidualsB,
+                                                    aDestinationsB);
+    aConfigB.mExpectedSkeletonCount =
+        static_cast<int>(aDestinationsB.size());
+    aConfigB.mHotPackCount =
+        static_cast<int>(aDestinationsB.size());
+
+    std::string aErrorMessageB;
+    if (!GSeedRunStageConfigValidator::ValidateMidstage(
+            aConfigB,
+            GPassFactoryMidstage::ToVector(aPrimarySourcesB),
+            GPassFactoryMidstage::ToVector(aResidualsB),
+            GPassFactoryMidstage::ToVector(aDestinationsB),
+            &aErrorMessageB)) {
+        printf("MakeKDF_CConfig stage B was not valid with ValidateMidstage");
+        printf("%s\n", aErrorMessageB.c_str());
+        exit(0);
+    }
+    aConfigs[1] = aConfigB;
+
+    //
+    // Build and validate KDF C — Stage C
+    //
+    const ArrangementFour::SlotArray4 aArrangedPrimarySourcesC =
+        ArrangementFour::Arrange(aPrimarySourcesC,
+                                 static_cast<int>(pCandidateIndex),
+                                 12);
+
+    GSeedRunStageConfig aConfigC = BaseConfig("GSeedRunKDF_C_C",
+                                              "kdf_c_loop_c",
+                                              GAXSFormat::kN11);
+    aConfigC.mSlices =
+        GPassFactoryTrunk::FourPassTrunkSlices(aArrangedPrimarySourcesC,
+                                               aResidualsC,
+                                               aDestinationsC);
+    aConfigC.mExpectedSkeletonCount =
+        static_cast<int>(aDestinationsC.size());
+    aConfigC.mHotPackCount =
+        static_cast<int>(aDestinationsC.size());
+
+    std::string aErrorMessageC;
+    if (!GSeedRunStageConfigValidator::ValidateTrunk(
+            aConfigC,
+            GPassFactoryMidstage::ToVector(aArrangedPrimarySourcesC),
+            GPassFactoryMidstage::ToVector(aResidualsC),
+            GPassFactoryMidstage::ToVector(aDestinationsC),
+            &aErrorMessageC)) {
+        printf("MakeKDF_CConfig stage C was not valid with ValidateTrunk");
+        printf("%s\n", aErrorMessageC.c_str());
+        exit(0);
+    }
+    aConfigs[2] = aConfigC;
+
+    return aConfigs;
+}
+
+} // namespace GSeedRunKDF_CConfig
+
+GSeedRunKDF_C::GSeedRunKDF_C(
+    const GSeedRunStageConfig &pConfig,
+    const bool pEmitPrologue)
+: mStage(pConfig),
+  mEmitPrologue(pEmitPrologue) {
+}
+
+bool GSeedRunKDF_C::Plan(std::string *pErrorMessage) {
+    return mStage.Plan(pErrorMessage);
+}
+
+bool GSeedRunKDF_C::Build(TwistProgramBranch &pBranch,
+                          std::string *pErrorMessage) {
+    if (mEmitPrologue) {
+        AddKDF_CPrologue(pBranch);
+    }
+    return mStage.Build(pBranch, pErrorMessage);
 }

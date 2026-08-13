@@ -28,48 +28,6 @@ void TwistExpander::KDF(std::uint64_t pNonce,
     (void)pDomainSaltSet;
 }
 
-void TwistExpander::KDF_A(TwistWorkSpace *pWorkSpace,
-                          std::uint64_t pNonce,
-                          TwistDomainConstants *pDomainConstants,
-                          TwistDomainSaltSet *pDomainSaltSet,
-                          MUTABLE_PARAMS) {
-    (void)pWorkSpace;
-    (void)pIngress;
-    (void)pCarry;
-    (void)pWandererA;
-    (void)pWandererB;
-    (void)pWandererC;
-    (void)pWandererD;
-    (void)pWandererE;
-    (void)pWandererF;
-    (void)pWandererG;
-    (void)pWandererH;
-    (void)pWandererI;
-    (void)pWandererJ;
-    (void)pWandererK;
-    TwistExpander::KDF(pNonce,
-                       pDomainConstants,
-                       pDomainSaltSet);
-}
-
-void TwistExpander::KDF_B(TwistWorkSpace *pWorkSpace,
-                          std::uint64_t pNonce,
-                          TwistDomainConstants *pDomainConstants,
-                          TwistDomainSaltSet *pDomainSaltSet,
-                          MUTABLE_PARAMS) {
-    TwistExpander::KDF_A(pWorkSpace, pNonce, pDomainConstants, pDomainSaltSet,
-                         MUTABLE_PARAMS_PASSED);
-}
-
-void TwistExpander::KDF_C(TwistWorkSpace *pWorkSpace,
-                          std::uint64_t pNonce,
-                          TwistDomainConstants *pDomainConstants,
-                          TwistDomainSaltSet *pDomainSaltSet,
-                          MUTABLE_PARAMS) {
-    TwistExpander::KDF_A(pWorkSpace, pNonce, pDomainConstants, pDomainSaltSet,
-                         MUTABLE_PARAMS_PASSED);
-}
-
 void TwistExpander::Seed(TwistWorkSpace *pWorkSpace,
                          TwistFarmSalt *pFarmSalt,
                          std::uint64_t pNonce,
@@ -118,8 +76,12 @@ void TwistExpander::TwistBlock(TwistWorkSpace *pWorkSpace,
 }
 
 void TwistExpander::GrowKeyA(TwistWorkSpace *pWorkSpace,
+                             std::uint8_t *pCrossLaneA,
+                             std::uint8_t *pCrossLaneB,
                              MUTABLE_PARAMS) {
     (void)pWorkSpace;
+    (void)pCrossLaneA;
+    (void)pCrossLaneB;
     (void)pIngress;
     (void)pCarry;
     (void)pWandererA;
@@ -136,8 +98,12 @@ void TwistExpander::GrowKeyA(TwistWorkSpace *pWorkSpace,
 }
 
 void TwistExpander::GrowKeyB(TwistWorkSpace *pWorkSpace,
+                             std::uint8_t *pCrossLaneA,
+                             std::uint8_t *pCrossLaneB,
                              MUTABLE_PARAMS) {
     (void)pWorkSpace;
+    (void)pCrossLaneA;
+    (void)pCrossLaneB;
     (void)pIngress;
     (void)pCarry;
     (void)pWandererA;

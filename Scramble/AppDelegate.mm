@@ -36,12 +36,17 @@ sgrow: 3.40
 tmain: 121.07
 tgrow: 111.47
  ------
-16 exanders
+16 exanders (old numbers)
 kdf: 64.66
-smain: 12.19
-sgrow: 6.42
-tmain: 243.09
-tgrow: 223.80
+seed: 12.19 + 6.42
+twist_all: 243.09 + 223.80
+twist_grow: 223.80
+
+16 exanders (new numbers)
+kdf: 38.33
+seed: 14.93
+twist_all: 74.10
+twist_grow: 13.21
  
 */
 
@@ -360,6 +365,18 @@ bool RunReadmeSoccerExample() {
             }
         }
         
+        double aSeconds_KDF = Time_Poll("kdf");
+        double aSeconds_Seed = Time_Poll("seed");
+        double aSeconds_TwistAll = Time_Poll("twist_all");
+        double aSeconds_TwistGrow = Time_Poll("twist_grow");
+        
+        printf("End Trial, Str = %d\n", (int)aStrength);
+        printf("kdf: %.2f\n", aSeconds_KDF);
+        printf("seed: %.2f\n", aSeconds_Seed);
+        printf("twist_all: %.2f\n", aSeconds_TwistAll);
+        printf("twist_grow: %.2f\n", aSeconds_TwistGrow);
+        
+        /*
         double aSeconds_ArxA = Time_Poll("arx_a");
         double aSeconds_ArxB = Time_Poll("arx_b");
         double aSeconds_DiffuseA = Time_Poll("diffuse_a");
@@ -371,6 +388,7 @@ bool RunReadmeSoccerExample() {
         printf("arx_b: %.2f\n", aSeconds_ArxB);
         printf("diffuse_a: %.2f\n", aSeconds_DiffuseA);
         printf("diffuse_b: %.2f\n", aSeconds_DiffuseB);
+        */
         
         
     }

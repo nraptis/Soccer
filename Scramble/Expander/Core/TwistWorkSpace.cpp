@@ -330,6 +330,10 @@ std::uint8_t *TwistWorkSpace::GetBuffer(TwistWorkSpace *pWorkSpace,
         case TwistWorkSpaceSlot::kWaterLaneB: return pWorkSpace->mWaterLaneB;
         case TwistWorkSpaceSlot::kWaterLaneC: return pWorkSpace->mWaterLaneC;
         case TwistWorkSpaceSlot::kWaterLaneD: return pWorkSpace->mWaterLaneD;
+        case TwistWorkSpaceSlot::kHeartLaneA: return pWorkSpace->mHeartLaneA;
+        case TwistWorkSpaceSlot::kHeartLaneB: return pWorkSpace->mHeartLaneB;
+        case TwistWorkSpaceSlot::kHeartLaneC: return pWorkSpace->mHeartLaneC;
+        case TwistWorkSpaceSlot::kHeartLaneD: return pWorkSpace->mHeartLaneD;
         case TwistWorkSpaceSlot::kEarthLaneA: return pWorkSpace->mEarthLaneA;
         case TwistWorkSpaceSlot::kEarthLaneB: return pWorkSpace->mEarthLaneB;
         case TwistWorkSpaceSlot::kEarthLaneC: return pWorkSpace->mEarthLaneC;
@@ -369,6 +373,82 @@ std::uint8_t *TwistWorkSpace::GetBuffer(TwistWorkSpace *pWorkSpace,
         case TwistWorkSpaceSlot::kVaporLaneB: return pWorkSpace->mVaporLaneB;
         case TwistWorkSpaceSlot::kVaporLaneC: return pWorkSpace->mVaporLaneC;
         case TwistWorkSpaceSlot::kVaporLaneD: return pWorkSpace->mVaporLaneD;
+        case TwistWorkSpaceSlot::kKineticLaneA: return pWorkSpace->mKineticLaneA;
+        case TwistWorkSpaceSlot::kKineticLaneB: return pWorkSpace->mKineticLaneB;
+        case TwistWorkSpaceSlot::kKineticLaneC: return pWorkSpace->mKineticLaneC;
+        case TwistWorkSpaceSlot::kKineticLaneD: return pWorkSpace->mKineticLaneD;
+        case TwistWorkSpaceSlot::kSonicLaneA: return pWorkSpace->mSonicLaneA;
+        case TwistWorkSpaceSlot::kSonicLaneB: return pWorkSpace->mSonicLaneB;
+        case TwistWorkSpaceSlot::kSonicLaneC: return pWorkSpace->mSonicLaneC;
+        case TwistWorkSpaceSlot::kSonicLaneD: return pWorkSpace->mSonicLaneD;
+        case TwistWorkSpaceSlot::kPlanarLaneA: return pWorkSpace->mPlanarLaneA;
+        case TwistWorkSpaceSlot::kPlanarLaneB: return pWorkSpace->mPlanarLaneB;
+        case TwistWorkSpaceSlot::kPlanarLaneC: return pWorkSpace->mPlanarLaneC;
+        case TwistWorkSpaceSlot::kPlanarLaneD: return pWorkSpace->mPlanarLaneD;
+        case TwistWorkSpaceSlot::kFrostLaneA: return pWorkSpace->mFrostLaneA;
+        case TwistWorkSpaceSlot::kFrostLaneB: return pWorkSpace->mFrostLaneB;
+        case TwistWorkSpaceSlot::kFrostLaneC: return pWorkSpace->mFrostLaneC;
+        case TwistWorkSpaceSlot::kFrostLaneD: return pWorkSpace->mFrostLaneD;
+        case TwistWorkSpaceSlot::kArcaneLaneA: return pWorkSpace->mArcaneLaneA;
+        case TwistWorkSpaceSlot::kArcaneLaneB: return pWorkSpace->mArcaneLaneB;
+        case TwistWorkSpaceSlot::kArcaneLaneC: return pWorkSpace->mArcaneLaneC;
+        case TwistWorkSpaceSlot::kArcaneLaneD: return pWorkSpace->mArcaneLaneD;
+        case TwistWorkSpaceSlot::kLunarLaneA: return pWorkSpace->mLunarLaneA;
+        case TwistWorkSpaceSlot::kLunarLaneB: return pWorkSpace->mLunarLaneB;
+        case TwistWorkSpaceSlot::kLunarLaneC: return pWorkSpace->mLunarLaneC;
+        case TwistWorkSpaceSlot::kLunarLaneD: return pWorkSpace->mLunarLaneD;
+        case TwistWorkSpaceSlot::kRunicLaneA: return pWorkSpace->mRunicLaneA;
+        case TwistWorkSpaceSlot::kRunicLaneB: return pWorkSpace->mRunicLaneB;
+        case TwistWorkSpaceSlot::kRunicLaneC: return pWorkSpace->mRunicLaneC;
+        case TwistWorkSpaceSlot::kRunicLaneD: return pWorkSpace->mRunicLaneD;
+        case TwistWorkSpaceSlot::kGloomLaneA: return pWorkSpace->mGloomLaneA;
+        case TwistWorkSpaceSlot::kGloomLaneB: return pWorkSpace->mGloomLaneB;
+        case TwistWorkSpaceSlot::kGloomLaneC: return pWorkSpace->mGloomLaneC;
+        case TwistWorkSpaceSlot::kGloomLaneD: return pWorkSpace->mGloomLaneD;
+        case TwistWorkSpaceSlot::kAbjurationLaneA: return pWorkSpace->mAbjurationLaneA;
+        case TwistWorkSpaceSlot::kAbjurationLaneB: return pWorkSpace->mAbjurationLaneB;
+        case TwistWorkSpaceSlot::kAbjurationLaneC: return pWorkSpace->mAbjurationLaneC;
+        case TwistWorkSpaceSlot::kAbjurationLaneD: return pWorkSpace->mAbjurationLaneD;
+        case TwistWorkSpaceSlot::kDivinationLaneA: return pWorkSpace->mDivinationLaneA;
+        case TwistWorkSpaceSlot::kDivinationLaneB: return pWorkSpace->mDivinationLaneB;
+        case TwistWorkSpaceSlot::kDivinationLaneC: return pWorkSpace->mDivinationLaneC;
+        case TwistWorkSpaceSlot::kDivinationLaneD: return pWorkSpace->mDivinationLaneD;
+        case TwistWorkSpaceSlot::kEvocationLaneA: return pWorkSpace->mEvocationLaneA;
+        case TwistWorkSpaceSlot::kEvocationLaneB: return pWorkSpace->mEvocationLaneB;
+        case TwistWorkSpaceSlot::kEvocationLaneC: return pWorkSpace->mEvocationLaneC;
+        case TwistWorkSpaceSlot::kEvocationLaneD: return pWorkSpace->mEvocationLaneD;
+        case TwistWorkSpaceSlot::kAuguryLaneA: return pWorkSpace->mAuguryLaneA;
+        case TwistWorkSpaceSlot::kAuguryLaneB: return pWorkSpace->mAuguryLaneB;
+        case TwistWorkSpaceSlot::kAuguryLaneC: return pWorkSpace->mAuguryLaneC;
+        case TwistWorkSpaceSlot::kAuguryLaneD: return pWorkSpace->mAuguryLaneD;
+        case TwistWorkSpaceSlot::kProphecyLaneA: return pWorkSpace->mProphecyLaneA;
+        case TwistWorkSpaceSlot::kProphecyLaneB: return pWorkSpace->mProphecyLaneB;
+        case TwistWorkSpaceSlot::kProphecyLaneC: return pWorkSpace->mProphecyLaneC;
+        case TwistWorkSpaceSlot::kProphecyLaneD: return pWorkSpace->mProphecyLaneD;
+        case TwistWorkSpaceSlot::kTransmutationLaneA: return pWorkSpace->mTransmutationLaneA;
+        case TwistWorkSpaceSlot::kTransmutationLaneB: return pWorkSpace->mTransmutationLaneB;
+        case TwistWorkSpaceSlot::kTransmutationLaneC: return pWorkSpace->mTransmutationLaneC;
+        case TwistWorkSpaceSlot::kTransmutationLaneD: return pWorkSpace->mTransmutationLaneD;
+        case TwistWorkSpaceSlot::kRestorationLaneA: return pWorkSpace->mRestorationLaneA;
+        case TwistWorkSpaceSlot::kRestorationLaneB: return pWorkSpace->mRestorationLaneB;
+        case TwistWorkSpaceSlot::kRestorationLaneC: return pWorkSpace->mRestorationLaneC;
+        case TwistWorkSpaceSlot::kRestorationLaneD: return pWorkSpace->mRestorationLaneD;
+        case TwistWorkSpaceSlot::kStasisLaneA: return pWorkSpace->mStasisLaneA;
+        case TwistWorkSpaceSlot::kStasisLaneB: return pWorkSpace->mStasisLaneB;
+        case TwistWorkSpaceSlot::kStasisLaneC: return pWorkSpace->mStasisLaneC;
+        case TwistWorkSpaceSlot::kStasisLaneD: return pWorkSpace->mStasisLaneD;
+        case TwistWorkSpaceSlot::kMysticalLaneA: return pWorkSpace->mMysticalLaneA;
+        case TwistWorkSpaceSlot::kMysticalLaneB: return pWorkSpace->mMysticalLaneB;
+        case TwistWorkSpaceSlot::kMysticalLaneC: return pWorkSpace->mMysticalLaneC;
+        case TwistWorkSpaceSlot::kMysticalLaneD: return pWorkSpace->mMysticalLaneD;
+        case TwistWorkSpaceSlot::kCovenLaneA: return pWorkSpace->mCovenLaneA;
+        case TwistWorkSpaceSlot::kCovenLaneB: return pWorkSpace->mCovenLaneB;
+        case TwistWorkSpaceSlot::kCovenLaneC: return pWorkSpace->mCovenLaneC;
+        case TwistWorkSpaceSlot::kCovenLaneD: return pWorkSpace->mCovenLaneD;
+        case TwistWorkSpaceSlot::kAlchemyLaneA: return pWorkSpace->mAlchemyLaneA;
+        case TwistWorkSpaceSlot::kAlchemyLaneB: return pWorkSpace->mAlchemyLaneB;
+        case TwistWorkSpaceSlot::kAlchemyLaneC: return pWorkSpace->mAlchemyLaneC;
+        case TwistWorkSpaceSlot::kAlchemyLaneD: return pWorkSpace->mAlchemyLaneD;
         case TwistWorkSpaceSlot::kIceLaneA: return pWorkSpace->mIceLaneA;
         case TwistWorkSpaceSlot::kIceLaneB: return pWorkSpace->mIceLaneB;
         case TwistWorkSpaceSlot::kIceLaneC: return pWorkSpace->mIceLaneC;
@@ -580,6 +660,11 @@ void TwistWorkSpace::Zero_PostSeed() {
     memset(mWaterLaneC, 0, sizeof(mWaterLaneC));
     memset(mWaterLaneD, 0, sizeof(mWaterLaneD));
 
+    memset(mHeartLaneA, 0, sizeof(mHeartLaneA));
+    memset(mHeartLaneB, 0, sizeof(mHeartLaneB));
+    memset(mHeartLaneC, 0, sizeof(mHeartLaneC));
+    memset(mHeartLaneD, 0, sizeof(mHeartLaneD));
+
     memset(mEarthLaneA, 0, sizeof(mEarthLaneA));
     memset(mEarthLaneB, 0, sizeof(mEarthLaneB));
     memset(mEarthLaneC, 0, sizeof(mEarthLaneC));
@@ -627,6 +712,101 @@ void TwistWorkSpace::Zero_PostSeed() {
     memset(mVaporLaneB, 0, sizeof(mVaporLaneB));
     memset(mVaporLaneC, 0, sizeof(mVaporLaneC));
     memset(mVaporLaneD, 0, sizeof(mVaporLaneD));
+
+    memset(mKineticLaneA, 0, sizeof(mKineticLaneA));
+    memset(mKineticLaneB, 0, sizeof(mKineticLaneB));
+    memset(mKineticLaneC, 0, sizeof(mKineticLaneC));
+    memset(mKineticLaneD, 0, sizeof(mKineticLaneD));
+
+    memset(mSonicLaneA, 0, sizeof(mSonicLaneA));
+    memset(mSonicLaneB, 0, sizeof(mSonicLaneB));
+    memset(mSonicLaneC, 0, sizeof(mSonicLaneC));
+    memset(mSonicLaneD, 0, sizeof(mSonicLaneD));
+
+    memset(mPlanarLaneA, 0, sizeof(mPlanarLaneA));
+    memset(mPlanarLaneB, 0, sizeof(mPlanarLaneB));
+    memset(mPlanarLaneC, 0, sizeof(mPlanarLaneC));
+    memset(mPlanarLaneD, 0, sizeof(mPlanarLaneD));
+
+    memset(mFrostLaneA, 0, sizeof(mFrostLaneA));
+    memset(mFrostLaneB, 0, sizeof(mFrostLaneB));
+    memset(mFrostLaneC, 0, sizeof(mFrostLaneC));
+    memset(mFrostLaneD, 0, sizeof(mFrostLaneD));
+
+    memset(mArcaneLaneA, 0, sizeof(mArcaneLaneA));
+    memset(mArcaneLaneB, 0, sizeof(mArcaneLaneB));
+    memset(mArcaneLaneC, 0, sizeof(mArcaneLaneC));
+    memset(mArcaneLaneD, 0, sizeof(mArcaneLaneD));
+
+    memset(mLunarLaneA, 0, sizeof(mLunarLaneA));
+    memset(mLunarLaneB, 0, sizeof(mLunarLaneB));
+    memset(mLunarLaneC, 0, sizeof(mLunarLaneC));
+    memset(mLunarLaneD, 0, sizeof(mLunarLaneD));
+
+    memset(mRunicLaneA, 0, sizeof(mRunicLaneA));
+    memset(mRunicLaneB, 0, sizeof(mRunicLaneB));
+    memset(mRunicLaneC, 0, sizeof(mRunicLaneC));
+    memset(mRunicLaneD, 0, sizeof(mRunicLaneD));
+
+    memset(mGloomLaneA, 0, sizeof(mGloomLaneA));
+    memset(mGloomLaneB, 0, sizeof(mGloomLaneB));
+    memset(mGloomLaneC, 0, sizeof(mGloomLaneC));
+    memset(mGloomLaneD, 0, sizeof(mGloomLaneD));
+
+    memset(mAbjurationLaneA, 0, sizeof(mAbjurationLaneA));
+    memset(mAbjurationLaneB, 0, sizeof(mAbjurationLaneB));
+    memset(mAbjurationLaneC, 0, sizeof(mAbjurationLaneC));
+    memset(mAbjurationLaneD, 0, sizeof(mAbjurationLaneD));
+
+    memset(mDivinationLaneA, 0, sizeof(mDivinationLaneA));
+    memset(mDivinationLaneB, 0, sizeof(mDivinationLaneB));
+    memset(mDivinationLaneC, 0, sizeof(mDivinationLaneC));
+    memset(mDivinationLaneD, 0, sizeof(mDivinationLaneD));
+
+    memset(mEvocationLaneA, 0, sizeof(mEvocationLaneA));
+    memset(mEvocationLaneB, 0, sizeof(mEvocationLaneB));
+    memset(mEvocationLaneC, 0, sizeof(mEvocationLaneC));
+    memset(mEvocationLaneD, 0, sizeof(mEvocationLaneD));
+
+    memset(mAuguryLaneA, 0, sizeof(mAuguryLaneA));
+    memset(mAuguryLaneB, 0, sizeof(mAuguryLaneB));
+    memset(mAuguryLaneC, 0, sizeof(mAuguryLaneC));
+    memset(mAuguryLaneD, 0, sizeof(mAuguryLaneD));
+
+    memset(mProphecyLaneA, 0, sizeof(mProphecyLaneA));
+    memset(mProphecyLaneB, 0, sizeof(mProphecyLaneB));
+    memset(mProphecyLaneC, 0, sizeof(mProphecyLaneC));
+    memset(mProphecyLaneD, 0, sizeof(mProphecyLaneD));
+
+    memset(mTransmutationLaneA, 0, sizeof(mTransmutationLaneA));
+    memset(mTransmutationLaneB, 0, sizeof(mTransmutationLaneB));
+    memset(mTransmutationLaneC, 0, sizeof(mTransmutationLaneC));
+    memset(mTransmutationLaneD, 0, sizeof(mTransmutationLaneD));
+
+    memset(mRestorationLaneA, 0, sizeof(mRestorationLaneA));
+    memset(mRestorationLaneB, 0, sizeof(mRestorationLaneB));
+    memset(mRestorationLaneC, 0, sizeof(mRestorationLaneC));
+    memset(mRestorationLaneD, 0, sizeof(mRestorationLaneD));
+
+    memset(mStasisLaneA, 0, sizeof(mStasisLaneA));
+    memset(mStasisLaneB, 0, sizeof(mStasisLaneB));
+    memset(mStasisLaneC, 0, sizeof(mStasisLaneC));
+    memset(mStasisLaneD, 0, sizeof(mStasisLaneD));
+
+    memset(mMysticalLaneA, 0, sizeof(mMysticalLaneA));
+    memset(mMysticalLaneB, 0, sizeof(mMysticalLaneB));
+    memset(mMysticalLaneC, 0, sizeof(mMysticalLaneC));
+    memset(mMysticalLaneD, 0, sizeof(mMysticalLaneD));
+
+    memset(mCovenLaneA, 0, sizeof(mCovenLaneA));
+    memset(mCovenLaneB, 0, sizeof(mCovenLaneB));
+    memset(mCovenLaneC, 0, sizeof(mCovenLaneC));
+    memset(mCovenLaneD, 0, sizeof(mCovenLaneD));
+
+    memset(mAlchemyLaneA, 0, sizeof(mAlchemyLaneA));
+    memset(mAlchemyLaneB, 0, sizeof(mAlchemyLaneB));
+    memset(mAlchemyLaneC, 0, sizeof(mAlchemyLaneC));
+    memset(mAlchemyLaneD, 0, sizeof(mAlchemyLaneD));
 
     memset(mIceLaneA, 0, sizeof(mIceLaneA));
     memset(mIceLaneB, 0, sizeof(mIceLaneB));

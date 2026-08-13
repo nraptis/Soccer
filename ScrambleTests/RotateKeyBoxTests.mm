@@ -24,6 +24,33 @@
 
 @implementation RotateKeyBoxTests
 
+- (void)test_ShiftKeyBoxLoopin {
+    
+    TwistWorkSpace aWorkSpace;
+    memset(aWorkSpace.mKeyBoxA[0], 'a', W_KEY);
+    memset(aWorkSpace.mKeyBoxA[1], 'b', W_KEY);
+    memset(aWorkSpace.mKeyBoxA[2], 'c', W_KEY);
+    memset(aWorkSpace.mKeyBoxA[3], 'd', W_KEY);
+    memset(aWorkSpace.mKeyBoxA[4], 'e', W_KEY);
+    memset(aWorkSpace.mKeyBoxA[5], 'f', W_KEY);
+    memset(aWorkSpace.mKeyBoxA[6], 'g', W_KEY);
+    memset(aWorkSpace.mKeyBoxA[7], 'h', W_KEY);
+    
+    for (std::size_t aBlockIndex=0;aBlockIndex<32;aBlockIndex++) {
+        const bool aStifleKey = (aBlockIndex >= (32 - H_KEY));
+        
+        if (aStifleKey) {
+            aWorkSpace.ShiftKeyBoxA(&aWorkSpace.mKeyBoxA[0][0]);
+            
+            printf("on block %zu, we shifted\n", aBlockIndex);
+            
+            for (std::size_t aIndex=0; aIndex<H_KEY; aIndex++) {
+                printf("key[%zu] = %c\n", aIndex, aWorkSpace.mKeyBoxA[aIndex][0]);
+            }
+        }
+    }
+}
+
 - (void)test_ShiftKeyBoxA {
     
     uint8_t aRow_00[W_KEY];

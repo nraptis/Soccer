@@ -26,7 +26,6 @@
     std::size_t aLaneCount = 4;
     EncryptionStrength aEncryptionStrength = EncryptionStrength::kWeak;
     
-    
     std::uint8_t aSources_A[16][S_BLOCK];
     std::uint8_t aCrosses_A_A[16][S_BLOCK];
     std::uint8_t aCrosses_B_A[16][S_BLOCK];
