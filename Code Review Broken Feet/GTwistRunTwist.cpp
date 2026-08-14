@@ -8,8 +8,8 @@
 #include "GPassFactoryMidstage.hpp"
 #include "GPassFactoryStarter.hpp"
 #include "GPassFactoryTrunk.hpp"
-#include "GQuick.hpp"
-#include "Random.hpp"
+#include "GFlowPlans.hpp"
+#include "GMagicNumbers.hpp"
 #include "ResidualBucket.hpp"
 #include "GSeedRunStageConfigValidator.hpp"
 #include <array>
@@ -83,21 +83,43 @@ GSeedRunStageConfig BaseConfig(const std::string &pStageName,
     return aConfig;
 }
 
-void AddTwistPrologue(TwistProgramBranch &pBranch) {
-    GBatch aInitBatch;
-    aInitBatch.mName = "init varz";
-    aInitBatch.mExportsAsBlock = false;
+bool AddTwistPrologue(TwistProgramBranch &pBranch,
+                      std::string *pErrorMessage) {
+    static_assert(G_HOT_PACK_SIZE >= kInitialRandomVariables.size(),
+                  "A HotPack must contain every Twist ARX-state addition");
 
-    std::vector<GStatement> aInitStatements;
-    for (TwistVariable aVariable : kInitialRandomVariables) {
-        aInitStatements.push_back(
-            GQuick::MakeAssignVariableStatement(
-                GSymbol::Var(aVariable),
-                GExpr::Const64Hex(Random::Get64High())));
+    const std::vector<GHotPack> aHotPacks =
+        GMagicNumbers::GetHotPacks(1);
+    if (aHotPacks.empty()) {
+        if (pErrorMessage != nullptr) {
+            *pErrorMessage =
+                "GTwistRunTwist could not obtain a HotPack for the "
+                "Twist ARX-state additions";
+        }
+        return false;
     }
-    aInitBatch.CommitStatements(&aInitStatements);
-    pBranch.AddBatch(aInitBatch);
+    const GHotPack &aHotPack = aHotPacks.front();
+
+    for (std::size_t aIndex = 0U;
+         aIndex < kInitialRandomVariables.size();
+         ++aIndex) {
+        const TwistVariable aVariable =
+            kInitialRandomVariables[aIndex];
+        const std::string aName = GSymbol::Var(aVariable).mName;
+        const std::uint64_t aAddWord =
+            aHotPack.mPair[aIndex].mAdd;
+        char aLiteral[32] = {};
+        std::snprintf(aLiteral,
+                      sizeof(aLiteral),
+                      "0x%016llXULL",
+                      static_cast<unsigned long long>(aAddWord));
+        pBranch.AddLine(
+            "std::uint64_t " + aName + " = *p" +
+            aName.substr(1U) + " + " + aLiteral + ";"
+        );
+    }
     pBranch.AddLine("");
+    return true;
 }
 
 } // namespace
@@ -112,18 +134,21 @@ TwistStageConfigs MakeTwistConfig(ResidualBucket &pResidualBucket,
     std::vector<Slot> aResidualsPool;
 
     // Lane Plan
+    const std::vector<GFlowStep> aLanePlans =
+        GFlowPlans::ARXSteps(GFlowPlans::Twist());
 
     //
     // Twist — Stage A
-    // Source and key rows become Earth A-D.
     //
+    const std::vector<Slot> aPrimarySourcesAVector =
+        GFlowPlans::InputSlots(aLanePlans[0]);
     const GPassFactoryMidstage::SlotArray3 aPrimarySourcesA = {
-        Slot::kSourceLane, Slot::kKeyRowReadA, Slot::kKeyRowReadB,
+        aPrimarySourcesAVector[0],
+        aPrimarySourcesAVector[1],
+        aPrimarySourcesAVector[2],
     };
-    const GPassFactoryMidstage::SlotArray4 aDestinationsA = {
-        Slot::kEarthLaneA, Slot::kEarthLaneB,
-        Slot::kEarthLaneC, Slot::kEarthLaneD,
-    };
+    const GPassFactoryMidstage::SlotArray4 aDestinationsA =
+        GFlowPlans::FamilySlots(aLanePlans[0].mOutput);
     const GPassFactoryMidstage::SlotArray4 aResidualsA = {
         Slot::kParamCrossA, Slot::kParamCrossB,
         Slot::kParamCrossC, Slot::kParamCrossD,
@@ -134,27 +159,23 @@ TwistStageConfigs MakeTwistConfig(ResidualBucket &pResidualBucket,
     pResidualBucket.Remove(
         GPassFactoryMidstage::ToVector(aDestinationsA));
 
-    //
-    pResidualBucket.AddResiduals("Twist — Stage A inputs", {
-        Slot::kSourceLane,
-        Slot::kKeyRowReadA, Slot::kKeyRowReadB,
-    });
+    pResidualBucket.AddResiduals(
+        "Twist — Stage A inputs",
+        GFlowPlans::InputSlots(aLanePlans[0]));
     pResidualBucket.AddResiduals("Twist — Stage A cross lanes", {
-        Slot::kParamCrossA, Slot::kParamCrossB,
-        Slot::kParamCrossC, Slot::kParamCrossD,
+        GFlowPlans::FirstSlot(GFlowLane::kCrossA),
+        GFlowPlans::FirstSlot(GFlowLane::kCrossB),
+        GFlowPlans::FirstSlot(GFlowLane::kCrossC),
+        GFlowPlans::FirstSlot(GFlowLane::kCrossD),
     }, 1U);
 
     //
     // Twist — Stage B
     //
-    const GPassFactoryMidstage::SlotArray4 aPrimarySourcesB = {
-        Slot::kEarthLaneA, Slot::kEarthLaneB,
-        Slot::kEarthLaneC, Slot::kEarthLaneD,
-    };
-    const GPassFactoryMidstage::SlotArray4 aDestinationsB = {
-        Slot::kFireLaneA, Slot::kFireLaneB,
-        Slot::kFireLaneC, Slot::kFireLaneD,
-    };
+    const GPassFactoryMidstage::SlotArray4 aPrimarySourcesB =
+        GFlowPlans::FamilySlots(aLanePlans[1].mInputs[0]);
+    const GPassFactoryMidstage::SlotArray4 aDestinationsB =
+        GFlowPlans::FamilySlots(aLanePlans[1].mOutput);
 
     pResidualBucket.Remove(
         GPassFactoryMidstage::ToVector(aPrimarySourcesB));
@@ -170,29 +191,20 @@ TwistStageConfigs MakeTwistConfig(ResidualBucket &pResidualBucket,
         aResidualsPool[6],
     };
 
-    //
-    // Matrix diffusion: Fire A-D -> Wind A-D.
-    // Entropy: Earth A-D.
-    //
-
-    pResidualBucket.AddResiduals("Twist — After diffusion", {
-        Slot::kEarthLaneA, Slot::kEarthLaneB,
-        Slot::kEarthLaneC, Slot::kEarthLaneD,
-        Slot::kFireLaneA, Slot::kFireLaneB,
-        Slot::kFireLaneC, Slot::kFireLaneD,
-    });
+    pResidualBucket.AddResiduals(
+        "Twist — After diffusion",
+        GFlowPlans::FamilySlotVector({
+            aLanePlans[0].mOutput,
+            aLanePlans[1].mOutput,
+        }));
 
     //
     // Twist — Stage C
     //
-    const GPassFactoryMidstage::SlotArray4 aPrimarySourcesC = {
-        Slot::kWindLaneA, Slot::kWindLaneB,
-        Slot::kWindLaneC, Slot::kWindLaneD,
-    };
-    const GPassFactoryMidstage::SlotArray4 aDestinationsC = {
-        Slot::kWaterLaneA, Slot::kWaterLaneB,
-        Slot::kWaterLaneC, Slot::kWaterLaneD,
-    };
+    const GPassFactoryMidstage::SlotArray4 aPrimarySourcesC =
+        GFlowPlans::FamilySlots(aLanePlans[2].mInputs[0]);
+    const GPassFactoryMidstage::SlotArray4 aDestinationsC =
+        GFlowPlans::FamilySlots(aLanePlans[2].mOutput);
 
     pResidualBucket.Remove(
         GPassFactoryMidstage::ToVector(aPrimarySourcesC));
@@ -212,10 +224,9 @@ TwistStageConfigs MakeTwistConfig(ResidualBucket &pResidualBucket,
         aResidualsPool[14],
     };
 
-    pResidualBucket.AddResiduals("Twist — Stage C", {
-        Slot::kWindLaneA, Slot::kWindLaneB,
-        Slot::kWindLaneC, Slot::kWindLaneD,
-    });
+    pResidualBucket.AddResiduals(
+        "Twist — Stage C",
+        GFlowPlans::FamilySlotVector(aLanePlans[2].mInputs[0]));
     pResidualBucket.Print("Twist — Final");
 
     // Stage Construction
@@ -245,6 +256,7 @@ TwistStageConfigs MakeTwistConfig(ResidualBucket &pResidualBucket,
         printf("%s\n", aErrorMessageA.c_str());
         exit(0);
     }
+    aConfigA.SetLaneFlow(aPrimarySourcesA, aDestinationsA);
     aConfigs[0] = aConfigA;
 
     // --------------------------
@@ -271,6 +283,7 @@ TwistStageConfigs MakeTwistConfig(ResidualBucket &pResidualBucket,
         printf("%s\n", aErrorMessageB.c_str());
         exit(0);
     }
+    aConfigB.SetLaneFlow(aPrimarySourcesB, aDestinationsB);
     aConfigs[1] = aConfigB;
 
     // --------------------------
@@ -278,7 +291,7 @@ TwistStageConfigs MakeTwistConfig(ResidualBucket &pResidualBucket,
     const ArrangementFour::SlotArray4 aArrangedPrimarySourcesC =
         ArrangementFour::Arrange(aPrimarySourcesC,
                                  static_cast<int>(pCandidateIndex),
-                                 11);
+                                 aLanePlans[2].mArrangementOffset);
 
     GSeedRunStageConfig aConfigC = BaseConfig("GTwistRunTwist_C",
                                               "twist_loop_c",
@@ -302,6 +315,7 @@ TwistStageConfigs MakeTwistConfig(ResidualBucket &pResidualBucket,
         printf("%s\n", aErrorMessageC.c_str());
         exit(0);
     }
+    aConfigC.SetLaneFlow(aPrimarySourcesC, aDestinationsC);
     aConfigs[2] = aConfigC;
 
     return aConfigs;
@@ -323,7 +337,9 @@ bool GTwistRunTwist::Plan(std::string *pErrorMessage) {
 bool GTwistRunTwist::Build(TwistProgramBranch &pBranch,
                            std::string *pErrorMessage) {
     if (mEmitPrologue) {
-        AddTwistPrologue(pBranch);
+        if (!AddTwistPrologue(pBranch, pErrorMessage)) {
+            return false;
+        }
     }
     return mStage.Build(pBranch, pErrorMessage);
 }

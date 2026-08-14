@@ -7,9 +7,11 @@
 
 #include "GPassFactoryMidstage.hpp"
 #include "GPassFactoryStarter.hpp"
+#include "GFlowPlans.hpp"
 #include "KeyLaneAssignments.hpp"
 #include "ResidualBucket.hpp"
 
+#include <algorithm>
 #include <array>
 #include <utility>
 #include <vector>
@@ -18,125 +20,33 @@ namespace {
 
 using Slot = TwistWorkSpaceSlot;
 
-constexpr std::size_t kKeyFlowCount = 16U;
-constexpr std::size_t kKeyBoxAFlowCount = 8U;
+constexpr std::size_t kKeyFlowCount = GFlowPlans::kKeyFlowCount;
+constexpr std::size_t kKeyBoxAFlowCount =
+    GFlowPlans::kKeyBoxFlowCount;
 constexpr std::size_t kPhaseAConfigOffset = 0U;
-constexpr std::size_t kPhaseBConfigOffset = 16U;
-constexpr std::size_t kPhaseCConfigOffset = 32U;
-constexpr std::size_t kPhaseDConfigOffset = 48U;
-constexpr std::size_t kPhaseEConfigOffset = 64U;
+constexpr std::size_t kPhaseBConfigOffset = 1U * kKeyFlowCount;
+constexpr std::size_t kPhaseCConfigOffset = 2U * kKeyFlowCount;
+constexpr std::size_t kPhaseDConfigOffset = 3U * kKeyFlowCount;
+constexpr std::size_t kPhaseEConfigOffset = 4U * kKeyFlowCount;
 
-// The names are grouped by phase to match both the lane plan below and the
-// three contiguous config ranges consumed by Builder_Seeder.
-constexpr std::array<const char *, kKeyFlowCount> kStageNamesA = {
-    "GSeedRunKEY_A_A_A", "GSeedRunKEY_A_B_A",
-    "GSeedRunKEY_A_C_A", "GSeedRunKEY_A_D_A",
-    "GSeedRunKEY_A_E_A", "GSeedRunKEY_A_F_A",
-    "GSeedRunKEY_A_G_A", "GSeedRunKEY_A_H_A",
-    "GSeedRunKEY_B_A_A", "GSeedRunKEY_B_B_A",
-    "GSeedRunKEY_B_C_A", "GSeedRunKEY_B_D_A",
-    "GSeedRunKEY_B_E_A", "GSeedRunKEY_B_F_A",
-    "GSeedRunKEY_B_G_A", "GSeedRunKEY_B_H_A",
-};
+std::string KeyStageName(const std::size_t pLogicalIndex,
+                         const char pPhase) {
+    const char aKeyBox = (pLogicalIndex < kKeyBoxAFlowCount) ? 'A' : 'B';
+    const char aKeyRow = static_cast<char>(
+        'A' + (pLogicalIndex % kKeyBoxAFlowCount));
+    return std::string("GSeedRunKEY_") + aKeyBox + "_" +
+        aKeyRow + "_" + pPhase;
+}
 
-constexpr std::array<const char *, kKeyFlowCount> kBatchNamesA = {
-    "key_a_loop_a_a", "key_a_loop_b_a",
-    "key_a_loop_c_a", "key_a_loop_d_a",
-    "key_a_loop_e_a", "key_a_loop_f_a",
-    "key_a_loop_g_a", "key_a_loop_h_a",
-    "key_b_loop_a_a", "key_b_loop_b_a",
-    "key_b_loop_c_a", "key_b_loop_d_a",
-    "key_b_loop_e_a", "key_b_loop_f_a",
-    "key_b_loop_g_a", "key_b_loop_h_a",
-};
-
-constexpr std::array<const char *, kKeyFlowCount> kStageNamesB = {
-    "GSeedRunKEY_A_A_B", "GSeedRunKEY_A_B_B",
-    "GSeedRunKEY_A_C_B", "GSeedRunKEY_A_D_B",
-    "GSeedRunKEY_A_E_B", "GSeedRunKEY_A_F_B",
-    "GSeedRunKEY_A_G_B", "GSeedRunKEY_A_H_B",
-    "GSeedRunKEY_B_A_B", "GSeedRunKEY_B_B_B",
-    "GSeedRunKEY_B_C_B", "GSeedRunKEY_B_D_B",
-    "GSeedRunKEY_B_E_B", "GSeedRunKEY_B_F_B",
-    "GSeedRunKEY_B_G_B", "GSeedRunKEY_B_H_B",
-};
-
-constexpr std::array<const char *, kKeyFlowCount> kBatchNamesB = {
-    "key_a_loop_a_b", "key_a_loop_b_b",
-    "key_a_loop_c_b", "key_a_loop_d_b",
-    "key_a_loop_e_b", "key_a_loop_f_b",
-    "key_a_loop_g_b", "key_a_loop_h_b",
-    "key_b_loop_a_b", "key_b_loop_b_b",
-    "key_b_loop_c_b", "key_b_loop_d_b",
-    "key_b_loop_e_b", "key_b_loop_f_b",
-    "key_b_loop_g_b", "key_b_loop_h_b",
-};
-
-constexpr std::array<const char *, kKeyFlowCount> kStageNamesC = {
-    "GSeedRunKEY_A_A_C", "GSeedRunKEY_A_B_C",
-    "GSeedRunKEY_A_C_C", "GSeedRunKEY_A_D_C",
-    "GSeedRunKEY_A_E_C", "GSeedRunKEY_A_F_C",
-    "GSeedRunKEY_A_G_C", "GSeedRunKEY_A_H_C",
-    "GSeedRunKEY_B_A_C", "GSeedRunKEY_B_B_C",
-    "GSeedRunKEY_B_C_C", "GSeedRunKEY_B_D_C",
-    "GSeedRunKEY_B_E_C", "GSeedRunKEY_B_F_C",
-    "GSeedRunKEY_B_G_C", "GSeedRunKEY_B_H_C",
-};
-
-constexpr std::array<const char *, kKeyFlowCount> kBatchNamesC = {
-    "key_a_loop_a_c", "key_a_loop_b_c",
-    "key_a_loop_c_c", "key_a_loop_d_c",
-    "key_a_loop_e_c", "key_a_loop_f_c",
-    "key_a_loop_g_c", "key_a_loop_h_c",
-    "key_b_loop_a_c", "key_b_loop_b_c",
-    "key_b_loop_c_c", "key_b_loop_d_c",
-    "key_b_loop_e_c", "key_b_loop_f_c",
-    "key_b_loop_g_c", "key_b_loop_h_c",
-};
-
-constexpr std::array<const char *, kKeyFlowCount> kStageNamesD = {
-    "GSeedRunKEY_A_A_D", "GSeedRunKEY_A_B_D",
-    "GSeedRunKEY_A_C_D", "GSeedRunKEY_A_D_D",
-    "GSeedRunKEY_A_E_D", "GSeedRunKEY_A_F_D",
-    "GSeedRunKEY_A_G_D", "GSeedRunKEY_A_H_D",
-    "GSeedRunKEY_B_A_D", "GSeedRunKEY_B_B_D",
-    "GSeedRunKEY_B_C_D", "GSeedRunKEY_B_D_D",
-    "GSeedRunKEY_B_E_D", "GSeedRunKEY_B_F_D",
-    "GSeedRunKEY_B_G_D", "GSeedRunKEY_B_H_D",
-};
-
-constexpr std::array<const char *, kKeyFlowCount> kBatchNamesD = {
-    "key_a_loop_a_d", "key_a_loop_b_d",
-    "key_a_loop_c_d", "key_a_loop_d_d",
-    "key_a_loop_e_d", "key_a_loop_f_d",
-    "key_a_loop_g_d", "key_a_loop_h_d",
-    "key_b_loop_a_d", "key_b_loop_b_d",
-    "key_b_loop_c_d", "key_b_loop_d_d",
-    "key_b_loop_e_d", "key_b_loop_f_d",
-    "key_b_loop_g_d", "key_b_loop_h_d",
-};
-
-constexpr std::array<const char *, kKeyFlowCount> kStageNamesE = {
-    "GSeedRunKEY_A_A_E", "GSeedRunKEY_A_B_E",
-    "GSeedRunKEY_A_C_E", "GSeedRunKEY_A_D_E",
-    "GSeedRunKEY_A_E_E", "GSeedRunKEY_A_F_E",
-    "GSeedRunKEY_A_G_E", "GSeedRunKEY_A_H_E",
-    "GSeedRunKEY_B_A_E", "GSeedRunKEY_B_B_E",
-    "GSeedRunKEY_B_C_E", "GSeedRunKEY_B_D_E",
-    "GSeedRunKEY_B_E_E", "GSeedRunKEY_B_F_E",
-    "GSeedRunKEY_B_G_E", "GSeedRunKEY_B_H_E",
-};
-
-constexpr std::array<const char *, kKeyFlowCount> kBatchNamesE = {
-    "key_a_loop_a_e", "key_a_loop_b_e",
-    "key_a_loop_c_e", "key_a_loop_d_e",
-    "key_a_loop_e_e", "key_a_loop_f_e",
-    "key_a_loop_g_e", "key_a_loop_h_e",
-    "key_b_loop_a_e", "key_b_loop_b_e",
-    "key_b_loop_c_e", "key_b_loop_d_e",
-    "key_b_loop_e_e", "key_b_loop_f_e",
-    "key_b_loop_g_e", "key_b_loop_h_e",
-};
+std::string KeyBatchName(const std::size_t pLogicalIndex,
+                         const char pPhase) {
+    const char aKeyBox = (pLogicalIndex < kKeyBoxAFlowCount) ? 'a' : 'b';
+    const char aKeyRow = static_cast<char>(
+        'a' + (pLogicalIndex % kKeyBoxAFlowCount));
+    const char aPhase = static_cast<char>(pPhase - 'A' + 'a');
+    return std::string("key_") + aKeyBox + "_loop_" +
+        aKeyRow + "_" + aPhase;
+}
 
 std::vector<Slot> PhaseSalts(const TwistDomain pDomain,
                              const Slot pBaseSlot,
@@ -166,8 +76,8 @@ std::vector<Slot> PhaseSalts(const TwistDomain pDomain,
     return aResult;
 }
 
-GSeedRunStageConfig BaseConfig(const char *pStageName,
-                               const char *pBatchName,
+GSeedRunStageConfig BaseConfig(const std::string &pStageName,
+                               const std::string &pBatchName,
                                const TwistDomain pDomain,
                                const GAXSFormat pFormat) {
     GSeedRunStageConfig aConfig;
@@ -214,6 +124,17 @@ std::array<Slot, N> WithdrawFlowResiduals(
         aResult[i] = aWithdrawn[i];
     }
     return aResult;
+}
+
+void AppendUniqueSlots(std::vector<Slot> *pDestination,
+                       const std::vector<Slot> &pSource) {
+    for (const Slot aSlot : pSource) {
+        if (std::find(pDestination->begin(),
+                      pDestination->end(),
+                      aSlot) == pDestination->end()) {
+            pDestination->push_back(aSlot);
+        }
+    }
 }
 
 std::uint8_t KeyLaneSplit(
@@ -320,112 +241,83 @@ bool MakeKeyBoxConfigs(const std::size_t pCandidateIndex,
         return false;
     }
     // Lane Plan
+    const std::vector<GFlowStep> aLanePlans =
+        GFlowPlans::ARXSteps(GFlowPlans::Key());
+    if (aLanePlans.size() != GFlowPlans::kKeyARXStageCount) {
+        if (pErrorMessage != nullptr) {
+            *pErrorMessage =
+                "Key stage configuration count did not match its flow plan";
+        }
+        return false;
+    }
 
     //
     // KEY — Phase A
-    // Alchemy A-D + Coven A-D -> Earth A-D.
     // Eight inherited residual lanes are consumed.
     //
+    const std::vector<Slot> aPrimarySourcesAVector =
+        GFlowPlans::InputSlots(aLanePlans[0]);
     const GPassFactoryStarter::SlotArray8 aPrimarySourcesA = {
-        Slot::kAlchemyLaneA, Slot::kAlchemyLaneB,
-        Slot::kAlchemyLaneC, Slot::kAlchemyLaneD,
-        Slot::kCovenLaneA, Slot::kCovenLaneB,
-        Slot::kCovenLaneC, Slot::kCovenLaneD,
+        aPrimarySourcesAVector[0], aPrimarySourcesAVector[1],
+        aPrimarySourcesAVector[2], aPrimarySourcesAVector[3],
+        aPrimarySourcesAVector[4], aPrimarySourcesAVector[5],
+        aPrimarySourcesAVector[6], aPrimarySourcesAVector[7],
     };
-    const GPassFactoryStarter::SlotArray4 aDestinationsA = {
-        Slot::kEarthLaneA, Slot::kEarthLaneB,
-        Slot::kEarthLaneC, Slot::kEarthLaneD,
-    };
+    const GPassFactoryStarter::SlotArray4 aDestinationsA =
+        GFlowPlans::FamilySlots(aLanePlans[0].mOutput);
 
     //
     // KEY — Phase B
-    // Earth A-D -> Augury A-D.
-    // Sixteen inherited residual lanes are consumed.
+    // Thirteen inherited residual lanes are consumed.
     //
-    const GPassFactoryMidstage::SlotArray4 aPrimarySourcesB = {
-        Slot::kEarthLaneA, Slot::kEarthLaneB,
-        Slot::kEarthLaneC, Slot::kEarthLaneD,
-    };
-    const GPassFactoryMidstage::SlotArray4 aDestinationsB = {
-        Slot::kAuguryLaneA, Slot::kAuguryLaneB,
-        Slot::kAuguryLaneC, Slot::kAuguryLaneD,
-    };
-
-    // The current flow's KeyDiffuse_A_*_* transforms Augury A-D into
-    // Prophecy A-D here.
+    const GPassFactoryMidstage::SlotArray4 aPrimarySourcesB =
+        GFlowPlans::FamilySlots(aLanePlans[1].mInputs[0]);
+    const GPassFactoryMidstage::SlotArray4 aDestinationsB =
+        GFlowPlans::FamilySlots(aLanePlans[1].mOutput);
 
     //
     // KEY — Phase C
-    // Prophecy A-D -> Transmutation A-D.
-    // Sixteen inherited residual lanes are consumed.
+    // Thirteen inherited residual lanes are consumed.
     //
-    const GPassFactoryMidstage::SlotArray4 aPrimarySourcesC = {
-        Slot::kProphecyLaneA, Slot::kProphecyLaneB,
-        Slot::kProphecyLaneC, Slot::kProphecyLaneD,
-    };
-    const GPassFactoryMidstage::SlotArray4 aDestinationsC = {
-        Slot::kTransmutationLaneA, Slot::kTransmutationLaneB,
-        Slot::kTransmutationLaneC, Slot::kTransmutationLaneD,
-    };
+    const GPassFactoryMidstage::SlotArray4 aPrimarySourcesC =
+        GFlowPlans::FamilySlots(aLanePlans[2].mInputs[0]);
+    const GPassFactoryMidstage::SlotArray4 aDestinationsC =
+        GFlowPlans::FamilySlots(aLanePlans[2].mOutput);
 
     //
     // KEY — Phase D
-    // Transmutation A-D -> Restoration A-D.
-    // Sixteen inherited residual lanes are consumed.
+    // Thirteen inherited residual lanes are consumed.
     //
-    const GPassFactoryMidstage::SlotArray4 aPrimarySourcesD = {
-        Slot::kTransmutationLaneA, Slot::kTransmutationLaneB,
-        Slot::kTransmutationLaneC, Slot::kTransmutationLaneD,
-    };
-    const GPassFactoryMidstage::SlotArray4 aDestinationsD = {
-        Slot::kRestorationLaneA, Slot::kRestorationLaneB,
-        Slot::kRestorationLaneC, Slot::kRestorationLaneD,
-    };
-
-    // The current flow's KeyDiffuse_B_*_* transforms Restoration A-D into
-    // Celestial A-D here.
+    const GPassFactoryMidstage::SlotArray4 aPrimarySourcesD =
+        GFlowPlans::FamilySlots(aLanePlans[3].mInputs[0]);
+    const GPassFactoryMidstage::SlotArray4 aDestinationsD =
+        GFlowPlans::FamilySlots(aLanePlans[3].mOutput);
 
     //
     // KEY — Phase E
-    // Celestial A-D -> Ice A-D.
     // This overwrites only the current logical key flow's Ice sixteenths;
     // every other flow owns a different KeyLaneAssignments split.
-    // Sixteen inherited residual lanes are consumed.
+    // Thirteen inherited residual lanes are consumed.
     //
-    const GPassFactoryMidstage::SlotArray4 aPrimarySourcesE = {
-        Slot::kCelestialLaneA, Slot::kCelestialLaneB,
-        Slot::kCelestialLaneC, Slot::kCelestialLaneD,
-    };
-    const GPassFactoryMidstage::SlotArray4 aDestinationsE = {
-        Slot::kIceLaneA, Slot::kIceLaneB,
-        Slot::kIceLaneC, Slot::kIceLaneD,
-    };
+    const GPassFactoryMidstage::SlotArray4 aPrimarySourcesE =
+        GFlowPlans::FamilySlots(aLanePlans[4].mInputs[0]);
+    const GPassFactoryMidstage::SlotArray4 aDestinationsE =
+        GFlowPlans::FamilySlots(aLanePlans[4].mOutput);
 
     // These lanes have fixed jobs in the five phases. Source and Nonce are
     // deliberately excluded from key construction. No phase adds its output
     // lanes back; each independent flow drains this inherited bucket.
-    const std::vector<Slot> aUnavailableResiduals = {
+    std::vector<Slot> aUnavailableResiduals = {
         Slot::kSourceLane,
         Slot::kNonceLane,
-        Slot::kIceLaneA, Slot::kIceLaneB,
-        Slot::kIceLaneC, Slot::kIceLaneD,
-        Slot::kCovenLaneA, Slot::kCovenLaneB,
-        Slot::kCovenLaneC, Slot::kCovenLaneD,
-        Slot::kAlchemyLaneA, Slot::kAlchemyLaneB,
-        Slot::kAlchemyLaneC, Slot::kAlchemyLaneD,
-        Slot::kEarthLaneA, Slot::kEarthLaneB,
-        Slot::kEarthLaneC, Slot::kEarthLaneD,
-        Slot::kCelestialLaneA, Slot::kCelestialLaneB,
-        Slot::kCelestialLaneC, Slot::kCelestialLaneD,
-        Slot::kAuguryLaneA, Slot::kAuguryLaneB,
-        Slot::kAuguryLaneC, Slot::kAuguryLaneD,
-        Slot::kProphecyLaneA, Slot::kProphecyLaneB,
-        Slot::kProphecyLaneC, Slot::kProphecyLaneD,
-        Slot::kTransmutationLaneA, Slot::kTransmutationLaneB,
-        Slot::kTransmutationLaneC, Slot::kTransmutationLaneD,
-        Slot::kRestorationLaneA, Slot::kRestorationLaneB,
-        Slot::kRestorationLaneC, Slot::kRestorationLaneD,
     };
+    for (const GFlowStep &aPlan : aLanePlans) {
+        AppendUniqueSlots(&aUnavailableResiduals,
+                          GFlowPlans::InputSlots(aPlan));
+        AppendUniqueSlots(
+            &aUnavailableResiduals,
+            GFlowPlans::FamilySlotVector(aPlan.mOutput));
+    }
 
     // Stage Construction
 
@@ -454,32 +346,46 @@ bool MakeKeyBoxConfigs(const std::size_t pCandidateIndex,
                 aFlowResidualBucket,
                 aFlowName + " — Phase A");
 
-        const GPassFactoryMidstage::SlotArray16 aResidualsB =
-            WithdrawFlowResiduals<16U>(
+        const GPassFactoryMidstage::SlotArray13 aResidualsB =
+            WithdrawFlowResiduals<13U>(
                 aFlowResidualBucket,
                 aFlowName + " — Phase B");
 
-        const GPassFactoryMidstage::SlotArray16 aResidualsC =
-            WithdrawFlowResiduals<16U>(
+        const GPassFactoryMidstage::SlotArray13 aResidualsC =
+            WithdrawFlowResiduals<13U>(
                 aFlowResidualBucket,
                 aFlowName + " — Phase C");
 
-        const GPassFactoryMidstage::SlotArray16 aResidualsD =
-            WithdrawFlowResiduals<16U>(
+        const GPassFactoryMidstage::SlotArray13 aResidualsD =
+            WithdrawFlowResiduals<13U>(
                 aFlowResidualBucket,
                 aFlowName + " — Phase D");
 
-        const GPassFactoryMidstage::SlotArray16 aResidualsE =
-            WithdrawFlowResiduals<16U>(
+        const GPassFactoryMidstage::SlotArray13 aResidualsE =
+            WithdrawFlowResiduals<13U>(
                 aFlowResidualBucket,
                 aFlowName + " — Phase E");
+
+        constexpr std::size_t kExpectedResidualSurplus = 16U;
+        const std::size_t aResidualSurplus =
+            aFlowResidualBucket.CountValidResiduals();
+        if (aResidualSurplus != kExpectedResidualSurplus) {
+            if (pErrorMessage != nullptr) {
+                *pErrorMessage =
+                    aFlowName + " ended with " +
+                    std::to_string(aResidualSurplus) +
+                    " residual lanes; expected " +
+                    std::to_string(kExpectedResidualSurplus);
+            }
+            return false;
+        }
 
         //
         // Build KEY — Phase A
         //
         GSeedRunStageConfig aConfigA = BaseConfig(
-            kStageNamesA[aLogicalIndex],
-            kBatchNamesA[aLogicalIndex],
+            KeyStageName(aLogicalIndex, 'A'),
+            KeyBatchName(aLogicalIndex, 'A'),
             aDomain,
             GAXSFormat::kN11);
         aConfigA.mSlices =
@@ -487,6 +393,7 @@ bool MakeKeyBoxConfigs(const std::size_t pCandidateIndex,
                 aPrimarySourcesA,
                 aResidualsA,
                 aDestinationsA);
+        aConfigA.SetLaneFlow(aPrimarySourcesA, aDestinationsA);
         aConfigA = FinishFourLoopConfig(std::move(aConfigA),
                                         aLogicalIndex,
                                         pCandidateIndex,
@@ -502,15 +409,16 @@ bool MakeKeyBoxConfigs(const std::size_t pCandidateIndex,
         // Build KEY — Phase B
         //
         GSeedRunStageConfig aConfigB = BaseConfig(
-            kStageNamesB[aLogicalIndex],
-            kBatchNamesB[aLogicalIndex],
+            KeyStageName(aLogicalIndex, 'B'),
+            KeyBatchName(aLogicalIndex, 'B'),
             aDomain,
             GAXSFormat::kN11);
         aConfigB.mSlices =
-            GPassFactoryMidstage::FourPassSixteenResidualSlices(
+            GPassFactoryMidstage::FourPassThirteenResidualSlices(
                 aPrimarySourcesB,
                 aResidualsB,
                 aDestinationsB);
+        aConfigB.SetLaneFlow(aPrimarySourcesB, aDestinationsB);
         aConfigB = FinishFourLoopConfig(std::move(aConfigB),
                                         aLogicalIndex,
                                         pCandidateIndex,
@@ -526,15 +434,16 @@ bool MakeKeyBoxConfigs(const std::size_t pCandidateIndex,
         // Build KEY — Phase C
         //
         GSeedRunStageConfig aConfigC = BaseConfig(
-            kStageNamesC[aLogicalIndex],
-            kBatchNamesC[aLogicalIndex],
+            KeyStageName(aLogicalIndex, 'C'),
+            KeyBatchName(aLogicalIndex, 'C'),
             aDomain,
             GAXSFormat::kN11);
         aConfigC.mSlices =
-            GPassFactoryMidstage::FourPassSixteenResidualSlices(
+            GPassFactoryMidstage::FourPassThirteenResidualSlices(
                 aPrimarySourcesC,
                 aResidualsC,
                 aDestinationsC);
+        aConfigC.SetLaneFlow(aPrimarySourcesC, aDestinationsC);
         aConfigC = FinishFourLoopConfig(std::move(aConfigC),
                                         aLogicalIndex,
                                         pCandidateIndex,
@@ -550,15 +459,16 @@ bool MakeKeyBoxConfigs(const std::size_t pCandidateIndex,
         // Build KEY — Phase D
         //
         GSeedRunStageConfig aConfigD = BaseConfig(
-            kStageNamesD[aLogicalIndex],
-            kBatchNamesD[aLogicalIndex],
+            KeyStageName(aLogicalIndex, 'D'),
+            KeyBatchName(aLogicalIndex, 'D'),
             aDomain,
             GAXSFormat::kN11);
         aConfigD.mSlices =
-            GPassFactoryMidstage::FourPassSixteenResidualSlices(
+            GPassFactoryMidstage::FourPassThirteenResidualSlices(
                 aPrimarySourcesD,
                 aResidualsD,
                 aDestinationsD);
+        aConfigD.SetLaneFlow(aPrimarySourcesD, aDestinationsD);
         aConfigD = FinishFourLoopConfig(std::move(aConfigD),
                                         aLogicalIndex,
                                         pCandidateIndex,
@@ -574,15 +484,16 @@ bool MakeKeyBoxConfigs(const std::size_t pCandidateIndex,
         // Build KEY — Phase E
         //
         GSeedRunStageConfig aConfigE = BaseConfig(
-            kStageNamesE[aLogicalIndex],
-            kBatchNamesE[aLogicalIndex],
+            KeyStageName(aLogicalIndex, 'E'),
+            KeyBatchName(aLogicalIndex, 'E'),
             aDomain,
             GAXSFormat::kN11);
         aConfigE.mSlices =
-            GPassFactoryMidstage::FourPassSixteenResidualSlices(
+            GPassFactoryMidstage::FourPassThirteenResidualSlices(
                 aPrimarySourcesE,
                 aResidualsE,
                 aDestinationsE);
+        aConfigE.SetLaneFlow(aPrimarySourcesE, aDestinationsE);
         aConfigE = FinishFourLoopConfig(std::move(aConfigE),
                                         aLogicalIndex,
                                         pCandidateIndex,

@@ -8,6 +8,7 @@
 #include "GPassFactoryMidstage.hpp"
 #include "GPassFactoryStarter.hpp"
 #include "GPassFactoryTrunk.hpp"
+#include "GFlowPlans.hpp"
 #include "Random.hpp"
 #include "ResidualBucket.hpp"
 #include "GSeedRunStageConfigValidator.hpp"
@@ -34,14 +35,6 @@ const std::array<const char *, 16> kNonceVariableNames = {
 
 const std::array<const char *, 3> kNonceDiffuseNames = {
     "DiffuseA", "DiffuseB", "DiffuseC",
-};
-
-struct SeedStagePlan {
-    char                                    mLetter;
-    SlotArray4                              mPrimarySources;
-    SlotArray4                              mDestinations;
-    bool                                    mIsTrunk;
-    int                                     mArrangementOffset;
 };
 
 int PhaseIndex(const TwistDomain pDomain) {
@@ -161,21 +154,18 @@ std::vector<Slot> WithdrawResidualsWithSource(
     return aResiduals;
 }
 
-std::vector<Slot> StageOutputs(const SeedStagePlan &pPlan) {
-    return GPassFactoryMidstage::ToVector(pPlan.mDestinations);
-}
-
 void AddCompletedStageLanes(ResidualBucket &pResidualBucket,
-                            const SeedStagePlan &pPlan) {
-    std::vector<Slot> aResiduals(
-        pPlan.mPrimarySources.begin(),
-        pPlan.mPrimarySources.end());
-    const std::vector<Slot> aOutputs = StageOutputs(pPlan);
+                            const GFlowStep &pStep) {
+    std::vector<Slot> aResiduals = GFlowPlans::InputSlots(pStep);
+    const GFlowPlans::SlotArray4 aDestinationSlots =
+        GFlowPlans::FamilySlots(pStep.mOutput);
+    const std::vector<Slot> aOutputs(aDestinationSlots.begin(),
+                                     aDestinationSlots.end());
     aResiduals.insert(aResiduals.end(),
                       aOutputs.begin(),
                       aOutputs.end());
     pResidualBucket.AddResiduals(
-        SeedStageTitle(pPlan.mLetter),
+        SeedStageTitle(pStep.mLetter),
         std::move(aResiduals));
 }
 
@@ -189,69 +179,15 @@ SeedStageConfigs MakeSeedConfig(const bool pUseNonces,
     SeedStageConfigs aConfigs;
 
     // Lane Plan
-
-    // A: Source + Nonce -> Water.
+    const std::vector<GFlowStep> aLanePlans =
+        GFlowPlans::ARXSteps(GFlowPlans::Seed());
+    const std::vector<Slot> aPrimarySourcesAVector =
+        GFlowPlans::InputSlots(aLanePlans[0]);
     const GPassFactoryStarter::SlotArray2 aPrimarySourcesA = {
-        Slot::kSourceLane, Slot::kNonceLane,
+        aPrimarySourcesAVector[0], aPrimarySourcesAVector[1],
     };
-    const SlotArray4 aDestinationsA = {
-        Slot::kWaterLaneA, Slot::kWaterLaneB,
-        Slot::kWaterLaneC, Slot::kWaterLaneD,
-    };
-
-    // Eight ARX/ARX/diffuse rounds, followed by one final ARX stage. Every
-    // write family is unique. Stages after A retain Source as one fixed
-    // residual; no KDF residual material enters this schedule.
-    const std::array<SeedStagePlan, 16U> aLanePlans = {{
-        {'B', {Slot::kWaterLaneA, Slot::kWaterLaneB, Slot::kWaterLaneC, Slot::kWaterLaneD},
-              {Slot::kSpiritLaneA, Slot::kSpiritLaneB, Slot::kSpiritLaneC, Slot::kSpiritLaneD},
-              false, 0},
-        {'C', {Slot::kStasisLaneA, Slot::kStasisLaneB, Slot::kStasisLaneC, Slot::kStasisLaneD},
-              {Slot::kLightningLaneA, Slot::kLightningLaneB, Slot::kLightningLaneC, Slot::kLightningLaneD},
-              true, 7},
-        {'D', {Slot::kLightningLaneA, Slot::kLightningLaneB, Slot::kLightningLaneC, Slot::kLightningLaneD},
-              {Slot::kWindLaneA, Slot::kWindLaneB, Slot::kWindLaneC, Slot::kWindLaneD},
-              false, 0},
-        {'E', {Slot::kVaporLaneA, Slot::kVaporLaneB, Slot::kVaporLaneC, Slot::kVaporLaneD},
-              {Slot::kPlasmaLaneA, Slot::kPlasmaLaneB, Slot::kPlasmaLaneC, Slot::kPlasmaLaneD},
-              true, 9},
-        {'F', {Slot::kPlasmaLaneA, Slot::kPlasmaLaneB, Slot::kPlasmaLaneC, Slot::kPlasmaLaneD},
-              {Slot::kAetherLaneA, Slot::kAetherLaneB, Slot::kAetherLaneC, Slot::kAetherLaneD},
-              false, 0},
-        {'G', {Slot::kShadowLaneA, Slot::kShadowLaneB, Slot::kShadowLaneC, Slot::kShadowLaneD},
-              {Slot::kMysticalLaneA, Slot::kMysticalLaneB, Slot::kMysticalLaneC, Slot::kMysticalLaneD},
-              true, 13},
-        {'H', {Slot::kMysticalLaneA, Slot::kMysticalLaneB, Slot::kMysticalLaneC, Slot::kMysticalLaneD},
-              {Slot::kKineticLaneA, Slot::kKineticLaneB, Slot::kKineticLaneC, Slot::kKineticLaneD},
-              false, 0},
-        {'I', {Slot::kSonicLaneA, Slot::kSonicLaneB, Slot::kSonicLaneC, Slot::kSonicLaneD},
-              {Slot::kPlanarLaneA, Slot::kPlanarLaneB, Slot::kPlanarLaneC, Slot::kPlanarLaneD},
-              true, 2},
-        {'J', {Slot::kPlanarLaneA, Slot::kPlanarLaneB, Slot::kPlanarLaneC, Slot::kPlanarLaneD},
-              {Slot::kFrostLaneA, Slot::kFrostLaneB, Slot::kFrostLaneC, Slot::kFrostLaneD},
-              false, 0},
-        {'K', {Slot::kArcaneLaneA, Slot::kArcaneLaneB, Slot::kArcaneLaneC, Slot::kArcaneLaneD},
-              {Slot::kLunarLaneA, Slot::kLunarLaneB, Slot::kLunarLaneC, Slot::kLunarLaneD},
-              true, 6},
-        {'L', {Slot::kLunarLaneA, Slot::kLunarLaneB, Slot::kLunarLaneC, Slot::kLunarLaneD},
-              {Slot::kRunicLaneA, Slot::kRunicLaneB, Slot::kRunicLaneC, Slot::kRunicLaneD},
-              false, 0},
-        {'M', {Slot::kGloomLaneA, Slot::kGloomLaneB, Slot::kGloomLaneC, Slot::kGloomLaneD},
-              {Slot::kAbjurationLaneA, Slot::kAbjurationLaneB, Slot::kAbjurationLaneC, Slot::kAbjurationLaneD},
-              true, 11},
-        {'N', {Slot::kAbjurationLaneA, Slot::kAbjurationLaneB, Slot::kAbjurationLaneC, Slot::kAbjurationLaneD},
-              {Slot::kDivinationLaneA, Slot::kDivinationLaneB, Slot::kDivinationLaneC, Slot::kDivinationLaneD},
-              false, 0},
-        {'O', {Slot::kEvocationLaneA, Slot::kEvocationLaneB, Slot::kEvocationLaneC, Slot::kEvocationLaneD},
-              {Slot::kFireLaneA, Slot::kFireLaneB, Slot::kFireLaneC, Slot::kFireLaneD},
-              true, 5},
-        {'P', {Slot::kFireLaneA, Slot::kFireLaneB, Slot::kFireLaneC, Slot::kFireLaneD},
-              {Slot::kCovenLaneA, Slot::kCovenLaneB, Slot::kCovenLaneC, Slot::kCovenLaneD},
-              false, 0},
-        {'Q', {Slot::kHeartLaneA, Slot::kHeartLaneB, Slot::kHeartLaneC, Slot::kHeartLaneD},
-              {Slot::kAlchemyLaneA, Slot::kAlchemyLaneB, Slot::kAlchemyLaneC, Slot::kAlchemyLaneD},
-              true, 3},
-    }};
+    const SlotArray4 aDestinationsA =
+        GFlowPlans::FamilySlots(aLanePlans[0].mOutput);
 
     // Stage Construction
 
@@ -282,22 +218,28 @@ SeedStageConfigs MakeSeedConfig(const bool pUseNonces,
         printf("%s\n", aErrorMessageA.c_str());
         exit(0);
     }
+    aConfigA.SetLaneFlow(aPrimarySourcesA, aDestinationsA);
     aConfigs[0] = aConfigA;
     pResidualBucket.AddResiduals(
         "Seed — Stage A",
         GPassFactoryMidstage::ToVector(aDestinationsA));
 
-    for (std::size_t aPlanIndex = 0U;
+    for (std::size_t aPlanIndex = 1U;
          aPlanIndex < aLanePlans.size();
          ++aPlanIndex) {
-        const SeedStagePlan &aPlan = aLanePlans[aPlanIndex];
-        const std::size_t aConfigIndex = aPlanIndex + 1U;
+        const GFlowStep &aPlan = aLanePlans[aPlanIndex];
+        const std::size_t aConfigIndex = aPlanIndex;
         const std::string aStageName = SeedStageName(aPlan.mLetter);
         const std::string aStageTitle = SeedStageTitle(aPlan.mLetter);
-        const std::vector<Slot> aOutputs = StageOutputs(aPlan);
+        const SlotArray4 aPrimarySources =
+            GFlowPlans::FamilySlots(aPlan.mInputs[0]);
+        const SlotArray4 aDestinations =
+            GFlowPlans::FamilySlots(aPlan.mOutput);
+        const std::vector<Slot> aOutputs(aDestinations.begin(),
+                                         aDestinations.end());
 
         pResidualBucket.Remove(
-            GPassFactoryMidstage::ToVector(aPlan.mPrimarySources));
+            GPassFactoryMidstage::ToVector(aPrimarySources));
         pResidualBucket.Remove(aOutputs);
 
         GSeedRunStageConfig aConfig = BaseConfig(
@@ -307,25 +249,25 @@ SeedStageConfigs MakeSeedConfig(const bool pUseNonces,
             WithdrawResidualsWithSource(pResidualBucket,
                                         aStageTitle);
         aConfig.mExpectedSkeletonCount =
-            static_cast<int>(aPlan.mDestinations.size());
+            static_cast<int>(aDestinations.size());
         aConfig.mHotPackCount =
-            static_cast<int>(aPlan.mDestinations.size());
+            static_cast<int>(aDestinations.size());
 
-        if (aPlan.mIsTrunk) {
+        if (aPlan.mARXShape == GFlowARXShape::kTrunk) {
             const ArrangementFour::SlotArray4 aArrangedPrimarySources =
                 ArrangementFour::Arrange(
-                    aPlan.mPrimarySources,
+                    aPrimarySources,
                     static_cast<int>(pCandidateIndex),
                     aPlan.mArrangementOffset);
             aConfig.mSlices = GPassFactoryTrunk::FourPassVariableResidualSlices(
                 aArrangedPrimarySources,
                 aResiduals,
-                aPlan.mDestinations);
+                aDestinations);
             if (!GSeedRunStageConfigValidator::ValidateTrunk(
                     aConfig,
                     GPassFactoryMidstage::ToVector(aArrangedPrimarySources),
                     aResiduals,
-                    GPassFactoryMidstage::ToVector(aPlan.mDestinations),
+                    GPassFactoryMidstage::ToVector(aDestinations),
                     &aErrorMessage)) {
                 printf("MakeSeedConfig stage %c was not valid with ValidateTrunk",
                        aPlan.mLetter);
@@ -335,14 +277,14 @@ SeedStageConfigs MakeSeedConfig(const bool pUseNonces,
         } else {
             aConfig.mSlices =
                 GPassFactoryMidstage::FourPassVariableResidualSlices(
-                    aPlan.mPrimarySources,
+                    aPrimarySources,
                     aResiduals,
-                    aPlan.mDestinations);
+                    aDestinations);
             if (!GSeedRunStageConfigValidator::ValidateMidstage(
                     aConfig,
-                    GPassFactoryMidstage::ToVector(aPlan.mPrimarySources),
+                    GPassFactoryMidstage::ToVector(aPrimarySources),
                     aResiduals,
-                    GPassFactoryMidstage::ToVector(aPlan.mDestinations),
+                    GPassFactoryMidstage::ToVector(aDestinations),
                     &aErrorMessage)) {
                 printf("MakeSeedConfig stage %c was not valid with ValidateMidstage",
                        aPlan.mLetter);
@@ -351,6 +293,8 @@ SeedStageConfigs MakeSeedConfig(const bool pUseNonces,
             }
         }
 
+        aConfig.SetLaneFlow(aPrimarySources,
+                            aDestinations);
         aConfigs[aConfigIndex] = aConfig;
         AddCompletedStageLanes(pResidualBucket, aPlan);
     }

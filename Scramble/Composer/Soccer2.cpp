@@ -779,6 +779,19 @@ void Soccer2::TwistRound(std::size_t pBlockIndex, bool pIsWarmUpRound) {
     const bool aStifleKey =
         (!pIsWarmUpRound) && (pBlockIndex >= (BLOCK_COUNT - H_KEY));
     
+    std::uint64_t aIngress = 0xC57A5D1CB76274CDULL;
+    std::uint64_t aCarry = 0xD884E6D87C4E5D32ULL;
+    std::uint64_t aWandererA = 0x56A39022D8815D93ULL;
+    std::uint64_t aWandererB = 0x78621F8668264758ULL;
+    std::uint64_t aWandererC = 0x9CCC333EB717B5FDULL;
+    std::uint64_t aWandererD = 0x308B1DDC64346BAAULL;
+    std::uint64_t aWandererE = 0x7553EBB34F729AFDULL;
+    std::uint64_t aWandererF = 0x789948C10DFC7B5DULL;
+    std::uint64_t aWandererG = 0x4205DA226FC0675BULL;
+    std::uint64_t aWandererH = 0x511EE95FB0224D10ULL;
+    std::uint64_t aWandererI = 0xFAE48C727EFD1D19ULL;
+    std::uint64_t aWandererJ = 0x51D0F4DB9C43223CULL;
+    std::uint64_t aWandererK = 0x0BEE6245265CD32DULL;
     const std::size_t aDestinationByteIndex = pBlockIndex * S_BLOCK;
     for (std::size_t aLaneIndex=0U; aLaneIndex<aComplexity; aLaneIndex++) {
         mExpanders[aLaneIndex]->TwistBlock(mWorkSpaces[aLaneIndex],
@@ -788,7 +801,8 @@ void Soccer2::TwistRound(std::size_t pBlockIndex, bool pIsWarmUpRound) {
                                            mCross[2][aLaneIndex],
                                            mCross[3][aLaneIndex],
                                            &mMaterials[aLaneIndex][aDestinationByteIndex],
-                                           aStifleKey);
+                                           aStifleKey,
+                                           ARX_STATE_VARS);
     }
 
     for (std::size_t aLaneIndex=0U; aLaneIndex<aComplexity; aLaneIndex++) {
@@ -826,6 +840,19 @@ void Soccer2::SeedPrologue_Regular_A(std::uint8_t *pPassword,
     
     const std::size_t aWarmUpStartIndex = (BLOCK_COUNT - WARM_UP_BLOCKS) * S_BLOCK;
 
+    std::uint64_t aIngress = 0xC57A5D1CB76274CDULL;
+    std::uint64_t aCarry = 0xD884E6D87C4E5D32ULL;
+    std::uint64_t aWandererA = 0x56A39022D8815D93ULL;
+    std::uint64_t aWandererB = 0x78621F8668264758ULL;
+    std::uint64_t aWandererC = 0x9CCC333EB717B5FDULL;
+    std::uint64_t aWandererD = 0x308B1DDC64346BAAULL;
+    std::uint64_t aWandererE = 0x7553EBB34F729AFDULL;
+    std::uint64_t aWandererF = 0x789948C10DFC7B5DULL;
+    std::uint64_t aWandererG = 0x4205DA226FC0675BULL;
+    std::uint64_t aWandererH = 0x511EE95FB0224D10ULL;
+    std::uint64_t aWandererI = 0xFAE48C727EFD1D19ULL;
+    std::uint64_t aWandererJ = 0x51D0F4DB9C43223CULL;
+    std::uint64_t aWandererK = 0x0BEE6245265CD32DULL;
     for (std::size_t aSpanIndex=0U; aSpanIndex<4U; aSpanIndex++) {
         for (std::size_t aPowerIndex=0U; aPowerIndex<aPower; aPowerIndex++) {
             const std::size_t aClaimedIndex = mClaimedMaterialCount;
@@ -844,7 +871,8 @@ void Soccer2::SeedPrologue_Regular_A(std::uint8_t *pPassword,
                                                    pNonce,
                                                    pPassword,
                                                    pPasswordByteLength,
-                                                   &mClaimedMaterials[aClaimedIndex][aWarmUpStartIndex]);
+                                                   &mClaimedMaterials[aClaimedIndex][aWarmUpStartIndex],
+                                                   ARX_STATE_VARS);
         }
 
         if (aSpanIndex < 3U) {
@@ -1587,7 +1615,21 @@ void Soccer2::SeedPrelude_Regular_A(std::uint8_t *pPassword,
 }
 
 void Soccer2::SeedPrelude_Regular_B(std::uint64_t pNonce) {
-    mStarter.Seed(&mWorkSpaceA, &mFarmSalt, pNonce, SOCCER_SCRATCH_WORKER_A, S_BLOCK, mCollapseLaneB);
+    
+    std::uint64_t aIngress = 0xC57A5D1CB76274CDULL;
+    std::uint64_t aCarry = 0xD884E6D87C4E5D32ULL;
+    std::uint64_t aWandererA = 0x56A39022D8815D93ULL;
+    std::uint64_t aWandererB = 0x78621F8668264758ULL;
+    std::uint64_t aWandererC = 0x9CCC333EB717B5FDULL;
+    std::uint64_t aWandererD = 0x308B1DDC64346BAAULL;
+    std::uint64_t aWandererE = 0x7553EBB34F729AFDULL;
+    std::uint64_t aWandererF = 0x789948C10DFC7B5DULL;
+    std::uint64_t aWandererG = 0x4205DA226FC0675BULL;
+    std::uint64_t aWandererH = 0x511EE95FB0224D10ULL;
+    std::uint64_t aWandererI = 0xFAE48C727EFD1D19ULL;
+    std::uint64_t aWandererJ = 0x51D0F4DB9C43223CULL;
+    std::uint64_t aWandererK = 0x0BEE6245265CD32DULL;
+    mStarter.Seed(&mWorkSpaceA, &mFarmSalt, pNonce, SOCCER_SCRATCH_WORKER_A, S_BLOCK, mCollapseLaneB, ARX_STATE_VARS);
 }
 
 void Soccer2::SeedPrelude_Regular_C() {

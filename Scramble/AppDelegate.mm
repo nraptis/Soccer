@@ -325,12 +325,13 @@ bool RunReadmeSoccerExample() {
         return;
     }
     
-    /*
+    
     if (!RunReadmeSoccerExample()) {
         std::printf("Soccer2 README example failed.\n");
     }
-    */
     
+    
+    /*
     constexpr std::size_t kTrialCount = 10U;
     std::vector<EncryptionStrength> aStrengthList = { EncryptionStrength::kWeak, EncryptionStrength::kNormal, EncryptionStrength::kStrong};
     
@@ -375,23 +376,10 @@ bool RunReadmeSoccerExample() {
         printf("seed: %.2f\n", aSeconds_Seed);
         printf("twist_all: %.2f\n", aSeconds_TwistAll);
         printf("twist_grow: %.2f\n", aSeconds_TwistGrow);
-        
-        /*
-        double aSeconds_ArxA = Time_Poll("arx_a");
-        double aSeconds_ArxB = Time_Poll("arx_b");
-        double aSeconds_DiffuseA = Time_Poll("diffuse_a");
-        double aSeconds_DiffuseB = Time_Poll("diffuse_b");
-        
-        printf("End Trial, Str = %d\n", (int)aStrength);
-        //printf("kdf: %.2f\n", aSeconds_KDF);
-        printf("arx_a: %.2f\n", aSeconds_ArxA);
-        printf("arx_b: %.2f\n", aSeconds_ArxB);
-        printf("diffuse_a: %.2f\n", aSeconds_DiffuseA);
-        printf("diffuse_b: %.2f\n", aSeconds_DiffuseB);
-        */
-        
-        
+
+     
     }
+    */
     
     
 }

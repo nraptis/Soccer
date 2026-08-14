@@ -106,10 +106,10 @@ enum class TwistWorkSpaceSlot : std::uint16_t {
     kParamCrossC=10,
     kParamCrossD=11,
 
-    kHeartLaneA=104,
-    kHeartLaneB=105,
-    kHeartLaneC=106,
-    kHeartLaneD=107,
+    kRainbowLaneA=104,
+    kRainbowLaneB=105,
+    kRainbowLaneC=106,
+    kRainbowLaneD=107,
     
     
     kEarthLaneA=140,
@@ -232,13 +232,6 @@ enum class TwistWorkSpaceSlot : std::uint16_t {
     kSpiritLaneC=102,
     kSpiritLaneD=103,
     
-    kFuseLaneA=148,
-    kFuseLaneB=149,
-    kFuseLaneC=150,
-
-    
-
-
     // Rolling key-box views used by Seed, Twist, and Grow:
     // 1.) Seed addresses the entire box through kKeyBoxUnrolledA/B.
     // 2.) Twist and Grow read the oldest row through kKeyRowReadA/B.
@@ -271,45 +264,29 @@ enum class TwistWorkSpaceSlot : std::uint16_t {
     kKeyRowB6,
     kKeyRowB7,
 
-    kAuguryLaneA=232,
+    kStasisLaneA=260,
+    kStasisLaneB,
+    kStasisLaneC,
+
+    kAlchemyLaneA=268,
+    kAlchemyLaneB,
+    kAlchemyLaneC,
+    kAlchemyLaneD,
+
+    kAuguryLaneA=272,
     kAuguryLaneB,
     kAuguryLaneC,
     kAuguryLaneD,
 
-    kProphecyLaneA=236,
-    kProphecyLaneB,
-    kProphecyLaneC,
-    kProphecyLaneD,
+    kPsychicLaneA=276,
+    kPsychicLaneB,
+    kPsychicLaneC,
+    kPsychicLaneD,
 
-    kTransmutationLaneA=240,
-    kTransmutationLaneB,
-    kTransmutationLaneC,
-    kTransmutationLaneD,
-
-    kRestorationLaneA=244,
-    kRestorationLaneB,
-    kRestorationLaneC,
-    kRestorationLaneD,
-
-    kStasisLaneA=260,
-    kStasisLaneB,
-    kStasisLaneC,
-    kStasisLaneD,
-
-    kMysticalLaneA=264,
-    kMysticalLaneB,
-    kMysticalLaneC,
-    kMysticalLaneD,
-
-    kCovenLaneA=268,
-    kCovenLaneB,
-    kCovenLaneC,
-    kCovenLaneD,
-
-    kAlchemyLaneA=272,
-    kAlchemyLaneB,
-    kAlchemyLaneC,
-    kAlchemyLaneD,
+    kVoodooLaneA=280,
+    kVoodooLaneB,
+    kVoodooLaneC,
+    kVoodooLaneD,
 
     kParamDomainSaltOrbiterAssignA=170,
     kParamDomainSaltOrbiterAssignB=171,
@@ -640,10 +617,10 @@ public:
     std::uint8_t                            mWaterLaneC[S_BLOCK];
     std::uint8_t                            mWaterLaneD[S_BLOCK];
 
-    std::uint8_t                            mHeartLaneA[S_BLOCK];
-    std::uint8_t                            mHeartLaneB[S_BLOCK];
-    std::uint8_t                            mHeartLaneC[S_BLOCK];
-    std::uint8_t                            mHeartLaneD[S_BLOCK];
+    std::uint8_t                            mRainbowLaneA[S_BLOCK];
+    std::uint8_t                            mRainbowLaneB[S_BLOCK];
+    std::uint8_t                            mRainbowLaneC[S_BLOCK];
+    std::uint8_t                            mRainbowLaneD[S_BLOCK];
     
     std::uint8_t                            mLightningLaneA[S_BLOCK];
     std::uint8_t                            mLightningLaneB[S_BLOCK];
@@ -740,57 +717,34 @@ public:
     std::uint8_t                            mEvocationLaneC[S_BLOCK];
     std::uint8_t                            mEvocationLaneD[S_BLOCK];
 
-    std::uint8_t                            mAuguryLaneA[S_BLOCK];
-    std::uint8_t                            mAuguryLaneB[S_BLOCK];
-    std::uint8_t                            mAuguryLaneC[S_BLOCK];
-    std::uint8_t                            mAuguryLaneD[S_BLOCK];
-
-    std::uint8_t                            mProphecyLaneA[S_BLOCK];
-    std::uint8_t                            mProphecyLaneB[S_BLOCK];
-    std::uint8_t                            mProphecyLaneC[S_BLOCK];
-    std::uint8_t                            mProphecyLaneD[S_BLOCK];
-
-    std::uint8_t                            mTransmutationLaneA[S_BLOCK];
-    std::uint8_t                            mTransmutationLaneB[S_BLOCK];
-    std::uint8_t                            mTransmutationLaneC[S_BLOCK];
-    std::uint8_t                            mTransmutationLaneD[S_BLOCK];
-
-    std::uint8_t                            mRestorationLaneA[S_BLOCK];
-    std::uint8_t                            mRestorationLaneB[S_BLOCK];
-    std::uint8_t                            mRestorationLaneC[S_BLOCK];
-    std::uint8_t                            mRestorationLaneD[S_BLOCK];
-
     std::uint8_t                            mStasisLaneA[S_BLOCK];
     std::uint8_t                            mStasisLaneB[S_BLOCK];
     std::uint8_t                            mStasisLaneC[S_BLOCK];
-    std::uint8_t                            mStasisLaneD[S_BLOCK];
-
-    std::uint8_t                            mMysticalLaneA[S_BLOCK];
-    std::uint8_t                            mMysticalLaneB[S_BLOCK];
-    std::uint8_t                            mMysticalLaneC[S_BLOCK];
-    std::uint8_t                            mMysticalLaneD[S_BLOCK];
-
-    std::uint8_t                            mCovenLaneA[S_BLOCK];
-    std::uint8_t                            mCovenLaneB[S_BLOCK];
-    std::uint8_t                            mCovenLaneC[S_BLOCK];
-    std::uint8_t                            mCovenLaneD[S_BLOCK];
 
     std::uint8_t                            mAlchemyLaneA[S_BLOCK];
     std::uint8_t                            mAlchemyLaneB[S_BLOCK];
     std::uint8_t                            mAlchemyLaneC[S_BLOCK];
     std::uint8_t                            mAlchemyLaneD[S_BLOCK];
 
+    std::uint8_t                            mAuguryLaneA[S_BLOCK];
+    std::uint8_t                            mAuguryLaneB[S_BLOCK];
+    std::uint8_t                            mAuguryLaneC[S_BLOCK];
+    std::uint8_t                            mAuguryLaneD[S_BLOCK];
+
+    std::uint8_t                            mPsychicLaneA[S_BLOCK];
+    std::uint8_t                            mPsychicLaneB[S_BLOCK];
+    std::uint8_t                            mPsychicLaneC[S_BLOCK];
+    std::uint8_t                            mPsychicLaneD[S_BLOCK];
+
+    std::uint8_t                            mVoodooLaneA[S_BLOCK];
+    std::uint8_t                            mVoodooLaneB[S_BLOCK];
+    std::uint8_t                            mVoodooLaneC[S_BLOCK];
+    std::uint8_t                            mVoodooLaneD[S_BLOCK];
+
     std::uint8_t                            mSpiritLaneA[S_BLOCK];
     std::uint8_t                            mSpiritLaneB[S_BLOCK];
     std::uint8_t                            mSpiritLaneC[S_BLOCK];
     std::uint8_t                            mSpiritLaneD[S_BLOCK];
-
-    // Twist forks its terminal four-lane family into two independent key
-    // branches.  Each branch first retains one 16,384-byte half per lane,
-    // then folds the eight W_KEY sections down to four 2,048-byte pieces.
-    std::uint8_t                            mFuseLaneA[S_BLOCK];
-    std::uint8_t                            mFuseLaneB[S_BLOCK];
-    std::uint8_t                            mFuseLaneC[S_BLOCK];
 
     TwistDomainBundle                       mDomainBundle;
 

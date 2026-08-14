@@ -8,90 +8,9 @@
 #include "GPassFactoryMidstage.hpp"
 #include "GPassFactoryTrunk.hpp"
 #include "GSeedRunStageConfigValidator.hpp"
+#include "GSeedRunKDFCommon.hpp"
+#include "GFlowPlans.hpp"
 #include "ResidualBucket.hpp"
-
-namespace {
-
-std::vector<TwistWorkSpaceSlot> ParamOrbiterAssignSalts() {
-    using Slot = TwistWorkSpaceSlot;
-    return {
-        Slot::kParamDomainSaltOrbiterAssignA,
-        Slot::kParamDomainSaltOrbiterAssignB,
-        Slot::kParamDomainSaltOrbiterAssignC,
-        Slot::kParamDomainSaltOrbiterAssignD,
-        Slot::kParamDomainSaltOrbiterAssignE,
-        Slot::kParamDomainSaltOrbiterAssignF,
-        Slot::kParamDomainSaltOrbiterAssignG,
-        Slot::kParamDomainSaltOrbiterAssignH,
-    };
-}
-
-std::vector<TwistWorkSpaceSlot> ParamOrbiterUpdateSalts() {
-    using Slot = TwistWorkSpaceSlot;
-    return {
-        Slot::kParamDomainSaltOrbiterUpdateA,
-        Slot::kParamDomainSaltOrbiterUpdateB,
-        Slot::kParamDomainSaltOrbiterUpdateC,
-        Slot::kParamDomainSaltOrbiterUpdateD,
-        Slot::kParamDomainSaltOrbiterUpdateE,
-        Slot::kParamDomainSaltOrbiterUpdateF,
-        Slot::kParamDomainSaltOrbiterUpdateG,
-        Slot::kParamDomainSaltOrbiterUpdateH,
-    };
-}
-
-std::vector<TwistWorkSpaceSlot> ParamWandererUpdateSalts() {
-    using Slot = TwistWorkSpaceSlot;
-    return {
-        Slot::kParamDomainSaltWandererUpdateA,
-        Slot::kParamDomainSaltWandererUpdateB,
-        Slot::kParamDomainSaltWandererUpdateC,
-        Slot::kParamDomainSaltWandererUpdateD,
-        Slot::kParamDomainSaltWandererUpdateE,
-        Slot::kParamDomainSaltWandererUpdateF,
-        Slot::kParamDomainSaltWandererUpdateG,
-        Slot::kParamDomainSaltWandererUpdateH,
-    };
-}
-
-GSeedRunStageConfig BaseConfig(const std::string &pStageName,
-                               const std::string &pBatchName,
-                               GAXSFormat pFormat) {
-    GSeedRunStageConfig aConfig;
-    aConfig.mStageName = pStageName;
-    aConfig.mBatchName = pBatchName;
-    aConfig.mStartLine = "// " + pStageName + " " + pBatchName + " (start)";
-    aConfig.mEndLine = "// " + pStageName + " " + pBatchName + " (end)";
-    aConfig.mFormat = pFormat;
-    aConfig.mIgnoreNonces = false;
-    aConfig.mDomain = TwistDomain::kInvalid;
-    aConfig.mIsNonKDF = false;
-    aConfig.mExpectedSkeletonCount = 6;
-    aConfig.mLoopCeiling = S_BLOCK;
-    aConfig.mLoopEndText = "S_BLOCK";
-    aConfig.mHotPackCount = 12;
-    aConfig.mSaltsOrbiterAssign = ParamOrbiterAssignSalts();
-    aConfig.mSaltsOrbiterUpdate = ParamOrbiterUpdateSalts();
-    aConfig.mSaltsWandererUpdate = ParamWandererUpdateSalts();
-    return aConfig;
-}
-
-void AddKDF_CPrologue(TwistProgramBranch &pBranch) {
-    pBranch.AddLine("std::uint64_t aDomainWordIngress = pConstants->mIngress;");
-    pBranch.AddLine("std::uint64_t aDomainWordScatter = pConstants->mScatter;");
-    pBranch.AddLine("std::uint64_t aDomainWordCross = pConstants->mCross;");
-    pBranch.AddLine("std::uint64_t aDomainWordMatrixSelectA = pConstants->mMatrixSelectA;");
-    pBranch.AddLine("std::uint64_t aDomainWordMatrixSelectB = pConstants->mMatrixSelectB;");
-    pBranch.AddLine("std::uint8_t aDomainWordMatrixUnrollA = pConstants->mMatrixUnrollA;");
-    pBranch.AddLine("std::uint8_t aDomainWordMatrixUnrollB = pConstants->mMatrixUnrollB;");
-    pBranch.AddLine("std::uint8_t aDomainWordMatrixArgA = pConstants->mMatrixArgA;");
-    pBranch.AddLine("std::uint8_t aDomainWordMatrixArgB = pConstants->mMatrixArgB;");
-    pBranch.AddLine("std::uint8_t aDomainWordMatrixArgC = pConstants->mMatrixArgC;");
-    pBranch.AddLine("std::uint8_t aDomainWordMatrixArgD = pConstants->mMatrixArgD;");
-    pBranch.AddLine("");
-}
-
-} // namespace
 
 namespace GSeedRunKDF_CConfig {
 
@@ -103,18 +22,16 @@ KDFStageConfigs MakeKDF_CConfig(ResidualBucket &pResidualBucket,
     std::vector<Slot> aResidualsPool;
 
     // Lane Plan
+    const std::vector<GFlowStep> aLanePlans =
+        GFlowPlans::ARXSteps(GFlowPlans::KDFC());
 
     //
     // KDF C — Stage A
     //
-    const GPassFactoryMidstage::SlotArray4 aPrimarySourcesA = {
-        Slot::kVaporLaneA, Slot::kVaporLaneB,
-        Slot::kVaporLaneC, Slot::kVaporLaneD,
-    };
-    const GPassFactoryMidstage::SlotArray4 aDestinationsA = {
-        Slot::kPlasmaLaneA, Slot::kPlasmaLaneB,
-        Slot::kPlasmaLaneC, Slot::kPlasmaLaneD,
-    };
+    const GPassFactoryMidstage::SlotArray4 aPrimarySourcesA =
+        GFlowPlans::FamilySlots(aLanePlans[0].mInputs[0]);
+    const GPassFactoryMidstage::SlotArray4 aDestinationsA =
+        GFlowPlans::FamilySlots(aLanePlans[0].mOutput);
 
     pResidualBucket.Remove(GPassFactoryMidstage::ToVector(aPrimarySourcesA));
     pResidualBucket.Remove(GPassFactoryMidstage::ToVector(aDestinationsA));
@@ -136,22 +53,17 @@ KDFStageConfigs MakeKDF_CConfig(ResidualBucket &pResidualBucket,
         aResidualsPool[14],
     };
 
-    pResidualBucket.AddResiduals("KDF C — Stage A", {
-        Slot::kVaporLaneA, Slot::kVaporLaneB,
-        Slot::kVaporLaneC, Slot::kVaporLaneD,
-    });
+    pResidualBucket.AddResiduals(
+        "KDF C — Stage A",
+        GFlowPlans::FamilySlotVector(aLanePlans[0].mInputs[0]));
 
     //
     // KDF C — Stage B
     //
-    const GPassFactoryMidstage::SlotArray4 aPrimarySourcesB = {
-        Slot::kPlasmaLaneA, Slot::kPlasmaLaneB,
-        Slot::kPlasmaLaneC, Slot::kPlasmaLaneD,
-    };
-    const GPassFactoryMidstage::SlotArray4 aDestinationsB = {
-        Slot::kAetherLaneA, Slot::kAetherLaneB,
-        Slot::kAetherLaneC, Slot::kAetherLaneD,
-    };
+    const GPassFactoryMidstage::SlotArray4 aPrimarySourcesB =
+        GFlowPlans::FamilySlots(aLanePlans[1].mInputs[0]);
+    const GPassFactoryMidstage::SlotArray4 aDestinationsB =
+        GFlowPlans::FamilySlots(aLanePlans[1].mOutput);
 
     pResidualBucket.Remove(GPassFactoryMidstage::ToVector(aPrimarySourcesB));
     pResidualBucket.Remove(GPassFactoryMidstage::ToVector(aDestinationsB));
@@ -173,31 +85,21 @@ KDFStageConfigs MakeKDF_CConfig(ResidualBucket &pResidualBucket,
         aResidualsPool[14],
     };
 
-    pResidualBucket.AddResiduals("KDF C — Stage B", {
-        Slot::kPlasmaLaneA, Slot::kPlasmaLaneB,
-        Slot::kPlasmaLaneC, Slot::kPlasmaLaneD,
-    });
+    pResidualBucket.AddResiduals(
+        "KDF C — Stage B",
+        GFlowPlans::FamilySlotVector(aLanePlans[1].mInputs[0]));
 
-    //
-    // Matrix diffusion: Aether lanes -> Shadow lanes.
-    // Entropy: Plasma lanes.
-    //
-    pResidualBucket.AddResiduals("KDF C — After diffusion", {
-        Slot::kAetherLaneA, Slot::kAetherLaneB,
-        Slot::kAetherLaneC, Slot::kAetherLaneD,
-    });
+    pResidualBucket.AddResiduals(
+        "KDF C — After diffusion",
+        GFlowPlans::FamilySlotVector(aLanePlans[1].mOutput));
 
     //
     // KDF C — Stage C
     //
-    const GPassFactoryMidstage::SlotArray4 aPrimarySourcesC = {
-        Slot::kShadowLaneA, Slot::kShadowLaneB,
-        Slot::kShadowLaneC, Slot::kShadowLaneD,
-    };
-    const GPassFactoryMidstage::SlotArray4 aDestinationsC = {
-        Slot::kCelestialLaneA, Slot::kCelestialLaneB,
-        Slot::kCelestialLaneC, Slot::kCelestialLaneD,
-    };
+    const GPassFactoryMidstage::SlotArray4 aPrimarySourcesC =
+        GFlowPlans::FamilySlots(aLanePlans[2].mInputs[0]);
+    const GPassFactoryMidstage::SlotArray4 aDestinationsC =
+        GFlowPlans::FamilySlots(aLanePlans[2].mOutput);
 
     pResidualBucket.Remove(GPassFactoryMidstage::ToVector(aPrimarySourcesC));
     pResidualBucket.Remove(GPassFactoryMidstage::ToVector(aDestinationsC));
@@ -219,19 +121,16 @@ KDFStageConfigs MakeKDF_CConfig(ResidualBucket &pResidualBucket,
         aResidualsPool[14],
     };
 
-    pResidualBucket.AddResiduals("KDF C — Stage C", {
-        Slot::kShadowLaneA,
-        Slot::kShadowLaneB,
-        Slot::kShadowLaneC,
-        Slot::kShadowLaneD,
-    });
+    pResidualBucket.AddResiduals(
+        "KDF C — Stage C",
+        GFlowPlans::FamilySlotVector(aLanePlans[2].mInputs[0]));
 
     // Stage Construction
 
     //
     // Build and validate KDF C — Stage A
     //
-    GSeedRunStageConfig aConfigA = BaseConfig("GSeedRunKDF_C_A",
+    GSeedRunStageConfig aConfigA = GSeedRunKDFCommon::BaseConfig("GSeedRunKDF_C_A",
                                               "kdf_c_loop_a",
                                               GAXSFormat::kN11);
     aConfigA.mSlices =
@@ -254,12 +153,13 @@ KDFStageConfigs MakeKDF_CConfig(ResidualBucket &pResidualBucket,
         printf("%s\n", aErrorMessageA.c_str());
         exit(0);
     }
+    aConfigA.SetLaneFlow(aPrimarySourcesA, aDestinationsA);
     aConfigs[0] = aConfigA;
 
     //
     // Build and validate KDF C — Stage B
     //
-    GSeedRunStageConfig aConfigB = BaseConfig("GSeedRunKDF_C_B",
+    GSeedRunStageConfig aConfigB = GSeedRunKDFCommon::BaseConfig("GSeedRunKDF_C_B",
                                               "kdf_c_loop_b",
                                               GAXSFormat::kN11);
     aConfigB.mSlices =
@@ -282,6 +182,7 @@ KDFStageConfigs MakeKDF_CConfig(ResidualBucket &pResidualBucket,
         printf("%s\n", aErrorMessageB.c_str());
         exit(0);
     }
+    aConfigB.SetLaneFlow(aPrimarySourcesB, aDestinationsB);
     aConfigs[1] = aConfigB;
 
     //
@@ -290,9 +191,9 @@ KDFStageConfigs MakeKDF_CConfig(ResidualBucket &pResidualBucket,
     const ArrangementFour::SlotArray4 aArrangedPrimarySourcesC =
         ArrangementFour::Arrange(aPrimarySourcesC,
                                  static_cast<int>(pCandidateIndex),
-                                 12);
+                                 aLanePlans[2].mArrangementOffset);
 
-    GSeedRunStageConfig aConfigC = BaseConfig("GSeedRunKDF_C_C",
+    GSeedRunStageConfig aConfigC = GSeedRunKDFCommon::BaseConfig("GSeedRunKDF_C_C",
                                               "kdf_c_loop_c",
                                               GAXSFormat::kN11);
     aConfigC.mSlices =
@@ -315,6 +216,7 @@ KDFStageConfigs MakeKDF_CConfig(ResidualBucket &pResidualBucket,
         printf("%s\n", aErrorMessageC.c_str());
         exit(0);
     }
+    aConfigC.SetLaneFlow(aPrimarySourcesC, aDestinationsC);
     aConfigs[2] = aConfigC;
 
     return aConfigs;
@@ -336,7 +238,7 @@ bool GSeedRunKDF_C::Plan(std::string *pErrorMessage) {
 bool GSeedRunKDF_C::Build(TwistProgramBranch &pBranch,
                           std::string *pErrorMessage) {
     if (mEmitPrologue) {
-        AddKDF_CPrologue(pBranch);
+        GSeedRunKDFCommon::AddPrologue(pBranch);
     }
     return mStage.Build(pBranch, pErrorMessage);
 }

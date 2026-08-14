@@ -44,6 +44,21 @@
     pWandererJ, \
     pWandererK
 
+#define MUTABLE_PARAMS_ARE_NULL \
+    ((pIngress == nullptr) || \
+     (pCarry == nullptr) || \
+     (pWandererA == nullptr) || \
+     (pWandererB == nullptr) || \
+     (pWandererC == nullptr) || \
+     (pWandererD == nullptr) || \
+     (pWandererE == nullptr) || \
+     (pWandererF == nullptr) || \
+     (pWandererG == nullptr) || \
+     (pWandererH == nullptr) || \
+     (pWandererI == nullptr) || \
+     (pWandererJ == nullptr) || \
+     (pWandererK == nullptr))
+
 #define ARX_STATE_VARS \
     &aIngress, \
     &aCarry, \
@@ -147,7 +162,8 @@ public:
                                                  std::uint64_t pNonce,
                                                  std::uint8_t *pPassword,
                                                  std::size_t pPasswordByteLength,
-                                                 std::uint8_t *pDestination);
+                                                 std::uint8_t *pDestination,
+                                                 MUTABLE_PARAMS);
 
     virtual void                            TwistBlock(TwistWorkSpace *pWorkSpace,
                                                        std::uint8_t *pSource,
@@ -156,7 +172,8 @@ public:
                                                        std::uint8_t *pCrossLaneC,
                                                        std::uint8_t *pCrossLaneD,
                                                        std::uint8_t *pDestination,
-                                                       bool pStifleKey);
+                                                       bool pStifleKey,
+                                                       MUTABLE_PARAMS);
 
     virtual void                            GrowKeyA(TwistWorkSpace *pWorkSpace,
                                                      std::uint8_t *pCrossLaneA,
@@ -176,7 +193,8 @@ public:
                                                   std::uint8_t *pCrossLaneC,
                                                   std::uint8_t *pCrossLaneD,
                                                   std::uint8_t *pDestination,
-                                                  std::size_t pDestinationByteLength);
+                                                  std::size_t pDestinationByteLength,
+                                                  MUTABLE_PARAMS);
     
     void                                    AutoSeedThenTwist(TwistWorkSpace *pWorkSpace,
                                                               TwistFarmSalt *pFarmSalt,
@@ -188,7 +206,8 @@ public:
                                                               std::uint8_t *pCrossLaneC,
                                                               std::uint8_t *pCrossLaneD,
                                                               std::uint8_t *pDestination,
-                                                              std::size_t pDestinationByteLength);
+                                                              std::size_t pDestinationByteLength,
+                                                              MUTABLE_PARAMS);
     
     // Assumes the work space is seeded...
     // Assumes pSource has at least S_BLOCK bytes...
@@ -199,7 +218,8 @@ public:
                                                       std::uint8_t *pCrossLaneC,
                                                       std::uint8_t *pCrossLaneD,
                                                       std::uint8_t *pDestination,
-                                                      std::size_t pDestinationByteLength);
+                                                      std::size_t pDestinationByteLength,
+                                                      MUTABLE_PARAMS);
     
     M88                                     mMatrix;
     

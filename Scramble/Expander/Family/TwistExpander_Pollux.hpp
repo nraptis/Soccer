@@ -103,7 +103,8 @@ public:
               std::uint64_t pNonce,
               std::uint8_t *pPassword,
               std::size_t pPasswordByteLength,
-              std::uint8_t *pDestination) override;
+              std::uint8_t *pDestination,
+              MUTABLE_PARAMS) override;
     void TwistBlock(TwistWorkSpace *pWorkSpace,
                     std::uint8_t *pSource,
                     std::uint8_t *pCrossLaneA,
@@ -111,7 +112,8 @@ public:
                     std::uint8_t *pCrossLaneC,
                     std::uint8_t *pCrossLaneD,
                     std::uint8_t *pDestination,
-                    bool pStifleKey) override;
+                    bool pStifleKey,
+                    MUTABLE_PARAMS) override;
     void GrowKeyA(TwistWorkSpace *pWorkSpace,
                   std::uint8_t *pCrossLaneA,
                   std::uint8_t *pCrossLaneB,

@@ -6,6 +6,7 @@
 #ifndef GSeedRunKeyBox_hpp
 #define GSeedRunKeyBox_hpp
 
+#include "GFlowPlans.hpp"
 #include "GSeedRunStage.hpp"
 
 #include <array>
@@ -17,12 +18,13 @@ class ResidualBucket;
 
 namespace GSeedRunKeyBoxConfig {
 
-using KeyBoxStageConfigs = std::array<GSeedRunStageConfig, 80>;
+using KeyBoxStageConfigs = std::array<
+    GSeedRunStageConfig,
+    GFlowPlans::kKeyStageConfigCount>;
 
 // Each key flow has five independently generated four-loop ARX stages and two
-// per-flow mini-diffusions. Phase A reads one Coven/Alchemy sixteenth. Phase E
-// finishes by replacing that same logical flow's four Ice sixteenths, which
-// are then folded directly into one key row.
+// per-flow mini-diffusions. The exact lane chain lives in GFlowPlans::Key();
+// each stage operates on the current flow's assigned lane sixteenths.
 
 bool MakeKeyBoxConfigs(std::size_t pCandidateIndex,
                        const ResidualBucket &pSeedResidualBucket,
