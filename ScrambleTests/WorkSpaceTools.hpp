@@ -248,7 +248,12 @@ public:
         FillBytes(pWorkSpace->mWaterLaneB, S_BLOCK);
         FillBytes(pWorkSpace->mWaterLaneC, S_BLOCK);
         FillBytes(pWorkSpace->mWaterLaneD, S_BLOCK);
-
+        
+        FillBytes(pWorkSpace->mRainbowLaneA, S_BLOCK);
+        FillBytes(pWorkSpace->mRainbowLaneB, S_BLOCK);
+        FillBytes(pWorkSpace->mRainbowLaneC, S_BLOCK);
+        FillBytes(pWorkSpace->mRainbowLaneD, S_BLOCK);
+        
         FillBytes(pWorkSpace->mLightningLaneA, S_BLOCK);
         FillBytes(pWorkSpace->mLightningLaneB, S_BLOCK);
         FillBytes(pWorkSpace->mLightningLaneC, S_BLOCK);
@@ -288,16 +293,92 @@ public:
         FillBytes(pWorkSpace->mVaporLaneB, S_BLOCK);
         FillBytes(pWorkSpace->mVaporLaneC, S_BLOCK);
         FillBytes(pWorkSpace->mVaporLaneD, S_BLOCK);
+        
+        FillBytes(pWorkSpace->mKineticLaneA, S_BLOCK);
+        FillBytes(pWorkSpace->mKineticLaneB, S_BLOCK);
+        FillBytes(pWorkSpace->mKineticLaneC, S_BLOCK);
+        FillBytes(pWorkSpace->mKineticLaneD, S_BLOCK);
+        
+        FillBytes(pWorkSpace->mSonicLaneA, S_BLOCK);
+        FillBytes(pWorkSpace->mSonicLaneB, S_BLOCK);
+        FillBytes(pWorkSpace->mSonicLaneC, S_BLOCK);
+        FillBytes(pWorkSpace->mSonicLaneD, S_BLOCK);
+
+        FillBytes(pWorkSpace->mPlanarLaneA, S_BLOCK);
+        FillBytes(pWorkSpace->mPlanarLaneB, S_BLOCK);
+        FillBytes(pWorkSpace->mPlanarLaneC, S_BLOCK);
+        FillBytes(pWorkSpace->mPlanarLaneD, S_BLOCK);
+
+        FillBytes(pWorkSpace->mFrostLaneA, S_BLOCK);
+        FillBytes(pWorkSpace->mFrostLaneB, S_BLOCK);
+        FillBytes(pWorkSpace->mFrostLaneC, S_BLOCK);
+        FillBytes(pWorkSpace->mFrostLaneD, S_BLOCK);
+
+        FillBytes(pWorkSpace->mArcaneLaneA, S_BLOCK);
+        FillBytes(pWorkSpace->mArcaneLaneB, S_BLOCK);
+        FillBytes(pWorkSpace->mArcaneLaneC, S_BLOCK);
+        FillBytes(pWorkSpace->mArcaneLaneD, S_BLOCK);
+
+        FillBytes(pWorkSpace->mLunarLaneA, S_BLOCK);
+        FillBytes(pWorkSpace->mLunarLaneB, S_BLOCK);
+        FillBytes(pWorkSpace->mLunarLaneC, S_BLOCK);
+        FillBytes(pWorkSpace->mLunarLaneD, S_BLOCK);
+
+        FillBytes(pWorkSpace->mRunicLaneA, S_BLOCK);
+        FillBytes(pWorkSpace->mRunicLaneB, S_BLOCK);
+        FillBytes(pWorkSpace->mRunicLaneC, S_BLOCK);
+        FillBytes(pWorkSpace->mRunicLaneD, S_BLOCK);
 
         FillBytes(pWorkSpace->mSpiritLaneA, S_BLOCK);
         FillBytes(pWorkSpace->mSpiritLaneB, S_BLOCK);
         FillBytes(pWorkSpace->mSpiritLaneC, S_BLOCK);
         FillBytes(pWorkSpace->mSpiritLaneD, S_BLOCK);
-
-        FillBytes(pWorkSpace->mFuseLaneA, S_BLOCK);
-        FillBytes(pWorkSpace->mFuseLaneB, S_BLOCK);
-        FillBytes(pWorkSpace->mFuseLaneC, S_BLOCK);
         
+        FillBytes(pWorkSpace->mGloomLaneA, S_BLOCK);
+        FillBytes(pWorkSpace->mGloomLaneB, S_BLOCK);
+        FillBytes(pWorkSpace->mGloomLaneC, S_BLOCK);
+        FillBytes(pWorkSpace->mGloomLaneD, S_BLOCK);
+        
+        FillBytes(pWorkSpace->mAbjurationLaneA, S_BLOCK);
+        FillBytes(pWorkSpace->mAbjurationLaneB, S_BLOCK);
+        FillBytes(pWorkSpace->mAbjurationLaneC, S_BLOCK);
+        FillBytes(pWorkSpace->mAbjurationLaneD, S_BLOCK);
+        
+        FillBytes(pWorkSpace->mDivinationLaneA, S_BLOCK);
+        FillBytes(pWorkSpace->mDivinationLaneB, S_BLOCK);
+        FillBytes(pWorkSpace->mDivinationLaneC, S_BLOCK);
+        FillBytes(pWorkSpace->mDivinationLaneD, S_BLOCK);
+        
+        FillBytes(pWorkSpace->mEvocationLaneA, S_BLOCK);
+        FillBytes(pWorkSpace->mEvocationLaneB, S_BLOCK);
+        FillBytes(pWorkSpace->mEvocationLaneC, S_BLOCK);
+        FillBytes(pWorkSpace->mEvocationLaneD, S_BLOCK);
+        
+        FillBytes(pWorkSpace->mStasisLaneA, S_BLOCK);
+        FillBytes(pWorkSpace->mStasisLaneB, S_BLOCK);
+        FillBytes(pWorkSpace->mStasisLaneC, S_BLOCK);
+        //FillBytes(pWorkSpace->mStasisLaneD, S_BLOCK);
+        
+        FillBytes(pWorkSpace->mAlchemyLaneA, S_BLOCK);
+        FillBytes(pWorkSpace->mAlchemyLaneB, S_BLOCK);
+        FillBytes(pWorkSpace->mAlchemyLaneC, S_BLOCK);
+        FillBytes(pWorkSpace->mAlchemyLaneD, S_BLOCK);
+        
+        FillBytes(pWorkSpace->mAuguryLaneA, S_BLOCK);
+        FillBytes(pWorkSpace->mAuguryLaneB, S_BLOCK);
+        FillBytes(pWorkSpace->mAuguryLaneC, S_BLOCK);
+        FillBytes(pWorkSpace->mAuguryLaneD, S_BLOCK);
+        
+        FillBytes(pWorkSpace->mPsychicLaneA, S_BLOCK);
+        FillBytes(pWorkSpace->mPsychicLaneB, S_BLOCK);
+        FillBytes(pWorkSpace->mPsychicLaneC, S_BLOCK);
+        FillBytes(pWorkSpace->mPsychicLaneD, S_BLOCK);
+        
+        FillBytes(pWorkSpace->mVoodooLaneA, S_BLOCK);
+        FillBytes(pWorkSpace->mVoodooLaneB, S_BLOCK);
+        FillBytes(pWorkSpace->mVoodooLaneC, S_BLOCK);
+        FillBytes(pWorkSpace->mVoodooLaneD, S_BLOCK);
+
         FillDomainBundle(&pWorkSpace->mDomainBundle);
     }
 };

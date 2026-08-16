@@ -309,6 +309,20 @@
         aSource[i] = 0x00;
     }
     
+    std::uint64_t aIngress = 0xC57A5D1CB76274CDULL;
+    std::uint64_t aCarry = 0xD884E6D87C4E5D32ULL;
+    std::uint64_t aWandererA = 0x56A39022D8815D93ULL;
+    std::uint64_t aWandererB = 0x78621F8668264758ULL;
+    std::uint64_t aWandererC = 0x9CCC333EB717B5FDULL;
+    std::uint64_t aWandererD = 0x308B1DDC64346BAAULL;
+    std::uint64_t aWandererE = 0x7553EBB34F729AFDULL;
+    std::uint64_t aWandererF = 0x789948C10DFC7B5DULL;
+    std::uint64_t aWandererG = 0x4205DA226FC0675BULL;
+    std::uint64_t aWandererH = 0x511EE95FB0224D10ULL;
+    std::uint64_t aWandererI = 0xFAE48C727EFD1D19ULL;
+    std::uint64_t aWandererJ = 0x51D0F4DB9C43223CULL;
+    std::uint64_t aWandererK = 0x0BEE6245265CD32DULL;
+    
     std::vector<ExpanderItem> aExpanderItems = ExpanderFactory::Get();
     for (auto &aExpanderItem : aExpanderItems) {
         
@@ -332,7 +346,8 @@
                                             aSource,
                                             aSource,
                                             aSource,
-                                            false);
+                                            false,
+                                            ARX_STATE_VARS);
         
         std::unordered_set<std::uint8_t> aCharBag;
     
@@ -425,6 +440,20 @@
         aSource[i] = 0x00;
     }
     
+    std::uint64_t aIngress = 0xC57A5D1CB76274CDULL;
+    std::uint64_t aCarry = 0xD884E6D87C4E5D32ULL;
+    std::uint64_t aWandererA = 0x56A39022D8815D93ULL;
+    std::uint64_t aWandererB = 0x78621F8668264758ULL;
+    std::uint64_t aWandererC = 0x9CCC333EB717B5FDULL;
+    std::uint64_t aWandererD = 0x308B1DDC64346BAAULL;
+    std::uint64_t aWandererE = 0x7553EBB34F729AFDULL;
+    std::uint64_t aWandererF = 0x789948C10DFC7B5DULL;
+    std::uint64_t aWandererG = 0x4205DA226FC0675BULL;
+    std::uint64_t aWandererH = 0x511EE95FB0224D10ULL;
+    std::uint64_t aWandererI = 0xFAE48C727EFD1D19ULL;
+    std::uint64_t aWandererJ = 0x51D0F4DB9C43223CULL;
+    std::uint64_t aWandererK = 0x0BEE6245265CD32DULL;
+    
     std::vector<ExpanderItem> aExpanderItems = ExpanderFactory::Get();
     for (auto &aExpanderItem : aExpanderItems) {
         
@@ -448,7 +477,8 @@
                                             aSource,
                                             aSource,
                                             aSource,
-                                            false);
+                                            false,
+                                            ARX_STATE_VARS);
         
         std::unordered_set<std::uint8_t> aCharBag;
     

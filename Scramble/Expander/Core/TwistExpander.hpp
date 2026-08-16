@@ -7,6 +7,7 @@
 #define TwistExpander_hpp
 
 #include "TwistWorkSpace.hpp"
+#include "TwistMix16.hpp"
 
 #include <cstddef>
 #include <cstdint>
@@ -131,6 +132,38 @@
     *pWandererI = aWandererI; \
     *pWandererJ = aWandererJ; \
     *pWandererK = aWandererK
+
+inline void TwistKeyFoldBlock(const std::uint8_t *pSourceLaneA,
+                              const std::size_t pSourceBlockA,
+                              const std::uint8_t *pSourceLaneB,
+                              const std::size_t pSourceBlockB,
+                              std::uint8_t *pDestinationLane,
+                              const std::size_t pDestinationBlock) {
+    constexpr std::size_t kKeyFoldBlockSize = 512U;
+    const std::uint8_t *aSourceA =
+        pSourceLaneA + (pSourceBlockA * kKeyFoldBlockSize);
+    const std::uint8_t *aSourceB =
+        pSourceLaneB + (pSourceBlockB * kKeyFoldBlockSize);
+    std::uint8_t *aDestination =
+        pDestinationLane + (pDestinationBlock * kKeyFoldBlockSize);
+    for (std::size_t aIndex = 0U;
+         aIndex < kKeyFoldBlockSize;
+         ++aIndex) {
+        std::uint16_t aFoldValue =
+            static_cast<std::uint16_t>(aSourceA[aIndex]);
+        aFoldValue |=
+            static_cast<std::uint16_t>(aSourceB[aIndex]) << 8U;
+        aFoldValue = TwistMix16::DiffuseA(aFoldValue);
+        aDestination[aIndex] = static_cast<std::uint8_t>(aFoldValue);
+    }
+}
+
+#define KEY_FOLD_BLOCK(pSourceLaneA, pSourceBlockA, \
+                       pSourceLaneB, pSourceBlockB, \
+                       pDestinationLane, pDestinationBlock) \
+    TwistKeyFoldBlock((pSourceLaneA), (pSourceBlockA), \
+                      (pSourceLaneB), (pSourceBlockB), \
+                      (pDestinationLane), (pDestinationBlock))
 
 
 
