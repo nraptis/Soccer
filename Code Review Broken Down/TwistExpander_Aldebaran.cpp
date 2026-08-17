@@ -1,34 +1,5 @@
 
-void TwistExpander_Aldebaran::KDF_A_A(TwistWorkSpace *pWorkSpace,
-               std::uint64_t pNonce,
-               TwistDomainConstants *pConstants,
-               TwistDomainSaltSet *pDomainSaltSet,
-               MUTABLE_PARAMS) {
-    std::uint8_t *aFireLaneA = pWorkSpace->mFireLaneA;
-    std::uint8_t *aFireLaneB = pWorkSpace->mFireLaneB;
-    std::uint8_t *aFireLaneC = pWorkSpace->mFireLaneC;
-    std::uint8_t *aFireLaneD = pWorkSpace->mFireLaneD;
-    std::uint8_t *aShadowLaneA = pWorkSpace->mShadowLaneA;
-    std::uint8_t *aShadowLaneB = pWorkSpace->mShadowLaneB;
-    std::uint8_t *aShadowLaneC = pWorkSpace->mShadowLaneC;
-    std::uint8_t *aShadowLaneD = pWorkSpace->mShadowLaneD;
-    std::uint8_t *aVaporLaneA = pWorkSpace->mVaporLaneA;
-    std::uint8_t *aVaporLaneB = pWorkSpace->mVaporLaneB;
-    std::uint8_t *aVaporLaneC = pWorkSpace->mVaporLaneC;
-    std::uint8_t *aVaporLaneD = pWorkSpace->mVaporLaneD;
-    std::size_t *aIndexList256A = pWorkSpace->mIndexList256A;
-    std::size_t *aIndexList256B = pWorkSpace->mIndexList256B;
-    std::size_t *aIndexList256C = pWorkSpace->mIndexList256C;
-    std::size_t *aIndexList256D = pWorkSpace->mIndexList256D;
-
-    std::uint64_t aDomainWordMatrixSelectA = pConstants->mMatrixSelectA;
-    std::uint64_t aDomainWordMatrixSelectB = pConstants->mMatrixSelectB;
-    std::uint8_t aDomainWordMatrixUnrollA = pConstants->mMatrixUnrollA;
-    std::uint8_t aDomainWordMatrixUnrollB = pConstants->mMatrixUnrollB;
-    std::uint8_t aDomainWordMatrixArgA = pConstants->mMatrixArgA;
-    std::uint8_t aDomainWordMatrixArgB = pConstants->mMatrixArgB;
-    std::uint8_t aDomainWordMatrixArgC = pConstants->mMatrixArgC;
-    std::uint8_t aDomainWordMatrixArgD = pConstants->mMatrixArgD;
+void TwistExpander_Aldebaran::KDF_A_A() {
 
     //
     // src: [source, nonce]
@@ -61,7 +32,7 @@ void TwistExpander_Aldebaran::KDF_A_A(TwistWorkSpace *pWorkSpace,
 }
 
 void TwistExpander_Aldebaran::KDF_B_A() {
-    
+
     //
     // src: [$kinetic]
     // dst: [$evocation]
@@ -77,8 +48,12 @@ void TwistExpander_Aldebaran::KDF_B_A() {
     TwistDiffuse::DiffuseWithDomainWords(
         aEvocationLaneA, aEvocationLaneB, aEvocationLaneC, aEvocationLaneD, // entropy lanes
         aRunicLaneA, aRunicLaneB, aRunicLaneC, aRunicLaneD,  // input lanes
-        aDivinationLaneA, aDivinationLaneB, aDivinationLaneC, aDivinationLaneD); // output lanes
-
+        aDivinationLaneA, aDivinationLaneB, aDivinationLaneC, aDivinationLaneD, // output lanes
+        aIndexList256A, aIndexList256B, aIndexList256C, aIndexList256D,
+        &mMatrix,
+        aDomainWordMatrixSelectA, aDomainWordMatrixSelectB,
+        aDomainWordMatrixUnrollA, aDomainWordMatrixUnrollB,
+        aDomainWordMatrixArgA, aDomainWordMatrixArgB, aDomainWordMatrixArgC, aDomainWordMatrixArgD);
 
     //
     // src: [$divination]
@@ -89,7 +64,7 @@ void TwistExpander_Aldebaran::KDF_B_A() {
 }
 
 void TwistExpander_Aldebaran::KDF_C_A() {
-    
+
     //
     // src: [$abjuration]
     // dst: [$aether]
@@ -105,7 +80,12 @@ void TwistExpander_Aldebaran::KDF_C_A() {
     TwistDiffuse::DiffuseWithDomainWords(
         aAetherLaneA, aAetherLaneB, aAetherLaneC, aAetherLaneD, // entropy lanes
         aLunarLaneA, aLunarLaneB, aLunarLaneC, aLunarLaneD,  // input lanes
-        aEarthLaneA, aEarthLaneB, aEarthLaneC, aEarthLaneD); // output lanes
+        aEarthLaneA, aEarthLaneB, aEarthLaneC, aEarthLaneD, // output lanes
+        aIndexList256A, aIndexList256B, aIndexList256C, aIndexList256D,
+        &mMatrix,
+        aDomainWordMatrixSelectA, aDomainWordMatrixSelectB,
+        aDomainWordMatrixUnrollA, aDomainWordMatrixUnrollB,
+        aDomainWordMatrixArgA, aDomainWordMatrixArgB, aDomainWordMatrixArgC, aDomainWordMatrixArgD);
 
     //
     // src: [$earth]
@@ -122,20 +102,40 @@ void TwistExpander_Aldebaran::Seed(TwistWorkSpace *pWorkSpace,
                                  std::size_t pPasswordByteLength,
                                  std::uint8_t *pDestination,
                                  MUTABLE_PARAMS) {
+    if ((pWorkSpace == nullptr) || (pFarmSalt == nullptr) ||
+        (pDestination == nullptr) || MUTABLE_PARAMS_ARE_NULL) { return; }
+
+    UnrollPassword(pWorkSpace->mSourceLane, pPassword, pPasswordByteLength);
+    UnrollNonce(pWorkSpace->mNonceLane, pNonce);
+    mDomainBundleInbuilt.mKeyRotateASalts = kKeyRotateASalts;
+    mDomainBundleInbuilt.mKeyRotateAConstants = kKeyRotateAConstants;
+    mDomainBundleInbuilt.mKeyRotateBSalts = kKeyRotateBSalts;
+    mDomainBundleInbuilt.mKeyRotateBConstants = kKeyRotateBConstants;
+    mDomainBundleInbuilt.mKeySpawnASalts = kKeySpawnASalts;
+    mDomainBundleInbuilt.mKeySpawnAConstants = kKeySpawnAConstants;
+    mDomainBundleInbuilt.mKeySpawnBSalts = kKeySpawnBSalts;
+    mDomainBundleInbuilt.mKeySpawnBConstants = kKeySpawnBConstants;
+    mDomainBundleInbuilt.mSeedSalts = kSeedSalts;
+    mDomainBundleInbuilt.mSeedConstants = kSeedConstants;
+    mDomainBundleInbuilt.mTwistSalts = kTwistSalts;
+    mDomainBundleInbuilt.mTwistConstants = kTwistConstants;
+    mDomainBundleEphemeralA.Zero();
+    mDomainBundleEphemeralB.Zero();
+    pWorkSpace->mDomainBundle.Zero();
     
-    std::uint64_t aIngress = *pIngress + 0xEDBBF8A99E501354ULL;
-    std::uint64_t aCarry = *pCarry + 0x7119307BD2710827ULL;
-    std::uint64_t aWandererA = *pWandererA + 0x2F99236D65F85FA0ULL;
-    std::uint64_t aWandererB = *pWandererB + 0x87D4A07BE8160282ULL;
-    std::uint64_t aWandererC = *pWandererC + 0xB267A1B890FE5A14ULL;
-    std::uint64_t aWandererD = *pWandererD + 0xC2B1A1572AA7AF89ULL;
-    std::uint64_t aWandererE = *pWandererE + 0x2CCA1D49997B728CULL;
-    std::uint64_t aWandererF = *pWandererF + 0xF12FC7DF4251D512ULL;
-    std::uint64_t aWandererG = *pWandererG + 0x277EAFE42216794FULL;
-    std::uint64_t aWandererH = *pWandererH + 0x47D91C37F46A80CULL;
-    std::uint64_t aWandererI = *pWandererI + 0x7AA854D7E7B09E57ULL;
-    std::uint64_t aWandererJ = *pWandererJ + 0x2D6827D768F23865ULL;
-    std::uint64_t aWandererK = *pWandererK + 0x9A550466920B3A69ULL;
+    std::uint64_t aIngress = *pIngress + 0x6278A02D0FBE5D64ULL;
+    std::uint64_t aCarry = *pCarry + 0x7E0F6FA207027CDEULL;
+    std::uint64_t aWandererA = *pWandererA + 0xA8977CD24D567F50ULL;
+    std::uint64_t aWandererB = *pWandererB + 0xC45CF33D3D818AC6ULL;
+    std::uint64_t aWandererC = *pWandererC + 0xAC6DD18CC6BA0278ULL;
+    std::uint64_t aWandererD = *pWandererD + 0x3B4D8EEE5D18557BULL;
+    std::uint64_t aWandererE = *pWandererE + 0x20AD0C6928DA06E8ULL;
+    std::uint64_t aWandererF = *pWandererF + 0xA366627E9ED4C707ULL;
+    std::uint64_t aWandererG = *pWandererG + 0xD849D2F392E4072FULL;
+    std::uint64_t aWandererH = *pWandererH + 0x122A461B2DE75A62ULL;
+    std::uint64_t aWandererI = *pWandererI + 0x3AA96EDF35C43107ULL;
+    std::uint64_t aWandererJ = *pWandererJ + 0x80FE118B47D63019ULL;
+    std::uint64_t aWandererK = *pWandererK + 0x4F1E59779205D1EAULL;
 
     ////////////////////////////////////////////////////////
     //
@@ -202,6 +202,18 @@ void TwistExpander_Aldebaran::Seed(TwistWorkSpace *pWorkSpace,
                     aStasisLaneA, aStasisLaneB, aStasisLaneC, // temp/fold lanes
                     &mDomainBundleEphemeralB.mKeyRotateBSalts,
                     &(mDomainBundleEphemeralB.mKeyRotateBConstants));
+
+    //
+    // src: [$abjuration]
+    // dst: [$aether]
+    //
+    KDF_C_B(pWorkSpace, pNonce, &(mDomainBundleEphemeralB.mKeyRotateBConstants), &(mDomainBundleEphemeralB.mKeyRotateBSalts), ARX_STATE_VARS);
+
+    TwistFarm::Farm(pFarmSalt,
+                    aCrystalLaneB, aCrystalLaneC, aCrystalLaneD, aCrystalLaneA, // farm lanes
+                    aStasisLaneA, aStasisLaneB, aStasisLaneC, // temp/fold lanes
+                    &pWorkSpace->mDomainBundle.mKeyRotateBSalts,
+                    &(pWorkSpace->mDomainBundle.mKeyRotateBConstants));
     //
     ////////////////////////////////////////////////////////
 
@@ -468,112 +480,26 @@ void TwistExpander_Aldebaran::Seed(TwistWorkSpace *pWorkSpace,
 
     TwistSquash::SquashKeyA(ALDEBARAN_KEY_A_A_IceLaneA, ALDEBARAN_KEY_A_A_IceLaneB, ALDEBARAN_KEY_A_A_IceLaneC, ALDEBARAN_KEY_A_A_IceLaneD, &(pWorkSpace->mKeyBoxA[0U][0]));
 
-    ...
-    ...
-
-    aIngress = *pIngress;
-    aCarry = *pCarry;
-    aWandererA = *pWandererA;
-    aWandererB = *pWandererB;
-    aWandererC = *pWandererC;
-    aWandererD = *pWandererD;
-    aWandererE = *pWandererE;
-    aWandererF = *pWandererF;
-    aWandererG = *pWandererG;
-    aWandererH = *pWandererH;
-    aWandererI = *pWandererI;
-    aWandererJ = *pWandererJ;
-    aWandererK = *pWandererK;
-
-    // Key flow — B / A
-
-    //
-    // src: [$earth, $crystal]
-    // dst: [$arcane]
-    //
-    TwistExpander_Aldebaran_Arx::KEY_B_A_A(PARAMS_SEED);
-
-    //
-    // src: [$arcane]
-    // dst: [$plasma]
-    //
-    TwistExpander_Aldebaran_Arx::KEY_B_A_B(PARAMS_SEED);
-
-    KeyDiffuse_A_B_A(pWorkSpace);
-
-    //
-    // src: [$rainbow]
-    // dst: [$water]
-    //
-    TwistExpander_Aldebaran_Arx::KEY_B_A_C(PARAMS_SEED);
-
-    //
-    // src: [$water]
-    // dst: [$vapor]
-    //
-    TwistExpander_Aldebaran_Arx::KEY_B_A_D(PARAMS_SEED);
-
-    KeyDiffuse_B_B_A(pWorkSpace);
-
-    //
-    // src: [$frost]
-    // dst: [$ice]
-    //
-    TwistExpander_Aldebaran_Arx::KEY_B_A_E(PARAMS_SEED);
-
-    TwistSquash::SquashKeyA(ALDEBARAN_KEY_B_A_IceLaneA, ALDEBARAN_KEY_B_A_IceLaneB, ALDEBARAN_KEY_B_A_IceLaneC, ALDEBARAN_KEY_B_A_IceLaneD, &(pWorkSpace->mKeyBoxB[0U][0]));
-
-    //
-    ////////////////////////////////////////////////////////
-
     pWorkSpace->Zero_PostSeed();
 
     Zero_PostSeed();
 }
 
-void TwistExpander_Aldebaran::TwistBlock(TwistWorkSpace *pWorkSpace,
-                                       std::uint8_t *pSource,
-                                       std::uint8_t *pCrossLaneA,
-                                       std::uint8_t *pCrossLaneB,
-                                       std::uint8_t *pCrossLaneC,
-                                       std::uint8_t *pCrossLaneD,
-                                       std::uint8_t *pDestination,
-                                       bool pStifleKey,
-                                       MUTABLE_PARAMS) {
-    if ((pWorkSpace == nullptr) || (pSource == nullptr) ||
-        (pCrossLaneA == nullptr) || (pCrossLaneB == nullptr) ||
-        (pCrossLaneC == nullptr) || (pCrossLaneD == nullptr) ||
-        (pDestination == nullptr) || MUTABLE_PARAMS_ARE_NULL) { return; }
-    std::uint8_t *aEarthLaneA = pWorkSpace->mEarthLaneA;
-    std::uint8_t *aEarthLaneB = pWorkSpace->mEarthLaneB;
-    std::uint8_t *aEarthLaneC = pWorkSpace->mEarthLaneC;
-    std::uint8_t *aEarthLaneD = pWorkSpace->mEarthLaneD;
-    std::uint8_t *aAetherLaneA = pWorkSpace->mAetherLaneA;
-    std::uint8_t *aAetherLaneB = pWorkSpace->mAetherLaneB;
-    std::uint8_t *aAetherLaneC = pWorkSpace->mAetherLaneC;
-    std::uint8_t *aAetherLaneD = pWorkSpace->mAetherLaneD;
-    std::uint8_t *aLunarLaneA = pWorkSpace->mLunarLaneA;
-    std::uint8_t *aLunarLaneB = pWorkSpace->mLunarLaneB;
-    std::uint8_t *aLunarLaneC = pWorkSpace->mLunarLaneC;
-    std::uint8_t *aLunarLaneD = pWorkSpace->mLunarLaneD;
-    std::size_t *aIndexList256A = pWorkSpace->mIndexList256A;
-    std::size_t *aIndexList256B = pWorkSpace->mIndexList256B;
-    std::size_t *aIndexList256C = pWorkSpace->mIndexList256C;
-    std::size_t *aIndexList256D = pWorkSpace->mIndexList256D;
-
-    std::uint64_t aIngress = *pIngress + 0xF459E9EDD2E96098ULL;
-    std::uint64_t aCarry = *pCarry + 0xDCD6BED954525357ULL;
-    std::uint64_t aWandererA = *pWandererA + 0x5B546BA4497DCA7DULL;
-    std::uint64_t aWandererB = *pWandererB + 0x3F80AD0E5F01C5B1ULL;
-    std::uint64_t aWandererC = *pWandererC + 0xB3D63F9B2AAEBC0DULL;
-    std::uint64_t aWandererD = *pWandererD + 0x4E88BAA1729C15AAULL;
-    std::uint64_t aWandererE = *pWandererE + 0x7788C3442248CA42ULL;
-    std::uint64_t aWandererF = *pWandererF + 0x23616574A785B65BULL;
-    std::uint64_t aWandererG = *pWandererG + 0x17C8D2688354781EULL;
-    std::uint64_t aWandererH = *pWandererH + 0xAA5E58A22F290CABULL;
-    std::uint64_t aWandererI = *pWandererI + 0x5FB9CF3072696145ULL;
-    std::uint64_t aWandererJ = *pWandererJ + 0xE4044C50AC250CCDULL;
-    std::uint64_t aWandererK = *pWandererK + 0xEFD749887F6B68E4ULL;
+void TwistExpander_Aldebaran::TwistBlock() {
+    
+    std::uint64_t aIngress = *pIngress + 0x09BDB5B86B41E95DULL;
+    std::uint64_t aCarry = *pCarry + 0xB2DCB57BB2C12D7BULL;
+    std::uint64_t aWandererA = *pWandererA + 0xD8320828E2C8AB84ULL;
+    std::uint64_t aWandererB = *pWandererB + 0x97D09A813CDC2F8EULL;
+    std::uint64_t aWandererC = *pWandererC + 0x3BEBE53B8B15F351ULL;
+    std::uint64_t aWandererD = *pWandererD + 0x3A46FC2746D2CA77ULL;
+    std::uint64_t aWandererE = *pWandererE + 0xB074B4921B984CC9ULL;
+    std::uint64_t aWandererF = *pWandererF + 0xA265A5CC7F25BDF2ULL;
+    std::uint64_t aWandererG = *pWandererG + 0x85D6255D21F4AEB0ULL;
+    std::uint64_t aWandererH = *pWandererH + 0xDD4225F2FC7EB204ULL;
+    std::uint64_t aWandererI = *pWandererI + 0x63D9677B3EED9D9DULL;
+    std::uint64_t aWandererJ = *pWandererJ + 0x79F30E7883C7AFB2ULL;
+    std::uint64_t aWandererK = *pWandererK + 0x7B735540EB8434F9ULL;
 
     ////////////////////////////////////////////////////////
     //
@@ -675,15 +601,12 @@ void TwistExpander_Aldebaran::TwistBlock(TwistWorkSpace *pWorkSpace,
     ////////////////////////////////////////////////////////
 }
 
-void TwistExpander_Aldebaran::GrowKeyA(TwistWorkSpace *pWorkSpace,
-                  std::uint8_t *pCrossLaneA,
-                  std::uint8_t *pCrossLaneB,
-                  MUTABLE_PARAMS) {
+void TwistExpander_Aldebaran::GrowKeyA() {
     //
     // src: [$spirit, cross_a, cross_b]
     // dst: [$arcane]
     //
-    TwistExpander_Aldebaran_Arx::GROW_A_A(PARAMS_GROW);
+    TwistExpander_Aldebaran_Arx::GROW_A_A(PARAMS_GROW_CROSS);
 
     //
     // src: [$arcane]
@@ -759,7 +682,7 @@ void TwistExpander_Aldebaran::GrowKeyB(TwistWorkSpace *pWorkSpace,
     // src: [$divination, cross_a, cross_b]
     // dst: [$arcane]
     //
-    TwistExpander_Aldebaran_Arx::GROW_B_A(PARAMS_GROW);
+    TwistExpander_Aldebaran_Arx::GROW_B_A(PARAMS_GROW_CROSS);
 
     //
     // src: [$arcane]
@@ -841,20 +764,6 @@ void TwistExpander_Aldebaran::KeyDiffuse_A_A_A(TwistWorkSpace *pWorkSpace) {
         pWorkSpace->mDomainBundle.mKeySpawnAConstants.mMatrixArgA, pWorkSpace->mDomainBundle.mKeySpawnAConstants.mMatrixArgB, pWorkSpace->mDomainBundle.mKeySpawnAConstants.mMatrixArgC, pWorkSpace->mDomainBundle.mKeySpawnAConstants.mMatrixArgD);
 }
 
-void TwistExpander_Aldebaran::KeyDiffuse_A_A_B(TwistWorkSpace *pWorkSpace) {
-    TwistDiffuse::KeyDiffuseWithDomainWords(
-        ALDEBARAN_KEY_A_B_ArcaneLaneA, ALDEBARAN_KEY_A_B_ArcaneLaneB, // entropy lanes
-        ALDEBARAN_KEY_A_B_ArcaneLaneC, ALDEBARAN_KEY_A_B_ArcaneLaneD, // entropy lanes
-        ALDEBARAN_KEY_A_B_PlasmaLaneA, ALDEBARAN_KEY_A_B_PlasmaLaneB, // input lanes
-        ALDEBARAN_KEY_A_B_PlasmaLaneC, ALDEBARAN_KEY_A_B_PlasmaLaneD, // input lanes
-        ALDEBARAN_KEY_A_B_RainbowLaneA, ALDEBARAN_KEY_A_B_RainbowLaneB, // output lanes
-        ALDEBARAN_KEY_A_B_RainbowLaneC, ALDEBARAN_KEY_A_B_RainbowLaneD, // output lanes
-        pWorkSpace->mIndexList256A, pWorkSpace->mIndexList256B, pWorkSpace->mIndexList256C, pWorkSpace->mIndexList256D,
-        &mMatrix, pWorkSpace->mDomainBundle.mKeySpawnAConstants.mMatrixSelectA, pWorkSpace->mDomainBundle.mKeySpawnAConstants.mMatrixSelectB,
-        pWorkSpace->mDomainBundle.mKeySpawnAConstants.mMatrixUnrollA, pWorkSpace->mDomainBundle.mKeySpawnAConstants.mMatrixUnrollB,
-        pWorkSpace->mDomainBundle.mKeySpawnAConstants.mMatrixArgA, pWorkSpace->mDomainBundle.mKeySpawnAConstants.mMatrixArgB, pWorkSpace->mDomainBundle.mKeySpawnAConstants.mMatrixArgC, pWorkSpace->mDomainBundle.mKeySpawnAConstants.mMatrixArgD);
-}
-
 void TwistExpander_Aldebaran::KeyDiffuse_B_A_A(TwistWorkSpace *pWorkSpace) {
     TwistDiffuse::KeyDiffuseWithDomainWords(
         ALDEBARAN_KEY_A_A_WaterLaneA, ALDEBARAN_KEY_A_A_WaterLaneB, // entropy lanes
@@ -863,20 +772,6 @@ void TwistExpander_Aldebaran::KeyDiffuse_B_A_A(TwistWorkSpace *pWorkSpace) {
         ALDEBARAN_KEY_A_A_VaporLaneC, ALDEBARAN_KEY_A_A_VaporLaneD, // input lanes
         ALDEBARAN_KEY_A_A_FrostLaneA, ALDEBARAN_KEY_A_A_FrostLaneB, // output lanes
         ALDEBARAN_KEY_A_A_FrostLaneC, ALDEBARAN_KEY_A_A_FrostLaneD, // output lanes
-        pWorkSpace->mIndexList256A, pWorkSpace->mIndexList256B, pWorkSpace->mIndexList256C, pWorkSpace->mIndexList256D,
-        &mMatrix, pWorkSpace->mDomainBundle.mKeySpawnAConstants.mMatrixSelectA, pWorkSpace->mDomainBundle.mKeySpawnAConstants.mMatrixSelectB,
-        pWorkSpace->mDomainBundle.mKeySpawnAConstants.mMatrixUnrollA, pWorkSpace->mDomainBundle.mKeySpawnAConstants.mMatrixUnrollB,
-        pWorkSpace->mDomainBundle.mKeySpawnAConstants.mMatrixArgA, pWorkSpace->mDomainBundle.mKeySpawnAConstants.mMatrixArgB, pWorkSpace->mDomainBundle.mKeySpawnAConstants.mMatrixArgC, pWorkSpace->mDomainBundle.mKeySpawnAConstants.mMatrixArgD);
-}
-
-void TwistExpander_Aldebaran::KeyDiffuse_B_A_B(TwistWorkSpace *pWorkSpace) {
-    TwistDiffuse::KeyDiffuseWithDomainWords(
-        ALDEBARAN_KEY_A_B_WaterLaneA, ALDEBARAN_KEY_A_B_WaterLaneB, // entropy lanes
-        ALDEBARAN_KEY_A_B_WaterLaneC, ALDEBARAN_KEY_A_B_WaterLaneD, // entropy lanes
-        ALDEBARAN_KEY_A_B_VaporLaneA, ALDEBARAN_KEY_A_B_VaporLaneB, // input lanes
-        ALDEBARAN_KEY_A_B_VaporLaneC, ALDEBARAN_KEY_A_B_VaporLaneD, // input lanes
-        ALDEBARAN_KEY_A_B_FrostLaneA, ALDEBARAN_KEY_A_B_FrostLaneB, // output lanes
-        ALDEBARAN_KEY_A_B_FrostLaneC, ALDEBARAN_KEY_A_B_FrostLaneD, // output lanes
         pWorkSpace->mIndexList256A, pWorkSpace->mIndexList256B, pWorkSpace->mIndexList256C, pWorkSpace->mIndexList256D,
         &mMatrix, pWorkSpace->mDomainBundle.mKeySpawnAConstants.mMatrixSelectA, pWorkSpace->mDomainBundle.mKeySpawnAConstants.mMatrixSelectB,
         pWorkSpace->mDomainBundle.mKeySpawnAConstants.mMatrixUnrollA, pWorkSpace->mDomainBundle.mKeySpawnAConstants.mMatrixUnrollB,

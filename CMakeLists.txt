@@ -55,11 +55,9 @@ set(SOCCER_LIBRARY_SOURCES
     "${SOCCER_SOURCE_ROOT}/Public/Soccer2.cpp"
     "${SOCCER_COMPOSER_ROOT}/EncryptionPlan.cpp"
     "${SOCCER_COMPOSER_ROOT}/LaneCombinations.cpp"
-    "${SOCCER_COMPOSER_ROOT}/RotationRangeFarmer.cpp"
     "${SOCCER_COMPOSER_ROOT}/Soccer2.cpp"
     "${SOCCER_COMPOSER_ROOT}/SoccerFolding.cpp"
     "${SOCCER_COMPOSER_ROOT}/SoccerMaskBank.cpp"
-    "${SOCCER_COMPOSER_ROOT}/SoccerRotationBank.cpp"
     "${SOCCER_ENCRYPTER_ROOT}/Cryptex.cpp"
     "${SOCCER_ENCRYPTER_ROOT}/EncryptionLayer.cpp"
     ${SOCCER_CORE_SOURCES}

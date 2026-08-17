@@ -111,9 +111,9 @@ public:
 
      Rotate: 6
      Mask: 9 / 9
-     Lane, L3: 3/2
-     Lane, L2: 2/1
-     Lane, L1: 2/1
+     Lane, L3: 2/2
+     Lane, L2: 1/1
+     Lane, L1: 1/1
      */
 
     static EncryptionPlan               MakePlanWeak(std::uint64_t pLaneSelect,

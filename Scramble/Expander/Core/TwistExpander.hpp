@@ -98,6 +98,10 @@
 
 #define PARAMS_GROW \
     pWorkSpace, \
+    MUTABLE_PARAMS_PASSED
+
+#define PARAMS_GROW_CROSS \
+    pWorkSpace, \
     pCrossLaneA, \
     pCrossLaneB, \
     MUTABLE_PARAMS_PASSED
@@ -135,11 +139,15 @@
 
 inline void TwistKeyFoldBlock(const std::uint8_t *pSourceLaneA,
                               const std::size_t pSourceBlockA,
+                              const std::size_t pSourceOffsetA,
                               const std::uint8_t *pSourceLaneB,
                               const std::size_t pSourceBlockB,
+                              const std::size_t pSourceOffsetB,
                               std::uint8_t *pDestinationLane,
                               const std::size_t pDestinationBlock) {
     constexpr std::size_t kKeyFoldBlockSize = 512U;
+    static_assert((kKeyFoldBlockSize & (kKeyFoldBlockSize - 1U)) == 0U,
+                  "Key fold block size must be a power of two.");
     const std::uint8_t *aSourceA =
         pSourceLaneA + (pSourceBlockA * kKeyFoldBlockSize);
     const std::uint8_t *aSourceB =
@@ -149,20 +157,24 @@ inline void TwistKeyFoldBlock(const std::uint8_t *pSourceLaneA,
     for (std::size_t aIndex = 0U;
          aIndex < kKeyFoldBlockSize;
          ++aIndex) {
+        const std::size_t aSourceIndexA =
+            (aIndex + pSourceOffsetA) & (kKeyFoldBlockSize - 1U);
+        const std::size_t aSourceIndexB =
+            (aIndex + pSourceOffsetB) & (kKeyFoldBlockSize - 1U);
         std::uint16_t aFoldValue =
-            static_cast<std::uint16_t>(aSourceA[aIndex]);
+            static_cast<std::uint16_t>(aSourceA[aSourceIndexA]);
         aFoldValue |=
-            static_cast<std::uint16_t>(aSourceB[aIndex]) << 8U;
+            static_cast<std::uint16_t>(aSourceB[aSourceIndexB]) << 8U;
         aFoldValue = TwistMix16::DiffuseA(aFoldValue);
         aDestination[aIndex] = static_cast<std::uint8_t>(aFoldValue);
     }
 }
 
-#define KEY_FOLD_BLOCK(pSourceLaneA, pSourceBlockA, \
-                       pSourceLaneB, pSourceBlockB, \
+#define KEY_FOLD_BLOCK(pSourceLaneA, pSourceBlockA, pSourceOffsetA, \
+                       pSourceLaneB, pSourceBlockB, pSourceOffsetB, \
                        pDestinationLane, pDestinationBlock) \
-    TwistKeyFoldBlock((pSourceLaneA), (pSourceBlockA), \
-                      (pSourceLaneB), (pSourceBlockB), \
+    TwistKeyFoldBlock((pSourceLaneA), (pSourceBlockA), (pSourceOffsetA), \
+                      (pSourceLaneB), (pSourceBlockB), (pSourceOffsetB), \
                       (pDestinationLane), (pDestinationBlock))
 
 

@@ -591,40 +591,24 @@ public:
                      std::uint8_t *pCrossLaneB,
                      MUTABLE_PARAMS);
     static void GROW_A_B(TwistWorkSpace *pWorkSpace,
-                     std::uint8_t *pCrossLaneA,
-                     std::uint8_t *pCrossLaneB,
                      MUTABLE_PARAMS);
     static void GROW_A_C(TwistWorkSpace *pWorkSpace,
-                     std::uint8_t *pCrossLaneA,
-                     std::uint8_t *pCrossLaneB,
                      MUTABLE_PARAMS);
     static void GROW_A_D(TwistWorkSpace *pWorkSpace,
-                     std::uint8_t *pCrossLaneA,
-                     std::uint8_t *pCrossLaneB,
                      MUTABLE_PARAMS);
     static void GROW_A_E(TwistWorkSpace *pWorkSpace,
-                     std::uint8_t *pCrossLaneA,
-                     std::uint8_t *pCrossLaneB,
                      MUTABLE_PARAMS);
     static void GROW_B_A(TwistWorkSpace *pWorkSpace,
                      std::uint8_t *pCrossLaneA,
                      std::uint8_t *pCrossLaneB,
                      MUTABLE_PARAMS);
     static void GROW_B_B(TwistWorkSpace *pWorkSpace,
-                     std::uint8_t *pCrossLaneA,
-                     std::uint8_t *pCrossLaneB,
                      MUTABLE_PARAMS);
     static void GROW_B_C(TwistWorkSpace *pWorkSpace,
-                     std::uint8_t *pCrossLaneA,
-                     std::uint8_t *pCrossLaneB,
                      MUTABLE_PARAMS);
     static void GROW_B_D(TwistWorkSpace *pWorkSpace,
-                     std::uint8_t *pCrossLaneA,
-                     std::uint8_t *pCrossLaneB,
                      MUTABLE_PARAMS);
     static void GROW_B_E(TwistWorkSpace *pWorkSpace,
-                     std::uint8_t *pCrossLaneA,
-                     std::uint8_t *pCrossLaneB,
                      MUTABLE_PARAMS);
 };
 
