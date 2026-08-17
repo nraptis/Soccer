@@ -27,6 +27,21 @@
 #define WARM_UP_ROUNDS 5
 #define WARM_UP_BLOCKS (WARM_UP_ROUNDS + 1)
 
+#define READ_IN_MUTABLE_PARAMS_INTERNAL \
+    std::uint64_t aIngress = *pIngress; \
+    std::uint64_t aCarry = *pCarry; \
+    std::uint64_t aWandererA = *pWandererA; \
+    std::uint64_t aWandererB = *pWandererB; \
+    std::uint64_t aWandererC = *pWandererC; \
+    std::uint64_t aWandererD = *pWandererD; \
+    std::uint64_t aWandererE = *pWandererE; \
+    std::uint64_t aWandererF = *pWandererF; \
+    std::uint64_t aWandererG = *pWandererG; \
+    std::uint64_t aWandererH = *pWandererH; \
+    std::uint64_t aWandererI = *pWandererI; \
+    std::uint64_t aWandererJ = *pWandererJ; \
+    std::uint64_t aWandererK = *pWandererK
+
 namespace {
 
 constexpr std::uint8_t kStageL3A = 0U;
@@ -763,7 +778,9 @@ void Soccer2::Shuffle_CROSSPERMUTATIONS(std::size_t pPermutationCount) {
     }
 }
 
-void Soccer2::TwistRound(std::size_t pBlockIndex, bool pIsWarmUpRound) {
+void Soccer2::TwistRound(std::size_t pBlockIndex,
+                         bool pIsWarmUpRound,
+                         MUTABLE_PARAMS) {
     
     std::size_t aComplexity = COMPLEXITY_NORMAL;
     std::size_t aReverseCount = 2U;
@@ -779,19 +796,7 @@ void Soccer2::TwistRound(std::size_t pBlockIndex, bool pIsWarmUpRound) {
     const bool aStifleKey =
         (!pIsWarmUpRound) && (pBlockIndex >= (BLOCK_COUNT - H_KEY));
     
-    std::uint64_t aIngress = 0xC57A5D1CB76274CDULL;
-    std::uint64_t aCarry = 0xD884E6D87C4E5D32ULL;
-    std::uint64_t aWandererA = 0x56A39022D8815D93ULL;
-    std::uint64_t aWandererB = 0x78621F8668264758ULL;
-    std::uint64_t aWandererC = 0x9CCC333EB717B5FDULL;
-    std::uint64_t aWandererD = 0x308B1DDC64346BAAULL;
-    std::uint64_t aWandererE = 0x7553EBB34F729AFDULL;
-    std::uint64_t aWandererF = 0x789948C10DFC7B5DULL;
-    std::uint64_t aWandererG = 0x4205DA226FC0675BULL;
-    std::uint64_t aWandererH = 0x511EE95FB0224D10ULL;
-    std::uint64_t aWandererI = 0xFAE48C727EFD1D19ULL;
-    std::uint64_t aWandererJ = 0x51D0F4DB9C43223CULL;
-    std::uint64_t aWandererK = 0x0BEE6245265CD32DULL;
+    READ_IN_MUTABLE_PARAMS_INTERNAL;
     const std::size_t aDestinationByteIndex = pBlockIndex * S_BLOCK;
     for (std::size_t aLaneIndex=0U; aLaneIndex<aComplexity; aLaneIndex++) {
         mExpanders[aLaneIndex]->TwistBlock(mWorkSpaces[aLaneIndex],
@@ -823,11 +828,14 @@ void Soccer2::TwistRound(std::size_t pBlockIndex, bool pIsWarmUpRound) {
     }
     
     Shuffle_CROWSCIMASSORMATEX();
+    
+    WRITE_OUT_MUTABLE_PARAMS;
 }
 
 void Soccer2::SeedPrologue_Regular_A(std::uint8_t *pPassword,
                                      std::size_t pPasswordByteLength,
-                                     std::uint64_t pNonce) {
+                                     std::uint64_t pNonce,
+                                     MUTABLE_PARAMS) {
     
     std::size_t aPower = 0U;
     if (mStrength == EncryptionStrength::kWeak) {
@@ -839,20 +847,9 @@ void Soccer2::SeedPrologue_Regular_A(std::uint8_t *pPassword,
     }
     
     const std::size_t aWarmUpStartIndex = (BLOCK_COUNT - WARM_UP_BLOCKS) * S_BLOCK;
-
-    std::uint64_t aIngress = 0xC57A5D1CB76274CDULL;
-    std::uint64_t aCarry = 0xD884E6D87C4E5D32ULL;
-    std::uint64_t aWandererA = 0x56A39022D8815D93ULL;
-    std::uint64_t aWandererB = 0x78621F8668264758ULL;
-    std::uint64_t aWandererC = 0x9CCC333EB717B5FDULL;
-    std::uint64_t aWandererD = 0x308B1DDC64346BAAULL;
-    std::uint64_t aWandererE = 0x7553EBB34F729AFDULL;
-    std::uint64_t aWandererF = 0x789948C10DFC7B5DULL;
-    std::uint64_t aWandererG = 0x4205DA226FC0675BULL;
-    std::uint64_t aWandererH = 0x511EE95FB0224D10ULL;
-    std::uint64_t aWandererI = 0xFAE48C727EFD1D19ULL;
-    std::uint64_t aWandererJ = 0x51D0F4DB9C43223CULL;
-    std::uint64_t aWandererK = 0x0BEE6245265CD32DULL;
+    
+    READ_IN_MUTABLE_PARAMS_INTERNAL;
+    
     for (std::size_t aSpanIndex=0U; aSpanIndex<4U; aSpanIndex++) {
         for (std::size_t aPowerIndex=0U; aPowerIndex<aPower; aPowerIndex++) {
             const std::size_t aClaimedIndex = mClaimedMaterialCount;
@@ -879,6 +876,8 @@ void Soccer2::SeedPrologue_Regular_A(std::uint8_t *pPassword,
             Shuffle_MEWBlockZero(&mClaimedMaterials[mClaimedMaterialCount - 1U][aWarmUpStartIndex]);
         }
     }
+    
+    WRITE_OUT_MUTABLE_PARAMS;
 }
 
 void Soccer2::SeedPrologue_Regular_B() {
@@ -1147,7 +1146,8 @@ void Soccer2::BuildCrossPool_Regular(std::size_t pComplexity,
 }
 
 bool Soccer2::SeedPrologue_Regular_C(std::uint32_t *pAckWord,
-                             bool pForwardDeploy) {
+                             bool pForwardDeploy,
+                                     MUTABLE_PARAMS) {
     
     std::size_t aComplexity = COMPLEXITY_NORMAL;
     if (mStrength == EncryptionStrength::kWeak) {
@@ -1163,27 +1163,29 @@ bool Soccer2::SeedPrologue_Regular_C(std::uint32_t *pAckWord,
     const std::size_t aWarmUp1ByteIndex = (aWarmUpSeedBlockIndex + 1U) * S_BLOCK;
     const std::size_t aWarmUp2ByteIndex = (aWarmUpSeedBlockIndex + 2U) * S_BLOCK;
     const std::size_t aWarmUp3ByteIndex = (aWarmUpSeedBlockIndex + 3U) * S_BLOCK;
+    
+    READ_IN_MUTABLE_PARAMS_INTERNAL;
 
     Shuffle_CROWSCIMASSORMATEX();
 
     BuildCrossPool_WarmUp1(aComplexity, aWarmUpSeedByteIndex);
     Shuffle_CROSSPERMUTATIONS(mCrossPoolCount[0]);
     ArrangeCrossPool(aComplexity);
-    TwistRound(aWarmUpSeedBlockIndex + 1U, true);
+    TwistRound(aWarmUpSeedBlockIndex + 1U, true, ARX_STATE_VARS);
 
     BuildCrossPool_WarmUp2(aComplexity,
                            aWarmUpSeedByteIndex,
                            aWarmUp1ByteIndex);
     Shuffle_CROSSPERMUTATIONS(mCrossPoolCount[0]);
     ArrangeCrossPool(aComplexity);
-    TwistRound(aWarmUpSeedBlockIndex + 2U, true);
+    TwistRound(aWarmUpSeedBlockIndex + 2U, true, ARX_STATE_VARS);
 
     BuildCrossPool_WarmUp2(aComplexity,
                            aWarmUp1ByteIndex,
                            aWarmUp2ByteIndex);
     Shuffle_CROSSPERMUTATIONS(mCrossPoolCount[0]);
     ArrangeCrossPool(aComplexity);
-    TwistRound(aWarmUpSeedBlockIndex + 3U, true);
+    TwistRound(aWarmUpSeedBlockIndex + 3U, true, ARX_STATE_VARS);
 
     BuildCrossPool_WarmUp4(aComplexity,
                            aWarmUpSeedByteIndex,
@@ -1191,7 +1193,7 @@ bool Soccer2::SeedPrologue_Regular_C(std::uint32_t *pAckWord,
                            aWarmUp2ByteIndex);
     Shuffle_CROSSPERMUTATIONS(mCrossPoolCount[0]);
     ArrangeCrossPool(aComplexity);
-    TwistRound(aWarmUpSeedBlockIndex + 4U, true);
+    TwistRound(aWarmUpSeedBlockIndex + 4U, true, ARX_STATE_VARS);
 
     BuildCrossPool_Regular(aComplexity,
                            aWarmUpSeedByteIndex,
@@ -1200,7 +1202,9 @@ bool Soccer2::SeedPrologue_Regular_C(std::uint32_t *pAckWord,
                            aWarmUp3ByteIndex);
     Shuffle_CROSSPERMUTATIONS(mCrossPoolCount[0]);
     ArrangeCrossPool(aComplexity);
-    TwistRound(aWarmUpSeedBlockIndex + 5U, true);
+    TwistRound(aWarmUpSeedBlockIndex + 5U, true, ARX_STATE_VARS);
+    
+    WRITE_OUT_MUTABLE_PARAMS;
 
     const std::size_t aAckByteIndex = SOCCER_BLOCK_SIZE - 1U;
     std::uint32_t aGeneratedAckWord = 0U;
@@ -1229,13 +1233,15 @@ bool Soccer2::SeedPrologue_Regular_C(std::uint32_t *pAckWord,
     return aGeneratedAckWord == *pAckWord;
 }
 
-void Soccer2::SeedPrologue_Regular_D() {
+void Soccer2::SeedPrologue_Regular_D(MUTABLE_PARAMS) {
     std::size_t aComplexity = COMPLEXITY_NORMAL;
     if (mStrength == EncryptionStrength::kWeak) {
         aComplexity = COMPLEXITY_WEAK;
     } else if (mStrength == EncryptionStrength::kStrong) {
         aComplexity = COMPLEXITY_STRONG;
     }
+    
+    READ_IN_MUTABLE_PARAMS_INTERNAL;
 
     for (std::size_t aRoundIndex=0U; aRoundIndex<BLOCK_COUNT; aRoundIndex++) {
         const std::size_t aFourRoundsBackBlockIndex = (aRoundIndex + BLOCK_COUNT - 5U) % BLOCK_COUNT;
@@ -1249,8 +1255,10 @@ void Soccer2::SeedPrologue_Regular_D() {
                                aOneRoundBackBlockIndex * S_BLOCK);
         Shuffle_CROSSPERMUTATIONS(mCrossPoolCount[0]);
         ArrangeCrossPool(aComplexity);
-        TwistRound(aRoundIndex, false);
+        TwistRound(aRoundIndex, false, ARX_STATE_VARS);
     }
+    
+    WRITE_OUT_MUTABLE_PARAMS;
     
     /*
     mWorkSpaceN.Zero();
@@ -1410,18 +1418,32 @@ bool Soccer2::AttemptSeed_Encrypt(EncryptionStrength pStrength,
         return true;
     }
     
+    std::uint64_t aIngress = 0xE025CAEA83AB99CFULL;
+    std::uint64_t aCarry = 0x6530BC4A53A443B8ULL;
+    std::uint64_t aWandererA = 0x4E06885276D20E3DULL;
+    std::uint64_t aWandererB = 0xEBF1E1AB6DF26920ULL;
+    std::uint64_t aWandererC = 0x99478E05E833FBB1ULL;
+    std::uint64_t aWandererD = 0x73A9F7B5B01778B2ULL;
+    std::uint64_t aWandererE = 0xB9AB363EA936D1EDULL;
+    std::uint64_t aWandererF = 0x847430D62AD62F79ULL;
+    std::uint64_t aWandererG = 0x0D6FE89E3169B0E1ULL;
+    std::uint64_t aWandererH = 0xD22934C37E3EE9B7ULL;
+    std::uint64_t aWandererI = 0x648E293C4DCD6ED1ULL;
+    std::uint64_t aWandererJ = 0xA31C40A884CAD927ULL;
+    std::uint64_t aWandererK = 0x183169CC43C8BCE3ULL;
+    
     // Chapter I - Prelude
     SeedPrelude_Regular_A(pPassword, pPasswordByteLength, pNonce);
-    SeedPrelude_Regular_B(pNonce);
+    SeedPrelude_Regular_B(pNonce, ARX_STATE_VARS);
     SeedPrelude_Regular_C();
     
     // Chapter II - Prologue
-    SeedPrologue_Regular_A(pPassword, pPasswordByteLength, pNonce);
+    SeedPrologue_Regular_A(pPassword, pPasswordByteLength, pNonce, ARX_STATE_VARS);
     SeedPrologue_Regular_B();
-    if (!SeedPrologue_Regular_C(pAckWord, true)) {
+    if (!SeedPrologue_Regular_C(pAckWord, true, ARX_STATE_VARS)) {
         return false;
     }
-    SeedPrologue_Regular_D();
+    SeedPrologue_Regular_D(ARX_STATE_VARS);
     
     // Chapter III - Epilogue
     SeedEpilogue_Regular_A();
@@ -1459,19 +1481,33 @@ bool Soccer2::AttemptSeed_Decrypt(EncryptionStrength pStrength,
         return true;
     }
     
+    std::uint64_t aIngress = 0xE025CAEA83AB99CFULL;
+    std::uint64_t aCarry = 0x6530BC4A53A443B8ULL;
+    std::uint64_t aWandererA = 0x4E06885276D20E3DULL;
+    std::uint64_t aWandererB = 0xEBF1E1AB6DF26920ULL;
+    std::uint64_t aWandererC = 0x99478E05E833FBB1ULL;
+    std::uint64_t aWandererD = 0x73A9F7B5B01778B2ULL;
+    std::uint64_t aWandererE = 0xB9AB363EA936D1EDULL;
+    std::uint64_t aWandererF = 0x847430D62AD62F79ULL;
+    std::uint64_t aWandererG = 0x0D6FE89E3169B0E1ULL;
+    std::uint64_t aWandererH = 0xD22934C37E3EE9B7ULL;
+    std::uint64_t aWandererI = 0x648E293C4DCD6ED1ULL;
+    std::uint64_t aWandererJ = 0xA31C40A884CAD927ULL;
+    std::uint64_t aWandererK = 0x183169CC43C8BCE3ULL;
+    
     // Chapter I - Prelude
     SeedPrelude_Regular_A(pPassword, pPasswordByteLength, pNonce);
-    SeedPrelude_Regular_B(pNonce);
+    SeedPrelude_Regular_B(pNonce, ARX_STATE_VARS);
     SeedPrelude_Regular_C();
     
     // Chapter II - Prologue
     std::uint32_t aAckWord = pAckWord;
-    SeedPrologue_Regular_A(pPassword, pPasswordByteLength, pNonce);
+    SeedPrologue_Regular_A(pPassword, pPasswordByteLength, pNonce, ARX_STATE_VARS);
     SeedPrologue_Regular_B();
-    if (!SeedPrologue_Regular_C(&aAckWord, false)) {
+    if (!SeedPrologue_Regular_C(&aAckWord, false, ARX_STATE_VARS)) {
         return false;
     }
-    SeedPrologue_Regular_D();
+    SeedPrologue_Regular_D(ARX_STATE_VARS);
     
     // Chapter III - Epilogue
     SeedEpilogue_Regular_A();
@@ -1614,22 +1650,13 @@ void Soccer2::SeedPrelude_Regular_A(std::uint8_t *pPassword,
     UnrollNonceAndPasswordToScratch_Regular(pPassword, pPasswordByteLength, pNonce);
 }
 
-void Soccer2::SeedPrelude_Regular_B(std::uint64_t pNonce) {
+void Soccer2::SeedPrelude_Regular_B(std::uint64_t pNonce, MUTABLE_PARAMS) {
     
-    std::uint64_t aIngress = 0xC57A5D1CB76274CDULL;
-    std::uint64_t aCarry = 0xD884E6D87C4E5D32ULL;
-    std::uint64_t aWandererA = 0x56A39022D8815D93ULL;
-    std::uint64_t aWandererB = 0x78621F8668264758ULL;
-    std::uint64_t aWandererC = 0x9CCC333EB717B5FDULL;
-    std::uint64_t aWandererD = 0x308B1DDC64346BAAULL;
-    std::uint64_t aWandererE = 0x7553EBB34F729AFDULL;
-    std::uint64_t aWandererF = 0x789948C10DFC7B5DULL;
-    std::uint64_t aWandererG = 0x4205DA226FC0675BULL;
-    std::uint64_t aWandererH = 0x511EE95FB0224D10ULL;
-    std::uint64_t aWandererI = 0xFAE48C727EFD1D19ULL;
-    std::uint64_t aWandererJ = 0x51D0F4DB9C43223CULL;
-    std::uint64_t aWandererK = 0x0BEE6245265CD32DULL;
+    READ_IN_MUTABLE_PARAMS_INTERNAL;
+    
     mStarter.Seed(&mWorkSpaceA, &mFarmSalt, pNonce, SOCCER_SCRATCH_WORKER_A, S_BLOCK, mCollapseLaneB, ARX_STATE_VARS);
+    
+    WRITE_OUT_MUTABLE_PARAMS;
 }
 
 void Soccer2::SeedPrelude_Regular_C() {

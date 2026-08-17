@@ -227,20 +227,24 @@ public:
     static void                                 SeedPrelude_Regular_A(std::uint8_t *pPassword,
                                                                       std::size_t pPasswordByteLength,
                                                                       std::uint64_t pNonce);
-    static void                                 SeedPrelude_Regular_B(std::uint64_t pNonce);
+    static void                                 SeedPrelude_Regular_B(std::uint64_t pNonce, MUTABLE_PARAMS);
     static void                                 SeedPrelude_Regular_C();
     
     
     static void                                 SeedPrologue_Regular_A(std::uint8_t *pPassword,
                                                                        std::size_t pPasswordByteLength,
-                                                                       std::uint64_t pNonce);
+                                                                       std::uint64_t pNonce,
+                                                                       MUTABLE_PARAMS);
     static void                                 SeedPrologue_Regular_B();
     static bool                                 SeedPrologue_Regular_C(std::uint32_t *pAckWord,
-                                                                       bool pForwardDeploy);
-    static void                                 SeedPrologue_Regular_D();
+                                                                       bool pForwardDeploy,
+                                                                       MUTABLE_PARAMS);
+    static void                                 SeedPrologue_Regular_D(MUTABLE_PARAMS);
     
     
-    static void                                 TwistRound(std::size_t pBlockIndex, bool pIsWarmUpRound);
+    static void                                 TwistRound(std::size_t pBlockIndex,
+                                                           bool pIsWarmUpRound,
+                                                           MUTABLE_PARAMS);
     
     
     static void                                 ArrangeCrossPool(std::size_t pComplexity);
