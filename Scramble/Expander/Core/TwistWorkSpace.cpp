@@ -617,6 +617,9 @@ void TwistWorkSpace::Zero() {
     Zero_PostSeed();
 
     mDomainBundle.Zero();
+    
+    memset(mKeyBoxA, 0, sizeof(mKeyBoxA));
+    memset(mKeyBoxB, 0, sizeof(mKeyBoxB));
 }
 
 void TwistWorkSpace::Zero_PostSeed() {

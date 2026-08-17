@@ -22,7 +22,7 @@
 @implementation AgileTwistRoundTests
 
 - (void)test_TwistRound_Weak {
-
+    
     std::size_t aLaneCount = 4;
     EncryptionStrength aEncryptionStrength = EncryptionStrength::kWeak;
     
@@ -66,6 +66,19 @@
             
         }
         
+        std::uint64_t aIngress = 0xE025CAEA83AB99CFULL;
+        std::uint64_t aCarry = 0x6530BC4A53A443B8ULL;
+        std::uint64_t aWandererA = 0x4E06885276D20E3DULL;
+        std::uint64_t aWandererB = 0xEBF1E1AB6DF26920ULL;
+        std::uint64_t aWandererC = 0x99478E05E833FBB1ULL;
+        std::uint64_t aWandererD = 0x73A9F7B5B01778B2ULL;
+        std::uint64_t aWandererE = 0xB9AB363EA936D1EDULL;
+        std::uint64_t aWandererF = 0x847430D62AD62F79ULL;
+        std::uint64_t aWandererG = 0x0D6FE89E3169B0E1ULL;
+        std::uint64_t aWandererH = 0xD22934C37E3EE9B7ULL;
+        std::uint64_t aWandererI = 0x648E293C4DCD6ED1ULL;
+        std::uint64_t aWandererJ = 0xA31C40A884CAD927ULL;
+        std::uint64_t aWandererK = 0x183169CC43C8BCE3ULL;
         Soccer2::Zero();
         Soccer2::mStrength = aEncryptionStrength;
         Soccer2::InitializeExpanders();
@@ -79,7 +92,7 @@
             Soccer2::mCross[3][aLaneIndex] = aCrosses_D_A[aLaneIndex];
         }
         
-        Soccer2::TwistRound(0, false);
+        Soccer2::TwistRound(0, false, ARX_STATE_VARS);
         
         for (std::size_t aLaneIndex=0; aLaneIndex<aLaneCount; aLaneIndex++) {
             const std::size_t aByteRichness = LaneTool::ByteRichness(Soccer2::mMaterials[aLaneIndex], S_BLOCK);
@@ -99,6 +112,19 @@
             }
         }
         
+        aIngress = 0xE025CAEA83AB99CFULL;
+        aCarry = 0x6530BC4A53A443B8ULL;
+        aWandererA = 0x4E06885276D20E3DULL;
+        aWandererB = 0xEBF1E1AB6DF26920ULL;
+        aWandererC = 0x99478E05E833FBB1ULL;
+        aWandererD = 0x73A9F7B5B01778B2ULL;
+        aWandererE = 0xB9AB363EA936D1EDULL;
+        aWandererF = 0x847430D62AD62F79ULL;
+        aWandererG = 0x0D6FE89E3169B0E1ULL;
+        aWandererH = 0xD22934C37E3EE9B7ULL;
+        aWandererI = 0x648E293C4DCD6ED1ULL;
+        aWandererJ = 0xA31C40A884CAD927ULL;
+        aWandererK = 0x183169CC43C8BCE3ULL;
         Soccer2::Zero();
         Soccer2::mStrength = aEncryptionStrength;
         Soccer2::InitializeExpanders();
@@ -112,7 +138,7 @@
             Soccer2::mCross[3][aLaneIndex] = aCrosses_D_B[aLaneIndex];
         }
         
-        Soccer2::TwistRound(0, false);
+        Soccer2::TwistRound(0, false, ARX_STATE_VARS);
         
         for (std::size_t aLaneIndex=0; aLaneIndex<aLaneCount; aLaneIndex++) {
             const std::size_t aByteRichness = LaneTool::ByteRichness(Soccer2::mMaterials[aLaneIndex], S_BLOCK);
@@ -144,6 +170,19 @@
             
             std::size_t aBlockIndex = aBlockIndexList[aBlockIndexIndex];
             
+            aIngress = 0xE025CAEA83AB99CFULL;
+            aCarry = 0x6530BC4A53A443B8ULL;
+            aWandererA = 0x4E06885276D20E3DULL;
+            aWandererB = 0xEBF1E1AB6DF26920ULL;
+            aWandererC = 0x99478E05E833FBB1ULL;
+            aWandererD = 0x73A9F7B5B01778B2ULL;
+            aWandererE = 0xB9AB363EA936D1EDULL;
+            aWandererF = 0x847430D62AD62F79ULL;
+            aWandererG = 0x0D6FE89E3169B0E1ULL;
+            aWandererH = 0xD22934C37E3EE9B7ULL;
+            aWandererI = 0x648E293C4DCD6ED1ULL;
+            aWandererJ = 0xA31C40A884CAD927ULL;
+            aWandererK = 0x183169CC43C8BCE3ULL;
             Soccer2::Zero();
             Soccer2::mStrength = aEncryptionStrength;
             Soccer2::InitializeExpanders();
@@ -157,7 +196,7 @@
                 Soccer2::mCross[3][aLaneIndex] = aCrosses_D_A[aLaneIndex];
             }
             
-            Soccer2::TwistRound(aBlockIndex, false);
+            Soccer2::TwistRound(aBlockIndex, false, ARX_STATE_VARS);
             
             for (std::size_t aLaneIndex=0; aLaneIndex<aLaneCount; aLaneIndex++) {
                 
@@ -175,6 +214,20 @@
             
             std::size_t aBlockIndex = aBlockIndexList[aBlockIndexIndex];
             
+            
+            aIngress = 0xE025CAEA83AB99CFULL;
+            aCarry = 0x6530BC4A53A443B8ULL;
+            aWandererA = 0x4E06885276D20E3DULL;
+            aWandererB = 0xEBF1E1AB6DF26920ULL;
+            aWandererC = 0x99478E05E833FBB1ULL;
+            aWandererD = 0x73A9F7B5B01778B2ULL;
+            aWandererE = 0xB9AB363EA936D1EDULL;
+            aWandererF = 0x847430D62AD62F79ULL;
+            aWandererG = 0x0D6FE89E3169B0E1ULL;
+            aWandererH = 0xD22934C37E3EE9B7ULL;
+            aWandererI = 0x648E293C4DCD6ED1ULL;
+            aWandererJ = 0xA31C40A884CAD927ULL;
+            aWandererK = 0x183169CC43C8BCE3ULL;
             Soccer2::Zero();
             Soccer2::mStrength = aEncryptionStrength;
             Soccer2::InitializeExpanders();
@@ -188,7 +241,7 @@
                 Soccer2::mCross[3][aLaneIndex] = aCrosses_D_B[aLaneIndex];
             }
             
-            Soccer2::TwistRound(aBlockIndex, false);
+            Soccer2::TwistRound(aBlockIndex, false, ARX_STATE_VARS);
             
             for (std::size_t aLaneIndex=0; aLaneIndex<aLaneCount; aLaneIndex++) {
                 
@@ -206,7 +259,7 @@
 }
 
 - (void)test_TwistRound_Normal {
-
+    
     std::size_t aLaneCount = 8;
     EncryptionStrength aEncryptionStrength = EncryptionStrength::kNormal;
     
@@ -250,6 +303,19 @@
             
         }
         
+        std::uint64_t aIngress = 0xE025CAEA83AB99CFULL;
+        std::uint64_t aCarry = 0x6530BC4A53A443B8ULL;
+        std::uint64_t aWandererA = 0x4E06885276D20E3DULL;
+        std::uint64_t aWandererB = 0xEBF1E1AB6DF26920ULL;
+        std::uint64_t aWandererC = 0x99478E05E833FBB1ULL;
+        std::uint64_t aWandererD = 0x73A9F7B5B01778B2ULL;
+        std::uint64_t aWandererE = 0xB9AB363EA936D1EDULL;
+        std::uint64_t aWandererF = 0x847430D62AD62F79ULL;
+        std::uint64_t aWandererG = 0x0D6FE89E3169B0E1ULL;
+        std::uint64_t aWandererH = 0xD22934C37E3EE9B7ULL;
+        std::uint64_t aWandererI = 0x648E293C4DCD6ED1ULL;
+        std::uint64_t aWandererJ = 0xA31C40A884CAD927ULL;
+        std::uint64_t aWandererK = 0x183169CC43C8BCE3ULL;
         Soccer2::Zero();
         Soccer2::mStrength = aEncryptionStrength;
         Soccer2::InitializeExpanders();
@@ -263,7 +329,7 @@
             Soccer2::mCross[3][aLaneIndex] = aCrosses_D_A[aLaneIndex];
         }
         
-        Soccer2::TwistRound(0, false);
+        Soccer2::TwistRound(0, false, ARX_STATE_VARS);
         
         for (std::size_t aLaneIndex=0; aLaneIndex<aLaneCount; aLaneIndex++) {
             const std::size_t aByteRichness = LaneTool::ByteRichness(Soccer2::mMaterials[aLaneIndex], S_BLOCK);
@@ -283,6 +349,19 @@
             }
         }
         
+        aIngress = 0xE025CAEA83AB99CFULL;
+        aCarry = 0x6530BC4A53A443B8ULL;
+        aWandererA = 0x4E06885276D20E3DULL;
+        aWandererB = 0xEBF1E1AB6DF26920ULL;
+        aWandererC = 0x99478E05E833FBB1ULL;
+        aWandererD = 0x73A9F7B5B01778B2ULL;
+        aWandererE = 0xB9AB363EA936D1EDULL;
+        aWandererF = 0x847430D62AD62F79ULL;
+        aWandererG = 0x0D6FE89E3169B0E1ULL;
+        aWandererH = 0xD22934C37E3EE9B7ULL;
+        aWandererI = 0x648E293C4DCD6ED1ULL;
+        aWandererJ = 0xA31C40A884CAD927ULL;
+        aWandererK = 0x183169CC43C8BCE3ULL;
         Soccer2::Zero();
         Soccer2::mStrength = aEncryptionStrength;
         Soccer2::InitializeExpanders();
@@ -296,7 +375,7 @@
             Soccer2::mCross[3][aLaneIndex] = aCrosses_D_B[aLaneIndex];
         }
         
-        Soccer2::TwistRound(0, false);
+        Soccer2::TwistRound(0, false, ARX_STATE_VARS);
         
         for (std::size_t aLaneIndex=0; aLaneIndex<aLaneCount; aLaneIndex++) {
             const std::size_t aByteRichness = LaneTool::ByteRichness(Soccer2::mMaterials[aLaneIndex], S_BLOCK);
@@ -328,6 +407,19 @@
             
             std::size_t aBlockIndex = aBlockIndexList[aBlockIndexIndex];
             
+            aIngress = 0xE025CAEA83AB99CFULL;
+            aCarry = 0x6530BC4A53A443B8ULL;
+            aWandererA = 0x4E06885276D20E3DULL;
+            aWandererB = 0xEBF1E1AB6DF26920ULL;
+            aWandererC = 0x99478E05E833FBB1ULL;
+            aWandererD = 0x73A9F7B5B01778B2ULL;
+            aWandererE = 0xB9AB363EA936D1EDULL;
+            aWandererF = 0x847430D62AD62F79ULL;
+            aWandererG = 0x0D6FE89E3169B0E1ULL;
+            aWandererH = 0xD22934C37E3EE9B7ULL;
+            aWandererI = 0x648E293C4DCD6ED1ULL;
+            aWandererJ = 0xA31C40A884CAD927ULL;
+            aWandererK = 0x183169CC43C8BCE3ULL;
             Soccer2::Zero();
             Soccer2::mStrength = aEncryptionStrength;
             Soccer2::InitializeExpanders();
@@ -341,7 +433,7 @@
                 Soccer2::mCross[3][aLaneIndex] = aCrosses_D_A[aLaneIndex];
             }
             
-            Soccer2::TwistRound(aBlockIndex, false);
+            Soccer2::TwistRound(aBlockIndex, false, ARX_STATE_VARS);
             
             for (std::size_t aLaneIndex=0; aLaneIndex<aLaneCount; aLaneIndex++) {
                 
@@ -359,6 +451,19 @@
             
             std::size_t aBlockIndex = aBlockIndexList[aBlockIndexIndex];
             
+            aIngress = 0xE025CAEA83AB99CFULL;
+            aCarry = 0x6530BC4A53A443B8ULL;
+            aWandererA = 0x4E06885276D20E3DULL;
+            aWandererB = 0xEBF1E1AB6DF26920ULL;
+            aWandererC = 0x99478E05E833FBB1ULL;
+            aWandererD = 0x73A9F7B5B01778B2ULL;
+            aWandererE = 0xB9AB363EA936D1EDULL;
+            aWandererF = 0x847430D62AD62F79ULL;
+            aWandererG = 0x0D6FE89E3169B0E1ULL;
+            aWandererH = 0xD22934C37E3EE9B7ULL;
+            aWandererI = 0x648E293C4DCD6ED1ULL;
+            aWandererJ = 0xA31C40A884CAD927ULL;
+            aWandererK = 0x183169CC43C8BCE3ULL;
             Soccer2::Zero();
             Soccer2::mStrength = aEncryptionStrength;
             Soccer2::InitializeExpanders();
@@ -372,7 +477,7 @@
                 Soccer2::mCross[3][aLaneIndex] = aCrosses_D_B[aLaneIndex];
             }
             
-            Soccer2::TwistRound(aBlockIndex, false);
+            Soccer2::TwistRound(aBlockIndex, false, ARX_STATE_VARS);
             
             for (std::size_t aLaneIndex=0; aLaneIndex<aLaneCount; aLaneIndex++) {
                 
@@ -389,7 +494,7 @@
 }
 
 - (void)test_TwistRound_Strong {
-
+    
     std::size_t aLaneCount = 16;
     EncryptionStrength aEncryptionStrength = EncryptionStrength::kStrong;
     
@@ -433,6 +538,19 @@
             
         }
         
+        std::uint64_t aIngress = 0xE025CAEA83AB99CFULL;
+        std::uint64_t aCarry = 0x6530BC4A53A443B8ULL;
+        std::uint64_t aWandererA = 0x4E06885276D20E3DULL;
+        std::uint64_t aWandererB = 0xEBF1E1AB6DF26920ULL;
+        std::uint64_t aWandererC = 0x99478E05E833FBB1ULL;
+        std::uint64_t aWandererD = 0x73A9F7B5B01778B2ULL;
+        std::uint64_t aWandererE = 0xB9AB363EA936D1EDULL;
+        std::uint64_t aWandererF = 0x847430D62AD62F79ULL;
+        std::uint64_t aWandererG = 0x0D6FE89E3169B0E1ULL;
+        std::uint64_t aWandererH = 0xD22934C37E3EE9B7ULL;
+        std::uint64_t aWandererI = 0x648E293C4DCD6ED1ULL;
+        std::uint64_t aWandererJ = 0xA31C40A884CAD927ULL;
+        std::uint64_t aWandererK = 0x183169CC43C8BCE3ULL;
         Soccer2::Zero();
         Soccer2::mStrength = aEncryptionStrength;
         Soccer2::InitializeExpanders();
@@ -446,7 +564,7 @@
             Soccer2::mCross[3][aLaneIndex] = aCrosses_D_A[aLaneIndex];
         }
         
-        Soccer2::TwistRound(0, false);
+        Soccer2::TwistRound(0, false, ARX_STATE_VARS);
         
         for (std::size_t aLaneIndex=0; aLaneIndex<aLaneCount; aLaneIndex++) {
             const std::size_t aByteRichness = LaneTool::ByteRichness(Soccer2::mMaterials[aLaneIndex], S_BLOCK);
@@ -466,6 +584,19 @@
             }
         }
         
+        aIngress = 0xE025CAEA83AB99CFULL;
+        aCarry = 0x6530BC4A53A443B8ULL;
+        aWandererA = 0x4E06885276D20E3DULL;
+        aWandererB = 0xEBF1E1AB6DF26920ULL;
+        aWandererC = 0x99478E05E833FBB1ULL;
+        aWandererD = 0x73A9F7B5B01778B2ULL;
+        aWandererE = 0xB9AB363EA936D1EDULL;
+        aWandererF = 0x847430D62AD62F79ULL;
+        aWandererG = 0x0D6FE89E3169B0E1ULL;
+        aWandererH = 0xD22934C37E3EE9B7ULL;
+        aWandererI = 0x648E293C4DCD6ED1ULL;
+        aWandererJ = 0xA31C40A884CAD927ULL;
+        aWandererK = 0x183169CC43C8BCE3ULL;
         Soccer2::Zero();
         Soccer2::mStrength = aEncryptionStrength;
         Soccer2::InitializeExpanders();
@@ -479,7 +610,7 @@
             Soccer2::mCross[3][aLaneIndex] = aCrosses_D_B[aLaneIndex];
         }
         
-        Soccer2::TwistRound(0, false);
+        Soccer2::TwistRound(0, false, ARX_STATE_VARS);
         
         for (std::size_t aLaneIndex=0; aLaneIndex<aLaneCount; aLaneIndex++) {
             const std::size_t aByteRichness = LaneTool::ByteRichness(Soccer2::mMaterials[aLaneIndex], S_BLOCK);
@@ -511,6 +642,19 @@
             
             std::size_t aBlockIndex = aBlockIndexList[aBlockIndexIndex];
             
+            aIngress = 0xE025CAEA83AB99CFULL;
+            aCarry = 0x6530BC4A53A443B8ULL;
+            aWandererA = 0x4E06885276D20E3DULL;
+            aWandererB = 0xEBF1E1AB6DF26920ULL;
+            aWandererC = 0x99478E05E833FBB1ULL;
+            aWandererD = 0x73A9F7B5B01778B2ULL;
+            aWandererE = 0xB9AB363EA936D1EDULL;
+            aWandererF = 0x847430D62AD62F79ULL;
+            aWandererG = 0x0D6FE89E3169B0E1ULL;
+            aWandererH = 0xD22934C37E3EE9B7ULL;
+            aWandererI = 0x648E293C4DCD6ED1ULL;
+            aWandererJ = 0xA31C40A884CAD927ULL;
+            aWandererK = 0x183169CC43C8BCE3ULL;
             Soccer2::Zero();
             Soccer2::mStrength = aEncryptionStrength;
             Soccer2::InitializeExpanders();
@@ -524,7 +668,7 @@
                 Soccer2::mCross[3][aLaneIndex] = aCrosses_D_A[aLaneIndex];
             }
             
-            Soccer2::TwistRound(aBlockIndex, false);
+            Soccer2::TwistRound(aBlockIndex, false, ARX_STATE_VARS);
             
             for (std::size_t aLaneIndex=0; aLaneIndex<aLaneCount; aLaneIndex++) {
                 
@@ -542,6 +686,19 @@
             
             std::size_t aBlockIndex = aBlockIndexList[aBlockIndexIndex];
             
+            aIngress = 0xE025CAEA83AB99CFULL;
+            aCarry = 0x6530BC4A53A443B8ULL;
+            aWandererA = 0x4E06885276D20E3DULL;
+            aWandererB = 0xEBF1E1AB6DF26920ULL;
+            aWandererC = 0x99478E05E833FBB1ULL;
+            aWandererD = 0x73A9F7B5B01778B2ULL;
+            aWandererE = 0xB9AB363EA936D1EDULL;
+            aWandererF = 0x847430D62AD62F79ULL;
+            aWandererG = 0x0D6FE89E3169B0E1ULL;
+            aWandererH = 0xD22934C37E3EE9B7ULL;
+            aWandererI = 0x648E293C4DCD6ED1ULL;
+            aWandererJ = 0xA31C40A884CAD927ULL;
+            aWandererK = 0x183169CC43C8BCE3ULL;
             Soccer2::Zero();
             Soccer2::mStrength = aEncryptionStrength;
             Soccer2::InitializeExpanders();
@@ -555,7 +712,7 @@
                 Soccer2::mCross[3][aLaneIndex] = aCrosses_D_B[aLaneIndex];
             }
             
-            Soccer2::TwistRound(aBlockIndex, false);
+            Soccer2::TwistRound(aBlockIndex, false, ARX_STATE_VARS);
             
             for (std::size_t aLaneIndex=0; aLaneIndex<aLaneCount; aLaneIndex++) {
                 

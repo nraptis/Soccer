@@ -74,12 +74,25 @@ std::string ToString(const std::uint8_t *pList, std::size_t pCount) {
             aPassword[aIndex] = Random::GetByte();
         }
         
+        std::uint64_t aIngress = 0xE025CAEA83AB99CFULL;
+        std::uint64_t aCarry = 0x6530BC4A53A443B8ULL;
+        std::uint64_t aWandererA = 0x4E06885276D20E3DULL;
+        std::uint64_t aWandererB = 0xEBF1E1AB6DF26920ULL;
+        std::uint64_t aWandererC = 0x99478E05E833FBB1ULL;
+        std::uint64_t aWandererD = 0x73A9F7B5B01778B2ULL;
+        std::uint64_t aWandererE = 0xB9AB363EA936D1EDULL;
+        std::uint64_t aWandererF = 0x847430D62AD62F79ULL;
+        std::uint64_t aWandererG = 0x0D6FE89E3169B0E1ULL;
+        std::uint64_t aWandererH = 0xD22934C37E3EE9B7ULL;
+        std::uint64_t aWandererI = 0x648E293C4DCD6ED1ULL;
+        std::uint64_t aWandererJ = 0xA31C40A884CAD927ULL;
+        std::uint64_t aWandererK = 0x183169CC43C8BCE3ULL;
         Soccer2::Zero();
         Soccer2::mStrength = EncryptionStrength::kWeak;
         Soccer2::InitializeExpanders();
         Soccer2::InitializeWorkSpaces();
         Soccer2::InitializeMaterials();
-        Soccer2::SeedPrologue_Regular_A(aPassword, 3, aNonce);
+        Soccer2::SeedPrologue_Regular_A(aPassword, 3, aNonce, ARX_STATE_VARS);
         
         if (Soccer2::mClaimedExpanderCount != 4) {
             XCTFail("test_Prologue_A_B_Shuffle_Weak: expecting 4 claimed expanders.");
@@ -100,7 +113,7 @@ std::string ToString(const std::uint8_t *pList, std::size_t pCount) {
         }
         
         std::unordered_set<std::uint8_t *> aClaimedMaterialSet;
-        const std::size_t aWarmUpStartIndex = (32 - 4) * S_BLOCK;
+        const std::size_t aWarmUpStartIndex = (32 - 6) * S_BLOCK;
         for (std::size_t aMaterialIndex=0; aMaterialIndex<Soccer2::mClaimedMaterialCount; aMaterialIndex++) {
             aClaimedMaterialSet.insert(Soccer2::mClaimedMaterials[aMaterialIndex]);
             std::size_t aByteRichness = LaneTool::ByteRichness(&Soccer2::mClaimedMaterials[aMaterialIndex][aWarmUpStartIndex], S_BLOCK);
@@ -124,7 +137,7 @@ std::string ToString(const std::uint8_t *pList, std::size_t pCount) {
                 for (std::size_t aBlockIndex=0; aBlockIndex<32; aBlockIndex++) {
                     std::size_t aByteRichness = LaneTool::ByteRichness(&Soccer2::mMaterials[aOuterMaterialIndex][S_BLOCK * aBlockIndex], S_BLOCK);
                     
-                    if (aBlockIndex == 28) {
+                    if (aBlockIndex == 26) {
                         if (aByteRichness < 512) {
                             XCTFail("test_Prologue_A_B_Shuffle_Weak: expecting claimed material [%zu] block [%zu] to be byte rich. (got %zu)", aOuterMaterialIndex, aBlockIndex, aByteRichness);
                             return;
@@ -234,17 +247,17 @@ std::string ToString(const std::uint8_t *pList, std::size_t pCount) {
         aHashesMaterials.insert(ToString(Soccer2::mClaimedMaterials, Soccer2::mClaimedMaterialCount));
         aHashesExpanders.insert(ToString(Soccer2::mClaimedExpanders, Soccer2::mClaimedExpanderCount));
         aHashesWorkSpaces.insert(ToString(Soccer2::mClaimedWorkSpaces, Soccer2::mClaimedWorkSpaceCount));
-
+        
         const std::size_t aFirstSaltSlot = static_cast<std::size_t>(TwistWorkSpaceSlot::kKeyRotateASaltOrbiterAssignA);
         const std::size_t aLastSaltSlot = static_cast<std::size_t>(TwistWorkSpaceSlot::kKeySpawnBSaltWandererUpdateH);
-
+        
         for (std::size_t aWorkSpaceIndex=0U; aWorkSpaceIndex<Soccer2::mClaimedWorkSpaceCount; aWorkSpaceIndex++) {
             for (std::size_t aSaltSlot=aFirstSaltSlot; aSaltSlot<=aLastSaltSlot; aSaltSlot++) {
                 std::uint8_t *aSalt = TwistWorkSpace::GetBuffer(Soccer2::mWorkSpaces[aWorkSpaceIndex],
-                                                               static_cast<TwistWorkSpaceSlot>(aSaltSlot));
+                                                                static_cast<TwistWorkSpaceSlot>(aSaltSlot));
                 const std::size_t aByteRichness = LaneTool::ByteRichness(aSalt, S_SALT * sizeof(std::uint64_t));
                 const std::size_t aSaltIndex = aSaltSlot - aFirstSaltSlot;
-
+                
                 if (aByteRichness < 480U) {
                     XCTFail("test_Prologue_A_B_Shuffle_Weak: expected work space [%zu], salt %zu to have 480 byte richness, got %zu.",
                             aWorkSpaceIndex, aSaltIndex, aByteRichness);
@@ -285,12 +298,25 @@ std::string ToString(const std::uint8_t *pList, std::size_t pCount) {
             aPassword[aIndex] = Random::GetByte();
         }
         
+        std::uint64_t aIngress = 0xE025CAEA83AB99CFULL;
+        std::uint64_t aCarry = 0x6530BC4A53A443B8ULL;
+        std::uint64_t aWandererA = 0x4E06885276D20E3DULL;
+        std::uint64_t aWandererB = 0xEBF1E1AB6DF26920ULL;
+        std::uint64_t aWandererC = 0x99478E05E833FBB1ULL;
+        std::uint64_t aWandererD = 0x73A9F7B5B01778B2ULL;
+        std::uint64_t aWandererE = 0xB9AB363EA936D1EDULL;
+        std::uint64_t aWandererF = 0x847430D62AD62F79ULL;
+        std::uint64_t aWandererG = 0x0D6FE89E3169B0E1ULL;
+        std::uint64_t aWandererH = 0xD22934C37E3EE9B7ULL;
+        std::uint64_t aWandererI = 0x648E293C4DCD6ED1ULL;
+        std::uint64_t aWandererJ = 0xA31C40A884CAD927ULL;
+        std::uint64_t aWandererK = 0x183169CC43C8BCE3ULL;
         Soccer2::Zero();
         Soccer2::mStrength = EncryptionStrength::kNormal;
         Soccer2::InitializeExpanders();
         Soccer2::InitializeWorkSpaces();
         Soccer2::InitializeMaterials();
-        Soccer2::SeedPrologue_Regular_A(aPassword, 3, aNonce);
+        Soccer2::SeedPrologue_Regular_A(aPassword, 3, aNonce, ARX_STATE_VARS);
         
         if (Soccer2::mClaimedExpanderCount != 8) {
             XCTFail("test_Prologue_A_B_Shuffle_Normal: expecting 8 claimed expanders.");
@@ -312,7 +338,7 @@ std::string ToString(const std::uint8_t *pList, std::size_t pCount) {
         }
         
         std::unordered_set<std::uint8_t *> aClaimedMaterialSet;
-        const std::size_t aWarmUpStartIndex = (32 - 4) * S_BLOCK;
+        const std::size_t aWarmUpStartIndex = (32 - 6) * S_BLOCK;
         for (std::size_t aMaterialIndex=0; aMaterialIndex<Soccer2::mClaimedMaterialCount; aMaterialIndex++) {
             aClaimedMaterialSet.insert(Soccer2::mClaimedMaterials[aMaterialIndex]);
             std::size_t aByteRichness = LaneTool::ByteRichness(&Soccer2::mClaimedMaterials[aMaterialIndex][aWarmUpStartIndex], S_BLOCK);
@@ -336,7 +362,7 @@ std::string ToString(const std::uint8_t *pList, std::size_t pCount) {
                 for (std::size_t aBlockIndex=0; aBlockIndex<32; aBlockIndex++) {
                     std::size_t aByteRichness = LaneTool::ByteRichness(&Soccer2::mMaterials[aOuterMaterialIndex][S_BLOCK * aBlockIndex], S_BLOCK);
                     
-                    if (aBlockIndex == 28) {
+                    if (aBlockIndex == 26) {
                         if (aByteRichness < 512) {
                             XCTFail("test_Prologue_A_B_Shuffle_Normal: expecting claimed material [%zu] block [%zu] to be byte rich. (got %zu)", aOuterMaterialIndex, aBlockIndex, aByteRichness);
                             return;
@@ -446,17 +472,17 @@ std::string ToString(const std::uint8_t *pList, std::size_t pCount) {
         aHashesMaterials.insert(ToString(Soccer2::mClaimedMaterials, Soccer2::mClaimedMaterialCount));
         aHashesExpanders.insert(ToString(Soccer2::mClaimedExpanders, Soccer2::mClaimedExpanderCount));
         aHashesWorkSpaces.insert(ToString(Soccer2::mClaimedWorkSpaces, Soccer2::mClaimedWorkSpaceCount));
-
+        
         const std::size_t aFirstSaltSlot = static_cast<std::size_t>(TwistWorkSpaceSlot::kKeyRotateASaltOrbiterAssignA);
         const std::size_t aLastSaltSlot = static_cast<std::size_t>(TwistWorkSpaceSlot::kKeySpawnBSaltWandererUpdateH);
-
+        
         for (std::size_t aWorkSpaceIndex=0U; aWorkSpaceIndex<Soccer2::mClaimedWorkSpaceCount; aWorkSpaceIndex++) {
             for (std::size_t aSaltSlot=aFirstSaltSlot; aSaltSlot<=aLastSaltSlot; aSaltSlot++) {
                 std::uint8_t *aSalt = TwistWorkSpace::GetBuffer(Soccer2::mWorkSpaces[aWorkSpaceIndex],
-                                                               static_cast<TwistWorkSpaceSlot>(aSaltSlot));
+                                                                static_cast<TwistWorkSpaceSlot>(aSaltSlot));
                 const std::size_t aByteRichness = LaneTool::ByteRichness(aSalt, S_SALT * sizeof(std::uint64_t));
                 const std::size_t aSaltIndex = aSaltSlot - aFirstSaltSlot;
-
+                
                 if (aByteRichness < 480U) {
                     XCTFail("test_Prologue_A_B_Shuffle_Normal: expected work space [%zu], salt %zu to have 480 byte richness, got %zu.",
                             aWorkSpaceIndex, aSaltIndex, aByteRichness);
@@ -479,7 +505,6 @@ std::string ToString(const std::uint8_t *pList, std::size_t pCount) {
         XCTFail("test_Prologue_A_B_Shuffle_Normal: expected more unique claimed work space configurations");
         return;
     }
-    
 }
 
 - (void)test_Prologue_A_B_Shuffle_Strong {
@@ -498,12 +523,25 @@ std::string ToString(const std::uint8_t *pList, std::size_t pCount) {
             aPassword[aIndex] = Random::GetByte();
         }
 
+        std::uint64_t aIngress = 0xE025CAEA83AB99CFULL;
+        std::uint64_t aCarry = 0x6530BC4A53A443B8ULL;
+        std::uint64_t aWandererA = 0x4E06885276D20E3DULL;
+        std::uint64_t aWandererB = 0xEBF1E1AB6DF26920ULL;
+        std::uint64_t aWandererC = 0x99478E05E833FBB1ULL;
+        std::uint64_t aWandererD = 0x73A9F7B5B01778B2ULL;
+        std::uint64_t aWandererE = 0xB9AB363EA936D1EDULL;
+        std::uint64_t aWandererF = 0x847430D62AD62F79ULL;
+        std::uint64_t aWandererG = 0x0D6FE89E3169B0E1ULL;
+        std::uint64_t aWandererH = 0xD22934C37E3EE9B7ULL;
+        std::uint64_t aWandererI = 0x648E293C4DCD6ED1ULL;
+        std::uint64_t aWandererJ = 0xA31C40A884CAD927ULL;
+        std::uint64_t aWandererK = 0x183169CC43C8BCE3ULL;
         Soccer2::Zero();
         Soccer2::mStrength = EncryptionStrength::kStrong;
         Soccer2::InitializeExpanders();
         Soccer2::InitializeWorkSpaces();
         Soccer2::InitializeMaterials();
-        Soccer2::SeedPrologue_Regular_A(aPassword, 3, aNonce);
+        Soccer2::SeedPrologue_Regular_A(aPassword, 3, aNonce, ARX_STATE_VARS);
         
         if (Soccer2::mClaimedExpanderCount != 16) {
             XCTFail("test_Prologue_A_B_Shuffle_Strong: expecting 16 claimed expanders.");
@@ -525,7 +563,7 @@ std::string ToString(const std::uint8_t *pList, std::size_t pCount) {
         }
         
         std::unordered_set<std::uint8_t *> aClaimedMaterialSet;
-        const std::size_t aWarmUpStartIndex = (32 - 4) * S_BLOCK;
+        const std::size_t aWarmUpStartIndex = (32 - 6) * S_BLOCK;
         for (std::size_t aMaterialIndex=0; aMaterialIndex<Soccer2::mClaimedMaterialCount; aMaterialIndex++) {
             aClaimedMaterialSet.insert(Soccer2::mClaimedMaterials[aMaterialIndex]);
             std::size_t aByteRichness = LaneTool::ByteRichness(&Soccer2::mClaimedMaterials[aMaterialIndex][aWarmUpStartIndex], S_BLOCK);
@@ -549,7 +587,7 @@ std::string ToString(const std::uint8_t *pList, std::size_t pCount) {
                 for (std::size_t aBlockIndex=0; aBlockIndex<32; aBlockIndex++) {
                     std::size_t aByteRichness = LaneTool::ByteRichness(&Soccer2::mMaterials[aOuterMaterialIndex][S_BLOCK * aBlockIndex], S_BLOCK);
                     
-                    if (aBlockIndex == 28) {
+                    if (aBlockIndex == 26) {
                         if (aByteRichness < 512) {
                             XCTFail("test_Prologue_A_B_Shuffle_Strong: expecting claimed material [%zu] block [%zu] to be byte rich. (got %zu)", aOuterMaterialIndex, aBlockIndex, aByteRichness);
                             return;

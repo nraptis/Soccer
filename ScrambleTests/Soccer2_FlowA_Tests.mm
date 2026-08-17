@@ -122,9 +122,22 @@ std::string ToString(const std::uint8_t *pList, std::size_t pCount) {
         
         std::uint64_t aNonce = Random::Get64();
         
+        std::uint64_t aIngress = 0xE025CAEA83AB99CFULL;
+        std::uint64_t aCarry = 0x6530BC4A53A443B8ULL;
+        std::uint64_t aWandererA = 0x4E06885276D20E3DULL;
+        std::uint64_t aWandererB = 0xEBF1E1AB6DF26920ULL;
+        std::uint64_t aWandererC = 0x99478E05E833FBB1ULL;
+        std::uint64_t aWandererD = 0x73A9F7B5B01778B2ULL;
+        std::uint64_t aWandererE = 0xB9AB363EA936D1EDULL;
+        std::uint64_t aWandererF = 0x847430D62AD62F79ULL;
+        std::uint64_t aWandererG = 0x0D6FE89E3169B0E1ULL;
+        std::uint64_t aWandererH = 0xD22934C37E3EE9B7ULL;
+        std::uint64_t aWandererI = 0x648E293C4DCD6ED1ULL;
+        std::uint64_t aWandererJ = 0xA31C40A884CAD927ULL;
+        std::uint64_t aWandererK = 0x183169CC43C8BCE3ULL;
         Soccer2::Zero();
         memcpy(Soccer2::SOCCER_SCRATCH_WORKER_A, aZero, S_BLOCK);
-        Soccer2::SeedPrelude_Regular_B(aNonce);
+        Soccer2::SeedPrelude_Regular_B(aNonce, ARX_STATE_VARS);
         memcpy(aWriteA, Soccer2::SOCCER_PRELUDE_RAND, S_BLOCK);
         
         
@@ -138,10 +151,22 @@ std::string ToString(const std::uint8_t *pList, std::size_t pCount) {
             return;
         }
         
+        aIngress = 0xE025CAEA83AB99CFULL;
+        aCarry = 0x6530BC4A53A443B8ULL;
+        aWandererA = 0x4E06885276D20E3DULL;
+        aWandererB = 0xEBF1E1AB6DF26920ULL;
+        aWandererC = 0x99478E05E833FBB1ULL;
+        aWandererD = 0x73A9F7B5B01778B2ULL;
+        aWandererE = 0xB9AB363EA936D1EDULL;
+        aWandererF = 0x847430D62AD62F79ULL;
+        aWandererG = 0x0D6FE89E3169B0E1ULL;
+        aWandererH = 0xD22934C37E3EE9B7ULL;
+        aWandererI = 0x648E293C4DCD6ED1ULL;
+        aWandererJ = 0xA31C40A884CAD927ULL;
+        aWandererK = 0x183169CC43C8BCE3ULL;
         Soccer2::Zero();
-        
         memcpy(Soccer2::SOCCER_SCRATCH_WORKER_A, aZero, S_BLOCK);
-        Soccer2::SeedPrelude_Regular_B(aNonce);
+        Soccer2::SeedPrelude_Regular_B(aNonce, ARX_STATE_VARS);
         memcpy(aWriteB, Soccer2::SOCCER_PRELUDE_RAND, S_BLOCK);
         if (std::memcmp(Soccer2::SOCCER_PRELUDE_RAND, aZero, S_BLOCK) == 0) {
             XCTFail("test_PreludeB: expected random not to be 0 (b).");
@@ -156,7 +181,7 @@ std::string ToString(const std::uint8_t *pList, std::size_t pCount) {
         Soccer2::Zero();
         
         memcpy(Soccer2::SOCCER_SCRATCH_WORKER_A, aEntropy, S_BLOCK);
-        Soccer2::SeedPrelude_Regular_B(aNonce);
+        Soccer2::SeedPrelude_Regular_B(aNonce, ARX_STATE_VARS);
         memcpy(aWriteC, Soccer2::SOCCER_PRELUDE_RAND, S_BLOCK);
         if (std::memcmp(Soccer2::SOCCER_PRELUDE_RAND, aZero, S_BLOCK) == 0) {
             XCTFail("test_PreludeB: expected random not to be 0 (c).");
@@ -171,7 +196,7 @@ std::string ToString(const std::uint8_t *pList, std::size_t pCount) {
         Soccer2::Zero();
         
         memcpy(Soccer2::SOCCER_SCRATCH_WORKER_A, aEntropy, S_BLOCK);
-        Soccer2::SeedPrelude_Regular_B(aNonce);
+        Soccer2::SeedPrelude_Regular_B(aNonce, ARX_STATE_VARS);
         memcpy(aWriteD, Soccer2::SOCCER_PRELUDE_RAND, S_BLOCK);
         if (std::memcmp(Soccer2::SOCCER_PRELUDE_RAND, aZero, S_BLOCK) == 0) {
             XCTFail("test_PreludeB: expected random not to be 0 (d).");
