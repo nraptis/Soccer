@@ -24,7 +24,7 @@
 
 @implementation RotateKeyBoxTests
 
-- (void)test_ShiftKeyBoxLoopin {
+- (void)test_ShiftKeyABoxLoopin {
     
     TwistWorkSpace aWorkSpace;
     memset(aWorkSpace.mKeyBoxA[0], 'a', W_KEY);
@@ -36,19 +36,594 @@
     memset(aWorkSpace.mKeyBoxA[6], 'g', W_KEY);
     memset(aWorkSpace.mKeyBoxA[7], 'h', W_KEY);
     
+    std::size_t aGrowCount = 0;
+    std::size_t aStifleCount = 0;
+    
     for (std::size_t aBlockIndex=0;aBlockIndex<32;aBlockIndex++) {
         const bool aStifleKey = (aBlockIndex >= (32 - H_KEY));
         
         if (aStifleKey) {
             aWorkSpace.ShiftKeyBoxA(&aWorkSpace.mKeyBoxA[0][0]);
             
-            printf("on block %zu, we shifted\n", aBlockIndex);
-            
-            for (std::size_t aIndex=0; aIndex<H_KEY; aIndex++) {
-                printf("key[%zu] = %c\n", aIndex, aWorkSpace.mKeyBoxA[aIndex][0]);
+            if (aStifleCount == 0) {
+                if (aWorkSpace.mKeyBoxA[0][0] != 'a') {
+                    XCTFail("test_ShiftKeyABoxLoopin: failed key box a, 0, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxA[1][0] != 'a') {
+                    XCTFail("test_ShiftKeyABoxLoopin: failed key box a, 1, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxA[2][0] != 'b') {
+                    XCTFail("test_ShiftKeyABoxLoopin: failed key box a, 2, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxA[3][0] != 'c') {
+                    XCTFail("test_ShiftKeyABoxLoopin: failed key box a, 3, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxA[4][0] != 'd') {
+                    XCTFail("test_ShiftKeyABoxLoopin: failed key box a, 4, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxA[5][0] != 'e') {
+                    XCTFail("test_ShiftKeyABoxLoopin: failed key box a, 5, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxA[6][0] != 'f') {
+                    XCTFail("test_ShiftKeyABoxLoopin: failed key box a, 6, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxA[7][0] != 'g') {
+                    XCTFail("test_ShiftKeyABoxLoopin: failed key box a, 7, stifle count %zu", aStifleCount);
+                    return;
+                }
+            } else if (aStifleCount == 1) {
+                if (aWorkSpace.mKeyBoxA[0][0] != 'a') {
+                    XCTFail("test_ShiftKeyABoxLoopin: failed key box a, 0, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxA[1][0] != 'a') {
+                    XCTFail("test_ShiftKeyABoxLoopin: failed key box a, 1, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxA[2][0] != 'a') {
+                    XCTFail("test_ShiftKeyABoxLoopin: failed key box a, 2, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxA[3][0] != 'b') {
+                    XCTFail("test_ShiftKeyABoxLoopin: failed key box a, 3, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxA[4][0] != 'c') {
+                    XCTFail("test_ShiftKeyABoxLoopin: failed key box a, 4, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxA[5][0] != 'd') {
+                    XCTFail("test_ShiftKeyABoxLoopin: failed key box a, 5, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxA[6][0] != 'e') {
+                    XCTFail("test_ShiftKeyABoxLoopin: failed key box a, 6, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxA[7][0] != 'f') {
+                    XCTFail("test_ShiftKeyABoxLoopin: failed key box a, 7, stifle count %zu", aStifleCount);
+                    return;
+                }
+            } else if (aStifleCount == 2) {
+                if (aWorkSpace.mKeyBoxA[0][0] != 'a') {
+                    XCTFail("test_ShiftKeyABoxLoopin: failed key box a, 0, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxA[1][0] != 'a') {
+                    XCTFail("test_ShiftKeyABoxLoopin: failed key box a, 1, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxA[2][0] != 'a') {
+                    XCTFail("test_ShiftKeyABoxLoopin: failed key box a, 2, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxA[3][0] != 'a') {
+                    XCTFail("test_ShiftKeyABoxLoopin: failed key box a, 3, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxA[4][0] != 'b') {
+                    XCTFail("test_ShiftKeyABoxLoopin: failed key box a, 4, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxA[5][0] != 'c') {
+                    XCTFail("test_ShiftKeyABoxLoopin: failed key box a, 5, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxA[6][0] != 'd') {
+                    XCTFail("test_ShiftKeyABoxLoopin: failed key box a, 6, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxA[7][0] != 'e') {
+                    XCTFail("test_ShiftKeyABoxLoopin: failed key box a, 7, stifle count %zu", aStifleCount);
+                    return;
+                }
+            } else if (aStifleCount == 3) {
+                if (aWorkSpace.mKeyBoxA[0][0] != 'a') {
+                    XCTFail("test_ShiftKeyABoxLoopin: failed key box a, 0, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxA[1][0] != 'a') {
+                    XCTFail("test_ShiftKeyABoxLoopin: failed key box a, 1, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxA[2][0] != 'a') {
+                    XCTFail("test_ShiftKeyABoxLoopin: failed key box a, 2, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxA[3][0] != 'a') {
+                    XCTFail("test_ShiftKeyABoxLoopin: failed key box a, 3, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxA[4][0] != 'a') {
+                    XCTFail("test_ShiftKeyABoxLoopin: failed key box a, 4, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxA[5][0] != 'b') {
+                    XCTFail("test_ShiftKeyABoxLoopin: failed key box a, 5, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxA[6][0] != 'c') {
+                    XCTFail("test_ShiftKeyABoxLoopin: failed key box a, 6, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxA[7][0] != 'd') {
+                    XCTFail("test_ShiftKeyABoxLoopin: failed key box a, 7, stifle count %zu", aStifleCount);
+                    return;
+                }
+            } else if (aStifleCount == 4) {
+                if (aWorkSpace.mKeyBoxA[0][0] != 'a') {
+                    XCTFail("test_ShiftKeyABoxLoopin: failed key box a, 0, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxA[1][0] != 'a') {
+                    XCTFail("test_ShiftKeyABoxLoopin: failed key box a, 1, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxA[2][0] != 'a') {
+                    XCTFail("test_ShiftKeyABoxLoopin: failed key box a, 2, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxA[3][0] != 'a') {
+                    XCTFail("test_ShiftKeyABoxLoopin: failed key box a, 3, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxA[4][0] != 'a') {
+                    XCTFail("test_ShiftKeyABoxLoopin: failed key box a, 4, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxA[5][0] != 'a') {
+                    XCTFail("test_ShiftKeyABoxLoopin: failed key box a, 5, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxA[6][0] != 'b') {
+                    XCTFail("test_ShiftKeyABoxLoopin: failed key box a, 6, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxA[7][0] != 'c') {
+                    XCTFail("test_ShiftKeyABoxLoopin: failed key box a, 7, stifle count %zu", aStifleCount);
+                    return;
+                }
+            } else if (aStifleCount == 5) {
+                if (aWorkSpace.mKeyBoxA[0][0] != 'a') {
+                    XCTFail("test_ShiftKeyABoxLoopin: failed key box a, 0, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxA[1][0] != 'a') {
+                    XCTFail("test_ShiftKeyABoxLoopin: failed key box a, 1, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxA[2][0] != 'a') {
+                    XCTFail("test_ShiftKeyABoxLoopin: failed key box a, 2, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxA[3][0] != 'a') {
+                    XCTFail("test_ShiftKeyABoxLoopin: failed key box a, 3, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxA[4][0] != 'a') {
+                    XCTFail("test_ShiftKeyABoxLoopin: failed key box a, 4, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxA[5][0] != 'a') {
+                    XCTFail("test_ShiftKeyABoxLoopin: failed key box a, 5, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxA[6][0] != 'a') {
+                    XCTFail("test_ShiftKeyABoxLoopin: failed key box a, 6, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxA[7][0] != 'b') {
+                    XCTFail("test_ShiftKeyABoxLoopin: failed key box a, 7, stifle count %zu", aStifleCount);
+                    return;
+                }
+            } else {
+                if (aWorkSpace.mKeyBoxA[0][0] != 'a') {
+                    XCTFail("test_ShiftKeyABoxLoopin: failed key box a, 0, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxA[1][0] != 'a') {
+                    XCTFail("test_ShiftKeyABoxLoopin: failed key box a, 1, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxA[2][0] != 'a') {
+                    XCTFail("test_ShiftKeyABoxLoopin: failed key box a, 2, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxA[3][0] != 'a') {
+                    XCTFail("test_ShiftKeyABoxLoopin: failed key box a, 3, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxA[4][0] != 'a') {
+                    XCTFail("test_ShiftKeyABoxLoopin: failed key box a, 4, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxA[5][0] != 'a') {
+                    XCTFail("test_ShiftKeyABoxLoopin: failed key box a, 5, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxA[6][0] != 'a') {
+                    XCTFail("test_ShiftKeyABoxLoopin: failed key box a, 6, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxA[7][0] != 'a') {
+                    XCTFail("test_ShiftKeyABoxLoopin: failed key box a, 7, stifle count %zu", aStifleCount);
+                    return;
+                }
             }
+
+            aStifleCount++;
+        } else {
+            
+            if (aWorkSpace.mKeyBoxA[0][0] != 'a') {
+                XCTFail("test_ShiftKeyABoxLoopin: failed key box a, 0, grow count %zu", aGrowCount);
+                return;
+            }
+            if (aWorkSpace.mKeyBoxA[1][0] != 'b') {
+                XCTFail("test_ShiftKeyABoxLoopin: failed key box a, 1, grow count %zu", aGrowCount);
+                return;
+            }
+            if (aWorkSpace.mKeyBoxA[2][0] != 'c') {
+                XCTFail("test_ShiftKeyABoxLoopin: failed key box a, 2, grow count %zu", aGrowCount);
+                return;
+            }
+            if (aWorkSpace.mKeyBoxA[3][0] != 'd') {
+                XCTFail("test_ShiftKeyABoxLoopin: failed key box a, 3, grow count %zu", aGrowCount);
+                return;
+            }
+            if (aWorkSpace.mKeyBoxA[4][0] != 'e') {
+                XCTFail("test_ShiftKeyABoxLoopin: failed key box a, 4, grow count %zu", aGrowCount);
+                return;
+            }
+            if (aWorkSpace.mKeyBoxA[5][0] != 'f') {
+                XCTFail("test_ShiftKeyABoxLoopin: failed key box a, 5, grow count %zu", aGrowCount);
+                return;
+            }
+            if (aWorkSpace.mKeyBoxA[6][0] != 'g') {
+                XCTFail("test_ShiftKeyABoxLoopin: failed key box a, 6, grow count %zu", aGrowCount);
+                return;
+            }
+            if (aWorkSpace.mKeyBoxA[7][0] != 'h') {
+                XCTFail("test_ShiftKeyABoxLoopin: failed key box a, 7, grow count %zu", aGrowCount);
+                return;
+            }
+            
+            aGrowCount++;
         }
     }
+    
+    if (aStifleCount != 8) {
+        XCTFail("test_ShiftKeyBoxA: failed on aStifleCount, expected 8 got %zu", aStifleCount);
+        return;
+    }
+    
+}
+
+- (void)test_ShiftKeyBBoxLoopin {
+    
+    TwistWorkSpace aWorkSpace;
+    memset(aWorkSpace.mKeyBoxB[0], 'a', W_KEY);
+    memset(aWorkSpace.mKeyBoxB[1], 'b', W_KEY);
+    memset(aWorkSpace.mKeyBoxB[2], 'c', W_KEY);
+    memset(aWorkSpace.mKeyBoxB[3], 'd', W_KEY);
+    memset(aWorkSpace.mKeyBoxB[4], 'e', W_KEY);
+    memset(aWorkSpace.mKeyBoxB[5], 'f', W_KEY);
+    memset(aWorkSpace.mKeyBoxB[6], 'g', W_KEY);
+    memset(aWorkSpace.mKeyBoxB[7], 'h', W_KEY);
+    
+    std::size_t aGrowCount = 0;
+    std::size_t aStifleCount = 0;
+    
+    for (std::size_t aBlockIndex=0;aBlockIndex<32;aBlockIndex++) {
+        const bool aStifleKey = (aBlockIndex >= (32 - H_KEY));
+        
+        if (aStifleKey) {
+            aWorkSpace.ShiftKeyBoxB(&aWorkSpace.mKeyBoxB[0][0]);
+            
+            if (aStifleCount == 0) {
+                if (aWorkSpace.mKeyBoxB[0][0] != 'a') {
+                    XCTFail("test_ShiftKeyBBoxLoopin: failed key box a, 0, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxB[1][0] != 'a') {
+                    XCTFail("test_ShiftKeyBBoxLoopin: failed key box a, 1, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxB[2][0] != 'b') {
+                    XCTFail("test_ShiftKeyBBoxLoopin: failed key box a, 2, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxB[3][0] != 'c') {
+                    XCTFail("test_ShiftKeyBBoxLoopin: failed key box a, 3, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxB[4][0] != 'd') {
+                    XCTFail("test_ShiftKeyBBoxLoopin: failed key box a, 4, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxB[5][0] != 'e') {
+                    XCTFail("test_ShiftKeyBBoxLoopin: failed key box a, 5, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxB[6][0] != 'f') {
+                    XCTFail("test_ShiftKeyBBoxLoopin: failed key box a, 6, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxB[7][0] != 'g') {
+                    XCTFail("test_ShiftKeyBBoxLoopin: failed key box a, 7, stifle count %zu", aStifleCount);
+                    return;
+                }
+            } else if (aStifleCount == 1) {
+                if (aWorkSpace.mKeyBoxB[0][0] != 'a') {
+                    XCTFail("test_ShiftKeyBBoxLoopin: failed key box a, 0, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxB[1][0] != 'a') {
+                    XCTFail("test_ShiftKeyBBoxLoopin: failed key box a, 1, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxB[2][0] != 'a') {
+                    XCTFail("test_ShiftKeyBBoxLoopin: failed key box a, 2, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxB[3][0] != 'b') {
+                    XCTFail("test_ShiftKeyBBoxLoopin: failed key box a, 3, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxB[4][0] != 'c') {
+                    XCTFail("test_ShiftKeyBBoxLoopin: failed key box a, 4, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxB[5][0] != 'd') {
+                    XCTFail("test_ShiftKeyBBoxLoopin: failed key box a, 5, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxB[6][0] != 'e') {
+                    XCTFail("test_ShiftKeyBBoxLoopin: failed key box a, 6, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxB[7][0] != 'f') {
+                    XCTFail("test_ShiftKeyBBoxLoopin: failed key box a, 7, stifle count %zu", aStifleCount);
+                    return;
+                }
+            } else if (aStifleCount == 2) {
+                if (aWorkSpace.mKeyBoxB[0][0] != 'a') {
+                    XCTFail("test_ShiftKeyBBoxLoopin: failed key box a, 0, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxB[1][0] != 'a') {
+                    XCTFail("test_ShiftKeyBBoxLoopin: failed key box a, 1, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxB[2][0] != 'a') {
+                    XCTFail("test_ShiftKeyBBoxLoopin: failed key box a, 2, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxB[3][0] != 'a') {
+                    XCTFail("test_ShiftKeyBBoxLoopin: failed key box a, 3, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxB[4][0] != 'b') {
+                    XCTFail("test_ShiftKeyBBoxLoopin: failed key box a, 4, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxB[5][0] != 'c') {
+                    XCTFail("test_ShiftKeyBBoxLoopin: failed key box a, 5, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxB[6][0] != 'd') {
+                    XCTFail("test_ShiftKeyBBoxLoopin: failed key box a, 6, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxB[7][0] != 'e') {
+                    XCTFail("test_ShiftKeyBBoxLoopin: failed key box a, 7, stifle count %zu", aStifleCount);
+                    return;
+                }
+            } else if (aStifleCount == 3) {
+                if (aWorkSpace.mKeyBoxB[0][0] != 'a') {
+                    XCTFail("test_ShiftKeyBBoxLoopin: failed key box a, 0, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxB[1][0] != 'a') {
+                    XCTFail("test_ShiftKeyBBoxLoopin: failed key box a, 1, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxB[2][0] != 'a') {
+                    XCTFail("test_ShiftKeyBBoxLoopin: failed key box a, 2, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxB[3][0] != 'a') {
+                    XCTFail("test_ShiftKeyBBoxLoopin: failed key box a, 3, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxB[4][0] != 'a') {
+                    XCTFail("test_ShiftKeyBBoxLoopin: failed key box a, 4, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxB[5][0] != 'b') {
+                    XCTFail("test_ShiftKeyBBoxLoopin: failed key box a, 5, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxB[6][0] != 'c') {
+                    XCTFail("test_ShiftKeyBBoxLoopin: failed key box a, 6, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxB[7][0] != 'd') {
+                    XCTFail("test_ShiftKeyBBoxLoopin: failed key box a, 7, stifle count %zu", aStifleCount);
+                    return;
+                }
+            } else if (aStifleCount == 4) {
+                if (aWorkSpace.mKeyBoxB[0][0] != 'a') {
+                    XCTFail("test_ShiftKeyBBoxLoopin: failed key box a, 0, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxB[1][0] != 'a') {
+                    XCTFail("test_ShiftKeyBBoxLoopin: failed key box a, 1, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxB[2][0] != 'a') {
+                    XCTFail("test_ShiftKeyBBoxLoopin: failed key box a, 2, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxB[3][0] != 'a') {
+                    XCTFail("test_ShiftKeyBBoxLoopin: failed key box a, 3, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxB[4][0] != 'a') {
+                    XCTFail("test_ShiftKeyBBoxLoopin: failed key box a, 4, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxB[5][0] != 'a') {
+                    XCTFail("test_ShiftKeyBBoxLoopin: failed key box a, 5, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxB[6][0] != 'b') {
+                    XCTFail("test_ShiftKeyBBoxLoopin: failed key box a, 6, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxB[7][0] != 'c') {
+                    XCTFail("test_ShiftKeyBBoxLoopin: failed key box a, 7, stifle count %zu", aStifleCount);
+                    return;
+                }
+            } else if (aStifleCount == 5) {
+                if (aWorkSpace.mKeyBoxB[0][0] != 'a') {
+                    XCTFail("test_ShiftKeyBBoxLoopin: failed key box a, 0, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxB[1][0] != 'a') {
+                    XCTFail("test_ShiftKeyBBoxLoopin: failed key box a, 1, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxB[2][0] != 'a') {
+                    XCTFail("test_ShiftKeyBBoxLoopin: failed key box a, 2, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxB[3][0] != 'a') {
+                    XCTFail("test_ShiftKeyBBoxLoopin: failed key box a, 3, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxB[4][0] != 'a') {
+                    XCTFail("test_ShiftKeyBBoxLoopin: failed key box a, 4, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxB[5][0] != 'a') {
+                    XCTFail("test_ShiftKeyBBoxLoopin: failed key box a, 5, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxB[6][0] != 'a') {
+                    XCTFail("test_ShiftKeyBBoxLoopin: failed key box a, 6, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxB[7][0] != 'b') {
+                    XCTFail("test_ShiftKeyBBoxLoopin: failed key box a, 7, stifle count %zu", aStifleCount);
+                    return;
+                }
+            } else {
+                if (aWorkSpace.mKeyBoxB[0][0] != 'a') {
+                    XCTFail("test_ShiftKeyBBoxLoopin: failed key box a, 0, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxB[1][0] != 'a') {
+                    XCTFail("test_ShiftKeyBBoxLoopin: failed key box a, 1, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxB[2][0] != 'a') {
+                    XCTFail("test_ShiftKeyBBoxLoopin: failed key box a, 2, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxB[3][0] != 'a') {
+                    XCTFail("test_ShiftKeyBBoxLoopin: failed key box a, 3, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxB[4][0] != 'a') {
+                    XCTFail("test_ShiftKeyBBoxLoopin: failed key box a, 4, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxB[5][0] != 'a') {
+                    XCTFail("test_ShiftKeyBBoxLoopin: failed key box a, 5, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxB[6][0] != 'a') {
+                    XCTFail("test_ShiftKeyBBoxLoopin: failed key box a, 6, stifle count %zu", aStifleCount);
+                    return;
+                }
+                if (aWorkSpace.mKeyBoxB[7][0] != 'a') {
+                    XCTFail("test_ShiftKeyBBoxLoopin: failed key box a, 7, stifle count %zu", aStifleCount);
+                    return;
+                }
+            }
+
+            aStifleCount++;
+        } else {
+            
+            if (aWorkSpace.mKeyBoxB[0][0] != 'a') {
+                XCTFail("test_ShiftKeyBBoxLoopin: failed key box a, 0, grow count %zu", aGrowCount);
+                return;
+            }
+            if (aWorkSpace.mKeyBoxB[1][0] != 'b') {
+                XCTFail("test_ShiftKeyBBoxLoopin: failed key box a, 1, grow count %zu", aGrowCount);
+                return;
+            }
+            if (aWorkSpace.mKeyBoxB[2][0] != 'c') {
+                XCTFail("test_ShiftKeyBBoxLoopin: failed key box a, 2, grow count %zu", aGrowCount);
+                return;
+            }
+            if (aWorkSpace.mKeyBoxB[3][0] != 'd') {
+                XCTFail("test_ShiftKeyBBoxLoopin: failed key box a, 3, grow count %zu", aGrowCount);
+                return;
+            }
+            if (aWorkSpace.mKeyBoxB[4][0] != 'e') {
+                XCTFail("test_ShiftKeyBBoxLoopin: failed key box a, 4, grow count %zu", aGrowCount);
+                return;
+            }
+            if (aWorkSpace.mKeyBoxB[5][0] != 'f') {
+                XCTFail("test_ShiftKeyBBoxLoopin: failed key box a, 5, grow count %zu", aGrowCount);
+                return;
+            }
+            if (aWorkSpace.mKeyBoxB[6][0] != 'g') {
+                XCTFail("test_ShiftKeyBBoxLoopin: failed key box a, 6, grow count %zu", aGrowCount);
+                return;
+            }
+            if (aWorkSpace.mKeyBoxB[7][0] != 'h') {
+                XCTFail("test_ShiftKeyBBoxLoopin: failed key box a, 7, grow count %zu", aGrowCount);
+                return;
+            }
+            
+            aGrowCount++;
+        }
+    }
+    
+    if (aStifleCount != 8) {
+        XCTFail("test_ShiftKeyBoxB: failed on aStifleCount, expected 8 got %zu", aStifleCount);
+        return;
+    }
+    
 }
 
 - (void)test_ShiftKeyBoxA {
