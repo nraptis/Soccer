@@ -99,7 +99,6 @@ public:
                TwistDomainSaltSet *pDomainSaltSet,
                MUTABLE_PARAMS);
     void Seed(TwistWorkSpace *pWorkSpace,
-              TwistFarmSalt *pFarmSalt,
               std::uint64_t pNonce,
               std::uint8_t *pPassword,
               std::size_t pPasswordByteLength,

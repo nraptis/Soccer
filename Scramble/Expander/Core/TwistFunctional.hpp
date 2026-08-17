@@ -66,6 +66,26 @@ inline std::uint64_t Load64LE(const std::uint8_t *pSource) {
         (static_cast<std::uint64_t>(pSource[7U]) << 56U);
 }
 
+inline void Store32LE(std::uint8_t *pDestination,
+                      const std::uint32_t pValue) {
+    pDestination[0U] = static_cast<std::uint8_t>(pValue >>  0U);
+    pDestination[1U] = static_cast<std::uint8_t>(pValue >>  8U);
+    pDestination[2U] = static_cast<std::uint8_t>(pValue >> 16U);
+    pDestination[3U] = static_cast<std::uint8_t>(pValue >> 24U);
+}
+
+inline void Store64LE(std::uint8_t *pDestination,
+                      const std::uint64_t pValue) {
+    pDestination[0U] = static_cast<std::uint8_t>(pValue >>  0U);
+    pDestination[1U] = static_cast<std::uint8_t>(pValue >>  8U);
+    pDestination[2U] = static_cast<std::uint8_t>(pValue >> 16U);
+    pDestination[3U] = static_cast<std::uint8_t>(pValue >> 24U);
+    pDestination[4U] = static_cast<std::uint8_t>(pValue >> 32U);
+    pDestination[5U] = static_cast<std::uint8_t>(pValue >> 40U);
+    pDestination[6U] = static_cast<std::uint8_t>(pValue >> 48U);
+    pDestination[7U] = static_cast<std::uint8_t>(pValue >> 56U);
+}
+
 inline std::uint8_t RotR8(std::uint8_t pValue, std::uint8_t pAmount) {
     std::uint8_t aAmount = static_cast<std::uint8_t>(pAmount & 7U);
     if (aAmount == 0U) { return pValue; }

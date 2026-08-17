@@ -7,15 +7,18 @@
 
 #include "TwistFarm.hpp"
 
-#include "TwistFarmSalt.hpp"
+#include "TwistFunctional.hpp"
 #include "TwistMix32.hpp"
 #include "TwistMix64.hpp"
 
+#include <cstring>
+
 static_assert(S_BLOCK == 32768,
               "TwistFarm::Farm requires S_BLOCK to be exactly 32768 bytes.");
+static_assert(sizeof(TwistDomainSeedRoundMaterial) == S_BLOCK,
+              "One farm lane must exactly fill one salt round material.");
 
-void TwistFarm::Farm(TwistFarmSalt *pFarmSalt,
-                     const std::uint8_t *pSaltLaneA,
+void TwistFarm::Farm(const std::uint8_t *pSaltLaneA,
                      const std::uint8_t *pSaltLaneB,
                      const std::uint8_t *pSaltLaneC,
                      const std::uint8_t *pConstantLane,
@@ -24,8 +27,7 @@ void TwistFarm::Farm(TwistFarmSalt *pFarmSalt,
                      std::uint8_t *pFoldLaneC,
                      TwistDomainSaltSet *pSaltSet,
                      TwistDomainConstants *pConstants) {
-    if ((pFarmSalt == nullptr) ||
-        (pSaltLaneA == nullptr) ||
+    if ((pSaltLaneA == nullptr) ||
         (pSaltLaneB == nullptr) ||
         (pSaltLaneC == nullptr) ||
         (pConstantLane == nullptr) ||
@@ -37,8 +39,7 @@ void TwistFarm::Farm(TwistFarmSalt *pFarmSalt,
         return;
     }
 
-    FarmSalts(pFarmSalt,
-              pSaltLaneA,
+    FarmSalts(pSaltLaneA,
               pSaltLaneB,
               pSaltLaneC,
               pSaltSet);
@@ -49,25 +50,26 @@ void TwistFarm::Farm(TwistFarmSalt *pFarmSalt,
                   pConstants);
 }
 
-void TwistFarm::FarmSalts(TwistFarmSalt *pFarmSalt,
-                          const std::uint8_t *pSourceLaneA,
+void TwistFarm::FarmSalts(const std::uint8_t *pSourceLaneA,
                           const std::uint8_t *pSourceLaneB,
                           const std::uint8_t *pSourceLaneC,
                           TwistDomainSaltSet *pSaltSet) {
-    if ((pFarmSalt == nullptr) ||
-        (pSourceLaneA == nullptr) ||
+    if ((pSourceLaneA == nullptr) ||
         (pSourceLaneB == nullptr) ||
         (pSourceLaneC == nullptr) ||
         (pSaltSet == nullptr)) {
         return;
     }
 
-    pFarmSalt->Derive(pSourceLaneA,
-                      &(pSaltSet->mOrbiterAssign));
-    pFarmSalt->Derive(pSourceLaneB,
-                      &(pSaltSet->mOrbiterUpdate));
-    pFarmSalt->Derive(pSourceLaneC,
-                      &(pSaltSet->mWandererUpdate));
+    std::memcpy(&pSaltSet->mOrbiterAssign,
+                pSourceLaneA,
+                sizeof(pSaltSet->mOrbiterAssign));
+    std::memcpy(&pSaltSet->mOrbiterUpdate,
+                pSourceLaneB,
+                sizeof(pSaltSet->mOrbiterUpdate));
+    std::memcpy(&pSaltSet->mWandererUpdate,
+                pSourceLaneC,
+                sizeof(pSaltSet->mWandererUpdate));
 }
 
 void TwistFarm::FarmConstants(const std::uint8_t *pSource,
@@ -91,42 +93,20 @@ void TwistFarm::FarmConstants(const std::uint8_t *pSource,
         return;
     }
 
-    if ((reinterpret_cast<std::uintptr_t>(pSource) & 7U) != 0U) {
-        return;
-    }
-    if ((reinterpret_cast<std::uintptr_t>(pFoldLaneA) & 7U) != 0U) {
-        return;
-    }
-    if ((reinterpret_cast<std::uintptr_t>(pFoldLaneB) & 7U) != 0U) {
-        return;
-    }
-    if ((reinterpret_cast<std::uintptr_t>(pFoldLaneC) & 7U) != 0U) {
-        return;
-    }
-
-    const std::uint64_t *aSource =
-        reinterpret_cast<const std::uint64_t *>(pSource);
-    std::uint64_t *aFoldLaneA =
-        reinterpret_cast<std::uint64_t *>(pFoldLaneA);
-    std::uint64_t *aFoldLaneB =
-        reinterpret_cast<std::uint64_t *>(pFoldLaneB);
-    std::uint64_t *aFoldLaneC =
-        reinterpret_cast<std::uint64_t *>(pFoldLaneC);
-
     //
     // Fold eight 4,096-byte pieces into 512 64-bit words.
     //
     for (std::size_t aIndex = 0U; aIndex < 512U; aIndex += 1U) {
         std::uint64_t aFold = 0ULL;
-        aFold = TwistMix64::DiffuseA(aFold ^ aSource[aIndex + 0U]);
-        aFold = TwistMix64::DiffuseA(aFold ^ aSource[aIndex + 512U]);
-        aFold = TwistMix64::DiffuseA(aFold ^ aSource[aIndex + 1024U]);
-        aFold = TwistMix64::DiffuseA(aFold ^ aSource[aIndex + 1536U]);
-        aFold = TwistMix64::DiffuseA(aFold ^ aSource[aIndex + 2048U]);
-        aFold = TwistMix64::DiffuseA(aFold ^ aSource[aIndex + 2560U]);
-        aFold = TwistMix64::DiffuseA(aFold ^ aSource[aIndex + 3072U]);
-        aFold = TwistMix64::DiffuseA(aFold ^ aSource[aIndex + 3584U]);
-        aFoldLaneA[aIndex] = aFold;
+        aFold = TwistMix64::DiffuseA(aFold ^ Load64LE(pSource + ((aIndex + 0U) * 8U)));
+        aFold = TwistMix64::DiffuseA(aFold ^ Load64LE(pSource + ((aIndex + 512U) * 8U)));
+        aFold = TwistMix64::DiffuseA(aFold ^ Load64LE(pSource + ((aIndex + 1024U) * 8U)));
+        aFold = TwistMix64::DiffuseA(aFold ^ Load64LE(pSource + ((aIndex + 1536U) * 8U)));
+        aFold = TwistMix64::DiffuseA(aFold ^ Load64LE(pSource + ((aIndex + 2048U) * 8U)));
+        aFold = TwistMix64::DiffuseA(aFold ^ Load64LE(pSource + ((aIndex + 2560U) * 8U)));
+        aFold = TwistMix64::DiffuseA(aFold ^ Load64LE(pSource + ((aIndex + 3072U) * 8U)));
+        aFold = TwistMix64::DiffuseA(aFold ^ Load64LE(pSource + ((aIndex + 3584U) * 8U)));
+        Store64LE(pFoldLaneA + (aIndex * 8U), aFold);
     }
 
     //
@@ -134,15 +114,15 @@ void TwistFarm::FarmConstants(const std::uint8_t *pSource,
     //
     for (std::size_t aIndex = 0U; aIndex < 64U; aIndex += 1U) {
         std::uint64_t aFold = 0ULL;
-        aFold = TwistMix64::DiffuseA(aFold ^ aFoldLaneA[aIndex + 0U]);
-        aFold = TwistMix64::DiffuseA(aFold ^ aFoldLaneA[aIndex + 64U]);
-        aFold = TwistMix64::DiffuseA(aFold ^ aFoldLaneA[aIndex + 128U]);
-        aFold = TwistMix64::DiffuseA(aFold ^ aFoldLaneA[aIndex + 192U]);
-        aFold = TwistMix64::DiffuseA(aFold ^ aFoldLaneA[aIndex + 256U]);
-        aFold = TwistMix64::DiffuseA(aFold ^ aFoldLaneA[aIndex + 320U]);
-        aFold = TwistMix64::DiffuseA(aFold ^ aFoldLaneA[aIndex + 384U]);
-        aFold = TwistMix64::DiffuseA(aFold ^ aFoldLaneA[aIndex + 448U]);
-        aFoldLaneB[aIndex] = aFold;
+        aFold = TwistMix64::DiffuseA(aFold ^ Load64LE(pFoldLaneA + ((aIndex + 0U) * 8U)));
+        aFold = TwistMix64::DiffuseA(aFold ^ Load64LE(pFoldLaneA + ((aIndex + 64U) * 8U)));
+        aFold = TwistMix64::DiffuseA(aFold ^ Load64LE(pFoldLaneA + ((aIndex + 128U) * 8U)));
+        aFold = TwistMix64::DiffuseA(aFold ^ Load64LE(pFoldLaneA + ((aIndex + 192U) * 8U)));
+        aFold = TwistMix64::DiffuseA(aFold ^ Load64LE(pFoldLaneA + ((aIndex + 256U) * 8U)));
+        aFold = TwistMix64::DiffuseA(aFold ^ Load64LE(pFoldLaneA + ((aIndex + 320U) * 8U)));
+        aFold = TwistMix64::DiffuseA(aFold ^ Load64LE(pFoldLaneA + ((aIndex + 384U) * 8U)));
+        aFold = TwistMix64::DiffuseA(aFold ^ Load64LE(pFoldLaneA + ((aIndex + 448U) * 8U)));
+        Store64LE(pFoldLaneB + (aIndex * 8U), aFold);
     }
 
     //
@@ -151,50 +131,41 @@ void TwistFarm::FarmConstants(const std::uint8_t *pSource,
     // The low and high halves are folded independently with TwistMix32.
     //
     for (std::size_t aIndex = 0U; aIndex < 16U; aIndex += 1U) {
-        std::uint64_t aPieceA = aFoldLaneB[aIndex + 0U];
-        std::uint64_t aPieceB = aFoldLaneB[aIndex + 16U];
-        std::uint64_t aPieceC = aFoldLaneB[aIndex + 32U];
-        std::uint64_t aPieceD = aFoldLaneB[aIndex + 48U];
+        const std::uint8_t *aPieceA = pFoldLaneB + ((aIndex + 0U) * 8U);
+        const std::uint8_t *aPieceB = pFoldLaneB + ((aIndex + 16U) * 8U);
+        const std::uint8_t *aPieceC = pFoldLaneB + ((aIndex + 32U) * 8U);
+        const std::uint8_t *aPieceD = pFoldLaneB + ((aIndex + 48U) * 8U);
 
         std::uint32_t aFoldLow = 0U;
-        aFoldLow = TwistMix32::DiffuseA(
-            aFoldLow ^ static_cast<std::uint32_t>(aPieceA));
-        aFoldLow = TwistMix32::DiffuseA(
-            aFoldLow ^ static_cast<std::uint32_t>(aPieceB));
-        aFoldLow = TwistMix32::DiffuseA(
-            aFoldLow ^ static_cast<std::uint32_t>(aPieceC));
-        aFoldLow = TwistMix32::DiffuseA(
-            aFoldLow ^ static_cast<std::uint32_t>(aPieceD));
+        aFoldLow = TwistMix32::DiffuseA(aFoldLow ^ Load32LE(aPieceA));
+        aFoldLow = TwistMix32::DiffuseA(aFoldLow ^ Load32LE(aPieceB));
+        aFoldLow = TwistMix32::DiffuseA(aFoldLow ^ Load32LE(aPieceC));
+        aFoldLow = TwistMix32::DiffuseA(aFoldLow ^ Load32LE(aPieceD));
 
         std::uint32_t aFoldHigh = 0U;
-        aFoldHigh = TwistMix32::DiffuseA(
-            aFoldHigh ^ static_cast<std::uint32_t>(aPieceA >> 32U));
-        aFoldHigh = TwistMix32::DiffuseA(
-            aFoldHigh ^ static_cast<std::uint32_t>(aPieceB >> 32U));
-        aFoldHigh = TwistMix32::DiffuseA(
-            aFoldHigh ^ static_cast<std::uint32_t>(aPieceC >> 32U));
-        aFoldHigh = TwistMix32::DiffuseA(
-            aFoldHigh ^ static_cast<std::uint32_t>(aPieceD >> 32U));
+        aFoldHigh = TwistMix32::DiffuseA(aFoldHigh ^ Load32LE(aPieceA + 4U));
+        aFoldHigh = TwistMix32::DiffuseA(aFoldHigh ^ Load32LE(aPieceB + 4U));
+        aFoldHigh = TwistMix32::DiffuseA(aFoldHigh ^ Load32LE(aPieceC + 4U));
+        aFoldHigh = TwistMix32::DiffuseA(aFoldHigh ^ Load32LE(aPieceD + 4U));
 
-        std::uint64_t aFold = static_cast<std::uint64_t>(aFoldLow);
-        aFold |= static_cast<std::uint64_t>(aFoldHigh) << 32U;
-        aFoldLaneC[aIndex] = aFold;
+        Store32LE(pFoldLaneC + (aIndex * 8U), aFoldLow);
+        Store32LE(pFoldLaneC + (aIndex * 8U) + 4U, aFoldHigh);
     }
 
     //
     // The final lane contains sixteen 64-bit words. Use the first eleven.
     //
-    std::uint64_t aIngress = aFoldLaneC[0U];
-    std::uint64_t aScatter = aFoldLaneC[1U];
-    std::uint64_t aCross = aFoldLaneC[2U];
-    std::uint64_t aMatrixSelectA = aFoldLaneC[3U];
-    std::uint64_t aMatrixSelectB = aFoldLaneC[4U];
-    std::uint64_t aMatrixUnrollA = aFoldLaneC[5U];
-    std::uint64_t aMatrixUnrollB = aFoldLaneC[6U];
-    std::uint64_t aMatrixArgA = aFoldLaneC[7U];
-    std::uint64_t aMatrixArgB = aFoldLaneC[8U];
-    std::uint64_t aMatrixArgC = aFoldLaneC[9U];
-    std::uint64_t aMatrixArgD = aFoldLaneC[10U];
+    std::uint64_t aIngress = Load64LE(pFoldLaneC + (0U * 8U));
+    std::uint64_t aScatter = Load64LE(pFoldLaneC + (1U * 8U));
+    std::uint64_t aCross = Load64LE(pFoldLaneC + (2U * 8U));
+    std::uint64_t aMatrixSelectA = Load64LE(pFoldLaneC + (3U * 8U));
+    std::uint64_t aMatrixSelectB = Load64LE(pFoldLaneC + (4U * 8U));
+    std::uint64_t aMatrixUnrollA = Load64LE(pFoldLaneC + (5U * 8U));
+    std::uint64_t aMatrixUnrollB = Load64LE(pFoldLaneC + (6U * 8U));
+    std::uint64_t aMatrixArgA = Load64LE(pFoldLaneC + (7U * 8U));
+    std::uint64_t aMatrixArgB = Load64LE(pFoldLaneC + (8U * 8U));
+    std::uint64_t aMatrixArgC = Load64LE(pFoldLaneC + (9U * 8U));
+    std::uint64_t aMatrixArgD = Load64LE(pFoldLaneC + (10U * 8U));
 
     //
     // Fold each 64-bit small constant down to eight bits.

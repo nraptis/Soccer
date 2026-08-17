@@ -10,7 +10,6 @@
 #ifndef Soccer2_hpp
 #define Soccer2_hpp
 
-#include "TwistFarmSalt.hpp"
 #include "TwistWorkSpace.hpp"
 #include "TwistShuffle.hpp"
 #include "TwistFunctional.hpp"
@@ -136,8 +135,6 @@ public:
     static TwistExpander                        *mExpanders[SOCCER_EXPANDER_COUNT];
     static TwistExpander                        *mClaimedExpanders[16];
     static std::size_t                          mClaimedExpanderCount;
-    
-    static TwistFarmSalt                        mFarmSalt;
     
     static std::uint8_t                         mRandom[S_BLOCK];
     

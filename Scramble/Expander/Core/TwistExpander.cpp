@@ -4,7 +4,6 @@
 //
 
 #include "TwistExpander.hpp"
-#include "TwistFarmSalt.hpp"
 #include "TwistMix64.hpp"
 
 #include <cstdio>
@@ -29,7 +28,6 @@ void TwistExpander::KDF(std::uint64_t pNonce,
 }
 
 void TwistExpander::Seed(TwistWorkSpace *pWorkSpace,
-                         TwistFarmSalt *pFarmSalt,
                          std::uint64_t pNonce,
                          std::uint8_t *pPassword,
                          std::size_t pPasswordByteLength,
@@ -41,10 +39,6 @@ void TwistExpander::Seed(TwistWorkSpace *pWorkSpace,
     }
     if (pDestination == nullptr) {
         std::printf("fatal: TwistExpander::Seed requires destination buffer\n");
-        return;
-    }
-    if (pFarmSalt == nullptr) {
-        std::printf("fatal: TwistExpander::Seed requires farm salt\n");
         return;
     }
     if (MUTABLE_PARAMS_ARE_NULL) {
@@ -167,7 +161,6 @@ void TwistExpander::Twist(TwistWorkSpace *pWorkSpace,
 }
 
 void TwistExpander::AutoSeedThenTwist(TwistWorkSpace *pWorkSpace,
-                                      TwistFarmSalt *pFarmSalt,
                                       std::uint64_t pNonce,
                                       std::uint8_t *pPassword,
                                       std::size_t pPasswordByteLength,
@@ -185,7 +178,6 @@ void TwistExpander::AutoSeedThenTwist(TwistWorkSpace *pWorkSpace,
     }
     
     Seed(pWorkSpace,
-         pFarmSalt,
          pNonce,
          pPassword, // password
          pPasswordByteLength, // password length

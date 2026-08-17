@@ -179,8 +179,6 @@ inline void TwistKeyFoldBlock(const std::uint8_t *pSourceLaneA,
 
 
 
-class TwistFarmSalt;
-
 class TwistExpander {
 public:
     
@@ -203,7 +201,6 @@ public:
                                                 TwistDomainSaltSet *pDomainSaltSet);
     
     virtual void                            Seed(TwistWorkSpace *pWorkSpace,
-                                                 TwistFarmSalt *pFarmSalt,
                                                  std::uint64_t pNonce,
                                                  std::uint8_t *pPassword,
                                                  std::size_t pPasswordByteLength,
@@ -242,7 +239,6 @@ public:
                                                   MUTABLE_PARAMS);
     
     void                                    AutoSeedThenTwist(TwistWorkSpace *pWorkSpace,
-                                                              TwistFarmSalt *pFarmSalt,
                                                               std::uint64_t pNonce,
                                                               std::uint8_t *pPassword,
                                                               std::size_t pPasswordByteLength,

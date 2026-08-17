@@ -6,7 +6,6 @@
 //
 
 #include "Rig.hpp"
-#include "TwistFarmSalt.hpp"
 #include <cctype>
 #include <cstdio>
 
@@ -86,7 +85,6 @@ void Rig::Run(TwistExpander *pExpander,
     memset(aSnowLaneD, 0, sizeof(aSnowLaneA));
 
     TwistWorkSpace aWorkSpace;
-    TwistFarmSalt aFarmSalt;
     
     std::uint64_t aIngress = 0xC57A5D1CB76274CDULL;
     std::uint64_t aCarry = 0xD884E6D87C4E5D32ULL;
@@ -103,7 +101,6 @@ void Rig::Run(TwistExpander *pExpander,
     std::uint64_t aWandererK = 0x0BEE6245265CD32DULL;
     
     pExpander->Seed(&aWorkSpace,
-                    &aFarmSalt,
                     0ULL,
                     pPassword,
                     static_cast<unsigned int>(pPasswordLength),

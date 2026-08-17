@@ -79,8 +79,6 @@ std::uint8_t                                Soccer2::mMaterialN[SOCCER_BLOCK_SIZ
 std::uint8_t                                Soccer2::mMaterialO[SOCCER_BLOCK_SIZE];
 std::uint8_t                                Soccer2::mMaterialP[SOCCER_BLOCK_SIZE];
 
-TwistFarmSalt                               Soccer2::mFarmSalt;
-
 TwistExpander_Betelgeuse                    Soccer2::mStarter;
 
 TwistExpander_Aldebaran                     Soccer2::mAldebaran; // 1
@@ -864,7 +862,6 @@ void Soccer2::SeedPrologue_Regular_A(std::uint8_t *pPassword,
             mClaimedWorkSpaceCount++;
 
             mClaimedExpanders[aClaimedIndex]->Seed(mClaimedWorkSpaces[aClaimedIndex],
-                                                   &mFarmSalt,
                                                    pNonce,
                                                    pPassword,
                                                    pPasswordByteLength,
@@ -1654,7 +1651,7 @@ void Soccer2::SeedPrelude_Regular_B(std::uint64_t pNonce, MUTABLE_PARAMS) {
     
     READ_IN_MUTABLE_PARAMS_INTERNAL;
     
-    mStarter.Seed(&mWorkSpaceA, &mFarmSalt, pNonce, SOCCER_SCRATCH_WORKER_A, S_BLOCK, mCollapseLaneB, ARX_STATE_VARS);
+    mStarter.Seed(&mWorkSpaceA, pNonce, SOCCER_SCRATCH_WORKER_A, S_BLOCK, mCollapseLaneB, ARX_STATE_VARS);
     
     WRITE_OUT_MUTABLE_PARAMS;
 }

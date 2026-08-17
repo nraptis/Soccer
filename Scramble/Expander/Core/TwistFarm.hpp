@@ -11,12 +11,9 @@
 #include <cstdint>
 #include "TwistWorkSpace.hpp"
 
-class TwistFarmSalt;
-
 class TwistFarm {
 public:
-    static void                 Farm(TwistFarmSalt *pFarmSalt,
-                                     const std::uint8_t *pSaltLaneA,
+    static void                 Farm(const std::uint8_t *pSaltLaneA,
                                      const std::uint8_t *pSaltLaneB,
                                      const std::uint8_t *pSaltLaneC,
                                      const std::uint8_t *pConstantLane,
@@ -27,8 +24,7 @@ public:
                                      TwistDomainConstants *pConstants);
 
 private:
-    static void                 FarmSalts(TwistFarmSalt *pFarmSalt,
-                                          const std::uint8_t *pSourceLaneA,
+    static void                 FarmSalts(const std::uint8_t *pSourceLaneA,
                                           const std::uint8_t *pSourceLaneB,
                                           const std::uint8_t *pSourceLaneC,
                                           TwistDomainSaltSet *pSaltSet);
