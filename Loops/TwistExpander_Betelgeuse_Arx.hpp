@@ -733,6 +733,51 @@ public:
 #define BETELGEUSE_KEY_A_A_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 0U))
 #define BETELGEUSE_KEY_A_A_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 0U))
 #define BETELGEUSE_KEY_A_A_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 0U))
+#define BETELGEUSE_KEY_A_A_ArcaneLanes \
+    BETELGEUSE_KEY_A_A_ArcaneLaneA, \
+    BETELGEUSE_KEY_A_A_ArcaneLaneB, \
+    BETELGEUSE_KEY_A_A_ArcaneLaneC, \
+    BETELGEUSE_KEY_A_A_ArcaneLaneD
+#define BETELGEUSE_KEY_A_A_PlasmaLanes \
+    BETELGEUSE_KEY_A_A_PlasmaLaneA, \
+    BETELGEUSE_KEY_A_A_PlasmaLaneB, \
+    BETELGEUSE_KEY_A_A_PlasmaLaneC, \
+    BETELGEUSE_KEY_A_A_PlasmaLaneD
+#define BETELGEUSE_KEY_A_A_RainbowLanes \
+    BETELGEUSE_KEY_A_A_RainbowLaneA, \
+    BETELGEUSE_KEY_A_A_RainbowLaneB, \
+    BETELGEUSE_KEY_A_A_RainbowLaneC, \
+    BETELGEUSE_KEY_A_A_RainbowLaneD
+#define BETELGEUSE_KEY_A_A_WaterLanes \
+    BETELGEUSE_KEY_A_A_WaterLaneA, \
+    BETELGEUSE_KEY_A_A_WaterLaneB, \
+    BETELGEUSE_KEY_A_A_WaterLaneC, \
+    BETELGEUSE_KEY_A_A_WaterLaneD
+#define BETELGEUSE_KEY_A_A_VaporLanes \
+    BETELGEUSE_KEY_A_A_VaporLaneA, \
+    BETELGEUSE_KEY_A_A_VaporLaneB, \
+    BETELGEUSE_KEY_A_A_VaporLaneC, \
+    BETELGEUSE_KEY_A_A_VaporLaneD
+#define BETELGEUSE_KEY_A_A_FrostLanes \
+    BETELGEUSE_KEY_A_A_FrostLaneA, \
+    BETELGEUSE_KEY_A_A_FrostLaneB, \
+    BETELGEUSE_KEY_A_A_FrostLaneC, \
+    BETELGEUSE_KEY_A_A_FrostLaneD
+#define BETELGEUSE_KEY_A_A_IceLanes \
+    BETELGEUSE_KEY_A_A_IceLaneA, \
+    BETELGEUSE_KEY_A_A_IceLaneB, \
+    BETELGEUSE_KEY_A_A_IceLaneC, \
+    BETELGEUSE_KEY_A_A_IceLaneD
+#define BETELGEUSE_KEY_A_A \
+    { \
+        { BETELGEUSE_KEY_A_A_ArcaneLanes }, \
+        { BETELGEUSE_KEY_A_A_PlasmaLanes }, \
+        { BETELGEUSE_KEY_A_A_RainbowLanes }, \
+        { BETELGEUSE_KEY_A_A_WaterLanes }, \
+        { BETELGEUSE_KEY_A_A_VaporLanes }, \
+        { BETELGEUSE_KEY_A_A_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_A_B
 #define BETELGEUSE_KEY_A_B_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 0U))
@@ -851,6 +896,51 @@ public:
 #define BETELGEUSE_KEY_A_B_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 0U))
 #define BETELGEUSE_KEY_A_B_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 0U))
 #define BETELGEUSE_KEY_A_B_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 0U))
+#define BETELGEUSE_KEY_A_B_ArcaneLanes \
+    BETELGEUSE_KEY_A_B_ArcaneLaneA, \
+    BETELGEUSE_KEY_A_B_ArcaneLaneB, \
+    BETELGEUSE_KEY_A_B_ArcaneLaneC, \
+    BETELGEUSE_KEY_A_B_ArcaneLaneD
+#define BETELGEUSE_KEY_A_B_PlasmaLanes \
+    BETELGEUSE_KEY_A_B_PlasmaLaneA, \
+    BETELGEUSE_KEY_A_B_PlasmaLaneB, \
+    BETELGEUSE_KEY_A_B_PlasmaLaneC, \
+    BETELGEUSE_KEY_A_B_PlasmaLaneD
+#define BETELGEUSE_KEY_A_B_RainbowLanes \
+    BETELGEUSE_KEY_A_B_RainbowLaneA, \
+    BETELGEUSE_KEY_A_B_RainbowLaneB, \
+    BETELGEUSE_KEY_A_B_RainbowLaneC, \
+    BETELGEUSE_KEY_A_B_RainbowLaneD
+#define BETELGEUSE_KEY_A_B_WaterLanes \
+    BETELGEUSE_KEY_A_B_WaterLaneA, \
+    BETELGEUSE_KEY_A_B_WaterLaneB, \
+    BETELGEUSE_KEY_A_B_WaterLaneC, \
+    BETELGEUSE_KEY_A_B_WaterLaneD
+#define BETELGEUSE_KEY_A_B_VaporLanes \
+    BETELGEUSE_KEY_A_B_VaporLaneA, \
+    BETELGEUSE_KEY_A_B_VaporLaneB, \
+    BETELGEUSE_KEY_A_B_VaporLaneC, \
+    BETELGEUSE_KEY_A_B_VaporLaneD
+#define BETELGEUSE_KEY_A_B_FrostLanes \
+    BETELGEUSE_KEY_A_B_FrostLaneA, \
+    BETELGEUSE_KEY_A_B_FrostLaneB, \
+    BETELGEUSE_KEY_A_B_FrostLaneC, \
+    BETELGEUSE_KEY_A_B_FrostLaneD
+#define BETELGEUSE_KEY_A_B_IceLanes \
+    BETELGEUSE_KEY_A_B_IceLaneA, \
+    BETELGEUSE_KEY_A_B_IceLaneB, \
+    BETELGEUSE_KEY_A_B_IceLaneC, \
+    BETELGEUSE_KEY_A_B_IceLaneD
+#define BETELGEUSE_KEY_A_B \
+    { \
+        { BETELGEUSE_KEY_A_B_ArcaneLanes }, \
+        { BETELGEUSE_KEY_A_B_PlasmaLanes }, \
+        { BETELGEUSE_KEY_A_B_RainbowLanes }, \
+        { BETELGEUSE_KEY_A_B_WaterLanes }, \
+        { BETELGEUSE_KEY_A_B_VaporLanes }, \
+        { BETELGEUSE_KEY_A_B_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_A_C
 #define BETELGEUSE_KEY_A_C_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 0U))
@@ -969,6 +1059,51 @@ public:
 #define BETELGEUSE_KEY_A_C_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 0U))
 #define BETELGEUSE_KEY_A_C_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 0U))
 #define BETELGEUSE_KEY_A_C_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 0U))
+#define BETELGEUSE_KEY_A_C_ArcaneLanes \
+    BETELGEUSE_KEY_A_C_ArcaneLaneA, \
+    BETELGEUSE_KEY_A_C_ArcaneLaneB, \
+    BETELGEUSE_KEY_A_C_ArcaneLaneC, \
+    BETELGEUSE_KEY_A_C_ArcaneLaneD
+#define BETELGEUSE_KEY_A_C_PlasmaLanes \
+    BETELGEUSE_KEY_A_C_PlasmaLaneA, \
+    BETELGEUSE_KEY_A_C_PlasmaLaneB, \
+    BETELGEUSE_KEY_A_C_PlasmaLaneC, \
+    BETELGEUSE_KEY_A_C_PlasmaLaneD
+#define BETELGEUSE_KEY_A_C_RainbowLanes \
+    BETELGEUSE_KEY_A_C_RainbowLaneA, \
+    BETELGEUSE_KEY_A_C_RainbowLaneB, \
+    BETELGEUSE_KEY_A_C_RainbowLaneC, \
+    BETELGEUSE_KEY_A_C_RainbowLaneD
+#define BETELGEUSE_KEY_A_C_WaterLanes \
+    BETELGEUSE_KEY_A_C_WaterLaneA, \
+    BETELGEUSE_KEY_A_C_WaterLaneB, \
+    BETELGEUSE_KEY_A_C_WaterLaneC, \
+    BETELGEUSE_KEY_A_C_WaterLaneD
+#define BETELGEUSE_KEY_A_C_VaporLanes \
+    BETELGEUSE_KEY_A_C_VaporLaneA, \
+    BETELGEUSE_KEY_A_C_VaporLaneB, \
+    BETELGEUSE_KEY_A_C_VaporLaneC, \
+    BETELGEUSE_KEY_A_C_VaporLaneD
+#define BETELGEUSE_KEY_A_C_FrostLanes \
+    BETELGEUSE_KEY_A_C_FrostLaneA, \
+    BETELGEUSE_KEY_A_C_FrostLaneB, \
+    BETELGEUSE_KEY_A_C_FrostLaneC, \
+    BETELGEUSE_KEY_A_C_FrostLaneD
+#define BETELGEUSE_KEY_A_C_IceLanes \
+    BETELGEUSE_KEY_A_C_IceLaneA, \
+    BETELGEUSE_KEY_A_C_IceLaneB, \
+    BETELGEUSE_KEY_A_C_IceLaneC, \
+    BETELGEUSE_KEY_A_C_IceLaneD
+#define BETELGEUSE_KEY_A_C \
+    { \
+        { BETELGEUSE_KEY_A_C_ArcaneLanes }, \
+        { BETELGEUSE_KEY_A_C_PlasmaLanes }, \
+        { BETELGEUSE_KEY_A_C_RainbowLanes }, \
+        { BETELGEUSE_KEY_A_C_WaterLanes }, \
+        { BETELGEUSE_KEY_A_C_VaporLanes }, \
+        { BETELGEUSE_KEY_A_C_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_A_D
 #define BETELGEUSE_KEY_A_D_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 0U))
@@ -1087,6 +1222,51 @@ public:
 #define BETELGEUSE_KEY_A_D_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 0U))
 #define BETELGEUSE_KEY_A_D_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 0U))
 #define BETELGEUSE_KEY_A_D_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 0U))
+#define BETELGEUSE_KEY_A_D_ArcaneLanes \
+    BETELGEUSE_KEY_A_D_ArcaneLaneA, \
+    BETELGEUSE_KEY_A_D_ArcaneLaneB, \
+    BETELGEUSE_KEY_A_D_ArcaneLaneC, \
+    BETELGEUSE_KEY_A_D_ArcaneLaneD
+#define BETELGEUSE_KEY_A_D_PlasmaLanes \
+    BETELGEUSE_KEY_A_D_PlasmaLaneA, \
+    BETELGEUSE_KEY_A_D_PlasmaLaneB, \
+    BETELGEUSE_KEY_A_D_PlasmaLaneC, \
+    BETELGEUSE_KEY_A_D_PlasmaLaneD
+#define BETELGEUSE_KEY_A_D_RainbowLanes \
+    BETELGEUSE_KEY_A_D_RainbowLaneA, \
+    BETELGEUSE_KEY_A_D_RainbowLaneB, \
+    BETELGEUSE_KEY_A_D_RainbowLaneC, \
+    BETELGEUSE_KEY_A_D_RainbowLaneD
+#define BETELGEUSE_KEY_A_D_WaterLanes \
+    BETELGEUSE_KEY_A_D_WaterLaneA, \
+    BETELGEUSE_KEY_A_D_WaterLaneB, \
+    BETELGEUSE_KEY_A_D_WaterLaneC, \
+    BETELGEUSE_KEY_A_D_WaterLaneD
+#define BETELGEUSE_KEY_A_D_VaporLanes \
+    BETELGEUSE_KEY_A_D_VaporLaneA, \
+    BETELGEUSE_KEY_A_D_VaporLaneB, \
+    BETELGEUSE_KEY_A_D_VaporLaneC, \
+    BETELGEUSE_KEY_A_D_VaporLaneD
+#define BETELGEUSE_KEY_A_D_FrostLanes \
+    BETELGEUSE_KEY_A_D_FrostLaneA, \
+    BETELGEUSE_KEY_A_D_FrostLaneB, \
+    BETELGEUSE_KEY_A_D_FrostLaneC, \
+    BETELGEUSE_KEY_A_D_FrostLaneD
+#define BETELGEUSE_KEY_A_D_IceLanes \
+    BETELGEUSE_KEY_A_D_IceLaneA, \
+    BETELGEUSE_KEY_A_D_IceLaneB, \
+    BETELGEUSE_KEY_A_D_IceLaneC, \
+    BETELGEUSE_KEY_A_D_IceLaneD
+#define BETELGEUSE_KEY_A_D \
+    { \
+        { BETELGEUSE_KEY_A_D_ArcaneLanes }, \
+        { BETELGEUSE_KEY_A_D_PlasmaLanes }, \
+        { BETELGEUSE_KEY_A_D_RainbowLanes }, \
+        { BETELGEUSE_KEY_A_D_WaterLanes }, \
+        { BETELGEUSE_KEY_A_D_VaporLanes }, \
+        { BETELGEUSE_KEY_A_D_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_A_E
 #define BETELGEUSE_KEY_A_E_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 0U))
@@ -1205,6 +1385,51 @@ public:
 #define BETELGEUSE_KEY_A_E_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 0U))
 #define BETELGEUSE_KEY_A_E_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 0U))
 #define BETELGEUSE_KEY_A_E_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 0U))
+#define BETELGEUSE_KEY_A_E_ArcaneLanes \
+    BETELGEUSE_KEY_A_E_ArcaneLaneA, \
+    BETELGEUSE_KEY_A_E_ArcaneLaneB, \
+    BETELGEUSE_KEY_A_E_ArcaneLaneC, \
+    BETELGEUSE_KEY_A_E_ArcaneLaneD
+#define BETELGEUSE_KEY_A_E_PlasmaLanes \
+    BETELGEUSE_KEY_A_E_PlasmaLaneA, \
+    BETELGEUSE_KEY_A_E_PlasmaLaneB, \
+    BETELGEUSE_KEY_A_E_PlasmaLaneC, \
+    BETELGEUSE_KEY_A_E_PlasmaLaneD
+#define BETELGEUSE_KEY_A_E_RainbowLanes \
+    BETELGEUSE_KEY_A_E_RainbowLaneA, \
+    BETELGEUSE_KEY_A_E_RainbowLaneB, \
+    BETELGEUSE_KEY_A_E_RainbowLaneC, \
+    BETELGEUSE_KEY_A_E_RainbowLaneD
+#define BETELGEUSE_KEY_A_E_WaterLanes \
+    BETELGEUSE_KEY_A_E_WaterLaneA, \
+    BETELGEUSE_KEY_A_E_WaterLaneB, \
+    BETELGEUSE_KEY_A_E_WaterLaneC, \
+    BETELGEUSE_KEY_A_E_WaterLaneD
+#define BETELGEUSE_KEY_A_E_VaporLanes \
+    BETELGEUSE_KEY_A_E_VaporLaneA, \
+    BETELGEUSE_KEY_A_E_VaporLaneB, \
+    BETELGEUSE_KEY_A_E_VaporLaneC, \
+    BETELGEUSE_KEY_A_E_VaporLaneD
+#define BETELGEUSE_KEY_A_E_FrostLanes \
+    BETELGEUSE_KEY_A_E_FrostLaneA, \
+    BETELGEUSE_KEY_A_E_FrostLaneB, \
+    BETELGEUSE_KEY_A_E_FrostLaneC, \
+    BETELGEUSE_KEY_A_E_FrostLaneD
+#define BETELGEUSE_KEY_A_E_IceLanes \
+    BETELGEUSE_KEY_A_E_IceLaneA, \
+    BETELGEUSE_KEY_A_E_IceLaneB, \
+    BETELGEUSE_KEY_A_E_IceLaneC, \
+    BETELGEUSE_KEY_A_E_IceLaneD
+#define BETELGEUSE_KEY_A_E \
+    { \
+        { BETELGEUSE_KEY_A_E_ArcaneLanes }, \
+        { BETELGEUSE_KEY_A_E_PlasmaLanes }, \
+        { BETELGEUSE_KEY_A_E_RainbowLanes }, \
+        { BETELGEUSE_KEY_A_E_WaterLanes }, \
+        { BETELGEUSE_KEY_A_E_VaporLanes }, \
+        { BETELGEUSE_KEY_A_E_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_A_F
 #define BETELGEUSE_KEY_A_F_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 0U))
@@ -1323,6 +1548,51 @@ public:
 #define BETELGEUSE_KEY_A_F_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 0U))
 #define BETELGEUSE_KEY_A_F_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 0U))
 #define BETELGEUSE_KEY_A_F_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 0U))
+#define BETELGEUSE_KEY_A_F_ArcaneLanes \
+    BETELGEUSE_KEY_A_F_ArcaneLaneA, \
+    BETELGEUSE_KEY_A_F_ArcaneLaneB, \
+    BETELGEUSE_KEY_A_F_ArcaneLaneC, \
+    BETELGEUSE_KEY_A_F_ArcaneLaneD
+#define BETELGEUSE_KEY_A_F_PlasmaLanes \
+    BETELGEUSE_KEY_A_F_PlasmaLaneA, \
+    BETELGEUSE_KEY_A_F_PlasmaLaneB, \
+    BETELGEUSE_KEY_A_F_PlasmaLaneC, \
+    BETELGEUSE_KEY_A_F_PlasmaLaneD
+#define BETELGEUSE_KEY_A_F_RainbowLanes \
+    BETELGEUSE_KEY_A_F_RainbowLaneA, \
+    BETELGEUSE_KEY_A_F_RainbowLaneB, \
+    BETELGEUSE_KEY_A_F_RainbowLaneC, \
+    BETELGEUSE_KEY_A_F_RainbowLaneD
+#define BETELGEUSE_KEY_A_F_WaterLanes \
+    BETELGEUSE_KEY_A_F_WaterLaneA, \
+    BETELGEUSE_KEY_A_F_WaterLaneB, \
+    BETELGEUSE_KEY_A_F_WaterLaneC, \
+    BETELGEUSE_KEY_A_F_WaterLaneD
+#define BETELGEUSE_KEY_A_F_VaporLanes \
+    BETELGEUSE_KEY_A_F_VaporLaneA, \
+    BETELGEUSE_KEY_A_F_VaporLaneB, \
+    BETELGEUSE_KEY_A_F_VaporLaneC, \
+    BETELGEUSE_KEY_A_F_VaporLaneD
+#define BETELGEUSE_KEY_A_F_FrostLanes \
+    BETELGEUSE_KEY_A_F_FrostLaneA, \
+    BETELGEUSE_KEY_A_F_FrostLaneB, \
+    BETELGEUSE_KEY_A_F_FrostLaneC, \
+    BETELGEUSE_KEY_A_F_FrostLaneD
+#define BETELGEUSE_KEY_A_F_IceLanes \
+    BETELGEUSE_KEY_A_F_IceLaneA, \
+    BETELGEUSE_KEY_A_F_IceLaneB, \
+    BETELGEUSE_KEY_A_F_IceLaneC, \
+    BETELGEUSE_KEY_A_F_IceLaneD
+#define BETELGEUSE_KEY_A_F \
+    { \
+        { BETELGEUSE_KEY_A_F_ArcaneLanes }, \
+        { BETELGEUSE_KEY_A_F_PlasmaLanes }, \
+        { BETELGEUSE_KEY_A_F_RainbowLanes }, \
+        { BETELGEUSE_KEY_A_F_WaterLanes }, \
+        { BETELGEUSE_KEY_A_F_VaporLanes }, \
+        { BETELGEUSE_KEY_A_F_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_A_G
 #define BETELGEUSE_KEY_A_G_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 0U))
@@ -1441,6 +1711,51 @@ public:
 #define BETELGEUSE_KEY_A_G_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 0U))
 #define BETELGEUSE_KEY_A_G_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 0U))
 #define BETELGEUSE_KEY_A_G_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 0U))
+#define BETELGEUSE_KEY_A_G_ArcaneLanes \
+    BETELGEUSE_KEY_A_G_ArcaneLaneA, \
+    BETELGEUSE_KEY_A_G_ArcaneLaneB, \
+    BETELGEUSE_KEY_A_G_ArcaneLaneC, \
+    BETELGEUSE_KEY_A_G_ArcaneLaneD
+#define BETELGEUSE_KEY_A_G_PlasmaLanes \
+    BETELGEUSE_KEY_A_G_PlasmaLaneA, \
+    BETELGEUSE_KEY_A_G_PlasmaLaneB, \
+    BETELGEUSE_KEY_A_G_PlasmaLaneC, \
+    BETELGEUSE_KEY_A_G_PlasmaLaneD
+#define BETELGEUSE_KEY_A_G_RainbowLanes \
+    BETELGEUSE_KEY_A_G_RainbowLaneA, \
+    BETELGEUSE_KEY_A_G_RainbowLaneB, \
+    BETELGEUSE_KEY_A_G_RainbowLaneC, \
+    BETELGEUSE_KEY_A_G_RainbowLaneD
+#define BETELGEUSE_KEY_A_G_WaterLanes \
+    BETELGEUSE_KEY_A_G_WaterLaneA, \
+    BETELGEUSE_KEY_A_G_WaterLaneB, \
+    BETELGEUSE_KEY_A_G_WaterLaneC, \
+    BETELGEUSE_KEY_A_G_WaterLaneD
+#define BETELGEUSE_KEY_A_G_VaporLanes \
+    BETELGEUSE_KEY_A_G_VaporLaneA, \
+    BETELGEUSE_KEY_A_G_VaporLaneB, \
+    BETELGEUSE_KEY_A_G_VaporLaneC, \
+    BETELGEUSE_KEY_A_G_VaporLaneD
+#define BETELGEUSE_KEY_A_G_FrostLanes \
+    BETELGEUSE_KEY_A_G_FrostLaneA, \
+    BETELGEUSE_KEY_A_G_FrostLaneB, \
+    BETELGEUSE_KEY_A_G_FrostLaneC, \
+    BETELGEUSE_KEY_A_G_FrostLaneD
+#define BETELGEUSE_KEY_A_G_IceLanes \
+    BETELGEUSE_KEY_A_G_IceLaneA, \
+    BETELGEUSE_KEY_A_G_IceLaneB, \
+    BETELGEUSE_KEY_A_G_IceLaneC, \
+    BETELGEUSE_KEY_A_G_IceLaneD
+#define BETELGEUSE_KEY_A_G \
+    { \
+        { BETELGEUSE_KEY_A_G_ArcaneLanes }, \
+        { BETELGEUSE_KEY_A_G_PlasmaLanes }, \
+        { BETELGEUSE_KEY_A_G_RainbowLanes }, \
+        { BETELGEUSE_KEY_A_G_WaterLanes }, \
+        { BETELGEUSE_KEY_A_G_VaporLanes }, \
+        { BETELGEUSE_KEY_A_G_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_A_H
 #define BETELGEUSE_KEY_A_H_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 0U))
@@ -1559,6 +1874,51 @@ public:
 #define BETELGEUSE_KEY_A_H_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 0U))
 #define BETELGEUSE_KEY_A_H_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 0U))
 #define BETELGEUSE_KEY_A_H_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 0U))
+#define BETELGEUSE_KEY_A_H_ArcaneLanes \
+    BETELGEUSE_KEY_A_H_ArcaneLaneA, \
+    BETELGEUSE_KEY_A_H_ArcaneLaneB, \
+    BETELGEUSE_KEY_A_H_ArcaneLaneC, \
+    BETELGEUSE_KEY_A_H_ArcaneLaneD
+#define BETELGEUSE_KEY_A_H_PlasmaLanes \
+    BETELGEUSE_KEY_A_H_PlasmaLaneA, \
+    BETELGEUSE_KEY_A_H_PlasmaLaneB, \
+    BETELGEUSE_KEY_A_H_PlasmaLaneC, \
+    BETELGEUSE_KEY_A_H_PlasmaLaneD
+#define BETELGEUSE_KEY_A_H_RainbowLanes \
+    BETELGEUSE_KEY_A_H_RainbowLaneA, \
+    BETELGEUSE_KEY_A_H_RainbowLaneB, \
+    BETELGEUSE_KEY_A_H_RainbowLaneC, \
+    BETELGEUSE_KEY_A_H_RainbowLaneD
+#define BETELGEUSE_KEY_A_H_WaterLanes \
+    BETELGEUSE_KEY_A_H_WaterLaneA, \
+    BETELGEUSE_KEY_A_H_WaterLaneB, \
+    BETELGEUSE_KEY_A_H_WaterLaneC, \
+    BETELGEUSE_KEY_A_H_WaterLaneD
+#define BETELGEUSE_KEY_A_H_VaporLanes \
+    BETELGEUSE_KEY_A_H_VaporLaneA, \
+    BETELGEUSE_KEY_A_H_VaporLaneB, \
+    BETELGEUSE_KEY_A_H_VaporLaneC, \
+    BETELGEUSE_KEY_A_H_VaporLaneD
+#define BETELGEUSE_KEY_A_H_FrostLanes \
+    BETELGEUSE_KEY_A_H_FrostLaneA, \
+    BETELGEUSE_KEY_A_H_FrostLaneB, \
+    BETELGEUSE_KEY_A_H_FrostLaneC, \
+    BETELGEUSE_KEY_A_H_FrostLaneD
+#define BETELGEUSE_KEY_A_H_IceLanes \
+    BETELGEUSE_KEY_A_H_IceLaneA, \
+    BETELGEUSE_KEY_A_H_IceLaneB, \
+    BETELGEUSE_KEY_A_H_IceLaneC, \
+    BETELGEUSE_KEY_A_H_IceLaneD
+#define BETELGEUSE_KEY_A_H \
+    { \
+        { BETELGEUSE_KEY_A_H_ArcaneLanes }, \
+        { BETELGEUSE_KEY_A_H_PlasmaLanes }, \
+        { BETELGEUSE_KEY_A_H_RainbowLanes }, \
+        { BETELGEUSE_KEY_A_H_WaterLanes }, \
+        { BETELGEUSE_KEY_A_H_VaporLanes }, \
+        { BETELGEUSE_KEY_A_H_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_B_A
 #define BETELGEUSE_KEY_B_A_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 0U))
@@ -1677,6 +2037,51 @@ public:
 #define BETELGEUSE_KEY_B_A_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 0U))
 #define BETELGEUSE_KEY_B_A_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 0U))
 #define BETELGEUSE_KEY_B_A_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 0U))
+#define BETELGEUSE_KEY_B_A_ArcaneLanes \
+    BETELGEUSE_KEY_B_A_ArcaneLaneA, \
+    BETELGEUSE_KEY_B_A_ArcaneLaneB, \
+    BETELGEUSE_KEY_B_A_ArcaneLaneC, \
+    BETELGEUSE_KEY_B_A_ArcaneLaneD
+#define BETELGEUSE_KEY_B_A_PlasmaLanes \
+    BETELGEUSE_KEY_B_A_PlasmaLaneA, \
+    BETELGEUSE_KEY_B_A_PlasmaLaneB, \
+    BETELGEUSE_KEY_B_A_PlasmaLaneC, \
+    BETELGEUSE_KEY_B_A_PlasmaLaneD
+#define BETELGEUSE_KEY_B_A_RainbowLanes \
+    BETELGEUSE_KEY_B_A_RainbowLaneA, \
+    BETELGEUSE_KEY_B_A_RainbowLaneB, \
+    BETELGEUSE_KEY_B_A_RainbowLaneC, \
+    BETELGEUSE_KEY_B_A_RainbowLaneD
+#define BETELGEUSE_KEY_B_A_WaterLanes \
+    BETELGEUSE_KEY_B_A_WaterLaneA, \
+    BETELGEUSE_KEY_B_A_WaterLaneB, \
+    BETELGEUSE_KEY_B_A_WaterLaneC, \
+    BETELGEUSE_KEY_B_A_WaterLaneD
+#define BETELGEUSE_KEY_B_A_VaporLanes \
+    BETELGEUSE_KEY_B_A_VaporLaneA, \
+    BETELGEUSE_KEY_B_A_VaporLaneB, \
+    BETELGEUSE_KEY_B_A_VaporLaneC, \
+    BETELGEUSE_KEY_B_A_VaporLaneD
+#define BETELGEUSE_KEY_B_A_FrostLanes \
+    BETELGEUSE_KEY_B_A_FrostLaneA, \
+    BETELGEUSE_KEY_B_A_FrostLaneB, \
+    BETELGEUSE_KEY_B_A_FrostLaneC, \
+    BETELGEUSE_KEY_B_A_FrostLaneD
+#define BETELGEUSE_KEY_B_A_IceLanes \
+    BETELGEUSE_KEY_B_A_IceLaneA, \
+    BETELGEUSE_KEY_B_A_IceLaneB, \
+    BETELGEUSE_KEY_B_A_IceLaneC, \
+    BETELGEUSE_KEY_B_A_IceLaneD
+#define BETELGEUSE_KEY_B_A \
+    { \
+        { BETELGEUSE_KEY_B_A_ArcaneLanes }, \
+        { BETELGEUSE_KEY_B_A_PlasmaLanes }, \
+        { BETELGEUSE_KEY_B_A_RainbowLanes }, \
+        { BETELGEUSE_KEY_B_A_WaterLanes }, \
+        { BETELGEUSE_KEY_B_A_VaporLanes }, \
+        { BETELGEUSE_KEY_B_A_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }
 
 // KEY_B_B
 #define BETELGEUSE_KEY_B_B_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 0U))
@@ -1795,6 +2200,51 @@ public:
 #define BETELGEUSE_KEY_B_B_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 0U))
 #define BETELGEUSE_KEY_B_B_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 0U))
 #define BETELGEUSE_KEY_B_B_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 0U))
+#define BETELGEUSE_KEY_B_B_ArcaneLanes \
+    BETELGEUSE_KEY_B_B_ArcaneLaneA, \
+    BETELGEUSE_KEY_B_B_ArcaneLaneB, \
+    BETELGEUSE_KEY_B_B_ArcaneLaneC, \
+    BETELGEUSE_KEY_B_B_ArcaneLaneD
+#define BETELGEUSE_KEY_B_B_PlasmaLanes \
+    BETELGEUSE_KEY_B_B_PlasmaLaneA, \
+    BETELGEUSE_KEY_B_B_PlasmaLaneB, \
+    BETELGEUSE_KEY_B_B_PlasmaLaneC, \
+    BETELGEUSE_KEY_B_B_PlasmaLaneD
+#define BETELGEUSE_KEY_B_B_RainbowLanes \
+    BETELGEUSE_KEY_B_B_RainbowLaneA, \
+    BETELGEUSE_KEY_B_B_RainbowLaneB, \
+    BETELGEUSE_KEY_B_B_RainbowLaneC, \
+    BETELGEUSE_KEY_B_B_RainbowLaneD
+#define BETELGEUSE_KEY_B_B_WaterLanes \
+    BETELGEUSE_KEY_B_B_WaterLaneA, \
+    BETELGEUSE_KEY_B_B_WaterLaneB, \
+    BETELGEUSE_KEY_B_B_WaterLaneC, \
+    BETELGEUSE_KEY_B_B_WaterLaneD
+#define BETELGEUSE_KEY_B_B_VaporLanes \
+    BETELGEUSE_KEY_B_B_VaporLaneA, \
+    BETELGEUSE_KEY_B_B_VaporLaneB, \
+    BETELGEUSE_KEY_B_B_VaporLaneC, \
+    BETELGEUSE_KEY_B_B_VaporLaneD
+#define BETELGEUSE_KEY_B_B_FrostLanes \
+    BETELGEUSE_KEY_B_B_FrostLaneA, \
+    BETELGEUSE_KEY_B_B_FrostLaneB, \
+    BETELGEUSE_KEY_B_B_FrostLaneC, \
+    BETELGEUSE_KEY_B_B_FrostLaneD
+#define BETELGEUSE_KEY_B_B_IceLanes \
+    BETELGEUSE_KEY_B_B_IceLaneA, \
+    BETELGEUSE_KEY_B_B_IceLaneB, \
+    BETELGEUSE_KEY_B_B_IceLaneC, \
+    BETELGEUSE_KEY_B_B_IceLaneD
+#define BETELGEUSE_KEY_B_B \
+    { \
+        { BETELGEUSE_KEY_B_B_ArcaneLanes }, \
+        { BETELGEUSE_KEY_B_B_PlasmaLanes }, \
+        { BETELGEUSE_KEY_B_B_RainbowLanes }, \
+        { BETELGEUSE_KEY_B_B_WaterLanes }, \
+        { BETELGEUSE_KEY_B_B_VaporLanes }, \
+        { BETELGEUSE_KEY_B_B_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }
 
 // KEY_B_C
 #define BETELGEUSE_KEY_B_C_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 0U))
@@ -1913,6 +2363,51 @@ public:
 #define BETELGEUSE_KEY_B_C_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 0U))
 #define BETELGEUSE_KEY_B_C_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 0U))
 #define BETELGEUSE_KEY_B_C_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 0U))
+#define BETELGEUSE_KEY_B_C_ArcaneLanes \
+    BETELGEUSE_KEY_B_C_ArcaneLaneA, \
+    BETELGEUSE_KEY_B_C_ArcaneLaneB, \
+    BETELGEUSE_KEY_B_C_ArcaneLaneC, \
+    BETELGEUSE_KEY_B_C_ArcaneLaneD
+#define BETELGEUSE_KEY_B_C_PlasmaLanes \
+    BETELGEUSE_KEY_B_C_PlasmaLaneA, \
+    BETELGEUSE_KEY_B_C_PlasmaLaneB, \
+    BETELGEUSE_KEY_B_C_PlasmaLaneC, \
+    BETELGEUSE_KEY_B_C_PlasmaLaneD
+#define BETELGEUSE_KEY_B_C_RainbowLanes \
+    BETELGEUSE_KEY_B_C_RainbowLaneA, \
+    BETELGEUSE_KEY_B_C_RainbowLaneB, \
+    BETELGEUSE_KEY_B_C_RainbowLaneC, \
+    BETELGEUSE_KEY_B_C_RainbowLaneD
+#define BETELGEUSE_KEY_B_C_WaterLanes \
+    BETELGEUSE_KEY_B_C_WaterLaneA, \
+    BETELGEUSE_KEY_B_C_WaterLaneB, \
+    BETELGEUSE_KEY_B_C_WaterLaneC, \
+    BETELGEUSE_KEY_B_C_WaterLaneD
+#define BETELGEUSE_KEY_B_C_VaporLanes \
+    BETELGEUSE_KEY_B_C_VaporLaneA, \
+    BETELGEUSE_KEY_B_C_VaporLaneB, \
+    BETELGEUSE_KEY_B_C_VaporLaneC, \
+    BETELGEUSE_KEY_B_C_VaporLaneD
+#define BETELGEUSE_KEY_B_C_FrostLanes \
+    BETELGEUSE_KEY_B_C_FrostLaneA, \
+    BETELGEUSE_KEY_B_C_FrostLaneB, \
+    BETELGEUSE_KEY_B_C_FrostLaneC, \
+    BETELGEUSE_KEY_B_C_FrostLaneD
+#define BETELGEUSE_KEY_B_C_IceLanes \
+    BETELGEUSE_KEY_B_C_IceLaneA, \
+    BETELGEUSE_KEY_B_C_IceLaneB, \
+    BETELGEUSE_KEY_B_C_IceLaneC, \
+    BETELGEUSE_KEY_B_C_IceLaneD
+#define BETELGEUSE_KEY_B_C \
+    { \
+        { BETELGEUSE_KEY_B_C_ArcaneLanes }, \
+        { BETELGEUSE_KEY_B_C_PlasmaLanes }, \
+        { BETELGEUSE_KEY_B_C_RainbowLanes }, \
+        { BETELGEUSE_KEY_B_C_WaterLanes }, \
+        { BETELGEUSE_KEY_B_C_VaporLanes }, \
+        { BETELGEUSE_KEY_B_C_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }
 
 // KEY_B_D
 #define BETELGEUSE_KEY_B_D_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 0U))
@@ -2031,6 +2526,51 @@ public:
 #define BETELGEUSE_KEY_B_D_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 0U))
 #define BETELGEUSE_KEY_B_D_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 0U))
 #define BETELGEUSE_KEY_B_D_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 0U))
+#define BETELGEUSE_KEY_B_D_ArcaneLanes \
+    BETELGEUSE_KEY_B_D_ArcaneLaneA, \
+    BETELGEUSE_KEY_B_D_ArcaneLaneB, \
+    BETELGEUSE_KEY_B_D_ArcaneLaneC, \
+    BETELGEUSE_KEY_B_D_ArcaneLaneD
+#define BETELGEUSE_KEY_B_D_PlasmaLanes \
+    BETELGEUSE_KEY_B_D_PlasmaLaneA, \
+    BETELGEUSE_KEY_B_D_PlasmaLaneB, \
+    BETELGEUSE_KEY_B_D_PlasmaLaneC, \
+    BETELGEUSE_KEY_B_D_PlasmaLaneD
+#define BETELGEUSE_KEY_B_D_RainbowLanes \
+    BETELGEUSE_KEY_B_D_RainbowLaneA, \
+    BETELGEUSE_KEY_B_D_RainbowLaneB, \
+    BETELGEUSE_KEY_B_D_RainbowLaneC, \
+    BETELGEUSE_KEY_B_D_RainbowLaneD
+#define BETELGEUSE_KEY_B_D_WaterLanes \
+    BETELGEUSE_KEY_B_D_WaterLaneA, \
+    BETELGEUSE_KEY_B_D_WaterLaneB, \
+    BETELGEUSE_KEY_B_D_WaterLaneC, \
+    BETELGEUSE_KEY_B_D_WaterLaneD
+#define BETELGEUSE_KEY_B_D_VaporLanes \
+    BETELGEUSE_KEY_B_D_VaporLaneA, \
+    BETELGEUSE_KEY_B_D_VaporLaneB, \
+    BETELGEUSE_KEY_B_D_VaporLaneC, \
+    BETELGEUSE_KEY_B_D_VaporLaneD
+#define BETELGEUSE_KEY_B_D_FrostLanes \
+    BETELGEUSE_KEY_B_D_FrostLaneA, \
+    BETELGEUSE_KEY_B_D_FrostLaneB, \
+    BETELGEUSE_KEY_B_D_FrostLaneC, \
+    BETELGEUSE_KEY_B_D_FrostLaneD
+#define BETELGEUSE_KEY_B_D_IceLanes \
+    BETELGEUSE_KEY_B_D_IceLaneA, \
+    BETELGEUSE_KEY_B_D_IceLaneB, \
+    BETELGEUSE_KEY_B_D_IceLaneC, \
+    BETELGEUSE_KEY_B_D_IceLaneD
+#define BETELGEUSE_KEY_B_D \
+    { \
+        { BETELGEUSE_KEY_B_D_ArcaneLanes }, \
+        { BETELGEUSE_KEY_B_D_PlasmaLanes }, \
+        { BETELGEUSE_KEY_B_D_RainbowLanes }, \
+        { BETELGEUSE_KEY_B_D_WaterLanes }, \
+        { BETELGEUSE_KEY_B_D_VaporLanes }, \
+        { BETELGEUSE_KEY_B_D_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }
 
 // KEY_B_E
 #define BETELGEUSE_KEY_B_E_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 0U))
@@ -2149,6 +2689,51 @@ public:
 #define BETELGEUSE_KEY_B_E_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 0U))
 #define BETELGEUSE_KEY_B_E_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 0U))
 #define BETELGEUSE_KEY_B_E_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 0U))
+#define BETELGEUSE_KEY_B_E_ArcaneLanes \
+    BETELGEUSE_KEY_B_E_ArcaneLaneA, \
+    BETELGEUSE_KEY_B_E_ArcaneLaneB, \
+    BETELGEUSE_KEY_B_E_ArcaneLaneC, \
+    BETELGEUSE_KEY_B_E_ArcaneLaneD
+#define BETELGEUSE_KEY_B_E_PlasmaLanes \
+    BETELGEUSE_KEY_B_E_PlasmaLaneA, \
+    BETELGEUSE_KEY_B_E_PlasmaLaneB, \
+    BETELGEUSE_KEY_B_E_PlasmaLaneC, \
+    BETELGEUSE_KEY_B_E_PlasmaLaneD
+#define BETELGEUSE_KEY_B_E_RainbowLanes \
+    BETELGEUSE_KEY_B_E_RainbowLaneA, \
+    BETELGEUSE_KEY_B_E_RainbowLaneB, \
+    BETELGEUSE_KEY_B_E_RainbowLaneC, \
+    BETELGEUSE_KEY_B_E_RainbowLaneD
+#define BETELGEUSE_KEY_B_E_WaterLanes \
+    BETELGEUSE_KEY_B_E_WaterLaneA, \
+    BETELGEUSE_KEY_B_E_WaterLaneB, \
+    BETELGEUSE_KEY_B_E_WaterLaneC, \
+    BETELGEUSE_KEY_B_E_WaterLaneD
+#define BETELGEUSE_KEY_B_E_VaporLanes \
+    BETELGEUSE_KEY_B_E_VaporLaneA, \
+    BETELGEUSE_KEY_B_E_VaporLaneB, \
+    BETELGEUSE_KEY_B_E_VaporLaneC, \
+    BETELGEUSE_KEY_B_E_VaporLaneD
+#define BETELGEUSE_KEY_B_E_FrostLanes \
+    BETELGEUSE_KEY_B_E_FrostLaneA, \
+    BETELGEUSE_KEY_B_E_FrostLaneB, \
+    BETELGEUSE_KEY_B_E_FrostLaneC, \
+    BETELGEUSE_KEY_B_E_FrostLaneD
+#define BETELGEUSE_KEY_B_E_IceLanes \
+    BETELGEUSE_KEY_B_E_IceLaneA, \
+    BETELGEUSE_KEY_B_E_IceLaneB, \
+    BETELGEUSE_KEY_B_E_IceLaneC, \
+    BETELGEUSE_KEY_B_E_IceLaneD
+#define BETELGEUSE_KEY_B_E \
+    { \
+        { BETELGEUSE_KEY_B_E_ArcaneLanes }, \
+        { BETELGEUSE_KEY_B_E_PlasmaLanes }, \
+        { BETELGEUSE_KEY_B_E_RainbowLanes }, \
+        { BETELGEUSE_KEY_B_E_WaterLanes }, \
+        { BETELGEUSE_KEY_B_E_VaporLanes }, \
+        { BETELGEUSE_KEY_B_E_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }
 
 // KEY_B_F
 #define BETELGEUSE_KEY_B_F_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 0U))
@@ -2267,6 +2852,51 @@ public:
 #define BETELGEUSE_KEY_B_F_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 0U))
 #define BETELGEUSE_KEY_B_F_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 0U))
 #define BETELGEUSE_KEY_B_F_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 0U))
+#define BETELGEUSE_KEY_B_F_ArcaneLanes \
+    BETELGEUSE_KEY_B_F_ArcaneLaneA, \
+    BETELGEUSE_KEY_B_F_ArcaneLaneB, \
+    BETELGEUSE_KEY_B_F_ArcaneLaneC, \
+    BETELGEUSE_KEY_B_F_ArcaneLaneD
+#define BETELGEUSE_KEY_B_F_PlasmaLanes \
+    BETELGEUSE_KEY_B_F_PlasmaLaneA, \
+    BETELGEUSE_KEY_B_F_PlasmaLaneB, \
+    BETELGEUSE_KEY_B_F_PlasmaLaneC, \
+    BETELGEUSE_KEY_B_F_PlasmaLaneD
+#define BETELGEUSE_KEY_B_F_RainbowLanes \
+    BETELGEUSE_KEY_B_F_RainbowLaneA, \
+    BETELGEUSE_KEY_B_F_RainbowLaneB, \
+    BETELGEUSE_KEY_B_F_RainbowLaneC, \
+    BETELGEUSE_KEY_B_F_RainbowLaneD
+#define BETELGEUSE_KEY_B_F_WaterLanes \
+    BETELGEUSE_KEY_B_F_WaterLaneA, \
+    BETELGEUSE_KEY_B_F_WaterLaneB, \
+    BETELGEUSE_KEY_B_F_WaterLaneC, \
+    BETELGEUSE_KEY_B_F_WaterLaneD
+#define BETELGEUSE_KEY_B_F_VaporLanes \
+    BETELGEUSE_KEY_B_F_VaporLaneA, \
+    BETELGEUSE_KEY_B_F_VaporLaneB, \
+    BETELGEUSE_KEY_B_F_VaporLaneC, \
+    BETELGEUSE_KEY_B_F_VaporLaneD
+#define BETELGEUSE_KEY_B_F_FrostLanes \
+    BETELGEUSE_KEY_B_F_FrostLaneA, \
+    BETELGEUSE_KEY_B_F_FrostLaneB, \
+    BETELGEUSE_KEY_B_F_FrostLaneC, \
+    BETELGEUSE_KEY_B_F_FrostLaneD
+#define BETELGEUSE_KEY_B_F_IceLanes \
+    BETELGEUSE_KEY_B_F_IceLaneA, \
+    BETELGEUSE_KEY_B_F_IceLaneB, \
+    BETELGEUSE_KEY_B_F_IceLaneC, \
+    BETELGEUSE_KEY_B_F_IceLaneD
+#define BETELGEUSE_KEY_B_F \
+    { \
+        { BETELGEUSE_KEY_B_F_ArcaneLanes }, \
+        { BETELGEUSE_KEY_B_F_PlasmaLanes }, \
+        { BETELGEUSE_KEY_B_F_RainbowLanes }, \
+        { BETELGEUSE_KEY_B_F_WaterLanes }, \
+        { BETELGEUSE_KEY_B_F_VaporLanes }, \
+        { BETELGEUSE_KEY_B_F_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }
 
 // KEY_B_G
 #define BETELGEUSE_KEY_B_G_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 0U))
@@ -2385,6 +3015,51 @@ public:
 #define BETELGEUSE_KEY_B_G_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 0U))
 #define BETELGEUSE_KEY_B_G_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 0U))
 #define BETELGEUSE_KEY_B_G_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 0U))
+#define BETELGEUSE_KEY_B_G_ArcaneLanes \
+    BETELGEUSE_KEY_B_G_ArcaneLaneA, \
+    BETELGEUSE_KEY_B_G_ArcaneLaneB, \
+    BETELGEUSE_KEY_B_G_ArcaneLaneC, \
+    BETELGEUSE_KEY_B_G_ArcaneLaneD
+#define BETELGEUSE_KEY_B_G_PlasmaLanes \
+    BETELGEUSE_KEY_B_G_PlasmaLaneA, \
+    BETELGEUSE_KEY_B_G_PlasmaLaneB, \
+    BETELGEUSE_KEY_B_G_PlasmaLaneC, \
+    BETELGEUSE_KEY_B_G_PlasmaLaneD
+#define BETELGEUSE_KEY_B_G_RainbowLanes \
+    BETELGEUSE_KEY_B_G_RainbowLaneA, \
+    BETELGEUSE_KEY_B_G_RainbowLaneB, \
+    BETELGEUSE_KEY_B_G_RainbowLaneC, \
+    BETELGEUSE_KEY_B_G_RainbowLaneD
+#define BETELGEUSE_KEY_B_G_WaterLanes \
+    BETELGEUSE_KEY_B_G_WaterLaneA, \
+    BETELGEUSE_KEY_B_G_WaterLaneB, \
+    BETELGEUSE_KEY_B_G_WaterLaneC, \
+    BETELGEUSE_KEY_B_G_WaterLaneD
+#define BETELGEUSE_KEY_B_G_VaporLanes \
+    BETELGEUSE_KEY_B_G_VaporLaneA, \
+    BETELGEUSE_KEY_B_G_VaporLaneB, \
+    BETELGEUSE_KEY_B_G_VaporLaneC, \
+    BETELGEUSE_KEY_B_G_VaporLaneD
+#define BETELGEUSE_KEY_B_G_FrostLanes \
+    BETELGEUSE_KEY_B_G_FrostLaneA, \
+    BETELGEUSE_KEY_B_G_FrostLaneB, \
+    BETELGEUSE_KEY_B_G_FrostLaneC, \
+    BETELGEUSE_KEY_B_G_FrostLaneD
+#define BETELGEUSE_KEY_B_G_IceLanes \
+    BETELGEUSE_KEY_B_G_IceLaneA, \
+    BETELGEUSE_KEY_B_G_IceLaneB, \
+    BETELGEUSE_KEY_B_G_IceLaneC, \
+    BETELGEUSE_KEY_B_G_IceLaneD
+#define BETELGEUSE_KEY_B_G \
+    { \
+        { BETELGEUSE_KEY_B_G_ArcaneLanes }, \
+        { BETELGEUSE_KEY_B_G_PlasmaLanes }, \
+        { BETELGEUSE_KEY_B_G_RainbowLanes }, \
+        { BETELGEUSE_KEY_B_G_WaterLanes }, \
+        { BETELGEUSE_KEY_B_G_VaporLanes }, \
+        { BETELGEUSE_KEY_B_G_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }
 
 // KEY_B_H
 #define BETELGEUSE_KEY_B_H_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 0U))
@@ -2503,3 +3178,48 @@ public:
 #define BETELGEUSE_KEY_B_H_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 0U))
 #define BETELGEUSE_KEY_B_H_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 0U))
 #define BETELGEUSE_KEY_B_H_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 0U))
+#define BETELGEUSE_KEY_B_H_ArcaneLanes \
+    BETELGEUSE_KEY_B_H_ArcaneLaneA, \
+    BETELGEUSE_KEY_B_H_ArcaneLaneB, \
+    BETELGEUSE_KEY_B_H_ArcaneLaneC, \
+    BETELGEUSE_KEY_B_H_ArcaneLaneD
+#define BETELGEUSE_KEY_B_H_PlasmaLanes \
+    BETELGEUSE_KEY_B_H_PlasmaLaneA, \
+    BETELGEUSE_KEY_B_H_PlasmaLaneB, \
+    BETELGEUSE_KEY_B_H_PlasmaLaneC, \
+    BETELGEUSE_KEY_B_H_PlasmaLaneD
+#define BETELGEUSE_KEY_B_H_RainbowLanes \
+    BETELGEUSE_KEY_B_H_RainbowLaneA, \
+    BETELGEUSE_KEY_B_H_RainbowLaneB, \
+    BETELGEUSE_KEY_B_H_RainbowLaneC, \
+    BETELGEUSE_KEY_B_H_RainbowLaneD
+#define BETELGEUSE_KEY_B_H_WaterLanes \
+    BETELGEUSE_KEY_B_H_WaterLaneA, \
+    BETELGEUSE_KEY_B_H_WaterLaneB, \
+    BETELGEUSE_KEY_B_H_WaterLaneC, \
+    BETELGEUSE_KEY_B_H_WaterLaneD
+#define BETELGEUSE_KEY_B_H_VaporLanes \
+    BETELGEUSE_KEY_B_H_VaporLaneA, \
+    BETELGEUSE_KEY_B_H_VaporLaneB, \
+    BETELGEUSE_KEY_B_H_VaporLaneC, \
+    BETELGEUSE_KEY_B_H_VaporLaneD
+#define BETELGEUSE_KEY_B_H_FrostLanes \
+    BETELGEUSE_KEY_B_H_FrostLaneA, \
+    BETELGEUSE_KEY_B_H_FrostLaneB, \
+    BETELGEUSE_KEY_B_H_FrostLaneC, \
+    BETELGEUSE_KEY_B_H_FrostLaneD
+#define BETELGEUSE_KEY_B_H_IceLanes \
+    BETELGEUSE_KEY_B_H_IceLaneA, \
+    BETELGEUSE_KEY_B_H_IceLaneB, \
+    BETELGEUSE_KEY_B_H_IceLaneC, \
+    BETELGEUSE_KEY_B_H_IceLaneD
+#define BETELGEUSE_KEY_B_H \
+    { \
+        { BETELGEUSE_KEY_B_H_ArcaneLanes }, \
+        { BETELGEUSE_KEY_B_H_PlasmaLanes }, \
+        { BETELGEUSE_KEY_B_H_RainbowLanes }, \
+        { BETELGEUSE_KEY_B_H_WaterLanes }, \
+        { BETELGEUSE_KEY_B_H_VaporLanes }, \
+        { BETELGEUSE_KEY_B_H_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }

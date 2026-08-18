@@ -733,6 +733,51 @@ public:
 #define SAIPH_KEY_A_A_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 14U))
 #define SAIPH_KEY_A_A_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 10U))
 #define SAIPH_KEY_A_A_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 12U))
+#define SAIPH_KEY_A_A_ArcaneLanes \
+    SAIPH_KEY_A_A_ArcaneLaneA, \
+    SAIPH_KEY_A_A_ArcaneLaneB, \
+    SAIPH_KEY_A_A_ArcaneLaneC, \
+    SAIPH_KEY_A_A_ArcaneLaneD
+#define SAIPH_KEY_A_A_PlasmaLanes \
+    SAIPH_KEY_A_A_PlasmaLaneA, \
+    SAIPH_KEY_A_A_PlasmaLaneB, \
+    SAIPH_KEY_A_A_PlasmaLaneC, \
+    SAIPH_KEY_A_A_PlasmaLaneD
+#define SAIPH_KEY_A_A_RainbowLanes \
+    SAIPH_KEY_A_A_RainbowLaneA, \
+    SAIPH_KEY_A_A_RainbowLaneB, \
+    SAIPH_KEY_A_A_RainbowLaneC, \
+    SAIPH_KEY_A_A_RainbowLaneD
+#define SAIPH_KEY_A_A_WaterLanes \
+    SAIPH_KEY_A_A_WaterLaneA, \
+    SAIPH_KEY_A_A_WaterLaneB, \
+    SAIPH_KEY_A_A_WaterLaneC, \
+    SAIPH_KEY_A_A_WaterLaneD
+#define SAIPH_KEY_A_A_VaporLanes \
+    SAIPH_KEY_A_A_VaporLaneA, \
+    SAIPH_KEY_A_A_VaporLaneB, \
+    SAIPH_KEY_A_A_VaporLaneC, \
+    SAIPH_KEY_A_A_VaporLaneD
+#define SAIPH_KEY_A_A_FrostLanes \
+    SAIPH_KEY_A_A_FrostLaneA, \
+    SAIPH_KEY_A_A_FrostLaneB, \
+    SAIPH_KEY_A_A_FrostLaneC, \
+    SAIPH_KEY_A_A_FrostLaneD
+#define SAIPH_KEY_A_A_IceLanes \
+    SAIPH_KEY_A_A_IceLaneA, \
+    SAIPH_KEY_A_A_IceLaneB, \
+    SAIPH_KEY_A_A_IceLaneC, \
+    SAIPH_KEY_A_A_IceLaneD
+#define SAIPH_KEY_A_A \
+    { \
+        { SAIPH_KEY_A_A_ArcaneLanes }, \
+        { SAIPH_KEY_A_A_PlasmaLanes }, \
+        { SAIPH_KEY_A_A_RainbowLanes }, \
+        { SAIPH_KEY_A_A_WaterLanes }, \
+        { SAIPH_KEY_A_A_VaporLanes }, \
+        { SAIPH_KEY_A_A_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_A_B
 #define SAIPH_KEY_A_B_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 14U))
@@ -851,6 +896,51 @@ public:
 #define SAIPH_KEY_A_B_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 1U))
 #define SAIPH_KEY_A_B_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 2U))
 #define SAIPH_KEY_A_B_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 14U))
+#define SAIPH_KEY_A_B_ArcaneLanes \
+    SAIPH_KEY_A_B_ArcaneLaneA, \
+    SAIPH_KEY_A_B_ArcaneLaneB, \
+    SAIPH_KEY_A_B_ArcaneLaneC, \
+    SAIPH_KEY_A_B_ArcaneLaneD
+#define SAIPH_KEY_A_B_PlasmaLanes \
+    SAIPH_KEY_A_B_PlasmaLaneA, \
+    SAIPH_KEY_A_B_PlasmaLaneB, \
+    SAIPH_KEY_A_B_PlasmaLaneC, \
+    SAIPH_KEY_A_B_PlasmaLaneD
+#define SAIPH_KEY_A_B_RainbowLanes \
+    SAIPH_KEY_A_B_RainbowLaneA, \
+    SAIPH_KEY_A_B_RainbowLaneB, \
+    SAIPH_KEY_A_B_RainbowLaneC, \
+    SAIPH_KEY_A_B_RainbowLaneD
+#define SAIPH_KEY_A_B_WaterLanes \
+    SAIPH_KEY_A_B_WaterLaneA, \
+    SAIPH_KEY_A_B_WaterLaneB, \
+    SAIPH_KEY_A_B_WaterLaneC, \
+    SAIPH_KEY_A_B_WaterLaneD
+#define SAIPH_KEY_A_B_VaporLanes \
+    SAIPH_KEY_A_B_VaporLaneA, \
+    SAIPH_KEY_A_B_VaporLaneB, \
+    SAIPH_KEY_A_B_VaporLaneC, \
+    SAIPH_KEY_A_B_VaporLaneD
+#define SAIPH_KEY_A_B_FrostLanes \
+    SAIPH_KEY_A_B_FrostLaneA, \
+    SAIPH_KEY_A_B_FrostLaneB, \
+    SAIPH_KEY_A_B_FrostLaneC, \
+    SAIPH_KEY_A_B_FrostLaneD
+#define SAIPH_KEY_A_B_IceLanes \
+    SAIPH_KEY_A_B_IceLaneA, \
+    SAIPH_KEY_A_B_IceLaneB, \
+    SAIPH_KEY_A_B_IceLaneC, \
+    SAIPH_KEY_A_B_IceLaneD
+#define SAIPH_KEY_A_B \
+    { \
+        { SAIPH_KEY_A_B_ArcaneLanes }, \
+        { SAIPH_KEY_A_B_PlasmaLanes }, \
+        { SAIPH_KEY_A_B_RainbowLanes }, \
+        { SAIPH_KEY_A_B_WaterLanes }, \
+        { SAIPH_KEY_A_B_VaporLanes }, \
+        { SAIPH_KEY_A_B_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_A_C
 #define SAIPH_KEY_A_C_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 5U))
@@ -969,6 +1059,51 @@ public:
 #define SAIPH_KEY_A_C_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 5U))
 #define SAIPH_KEY_A_C_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 3U))
 #define SAIPH_KEY_A_C_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 4U))
+#define SAIPH_KEY_A_C_ArcaneLanes \
+    SAIPH_KEY_A_C_ArcaneLaneA, \
+    SAIPH_KEY_A_C_ArcaneLaneB, \
+    SAIPH_KEY_A_C_ArcaneLaneC, \
+    SAIPH_KEY_A_C_ArcaneLaneD
+#define SAIPH_KEY_A_C_PlasmaLanes \
+    SAIPH_KEY_A_C_PlasmaLaneA, \
+    SAIPH_KEY_A_C_PlasmaLaneB, \
+    SAIPH_KEY_A_C_PlasmaLaneC, \
+    SAIPH_KEY_A_C_PlasmaLaneD
+#define SAIPH_KEY_A_C_RainbowLanes \
+    SAIPH_KEY_A_C_RainbowLaneA, \
+    SAIPH_KEY_A_C_RainbowLaneB, \
+    SAIPH_KEY_A_C_RainbowLaneC, \
+    SAIPH_KEY_A_C_RainbowLaneD
+#define SAIPH_KEY_A_C_WaterLanes \
+    SAIPH_KEY_A_C_WaterLaneA, \
+    SAIPH_KEY_A_C_WaterLaneB, \
+    SAIPH_KEY_A_C_WaterLaneC, \
+    SAIPH_KEY_A_C_WaterLaneD
+#define SAIPH_KEY_A_C_VaporLanes \
+    SAIPH_KEY_A_C_VaporLaneA, \
+    SAIPH_KEY_A_C_VaporLaneB, \
+    SAIPH_KEY_A_C_VaporLaneC, \
+    SAIPH_KEY_A_C_VaporLaneD
+#define SAIPH_KEY_A_C_FrostLanes \
+    SAIPH_KEY_A_C_FrostLaneA, \
+    SAIPH_KEY_A_C_FrostLaneB, \
+    SAIPH_KEY_A_C_FrostLaneC, \
+    SAIPH_KEY_A_C_FrostLaneD
+#define SAIPH_KEY_A_C_IceLanes \
+    SAIPH_KEY_A_C_IceLaneA, \
+    SAIPH_KEY_A_C_IceLaneB, \
+    SAIPH_KEY_A_C_IceLaneC, \
+    SAIPH_KEY_A_C_IceLaneD
+#define SAIPH_KEY_A_C \
+    { \
+        { SAIPH_KEY_A_C_ArcaneLanes }, \
+        { SAIPH_KEY_A_C_PlasmaLanes }, \
+        { SAIPH_KEY_A_C_RainbowLanes }, \
+        { SAIPH_KEY_A_C_WaterLanes }, \
+        { SAIPH_KEY_A_C_VaporLanes }, \
+        { SAIPH_KEY_A_C_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_A_D
 #define SAIPH_KEY_A_D_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 1U))
@@ -1087,6 +1222,51 @@ public:
 #define SAIPH_KEY_A_D_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 4U))
 #define SAIPH_KEY_A_D_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 7U))
 #define SAIPH_KEY_A_D_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 13U))
+#define SAIPH_KEY_A_D_ArcaneLanes \
+    SAIPH_KEY_A_D_ArcaneLaneA, \
+    SAIPH_KEY_A_D_ArcaneLaneB, \
+    SAIPH_KEY_A_D_ArcaneLaneC, \
+    SAIPH_KEY_A_D_ArcaneLaneD
+#define SAIPH_KEY_A_D_PlasmaLanes \
+    SAIPH_KEY_A_D_PlasmaLaneA, \
+    SAIPH_KEY_A_D_PlasmaLaneB, \
+    SAIPH_KEY_A_D_PlasmaLaneC, \
+    SAIPH_KEY_A_D_PlasmaLaneD
+#define SAIPH_KEY_A_D_RainbowLanes \
+    SAIPH_KEY_A_D_RainbowLaneA, \
+    SAIPH_KEY_A_D_RainbowLaneB, \
+    SAIPH_KEY_A_D_RainbowLaneC, \
+    SAIPH_KEY_A_D_RainbowLaneD
+#define SAIPH_KEY_A_D_WaterLanes \
+    SAIPH_KEY_A_D_WaterLaneA, \
+    SAIPH_KEY_A_D_WaterLaneB, \
+    SAIPH_KEY_A_D_WaterLaneC, \
+    SAIPH_KEY_A_D_WaterLaneD
+#define SAIPH_KEY_A_D_VaporLanes \
+    SAIPH_KEY_A_D_VaporLaneA, \
+    SAIPH_KEY_A_D_VaporLaneB, \
+    SAIPH_KEY_A_D_VaporLaneC, \
+    SAIPH_KEY_A_D_VaporLaneD
+#define SAIPH_KEY_A_D_FrostLanes \
+    SAIPH_KEY_A_D_FrostLaneA, \
+    SAIPH_KEY_A_D_FrostLaneB, \
+    SAIPH_KEY_A_D_FrostLaneC, \
+    SAIPH_KEY_A_D_FrostLaneD
+#define SAIPH_KEY_A_D_IceLanes \
+    SAIPH_KEY_A_D_IceLaneA, \
+    SAIPH_KEY_A_D_IceLaneB, \
+    SAIPH_KEY_A_D_IceLaneC, \
+    SAIPH_KEY_A_D_IceLaneD
+#define SAIPH_KEY_A_D \
+    { \
+        { SAIPH_KEY_A_D_ArcaneLanes }, \
+        { SAIPH_KEY_A_D_PlasmaLanes }, \
+        { SAIPH_KEY_A_D_RainbowLanes }, \
+        { SAIPH_KEY_A_D_WaterLanes }, \
+        { SAIPH_KEY_A_D_VaporLanes }, \
+        { SAIPH_KEY_A_D_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_A_E
 #define SAIPH_KEY_A_E_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 13U))
@@ -1205,6 +1385,51 @@ public:
 #define SAIPH_KEY_A_E_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 13U))
 #define SAIPH_KEY_A_E_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 8U))
 #define SAIPH_KEY_A_E_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 1U))
+#define SAIPH_KEY_A_E_ArcaneLanes \
+    SAIPH_KEY_A_E_ArcaneLaneA, \
+    SAIPH_KEY_A_E_ArcaneLaneB, \
+    SAIPH_KEY_A_E_ArcaneLaneC, \
+    SAIPH_KEY_A_E_ArcaneLaneD
+#define SAIPH_KEY_A_E_PlasmaLanes \
+    SAIPH_KEY_A_E_PlasmaLaneA, \
+    SAIPH_KEY_A_E_PlasmaLaneB, \
+    SAIPH_KEY_A_E_PlasmaLaneC, \
+    SAIPH_KEY_A_E_PlasmaLaneD
+#define SAIPH_KEY_A_E_RainbowLanes \
+    SAIPH_KEY_A_E_RainbowLaneA, \
+    SAIPH_KEY_A_E_RainbowLaneB, \
+    SAIPH_KEY_A_E_RainbowLaneC, \
+    SAIPH_KEY_A_E_RainbowLaneD
+#define SAIPH_KEY_A_E_WaterLanes \
+    SAIPH_KEY_A_E_WaterLaneA, \
+    SAIPH_KEY_A_E_WaterLaneB, \
+    SAIPH_KEY_A_E_WaterLaneC, \
+    SAIPH_KEY_A_E_WaterLaneD
+#define SAIPH_KEY_A_E_VaporLanes \
+    SAIPH_KEY_A_E_VaporLaneA, \
+    SAIPH_KEY_A_E_VaporLaneB, \
+    SAIPH_KEY_A_E_VaporLaneC, \
+    SAIPH_KEY_A_E_VaporLaneD
+#define SAIPH_KEY_A_E_FrostLanes \
+    SAIPH_KEY_A_E_FrostLaneA, \
+    SAIPH_KEY_A_E_FrostLaneB, \
+    SAIPH_KEY_A_E_FrostLaneC, \
+    SAIPH_KEY_A_E_FrostLaneD
+#define SAIPH_KEY_A_E_IceLanes \
+    SAIPH_KEY_A_E_IceLaneA, \
+    SAIPH_KEY_A_E_IceLaneB, \
+    SAIPH_KEY_A_E_IceLaneC, \
+    SAIPH_KEY_A_E_IceLaneD
+#define SAIPH_KEY_A_E \
+    { \
+        { SAIPH_KEY_A_E_ArcaneLanes }, \
+        { SAIPH_KEY_A_E_PlasmaLanes }, \
+        { SAIPH_KEY_A_E_RainbowLanes }, \
+        { SAIPH_KEY_A_E_WaterLanes }, \
+        { SAIPH_KEY_A_E_VaporLanes }, \
+        { SAIPH_KEY_A_E_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_A_F
 #define SAIPH_KEY_A_F_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 4U))
@@ -1323,6 +1548,51 @@ public:
 #define SAIPH_KEY_A_F_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 6U))
 #define SAIPH_KEY_A_F_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 0U))
 #define SAIPH_KEY_A_F_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 5U))
+#define SAIPH_KEY_A_F_ArcaneLanes \
+    SAIPH_KEY_A_F_ArcaneLaneA, \
+    SAIPH_KEY_A_F_ArcaneLaneB, \
+    SAIPH_KEY_A_F_ArcaneLaneC, \
+    SAIPH_KEY_A_F_ArcaneLaneD
+#define SAIPH_KEY_A_F_PlasmaLanes \
+    SAIPH_KEY_A_F_PlasmaLaneA, \
+    SAIPH_KEY_A_F_PlasmaLaneB, \
+    SAIPH_KEY_A_F_PlasmaLaneC, \
+    SAIPH_KEY_A_F_PlasmaLaneD
+#define SAIPH_KEY_A_F_RainbowLanes \
+    SAIPH_KEY_A_F_RainbowLaneA, \
+    SAIPH_KEY_A_F_RainbowLaneB, \
+    SAIPH_KEY_A_F_RainbowLaneC, \
+    SAIPH_KEY_A_F_RainbowLaneD
+#define SAIPH_KEY_A_F_WaterLanes \
+    SAIPH_KEY_A_F_WaterLaneA, \
+    SAIPH_KEY_A_F_WaterLaneB, \
+    SAIPH_KEY_A_F_WaterLaneC, \
+    SAIPH_KEY_A_F_WaterLaneD
+#define SAIPH_KEY_A_F_VaporLanes \
+    SAIPH_KEY_A_F_VaporLaneA, \
+    SAIPH_KEY_A_F_VaporLaneB, \
+    SAIPH_KEY_A_F_VaporLaneC, \
+    SAIPH_KEY_A_F_VaporLaneD
+#define SAIPH_KEY_A_F_FrostLanes \
+    SAIPH_KEY_A_F_FrostLaneA, \
+    SAIPH_KEY_A_F_FrostLaneB, \
+    SAIPH_KEY_A_F_FrostLaneC, \
+    SAIPH_KEY_A_F_FrostLaneD
+#define SAIPH_KEY_A_F_IceLanes \
+    SAIPH_KEY_A_F_IceLaneA, \
+    SAIPH_KEY_A_F_IceLaneB, \
+    SAIPH_KEY_A_F_IceLaneC, \
+    SAIPH_KEY_A_F_IceLaneD
+#define SAIPH_KEY_A_F \
+    { \
+        { SAIPH_KEY_A_F_ArcaneLanes }, \
+        { SAIPH_KEY_A_F_PlasmaLanes }, \
+        { SAIPH_KEY_A_F_RainbowLanes }, \
+        { SAIPH_KEY_A_F_WaterLanes }, \
+        { SAIPH_KEY_A_F_VaporLanes }, \
+        { SAIPH_KEY_A_F_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_A_G
 #define SAIPH_KEY_A_G_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 8U))
@@ -1441,6 +1711,51 @@ public:
 #define SAIPH_KEY_A_G_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 9U))
 #define SAIPH_KEY_A_G_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 11U))
 #define SAIPH_KEY_A_G_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 6U))
+#define SAIPH_KEY_A_G_ArcaneLanes \
+    SAIPH_KEY_A_G_ArcaneLaneA, \
+    SAIPH_KEY_A_G_ArcaneLaneB, \
+    SAIPH_KEY_A_G_ArcaneLaneC, \
+    SAIPH_KEY_A_G_ArcaneLaneD
+#define SAIPH_KEY_A_G_PlasmaLanes \
+    SAIPH_KEY_A_G_PlasmaLaneA, \
+    SAIPH_KEY_A_G_PlasmaLaneB, \
+    SAIPH_KEY_A_G_PlasmaLaneC, \
+    SAIPH_KEY_A_G_PlasmaLaneD
+#define SAIPH_KEY_A_G_RainbowLanes \
+    SAIPH_KEY_A_G_RainbowLaneA, \
+    SAIPH_KEY_A_G_RainbowLaneB, \
+    SAIPH_KEY_A_G_RainbowLaneC, \
+    SAIPH_KEY_A_G_RainbowLaneD
+#define SAIPH_KEY_A_G_WaterLanes \
+    SAIPH_KEY_A_G_WaterLaneA, \
+    SAIPH_KEY_A_G_WaterLaneB, \
+    SAIPH_KEY_A_G_WaterLaneC, \
+    SAIPH_KEY_A_G_WaterLaneD
+#define SAIPH_KEY_A_G_VaporLanes \
+    SAIPH_KEY_A_G_VaporLaneA, \
+    SAIPH_KEY_A_G_VaporLaneB, \
+    SAIPH_KEY_A_G_VaporLaneC, \
+    SAIPH_KEY_A_G_VaporLaneD
+#define SAIPH_KEY_A_G_FrostLanes \
+    SAIPH_KEY_A_G_FrostLaneA, \
+    SAIPH_KEY_A_G_FrostLaneB, \
+    SAIPH_KEY_A_G_FrostLaneC, \
+    SAIPH_KEY_A_G_FrostLaneD
+#define SAIPH_KEY_A_G_IceLanes \
+    SAIPH_KEY_A_G_IceLaneA, \
+    SAIPH_KEY_A_G_IceLaneB, \
+    SAIPH_KEY_A_G_IceLaneC, \
+    SAIPH_KEY_A_G_IceLaneD
+#define SAIPH_KEY_A_G \
+    { \
+        { SAIPH_KEY_A_G_ArcaneLanes }, \
+        { SAIPH_KEY_A_G_PlasmaLanes }, \
+        { SAIPH_KEY_A_G_RainbowLanes }, \
+        { SAIPH_KEY_A_G_WaterLanes }, \
+        { SAIPH_KEY_A_G_VaporLanes }, \
+        { SAIPH_KEY_A_G_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_A_H
 #define SAIPH_KEY_A_H_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 6U))
@@ -1559,6 +1874,51 @@ public:
 #define SAIPH_KEY_A_H_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 8U))
 #define SAIPH_KEY_A_H_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 12U))
 #define SAIPH_KEY_A_H_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 2U))
+#define SAIPH_KEY_A_H_ArcaneLanes \
+    SAIPH_KEY_A_H_ArcaneLaneA, \
+    SAIPH_KEY_A_H_ArcaneLaneB, \
+    SAIPH_KEY_A_H_ArcaneLaneC, \
+    SAIPH_KEY_A_H_ArcaneLaneD
+#define SAIPH_KEY_A_H_PlasmaLanes \
+    SAIPH_KEY_A_H_PlasmaLaneA, \
+    SAIPH_KEY_A_H_PlasmaLaneB, \
+    SAIPH_KEY_A_H_PlasmaLaneC, \
+    SAIPH_KEY_A_H_PlasmaLaneD
+#define SAIPH_KEY_A_H_RainbowLanes \
+    SAIPH_KEY_A_H_RainbowLaneA, \
+    SAIPH_KEY_A_H_RainbowLaneB, \
+    SAIPH_KEY_A_H_RainbowLaneC, \
+    SAIPH_KEY_A_H_RainbowLaneD
+#define SAIPH_KEY_A_H_WaterLanes \
+    SAIPH_KEY_A_H_WaterLaneA, \
+    SAIPH_KEY_A_H_WaterLaneB, \
+    SAIPH_KEY_A_H_WaterLaneC, \
+    SAIPH_KEY_A_H_WaterLaneD
+#define SAIPH_KEY_A_H_VaporLanes \
+    SAIPH_KEY_A_H_VaporLaneA, \
+    SAIPH_KEY_A_H_VaporLaneB, \
+    SAIPH_KEY_A_H_VaporLaneC, \
+    SAIPH_KEY_A_H_VaporLaneD
+#define SAIPH_KEY_A_H_FrostLanes \
+    SAIPH_KEY_A_H_FrostLaneA, \
+    SAIPH_KEY_A_H_FrostLaneB, \
+    SAIPH_KEY_A_H_FrostLaneC, \
+    SAIPH_KEY_A_H_FrostLaneD
+#define SAIPH_KEY_A_H_IceLanes \
+    SAIPH_KEY_A_H_IceLaneA, \
+    SAIPH_KEY_A_H_IceLaneB, \
+    SAIPH_KEY_A_H_IceLaneC, \
+    SAIPH_KEY_A_H_IceLaneD
+#define SAIPH_KEY_A_H \
+    { \
+        { SAIPH_KEY_A_H_ArcaneLanes }, \
+        { SAIPH_KEY_A_H_PlasmaLanes }, \
+        { SAIPH_KEY_A_H_RainbowLanes }, \
+        { SAIPH_KEY_A_H_WaterLanes }, \
+        { SAIPH_KEY_A_H_VaporLanes }, \
+        { SAIPH_KEY_A_H_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_B_A
 #define SAIPH_KEY_B_A_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 11U))
@@ -1677,6 +2037,51 @@ public:
 #define SAIPH_KEY_B_A_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 15U))
 #define SAIPH_KEY_B_A_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 5U))
 #define SAIPH_KEY_B_A_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 11U))
+#define SAIPH_KEY_B_A_ArcaneLanes \
+    SAIPH_KEY_B_A_ArcaneLaneA, \
+    SAIPH_KEY_B_A_ArcaneLaneB, \
+    SAIPH_KEY_B_A_ArcaneLaneC, \
+    SAIPH_KEY_B_A_ArcaneLaneD
+#define SAIPH_KEY_B_A_PlasmaLanes \
+    SAIPH_KEY_B_A_PlasmaLaneA, \
+    SAIPH_KEY_B_A_PlasmaLaneB, \
+    SAIPH_KEY_B_A_PlasmaLaneC, \
+    SAIPH_KEY_B_A_PlasmaLaneD
+#define SAIPH_KEY_B_A_RainbowLanes \
+    SAIPH_KEY_B_A_RainbowLaneA, \
+    SAIPH_KEY_B_A_RainbowLaneB, \
+    SAIPH_KEY_B_A_RainbowLaneC, \
+    SAIPH_KEY_B_A_RainbowLaneD
+#define SAIPH_KEY_B_A_WaterLanes \
+    SAIPH_KEY_B_A_WaterLaneA, \
+    SAIPH_KEY_B_A_WaterLaneB, \
+    SAIPH_KEY_B_A_WaterLaneC, \
+    SAIPH_KEY_B_A_WaterLaneD
+#define SAIPH_KEY_B_A_VaporLanes \
+    SAIPH_KEY_B_A_VaporLaneA, \
+    SAIPH_KEY_B_A_VaporLaneB, \
+    SAIPH_KEY_B_A_VaporLaneC, \
+    SAIPH_KEY_B_A_VaporLaneD
+#define SAIPH_KEY_B_A_FrostLanes \
+    SAIPH_KEY_B_A_FrostLaneA, \
+    SAIPH_KEY_B_A_FrostLaneB, \
+    SAIPH_KEY_B_A_FrostLaneC, \
+    SAIPH_KEY_B_A_FrostLaneD
+#define SAIPH_KEY_B_A_IceLanes \
+    SAIPH_KEY_B_A_IceLaneA, \
+    SAIPH_KEY_B_A_IceLaneB, \
+    SAIPH_KEY_B_A_IceLaneC, \
+    SAIPH_KEY_B_A_IceLaneD
+#define SAIPH_KEY_B_A \
+    { \
+        { SAIPH_KEY_B_A_ArcaneLanes }, \
+        { SAIPH_KEY_B_A_PlasmaLanes }, \
+        { SAIPH_KEY_B_A_RainbowLanes }, \
+        { SAIPH_KEY_B_A_WaterLanes }, \
+        { SAIPH_KEY_B_A_VaporLanes }, \
+        { SAIPH_KEY_B_A_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }
 
 // KEY_B_B
 #define SAIPH_KEY_B_B_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 10U))
@@ -1795,6 +2200,51 @@ public:
 #define SAIPH_KEY_B_B_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 12U))
 #define SAIPH_KEY_B_B_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 15U))
 #define SAIPH_KEY_B_B_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 9U))
+#define SAIPH_KEY_B_B_ArcaneLanes \
+    SAIPH_KEY_B_B_ArcaneLaneA, \
+    SAIPH_KEY_B_B_ArcaneLaneB, \
+    SAIPH_KEY_B_B_ArcaneLaneC, \
+    SAIPH_KEY_B_B_ArcaneLaneD
+#define SAIPH_KEY_B_B_PlasmaLanes \
+    SAIPH_KEY_B_B_PlasmaLaneA, \
+    SAIPH_KEY_B_B_PlasmaLaneB, \
+    SAIPH_KEY_B_B_PlasmaLaneC, \
+    SAIPH_KEY_B_B_PlasmaLaneD
+#define SAIPH_KEY_B_B_RainbowLanes \
+    SAIPH_KEY_B_B_RainbowLaneA, \
+    SAIPH_KEY_B_B_RainbowLaneB, \
+    SAIPH_KEY_B_B_RainbowLaneC, \
+    SAIPH_KEY_B_B_RainbowLaneD
+#define SAIPH_KEY_B_B_WaterLanes \
+    SAIPH_KEY_B_B_WaterLaneA, \
+    SAIPH_KEY_B_B_WaterLaneB, \
+    SAIPH_KEY_B_B_WaterLaneC, \
+    SAIPH_KEY_B_B_WaterLaneD
+#define SAIPH_KEY_B_B_VaporLanes \
+    SAIPH_KEY_B_B_VaporLaneA, \
+    SAIPH_KEY_B_B_VaporLaneB, \
+    SAIPH_KEY_B_B_VaporLaneC, \
+    SAIPH_KEY_B_B_VaporLaneD
+#define SAIPH_KEY_B_B_FrostLanes \
+    SAIPH_KEY_B_B_FrostLaneA, \
+    SAIPH_KEY_B_B_FrostLaneB, \
+    SAIPH_KEY_B_B_FrostLaneC, \
+    SAIPH_KEY_B_B_FrostLaneD
+#define SAIPH_KEY_B_B_IceLanes \
+    SAIPH_KEY_B_B_IceLaneA, \
+    SAIPH_KEY_B_B_IceLaneB, \
+    SAIPH_KEY_B_B_IceLaneC, \
+    SAIPH_KEY_B_B_IceLaneD
+#define SAIPH_KEY_B_B \
+    { \
+        { SAIPH_KEY_B_B_ArcaneLanes }, \
+        { SAIPH_KEY_B_B_PlasmaLanes }, \
+        { SAIPH_KEY_B_B_RainbowLanes }, \
+        { SAIPH_KEY_B_B_WaterLanes }, \
+        { SAIPH_KEY_B_B_VaporLanes }, \
+        { SAIPH_KEY_B_B_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }
 
 // KEY_B_C
 #define SAIPH_KEY_B_C_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 15U))
@@ -1913,6 +2363,51 @@ public:
 #define SAIPH_KEY_B_C_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 3U))
 #define SAIPH_KEY_B_C_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 1U))
 #define SAIPH_KEY_B_C_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 7U))
+#define SAIPH_KEY_B_C_ArcaneLanes \
+    SAIPH_KEY_B_C_ArcaneLaneA, \
+    SAIPH_KEY_B_C_ArcaneLaneB, \
+    SAIPH_KEY_B_C_ArcaneLaneC, \
+    SAIPH_KEY_B_C_ArcaneLaneD
+#define SAIPH_KEY_B_C_PlasmaLanes \
+    SAIPH_KEY_B_C_PlasmaLaneA, \
+    SAIPH_KEY_B_C_PlasmaLaneB, \
+    SAIPH_KEY_B_C_PlasmaLaneC, \
+    SAIPH_KEY_B_C_PlasmaLaneD
+#define SAIPH_KEY_B_C_RainbowLanes \
+    SAIPH_KEY_B_C_RainbowLaneA, \
+    SAIPH_KEY_B_C_RainbowLaneB, \
+    SAIPH_KEY_B_C_RainbowLaneC, \
+    SAIPH_KEY_B_C_RainbowLaneD
+#define SAIPH_KEY_B_C_WaterLanes \
+    SAIPH_KEY_B_C_WaterLaneA, \
+    SAIPH_KEY_B_C_WaterLaneB, \
+    SAIPH_KEY_B_C_WaterLaneC, \
+    SAIPH_KEY_B_C_WaterLaneD
+#define SAIPH_KEY_B_C_VaporLanes \
+    SAIPH_KEY_B_C_VaporLaneA, \
+    SAIPH_KEY_B_C_VaporLaneB, \
+    SAIPH_KEY_B_C_VaporLaneC, \
+    SAIPH_KEY_B_C_VaporLaneD
+#define SAIPH_KEY_B_C_FrostLanes \
+    SAIPH_KEY_B_C_FrostLaneA, \
+    SAIPH_KEY_B_C_FrostLaneB, \
+    SAIPH_KEY_B_C_FrostLaneC, \
+    SAIPH_KEY_B_C_FrostLaneD
+#define SAIPH_KEY_B_C_IceLanes \
+    SAIPH_KEY_B_C_IceLaneA, \
+    SAIPH_KEY_B_C_IceLaneB, \
+    SAIPH_KEY_B_C_IceLaneC, \
+    SAIPH_KEY_B_C_IceLaneD
+#define SAIPH_KEY_B_C \
+    { \
+        { SAIPH_KEY_B_C_ArcaneLanes }, \
+        { SAIPH_KEY_B_C_PlasmaLanes }, \
+        { SAIPH_KEY_B_C_RainbowLanes }, \
+        { SAIPH_KEY_B_C_WaterLanes }, \
+        { SAIPH_KEY_B_C_VaporLanes }, \
+        { SAIPH_KEY_B_C_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }
 
 // KEY_B_D
 #define SAIPH_KEY_B_D_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 12U))
@@ -2031,6 +2526,51 @@ public:
 #define SAIPH_KEY_B_D_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 0U))
 #define SAIPH_KEY_B_D_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 13U))
 #define SAIPH_KEY_B_D_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 3U))
+#define SAIPH_KEY_B_D_ArcaneLanes \
+    SAIPH_KEY_B_D_ArcaneLaneA, \
+    SAIPH_KEY_B_D_ArcaneLaneB, \
+    SAIPH_KEY_B_D_ArcaneLaneC, \
+    SAIPH_KEY_B_D_ArcaneLaneD
+#define SAIPH_KEY_B_D_PlasmaLanes \
+    SAIPH_KEY_B_D_PlasmaLaneA, \
+    SAIPH_KEY_B_D_PlasmaLaneB, \
+    SAIPH_KEY_B_D_PlasmaLaneC, \
+    SAIPH_KEY_B_D_PlasmaLaneD
+#define SAIPH_KEY_B_D_RainbowLanes \
+    SAIPH_KEY_B_D_RainbowLaneA, \
+    SAIPH_KEY_B_D_RainbowLaneB, \
+    SAIPH_KEY_B_D_RainbowLaneC, \
+    SAIPH_KEY_B_D_RainbowLaneD
+#define SAIPH_KEY_B_D_WaterLanes \
+    SAIPH_KEY_B_D_WaterLaneA, \
+    SAIPH_KEY_B_D_WaterLaneB, \
+    SAIPH_KEY_B_D_WaterLaneC, \
+    SAIPH_KEY_B_D_WaterLaneD
+#define SAIPH_KEY_B_D_VaporLanes \
+    SAIPH_KEY_B_D_VaporLaneA, \
+    SAIPH_KEY_B_D_VaporLaneB, \
+    SAIPH_KEY_B_D_VaporLaneC, \
+    SAIPH_KEY_B_D_VaporLaneD
+#define SAIPH_KEY_B_D_FrostLanes \
+    SAIPH_KEY_B_D_FrostLaneA, \
+    SAIPH_KEY_B_D_FrostLaneB, \
+    SAIPH_KEY_B_D_FrostLaneC, \
+    SAIPH_KEY_B_D_FrostLaneD
+#define SAIPH_KEY_B_D_IceLanes \
+    SAIPH_KEY_B_D_IceLaneA, \
+    SAIPH_KEY_B_D_IceLaneB, \
+    SAIPH_KEY_B_D_IceLaneC, \
+    SAIPH_KEY_B_D_IceLaneD
+#define SAIPH_KEY_B_D \
+    { \
+        { SAIPH_KEY_B_D_ArcaneLanes }, \
+        { SAIPH_KEY_B_D_PlasmaLanes }, \
+        { SAIPH_KEY_B_D_RainbowLanes }, \
+        { SAIPH_KEY_B_D_WaterLanes }, \
+        { SAIPH_KEY_B_D_VaporLanes }, \
+        { SAIPH_KEY_B_D_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }
 
 // KEY_B_E
 #define SAIPH_KEY_B_E_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 9U))
@@ -2149,6 +2689,51 @@ public:
 #define SAIPH_KEY_B_E_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 2U))
 #define SAIPH_KEY_B_E_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 9U))
 #define SAIPH_KEY_B_E_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 10U))
+#define SAIPH_KEY_B_E_ArcaneLanes \
+    SAIPH_KEY_B_E_ArcaneLaneA, \
+    SAIPH_KEY_B_E_ArcaneLaneB, \
+    SAIPH_KEY_B_E_ArcaneLaneC, \
+    SAIPH_KEY_B_E_ArcaneLaneD
+#define SAIPH_KEY_B_E_PlasmaLanes \
+    SAIPH_KEY_B_E_PlasmaLaneA, \
+    SAIPH_KEY_B_E_PlasmaLaneB, \
+    SAIPH_KEY_B_E_PlasmaLaneC, \
+    SAIPH_KEY_B_E_PlasmaLaneD
+#define SAIPH_KEY_B_E_RainbowLanes \
+    SAIPH_KEY_B_E_RainbowLaneA, \
+    SAIPH_KEY_B_E_RainbowLaneB, \
+    SAIPH_KEY_B_E_RainbowLaneC, \
+    SAIPH_KEY_B_E_RainbowLaneD
+#define SAIPH_KEY_B_E_WaterLanes \
+    SAIPH_KEY_B_E_WaterLaneA, \
+    SAIPH_KEY_B_E_WaterLaneB, \
+    SAIPH_KEY_B_E_WaterLaneC, \
+    SAIPH_KEY_B_E_WaterLaneD
+#define SAIPH_KEY_B_E_VaporLanes \
+    SAIPH_KEY_B_E_VaporLaneA, \
+    SAIPH_KEY_B_E_VaporLaneB, \
+    SAIPH_KEY_B_E_VaporLaneC, \
+    SAIPH_KEY_B_E_VaporLaneD
+#define SAIPH_KEY_B_E_FrostLanes \
+    SAIPH_KEY_B_E_FrostLaneA, \
+    SAIPH_KEY_B_E_FrostLaneB, \
+    SAIPH_KEY_B_E_FrostLaneC, \
+    SAIPH_KEY_B_E_FrostLaneD
+#define SAIPH_KEY_B_E_IceLanes \
+    SAIPH_KEY_B_E_IceLaneA, \
+    SAIPH_KEY_B_E_IceLaneB, \
+    SAIPH_KEY_B_E_IceLaneC, \
+    SAIPH_KEY_B_E_IceLaneD
+#define SAIPH_KEY_B_E \
+    { \
+        { SAIPH_KEY_B_E_ArcaneLanes }, \
+        { SAIPH_KEY_B_E_PlasmaLanes }, \
+        { SAIPH_KEY_B_E_RainbowLanes }, \
+        { SAIPH_KEY_B_E_WaterLanes }, \
+        { SAIPH_KEY_B_E_VaporLanes }, \
+        { SAIPH_KEY_B_E_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }
 
 // KEY_B_F
 #define SAIPH_KEY_B_F_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 3U))
@@ -2267,6 +2852,51 @@ public:
 #define SAIPH_KEY_B_F_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 11U))
 #define SAIPH_KEY_B_F_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 4U))
 #define SAIPH_KEY_B_F_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 0U))
+#define SAIPH_KEY_B_F_ArcaneLanes \
+    SAIPH_KEY_B_F_ArcaneLaneA, \
+    SAIPH_KEY_B_F_ArcaneLaneB, \
+    SAIPH_KEY_B_F_ArcaneLaneC, \
+    SAIPH_KEY_B_F_ArcaneLaneD
+#define SAIPH_KEY_B_F_PlasmaLanes \
+    SAIPH_KEY_B_F_PlasmaLaneA, \
+    SAIPH_KEY_B_F_PlasmaLaneB, \
+    SAIPH_KEY_B_F_PlasmaLaneC, \
+    SAIPH_KEY_B_F_PlasmaLaneD
+#define SAIPH_KEY_B_F_RainbowLanes \
+    SAIPH_KEY_B_F_RainbowLaneA, \
+    SAIPH_KEY_B_F_RainbowLaneB, \
+    SAIPH_KEY_B_F_RainbowLaneC, \
+    SAIPH_KEY_B_F_RainbowLaneD
+#define SAIPH_KEY_B_F_WaterLanes \
+    SAIPH_KEY_B_F_WaterLaneA, \
+    SAIPH_KEY_B_F_WaterLaneB, \
+    SAIPH_KEY_B_F_WaterLaneC, \
+    SAIPH_KEY_B_F_WaterLaneD
+#define SAIPH_KEY_B_F_VaporLanes \
+    SAIPH_KEY_B_F_VaporLaneA, \
+    SAIPH_KEY_B_F_VaporLaneB, \
+    SAIPH_KEY_B_F_VaporLaneC, \
+    SAIPH_KEY_B_F_VaporLaneD
+#define SAIPH_KEY_B_F_FrostLanes \
+    SAIPH_KEY_B_F_FrostLaneA, \
+    SAIPH_KEY_B_F_FrostLaneB, \
+    SAIPH_KEY_B_F_FrostLaneC, \
+    SAIPH_KEY_B_F_FrostLaneD
+#define SAIPH_KEY_B_F_IceLanes \
+    SAIPH_KEY_B_F_IceLaneA, \
+    SAIPH_KEY_B_F_IceLaneB, \
+    SAIPH_KEY_B_F_IceLaneC, \
+    SAIPH_KEY_B_F_IceLaneD
+#define SAIPH_KEY_B_F \
+    { \
+        { SAIPH_KEY_B_F_ArcaneLanes }, \
+        { SAIPH_KEY_B_F_PlasmaLanes }, \
+        { SAIPH_KEY_B_F_RainbowLanes }, \
+        { SAIPH_KEY_B_F_WaterLanes }, \
+        { SAIPH_KEY_B_F_VaporLanes }, \
+        { SAIPH_KEY_B_F_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }
 
 // KEY_B_G
 #define SAIPH_KEY_B_G_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 2U))
@@ -2385,6 +3015,51 @@ public:
 #define SAIPH_KEY_B_G_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 7U))
 #define SAIPH_KEY_B_G_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 14U))
 #define SAIPH_KEY_B_G_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 8U))
+#define SAIPH_KEY_B_G_ArcaneLanes \
+    SAIPH_KEY_B_G_ArcaneLaneA, \
+    SAIPH_KEY_B_G_ArcaneLaneB, \
+    SAIPH_KEY_B_G_ArcaneLaneC, \
+    SAIPH_KEY_B_G_ArcaneLaneD
+#define SAIPH_KEY_B_G_PlasmaLanes \
+    SAIPH_KEY_B_G_PlasmaLaneA, \
+    SAIPH_KEY_B_G_PlasmaLaneB, \
+    SAIPH_KEY_B_G_PlasmaLaneC, \
+    SAIPH_KEY_B_G_PlasmaLaneD
+#define SAIPH_KEY_B_G_RainbowLanes \
+    SAIPH_KEY_B_G_RainbowLaneA, \
+    SAIPH_KEY_B_G_RainbowLaneB, \
+    SAIPH_KEY_B_G_RainbowLaneC, \
+    SAIPH_KEY_B_G_RainbowLaneD
+#define SAIPH_KEY_B_G_WaterLanes \
+    SAIPH_KEY_B_G_WaterLaneA, \
+    SAIPH_KEY_B_G_WaterLaneB, \
+    SAIPH_KEY_B_G_WaterLaneC, \
+    SAIPH_KEY_B_G_WaterLaneD
+#define SAIPH_KEY_B_G_VaporLanes \
+    SAIPH_KEY_B_G_VaporLaneA, \
+    SAIPH_KEY_B_G_VaporLaneB, \
+    SAIPH_KEY_B_G_VaporLaneC, \
+    SAIPH_KEY_B_G_VaporLaneD
+#define SAIPH_KEY_B_G_FrostLanes \
+    SAIPH_KEY_B_G_FrostLaneA, \
+    SAIPH_KEY_B_G_FrostLaneB, \
+    SAIPH_KEY_B_G_FrostLaneC, \
+    SAIPH_KEY_B_G_FrostLaneD
+#define SAIPH_KEY_B_G_IceLanes \
+    SAIPH_KEY_B_G_IceLaneA, \
+    SAIPH_KEY_B_G_IceLaneB, \
+    SAIPH_KEY_B_G_IceLaneC, \
+    SAIPH_KEY_B_G_IceLaneD
+#define SAIPH_KEY_B_G \
+    { \
+        { SAIPH_KEY_B_G_ArcaneLanes }, \
+        { SAIPH_KEY_B_G_PlasmaLanes }, \
+        { SAIPH_KEY_B_G_RainbowLanes }, \
+        { SAIPH_KEY_B_G_WaterLanes }, \
+        { SAIPH_KEY_B_G_VaporLanes }, \
+        { SAIPH_KEY_B_G_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }
 
 // KEY_B_H
 #define SAIPH_KEY_B_H_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 7U))
@@ -2503,3 +3178,48 @@ public:
 #define SAIPH_KEY_B_H_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 10U))
 #define SAIPH_KEY_B_H_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 6U))
 #define SAIPH_KEY_B_H_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 15U))
+#define SAIPH_KEY_B_H_ArcaneLanes \
+    SAIPH_KEY_B_H_ArcaneLaneA, \
+    SAIPH_KEY_B_H_ArcaneLaneB, \
+    SAIPH_KEY_B_H_ArcaneLaneC, \
+    SAIPH_KEY_B_H_ArcaneLaneD
+#define SAIPH_KEY_B_H_PlasmaLanes \
+    SAIPH_KEY_B_H_PlasmaLaneA, \
+    SAIPH_KEY_B_H_PlasmaLaneB, \
+    SAIPH_KEY_B_H_PlasmaLaneC, \
+    SAIPH_KEY_B_H_PlasmaLaneD
+#define SAIPH_KEY_B_H_RainbowLanes \
+    SAIPH_KEY_B_H_RainbowLaneA, \
+    SAIPH_KEY_B_H_RainbowLaneB, \
+    SAIPH_KEY_B_H_RainbowLaneC, \
+    SAIPH_KEY_B_H_RainbowLaneD
+#define SAIPH_KEY_B_H_WaterLanes \
+    SAIPH_KEY_B_H_WaterLaneA, \
+    SAIPH_KEY_B_H_WaterLaneB, \
+    SAIPH_KEY_B_H_WaterLaneC, \
+    SAIPH_KEY_B_H_WaterLaneD
+#define SAIPH_KEY_B_H_VaporLanes \
+    SAIPH_KEY_B_H_VaporLaneA, \
+    SAIPH_KEY_B_H_VaporLaneB, \
+    SAIPH_KEY_B_H_VaporLaneC, \
+    SAIPH_KEY_B_H_VaporLaneD
+#define SAIPH_KEY_B_H_FrostLanes \
+    SAIPH_KEY_B_H_FrostLaneA, \
+    SAIPH_KEY_B_H_FrostLaneB, \
+    SAIPH_KEY_B_H_FrostLaneC, \
+    SAIPH_KEY_B_H_FrostLaneD
+#define SAIPH_KEY_B_H_IceLanes \
+    SAIPH_KEY_B_H_IceLaneA, \
+    SAIPH_KEY_B_H_IceLaneB, \
+    SAIPH_KEY_B_H_IceLaneC, \
+    SAIPH_KEY_B_H_IceLaneD
+#define SAIPH_KEY_B_H \
+    { \
+        { SAIPH_KEY_B_H_ArcaneLanes }, \
+        { SAIPH_KEY_B_H_PlasmaLanes }, \
+        { SAIPH_KEY_B_H_RainbowLanes }, \
+        { SAIPH_KEY_B_H_WaterLanes }, \
+        { SAIPH_KEY_B_H_VaporLanes }, \
+        { SAIPH_KEY_B_H_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }

@@ -733,6 +733,51 @@ public:
 #define VEGA_KEY_A_A_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 12U))
 #define VEGA_KEY_A_A_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 15U))
 #define VEGA_KEY_A_A_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 9U))
+#define VEGA_KEY_A_A_ArcaneLanes \
+    VEGA_KEY_A_A_ArcaneLaneA, \
+    VEGA_KEY_A_A_ArcaneLaneB, \
+    VEGA_KEY_A_A_ArcaneLaneC, \
+    VEGA_KEY_A_A_ArcaneLaneD
+#define VEGA_KEY_A_A_PlasmaLanes \
+    VEGA_KEY_A_A_PlasmaLaneA, \
+    VEGA_KEY_A_A_PlasmaLaneB, \
+    VEGA_KEY_A_A_PlasmaLaneC, \
+    VEGA_KEY_A_A_PlasmaLaneD
+#define VEGA_KEY_A_A_RainbowLanes \
+    VEGA_KEY_A_A_RainbowLaneA, \
+    VEGA_KEY_A_A_RainbowLaneB, \
+    VEGA_KEY_A_A_RainbowLaneC, \
+    VEGA_KEY_A_A_RainbowLaneD
+#define VEGA_KEY_A_A_WaterLanes \
+    VEGA_KEY_A_A_WaterLaneA, \
+    VEGA_KEY_A_A_WaterLaneB, \
+    VEGA_KEY_A_A_WaterLaneC, \
+    VEGA_KEY_A_A_WaterLaneD
+#define VEGA_KEY_A_A_VaporLanes \
+    VEGA_KEY_A_A_VaporLaneA, \
+    VEGA_KEY_A_A_VaporLaneB, \
+    VEGA_KEY_A_A_VaporLaneC, \
+    VEGA_KEY_A_A_VaporLaneD
+#define VEGA_KEY_A_A_FrostLanes \
+    VEGA_KEY_A_A_FrostLaneA, \
+    VEGA_KEY_A_A_FrostLaneB, \
+    VEGA_KEY_A_A_FrostLaneC, \
+    VEGA_KEY_A_A_FrostLaneD
+#define VEGA_KEY_A_A_IceLanes \
+    VEGA_KEY_A_A_IceLaneA, \
+    VEGA_KEY_A_A_IceLaneB, \
+    VEGA_KEY_A_A_IceLaneC, \
+    VEGA_KEY_A_A_IceLaneD
+#define VEGA_KEY_A_A \
+    { \
+        { VEGA_KEY_A_A_ArcaneLanes }, \
+        { VEGA_KEY_A_A_PlasmaLanes }, \
+        { VEGA_KEY_A_A_RainbowLanes }, \
+        { VEGA_KEY_A_A_WaterLanes }, \
+        { VEGA_KEY_A_A_VaporLanes }, \
+        { VEGA_KEY_A_A_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_A_B
 #define VEGA_KEY_A_B_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 9U))
@@ -851,6 +896,51 @@ public:
 #define VEGA_KEY_A_B_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 14U))
 #define VEGA_KEY_A_B_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 10U))
 #define VEGA_KEY_A_B_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 12U))
+#define VEGA_KEY_A_B_ArcaneLanes \
+    VEGA_KEY_A_B_ArcaneLaneA, \
+    VEGA_KEY_A_B_ArcaneLaneB, \
+    VEGA_KEY_A_B_ArcaneLaneC, \
+    VEGA_KEY_A_B_ArcaneLaneD
+#define VEGA_KEY_A_B_PlasmaLanes \
+    VEGA_KEY_A_B_PlasmaLaneA, \
+    VEGA_KEY_A_B_PlasmaLaneB, \
+    VEGA_KEY_A_B_PlasmaLaneC, \
+    VEGA_KEY_A_B_PlasmaLaneD
+#define VEGA_KEY_A_B_RainbowLanes \
+    VEGA_KEY_A_B_RainbowLaneA, \
+    VEGA_KEY_A_B_RainbowLaneB, \
+    VEGA_KEY_A_B_RainbowLaneC, \
+    VEGA_KEY_A_B_RainbowLaneD
+#define VEGA_KEY_A_B_WaterLanes \
+    VEGA_KEY_A_B_WaterLaneA, \
+    VEGA_KEY_A_B_WaterLaneB, \
+    VEGA_KEY_A_B_WaterLaneC, \
+    VEGA_KEY_A_B_WaterLaneD
+#define VEGA_KEY_A_B_VaporLanes \
+    VEGA_KEY_A_B_VaporLaneA, \
+    VEGA_KEY_A_B_VaporLaneB, \
+    VEGA_KEY_A_B_VaporLaneC, \
+    VEGA_KEY_A_B_VaporLaneD
+#define VEGA_KEY_A_B_FrostLanes \
+    VEGA_KEY_A_B_FrostLaneA, \
+    VEGA_KEY_A_B_FrostLaneB, \
+    VEGA_KEY_A_B_FrostLaneC, \
+    VEGA_KEY_A_B_FrostLaneD
+#define VEGA_KEY_A_B_IceLanes \
+    VEGA_KEY_A_B_IceLaneA, \
+    VEGA_KEY_A_B_IceLaneB, \
+    VEGA_KEY_A_B_IceLaneC, \
+    VEGA_KEY_A_B_IceLaneD
+#define VEGA_KEY_A_B \
+    { \
+        { VEGA_KEY_A_B_ArcaneLanes }, \
+        { VEGA_KEY_A_B_PlasmaLanes }, \
+        { VEGA_KEY_A_B_RainbowLanes }, \
+        { VEGA_KEY_A_B_WaterLanes }, \
+        { VEGA_KEY_A_B_VaporLanes }, \
+        { VEGA_KEY_A_B_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_A_C
 #define VEGA_KEY_A_C_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 14U))
@@ -969,6 +1059,51 @@ public:
 #define VEGA_KEY_A_C_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 4U))
 #define VEGA_KEY_A_C_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 7U))
 #define VEGA_KEY_A_C_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 13U))
+#define VEGA_KEY_A_C_ArcaneLanes \
+    VEGA_KEY_A_C_ArcaneLaneA, \
+    VEGA_KEY_A_C_ArcaneLaneB, \
+    VEGA_KEY_A_C_ArcaneLaneC, \
+    VEGA_KEY_A_C_ArcaneLaneD
+#define VEGA_KEY_A_C_PlasmaLanes \
+    VEGA_KEY_A_C_PlasmaLaneA, \
+    VEGA_KEY_A_C_PlasmaLaneB, \
+    VEGA_KEY_A_C_PlasmaLaneC, \
+    VEGA_KEY_A_C_PlasmaLaneD
+#define VEGA_KEY_A_C_RainbowLanes \
+    VEGA_KEY_A_C_RainbowLaneA, \
+    VEGA_KEY_A_C_RainbowLaneB, \
+    VEGA_KEY_A_C_RainbowLaneC, \
+    VEGA_KEY_A_C_RainbowLaneD
+#define VEGA_KEY_A_C_WaterLanes \
+    VEGA_KEY_A_C_WaterLaneA, \
+    VEGA_KEY_A_C_WaterLaneB, \
+    VEGA_KEY_A_C_WaterLaneC, \
+    VEGA_KEY_A_C_WaterLaneD
+#define VEGA_KEY_A_C_VaporLanes \
+    VEGA_KEY_A_C_VaporLaneA, \
+    VEGA_KEY_A_C_VaporLaneB, \
+    VEGA_KEY_A_C_VaporLaneC, \
+    VEGA_KEY_A_C_VaporLaneD
+#define VEGA_KEY_A_C_FrostLanes \
+    VEGA_KEY_A_C_FrostLaneA, \
+    VEGA_KEY_A_C_FrostLaneB, \
+    VEGA_KEY_A_C_FrostLaneC, \
+    VEGA_KEY_A_C_FrostLaneD
+#define VEGA_KEY_A_C_IceLanes \
+    VEGA_KEY_A_C_IceLaneA, \
+    VEGA_KEY_A_C_IceLaneB, \
+    VEGA_KEY_A_C_IceLaneC, \
+    VEGA_KEY_A_C_IceLaneD
+#define VEGA_KEY_A_C \
+    { \
+        { VEGA_KEY_A_C_ArcaneLanes }, \
+        { VEGA_KEY_A_C_PlasmaLanes }, \
+        { VEGA_KEY_A_C_RainbowLanes }, \
+        { VEGA_KEY_A_C_WaterLanes }, \
+        { VEGA_KEY_A_C_VaporLanes }, \
+        { VEGA_KEY_A_C_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_A_D
 #define VEGA_KEY_A_D_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 7U))
@@ -1087,6 +1222,51 @@ public:
 #define VEGA_KEY_A_D_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 13U))
 #define VEGA_KEY_A_D_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 8U))
 #define VEGA_KEY_A_D_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 1U))
+#define VEGA_KEY_A_D_ArcaneLanes \
+    VEGA_KEY_A_D_ArcaneLaneA, \
+    VEGA_KEY_A_D_ArcaneLaneB, \
+    VEGA_KEY_A_D_ArcaneLaneC, \
+    VEGA_KEY_A_D_ArcaneLaneD
+#define VEGA_KEY_A_D_PlasmaLanes \
+    VEGA_KEY_A_D_PlasmaLaneA, \
+    VEGA_KEY_A_D_PlasmaLaneB, \
+    VEGA_KEY_A_D_PlasmaLaneC, \
+    VEGA_KEY_A_D_PlasmaLaneD
+#define VEGA_KEY_A_D_RainbowLanes \
+    VEGA_KEY_A_D_RainbowLaneA, \
+    VEGA_KEY_A_D_RainbowLaneB, \
+    VEGA_KEY_A_D_RainbowLaneC, \
+    VEGA_KEY_A_D_RainbowLaneD
+#define VEGA_KEY_A_D_WaterLanes \
+    VEGA_KEY_A_D_WaterLaneA, \
+    VEGA_KEY_A_D_WaterLaneB, \
+    VEGA_KEY_A_D_WaterLaneC, \
+    VEGA_KEY_A_D_WaterLaneD
+#define VEGA_KEY_A_D_VaporLanes \
+    VEGA_KEY_A_D_VaporLaneA, \
+    VEGA_KEY_A_D_VaporLaneB, \
+    VEGA_KEY_A_D_VaporLaneC, \
+    VEGA_KEY_A_D_VaporLaneD
+#define VEGA_KEY_A_D_FrostLanes \
+    VEGA_KEY_A_D_FrostLaneA, \
+    VEGA_KEY_A_D_FrostLaneB, \
+    VEGA_KEY_A_D_FrostLaneC, \
+    VEGA_KEY_A_D_FrostLaneD
+#define VEGA_KEY_A_D_IceLanes \
+    VEGA_KEY_A_D_IceLaneA, \
+    VEGA_KEY_A_D_IceLaneB, \
+    VEGA_KEY_A_D_IceLaneC, \
+    VEGA_KEY_A_D_IceLaneD
+#define VEGA_KEY_A_D \
+    { \
+        { VEGA_KEY_A_D_ArcaneLanes }, \
+        { VEGA_KEY_A_D_PlasmaLanes }, \
+        { VEGA_KEY_A_D_RainbowLanes }, \
+        { VEGA_KEY_A_D_WaterLanes }, \
+        { VEGA_KEY_A_D_VaporLanes }, \
+        { VEGA_KEY_A_D_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_A_E
 #define VEGA_KEY_A_E_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 15U))
@@ -1205,6 +1385,51 @@ public:
 #define VEGA_KEY_A_E_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 1U))
 #define VEGA_KEY_A_E_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 2U))
 #define VEGA_KEY_A_E_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 14U))
+#define VEGA_KEY_A_E_ArcaneLanes \
+    VEGA_KEY_A_E_ArcaneLaneA, \
+    VEGA_KEY_A_E_ArcaneLaneB, \
+    VEGA_KEY_A_E_ArcaneLaneC, \
+    VEGA_KEY_A_E_ArcaneLaneD
+#define VEGA_KEY_A_E_PlasmaLanes \
+    VEGA_KEY_A_E_PlasmaLaneA, \
+    VEGA_KEY_A_E_PlasmaLaneB, \
+    VEGA_KEY_A_E_PlasmaLaneC, \
+    VEGA_KEY_A_E_PlasmaLaneD
+#define VEGA_KEY_A_E_RainbowLanes \
+    VEGA_KEY_A_E_RainbowLaneA, \
+    VEGA_KEY_A_E_RainbowLaneB, \
+    VEGA_KEY_A_E_RainbowLaneC, \
+    VEGA_KEY_A_E_RainbowLaneD
+#define VEGA_KEY_A_E_WaterLanes \
+    VEGA_KEY_A_E_WaterLaneA, \
+    VEGA_KEY_A_E_WaterLaneB, \
+    VEGA_KEY_A_E_WaterLaneC, \
+    VEGA_KEY_A_E_WaterLaneD
+#define VEGA_KEY_A_E_VaporLanes \
+    VEGA_KEY_A_E_VaporLaneA, \
+    VEGA_KEY_A_E_VaporLaneB, \
+    VEGA_KEY_A_E_VaporLaneC, \
+    VEGA_KEY_A_E_VaporLaneD
+#define VEGA_KEY_A_E_FrostLanes \
+    VEGA_KEY_A_E_FrostLaneA, \
+    VEGA_KEY_A_E_FrostLaneB, \
+    VEGA_KEY_A_E_FrostLaneC, \
+    VEGA_KEY_A_E_FrostLaneD
+#define VEGA_KEY_A_E_IceLanes \
+    VEGA_KEY_A_E_IceLaneA, \
+    VEGA_KEY_A_E_IceLaneB, \
+    VEGA_KEY_A_E_IceLaneC, \
+    VEGA_KEY_A_E_IceLaneD
+#define VEGA_KEY_A_E \
+    { \
+        { VEGA_KEY_A_E_ArcaneLanes }, \
+        { VEGA_KEY_A_E_PlasmaLanes }, \
+        { VEGA_KEY_A_E_RainbowLanes }, \
+        { VEGA_KEY_A_E_WaterLanes }, \
+        { VEGA_KEY_A_E_VaporLanes }, \
+        { VEGA_KEY_A_E_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_A_F
 #define VEGA_KEY_A_F_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 2U))
@@ -1323,6 +1548,51 @@ public:
 #define VEGA_KEY_A_F_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 5U))
 #define VEGA_KEY_A_F_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 3U))
 #define VEGA_KEY_A_F_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 4U))
+#define VEGA_KEY_A_F_ArcaneLanes \
+    VEGA_KEY_A_F_ArcaneLaneA, \
+    VEGA_KEY_A_F_ArcaneLaneB, \
+    VEGA_KEY_A_F_ArcaneLaneC, \
+    VEGA_KEY_A_F_ArcaneLaneD
+#define VEGA_KEY_A_F_PlasmaLanes \
+    VEGA_KEY_A_F_PlasmaLaneA, \
+    VEGA_KEY_A_F_PlasmaLaneB, \
+    VEGA_KEY_A_F_PlasmaLaneC, \
+    VEGA_KEY_A_F_PlasmaLaneD
+#define VEGA_KEY_A_F_RainbowLanes \
+    VEGA_KEY_A_F_RainbowLaneA, \
+    VEGA_KEY_A_F_RainbowLaneB, \
+    VEGA_KEY_A_F_RainbowLaneC, \
+    VEGA_KEY_A_F_RainbowLaneD
+#define VEGA_KEY_A_F_WaterLanes \
+    VEGA_KEY_A_F_WaterLaneA, \
+    VEGA_KEY_A_F_WaterLaneB, \
+    VEGA_KEY_A_F_WaterLaneC, \
+    VEGA_KEY_A_F_WaterLaneD
+#define VEGA_KEY_A_F_VaporLanes \
+    VEGA_KEY_A_F_VaporLaneA, \
+    VEGA_KEY_A_F_VaporLaneB, \
+    VEGA_KEY_A_F_VaporLaneC, \
+    VEGA_KEY_A_F_VaporLaneD
+#define VEGA_KEY_A_F_FrostLanes \
+    VEGA_KEY_A_F_FrostLaneA, \
+    VEGA_KEY_A_F_FrostLaneB, \
+    VEGA_KEY_A_F_FrostLaneC, \
+    VEGA_KEY_A_F_FrostLaneD
+#define VEGA_KEY_A_F_IceLanes \
+    VEGA_KEY_A_F_IceLaneA, \
+    VEGA_KEY_A_F_IceLaneB, \
+    VEGA_KEY_A_F_IceLaneC, \
+    VEGA_KEY_A_F_IceLaneD
+#define VEGA_KEY_A_F \
+    { \
+        { VEGA_KEY_A_F_ArcaneLanes }, \
+        { VEGA_KEY_A_F_PlasmaLanes }, \
+        { VEGA_KEY_A_F_RainbowLanes }, \
+        { VEGA_KEY_A_F_WaterLanes }, \
+        { VEGA_KEY_A_F_VaporLanes }, \
+        { VEGA_KEY_A_F_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_A_G
 #define VEGA_KEY_A_G_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 1U))
@@ -1441,6 +1711,51 @@ public:
 #define VEGA_KEY_A_G_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 6U))
 #define VEGA_KEY_A_G_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 0U))
 #define VEGA_KEY_A_G_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 5U))
+#define VEGA_KEY_A_G_ArcaneLanes \
+    VEGA_KEY_A_G_ArcaneLaneA, \
+    VEGA_KEY_A_G_ArcaneLaneB, \
+    VEGA_KEY_A_G_ArcaneLaneC, \
+    VEGA_KEY_A_G_ArcaneLaneD
+#define VEGA_KEY_A_G_PlasmaLanes \
+    VEGA_KEY_A_G_PlasmaLaneA, \
+    VEGA_KEY_A_G_PlasmaLaneB, \
+    VEGA_KEY_A_G_PlasmaLaneC, \
+    VEGA_KEY_A_G_PlasmaLaneD
+#define VEGA_KEY_A_G_RainbowLanes \
+    VEGA_KEY_A_G_RainbowLaneA, \
+    VEGA_KEY_A_G_RainbowLaneB, \
+    VEGA_KEY_A_G_RainbowLaneC, \
+    VEGA_KEY_A_G_RainbowLaneD
+#define VEGA_KEY_A_G_WaterLanes \
+    VEGA_KEY_A_G_WaterLaneA, \
+    VEGA_KEY_A_G_WaterLaneB, \
+    VEGA_KEY_A_G_WaterLaneC, \
+    VEGA_KEY_A_G_WaterLaneD
+#define VEGA_KEY_A_G_VaporLanes \
+    VEGA_KEY_A_G_VaporLaneA, \
+    VEGA_KEY_A_G_VaporLaneB, \
+    VEGA_KEY_A_G_VaporLaneC, \
+    VEGA_KEY_A_G_VaporLaneD
+#define VEGA_KEY_A_G_FrostLanes \
+    VEGA_KEY_A_G_FrostLaneA, \
+    VEGA_KEY_A_G_FrostLaneB, \
+    VEGA_KEY_A_G_FrostLaneC, \
+    VEGA_KEY_A_G_FrostLaneD
+#define VEGA_KEY_A_G_IceLanes \
+    VEGA_KEY_A_G_IceLaneA, \
+    VEGA_KEY_A_G_IceLaneB, \
+    VEGA_KEY_A_G_IceLaneC, \
+    VEGA_KEY_A_G_IceLaneD
+#define VEGA_KEY_A_G \
+    { \
+        { VEGA_KEY_A_G_ArcaneLanes }, \
+        { VEGA_KEY_A_G_PlasmaLanes }, \
+        { VEGA_KEY_A_G_RainbowLanes }, \
+        { VEGA_KEY_A_G_WaterLanes }, \
+        { VEGA_KEY_A_G_VaporLanes }, \
+        { VEGA_KEY_A_G_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_A_H
 #define VEGA_KEY_A_H_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 5U))
@@ -1559,6 +1874,51 @@ public:
 #define VEGA_KEY_A_H_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 2U))
 #define VEGA_KEY_A_H_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 9U))
 #define VEGA_KEY_A_H_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 10U))
+#define VEGA_KEY_A_H_ArcaneLanes \
+    VEGA_KEY_A_H_ArcaneLaneA, \
+    VEGA_KEY_A_H_ArcaneLaneB, \
+    VEGA_KEY_A_H_ArcaneLaneC, \
+    VEGA_KEY_A_H_ArcaneLaneD
+#define VEGA_KEY_A_H_PlasmaLanes \
+    VEGA_KEY_A_H_PlasmaLaneA, \
+    VEGA_KEY_A_H_PlasmaLaneB, \
+    VEGA_KEY_A_H_PlasmaLaneC, \
+    VEGA_KEY_A_H_PlasmaLaneD
+#define VEGA_KEY_A_H_RainbowLanes \
+    VEGA_KEY_A_H_RainbowLaneA, \
+    VEGA_KEY_A_H_RainbowLaneB, \
+    VEGA_KEY_A_H_RainbowLaneC, \
+    VEGA_KEY_A_H_RainbowLaneD
+#define VEGA_KEY_A_H_WaterLanes \
+    VEGA_KEY_A_H_WaterLaneA, \
+    VEGA_KEY_A_H_WaterLaneB, \
+    VEGA_KEY_A_H_WaterLaneC, \
+    VEGA_KEY_A_H_WaterLaneD
+#define VEGA_KEY_A_H_VaporLanes \
+    VEGA_KEY_A_H_VaporLaneA, \
+    VEGA_KEY_A_H_VaporLaneB, \
+    VEGA_KEY_A_H_VaporLaneC, \
+    VEGA_KEY_A_H_VaporLaneD
+#define VEGA_KEY_A_H_FrostLanes \
+    VEGA_KEY_A_H_FrostLaneA, \
+    VEGA_KEY_A_H_FrostLaneB, \
+    VEGA_KEY_A_H_FrostLaneC, \
+    VEGA_KEY_A_H_FrostLaneD
+#define VEGA_KEY_A_H_IceLanes \
+    VEGA_KEY_A_H_IceLaneA, \
+    VEGA_KEY_A_H_IceLaneB, \
+    VEGA_KEY_A_H_IceLaneC, \
+    VEGA_KEY_A_H_IceLaneD
+#define VEGA_KEY_A_H \
+    { \
+        { VEGA_KEY_A_H_ArcaneLanes }, \
+        { VEGA_KEY_A_H_PlasmaLanes }, \
+        { VEGA_KEY_A_H_RainbowLanes }, \
+        { VEGA_KEY_A_H_WaterLanes }, \
+        { VEGA_KEY_A_H_VaporLanes }, \
+        { VEGA_KEY_A_H_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_B_A
 #define VEGA_KEY_B_A_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 13U))
@@ -1677,6 +2037,51 @@ public:
 #define VEGA_KEY_B_A_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 11U))
 #define VEGA_KEY_B_A_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 4U))
 #define VEGA_KEY_B_A_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 0U))
+#define VEGA_KEY_B_A_ArcaneLanes \
+    VEGA_KEY_B_A_ArcaneLaneA, \
+    VEGA_KEY_B_A_ArcaneLaneB, \
+    VEGA_KEY_B_A_ArcaneLaneC, \
+    VEGA_KEY_B_A_ArcaneLaneD
+#define VEGA_KEY_B_A_PlasmaLanes \
+    VEGA_KEY_B_A_PlasmaLaneA, \
+    VEGA_KEY_B_A_PlasmaLaneB, \
+    VEGA_KEY_B_A_PlasmaLaneC, \
+    VEGA_KEY_B_A_PlasmaLaneD
+#define VEGA_KEY_B_A_RainbowLanes \
+    VEGA_KEY_B_A_RainbowLaneA, \
+    VEGA_KEY_B_A_RainbowLaneB, \
+    VEGA_KEY_B_A_RainbowLaneC, \
+    VEGA_KEY_B_A_RainbowLaneD
+#define VEGA_KEY_B_A_WaterLanes \
+    VEGA_KEY_B_A_WaterLaneA, \
+    VEGA_KEY_B_A_WaterLaneB, \
+    VEGA_KEY_B_A_WaterLaneC, \
+    VEGA_KEY_B_A_WaterLaneD
+#define VEGA_KEY_B_A_VaporLanes \
+    VEGA_KEY_B_A_VaporLaneA, \
+    VEGA_KEY_B_A_VaporLaneB, \
+    VEGA_KEY_B_A_VaporLaneC, \
+    VEGA_KEY_B_A_VaporLaneD
+#define VEGA_KEY_B_A_FrostLanes \
+    VEGA_KEY_B_A_FrostLaneA, \
+    VEGA_KEY_B_A_FrostLaneB, \
+    VEGA_KEY_B_A_FrostLaneC, \
+    VEGA_KEY_B_A_FrostLaneD
+#define VEGA_KEY_B_A_IceLanes \
+    VEGA_KEY_B_A_IceLaneA, \
+    VEGA_KEY_B_A_IceLaneB, \
+    VEGA_KEY_B_A_IceLaneC, \
+    VEGA_KEY_B_A_IceLaneD
+#define VEGA_KEY_B_A \
+    { \
+        { VEGA_KEY_B_A_ArcaneLanes }, \
+        { VEGA_KEY_B_A_PlasmaLanes }, \
+        { VEGA_KEY_B_A_RainbowLanes }, \
+        { VEGA_KEY_B_A_WaterLanes }, \
+        { VEGA_KEY_B_A_VaporLanes }, \
+        { VEGA_KEY_B_A_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }
 
 // KEY_B_B
 #define VEGA_KEY_B_B_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 3U))
@@ -1795,6 +2200,51 @@ public:
 #define VEGA_KEY_B_B_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 9U))
 #define VEGA_KEY_B_B_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 11U))
 #define VEGA_KEY_B_B_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 6U))
+#define VEGA_KEY_B_B_ArcaneLanes \
+    VEGA_KEY_B_B_ArcaneLaneA, \
+    VEGA_KEY_B_B_ArcaneLaneB, \
+    VEGA_KEY_B_B_ArcaneLaneC, \
+    VEGA_KEY_B_B_ArcaneLaneD
+#define VEGA_KEY_B_B_PlasmaLanes \
+    VEGA_KEY_B_B_PlasmaLaneA, \
+    VEGA_KEY_B_B_PlasmaLaneB, \
+    VEGA_KEY_B_B_PlasmaLaneC, \
+    VEGA_KEY_B_B_PlasmaLaneD
+#define VEGA_KEY_B_B_RainbowLanes \
+    VEGA_KEY_B_B_RainbowLaneA, \
+    VEGA_KEY_B_B_RainbowLaneB, \
+    VEGA_KEY_B_B_RainbowLaneC, \
+    VEGA_KEY_B_B_RainbowLaneD
+#define VEGA_KEY_B_B_WaterLanes \
+    VEGA_KEY_B_B_WaterLaneA, \
+    VEGA_KEY_B_B_WaterLaneB, \
+    VEGA_KEY_B_B_WaterLaneC, \
+    VEGA_KEY_B_B_WaterLaneD
+#define VEGA_KEY_B_B_VaporLanes \
+    VEGA_KEY_B_B_VaporLaneA, \
+    VEGA_KEY_B_B_VaporLaneB, \
+    VEGA_KEY_B_B_VaporLaneC, \
+    VEGA_KEY_B_B_VaporLaneD
+#define VEGA_KEY_B_B_FrostLanes \
+    VEGA_KEY_B_B_FrostLaneA, \
+    VEGA_KEY_B_B_FrostLaneB, \
+    VEGA_KEY_B_B_FrostLaneC, \
+    VEGA_KEY_B_B_FrostLaneD
+#define VEGA_KEY_B_B_IceLanes \
+    VEGA_KEY_B_B_IceLaneA, \
+    VEGA_KEY_B_B_IceLaneB, \
+    VEGA_KEY_B_B_IceLaneC, \
+    VEGA_KEY_B_B_IceLaneD
+#define VEGA_KEY_B_B \
+    { \
+        { VEGA_KEY_B_B_ArcaneLanes }, \
+        { VEGA_KEY_B_B_PlasmaLanes }, \
+        { VEGA_KEY_B_B_RainbowLanes }, \
+        { VEGA_KEY_B_B_WaterLanes }, \
+        { VEGA_KEY_B_B_VaporLanes }, \
+        { VEGA_KEY_B_B_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }
 
 // KEY_B_C
 #define VEGA_KEY_B_C_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 10U))
@@ -1913,6 +2363,51 @@ public:
 #define VEGA_KEY_B_C_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 7U))
 #define VEGA_KEY_B_C_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 14U))
 #define VEGA_KEY_B_C_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 8U))
+#define VEGA_KEY_B_C_ArcaneLanes \
+    VEGA_KEY_B_C_ArcaneLaneA, \
+    VEGA_KEY_B_C_ArcaneLaneB, \
+    VEGA_KEY_B_C_ArcaneLaneC, \
+    VEGA_KEY_B_C_ArcaneLaneD
+#define VEGA_KEY_B_C_PlasmaLanes \
+    VEGA_KEY_B_C_PlasmaLaneA, \
+    VEGA_KEY_B_C_PlasmaLaneB, \
+    VEGA_KEY_B_C_PlasmaLaneC, \
+    VEGA_KEY_B_C_PlasmaLaneD
+#define VEGA_KEY_B_C_RainbowLanes \
+    VEGA_KEY_B_C_RainbowLaneA, \
+    VEGA_KEY_B_C_RainbowLaneB, \
+    VEGA_KEY_B_C_RainbowLaneC, \
+    VEGA_KEY_B_C_RainbowLaneD
+#define VEGA_KEY_B_C_WaterLanes \
+    VEGA_KEY_B_C_WaterLaneA, \
+    VEGA_KEY_B_C_WaterLaneB, \
+    VEGA_KEY_B_C_WaterLaneC, \
+    VEGA_KEY_B_C_WaterLaneD
+#define VEGA_KEY_B_C_VaporLanes \
+    VEGA_KEY_B_C_VaporLaneA, \
+    VEGA_KEY_B_C_VaporLaneB, \
+    VEGA_KEY_B_C_VaporLaneC, \
+    VEGA_KEY_B_C_VaporLaneD
+#define VEGA_KEY_B_C_FrostLanes \
+    VEGA_KEY_B_C_FrostLaneA, \
+    VEGA_KEY_B_C_FrostLaneB, \
+    VEGA_KEY_B_C_FrostLaneC, \
+    VEGA_KEY_B_C_FrostLaneD
+#define VEGA_KEY_B_C_IceLanes \
+    VEGA_KEY_B_C_IceLaneA, \
+    VEGA_KEY_B_C_IceLaneB, \
+    VEGA_KEY_B_C_IceLaneC, \
+    VEGA_KEY_B_C_IceLaneD
+#define VEGA_KEY_B_C \
+    { \
+        { VEGA_KEY_B_C_ArcaneLanes }, \
+        { VEGA_KEY_B_C_PlasmaLanes }, \
+        { VEGA_KEY_B_C_RainbowLanes }, \
+        { VEGA_KEY_B_C_WaterLanes }, \
+        { VEGA_KEY_B_C_VaporLanes }, \
+        { VEGA_KEY_B_C_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }
 
 // KEY_B_D
 #define VEGA_KEY_B_D_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 4U))
@@ -2031,6 +2526,51 @@ public:
 #define VEGA_KEY_B_D_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 3U))
 #define VEGA_KEY_B_D_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 1U))
 #define VEGA_KEY_B_D_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 7U))
+#define VEGA_KEY_B_D_ArcaneLanes \
+    VEGA_KEY_B_D_ArcaneLaneA, \
+    VEGA_KEY_B_D_ArcaneLaneB, \
+    VEGA_KEY_B_D_ArcaneLaneC, \
+    VEGA_KEY_B_D_ArcaneLaneD
+#define VEGA_KEY_B_D_PlasmaLanes \
+    VEGA_KEY_B_D_PlasmaLaneA, \
+    VEGA_KEY_B_D_PlasmaLaneB, \
+    VEGA_KEY_B_D_PlasmaLaneC, \
+    VEGA_KEY_B_D_PlasmaLaneD
+#define VEGA_KEY_B_D_RainbowLanes \
+    VEGA_KEY_B_D_RainbowLaneA, \
+    VEGA_KEY_B_D_RainbowLaneB, \
+    VEGA_KEY_B_D_RainbowLaneC, \
+    VEGA_KEY_B_D_RainbowLaneD
+#define VEGA_KEY_B_D_WaterLanes \
+    VEGA_KEY_B_D_WaterLaneA, \
+    VEGA_KEY_B_D_WaterLaneB, \
+    VEGA_KEY_B_D_WaterLaneC, \
+    VEGA_KEY_B_D_WaterLaneD
+#define VEGA_KEY_B_D_VaporLanes \
+    VEGA_KEY_B_D_VaporLaneA, \
+    VEGA_KEY_B_D_VaporLaneB, \
+    VEGA_KEY_B_D_VaporLaneC, \
+    VEGA_KEY_B_D_VaporLaneD
+#define VEGA_KEY_B_D_FrostLanes \
+    VEGA_KEY_B_D_FrostLaneA, \
+    VEGA_KEY_B_D_FrostLaneB, \
+    VEGA_KEY_B_D_FrostLaneC, \
+    VEGA_KEY_B_D_FrostLaneD
+#define VEGA_KEY_B_D_IceLanes \
+    VEGA_KEY_B_D_IceLaneA, \
+    VEGA_KEY_B_D_IceLaneB, \
+    VEGA_KEY_B_D_IceLaneC, \
+    VEGA_KEY_B_D_IceLaneD
+#define VEGA_KEY_B_D \
+    { \
+        { VEGA_KEY_B_D_ArcaneLanes }, \
+        { VEGA_KEY_B_D_PlasmaLanes }, \
+        { VEGA_KEY_B_D_RainbowLanes }, \
+        { VEGA_KEY_B_D_WaterLanes }, \
+        { VEGA_KEY_B_D_VaporLanes }, \
+        { VEGA_KEY_B_D_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }
 
 // KEY_B_E
 #define VEGA_KEY_B_E_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 0U))
@@ -2149,6 +2689,51 @@ public:
 #define VEGA_KEY_B_E_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 10U))
 #define VEGA_KEY_B_E_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 6U))
 #define VEGA_KEY_B_E_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 15U))
+#define VEGA_KEY_B_E_ArcaneLanes \
+    VEGA_KEY_B_E_ArcaneLaneA, \
+    VEGA_KEY_B_E_ArcaneLaneB, \
+    VEGA_KEY_B_E_ArcaneLaneC, \
+    VEGA_KEY_B_E_ArcaneLaneD
+#define VEGA_KEY_B_E_PlasmaLanes \
+    VEGA_KEY_B_E_PlasmaLaneA, \
+    VEGA_KEY_B_E_PlasmaLaneB, \
+    VEGA_KEY_B_E_PlasmaLaneC, \
+    VEGA_KEY_B_E_PlasmaLaneD
+#define VEGA_KEY_B_E_RainbowLanes \
+    VEGA_KEY_B_E_RainbowLaneA, \
+    VEGA_KEY_B_E_RainbowLaneB, \
+    VEGA_KEY_B_E_RainbowLaneC, \
+    VEGA_KEY_B_E_RainbowLaneD
+#define VEGA_KEY_B_E_WaterLanes \
+    VEGA_KEY_B_E_WaterLaneA, \
+    VEGA_KEY_B_E_WaterLaneB, \
+    VEGA_KEY_B_E_WaterLaneC, \
+    VEGA_KEY_B_E_WaterLaneD
+#define VEGA_KEY_B_E_VaporLanes \
+    VEGA_KEY_B_E_VaporLaneA, \
+    VEGA_KEY_B_E_VaporLaneB, \
+    VEGA_KEY_B_E_VaporLaneC, \
+    VEGA_KEY_B_E_VaporLaneD
+#define VEGA_KEY_B_E_FrostLanes \
+    VEGA_KEY_B_E_FrostLaneA, \
+    VEGA_KEY_B_E_FrostLaneB, \
+    VEGA_KEY_B_E_FrostLaneC, \
+    VEGA_KEY_B_E_FrostLaneD
+#define VEGA_KEY_B_E_IceLanes \
+    VEGA_KEY_B_E_IceLaneA, \
+    VEGA_KEY_B_E_IceLaneB, \
+    VEGA_KEY_B_E_IceLaneC, \
+    VEGA_KEY_B_E_IceLaneD
+#define VEGA_KEY_B_E \
+    { \
+        { VEGA_KEY_B_E_ArcaneLanes }, \
+        { VEGA_KEY_B_E_PlasmaLanes }, \
+        { VEGA_KEY_B_E_RainbowLanes }, \
+        { VEGA_KEY_B_E_WaterLanes }, \
+        { VEGA_KEY_B_E_VaporLanes }, \
+        { VEGA_KEY_B_E_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }
 
 // KEY_B_F
 #define VEGA_KEY_B_F_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 8U))
@@ -2267,6 +2852,51 @@ public:
 #define VEGA_KEY_B_F_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 0U))
 #define VEGA_KEY_B_F_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 13U))
 #define VEGA_KEY_B_F_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 3U))
+#define VEGA_KEY_B_F_ArcaneLanes \
+    VEGA_KEY_B_F_ArcaneLaneA, \
+    VEGA_KEY_B_F_ArcaneLaneB, \
+    VEGA_KEY_B_F_ArcaneLaneC, \
+    VEGA_KEY_B_F_ArcaneLaneD
+#define VEGA_KEY_B_F_PlasmaLanes \
+    VEGA_KEY_B_F_PlasmaLaneA, \
+    VEGA_KEY_B_F_PlasmaLaneB, \
+    VEGA_KEY_B_F_PlasmaLaneC, \
+    VEGA_KEY_B_F_PlasmaLaneD
+#define VEGA_KEY_B_F_RainbowLanes \
+    VEGA_KEY_B_F_RainbowLaneA, \
+    VEGA_KEY_B_F_RainbowLaneB, \
+    VEGA_KEY_B_F_RainbowLaneC, \
+    VEGA_KEY_B_F_RainbowLaneD
+#define VEGA_KEY_B_F_WaterLanes \
+    VEGA_KEY_B_F_WaterLaneA, \
+    VEGA_KEY_B_F_WaterLaneB, \
+    VEGA_KEY_B_F_WaterLaneC, \
+    VEGA_KEY_B_F_WaterLaneD
+#define VEGA_KEY_B_F_VaporLanes \
+    VEGA_KEY_B_F_VaporLaneA, \
+    VEGA_KEY_B_F_VaporLaneB, \
+    VEGA_KEY_B_F_VaporLaneC, \
+    VEGA_KEY_B_F_VaporLaneD
+#define VEGA_KEY_B_F_FrostLanes \
+    VEGA_KEY_B_F_FrostLaneA, \
+    VEGA_KEY_B_F_FrostLaneB, \
+    VEGA_KEY_B_F_FrostLaneC, \
+    VEGA_KEY_B_F_FrostLaneD
+#define VEGA_KEY_B_F_IceLanes \
+    VEGA_KEY_B_F_IceLaneA, \
+    VEGA_KEY_B_F_IceLaneB, \
+    VEGA_KEY_B_F_IceLaneC, \
+    VEGA_KEY_B_F_IceLaneD
+#define VEGA_KEY_B_F \
+    { \
+        { VEGA_KEY_B_F_ArcaneLanes }, \
+        { VEGA_KEY_B_F_PlasmaLanes }, \
+        { VEGA_KEY_B_F_RainbowLanes }, \
+        { VEGA_KEY_B_F_WaterLanes }, \
+        { VEGA_KEY_B_F_VaporLanes }, \
+        { VEGA_KEY_B_F_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }
 
 // KEY_B_G
 #define VEGA_KEY_B_G_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 6U))
@@ -2385,6 +3015,51 @@ public:
 #define VEGA_KEY_B_G_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 8U))
 #define VEGA_KEY_B_G_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 12U))
 #define VEGA_KEY_B_G_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 2U))
+#define VEGA_KEY_B_G_ArcaneLanes \
+    VEGA_KEY_B_G_ArcaneLaneA, \
+    VEGA_KEY_B_G_ArcaneLaneB, \
+    VEGA_KEY_B_G_ArcaneLaneC, \
+    VEGA_KEY_B_G_ArcaneLaneD
+#define VEGA_KEY_B_G_PlasmaLanes \
+    VEGA_KEY_B_G_PlasmaLaneA, \
+    VEGA_KEY_B_G_PlasmaLaneB, \
+    VEGA_KEY_B_G_PlasmaLaneC, \
+    VEGA_KEY_B_G_PlasmaLaneD
+#define VEGA_KEY_B_G_RainbowLanes \
+    VEGA_KEY_B_G_RainbowLaneA, \
+    VEGA_KEY_B_G_RainbowLaneB, \
+    VEGA_KEY_B_G_RainbowLaneC, \
+    VEGA_KEY_B_G_RainbowLaneD
+#define VEGA_KEY_B_G_WaterLanes \
+    VEGA_KEY_B_G_WaterLaneA, \
+    VEGA_KEY_B_G_WaterLaneB, \
+    VEGA_KEY_B_G_WaterLaneC, \
+    VEGA_KEY_B_G_WaterLaneD
+#define VEGA_KEY_B_G_VaporLanes \
+    VEGA_KEY_B_G_VaporLaneA, \
+    VEGA_KEY_B_G_VaporLaneB, \
+    VEGA_KEY_B_G_VaporLaneC, \
+    VEGA_KEY_B_G_VaporLaneD
+#define VEGA_KEY_B_G_FrostLanes \
+    VEGA_KEY_B_G_FrostLaneA, \
+    VEGA_KEY_B_G_FrostLaneB, \
+    VEGA_KEY_B_G_FrostLaneC, \
+    VEGA_KEY_B_G_FrostLaneD
+#define VEGA_KEY_B_G_IceLanes \
+    VEGA_KEY_B_G_IceLaneA, \
+    VEGA_KEY_B_G_IceLaneB, \
+    VEGA_KEY_B_G_IceLaneC, \
+    VEGA_KEY_B_G_IceLaneD
+#define VEGA_KEY_B_G \
+    { \
+        { VEGA_KEY_B_G_ArcaneLanes }, \
+        { VEGA_KEY_B_G_PlasmaLanes }, \
+        { VEGA_KEY_B_G_RainbowLanes }, \
+        { VEGA_KEY_B_G_WaterLanes }, \
+        { VEGA_KEY_B_G_VaporLanes }, \
+        { VEGA_KEY_B_G_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }
 
 // KEY_B_H
 #define VEGA_KEY_B_H_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 11U))
@@ -2503,3 +3178,48 @@ public:
 #define VEGA_KEY_B_H_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 15U))
 #define VEGA_KEY_B_H_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 5U))
 #define VEGA_KEY_B_H_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 11U))
+#define VEGA_KEY_B_H_ArcaneLanes \
+    VEGA_KEY_B_H_ArcaneLaneA, \
+    VEGA_KEY_B_H_ArcaneLaneB, \
+    VEGA_KEY_B_H_ArcaneLaneC, \
+    VEGA_KEY_B_H_ArcaneLaneD
+#define VEGA_KEY_B_H_PlasmaLanes \
+    VEGA_KEY_B_H_PlasmaLaneA, \
+    VEGA_KEY_B_H_PlasmaLaneB, \
+    VEGA_KEY_B_H_PlasmaLaneC, \
+    VEGA_KEY_B_H_PlasmaLaneD
+#define VEGA_KEY_B_H_RainbowLanes \
+    VEGA_KEY_B_H_RainbowLaneA, \
+    VEGA_KEY_B_H_RainbowLaneB, \
+    VEGA_KEY_B_H_RainbowLaneC, \
+    VEGA_KEY_B_H_RainbowLaneD
+#define VEGA_KEY_B_H_WaterLanes \
+    VEGA_KEY_B_H_WaterLaneA, \
+    VEGA_KEY_B_H_WaterLaneB, \
+    VEGA_KEY_B_H_WaterLaneC, \
+    VEGA_KEY_B_H_WaterLaneD
+#define VEGA_KEY_B_H_VaporLanes \
+    VEGA_KEY_B_H_VaporLaneA, \
+    VEGA_KEY_B_H_VaporLaneB, \
+    VEGA_KEY_B_H_VaporLaneC, \
+    VEGA_KEY_B_H_VaporLaneD
+#define VEGA_KEY_B_H_FrostLanes \
+    VEGA_KEY_B_H_FrostLaneA, \
+    VEGA_KEY_B_H_FrostLaneB, \
+    VEGA_KEY_B_H_FrostLaneC, \
+    VEGA_KEY_B_H_FrostLaneD
+#define VEGA_KEY_B_H_IceLanes \
+    VEGA_KEY_B_H_IceLaneA, \
+    VEGA_KEY_B_H_IceLaneB, \
+    VEGA_KEY_B_H_IceLaneC, \
+    VEGA_KEY_B_H_IceLaneD
+#define VEGA_KEY_B_H \
+    { \
+        { VEGA_KEY_B_H_ArcaneLanes }, \
+        { VEGA_KEY_B_H_PlasmaLanes }, \
+        { VEGA_KEY_B_H_RainbowLanes }, \
+        { VEGA_KEY_B_H_WaterLanes }, \
+        { VEGA_KEY_B_H_VaporLanes }, \
+        { VEGA_KEY_B_H_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }

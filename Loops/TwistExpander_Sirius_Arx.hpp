@@ -733,6 +733,51 @@ public:
 #define SIRIUS_KEY_A_A_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 2U))
 #define SIRIUS_KEY_A_A_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 9U))
 #define SIRIUS_KEY_A_A_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 10U))
+#define SIRIUS_KEY_A_A_ArcaneLanes \
+    SIRIUS_KEY_A_A_ArcaneLaneA, \
+    SIRIUS_KEY_A_A_ArcaneLaneB, \
+    SIRIUS_KEY_A_A_ArcaneLaneC, \
+    SIRIUS_KEY_A_A_ArcaneLaneD
+#define SIRIUS_KEY_A_A_PlasmaLanes \
+    SIRIUS_KEY_A_A_PlasmaLaneA, \
+    SIRIUS_KEY_A_A_PlasmaLaneB, \
+    SIRIUS_KEY_A_A_PlasmaLaneC, \
+    SIRIUS_KEY_A_A_PlasmaLaneD
+#define SIRIUS_KEY_A_A_RainbowLanes \
+    SIRIUS_KEY_A_A_RainbowLaneA, \
+    SIRIUS_KEY_A_A_RainbowLaneB, \
+    SIRIUS_KEY_A_A_RainbowLaneC, \
+    SIRIUS_KEY_A_A_RainbowLaneD
+#define SIRIUS_KEY_A_A_WaterLanes \
+    SIRIUS_KEY_A_A_WaterLaneA, \
+    SIRIUS_KEY_A_A_WaterLaneB, \
+    SIRIUS_KEY_A_A_WaterLaneC, \
+    SIRIUS_KEY_A_A_WaterLaneD
+#define SIRIUS_KEY_A_A_VaporLanes \
+    SIRIUS_KEY_A_A_VaporLaneA, \
+    SIRIUS_KEY_A_A_VaporLaneB, \
+    SIRIUS_KEY_A_A_VaporLaneC, \
+    SIRIUS_KEY_A_A_VaporLaneD
+#define SIRIUS_KEY_A_A_FrostLanes \
+    SIRIUS_KEY_A_A_FrostLaneA, \
+    SIRIUS_KEY_A_A_FrostLaneB, \
+    SIRIUS_KEY_A_A_FrostLaneC, \
+    SIRIUS_KEY_A_A_FrostLaneD
+#define SIRIUS_KEY_A_A_IceLanes \
+    SIRIUS_KEY_A_A_IceLaneA, \
+    SIRIUS_KEY_A_A_IceLaneB, \
+    SIRIUS_KEY_A_A_IceLaneC, \
+    SIRIUS_KEY_A_A_IceLaneD
+#define SIRIUS_KEY_A_A \
+    { \
+        { SIRIUS_KEY_A_A_ArcaneLanes }, \
+        { SIRIUS_KEY_A_A_PlasmaLanes }, \
+        { SIRIUS_KEY_A_A_RainbowLanes }, \
+        { SIRIUS_KEY_A_A_WaterLanes }, \
+        { SIRIUS_KEY_A_A_VaporLanes }, \
+        { SIRIUS_KEY_A_A_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_A_B
 #define SIRIUS_KEY_A_B_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 7U))
@@ -851,6 +896,51 @@ public:
 #define SIRIUS_KEY_A_B_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 8U))
 #define SIRIUS_KEY_A_B_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 12U))
 #define SIRIUS_KEY_A_B_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 2U))
+#define SIRIUS_KEY_A_B_ArcaneLanes \
+    SIRIUS_KEY_A_B_ArcaneLaneA, \
+    SIRIUS_KEY_A_B_ArcaneLaneB, \
+    SIRIUS_KEY_A_B_ArcaneLaneC, \
+    SIRIUS_KEY_A_B_ArcaneLaneD
+#define SIRIUS_KEY_A_B_PlasmaLanes \
+    SIRIUS_KEY_A_B_PlasmaLaneA, \
+    SIRIUS_KEY_A_B_PlasmaLaneB, \
+    SIRIUS_KEY_A_B_PlasmaLaneC, \
+    SIRIUS_KEY_A_B_PlasmaLaneD
+#define SIRIUS_KEY_A_B_RainbowLanes \
+    SIRIUS_KEY_A_B_RainbowLaneA, \
+    SIRIUS_KEY_A_B_RainbowLaneB, \
+    SIRIUS_KEY_A_B_RainbowLaneC, \
+    SIRIUS_KEY_A_B_RainbowLaneD
+#define SIRIUS_KEY_A_B_WaterLanes \
+    SIRIUS_KEY_A_B_WaterLaneA, \
+    SIRIUS_KEY_A_B_WaterLaneB, \
+    SIRIUS_KEY_A_B_WaterLaneC, \
+    SIRIUS_KEY_A_B_WaterLaneD
+#define SIRIUS_KEY_A_B_VaporLanes \
+    SIRIUS_KEY_A_B_VaporLaneA, \
+    SIRIUS_KEY_A_B_VaporLaneB, \
+    SIRIUS_KEY_A_B_VaporLaneC, \
+    SIRIUS_KEY_A_B_VaporLaneD
+#define SIRIUS_KEY_A_B_FrostLanes \
+    SIRIUS_KEY_A_B_FrostLaneA, \
+    SIRIUS_KEY_A_B_FrostLaneB, \
+    SIRIUS_KEY_A_B_FrostLaneC, \
+    SIRIUS_KEY_A_B_FrostLaneD
+#define SIRIUS_KEY_A_B_IceLanes \
+    SIRIUS_KEY_A_B_IceLaneA, \
+    SIRIUS_KEY_A_B_IceLaneB, \
+    SIRIUS_KEY_A_B_IceLaneC, \
+    SIRIUS_KEY_A_B_IceLaneD
+#define SIRIUS_KEY_A_B \
+    { \
+        { SIRIUS_KEY_A_B_ArcaneLanes }, \
+        { SIRIUS_KEY_A_B_PlasmaLanes }, \
+        { SIRIUS_KEY_A_B_RainbowLanes }, \
+        { SIRIUS_KEY_A_B_WaterLanes }, \
+        { SIRIUS_KEY_A_B_VaporLanes }, \
+        { SIRIUS_KEY_A_B_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_A_C
 #define SIRIUS_KEY_A_C_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 1U))
@@ -969,6 +1059,51 @@ public:
 #define SIRIUS_KEY_A_C_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 0U))
 #define SIRIUS_KEY_A_C_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 13U))
 #define SIRIUS_KEY_A_C_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 3U))
+#define SIRIUS_KEY_A_C_ArcaneLanes \
+    SIRIUS_KEY_A_C_ArcaneLaneA, \
+    SIRIUS_KEY_A_C_ArcaneLaneB, \
+    SIRIUS_KEY_A_C_ArcaneLaneC, \
+    SIRIUS_KEY_A_C_ArcaneLaneD
+#define SIRIUS_KEY_A_C_PlasmaLanes \
+    SIRIUS_KEY_A_C_PlasmaLaneA, \
+    SIRIUS_KEY_A_C_PlasmaLaneB, \
+    SIRIUS_KEY_A_C_PlasmaLaneC, \
+    SIRIUS_KEY_A_C_PlasmaLaneD
+#define SIRIUS_KEY_A_C_RainbowLanes \
+    SIRIUS_KEY_A_C_RainbowLaneA, \
+    SIRIUS_KEY_A_C_RainbowLaneB, \
+    SIRIUS_KEY_A_C_RainbowLaneC, \
+    SIRIUS_KEY_A_C_RainbowLaneD
+#define SIRIUS_KEY_A_C_WaterLanes \
+    SIRIUS_KEY_A_C_WaterLaneA, \
+    SIRIUS_KEY_A_C_WaterLaneB, \
+    SIRIUS_KEY_A_C_WaterLaneC, \
+    SIRIUS_KEY_A_C_WaterLaneD
+#define SIRIUS_KEY_A_C_VaporLanes \
+    SIRIUS_KEY_A_C_VaporLaneA, \
+    SIRIUS_KEY_A_C_VaporLaneB, \
+    SIRIUS_KEY_A_C_VaporLaneC, \
+    SIRIUS_KEY_A_C_VaporLaneD
+#define SIRIUS_KEY_A_C_FrostLanes \
+    SIRIUS_KEY_A_C_FrostLaneA, \
+    SIRIUS_KEY_A_C_FrostLaneB, \
+    SIRIUS_KEY_A_C_FrostLaneC, \
+    SIRIUS_KEY_A_C_FrostLaneD
+#define SIRIUS_KEY_A_C_IceLanes \
+    SIRIUS_KEY_A_C_IceLaneA, \
+    SIRIUS_KEY_A_C_IceLaneB, \
+    SIRIUS_KEY_A_C_IceLaneC, \
+    SIRIUS_KEY_A_C_IceLaneD
+#define SIRIUS_KEY_A_C \
+    { \
+        { SIRIUS_KEY_A_C_ArcaneLanes }, \
+        { SIRIUS_KEY_A_C_PlasmaLanes }, \
+        { SIRIUS_KEY_A_C_RainbowLanes }, \
+        { SIRIUS_KEY_A_C_WaterLanes }, \
+        { SIRIUS_KEY_A_C_VaporLanes }, \
+        { SIRIUS_KEY_A_C_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_A_D
 #define SIRIUS_KEY_A_D_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 14U))
@@ -1087,6 +1222,51 @@ public:
 #define SIRIUS_KEY_A_D_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 3U))
 #define SIRIUS_KEY_A_D_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 1U))
 #define SIRIUS_KEY_A_D_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 7U))
+#define SIRIUS_KEY_A_D_ArcaneLanes \
+    SIRIUS_KEY_A_D_ArcaneLaneA, \
+    SIRIUS_KEY_A_D_ArcaneLaneB, \
+    SIRIUS_KEY_A_D_ArcaneLaneC, \
+    SIRIUS_KEY_A_D_ArcaneLaneD
+#define SIRIUS_KEY_A_D_PlasmaLanes \
+    SIRIUS_KEY_A_D_PlasmaLaneA, \
+    SIRIUS_KEY_A_D_PlasmaLaneB, \
+    SIRIUS_KEY_A_D_PlasmaLaneC, \
+    SIRIUS_KEY_A_D_PlasmaLaneD
+#define SIRIUS_KEY_A_D_RainbowLanes \
+    SIRIUS_KEY_A_D_RainbowLaneA, \
+    SIRIUS_KEY_A_D_RainbowLaneB, \
+    SIRIUS_KEY_A_D_RainbowLaneC, \
+    SIRIUS_KEY_A_D_RainbowLaneD
+#define SIRIUS_KEY_A_D_WaterLanes \
+    SIRIUS_KEY_A_D_WaterLaneA, \
+    SIRIUS_KEY_A_D_WaterLaneB, \
+    SIRIUS_KEY_A_D_WaterLaneC, \
+    SIRIUS_KEY_A_D_WaterLaneD
+#define SIRIUS_KEY_A_D_VaporLanes \
+    SIRIUS_KEY_A_D_VaporLaneA, \
+    SIRIUS_KEY_A_D_VaporLaneB, \
+    SIRIUS_KEY_A_D_VaporLaneC, \
+    SIRIUS_KEY_A_D_VaporLaneD
+#define SIRIUS_KEY_A_D_FrostLanes \
+    SIRIUS_KEY_A_D_FrostLaneA, \
+    SIRIUS_KEY_A_D_FrostLaneB, \
+    SIRIUS_KEY_A_D_FrostLaneC, \
+    SIRIUS_KEY_A_D_FrostLaneD
+#define SIRIUS_KEY_A_D_IceLanes \
+    SIRIUS_KEY_A_D_IceLaneA, \
+    SIRIUS_KEY_A_D_IceLaneB, \
+    SIRIUS_KEY_A_D_IceLaneC, \
+    SIRIUS_KEY_A_D_IceLaneD
+#define SIRIUS_KEY_A_D \
+    { \
+        { SIRIUS_KEY_A_D_ArcaneLanes }, \
+        { SIRIUS_KEY_A_D_PlasmaLanes }, \
+        { SIRIUS_KEY_A_D_RainbowLanes }, \
+        { SIRIUS_KEY_A_D_WaterLanes }, \
+        { SIRIUS_KEY_A_D_VaporLanes }, \
+        { SIRIUS_KEY_A_D_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_A_E
 #define SIRIUS_KEY_A_E_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 12U))
@@ -1205,6 +1385,51 @@ public:
 #define SIRIUS_KEY_A_E_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 7U))
 #define SIRIUS_KEY_A_E_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 14U))
 #define SIRIUS_KEY_A_E_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 8U))
+#define SIRIUS_KEY_A_E_ArcaneLanes \
+    SIRIUS_KEY_A_E_ArcaneLaneA, \
+    SIRIUS_KEY_A_E_ArcaneLaneB, \
+    SIRIUS_KEY_A_E_ArcaneLaneC, \
+    SIRIUS_KEY_A_E_ArcaneLaneD
+#define SIRIUS_KEY_A_E_PlasmaLanes \
+    SIRIUS_KEY_A_E_PlasmaLaneA, \
+    SIRIUS_KEY_A_E_PlasmaLaneB, \
+    SIRIUS_KEY_A_E_PlasmaLaneC, \
+    SIRIUS_KEY_A_E_PlasmaLaneD
+#define SIRIUS_KEY_A_E_RainbowLanes \
+    SIRIUS_KEY_A_E_RainbowLaneA, \
+    SIRIUS_KEY_A_E_RainbowLaneB, \
+    SIRIUS_KEY_A_E_RainbowLaneC, \
+    SIRIUS_KEY_A_E_RainbowLaneD
+#define SIRIUS_KEY_A_E_WaterLanes \
+    SIRIUS_KEY_A_E_WaterLaneA, \
+    SIRIUS_KEY_A_E_WaterLaneB, \
+    SIRIUS_KEY_A_E_WaterLaneC, \
+    SIRIUS_KEY_A_E_WaterLaneD
+#define SIRIUS_KEY_A_E_VaporLanes \
+    SIRIUS_KEY_A_E_VaporLaneA, \
+    SIRIUS_KEY_A_E_VaporLaneB, \
+    SIRIUS_KEY_A_E_VaporLaneC, \
+    SIRIUS_KEY_A_E_VaporLaneD
+#define SIRIUS_KEY_A_E_FrostLanes \
+    SIRIUS_KEY_A_E_FrostLaneA, \
+    SIRIUS_KEY_A_E_FrostLaneB, \
+    SIRIUS_KEY_A_E_FrostLaneC, \
+    SIRIUS_KEY_A_E_FrostLaneD
+#define SIRIUS_KEY_A_E_IceLanes \
+    SIRIUS_KEY_A_E_IceLaneA, \
+    SIRIUS_KEY_A_E_IceLaneB, \
+    SIRIUS_KEY_A_E_IceLaneC, \
+    SIRIUS_KEY_A_E_IceLaneD
+#define SIRIUS_KEY_A_E \
+    { \
+        { SIRIUS_KEY_A_E_ArcaneLanes }, \
+        { SIRIUS_KEY_A_E_PlasmaLanes }, \
+        { SIRIUS_KEY_A_E_RainbowLanes }, \
+        { SIRIUS_KEY_A_E_WaterLanes }, \
+        { SIRIUS_KEY_A_E_VaporLanes }, \
+        { SIRIUS_KEY_A_E_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_A_F
 #define SIRIUS_KEY_A_F_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 10U))
@@ -1323,6 +1548,51 @@ public:
 #define SIRIUS_KEY_A_F_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 11U))
 #define SIRIUS_KEY_A_F_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 4U))
 #define SIRIUS_KEY_A_F_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 0U))
+#define SIRIUS_KEY_A_F_ArcaneLanes \
+    SIRIUS_KEY_A_F_ArcaneLaneA, \
+    SIRIUS_KEY_A_F_ArcaneLaneB, \
+    SIRIUS_KEY_A_F_ArcaneLaneC, \
+    SIRIUS_KEY_A_F_ArcaneLaneD
+#define SIRIUS_KEY_A_F_PlasmaLanes \
+    SIRIUS_KEY_A_F_PlasmaLaneA, \
+    SIRIUS_KEY_A_F_PlasmaLaneB, \
+    SIRIUS_KEY_A_F_PlasmaLaneC, \
+    SIRIUS_KEY_A_F_PlasmaLaneD
+#define SIRIUS_KEY_A_F_RainbowLanes \
+    SIRIUS_KEY_A_F_RainbowLaneA, \
+    SIRIUS_KEY_A_F_RainbowLaneB, \
+    SIRIUS_KEY_A_F_RainbowLaneC, \
+    SIRIUS_KEY_A_F_RainbowLaneD
+#define SIRIUS_KEY_A_F_WaterLanes \
+    SIRIUS_KEY_A_F_WaterLaneA, \
+    SIRIUS_KEY_A_F_WaterLaneB, \
+    SIRIUS_KEY_A_F_WaterLaneC, \
+    SIRIUS_KEY_A_F_WaterLaneD
+#define SIRIUS_KEY_A_F_VaporLanes \
+    SIRIUS_KEY_A_F_VaporLaneA, \
+    SIRIUS_KEY_A_F_VaporLaneB, \
+    SIRIUS_KEY_A_F_VaporLaneC, \
+    SIRIUS_KEY_A_F_VaporLaneD
+#define SIRIUS_KEY_A_F_FrostLanes \
+    SIRIUS_KEY_A_F_FrostLaneA, \
+    SIRIUS_KEY_A_F_FrostLaneB, \
+    SIRIUS_KEY_A_F_FrostLaneC, \
+    SIRIUS_KEY_A_F_FrostLaneD
+#define SIRIUS_KEY_A_F_IceLanes \
+    SIRIUS_KEY_A_F_IceLaneA, \
+    SIRIUS_KEY_A_F_IceLaneB, \
+    SIRIUS_KEY_A_F_IceLaneC, \
+    SIRIUS_KEY_A_F_IceLaneD
+#define SIRIUS_KEY_A_F \
+    { \
+        { SIRIUS_KEY_A_F_ArcaneLanes }, \
+        { SIRIUS_KEY_A_F_PlasmaLanes }, \
+        { SIRIUS_KEY_A_F_RainbowLanes }, \
+        { SIRIUS_KEY_A_F_WaterLanes }, \
+        { SIRIUS_KEY_A_F_VaporLanes }, \
+        { SIRIUS_KEY_A_F_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_A_G
 #define SIRIUS_KEY_A_G_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 5U))
@@ -1441,6 +1711,51 @@ public:
 #define SIRIUS_KEY_A_G_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 15U))
 #define SIRIUS_KEY_A_G_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 5U))
 #define SIRIUS_KEY_A_G_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 11U))
+#define SIRIUS_KEY_A_G_ArcaneLanes \
+    SIRIUS_KEY_A_G_ArcaneLaneA, \
+    SIRIUS_KEY_A_G_ArcaneLaneB, \
+    SIRIUS_KEY_A_G_ArcaneLaneC, \
+    SIRIUS_KEY_A_G_ArcaneLaneD
+#define SIRIUS_KEY_A_G_PlasmaLanes \
+    SIRIUS_KEY_A_G_PlasmaLaneA, \
+    SIRIUS_KEY_A_G_PlasmaLaneB, \
+    SIRIUS_KEY_A_G_PlasmaLaneC, \
+    SIRIUS_KEY_A_G_PlasmaLaneD
+#define SIRIUS_KEY_A_G_RainbowLanes \
+    SIRIUS_KEY_A_G_RainbowLaneA, \
+    SIRIUS_KEY_A_G_RainbowLaneB, \
+    SIRIUS_KEY_A_G_RainbowLaneC, \
+    SIRIUS_KEY_A_G_RainbowLaneD
+#define SIRIUS_KEY_A_G_WaterLanes \
+    SIRIUS_KEY_A_G_WaterLaneA, \
+    SIRIUS_KEY_A_G_WaterLaneB, \
+    SIRIUS_KEY_A_G_WaterLaneC, \
+    SIRIUS_KEY_A_G_WaterLaneD
+#define SIRIUS_KEY_A_G_VaporLanes \
+    SIRIUS_KEY_A_G_VaporLaneA, \
+    SIRIUS_KEY_A_G_VaporLaneB, \
+    SIRIUS_KEY_A_G_VaporLaneC, \
+    SIRIUS_KEY_A_G_VaporLaneD
+#define SIRIUS_KEY_A_G_FrostLanes \
+    SIRIUS_KEY_A_G_FrostLaneA, \
+    SIRIUS_KEY_A_G_FrostLaneB, \
+    SIRIUS_KEY_A_G_FrostLaneC, \
+    SIRIUS_KEY_A_G_FrostLaneD
+#define SIRIUS_KEY_A_G_IceLanes \
+    SIRIUS_KEY_A_G_IceLaneA, \
+    SIRIUS_KEY_A_G_IceLaneB, \
+    SIRIUS_KEY_A_G_IceLaneC, \
+    SIRIUS_KEY_A_G_IceLaneD
+#define SIRIUS_KEY_A_G \
+    { \
+        { SIRIUS_KEY_A_G_ArcaneLanes }, \
+        { SIRIUS_KEY_A_G_PlasmaLanes }, \
+        { SIRIUS_KEY_A_G_RainbowLanes }, \
+        { SIRIUS_KEY_A_G_WaterLanes }, \
+        { SIRIUS_KEY_A_G_VaporLanes }, \
+        { SIRIUS_KEY_A_G_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_A_H
 #define SIRIUS_KEY_A_H_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 8U))
@@ -1559,6 +1874,51 @@ public:
 #define SIRIUS_KEY_A_H_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 14U))
 #define SIRIUS_KEY_A_H_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 10U))
 #define SIRIUS_KEY_A_H_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 12U))
+#define SIRIUS_KEY_A_H_ArcaneLanes \
+    SIRIUS_KEY_A_H_ArcaneLaneA, \
+    SIRIUS_KEY_A_H_ArcaneLaneB, \
+    SIRIUS_KEY_A_H_ArcaneLaneC, \
+    SIRIUS_KEY_A_H_ArcaneLaneD
+#define SIRIUS_KEY_A_H_PlasmaLanes \
+    SIRIUS_KEY_A_H_PlasmaLaneA, \
+    SIRIUS_KEY_A_H_PlasmaLaneB, \
+    SIRIUS_KEY_A_H_PlasmaLaneC, \
+    SIRIUS_KEY_A_H_PlasmaLaneD
+#define SIRIUS_KEY_A_H_RainbowLanes \
+    SIRIUS_KEY_A_H_RainbowLaneA, \
+    SIRIUS_KEY_A_H_RainbowLaneB, \
+    SIRIUS_KEY_A_H_RainbowLaneC, \
+    SIRIUS_KEY_A_H_RainbowLaneD
+#define SIRIUS_KEY_A_H_WaterLanes \
+    SIRIUS_KEY_A_H_WaterLaneA, \
+    SIRIUS_KEY_A_H_WaterLaneB, \
+    SIRIUS_KEY_A_H_WaterLaneC, \
+    SIRIUS_KEY_A_H_WaterLaneD
+#define SIRIUS_KEY_A_H_VaporLanes \
+    SIRIUS_KEY_A_H_VaporLaneA, \
+    SIRIUS_KEY_A_H_VaporLaneB, \
+    SIRIUS_KEY_A_H_VaporLaneC, \
+    SIRIUS_KEY_A_H_VaporLaneD
+#define SIRIUS_KEY_A_H_FrostLanes \
+    SIRIUS_KEY_A_H_FrostLaneA, \
+    SIRIUS_KEY_A_H_FrostLaneB, \
+    SIRIUS_KEY_A_H_FrostLaneC, \
+    SIRIUS_KEY_A_H_FrostLaneD
+#define SIRIUS_KEY_A_H_IceLanes \
+    SIRIUS_KEY_A_H_IceLaneA, \
+    SIRIUS_KEY_A_H_IceLaneB, \
+    SIRIUS_KEY_A_H_IceLaneC, \
+    SIRIUS_KEY_A_H_IceLaneD
+#define SIRIUS_KEY_A_H \
+    { \
+        { SIRIUS_KEY_A_H_ArcaneLanes }, \
+        { SIRIUS_KEY_A_H_PlasmaLanes }, \
+        { SIRIUS_KEY_A_H_RainbowLanes }, \
+        { SIRIUS_KEY_A_H_WaterLanes }, \
+        { SIRIUS_KEY_A_H_VaporLanes }, \
+        { SIRIUS_KEY_A_H_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_B_A
 #define SIRIUS_KEY_B_A_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 0U))
@@ -1677,6 +2037,51 @@ public:
 #define SIRIUS_KEY_B_A_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 6U))
 #define SIRIUS_KEY_B_A_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 0U))
 #define SIRIUS_KEY_B_A_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 5U))
+#define SIRIUS_KEY_B_A_ArcaneLanes \
+    SIRIUS_KEY_B_A_ArcaneLaneA, \
+    SIRIUS_KEY_B_A_ArcaneLaneB, \
+    SIRIUS_KEY_B_A_ArcaneLaneC, \
+    SIRIUS_KEY_B_A_ArcaneLaneD
+#define SIRIUS_KEY_B_A_PlasmaLanes \
+    SIRIUS_KEY_B_A_PlasmaLaneA, \
+    SIRIUS_KEY_B_A_PlasmaLaneB, \
+    SIRIUS_KEY_B_A_PlasmaLaneC, \
+    SIRIUS_KEY_B_A_PlasmaLaneD
+#define SIRIUS_KEY_B_A_RainbowLanes \
+    SIRIUS_KEY_B_A_RainbowLaneA, \
+    SIRIUS_KEY_B_A_RainbowLaneB, \
+    SIRIUS_KEY_B_A_RainbowLaneC, \
+    SIRIUS_KEY_B_A_RainbowLaneD
+#define SIRIUS_KEY_B_A_WaterLanes \
+    SIRIUS_KEY_B_A_WaterLaneA, \
+    SIRIUS_KEY_B_A_WaterLaneB, \
+    SIRIUS_KEY_B_A_WaterLaneC, \
+    SIRIUS_KEY_B_A_WaterLaneD
+#define SIRIUS_KEY_B_A_VaporLanes \
+    SIRIUS_KEY_B_A_VaporLaneA, \
+    SIRIUS_KEY_B_A_VaporLaneB, \
+    SIRIUS_KEY_B_A_VaporLaneC, \
+    SIRIUS_KEY_B_A_VaporLaneD
+#define SIRIUS_KEY_B_A_FrostLanes \
+    SIRIUS_KEY_B_A_FrostLaneA, \
+    SIRIUS_KEY_B_A_FrostLaneB, \
+    SIRIUS_KEY_B_A_FrostLaneC, \
+    SIRIUS_KEY_B_A_FrostLaneD
+#define SIRIUS_KEY_B_A_IceLanes \
+    SIRIUS_KEY_B_A_IceLaneA, \
+    SIRIUS_KEY_B_A_IceLaneB, \
+    SIRIUS_KEY_B_A_IceLaneC, \
+    SIRIUS_KEY_B_A_IceLaneD
+#define SIRIUS_KEY_B_A \
+    { \
+        { SIRIUS_KEY_B_A_ArcaneLanes }, \
+        { SIRIUS_KEY_B_A_PlasmaLanes }, \
+        { SIRIUS_KEY_B_A_RainbowLanes }, \
+        { SIRIUS_KEY_B_A_WaterLanes }, \
+        { SIRIUS_KEY_B_A_VaporLanes }, \
+        { SIRIUS_KEY_B_A_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }
 
 // KEY_B_B
 #define SIRIUS_KEY_B_B_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 2U))
@@ -1795,6 +2200,51 @@ public:
 #define SIRIUS_KEY_B_B_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 10U))
 #define SIRIUS_KEY_B_B_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 6U))
 #define SIRIUS_KEY_B_B_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 15U))
+#define SIRIUS_KEY_B_B_ArcaneLanes \
+    SIRIUS_KEY_B_B_ArcaneLaneA, \
+    SIRIUS_KEY_B_B_ArcaneLaneB, \
+    SIRIUS_KEY_B_B_ArcaneLaneC, \
+    SIRIUS_KEY_B_B_ArcaneLaneD
+#define SIRIUS_KEY_B_B_PlasmaLanes \
+    SIRIUS_KEY_B_B_PlasmaLaneA, \
+    SIRIUS_KEY_B_B_PlasmaLaneB, \
+    SIRIUS_KEY_B_B_PlasmaLaneC, \
+    SIRIUS_KEY_B_B_PlasmaLaneD
+#define SIRIUS_KEY_B_B_RainbowLanes \
+    SIRIUS_KEY_B_B_RainbowLaneA, \
+    SIRIUS_KEY_B_B_RainbowLaneB, \
+    SIRIUS_KEY_B_B_RainbowLaneC, \
+    SIRIUS_KEY_B_B_RainbowLaneD
+#define SIRIUS_KEY_B_B_WaterLanes \
+    SIRIUS_KEY_B_B_WaterLaneA, \
+    SIRIUS_KEY_B_B_WaterLaneB, \
+    SIRIUS_KEY_B_B_WaterLaneC, \
+    SIRIUS_KEY_B_B_WaterLaneD
+#define SIRIUS_KEY_B_B_VaporLanes \
+    SIRIUS_KEY_B_B_VaporLaneA, \
+    SIRIUS_KEY_B_B_VaporLaneB, \
+    SIRIUS_KEY_B_B_VaporLaneC, \
+    SIRIUS_KEY_B_B_VaporLaneD
+#define SIRIUS_KEY_B_B_FrostLanes \
+    SIRIUS_KEY_B_B_FrostLaneA, \
+    SIRIUS_KEY_B_B_FrostLaneB, \
+    SIRIUS_KEY_B_B_FrostLaneC, \
+    SIRIUS_KEY_B_B_FrostLaneD
+#define SIRIUS_KEY_B_B_IceLanes \
+    SIRIUS_KEY_B_B_IceLaneA, \
+    SIRIUS_KEY_B_B_IceLaneB, \
+    SIRIUS_KEY_B_B_IceLaneC, \
+    SIRIUS_KEY_B_B_IceLaneD
+#define SIRIUS_KEY_B_B \
+    { \
+        { SIRIUS_KEY_B_B_ArcaneLanes }, \
+        { SIRIUS_KEY_B_B_PlasmaLanes }, \
+        { SIRIUS_KEY_B_B_RainbowLanes }, \
+        { SIRIUS_KEY_B_B_WaterLanes }, \
+        { SIRIUS_KEY_B_B_VaporLanes }, \
+        { SIRIUS_KEY_B_B_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }
 
 // KEY_B_C
 #define SIRIUS_KEY_B_C_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 4U))
@@ -1913,6 +2363,51 @@ public:
 #define SIRIUS_KEY_B_C_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 13U))
 #define SIRIUS_KEY_B_C_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 8U))
 #define SIRIUS_KEY_B_C_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 1U))
+#define SIRIUS_KEY_B_C_ArcaneLanes \
+    SIRIUS_KEY_B_C_ArcaneLaneA, \
+    SIRIUS_KEY_B_C_ArcaneLaneB, \
+    SIRIUS_KEY_B_C_ArcaneLaneC, \
+    SIRIUS_KEY_B_C_ArcaneLaneD
+#define SIRIUS_KEY_B_C_PlasmaLanes \
+    SIRIUS_KEY_B_C_PlasmaLaneA, \
+    SIRIUS_KEY_B_C_PlasmaLaneB, \
+    SIRIUS_KEY_B_C_PlasmaLaneC, \
+    SIRIUS_KEY_B_C_PlasmaLaneD
+#define SIRIUS_KEY_B_C_RainbowLanes \
+    SIRIUS_KEY_B_C_RainbowLaneA, \
+    SIRIUS_KEY_B_C_RainbowLaneB, \
+    SIRIUS_KEY_B_C_RainbowLaneC, \
+    SIRIUS_KEY_B_C_RainbowLaneD
+#define SIRIUS_KEY_B_C_WaterLanes \
+    SIRIUS_KEY_B_C_WaterLaneA, \
+    SIRIUS_KEY_B_C_WaterLaneB, \
+    SIRIUS_KEY_B_C_WaterLaneC, \
+    SIRIUS_KEY_B_C_WaterLaneD
+#define SIRIUS_KEY_B_C_VaporLanes \
+    SIRIUS_KEY_B_C_VaporLaneA, \
+    SIRIUS_KEY_B_C_VaporLaneB, \
+    SIRIUS_KEY_B_C_VaporLaneC, \
+    SIRIUS_KEY_B_C_VaporLaneD
+#define SIRIUS_KEY_B_C_FrostLanes \
+    SIRIUS_KEY_B_C_FrostLaneA, \
+    SIRIUS_KEY_B_C_FrostLaneB, \
+    SIRIUS_KEY_B_C_FrostLaneC, \
+    SIRIUS_KEY_B_C_FrostLaneD
+#define SIRIUS_KEY_B_C_IceLanes \
+    SIRIUS_KEY_B_C_IceLaneA, \
+    SIRIUS_KEY_B_C_IceLaneB, \
+    SIRIUS_KEY_B_C_IceLaneC, \
+    SIRIUS_KEY_B_C_IceLaneD
+#define SIRIUS_KEY_B_C \
+    { \
+        { SIRIUS_KEY_B_C_ArcaneLanes }, \
+        { SIRIUS_KEY_B_C_PlasmaLanes }, \
+        { SIRIUS_KEY_B_C_RainbowLanes }, \
+        { SIRIUS_KEY_B_C_WaterLanes }, \
+        { SIRIUS_KEY_B_C_VaporLanes }, \
+        { SIRIUS_KEY_B_C_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }
 
 // KEY_B_D
 #define SIRIUS_KEY_B_D_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 15U))
@@ -2031,6 +2526,51 @@ public:
 #define SIRIUS_KEY_B_D_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 4U))
 #define SIRIUS_KEY_B_D_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 7U))
 #define SIRIUS_KEY_B_D_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 13U))
+#define SIRIUS_KEY_B_D_ArcaneLanes \
+    SIRIUS_KEY_B_D_ArcaneLaneA, \
+    SIRIUS_KEY_B_D_ArcaneLaneB, \
+    SIRIUS_KEY_B_D_ArcaneLaneC, \
+    SIRIUS_KEY_B_D_ArcaneLaneD
+#define SIRIUS_KEY_B_D_PlasmaLanes \
+    SIRIUS_KEY_B_D_PlasmaLaneA, \
+    SIRIUS_KEY_B_D_PlasmaLaneB, \
+    SIRIUS_KEY_B_D_PlasmaLaneC, \
+    SIRIUS_KEY_B_D_PlasmaLaneD
+#define SIRIUS_KEY_B_D_RainbowLanes \
+    SIRIUS_KEY_B_D_RainbowLaneA, \
+    SIRIUS_KEY_B_D_RainbowLaneB, \
+    SIRIUS_KEY_B_D_RainbowLaneC, \
+    SIRIUS_KEY_B_D_RainbowLaneD
+#define SIRIUS_KEY_B_D_WaterLanes \
+    SIRIUS_KEY_B_D_WaterLaneA, \
+    SIRIUS_KEY_B_D_WaterLaneB, \
+    SIRIUS_KEY_B_D_WaterLaneC, \
+    SIRIUS_KEY_B_D_WaterLaneD
+#define SIRIUS_KEY_B_D_VaporLanes \
+    SIRIUS_KEY_B_D_VaporLaneA, \
+    SIRIUS_KEY_B_D_VaporLaneB, \
+    SIRIUS_KEY_B_D_VaporLaneC, \
+    SIRIUS_KEY_B_D_VaporLaneD
+#define SIRIUS_KEY_B_D_FrostLanes \
+    SIRIUS_KEY_B_D_FrostLaneA, \
+    SIRIUS_KEY_B_D_FrostLaneB, \
+    SIRIUS_KEY_B_D_FrostLaneC, \
+    SIRIUS_KEY_B_D_FrostLaneD
+#define SIRIUS_KEY_B_D_IceLanes \
+    SIRIUS_KEY_B_D_IceLaneA, \
+    SIRIUS_KEY_B_D_IceLaneB, \
+    SIRIUS_KEY_B_D_IceLaneC, \
+    SIRIUS_KEY_B_D_IceLaneD
+#define SIRIUS_KEY_B_D \
+    { \
+        { SIRIUS_KEY_B_D_ArcaneLanes }, \
+        { SIRIUS_KEY_B_D_PlasmaLanes }, \
+        { SIRIUS_KEY_B_D_RainbowLanes }, \
+        { SIRIUS_KEY_B_D_WaterLanes }, \
+        { SIRIUS_KEY_B_D_VaporLanes }, \
+        { SIRIUS_KEY_B_D_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }
 
 // KEY_B_E
 #define SIRIUS_KEY_B_E_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 11U))
@@ -2149,6 +2689,51 @@ public:
 #define SIRIUS_KEY_B_E_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 12U))
 #define SIRIUS_KEY_B_E_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 15U))
 #define SIRIUS_KEY_B_E_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 9U))
+#define SIRIUS_KEY_B_E_ArcaneLanes \
+    SIRIUS_KEY_B_E_ArcaneLaneA, \
+    SIRIUS_KEY_B_E_ArcaneLaneB, \
+    SIRIUS_KEY_B_E_ArcaneLaneC, \
+    SIRIUS_KEY_B_E_ArcaneLaneD
+#define SIRIUS_KEY_B_E_PlasmaLanes \
+    SIRIUS_KEY_B_E_PlasmaLaneA, \
+    SIRIUS_KEY_B_E_PlasmaLaneB, \
+    SIRIUS_KEY_B_E_PlasmaLaneC, \
+    SIRIUS_KEY_B_E_PlasmaLaneD
+#define SIRIUS_KEY_B_E_RainbowLanes \
+    SIRIUS_KEY_B_E_RainbowLaneA, \
+    SIRIUS_KEY_B_E_RainbowLaneB, \
+    SIRIUS_KEY_B_E_RainbowLaneC, \
+    SIRIUS_KEY_B_E_RainbowLaneD
+#define SIRIUS_KEY_B_E_WaterLanes \
+    SIRIUS_KEY_B_E_WaterLaneA, \
+    SIRIUS_KEY_B_E_WaterLaneB, \
+    SIRIUS_KEY_B_E_WaterLaneC, \
+    SIRIUS_KEY_B_E_WaterLaneD
+#define SIRIUS_KEY_B_E_VaporLanes \
+    SIRIUS_KEY_B_E_VaporLaneA, \
+    SIRIUS_KEY_B_E_VaporLaneB, \
+    SIRIUS_KEY_B_E_VaporLaneC, \
+    SIRIUS_KEY_B_E_VaporLaneD
+#define SIRIUS_KEY_B_E_FrostLanes \
+    SIRIUS_KEY_B_E_FrostLaneA, \
+    SIRIUS_KEY_B_E_FrostLaneB, \
+    SIRIUS_KEY_B_E_FrostLaneC, \
+    SIRIUS_KEY_B_E_FrostLaneD
+#define SIRIUS_KEY_B_E_IceLanes \
+    SIRIUS_KEY_B_E_IceLaneA, \
+    SIRIUS_KEY_B_E_IceLaneB, \
+    SIRIUS_KEY_B_E_IceLaneC, \
+    SIRIUS_KEY_B_E_IceLaneD
+#define SIRIUS_KEY_B_E \
+    { \
+        { SIRIUS_KEY_B_E_ArcaneLanes }, \
+        { SIRIUS_KEY_B_E_PlasmaLanes }, \
+        { SIRIUS_KEY_B_E_RainbowLanes }, \
+        { SIRIUS_KEY_B_E_WaterLanes }, \
+        { SIRIUS_KEY_B_E_VaporLanes }, \
+        { SIRIUS_KEY_B_E_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }
 
 // KEY_B_F
 #define SIRIUS_KEY_B_F_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 6U))
@@ -2267,6 +2852,51 @@ public:
 #define SIRIUS_KEY_B_F_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 5U))
 #define SIRIUS_KEY_B_F_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 3U))
 #define SIRIUS_KEY_B_F_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 4U))
+#define SIRIUS_KEY_B_F_ArcaneLanes \
+    SIRIUS_KEY_B_F_ArcaneLaneA, \
+    SIRIUS_KEY_B_F_ArcaneLaneB, \
+    SIRIUS_KEY_B_F_ArcaneLaneC, \
+    SIRIUS_KEY_B_F_ArcaneLaneD
+#define SIRIUS_KEY_B_F_PlasmaLanes \
+    SIRIUS_KEY_B_F_PlasmaLaneA, \
+    SIRIUS_KEY_B_F_PlasmaLaneB, \
+    SIRIUS_KEY_B_F_PlasmaLaneC, \
+    SIRIUS_KEY_B_F_PlasmaLaneD
+#define SIRIUS_KEY_B_F_RainbowLanes \
+    SIRIUS_KEY_B_F_RainbowLaneA, \
+    SIRIUS_KEY_B_F_RainbowLaneB, \
+    SIRIUS_KEY_B_F_RainbowLaneC, \
+    SIRIUS_KEY_B_F_RainbowLaneD
+#define SIRIUS_KEY_B_F_WaterLanes \
+    SIRIUS_KEY_B_F_WaterLaneA, \
+    SIRIUS_KEY_B_F_WaterLaneB, \
+    SIRIUS_KEY_B_F_WaterLaneC, \
+    SIRIUS_KEY_B_F_WaterLaneD
+#define SIRIUS_KEY_B_F_VaporLanes \
+    SIRIUS_KEY_B_F_VaporLaneA, \
+    SIRIUS_KEY_B_F_VaporLaneB, \
+    SIRIUS_KEY_B_F_VaporLaneC, \
+    SIRIUS_KEY_B_F_VaporLaneD
+#define SIRIUS_KEY_B_F_FrostLanes \
+    SIRIUS_KEY_B_F_FrostLaneA, \
+    SIRIUS_KEY_B_F_FrostLaneB, \
+    SIRIUS_KEY_B_F_FrostLaneC, \
+    SIRIUS_KEY_B_F_FrostLaneD
+#define SIRIUS_KEY_B_F_IceLanes \
+    SIRIUS_KEY_B_F_IceLaneA, \
+    SIRIUS_KEY_B_F_IceLaneB, \
+    SIRIUS_KEY_B_F_IceLaneC, \
+    SIRIUS_KEY_B_F_IceLaneD
+#define SIRIUS_KEY_B_F \
+    { \
+        { SIRIUS_KEY_B_F_ArcaneLanes }, \
+        { SIRIUS_KEY_B_F_PlasmaLanes }, \
+        { SIRIUS_KEY_B_F_RainbowLanes }, \
+        { SIRIUS_KEY_B_F_WaterLanes }, \
+        { SIRIUS_KEY_B_F_VaporLanes }, \
+        { SIRIUS_KEY_B_F_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }
 
 // KEY_B_G
 #define SIRIUS_KEY_B_G_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 3U))
@@ -2385,6 +3015,51 @@ public:
 #define SIRIUS_KEY_B_G_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 1U))
 #define SIRIUS_KEY_B_G_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 2U))
 #define SIRIUS_KEY_B_G_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 14U))
+#define SIRIUS_KEY_B_G_ArcaneLanes \
+    SIRIUS_KEY_B_G_ArcaneLaneA, \
+    SIRIUS_KEY_B_G_ArcaneLaneB, \
+    SIRIUS_KEY_B_G_ArcaneLaneC, \
+    SIRIUS_KEY_B_G_ArcaneLaneD
+#define SIRIUS_KEY_B_G_PlasmaLanes \
+    SIRIUS_KEY_B_G_PlasmaLaneA, \
+    SIRIUS_KEY_B_G_PlasmaLaneB, \
+    SIRIUS_KEY_B_G_PlasmaLaneC, \
+    SIRIUS_KEY_B_G_PlasmaLaneD
+#define SIRIUS_KEY_B_G_RainbowLanes \
+    SIRIUS_KEY_B_G_RainbowLaneA, \
+    SIRIUS_KEY_B_G_RainbowLaneB, \
+    SIRIUS_KEY_B_G_RainbowLaneC, \
+    SIRIUS_KEY_B_G_RainbowLaneD
+#define SIRIUS_KEY_B_G_WaterLanes \
+    SIRIUS_KEY_B_G_WaterLaneA, \
+    SIRIUS_KEY_B_G_WaterLaneB, \
+    SIRIUS_KEY_B_G_WaterLaneC, \
+    SIRIUS_KEY_B_G_WaterLaneD
+#define SIRIUS_KEY_B_G_VaporLanes \
+    SIRIUS_KEY_B_G_VaporLaneA, \
+    SIRIUS_KEY_B_G_VaporLaneB, \
+    SIRIUS_KEY_B_G_VaporLaneC, \
+    SIRIUS_KEY_B_G_VaporLaneD
+#define SIRIUS_KEY_B_G_FrostLanes \
+    SIRIUS_KEY_B_G_FrostLaneA, \
+    SIRIUS_KEY_B_G_FrostLaneB, \
+    SIRIUS_KEY_B_G_FrostLaneC, \
+    SIRIUS_KEY_B_G_FrostLaneD
+#define SIRIUS_KEY_B_G_IceLanes \
+    SIRIUS_KEY_B_G_IceLaneA, \
+    SIRIUS_KEY_B_G_IceLaneB, \
+    SIRIUS_KEY_B_G_IceLaneC, \
+    SIRIUS_KEY_B_G_IceLaneD
+#define SIRIUS_KEY_B_G \
+    { \
+        { SIRIUS_KEY_B_G_ArcaneLanes }, \
+        { SIRIUS_KEY_B_G_PlasmaLanes }, \
+        { SIRIUS_KEY_B_G_RainbowLanes }, \
+        { SIRIUS_KEY_B_G_WaterLanes }, \
+        { SIRIUS_KEY_B_G_VaporLanes }, \
+        { SIRIUS_KEY_B_G_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }
 
 // KEY_B_H
 #define SIRIUS_KEY_B_H_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 9U))
@@ -2503,3 +3178,48 @@ public:
 #define SIRIUS_KEY_B_H_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 9U))
 #define SIRIUS_KEY_B_H_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 11U))
 #define SIRIUS_KEY_B_H_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 6U))
+#define SIRIUS_KEY_B_H_ArcaneLanes \
+    SIRIUS_KEY_B_H_ArcaneLaneA, \
+    SIRIUS_KEY_B_H_ArcaneLaneB, \
+    SIRIUS_KEY_B_H_ArcaneLaneC, \
+    SIRIUS_KEY_B_H_ArcaneLaneD
+#define SIRIUS_KEY_B_H_PlasmaLanes \
+    SIRIUS_KEY_B_H_PlasmaLaneA, \
+    SIRIUS_KEY_B_H_PlasmaLaneB, \
+    SIRIUS_KEY_B_H_PlasmaLaneC, \
+    SIRIUS_KEY_B_H_PlasmaLaneD
+#define SIRIUS_KEY_B_H_RainbowLanes \
+    SIRIUS_KEY_B_H_RainbowLaneA, \
+    SIRIUS_KEY_B_H_RainbowLaneB, \
+    SIRIUS_KEY_B_H_RainbowLaneC, \
+    SIRIUS_KEY_B_H_RainbowLaneD
+#define SIRIUS_KEY_B_H_WaterLanes \
+    SIRIUS_KEY_B_H_WaterLaneA, \
+    SIRIUS_KEY_B_H_WaterLaneB, \
+    SIRIUS_KEY_B_H_WaterLaneC, \
+    SIRIUS_KEY_B_H_WaterLaneD
+#define SIRIUS_KEY_B_H_VaporLanes \
+    SIRIUS_KEY_B_H_VaporLaneA, \
+    SIRIUS_KEY_B_H_VaporLaneB, \
+    SIRIUS_KEY_B_H_VaporLaneC, \
+    SIRIUS_KEY_B_H_VaporLaneD
+#define SIRIUS_KEY_B_H_FrostLanes \
+    SIRIUS_KEY_B_H_FrostLaneA, \
+    SIRIUS_KEY_B_H_FrostLaneB, \
+    SIRIUS_KEY_B_H_FrostLaneC, \
+    SIRIUS_KEY_B_H_FrostLaneD
+#define SIRIUS_KEY_B_H_IceLanes \
+    SIRIUS_KEY_B_H_IceLaneA, \
+    SIRIUS_KEY_B_H_IceLaneB, \
+    SIRIUS_KEY_B_H_IceLaneC, \
+    SIRIUS_KEY_B_H_IceLaneD
+#define SIRIUS_KEY_B_H \
+    { \
+        { SIRIUS_KEY_B_H_ArcaneLanes }, \
+        { SIRIUS_KEY_B_H_PlasmaLanes }, \
+        { SIRIUS_KEY_B_H_RainbowLanes }, \
+        { SIRIUS_KEY_B_H_WaterLanes }, \
+        { SIRIUS_KEY_B_H_VaporLanes }, \
+        { SIRIUS_KEY_B_H_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }

@@ -733,6 +733,51 @@ public:
 #define REGULUS_KEY_A_A_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 1U))
 #define REGULUS_KEY_A_A_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 2U))
 #define REGULUS_KEY_A_A_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 14U))
+#define REGULUS_KEY_A_A_ArcaneLanes \
+    REGULUS_KEY_A_A_ArcaneLaneA, \
+    REGULUS_KEY_A_A_ArcaneLaneB, \
+    REGULUS_KEY_A_A_ArcaneLaneC, \
+    REGULUS_KEY_A_A_ArcaneLaneD
+#define REGULUS_KEY_A_A_PlasmaLanes \
+    REGULUS_KEY_A_A_PlasmaLaneA, \
+    REGULUS_KEY_A_A_PlasmaLaneB, \
+    REGULUS_KEY_A_A_PlasmaLaneC, \
+    REGULUS_KEY_A_A_PlasmaLaneD
+#define REGULUS_KEY_A_A_RainbowLanes \
+    REGULUS_KEY_A_A_RainbowLaneA, \
+    REGULUS_KEY_A_A_RainbowLaneB, \
+    REGULUS_KEY_A_A_RainbowLaneC, \
+    REGULUS_KEY_A_A_RainbowLaneD
+#define REGULUS_KEY_A_A_WaterLanes \
+    REGULUS_KEY_A_A_WaterLaneA, \
+    REGULUS_KEY_A_A_WaterLaneB, \
+    REGULUS_KEY_A_A_WaterLaneC, \
+    REGULUS_KEY_A_A_WaterLaneD
+#define REGULUS_KEY_A_A_VaporLanes \
+    REGULUS_KEY_A_A_VaporLaneA, \
+    REGULUS_KEY_A_A_VaporLaneB, \
+    REGULUS_KEY_A_A_VaporLaneC, \
+    REGULUS_KEY_A_A_VaporLaneD
+#define REGULUS_KEY_A_A_FrostLanes \
+    REGULUS_KEY_A_A_FrostLaneA, \
+    REGULUS_KEY_A_A_FrostLaneB, \
+    REGULUS_KEY_A_A_FrostLaneC, \
+    REGULUS_KEY_A_A_FrostLaneD
+#define REGULUS_KEY_A_A_IceLanes \
+    REGULUS_KEY_A_A_IceLaneA, \
+    REGULUS_KEY_A_A_IceLaneB, \
+    REGULUS_KEY_A_A_IceLaneC, \
+    REGULUS_KEY_A_A_IceLaneD
+#define REGULUS_KEY_A_A \
+    { \
+        { REGULUS_KEY_A_A_ArcaneLanes }, \
+        { REGULUS_KEY_A_A_PlasmaLanes }, \
+        { REGULUS_KEY_A_A_RainbowLanes }, \
+        { REGULUS_KEY_A_A_WaterLanes }, \
+        { REGULUS_KEY_A_A_VaporLanes }, \
+        { REGULUS_KEY_A_A_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_A_B
 #define REGULUS_KEY_A_B_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 5U))
@@ -851,6 +896,51 @@ public:
 #define REGULUS_KEY_A_B_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 13U))
 #define REGULUS_KEY_A_B_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 8U))
 #define REGULUS_KEY_A_B_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 1U))
+#define REGULUS_KEY_A_B_ArcaneLanes \
+    REGULUS_KEY_A_B_ArcaneLaneA, \
+    REGULUS_KEY_A_B_ArcaneLaneB, \
+    REGULUS_KEY_A_B_ArcaneLaneC, \
+    REGULUS_KEY_A_B_ArcaneLaneD
+#define REGULUS_KEY_A_B_PlasmaLanes \
+    REGULUS_KEY_A_B_PlasmaLaneA, \
+    REGULUS_KEY_A_B_PlasmaLaneB, \
+    REGULUS_KEY_A_B_PlasmaLaneC, \
+    REGULUS_KEY_A_B_PlasmaLaneD
+#define REGULUS_KEY_A_B_RainbowLanes \
+    REGULUS_KEY_A_B_RainbowLaneA, \
+    REGULUS_KEY_A_B_RainbowLaneB, \
+    REGULUS_KEY_A_B_RainbowLaneC, \
+    REGULUS_KEY_A_B_RainbowLaneD
+#define REGULUS_KEY_A_B_WaterLanes \
+    REGULUS_KEY_A_B_WaterLaneA, \
+    REGULUS_KEY_A_B_WaterLaneB, \
+    REGULUS_KEY_A_B_WaterLaneC, \
+    REGULUS_KEY_A_B_WaterLaneD
+#define REGULUS_KEY_A_B_VaporLanes \
+    REGULUS_KEY_A_B_VaporLaneA, \
+    REGULUS_KEY_A_B_VaporLaneB, \
+    REGULUS_KEY_A_B_VaporLaneC, \
+    REGULUS_KEY_A_B_VaporLaneD
+#define REGULUS_KEY_A_B_FrostLanes \
+    REGULUS_KEY_A_B_FrostLaneA, \
+    REGULUS_KEY_A_B_FrostLaneB, \
+    REGULUS_KEY_A_B_FrostLaneC, \
+    REGULUS_KEY_A_B_FrostLaneD
+#define REGULUS_KEY_A_B_IceLanes \
+    REGULUS_KEY_A_B_IceLaneA, \
+    REGULUS_KEY_A_B_IceLaneB, \
+    REGULUS_KEY_A_B_IceLaneC, \
+    REGULUS_KEY_A_B_IceLaneD
+#define REGULUS_KEY_A_B \
+    { \
+        { REGULUS_KEY_A_B_ArcaneLanes }, \
+        { REGULUS_KEY_A_B_PlasmaLanes }, \
+        { REGULUS_KEY_A_B_RainbowLanes }, \
+        { REGULUS_KEY_A_B_WaterLanes }, \
+        { REGULUS_KEY_A_B_VaporLanes }, \
+        { REGULUS_KEY_A_B_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_A_C
 #define REGULUS_KEY_A_C_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 6U))
@@ -969,6 +1059,51 @@ public:
 #define REGULUS_KEY_A_C_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 6U))
 #define REGULUS_KEY_A_C_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 0U))
 #define REGULUS_KEY_A_C_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 5U))
+#define REGULUS_KEY_A_C_ArcaneLanes \
+    REGULUS_KEY_A_C_ArcaneLaneA, \
+    REGULUS_KEY_A_C_ArcaneLaneB, \
+    REGULUS_KEY_A_C_ArcaneLaneC, \
+    REGULUS_KEY_A_C_ArcaneLaneD
+#define REGULUS_KEY_A_C_PlasmaLanes \
+    REGULUS_KEY_A_C_PlasmaLaneA, \
+    REGULUS_KEY_A_C_PlasmaLaneB, \
+    REGULUS_KEY_A_C_PlasmaLaneC, \
+    REGULUS_KEY_A_C_PlasmaLaneD
+#define REGULUS_KEY_A_C_RainbowLanes \
+    REGULUS_KEY_A_C_RainbowLaneA, \
+    REGULUS_KEY_A_C_RainbowLaneB, \
+    REGULUS_KEY_A_C_RainbowLaneC, \
+    REGULUS_KEY_A_C_RainbowLaneD
+#define REGULUS_KEY_A_C_WaterLanes \
+    REGULUS_KEY_A_C_WaterLaneA, \
+    REGULUS_KEY_A_C_WaterLaneB, \
+    REGULUS_KEY_A_C_WaterLaneC, \
+    REGULUS_KEY_A_C_WaterLaneD
+#define REGULUS_KEY_A_C_VaporLanes \
+    REGULUS_KEY_A_C_VaporLaneA, \
+    REGULUS_KEY_A_C_VaporLaneB, \
+    REGULUS_KEY_A_C_VaporLaneC, \
+    REGULUS_KEY_A_C_VaporLaneD
+#define REGULUS_KEY_A_C_FrostLanes \
+    REGULUS_KEY_A_C_FrostLaneA, \
+    REGULUS_KEY_A_C_FrostLaneB, \
+    REGULUS_KEY_A_C_FrostLaneC, \
+    REGULUS_KEY_A_C_FrostLaneD
+#define REGULUS_KEY_A_C_IceLanes \
+    REGULUS_KEY_A_C_IceLaneA, \
+    REGULUS_KEY_A_C_IceLaneB, \
+    REGULUS_KEY_A_C_IceLaneC, \
+    REGULUS_KEY_A_C_IceLaneD
+#define REGULUS_KEY_A_C \
+    { \
+        { REGULUS_KEY_A_C_ArcaneLanes }, \
+        { REGULUS_KEY_A_C_PlasmaLanes }, \
+        { REGULUS_KEY_A_C_RainbowLanes }, \
+        { REGULUS_KEY_A_C_WaterLanes }, \
+        { REGULUS_KEY_A_C_VaporLanes }, \
+        { REGULUS_KEY_A_C_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_A_D
 #define REGULUS_KEY_A_D_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 8U))
@@ -1087,6 +1222,51 @@ public:
 #define REGULUS_KEY_A_D_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 5U))
 #define REGULUS_KEY_A_D_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 3U))
 #define REGULUS_KEY_A_D_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 4U))
+#define REGULUS_KEY_A_D_ArcaneLanes \
+    REGULUS_KEY_A_D_ArcaneLaneA, \
+    REGULUS_KEY_A_D_ArcaneLaneB, \
+    REGULUS_KEY_A_D_ArcaneLaneC, \
+    REGULUS_KEY_A_D_ArcaneLaneD
+#define REGULUS_KEY_A_D_PlasmaLanes \
+    REGULUS_KEY_A_D_PlasmaLaneA, \
+    REGULUS_KEY_A_D_PlasmaLaneB, \
+    REGULUS_KEY_A_D_PlasmaLaneC, \
+    REGULUS_KEY_A_D_PlasmaLaneD
+#define REGULUS_KEY_A_D_RainbowLanes \
+    REGULUS_KEY_A_D_RainbowLaneA, \
+    REGULUS_KEY_A_D_RainbowLaneB, \
+    REGULUS_KEY_A_D_RainbowLaneC, \
+    REGULUS_KEY_A_D_RainbowLaneD
+#define REGULUS_KEY_A_D_WaterLanes \
+    REGULUS_KEY_A_D_WaterLaneA, \
+    REGULUS_KEY_A_D_WaterLaneB, \
+    REGULUS_KEY_A_D_WaterLaneC, \
+    REGULUS_KEY_A_D_WaterLaneD
+#define REGULUS_KEY_A_D_VaporLanes \
+    REGULUS_KEY_A_D_VaporLaneA, \
+    REGULUS_KEY_A_D_VaporLaneB, \
+    REGULUS_KEY_A_D_VaporLaneC, \
+    REGULUS_KEY_A_D_VaporLaneD
+#define REGULUS_KEY_A_D_FrostLanes \
+    REGULUS_KEY_A_D_FrostLaneA, \
+    REGULUS_KEY_A_D_FrostLaneB, \
+    REGULUS_KEY_A_D_FrostLaneC, \
+    REGULUS_KEY_A_D_FrostLaneD
+#define REGULUS_KEY_A_D_IceLanes \
+    REGULUS_KEY_A_D_IceLaneA, \
+    REGULUS_KEY_A_D_IceLaneB, \
+    REGULUS_KEY_A_D_IceLaneC, \
+    REGULUS_KEY_A_D_IceLaneD
+#define REGULUS_KEY_A_D \
+    { \
+        { REGULUS_KEY_A_D_ArcaneLanes }, \
+        { REGULUS_KEY_A_D_PlasmaLanes }, \
+        { REGULUS_KEY_A_D_RainbowLanes }, \
+        { REGULUS_KEY_A_D_WaterLanes }, \
+        { REGULUS_KEY_A_D_VaporLanes }, \
+        { REGULUS_KEY_A_D_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_A_E
 #define REGULUS_KEY_A_E_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 11U))
@@ -1205,6 +1385,51 @@ public:
 #define REGULUS_KEY_A_E_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 4U))
 #define REGULUS_KEY_A_E_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 7U))
 #define REGULUS_KEY_A_E_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 13U))
+#define REGULUS_KEY_A_E_ArcaneLanes \
+    REGULUS_KEY_A_E_ArcaneLaneA, \
+    REGULUS_KEY_A_E_ArcaneLaneB, \
+    REGULUS_KEY_A_E_ArcaneLaneC, \
+    REGULUS_KEY_A_E_ArcaneLaneD
+#define REGULUS_KEY_A_E_PlasmaLanes \
+    REGULUS_KEY_A_E_PlasmaLaneA, \
+    REGULUS_KEY_A_E_PlasmaLaneB, \
+    REGULUS_KEY_A_E_PlasmaLaneC, \
+    REGULUS_KEY_A_E_PlasmaLaneD
+#define REGULUS_KEY_A_E_RainbowLanes \
+    REGULUS_KEY_A_E_RainbowLaneA, \
+    REGULUS_KEY_A_E_RainbowLaneB, \
+    REGULUS_KEY_A_E_RainbowLaneC, \
+    REGULUS_KEY_A_E_RainbowLaneD
+#define REGULUS_KEY_A_E_WaterLanes \
+    REGULUS_KEY_A_E_WaterLaneA, \
+    REGULUS_KEY_A_E_WaterLaneB, \
+    REGULUS_KEY_A_E_WaterLaneC, \
+    REGULUS_KEY_A_E_WaterLaneD
+#define REGULUS_KEY_A_E_VaporLanes \
+    REGULUS_KEY_A_E_VaporLaneA, \
+    REGULUS_KEY_A_E_VaporLaneB, \
+    REGULUS_KEY_A_E_VaporLaneC, \
+    REGULUS_KEY_A_E_VaporLaneD
+#define REGULUS_KEY_A_E_FrostLanes \
+    REGULUS_KEY_A_E_FrostLaneA, \
+    REGULUS_KEY_A_E_FrostLaneB, \
+    REGULUS_KEY_A_E_FrostLaneC, \
+    REGULUS_KEY_A_E_FrostLaneD
+#define REGULUS_KEY_A_E_IceLanes \
+    REGULUS_KEY_A_E_IceLaneA, \
+    REGULUS_KEY_A_E_IceLaneB, \
+    REGULUS_KEY_A_E_IceLaneC, \
+    REGULUS_KEY_A_E_IceLaneD
+#define REGULUS_KEY_A_E \
+    { \
+        { REGULUS_KEY_A_E_ArcaneLanes }, \
+        { REGULUS_KEY_A_E_PlasmaLanes }, \
+        { REGULUS_KEY_A_E_RainbowLanes }, \
+        { REGULUS_KEY_A_E_WaterLanes }, \
+        { REGULUS_KEY_A_E_VaporLanes }, \
+        { REGULUS_KEY_A_E_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_A_F
 #define REGULUS_KEY_A_F_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 12U))
@@ -1323,6 +1548,51 @@ public:
 #define REGULUS_KEY_A_F_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 9U))
 #define REGULUS_KEY_A_F_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 11U))
 #define REGULUS_KEY_A_F_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 6U))
+#define REGULUS_KEY_A_F_ArcaneLanes \
+    REGULUS_KEY_A_F_ArcaneLaneA, \
+    REGULUS_KEY_A_F_ArcaneLaneB, \
+    REGULUS_KEY_A_F_ArcaneLaneC, \
+    REGULUS_KEY_A_F_ArcaneLaneD
+#define REGULUS_KEY_A_F_PlasmaLanes \
+    REGULUS_KEY_A_F_PlasmaLaneA, \
+    REGULUS_KEY_A_F_PlasmaLaneB, \
+    REGULUS_KEY_A_F_PlasmaLaneC, \
+    REGULUS_KEY_A_F_PlasmaLaneD
+#define REGULUS_KEY_A_F_RainbowLanes \
+    REGULUS_KEY_A_F_RainbowLaneA, \
+    REGULUS_KEY_A_F_RainbowLaneB, \
+    REGULUS_KEY_A_F_RainbowLaneC, \
+    REGULUS_KEY_A_F_RainbowLaneD
+#define REGULUS_KEY_A_F_WaterLanes \
+    REGULUS_KEY_A_F_WaterLaneA, \
+    REGULUS_KEY_A_F_WaterLaneB, \
+    REGULUS_KEY_A_F_WaterLaneC, \
+    REGULUS_KEY_A_F_WaterLaneD
+#define REGULUS_KEY_A_F_VaporLanes \
+    REGULUS_KEY_A_F_VaporLaneA, \
+    REGULUS_KEY_A_F_VaporLaneB, \
+    REGULUS_KEY_A_F_VaporLaneC, \
+    REGULUS_KEY_A_F_VaporLaneD
+#define REGULUS_KEY_A_F_FrostLanes \
+    REGULUS_KEY_A_F_FrostLaneA, \
+    REGULUS_KEY_A_F_FrostLaneB, \
+    REGULUS_KEY_A_F_FrostLaneC, \
+    REGULUS_KEY_A_F_FrostLaneD
+#define REGULUS_KEY_A_F_IceLanes \
+    REGULUS_KEY_A_F_IceLaneA, \
+    REGULUS_KEY_A_F_IceLaneB, \
+    REGULUS_KEY_A_F_IceLaneC, \
+    REGULUS_KEY_A_F_IceLaneD
+#define REGULUS_KEY_A_F \
+    { \
+        { REGULUS_KEY_A_F_ArcaneLanes }, \
+        { REGULUS_KEY_A_F_PlasmaLanes }, \
+        { REGULUS_KEY_A_F_RainbowLanes }, \
+        { REGULUS_KEY_A_F_WaterLanes }, \
+        { REGULUS_KEY_A_F_VaporLanes }, \
+        { REGULUS_KEY_A_F_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_A_G
 #define REGULUS_KEY_A_G_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 3U))
@@ -1441,6 +1711,51 @@ public:
 #define REGULUS_KEY_A_G_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 12U))
 #define REGULUS_KEY_A_G_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 15U))
 #define REGULUS_KEY_A_G_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 9U))
+#define REGULUS_KEY_A_G_ArcaneLanes \
+    REGULUS_KEY_A_G_ArcaneLaneA, \
+    REGULUS_KEY_A_G_ArcaneLaneB, \
+    REGULUS_KEY_A_G_ArcaneLaneC, \
+    REGULUS_KEY_A_G_ArcaneLaneD
+#define REGULUS_KEY_A_G_PlasmaLanes \
+    REGULUS_KEY_A_G_PlasmaLaneA, \
+    REGULUS_KEY_A_G_PlasmaLaneB, \
+    REGULUS_KEY_A_G_PlasmaLaneC, \
+    REGULUS_KEY_A_G_PlasmaLaneD
+#define REGULUS_KEY_A_G_RainbowLanes \
+    REGULUS_KEY_A_G_RainbowLaneA, \
+    REGULUS_KEY_A_G_RainbowLaneB, \
+    REGULUS_KEY_A_G_RainbowLaneC, \
+    REGULUS_KEY_A_G_RainbowLaneD
+#define REGULUS_KEY_A_G_WaterLanes \
+    REGULUS_KEY_A_G_WaterLaneA, \
+    REGULUS_KEY_A_G_WaterLaneB, \
+    REGULUS_KEY_A_G_WaterLaneC, \
+    REGULUS_KEY_A_G_WaterLaneD
+#define REGULUS_KEY_A_G_VaporLanes \
+    REGULUS_KEY_A_G_VaporLaneA, \
+    REGULUS_KEY_A_G_VaporLaneB, \
+    REGULUS_KEY_A_G_VaporLaneC, \
+    REGULUS_KEY_A_G_VaporLaneD
+#define REGULUS_KEY_A_G_FrostLanes \
+    REGULUS_KEY_A_G_FrostLaneA, \
+    REGULUS_KEY_A_G_FrostLaneB, \
+    REGULUS_KEY_A_G_FrostLaneC, \
+    REGULUS_KEY_A_G_FrostLaneD
+#define REGULUS_KEY_A_G_IceLanes \
+    REGULUS_KEY_A_G_IceLaneA, \
+    REGULUS_KEY_A_G_IceLaneB, \
+    REGULUS_KEY_A_G_IceLaneC, \
+    REGULUS_KEY_A_G_IceLaneD
+#define REGULUS_KEY_A_G \
+    { \
+        { REGULUS_KEY_A_G_ArcaneLanes }, \
+        { REGULUS_KEY_A_G_PlasmaLanes }, \
+        { REGULUS_KEY_A_G_RainbowLanes }, \
+        { REGULUS_KEY_A_G_WaterLanes }, \
+        { REGULUS_KEY_A_G_VaporLanes }, \
+        { REGULUS_KEY_A_G_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_A_H
 #define REGULUS_KEY_A_H_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 2U))
@@ -1559,6 +1874,51 @@ public:
 #define REGULUS_KEY_A_H_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 7U))
 #define REGULUS_KEY_A_H_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 14U))
 #define REGULUS_KEY_A_H_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 8U))
+#define REGULUS_KEY_A_H_ArcaneLanes \
+    REGULUS_KEY_A_H_ArcaneLaneA, \
+    REGULUS_KEY_A_H_ArcaneLaneB, \
+    REGULUS_KEY_A_H_ArcaneLaneC, \
+    REGULUS_KEY_A_H_ArcaneLaneD
+#define REGULUS_KEY_A_H_PlasmaLanes \
+    REGULUS_KEY_A_H_PlasmaLaneA, \
+    REGULUS_KEY_A_H_PlasmaLaneB, \
+    REGULUS_KEY_A_H_PlasmaLaneC, \
+    REGULUS_KEY_A_H_PlasmaLaneD
+#define REGULUS_KEY_A_H_RainbowLanes \
+    REGULUS_KEY_A_H_RainbowLaneA, \
+    REGULUS_KEY_A_H_RainbowLaneB, \
+    REGULUS_KEY_A_H_RainbowLaneC, \
+    REGULUS_KEY_A_H_RainbowLaneD
+#define REGULUS_KEY_A_H_WaterLanes \
+    REGULUS_KEY_A_H_WaterLaneA, \
+    REGULUS_KEY_A_H_WaterLaneB, \
+    REGULUS_KEY_A_H_WaterLaneC, \
+    REGULUS_KEY_A_H_WaterLaneD
+#define REGULUS_KEY_A_H_VaporLanes \
+    REGULUS_KEY_A_H_VaporLaneA, \
+    REGULUS_KEY_A_H_VaporLaneB, \
+    REGULUS_KEY_A_H_VaporLaneC, \
+    REGULUS_KEY_A_H_VaporLaneD
+#define REGULUS_KEY_A_H_FrostLanes \
+    REGULUS_KEY_A_H_FrostLaneA, \
+    REGULUS_KEY_A_H_FrostLaneB, \
+    REGULUS_KEY_A_H_FrostLaneC, \
+    REGULUS_KEY_A_H_FrostLaneD
+#define REGULUS_KEY_A_H_IceLanes \
+    REGULUS_KEY_A_H_IceLaneA, \
+    REGULUS_KEY_A_H_IceLaneB, \
+    REGULUS_KEY_A_H_IceLaneC, \
+    REGULUS_KEY_A_H_IceLaneD
+#define REGULUS_KEY_A_H \
+    { \
+        { REGULUS_KEY_A_H_ArcaneLanes }, \
+        { REGULUS_KEY_A_H_PlasmaLanes }, \
+        { REGULUS_KEY_A_H_RainbowLanes }, \
+        { REGULUS_KEY_A_H_WaterLanes }, \
+        { REGULUS_KEY_A_H_VaporLanes }, \
+        { REGULUS_KEY_A_H_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_B_A
 #define REGULUS_KEY_B_A_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 7U))
@@ -1677,6 +2037,51 @@ public:
 #define REGULUS_KEY_B_A_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 10U))
 #define REGULUS_KEY_B_A_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 6U))
 #define REGULUS_KEY_B_A_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 15U))
+#define REGULUS_KEY_B_A_ArcaneLanes \
+    REGULUS_KEY_B_A_ArcaneLaneA, \
+    REGULUS_KEY_B_A_ArcaneLaneB, \
+    REGULUS_KEY_B_A_ArcaneLaneC, \
+    REGULUS_KEY_B_A_ArcaneLaneD
+#define REGULUS_KEY_B_A_PlasmaLanes \
+    REGULUS_KEY_B_A_PlasmaLaneA, \
+    REGULUS_KEY_B_A_PlasmaLaneB, \
+    REGULUS_KEY_B_A_PlasmaLaneC, \
+    REGULUS_KEY_B_A_PlasmaLaneD
+#define REGULUS_KEY_B_A_RainbowLanes \
+    REGULUS_KEY_B_A_RainbowLaneA, \
+    REGULUS_KEY_B_A_RainbowLaneB, \
+    REGULUS_KEY_B_A_RainbowLaneC, \
+    REGULUS_KEY_B_A_RainbowLaneD
+#define REGULUS_KEY_B_A_WaterLanes \
+    REGULUS_KEY_B_A_WaterLaneA, \
+    REGULUS_KEY_B_A_WaterLaneB, \
+    REGULUS_KEY_B_A_WaterLaneC, \
+    REGULUS_KEY_B_A_WaterLaneD
+#define REGULUS_KEY_B_A_VaporLanes \
+    REGULUS_KEY_B_A_VaporLaneA, \
+    REGULUS_KEY_B_A_VaporLaneB, \
+    REGULUS_KEY_B_A_VaporLaneC, \
+    REGULUS_KEY_B_A_VaporLaneD
+#define REGULUS_KEY_B_A_FrostLanes \
+    REGULUS_KEY_B_A_FrostLaneA, \
+    REGULUS_KEY_B_A_FrostLaneB, \
+    REGULUS_KEY_B_A_FrostLaneC, \
+    REGULUS_KEY_B_A_FrostLaneD
+#define REGULUS_KEY_B_A_IceLanes \
+    REGULUS_KEY_B_A_IceLaneA, \
+    REGULUS_KEY_B_A_IceLaneB, \
+    REGULUS_KEY_B_A_IceLaneC, \
+    REGULUS_KEY_B_A_IceLaneD
+#define REGULUS_KEY_B_A \
+    { \
+        { REGULUS_KEY_B_A_ArcaneLanes }, \
+        { REGULUS_KEY_B_A_PlasmaLanes }, \
+        { REGULUS_KEY_B_A_RainbowLanes }, \
+        { REGULUS_KEY_B_A_WaterLanes }, \
+        { REGULUS_KEY_B_A_VaporLanes }, \
+        { REGULUS_KEY_B_A_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }
 
 // KEY_B_B
 #define REGULUS_KEY_B_B_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 15U))
@@ -1795,6 +2200,51 @@ public:
 #define REGULUS_KEY_B_B_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 14U))
 #define REGULUS_KEY_B_B_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 10U))
 #define REGULUS_KEY_B_B_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 12U))
+#define REGULUS_KEY_B_B_ArcaneLanes \
+    REGULUS_KEY_B_B_ArcaneLaneA, \
+    REGULUS_KEY_B_B_ArcaneLaneB, \
+    REGULUS_KEY_B_B_ArcaneLaneC, \
+    REGULUS_KEY_B_B_ArcaneLaneD
+#define REGULUS_KEY_B_B_PlasmaLanes \
+    REGULUS_KEY_B_B_PlasmaLaneA, \
+    REGULUS_KEY_B_B_PlasmaLaneB, \
+    REGULUS_KEY_B_B_PlasmaLaneC, \
+    REGULUS_KEY_B_B_PlasmaLaneD
+#define REGULUS_KEY_B_B_RainbowLanes \
+    REGULUS_KEY_B_B_RainbowLaneA, \
+    REGULUS_KEY_B_B_RainbowLaneB, \
+    REGULUS_KEY_B_B_RainbowLaneC, \
+    REGULUS_KEY_B_B_RainbowLaneD
+#define REGULUS_KEY_B_B_WaterLanes \
+    REGULUS_KEY_B_B_WaterLaneA, \
+    REGULUS_KEY_B_B_WaterLaneB, \
+    REGULUS_KEY_B_B_WaterLaneC, \
+    REGULUS_KEY_B_B_WaterLaneD
+#define REGULUS_KEY_B_B_VaporLanes \
+    REGULUS_KEY_B_B_VaporLaneA, \
+    REGULUS_KEY_B_B_VaporLaneB, \
+    REGULUS_KEY_B_B_VaporLaneC, \
+    REGULUS_KEY_B_B_VaporLaneD
+#define REGULUS_KEY_B_B_FrostLanes \
+    REGULUS_KEY_B_B_FrostLaneA, \
+    REGULUS_KEY_B_B_FrostLaneB, \
+    REGULUS_KEY_B_B_FrostLaneC, \
+    REGULUS_KEY_B_B_FrostLaneD
+#define REGULUS_KEY_B_B_IceLanes \
+    REGULUS_KEY_B_B_IceLaneA, \
+    REGULUS_KEY_B_B_IceLaneB, \
+    REGULUS_KEY_B_B_IceLaneC, \
+    REGULUS_KEY_B_B_IceLaneD
+#define REGULUS_KEY_B_B \
+    { \
+        { REGULUS_KEY_B_B_ArcaneLanes }, \
+        { REGULUS_KEY_B_B_PlasmaLanes }, \
+        { REGULUS_KEY_B_B_RainbowLanes }, \
+        { REGULUS_KEY_B_B_WaterLanes }, \
+        { REGULUS_KEY_B_B_VaporLanes }, \
+        { REGULUS_KEY_B_B_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }
 
 // KEY_B_C
 #define REGULUS_KEY_B_C_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 13U))
@@ -1913,6 +2363,51 @@ public:
 #define REGULUS_KEY_B_C_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 0U))
 #define REGULUS_KEY_B_C_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 13U))
 #define REGULUS_KEY_B_C_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 3U))
+#define REGULUS_KEY_B_C_ArcaneLanes \
+    REGULUS_KEY_B_C_ArcaneLaneA, \
+    REGULUS_KEY_B_C_ArcaneLaneB, \
+    REGULUS_KEY_B_C_ArcaneLaneC, \
+    REGULUS_KEY_B_C_ArcaneLaneD
+#define REGULUS_KEY_B_C_PlasmaLanes \
+    REGULUS_KEY_B_C_PlasmaLaneA, \
+    REGULUS_KEY_B_C_PlasmaLaneB, \
+    REGULUS_KEY_B_C_PlasmaLaneC, \
+    REGULUS_KEY_B_C_PlasmaLaneD
+#define REGULUS_KEY_B_C_RainbowLanes \
+    REGULUS_KEY_B_C_RainbowLaneA, \
+    REGULUS_KEY_B_C_RainbowLaneB, \
+    REGULUS_KEY_B_C_RainbowLaneC, \
+    REGULUS_KEY_B_C_RainbowLaneD
+#define REGULUS_KEY_B_C_WaterLanes \
+    REGULUS_KEY_B_C_WaterLaneA, \
+    REGULUS_KEY_B_C_WaterLaneB, \
+    REGULUS_KEY_B_C_WaterLaneC, \
+    REGULUS_KEY_B_C_WaterLaneD
+#define REGULUS_KEY_B_C_VaporLanes \
+    REGULUS_KEY_B_C_VaporLaneA, \
+    REGULUS_KEY_B_C_VaporLaneB, \
+    REGULUS_KEY_B_C_VaporLaneC, \
+    REGULUS_KEY_B_C_VaporLaneD
+#define REGULUS_KEY_B_C_FrostLanes \
+    REGULUS_KEY_B_C_FrostLaneA, \
+    REGULUS_KEY_B_C_FrostLaneB, \
+    REGULUS_KEY_B_C_FrostLaneC, \
+    REGULUS_KEY_B_C_FrostLaneD
+#define REGULUS_KEY_B_C_IceLanes \
+    REGULUS_KEY_B_C_IceLaneA, \
+    REGULUS_KEY_B_C_IceLaneB, \
+    REGULUS_KEY_B_C_IceLaneC, \
+    REGULUS_KEY_B_C_IceLaneD
+#define REGULUS_KEY_B_C \
+    { \
+        { REGULUS_KEY_B_C_ArcaneLanes }, \
+        { REGULUS_KEY_B_C_PlasmaLanes }, \
+        { REGULUS_KEY_B_C_RainbowLanes }, \
+        { REGULUS_KEY_B_C_WaterLanes }, \
+        { REGULUS_KEY_B_C_VaporLanes }, \
+        { REGULUS_KEY_B_C_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }
 
 // KEY_B_D
 #define REGULUS_KEY_B_D_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 0U))
@@ -2031,6 +2526,51 @@ public:
 #define REGULUS_KEY_B_D_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 11U))
 #define REGULUS_KEY_B_D_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 4U))
 #define REGULUS_KEY_B_D_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 0U))
+#define REGULUS_KEY_B_D_ArcaneLanes \
+    REGULUS_KEY_B_D_ArcaneLaneA, \
+    REGULUS_KEY_B_D_ArcaneLaneB, \
+    REGULUS_KEY_B_D_ArcaneLaneC, \
+    REGULUS_KEY_B_D_ArcaneLaneD
+#define REGULUS_KEY_B_D_PlasmaLanes \
+    REGULUS_KEY_B_D_PlasmaLaneA, \
+    REGULUS_KEY_B_D_PlasmaLaneB, \
+    REGULUS_KEY_B_D_PlasmaLaneC, \
+    REGULUS_KEY_B_D_PlasmaLaneD
+#define REGULUS_KEY_B_D_RainbowLanes \
+    REGULUS_KEY_B_D_RainbowLaneA, \
+    REGULUS_KEY_B_D_RainbowLaneB, \
+    REGULUS_KEY_B_D_RainbowLaneC, \
+    REGULUS_KEY_B_D_RainbowLaneD
+#define REGULUS_KEY_B_D_WaterLanes \
+    REGULUS_KEY_B_D_WaterLaneA, \
+    REGULUS_KEY_B_D_WaterLaneB, \
+    REGULUS_KEY_B_D_WaterLaneC, \
+    REGULUS_KEY_B_D_WaterLaneD
+#define REGULUS_KEY_B_D_VaporLanes \
+    REGULUS_KEY_B_D_VaporLaneA, \
+    REGULUS_KEY_B_D_VaporLaneB, \
+    REGULUS_KEY_B_D_VaporLaneC, \
+    REGULUS_KEY_B_D_VaporLaneD
+#define REGULUS_KEY_B_D_FrostLanes \
+    REGULUS_KEY_B_D_FrostLaneA, \
+    REGULUS_KEY_B_D_FrostLaneB, \
+    REGULUS_KEY_B_D_FrostLaneC, \
+    REGULUS_KEY_B_D_FrostLaneD
+#define REGULUS_KEY_B_D_IceLanes \
+    REGULUS_KEY_B_D_IceLaneA, \
+    REGULUS_KEY_B_D_IceLaneB, \
+    REGULUS_KEY_B_D_IceLaneC, \
+    REGULUS_KEY_B_D_IceLaneD
+#define REGULUS_KEY_B_D \
+    { \
+        { REGULUS_KEY_B_D_ArcaneLanes }, \
+        { REGULUS_KEY_B_D_PlasmaLanes }, \
+        { REGULUS_KEY_B_D_RainbowLanes }, \
+        { REGULUS_KEY_B_D_WaterLanes }, \
+        { REGULUS_KEY_B_D_VaporLanes }, \
+        { REGULUS_KEY_B_D_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }
 
 // KEY_B_E
 #define REGULUS_KEY_B_E_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 14U))
@@ -2149,6 +2689,51 @@ public:
 #define REGULUS_KEY_B_E_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 8U))
 #define REGULUS_KEY_B_E_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 12U))
 #define REGULUS_KEY_B_E_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 2U))
+#define REGULUS_KEY_B_E_ArcaneLanes \
+    REGULUS_KEY_B_E_ArcaneLaneA, \
+    REGULUS_KEY_B_E_ArcaneLaneB, \
+    REGULUS_KEY_B_E_ArcaneLaneC, \
+    REGULUS_KEY_B_E_ArcaneLaneD
+#define REGULUS_KEY_B_E_PlasmaLanes \
+    REGULUS_KEY_B_E_PlasmaLaneA, \
+    REGULUS_KEY_B_E_PlasmaLaneB, \
+    REGULUS_KEY_B_E_PlasmaLaneC, \
+    REGULUS_KEY_B_E_PlasmaLaneD
+#define REGULUS_KEY_B_E_RainbowLanes \
+    REGULUS_KEY_B_E_RainbowLaneA, \
+    REGULUS_KEY_B_E_RainbowLaneB, \
+    REGULUS_KEY_B_E_RainbowLaneC, \
+    REGULUS_KEY_B_E_RainbowLaneD
+#define REGULUS_KEY_B_E_WaterLanes \
+    REGULUS_KEY_B_E_WaterLaneA, \
+    REGULUS_KEY_B_E_WaterLaneB, \
+    REGULUS_KEY_B_E_WaterLaneC, \
+    REGULUS_KEY_B_E_WaterLaneD
+#define REGULUS_KEY_B_E_VaporLanes \
+    REGULUS_KEY_B_E_VaporLaneA, \
+    REGULUS_KEY_B_E_VaporLaneB, \
+    REGULUS_KEY_B_E_VaporLaneC, \
+    REGULUS_KEY_B_E_VaporLaneD
+#define REGULUS_KEY_B_E_FrostLanes \
+    REGULUS_KEY_B_E_FrostLaneA, \
+    REGULUS_KEY_B_E_FrostLaneB, \
+    REGULUS_KEY_B_E_FrostLaneC, \
+    REGULUS_KEY_B_E_FrostLaneD
+#define REGULUS_KEY_B_E_IceLanes \
+    REGULUS_KEY_B_E_IceLaneA, \
+    REGULUS_KEY_B_E_IceLaneB, \
+    REGULUS_KEY_B_E_IceLaneC, \
+    REGULUS_KEY_B_E_IceLaneD
+#define REGULUS_KEY_B_E \
+    { \
+        { REGULUS_KEY_B_E_ArcaneLanes }, \
+        { REGULUS_KEY_B_E_PlasmaLanes }, \
+        { REGULUS_KEY_B_E_RainbowLanes }, \
+        { REGULUS_KEY_B_E_WaterLanes }, \
+        { REGULUS_KEY_B_E_VaporLanes }, \
+        { REGULUS_KEY_B_E_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }
 
 // KEY_B_F
 #define REGULUS_KEY_B_F_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 10U))
@@ -2267,6 +2852,51 @@ public:
 #define REGULUS_KEY_B_F_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 15U))
 #define REGULUS_KEY_B_F_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 5U))
 #define REGULUS_KEY_B_F_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 11U))
+#define REGULUS_KEY_B_F_ArcaneLanes \
+    REGULUS_KEY_B_F_ArcaneLaneA, \
+    REGULUS_KEY_B_F_ArcaneLaneB, \
+    REGULUS_KEY_B_F_ArcaneLaneC, \
+    REGULUS_KEY_B_F_ArcaneLaneD
+#define REGULUS_KEY_B_F_PlasmaLanes \
+    REGULUS_KEY_B_F_PlasmaLaneA, \
+    REGULUS_KEY_B_F_PlasmaLaneB, \
+    REGULUS_KEY_B_F_PlasmaLaneC, \
+    REGULUS_KEY_B_F_PlasmaLaneD
+#define REGULUS_KEY_B_F_RainbowLanes \
+    REGULUS_KEY_B_F_RainbowLaneA, \
+    REGULUS_KEY_B_F_RainbowLaneB, \
+    REGULUS_KEY_B_F_RainbowLaneC, \
+    REGULUS_KEY_B_F_RainbowLaneD
+#define REGULUS_KEY_B_F_WaterLanes \
+    REGULUS_KEY_B_F_WaterLaneA, \
+    REGULUS_KEY_B_F_WaterLaneB, \
+    REGULUS_KEY_B_F_WaterLaneC, \
+    REGULUS_KEY_B_F_WaterLaneD
+#define REGULUS_KEY_B_F_VaporLanes \
+    REGULUS_KEY_B_F_VaporLaneA, \
+    REGULUS_KEY_B_F_VaporLaneB, \
+    REGULUS_KEY_B_F_VaporLaneC, \
+    REGULUS_KEY_B_F_VaporLaneD
+#define REGULUS_KEY_B_F_FrostLanes \
+    REGULUS_KEY_B_F_FrostLaneA, \
+    REGULUS_KEY_B_F_FrostLaneB, \
+    REGULUS_KEY_B_F_FrostLaneC, \
+    REGULUS_KEY_B_F_FrostLaneD
+#define REGULUS_KEY_B_F_IceLanes \
+    REGULUS_KEY_B_F_IceLaneA, \
+    REGULUS_KEY_B_F_IceLaneB, \
+    REGULUS_KEY_B_F_IceLaneC, \
+    REGULUS_KEY_B_F_IceLaneD
+#define REGULUS_KEY_B_F \
+    { \
+        { REGULUS_KEY_B_F_ArcaneLanes }, \
+        { REGULUS_KEY_B_F_PlasmaLanes }, \
+        { REGULUS_KEY_B_F_RainbowLanes }, \
+        { REGULUS_KEY_B_F_WaterLanes }, \
+        { REGULUS_KEY_B_F_VaporLanes }, \
+        { REGULUS_KEY_B_F_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }
 
 // KEY_B_G
 #define REGULUS_KEY_B_G_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 4U))
@@ -2385,6 +3015,51 @@ public:
 #define REGULUS_KEY_B_G_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 3U))
 #define REGULUS_KEY_B_G_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 1U))
 #define REGULUS_KEY_B_G_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 7U))
+#define REGULUS_KEY_B_G_ArcaneLanes \
+    REGULUS_KEY_B_G_ArcaneLaneA, \
+    REGULUS_KEY_B_G_ArcaneLaneB, \
+    REGULUS_KEY_B_G_ArcaneLaneC, \
+    REGULUS_KEY_B_G_ArcaneLaneD
+#define REGULUS_KEY_B_G_PlasmaLanes \
+    REGULUS_KEY_B_G_PlasmaLaneA, \
+    REGULUS_KEY_B_G_PlasmaLaneB, \
+    REGULUS_KEY_B_G_PlasmaLaneC, \
+    REGULUS_KEY_B_G_PlasmaLaneD
+#define REGULUS_KEY_B_G_RainbowLanes \
+    REGULUS_KEY_B_G_RainbowLaneA, \
+    REGULUS_KEY_B_G_RainbowLaneB, \
+    REGULUS_KEY_B_G_RainbowLaneC, \
+    REGULUS_KEY_B_G_RainbowLaneD
+#define REGULUS_KEY_B_G_WaterLanes \
+    REGULUS_KEY_B_G_WaterLaneA, \
+    REGULUS_KEY_B_G_WaterLaneB, \
+    REGULUS_KEY_B_G_WaterLaneC, \
+    REGULUS_KEY_B_G_WaterLaneD
+#define REGULUS_KEY_B_G_VaporLanes \
+    REGULUS_KEY_B_G_VaporLaneA, \
+    REGULUS_KEY_B_G_VaporLaneB, \
+    REGULUS_KEY_B_G_VaporLaneC, \
+    REGULUS_KEY_B_G_VaporLaneD
+#define REGULUS_KEY_B_G_FrostLanes \
+    REGULUS_KEY_B_G_FrostLaneA, \
+    REGULUS_KEY_B_G_FrostLaneB, \
+    REGULUS_KEY_B_G_FrostLaneC, \
+    REGULUS_KEY_B_G_FrostLaneD
+#define REGULUS_KEY_B_G_IceLanes \
+    REGULUS_KEY_B_G_IceLaneA, \
+    REGULUS_KEY_B_G_IceLaneB, \
+    REGULUS_KEY_B_G_IceLaneC, \
+    REGULUS_KEY_B_G_IceLaneD
+#define REGULUS_KEY_B_G \
+    { \
+        { REGULUS_KEY_B_G_ArcaneLanes }, \
+        { REGULUS_KEY_B_G_PlasmaLanes }, \
+        { REGULUS_KEY_B_G_RainbowLanes }, \
+        { REGULUS_KEY_B_G_WaterLanes }, \
+        { REGULUS_KEY_B_G_VaporLanes }, \
+        { REGULUS_KEY_B_G_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }
 
 // KEY_B_H
 #define REGULUS_KEY_B_H_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 1U))
@@ -2503,3 +3178,48 @@ public:
 #define REGULUS_KEY_B_H_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 2U))
 #define REGULUS_KEY_B_H_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 9U))
 #define REGULUS_KEY_B_H_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 10U))
+#define REGULUS_KEY_B_H_ArcaneLanes \
+    REGULUS_KEY_B_H_ArcaneLaneA, \
+    REGULUS_KEY_B_H_ArcaneLaneB, \
+    REGULUS_KEY_B_H_ArcaneLaneC, \
+    REGULUS_KEY_B_H_ArcaneLaneD
+#define REGULUS_KEY_B_H_PlasmaLanes \
+    REGULUS_KEY_B_H_PlasmaLaneA, \
+    REGULUS_KEY_B_H_PlasmaLaneB, \
+    REGULUS_KEY_B_H_PlasmaLaneC, \
+    REGULUS_KEY_B_H_PlasmaLaneD
+#define REGULUS_KEY_B_H_RainbowLanes \
+    REGULUS_KEY_B_H_RainbowLaneA, \
+    REGULUS_KEY_B_H_RainbowLaneB, \
+    REGULUS_KEY_B_H_RainbowLaneC, \
+    REGULUS_KEY_B_H_RainbowLaneD
+#define REGULUS_KEY_B_H_WaterLanes \
+    REGULUS_KEY_B_H_WaterLaneA, \
+    REGULUS_KEY_B_H_WaterLaneB, \
+    REGULUS_KEY_B_H_WaterLaneC, \
+    REGULUS_KEY_B_H_WaterLaneD
+#define REGULUS_KEY_B_H_VaporLanes \
+    REGULUS_KEY_B_H_VaporLaneA, \
+    REGULUS_KEY_B_H_VaporLaneB, \
+    REGULUS_KEY_B_H_VaporLaneC, \
+    REGULUS_KEY_B_H_VaporLaneD
+#define REGULUS_KEY_B_H_FrostLanes \
+    REGULUS_KEY_B_H_FrostLaneA, \
+    REGULUS_KEY_B_H_FrostLaneB, \
+    REGULUS_KEY_B_H_FrostLaneC, \
+    REGULUS_KEY_B_H_FrostLaneD
+#define REGULUS_KEY_B_H_IceLanes \
+    REGULUS_KEY_B_H_IceLaneA, \
+    REGULUS_KEY_B_H_IceLaneB, \
+    REGULUS_KEY_B_H_IceLaneC, \
+    REGULUS_KEY_B_H_IceLaneD
+#define REGULUS_KEY_B_H \
+    { \
+        { REGULUS_KEY_B_H_ArcaneLanes }, \
+        { REGULUS_KEY_B_H_PlasmaLanes }, \
+        { REGULUS_KEY_B_H_RainbowLanes }, \
+        { REGULUS_KEY_B_H_WaterLanes }, \
+        { REGULUS_KEY_B_H_VaporLanes }, \
+        { REGULUS_KEY_B_H_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }

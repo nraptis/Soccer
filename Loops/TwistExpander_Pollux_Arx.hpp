@@ -733,6 +733,51 @@ public:
 #define POLLUX_KEY_A_A_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 13U))
 #define POLLUX_KEY_A_A_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 8U))
 #define POLLUX_KEY_A_A_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 1U))
+#define POLLUX_KEY_A_A_ArcaneLanes \
+    POLLUX_KEY_A_A_ArcaneLaneA, \
+    POLLUX_KEY_A_A_ArcaneLaneB, \
+    POLLUX_KEY_A_A_ArcaneLaneC, \
+    POLLUX_KEY_A_A_ArcaneLaneD
+#define POLLUX_KEY_A_A_PlasmaLanes \
+    POLLUX_KEY_A_A_PlasmaLaneA, \
+    POLLUX_KEY_A_A_PlasmaLaneB, \
+    POLLUX_KEY_A_A_PlasmaLaneC, \
+    POLLUX_KEY_A_A_PlasmaLaneD
+#define POLLUX_KEY_A_A_RainbowLanes \
+    POLLUX_KEY_A_A_RainbowLaneA, \
+    POLLUX_KEY_A_A_RainbowLaneB, \
+    POLLUX_KEY_A_A_RainbowLaneC, \
+    POLLUX_KEY_A_A_RainbowLaneD
+#define POLLUX_KEY_A_A_WaterLanes \
+    POLLUX_KEY_A_A_WaterLaneA, \
+    POLLUX_KEY_A_A_WaterLaneB, \
+    POLLUX_KEY_A_A_WaterLaneC, \
+    POLLUX_KEY_A_A_WaterLaneD
+#define POLLUX_KEY_A_A_VaporLanes \
+    POLLUX_KEY_A_A_VaporLaneA, \
+    POLLUX_KEY_A_A_VaporLaneB, \
+    POLLUX_KEY_A_A_VaporLaneC, \
+    POLLUX_KEY_A_A_VaporLaneD
+#define POLLUX_KEY_A_A_FrostLanes \
+    POLLUX_KEY_A_A_FrostLaneA, \
+    POLLUX_KEY_A_A_FrostLaneB, \
+    POLLUX_KEY_A_A_FrostLaneC, \
+    POLLUX_KEY_A_A_FrostLaneD
+#define POLLUX_KEY_A_A_IceLanes \
+    POLLUX_KEY_A_A_IceLaneA, \
+    POLLUX_KEY_A_A_IceLaneB, \
+    POLLUX_KEY_A_A_IceLaneC, \
+    POLLUX_KEY_A_A_IceLaneD
+#define POLLUX_KEY_A_A \
+    { \
+        { POLLUX_KEY_A_A_ArcaneLanes }, \
+        { POLLUX_KEY_A_A_PlasmaLanes }, \
+        { POLLUX_KEY_A_A_RainbowLanes }, \
+        { POLLUX_KEY_A_A_WaterLanes }, \
+        { POLLUX_KEY_A_A_VaporLanes }, \
+        { POLLUX_KEY_A_A_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_A_B
 #define POLLUX_KEY_A_B_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 6U))
@@ -851,6 +896,51 @@ public:
 #define POLLUX_KEY_A_B_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 4U))
 #define POLLUX_KEY_A_B_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 7U))
 #define POLLUX_KEY_A_B_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 13U))
+#define POLLUX_KEY_A_B_ArcaneLanes \
+    POLLUX_KEY_A_B_ArcaneLaneA, \
+    POLLUX_KEY_A_B_ArcaneLaneB, \
+    POLLUX_KEY_A_B_ArcaneLaneC, \
+    POLLUX_KEY_A_B_ArcaneLaneD
+#define POLLUX_KEY_A_B_PlasmaLanes \
+    POLLUX_KEY_A_B_PlasmaLaneA, \
+    POLLUX_KEY_A_B_PlasmaLaneB, \
+    POLLUX_KEY_A_B_PlasmaLaneC, \
+    POLLUX_KEY_A_B_PlasmaLaneD
+#define POLLUX_KEY_A_B_RainbowLanes \
+    POLLUX_KEY_A_B_RainbowLaneA, \
+    POLLUX_KEY_A_B_RainbowLaneB, \
+    POLLUX_KEY_A_B_RainbowLaneC, \
+    POLLUX_KEY_A_B_RainbowLaneD
+#define POLLUX_KEY_A_B_WaterLanes \
+    POLLUX_KEY_A_B_WaterLaneA, \
+    POLLUX_KEY_A_B_WaterLaneB, \
+    POLLUX_KEY_A_B_WaterLaneC, \
+    POLLUX_KEY_A_B_WaterLaneD
+#define POLLUX_KEY_A_B_VaporLanes \
+    POLLUX_KEY_A_B_VaporLaneA, \
+    POLLUX_KEY_A_B_VaporLaneB, \
+    POLLUX_KEY_A_B_VaporLaneC, \
+    POLLUX_KEY_A_B_VaporLaneD
+#define POLLUX_KEY_A_B_FrostLanes \
+    POLLUX_KEY_A_B_FrostLaneA, \
+    POLLUX_KEY_A_B_FrostLaneB, \
+    POLLUX_KEY_A_B_FrostLaneC, \
+    POLLUX_KEY_A_B_FrostLaneD
+#define POLLUX_KEY_A_B_IceLanes \
+    POLLUX_KEY_A_B_IceLaneA, \
+    POLLUX_KEY_A_B_IceLaneB, \
+    POLLUX_KEY_A_B_IceLaneC, \
+    POLLUX_KEY_A_B_IceLaneD
+#define POLLUX_KEY_A_B \
+    { \
+        { POLLUX_KEY_A_B_ArcaneLanes }, \
+        { POLLUX_KEY_A_B_PlasmaLanes }, \
+        { POLLUX_KEY_A_B_RainbowLanes }, \
+        { POLLUX_KEY_A_B_WaterLanes }, \
+        { POLLUX_KEY_A_B_VaporLanes }, \
+        { POLLUX_KEY_A_B_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_A_C
 #define POLLUX_KEY_A_C_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 2U))
@@ -969,6 +1059,51 @@ public:
 #define POLLUX_KEY_A_C_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 9U))
 #define POLLUX_KEY_A_C_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 11U))
 #define POLLUX_KEY_A_C_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 6U))
+#define POLLUX_KEY_A_C_ArcaneLanes \
+    POLLUX_KEY_A_C_ArcaneLaneA, \
+    POLLUX_KEY_A_C_ArcaneLaneB, \
+    POLLUX_KEY_A_C_ArcaneLaneC, \
+    POLLUX_KEY_A_C_ArcaneLaneD
+#define POLLUX_KEY_A_C_PlasmaLanes \
+    POLLUX_KEY_A_C_PlasmaLaneA, \
+    POLLUX_KEY_A_C_PlasmaLaneB, \
+    POLLUX_KEY_A_C_PlasmaLaneC, \
+    POLLUX_KEY_A_C_PlasmaLaneD
+#define POLLUX_KEY_A_C_RainbowLanes \
+    POLLUX_KEY_A_C_RainbowLaneA, \
+    POLLUX_KEY_A_C_RainbowLaneB, \
+    POLLUX_KEY_A_C_RainbowLaneC, \
+    POLLUX_KEY_A_C_RainbowLaneD
+#define POLLUX_KEY_A_C_WaterLanes \
+    POLLUX_KEY_A_C_WaterLaneA, \
+    POLLUX_KEY_A_C_WaterLaneB, \
+    POLLUX_KEY_A_C_WaterLaneC, \
+    POLLUX_KEY_A_C_WaterLaneD
+#define POLLUX_KEY_A_C_VaporLanes \
+    POLLUX_KEY_A_C_VaporLaneA, \
+    POLLUX_KEY_A_C_VaporLaneB, \
+    POLLUX_KEY_A_C_VaporLaneC, \
+    POLLUX_KEY_A_C_VaporLaneD
+#define POLLUX_KEY_A_C_FrostLanes \
+    POLLUX_KEY_A_C_FrostLaneA, \
+    POLLUX_KEY_A_C_FrostLaneB, \
+    POLLUX_KEY_A_C_FrostLaneC, \
+    POLLUX_KEY_A_C_FrostLaneD
+#define POLLUX_KEY_A_C_IceLanes \
+    POLLUX_KEY_A_C_IceLaneA, \
+    POLLUX_KEY_A_C_IceLaneB, \
+    POLLUX_KEY_A_C_IceLaneC, \
+    POLLUX_KEY_A_C_IceLaneD
+#define POLLUX_KEY_A_C \
+    { \
+        { POLLUX_KEY_A_C_ArcaneLanes }, \
+        { POLLUX_KEY_A_C_PlasmaLanes }, \
+        { POLLUX_KEY_A_C_RainbowLanes }, \
+        { POLLUX_KEY_A_C_WaterLanes }, \
+        { POLLUX_KEY_A_C_VaporLanes }, \
+        { POLLUX_KEY_A_C_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_A_D
 #define POLLUX_KEY_A_D_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 3U))
@@ -1087,6 +1222,51 @@ public:
 #define POLLUX_KEY_A_D_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 6U))
 #define POLLUX_KEY_A_D_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 0U))
 #define POLLUX_KEY_A_D_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 5U))
+#define POLLUX_KEY_A_D_ArcaneLanes \
+    POLLUX_KEY_A_D_ArcaneLaneA, \
+    POLLUX_KEY_A_D_ArcaneLaneB, \
+    POLLUX_KEY_A_D_ArcaneLaneC, \
+    POLLUX_KEY_A_D_ArcaneLaneD
+#define POLLUX_KEY_A_D_PlasmaLanes \
+    POLLUX_KEY_A_D_PlasmaLaneA, \
+    POLLUX_KEY_A_D_PlasmaLaneB, \
+    POLLUX_KEY_A_D_PlasmaLaneC, \
+    POLLUX_KEY_A_D_PlasmaLaneD
+#define POLLUX_KEY_A_D_RainbowLanes \
+    POLLUX_KEY_A_D_RainbowLaneA, \
+    POLLUX_KEY_A_D_RainbowLaneB, \
+    POLLUX_KEY_A_D_RainbowLaneC, \
+    POLLUX_KEY_A_D_RainbowLaneD
+#define POLLUX_KEY_A_D_WaterLanes \
+    POLLUX_KEY_A_D_WaterLaneA, \
+    POLLUX_KEY_A_D_WaterLaneB, \
+    POLLUX_KEY_A_D_WaterLaneC, \
+    POLLUX_KEY_A_D_WaterLaneD
+#define POLLUX_KEY_A_D_VaporLanes \
+    POLLUX_KEY_A_D_VaporLaneA, \
+    POLLUX_KEY_A_D_VaporLaneB, \
+    POLLUX_KEY_A_D_VaporLaneC, \
+    POLLUX_KEY_A_D_VaporLaneD
+#define POLLUX_KEY_A_D_FrostLanes \
+    POLLUX_KEY_A_D_FrostLaneA, \
+    POLLUX_KEY_A_D_FrostLaneB, \
+    POLLUX_KEY_A_D_FrostLaneC, \
+    POLLUX_KEY_A_D_FrostLaneD
+#define POLLUX_KEY_A_D_IceLanes \
+    POLLUX_KEY_A_D_IceLaneA, \
+    POLLUX_KEY_A_D_IceLaneB, \
+    POLLUX_KEY_A_D_IceLaneC, \
+    POLLUX_KEY_A_D_IceLaneD
+#define POLLUX_KEY_A_D \
+    { \
+        { POLLUX_KEY_A_D_ArcaneLanes }, \
+        { POLLUX_KEY_A_D_PlasmaLanes }, \
+        { POLLUX_KEY_A_D_RainbowLanes }, \
+        { POLLUX_KEY_A_D_WaterLanes }, \
+        { POLLUX_KEY_A_D_VaporLanes }, \
+        { POLLUX_KEY_A_D_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_A_E
 #define POLLUX_KEY_A_E_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 7U))
@@ -1205,6 +1385,51 @@ public:
 #define POLLUX_KEY_A_E_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 5U))
 #define POLLUX_KEY_A_E_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 3U))
 #define POLLUX_KEY_A_E_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 4U))
+#define POLLUX_KEY_A_E_ArcaneLanes \
+    POLLUX_KEY_A_E_ArcaneLaneA, \
+    POLLUX_KEY_A_E_ArcaneLaneB, \
+    POLLUX_KEY_A_E_ArcaneLaneC, \
+    POLLUX_KEY_A_E_ArcaneLaneD
+#define POLLUX_KEY_A_E_PlasmaLanes \
+    POLLUX_KEY_A_E_PlasmaLaneA, \
+    POLLUX_KEY_A_E_PlasmaLaneB, \
+    POLLUX_KEY_A_E_PlasmaLaneC, \
+    POLLUX_KEY_A_E_PlasmaLaneD
+#define POLLUX_KEY_A_E_RainbowLanes \
+    POLLUX_KEY_A_E_RainbowLaneA, \
+    POLLUX_KEY_A_E_RainbowLaneB, \
+    POLLUX_KEY_A_E_RainbowLaneC, \
+    POLLUX_KEY_A_E_RainbowLaneD
+#define POLLUX_KEY_A_E_WaterLanes \
+    POLLUX_KEY_A_E_WaterLaneA, \
+    POLLUX_KEY_A_E_WaterLaneB, \
+    POLLUX_KEY_A_E_WaterLaneC, \
+    POLLUX_KEY_A_E_WaterLaneD
+#define POLLUX_KEY_A_E_VaporLanes \
+    POLLUX_KEY_A_E_VaporLaneA, \
+    POLLUX_KEY_A_E_VaporLaneB, \
+    POLLUX_KEY_A_E_VaporLaneC, \
+    POLLUX_KEY_A_E_VaporLaneD
+#define POLLUX_KEY_A_E_FrostLanes \
+    POLLUX_KEY_A_E_FrostLaneA, \
+    POLLUX_KEY_A_E_FrostLaneB, \
+    POLLUX_KEY_A_E_FrostLaneC, \
+    POLLUX_KEY_A_E_FrostLaneD
+#define POLLUX_KEY_A_E_IceLanes \
+    POLLUX_KEY_A_E_IceLaneA, \
+    POLLUX_KEY_A_E_IceLaneB, \
+    POLLUX_KEY_A_E_IceLaneC, \
+    POLLUX_KEY_A_E_IceLaneD
+#define POLLUX_KEY_A_E \
+    { \
+        { POLLUX_KEY_A_E_ArcaneLanes }, \
+        { POLLUX_KEY_A_E_PlasmaLanes }, \
+        { POLLUX_KEY_A_E_RainbowLanes }, \
+        { POLLUX_KEY_A_E_WaterLanes }, \
+        { POLLUX_KEY_A_E_VaporLanes }, \
+        { POLLUX_KEY_A_E_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_A_F
 #define POLLUX_KEY_A_F_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 0U))
@@ -1323,6 +1548,51 @@ public:
 #define POLLUX_KEY_A_F_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 12U))
 #define POLLUX_KEY_A_F_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 15U))
 #define POLLUX_KEY_A_F_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 9U))
+#define POLLUX_KEY_A_F_ArcaneLanes \
+    POLLUX_KEY_A_F_ArcaneLaneA, \
+    POLLUX_KEY_A_F_ArcaneLaneB, \
+    POLLUX_KEY_A_F_ArcaneLaneC, \
+    POLLUX_KEY_A_F_ArcaneLaneD
+#define POLLUX_KEY_A_F_PlasmaLanes \
+    POLLUX_KEY_A_F_PlasmaLaneA, \
+    POLLUX_KEY_A_F_PlasmaLaneB, \
+    POLLUX_KEY_A_F_PlasmaLaneC, \
+    POLLUX_KEY_A_F_PlasmaLaneD
+#define POLLUX_KEY_A_F_RainbowLanes \
+    POLLUX_KEY_A_F_RainbowLaneA, \
+    POLLUX_KEY_A_F_RainbowLaneB, \
+    POLLUX_KEY_A_F_RainbowLaneC, \
+    POLLUX_KEY_A_F_RainbowLaneD
+#define POLLUX_KEY_A_F_WaterLanes \
+    POLLUX_KEY_A_F_WaterLaneA, \
+    POLLUX_KEY_A_F_WaterLaneB, \
+    POLLUX_KEY_A_F_WaterLaneC, \
+    POLLUX_KEY_A_F_WaterLaneD
+#define POLLUX_KEY_A_F_VaporLanes \
+    POLLUX_KEY_A_F_VaporLaneA, \
+    POLLUX_KEY_A_F_VaporLaneB, \
+    POLLUX_KEY_A_F_VaporLaneC, \
+    POLLUX_KEY_A_F_VaporLaneD
+#define POLLUX_KEY_A_F_FrostLanes \
+    POLLUX_KEY_A_F_FrostLaneA, \
+    POLLUX_KEY_A_F_FrostLaneB, \
+    POLLUX_KEY_A_F_FrostLaneC, \
+    POLLUX_KEY_A_F_FrostLaneD
+#define POLLUX_KEY_A_F_IceLanes \
+    POLLUX_KEY_A_F_IceLaneA, \
+    POLLUX_KEY_A_F_IceLaneB, \
+    POLLUX_KEY_A_F_IceLaneC, \
+    POLLUX_KEY_A_F_IceLaneD
+#define POLLUX_KEY_A_F \
+    { \
+        { POLLUX_KEY_A_F_ArcaneLanes }, \
+        { POLLUX_KEY_A_F_PlasmaLanes }, \
+        { POLLUX_KEY_A_F_RainbowLanes }, \
+        { POLLUX_KEY_A_F_WaterLanes }, \
+        { POLLUX_KEY_A_F_VaporLanes }, \
+        { POLLUX_KEY_A_F_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_A_G
 #define POLLUX_KEY_A_G_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 10U))
@@ -1441,6 +1711,51 @@ public:
 #define POLLUX_KEY_A_G_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 14U))
 #define POLLUX_KEY_A_G_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 10U))
 #define POLLUX_KEY_A_G_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 12U))
+#define POLLUX_KEY_A_G_ArcaneLanes \
+    POLLUX_KEY_A_G_ArcaneLaneA, \
+    POLLUX_KEY_A_G_ArcaneLaneB, \
+    POLLUX_KEY_A_G_ArcaneLaneC, \
+    POLLUX_KEY_A_G_ArcaneLaneD
+#define POLLUX_KEY_A_G_PlasmaLanes \
+    POLLUX_KEY_A_G_PlasmaLaneA, \
+    POLLUX_KEY_A_G_PlasmaLaneB, \
+    POLLUX_KEY_A_G_PlasmaLaneC, \
+    POLLUX_KEY_A_G_PlasmaLaneD
+#define POLLUX_KEY_A_G_RainbowLanes \
+    POLLUX_KEY_A_G_RainbowLaneA, \
+    POLLUX_KEY_A_G_RainbowLaneB, \
+    POLLUX_KEY_A_G_RainbowLaneC, \
+    POLLUX_KEY_A_G_RainbowLaneD
+#define POLLUX_KEY_A_G_WaterLanes \
+    POLLUX_KEY_A_G_WaterLaneA, \
+    POLLUX_KEY_A_G_WaterLaneB, \
+    POLLUX_KEY_A_G_WaterLaneC, \
+    POLLUX_KEY_A_G_WaterLaneD
+#define POLLUX_KEY_A_G_VaporLanes \
+    POLLUX_KEY_A_G_VaporLaneA, \
+    POLLUX_KEY_A_G_VaporLaneB, \
+    POLLUX_KEY_A_G_VaporLaneC, \
+    POLLUX_KEY_A_G_VaporLaneD
+#define POLLUX_KEY_A_G_FrostLanes \
+    POLLUX_KEY_A_G_FrostLaneA, \
+    POLLUX_KEY_A_G_FrostLaneB, \
+    POLLUX_KEY_A_G_FrostLaneC, \
+    POLLUX_KEY_A_G_FrostLaneD
+#define POLLUX_KEY_A_G_IceLanes \
+    POLLUX_KEY_A_G_IceLaneA, \
+    POLLUX_KEY_A_G_IceLaneB, \
+    POLLUX_KEY_A_G_IceLaneC, \
+    POLLUX_KEY_A_G_IceLaneD
+#define POLLUX_KEY_A_G \
+    { \
+        { POLLUX_KEY_A_G_ArcaneLanes }, \
+        { POLLUX_KEY_A_G_PlasmaLanes }, \
+        { POLLUX_KEY_A_G_RainbowLanes }, \
+        { POLLUX_KEY_A_G_WaterLanes }, \
+        { POLLUX_KEY_A_G_VaporLanes }, \
+        { POLLUX_KEY_A_G_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_A_H
 #define POLLUX_KEY_A_H_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 4U))
@@ -1559,6 +1874,51 @@ public:
 #define POLLUX_KEY_A_H_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 3U))
 #define POLLUX_KEY_A_H_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 1U))
 #define POLLUX_KEY_A_H_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 7U))
+#define POLLUX_KEY_A_H_ArcaneLanes \
+    POLLUX_KEY_A_H_ArcaneLaneA, \
+    POLLUX_KEY_A_H_ArcaneLaneB, \
+    POLLUX_KEY_A_H_ArcaneLaneC, \
+    POLLUX_KEY_A_H_ArcaneLaneD
+#define POLLUX_KEY_A_H_PlasmaLanes \
+    POLLUX_KEY_A_H_PlasmaLaneA, \
+    POLLUX_KEY_A_H_PlasmaLaneB, \
+    POLLUX_KEY_A_H_PlasmaLaneC, \
+    POLLUX_KEY_A_H_PlasmaLaneD
+#define POLLUX_KEY_A_H_RainbowLanes \
+    POLLUX_KEY_A_H_RainbowLaneA, \
+    POLLUX_KEY_A_H_RainbowLaneB, \
+    POLLUX_KEY_A_H_RainbowLaneC, \
+    POLLUX_KEY_A_H_RainbowLaneD
+#define POLLUX_KEY_A_H_WaterLanes \
+    POLLUX_KEY_A_H_WaterLaneA, \
+    POLLUX_KEY_A_H_WaterLaneB, \
+    POLLUX_KEY_A_H_WaterLaneC, \
+    POLLUX_KEY_A_H_WaterLaneD
+#define POLLUX_KEY_A_H_VaporLanes \
+    POLLUX_KEY_A_H_VaporLaneA, \
+    POLLUX_KEY_A_H_VaporLaneB, \
+    POLLUX_KEY_A_H_VaporLaneC, \
+    POLLUX_KEY_A_H_VaporLaneD
+#define POLLUX_KEY_A_H_FrostLanes \
+    POLLUX_KEY_A_H_FrostLaneA, \
+    POLLUX_KEY_A_H_FrostLaneB, \
+    POLLUX_KEY_A_H_FrostLaneC, \
+    POLLUX_KEY_A_H_FrostLaneD
+#define POLLUX_KEY_A_H_IceLanes \
+    POLLUX_KEY_A_H_IceLaneA, \
+    POLLUX_KEY_A_H_IceLaneB, \
+    POLLUX_KEY_A_H_IceLaneC, \
+    POLLUX_KEY_A_H_IceLaneD
+#define POLLUX_KEY_A_H \
+    { \
+        { POLLUX_KEY_A_H_ArcaneLanes }, \
+        { POLLUX_KEY_A_H_PlasmaLanes }, \
+        { POLLUX_KEY_A_H_RainbowLanes }, \
+        { POLLUX_KEY_A_H_WaterLanes }, \
+        { POLLUX_KEY_A_H_VaporLanes }, \
+        { POLLUX_KEY_A_H_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_B_A
 #define POLLUX_KEY_B_A_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 1U))
@@ -1677,6 +2037,51 @@ public:
 #define POLLUX_KEY_B_A_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 2U))
 #define POLLUX_KEY_B_A_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 9U))
 #define POLLUX_KEY_B_A_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 10U))
+#define POLLUX_KEY_B_A_ArcaneLanes \
+    POLLUX_KEY_B_A_ArcaneLaneA, \
+    POLLUX_KEY_B_A_ArcaneLaneB, \
+    POLLUX_KEY_B_A_ArcaneLaneC, \
+    POLLUX_KEY_B_A_ArcaneLaneD
+#define POLLUX_KEY_B_A_PlasmaLanes \
+    POLLUX_KEY_B_A_PlasmaLaneA, \
+    POLLUX_KEY_B_A_PlasmaLaneB, \
+    POLLUX_KEY_B_A_PlasmaLaneC, \
+    POLLUX_KEY_B_A_PlasmaLaneD
+#define POLLUX_KEY_B_A_RainbowLanes \
+    POLLUX_KEY_B_A_RainbowLaneA, \
+    POLLUX_KEY_B_A_RainbowLaneB, \
+    POLLUX_KEY_B_A_RainbowLaneC, \
+    POLLUX_KEY_B_A_RainbowLaneD
+#define POLLUX_KEY_B_A_WaterLanes \
+    POLLUX_KEY_B_A_WaterLaneA, \
+    POLLUX_KEY_B_A_WaterLaneB, \
+    POLLUX_KEY_B_A_WaterLaneC, \
+    POLLUX_KEY_B_A_WaterLaneD
+#define POLLUX_KEY_B_A_VaporLanes \
+    POLLUX_KEY_B_A_VaporLaneA, \
+    POLLUX_KEY_B_A_VaporLaneB, \
+    POLLUX_KEY_B_A_VaporLaneC, \
+    POLLUX_KEY_B_A_VaporLaneD
+#define POLLUX_KEY_B_A_FrostLanes \
+    POLLUX_KEY_B_A_FrostLaneA, \
+    POLLUX_KEY_B_A_FrostLaneB, \
+    POLLUX_KEY_B_A_FrostLaneC, \
+    POLLUX_KEY_B_A_FrostLaneD
+#define POLLUX_KEY_B_A_IceLanes \
+    POLLUX_KEY_B_A_IceLaneA, \
+    POLLUX_KEY_B_A_IceLaneB, \
+    POLLUX_KEY_B_A_IceLaneC, \
+    POLLUX_KEY_B_A_IceLaneD
+#define POLLUX_KEY_B_A \
+    { \
+        { POLLUX_KEY_B_A_ArcaneLanes }, \
+        { POLLUX_KEY_B_A_PlasmaLanes }, \
+        { POLLUX_KEY_B_A_RainbowLanes }, \
+        { POLLUX_KEY_B_A_WaterLanes }, \
+        { POLLUX_KEY_B_A_VaporLanes }, \
+        { POLLUX_KEY_B_A_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }
 
 // KEY_B_B
 #define POLLUX_KEY_B_B_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 13U))
@@ -1795,6 +2200,51 @@ public:
 #define POLLUX_KEY_B_B_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 1U))
 #define POLLUX_KEY_B_B_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 2U))
 #define POLLUX_KEY_B_B_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 14U))
+#define POLLUX_KEY_B_B_ArcaneLanes \
+    POLLUX_KEY_B_B_ArcaneLaneA, \
+    POLLUX_KEY_B_B_ArcaneLaneB, \
+    POLLUX_KEY_B_B_ArcaneLaneC, \
+    POLLUX_KEY_B_B_ArcaneLaneD
+#define POLLUX_KEY_B_B_PlasmaLanes \
+    POLLUX_KEY_B_B_PlasmaLaneA, \
+    POLLUX_KEY_B_B_PlasmaLaneB, \
+    POLLUX_KEY_B_B_PlasmaLaneC, \
+    POLLUX_KEY_B_B_PlasmaLaneD
+#define POLLUX_KEY_B_B_RainbowLanes \
+    POLLUX_KEY_B_B_RainbowLaneA, \
+    POLLUX_KEY_B_B_RainbowLaneB, \
+    POLLUX_KEY_B_B_RainbowLaneC, \
+    POLLUX_KEY_B_B_RainbowLaneD
+#define POLLUX_KEY_B_B_WaterLanes \
+    POLLUX_KEY_B_B_WaterLaneA, \
+    POLLUX_KEY_B_B_WaterLaneB, \
+    POLLUX_KEY_B_B_WaterLaneC, \
+    POLLUX_KEY_B_B_WaterLaneD
+#define POLLUX_KEY_B_B_VaporLanes \
+    POLLUX_KEY_B_B_VaporLaneA, \
+    POLLUX_KEY_B_B_VaporLaneB, \
+    POLLUX_KEY_B_B_VaporLaneC, \
+    POLLUX_KEY_B_B_VaporLaneD
+#define POLLUX_KEY_B_B_FrostLanes \
+    POLLUX_KEY_B_B_FrostLaneA, \
+    POLLUX_KEY_B_B_FrostLaneB, \
+    POLLUX_KEY_B_B_FrostLaneC, \
+    POLLUX_KEY_B_B_FrostLaneD
+#define POLLUX_KEY_B_B_IceLanes \
+    POLLUX_KEY_B_B_IceLaneA, \
+    POLLUX_KEY_B_B_IceLaneB, \
+    POLLUX_KEY_B_B_IceLaneC, \
+    POLLUX_KEY_B_B_IceLaneD
+#define POLLUX_KEY_B_B \
+    { \
+        { POLLUX_KEY_B_B_ArcaneLanes }, \
+        { POLLUX_KEY_B_B_PlasmaLanes }, \
+        { POLLUX_KEY_B_B_RainbowLanes }, \
+        { POLLUX_KEY_B_B_WaterLanes }, \
+        { POLLUX_KEY_B_B_VaporLanes }, \
+        { POLLUX_KEY_B_B_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }
 
 // KEY_B_C
 #define POLLUX_KEY_B_C_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 11U))
@@ -1913,6 +2363,51 @@ public:
 #define POLLUX_KEY_B_C_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 11U))
 #define POLLUX_KEY_B_C_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 4U))
 #define POLLUX_KEY_B_C_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 0U))
+#define POLLUX_KEY_B_C_ArcaneLanes \
+    POLLUX_KEY_B_C_ArcaneLaneA, \
+    POLLUX_KEY_B_C_ArcaneLaneB, \
+    POLLUX_KEY_B_C_ArcaneLaneC, \
+    POLLUX_KEY_B_C_ArcaneLaneD
+#define POLLUX_KEY_B_C_PlasmaLanes \
+    POLLUX_KEY_B_C_PlasmaLaneA, \
+    POLLUX_KEY_B_C_PlasmaLaneB, \
+    POLLUX_KEY_B_C_PlasmaLaneC, \
+    POLLUX_KEY_B_C_PlasmaLaneD
+#define POLLUX_KEY_B_C_RainbowLanes \
+    POLLUX_KEY_B_C_RainbowLaneA, \
+    POLLUX_KEY_B_C_RainbowLaneB, \
+    POLLUX_KEY_B_C_RainbowLaneC, \
+    POLLUX_KEY_B_C_RainbowLaneD
+#define POLLUX_KEY_B_C_WaterLanes \
+    POLLUX_KEY_B_C_WaterLaneA, \
+    POLLUX_KEY_B_C_WaterLaneB, \
+    POLLUX_KEY_B_C_WaterLaneC, \
+    POLLUX_KEY_B_C_WaterLaneD
+#define POLLUX_KEY_B_C_VaporLanes \
+    POLLUX_KEY_B_C_VaporLaneA, \
+    POLLUX_KEY_B_C_VaporLaneB, \
+    POLLUX_KEY_B_C_VaporLaneC, \
+    POLLUX_KEY_B_C_VaporLaneD
+#define POLLUX_KEY_B_C_FrostLanes \
+    POLLUX_KEY_B_C_FrostLaneA, \
+    POLLUX_KEY_B_C_FrostLaneB, \
+    POLLUX_KEY_B_C_FrostLaneC, \
+    POLLUX_KEY_B_C_FrostLaneD
+#define POLLUX_KEY_B_C_IceLanes \
+    POLLUX_KEY_B_C_IceLaneA, \
+    POLLUX_KEY_B_C_IceLaneB, \
+    POLLUX_KEY_B_C_IceLaneC, \
+    POLLUX_KEY_B_C_IceLaneD
+#define POLLUX_KEY_B_C \
+    { \
+        { POLLUX_KEY_B_C_ArcaneLanes }, \
+        { POLLUX_KEY_B_C_PlasmaLanes }, \
+        { POLLUX_KEY_B_C_RainbowLanes }, \
+        { POLLUX_KEY_B_C_WaterLanes }, \
+        { POLLUX_KEY_B_C_VaporLanes }, \
+        { POLLUX_KEY_B_C_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }
 
 // KEY_B_D
 #define POLLUX_KEY_B_D_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 9U))
@@ -2031,6 +2526,51 @@ public:
 #define POLLUX_KEY_B_D_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 15U))
 #define POLLUX_KEY_B_D_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 5U))
 #define POLLUX_KEY_B_D_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 11U))
+#define POLLUX_KEY_B_D_ArcaneLanes \
+    POLLUX_KEY_B_D_ArcaneLaneA, \
+    POLLUX_KEY_B_D_ArcaneLaneB, \
+    POLLUX_KEY_B_D_ArcaneLaneC, \
+    POLLUX_KEY_B_D_ArcaneLaneD
+#define POLLUX_KEY_B_D_PlasmaLanes \
+    POLLUX_KEY_B_D_PlasmaLaneA, \
+    POLLUX_KEY_B_D_PlasmaLaneB, \
+    POLLUX_KEY_B_D_PlasmaLaneC, \
+    POLLUX_KEY_B_D_PlasmaLaneD
+#define POLLUX_KEY_B_D_RainbowLanes \
+    POLLUX_KEY_B_D_RainbowLaneA, \
+    POLLUX_KEY_B_D_RainbowLaneB, \
+    POLLUX_KEY_B_D_RainbowLaneC, \
+    POLLUX_KEY_B_D_RainbowLaneD
+#define POLLUX_KEY_B_D_WaterLanes \
+    POLLUX_KEY_B_D_WaterLaneA, \
+    POLLUX_KEY_B_D_WaterLaneB, \
+    POLLUX_KEY_B_D_WaterLaneC, \
+    POLLUX_KEY_B_D_WaterLaneD
+#define POLLUX_KEY_B_D_VaporLanes \
+    POLLUX_KEY_B_D_VaporLaneA, \
+    POLLUX_KEY_B_D_VaporLaneB, \
+    POLLUX_KEY_B_D_VaporLaneC, \
+    POLLUX_KEY_B_D_VaporLaneD
+#define POLLUX_KEY_B_D_FrostLanes \
+    POLLUX_KEY_B_D_FrostLaneA, \
+    POLLUX_KEY_B_D_FrostLaneB, \
+    POLLUX_KEY_B_D_FrostLaneC, \
+    POLLUX_KEY_B_D_FrostLaneD
+#define POLLUX_KEY_B_D_IceLanes \
+    POLLUX_KEY_B_D_IceLaneA, \
+    POLLUX_KEY_B_D_IceLaneB, \
+    POLLUX_KEY_B_D_IceLaneC, \
+    POLLUX_KEY_B_D_IceLaneD
+#define POLLUX_KEY_B_D \
+    { \
+        { POLLUX_KEY_B_D_ArcaneLanes }, \
+        { POLLUX_KEY_B_D_PlasmaLanes }, \
+        { POLLUX_KEY_B_D_RainbowLanes }, \
+        { POLLUX_KEY_B_D_WaterLanes }, \
+        { POLLUX_KEY_B_D_VaporLanes }, \
+        { POLLUX_KEY_B_D_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }
 
 // KEY_B_E
 #define POLLUX_KEY_B_E_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 5U))
@@ -2149,6 +2689,51 @@ public:
 #define POLLUX_KEY_B_E_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 7U))
 #define POLLUX_KEY_B_E_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 14U))
 #define POLLUX_KEY_B_E_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 8U))
+#define POLLUX_KEY_B_E_ArcaneLanes \
+    POLLUX_KEY_B_E_ArcaneLaneA, \
+    POLLUX_KEY_B_E_ArcaneLaneB, \
+    POLLUX_KEY_B_E_ArcaneLaneC, \
+    POLLUX_KEY_B_E_ArcaneLaneD
+#define POLLUX_KEY_B_E_PlasmaLanes \
+    POLLUX_KEY_B_E_PlasmaLaneA, \
+    POLLUX_KEY_B_E_PlasmaLaneB, \
+    POLLUX_KEY_B_E_PlasmaLaneC, \
+    POLLUX_KEY_B_E_PlasmaLaneD
+#define POLLUX_KEY_B_E_RainbowLanes \
+    POLLUX_KEY_B_E_RainbowLaneA, \
+    POLLUX_KEY_B_E_RainbowLaneB, \
+    POLLUX_KEY_B_E_RainbowLaneC, \
+    POLLUX_KEY_B_E_RainbowLaneD
+#define POLLUX_KEY_B_E_WaterLanes \
+    POLLUX_KEY_B_E_WaterLaneA, \
+    POLLUX_KEY_B_E_WaterLaneB, \
+    POLLUX_KEY_B_E_WaterLaneC, \
+    POLLUX_KEY_B_E_WaterLaneD
+#define POLLUX_KEY_B_E_VaporLanes \
+    POLLUX_KEY_B_E_VaporLaneA, \
+    POLLUX_KEY_B_E_VaporLaneB, \
+    POLLUX_KEY_B_E_VaporLaneC, \
+    POLLUX_KEY_B_E_VaporLaneD
+#define POLLUX_KEY_B_E_FrostLanes \
+    POLLUX_KEY_B_E_FrostLaneA, \
+    POLLUX_KEY_B_E_FrostLaneB, \
+    POLLUX_KEY_B_E_FrostLaneC, \
+    POLLUX_KEY_B_E_FrostLaneD
+#define POLLUX_KEY_B_E_IceLanes \
+    POLLUX_KEY_B_E_IceLaneA, \
+    POLLUX_KEY_B_E_IceLaneB, \
+    POLLUX_KEY_B_E_IceLaneC, \
+    POLLUX_KEY_B_E_IceLaneD
+#define POLLUX_KEY_B_E \
+    { \
+        { POLLUX_KEY_B_E_ArcaneLanes }, \
+        { POLLUX_KEY_B_E_PlasmaLanes }, \
+        { POLLUX_KEY_B_E_RainbowLanes }, \
+        { POLLUX_KEY_B_E_WaterLanes }, \
+        { POLLUX_KEY_B_E_VaporLanes }, \
+        { POLLUX_KEY_B_E_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }
 
 // KEY_B_F
 #define POLLUX_KEY_B_F_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 15U))
@@ -2267,6 +2852,51 @@ public:
 #define POLLUX_KEY_B_F_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 10U))
 #define POLLUX_KEY_B_F_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 6U))
 #define POLLUX_KEY_B_F_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 15U))
+#define POLLUX_KEY_B_F_ArcaneLanes \
+    POLLUX_KEY_B_F_ArcaneLaneA, \
+    POLLUX_KEY_B_F_ArcaneLaneB, \
+    POLLUX_KEY_B_F_ArcaneLaneC, \
+    POLLUX_KEY_B_F_ArcaneLaneD
+#define POLLUX_KEY_B_F_PlasmaLanes \
+    POLLUX_KEY_B_F_PlasmaLaneA, \
+    POLLUX_KEY_B_F_PlasmaLaneB, \
+    POLLUX_KEY_B_F_PlasmaLaneC, \
+    POLLUX_KEY_B_F_PlasmaLaneD
+#define POLLUX_KEY_B_F_RainbowLanes \
+    POLLUX_KEY_B_F_RainbowLaneA, \
+    POLLUX_KEY_B_F_RainbowLaneB, \
+    POLLUX_KEY_B_F_RainbowLaneC, \
+    POLLUX_KEY_B_F_RainbowLaneD
+#define POLLUX_KEY_B_F_WaterLanes \
+    POLLUX_KEY_B_F_WaterLaneA, \
+    POLLUX_KEY_B_F_WaterLaneB, \
+    POLLUX_KEY_B_F_WaterLaneC, \
+    POLLUX_KEY_B_F_WaterLaneD
+#define POLLUX_KEY_B_F_VaporLanes \
+    POLLUX_KEY_B_F_VaporLaneA, \
+    POLLUX_KEY_B_F_VaporLaneB, \
+    POLLUX_KEY_B_F_VaporLaneC, \
+    POLLUX_KEY_B_F_VaporLaneD
+#define POLLUX_KEY_B_F_FrostLanes \
+    POLLUX_KEY_B_F_FrostLaneA, \
+    POLLUX_KEY_B_F_FrostLaneB, \
+    POLLUX_KEY_B_F_FrostLaneC, \
+    POLLUX_KEY_B_F_FrostLaneD
+#define POLLUX_KEY_B_F_IceLanes \
+    POLLUX_KEY_B_F_IceLaneA, \
+    POLLUX_KEY_B_F_IceLaneB, \
+    POLLUX_KEY_B_F_IceLaneC, \
+    POLLUX_KEY_B_F_IceLaneD
+#define POLLUX_KEY_B_F \
+    { \
+        { POLLUX_KEY_B_F_ArcaneLanes }, \
+        { POLLUX_KEY_B_F_PlasmaLanes }, \
+        { POLLUX_KEY_B_F_RainbowLanes }, \
+        { POLLUX_KEY_B_F_WaterLanes }, \
+        { POLLUX_KEY_B_F_VaporLanes }, \
+        { POLLUX_KEY_B_F_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }
 
 // KEY_B_G
 #define POLLUX_KEY_B_G_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 12U))
@@ -2385,6 +3015,51 @@ public:
 #define POLLUX_KEY_B_G_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 0U))
 #define POLLUX_KEY_B_G_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 13U))
 #define POLLUX_KEY_B_G_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 3U))
+#define POLLUX_KEY_B_G_ArcaneLanes \
+    POLLUX_KEY_B_G_ArcaneLaneA, \
+    POLLUX_KEY_B_G_ArcaneLaneB, \
+    POLLUX_KEY_B_G_ArcaneLaneC, \
+    POLLUX_KEY_B_G_ArcaneLaneD
+#define POLLUX_KEY_B_G_PlasmaLanes \
+    POLLUX_KEY_B_G_PlasmaLaneA, \
+    POLLUX_KEY_B_G_PlasmaLaneB, \
+    POLLUX_KEY_B_G_PlasmaLaneC, \
+    POLLUX_KEY_B_G_PlasmaLaneD
+#define POLLUX_KEY_B_G_RainbowLanes \
+    POLLUX_KEY_B_G_RainbowLaneA, \
+    POLLUX_KEY_B_G_RainbowLaneB, \
+    POLLUX_KEY_B_G_RainbowLaneC, \
+    POLLUX_KEY_B_G_RainbowLaneD
+#define POLLUX_KEY_B_G_WaterLanes \
+    POLLUX_KEY_B_G_WaterLaneA, \
+    POLLUX_KEY_B_G_WaterLaneB, \
+    POLLUX_KEY_B_G_WaterLaneC, \
+    POLLUX_KEY_B_G_WaterLaneD
+#define POLLUX_KEY_B_G_VaporLanes \
+    POLLUX_KEY_B_G_VaporLaneA, \
+    POLLUX_KEY_B_G_VaporLaneB, \
+    POLLUX_KEY_B_G_VaporLaneC, \
+    POLLUX_KEY_B_G_VaporLaneD
+#define POLLUX_KEY_B_G_FrostLanes \
+    POLLUX_KEY_B_G_FrostLaneA, \
+    POLLUX_KEY_B_G_FrostLaneB, \
+    POLLUX_KEY_B_G_FrostLaneC, \
+    POLLUX_KEY_B_G_FrostLaneD
+#define POLLUX_KEY_B_G_IceLanes \
+    POLLUX_KEY_B_G_IceLaneA, \
+    POLLUX_KEY_B_G_IceLaneB, \
+    POLLUX_KEY_B_G_IceLaneC, \
+    POLLUX_KEY_B_G_IceLaneD
+#define POLLUX_KEY_B_G \
+    { \
+        { POLLUX_KEY_B_G_ArcaneLanes }, \
+        { POLLUX_KEY_B_G_PlasmaLanes }, \
+        { POLLUX_KEY_B_G_RainbowLanes }, \
+        { POLLUX_KEY_B_G_WaterLanes }, \
+        { POLLUX_KEY_B_G_VaporLanes }, \
+        { POLLUX_KEY_B_G_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }
 
 // KEY_B_H
 #define POLLUX_KEY_B_H_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 8U))
@@ -2503,3 +3178,48 @@ public:
 #define POLLUX_KEY_B_H_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 8U))
 #define POLLUX_KEY_B_H_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 12U))
 #define POLLUX_KEY_B_H_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 2U))
+#define POLLUX_KEY_B_H_ArcaneLanes \
+    POLLUX_KEY_B_H_ArcaneLaneA, \
+    POLLUX_KEY_B_H_ArcaneLaneB, \
+    POLLUX_KEY_B_H_ArcaneLaneC, \
+    POLLUX_KEY_B_H_ArcaneLaneD
+#define POLLUX_KEY_B_H_PlasmaLanes \
+    POLLUX_KEY_B_H_PlasmaLaneA, \
+    POLLUX_KEY_B_H_PlasmaLaneB, \
+    POLLUX_KEY_B_H_PlasmaLaneC, \
+    POLLUX_KEY_B_H_PlasmaLaneD
+#define POLLUX_KEY_B_H_RainbowLanes \
+    POLLUX_KEY_B_H_RainbowLaneA, \
+    POLLUX_KEY_B_H_RainbowLaneB, \
+    POLLUX_KEY_B_H_RainbowLaneC, \
+    POLLUX_KEY_B_H_RainbowLaneD
+#define POLLUX_KEY_B_H_WaterLanes \
+    POLLUX_KEY_B_H_WaterLaneA, \
+    POLLUX_KEY_B_H_WaterLaneB, \
+    POLLUX_KEY_B_H_WaterLaneC, \
+    POLLUX_KEY_B_H_WaterLaneD
+#define POLLUX_KEY_B_H_VaporLanes \
+    POLLUX_KEY_B_H_VaporLaneA, \
+    POLLUX_KEY_B_H_VaporLaneB, \
+    POLLUX_KEY_B_H_VaporLaneC, \
+    POLLUX_KEY_B_H_VaporLaneD
+#define POLLUX_KEY_B_H_FrostLanes \
+    POLLUX_KEY_B_H_FrostLaneA, \
+    POLLUX_KEY_B_H_FrostLaneB, \
+    POLLUX_KEY_B_H_FrostLaneC, \
+    POLLUX_KEY_B_H_FrostLaneD
+#define POLLUX_KEY_B_H_IceLanes \
+    POLLUX_KEY_B_H_IceLaneA, \
+    POLLUX_KEY_B_H_IceLaneB, \
+    POLLUX_KEY_B_H_IceLaneC, \
+    POLLUX_KEY_B_H_IceLaneD
+#define POLLUX_KEY_B_H \
+    { \
+        { POLLUX_KEY_B_H_ArcaneLanes }, \
+        { POLLUX_KEY_B_H_PlasmaLanes }, \
+        { POLLUX_KEY_B_H_RainbowLanes }, \
+        { POLLUX_KEY_B_H_WaterLanes }, \
+        { POLLUX_KEY_B_H_VaporLanes }, \
+        { POLLUX_KEY_B_H_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }

@@ -125,38 +125,25 @@ public:
 private:
     void TwistForkKeyHalfA(TwistWorkSpace *pWorkSpace);
     void TwistForkKeyHalfB(TwistWorkSpace *pWorkSpace);
-    void KeyDiffuse_A_A_A(TwistWorkSpace *pWorkSpace);
-    void KeyDiffuse_A_A_B(TwistWorkSpace *pWorkSpace);
-    void KeyDiffuse_A_A_C(TwistWorkSpace *pWorkSpace);
-    void KeyDiffuse_A_A_D(TwistWorkSpace *pWorkSpace);
-    void KeyDiffuse_A_A_E(TwistWorkSpace *pWorkSpace);
-    void KeyDiffuse_A_A_F(TwistWorkSpace *pWorkSpace);
-    void KeyDiffuse_A_A_G(TwistWorkSpace *pWorkSpace);
-    void KeyDiffuse_A_A_H(TwistWorkSpace *pWorkSpace);
-    void KeyDiffuse_A_B_A(TwistWorkSpace *pWorkSpace);
-    void KeyDiffuse_A_B_B(TwistWorkSpace *pWorkSpace);
-    void KeyDiffuse_A_B_C(TwistWorkSpace *pWorkSpace);
-    void KeyDiffuse_A_B_D(TwistWorkSpace *pWorkSpace);
-    void KeyDiffuse_A_B_E(TwistWorkSpace *pWorkSpace);
-    void KeyDiffuse_A_B_F(TwistWorkSpace *pWorkSpace);
-    void KeyDiffuse_A_B_G(TwistWorkSpace *pWorkSpace);
-    void KeyDiffuse_A_B_H(TwistWorkSpace *pWorkSpace);
-    void KeyDiffuse_B_A_A(TwistWorkSpace *pWorkSpace);
-    void KeyDiffuse_B_A_B(TwistWorkSpace *pWorkSpace);
-    void KeyDiffuse_B_A_C(TwistWorkSpace *pWorkSpace);
-    void KeyDiffuse_B_A_D(TwistWorkSpace *pWorkSpace);
-    void KeyDiffuse_B_A_E(TwistWorkSpace *pWorkSpace);
-    void KeyDiffuse_B_A_F(TwistWorkSpace *pWorkSpace);
-    void KeyDiffuse_B_A_G(TwistWorkSpace *pWorkSpace);
-    void KeyDiffuse_B_A_H(TwistWorkSpace *pWorkSpace);
-    void KeyDiffuse_B_B_A(TwistWorkSpace *pWorkSpace);
-    void KeyDiffuse_B_B_B(TwistWorkSpace *pWorkSpace);
-    void KeyDiffuse_B_B_C(TwistWorkSpace *pWorkSpace);
-    void KeyDiffuse_B_B_D(TwistWorkSpace *pWorkSpace);
-    void KeyDiffuse_B_B_E(TwistWorkSpace *pWorkSpace);
-    void KeyDiffuse_B_B_F(TwistWorkSpace *pWorkSpace);
-    void KeyDiffuse_B_B_G(TwistWorkSpace *pWorkSpace);
-    void KeyDiffuse_B_B_H(TwistWorkSpace *pWorkSpace);
+    struct KeyDiffuseLanes {
+        std::uint8_t *mA;
+        std::uint8_t *mB;
+        std::uint8_t *mC;
+        std::uint8_t *mD;
+    };
+    struct KeyDiffuseBundle {
+        KeyDiffuseLanes mEntropyA;
+        KeyDiffuseLanes mInputA;
+        KeyDiffuseLanes mOutputA;
+        KeyDiffuseLanes mEntropyB;
+        KeyDiffuseLanes mInputB;
+        KeyDiffuseLanes mOutputB;
+        TwistDomainConstants *mConstants;
+    };
+    void KeyDiffuseA(TwistWorkSpace *pWorkSpace,
+                     const KeyDiffuseBundle &pBundle);
+    void KeyDiffuseB(TwistWorkSpace *pWorkSpace,
+                     const KeyDiffuseBundle &pBundle);
     static const TwistDomainSaltSet kKeyRotateASalts;
     static const TwistDomainConstants kKeyRotateAConstants;
     static const TwistDomainSaltSet kKeyRotateBSalts;

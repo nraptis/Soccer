@@ -733,6 +733,51 @@ public:
 #define PROCYON_KEY_A_A_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 7U))
 #define PROCYON_KEY_A_A_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 14U))
 #define PROCYON_KEY_A_A_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 8U))
+#define PROCYON_KEY_A_A_ArcaneLanes \
+    PROCYON_KEY_A_A_ArcaneLaneA, \
+    PROCYON_KEY_A_A_ArcaneLaneB, \
+    PROCYON_KEY_A_A_ArcaneLaneC, \
+    PROCYON_KEY_A_A_ArcaneLaneD
+#define PROCYON_KEY_A_A_PlasmaLanes \
+    PROCYON_KEY_A_A_PlasmaLaneA, \
+    PROCYON_KEY_A_A_PlasmaLaneB, \
+    PROCYON_KEY_A_A_PlasmaLaneC, \
+    PROCYON_KEY_A_A_PlasmaLaneD
+#define PROCYON_KEY_A_A_RainbowLanes \
+    PROCYON_KEY_A_A_RainbowLaneA, \
+    PROCYON_KEY_A_A_RainbowLaneB, \
+    PROCYON_KEY_A_A_RainbowLaneC, \
+    PROCYON_KEY_A_A_RainbowLaneD
+#define PROCYON_KEY_A_A_WaterLanes \
+    PROCYON_KEY_A_A_WaterLaneA, \
+    PROCYON_KEY_A_A_WaterLaneB, \
+    PROCYON_KEY_A_A_WaterLaneC, \
+    PROCYON_KEY_A_A_WaterLaneD
+#define PROCYON_KEY_A_A_VaporLanes \
+    PROCYON_KEY_A_A_VaporLaneA, \
+    PROCYON_KEY_A_A_VaporLaneB, \
+    PROCYON_KEY_A_A_VaporLaneC, \
+    PROCYON_KEY_A_A_VaporLaneD
+#define PROCYON_KEY_A_A_FrostLanes \
+    PROCYON_KEY_A_A_FrostLaneA, \
+    PROCYON_KEY_A_A_FrostLaneB, \
+    PROCYON_KEY_A_A_FrostLaneC, \
+    PROCYON_KEY_A_A_FrostLaneD
+#define PROCYON_KEY_A_A_IceLanes \
+    PROCYON_KEY_A_A_IceLaneA, \
+    PROCYON_KEY_A_A_IceLaneB, \
+    PROCYON_KEY_A_A_IceLaneC, \
+    PROCYON_KEY_A_A_IceLaneD
+#define PROCYON_KEY_A_A \
+    { \
+        { PROCYON_KEY_A_A_ArcaneLanes }, \
+        { PROCYON_KEY_A_A_PlasmaLanes }, \
+        { PROCYON_KEY_A_A_RainbowLanes }, \
+        { PROCYON_KEY_A_A_WaterLanes }, \
+        { PROCYON_KEY_A_A_VaporLanes }, \
+        { PROCYON_KEY_A_A_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_A_B
 #define PROCYON_KEY_A_B_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 8U))
@@ -851,6 +896,51 @@ public:
 #define PROCYON_KEY_A_B_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 3U))
 #define PROCYON_KEY_A_B_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 1U))
 #define PROCYON_KEY_A_B_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 7U))
+#define PROCYON_KEY_A_B_ArcaneLanes \
+    PROCYON_KEY_A_B_ArcaneLaneA, \
+    PROCYON_KEY_A_B_ArcaneLaneB, \
+    PROCYON_KEY_A_B_ArcaneLaneC, \
+    PROCYON_KEY_A_B_ArcaneLaneD
+#define PROCYON_KEY_A_B_PlasmaLanes \
+    PROCYON_KEY_A_B_PlasmaLaneA, \
+    PROCYON_KEY_A_B_PlasmaLaneB, \
+    PROCYON_KEY_A_B_PlasmaLaneC, \
+    PROCYON_KEY_A_B_PlasmaLaneD
+#define PROCYON_KEY_A_B_RainbowLanes \
+    PROCYON_KEY_A_B_RainbowLaneA, \
+    PROCYON_KEY_A_B_RainbowLaneB, \
+    PROCYON_KEY_A_B_RainbowLaneC, \
+    PROCYON_KEY_A_B_RainbowLaneD
+#define PROCYON_KEY_A_B_WaterLanes \
+    PROCYON_KEY_A_B_WaterLaneA, \
+    PROCYON_KEY_A_B_WaterLaneB, \
+    PROCYON_KEY_A_B_WaterLaneC, \
+    PROCYON_KEY_A_B_WaterLaneD
+#define PROCYON_KEY_A_B_VaporLanes \
+    PROCYON_KEY_A_B_VaporLaneA, \
+    PROCYON_KEY_A_B_VaporLaneB, \
+    PROCYON_KEY_A_B_VaporLaneC, \
+    PROCYON_KEY_A_B_VaporLaneD
+#define PROCYON_KEY_A_B_FrostLanes \
+    PROCYON_KEY_A_B_FrostLaneA, \
+    PROCYON_KEY_A_B_FrostLaneB, \
+    PROCYON_KEY_A_B_FrostLaneC, \
+    PROCYON_KEY_A_B_FrostLaneD
+#define PROCYON_KEY_A_B_IceLanes \
+    PROCYON_KEY_A_B_IceLaneA, \
+    PROCYON_KEY_A_B_IceLaneB, \
+    PROCYON_KEY_A_B_IceLaneC, \
+    PROCYON_KEY_A_B_IceLaneD
+#define PROCYON_KEY_A_B \
+    { \
+        { PROCYON_KEY_A_B_ArcaneLanes }, \
+        { PROCYON_KEY_A_B_PlasmaLanes }, \
+        { PROCYON_KEY_A_B_RainbowLanes }, \
+        { PROCYON_KEY_A_B_WaterLanes }, \
+        { PROCYON_KEY_A_B_VaporLanes }, \
+        { PROCYON_KEY_A_B_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_A_C
 #define PROCYON_KEY_A_C_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 3U))
@@ -969,6 +1059,51 @@ public:
 #define PROCYON_KEY_A_C_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 15U))
 #define PROCYON_KEY_A_C_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 5U))
 #define PROCYON_KEY_A_C_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 11U))
+#define PROCYON_KEY_A_C_ArcaneLanes \
+    PROCYON_KEY_A_C_ArcaneLaneA, \
+    PROCYON_KEY_A_C_ArcaneLaneB, \
+    PROCYON_KEY_A_C_ArcaneLaneC, \
+    PROCYON_KEY_A_C_ArcaneLaneD
+#define PROCYON_KEY_A_C_PlasmaLanes \
+    PROCYON_KEY_A_C_PlasmaLaneA, \
+    PROCYON_KEY_A_C_PlasmaLaneB, \
+    PROCYON_KEY_A_C_PlasmaLaneC, \
+    PROCYON_KEY_A_C_PlasmaLaneD
+#define PROCYON_KEY_A_C_RainbowLanes \
+    PROCYON_KEY_A_C_RainbowLaneA, \
+    PROCYON_KEY_A_C_RainbowLaneB, \
+    PROCYON_KEY_A_C_RainbowLaneC, \
+    PROCYON_KEY_A_C_RainbowLaneD
+#define PROCYON_KEY_A_C_WaterLanes \
+    PROCYON_KEY_A_C_WaterLaneA, \
+    PROCYON_KEY_A_C_WaterLaneB, \
+    PROCYON_KEY_A_C_WaterLaneC, \
+    PROCYON_KEY_A_C_WaterLaneD
+#define PROCYON_KEY_A_C_VaporLanes \
+    PROCYON_KEY_A_C_VaporLaneA, \
+    PROCYON_KEY_A_C_VaporLaneB, \
+    PROCYON_KEY_A_C_VaporLaneC, \
+    PROCYON_KEY_A_C_VaporLaneD
+#define PROCYON_KEY_A_C_FrostLanes \
+    PROCYON_KEY_A_C_FrostLaneA, \
+    PROCYON_KEY_A_C_FrostLaneB, \
+    PROCYON_KEY_A_C_FrostLaneC, \
+    PROCYON_KEY_A_C_FrostLaneD
+#define PROCYON_KEY_A_C_IceLanes \
+    PROCYON_KEY_A_C_IceLaneA, \
+    PROCYON_KEY_A_C_IceLaneB, \
+    PROCYON_KEY_A_C_IceLaneC, \
+    PROCYON_KEY_A_C_IceLaneD
+#define PROCYON_KEY_A_C \
+    { \
+        { PROCYON_KEY_A_C_ArcaneLanes }, \
+        { PROCYON_KEY_A_C_PlasmaLanes }, \
+        { PROCYON_KEY_A_C_RainbowLanes }, \
+        { PROCYON_KEY_A_C_WaterLanes }, \
+        { PROCYON_KEY_A_C_VaporLanes }, \
+        { PROCYON_KEY_A_C_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_A_D
 #define PROCYON_KEY_A_D_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 6U))
@@ -1087,6 +1222,51 @@ public:
 #define PROCYON_KEY_A_D_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 11U))
 #define PROCYON_KEY_A_D_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 4U))
 #define PROCYON_KEY_A_D_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 0U))
+#define PROCYON_KEY_A_D_ArcaneLanes \
+    PROCYON_KEY_A_D_ArcaneLaneA, \
+    PROCYON_KEY_A_D_ArcaneLaneB, \
+    PROCYON_KEY_A_D_ArcaneLaneC, \
+    PROCYON_KEY_A_D_ArcaneLaneD
+#define PROCYON_KEY_A_D_PlasmaLanes \
+    PROCYON_KEY_A_D_PlasmaLaneA, \
+    PROCYON_KEY_A_D_PlasmaLaneB, \
+    PROCYON_KEY_A_D_PlasmaLaneC, \
+    PROCYON_KEY_A_D_PlasmaLaneD
+#define PROCYON_KEY_A_D_RainbowLanes \
+    PROCYON_KEY_A_D_RainbowLaneA, \
+    PROCYON_KEY_A_D_RainbowLaneB, \
+    PROCYON_KEY_A_D_RainbowLaneC, \
+    PROCYON_KEY_A_D_RainbowLaneD
+#define PROCYON_KEY_A_D_WaterLanes \
+    PROCYON_KEY_A_D_WaterLaneA, \
+    PROCYON_KEY_A_D_WaterLaneB, \
+    PROCYON_KEY_A_D_WaterLaneC, \
+    PROCYON_KEY_A_D_WaterLaneD
+#define PROCYON_KEY_A_D_VaporLanes \
+    PROCYON_KEY_A_D_VaporLaneA, \
+    PROCYON_KEY_A_D_VaporLaneB, \
+    PROCYON_KEY_A_D_VaporLaneC, \
+    PROCYON_KEY_A_D_VaporLaneD
+#define PROCYON_KEY_A_D_FrostLanes \
+    PROCYON_KEY_A_D_FrostLaneA, \
+    PROCYON_KEY_A_D_FrostLaneB, \
+    PROCYON_KEY_A_D_FrostLaneC, \
+    PROCYON_KEY_A_D_FrostLaneD
+#define PROCYON_KEY_A_D_IceLanes \
+    PROCYON_KEY_A_D_IceLaneA, \
+    PROCYON_KEY_A_D_IceLaneB, \
+    PROCYON_KEY_A_D_IceLaneC, \
+    PROCYON_KEY_A_D_IceLaneD
+#define PROCYON_KEY_A_D \
+    { \
+        { PROCYON_KEY_A_D_ArcaneLanes }, \
+        { PROCYON_KEY_A_D_PlasmaLanes }, \
+        { PROCYON_KEY_A_D_RainbowLanes }, \
+        { PROCYON_KEY_A_D_WaterLanes }, \
+        { PROCYON_KEY_A_D_VaporLanes }, \
+        { PROCYON_KEY_A_D_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_A_E
 #define PROCYON_KEY_A_E_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 9U))
@@ -1205,6 +1385,51 @@ public:
 #define PROCYON_KEY_A_E_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 0U))
 #define PROCYON_KEY_A_E_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 13U))
 #define PROCYON_KEY_A_E_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 3U))
+#define PROCYON_KEY_A_E_ArcaneLanes \
+    PROCYON_KEY_A_E_ArcaneLaneA, \
+    PROCYON_KEY_A_E_ArcaneLaneB, \
+    PROCYON_KEY_A_E_ArcaneLaneC, \
+    PROCYON_KEY_A_E_ArcaneLaneD
+#define PROCYON_KEY_A_E_PlasmaLanes \
+    PROCYON_KEY_A_E_PlasmaLaneA, \
+    PROCYON_KEY_A_E_PlasmaLaneB, \
+    PROCYON_KEY_A_E_PlasmaLaneC, \
+    PROCYON_KEY_A_E_PlasmaLaneD
+#define PROCYON_KEY_A_E_RainbowLanes \
+    PROCYON_KEY_A_E_RainbowLaneA, \
+    PROCYON_KEY_A_E_RainbowLaneB, \
+    PROCYON_KEY_A_E_RainbowLaneC, \
+    PROCYON_KEY_A_E_RainbowLaneD
+#define PROCYON_KEY_A_E_WaterLanes \
+    PROCYON_KEY_A_E_WaterLaneA, \
+    PROCYON_KEY_A_E_WaterLaneB, \
+    PROCYON_KEY_A_E_WaterLaneC, \
+    PROCYON_KEY_A_E_WaterLaneD
+#define PROCYON_KEY_A_E_VaporLanes \
+    PROCYON_KEY_A_E_VaporLaneA, \
+    PROCYON_KEY_A_E_VaporLaneB, \
+    PROCYON_KEY_A_E_VaporLaneC, \
+    PROCYON_KEY_A_E_VaporLaneD
+#define PROCYON_KEY_A_E_FrostLanes \
+    PROCYON_KEY_A_E_FrostLaneA, \
+    PROCYON_KEY_A_E_FrostLaneB, \
+    PROCYON_KEY_A_E_FrostLaneC, \
+    PROCYON_KEY_A_E_FrostLaneD
+#define PROCYON_KEY_A_E_IceLanes \
+    PROCYON_KEY_A_E_IceLaneA, \
+    PROCYON_KEY_A_E_IceLaneB, \
+    PROCYON_KEY_A_E_IceLaneC, \
+    PROCYON_KEY_A_E_IceLaneD
+#define PROCYON_KEY_A_E \
+    { \
+        { PROCYON_KEY_A_E_ArcaneLanes }, \
+        { PROCYON_KEY_A_E_PlasmaLanes }, \
+        { PROCYON_KEY_A_E_RainbowLanes }, \
+        { PROCYON_KEY_A_E_WaterLanes }, \
+        { PROCYON_KEY_A_E_VaporLanes }, \
+        { PROCYON_KEY_A_E_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_A_F
 #define PROCYON_KEY_A_F_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 13U))
@@ -1323,6 +1548,51 @@ public:
 #define PROCYON_KEY_A_F_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 10U))
 #define PROCYON_KEY_A_F_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 6U))
 #define PROCYON_KEY_A_F_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 15U))
+#define PROCYON_KEY_A_F_ArcaneLanes \
+    PROCYON_KEY_A_F_ArcaneLaneA, \
+    PROCYON_KEY_A_F_ArcaneLaneB, \
+    PROCYON_KEY_A_F_ArcaneLaneC, \
+    PROCYON_KEY_A_F_ArcaneLaneD
+#define PROCYON_KEY_A_F_PlasmaLanes \
+    PROCYON_KEY_A_F_PlasmaLaneA, \
+    PROCYON_KEY_A_F_PlasmaLaneB, \
+    PROCYON_KEY_A_F_PlasmaLaneC, \
+    PROCYON_KEY_A_F_PlasmaLaneD
+#define PROCYON_KEY_A_F_RainbowLanes \
+    PROCYON_KEY_A_F_RainbowLaneA, \
+    PROCYON_KEY_A_F_RainbowLaneB, \
+    PROCYON_KEY_A_F_RainbowLaneC, \
+    PROCYON_KEY_A_F_RainbowLaneD
+#define PROCYON_KEY_A_F_WaterLanes \
+    PROCYON_KEY_A_F_WaterLaneA, \
+    PROCYON_KEY_A_F_WaterLaneB, \
+    PROCYON_KEY_A_F_WaterLaneC, \
+    PROCYON_KEY_A_F_WaterLaneD
+#define PROCYON_KEY_A_F_VaporLanes \
+    PROCYON_KEY_A_F_VaporLaneA, \
+    PROCYON_KEY_A_F_VaporLaneB, \
+    PROCYON_KEY_A_F_VaporLaneC, \
+    PROCYON_KEY_A_F_VaporLaneD
+#define PROCYON_KEY_A_F_FrostLanes \
+    PROCYON_KEY_A_F_FrostLaneA, \
+    PROCYON_KEY_A_F_FrostLaneB, \
+    PROCYON_KEY_A_F_FrostLaneC, \
+    PROCYON_KEY_A_F_FrostLaneD
+#define PROCYON_KEY_A_F_IceLanes \
+    PROCYON_KEY_A_F_IceLaneA, \
+    PROCYON_KEY_A_F_IceLaneB, \
+    PROCYON_KEY_A_F_IceLaneC, \
+    PROCYON_KEY_A_F_IceLaneD
+#define PROCYON_KEY_A_F \
+    { \
+        { PROCYON_KEY_A_F_ArcaneLanes }, \
+        { PROCYON_KEY_A_F_PlasmaLanes }, \
+        { PROCYON_KEY_A_F_RainbowLanes }, \
+        { PROCYON_KEY_A_F_WaterLanes }, \
+        { PROCYON_KEY_A_F_VaporLanes }, \
+        { PROCYON_KEY_A_F_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_A_G
 #define PROCYON_KEY_A_G_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 2U))
@@ -1441,6 +1711,51 @@ public:
 #define PROCYON_KEY_A_G_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 2U))
 #define PROCYON_KEY_A_G_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 9U))
 #define PROCYON_KEY_A_G_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 10U))
+#define PROCYON_KEY_A_G_ArcaneLanes \
+    PROCYON_KEY_A_G_ArcaneLaneA, \
+    PROCYON_KEY_A_G_ArcaneLaneB, \
+    PROCYON_KEY_A_G_ArcaneLaneC, \
+    PROCYON_KEY_A_G_ArcaneLaneD
+#define PROCYON_KEY_A_G_PlasmaLanes \
+    PROCYON_KEY_A_G_PlasmaLaneA, \
+    PROCYON_KEY_A_G_PlasmaLaneB, \
+    PROCYON_KEY_A_G_PlasmaLaneC, \
+    PROCYON_KEY_A_G_PlasmaLaneD
+#define PROCYON_KEY_A_G_RainbowLanes \
+    PROCYON_KEY_A_G_RainbowLaneA, \
+    PROCYON_KEY_A_G_RainbowLaneB, \
+    PROCYON_KEY_A_G_RainbowLaneC, \
+    PROCYON_KEY_A_G_RainbowLaneD
+#define PROCYON_KEY_A_G_WaterLanes \
+    PROCYON_KEY_A_G_WaterLaneA, \
+    PROCYON_KEY_A_G_WaterLaneB, \
+    PROCYON_KEY_A_G_WaterLaneC, \
+    PROCYON_KEY_A_G_WaterLaneD
+#define PROCYON_KEY_A_G_VaporLanes \
+    PROCYON_KEY_A_G_VaporLaneA, \
+    PROCYON_KEY_A_G_VaporLaneB, \
+    PROCYON_KEY_A_G_VaporLaneC, \
+    PROCYON_KEY_A_G_VaporLaneD
+#define PROCYON_KEY_A_G_FrostLanes \
+    PROCYON_KEY_A_G_FrostLaneA, \
+    PROCYON_KEY_A_G_FrostLaneB, \
+    PROCYON_KEY_A_G_FrostLaneC, \
+    PROCYON_KEY_A_G_FrostLaneD
+#define PROCYON_KEY_A_G_IceLanes \
+    PROCYON_KEY_A_G_IceLaneA, \
+    PROCYON_KEY_A_G_IceLaneB, \
+    PROCYON_KEY_A_G_IceLaneC, \
+    PROCYON_KEY_A_G_IceLaneD
+#define PROCYON_KEY_A_G \
+    { \
+        { PROCYON_KEY_A_G_ArcaneLanes }, \
+        { PROCYON_KEY_A_G_PlasmaLanes }, \
+        { PROCYON_KEY_A_G_RainbowLanes }, \
+        { PROCYON_KEY_A_G_WaterLanes }, \
+        { PROCYON_KEY_A_G_VaporLanes }, \
+        { PROCYON_KEY_A_G_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_A_H
 #define PROCYON_KEY_A_H_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 10U))
@@ -1559,6 +1874,51 @@ public:
 #define PROCYON_KEY_A_H_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 13U))
 #define PROCYON_KEY_A_H_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 8U))
 #define PROCYON_KEY_A_H_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 1U))
+#define PROCYON_KEY_A_H_ArcaneLanes \
+    PROCYON_KEY_A_H_ArcaneLaneA, \
+    PROCYON_KEY_A_H_ArcaneLaneB, \
+    PROCYON_KEY_A_H_ArcaneLaneC, \
+    PROCYON_KEY_A_H_ArcaneLaneD
+#define PROCYON_KEY_A_H_PlasmaLanes \
+    PROCYON_KEY_A_H_PlasmaLaneA, \
+    PROCYON_KEY_A_H_PlasmaLaneB, \
+    PROCYON_KEY_A_H_PlasmaLaneC, \
+    PROCYON_KEY_A_H_PlasmaLaneD
+#define PROCYON_KEY_A_H_RainbowLanes \
+    PROCYON_KEY_A_H_RainbowLaneA, \
+    PROCYON_KEY_A_H_RainbowLaneB, \
+    PROCYON_KEY_A_H_RainbowLaneC, \
+    PROCYON_KEY_A_H_RainbowLaneD
+#define PROCYON_KEY_A_H_WaterLanes \
+    PROCYON_KEY_A_H_WaterLaneA, \
+    PROCYON_KEY_A_H_WaterLaneB, \
+    PROCYON_KEY_A_H_WaterLaneC, \
+    PROCYON_KEY_A_H_WaterLaneD
+#define PROCYON_KEY_A_H_VaporLanes \
+    PROCYON_KEY_A_H_VaporLaneA, \
+    PROCYON_KEY_A_H_VaporLaneB, \
+    PROCYON_KEY_A_H_VaporLaneC, \
+    PROCYON_KEY_A_H_VaporLaneD
+#define PROCYON_KEY_A_H_FrostLanes \
+    PROCYON_KEY_A_H_FrostLaneA, \
+    PROCYON_KEY_A_H_FrostLaneB, \
+    PROCYON_KEY_A_H_FrostLaneC, \
+    PROCYON_KEY_A_H_FrostLaneD
+#define PROCYON_KEY_A_H_IceLanes \
+    PROCYON_KEY_A_H_IceLaneA, \
+    PROCYON_KEY_A_H_IceLaneB, \
+    PROCYON_KEY_A_H_IceLaneC, \
+    PROCYON_KEY_A_H_IceLaneD
+#define PROCYON_KEY_A_H \
+    { \
+        { PROCYON_KEY_A_H_ArcaneLanes }, \
+        { PROCYON_KEY_A_H_PlasmaLanes }, \
+        { PROCYON_KEY_A_H_RainbowLanes }, \
+        { PROCYON_KEY_A_H_WaterLanes }, \
+        { PROCYON_KEY_A_H_VaporLanes }, \
+        { PROCYON_KEY_A_H_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_B_A
 #define PROCYON_KEY_B_A_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 14U))
@@ -1677,6 +2037,51 @@ public:
 #define PROCYON_KEY_B_A_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 12U))
 #define PROCYON_KEY_B_A_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 15U))
 #define PROCYON_KEY_B_A_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 9U))
+#define PROCYON_KEY_B_A_ArcaneLanes \
+    PROCYON_KEY_B_A_ArcaneLaneA, \
+    PROCYON_KEY_B_A_ArcaneLaneB, \
+    PROCYON_KEY_B_A_ArcaneLaneC, \
+    PROCYON_KEY_B_A_ArcaneLaneD
+#define PROCYON_KEY_B_A_PlasmaLanes \
+    PROCYON_KEY_B_A_PlasmaLaneA, \
+    PROCYON_KEY_B_A_PlasmaLaneB, \
+    PROCYON_KEY_B_A_PlasmaLaneC, \
+    PROCYON_KEY_B_A_PlasmaLaneD
+#define PROCYON_KEY_B_A_RainbowLanes \
+    PROCYON_KEY_B_A_RainbowLaneA, \
+    PROCYON_KEY_B_A_RainbowLaneB, \
+    PROCYON_KEY_B_A_RainbowLaneC, \
+    PROCYON_KEY_B_A_RainbowLaneD
+#define PROCYON_KEY_B_A_WaterLanes \
+    PROCYON_KEY_B_A_WaterLaneA, \
+    PROCYON_KEY_B_A_WaterLaneB, \
+    PROCYON_KEY_B_A_WaterLaneC, \
+    PROCYON_KEY_B_A_WaterLaneD
+#define PROCYON_KEY_B_A_VaporLanes \
+    PROCYON_KEY_B_A_VaporLaneA, \
+    PROCYON_KEY_B_A_VaporLaneB, \
+    PROCYON_KEY_B_A_VaporLaneC, \
+    PROCYON_KEY_B_A_VaporLaneD
+#define PROCYON_KEY_B_A_FrostLanes \
+    PROCYON_KEY_B_A_FrostLaneA, \
+    PROCYON_KEY_B_A_FrostLaneB, \
+    PROCYON_KEY_B_A_FrostLaneC, \
+    PROCYON_KEY_B_A_FrostLaneD
+#define PROCYON_KEY_B_A_IceLanes \
+    PROCYON_KEY_B_A_IceLaneA, \
+    PROCYON_KEY_B_A_IceLaneB, \
+    PROCYON_KEY_B_A_IceLaneC, \
+    PROCYON_KEY_B_A_IceLaneD
+#define PROCYON_KEY_B_A \
+    { \
+        { PROCYON_KEY_B_A_ArcaneLanes }, \
+        { PROCYON_KEY_B_A_PlasmaLanes }, \
+        { PROCYON_KEY_B_A_RainbowLanes }, \
+        { PROCYON_KEY_B_A_WaterLanes }, \
+        { PROCYON_KEY_B_A_VaporLanes }, \
+        { PROCYON_KEY_B_A_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }
 
 // KEY_B_B
 #define PROCYON_KEY_B_B_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 12U))
@@ -1795,6 +2200,51 @@ public:
 #define PROCYON_KEY_B_B_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 8U))
 #define PROCYON_KEY_B_B_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 12U))
 #define PROCYON_KEY_B_B_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 2U))
+#define PROCYON_KEY_B_B_ArcaneLanes \
+    PROCYON_KEY_B_B_ArcaneLaneA, \
+    PROCYON_KEY_B_B_ArcaneLaneB, \
+    PROCYON_KEY_B_B_ArcaneLaneC, \
+    PROCYON_KEY_B_B_ArcaneLaneD
+#define PROCYON_KEY_B_B_PlasmaLanes \
+    PROCYON_KEY_B_B_PlasmaLaneA, \
+    PROCYON_KEY_B_B_PlasmaLaneB, \
+    PROCYON_KEY_B_B_PlasmaLaneC, \
+    PROCYON_KEY_B_B_PlasmaLaneD
+#define PROCYON_KEY_B_B_RainbowLanes \
+    PROCYON_KEY_B_B_RainbowLaneA, \
+    PROCYON_KEY_B_B_RainbowLaneB, \
+    PROCYON_KEY_B_B_RainbowLaneC, \
+    PROCYON_KEY_B_B_RainbowLaneD
+#define PROCYON_KEY_B_B_WaterLanes \
+    PROCYON_KEY_B_B_WaterLaneA, \
+    PROCYON_KEY_B_B_WaterLaneB, \
+    PROCYON_KEY_B_B_WaterLaneC, \
+    PROCYON_KEY_B_B_WaterLaneD
+#define PROCYON_KEY_B_B_VaporLanes \
+    PROCYON_KEY_B_B_VaporLaneA, \
+    PROCYON_KEY_B_B_VaporLaneB, \
+    PROCYON_KEY_B_B_VaporLaneC, \
+    PROCYON_KEY_B_B_VaporLaneD
+#define PROCYON_KEY_B_B_FrostLanes \
+    PROCYON_KEY_B_B_FrostLaneA, \
+    PROCYON_KEY_B_B_FrostLaneB, \
+    PROCYON_KEY_B_B_FrostLaneC, \
+    PROCYON_KEY_B_B_FrostLaneD
+#define PROCYON_KEY_B_B_IceLanes \
+    PROCYON_KEY_B_B_IceLaneA, \
+    PROCYON_KEY_B_B_IceLaneB, \
+    PROCYON_KEY_B_B_IceLaneC, \
+    PROCYON_KEY_B_B_IceLaneD
+#define PROCYON_KEY_B_B \
+    { \
+        { PROCYON_KEY_B_B_ArcaneLanes }, \
+        { PROCYON_KEY_B_B_PlasmaLanes }, \
+        { PROCYON_KEY_B_B_RainbowLanes }, \
+        { PROCYON_KEY_B_B_WaterLanes }, \
+        { PROCYON_KEY_B_B_VaporLanes }, \
+        { PROCYON_KEY_B_B_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }
 
 // KEY_B_C
 #define PROCYON_KEY_B_C_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 0U))
@@ -1913,6 +2363,51 @@ public:
 #define PROCYON_KEY_B_C_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 5U))
 #define PROCYON_KEY_B_C_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 3U))
 #define PROCYON_KEY_B_C_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 4U))
+#define PROCYON_KEY_B_C_ArcaneLanes \
+    PROCYON_KEY_B_C_ArcaneLaneA, \
+    PROCYON_KEY_B_C_ArcaneLaneB, \
+    PROCYON_KEY_B_C_ArcaneLaneC, \
+    PROCYON_KEY_B_C_ArcaneLaneD
+#define PROCYON_KEY_B_C_PlasmaLanes \
+    PROCYON_KEY_B_C_PlasmaLaneA, \
+    PROCYON_KEY_B_C_PlasmaLaneB, \
+    PROCYON_KEY_B_C_PlasmaLaneC, \
+    PROCYON_KEY_B_C_PlasmaLaneD
+#define PROCYON_KEY_B_C_RainbowLanes \
+    PROCYON_KEY_B_C_RainbowLaneA, \
+    PROCYON_KEY_B_C_RainbowLaneB, \
+    PROCYON_KEY_B_C_RainbowLaneC, \
+    PROCYON_KEY_B_C_RainbowLaneD
+#define PROCYON_KEY_B_C_WaterLanes \
+    PROCYON_KEY_B_C_WaterLaneA, \
+    PROCYON_KEY_B_C_WaterLaneB, \
+    PROCYON_KEY_B_C_WaterLaneC, \
+    PROCYON_KEY_B_C_WaterLaneD
+#define PROCYON_KEY_B_C_VaporLanes \
+    PROCYON_KEY_B_C_VaporLaneA, \
+    PROCYON_KEY_B_C_VaporLaneB, \
+    PROCYON_KEY_B_C_VaporLaneC, \
+    PROCYON_KEY_B_C_VaporLaneD
+#define PROCYON_KEY_B_C_FrostLanes \
+    PROCYON_KEY_B_C_FrostLaneA, \
+    PROCYON_KEY_B_C_FrostLaneB, \
+    PROCYON_KEY_B_C_FrostLaneC, \
+    PROCYON_KEY_B_C_FrostLaneD
+#define PROCYON_KEY_B_C_IceLanes \
+    PROCYON_KEY_B_C_IceLaneA, \
+    PROCYON_KEY_B_C_IceLaneB, \
+    PROCYON_KEY_B_C_IceLaneC, \
+    PROCYON_KEY_B_C_IceLaneD
+#define PROCYON_KEY_B_C \
+    { \
+        { PROCYON_KEY_B_C_ArcaneLanes }, \
+        { PROCYON_KEY_B_C_PlasmaLanes }, \
+        { PROCYON_KEY_B_C_RainbowLanes }, \
+        { PROCYON_KEY_B_C_WaterLanes }, \
+        { PROCYON_KEY_B_C_VaporLanes }, \
+        { PROCYON_KEY_B_C_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }
 
 // KEY_B_D
 #define PROCYON_KEY_B_D_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 11U))
@@ -2031,6 +2526,51 @@ public:
 #define PROCYON_KEY_B_D_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 6U))
 #define PROCYON_KEY_B_D_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 0U))
 #define PROCYON_KEY_B_D_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 5U))
+#define PROCYON_KEY_B_D_ArcaneLanes \
+    PROCYON_KEY_B_D_ArcaneLaneA, \
+    PROCYON_KEY_B_D_ArcaneLaneB, \
+    PROCYON_KEY_B_D_ArcaneLaneC, \
+    PROCYON_KEY_B_D_ArcaneLaneD
+#define PROCYON_KEY_B_D_PlasmaLanes \
+    PROCYON_KEY_B_D_PlasmaLaneA, \
+    PROCYON_KEY_B_D_PlasmaLaneB, \
+    PROCYON_KEY_B_D_PlasmaLaneC, \
+    PROCYON_KEY_B_D_PlasmaLaneD
+#define PROCYON_KEY_B_D_RainbowLanes \
+    PROCYON_KEY_B_D_RainbowLaneA, \
+    PROCYON_KEY_B_D_RainbowLaneB, \
+    PROCYON_KEY_B_D_RainbowLaneC, \
+    PROCYON_KEY_B_D_RainbowLaneD
+#define PROCYON_KEY_B_D_WaterLanes \
+    PROCYON_KEY_B_D_WaterLaneA, \
+    PROCYON_KEY_B_D_WaterLaneB, \
+    PROCYON_KEY_B_D_WaterLaneC, \
+    PROCYON_KEY_B_D_WaterLaneD
+#define PROCYON_KEY_B_D_VaporLanes \
+    PROCYON_KEY_B_D_VaporLaneA, \
+    PROCYON_KEY_B_D_VaporLaneB, \
+    PROCYON_KEY_B_D_VaporLaneC, \
+    PROCYON_KEY_B_D_VaporLaneD
+#define PROCYON_KEY_B_D_FrostLanes \
+    PROCYON_KEY_B_D_FrostLaneA, \
+    PROCYON_KEY_B_D_FrostLaneB, \
+    PROCYON_KEY_B_D_FrostLaneC, \
+    PROCYON_KEY_B_D_FrostLaneD
+#define PROCYON_KEY_B_D_IceLanes \
+    PROCYON_KEY_B_D_IceLaneA, \
+    PROCYON_KEY_B_D_IceLaneB, \
+    PROCYON_KEY_B_D_IceLaneC, \
+    PROCYON_KEY_B_D_IceLaneD
+#define PROCYON_KEY_B_D \
+    { \
+        { PROCYON_KEY_B_D_ArcaneLanes }, \
+        { PROCYON_KEY_B_D_PlasmaLanes }, \
+        { PROCYON_KEY_B_D_RainbowLanes }, \
+        { PROCYON_KEY_B_D_WaterLanes }, \
+        { PROCYON_KEY_B_D_VaporLanes }, \
+        { PROCYON_KEY_B_D_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }
 
 // KEY_B_E
 #define PROCYON_KEY_B_E_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 1U))
@@ -2149,6 +2689,51 @@ public:
 #define PROCYON_KEY_B_E_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 1U))
 #define PROCYON_KEY_B_E_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 2U))
 #define PROCYON_KEY_B_E_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 14U))
+#define PROCYON_KEY_B_E_ArcaneLanes \
+    PROCYON_KEY_B_E_ArcaneLaneA, \
+    PROCYON_KEY_B_E_ArcaneLaneB, \
+    PROCYON_KEY_B_E_ArcaneLaneC, \
+    PROCYON_KEY_B_E_ArcaneLaneD
+#define PROCYON_KEY_B_E_PlasmaLanes \
+    PROCYON_KEY_B_E_PlasmaLaneA, \
+    PROCYON_KEY_B_E_PlasmaLaneB, \
+    PROCYON_KEY_B_E_PlasmaLaneC, \
+    PROCYON_KEY_B_E_PlasmaLaneD
+#define PROCYON_KEY_B_E_RainbowLanes \
+    PROCYON_KEY_B_E_RainbowLaneA, \
+    PROCYON_KEY_B_E_RainbowLaneB, \
+    PROCYON_KEY_B_E_RainbowLaneC, \
+    PROCYON_KEY_B_E_RainbowLaneD
+#define PROCYON_KEY_B_E_WaterLanes \
+    PROCYON_KEY_B_E_WaterLaneA, \
+    PROCYON_KEY_B_E_WaterLaneB, \
+    PROCYON_KEY_B_E_WaterLaneC, \
+    PROCYON_KEY_B_E_WaterLaneD
+#define PROCYON_KEY_B_E_VaporLanes \
+    PROCYON_KEY_B_E_VaporLaneA, \
+    PROCYON_KEY_B_E_VaporLaneB, \
+    PROCYON_KEY_B_E_VaporLaneC, \
+    PROCYON_KEY_B_E_VaporLaneD
+#define PROCYON_KEY_B_E_FrostLanes \
+    PROCYON_KEY_B_E_FrostLaneA, \
+    PROCYON_KEY_B_E_FrostLaneB, \
+    PROCYON_KEY_B_E_FrostLaneC, \
+    PROCYON_KEY_B_E_FrostLaneD
+#define PROCYON_KEY_B_E_IceLanes \
+    PROCYON_KEY_B_E_IceLaneA, \
+    PROCYON_KEY_B_E_IceLaneB, \
+    PROCYON_KEY_B_E_IceLaneC, \
+    PROCYON_KEY_B_E_IceLaneD
+#define PROCYON_KEY_B_E \
+    { \
+        { PROCYON_KEY_B_E_ArcaneLanes }, \
+        { PROCYON_KEY_B_E_PlasmaLanes }, \
+        { PROCYON_KEY_B_E_RainbowLanes }, \
+        { PROCYON_KEY_B_E_WaterLanes }, \
+        { PROCYON_KEY_B_E_VaporLanes }, \
+        { PROCYON_KEY_B_E_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }
 
 // KEY_B_F
 #define PROCYON_KEY_B_F_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 4U))
@@ -2267,6 +2852,51 @@ public:
 #define PROCYON_KEY_B_F_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 9U))
 #define PROCYON_KEY_B_F_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 11U))
 #define PROCYON_KEY_B_F_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 6U))
+#define PROCYON_KEY_B_F_ArcaneLanes \
+    PROCYON_KEY_B_F_ArcaneLaneA, \
+    PROCYON_KEY_B_F_ArcaneLaneB, \
+    PROCYON_KEY_B_F_ArcaneLaneC, \
+    PROCYON_KEY_B_F_ArcaneLaneD
+#define PROCYON_KEY_B_F_PlasmaLanes \
+    PROCYON_KEY_B_F_PlasmaLaneA, \
+    PROCYON_KEY_B_F_PlasmaLaneB, \
+    PROCYON_KEY_B_F_PlasmaLaneC, \
+    PROCYON_KEY_B_F_PlasmaLaneD
+#define PROCYON_KEY_B_F_RainbowLanes \
+    PROCYON_KEY_B_F_RainbowLaneA, \
+    PROCYON_KEY_B_F_RainbowLaneB, \
+    PROCYON_KEY_B_F_RainbowLaneC, \
+    PROCYON_KEY_B_F_RainbowLaneD
+#define PROCYON_KEY_B_F_WaterLanes \
+    PROCYON_KEY_B_F_WaterLaneA, \
+    PROCYON_KEY_B_F_WaterLaneB, \
+    PROCYON_KEY_B_F_WaterLaneC, \
+    PROCYON_KEY_B_F_WaterLaneD
+#define PROCYON_KEY_B_F_VaporLanes \
+    PROCYON_KEY_B_F_VaporLaneA, \
+    PROCYON_KEY_B_F_VaporLaneB, \
+    PROCYON_KEY_B_F_VaporLaneC, \
+    PROCYON_KEY_B_F_VaporLaneD
+#define PROCYON_KEY_B_F_FrostLanes \
+    PROCYON_KEY_B_F_FrostLaneA, \
+    PROCYON_KEY_B_F_FrostLaneB, \
+    PROCYON_KEY_B_F_FrostLaneC, \
+    PROCYON_KEY_B_F_FrostLaneD
+#define PROCYON_KEY_B_F_IceLanes \
+    PROCYON_KEY_B_F_IceLaneA, \
+    PROCYON_KEY_B_F_IceLaneB, \
+    PROCYON_KEY_B_F_IceLaneC, \
+    PROCYON_KEY_B_F_IceLaneD
+#define PROCYON_KEY_B_F \
+    { \
+        { PROCYON_KEY_B_F_ArcaneLanes }, \
+        { PROCYON_KEY_B_F_PlasmaLanes }, \
+        { PROCYON_KEY_B_F_RainbowLanes }, \
+        { PROCYON_KEY_B_F_WaterLanes }, \
+        { PROCYON_KEY_B_F_VaporLanes }, \
+        { PROCYON_KEY_B_F_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }
 
 // KEY_B_G
 #define PROCYON_KEY_B_G_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 15U))
@@ -2385,6 +3015,51 @@ public:
 #define PROCYON_KEY_B_G_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 4U))
 #define PROCYON_KEY_B_G_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 7U))
 #define PROCYON_KEY_B_G_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 13U))
+#define PROCYON_KEY_B_G_ArcaneLanes \
+    PROCYON_KEY_B_G_ArcaneLaneA, \
+    PROCYON_KEY_B_G_ArcaneLaneB, \
+    PROCYON_KEY_B_G_ArcaneLaneC, \
+    PROCYON_KEY_B_G_ArcaneLaneD
+#define PROCYON_KEY_B_G_PlasmaLanes \
+    PROCYON_KEY_B_G_PlasmaLaneA, \
+    PROCYON_KEY_B_G_PlasmaLaneB, \
+    PROCYON_KEY_B_G_PlasmaLaneC, \
+    PROCYON_KEY_B_G_PlasmaLaneD
+#define PROCYON_KEY_B_G_RainbowLanes \
+    PROCYON_KEY_B_G_RainbowLaneA, \
+    PROCYON_KEY_B_G_RainbowLaneB, \
+    PROCYON_KEY_B_G_RainbowLaneC, \
+    PROCYON_KEY_B_G_RainbowLaneD
+#define PROCYON_KEY_B_G_WaterLanes \
+    PROCYON_KEY_B_G_WaterLaneA, \
+    PROCYON_KEY_B_G_WaterLaneB, \
+    PROCYON_KEY_B_G_WaterLaneC, \
+    PROCYON_KEY_B_G_WaterLaneD
+#define PROCYON_KEY_B_G_VaporLanes \
+    PROCYON_KEY_B_G_VaporLaneA, \
+    PROCYON_KEY_B_G_VaporLaneB, \
+    PROCYON_KEY_B_G_VaporLaneC, \
+    PROCYON_KEY_B_G_VaporLaneD
+#define PROCYON_KEY_B_G_FrostLanes \
+    PROCYON_KEY_B_G_FrostLaneA, \
+    PROCYON_KEY_B_G_FrostLaneB, \
+    PROCYON_KEY_B_G_FrostLaneC, \
+    PROCYON_KEY_B_G_FrostLaneD
+#define PROCYON_KEY_B_G_IceLanes \
+    PROCYON_KEY_B_G_IceLaneA, \
+    PROCYON_KEY_B_G_IceLaneB, \
+    PROCYON_KEY_B_G_IceLaneC, \
+    PROCYON_KEY_B_G_IceLaneD
+#define PROCYON_KEY_B_G \
+    { \
+        { PROCYON_KEY_B_G_ArcaneLanes }, \
+        { PROCYON_KEY_B_G_PlasmaLanes }, \
+        { PROCYON_KEY_B_G_RainbowLanes }, \
+        { PROCYON_KEY_B_G_WaterLanes }, \
+        { PROCYON_KEY_B_G_VaporLanes }, \
+        { PROCYON_KEY_B_G_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }
 
 // KEY_B_H
 #define PROCYON_KEY_B_H_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 5U))
@@ -2503,3 +3178,48 @@ public:
 #define PROCYON_KEY_B_H_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 14U))
 #define PROCYON_KEY_B_H_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 10U))
 #define PROCYON_KEY_B_H_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 12U))
+#define PROCYON_KEY_B_H_ArcaneLanes \
+    PROCYON_KEY_B_H_ArcaneLaneA, \
+    PROCYON_KEY_B_H_ArcaneLaneB, \
+    PROCYON_KEY_B_H_ArcaneLaneC, \
+    PROCYON_KEY_B_H_ArcaneLaneD
+#define PROCYON_KEY_B_H_PlasmaLanes \
+    PROCYON_KEY_B_H_PlasmaLaneA, \
+    PROCYON_KEY_B_H_PlasmaLaneB, \
+    PROCYON_KEY_B_H_PlasmaLaneC, \
+    PROCYON_KEY_B_H_PlasmaLaneD
+#define PROCYON_KEY_B_H_RainbowLanes \
+    PROCYON_KEY_B_H_RainbowLaneA, \
+    PROCYON_KEY_B_H_RainbowLaneB, \
+    PROCYON_KEY_B_H_RainbowLaneC, \
+    PROCYON_KEY_B_H_RainbowLaneD
+#define PROCYON_KEY_B_H_WaterLanes \
+    PROCYON_KEY_B_H_WaterLaneA, \
+    PROCYON_KEY_B_H_WaterLaneB, \
+    PROCYON_KEY_B_H_WaterLaneC, \
+    PROCYON_KEY_B_H_WaterLaneD
+#define PROCYON_KEY_B_H_VaporLanes \
+    PROCYON_KEY_B_H_VaporLaneA, \
+    PROCYON_KEY_B_H_VaporLaneB, \
+    PROCYON_KEY_B_H_VaporLaneC, \
+    PROCYON_KEY_B_H_VaporLaneD
+#define PROCYON_KEY_B_H_FrostLanes \
+    PROCYON_KEY_B_H_FrostLaneA, \
+    PROCYON_KEY_B_H_FrostLaneB, \
+    PROCYON_KEY_B_H_FrostLaneC, \
+    PROCYON_KEY_B_H_FrostLaneD
+#define PROCYON_KEY_B_H_IceLanes \
+    PROCYON_KEY_B_H_IceLaneA, \
+    PROCYON_KEY_B_H_IceLaneB, \
+    PROCYON_KEY_B_H_IceLaneC, \
+    PROCYON_KEY_B_H_IceLaneD
+#define PROCYON_KEY_B_H \
+    { \
+        { PROCYON_KEY_B_H_ArcaneLanes }, \
+        { PROCYON_KEY_B_H_PlasmaLanes }, \
+        { PROCYON_KEY_B_H_RainbowLanes }, \
+        { PROCYON_KEY_B_H_WaterLanes }, \
+        { PROCYON_KEY_B_H_VaporLanes }, \
+        { PROCYON_KEY_B_H_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }

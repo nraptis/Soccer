@@ -63,7 +63,6 @@
             WorkSpaceTools::FillBytes(aCrosses_B_B[aLaneIndex], S_BLOCK);
             WorkSpaceTools::FillBytes(aCrosses_C_B[aLaneIndex], S_BLOCK);
             WorkSpaceTools::FillBytes(aCrosses_D_B[aLaneIndex], S_BLOCK);
-            
         }
         
         std::uint64_t aIngress = 0xE025CAEA83AB99CFULL;

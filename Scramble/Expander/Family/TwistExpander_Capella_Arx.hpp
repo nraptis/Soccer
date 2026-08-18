@@ -733,6 +733,51 @@ public:
 #define CAPELLA_KEY_A_A_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 5U))
 #define CAPELLA_KEY_A_A_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 3U))
 #define CAPELLA_KEY_A_A_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 4U))
+#define CAPELLA_KEY_A_A_ArcaneLanes \
+    CAPELLA_KEY_A_A_ArcaneLaneA, \
+    CAPELLA_KEY_A_A_ArcaneLaneB, \
+    CAPELLA_KEY_A_A_ArcaneLaneC, \
+    CAPELLA_KEY_A_A_ArcaneLaneD
+#define CAPELLA_KEY_A_A_PlasmaLanes \
+    CAPELLA_KEY_A_A_PlasmaLaneA, \
+    CAPELLA_KEY_A_A_PlasmaLaneB, \
+    CAPELLA_KEY_A_A_PlasmaLaneC, \
+    CAPELLA_KEY_A_A_PlasmaLaneD
+#define CAPELLA_KEY_A_A_RainbowLanes \
+    CAPELLA_KEY_A_A_RainbowLaneA, \
+    CAPELLA_KEY_A_A_RainbowLaneB, \
+    CAPELLA_KEY_A_A_RainbowLaneC, \
+    CAPELLA_KEY_A_A_RainbowLaneD
+#define CAPELLA_KEY_A_A_WaterLanes \
+    CAPELLA_KEY_A_A_WaterLaneA, \
+    CAPELLA_KEY_A_A_WaterLaneB, \
+    CAPELLA_KEY_A_A_WaterLaneC, \
+    CAPELLA_KEY_A_A_WaterLaneD
+#define CAPELLA_KEY_A_A_VaporLanes \
+    CAPELLA_KEY_A_A_VaporLaneA, \
+    CAPELLA_KEY_A_A_VaporLaneB, \
+    CAPELLA_KEY_A_A_VaporLaneC, \
+    CAPELLA_KEY_A_A_VaporLaneD
+#define CAPELLA_KEY_A_A_FrostLanes \
+    CAPELLA_KEY_A_A_FrostLaneA, \
+    CAPELLA_KEY_A_A_FrostLaneB, \
+    CAPELLA_KEY_A_A_FrostLaneC, \
+    CAPELLA_KEY_A_A_FrostLaneD
+#define CAPELLA_KEY_A_A_IceLanes \
+    CAPELLA_KEY_A_A_IceLaneA, \
+    CAPELLA_KEY_A_A_IceLaneB, \
+    CAPELLA_KEY_A_A_IceLaneC, \
+    CAPELLA_KEY_A_A_IceLaneD
+#define CAPELLA_KEY_A_A \
+    { \
+        { CAPELLA_KEY_A_A_ArcaneLanes }, \
+        { CAPELLA_KEY_A_A_PlasmaLanes }, \
+        { CAPELLA_KEY_A_A_RainbowLanes }, \
+        { CAPELLA_KEY_A_A_WaterLanes }, \
+        { CAPELLA_KEY_A_A_VaporLanes }, \
+        { CAPELLA_KEY_A_A_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_A_B
 #define CAPELLA_KEY_A_B_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 4U))
@@ -851,6 +896,51 @@ public:
 #define CAPELLA_KEY_A_B_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 6U))
 #define CAPELLA_KEY_A_B_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 0U))
 #define CAPELLA_KEY_A_B_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 5U))
+#define CAPELLA_KEY_A_B_ArcaneLanes \
+    CAPELLA_KEY_A_B_ArcaneLaneA, \
+    CAPELLA_KEY_A_B_ArcaneLaneB, \
+    CAPELLA_KEY_A_B_ArcaneLaneC, \
+    CAPELLA_KEY_A_B_ArcaneLaneD
+#define CAPELLA_KEY_A_B_PlasmaLanes \
+    CAPELLA_KEY_A_B_PlasmaLaneA, \
+    CAPELLA_KEY_A_B_PlasmaLaneB, \
+    CAPELLA_KEY_A_B_PlasmaLaneC, \
+    CAPELLA_KEY_A_B_PlasmaLaneD
+#define CAPELLA_KEY_A_B_RainbowLanes \
+    CAPELLA_KEY_A_B_RainbowLaneA, \
+    CAPELLA_KEY_A_B_RainbowLaneB, \
+    CAPELLA_KEY_A_B_RainbowLaneC, \
+    CAPELLA_KEY_A_B_RainbowLaneD
+#define CAPELLA_KEY_A_B_WaterLanes \
+    CAPELLA_KEY_A_B_WaterLaneA, \
+    CAPELLA_KEY_A_B_WaterLaneB, \
+    CAPELLA_KEY_A_B_WaterLaneC, \
+    CAPELLA_KEY_A_B_WaterLaneD
+#define CAPELLA_KEY_A_B_VaporLanes \
+    CAPELLA_KEY_A_B_VaporLaneA, \
+    CAPELLA_KEY_A_B_VaporLaneB, \
+    CAPELLA_KEY_A_B_VaporLaneC, \
+    CAPELLA_KEY_A_B_VaporLaneD
+#define CAPELLA_KEY_A_B_FrostLanes \
+    CAPELLA_KEY_A_B_FrostLaneA, \
+    CAPELLA_KEY_A_B_FrostLaneB, \
+    CAPELLA_KEY_A_B_FrostLaneC, \
+    CAPELLA_KEY_A_B_FrostLaneD
+#define CAPELLA_KEY_A_B_IceLanes \
+    CAPELLA_KEY_A_B_IceLaneA, \
+    CAPELLA_KEY_A_B_IceLaneB, \
+    CAPELLA_KEY_A_B_IceLaneC, \
+    CAPELLA_KEY_A_B_IceLaneD
+#define CAPELLA_KEY_A_B \
+    { \
+        { CAPELLA_KEY_A_B_ArcaneLanes }, \
+        { CAPELLA_KEY_A_B_PlasmaLanes }, \
+        { CAPELLA_KEY_A_B_RainbowLanes }, \
+        { CAPELLA_KEY_A_B_WaterLanes }, \
+        { CAPELLA_KEY_A_B_VaporLanes }, \
+        { CAPELLA_KEY_A_B_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_A_C
 #define CAPELLA_KEY_A_C_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 12U))
@@ -969,6 +1059,51 @@ public:
 #define CAPELLA_KEY_A_C_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 14U))
 #define CAPELLA_KEY_A_C_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 10U))
 #define CAPELLA_KEY_A_C_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 12U))
+#define CAPELLA_KEY_A_C_ArcaneLanes \
+    CAPELLA_KEY_A_C_ArcaneLaneA, \
+    CAPELLA_KEY_A_C_ArcaneLaneB, \
+    CAPELLA_KEY_A_C_ArcaneLaneC, \
+    CAPELLA_KEY_A_C_ArcaneLaneD
+#define CAPELLA_KEY_A_C_PlasmaLanes \
+    CAPELLA_KEY_A_C_PlasmaLaneA, \
+    CAPELLA_KEY_A_C_PlasmaLaneB, \
+    CAPELLA_KEY_A_C_PlasmaLaneC, \
+    CAPELLA_KEY_A_C_PlasmaLaneD
+#define CAPELLA_KEY_A_C_RainbowLanes \
+    CAPELLA_KEY_A_C_RainbowLaneA, \
+    CAPELLA_KEY_A_C_RainbowLaneB, \
+    CAPELLA_KEY_A_C_RainbowLaneC, \
+    CAPELLA_KEY_A_C_RainbowLaneD
+#define CAPELLA_KEY_A_C_WaterLanes \
+    CAPELLA_KEY_A_C_WaterLaneA, \
+    CAPELLA_KEY_A_C_WaterLaneB, \
+    CAPELLA_KEY_A_C_WaterLaneC, \
+    CAPELLA_KEY_A_C_WaterLaneD
+#define CAPELLA_KEY_A_C_VaporLanes \
+    CAPELLA_KEY_A_C_VaporLaneA, \
+    CAPELLA_KEY_A_C_VaporLaneB, \
+    CAPELLA_KEY_A_C_VaporLaneC, \
+    CAPELLA_KEY_A_C_VaporLaneD
+#define CAPELLA_KEY_A_C_FrostLanes \
+    CAPELLA_KEY_A_C_FrostLaneA, \
+    CAPELLA_KEY_A_C_FrostLaneB, \
+    CAPELLA_KEY_A_C_FrostLaneC, \
+    CAPELLA_KEY_A_C_FrostLaneD
+#define CAPELLA_KEY_A_C_IceLanes \
+    CAPELLA_KEY_A_C_IceLaneA, \
+    CAPELLA_KEY_A_C_IceLaneB, \
+    CAPELLA_KEY_A_C_IceLaneC, \
+    CAPELLA_KEY_A_C_IceLaneD
+#define CAPELLA_KEY_A_C \
+    { \
+        { CAPELLA_KEY_A_C_ArcaneLanes }, \
+        { CAPELLA_KEY_A_C_PlasmaLanes }, \
+        { CAPELLA_KEY_A_C_RainbowLanes }, \
+        { CAPELLA_KEY_A_C_WaterLanes }, \
+        { CAPELLA_KEY_A_C_VaporLanes }, \
+        { CAPELLA_KEY_A_C_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_A_D
 #define CAPELLA_KEY_A_D_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 15U))
@@ -1087,6 +1222,51 @@ public:
 #define CAPELLA_KEY_A_D_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 12U))
 #define CAPELLA_KEY_A_D_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 15U))
 #define CAPELLA_KEY_A_D_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 9U))
+#define CAPELLA_KEY_A_D_ArcaneLanes \
+    CAPELLA_KEY_A_D_ArcaneLaneA, \
+    CAPELLA_KEY_A_D_ArcaneLaneB, \
+    CAPELLA_KEY_A_D_ArcaneLaneC, \
+    CAPELLA_KEY_A_D_ArcaneLaneD
+#define CAPELLA_KEY_A_D_PlasmaLanes \
+    CAPELLA_KEY_A_D_PlasmaLaneA, \
+    CAPELLA_KEY_A_D_PlasmaLaneB, \
+    CAPELLA_KEY_A_D_PlasmaLaneC, \
+    CAPELLA_KEY_A_D_PlasmaLaneD
+#define CAPELLA_KEY_A_D_RainbowLanes \
+    CAPELLA_KEY_A_D_RainbowLaneA, \
+    CAPELLA_KEY_A_D_RainbowLaneB, \
+    CAPELLA_KEY_A_D_RainbowLaneC, \
+    CAPELLA_KEY_A_D_RainbowLaneD
+#define CAPELLA_KEY_A_D_WaterLanes \
+    CAPELLA_KEY_A_D_WaterLaneA, \
+    CAPELLA_KEY_A_D_WaterLaneB, \
+    CAPELLA_KEY_A_D_WaterLaneC, \
+    CAPELLA_KEY_A_D_WaterLaneD
+#define CAPELLA_KEY_A_D_VaporLanes \
+    CAPELLA_KEY_A_D_VaporLaneA, \
+    CAPELLA_KEY_A_D_VaporLaneB, \
+    CAPELLA_KEY_A_D_VaporLaneC, \
+    CAPELLA_KEY_A_D_VaporLaneD
+#define CAPELLA_KEY_A_D_FrostLanes \
+    CAPELLA_KEY_A_D_FrostLaneA, \
+    CAPELLA_KEY_A_D_FrostLaneB, \
+    CAPELLA_KEY_A_D_FrostLaneC, \
+    CAPELLA_KEY_A_D_FrostLaneD
+#define CAPELLA_KEY_A_D_IceLanes \
+    CAPELLA_KEY_A_D_IceLaneA, \
+    CAPELLA_KEY_A_D_IceLaneB, \
+    CAPELLA_KEY_A_D_IceLaneC, \
+    CAPELLA_KEY_A_D_IceLaneD
+#define CAPELLA_KEY_A_D \
+    { \
+        { CAPELLA_KEY_A_D_ArcaneLanes }, \
+        { CAPELLA_KEY_A_D_PlasmaLanes }, \
+        { CAPELLA_KEY_A_D_RainbowLanes }, \
+        { CAPELLA_KEY_A_D_WaterLanes }, \
+        { CAPELLA_KEY_A_D_VaporLanes }, \
+        { CAPELLA_KEY_A_D_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_A_E
 #define CAPELLA_KEY_A_E_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 8U))
@@ -1205,6 +1385,51 @@ public:
 #define CAPELLA_KEY_A_E_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 9U))
 #define CAPELLA_KEY_A_E_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 11U))
 #define CAPELLA_KEY_A_E_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 6U))
+#define CAPELLA_KEY_A_E_ArcaneLanes \
+    CAPELLA_KEY_A_E_ArcaneLaneA, \
+    CAPELLA_KEY_A_E_ArcaneLaneB, \
+    CAPELLA_KEY_A_E_ArcaneLaneC, \
+    CAPELLA_KEY_A_E_ArcaneLaneD
+#define CAPELLA_KEY_A_E_PlasmaLanes \
+    CAPELLA_KEY_A_E_PlasmaLaneA, \
+    CAPELLA_KEY_A_E_PlasmaLaneB, \
+    CAPELLA_KEY_A_E_PlasmaLaneC, \
+    CAPELLA_KEY_A_E_PlasmaLaneD
+#define CAPELLA_KEY_A_E_RainbowLanes \
+    CAPELLA_KEY_A_E_RainbowLaneA, \
+    CAPELLA_KEY_A_E_RainbowLaneB, \
+    CAPELLA_KEY_A_E_RainbowLaneC, \
+    CAPELLA_KEY_A_E_RainbowLaneD
+#define CAPELLA_KEY_A_E_WaterLanes \
+    CAPELLA_KEY_A_E_WaterLaneA, \
+    CAPELLA_KEY_A_E_WaterLaneB, \
+    CAPELLA_KEY_A_E_WaterLaneC, \
+    CAPELLA_KEY_A_E_WaterLaneD
+#define CAPELLA_KEY_A_E_VaporLanes \
+    CAPELLA_KEY_A_E_VaporLaneA, \
+    CAPELLA_KEY_A_E_VaporLaneB, \
+    CAPELLA_KEY_A_E_VaporLaneC, \
+    CAPELLA_KEY_A_E_VaporLaneD
+#define CAPELLA_KEY_A_E_FrostLanes \
+    CAPELLA_KEY_A_E_FrostLaneA, \
+    CAPELLA_KEY_A_E_FrostLaneB, \
+    CAPELLA_KEY_A_E_FrostLaneC, \
+    CAPELLA_KEY_A_E_FrostLaneD
+#define CAPELLA_KEY_A_E_IceLanes \
+    CAPELLA_KEY_A_E_IceLaneA, \
+    CAPELLA_KEY_A_E_IceLaneB, \
+    CAPELLA_KEY_A_E_IceLaneC, \
+    CAPELLA_KEY_A_E_IceLaneD
+#define CAPELLA_KEY_A_E \
+    { \
+        { CAPELLA_KEY_A_E_ArcaneLanes }, \
+        { CAPELLA_KEY_A_E_PlasmaLanes }, \
+        { CAPELLA_KEY_A_E_RainbowLanes }, \
+        { CAPELLA_KEY_A_E_WaterLanes }, \
+        { CAPELLA_KEY_A_E_VaporLanes }, \
+        { CAPELLA_KEY_A_E_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_A_F
 #define CAPELLA_KEY_A_F_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 14U))
@@ -1323,6 +1548,51 @@ public:
 #define CAPELLA_KEY_A_F_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 1U))
 #define CAPELLA_KEY_A_F_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 2U))
 #define CAPELLA_KEY_A_F_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 14U))
+#define CAPELLA_KEY_A_F_ArcaneLanes \
+    CAPELLA_KEY_A_F_ArcaneLaneA, \
+    CAPELLA_KEY_A_F_ArcaneLaneB, \
+    CAPELLA_KEY_A_F_ArcaneLaneC, \
+    CAPELLA_KEY_A_F_ArcaneLaneD
+#define CAPELLA_KEY_A_F_PlasmaLanes \
+    CAPELLA_KEY_A_F_PlasmaLaneA, \
+    CAPELLA_KEY_A_F_PlasmaLaneB, \
+    CAPELLA_KEY_A_F_PlasmaLaneC, \
+    CAPELLA_KEY_A_F_PlasmaLaneD
+#define CAPELLA_KEY_A_F_RainbowLanes \
+    CAPELLA_KEY_A_F_RainbowLaneA, \
+    CAPELLA_KEY_A_F_RainbowLaneB, \
+    CAPELLA_KEY_A_F_RainbowLaneC, \
+    CAPELLA_KEY_A_F_RainbowLaneD
+#define CAPELLA_KEY_A_F_WaterLanes \
+    CAPELLA_KEY_A_F_WaterLaneA, \
+    CAPELLA_KEY_A_F_WaterLaneB, \
+    CAPELLA_KEY_A_F_WaterLaneC, \
+    CAPELLA_KEY_A_F_WaterLaneD
+#define CAPELLA_KEY_A_F_VaporLanes \
+    CAPELLA_KEY_A_F_VaporLaneA, \
+    CAPELLA_KEY_A_F_VaporLaneB, \
+    CAPELLA_KEY_A_F_VaporLaneC, \
+    CAPELLA_KEY_A_F_VaporLaneD
+#define CAPELLA_KEY_A_F_FrostLanes \
+    CAPELLA_KEY_A_F_FrostLaneA, \
+    CAPELLA_KEY_A_F_FrostLaneB, \
+    CAPELLA_KEY_A_F_FrostLaneC, \
+    CAPELLA_KEY_A_F_FrostLaneD
+#define CAPELLA_KEY_A_F_IceLanes \
+    CAPELLA_KEY_A_F_IceLaneA, \
+    CAPELLA_KEY_A_F_IceLaneB, \
+    CAPELLA_KEY_A_F_IceLaneC, \
+    CAPELLA_KEY_A_F_IceLaneD
+#define CAPELLA_KEY_A_F \
+    { \
+        { CAPELLA_KEY_A_F_ArcaneLanes }, \
+        { CAPELLA_KEY_A_F_PlasmaLanes }, \
+        { CAPELLA_KEY_A_F_RainbowLanes }, \
+        { CAPELLA_KEY_A_F_WaterLanes }, \
+        { CAPELLA_KEY_A_F_VaporLanes }, \
+        { CAPELLA_KEY_A_F_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_A_G
 #define CAPELLA_KEY_A_G_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 13U))
@@ -1441,6 +1711,51 @@ public:
 #define CAPELLA_KEY_A_G_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 13U))
 #define CAPELLA_KEY_A_G_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 8U))
 #define CAPELLA_KEY_A_G_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 1U))
+#define CAPELLA_KEY_A_G_ArcaneLanes \
+    CAPELLA_KEY_A_G_ArcaneLaneA, \
+    CAPELLA_KEY_A_G_ArcaneLaneB, \
+    CAPELLA_KEY_A_G_ArcaneLaneC, \
+    CAPELLA_KEY_A_G_ArcaneLaneD
+#define CAPELLA_KEY_A_G_PlasmaLanes \
+    CAPELLA_KEY_A_G_PlasmaLaneA, \
+    CAPELLA_KEY_A_G_PlasmaLaneB, \
+    CAPELLA_KEY_A_G_PlasmaLaneC, \
+    CAPELLA_KEY_A_G_PlasmaLaneD
+#define CAPELLA_KEY_A_G_RainbowLanes \
+    CAPELLA_KEY_A_G_RainbowLaneA, \
+    CAPELLA_KEY_A_G_RainbowLaneB, \
+    CAPELLA_KEY_A_G_RainbowLaneC, \
+    CAPELLA_KEY_A_G_RainbowLaneD
+#define CAPELLA_KEY_A_G_WaterLanes \
+    CAPELLA_KEY_A_G_WaterLaneA, \
+    CAPELLA_KEY_A_G_WaterLaneB, \
+    CAPELLA_KEY_A_G_WaterLaneC, \
+    CAPELLA_KEY_A_G_WaterLaneD
+#define CAPELLA_KEY_A_G_VaporLanes \
+    CAPELLA_KEY_A_G_VaporLaneA, \
+    CAPELLA_KEY_A_G_VaporLaneB, \
+    CAPELLA_KEY_A_G_VaporLaneC, \
+    CAPELLA_KEY_A_G_VaporLaneD
+#define CAPELLA_KEY_A_G_FrostLanes \
+    CAPELLA_KEY_A_G_FrostLaneA, \
+    CAPELLA_KEY_A_G_FrostLaneB, \
+    CAPELLA_KEY_A_G_FrostLaneC, \
+    CAPELLA_KEY_A_G_FrostLaneD
+#define CAPELLA_KEY_A_G_IceLanes \
+    CAPELLA_KEY_A_G_IceLaneA, \
+    CAPELLA_KEY_A_G_IceLaneB, \
+    CAPELLA_KEY_A_G_IceLaneC, \
+    CAPELLA_KEY_A_G_IceLaneD
+#define CAPELLA_KEY_A_G \
+    { \
+        { CAPELLA_KEY_A_G_ArcaneLanes }, \
+        { CAPELLA_KEY_A_G_PlasmaLanes }, \
+        { CAPELLA_KEY_A_G_RainbowLanes }, \
+        { CAPELLA_KEY_A_G_WaterLanes }, \
+        { CAPELLA_KEY_A_G_VaporLanes }, \
+        { CAPELLA_KEY_A_G_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_A_H
 #define CAPELLA_KEY_A_H_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 0U))
@@ -1559,6 +1874,51 @@ public:
 #define CAPELLA_KEY_A_H_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 11U))
 #define CAPELLA_KEY_A_H_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 4U))
 #define CAPELLA_KEY_A_H_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 0U))
+#define CAPELLA_KEY_A_H_ArcaneLanes \
+    CAPELLA_KEY_A_H_ArcaneLaneA, \
+    CAPELLA_KEY_A_H_ArcaneLaneB, \
+    CAPELLA_KEY_A_H_ArcaneLaneC, \
+    CAPELLA_KEY_A_H_ArcaneLaneD
+#define CAPELLA_KEY_A_H_PlasmaLanes \
+    CAPELLA_KEY_A_H_PlasmaLaneA, \
+    CAPELLA_KEY_A_H_PlasmaLaneB, \
+    CAPELLA_KEY_A_H_PlasmaLaneC, \
+    CAPELLA_KEY_A_H_PlasmaLaneD
+#define CAPELLA_KEY_A_H_RainbowLanes \
+    CAPELLA_KEY_A_H_RainbowLaneA, \
+    CAPELLA_KEY_A_H_RainbowLaneB, \
+    CAPELLA_KEY_A_H_RainbowLaneC, \
+    CAPELLA_KEY_A_H_RainbowLaneD
+#define CAPELLA_KEY_A_H_WaterLanes \
+    CAPELLA_KEY_A_H_WaterLaneA, \
+    CAPELLA_KEY_A_H_WaterLaneB, \
+    CAPELLA_KEY_A_H_WaterLaneC, \
+    CAPELLA_KEY_A_H_WaterLaneD
+#define CAPELLA_KEY_A_H_VaporLanes \
+    CAPELLA_KEY_A_H_VaporLaneA, \
+    CAPELLA_KEY_A_H_VaporLaneB, \
+    CAPELLA_KEY_A_H_VaporLaneC, \
+    CAPELLA_KEY_A_H_VaporLaneD
+#define CAPELLA_KEY_A_H_FrostLanes \
+    CAPELLA_KEY_A_H_FrostLaneA, \
+    CAPELLA_KEY_A_H_FrostLaneB, \
+    CAPELLA_KEY_A_H_FrostLaneC, \
+    CAPELLA_KEY_A_H_FrostLaneD
+#define CAPELLA_KEY_A_H_IceLanes \
+    CAPELLA_KEY_A_H_IceLaneA, \
+    CAPELLA_KEY_A_H_IceLaneB, \
+    CAPELLA_KEY_A_H_IceLaneC, \
+    CAPELLA_KEY_A_H_IceLaneD
+#define CAPELLA_KEY_A_H \
+    { \
+        { CAPELLA_KEY_A_H_ArcaneLanes }, \
+        { CAPELLA_KEY_A_H_PlasmaLanes }, \
+        { CAPELLA_KEY_A_H_RainbowLanes }, \
+        { CAPELLA_KEY_A_H_WaterLanes }, \
+        { CAPELLA_KEY_A_H_VaporLanes }, \
+        { CAPELLA_KEY_A_H_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_B_A
 #define CAPELLA_KEY_B_A_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 3U))
@@ -1677,6 +2037,51 @@ public:
 #define CAPELLA_KEY_B_A_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 7U))
 #define CAPELLA_KEY_B_A_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 14U))
 #define CAPELLA_KEY_B_A_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 8U))
+#define CAPELLA_KEY_B_A_ArcaneLanes \
+    CAPELLA_KEY_B_A_ArcaneLaneA, \
+    CAPELLA_KEY_B_A_ArcaneLaneB, \
+    CAPELLA_KEY_B_A_ArcaneLaneC, \
+    CAPELLA_KEY_B_A_ArcaneLaneD
+#define CAPELLA_KEY_B_A_PlasmaLanes \
+    CAPELLA_KEY_B_A_PlasmaLaneA, \
+    CAPELLA_KEY_B_A_PlasmaLaneB, \
+    CAPELLA_KEY_B_A_PlasmaLaneC, \
+    CAPELLA_KEY_B_A_PlasmaLaneD
+#define CAPELLA_KEY_B_A_RainbowLanes \
+    CAPELLA_KEY_B_A_RainbowLaneA, \
+    CAPELLA_KEY_B_A_RainbowLaneB, \
+    CAPELLA_KEY_B_A_RainbowLaneC, \
+    CAPELLA_KEY_B_A_RainbowLaneD
+#define CAPELLA_KEY_B_A_WaterLanes \
+    CAPELLA_KEY_B_A_WaterLaneA, \
+    CAPELLA_KEY_B_A_WaterLaneB, \
+    CAPELLA_KEY_B_A_WaterLaneC, \
+    CAPELLA_KEY_B_A_WaterLaneD
+#define CAPELLA_KEY_B_A_VaporLanes \
+    CAPELLA_KEY_B_A_VaporLaneA, \
+    CAPELLA_KEY_B_A_VaporLaneB, \
+    CAPELLA_KEY_B_A_VaporLaneC, \
+    CAPELLA_KEY_B_A_VaporLaneD
+#define CAPELLA_KEY_B_A_FrostLanes \
+    CAPELLA_KEY_B_A_FrostLaneA, \
+    CAPELLA_KEY_B_A_FrostLaneB, \
+    CAPELLA_KEY_B_A_FrostLaneC, \
+    CAPELLA_KEY_B_A_FrostLaneD
+#define CAPELLA_KEY_B_A_IceLanes \
+    CAPELLA_KEY_B_A_IceLaneA, \
+    CAPELLA_KEY_B_A_IceLaneB, \
+    CAPELLA_KEY_B_A_IceLaneC, \
+    CAPELLA_KEY_B_A_IceLaneD
+#define CAPELLA_KEY_B_A \
+    { \
+        { CAPELLA_KEY_B_A_ArcaneLanes }, \
+        { CAPELLA_KEY_B_A_PlasmaLanes }, \
+        { CAPELLA_KEY_B_A_RainbowLanes }, \
+        { CAPELLA_KEY_B_A_WaterLanes }, \
+        { CAPELLA_KEY_B_A_VaporLanes }, \
+        { CAPELLA_KEY_B_A_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }
 
 // KEY_B_B
 #define CAPELLA_KEY_B_B_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 7U))
@@ -1795,6 +2200,51 @@ public:
 #define CAPELLA_KEY_B_B_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 4U))
 #define CAPELLA_KEY_B_B_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 7U))
 #define CAPELLA_KEY_B_B_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 13U))
+#define CAPELLA_KEY_B_B_ArcaneLanes \
+    CAPELLA_KEY_B_B_ArcaneLaneA, \
+    CAPELLA_KEY_B_B_ArcaneLaneB, \
+    CAPELLA_KEY_B_B_ArcaneLaneC, \
+    CAPELLA_KEY_B_B_ArcaneLaneD
+#define CAPELLA_KEY_B_B_PlasmaLanes \
+    CAPELLA_KEY_B_B_PlasmaLaneA, \
+    CAPELLA_KEY_B_B_PlasmaLaneB, \
+    CAPELLA_KEY_B_B_PlasmaLaneC, \
+    CAPELLA_KEY_B_B_PlasmaLaneD
+#define CAPELLA_KEY_B_B_RainbowLanes \
+    CAPELLA_KEY_B_B_RainbowLaneA, \
+    CAPELLA_KEY_B_B_RainbowLaneB, \
+    CAPELLA_KEY_B_B_RainbowLaneC, \
+    CAPELLA_KEY_B_B_RainbowLaneD
+#define CAPELLA_KEY_B_B_WaterLanes \
+    CAPELLA_KEY_B_B_WaterLaneA, \
+    CAPELLA_KEY_B_B_WaterLaneB, \
+    CAPELLA_KEY_B_B_WaterLaneC, \
+    CAPELLA_KEY_B_B_WaterLaneD
+#define CAPELLA_KEY_B_B_VaporLanes \
+    CAPELLA_KEY_B_B_VaporLaneA, \
+    CAPELLA_KEY_B_B_VaporLaneB, \
+    CAPELLA_KEY_B_B_VaporLaneC, \
+    CAPELLA_KEY_B_B_VaporLaneD
+#define CAPELLA_KEY_B_B_FrostLanes \
+    CAPELLA_KEY_B_B_FrostLaneA, \
+    CAPELLA_KEY_B_B_FrostLaneB, \
+    CAPELLA_KEY_B_B_FrostLaneC, \
+    CAPELLA_KEY_B_B_FrostLaneD
+#define CAPELLA_KEY_B_B_IceLanes \
+    CAPELLA_KEY_B_B_IceLaneA, \
+    CAPELLA_KEY_B_B_IceLaneB, \
+    CAPELLA_KEY_B_B_IceLaneC, \
+    CAPELLA_KEY_B_B_IceLaneD
+#define CAPELLA_KEY_B_B \
+    { \
+        { CAPELLA_KEY_B_B_ArcaneLanes }, \
+        { CAPELLA_KEY_B_B_PlasmaLanes }, \
+        { CAPELLA_KEY_B_B_RainbowLanes }, \
+        { CAPELLA_KEY_B_B_WaterLanes }, \
+        { CAPELLA_KEY_B_B_VaporLanes }, \
+        { CAPELLA_KEY_B_B_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }
 
 // KEY_B_C
 #define CAPELLA_KEY_B_C_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 1U))
@@ -1913,6 +2363,51 @@ public:
 #define CAPELLA_KEY_B_C_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 10U))
 #define CAPELLA_KEY_B_C_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 6U))
 #define CAPELLA_KEY_B_C_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 15U))
+#define CAPELLA_KEY_B_C_ArcaneLanes \
+    CAPELLA_KEY_B_C_ArcaneLaneA, \
+    CAPELLA_KEY_B_C_ArcaneLaneB, \
+    CAPELLA_KEY_B_C_ArcaneLaneC, \
+    CAPELLA_KEY_B_C_ArcaneLaneD
+#define CAPELLA_KEY_B_C_PlasmaLanes \
+    CAPELLA_KEY_B_C_PlasmaLaneA, \
+    CAPELLA_KEY_B_C_PlasmaLaneB, \
+    CAPELLA_KEY_B_C_PlasmaLaneC, \
+    CAPELLA_KEY_B_C_PlasmaLaneD
+#define CAPELLA_KEY_B_C_RainbowLanes \
+    CAPELLA_KEY_B_C_RainbowLaneA, \
+    CAPELLA_KEY_B_C_RainbowLaneB, \
+    CAPELLA_KEY_B_C_RainbowLaneC, \
+    CAPELLA_KEY_B_C_RainbowLaneD
+#define CAPELLA_KEY_B_C_WaterLanes \
+    CAPELLA_KEY_B_C_WaterLaneA, \
+    CAPELLA_KEY_B_C_WaterLaneB, \
+    CAPELLA_KEY_B_C_WaterLaneC, \
+    CAPELLA_KEY_B_C_WaterLaneD
+#define CAPELLA_KEY_B_C_VaporLanes \
+    CAPELLA_KEY_B_C_VaporLaneA, \
+    CAPELLA_KEY_B_C_VaporLaneB, \
+    CAPELLA_KEY_B_C_VaporLaneC, \
+    CAPELLA_KEY_B_C_VaporLaneD
+#define CAPELLA_KEY_B_C_FrostLanes \
+    CAPELLA_KEY_B_C_FrostLaneA, \
+    CAPELLA_KEY_B_C_FrostLaneB, \
+    CAPELLA_KEY_B_C_FrostLaneC, \
+    CAPELLA_KEY_B_C_FrostLaneD
+#define CAPELLA_KEY_B_C_IceLanes \
+    CAPELLA_KEY_B_C_IceLaneA, \
+    CAPELLA_KEY_B_C_IceLaneB, \
+    CAPELLA_KEY_B_C_IceLaneC, \
+    CAPELLA_KEY_B_C_IceLaneD
+#define CAPELLA_KEY_B_C \
+    { \
+        { CAPELLA_KEY_B_C_ArcaneLanes }, \
+        { CAPELLA_KEY_B_C_PlasmaLanes }, \
+        { CAPELLA_KEY_B_C_RainbowLanes }, \
+        { CAPELLA_KEY_B_C_WaterLanes }, \
+        { CAPELLA_KEY_B_C_VaporLanes }, \
+        { CAPELLA_KEY_B_C_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }
 
 // KEY_B_D
 #define CAPELLA_KEY_B_D_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 5U))
@@ -2031,6 +2526,51 @@ public:
 #define CAPELLA_KEY_B_D_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 2U))
 #define CAPELLA_KEY_B_D_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 9U))
 #define CAPELLA_KEY_B_D_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 10U))
+#define CAPELLA_KEY_B_D_ArcaneLanes \
+    CAPELLA_KEY_B_D_ArcaneLaneA, \
+    CAPELLA_KEY_B_D_ArcaneLaneB, \
+    CAPELLA_KEY_B_D_ArcaneLaneC, \
+    CAPELLA_KEY_B_D_ArcaneLaneD
+#define CAPELLA_KEY_B_D_PlasmaLanes \
+    CAPELLA_KEY_B_D_PlasmaLaneA, \
+    CAPELLA_KEY_B_D_PlasmaLaneB, \
+    CAPELLA_KEY_B_D_PlasmaLaneC, \
+    CAPELLA_KEY_B_D_PlasmaLaneD
+#define CAPELLA_KEY_B_D_RainbowLanes \
+    CAPELLA_KEY_B_D_RainbowLaneA, \
+    CAPELLA_KEY_B_D_RainbowLaneB, \
+    CAPELLA_KEY_B_D_RainbowLaneC, \
+    CAPELLA_KEY_B_D_RainbowLaneD
+#define CAPELLA_KEY_B_D_WaterLanes \
+    CAPELLA_KEY_B_D_WaterLaneA, \
+    CAPELLA_KEY_B_D_WaterLaneB, \
+    CAPELLA_KEY_B_D_WaterLaneC, \
+    CAPELLA_KEY_B_D_WaterLaneD
+#define CAPELLA_KEY_B_D_VaporLanes \
+    CAPELLA_KEY_B_D_VaporLaneA, \
+    CAPELLA_KEY_B_D_VaporLaneB, \
+    CAPELLA_KEY_B_D_VaporLaneC, \
+    CAPELLA_KEY_B_D_VaporLaneD
+#define CAPELLA_KEY_B_D_FrostLanes \
+    CAPELLA_KEY_B_D_FrostLaneA, \
+    CAPELLA_KEY_B_D_FrostLaneB, \
+    CAPELLA_KEY_B_D_FrostLaneC, \
+    CAPELLA_KEY_B_D_FrostLaneD
+#define CAPELLA_KEY_B_D_IceLanes \
+    CAPELLA_KEY_B_D_IceLaneA, \
+    CAPELLA_KEY_B_D_IceLaneB, \
+    CAPELLA_KEY_B_D_IceLaneC, \
+    CAPELLA_KEY_B_D_IceLaneD
+#define CAPELLA_KEY_B_D \
+    { \
+        { CAPELLA_KEY_B_D_ArcaneLanes }, \
+        { CAPELLA_KEY_B_D_PlasmaLanes }, \
+        { CAPELLA_KEY_B_D_RainbowLanes }, \
+        { CAPELLA_KEY_B_D_WaterLanes }, \
+        { CAPELLA_KEY_B_D_VaporLanes }, \
+        { CAPELLA_KEY_B_D_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }
 
 // KEY_B_E
 #define CAPELLA_KEY_B_E_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 2U))
@@ -2149,6 +2689,51 @@ public:
 #define CAPELLA_KEY_B_E_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 0U))
 #define CAPELLA_KEY_B_E_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 13U))
 #define CAPELLA_KEY_B_E_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 3U))
+#define CAPELLA_KEY_B_E_ArcaneLanes \
+    CAPELLA_KEY_B_E_ArcaneLaneA, \
+    CAPELLA_KEY_B_E_ArcaneLaneB, \
+    CAPELLA_KEY_B_E_ArcaneLaneC, \
+    CAPELLA_KEY_B_E_ArcaneLaneD
+#define CAPELLA_KEY_B_E_PlasmaLanes \
+    CAPELLA_KEY_B_E_PlasmaLaneA, \
+    CAPELLA_KEY_B_E_PlasmaLaneB, \
+    CAPELLA_KEY_B_E_PlasmaLaneC, \
+    CAPELLA_KEY_B_E_PlasmaLaneD
+#define CAPELLA_KEY_B_E_RainbowLanes \
+    CAPELLA_KEY_B_E_RainbowLaneA, \
+    CAPELLA_KEY_B_E_RainbowLaneB, \
+    CAPELLA_KEY_B_E_RainbowLaneC, \
+    CAPELLA_KEY_B_E_RainbowLaneD
+#define CAPELLA_KEY_B_E_WaterLanes \
+    CAPELLA_KEY_B_E_WaterLaneA, \
+    CAPELLA_KEY_B_E_WaterLaneB, \
+    CAPELLA_KEY_B_E_WaterLaneC, \
+    CAPELLA_KEY_B_E_WaterLaneD
+#define CAPELLA_KEY_B_E_VaporLanes \
+    CAPELLA_KEY_B_E_VaporLaneA, \
+    CAPELLA_KEY_B_E_VaporLaneB, \
+    CAPELLA_KEY_B_E_VaporLaneC, \
+    CAPELLA_KEY_B_E_VaporLaneD
+#define CAPELLA_KEY_B_E_FrostLanes \
+    CAPELLA_KEY_B_E_FrostLaneA, \
+    CAPELLA_KEY_B_E_FrostLaneB, \
+    CAPELLA_KEY_B_E_FrostLaneC, \
+    CAPELLA_KEY_B_E_FrostLaneD
+#define CAPELLA_KEY_B_E_IceLanes \
+    CAPELLA_KEY_B_E_IceLaneA, \
+    CAPELLA_KEY_B_E_IceLaneB, \
+    CAPELLA_KEY_B_E_IceLaneC, \
+    CAPELLA_KEY_B_E_IceLaneD
+#define CAPELLA_KEY_B_E \
+    { \
+        { CAPELLA_KEY_B_E_ArcaneLanes }, \
+        { CAPELLA_KEY_B_E_PlasmaLanes }, \
+        { CAPELLA_KEY_B_E_RainbowLanes }, \
+        { CAPELLA_KEY_B_E_WaterLanes }, \
+        { CAPELLA_KEY_B_E_VaporLanes }, \
+        { CAPELLA_KEY_B_E_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }
 
 // KEY_B_F
 #define CAPELLA_KEY_B_F_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 11U))
@@ -2267,6 +2852,51 @@ public:
 #define CAPELLA_KEY_B_F_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 8U))
 #define CAPELLA_KEY_B_F_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 12U))
 #define CAPELLA_KEY_B_F_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 2U))
+#define CAPELLA_KEY_B_F_ArcaneLanes \
+    CAPELLA_KEY_B_F_ArcaneLaneA, \
+    CAPELLA_KEY_B_F_ArcaneLaneB, \
+    CAPELLA_KEY_B_F_ArcaneLaneC, \
+    CAPELLA_KEY_B_F_ArcaneLaneD
+#define CAPELLA_KEY_B_F_PlasmaLanes \
+    CAPELLA_KEY_B_F_PlasmaLaneA, \
+    CAPELLA_KEY_B_F_PlasmaLaneB, \
+    CAPELLA_KEY_B_F_PlasmaLaneC, \
+    CAPELLA_KEY_B_F_PlasmaLaneD
+#define CAPELLA_KEY_B_F_RainbowLanes \
+    CAPELLA_KEY_B_F_RainbowLaneA, \
+    CAPELLA_KEY_B_F_RainbowLaneB, \
+    CAPELLA_KEY_B_F_RainbowLaneC, \
+    CAPELLA_KEY_B_F_RainbowLaneD
+#define CAPELLA_KEY_B_F_WaterLanes \
+    CAPELLA_KEY_B_F_WaterLaneA, \
+    CAPELLA_KEY_B_F_WaterLaneB, \
+    CAPELLA_KEY_B_F_WaterLaneC, \
+    CAPELLA_KEY_B_F_WaterLaneD
+#define CAPELLA_KEY_B_F_VaporLanes \
+    CAPELLA_KEY_B_F_VaporLaneA, \
+    CAPELLA_KEY_B_F_VaporLaneB, \
+    CAPELLA_KEY_B_F_VaporLaneC, \
+    CAPELLA_KEY_B_F_VaporLaneD
+#define CAPELLA_KEY_B_F_FrostLanes \
+    CAPELLA_KEY_B_F_FrostLaneA, \
+    CAPELLA_KEY_B_F_FrostLaneB, \
+    CAPELLA_KEY_B_F_FrostLaneC, \
+    CAPELLA_KEY_B_F_FrostLaneD
+#define CAPELLA_KEY_B_F_IceLanes \
+    CAPELLA_KEY_B_F_IceLaneA, \
+    CAPELLA_KEY_B_F_IceLaneB, \
+    CAPELLA_KEY_B_F_IceLaneC, \
+    CAPELLA_KEY_B_F_IceLaneD
+#define CAPELLA_KEY_B_F \
+    { \
+        { CAPELLA_KEY_B_F_ArcaneLanes }, \
+        { CAPELLA_KEY_B_F_PlasmaLanes }, \
+        { CAPELLA_KEY_B_F_RainbowLanes }, \
+        { CAPELLA_KEY_B_F_WaterLanes }, \
+        { CAPELLA_KEY_B_F_VaporLanes }, \
+        { CAPELLA_KEY_B_F_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }
 
 // KEY_B_G
 #define CAPELLA_KEY_B_G_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 9U))
@@ -2385,6 +3015,51 @@ public:
 #define CAPELLA_KEY_B_G_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 15U))
 #define CAPELLA_KEY_B_G_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 5U))
 #define CAPELLA_KEY_B_G_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 11U))
+#define CAPELLA_KEY_B_G_ArcaneLanes \
+    CAPELLA_KEY_B_G_ArcaneLaneA, \
+    CAPELLA_KEY_B_G_ArcaneLaneB, \
+    CAPELLA_KEY_B_G_ArcaneLaneC, \
+    CAPELLA_KEY_B_G_ArcaneLaneD
+#define CAPELLA_KEY_B_G_PlasmaLanes \
+    CAPELLA_KEY_B_G_PlasmaLaneA, \
+    CAPELLA_KEY_B_G_PlasmaLaneB, \
+    CAPELLA_KEY_B_G_PlasmaLaneC, \
+    CAPELLA_KEY_B_G_PlasmaLaneD
+#define CAPELLA_KEY_B_G_RainbowLanes \
+    CAPELLA_KEY_B_G_RainbowLaneA, \
+    CAPELLA_KEY_B_G_RainbowLaneB, \
+    CAPELLA_KEY_B_G_RainbowLaneC, \
+    CAPELLA_KEY_B_G_RainbowLaneD
+#define CAPELLA_KEY_B_G_WaterLanes \
+    CAPELLA_KEY_B_G_WaterLaneA, \
+    CAPELLA_KEY_B_G_WaterLaneB, \
+    CAPELLA_KEY_B_G_WaterLaneC, \
+    CAPELLA_KEY_B_G_WaterLaneD
+#define CAPELLA_KEY_B_G_VaporLanes \
+    CAPELLA_KEY_B_G_VaporLaneA, \
+    CAPELLA_KEY_B_G_VaporLaneB, \
+    CAPELLA_KEY_B_G_VaporLaneC, \
+    CAPELLA_KEY_B_G_VaporLaneD
+#define CAPELLA_KEY_B_G_FrostLanes \
+    CAPELLA_KEY_B_G_FrostLaneA, \
+    CAPELLA_KEY_B_G_FrostLaneB, \
+    CAPELLA_KEY_B_G_FrostLaneC, \
+    CAPELLA_KEY_B_G_FrostLaneD
+#define CAPELLA_KEY_B_G_IceLanes \
+    CAPELLA_KEY_B_G_IceLaneA, \
+    CAPELLA_KEY_B_G_IceLaneB, \
+    CAPELLA_KEY_B_G_IceLaneC, \
+    CAPELLA_KEY_B_G_IceLaneD
+#define CAPELLA_KEY_B_G \
+    { \
+        { CAPELLA_KEY_B_G_ArcaneLanes }, \
+        { CAPELLA_KEY_B_G_PlasmaLanes }, \
+        { CAPELLA_KEY_B_G_RainbowLanes }, \
+        { CAPELLA_KEY_B_G_WaterLanes }, \
+        { CAPELLA_KEY_B_G_VaporLanes }, \
+        { CAPELLA_KEY_B_G_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }
 
 // KEY_B_H
 #define CAPELLA_KEY_B_H_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 10U))
@@ -2503,3 +3178,48 @@ public:
 #define CAPELLA_KEY_B_H_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 3U))
 #define CAPELLA_KEY_B_H_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 1U))
 #define CAPELLA_KEY_B_H_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 7U))
+#define CAPELLA_KEY_B_H_ArcaneLanes \
+    CAPELLA_KEY_B_H_ArcaneLaneA, \
+    CAPELLA_KEY_B_H_ArcaneLaneB, \
+    CAPELLA_KEY_B_H_ArcaneLaneC, \
+    CAPELLA_KEY_B_H_ArcaneLaneD
+#define CAPELLA_KEY_B_H_PlasmaLanes \
+    CAPELLA_KEY_B_H_PlasmaLaneA, \
+    CAPELLA_KEY_B_H_PlasmaLaneB, \
+    CAPELLA_KEY_B_H_PlasmaLaneC, \
+    CAPELLA_KEY_B_H_PlasmaLaneD
+#define CAPELLA_KEY_B_H_RainbowLanes \
+    CAPELLA_KEY_B_H_RainbowLaneA, \
+    CAPELLA_KEY_B_H_RainbowLaneB, \
+    CAPELLA_KEY_B_H_RainbowLaneC, \
+    CAPELLA_KEY_B_H_RainbowLaneD
+#define CAPELLA_KEY_B_H_WaterLanes \
+    CAPELLA_KEY_B_H_WaterLaneA, \
+    CAPELLA_KEY_B_H_WaterLaneB, \
+    CAPELLA_KEY_B_H_WaterLaneC, \
+    CAPELLA_KEY_B_H_WaterLaneD
+#define CAPELLA_KEY_B_H_VaporLanes \
+    CAPELLA_KEY_B_H_VaporLaneA, \
+    CAPELLA_KEY_B_H_VaporLaneB, \
+    CAPELLA_KEY_B_H_VaporLaneC, \
+    CAPELLA_KEY_B_H_VaporLaneD
+#define CAPELLA_KEY_B_H_FrostLanes \
+    CAPELLA_KEY_B_H_FrostLaneA, \
+    CAPELLA_KEY_B_H_FrostLaneB, \
+    CAPELLA_KEY_B_H_FrostLaneC, \
+    CAPELLA_KEY_B_H_FrostLaneD
+#define CAPELLA_KEY_B_H_IceLanes \
+    CAPELLA_KEY_B_H_IceLaneA, \
+    CAPELLA_KEY_B_H_IceLaneB, \
+    CAPELLA_KEY_B_H_IceLaneC, \
+    CAPELLA_KEY_B_H_IceLaneD
+#define CAPELLA_KEY_B_H \
+    { \
+        { CAPELLA_KEY_B_H_ArcaneLanes }, \
+        { CAPELLA_KEY_B_H_PlasmaLanes }, \
+        { CAPELLA_KEY_B_H_RainbowLanes }, \
+        { CAPELLA_KEY_B_H_WaterLanes }, \
+        { CAPELLA_KEY_B_H_VaporLanes }, \
+        { CAPELLA_KEY_B_H_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }

@@ -733,6 +733,51 @@ public:
 #define ARCTURUS_KEY_A_A_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 6U))
 #define ARCTURUS_KEY_A_A_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 0U))
 #define ARCTURUS_KEY_A_A_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 5U))
+#define ARCTURUS_KEY_A_A_ArcaneLanes \
+    ARCTURUS_KEY_A_A_ArcaneLaneA, \
+    ARCTURUS_KEY_A_A_ArcaneLaneB, \
+    ARCTURUS_KEY_A_A_ArcaneLaneC, \
+    ARCTURUS_KEY_A_A_ArcaneLaneD
+#define ARCTURUS_KEY_A_A_PlasmaLanes \
+    ARCTURUS_KEY_A_A_PlasmaLaneA, \
+    ARCTURUS_KEY_A_A_PlasmaLaneB, \
+    ARCTURUS_KEY_A_A_PlasmaLaneC, \
+    ARCTURUS_KEY_A_A_PlasmaLaneD
+#define ARCTURUS_KEY_A_A_RainbowLanes \
+    ARCTURUS_KEY_A_A_RainbowLaneA, \
+    ARCTURUS_KEY_A_A_RainbowLaneB, \
+    ARCTURUS_KEY_A_A_RainbowLaneC, \
+    ARCTURUS_KEY_A_A_RainbowLaneD
+#define ARCTURUS_KEY_A_A_WaterLanes \
+    ARCTURUS_KEY_A_A_WaterLaneA, \
+    ARCTURUS_KEY_A_A_WaterLaneB, \
+    ARCTURUS_KEY_A_A_WaterLaneC, \
+    ARCTURUS_KEY_A_A_WaterLaneD
+#define ARCTURUS_KEY_A_A_VaporLanes \
+    ARCTURUS_KEY_A_A_VaporLaneA, \
+    ARCTURUS_KEY_A_A_VaporLaneB, \
+    ARCTURUS_KEY_A_A_VaporLaneC, \
+    ARCTURUS_KEY_A_A_VaporLaneD
+#define ARCTURUS_KEY_A_A_FrostLanes \
+    ARCTURUS_KEY_A_A_FrostLaneA, \
+    ARCTURUS_KEY_A_A_FrostLaneB, \
+    ARCTURUS_KEY_A_A_FrostLaneC, \
+    ARCTURUS_KEY_A_A_FrostLaneD
+#define ARCTURUS_KEY_A_A_IceLanes \
+    ARCTURUS_KEY_A_A_IceLaneA, \
+    ARCTURUS_KEY_A_A_IceLaneB, \
+    ARCTURUS_KEY_A_A_IceLaneC, \
+    ARCTURUS_KEY_A_A_IceLaneD
+#define ARCTURUS_KEY_A_A \
+    { \
+        { ARCTURUS_KEY_A_A_ArcaneLanes }, \
+        { ARCTURUS_KEY_A_A_PlasmaLanes }, \
+        { ARCTURUS_KEY_A_A_RainbowLanes }, \
+        { ARCTURUS_KEY_A_A_WaterLanes }, \
+        { ARCTURUS_KEY_A_A_VaporLanes }, \
+        { ARCTURUS_KEY_A_A_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_A_B
 #define ARCTURUS_KEY_A_B_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 12U))
@@ -851,6 +896,51 @@ public:
 #define ARCTURUS_KEY_A_B_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 9U))
 #define ARCTURUS_KEY_A_B_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 11U))
 #define ARCTURUS_KEY_A_B_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 6U))
+#define ARCTURUS_KEY_A_B_ArcaneLanes \
+    ARCTURUS_KEY_A_B_ArcaneLaneA, \
+    ARCTURUS_KEY_A_B_ArcaneLaneB, \
+    ARCTURUS_KEY_A_B_ArcaneLaneC, \
+    ARCTURUS_KEY_A_B_ArcaneLaneD
+#define ARCTURUS_KEY_A_B_PlasmaLanes \
+    ARCTURUS_KEY_A_B_PlasmaLaneA, \
+    ARCTURUS_KEY_A_B_PlasmaLaneB, \
+    ARCTURUS_KEY_A_B_PlasmaLaneC, \
+    ARCTURUS_KEY_A_B_PlasmaLaneD
+#define ARCTURUS_KEY_A_B_RainbowLanes \
+    ARCTURUS_KEY_A_B_RainbowLaneA, \
+    ARCTURUS_KEY_A_B_RainbowLaneB, \
+    ARCTURUS_KEY_A_B_RainbowLaneC, \
+    ARCTURUS_KEY_A_B_RainbowLaneD
+#define ARCTURUS_KEY_A_B_WaterLanes \
+    ARCTURUS_KEY_A_B_WaterLaneA, \
+    ARCTURUS_KEY_A_B_WaterLaneB, \
+    ARCTURUS_KEY_A_B_WaterLaneC, \
+    ARCTURUS_KEY_A_B_WaterLaneD
+#define ARCTURUS_KEY_A_B_VaporLanes \
+    ARCTURUS_KEY_A_B_VaporLaneA, \
+    ARCTURUS_KEY_A_B_VaporLaneB, \
+    ARCTURUS_KEY_A_B_VaporLaneC, \
+    ARCTURUS_KEY_A_B_VaporLaneD
+#define ARCTURUS_KEY_A_B_FrostLanes \
+    ARCTURUS_KEY_A_B_FrostLaneA, \
+    ARCTURUS_KEY_A_B_FrostLaneB, \
+    ARCTURUS_KEY_A_B_FrostLaneC, \
+    ARCTURUS_KEY_A_B_FrostLaneD
+#define ARCTURUS_KEY_A_B_IceLanes \
+    ARCTURUS_KEY_A_B_IceLaneA, \
+    ARCTURUS_KEY_A_B_IceLaneB, \
+    ARCTURUS_KEY_A_B_IceLaneC, \
+    ARCTURUS_KEY_A_B_IceLaneD
+#define ARCTURUS_KEY_A_B \
+    { \
+        { ARCTURUS_KEY_A_B_ArcaneLanes }, \
+        { ARCTURUS_KEY_A_B_PlasmaLanes }, \
+        { ARCTURUS_KEY_A_B_RainbowLanes }, \
+        { ARCTURUS_KEY_A_B_WaterLanes }, \
+        { ARCTURUS_KEY_A_B_VaporLanes }, \
+        { ARCTURUS_KEY_A_B_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_A_C
 #define ARCTURUS_KEY_A_C_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 0U))
@@ -969,6 +1059,51 @@ public:
 #define ARCTURUS_KEY_A_C_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 1U))
 #define ARCTURUS_KEY_A_C_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 2U))
 #define ARCTURUS_KEY_A_C_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 14U))
+#define ARCTURUS_KEY_A_C_ArcaneLanes \
+    ARCTURUS_KEY_A_C_ArcaneLaneA, \
+    ARCTURUS_KEY_A_C_ArcaneLaneB, \
+    ARCTURUS_KEY_A_C_ArcaneLaneC, \
+    ARCTURUS_KEY_A_C_ArcaneLaneD
+#define ARCTURUS_KEY_A_C_PlasmaLanes \
+    ARCTURUS_KEY_A_C_PlasmaLaneA, \
+    ARCTURUS_KEY_A_C_PlasmaLaneB, \
+    ARCTURUS_KEY_A_C_PlasmaLaneC, \
+    ARCTURUS_KEY_A_C_PlasmaLaneD
+#define ARCTURUS_KEY_A_C_RainbowLanes \
+    ARCTURUS_KEY_A_C_RainbowLaneA, \
+    ARCTURUS_KEY_A_C_RainbowLaneB, \
+    ARCTURUS_KEY_A_C_RainbowLaneC, \
+    ARCTURUS_KEY_A_C_RainbowLaneD
+#define ARCTURUS_KEY_A_C_WaterLanes \
+    ARCTURUS_KEY_A_C_WaterLaneA, \
+    ARCTURUS_KEY_A_C_WaterLaneB, \
+    ARCTURUS_KEY_A_C_WaterLaneC, \
+    ARCTURUS_KEY_A_C_WaterLaneD
+#define ARCTURUS_KEY_A_C_VaporLanes \
+    ARCTURUS_KEY_A_C_VaporLaneA, \
+    ARCTURUS_KEY_A_C_VaporLaneB, \
+    ARCTURUS_KEY_A_C_VaporLaneC, \
+    ARCTURUS_KEY_A_C_VaporLaneD
+#define ARCTURUS_KEY_A_C_FrostLanes \
+    ARCTURUS_KEY_A_C_FrostLaneA, \
+    ARCTURUS_KEY_A_C_FrostLaneB, \
+    ARCTURUS_KEY_A_C_FrostLaneC, \
+    ARCTURUS_KEY_A_C_FrostLaneD
+#define ARCTURUS_KEY_A_C_IceLanes \
+    ARCTURUS_KEY_A_C_IceLaneA, \
+    ARCTURUS_KEY_A_C_IceLaneB, \
+    ARCTURUS_KEY_A_C_IceLaneC, \
+    ARCTURUS_KEY_A_C_IceLaneD
+#define ARCTURUS_KEY_A_C \
+    { \
+        { ARCTURUS_KEY_A_C_ArcaneLanes }, \
+        { ARCTURUS_KEY_A_C_PlasmaLanes }, \
+        { ARCTURUS_KEY_A_C_RainbowLanes }, \
+        { ARCTURUS_KEY_A_C_WaterLanes }, \
+        { ARCTURUS_KEY_A_C_VaporLanes }, \
+        { ARCTURUS_KEY_A_C_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_A_D
 #define ARCTURUS_KEY_A_D_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 13U))
@@ -1087,6 +1222,51 @@ public:
 #define ARCTURUS_KEY_A_D_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 14U))
 #define ARCTURUS_KEY_A_D_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 10U))
 #define ARCTURUS_KEY_A_D_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 12U))
+#define ARCTURUS_KEY_A_D_ArcaneLanes \
+    ARCTURUS_KEY_A_D_ArcaneLaneA, \
+    ARCTURUS_KEY_A_D_ArcaneLaneB, \
+    ARCTURUS_KEY_A_D_ArcaneLaneC, \
+    ARCTURUS_KEY_A_D_ArcaneLaneD
+#define ARCTURUS_KEY_A_D_PlasmaLanes \
+    ARCTURUS_KEY_A_D_PlasmaLaneA, \
+    ARCTURUS_KEY_A_D_PlasmaLaneB, \
+    ARCTURUS_KEY_A_D_PlasmaLaneC, \
+    ARCTURUS_KEY_A_D_PlasmaLaneD
+#define ARCTURUS_KEY_A_D_RainbowLanes \
+    ARCTURUS_KEY_A_D_RainbowLaneA, \
+    ARCTURUS_KEY_A_D_RainbowLaneB, \
+    ARCTURUS_KEY_A_D_RainbowLaneC, \
+    ARCTURUS_KEY_A_D_RainbowLaneD
+#define ARCTURUS_KEY_A_D_WaterLanes \
+    ARCTURUS_KEY_A_D_WaterLaneA, \
+    ARCTURUS_KEY_A_D_WaterLaneB, \
+    ARCTURUS_KEY_A_D_WaterLaneC, \
+    ARCTURUS_KEY_A_D_WaterLaneD
+#define ARCTURUS_KEY_A_D_VaporLanes \
+    ARCTURUS_KEY_A_D_VaporLaneA, \
+    ARCTURUS_KEY_A_D_VaporLaneB, \
+    ARCTURUS_KEY_A_D_VaporLaneC, \
+    ARCTURUS_KEY_A_D_VaporLaneD
+#define ARCTURUS_KEY_A_D_FrostLanes \
+    ARCTURUS_KEY_A_D_FrostLaneA, \
+    ARCTURUS_KEY_A_D_FrostLaneB, \
+    ARCTURUS_KEY_A_D_FrostLaneC, \
+    ARCTURUS_KEY_A_D_FrostLaneD
+#define ARCTURUS_KEY_A_D_IceLanes \
+    ARCTURUS_KEY_A_D_IceLaneA, \
+    ARCTURUS_KEY_A_D_IceLaneB, \
+    ARCTURUS_KEY_A_D_IceLaneC, \
+    ARCTURUS_KEY_A_D_IceLaneD
+#define ARCTURUS_KEY_A_D \
+    { \
+        { ARCTURUS_KEY_A_D_ArcaneLanes }, \
+        { ARCTURUS_KEY_A_D_PlasmaLanes }, \
+        { ARCTURUS_KEY_A_D_RainbowLanes }, \
+        { ARCTURUS_KEY_A_D_WaterLanes }, \
+        { ARCTURUS_KEY_A_D_VaporLanes }, \
+        { ARCTURUS_KEY_A_D_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_A_E
 #define ARCTURUS_KEY_A_E_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 3U))
@@ -1205,6 +1385,51 @@ public:
 #define ARCTURUS_KEY_A_E_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 12U))
 #define ARCTURUS_KEY_A_E_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 15U))
 #define ARCTURUS_KEY_A_E_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 9U))
+#define ARCTURUS_KEY_A_E_ArcaneLanes \
+    ARCTURUS_KEY_A_E_ArcaneLaneA, \
+    ARCTURUS_KEY_A_E_ArcaneLaneB, \
+    ARCTURUS_KEY_A_E_ArcaneLaneC, \
+    ARCTURUS_KEY_A_E_ArcaneLaneD
+#define ARCTURUS_KEY_A_E_PlasmaLanes \
+    ARCTURUS_KEY_A_E_PlasmaLaneA, \
+    ARCTURUS_KEY_A_E_PlasmaLaneB, \
+    ARCTURUS_KEY_A_E_PlasmaLaneC, \
+    ARCTURUS_KEY_A_E_PlasmaLaneD
+#define ARCTURUS_KEY_A_E_RainbowLanes \
+    ARCTURUS_KEY_A_E_RainbowLaneA, \
+    ARCTURUS_KEY_A_E_RainbowLaneB, \
+    ARCTURUS_KEY_A_E_RainbowLaneC, \
+    ARCTURUS_KEY_A_E_RainbowLaneD
+#define ARCTURUS_KEY_A_E_WaterLanes \
+    ARCTURUS_KEY_A_E_WaterLaneA, \
+    ARCTURUS_KEY_A_E_WaterLaneB, \
+    ARCTURUS_KEY_A_E_WaterLaneC, \
+    ARCTURUS_KEY_A_E_WaterLaneD
+#define ARCTURUS_KEY_A_E_VaporLanes \
+    ARCTURUS_KEY_A_E_VaporLaneA, \
+    ARCTURUS_KEY_A_E_VaporLaneB, \
+    ARCTURUS_KEY_A_E_VaporLaneC, \
+    ARCTURUS_KEY_A_E_VaporLaneD
+#define ARCTURUS_KEY_A_E_FrostLanes \
+    ARCTURUS_KEY_A_E_FrostLaneA, \
+    ARCTURUS_KEY_A_E_FrostLaneB, \
+    ARCTURUS_KEY_A_E_FrostLaneC, \
+    ARCTURUS_KEY_A_E_FrostLaneD
+#define ARCTURUS_KEY_A_E_IceLanes \
+    ARCTURUS_KEY_A_E_IceLaneA, \
+    ARCTURUS_KEY_A_E_IceLaneB, \
+    ARCTURUS_KEY_A_E_IceLaneC, \
+    ARCTURUS_KEY_A_E_IceLaneD
+#define ARCTURUS_KEY_A_E \
+    { \
+        { ARCTURUS_KEY_A_E_ArcaneLanes }, \
+        { ARCTURUS_KEY_A_E_PlasmaLanes }, \
+        { ARCTURUS_KEY_A_E_RainbowLanes }, \
+        { ARCTURUS_KEY_A_E_WaterLanes }, \
+        { ARCTURUS_KEY_A_E_VaporLanes }, \
+        { ARCTURUS_KEY_A_E_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_A_F
 #define ARCTURUS_KEY_A_F_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 5U))
@@ -1323,6 +1548,51 @@ public:
 #define ARCTURUS_KEY_A_F_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 13U))
 #define ARCTURUS_KEY_A_F_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 8U))
 #define ARCTURUS_KEY_A_F_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 1U))
+#define ARCTURUS_KEY_A_F_ArcaneLanes \
+    ARCTURUS_KEY_A_F_ArcaneLaneA, \
+    ARCTURUS_KEY_A_F_ArcaneLaneB, \
+    ARCTURUS_KEY_A_F_ArcaneLaneC, \
+    ARCTURUS_KEY_A_F_ArcaneLaneD
+#define ARCTURUS_KEY_A_F_PlasmaLanes \
+    ARCTURUS_KEY_A_F_PlasmaLaneA, \
+    ARCTURUS_KEY_A_F_PlasmaLaneB, \
+    ARCTURUS_KEY_A_F_PlasmaLaneC, \
+    ARCTURUS_KEY_A_F_PlasmaLaneD
+#define ARCTURUS_KEY_A_F_RainbowLanes \
+    ARCTURUS_KEY_A_F_RainbowLaneA, \
+    ARCTURUS_KEY_A_F_RainbowLaneB, \
+    ARCTURUS_KEY_A_F_RainbowLaneC, \
+    ARCTURUS_KEY_A_F_RainbowLaneD
+#define ARCTURUS_KEY_A_F_WaterLanes \
+    ARCTURUS_KEY_A_F_WaterLaneA, \
+    ARCTURUS_KEY_A_F_WaterLaneB, \
+    ARCTURUS_KEY_A_F_WaterLaneC, \
+    ARCTURUS_KEY_A_F_WaterLaneD
+#define ARCTURUS_KEY_A_F_VaporLanes \
+    ARCTURUS_KEY_A_F_VaporLaneA, \
+    ARCTURUS_KEY_A_F_VaporLaneB, \
+    ARCTURUS_KEY_A_F_VaporLaneC, \
+    ARCTURUS_KEY_A_F_VaporLaneD
+#define ARCTURUS_KEY_A_F_FrostLanes \
+    ARCTURUS_KEY_A_F_FrostLaneA, \
+    ARCTURUS_KEY_A_F_FrostLaneB, \
+    ARCTURUS_KEY_A_F_FrostLaneC, \
+    ARCTURUS_KEY_A_F_FrostLaneD
+#define ARCTURUS_KEY_A_F_IceLanes \
+    ARCTURUS_KEY_A_F_IceLaneA, \
+    ARCTURUS_KEY_A_F_IceLaneB, \
+    ARCTURUS_KEY_A_F_IceLaneC, \
+    ARCTURUS_KEY_A_F_IceLaneD
+#define ARCTURUS_KEY_A_F \
+    { \
+        { ARCTURUS_KEY_A_F_ArcaneLanes }, \
+        { ARCTURUS_KEY_A_F_PlasmaLanes }, \
+        { ARCTURUS_KEY_A_F_RainbowLanes }, \
+        { ARCTURUS_KEY_A_F_WaterLanes }, \
+        { ARCTURUS_KEY_A_F_VaporLanes }, \
+        { ARCTURUS_KEY_A_F_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_A_G
 #define ARCTURUS_KEY_A_G_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 11U))
@@ -1441,6 +1711,51 @@ public:
 #define ARCTURUS_KEY_A_G_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 4U))
 #define ARCTURUS_KEY_A_G_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 7U))
 #define ARCTURUS_KEY_A_G_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 13U))
+#define ARCTURUS_KEY_A_G_ArcaneLanes \
+    ARCTURUS_KEY_A_G_ArcaneLaneA, \
+    ARCTURUS_KEY_A_G_ArcaneLaneB, \
+    ARCTURUS_KEY_A_G_ArcaneLaneC, \
+    ARCTURUS_KEY_A_G_ArcaneLaneD
+#define ARCTURUS_KEY_A_G_PlasmaLanes \
+    ARCTURUS_KEY_A_G_PlasmaLaneA, \
+    ARCTURUS_KEY_A_G_PlasmaLaneB, \
+    ARCTURUS_KEY_A_G_PlasmaLaneC, \
+    ARCTURUS_KEY_A_G_PlasmaLaneD
+#define ARCTURUS_KEY_A_G_RainbowLanes \
+    ARCTURUS_KEY_A_G_RainbowLaneA, \
+    ARCTURUS_KEY_A_G_RainbowLaneB, \
+    ARCTURUS_KEY_A_G_RainbowLaneC, \
+    ARCTURUS_KEY_A_G_RainbowLaneD
+#define ARCTURUS_KEY_A_G_WaterLanes \
+    ARCTURUS_KEY_A_G_WaterLaneA, \
+    ARCTURUS_KEY_A_G_WaterLaneB, \
+    ARCTURUS_KEY_A_G_WaterLaneC, \
+    ARCTURUS_KEY_A_G_WaterLaneD
+#define ARCTURUS_KEY_A_G_VaporLanes \
+    ARCTURUS_KEY_A_G_VaporLaneA, \
+    ARCTURUS_KEY_A_G_VaporLaneB, \
+    ARCTURUS_KEY_A_G_VaporLaneC, \
+    ARCTURUS_KEY_A_G_VaporLaneD
+#define ARCTURUS_KEY_A_G_FrostLanes \
+    ARCTURUS_KEY_A_G_FrostLaneA, \
+    ARCTURUS_KEY_A_G_FrostLaneB, \
+    ARCTURUS_KEY_A_G_FrostLaneC, \
+    ARCTURUS_KEY_A_G_FrostLaneD
+#define ARCTURUS_KEY_A_G_IceLanes \
+    ARCTURUS_KEY_A_G_IceLaneA, \
+    ARCTURUS_KEY_A_G_IceLaneB, \
+    ARCTURUS_KEY_A_G_IceLaneC, \
+    ARCTURUS_KEY_A_G_IceLaneD
+#define ARCTURUS_KEY_A_G \
+    { \
+        { ARCTURUS_KEY_A_G_ArcaneLanes }, \
+        { ARCTURUS_KEY_A_G_PlasmaLanes }, \
+        { ARCTURUS_KEY_A_G_RainbowLanes }, \
+        { ARCTURUS_KEY_A_G_WaterLanes }, \
+        { ARCTURUS_KEY_A_G_VaporLanes }, \
+        { ARCTURUS_KEY_A_G_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_A_H
 #define ARCTURUS_KEY_A_H_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 9U))
@@ -1559,6 +1874,51 @@ public:
 #define ARCTURUS_KEY_A_H_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 15U))
 #define ARCTURUS_KEY_A_H_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 5U))
 #define ARCTURUS_KEY_A_H_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 11U))
+#define ARCTURUS_KEY_A_H_ArcaneLanes \
+    ARCTURUS_KEY_A_H_ArcaneLaneA, \
+    ARCTURUS_KEY_A_H_ArcaneLaneB, \
+    ARCTURUS_KEY_A_H_ArcaneLaneC, \
+    ARCTURUS_KEY_A_H_ArcaneLaneD
+#define ARCTURUS_KEY_A_H_PlasmaLanes \
+    ARCTURUS_KEY_A_H_PlasmaLaneA, \
+    ARCTURUS_KEY_A_H_PlasmaLaneB, \
+    ARCTURUS_KEY_A_H_PlasmaLaneC, \
+    ARCTURUS_KEY_A_H_PlasmaLaneD
+#define ARCTURUS_KEY_A_H_RainbowLanes \
+    ARCTURUS_KEY_A_H_RainbowLaneA, \
+    ARCTURUS_KEY_A_H_RainbowLaneB, \
+    ARCTURUS_KEY_A_H_RainbowLaneC, \
+    ARCTURUS_KEY_A_H_RainbowLaneD
+#define ARCTURUS_KEY_A_H_WaterLanes \
+    ARCTURUS_KEY_A_H_WaterLaneA, \
+    ARCTURUS_KEY_A_H_WaterLaneB, \
+    ARCTURUS_KEY_A_H_WaterLaneC, \
+    ARCTURUS_KEY_A_H_WaterLaneD
+#define ARCTURUS_KEY_A_H_VaporLanes \
+    ARCTURUS_KEY_A_H_VaporLaneA, \
+    ARCTURUS_KEY_A_H_VaporLaneB, \
+    ARCTURUS_KEY_A_H_VaporLaneC, \
+    ARCTURUS_KEY_A_H_VaporLaneD
+#define ARCTURUS_KEY_A_H_FrostLanes \
+    ARCTURUS_KEY_A_H_FrostLaneA, \
+    ARCTURUS_KEY_A_H_FrostLaneB, \
+    ARCTURUS_KEY_A_H_FrostLaneC, \
+    ARCTURUS_KEY_A_H_FrostLaneD
+#define ARCTURUS_KEY_A_H_IceLanes \
+    ARCTURUS_KEY_A_H_IceLaneA, \
+    ARCTURUS_KEY_A_H_IceLaneB, \
+    ARCTURUS_KEY_A_H_IceLaneC, \
+    ARCTURUS_KEY_A_H_IceLaneD
+#define ARCTURUS_KEY_A_H \
+    { \
+        { ARCTURUS_KEY_A_H_ArcaneLanes }, \
+        { ARCTURUS_KEY_A_H_PlasmaLanes }, \
+        { ARCTURUS_KEY_A_H_RainbowLanes }, \
+        { ARCTURUS_KEY_A_H_WaterLanes }, \
+        { ARCTURUS_KEY_A_H_VaporLanes }, \
+        { ARCTURUS_KEY_A_H_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_B_A
 #define ARCTURUS_KEY_B_A_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 10U))
@@ -1677,6 +2037,51 @@ public:
 #define ARCTURUS_KEY_B_A_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 3U))
 #define ARCTURUS_KEY_B_A_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 1U))
 #define ARCTURUS_KEY_B_A_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 7U))
+#define ARCTURUS_KEY_B_A_ArcaneLanes \
+    ARCTURUS_KEY_B_A_ArcaneLaneA, \
+    ARCTURUS_KEY_B_A_ArcaneLaneB, \
+    ARCTURUS_KEY_B_A_ArcaneLaneC, \
+    ARCTURUS_KEY_B_A_ArcaneLaneD
+#define ARCTURUS_KEY_B_A_PlasmaLanes \
+    ARCTURUS_KEY_B_A_PlasmaLaneA, \
+    ARCTURUS_KEY_B_A_PlasmaLaneB, \
+    ARCTURUS_KEY_B_A_PlasmaLaneC, \
+    ARCTURUS_KEY_B_A_PlasmaLaneD
+#define ARCTURUS_KEY_B_A_RainbowLanes \
+    ARCTURUS_KEY_B_A_RainbowLaneA, \
+    ARCTURUS_KEY_B_A_RainbowLaneB, \
+    ARCTURUS_KEY_B_A_RainbowLaneC, \
+    ARCTURUS_KEY_B_A_RainbowLaneD
+#define ARCTURUS_KEY_B_A_WaterLanes \
+    ARCTURUS_KEY_B_A_WaterLaneA, \
+    ARCTURUS_KEY_B_A_WaterLaneB, \
+    ARCTURUS_KEY_B_A_WaterLaneC, \
+    ARCTURUS_KEY_B_A_WaterLaneD
+#define ARCTURUS_KEY_B_A_VaporLanes \
+    ARCTURUS_KEY_B_A_VaporLaneA, \
+    ARCTURUS_KEY_B_A_VaporLaneB, \
+    ARCTURUS_KEY_B_A_VaporLaneC, \
+    ARCTURUS_KEY_B_A_VaporLaneD
+#define ARCTURUS_KEY_B_A_FrostLanes \
+    ARCTURUS_KEY_B_A_FrostLaneA, \
+    ARCTURUS_KEY_B_A_FrostLaneB, \
+    ARCTURUS_KEY_B_A_FrostLaneC, \
+    ARCTURUS_KEY_B_A_FrostLaneD
+#define ARCTURUS_KEY_B_A_IceLanes \
+    ARCTURUS_KEY_B_A_IceLaneA, \
+    ARCTURUS_KEY_B_A_IceLaneB, \
+    ARCTURUS_KEY_B_A_IceLaneC, \
+    ARCTURUS_KEY_B_A_IceLaneD
+#define ARCTURUS_KEY_B_A \
+    { \
+        { ARCTURUS_KEY_B_A_ArcaneLanes }, \
+        { ARCTURUS_KEY_B_A_PlasmaLanes }, \
+        { ARCTURUS_KEY_B_A_RainbowLanes }, \
+        { ARCTURUS_KEY_B_A_WaterLanes }, \
+        { ARCTURUS_KEY_B_A_VaporLanes }, \
+        { ARCTURUS_KEY_B_A_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }
 
 // KEY_B_B
 #define ARCTURUS_KEY_B_B_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 1U))
@@ -1795,6 +2200,51 @@ public:
 #define ARCTURUS_KEY_B_B_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 5U))
 #define ARCTURUS_KEY_B_B_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 3U))
 #define ARCTURUS_KEY_B_B_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 4U))
+#define ARCTURUS_KEY_B_B_ArcaneLanes \
+    ARCTURUS_KEY_B_B_ArcaneLaneA, \
+    ARCTURUS_KEY_B_B_ArcaneLaneB, \
+    ARCTURUS_KEY_B_B_ArcaneLaneC, \
+    ARCTURUS_KEY_B_B_ArcaneLaneD
+#define ARCTURUS_KEY_B_B_PlasmaLanes \
+    ARCTURUS_KEY_B_B_PlasmaLaneA, \
+    ARCTURUS_KEY_B_B_PlasmaLaneB, \
+    ARCTURUS_KEY_B_B_PlasmaLaneC, \
+    ARCTURUS_KEY_B_B_PlasmaLaneD
+#define ARCTURUS_KEY_B_B_RainbowLanes \
+    ARCTURUS_KEY_B_B_RainbowLaneA, \
+    ARCTURUS_KEY_B_B_RainbowLaneB, \
+    ARCTURUS_KEY_B_B_RainbowLaneC, \
+    ARCTURUS_KEY_B_B_RainbowLaneD
+#define ARCTURUS_KEY_B_B_WaterLanes \
+    ARCTURUS_KEY_B_B_WaterLaneA, \
+    ARCTURUS_KEY_B_B_WaterLaneB, \
+    ARCTURUS_KEY_B_B_WaterLaneC, \
+    ARCTURUS_KEY_B_B_WaterLaneD
+#define ARCTURUS_KEY_B_B_VaporLanes \
+    ARCTURUS_KEY_B_B_VaporLaneA, \
+    ARCTURUS_KEY_B_B_VaporLaneB, \
+    ARCTURUS_KEY_B_B_VaporLaneC, \
+    ARCTURUS_KEY_B_B_VaporLaneD
+#define ARCTURUS_KEY_B_B_FrostLanes \
+    ARCTURUS_KEY_B_B_FrostLaneA, \
+    ARCTURUS_KEY_B_B_FrostLaneB, \
+    ARCTURUS_KEY_B_B_FrostLaneC, \
+    ARCTURUS_KEY_B_B_FrostLaneD
+#define ARCTURUS_KEY_B_B_IceLanes \
+    ARCTURUS_KEY_B_B_IceLaneA, \
+    ARCTURUS_KEY_B_B_IceLaneB, \
+    ARCTURUS_KEY_B_B_IceLaneC, \
+    ARCTURUS_KEY_B_B_IceLaneD
+#define ARCTURUS_KEY_B_B \
+    { \
+        { ARCTURUS_KEY_B_B_ArcaneLanes }, \
+        { ARCTURUS_KEY_B_B_PlasmaLanes }, \
+        { ARCTURUS_KEY_B_B_RainbowLanes }, \
+        { ARCTURUS_KEY_B_B_WaterLanes }, \
+        { ARCTURUS_KEY_B_B_VaporLanes }, \
+        { ARCTURUS_KEY_B_B_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }
 
 // KEY_B_C
 #define ARCTURUS_KEY_B_C_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 8U))
@@ -1913,6 +2363,51 @@ public:
 #define ARCTURUS_KEY_B_C_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 2U))
 #define ARCTURUS_KEY_B_C_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 9U))
 #define ARCTURUS_KEY_B_C_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 10U))
+#define ARCTURUS_KEY_B_C_ArcaneLanes \
+    ARCTURUS_KEY_B_C_ArcaneLaneA, \
+    ARCTURUS_KEY_B_C_ArcaneLaneB, \
+    ARCTURUS_KEY_B_C_ArcaneLaneC, \
+    ARCTURUS_KEY_B_C_ArcaneLaneD
+#define ARCTURUS_KEY_B_C_PlasmaLanes \
+    ARCTURUS_KEY_B_C_PlasmaLaneA, \
+    ARCTURUS_KEY_B_C_PlasmaLaneB, \
+    ARCTURUS_KEY_B_C_PlasmaLaneC, \
+    ARCTURUS_KEY_B_C_PlasmaLaneD
+#define ARCTURUS_KEY_B_C_RainbowLanes \
+    ARCTURUS_KEY_B_C_RainbowLaneA, \
+    ARCTURUS_KEY_B_C_RainbowLaneB, \
+    ARCTURUS_KEY_B_C_RainbowLaneC, \
+    ARCTURUS_KEY_B_C_RainbowLaneD
+#define ARCTURUS_KEY_B_C_WaterLanes \
+    ARCTURUS_KEY_B_C_WaterLaneA, \
+    ARCTURUS_KEY_B_C_WaterLaneB, \
+    ARCTURUS_KEY_B_C_WaterLaneC, \
+    ARCTURUS_KEY_B_C_WaterLaneD
+#define ARCTURUS_KEY_B_C_VaporLanes \
+    ARCTURUS_KEY_B_C_VaporLaneA, \
+    ARCTURUS_KEY_B_C_VaporLaneB, \
+    ARCTURUS_KEY_B_C_VaporLaneC, \
+    ARCTURUS_KEY_B_C_VaporLaneD
+#define ARCTURUS_KEY_B_C_FrostLanes \
+    ARCTURUS_KEY_B_C_FrostLaneA, \
+    ARCTURUS_KEY_B_C_FrostLaneB, \
+    ARCTURUS_KEY_B_C_FrostLaneC, \
+    ARCTURUS_KEY_B_C_FrostLaneD
+#define ARCTURUS_KEY_B_C_IceLanes \
+    ARCTURUS_KEY_B_C_IceLaneA, \
+    ARCTURUS_KEY_B_C_IceLaneB, \
+    ARCTURUS_KEY_B_C_IceLaneC, \
+    ARCTURUS_KEY_B_C_IceLaneD
+#define ARCTURUS_KEY_B_C \
+    { \
+        { ARCTURUS_KEY_B_C_ArcaneLanes }, \
+        { ARCTURUS_KEY_B_C_PlasmaLanes }, \
+        { ARCTURUS_KEY_B_C_RainbowLanes }, \
+        { ARCTURUS_KEY_B_C_WaterLanes }, \
+        { ARCTURUS_KEY_B_C_VaporLanes }, \
+        { ARCTURUS_KEY_B_C_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }
 
 // KEY_B_D
 #define ARCTURUS_KEY_B_D_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 6U))
@@ -2031,6 +2526,51 @@ public:
 #define ARCTURUS_KEY_B_D_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 8U))
 #define ARCTURUS_KEY_B_D_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 12U))
 #define ARCTURUS_KEY_B_D_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 2U))
+#define ARCTURUS_KEY_B_D_ArcaneLanes \
+    ARCTURUS_KEY_B_D_ArcaneLaneA, \
+    ARCTURUS_KEY_B_D_ArcaneLaneB, \
+    ARCTURUS_KEY_B_D_ArcaneLaneC, \
+    ARCTURUS_KEY_B_D_ArcaneLaneD
+#define ARCTURUS_KEY_B_D_PlasmaLanes \
+    ARCTURUS_KEY_B_D_PlasmaLaneA, \
+    ARCTURUS_KEY_B_D_PlasmaLaneB, \
+    ARCTURUS_KEY_B_D_PlasmaLaneC, \
+    ARCTURUS_KEY_B_D_PlasmaLaneD
+#define ARCTURUS_KEY_B_D_RainbowLanes \
+    ARCTURUS_KEY_B_D_RainbowLaneA, \
+    ARCTURUS_KEY_B_D_RainbowLaneB, \
+    ARCTURUS_KEY_B_D_RainbowLaneC, \
+    ARCTURUS_KEY_B_D_RainbowLaneD
+#define ARCTURUS_KEY_B_D_WaterLanes \
+    ARCTURUS_KEY_B_D_WaterLaneA, \
+    ARCTURUS_KEY_B_D_WaterLaneB, \
+    ARCTURUS_KEY_B_D_WaterLaneC, \
+    ARCTURUS_KEY_B_D_WaterLaneD
+#define ARCTURUS_KEY_B_D_VaporLanes \
+    ARCTURUS_KEY_B_D_VaporLaneA, \
+    ARCTURUS_KEY_B_D_VaporLaneB, \
+    ARCTURUS_KEY_B_D_VaporLaneC, \
+    ARCTURUS_KEY_B_D_VaporLaneD
+#define ARCTURUS_KEY_B_D_FrostLanes \
+    ARCTURUS_KEY_B_D_FrostLaneA, \
+    ARCTURUS_KEY_B_D_FrostLaneB, \
+    ARCTURUS_KEY_B_D_FrostLaneC, \
+    ARCTURUS_KEY_B_D_FrostLaneD
+#define ARCTURUS_KEY_B_D_IceLanes \
+    ARCTURUS_KEY_B_D_IceLaneA, \
+    ARCTURUS_KEY_B_D_IceLaneB, \
+    ARCTURUS_KEY_B_D_IceLaneC, \
+    ARCTURUS_KEY_B_D_IceLaneD
+#define ARCTURUS_KEY_B_D \
+    { \
+        { ARCTURUS_KEY_B_D_ArcaneLanes }, \
+        { ARCTURUS_KEY_B_D_PlasmaLanes }, \
+        { ARCTURUS_KEY_B_D_RainbowLanes }, \
+        { ARCTURUS_KEY_B_D_WaterLanes }, \
+        { ARCTURUS_KEY_B_D_VaporLanes }, \
+        { ARCTURUS_KEY_B_D_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }
 
 // KEY_B_E
 #define ARCTURUS_KEY_B_E_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 4U))
@@ -2149,6 +2689,51 @@ public:
 #define ARCTURUS_KEY_B_E_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 11U))
 #define ARCTURUS_KEY_B_E_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 4U))
 #define ARCTURUS_KEY_B_E_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 0U))
+#define ARCTURUS_KEY_B_E_ArcaneLanes \
+    ARCTURUS_KEY_B_E_ArcaneLaneA, \
+    ARCTURUS_KEY_B_E_ArcaneLaneB, \
+    ARCTURUS_KEY_B_E_ArcaneLaneC, \
+    ARCTURUS_KEY_B_E_ArcaneLaneD
+#define ARCTURUS_KEY_B_E_PlasmaLanes \
+    ARCTURUS_KEY_B_E_PlasmaLaneA, \
+    ARCTURUS_KEY_B_E_PlasmaLaneB, \
+    ARCTURUS_KEY_B_E_PlasmaLaneC, \
+    ARCTURUS_KEY_B_E_PlasmaLaneD
+#define ARCTURUS_KEY_B_E_RainbowLanes \
+    ARCTURUS_KEY_B_E_RainbowLaneA, \
+    ARCTURUS_KEY_B_E_RainbowLaneB, \
+    ARCTURUS_KEY_B_E_RainbowLaneC, \
+    ARCTURUS_KEY_B_E_RainbowLaneD
+#define ARCTURUS_KEY_B_E_WaterLanes \
+    ARCTURUS_KEY_B_E_WaterLaneA, \
+    ARCTURUS_KEY_B_E_WaterLaneB, \
+    ARCTURUS_KEY_B_E_WaterLaneC, \
+    ARCTURUS_KEY_B_E_WaterLaneD
+#define ARCTURUS_KEY_B_E_VaporLanes \
+    ARCTURUS_KEY_B_E_VaporLaneA, \
+    ARCTURUS_KEY_B_E_VaporLaneB, \
+    ARCTURUS_KEY_B_E_VaporLaneC, \
+    ARCTURUS_KEY_B_E_VaporLaneD
+#define ARCTURUS_KEY_B_E_FrostLanes \
+    ARCTURUS_KEY_B_E_FrostLaneA, \
+    ARCTURUS_KEY_B_E_FrostLaneB, \
+    ARCTURUS_KEY_B_E_FrostLaneC, \
+    ARCTURUS_KEY_B_E_FrostLaneD
+#define ARCTURUS_KEY_B_E_IceLanes \
+    ARCTURUS_KEY_B_E_IceLaneA, \
+    ARCTURUS_KEY_B_E_IceLaneB, \
+    ARCTURUS_KEY_B_E_IceLaneC, \
+    ARCTURUS_KEY_B_E_IceLaneD
+#define ARCTURUS_KEY_B_E \
+    { \
+        { ARCTURUS_KEY_B_E_ArcaneLanes }, \
+        { ARCTURUS_KEY_B_E_PlasmaLanes }, \
+        { ARCTURUS_KEY_B_E_RainbowLanes }, \
+        { ARCTURUS_KEY_B_E_WaterLanes }, \
+        { ARCTURUS_KEY_B_E_VaporLanes }, \
+        { ARCTURUS_KEY_B_E_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }
 
 // KEY_B_F
 #define ARCTURUS_KEY_B_F_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 7U))
@@ -2267,6 +2852,51 @@ public:
 #define ARCTURUS_KEY_B_F_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 7U))
 #define ARCTURUS_KEY_B_F_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 14U))
 #define ARCTURUS_KEY_B_F_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 8U))
+#define ARCTURUS_KEY_B_F_ArcaneLanes \
+    ARCTURUS_KEY_B_F_ArcaneLaneA, \
+    ARCTURUS_KEY_B_F_ArcaneLaneB, \
+    ARCTURUS_KEY_B_F_ArcaneLaneC, \
+    ARCTURUS_KEY_B_F_ArcaneLaneD
+#define ARCTURUS_KEY_B_F_PlasmaLanes \
+    ARCTURUS_KEY_B_F_PlasmaLaneA, \
+    ARCTURUS_KEY_B_F_PlasmaLaneB, \
+    ARCTURUS_KEY_B_F_PlasmaLaneC, \
+    ARCTURUS_KEY_B_F_PlasmaLaneD
+#define ARCTURUS_KEY_B_F_RainbowLanes \
+    ARCTURUS_KEY_B_F_RainbowLaneA, \
+    ARCTURUS_KEY_B_F_RainbowLaneB, \
+    ARCTURUS_KEY_B_F_RainbowLaneC, \
+    ARCTURUS_KEY_B_F_RainbowLaneD
+#define ARCTURUS_KEY_B_F_WaterLanes \
+    ARCTURUS_KEY_B_F_WaterLaneA, \
+    ARCTURUS_KEY_B_F_WaterLaneB, \
+    ARCTURUS_KEY_B_F_WaterLaneC, \
+    ARCTURUS_KEY_B_F_WaterLaneD
+#define ARCTURUS_KEY_B_F_VaporLanes \
+    ARCTURUS_KEY_B_F_VaporLaneA, \
+    ARCTURUS_KEY_B_F_VaporLaneB, \
+    ARCTURUS_KEY_B_F_VaporLaneC, \
+    ARCTURUS_KEY_B_F_VaporLaneD
+#define ARCTURUS_KEY_B_F_FrostLanes \
+    ARCTURUS_KEY_B_F_FrostLaneA, \
+    ARCTURUS_KEY_B_F_FrostLaneB, \
+    ARCTURUS_KEY_B_F_FrostLaneC, \
+    ARCTURUS_KEY_B_F_FrostLaneD
+#define ARCTURUS_KEY_B_F_IceLanes \
+    ARCTURUS_KEY_B_F_IceLaneA, \
+    ARCTURUS_KEY_B_F_IceLaneB, \
+    ARCTURUS_KEY_B_F_IceLaneC, \
+    ARCTURUS_KEY_B_F_IceLaneD
+#define ARCTURUS_KEY_B_F \
+    { \
+        { ARCTURUS_KEY_B_F_ArcaneLanes }, \
+        { ARCTURUS_KEY_B_F_PlasmaLanes }, \
+        { ARCTURUS_KEY_B_F_RainbowLanes }, \
+        { ARCTURUS_KEY_B_F_WaterLanes }, \
+        { ARCTURUS_KEY_B_F_VaporLanes }, \
+        { ARCTURUS_KEY_B_F_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }
 
 // KEY_B_G
 #define ARCTURUS_KEY_B_G_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 14U))
@@ -2385,6 +3015,51 @@ public:
 #define ARCTURUS_KEY_B_G_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 10U))
 #define ARCTURUS_KEY_B_G_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 6U))
 #define ARCTURUS_KEY_B_G_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 15U))
+#define ARCTURUS_KEY_B_G_ArcaneLanes \
+    ARCTURUS_KEY_B_G_ArcaneLaneA, \
+    ARCTURUS_KEY_B_G_ArcaneLaneB, \
+    ARCTURUS_KEY_B_G_ArcaneLaneC, \
+    ARCTURUS_KEY_B_G_ArcaneLaneD
+#define ARCTURUS_KEY_B_G_PlasmaLanes \
+    ARCTURUS_KEY_B_G_PlasmaLaneA, \
+    ARCTURUS_KEY_B_G_PlasmaLaneB, \
+    ARCTURUS_KEY_B_G_PlasmaLaneC, \
+    ARCTURUS_KEY_B_G_PlasmaLaneD
+#define ARCTURUS_KEY_B_G_RainbowLanes \
+    ARCTURUS_KEY_B_G_RainbowLaneA, \
+    ARCTURUS_KEY_B_G_RainbowLaneB, \
+    ARCTURUS_KEY_B_G_RainbowLaneC, \
+    ARCTURUS_KEY_B_G_RainbowLaneD
+#define ARCTURUS_KEY_B_G_WaterLanes \
+    ARCTURUS_KEY_B_G_WaterLaneA, \
+    ARCTURUS_KEY_B_G_WaterLaneB, \
+    ARCTURUS_KEY_B_G_WaterLaneC, \
+    ARCTURUS_KEY_B_G_WaterLaneD
+#define ARCTURUS_KEY_B_G_VaporLanes \
+    ARCTURUS_KEY_B_G_VaporLaneA, \
+    ARCTURUS_KEY_B_G_VaporLaneB, \
+    ARCTURUS_KEY_B_G_VaporLaneC, \
+    ARCTURUS_KEY_B_G_VaporLaneD
+#define ARCTURUS_KEY_B_G_FrostLanes \
+    ARCTURUS_KEY_B_G_FrostLaneA, \
+    ARCTURUS_KEY_B_G_FrostLaneB, \
+    ARCTURUS_KEY_B_G_FrostLaneC, \
+    ARCTURUS_KEY_B_G_FrostLaneD
+#define ARCTURUS_KEY_B_G_IceLanes \
+    ARCTURUS_KEY_B_G_IceLaneA, \
+    ARCTURUS_KEY_B_G_IceLaneB, \
+    ARCTURUS_KEY_B_G_IceLaneC, \
+    ARCTURUS_KEY_B_G_IceLaneD
+#define ARCTURUS_KEY_B_G \
+    { \
+        { ARCTURUS_KEY_B_G_ArcaneLanes }, \
+        { ARCTURUS_KEY_B_G_PlasmaLanes }, \
+        { ARCTURUS_KEY_B_G_RainbowLanes }, \
+        { ARCTURUS_KEY_B_G_WaterLanes }, \
+        { ARCTURUS_KEY_B_G_VaporLanes }, \
+        { ARCTURUS_KEY_B_G_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }
 
 // KEY_B_H
 #define ARCTURUS_KEY_B_H_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 15U))
@@ -2503,3 +3178,48 @@ public:
 #define ARCTURUS_KEY_B_H_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 0U))
 #define ARCTURUS_KEY_B_H_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 13U))
 #define ARCTURUS_KEY_B_H_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 3U))
+#define ARCTURUS_KEY_B_H_ArcaneLanes \
+    ARCTURUS_KEY_B_H_ArcaneLaneA, \
+    ARCTURUS_KEY_B_H_ArcaneLaneB, \
+    ARCTURUS_KEY_B_H_ArcaneLaneC, \
+    ARCTURUS_KEY_B_H_ArcaneLaneD
+#define ARCTURUS_KEY_B_H_PlasmaLanes \
+    ARCTURUS_KEY_B_H_PlasmaLaneA, \
+    ARCTURUS_KEY_B_H_PlasmaLaneB, \
+    ARCTURUS_KEY_B_H_PlasmaLaneC, \
+    ARCTURUS_KEY_B_H_PlasmaLaneD
+#define ARCTURUS_KEY_B_H_RainbowLanes \
+    ARCTURUS_KEY_B_H_RainbowLaneA, \
+    ARCTURUS_KEY_B_H_RainbowLaneB, \
+    ARCTURUS_KEY_B_H_RainbowLaneC, \
+    ARCTURUS_KEY_B_H_RainbowLaneD
+#define ARCTURUS_KEY_B_H_WaterLanes \
+    ARCTURUS_KEY_B_H_WaterLaneA, \
+    ARCTURUS_KEY_B_H_WaterLaneB, \
+    ARCTURUS_KEY_B_H_WaterLaneC, \
+    ARCTURUS_KEY_B_H_WaterLaneD
+#define ARCTURUS_KEY_B_H_VaporLanes \
+    ARCTURUS_KEY_B_H_VaporLaneA, \
+    ARCTURUS_KEY_B_H_VaporLaneB, \
+    ARCTURUS_KEY_B_H_VaporLaneC, \
+    ARCTURUS_KEY_B_H_VaporLaneD
+#define ARCTURUS_KEY_B_H_FrostLanes \
+    ARCTURUS_KEY_B_H_FrostLaneA, \
+    ARCTURUS_KEY_B_H_FrostLaneB, \
+    ARCTURUS_KEY_B_H_FrostLaneC, \
+    ARCTURUS_KEY_B_H_FrostLaneD
+#define ARCTURUS_KEY_B_H_IceLanes \
+    ARCTURUS_KEY_B_H_IceLaneA, \
+    ARCTURUS_KEY_B_H_IceLaneB, \
+    ARCTURUS_KEY_B_H_IceLaneC, \
+    ARCTURUS_KEY_B_H_IceLaneD
+#define ARCTURUS_KEY_B_H \
+    { \
+        { ARCTURUS_KEY_B_H_ArcaneLanes }, \
+        { ARCTURUS_KEY_B_H_PlasmaLanes }, \
+        { ARCTURUS_KEY_B_H_RainbowLanes }, \
+        { ARCTURUS_KEY_B_H_WaterLanes }, \
+        { ARCTURUS_KEY_B_H_VaporLanes }, \
+        { ARCTURUS_KEY_B_H_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }

@@ -733,6 +733,51 @@ public:
 #define MIMOSA_KEY_A_A_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 4U))
 #define MIMOSA_KEY_A_A_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 7U))
 #define MIMOSA_KEY_A_A_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 13U))
+#define MIMOSA_KEY_A_A_ArcaneLanes \
+    MIMOSA_KEY_A_A_ArcaneLaneA, \
+    MIMOSA_KEY_A_A_ArcaneLaneB, \
+    MIMOSA_KEY_A_A_ArcaneLaneC, \
+    MIMOSA_KEY_A_A_ArcaneLaneD
+#define MIMOSA_KEY_A_A_PlasmaLanes \
+    MIMOSA_KEY_A_A_PlasmaLaneA, \
+    MIMOSA_KEY_A_A_PlasmaLaneB, \
+    MIMOSA_KEY_A_A_PlasmaLaneC, \
+    MIMOSA_KEY_A_A_PlasmaLaneD
+#define MIMOSA_KEY_A_A_RainbowLanes \
+    MIMOSA_KEY_A_A_RainbowLaneA, \
+    MIMOSA_KEY_A_A_RainbowLaneB, \
+    MIMOSA_KEY_A_A_RainbowLaneC, \
+    MIMOSA_KEY_A_A_RainbowLaneD
+#define MIMOSA_KEY_A_A_WaterLanes \
+    MIMOSA_KEY_A_A_WaterLaneA, \
+    MIMOSA_KEY_A_A_WaterLaneB, \
+    MIMOSA_KEY_A_A_WaterLaneC, \
+    MIMOSA_KEY_A_A_WaterLaneD
+#define MIMOSA_KEY_A_A_VaporLanes \
+    MIMOSA_KEY_A_A_VaporLaneA, \
+    MIMOSA_KEY_A_A_VaporLaneB, \
+    MIMOSA_KEY_A_A_VaporLaneC, \
+    MIMOSA_KEY_A_A_VaporLaneD
+#define MIMOSA_KEY_A_A_FrostLanes \
+    MIMOSA_KEY_A_A_FrostLaneA, \
+    MIMOSA_KEY_A_A_FrostLaneB, \
+    MIMOSA_KEY_A_A_FrostLaneC, \
+    MIMOSA_KEY_A_A_FrostLaneD
+#define MIMOSA_KEY_A_A_IceLanes \
+    MIMOSA_KEY_A_A_IceLaneA, \
+    MIMOSA_KEY_A_A_IceLaneB, \
+    MIMOSA_KEY_A_A_IceLaneC, \
+    MIMOSA_KEY_A_A_IceLaneD
+#define MIMOSA_KEY_A_A \
+    { \
+        { MIMOSA_KEY_A_A_ArcaneLanes }, \
+        { MIMOSA_KEY_A_A_PlasmaLanes }, \
+        { MIMOSA_KEY_A_A_RainbowLanes }, \
+        { MIMOSA_KEY_A_A_WaterLanes }, \
+        { MIMOSA_KEY_A_A_VaporLanes }, \
+        { MIMOSA_KEY_A_A_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_A_B
 #define MIMOSA_KEY_A_B_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 2U))
@@ -851,6 +896,51 @@ public:
 #define MIMOSA_KEY_A_B_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 5U))
 #define MIMOSA_KEY_A_B_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 3U))
 #define MIMOSA_KEY_A_B_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 4U))
+#define MIMOSA_KEY_A_B_ArcaneLanes \
+    MIMOSA_KEY_A_B_ArcaneLaneA, \
+    MIMOSA_KEY_A_B_ArcaneLaneB, \
+    MIMOSA_KEY_A_B_ArcaneLaneC, \
+    MIMOSA_KEY_A_B_ArcaneLaneD
+#define MIMOSA_KEY_A_B_PlasmaLanes \
+    MIMOSA_KEY_A_B_PlasmaLaneA, \
+    MIMOSA_KEY_A_B_PlasmaLaneB, \
+    MIMOSA_KEY_A_B_PlasmaLaneC, \
+    MIMOSA_KEY_A_B_PlasmaLaneD
+#define MIMOSA_KEY_A_B_RainbowLanes \
+    MIMOSA_KEY_A_B_RainbowLaneA, \
+    MIMOSA_KEY_A_B_RainbowLaneB, \
+    MIMOSA_KEY_A_B_RainbowLaneC, \
+    MIMOSA_KEY_A_B_RainbowLaneD
+#define MIMOSA_KEY_A_B_WaterLanes \
+    MIMOSA_KEY_A_B_WaterLaneA, \
+    MIMOSA_KEY_A_B_WaterLaneB, \
+    MIMOSA_KEY_A_B_WaterLaneC, \
+    MIMOSA_KEY_A_B_WaterLaneD
+#define MIMOSA_KEY_A_B_VaporLanes \
+    MIMOSA_KEY_A_B_VaporLaneA, \
+    MIMOSA_KEY_A_B_VaporLaneB, \
+    MIMOSA_KEY_A_B_VaporLaneC, \
+    MIMOSA_KEY_A_B_VaporLaneD
+#define MIMOSA_KEY_A_B_FrostLanes \
+    MIMOSA_KEY_A_B_FrostLaneA, \
+    MIMOSA_KEY_A_B_FrostLaneB, \
+    MIMOSA_KEY_A_B_FrostLaneC, \
+    MIMOSA_KEY_A_B_FrostLaneD
+#define MIMOSA_KEY_A_B_IceLanes \
+    MIMOSA_KEY_A_B_IceLaneA, \
+    MIMOSA_KEY_A_B_IceLaneB, \
+    MIMOSA_KEY_A_B_IceLaneC, \
+    MIMOSA_KEY_A_B_IceLaneD
+#define MIMOSA_KEY_A_B \
+    { \
+        { MIMOSA_KEY_A_B_ArcaneLanes }, \
+        { MIMOSA_KEY_A_B_PlasmaLanes }, \
+        { MIMOSA_KEY_A_B_RainbowLanes }, \
+        { MIMOSA_KEY_A_B_WaterLanes }, \
+        { MIMOSA_KEY_A_B_VaporLanes }, \
+        { MIMOSA_KEY_A_B_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_A_C
 #define MIMOSA_KEY_A_C_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 4U))
@@ -969,6 +1059,51 @@ public:
 #define MIMOSA_KEY_A_C_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 12U))
 #define MIMOSA_KEY_A_C_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 15U))
 #define MIMOSA_KEY_A_C_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 9U))
+#define MIMOSA_KEY_A_C_ArcaneLanes \
+    MIMOSA_KEY_A_C_ArcaneLaneA, \
+    MIMOSA_KEY_A_C_ArcaneLaneB, \
+    MIMOSA_KEY_A_C_ArcaneLaneC, \
+    MIMOSA_KEY_A_C_ArcaneLaneD
+#define MIMOSA_KEY_A_C_PlasmaLanes \
+    MIMOSA_KEY_A_C_PlasmaLaneA, \
+    MIMOSA_KEY_A_C_PlasmaLaneB, \
+    MIMOSA_KEY_A_C_PlasmaLaneC, \
+    MIMOSA_KEY_A_C_PlasmaLaneD
+#define MIMOSA_KEY_A_C_RainbowLanes \
+    MIMOSA_KEY_A_C_RainbowLaneA, \
+    MIMOSA_KEY_A_C_RainbowLaneB, \
+    MIMOSA_KEY_A_C_RainbowLaneC, \
+    MIMOSA_KEY_A_C_RainbowLaneD
+#define MIMOSA_KEY_A_C_WaterLanes \
+    MIMOSA_KEY_A_C_WaterLaneA, \
+    MIMOSA_KEY_A_C_WaterLaneB, \
+    MIMOSA_KEY_A_C_WaterLaneC, \
+    MIMOSA_KEY_A_C_WaterLaneD
+#define MIMOSA_KEY_A_C_VaporLanes \
+    MIMOSA_KEY_A_C_VaporLaneA, \
+    MIMOSA_KEY_A_C_VaporLaneB, \
+    MIMOSA_KEY_A_C_VaporLaneC, \
+    MIMOSA_KEY_A_C_VaporLaneD
+#define MIMOSA_KEY_A_C_FrostLanes \
+    MIMOSA_KEY_A_C_FrostLaneA, \
+    MIMOSA_KEY_A_C_FrostLaneB, \
+    MIMOSA_KEY_A_C_FrostLaneC, \
+    MIMOSA_KEY_A_C_FrostLaneD
+#define MIMOSA_KEY_A_C_IceLanes \
+    MIMOSA_KEY_A_C_IceLaneA, \
+    MIMOSA_KEY_A_C_IceLaneB, \
+    MIMOSA_KEY_A_C_IceLaneC, \
+    MIMOSA_KEY_A_C_IceLaneD
+#define MIMOSA_KEY_A_C \
+    { \
+        { MIMOSA_KEY_A_C_ArcaneLanes }, \
+        { MIMOSA_KEY_A_C_PlasmaLanes }, \
+        { MIMOSA_KEY_A_C_RainbowLanes }, \
+        { MIMOSA_KEY_A_C_WaterLanes }, \
+        { MIMOSA_KEY_A_C_VaporLanes }, \
+        { MIMOSA_KEY_A_C_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_A_D
 #define MIMOSA_KEY_A_D_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 10U))
@@ -1087,6 +1222,51 @@ public:
 #define MIMOSA_KEY_A_D_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 9U))
 #define MIMOSA_KEY_A_D_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 11U))
 #define MIMOSA_KEY_A_D_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 6U))
+#define MIMOSA_KEY_A_D_ArcaneLanes \
+    MIMOSA_KEY_A_D_ArcaneLaneA, \
+    MIMOSA_KEY_A_D_ArcaneLaneB, \
+    MIMOSA_KEY_A_D_ArcaneLaneC, \
+    MIMOSA_KEY_A_D_ArcaneLaneD
+#define MIMOSA_KEY_A_D_PlasmaLanes \
+    MIMOSA_KEY_A_D_PlasmaLaneA, \
+    MIMOSA_KEY_A_D_PlasmaLaneB, \
+    MIMOSA_KEY_A_D_PlasmaLaneC, \
+    MIMOSA_KEY_A_D_PlasmaLaneD
+#define MIMOSA_KEY_A_D_RainbowLanes \
+    MIMOSA_KEY_A_D_RainbowLaneA, \
+    MIMOSA_KEY_A_D_RainbowLaneB, \
+    MIMOSA_KEY_A_D_RainbowLaneC, \
+    MIMOSA_KEY_A_D_RainbowLaneD
+#define MIMOSA_KEY_A_D_WaterLanes \
+    MIMOSA_KEY_A_D_WaterLaneA, \
+    MIMOSA_KEY_A_D_WaterLaneB, \
+    MIMOSA_KEY_A_D_WaterLaneC, \
+    MIMOSA_KEY_A_D_WaterLaneD
+#define MIMOSA_KEY_A_D_VaporLanes \
+    MIMOSA_KEY_A_D_VaporLaneA, \
+    MIMOSA_KEY_A_D_VaporLaneB, \
+    MIMOSA_KEY_A_D_VaporLaneC, \
+    MIMOSA_KEY_A_D_VaporLaneD
+#define MIMOSA_KEY_A_D_FrostLanes \
+    MIMOSA_KEY_A_D_FrostLaneA, \
+    MIMOSA_KEY_A_D_FrostLaneB, \
+    MIMOSA_KEY_A_D_FrostLaneC, \
+    MIMOSA_KEY_A_D_FrostLaneD
+#define MIMOSA_KEY_A_D_IceLanes \
+    MIMOSA_KEY_A_D_IceLaneA, \
+    MIMOSA_KEY_A_D_IceLaneB, \
+    MIMOSA_KEY_A_D_IceLaneC, \
+    MIMOSA_KEY_A_D_IceLaneD
+#define MIMOSA_KEY_A_D \
+    { \
+        { MIMOSA_KEY_A_D_ArcaneLanes }, \
+        { MIMOSA_KEY_A_D_PlasmaLanes }, \
+        { MIMOSA_KEY_A_D_RainbowLanes }, \
+        { MIMOSA_KEY_A_D_WaterLanes }, \
+        { MIMOSA_KEY_A_D_VaporLanes }, \
+        { MIMOSA_KEY_A_D_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_A_E
 #define MIMOSA_KEY_A_E_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 1U))
@@ -1205,6 +1385,51 @@ public:
 #define MIMOSA_KEY_A_E_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 6U))
 #define MIMOSA_KEY_A_E_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 0U))
 #define MIMOSA_KEY_A_E_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 5U))
+#define MIMOSA_KEY_A_E_ArcaneLanes \
+    MIMOSA_KEY_A_E_ArcaneLaneA, \
+    MIMOSA_KEY_A_E_ArcaneLaneB, \
+    MIMOSA_KEY_A_E_ArcaneLaneC, \
+    MIMOSA_KEY_A_E_ArcaneLaneD
+#define MIMOSA_KEY_A_E_PlasmaLanes \
+    MIMOSA_KEY_A_E_PlasmaLaneA, \
+    MIMOSA_KEY_A_E_PlasmaLaneB, \
+    MIMOSA_KEY_A_E_PlasmaLaneC, \
+    MIMOSA_KEY_A_E_PlasmaLaneD
+#define MIMOSA_KEY_A_E_RainbowLanes \
+    MIMOSA_KEY_A_E_RainbowLaneA, \
+    MIMOSA_KEY_A_E_RainbowLaneB, \
+    MIMOSA_KEY_A_E_RainbowLaneC, \
+    MIMOSA_KEY_A_E_RainbowLaneD
+#define MIMOSA_KEY_A_E_WaterLanes \
+    MIMOSA_KEY_A_E_WaterLaneA, \
+    MIMOSA_KEY_A_E_WaterLaneB, \
+    MIMOSA_KEY_A_E_WaterLaneC, \
+    MIMOSA_KEY_A_E_WaterLaneD
+#define MIMOSA_KEY_A_E_VaporLanes \
+    MIMOSA_KEY_A_E_VaporLaneA, \
+    MIMOSA_KEY_A_E_VaporLaneB, \
+    MIMOSA_KEY_A_E_VaporLaneC, \
+    MIMOSA_KEY_A_E_VaporLaneD
+#define MIMOSA_KEY_A_E_FrostLanes \
+    MIMOSA_KEY_A_E_FrostLaneA, \
+    MIMOSA_KEY_A_E_FrostLaneB, \
+    MIMOSA_KEY_A_E_FrostLaneC, \
+    MIMOSA_KEY_A_E_FrostLaneD
+#define MIMOSA_KEY_A_E_IceLanes \
+    MIMOSA_KEY_A_E_IceLaneA, \
+    MIMOSA_KEY_A_E_IceLaneB, \
+    MIMOSA_KEY_A_E_IceLaneC, \
+    MIMOSA_KEY_A_E_IceLaneD
+#define MIMOSA_KEY_A_E \
+    { \
+        { MIMOSA_KEY_A_E_ArcaneLanes }, \
+        { MIMOSA_KEY_A_E_PlasmaLanes }, \
+        { MIMOSA_KEY_A_E_RainbowLanes }, \
+        { MIMOSA_KEY_A_E_WaterLanes }, \
+        { MIMOSA_KEY_A_E_VaporLanes }, \
+        { MIMOSA_KEY_A_E_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_A_F
 #define MIMOSA_KEY_A_F_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 9U))
@@ -1323,6 +1548,51 @@ public:
 #define MIMOSA_KEY_A_F_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 14U))
 #define MIMOSA_KEY_A_F_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 10U))
 #define MIMOSA_KEY_A_F_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 12U))
+#define MIMOSA_KEY_A_F_ArcaneLanes \
+    MIMOSA_KEY_A_F_ArcaneLaneA, \
+    MIMOSA_KEY_A_F_ArcaneLaneB, \
+    MIMOSA_KEY_A_F_ArcaneLaneC, \
+    MIMOSA_KEY_A_F_ArcaneLaneD
+#define MIMOSA_KEY_A_F_PlasmaLanes \
+    MIMOSA_KEY_A_F_PlasmaLaneA, \
+    MIMOSA_KEY_A_F_PlasmaLaneB, \
+    MIMOSA_KEY_A_F_PlasmaLaneC, \
+    MIMOSA_KEY_A_F_PlasmaLaneD
+#define MIMOSA_KEY_A_F_RainbowLanes \
+    MIMOSA_KEY_A_F_RainbowLaneA, \
+    MIMOSA_KEY_A_F_RainbowLaneB, \
+    MIMOSA_KEY_A_F_RainbowLaneC, \
+    MIMOSA_KEY_A_F_RainbowLaneD
+#define MIMOSA_KEY_A_F_WaterLanes \
+    MIMOSA_KEY_A_F_WaterLaneA, \
+    MIMOSA_KEY_A_F_WaterLaneB, \
+    MIMOSA_KEY_A_F_WaterLaneC, \
+    MIMOSA_KEY_A_F_WaterLaneD
+#define MIMOSA_KEY_A_F_VaporLanes \
+    MIMOSA_KEY_A_F_VaporLaneA, \
+    MIMOSA_KEY_A_F_VaporLaneB, \
+    MIMOSA_KEY_A_F_VaporLaneC, \
+    MIMOSA_KEY_A_F_VaporLaneD
+#define MIMOSA_KEY_A_F_FrostLanes \
+    MIMOSA_KEY_A_F_FrostLaneA, \
+    MIMOSA_KEY_A_F_FrostLaneB, \
+    MIMOSA_KEY_A_F_FrostLaneC, \
+    MIMOSA_KEY_A_F_FrostLaneD
+#define MIMOSA_KEY_A_F_IceLanes \
+    MIMOSA_KEY_A_F_IceLaneA, \
+    MIMOSA_KEY_A_F_IceLaneB, \
+    MIMOSA_KEY_A_F_IceLaneC, \
+    MIMOSA_KEY_A_F_IceLaneD
+#define MIMOSA_KEY_A_F \
+    { \
+        { MIMOSA_KEY_A_F_ArcaneLanes }, \
+        { MIMOSA_KEY_A_F_PlasmaLanes }, \
+        { MIMOSA_KEY_A_F_RainbowLanes }, \
+        { MIMOSA_KEY_A_F_WaterLanes }, \
+        { MIMOSA_KEY_A_F_VaporLanes }, \
+        { MIMOSA_KEY_A_F_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_A_G
 #define MIMOSA_KEY_A_G_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 15U))
@@ -1441,6 +1711,51 @@ public:
 #define MIMOSA_KEY_A_G_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 1U))
 #define MIMOSA_KEY_A_G_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 2U))
 #define MIMOSA_KEY_A_G_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 14U))
+#define MIMOSA_KEY_A_G_ArcaneLanes \
+    MIMOSA_KEY_A_G_ArcaneLaneA, \
+    MIMOSA_KEY_A_G_ArcaneLaneB, \
+    MIMOSA_KEY_A_G_ArcaneLaneC, \
+    MIMOSA_KEY_A_G_ArcaneLaneD
+#define MIMOSA_KEY_A_G_PlasmaLanes \
+    MIMOSA_KEY_A_G_PlasmaLaneA, \
+    MIMOSA_KEY_A_G_PlasmaLaneB, \
+    MIMOSA_KEY_A_G_PlasmaLaneC, \
+    MIMOSA_KEY_A_G_PlasmaLaneD
+#define MIMOSA_KEY_A_G_RainbowLanes \
+    MIMOSA_KEY_A_G_RainbowLaneA, \
+    MIMOSA_KEY_A_G_RainbowLaneB, \
+    MIMOSA_KEY_A_G_RainbowLaneC, \
+    MIMOSA_KEY_A_G_RainbowLaneD
+#define MIMOSA_KEY_A_G_WaterLanes \
+    MIMOSA_KEY_A_G_WaterLaneA, \
+    MIMOSA_KEY_A_G_WaterLaneB, \
+    MIMOSA_KEY_A_G_WaterLaneC, \
+    MIMOSA_KEY_A_G_WaterLaneD
+#define MIMOSA_KEY_A_G_VaporLanes \
+    MIMOSA_KEY_A_G_VaporLaneA, \
+    MIMOSA_KEY_A_G_VaporLaneB, \
+    MIMOSA_KEY_A_G_VaporLaneC, \
+    MIMOSA_KEY_A_G_VaporLaneD
+#define MIMOSA_KEY_A_G_FrostLanes \
+    MIMOSA_KEY_A_G_FrostLaneA, \
+    MIMOSA_KEY_A_G_FrostLaneB, \
+    MIMOSA_KEY_A_G_FrostLaneC, \
+    MIMOSA_KEY_A_G_FrostLaneD
+#define MIMOSA_KEY_A_G_IceLanes \
+    MIMOSA_KEY_A_G_IceLaneA, \
+    MIMOSA_KEY_A_G_IceLaneB, \
+    MIMOSA_KEY_A_G_IceLaneC, \
+    MIMOSA_KEY_A_G_IceLaneD
+#define MIMOSA_KEY_A_G \
+    { \
+        { MIMOSA_KEY_A_G_ArcaneLanes }, \
+        { MIMOSA_KEY_A_G_PlasmaLanes }, \
+        { MIMOSA_KEY_A_G_RainbowLanes }, \
+        { MIMOSA_KEY_A_G_WaterLanes }, \
+        { MIMOSA_KEY_A_G_VaporLanes }, \
+        { MIMOSA_KEY_A_G_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_A_H
 #define MIMOSA_KEY_A_H_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 12U))
@@ -1559,6 +1874,51 @@ public:
 #define MIMOSA_KEY_A_H_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 0U))
 #define MIMOSA_KEY_A_H_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 13U))
 #define MIMOSA_KEY_A_H_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 3U))
+#define MIMOSA_KEY_A_H_ArcaneLanes \
+    MIMOSA_KEY_A_H_ArcaneLaneA, \
+    MIMOSA_KEY_A_H_ArcaneLaneB, \
+    MIMOSA_KEY_A_H_ArcaneLaneC, \
+    MIMOSA_KEY_A_H_ArcaneLaneD
+#define MIMOSA_KEY_A_H_PlasmaLanes \
+    MIMOSA_KEY_A_H_PlasmaLaneA, \
+    MIMOSA_KEY_A_H_PlasmaLaneB, \
+    MIMOSA_KEY_A_H_PlasmaLaneC, \
+    MIMOSA_KEY_A_H_PlasmaLaneD
+#define MIMOSA_KEY_A_H_RainbowLanes \
+    MIMOSA_KEY_A_H_RainbowLaneA, \
+    MIMOSA_KEY_A_H_RainbowLaneB, \
+    MIMOSA_KEY_A_H_RainbowLaneC, \
+    MIMOSA_KEY_A_H_RainbowLaneD
+#define MIMOSA_KEY_A_H_WaterLanes \
+    MIMOSA_KEY_A_H_WaterLaneA, \
+    MIMOSA_KEY_A_H_WaterLaneB, \
+    MIMOSA_KEY_A_H_WaterLaneC, \
+    MIMOSA_KEY_A_H_WaterLaneD
+#define MIMOSA_KEY_A_H_VaporLanes \
+    MIMOSA_KEY_A_H_VaporLaneA, \
+    MIMOSA_KEY_A_H_VaporLaneB, \
+    MIMOSA_KEY_A_H_VaporLaneC, \
+    MIMOSA_KEY_A_H_VaporLaneD
+#define MIMOSA_KEY_A_H_FrostLanes \
+    MIMOSA_KEY_A_H_FrostLaneA, \
+    MIMOSA_KEY_A_H_FrostLaneB, \
+    MIMOSA_KEY_A_H_FrostLaneC, \
+    MIMOSA_KEY_A_H_FrostLaneD
+#define MIMOSA_KEY_A_H_IceLanes \
+    MIMOSA_KEY_A_H_IceLaneA, \
+    MIMOSA_KEY_A_H_IceLaneB, \
+    MIMOSA_KEY_A_H_IceLaneC, \
+    MIMOSA_KEY_A_H_IceLaneD
+#define MIMOSA_KEY_A_H \
+    { \
+        { MIMOSA_KEY_A_H_ArcaneLanes }, \
+        { MIMOSA_KEY_A_H_PlasmaLanes }, \
+        { MIMOSA_KEY_A_H_RainbowLanes }, \
+        { MIMOSA_KEY_A_H_WaterLanes }, \
+        { MIMOSA_KEY_A_H_VaporLanes }, \
+        { MIMOSA_KEY_A_H_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_B_A
 #define MIMOSA_KEY_B_A_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 8U))
@@ -1677,6 +2037,51 @@ public:
 #define MIMOSA_KEY_B_A_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 8U))
 #define MIMOSA_KEY_B_A_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 12U))
 #define MIMOSA_KEY_B_A_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 2U))
+#define MIMOSA_KEY_B_A_ArcaneLanes \
+    MIMOSA_KEY_B_A_ArcaneLaneA, \
+    MIMOSA_KEY_B_A_ArcaneLaneB, \
+    MIMOSA_KEY_B_A_ArcaneLaneC, \
+    MIMOSA_KEY_B_A_ArcaneLaneD
+#define MIMOSA_KEY_B_A_PlasmaLanes \
+    MIMOSA_KEY_B_A_PlasmaLaneA, \
+    MIMOSA_KEY_B_A_PlasmaLaneB, \
+    MIMOSA_KEY_B_A_PlasmaLaneC, \
+    MIMOSA_KEY_B_A_PlasmaLaneD
+#define MIMOSA_KEY_B_A_RainbowLanes \
+    MIMOSA_KEY_B_A_RainbowLaneA, \
+    MIMOSA_KEY_B_A_RainbowLaneB, \
+    MIMOSA_KEY_B_A_RainbowLaneC, \
+    MIMOSA_KEY_B_A_RainbowLaneD
+#define MIMOSA_KEY_B_A_WaterLanes \
+    MIMOSA_KEY_B_A_WaterLaneA, \
+    MIMOSA_KEY_B_A_WaterLaneB, \
+    MIMOSA_KEY_B_A_WaterLaneC, \
+    MIMOSA_KEY_B_A_WaterLaneD
+#define MIMOSA_KEY_B_A_VaporLanes \
+    MIMOSA_KEY_B_A_VaporLaneA, \
+    MIMOSA_KEY_B_A_VaporLaneB, \
+    MIMOSA_KEY_B_A_VaporLaneC, \
+    MIMOSA_KEY_B_A_VaporLaneD
+#define MIMOSA_KEY_B_A_FrostLanes \
+    MIMOSA_KEY_B_A_FrostLaneA, \
+    MIMOSA_KEY_B_A_FrostLaneB, \
+    MIMOSA_KEY_B_A_FrostLaneC, \
+    MIMOSA_KEY_B_A_FrostLaneD
+#define MIMOSA_KEY_B_A_IceLanes \
+    MIMOSA_KEY_B_A_IceLaneA, \
+    MIMOSA_KEY_B_A_IceLaneB, \
+    MIMOSA_KEY_B_A_IceLaneC, \
+    MIMOSA_KEY_B_A_IceLaneD
+#define MIMOSA_KEY_B_A \
+    { \
+        { MIMOSA_KEY_B_A_ArcaneLanes }, \
+        { MIMOSA_KEY_B_A_PlasmaLanes }, \
+        { MIMOSA_KEY_B_A_RainbowLanes }, \
+        { MIMOSA_KEY_B_A_WaterLanes }, \
+        { MIMOSA_KEY_B_A_VaporLanes }, \
+        { MIMOSA_KEY_B_A_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }
 
 // KEY_B_B
 #define MIMOSA_KEY_B_B_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 11U))
@@ -1795,6 +2200,51 @@ public:
 #define MIMOSA_KEY_B_B_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 13U))
 #define MIMOSA_KEY_B_B_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 8U))
 #define MIMOSA_KEY_B_B_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 1U))
+#define MIMOSA_KEY_B_B_ArcaneLanes \
+    MIMOSA_KEY_B_B_ArcaneLaneA, \
+    MIMOSA_KEY_B_B_ArcaneLaneB, \
+    MIMOSA_KEY_B_B_ArcaneLaneC, \
+    MIMOSA_KEY_B_B_ArcaneLaneD
+#define MIMOSA_KEY_B_B_PlasmaLanes \
+    MIMOSA_KEY_B_B_PlasmaLaneA, \
+    MIMOSA_KEY_B_B_PlasmaLaneB, \
+    MIMOSA_KEY_B_B_PlasmaLaneC, \
+    MIMOSA_KEY_B_B_PlasmaLaneD
+#define MIMOSA_KEY_B_B_RainbowLanes \
+    MIMOSA_KEY_B_B_RainbowLaneA, \
+    MIMOSA_KEY_B_B_RainbowLaneB, \
+    MIMOSA_KEY_B_B_RainbowLaneC, \
+    MIMOSA_KEY_B_B_RainbowLaneD
+#define MIMOSA_KEY_B_B_WaterLanes \
+    MIMOSA_KEY_B_B_WaterLaneA, \
+    MIMOSA_KEY_B_B_WaterLaneB, \
+    MIMOSA_KEY_B_B_WaterLaneC, \
+    MIMOSA_KEY_B_B_WaterLaneD
+#define MIMOSA_KEY_B_B_VaporLanes \
+    MIMOSA_KEY_B_B_VaporLaneA, \
+    MIMOSA_KEY_B_B_VaporLaneB, \
+    MIMOSA_KEY_B_B_VaporLaneC, \
+    MIMOSA_KEY_B_B_VaporLaneD
+#define MIMOSA_KEY_B_B_FrostLanes \
+    MIMOSA_KEY_B_B_FrostLaneA, \
+    MIMOSA_KEY_B_B_FrostLaneB, \
+    MIMOSA_KEY_B_B_FrostLaneC, \
+    MIMOSA_KEY_B_B_FrostLaneD
+#define MIMOSA_KEY_B_B_IceLanes \
+    MIMOSA_KEY_B_B_IceLaneA, \
+    MIMOSA_KEY_B_B_IceLaneB, \
+    MIMOSA_KEY_B_B_IceLaneC, \
+    MIMOSA_KEY_B_B_IceLaneD
+#define MIMOSA_KEY_B_B \
+    { \
+        { MIMOSA_KEY_B_B_ArcaneLanes }, \
+        { MIMOSA_KEY_B_B_PlasmaLanes }, \
+        { MIMOSA_KEY_B_B_RainbowLanes }, \
+        { MIMOSA_KEY_B_B_WaterLanes }, \
+        { MIMOSA_KEY_B_B_VaporLanes }, \
+        { MIMOSA_KEY_B_B_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }
 
 // KEY_B_C
 #define MIMOSA_KEY_B_C_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 7U))
@@ -1913,6 +2363,51 @@ public:
 #define MIMOSA_KEY_B_C_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 15U))
 #define MIMOSA_KEY_B_C_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 5U))
 #define MIMOSA_KEY_B_C_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 11U))
+#define MIMOSA_KEY_B_C_ArcaneLanes \
+    MIMOSA_KEY_B_C_ArcaneLaneA, \
+    MIMOSA_KEY_B_C_ArcaneLaneB, \
+    MIMOSA_KEY_B_C_ArcaneLaneC, \
+    MIMOSA_KEY_B_C_ArcaneLaneD
+#define MIMOSA_KEY_B_C_PlasmaLanes \
+    MIMOSA_KEY_B_C_PlasmaLaneA, \
+    MIMOSA_KEY_B_C_PlasmaLaneB, \
+    MIMOSA_KEY_B_C_PlasmaLaneC, \
+    MIMOSA_KEY_B_C_PlasmaLaneD
+#define MIMOSA_KEY_B_C_RainbowLanes \
+    MIMOSA_KEY_B_C_RainbowLaneA, \
+    MIMOSA_KEY_B_C_RainbowLaneB, \
+    MIMOSA_KEY_B_C_RainbowLaneC, \
+    MIMOSA_KEY_B_C_RainbowLaneD
+#define MIMOSA_KEY_B_C_WaterLanes \
+    MIMOSA_KEY_B_C_WaterLaneA, \
+    MIMOSA_KEY_B_C_WaterLaneB, \
+    MIMOSA_KEY_B_C_WaterLaneC, \
+    MIMOSA_KEY_B_C_WaterLaneD
+#define MIMOSA_KEY_B_C_VaporLanes \
+    MIMOSA_KEY_B_C_VaporLaneA, \
+    MIMOSA_KEY_B_C_VaporLaneB, \
+    MIMOSA_KEY_B_C_VaporLaneC, \
+    MIMOSA_KEY_B_C_VaporLaneD
+#define MIMOSA_KEY_B_C_FrostLanes \
+    MIMOSA_KEY_B_C_FrostLaneA, \
+    MIMOSA_KEY_B_C_FrostLaneB, \
+    MIMOSA_KEY_B_C_FrostLaneC, \
+    MIMOSA_KEY_B_C_FrostLaneD
+#define MIMOSA_KEY_B_C_IceLanes \
+    MIMOSA_KEY_B_C_IceLaneA, \
+    MIMOSA_KEY_B_C_IceLaneB, \
+    MIMOSA_KEY_B_C_IceLaneC, \
+    MIMOSA_KEY_B_C_IceLaneD
+#define MIMOSA_KEY_B_C \
+    { \
+        { MIMOSA_KEY_B_C_ArcaneLanes }, \
+        { MIMOSA_KEY_B_C_PlasmaLanes }, \
+        { MIMOSA_KEY_B_C_RainbowLanes }, \
+        { MIMOSA_KEY_B_C_WaterLanes }, \
+        { MIMOSA_KEY_B_C_VaporLanes }, \
+        { MIMOSA_KEY_B_C_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }
 
 // KEY_B_D
 #define MIMOSA_KEY_B_D_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 14U))
@@ -2031,6 +2526,51 @@ public:
 #define MIMOSA_KEY_B_D_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 10U))
 #define MIMOSA_KEY_B_D_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 6U))
 #define MIMOSA_KEY_B_D_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 15U))
+#define MIMOSA_KEY_B_D_ArcaneLanes \
+    MIMOSA_KEY_B_D_ArcaneLaneA, \
+    MIMOSA_KEY_B_D_ArcaneLaneB, \
+    MIMOSA_KEY_B_D_ArcaneLaneC, \
+    MIMOSA_KEY_B_D_ArcaneLaneD
+#define MIMOSA_KEY_B_D_PlasmaLanes \
+    MIMOSA_KEY_B_D_PlasmaLaneA, \
+    MIMOSA_KEY_B_D_PlasmaLaneB, \
+    MIMOSA_KEY_B_D_PlasmaLaneC, \
+    MIMOSA_KEY_B_D_PlasmaLaneD
+#define MIMOSA_KEY_B_D_RainbowLanes \
+    MIMOSA_KEY_B_D_RainbowLaneA, \
+    MIMOSA_KEY_B_D_RainbowLaneB, \
+    MIMOSA_KEY_B_D_RainbowLaneC, \
+    MIMOSA_KEY_B_D_RainbowLaneD
+#define MIMOSA_KEY_B_D_WaterLanes \
+    MIMOSA_KEY_B_D_WaterLaneA, \
+    MIMOSA_KEY_B_D_WaterLaneB, \
+    MIMOSA_KEY_B_D_WaterLaneC, \
+    MIMOSA_KEY_B_D_WaterLaneD
+#define MIMOSA_KEY_B_D_VaporLanes \
+    MIMOSA_KEY_B_D_VaporLaneA, \
+    MIMOSA_KEY_B_D_VaporLaneB, \
+    MIMOSA_KEY_B_D_VaporLaneC, \
+    MIMOSA_KEY_B_D_VaporLaneD
+#define MIMOSA_KEY_B_D_FrostLanes \
+    MIMOSA_KEY_B_D_FrostLaneA, \
+    MIMOSA_KEY_B_D_FrostLaneB, \
+    MIMOSA_KEY_B_D_FrostLaneC, \
+    MIMOSA_KEY_B_D_FrostLaneD
+#define MIMOSA_KEY_B_D_IceLanes \
+    MIMOSA_KEY_B_D_IceLaneA, \
+    MIMOSA_KEY_B_D_IceLaneB, \
+    MIMOSA_KEY_B_D_IceLaneC, \
+    MIMOSA_KEY_B_D_IceLaneD
+#define MIMOSA_KEY_B_D \
+    { \
+        { MIMOSA_KEY_B_D_ArcaneLanes }, \
+        { MIMOSA_KEY_B_D_PlasmaLanes }, \
+        { MIMOSA_KEY_B_D_RainbowLanes }, \
+        { MIMOSA_KEY_B_D_WaterLanes }, \
+        { MIMOSA_KEY_B_D_VaporLanes }, \
+        { MIMOSA_KEY_B_D_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }
 
 // KEY_B_E
 #define MIMOSA_KEY_B_E_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 6U))
@@ -2149,6 +2689,51 @@ public:
 #define MIMOSA_KEY_B_E_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 3U))
 #define MIMOSA_KEY_B_E_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 1U))
 #define MIMOSA_KEY_B_E_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 7U))
+#define MIMOSA_KEY_B_E_ArcaneLanes \
+    MIMOSA_KEY_B_E_ArcaneLaneA, \
+    MIMOSA_KEY_B_E_ArcaneLaneB, \
+    MIMOSA_KEY_B_E_ArcaneLaneC, \
+    MIMOSA_KEY_B_E_ArcaneLaneD
+#define MIMOSA_KEY_B_E_PlasmaLanes \
+    MIMOSA_KEY_B_E_PlasmaLaneA, \
+    MIMOSA_KEY_B_E_PlasmaLaneB, \
+    MIMOSA_KEY_B_E_PlasmaLaneC, \
+    MIMOSA_KEY_B_E_PlasmaLaneD
+#define MIMOSA_KEY_B_E_RainbowLanes \
+    MIMOSA_KEY_B_E_RainbowLaneA, \
+    MIMOSA_KEY_B_E_RainbowLaneB, \
+    MIMOSA_KEY_B_E_RainbowLaneC, \
+    MIMOSA_KEY_B_E_RainbowLaneD
+#define MIMOSA_KEY_B_E_WaterLanes \
+    MIMOSA_KEY_B_E_WaterLaneA, \
+    MIMOSA_KEY_B_E_WaterLaneB, \
+    MIMOSA_KEY_B_E_WaterLaneC, \
+    MIMOSA_KEY_B_E_WaterLaneD
+#define MIMOSA_KEY_B_E_VaporLanes \
+    MIMOSA_KEY_B_E_VaporLaneA, \
+    MIMOSA_KEY_B_E_VaporLaneB, \
+    MIMOSA_KEY_B_E_VaporLaneC, \
+    MIMOSA_KEY_B_E_VaporLaneD
+#define MIMOSA_KEY_B_E_FrostLanes \
+    MIMOSA_KEY_B_E_FrostLaneA, \
+    MIMOSA_KEY_B_E_FrostLaneB, \
+    MIMOSA_KEY_B_E_FrostLaneC, \
+    MIMOSA_KEY_B_E_FrostLaneD
+#define MIMOSA_KEY_B_E_IceLanes \
+    MIMOSA_KEY_B_E_IceLaneA, \
+    MIMOSA_KEY_B_E_IceLaneB, \
+    MIMOSA_KEY_B_E_IceLaneC, \
+    MIMOSA_KEY_B_E_IceLaneD
+#define MIMOSA_KEY_B_E \
+    { \
+        { MIMOSA_KEY_B_E_ArcaneLanes }, \
+        { MIMOSA_KEY_B_E_PlasmaLanes }, \
+        { MIMOSA_KEY_B_E_RainbowLanes }, \
+        { MIMOSA_KEY_B_E_WaterLanes }, \
+        { MIMOSA_KEY_B_E_VaporLanes }, \
+        { MIMOSA_KEY_B_E_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }
 
 // KEY_B_F
 #define MIMOSA_KEY_B_F_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 13U))
@@ -2267,6 +2852,51 @@ public:
 #define MIMOSA_KEY_B_F_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 2U))
 #define MIMOSA_KEY_B_F_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 9U))
 #define MIMOSA_KEY_B_F_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 10U))
+#define MIMOSA_KEY_B_F_ArcaneLanes \
+    MIMOSA_KEY_B_F_ArcaneLaneA, \
+    MIMOSA_KEY_B_F_ArcaneLaneB, \
+    MIMOSA_KEY_B_F_ArcaneLaneC, \
+    MIMOSA_KEY_B_F_ArcaneLaneD
+#define MIMOSA_KEY_B_F_PlasmaLanes \
+    MIMOSA_KEY_B_F_PlasmaLaneA, \
+    MIMOSA_KEY_B_F_PlasmaLaneB, \
+    MIMOSA_KEY_B_F_PlasmaLaneC, \
+    MIMOSA_KEY_B_F_PlasmaLaneD
+#define MIMOSA_KEY_B_F_RainbowLanes \
+    MIMOSA_KEY_B_F_RainbowLaneA, \
+    MIMOSA_KEY_B_F_RainbowLaneB, \
+    MIMOSA_KEY_B_F_RainbowLaneC, \
+    MIMOSA_KEY_B_F_RainbowLaneD
+#define MIMOSA_KEY_B_F_WaterLanes \
+    MIMOSA_KEY_B_F_WaterLaneA, \
+    MIMOSA_KEY_B_F_WaterLaneB, \
+    MIMOSA_KEY_B_F_WaterLaneC, \
+    MIMOSA_KEY_B_F_WaterLaneD
+#define MIMOSA_KEY_B_F_VaporLanes \
+    MIMOSA_KEY_B_F_VaporLaneA, \
+    MIMOSA_KEY_B_F_VaporLaneB, \
+    MIMOSA_KEY_B_F_VaporLaneC, \
+    MIMOSA_KEY_B_F_VaporLaneD
+#define MIMOSA_KEY_B_F_FrostLanes \
+    MIMOSA_KEY_B_F_FrostLaneA, \
+    MIMOSA_KEY_B_F_FrostLaneB, \
+    MIMOSA_KEY_B_F_FrostLaneC, \
+    MIMOSA_KEY_B_F_FrostLaneD
+#define MIMOSA_KEY_B_F_IceLanes \
+    MIMOSA_KEY_B_F_IceLaneA, \
+    MIMOSA_KEY_B_F_IceLaneB, \
+    MIMOSA_KEY_B_F_IceLaneC, \
+    MIMOSA_KEY_B_F_IceLaneD
+#define MIMOSA_KEY_B_F \
+    { \
+        { MIMOSA_KEY_B_F_ArcaneLanes }, \
+        { MIMOSA_KEY_B_F_PlasmaLanes }, \
+        { MIMOSA_KEY_B_F_RainbowLanes }, \
+        { MIMOSA_KEY_B_F_WaterLanes }, \
+        { MIMOSA_KEY_B_F_VaporLanes }, \
+        { MIMOSA_KEY_B_F_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }
 
 // KEY_B_G
 #define MIMOSA_KEY_B_G_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 0U))
@@ -2385,6 +3015,51 @@ public:
 #define MIMOSA_KEY_B_G_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 11U))
 #define MIMOSA_KEY_B_G_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 4U))
 #define MIMOSA_KEY_B_G_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 0U))
+#define MIMOSA_KEY_B_G_ArcaneLanes \
+    MIMOSA_KEY_B_G_ArcaneLaneA, \
+    MIMOSA_KEY_B_G_ArcaneLaneB, \
+    MIMOSA_KEY_B_G_ArcaneLaneC, \
+    MIMOSA_KEY_B_G_ArcaneLaneD
+#define MIMOSA_KEY_B_G_PlasmaLanes \
+    MIMOSA_KEY_B_G_PlasmaLaneA, \
+    MIMOSA_KEY_B_G_PlasmaLaneB, \
+    MIMOSA_KEY_B_G_PlasmaLaneC, \
+    MIMOSA_KEY_B_G_PlasmaLaneD
+#define MIMOSA_KEY_B_G_RainbowLanes \
+    MIMOSA_KEY_B_G_RainbowLaneA, \
+    MIMOSA_KEY_B_G_RainbowLaneB, \
+    MIMOSA_KEY_B_G_RainbowLaneC, \
+    MIMOSA_KEY_B_G_RainbowLaneD
+#define MIMOSA_KEY_B_G_WaterLanes \
+    MIMOSA_KEY_B_G_WaterLaneA, \
+    MIMOSA_KEY_B_G_WaterLaneB, \
+    MIMOSA_KEY_B_G_WaterLaneC, \
+    MIMOSA_KEY_B_G_WaterLaneD
+#define MIMOSA_KEY_B_G_VaporLanes \
+    MIMOSA_KEY_B_G_VaporLaneA, \
+    MIMOSA_KEY_B_G_VaporLaneB, \
+    MIMOSA_KEY_B_G_VaporLaneC, \
+    MIMOSA_KEY_B_G_VaporLaneD
+#define MIMOSA_KEY_B_G_FrostLanes \
+    MIMOSA_KEY_B_G_FrostLaneA, \
+    MIMOSA_KEY_B_G_FrostLaneB, \
+    MIMOSA_KEY_B_G_FrostLaneC, \
+    MIMOSA_KEY_B_G_FrostLaneD
+#define MIMOSA_KEY_B_G_IceLanes \
+    MIMOSA_KEY_B_G_IceLaneA, \
+    MIMOSA_KEY_B_G_IceLaneB, \
+    MIMOSA_KEY_B_G_IceLaneC, \
+    MIMOSA_KEY_B_G_IceLaneD
+#define MIMOSA_KEY_B_G \
+    { \
+        { MIMOSA_KEY_B_G_ArcaneLanes }, \
+        { MIMOSA_KEY_B_G_PlasmaLanes }, \
+        { MIMOSA_KEY_B_G_RainbowLanes }, \
+        { MIMOSA_KEY_B_G_WaterLanes }, \
+        { MIMOSA_KEY_B_G_VaporLanes }, \
+        { MIMOSA_KEY_B_G_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }
 
 // KEY_B_H
 #define MIMOSA_KEY_B_H_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 3U))
@@ -2503,3 +3178,48 @@ public:
 #define MIMOSA_KEY_B_H_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 7U))
 #define MIMOSA_KEY_B_H_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 14U))
 #define MIMOSA_KEY_B_H_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 8U))
+#define MIMOSA_KEY_B_H_ArcaneLanes \
+    MIMOSA_KEY_B_H_ArcaneLaneA, \
+    MIMOSA_KEY_B_H_ArcaneLaneB, \
+    MIMOSA_KEY_B_H_ArcaneLaneC, \
+    MIMOSA_KEY_B_H_ArcaneLaneD
+#define MIMOSA_KEY_B_H_PlasmaLanes \
+    MIMOSA_KEY_B_H_PlasmaLaneA, \
+    MIMOSA_KEY_B_H_PlasmaLaneB, \
+    MIMOSA_KEY_B_H_PlasmaLaneC, \
+    MIMOSA_KEY_B_H_PlasmaLaneD
+#define MIMOSA_KEY_B_H_RainbowLanes \
+    MIMOSA_KEY_B_H_RainbowLaneA, \
+    MIMOSA_KEY_B_H_RainbowLaneB, \
+    MIMOSA_KEY_B_H_RainbowLaneC, \
+    MIMOSA_KEY_B_H_RainbowLaneD
+#define MIMOSA_KEY_B_H_WaterLanes \
+    MIMOSA_KEY_B_H_WaterLaneA, \
+    MIMOSA_KEY_B_H_WaterLaneB, \
+    MIMOSA_KEY_B_H_WaterLaneC, \
+    MIMOSA_KEY_B_H_WaterLaneD
+#define MIMOSA_KEY_B_H_VaporLanes \
+    MIMOSA_KEY_B_H_VaporLaneA, \
+    MIMOSA_KEY_B_H_VaporLaneB, \
+    MIMOSA_KEY_B_H_VaporLaneC, \
+    MIMOSA_KEY_B_H_VaporLaneD
+#define MIMOSA_KEY_B_H_FrostLanes \
+    MIMOSA_KEY_B_H_FrostLaneA, \
+    MIMOSA_KEY_B_H_FrostLaneB, \
+    MIMOSA_KEY_B_H_FrostLaneC, \
+    MIMOSA_KEY_B_H_FrostLaneD
+#define MIMOSA_KEY_B_H_IceLanes \
+    MIMOSA_KEY_B_H_IceLaneA, \
+    MIMOSA_KEY_B_H_IceLaneB, \
+    MIMOSA_KEY_B_H_IceLaneC, \
+    MIMOSA_KEY_B_H_IceLaneD
+#define MIMOSA_KEY_B_H \
+    { \
+        { MIMOSA_KEY_B_H_ArcaneLanes }, \
+        { MIMOSA_KEY_B_H_PlasmaLanes }, \
+        { MIMOSA_KEY_B_H_RainbowLanes }, \
+        { MIMOSA_KEY_B_H_WaterLanes }, \
+        { MIMOSA_KEY_B_H_VaporLanes }, \
+        { MIMOSA_KEY_B_H_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }

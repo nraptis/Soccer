@@ -733,6 +733,51 @@ public:
 #define ALDEBARAN_KEY_A_A_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 10U))
 #define ALDEBARAN_KEY_A_A_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 6U))
 #define ALDEBARAN_KEY_A_A_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 15U))
+#define ALDEBARAN_KEY_A_A_ArcaneLanes \
+    ALDEBARAN_KEY_A_A_ArcaneLaneA, \
+    ALDEBARAN_KEY_A_A_ArcaneLaneB, \
+    ALDEBARAN_KEY_A_A_ArcaneLaneC, \
+    ALDEBARAN_KEY_A_A_ArcaneLaneD
+#define ALDEBARAN_KEY_A_A_PlasmaLanes \
+    ALDEBARAN_KEY_A_A_PlasmaLaneA, \
+    ALDEBARAN_KEY_A_A_PlasmaLaneB, \
+    ALDEBARAN_KEY_A_A_PlasmaLaneC, \
+    ALDEBARAN_KEY_A_A_PlasmaLaneD
+#define ALDEBARAN_KEY_A_A_RainbowLanes \
+    ALDEBARAN_KEY_A_A_RainbowLaneA, \
+    ALDEBARAN_KEY_A_A_RainbowLaneB, \
+    ALDEBARAN_KEY_A_A_RainbowLaneC, \
+    ALDEBARAN_KEY_A_A_RainbowLaneD
+#define ALDEBARAN_KEY_A_A_WaterLanes \
+    ALDEBARAN_KEY_A_A_WaterLaneA, \
+    ALDEBARAN_KEY_A_A_WaterLaneB, \
+    ALDEBARAN_KEY_A_A_WaterLaneC, \
+    ALDEBARAN_KEY_A_A_WaterLaneD
+#define ALDEBARAN_KEY_A_A_VaporLanes \
+    ALDEBARAN_KEY_A_A_VaporLaneA, \
+    ALDEBARAN_KEY_A_A_VaporLaneB, \
+    ALDEBARAN_KEY_A_A_VaporLaneC, \
+    ALDEBARAN_KEY_A_A_VaporLaneD
+#define ALDEBARAN_KEY_A_A_FrostLanes \
+    ALDEBARAN_KEY_A_A_FrostLaneA, \
+    ALDEBARAN_KEY_A_A_FrostLaneB, \
+    ALDEBARAN_KEY_A_A_FrostLaneC, \
+    ALDEBARAN_KEY_A_A_FrostLaneD
+#define ALDEBARAN_KEY_A_A_IceLanes \
+    ALDEBARAN_KEY_A_A_IceLaneA, \
+    ALDEBARAN_KEY_A_A_IceLaneB, \
+    ALDEBARAN_KEY_A_A_IceLaneC, \
+    ALDEBARAN_KEY_A_A_IceLaneD
+#define ALDEBARAN_KEY_A_A \
+    { \
+        { ALDEBARAN_KEY_A_A_ArcaneLanes }, \
+        { ALDEBARAN_KEY_A_A_PlasmaLanes }, \
+        { ALDEBARAN_KEY_A_A_RainbowLanes }, \
+        { ALDEBARAN_KEY_A_A_WaterLanes }, \
+        { ALDEBARAN_KEY_A_A_VaporLanes }, \
+        { ALDEBARAN_KEY_A_A_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_A_B
 #define ALDEBARAN_KEY_A_B_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 11U))
@@ -851,6 +896,51 @@ public:
 #define ALDEBARAN_KEY_A_B_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 2U))
 #define ALDEBARAN_KEY_A_B_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 9U))
 #define ALDEBARAN_KEY_A_B_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 10U))
+#define ALDEBARAN_KEY_A_B_ArcaneLanes \
+    ALDEBARAN_KEY_A_B_ArcaneLaneA, \
+    ALDEBARAN_KEY_A_B_ArcaneLaneB, \
+    ALDEBARAN_KEY_A_B_ArcaneLaneC, \
+    ALDEBARAN_KEY_A_B_ArcaneLaneD
+#define ALDEBARAN_KEY_A_B_PlasmaLanes \
+    ALDEBARAN_KEY_A_B_PlasmaLaneA, \
+    ALDEBARAN_KEY_A_B_PlasmaLaneB, \
+    ALDEBARAN_KEY_A_B_PlasmaLaneC, \
+    ALDEBARAN_KEY_A_B_PlasmaLaneD
+#define ALDEBARAN_KEY_A_B_RainbowLanes \
+    ALDEBARAN_KEY_A_B_RainbowLaneA, \
+    ALDEBARAN_KEY_A_B_RainbowLaneB, \
+    ALDEBARAN_KEY_A_B_RainbowLaneC, \
+    ALDEBARAN_KEY_A_B_RainbowLaneD
+#define ALDEBARAN_KEY_A_B_WaterLanes \
+    ALDEBARAN_KEY_A_B_WaterLaneA, \
+    ALDEBARAN_KEY_A_B_WaterLaneB, \
+    ALDEBARAN_KEY_A_B_WaterLaneC, \
+    ALDEBARAN_KEY_A_B_WaterLaneD
+#define ALDEBARAN_KEY_A_B_VaporLanes \
+    ALDEBARAN_KEY_A_B_VaporLaneA, \
+    ALDEBARAN_KEY_A_B_VaporLaneB, \
+    ALDEBARAN_KEY_A_B_VaporLaneC, \
+    ALDEBARAN_KEY_A_B_VaporLaneD
+#define ALDEBARAN_KEY_A_B_FrostLanes \
+    ALDEBARAN_KEY_A_B_FrostLaneA, \
+    ALDEBARAN_KEY_A_B_FrostLaneB, \
+    ALDEBARAN_KEY_A_B_FrostLaneC, \
+    ALDEBARAN_KEY_A_B_FrostLaneD
+#define ALDEBARAN_KEY_A_B_IceLanes \
+    ALDEBARAN_KEY_A_B_IceLaneA, \
+    ALDEBARAN_KEY_A_B_IceLaneB, \
+    ALDEBARAN_KEY_A_B_IceLaneC, \
+    ALDEBARAN_KEY_A_B_IceLaneD
+#define ALDEBARAN_KEY_A_B \
+    { \
+        { ALDEBARAN_KEY_A_B_ArcaneLanes }, \
+        { ALDEBARAN_KEY_A_B_PlasmaLanes }, \
+        { ALDEBARAN_KEY_A_B_RainbowLanes }, \
+        { ALDEBARAN_KEY_A_B_WaterLanes }, \
+        { ALDEBARAN_KEY_A_B_VaporLanes }, \
+        { ALDEBARAN_KEY_A_B_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_A_C
 #define ALDEBARAN_KEY_A_C_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 7U))
@@ -969,6 +1059,51 @@ public:
 #define ALDEBARAN_KEY_A_C_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 3U))
 #define ALDEBARAN_KEY_A_C_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 1U))
 #define ALDEBARAN_KEY_A_C_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 7U))
+#define ALDEBARAN_KEY_A_C_ArcaneLanes \
+    ALDEBARAN_KEY_A_C_ArcaneLaneA, \
+    ALDEBARAN_KEY_A_C_ArcaneLaneB, \
+    ALDEBARAN_KEY_A_C_ArcaneLaneC, \
+    ALDEBARAN_KEY_A_C_ArcaneLaneD
+#define ALDEBARAN_KEY_A_C_PlasmaLanes \
+    ALDEBARAN_KEY_A_C_PlasmaLaneA, \
+    ALDEBARAN_KEY_A_C_PlasmaLaneB, \
+    ALDEBARAN_KEY_A_C_PlasmaLaneC, \
+    ALDEBARAN_KEY_A_C_PlasmaLaneD
+#define ALDEBARAN_KEY_A_C_RainbowLanes \
+    ALDEBARAN_KEY_A_C_RainbowLaneA, \
+    ALDEBARAN_KEY_A_C_RainbowLaneB, \
+    ALDEBARAN_KEY_A_C_RainbowLaneC, \
+    ALDEBARAN_KEY_A_C_RainbowLaneD
+#define ALDEBARAN_KEY_A_C_WaterLanes \
+    ALDEBARAN_KEY_A_C_WaterLaneA, \
+    ALDEBARAN_KEY_A_C_WaterLaneB, \
+    ALDEBARAN_KEY_A_C_WaterLaneC, \
+    ALDEBARAN_KEY_A_C_WaterLaneD
+#define ALDEBARAN_KEY_A_C_VaporLanes \
+    ALDEBARAN_KEY_A_C_VaporLaneA, \
+    ALDEBARAN_KEY_A_C_VaporLaneB, \
+    ALDEBARAN_KEY_A_C_VaporLaneC, \
+    ALDEBARAN_KEY_A_C_VaporLaneD
+#define ALDEBARAN_KEY_A_C_FrostLanes \
+    ALDEBARAN_KEY_A_C_FrostLaneA, \
+    ALDEBARAN_KEY_A_C_FrostLaneB, \
+    ALDEBARAN_KEY_A_C_FrostLaneC, \
+    ALDEBARAN_KEY_A_C_FrostLaneD
+#define ALDEBARAN_KEY_A_C_IceLanes \
+    ALDEBARAN_KEY_A_C_IceLaneA, \
+    ALDEBARAN_KEY_A_C_IceLaneB, \
+    ALDEBARAN_KEY_A_C_IceLaneC, \
+    ALDEBARAN_KEY_A_C_IceLaneD
+#define ALDEBARAN_KEY_A_C \
+    { \
+        { ALDEBARAN_KEY_A_C_ArcaneLanes }, \
+        { ALDEBARAN_KEY_A_C_PlasmaLanes }, \
+        { ALDEBARAN_KEY_A_C_RainbowLanes }, \
+        { ALDEBARAN_KEY_A_C_WaterLanes }, \
+        { ALDEBARAN_KEY_A_C_VaporLanes }, \
+        { ALDEBARAN_KEY_A_C_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_A_D
 #define ALDEBARAN_KEY_A_D_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 9U))
@@ -1087,6 +1222,51 @@ public:
 #define ALDEBARAN_KEY_A_D_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 7U))
 #define ALDEBARAN_KEY_A_D_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 14U))
 #define ALDEBARAN_KEY_A_D_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 8U))
+#define ALDEBARAN_KEY_A_D_ArcaneLanes \
+    ALDEBARAN_KEY_A_D_ArcaneLaneA, \
+    ALDEBARAN_KEY_A_D_ArcaneLaneB, \
+    ALDEBARAN_KEY_A_D_ArcaneLaneC, \
+    ALDEBARAN_KEY_A_D_ArcaneLaneD
+#define ALDEBARAN_KEY_A_D_PlasmaLanes \
+    ALDEBARAN_KEY_A_D_PlasmaLaneA, \
+    ALDEBARAN_KEY_A_D_PlasmaLaneB, \
+    ALDEBARAN_KEY_A_D_PlasmaLaneC, \
+    ALDEBARAN_KEY_A_D_PlasmaLaneD
+#define ALDEBARAN_KEY_A_D_RainbowLanes \
+    ALDEBARAN_KEY_A_D_RainbowLaneA, \
+    ALDEBARAN_KEY_A_D_RainbowLaneB, \
+    ALDEBARAN_KEY_A_D_RainbowLaneC, \
+    ALDEBARAN_KEY_A_D_RainbowLaneD
+#define ALDEBARAN_KEY_A_D_WaterLanes \
+    ALDEBARAN_KEY_A_D_WaterLaneA, \
+    ALDEBARAN_KEY_A_D_WaterLaneB, \
+    ALDEBARAN_KEY_A_D_WaterLaneC, \
+    ALDEBARAN_KEY_A_D_WaterLaneD
+#define ALDEBARAN_KEY_A_D_VaporLanes \
+    ALDEBARAN_KEY_A_D_VaporLaneA, \
+    ALDEBARAN_KEY_A_D_VaporLaneB, \
+    ALDEBARAN_KEY_A_D_VaporLaneC, \
+    ALDEBARAN_KEY_A_D_VaporLaneD
+#define ALDEBARAN_KEY_A_D_FrostLanes \
+    ALDEBARAN_KEY_A_D_FrostLaneA, \
+    ALDEBARAN_KEY_A_D_FrostLaneB, \
+    ALDEBARAN_KEY_A_D_FrostLaneC, \
+    ALDEBARAN_KEY_A_D_FrostLaneD
+#define ALDEBARAN_KEY_A_D_IceLanes \
+    ALDEBARAN_KEY_A_D_IceLaneA, \
+    ALDEBARAN_KEY_A_D_IceLaneB, \
+    ALDEBARAN_KEY_A_D_IceLaneC, \
+    ALDEBARAN_KEY_A_D_IceLaneD
+#define ALDEBARAN_KEY_A_D \
+    { \
+        { ALDEBARAN_KEY_A_D_ArcaneLanes }, \
+        { ALDEBARAN_KEY_A_D_PlasmaLanes }, \
+        { ALDEBARAN_KEY_A_D_RainbowLanes }, \
+        { ALDEBARAN_KEY_A_D_WaterLanes }, \
+        { ALDEBARAN_KEY_A_D_VaporLanes }, \
+        { ALDEBARAN_KEY_A_D_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_A_E
 #define ALDEBARAN_KEY_A_E_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 4U))
@@ -1205,6 +1385,51 @@ public:
 #define ALDEBARAN_KEY_A_E_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 8U))
 #define ALDEBARAN_KEY_A_E_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 12U))
 #define ALDEBARAN_KEY_A_E_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 2U))
+#define ALDEBARAN_KEY_A_E_ArcaneLanes \
+    ALDEBARAN_KEY_A_E_ArcaneLaneA, \
+    ALDEBARAN_KEY_A_E_ArcaneLaneB, \
+    ALDEBARAN_KEY_A_E_ArcaneLaneC, \
+    ALDEBARAN_KEY_A_E_ArcaneLaneD
+#define ALDEBARAN_KEY_A_E_PlasmaLanes \
+    ALDEBARAN_KEY_A_E_PlasmaLaneA, \
+    ALDEBARAN_KEY_A_E_PlasmaLaneB, \
+    ALDEBARAN_KEY_A_E_PlasmaLaneC, \
+    ALDEBARAN_KEY_A_E_PlasmaLaneD
+#define ALDEBARAN_KEY_A_E_RainbowLanes \
+    ALDEBARAN_KEY_A_E_RainbowLaneA, \
+    ALDEBARAN_KEY_A_E_RainbowLaneB, \
+    ALDEBARAN_KEY_A_E_RainbowLaneC, \
+    ALDEBARAN_KEY_A_E_RainbowLaneD
+#define ALDEBARAN_KEY_A_E_WaterLanes \
+    ALDEBARAN_KEY_A_E_WaterLaneA, \
+    ALDEBARAN_KEY_A_E_WaterLaneB, \
+    ALDEBARAN_KEY_A_E_WaterLaneC, \
+    ALDEBARAN_KEY_A_E_WaterLaneD
+#define ALDEBARAN_KEY_A_E_VaporLanes \
+    ALDEBARAN_KEY_A_E_VaporLaneA, \
+    ALDEBARAN_KEY_A_E_VaporLaneB, \
+    ALDEBARAN_KEY_A_E_VaporLaneC, \
+    ALDEBARAN_KEY_A_E_VaporLaneD
+#define ALDEBARAN_KEY_A_E_FrostLanes \
+    ALDEBARAN_KEY_A_E_FrostLaneA, \
+    ALDEBARAN_KEY_A_E_FrostLaneB, \
+    ALDEBARAN_KEY_A_E_FrostLaneC, \
+    ALDEBARAN_KEY_A_E_FrostLaneD
+#define ALDEBARAN_KEY_A_E_IceLanes \
+    ALDEBARAN_KEY_A_E_IceLaneA, \
+    ALDEBARAN_KEY_A_E_IceLaneB, \
+    ALDEBARAN_KEY_A_E_IceLaneC, \
+    ALDEBARAN_KEY_A_E_IceLaneD
+#define ALDEBARAN_KEY_A_E \
+    { \
+        { ALDEBARAN_KEY_A_E_ArcaneLanes }, \
+        { ALDEBARAN_KEY_A_E_PlasmaLanes }, \
+        { ALDEBARAN_KEY_A_E_RainbowLanes }, \
+        { ALDEBARAN_KEY_A_E_WaterLanes }, \
+        { ALDEBARAN_KEY_A_E_VaporLanes }, \
+        { ALDEBARAN_KEY_A_E_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_A_F
 #define ALDEBARAN_KEY_A_F_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 3U))
@@ -1323,6 +1548,51 @@ public:
 #define ALDEBARAN_KEY_A_F_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 0U))
 #define ALDEBARAN_KEY_A_F_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 13U))
 #define ALDEBARAN_KEY_A_F_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 3U))
+#define ALDEBARAN_KEY_A_F_ArcaneLanes \
+    ALDEBARAN_KEY_A_F_ArcaneLaneA, \
+    ALDEBARAN_KEY_A_F_ArcaneLaneB, \
+    ALDEBARAN_KEY_A_F_ArcaneLaneC, \
+    ALDEBARAN_KEY_A_F_ArcaneLaneD
+#define ALDEBARAN_KEY_A_F_PlasmaLanes \
+    ALDEBARAN_KEY_A_F_PlasmaLaneA, \
+    ALDEBARAN_KEY_A_F_PlasmaLaneB, \
+    ALDEBARAN_KEY_A_F_PlasmaLaneC, \
+    ALDEBARAN_KEY_A_F_PlasmaLaneD
+#define ALDEBARAN_KEY_A_F_RainbowLanes \
+    ALDEBARAN_KEY_A_F_RainbowLaneA, \
+    ALDEBARAN_KEY_A_F_RainbowLaneB, \
+    ALDEBARAN_KEY_A_F_RainbowLaneC, \
+    ALDEBARAN_KEY_A_F_RainbowLaneD
+#define ALDEBARAN_KEY_A_F_WaterLanes \
+    ALDEBARAN_KEY_A_F_WaterLaneA, \
+    ALDEBARAN_KEY_A_F_WaterLaneB, \
+    ALDEBARAN_KEY_A_F_WaterLaneC, \
+    ALDEBARAN_KEY_A_F_WaterLaneD
+#define ALDEBARAN_KEY_A_F_VaporLanes \
+    ALDEBARAN_KEY_A_F_VaporLaneA, \
+    ALDEBARAN_KEY_A_F_VaporLaneB, \
+    ALDEBARAN_KEY_A_F_VaporLaneC, \
+    ALDEBARAN_KEY_A_F_VaporLaneD
+#define ALDEBARAN_KEY_A_F_FrostLanes \
+    ALDEBARAN_KEY_A_F_FrostLaneA, \
+    ALDEBARAN_KEY_A_F_FrostLaneB, \
+    ALDEBARAN_KEY_A_F_FrostLaneC, \
+    ALDEBARAN_KEY_A_F_FrostLaneD
+#define ALDEBARAN_KEY_A_F_IceLanes \
+    ALDEBARAN_KEY_A_F_IceLaneA, \
+    ALDEBARAN_KEY_A_F_IceLaneB, \
+    ALDEBARAN_KEY_A_F_IceLaneC, \
+    ALDEBARAN_KEY_A_F_IceLaneD
+#define ALDEBARAN_KEY_A_F \
+    { \
+        { ALDEBARAN_KEY_A_F_ArcaneLanes }, \
+        { ALDEBARAN_KEY_A_F_PlasmaLanes }, \
+        { ALDEBARAN_KEY_A_F_RainbowLanes }, \
+        { ALDEBARAN_KEY_A_F_WaterLanes }, \
+        { ALDEBARAN_KEY_A_F_VaporLanes }, \
+        { ALDEBARAN_KEY_A_F_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_A_G
 #define ALDEBARAN_KEY_A_G_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 14U))
@@ -1441,6 +1711,51 @@ public:
 #define ALDEBARAN_KEY_A_G_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 11U))
 #define ALDEBARAN_KEY_A_G_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 4U))
 #define ALDEBARAN_KEY_A_G_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 0U))
+#define ALDEBARAN_KEY_A_G_ArcaneLanes \
+    ALDEBARAN_KEY_A_G_ArcaneLaneA, \
+    ALDEBARAN_KEY_A_G_ArcaneLaneB, \
+    ALDEBARAN_KEY_A_G_ArcaneLaneC, \
+    ALDEBARAN_KEY_A_G_ArcaneLaneD
+#define ALDEBARAN_KEY_A_G_PlasmaLanes \
+    ALDEBARAN_KEY_A_G_PlasmaLaneA, \
+    ALDEBARAN_KEY_A_G_PlasmaLaneB, \
+    ALDEBARAN_KEY_A_G_PlasmaLaneC, \
+    ALDEBARAN_KEY_A_G_PlasmaLaneD
+#define ALDEBARAN_KEY_A_G_RainbowLanes \
+    ALDEBARAN_KEY_A_G_RainbowLaneA, \
+    ALDEBARAN_KEY_A_G_RainbowLaneB, \
+    ALDEBARAN_KEY_A_G_RainbowLaneC, \
+    ALDEBARAN_KEY_A_G_RainbowLaneD
+#define ALDEBARAN_KEY_A_G_WaterLanes \
+    ALDEBARAN_KEY_A_G_WaterLaneA, \
+    ALDEBARAN_KEY_A_G_WaterLaneB, \
+    ALDEBARAN_KEY_A_G_WaterLaneC, \
+    ALDEBARAN_KEY_A_G_WaterLaneD
+#define ALDEBARAN_KEY_A_G_VaporLanes \
+    ALDEBARAN_KEY_A_G_VaporLaneA, \
+    ALDEBARAN_KEY_A_G_VaporLaneB, \
+    ALDEBARAN_KEY_A_G_VaporLaneC, \
+    ALDEBARAN_KEY_A_G_VaporLaneD
+#define ALDEBARAN_KEY_A_G_FrostLanes \
+    ALDEBARAN_KEY_A_G_FrostLaneA, \
+    ALDEBARAN_KEY_A_G_FrostLaneB, \
+    ALDEBARAN_KEY_A_G_FrostLaneC, \
+    ALDEBARAN_KEY_A_G_FrostLaneD
+#define ALDEBARAN_KEY_A_G_IceLanes \
+    ALDEBARAN_KEY_A_G_IceLaneA, \
+    ALDEBARAN_KEY_A_G_IceLaneB, \
+    ALDEBARAN_KEY_A_G_IceLaneC, \
+    ALDEBARAN_KEY_A_G_IceLaneD
+#define ALDEBARAN_KEY_A_G \
+    { \
+        { ALDEBARAN_KEY_A_G_ArcaneLanes }, \
+        { ALDEBARAN_KEY_A_G_PlasmaLanes }, \
+        { ALDEBARAN_KEY_A_G_RainbowLanes }, \
+        { ALDEBARAN_KEY_A_G_WaterLanes }, \
+        { ALDEBARAN_KEY_A_G_VaporLanes }, \
+        { ALDEBARAN_KEY_A_G_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_A_H
 #define ALDEBARAN_KEY_A_H_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 1U))
@@ -1559,6 +1874,51 @@ public:
 #define ALDEBARAN_KEY_A_H_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 12U))
 #define ALDEBARAN_KEY_A_H_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 15U))
 #define ALDEBARAN_KEY_A_H_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 9U))
+#define ALDEBARAN_KEY_A_H_ArcaneLanes \
+    ALDEBARAN_KEY_A_H_ArcaneLaneA, \
+    ALDEBARAN_KEY_A_H_ArcaneLaneB, \
+    ALDEBARAN_KEY_A_H_ArcaneLaneC, \
+    ALDEBARAN_KEY_A_H_ArcaneLaneD
+#define ALDEBARAN_KEY_A_H_PlasmaLanes \
+    ALDEBARAN_KEY_A_H_PlasmaLaneA, \
+    ALDEBARAN_KEY_A_H_PlasmaLaneB, \
+    ALDEBARAN_KEY_A_H_PlasmaLaneC, \
+    ALDEBARAN_KEY_A_H_PlasmaLaneD
+#define ALDEBARAN_KEY_A_H_RainbowLanes \
+    ALDEBARAN_KEY_A_H_RainbowLaneA, \
+    ALDEBARAN_KEY_A_H_RainbowLaneB, \
+    ALDEBARAN_KEY_A_H_RainbowLaneC, \
+    ALDEBARAN_KEY_A_H_RainbowLaneD
+#define ALDEBARAN_KEY_A_H_WaterLanes \
+    ALDEBARAN_KEY_A_H_WaterLaneA, \
+    ALDEBARAN_KEY_A_H_WaterLaneB, \
+    ALDEBARAN_KEY_A_H_WaterLaneC, \
+    ALDEBARAN_KEY_A_H_WaterLaneD
+#define ALDEBARAN_KEY_A_H_VaporLanes \
+    ALDEBARAN_KEY_A_H_VaporLaneA, \
+    ALDEBARAN_KEY_A_H_VaporLaneB, \
+    ALDEBARAN_KEY_A_H_VaporLaneC, \
+    ALDEBARAN_KEY_A_H_VaporLaneD
+#define ALDEBARAN_KEY_A_H_FrostLanes \
+    ALDEBARAN_KEY_A_H_FrostLaneA, \
+    ALDEBARAN_KEY_A_H_FrostLaneB, \
+    ALDEBARAN_KEY_A_H_FrostLaneC, \
+    ALDEBARAN_KEY_A_H_FrostLaneD
+#define ALDEBARAN_KEY_A_H_IceLanes \
+    ALDEBARAN_KEY_A_H_IceLaneA, \
+    ALDEBARAN_KEY_A_H_IceLaneB, \
+    ALDEBARAN_KEY_A_H_IceLaneC, \
+    ALDEBARAN_KEY_A_H_IceLaneD
+#define ALDEBARAN_KEY_A_H \
+    { \
+        { ALDEBARAN_KEY_A_H_ArcaneLanes }, \
+        { ALDEBARAN_KEY_A_H_PlasmaLanes }, \
+        { ALDEBARAN_KEY_A_H_RainbowLanes }, \
+        { ALDEBARAN_KEY_A_H_WaterLanes }, \
+        { ALDEBARAN_KEY_A_H_VaporLanes }, \
+        { ALDEBARAN_KEY_A_H_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_B_A
 #define ALDEBARAN_KEY_B_A_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 12U))
@@ -1677,6 +2037,51 @@ public:
 #define ALDEBARAN_KEY_B_A_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 5U))
 #define ALDEBARAN_KEY_B_A_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 3U))
 #define ALDEBARAN_KEY_B_A_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 4U))
+#define ALDEBARAN_KEY_B_A_ArcaneLanes \
+    ALDEBARAN_KEY_B_A_ArcaneLaneA, \
+    ALDEBARAN_KEY_B_A_ArcaneLaneB, \
+    ALDEBARAN_KEY_B_A_ArcaneLaneC, \
+    ALDEBARAN_KEY_B_A_ArcaneLaneD
+#define ALDEBARAN_KEY_B_A_PlasmaLanes \
+    ALDEBARAN_KEY_B_A_PlasmaLaneA, \
+    ALDEBARAN_KEY_B_A_PlasmaLaneB, \
+    ALDEBARAN_KEY_B_A_PlasmaLaneC, \
+    ALDEBARAN_KEY_B_A_PlasmaLaneD
+#define ALDEBARAN_KEY_B_A_RainbowLanes \
+    ALDEBARAN_KEY_B_A_RainbowLaneA, \
+    ALDEBARAN_KEY_B_A_RainbowLaneB, \
+    ALDEBARAN_KEY_B_A_RainbowLaneC, \
+    ALDEBARAN_KEY_B_A_RainbowLaneD
+#define ALDEBARAN_KEY_B_A_WaterLanes \
+    ALDEBARAN_KEY_B_A_WaterLaneA, \
+    ALDEBARAN_KEY_B_A_WaterLaneB, \
+    ALDEBARAN_KEY_B_A_WaterLaneC, \
+    ALDEBARAN_KEY_B_A_WaterLaneD
+#define ALDEBARAN_KEY_B_A_VaporLanes \
+    ALDEBARAN_KEY_B_A_VaporLaneA, \
+    ALDEBARAN_KEY_B_A_VaporLaneB, \
+    ALDEBARAN_KEY_B_A_VaporLaneC, \
+    ALDEBARAN_KEY_B_A_VaporLaneD
+#define ALDEBARAN_KEY_B_A_FrostLanes \
+    ALDEBARAN_KEY_B_A_FrostLaneA, \
+    ALDEBARAN_KEY_B_A_FrostLaneB, \
+    ALDEBARAN_KEY_B_A_FrostLaneC, \
+    ALDEBARAN_KEY_B_A_FrostLaneD
+#define ALDEBARAN_KEY_B_A_IceLanes \
+    ALDEBARAN_KEY_B_A_IceLaneA, \
+    ALDEBARAN_KEY_B_A_IceLaneB, \
+    ALDEBARAN_KEY_B_A_IceLaneC, \
+    ALDEBARAN_KEY_B_A_IceLaneD
+#define ALDEBARAN_KEY_B_A \
+    { \
+        { ALDEBARAN_KEY_B_A_ArcaneLanes }, \
+        { ALDEBARAN_KEY_B_A_PlasmaLanes }, \
+        { ALDEBARAN_KEY_B_A_RainbowLanes }, \
+        { ALDEBARAN_KEY_B_A_WaterLanes }, \
+        { ALDEBARAN_KEY_B_A_VaporLanes }, \
+        { ALDEBARAN_KEY_B_A_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }
 
 // KEY_B_B
 #define ALDEBARAN_KEY_B_B_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 6U))
@@ -1795,6 +2200,51 @@ public:
 #define ALDEBARAN_KEY_B_B_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 15U))
 #define ALDEBARAN_KEY_B_B_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 5U))
 #define ALDEBARAN_KEY_B_B_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 11U))
+#define ALDEBARAN_KEY_B_B_ArcaneLanes \
+    ALDEBARAN_KEY_B_B_ArcaneLaneA, \
+    ALDEBARAN_KEY_B_B_ArcaneLaneB, \
+    ALDEBARAN_KEY_B_B_ArcaneLaneC, \
+    ALDEBARAN_KEY_B_B_ArcaneLaneD
+#define ALDEBARAN_KEY_B_B_PlasmaLanes \
+    ALDEBARAN_KEY_B_B_PlasmaLaneA, \
+    ALDEBARAN_KEY_B_B_PlasmaLaneB, \
+    ALDEBARAN_KEY_B_B_PlasmaLaneC, \
+    ALDEBARAN_KEY_B_B_PlasmaLaneD
+#define ALDEBARAN_KEY_B_B_RainbowLanes \
+    ALDEBARAN_KEY_B_B_RainbowLaneA, \
+    ALDEBARAN_KEY_B_B_RainbowLaneB, \
+    ALDEBARAN_KEY_B_B_RainbowLaneC, \
+    ALDEBARAN_KEY_B_B_RainbowLaneD
+#define ALDEBARAN_KEY_B_B_WaterLanes \
+    ALDEBARAN_KEY_B_B_WaterLaneA, \
+    ALDEBARAN_KEY_B_B_WaterLaneB, \
+    ALDEBARAN_KEY_B_B_WaterLaneC, \
+    ALDEBARAN_KEY_B_B_WaterLaneD
+#define ALDEBARAN_KEY_B_B_VaporLanes \
+    ALDEBARAN_KEY_B_B_VaporLaneA, \
+    ALDEBARAN_KEY_B_B_VaporLaneB, \
+    ALDEBARAN_KEY_B_B_VaporLaneC, \
+    ALDEBARAN_KEY_B_B_VaporLaneD
+#define ALDEBARAN_KEY_B_B_FrostLanes \
+    ALDEBARAN_KEY_B_B_FrostLaneA, \
+    ALDEBARAN_KEY_B_B_FrostLaneB, \
+    ALDEBARAN_KEY_B_B_FrostLaneC, \
+    ALDEBARAN_KEY_B_B_FrostLaneD
+#define ALDEBARAN_KEY_B_B_IceLanes \
+    ALDEBARAN_KEY_B_B_IceLaneA, \
+    ALDEBARAN_KEY_B_B_IceLaneB, \
+    ALDEBARAN_KEY_B_B_IceLaneC, \
+    ALDEBARAN_KEY_B_B_IceLaneD
+#define ALDEBARAN_KEY_B_B \
+    { \
+        { ALDEBARAN_KEY_B_B_ArcaneLanes }, \
+        { ALDEBARAN_KEY_B_B_PlasmaLanes }, \
+        { ALDEBARAN_KEY_B_B_RainbowLanes }, \
+        { ALDEBARAN_KEY_B_B_WaterLanes }, \
+        { ALDEBARAN_KEY_B_B_VaporLanes }, \
+        { ALDEBARAN_KEY_B_B_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }
 
 // KEY_B_C
 #define ALDEBARAN_KEY_B_C_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 2U))
@@ -1913,6 +2363,51 @@ public:
 #define ALDEBARAN_KEY_B_C_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 1U))
 #define ALDEBARAN_KEY_B_C_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 2U))
 #define ALDEBARAN_KEY_B_C_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 14U))
+#define ALDEBARAN_KEY_B_C_ArcaneLanes \
+    ALDEBARAN_KEY_B_C_ArcaneLaneA, \
+    ALDEBARAN_KEY_B_C_ArcaneLaneB, \
+    ALDEBARAN_KEY_B_C_ArcaneLaneC, \
+    ALDEBARAN_KEY_B_C_ArcaneLaneD
+#define ALDEBARAN_KEY_B_C_PlasmaLanes \
+    ALDEBARAN_KEY_B_C_PlasmaLaneA, \
+    ALDEBARAN_KEY_B_C_PlasmaLaneB, \
+    ALDEBARAN_KEY_B_C_PlasmaLaneC, \
+    ALDEBARAN_KEY_B_C_PlasmaLaneD
+#define ALDEBARAN_KEY_B_C_RainbowLanes \
+    ALDEBARAN_KEY_B_C_RainbowLaneA, \
+    ALDEBARAN_KEY_B_C_RainbowLaneB, \
+    ALDEBARAN_KEY_B_C_RainbowLaneC, \
+    ALDEBARAN_KEY_B_C_RainbowLaneD
+#define ALDEBARAN_KEY_B_C_WaterLanes \
+    ALDEBARAN_KEY_B_C_WaterLaneA, \
+    ALDEBARAN_KEY_B_C_WaterLaneB, \
+    ALDEBARAN_KEY_B_C_WaterLaneC, \
+    ALDEBARAN_KEY_B_C_WaterLaneD
+#define ALDEBARAN_KEY_B_C_VaporLanes \
+    ALDEBARAN_KEY_B_C_VaporLaneA, \
+    ALDEBARAN_KEY_B_C_VaporLaneB, \
+    ALDEBARAN_KEY_B_C_VaporLaneC, \
+    ALDEBARAN_KEY_B_C_VaporLaneD
+#define ALDEBARAN_KEY_B_C_FrostLanes \
+    ALDEBARAN_KEY_B_C_FrostLaneA, \
+    ALDEBARAN_KEY_B_C_FrostLaneB, \
+    ALDEBARAN_KEY_B_C_FrostLaneC, \
+    ALDEBARAN_KEY_B_C_FrostLaneD
+#define ALDEBARAN_KEY_B_C_IceLanes \
+    ALDEBARAN_KEY_B_C_IceLaneA, \
+    ALDEBARAN_KEY_B_C_IceLaneB, \
+    ALDEBARAN_KEY_B_C_IceLaneC, \
+    ALDEBARAN_KEY_B_C_IceLaneD
+#define ALDEBARAN_KEY_B_C \
+    { \
+        { ALDEBARAN_KEY_B_C_ArcaneLanes }, \
+        { ALDEBARAN_KEY_B_C_PlasmaLanes }, \
+        { ALDEBARAN_KEY_B_C_RainbowLanes }, \
+        { ALDEBARAN_KEY_B_C_WaterLanes }, \
+        { ALDEBARAN_KEY_B_C_VaporLanes }, \
+        { ALDEBARAN_KEY_B_C_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }
 
 // KEY_B_D
 #define ALDEBARAN_KEY_B_D_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 10U))
@@ -2031,6 +2526,51 @@ public:
 #define ALDEBARAN_KEY_B_D_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 13U))
 #define ALDEBARAN_KEY_B_D_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 8U))
 #define ALDEBARAN_KEY_B_D_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 1U))
+#define ALDEBARAN_KEY_B_D_ArcaneLanes \
+    ALDEBARAN_KEY_B_D_ArcaneLaneA, \
+    ALDEBARAN_KEY_B_D_ArcaneLaneB, \
+    ALDEBARAN_KEY_B_D_ArcaneLaneC, \
+    ALDEBARAN_KEY_B_D_ArcaneLaneD
+#define ALDEBARAN_KEY_B_D_PlasmaLanes \
+    ALDEBARAN_KEY_B_D_PlasmaLaneA, \
+    ALDEBARAN_KEY_B_D_PlasmaLaneB, \
+    ALDEBARAN_KEY_B_D_PlasmaLaneC, \
+    ALDEBARAN_KEY_B_D_PlasmaLaneD
+#define ALDEBARAN_KEY_B_D_RainbowLanes \
+    ALDEBARAN_KEY_B_D_RainbowLaneA, \
+    ALDEBARAN_KEY_B_D_RainbowLaneB, \
+    ALDEBARAN_KEY_B_D_RainbowLaneC, \
+    ALDEBARAN_KEY_B_D_RainbowLaneD
+#define ALDEBARAN_KEY_B_D_WaterLanes \
+    ALDEBARAN_KEY_B_D_WaterLaneA, \
+    ALDEBARAN_KEY_B_D_WaterLaneB, \
+    ALDEBARAN_KEY_B_D_WaterLaneC, \
+    ALDEBARAN_KEY_B_D_WaterLaneD
+#define ALDEBARAN_KEY_B_D_VaporLanes \
+    ALDEBARAN_KEY_B_D_VaporLaneA, \
+    ALDEBARAN_KEY_B_D_VaporLaneB, \
+    ALDEBARAN_KEY_B_D_VaporLaneC, \
+    ALDEBARAN_KEY_B_D_VaporLaneD
+#define ALDEBARAN_KEY_B_D_FrostLanes \
+    ALDEBARAN_KEY_B_D_FrostLaneA, \
+    ALDEBARAN_KEY_B_D_FrostLaneB, \
+    ALDEBARAN_KEY_B_D_FrostLaneC, \
+    ALDEBARAN_KEY_B_D_FrostLaneD
+#define ALDEBARAN_KEY_B_D_IceLanes \
+    ALDEBARAN_KEY_B_D_IceLaneA, \
+    ALDEBARAN_KEY_B_D_IceLaneB, \
+    ALDEBARAN_KEY_B_D_IceLaneC, \
+    ALDEBARAN_KEY_B_D_IceLaneD
+#define ALDEBARAN_KEY_B_D \
+    { \
+        { ALDEBARAN_KEY_B_D_ArcaneLanes }, \
+        { ALDEBARAN_KEY_B_D_PlasmaLanes }, \
+        { ALDEBARAN_KEY_B_D_RainbowLanes }, \
+        { ALDEBARAN_KEY_B_D_WaterLanes }, \
+        { ALDEBARAN_KEY_B_D_VaporLanes }, \
+        { ALDEBARAN_KEY_B_D_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }
 
 // KEY_B_E
 #define ALDEBARAN_KEY_B_E_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 13U))
@@ -2149,6 +2689,51 @@ public:
 #define ALDEBARAN_KEY_B_E_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 9U))
 #define ALDEBARAN_KEY_B_E_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 11U))
 #define ALDEBARAN_KEY_B_E_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 6U))
+#define ALDEBARAN_KEY_B_E_ArcaneLanes \
+    ALDEBARAN_KEY_B_E_ArcaneLaneA, \
+    ALDEBARAN_KEY_B_E_ArcaneLaneB, \
+    ALDEBARAN_KEY_B_E_ArcaneLaneC, \
+    ALDEBARAN_KEY_B_E_ArcaneLaneD
+#define ALDEBARAN_KEY_B_E_PlasmaLanes \
+    ALDEBARAN_KEY_B_E_PlasmaLaneA, \
+    ALDEBARAN_KEY_B_E_PlasmaLaneB, \
+    ALDEBARAN_KEY_B_E_PlasmaLaneC, \
+    ALDEBARAN_KEY_B_E_PlasmaLaneD
+#define ALDEBARAN_KEY_B_E_RainbowLanes \
+    ALDEBARAN_KEY_B_E_RainbowLaneA, \
+    ALDEBARAN_KEY_B_E_RainbowLaneB, \
+    ALDEBARAN_KEY_B_E_RainbowLaneC, \
+    ALDEBARAN_KEY_B_E_RainbowLaneD
+#define ALDEBARAN_KEY_B_E_WaterLanes \
+    ALDEBARAN_KEY_B_E_WaterLaneA, \
+    ALDEBARAN_KEY_B_E_WaterLaneB, \
+    ALDEBARAN_KEY_B_E_WaterLaneC, \
+    ALDEBARAN_KEY_B_E_WaterLaneD
+#define ALDEBARAN_KEY_B_E_VaporLanes \
+    ALDEBARAN_KEY_B_E_VaporLaneA, \
+    ALDEBARAN_KEY_B_E_VaporLaneB, \
+    ALDEBARAN_KEY_B_E_VaporLaneC, \
+    ALDEBARAN_KEY_B_E_VaporLaneD
+#define ALDEBARAN_KEY_B_E_FrostLanes \
+    ALDEBARAN_KEY_B_E_FrostLaneA, \
+    ALDEBARAN_KEY_B_E_FrostLaneB, \
+    ALDEBARAN_KEY_B_E_FrostLaneC, \
+    ALDEBARAN_KEY_B_E_FrostLaneD
+#define ALDEBARAN_KEY_B_E_IceLanes \
+    ALDEBARAN_KEY_B_E_IceLaneA, \
+    ALDEBARAN_KEY_B_E_IceLaneB, \
+    ALDEBARAN_KEY_B_E_IceLaneC, \
+    ALDEBARAN_KEY_B_E_IceLaneD
+#define ALDEBARAN_KEY_B_E \
+    { \
+        { ALDEBARAN_KEY_B_E_ArcaneLanes }, \
+        { ALDEBARAN_KEY_B_E_PlasmaLanes }, \
+        { ALDEBARAN_KEY_B_E_RainbowLanes }, \
+        { ALDEBARAN_KEY_B_E_WaterLanes }, \
+        { ALDEBARAN_KEY_B_E_VaporLanes }, \
+        { ALDEBARAN_KEY_B_E_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }
 
 // KEY_B_F
 #define ALDEBARAN_KEY_B_F_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 5U))
@@ -2267,6 +2852,51 @@ public:
 #define ALDEBARAN_KEY_B_F_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 4U))
 #define ALDEBARAN_KEY_B_F_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 7U))
 #define ALDEBARAN_KEY_B_F_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 13U))
+#define ALDEBARAN_KEY_B_F_ArcaneLanes \
+    ALDEBARAN_KEY_B_F_ArcaneLaneA, \
+    ALDEBARAN_KEY_B_F_ArcaneLaneB, \
+    ALDEBARAN_KEY_B_F_ArcaneLaneC, \
+    ALDEBARAN_KEY_B_F_ArcaneLaneD
+#define ALDEBARAN_KEY_B_F_PlasmaLanes \
+    ALDEBARAN_KEY_B_F_PlasmaLaneA, \
+    ALDEBARAN_KEY_B_F_PlasmaLaneB, \
+    ALDEBARAN_KEY_B_F_PlasmaLaneC, \
+    ALDEBARAN_KEY_B_F_PlasmaLaneD
+#define ALDEBARAN_KEY_B_F_RainbowLanes \
+    ALDEBARAN_KEY_B_F_RainbowLaneA, \
+    ALDEBARAN_KEY_B_F_RainbowLaneB, \
+    ALDEBARAN_KEY_B_F_RainbowLaneC, \
+    ALDEBARAN_KEY_B_F_RainbowLaneD
+#define ALDEBARAN_KEY_B_F_WaterLanes \
+    ALDEBARAN_KEY_B_F_WaterLaneA, \
+    ALDEBARAN_KEY_B_F_WaterLaneB, \
+    ALDEBARAN_KEY_B_F_WaterLaneC, \
+    ALDEBARAN_KEY_B_F_WaterLaneD
+#define ALDEBARAN_KEY_B_F_VaporLanes \
+    ALDEBARAN_KEY_B_F_VaporLaneA, \
+    ALDEBARAN_KEY_B_F_VaporLaneB, \
+    ALDEBARAN_KEY_B_F_VaporLaneC, \
+    ALDEBARAN_KEY_B_F_VaporLaneD
+#define ALDEBARAN_KEY_B_F_FrostLanes \
+    ALDEBARAN_KEY_B_F_FrostLaneA, \
+    ALDEBARAN_KEY_B_F_FrostLaneB, \
+    ALDEBARAN_KEY_B_F_FrostLaneC, \
+    ALDEBARAN_KEY_B_F_FrostLaneD
+#define ALDEBARAN_KEY_B_F_IceLanes \
+    ALDEBARAN_KEY_B_F_IceLaneA, \
+    ALDEBARAN_KEY_B_F_IceLaneB, \
+    ALDEBARAN_KEY_B_F_IceLaneC, \
+    ALDEBARAN_KEY_B_F_IceLaneD
+#define ALDEBARAN_KEY_B_F \
+    { \
+        { ALDEBARAN_KEY_B_F_ArcaneLanes }, \
+        { ALDEBARAN_KEY_B_F_PlasmaLanes }, \
+        { ALDEBARAN_KEY_B_F_RainbowLanes }, \
+        { ALDEBARAN_KEY_B_F_WaterLanes }, \
+        { ALDEBARAN_KEY_B_F_VaporLanes }, \
+        { ALDEBARAN_KEY_B_F_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }
 
 // KEY_B_G
 #define ALDEBARAN_KEY_B_G_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 8U))
@@ -2385,6 +3015,51 @@ public:
 #define ALDEBARAN_KEY_B_G_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 14U))
 #define ALDEBARAN_KEY_B_G_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 10U))
 #define ALDEBARAN_KEY_B_G_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 12U))
+#define ALDEBARAN_KEY_B_G_ArcaneLanes \
+    ALDEBARAN_KEY_B_G_ArcaneLaneA, \
+    ALDEBARAN_KEY_B_G_ArcaneLaneB, \
+    ALDEBARAN_KEY_B_G_ArcaneLaneC, \
+    ALDEBARAN_KEY_B_G_ArcaneLaneD
+#define ALDEBARAN_KEY_B_G_PlasmaLanes \
+    ALDEBARAN_KEY_B_G_PlasmaLaneA, \
+    ALDEBARAN_KEY_B_G_PlasmaLaneB, \
+    ALDEBARAN_KEY_B_G_PlasmaLaneC, \
+    ALDEBARAN_KEY_B_G_PlasmaLaneD
+#define ALDEBARAN_KEY_B_G_RainbowLanes \
+    ALDEBARAN_KEY_B_G_RainbowLaneA, \
+    ALDEBARAN_KEY_B_G_RainbowLaneB, \
+    ALDEBARAN_KEY_B_G_RainbowLaneC, \
+    ALDEBARAN_KEY_B_G_RainbowLaneD
+#define ALDEBARAN_KEY_B_G_WaterLanes \
+    ALDEBARAN_KEY_B_G_WaterLaneA, \
+    ALDEBARAN_KEY_B_G_WaterLaneB, \
+    ALDEBARAN_KEY_B_G_WaterLaneC, \
+    ALDEBARAN_KEY_B_G_WaterLaneD
+#define ALDEBARAN_KEY_B_G_VaporLanes \
+    ALDEBARAN_KEY_B_G_VaporLaneA, \
+    ALDEBARAN_KEY_B_G_VaporLaneB, \
+    ALDEBARAN_KEY_B_G_VaporLaneC, \
+    ALDEBARAN_KEY_B_G_VaporLaneD
+#define ALDEBARAN_KEY_B_G_FrostLanes \
+    ALDEBARAN_KEY_B_G_FrostLaneA, \
+    ALDEBARAN_KEY_B_G_FrostLaneB, \
+    ALDEBARAN_KEY_B_G_FrostLaneC, \
+    ALDEBARAN_KEY_B_G_FrostLaneD
+#define ALDEBARAN_KEY_B_G_IceLanes \
+    ALDEBARAN_KEY_B_G_IceLaneA, \
+    ALDEBARAN_KEY_B_G_IceLaneB, \
+    ALDEBARAN_KEY_B_G_IceLaneC, \
+    ALDEBARAN_KEY_B_G_IceLaneD
+#define ALDEBARAN_KEY_B_G \
+    { \
+        { ALDEBARAN_KEY_B_G_ArcaneLanes }, \
+        { ALDEBARAN_KEY_B_G_PlasmaLanes }, \
+        { ALDEBARAN_KEY_B_G_RainbowLanes }, \
+        { ALDEBARAN_KEY_B_G_WaterLanes }, \
+        { ALDEBARAN_KEY_B_G_VaporLanes }, \
+        { ALDEBARAN_KEY_B_G_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }
 
 // KEY_B_H
 #define ALDEBARAN_KEY_B_H_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 0U))
@@ -2503,3 +3178,48 @@ public:
 #define ALDEBARAN_KEY_B_H_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 6U))
 #define ALDEBARAN_KEY_B_H_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 0U))
 #define ALDEBARAN_KEY_B_H_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 5U))
+#define ALDEBARAN_KEY_B_H_ArcaneLanes \
+    ALDEBARAN_KEY_B_H_ArcaneLaneA, \
+    ALDEBARAN_KEY_B_H_ArcaneLaneB, \
+    ALDEBARAN_KEY_B_H_ArcaneLaneC, \
+    ALDEBARAN_KEY_B_H_ArcaneLaneD
+#define ALDEBARAN_KEY_B_H_PlasmaLanes \
+    ALDEBARAN_KEY_B_H_PlasmaLaneA, \
+    ALDEBARAN_KEY_B_H_PlasmaLaneB, \
+    ALDEBARAN_KEY_B_H_PlasmaLaneC, \
+    ALDEBARAN_KEY_B_H_PlasmaLaneD
+#define ALDEBARAN_KEY_B_H_RainbowLanes \
+    ALDEBARAN_KEY_B_H_RainbowLaneA, \
+    ALDEBARAN_KEY_B_H_RainbowLaneB, \
+    ALDEBARAN_KEY_B_H_RainbowLaneC, \
+    ALDEBARAN_KEY_B_H_RainbowLaneD
+#define ALDEBARAN_KEY_B_H_WaterLanes \
+    ALDEBARAN_KEY_B_H_WaterLaneA, \
+    ALDEBARAN_KEY_B_H_WaterLaneB, \
+    ALDEBARAN_KEY_B_H_WaterLaneC, \
+    ALDEBARAN_KEY_B_H_WaterLaneD
+#define ALDEBARAN_KEY_B_H_VaporLanes \
+    ALDEBARAN_KEY_B_H_VaporLaneA, \
+    ALDEBARAN_KEY_B_H_VaporLaneB, \
+    ALDEBARAN_KEY_B_H_VaporLaneC, \
+    ALDEBARAN_KEY_B_H_VaporLaneD
+#define ALDEBARAN_KEY_B_H_FrostLanes \
+    ALDEBARAN_KEY_B_H_FrostLaneA, \
+    ALDEBARAN_KEY_B_H_FrostLaneB, \
+    ALDEBARAN_KEY_B_H_FrostLaneC, \
+    ALDEBARAN_KEY_B_H_FrostLaneD
+#define ALDEBARAN_KEY_B_H_IceLanes \
+    ALDEBARAN_KEY_B_H_IceLaneA, \
+    ALDEBARAN_KEY_B_H_IceLaneB, \
+    ALDEBARAN_KEY_B_H_IceLaneC, \
+    ALDEBARAN_KEY_B_H_IceLaneD
+#define ALDEBARAN_KEY_B_H \
+    { \
+        { ALDEBARAN_KEY_B_H_ArcaneLanes }, \
+        { ALDEBARAN_KEY_B_H_PlasmaLanes }, \
+        { ALDEBARAN_KEY_B_H_RainbowLanes }, \
+        { ALDEBARAN_KEY_B_H_WaterLanes }, \
+        { ALDEBARAN_KEY_B_H_VaporLanes }, \
+        { ALDEBARAN_KEY_B_H_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }

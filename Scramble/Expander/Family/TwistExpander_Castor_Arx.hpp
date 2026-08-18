@@ -733,6 +733,51 @@ public:
 #define CASTOR_KEY_A_A_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 0U))
 #define CASTOR_KEY_A_A_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 13U))
 #define CASTOR_KEY_A_A_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 3U))
+#define CASTOR_KEY_A_A_ArcaneLanes \
+    CASTOR_KEY_A_A_ArcaneLaneA, \
+    CASTOR_KEY_A_A_ArcaneLaneB, \
+    CASTOR_KEY_A_A_ArcaneLaneC, \
+    CASTOR_KEY_A_A_ArcaneLaneD
+#define CASTOR_KEY_A_A_PlasmaLanes \
+    CASTOR_KEY_A_A_PlasmaLaneA, \
+    CASTOR_KEY_A_A_PlasmaLaneB, \
+    CASTOR_KEY_A_A_PlasmaLaneC, \
+    CASTOR_KEY_A_A_PlasmaLaneD
+#define CASTOR_KEY_A_A_RainbowLanes \
+    CASTOR_KEY_A_A_RainbowLaneA, \
+    CASTOR_KEY_A_A_RainbowLaneB, \
+    CASTOR_KEY_A_A_RainbowLaneC, \
+    CASTOR_KEY_A_A_RainbowLaneD
+#define CASTOR_KEY_A_A_WaterLanes \
+    CASTOR_KEY_A_A_WaterLaneA, \
+    CASTOR_KEY_A_A_WaterLaneB, \
+    CASTOR_KEY_A_A_WaterLaneC, \
+    CASTOR_KEY_A_A_WaterLaneD
+#define CASTOR_KEY_A_A_VaporLanes \
+    CASTOR_KEY_A_A_VaporLaneA, \
+    CASTOR_KEY_A_A_VaporLaneB, \
+    CASTOR_KEY_A_A_VaporLaneC, \
+    CASTOR_KEY_A_A_VaporLaneD
+#define CASTOR_KEY_A_A_FrostLanes \
+    CASTOR_KEY_A_A_FrostLaneA, \
+    CASTOR_KEY_A_A_FrostLaneB, \
+    CASTOR_KEY_A_A_FrostLaneC, \
+    CASTOR_KEY_A_A_FrostLaneD
+#define CASTOR_KEY_A_A_IceLanes \
+    CASTOR_KEY_A_A_IceLaneA, \
+    CASTOR_KEY_A_A_IceLaneB, \
+    CASTOR_KEY_A_A_IceLaneC, \
+    CASTOR_KEY_A_A_IceLaneD
+#define CASTOR_KEY_A_A \
+    { \
+        { CASTOR_KEY_A_A_ArcaneLanes }, \
+        { CASTOR_KEY_A_A_PlasmaLanes }, \
+        { CASTOR_KEY_A_A_RainbowLanes }, \
+        { CASTOR_KEY_A_A_WaterLanes }, \
+        { CASTOR_KEY_A_A_VaporLanes }, \
+        { CASTOR_KEY_A_A_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_A_B
 #define CASTOR_KEY_A_B_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 10U))
@@ -851,6 +896,51 @@ public:
 #define CASTOR_KEY_A_B_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 11U))
 #define CASTOR_KEY_A_B_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 4U))
 #define CASTOR_KEY_A_B_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 0U))
+#define CASTOR_KEY_A_B_ArcaneLanes \
+    CASTOR_KEY_A_B_ArcaneLaneA, \
+    CASTOR_KEY_A_B_ArcaneLaneB, \
+    CASTOR_KEY_A_B_ArcaneLaneC, \
+    CASTOR_KEY_A_B_ArcaneLaneD
+#define CASTOR_KEY_A_B_PlasmaLanes \
+    CASTOR_KEY_A_B_PlasmaLaneA, \
+    CASTOR_KEY_A_B_PlasmaLaneB, \
+    CASTOR_KEY_A_B_PlasmaLaneC, \
+    CASTOR_KEY_A_B_PlasmaLaneD
+#define CASTOR_KEY_A_B_RainbowLanes \
+    CASTOR_KEY_A_B_RainbowLaneA, \
+    CASTOR_KEY_A_B_RainbowLaneB, \
+    CASTOR_KEY_A_B_RainbowLaneC, \
+    CASTOR_KEY_A_B_RainbowLaneD
+#define CASTOR_KEY_A_B_WaterLanes \
+    CASTOR_KEY_A_B_WaterLaneA, \
+    CASTOR_KEY_A_B_WaterLaneB, \
+    CASTOR_KEY_A_B_WaterLaneC, \
+    CASTOR_KEY_A_B_WaterLaneD
+#define CASTOR_KEY_A_B_VaporLanes \
+    CASTOR_KEY_A_B_VaporLaneA, \
+    CASTOR_KEY_A_B_VaporLaneB, \
+    CASTOR_KEY_A_B_VaporLaneC, \
+    CASTOR_KEY_A_B_VaporLaneD
+#define CASTOR_KEY_A_B_FrostLanes \
+    CASTOR_KEY_A_B_FrostLaneA, \
+    CASTOR_KEY_A_B_FrostLaneB, \
+    CASTOR_KEY_A_B_FrostLaneC, \
+    CASTOR_KEY_A_B_FrostLaneD
+#define CASTOR_KEY_A_B_IceLanes \
+    CASTOR_KEY_A_B_IceLaneA, \
+    CASTOR_KEY_A_B_IceLaneB, \
+    CASTOR_KEY_A_B_IceLaneC, \
+    CASTOR_KEY_A_B_IceLaneD
+#define CASTOR_KEY_A_B \
+    { \
+        { CASTOR_KEY_A_B_ArcaneLanes }, \
+        { CASTOR_KEY_A_B_PlasmaLanes }, \
+        { CASTOR_KEY_A_B_RainbowLanes }, \
+        { CASTOR_KEY_A_B_WaterLanes }, \
+        { CASTOR_KEY_A_B_VaporLanes }, \
+        { CASTOR_KEY_A_B_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_A_C
 #define CASTOR_KEY_A_C_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 15U))
@@ -969,6 +1059,51 @@ public:
 #define CASTOR_KEY_A_C_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 2U))
 #define CASTOR_KEY_A_C_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 9U))
 #define CASTOR_KEY_A_C_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 10U))
+#define CASTOR_KEY_A_C_ArcaneLanes \
+    CASTOR_KEY_A_C_ArcaneLaneA, \
+    CASTOR_KEY_A_C_ArcaneLaneB, \
+    CASTOR_KEY_A_C_ArcaneLaneC, \
+    CASTOR_KEY_A_C_ArcaneLaneD
+#define CASTOR_KEY_A_C_PlasmaLanes \
+    CASTOR_KEY_A_C_PlasmaLaneA, \
+    CASTOR_KEY_A_C_PlasmaLaneB, \
+    CASTOR_KEY_A_C_PlasmaLaneC, \
+    CASTOR_KEY_A_C_PlasmaLaneD
+#define CASTOR_KEY_A_C_RainbowLanes \
+    CASTOR_KEY_A_C_RainbowLaneA, \
+    CASTOR_KEY_A_C_RainbowLaneB, \
+    CASTOR_KEY_A_C_RainbowLaneC, \
+    CASTOR_KEY_A_C_RainbowLaneD
+#define CASTOR_KEY_A_C_WaterLanes \
+    CASTOR_KEY_A_C_WaterLaneA, \
+    CASTOR_KEY_A_C_WaterLaneB, \
+    CASTOR_KEY_A_C_WaterLaneC, \
+    CASTOR_KEY_A_C_WaterLaneD
+#define CASTOR_KEY_A_C_VaporLanes \
+    CASTOR_KEY_A_C_VaporLaneA, \
+    CASTOR_KEY_A_C_VaporLaneB, \
+    CASTOR_KEY_A_C_VaporLaneC, \
+    CASTOR_KEY_A_C_VaporLaneD
+#define CASTOR_KEY_A_C_FrostLanes \
+    CASTOR_KEY_A_C_FrostLaneA, \
+    CASTOR_KEY_A_C_FrostLaneB, \
+    CASTOR_KEY_A_C_FrostLaneC, \
+    CASTOR_KEY_A_C_FrostLaneD
+#define CASTOR_KEY_A_C_IceLanes \
+    CASTOR_KEY_A_C_IceLaneA, \
+    CASTOR_KEY_A_C_IceLaneB, \
+    CASTOR_KEY_A_C_IceLaneC, \
+    CASTOR_KEY_A_C_IceLaneD
+#define CASTOR_KEY_A_C \
+    { \
+        { CASTOR_KEY_A_C_ArcaneLanes }, \
+        { CASTOR_KEY_A_C_PlasmaLanes }, \
+        { CASTOR_KEY_A_C_RainbowLanes }, \
+        { CASTOR_KEY_A_C_WaterLanes }, \
+        { CASTOR_KEY_A_C_VaporLanes }, \
+        { CASTOR_KEY_A_C_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_A_D
 #define CASTOR_KEY_A_D_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 4U))
@@ -1087,6 +1222,51 @@ public:
 #define CASTOR_KEY_A_D_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 10U))
 #define CASTOR_KEY_A_D_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 6U))
 #define CASTOR_KEY_A_D_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 15U))
+#define CASTOR_KEY_A_D_ArcaneLanes \
+    CASTOR_KEY_A_D_ArcaneLaneA, \
+    CASTOR_KEY_A_D_ArcaneLaneB, \
+    CASTOR_KEY_A_D_ArcaneLaneC, \
+    CASTOR_KEY_A_D_ArcaneLaneD
+#define CASTOR_KEY_A_D_PlasmaLanes \
+    CASTOR_KEY_A_D_PlasmaLaneA, \
+    CASTOR_KEY_A_D_PlasmaLaneB, \
+    CASTOR_KEY_A_D_PlasmaLaneC, \
+    CASTOR_KEY_A_D_PlasmaLaneD
+#define CASTOR_KEY_A_D_RainbowLanes \
+    CASTOR_KEY_A_D_RainbowLaneA, \
+    CASTOR_KEY_A_D_RainbowLaneB, \
+    CASTOR_KEY_A_D_RainbowLaneC, \
+    CASTOR_KEY_A_D_RainbowLaneD
+#define CASTOR_KEY_A_D_WaterLanes \
+    CASTOR_KEY_A_D_WaterLaneA, \
+    CASTOR_KEY_A_D_WaterLaneB, \
+    CASTOR_KEY_A_D_WaterLaneC, \
+    CASTOR_KEY_A_D_WaterLaneD
+#define CASTOR_KEY_A_D_VaporLanes \
+    CASTOR_KEY_A_D_VaporLaneA, \
+    CASTOR_KEY_A_D_VaporLaneB, \
+    CASTOR_KEY_A_D_VaporLaneC, \
+    CASTOR_KEY_A_D_VaporLaneD
+#define CASTOR_KEY_A_D_FrostLanes \
+    CASTOR_KEY_A_D_FrostLaneA, \
+    CASTOR_KEY_A_D_FrostLaneB, \
+    CASTOR_KEY_A_D_FrostLaneC, \
+    CASTOR_KEY_A_D_FrostLaneD
+#define CASTOR_KEY_A_D_IceLanes \
+    CASTOR_KEY_A_D_IceLaneA, \
+    CASTOR_KEY_A_D_IceLaneB, \
+    CASTOR_KEY_A_D_IceLaneC, \
+    CASTOR_KEY_A_D_IceLaneD
+#define CASTOR_KEY_A_D \
+    { \
+        { CASTOR_KEY_A_D_ArcaneLanes }, \
+        { CASTOR_KEY_A_D_PlasmaLanes }, \
+        { CASTOR_KEY_A_D_RainbowLanes }, \
+        { CASTOR_KEY_A_D_WaterLanes }, \
+        { CASTOR_KEY_A_D_VaporLanes }, \
+        { CASTOR_KEY_A_D_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_A_E
 #define CASTOR_KEY_A_E_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 5U))
@@ -1205,6 +1385,51 @@ public:
 #define CASTOR_KEY_A_E_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 15U))
 #define CASTOR_KEY_A_E_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 5U))
 #define CASTOR_KEY_A_E_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 11U))
+#define CASTOR_KEY_A_E_ArcaneLanes \
+    CASTOR_KEY_A_E_ArcaneLaneA, \
+    CASTOR_KEY_A_E_ArcaneLaneB, \
+    CASTOR_KEY_A_E_ArcaneLaneC, \
+    CASTOR_KEY_A_E_ArcaneLaneD
+#define CASTOR_KEY_A_E_PlasmaLanes \
+    CASTOR_KEY_A_E_PlasmaLaneA, \
+    CASTOR_KEY_A_E_PlasmaLaneB, \
+    CASTOR_KEY_A_E_PlasmaLaneC, \
+    CASTOR_KEY_A_E_PlasmaLaneD
+#define CASTOR_KEY_A_E_RainbowLanes \
+    CASTOR_KEY_A_E_RainbowLaneA, \
+    CASTOR_KEY_A_E_RainbowLaneB, \
+    CASTOR_KEY_A_E_RainbowLaneC, \
+    CASTOR_KEY_A_E_RainbowLaneD
+#define CASTOR_KEY_A_E_WaterLanes \
+    CASTOR_KEY_A_E_WaterLaneA, \
+    CASTOR_KEY_A_E_WaterLaneB, \
+    CASTOR_KEY_A_E_WaterLaneC, \
+    CASTOR_KEY_A_E_WaterLaneD
+#define CASTOR_KEY_A_E_VaporLanes \
+    CASTOR_KEY_A_E_VaporLaneA, \
+    CASTOR_KEY_A_E_VaporLaneB, \
+    CASTOR_KEY_A_E_VaporLaneC, \
+    CASTOR_KEY_A_E_VaporLaneD
+#define CASTOR_KEY_A_E_FrostLanes \
+    CASTOR_KEY_A_E_FrostLaneA, \
+    CASTOR_KEY_A_E_FrostLaneB, \
+    CASTOR_KEY_A_E_FrostLaneC, \
+    CASTOR_KEY_A_E_FrostLaneD
+#define CASTOR_KEY_A_E_IceLanes \
+    CASTOR_KEY_A_E_IceLaneA, \
+    CASTOR_KEY_A_E_IceLaneB, \
+    CASTOR_KEY_A_E_IceLaneC, \
+    CASTOR_KEY_A_E_IceLaneD
+#define CASTOR_KEY_A_E \
+    { \
+        { CASTOR_KEY_A_E_ArcaneLanes }, \
+        { CASTOR_KEY_A_E_PlasmaLanes }, \
+        { CASTOR_KEY_A_E_RainbowLanes }, \
+        { CASTOR_KEY_A_E_WaterLanes }, \
+        { CASTOR_KEY_A_E_VaporLanes }, \
+        { CASTOR_KEY_A_E_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_A_F
 #define CASTOR_KEY_A_F_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 7U))
@@ -1323,6 +1548,51 @@ public:
 #define CASTOR_KEY_A_F_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 8U))
 #define CASTOR_KEY_A_F_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 12U))
 #define CASTOR_KEY_A_F_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 2U))
+#define CASTOR_KEY_A_F_ArcaneLanes \
+    CASTOR_KEY_A_F_ArcaneLaneA, \
+    CASTOR_KEY_A_F_ArcaneLaneB, \
+    CASTOR_KEY_A_F_ArcaneLaneC, \
+    CASTOR_KEY_A_F_ArcaneLaneD
+#define CASTOR_KEY_A_F_PlasmaLanes \
+    CASTOR_KEY_A_F_PlasmaLaneA, \
+    CASTOR_KEY_A_F_PlasmaLaneB, \
+    CASTOR_KEY_A_F_PlasmaLaneC, \
+    CASTOR_KEY_A_F_PlasmaLaneD
+#define CASTOR_KEY_A_F_RainbowLanes \
+    CASTOR_KEY_A_F_RainbowLaneA, \
+    CASTOR_KEY_A_F_RainbowLaneB, \
+    CASTOR_KEY_A_F_RainbowLaneC, \
+    CASTOR_KEY_A_F_RainbowLaneD
+#define CASTOR_KEY_A_F_WaterLanes \
+    CASTOR_KEY_A_F_WaterLaneA, \
+    CASTOR_KEY_A_F_WaterLaneB, \
+    CASTOR_KEY_A_F_WaterLaneC, \
+    CASTOR_KEY_A_F_WaterLaneD
+#define CASTOR_KEY_A_F_VaporLanes \
+    CASTOR_KEY_A_F_VaporLaneA, \
+    CASTOR_KEY_A_F_VaporLaneB, \
+    CASTOR_KEY_A_F_VaporLaneC, \
+    CASTOR_KEY_A_F_VaporLaneD
+#define CASTOR_KEY_A_F_FrostLanes \
+    CASTOR_KEY_A_F_FrostLaneA, \
+    CASTOR_KEY_A_F_FrostLaneB, \
+    CASTOR_KEY_A_F_FrostLaneC, \
+    CASTOR_KEY_A_F_FrostLaneD
+#define CASTOR_KEY_A_F_IceLanes \
+    CASTOR_KEY_A_F_IceLaneA, \
+    CASTOR_KEY_A_F_IceLaneB, \
+    CASTOR_KEY_A_F_IceLaneC, \
+    CASTOR_KEY_A_F_IceLaneD
+#define CASTOR_KEY_A_F \
+    { \
+        { CASTOR_KEY_A_F_ArcaneLanes }, \
+        { CASTOR_KEY_A_F_PlasmaLanes }, \
+        { CASTOR_KEY_A_F_RainbowLanes }, \
+        { CASTOR_KEY_A_F_WaterLanes }, \
+        { CASTOR_KEY_A_F_VaporLanes }, \
+        { CASTOR_KEY_A_F_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_A_G
 #define CASTOR_KEY_A_G_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 12U))
@@ -1441,6 +1711,51 @@ public:
 #define CASTOR_KEY_A_G_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 7U))
 #define CASTOR_KEY_A_G_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 14U))
 #define CASTOR_KEY_A_G_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 8U))
+#define CASTOR_KEY_A_G_ArcaneLanes \
+    CASTOR_KEY_A_G_ArcaneLaneA, \
+    CASTOR_KEY_A_G_ArcaneLaneB, \
+    CASTOR_KEY_A_G_ArcaneLaneC, \
+    CASTOR_KEY_A_G_ArcaneLaneD
+#define CASTOR_KEY_A_G_PlasmaLanes \
+    CASTOR_KEY_A_G_PlasmaLaneA, \
+    CASTOR_KEY_A_G_PlasmaLaneB, \
+    CASTOR_KEY_A_G_PlasmaLaneC, \
+    CASTOR_KEY_A_G_PlasmaLaneD
+#define CASTOR_KEY_A_G_RainbowLanes \
+    CASTOR_KEY_A_G_RainbowLaneA, \
+    CASTOR_KEY_A_G_RainbowLaneB, \
+    CASTOR_KEY_A_G_RainbowLaneC, \
+    CASTOR_KEY_A_G_RainbowLaneD
+#define CASTOR_KEY_A_G_WaterLanes \
+    CASTOR_KEY_A_G_WaterLaneA, \
+    CASTOR_KEY_A_G_WaterLaneB, \
+    CASTOR_KEY_A_G_WaterLaneC, \
+    CASTOR_KEY_A_G_WaterLaneD
+#define CASTOR_KEY_A_G_VaporLanes \
+    CASTOR_KEY_A_G_VaporLaneA, \
+    CASTOR_KEY_A_G_VaporLaneB, \
+    CASTOR_KEY_A_G_VaporLaneC, \
+    CASTOR_KEY_A_G_VaporLaneD
+#define CASTOR_KEY_A_G_FrostLanes \
+    CASTOR_KEY_A_G_FrostLaneA, \
+    CASTOR_KEY_A_G_FrostLaneB, \
+    CASTOR_KEY_A_G_FrostLaneC, \
+    CASTOR_KEY_A_G_FrostLaneD
+#define CASTOR_KEY_A_G_IceLanes \
+    CASTOR_KEY_A_G_IceLaneA, \
+    CASTOR_KEY_A_G_IceLaneB, \
+    CASTOR_KEY_A_G_IceLaneC, \
+    CASTOR_KEY_A_G_IceLaneD
+#define CASTOR_KEY_A_G \
+    { \
+        { CASTOR_KEY_A_G_ArcaneLanes }, \
+        { CASTOR_KEY_A_G_PlasmaLanes }, \
+        { CASTOR_KEY_A_G_RainbowLanes }, \
+        { CASTOR_KEY_A_G_WaterLanes }, \
+        { CASTOR_KEY_A_G_VaporLanes }, \
+        { CASTOR_KEY_A_G_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_A_H
 #define CASTOR_KEY_A_H_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 13U))
@@ -1559,6 +1874,51 @@ public:
 #define CASTOR_KEY_A_H_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 5U))
 #define CASTOR_KEY_A_H_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 3U))
 #define CASTOR_KEY_A_H_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 4U))
+#define CASTOR_KEY_A_H_ArcaneLanes \
+    CASTOR_KEY_A_H_ArcaneLaneA, \
+    CASTOR_KEY_A_H_ArcaneLaneB, \
+    CASTOR_KEY_A_H_ArcaneLaneC, \
+    CASTOR_KEY_A_H_ArcaneLaneD
+#define CASTOR_KEY_A_H_PlasmaLanes \
+    CASTOR_KEY_A_H_PlasmaLaneA, \
+    CASTOR_KEY_A_H_PlasmaLaneB, \
+    CASTOR_KEY_A_H_PlasmaLaneC, \
+    CASTOR_KEY_A_H_PlasmaLaneD
+#define CASTOR_KEY_A_H_RainbowLanes \
+    CASTOR_KEY_A_H_RainbowLaneA, \
+    CASTOR_KEY_A_H_RainbowLaneB, \
+    CASTOR_KEY_A_H_RainbowLaneC, \
+    CASTOR_KEY_A_H_RainbowLaneD
+#define CASTOR_KEY_A_H_WaterLanes \
+    CASTOR_KEY_A_H_WaterLaneA, \
+    CASTOR_KEY_A_H_WaterLaneB, \
+    CASTOR_KEY_A_H_WaterLaneC, \
+    CASTOR_KEY_A_H_WaterLaneD
+#define CASTOR_KEY_A_H_VaporLanes \
+    CASTOR_KEY_A_H_VaporLaneA, \
+    CASTOR_KEY_A_H_VaporLaneB, \
+    CASTOR_KEY_A_H_VaporLaneC, \
+    CASTOR_KEY_A_H_VaporLaneD
+#define CASTOR_KEY_A_H_FrostLanes \
+    CASTOR_KEY_A_H_FrostLaneA, \
+    CASTOR_KEY_A_H_FrostLaneB, \
+    CASTOR_KEY_A_H_FrostLaneC, \
+    CASTOR_KEY_A_H_FrostLaneD
+#define CASTOR_KEY_A_H_IceLanes \
+    CASTOR_KEY_A_H_IceLaneA, \
+    CASTOR_KEY_A_H_IceLaneB, \
+    CASTOR_KEY_A_H_IceLaneC, \
+    CASTOR_KEY_A_H_IceLaneD
+#define CASTOR_KEY_A_H \
+    { \
+        { CASTOR_KEY_A_H_ArcaneLanes }, \
+        { CASTOR_KEY_A_H_PlasmaLanes }, \
+        { CASTOR_KEY_A_H_RainbowLanes }, \
+        { CASTOR_KEY_A_H_WaterLanes }, \
+        { CASTOR_KEY_A_H_VaporLanes }, \
+        { CASTOR_KEY_A_H_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnAConstants) \
+    }
 
 // KEY_B_A
 #define CASTOR_KEY_B_A_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 6U))
@@ -1677,6 +2037,51 @@ public:
 #define CASTOR_KEY_B_A_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 1U))
 #define CASTOR_KEY_B_A_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 2U))
 #define CASTOR_KEY_B_A_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 14U))
+#define CASTOR_KEY_B_A_ArcaneLanes \
+    CASTOR_KEY_B_A_ArcaneLaneA, \
+    CASTOR_KEY_B_A_ArcaneLaneB, \
+    CASTOR_KEY_B_A_ArcaneLaneC, \
+    CASTOR_KEY_B_A_ArcaneLaneD
+#define CASTOR_KEY_B_A_PlasmaLanes \
+    CASTOR_KEY_B_A_PlasmaLaneA, \
+    CASTOR_KEY_B_A_PlasmaLaneB, \
+    CASTOR_KEY_B_A_PlasmaLaneC, \
+    CASTOR_KEY_B_A_PlasmaLaneD
+#define CASTOR_KEY_B_A_RainbowLanes \
+    CASTOR_KEY_B_A_RainbowLaneA, \
+    CASTOR_KEY_B_A_RainbowLaneB, \
+    CASTOR_KEY_B_A_RainbowLaneC, \
+    CASTOR_KEY_B_A_RainbowLaneD
+#define CASTOR_KEY_B_A_WaterLanes \
+    CASTOR_KEY_B_A_WaterLaneA, \
+    CASTOR_KEY_B_A_WaterLaneB, \
+    CASTOR_KEY_B_A_WaterLaneC, \
+    CASTOR_KEY_B_A_WaterLaneD
+#define CASTOR_KEY_B_A_VaporLanes \
+    CASTOR_KEY_B_A_VaporLaneA, \
+    CASTOR_KEY_B_A_VaporLaneB, \
+    CASTOR_KEY_B_A_VaporLaneC, \
+    CASTOR_KEY_B_A_VaporLaneD
+#define CASTOR_KEY_B_A_FrostLanes \
+    CASTOR_KEY_B_A_FrostLaneA, \
+    CASTOR_KEY_B_A_FrostLaneB, \
+    CASTOR_KEY_B_A_FrostLaneC, \
+    CASTOR_KEY_B_A_FrostLaneD
+#define CASTOR_KEY_B_A_IceLanes \
+    CASTOR_KEY_B_A_IceLaneA, \
+    CASTOR_KEY_B_A_IceLaneB, \
+    CASTOR_KEY_B_A_IceLaneC, \
+    CASTOR_KEY_B_A_IceLaneD
+#define CASTOR_KEY_B_A \
+    { \
+        { CASTOR_KEY_B_A_ArcaneLanes }, \
+        { CASTOR_KEY_B_A_PlasmaLanes }, \
+        { CASTOR_KEY_B_A_RainbowLanes }, \
+        { CASTOR_KEY_B_A_WaterLanes }, \
+        { CASTOR_KEY_B_A_VaporLanes }, \
+        { CASTOR_KEY_B_A_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }
 
 // KEY_B_B
 #define CASTOR_KEY_B_B_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 9U))
@@ -1795,6 +2200,51 @@ public:
 #define CASTOR_KEY_B_B_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 3U))
 #define CASTOR_KEY_B_B_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 1U))
 #define CASTOR_KEY_B_B_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 7U))
+#define CASTOR_KEY_B_B_ArcaneLanes \
+    CASTOR_KEY_B_B_ArcaneLaneA, \
+    CASTOR_KEY_B_B_ArcaneLaneB, \
+    CASTOR_KEY_B_B_ArcaneLaneC, \
+    CASTOR_KEY_B_B_ArcaneLaneD
+#define CASTOR_KEY_B_B_PlasmaLanes \
+    CASTOR_KEY_B_B_PlasmaLaneA, \
+    CASTOR_KEY_B_B_PlasmaLaneB, \
+    CASTOR_KEY_B_B_PlasmaLaneC, \
+    CASTOR_KEY_B_B_PlasmaLaneD
+#define CASTOR_KEY_B_B_RainbowLanes \
+    CASTOR_KEY_B_B_RainbowLaneA, \
+    CASTOR_KEY_B_B_RainbowLaneB, \
+    CASTOR_KEY_B_B_RainbowLaneC, \
+    CASTOR_KEY_B_B_RainbowLaneD
+#define CASTOR_KEY_B_B_WaterLanes \
+    CASTOR_KEY_B_B_WaterLaneA, \
+    CASTOR_KEY_B_B_WaterLaneB, \
+    CASTOR_KEY_B_B_WaterLaneC, \
+    CASTOR_KEY_B_B_WaterLaneD
+#define CASTOR_KEY_B_B_VaporLanes \
+    CASTOR_KEY_B_B_VaporLaneA, \
+    CASTOR_KEY_B_B_VaporLaneB, \
+    CASTOR_KEY_B_B_VaporLaneC, \
+    CASTOR_KEY_B_B_VaporLaneD
+#define CASTOR_KEY_B_B_FrostLanes \
+    CASTOR_KEY_B_B_FrostLaneA, \
+    CASTOR_KEY_B_B_FrostLaneB, \
+    CASTOR_KEY_B_B_FrostLaneC, \
+    CASTOR_KEY_B_B_FrostLaneD
+#define CASTOR_KEY_B_B_IceLanes \
+    CASTOR_KEY_B_B_IceLaneA, \
+    CASTOR_KEY_B_B_IceLaneB, \
+    CASTOR_KEY_B_B_IceLaneC, \
+    CASTOR_KEY_B_B_IceLaneD
+#define CASTOR_KEY_B_B \
+    { \
+        { CASTOR_KEY_B_B_ArcaneLanes }, \
+        { CASTOR_KEY_B_B_PlasmaLanes }, \
+        { CASTOR_KEY_B_B_RainbowLanes }, \
+        { CASTOR_KEY_B_B_WaterLanes }, \
+        { CASTOR_KEY_B_B_VaporLanes }, \
+        { CASTOR_KEY_B_B_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }
 
 // KEY_B_C
 #define CASTOR_KEY_B_C_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 14U))
@@ -1913,6 +2363,51 @@ public:
 #define CASTOR_KEY_B_C_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 9U))
 #define CASTOR_KEY_B_C_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 11U))
 #define CASTOR_KEY_B_C_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 6U))
+#define CASTOR_KEY_B_C_ArcaneLanes \
+    CASTOR_KEY_B_C_ArcaneLaneA, \
+    CASTOR_KEY_B_C_ArcaneLaneB, \
+    CASTOR_KEY_B_C_ArcaneLaneC, \
+    CASTOR_KEY_B_C_ArcaneLaneD
+#define CASTOR_KEY_B_C_PlasmaLanes \
+    CASTOR_KEY_B_C_PlasmaLaneA, \
+    CASTOR_KEY_B_C_PlasmaLaneB, \
+    CASTOR_KEY_B_C_PlasmaLaneC, \
+    CASTOR_KEY_B_C_PlasmaLaneD
+#define CASTOR_KEY_B_C_RainbowLanes \
+    CASTOR_KEY_B_C_RainbowLaneA, \
+    CASTOR_KEY_B_C_RainbowLaneB, \
+    CASTOR_KEY_B_C_RainbowLaneC, \
+    CASTOR_KEY_B_C_RainbowLaneD
+#define CASTOR_KEY_B_C_WaterLanes \
+    CASTOR_KEY_B_C_WaterLaneA, \
+    CASTOR_KEY_B_C_WaterLaneB, \
+    CASTOR_KEY_B_C_WaterLaneC, \
+    CASTOR_KEY_B_C_WaterLaneD
+#define CASTOR_KEY_B_C_VaporLanes \
+    CASTOR_KEY_B_C_VaporLaneA, \
+    CASTOR_KEY_B_C_VaporLaneB, \
+    CASTOR_KEY_B_C_VaporLaneC, \
+    CASTOR_KEY_B_C_VaporLaneD
+#define CASTOR_KEY_B_C_FrostLanes \
+    CASTOR_KEY_B_C_FrostLaneA, \
+    CASTOR_KEY_B_C_FrostLaneB, \
+    CASTOR_KEY_B_C_FrostLaneC, \
+    CASTOR_KEY_B_C_FrostLaneD
+#define CASTOR_KEY_B_C_IceLanes \
+    CASTOR_KEY_B_C_IceLaneA, \
+    CASTOR_KEY_B_C_IceLaneB, \
+    CASTOR_KEY_B_C_IceLaneC, \
+    CASTOR_KEY_B_C_IceLaneD
+#define CASTOR_KEY_B_C \
+    { \
+        { CASTOR_KEY_B_C_ArcaneLanes }, \
+        { CASTOR_KEY_B_C_PlasmaLanes }, \
+        { CASTOR_KEY_B_C_RainbowLanes }, \
+        { CASTOR_KEY_B_C_WaterLanes }, \
+        { CASTOR_KEY_B_C_VaporLanes }, \
+        { CASTOR_KEY_B_C_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }
 
 // KEY_B_D
 #define CASTOR_KEY_B_D_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 1U))
@@ -2031,6 +2526,51 @@ public:
 #define CASTOR_KEY_B_D_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 12U))
 #define CASTOR_KEY_B_D_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 15U))
 #define CASTOR_KEY_B_D_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 9U))
+#define CASTOR_KEY_B_D_ArcaneLanes \
+    CASTOR_KEY_B_D_ArcaneLaneA, \
+    CASTOR_KEY_B_D_ArcaneLaneB, \
+    CASTOR_KEY_B_D_ArcaneLaneC, \
+    CASTOR_KEY_B_D_ArcaneLaneD
+#define CASTOR_KEY_B_D_PlasmaLanes \
+    CASTOR_KEY_B_D_PlasmaLaneA, \
+    CASTOR_KEY_B_D_PlasmaLaneB, \
+    CASTOR_KEY_B_D_PlasmaLaneC, \
+    CASTOR_KEY_B_D_PlasmaLaneD
+#define CASTOR_KEY_B_D_RainbowLanes \
+    CASTOR_KEY_B_D_RainbowLaneA, \
+    CASTOR_KEY_B_D_RainbowLaneB, \
+    CASTOR_KEY_B_D_RainbowLaneC, \
+    CASTOR_KEY_B_D_RainbowLaneD
+#define CASTOR_KEY_B_D_WaterLanes \
+    CASTOR_KEY_B_D_WaterLaneA, \
+    CASTOR_KEY_B_D_WaterLaneB, \
+    CASTOR_KEY_B_D_WaterLaneC, \
+    CASTOR_KEY_B_D_WaterLaneD
+#define CASTOR_KEY_B_D_VaporLanes \
+    CASTOR_KEY_B_D_VaporLaneA, \
+    CASTOR_KEY_B_D_VaporLaneB, \
+    CASTOR_KEY_B_D_VaporLaneC, \
+    CASTOR_KEY_B_D_VaporLaneD
+#define CASTOR_KEY_B_D_FrostLanes \
+    CASTOR_KEY_B_D_FrostLaneA, \
+    CASTOR_KEY_B_D_FrostLaneB, \
+    CASTOR_KEY_B_D_FrostLaneC, \
+    CASTOR_KEY_B_D_FrostLaneD
+#define CASTOR_KEY_B_D_IceLanes \
+    CASTOR_KEY_B_D_IceLaneA, \
+    CASTOR_KEY_B_D_IceLaneB, \
+    CASTOR_KEY_B_D_IceLaneC, \
+    CASTOR_KEY_B_D_IceLaneD
+#define CASTOR_KEY_B_D \
+    { \
+        { CASTOR_KEY_B_D_ArcaneLanes }, \
+        { CASTOR_KEY_B_D_PlasmaLanes }, \
+        { CASTOR_KEY_B_D_RainbowLanes }, \
+        { CASTOR_KEY_B_D_WaterLanes }, \
+        { CASTOR_KEY_B_D_VaporLanes }, \
+        { CASTOR_KEY_B_D_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }
 
 // KEY_B_E
 #define CASTOR_KEY_B_E_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 3U))
@@ -2149,6 +2689,51 @@ public:
 #define CASTOR_KEY_B_E_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 4U))
 #define CASTOR_KEY_B_E_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 7U))
 #define CASTOR_KEY_B_E_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 13U))
+#define CASTOR_KEY_B_E_ArcaneLanes \
+    CASTOR_KEY_B_E_ArcaneLaneA, \
+    CASTOR_KEY_B_E_ArcaneLaneB, \
+    CASTOR_KEY_B_E_ArcaneLaneC, \
+    CASTOR_KEY_B_E_ArcaneLaneD
+#define CASTOR_KEY_B_E_PlasmaLanes \
+    CASTOR_KEY_B_E_PlasmaLaneA, \
+    CASTOR_KEY_B_E_PlasmaLaneB, \
+    CASTOR_KEY_B_E_PlasmaLaneC, \
+    CASTOR_KEY_B_E_PlasmaLaneD
+#define CASTOR_KEY_B_E_RainbowLanes \
+    CASTOR_KEY_B_E_RainbowLaneA, \
+    CASTOR_KEY_B_E_RainbowLaneB, \
+    CASTOR_KEY_B_E_RainbowLaneC, \
+    CASTOR_KEY_B_E_RainbowLaneD
+#define CASTOR_KEY_B_E_WaterLanes \
+    CASTOR_KEY_B_E_WaterLaneA, \
+    CASTOR_KEY_B_E_WaterLaneB, \
+    CASTOR_KEY_B_E_WaterLaneC, \
+    CASTOR_KEY_B_E_WaterLaneD
+#define CASTOR_KEY_B_E_VaporLanes \
+    CASTOR_KEY_B_E_VaporLaneA, \
+    CASTOR_KEY_B_E_VaporLaneB, \
+    CASTOR_KEY_B_E_VaporLaneC, \
+    CASTOR_KEY_B_E_VaporLaneD
+#define CASTOR_KEY_B_E_FrostLanes \
+    CASTOR_KEY_B_E_FrostLaneA, \
+    CASTOR_KEY_B_E_FrostLaneB, \
+    CASTOR_KEY_B_E_FrostLaneC, \
+    CASTOR_KEY_B_E_FrostLaneD
+#define CASTOR_KEY_B_E_IceLanes \
+    CASTOR_KEY_B_E_IceLaneA, \
+    CASTOR_KEY_B_E_IceLaneB, \
+    CASTOR_KEY_B_E_IceLaneC, \
+    CASTOR_KEY_B_E_IceLaneD
+#define CASTOR_KEY_B_E \
+    { \
+        { CASTOR_KEY_B_E_ArcaneLanes }, \
+        { CASTOR_KEY_B_E_PlasmaLanes }, \
+        { CASTOR_KEY_B_E_RainbowLanes }, \
+        { CASTOR_KEY_B_E_WaterLanes }, \
+        { CASTOR_KEY_B_E_VaporLanes }, \
+        { CASTOR_KEY_B_E_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }
 
 // KEY_B_F
 #define CASTOR_KEY_B_F_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 0U))
@@ -2267,6 +2852,51 @@ public:
 #define CASTOR_KEY_B_F_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 14U))
 #define CASTOR_KEY_B_F_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 10U))
 #define CASTOR_KEY_B_F_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 12U))
+#define CASTOR_KEY_B_F_ArcaneLanes \
+    CASTOR_KEY_B_F_ArcaneLaneA, \
+    CASTOR_KEY_B_F_ArcaneLaneB, \
+    CASTOR_KEY_B_F_ArcaneLaneC, \
+    CASTOR_KEY_B_F_ArcaneLaneD
+#define CASTOR_KEY_B_F_PlasmaLanes \
+    CASTOR_KEY_B_F_PlasmaLaneA, \
+    CASTOR_KEY_B_F_PlasmaLaneB, \
+    CASTOR_KEY_B_F_PlasmaLaneC, \
+    CASTOR_KEY_B_F_PlasmaLaneD
+#define CASTOR_KEY_B_F_RainbowLanes \
+    CASTOR_KEY_B_F_RainbowLaneA, \
+    CASTOR_KEY_B_F_RainbowLaneB, \
+    CASTOR_KEY_B_F_RainbowLaneC, \
+    CASTOR_KEY_B_F_RainbowLaneD
+#define CASTOR_KEY_B_F_WaterLanes \
+    CASTOR_KEY_B_F_WaterLaneA, \
+    CASTOR_KEY_B_F_WaterLaneB, \
+    CASTOR_KEY_B_F_WaterLaneC, \
+    CASTOR_KEY_B_F_WaterLaneD
+#define CASTOR_KEY_B_F_VaporLanes \
+    CASTOR_KEY_B_F_VaporLaneA, \
+    CASTOR_KEY_B_F_VaporLaneB, \
+    CASTOR_KEY_B_F_VaporLaneC, \
+    CASTOR_KEY_B_F_VaporLaneD
+#define CASTOR_KEY_B_F_FrostLanes \
+    CASTOR_KEY_B_F_FrostLaneA, \
+    CASTOR_KEY_B_F_FrostLaneB, \
+    CASTOR_KEY_B_F_FrostLaneC, \
+    CASTOR_KEY_B_F_FrostLaneD
+#define CASTOR_KEY_B_F_IceLanes \
+    CASTOR_KEY_B_F_IceLaneA, \
+    CASTOR_KEY_B_F_IceLaneB, \
+    CASTOR_KEY_B_F_IceLaneC, \
+    CASTOR_KEY_B_F_IceLaneD
+#define CASTOR_KEY_B_F \
+    { \
+        { CASTOR_KEY_B_F_ArcaneLanes }, \
+        { CASTOR_KEY_B_F_PlasmaLanes }, \
+        { CASTOR_KEY_B_F_RainbowLanes }, \
+        { CASTOR_KEY_B_F_WaterLanes }, \
+        { CASTOR_KEY_B_F_VaporLanes }, \
+        { CASTOR_KEY_B_F_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }
 
 // KEY_B_G
 #define CASTOR_KEY_B_G_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 11U))
@@ -2385,6 +3015,51 @@ public:
 #define CASTOR_KEY_B_G_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 6U))
 #define CASTOR_KEY_B_G_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 0U))
 #define CASTOR_KEY_B_G_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 5U))
+#define CASTOR_KEY_B_G_ArcaneLanes \
+    CASTOR_KEY_B_G_ArcaneLaneA, \
+    CASTOR_KEY_B_G_ArcaneLaneB, \
+    CASTOR_KEY_B_G_ArcaneLaneC, \
+    CASTOR_KEY_B_G_ArcaneLaneD
+#define CASTOR_KEY_B_G_PlasmaLanes \
+    CASTOR_KEY_B_G_PlasmaLaneA, \
+    CASTOR_KEY_B_G_PlasmaLaneB, \
+    CASTOR_KEY_B_G_PlasmaLaneC, \
+    CASTOR_KEY_B_G_PlasmaLaneD
+#define CASTOR_KEY_B_G_RainbowLanes \
+    CASTOR_KEY_B_G_RainbowLaneA, \
+    CASTOR_KEY_B_G_RainbowLaneB, \
+    CASTOR_KEY_B_G_RainbowLaneC, \
+    CASTOR_KEY_B_G_RainbowLaneD
+#define CASTOR_KEY_B_G_WaterLanes \
+    CASTOR_KEY_B_G_WaterLaneA, \
+    CASTOR_KEY_B_G_WaterLaneB, \
+    CASTOR_KEY_B_G_WaterLaneC, \
+    CASTOR_KEY_B_G_WaterLaneD
+#define CASTOR_KEY_B_G_VaporLanes \
+    CASTOR_KEY_B_G_VaporLaneA, \
+    CASTOR_KEY_B_G_VaporLaneB, \
+    CASTOR_KEY_B_G_VaporLaneC, \
+    CASTOR_KEY_B_G_VaporLaneD
+#define CASTOR_KEY_B_G_FrostLanes \
+    CASTOR_KEY_B_G_FrostLaneA, \
+    CASTOR_KEY_B_G_FrostLaneB, \
+    CASTOR_KEY_B_G_FrostLaneC, \
+    CASTOR_KEY_B_G_FrostLaneD
+#define CASTOR_KEY_B_G_IceLanes \
+    CASTOR_KEY_B_G_IceLaneA, \
+    CASTOR_KEY_B_G_IceLaneB, \
+    CASTOR_KEY_B_G_IceLaneC, \
+    CASTOR_KEY_B_G_IceLaneD
+#define CASTOR_KEY_B_G \
+    { \
+        { CASTOR_KEY_B_G_ArcaneLanes }, \
+        { CASTOR_KEY_B_G_PlasmaLanes }, \
+        { CASTOR_KEY_B_G_RainbowLanes }, \
+        { CASTOR_KEY_B_G_WaterLanes }, \
+        { CASTOR_KEY_B_G_VaporLanes }, \
+        { CASTOR_KEY_B_G_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }
 
 // KEY_B_H
 #define CASTOR_KEY_B_H_EarthLaneA (pWorkSpace->mEarthLaneA + (W_KEY * 2U))
@@ -2503,3 +3178,48 @@ public:
 #define CASTOR_KEY_B_H_VoodooLaneB (pWorkSpace->mVoodooLaneB + (W_KEY * 13U))
 #define CASTOR_KEY_B_H_VoodooLaneC (pWorkSpace->mVoodooLaneC + (W_KEY * 8U))
 #define CASTOR_KEY_B_H_VoodooLaneD (pWorkSpace->mVoodooLaneD + (W_KEY * 1U))
+#define CASTOR_KEY_B_H_ArcaneLanes \
+    CASTOR_KEY_B_H_ArcaneLaneA, \
+    CASTOR_KEY_B_H_ArcaneLaneB, \
+    CASTOR_KEY_B_H_ArcaneLaneC, \
+    CASTOR_KEY_B_H_ArcaneLaneD
+#define CASTOR_KEY_B_H_PlasmaLanes \
+    CASTOR_KEY_B_H_PlasmaLaneA, \
+    CASTOR_KEY_B_H_PlasmaLaneB, \
+    CASTOR_KEY_B_H_PlasmaLaneC, \
+    CASTOR_KEY_B_H_PlasmaLaneD
+#define CASTOR_KEY_B_H_RainbowLanes \
+    CASTOR_KEY_B_H_RainbowLaneA, \
+    CASTOR_KEY_B_H_RainbowLaneB, \
+    CASTOR_KEY_B_H_RainbowLaneC, \
+    CASTOR_KEY_B_H_RainbowLaneD
+#define CASTOR_KEY_B_H_WaterLanes \
+    CASTOR_KEY_B_H_WaterLaneA, \
+    CASTOR_KEY_B_H_WaterLaneB, \
+    CASTOR_KEY_B_H_WaterLaneC, \
+    CASTOR_KEY_B_H_WaterLaneD
+#define CASTOR_KEY_B_H_VaporLanes \
+    CASTOR_KEY_B_H_VaporLaneA, \
+    CASTOR_KEY_B_H_VaporLaneB, \
+    CASTOR_KEY_B_H_VaporLaneC, \
+    CASTOR_KEY_B_H_VaporLaneD
+#define CASTOR_KEY_B_H_FrostLanes \
+    CASTOR_KEY_B_H_FrostLaneA, \
+    CASTOR_KEY_B_H_FrostLaneB, \
+    CASTOR_KEY_B_H_FrostLaneC, \
+    CASTOR_KEY_B_H_FrostLaneD
+#define CASTOR_KEY_B_H_IceLanes \
+    CASTOR_KEY_B_H_IceLaneA, \
+    CASTOR_KEY_B_H_IceLaneB, \
+    CASTOR_KEY_B_H_IceLaneC, \
+    CASTOR_KEY_B_H_IceLaneD
+#define CASTOR_KEY_B_H \
+    { \
+        { CASTOR_KEY_B_H_ArcaneLanes }, \
+        { CASTOR_KEY_B_H_PlasmaLanes }, \
+        { CASTOR_KEY_B_H_RainbowLanes }, \
+        { CASTOR_KEY_B_H_WaterLanes }, \
+        { CASTOR_KEY_B_H_VaporLanes }, \
+        { CASTOR_KEY_B_H_FrostLanes }, \
+        &(pWorkSpace->mDomainBundle.mKeySpawnBConstants) \
+    }
