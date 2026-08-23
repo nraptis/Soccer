@@ -16,6 +16,11 @@
 
 class M88 {
 public:
+    
+    static std::size_t                          Slot(std::size_t pX, std::size_t pY);
+    static std::size_t                          X(std::size_t pSlot);
+    static std::size_t                          Y(std::size_t pSlot);
+    
     static constexpr std::size_t                kOperationByteCount = 48U;
     static constexpr std::size_t                kOperationBytesUsed = 48U;
     static_assert(kOperationBytesUsed <= kOperationByteCount);
@@ -23,7 +28,6 @@ public:
     M88();
     
     void                                        Reset();
-    void                                        Print() const;
     
 
     std::uint8_t                                mData[64];

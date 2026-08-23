@@ -44,13 +44,12 @@
     std::size_t aBlockIndexList[6];
     aBlockIndexList[0] = 0;
     aBlockIndexList[1] = 1;
-    aBlockIndexList[2] = 14;
-    aBlockIndexList[3] = 15;
-    aBlockIndexList[4] = 30;
-    aBlockIndexList[5] = 31;
+    aBlockIndexList[2] = 6;
+    aBlockIndexList[3] = 7;
+    aBlockIndexList[4] = 12;
+    aBlockIndexList[5] = 13;
     
     for (std::size_t aTrial=0; aTrial<16; aTrial++) {
-        
         for (std::size_t aLaneIndex=0; aLaneIndex<aLaneCount; aLaneIndex++) {
             std::memset(aSources_A[aLaneIndex], 0, S_BLOCK);
             std::memset(aCrosses_A_A[aLaneIndex], 0, S_BLOCK);
@@ -92,7 +91,6 @@
         }
         
         Soccer2::TwistRound(0, false, ARX_STATE_VARS);
-        
         for (std::size_t aLaneIndex=0; aLaneIndex<aLaneCount; aLaneIndex++) {
             const std::size_t aByteRichness = LaneTool::ByteRichness(Soccer2::mMaterials[aLaneIndex], S_BLOCK);
             if (aByteRichness < 512) {
@@ -138,7 +136,6 @@
         }
         
         Soccer2::TwistRound(0, false, ARX_STATE_VARS);
-        
         for (std::size_t aLaneIndex=0; aLaneIndex<aLaneCount; aLaneIndex++) {
             const std::size_t aByteRichness = LaneTool::ByteRichness(Soccer2::mMaterials[aLaneIndex], S_BLOCK);
             if (aByteRichness < 512) {
@@ -196,9 +193,7 @@
             }
             
             Soccer2::TwistRound(aBlockIndex, false, ARX_STATE_VARS);
-            
             for (std::size_t aLaneIndex=0; aLaneIndex<aLaneCount; aLaneIndex++) {
-                
                 if (std::memcmp(&Soccer2::mMaterials[aLaneIndex][aBlockIndex * S_BLOCK],
                                 aExpectation_A[aLaneIndex], S_BLOCK) != 0) {
                     XCTFail("test_TwistRound_Weak: at block %zu lane %zu, we did not get equal to expectation", aBlockIndex, aLaneIndex);
@@ -241,9 +236,7 @@
             }
             
             Soccer2::TwistRound(aBlockIndex, false, ARX_STATE_VARS);
-            
             for (std::size_t aLaneIndex=0; aLaneIndex<aLaneCount; aLaneIndex++) {
-                
                 if (std::memcmp(&Soccer2::mMaterials[aLaneIndex][aBlockIndex * S_BLOCK],
                                 aExpectation_B[aLaneIndex], S_BLOCK) != 0) {
                     XCTFail("test_TwistRound_Weak: at block %zu lane %zu, we did not get equal to expectation", aBlockIndex, aLaneIndex);
@@ -253,7 +246,6 @@
             
             printf("test_TwistRound_Weak trial %zu finished block %zu (randoms)\n", aTrial, aBlockIndex);
         }
-        
     }
 }
 
@@ -280,10 +272,10 @@
     std::size_t aBlockIndexList[6];
     aBlockIndexList[0] = 0;
     aBlockIndexList[1] = 1;
-    aBlockIndexList[2] = 14;
-    aBlockIndexList[3] = 15;
-    aBlockIndexList[4] = 30;
-    aBlockIndexList[5] = 31;
+    aBlockIndexList[2] = 6;
+    aBlockIndexList[3] = 7;
+    aBlockIndexList[4] = 12;
+    aBlockIndexList[5] = 13;
     
     for (std::size_t aTrial=0; aTrial<12; aTrial++) {
         
@@ -329,7 +321,6 @@
         }
         
         Soccer2::TwistRound(0, false, ARX_STATE_VARS);
-        
         for (std::size_t aLaneIndex=0; aLaneIndex<aLaneCount; aLaneIndex++) {
             const std::size_t aByteRichness = LaneTool::ByteRichness(Soccer2::mMaterials[aLaneIndex], S_BLOCK);
             if (aByteRichness < 512) {
@@ -375,7 +366,6 @@
         }
         
         Soccer2::TwistRound(0, false, ARX_STATE_VARS);
-        
         for (std::size_t aLaneIndex=0; aLaneIndex<aLaneCount; aLaneIndex++) {
             const std::size_t aByteRichness = LaneTool::ByteRichness(Soccer2::mMaterials[aLaneIndex], S_BLOCK);
             if (aByteRichness < 512) {
@@ -433,9 +423,7 @@
             }
             
             Soccer2::TwistRound(aBlockIndex, false, ARX_STATE_VARS);
-            
             for (std::size_t aLaneIndex=0; aLaneIndex<aLaneCount; aLaneIndex++) {
-                
                 if (std::memcmp(&Soccer2::mMaterials[aLaneIndex][aBlockIndex * S_BLOCK],
                                 aExpectation_A[aLaneIndex], S_BLOCK) != 0) {
                     XCTFail("test_TwistRound_Normal: at block %zu lane %zu, we did not get equal to expectation", aBlockIndex, aLaneIndex);
@@ -477,9 +465,7 @@
             }
             
             Soccer2::TwistRound(aBlockIndex, false, ARX_STATE_VARS);
-            
             for (std::size_t aLaneIndex=0; aLaneIndex<aLaneCount; aLaneIndex++) {
-                
                 if (std::memcmp(&Soccer2::mMaterials[aLaneIndex][aBlockIndex * S_BLOCK],
                                 aExpectation_B[aLaneIndex], S_BLOCK) != 0) {
                     XCTFail("test_TwistRound_Normal: at block %zu lane %zu, we did not get equal to expectation", aBlockIndex, aLaneIndex);
@@ -515,10 +501,10 @@
     std::size_t aBlockIndexList[6];
     aBlockIndexList[0] = 0;
     aBlockIndexList[1] = 1;
-    aBlockIndexList[2] = 14;
-    aBlockIndexList[3] = 15;
-    aBlockIndexList[4] = 30;
-    aBlockIndexList[5] = 31;
+    aBlockIndexList[2] = 6;
+    aBlockIndexList[3] = 7;
+    aBlockIndexList[4] = 12;
+    aBlockIndexList[5] = 13;
     
     for (std::size_t aTrial=0; aTrial<8; aTrial++) {
         
@@ -564,7 +550,6 @@
         }
         
         Soccer2::TwistRound(0, false, ARX_STATE_VARS);
-        
         for (std::size_t aLaneIndex=0; aLaneIndex<aLaneCount; aLaneIndex++) {
             const std::size_t aByteRichness = LaneTool::ByteRichness(Soccer2::mMaterials[aLaneIndex], S_BLOCK);
             if (aByteRichness < 512) {
@@ -610,7 +595,6 @@
         }
         
         Soccer2::TwistRound(0, false, ARX_STATE_VARS);
-        
         for (std::size_t aLaneIndex=0; aLaneIndex<aLaneCount; aLaneIndex++) {
             const std::size_t aByteRichness = LaneTool::ByteRichness(Soccer2::mMaterials[aLaneIndex], S_BLOCK);
             if (aByteRichness < 512) {
@@ -668,9 +652,7 @@
             }
             
             Soccer2::TwistRound(aBlockIndex, false, ARX_STATE_VARS);
-            
             for (std::size_t aLaneIndex=0; aLaneIndex<aLaneCount; aLaneIndex++) {
-                
                 if (std::memcmp(&Soccer2::mMaterials[aLaneIndex][aBlockIndex * S_BLOCK],
                                 aExpectation_A[aLaneIndex], S_BLOCK) != 0) {
                     XCTFail("test_TwistRound_Strong: at block %zu lane %zu, we did not get equal to expectation", aBlockIndex, aLaneIndex);
@@ -712,9 +694,7 @@
             }
             
             Soccer2::TwistRound(aBlockIndex, false, ARX_STATE_VARS);
-            
             for (std::size_t aLaneIndex=0; aLaneIndex<aLaneCount; aLaneIndex++) {
-                
                 if (std::memcmp(&Soccer2::mMaterials[aLaneIndex][aBlockIndex * S_BLOCK],
                                 aExpectation_B[aLaneIndex], S_BLOCK) != 0) {
                     XCTFail("test_TwistRound_Strong: at block %zu lane %zu, we did not get equal to expectation", aBlockIndex, aLaneIndex);

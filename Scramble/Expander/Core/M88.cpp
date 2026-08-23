@@ -22,112 +22,17 @@ void M88::Reset() {
     }
 }
 
-void M88::Print() const {
-    
-    for (std::size_t y = 0; y < 8U; y++) {
-        for (std::size_t x = 0; x < 8U; x++) {
-            const std::size_t aIndex = y * 8U + x;
-            std::printf("%3u ", static_cast<unsigned int>(mData[aIndex]));
-        }
-        
-        std::printf("\n");
-    }
-    
-    std::printf("\n");
+std::size_t M88::Slot(std::size_t pX, std::size_t pY) {
+    return pY * 8U + pX;
 }
 
-/*
-void M88::Dispatch(std::uint8_t *pOperationData,
-                   std::size_t pOperationIndex,
-                   std::uint8_t *pSource,
-                   std::size_t pSourceIndex,
-                   std::uint8_t *pDestination) {
-    
-    std::uint8_t *aOperationData = pOperationData + pOperationIndex;
-    std::uint8_t *aSource = pSource + pSourceIndex;
-    std::uint8_t *aDestination = pDestination;
-    
-    memcpy(mData, aSource, 64U);
-    
-    DispatchPermute(aOperationData[4],
-                    aOperationData[5],
-                    aOperationData[6],
-                    aOperationData[7],
-                    aOperationData[8],
-                    aOperationData[9],
-                    aOperationData[10],
-                    aOperationData[11],
-                    
-                    aOperationData[12],
-                    aOperationData[13],
-                    aOperationData[14],
-                    aOperationData[15],
-                    aOperationData[16],
-                    aOperationData[17],
-                    aOperationData[18],
-                    aOperationData[19],
-                    
-                    aOperationData[20]);
-    
-    DispatchFullA(aOperationData[21]);
-    
-    DispatchSwapsA(aOperationData[22],
-                   aOperationData[23]);
-    
-    DispatchQuadA(aOperationData[24]);
-    DispatchQuadB(aOperationData[25]);
-    DispatchQuadC(aOperationData[26]);
-    DispatchQuadD(aOperationData[27]);
-    
-    DispatchSwapsB(aOperationData[28]);
-    
-    DispatchMini(aOperationData[29]);
-    
-    DispatchPermute(aOperationData[30],
-                    aOperationData[31],
-                    aOperationData[32],
-                    aOperationData[33],
-                    aOperationData[34],
-                    aOperationData[35],
-                    aOperationData[36],
-                    aOperationData[37],
-                    
-                    aOperationData[38],
-                    aOperationData[39],
-                    aOperationData[40],
-                    aOperationData[41],
-                    aOperationData[42],
-                    aOperationData[43],
-                    aOperationData[44],
-                    aOperationData[45],
-                    
-                    aOperationData[46]);
-    
-    DispatchMini(aOperationData[47]);
-    
-    DispatchSwapsB(aOperationData[48]);
-    
-    DispatchQuadD(aOperationData[49]);
-    DispatchQuadC(aOperationData[50]);
-    DispatchQuadB(aOperationData[51]);
-    DispatchQuadA(aOperationData[52]);
-    
-    DispatchSwapsA(aOperationData[53],
-                   aOperationData[54]);
-    
-    DispatchFullB(aOperationData[55]);
-    
-    DispatchUnroll(aDestination,
-                   aOperationData[56],
-                   aOperationData[57],
-                   aOperationData[58],
-                   aOperationData[59],
-                   aOperationData[60],
-                   aOperationData[61],
-                   aOperationData[62],
-                   aOperationData[63]);
+std::size_t M88::X(std::size_t pSlot) {
+    return pSlot % 8U;
 }
-*/
+
+std::size_t M88::Y(std::size_t pSlot) {
+    return pSlot / 8U;
+}
 
 void M88::Dispatch(std::uint8_t *pOperationData,
                    std::size_t pOperationIndex,
