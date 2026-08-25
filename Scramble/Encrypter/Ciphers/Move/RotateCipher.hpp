@@ -43,36 +43,34 @@ class RotateCipher final : public Cipher {
  private:
   static constexpr std::size_t kLengthMultiple = 16u;
 
-  static std::int32_t NormalizeShift(std::int32_t pShift,
-                                     std::size_t pLength) {
-    if (pLength == 0u || pShift == 0) {
-      return 0;
+  static std::size_t NormalizeShift(std::int32_t pShift,
+                                    std::size_t pLength) {
+    if (pLength == 0u) {
+      return 0u;
+    }
+    if (pShift >= 0) {
+      return static_cast<std::size_t>(pShift) % pLength;
     }
 
-    std::int32_t aShift = pShift;
-    const std::int32_t aLength = static_cast<std::int32_t>(pLength);
-    if (aShift < 0) {
-      aShift += aLength;
-    }
-    if (aShift >= aLength) {
-      aShift -= aLength;
-    }
-    return aShift;
+    const std::size_t aMagnitude =
+        static_cast<std::size_t>(-static_cast<std::int64_t>(pShift));
+    const std::size_t aReverseRotation = aMagnitude % pLength;
+    return aReverseRotation == 0u ? 0u : pLength - aReverseRotation;
   }
 
-  static std::int32_t InverseShift(std::int32_t pShift,
-                                   std::size_t pLength) {
-    const std::int32_t aRotation = NormalizeShift(pShift, pLength);
-    if (aRotation == 0) {
-      return 0;
+  static std::size_t InverseShift(std::int32_t pShift,
+                                  std::size_t pLength) {
+    const std::size_t aRotation = NormalizeShift(pShift, pLength);
+    if (aRotation == 0u) {
+      return 0u;
     }
-    return static_cast<std::int32_t>(pLength) - aRotation;
+    return pLength - aRotation;
   }
 
   static bool Apply(const std::uint8_t *pSource,
                     std::uint8_t *pDestination,
                     std::size_t pLength,
-                    std::int32_t pRotation,
+                    std::size_t pRotation,
                     CipherErrorCode *pErrorCode) {
     if (pLength == 0u) {
       SetCipherErrorCode(pErrorCode, CipherErrorCode::kNone);
@@ -92,10 +90,9 @@ class RotateCipher final : public Cipher {
     }
 
     SetCipherErrorCode(pErrorCode, CipherErrorCode::kNone);
-    const std::size_t aRotation = static_cast<std::size_t>(pRotation);
-    const std::size_t aFirstSpan = pLength - aRotation;
-    std::memcpy(pDestination, pSource + aRotation, aFirstSpan);
-    std::memcpy(pDestination + aFirstSpan, pSource, aRotation);
+    const std::size_t aFirstSpan = pLength - pRotation;
+    std::memcpy(pDestination, pSource + pRotation, aFirstSpan);
+    std::memcpy(pDestination + aFirstSpan, pSource, pRotation);
     return true;
   }
 

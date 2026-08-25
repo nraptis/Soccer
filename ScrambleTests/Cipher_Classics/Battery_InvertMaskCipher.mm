@@ -19,9 +19,7 @@
 
 - (void)test_gauntlet_InvertMaskCipher {
     
-#if IGNORE_GAUNTLET
-    return;
-#endif
+
     
     static CipherGauntlet aGauntlet;
     

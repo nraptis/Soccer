@@ -25,7 +25,6 @@
     
     for (std::size_t aTrial=0; aTrial<16; aTrial++) {
         
-        
         std::uint64_t aNonceA = Random::Get64();
         std::uint64_t aNonceB = aNonceA + 1;
         
@@ -60,7 +59,6 @@
     
     for (std::size_t aTrial=0; aTrial<8; aTrial++) {
         
-        
         std::uint64_t aNonceA = Random::Get64();
         std::uint64_t aNonceB = aNonceA + 1;
         
@@ -68,7 +66,6 @@
         for (std::size_t aIndex=0; aIndex<10; aIndex++) {
             aPassword[aIndex] = Random::GetByte();
         }
-        
         
         std::uint32_t aAckWord = 0xFF00FF00;
         
@@ -87,8 +84,6 @@
             return;
         }
         
-
-        
     }
 
     printf("all nonce trials went fine (normal)\n");
@@ -99,7 +94,6 @@
     
     for (std::size_t aTrial=0; aTrial<6; aTrial++) {
         
-        
         std::uint64_t aNonceA = Random::Get64();
         std::uint64_t aNonceB = aNonceA + 1;
         
@@ -107,7 +101,6 @@
         for (std::size_t aIndex=0; aIndex<10; aIndex++) {
             aPassword[aIndex] = Random::GetByte();
         }
-        
         
         std::uint32_t aAckWord = 0xFF00FF00;
         

@@ -18,11 +18,6 @@
 @implementation Battery_PepperJumpNoiseXORCipher
 
 - (void)test_gauntlet_PepperJumpNoiseXORCipher {
-    
-#if IGNORE_GAUNTLET
-    return;
-#endif
-    
     static std::uint8_t aAllZero[SOCCER_BLOCK_SIZE];
     static std::uint8_t aAllOne[SOCCER_BLOCK_SIZE];
     static std::uint8_t aRandA[SOCCER_BLOCK_SIZE];

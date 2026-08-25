@@ -24,7 +24,6 @@
     
     for (std::size_t aTrial=0; aTrial<16; aTrial++) {
         
-        
         std::uint64_t aNonce = Random::Get64();
         
         std::uint8_t aPasswordA[10];
@@ -62,7 +61,6 @@
 - (void)test_pw_reject_normal_100 {
     
     for (std::size_t aTrial=0; aTrial<8; aTrial++) {
-        
         
         std::uint64_t aNonce = Random::Get64();
         
@@ -116,7 +114,6 @@
         }
         aPasswordB[5] += 1;
         
-        
         std::uint32_t aAckWord = 0xFF00FF00;
         
         if (!Soccer2::AttemptSeed_Encrypt(EncryptionStrength::kStrong, aPasswordA, 10, aNonce, &aAckWord)) {
@@ -134,14 +131,10 @@
             return;
         }
         
-
-        
     }
 
     printf("all nonce trials went fine (strong)\n");
     
 }
-
-
 
 @end

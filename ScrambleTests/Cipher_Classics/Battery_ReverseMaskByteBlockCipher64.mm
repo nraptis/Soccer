@@ -19,9 +19,7 @@
 
 - (void)test_gauntlet_ReverseMaskByteBlockCipher64 {
     
-#if IGNORE_GAUNTLET
-    return;
-#endif
+
     
     static CipherGauntlet aGauntlet;
     

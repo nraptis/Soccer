@@ -32,7 +32,6 @@ void FakeTwistRound(std::size_t pBlockIndex, EncryptionStrength pStrength) {
     
     const std::size_t aDestinationByteIndex = pBlockIndex * S_BLOCK;
     for (std::size_t aLaneIndex=0U; aLaneIndex<aComplexity; aLaneIndex++) {
-        
         WorkSpaceTools::FillBytes(&Soccer2::mMaterials[aLaneIndex][aDestinationByteIndex], S_BLOCK);
     }
 
@@ -104,6 +103,7 @@ bool VerifyPreTwist(std::size_t pBlockIndex, EncryptionStrength pStrength, bool 
     
     for (auto aSource : aSourceSet) {
         aVerified++;
+        
         bool aIsMaterial = false;
         for (std::size_t aMatIndex=0;aMatIndex<aComplexity;aMatIndex++) {
             if (&Soccer2::mMaterials[aMatIndex][aExpectedByte] == aSource) {
@@ -111,11 +111,11 @@ bool VerifyPreTwist(std::size_t pBlockIndex, EncryptionStrength pStrength, bool 
                 break;
             }
         }
+        
         if (aIsMaterial == false) {
             printf("VerifyPreTwist, Fail: Source was not a material.\n");
             return false;
         }
-        
         
         const std::size_t aByteRichness = LaneTool::ByteRichness(aSource, S_BLOCK);
         if (aByteRichness < 512) {
@@ -166,7 +166,6 @@ bool VerifyPreTwist(std::size_t pBlockIndex, EncryptionStrength pStrength, bool 
         }
     }
     
-    
     for (std::size_t aLaneIndex=0U; aLaneIndex<aComplexity; aLaneIndex++) {
         
         std::size_t aPoolSize = Soccer2::mCrossPoolCount[0];
@@ -214,7 +213,6 @@ bool VerifyPreTwist(std::size_t pBlockIndex, EncryptionStrength pStrength, bool 
             }
             aCrossSet.insert(Soccer2::mCrossPool[aLaneIndex][aPoolIndex]);
         }
-        
         
         for (auto &aCross : aCrossSet) {
             
@@ -273,11 +271,8 @@ bool VerifyPreTwist(std::size_t pBlockIndex, EncryptionStrength pStrength, bool 
         }
     }
     
-    
     return true;
 }
-
-
 
 - (void)test_WarmUpAndTwist {
     
@@ -286,7 +281,6 @@ bool VerifyPreTwist(std::size_t pBlockIndex, EncryptionStrength pStrength, bool 
     std::size_t WARM_UP_BLOCKS = WARM_UP_ROUNDS + 1;
     
     std::vector<EncryptionStrength> aStrengthList = { EncryptionStrength::kWeak, EncryptionStrength::kNormal, EncryptionStrength::kStrong};
-    
     
     for (std::size_t aTrial=0; aTrial<128; aTrial++) {
         
