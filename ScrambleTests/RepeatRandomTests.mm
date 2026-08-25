@@ -23,8 +23,6 @@
 
 @implementation RepeatRandomTests
 
-
-
 - (void)test_repeatRandom {
     
     constexpr char kPasswordCharacters[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";

@@ -43,7 +43,6 @@ class ExpanderFactory {
     static inline TwistExpander_Antares         mAntares;
     static inline TwistExpander_Arcturus        mArcturus;
     static inline TwistExpander_Bellatrix       mBellatrix;
-    static inline TwistExpander_Betelgeuse      mBetelgeuse;
     static inline TwistExpander_Capella         mCapella;
     static inline TwistExpander_Castor          mCastor;
     static inline TwistExpander_Mimosa          mMimosa;
@@ -67,7 +66,6 @@ public:
         aResult.push_back({&mAntares, "Antares"});
         aResult.push_back({&mArcturus, "Arcturus"});
         aResult.push_back({&mBellatrix, "Bellatrix"});
-        aResult.push_back({&mBetelgeuse, "Betelgeuse"});
         aResult.push_back({&mCapella, "Capella"});
         aResult.push_back({&mCastor, "Castor"});
         aResult.push_back({&mMimosa, "Mimosa"});
