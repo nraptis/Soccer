@@ -2,7 +2,7 @@
 //  Rig.hpp
 //  MeanMachine
 //
-//  Created by Xenegos of the Revel on 5/4/26.
+//  Created by Icarus Black on 5/4/26.
 //
 
 #ifndef Rig_hpp
