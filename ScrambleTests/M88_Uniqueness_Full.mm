@@ -2,9 +2,8 @@
 //  M88_Uniqueness_Full.m
 //  ScrambleTests
 //
-//  Created by nick on 8/23/26.
+//  Created by Icarus Black on 8/23/26.
 //
-
 
 #import <XCTest/XCTest.h>
 #include "M88.hpp"

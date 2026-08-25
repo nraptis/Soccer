@@ -2,7 +2,7 @@
 //  NonceAvalancheTests.m
 //  ScrambleTests
 //
-//  Created by nick on 7/19/26.
+//  Created by Icarus Black on 7/19/26.
 //
 
 #import <XCTest/XCTest.h>

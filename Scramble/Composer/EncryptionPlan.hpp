@@ -2,7 +2,7 @@
 //  EncryptionPlan.hpp
 //  Scramble
 //
-//  Created by nick on 8/4/26.
+//  Created by Icarus Black on 8/4/26.
 //
 
 #ifndef EncryptionPlan_hpp

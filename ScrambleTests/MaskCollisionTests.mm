@@ -2,7 +2,7 @@
 //  MaskCollisionTests.m
 //  ScrambleTests
 //
-//  Created by nick on 8/6/26.
+//  Created by Icarus Black on 8/6/26.
 //
 
 #import <XCTest/XCTest.h>

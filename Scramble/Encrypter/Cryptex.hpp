@@ -2,7 +2,7 @@
 //  Cryptex.hpp
 //  Scramble
 //
-//  Created by nick on 8/6/26.
+//  Created by Icarus Black on 8/6/26.
 //
 
 #ifndef Cryptex_hpp

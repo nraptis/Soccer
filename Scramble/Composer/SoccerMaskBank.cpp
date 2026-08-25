@@ -2,7 +2,7 @@
 //  SoccerMaskBank.cpp
 //  Scramble
 //
-//  Created by nick on 8/8/26.
+//  Created by Icarus Black on 8/8/26.
 //
 
 #include "SoccerMaskBank.hpp"

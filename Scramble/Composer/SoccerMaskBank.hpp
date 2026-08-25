@@ -2,7 +2,7 @@
 //  SoccerMaskBank.hpp
 //  Scramble
 //
-//  Created by nick on 8/8/26.
+//  Created by Icarus Black on 8/8/26.
 //
 
 #ifndef SoccerMaskBank_hpp
