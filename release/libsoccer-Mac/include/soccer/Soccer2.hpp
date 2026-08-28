@@ -4,6 +4,8 @@
 #include <cstddef>
 #include <cstdint>
 
+#include "SoccerDelegate.hpp"
+
 enum class EncryptionStrength : std::uint8_t {
     kTest = 3,
     kWeak = 0,
@@ -15,6 +17,12 @@ enum class EncryptionStrength : std::uint8_t {
 
 class Soccer2 {
 public:
+    // Non-owning. The delegate must outlive its registration; nullptr detaches it.
+    // Registration is preserved by Zero().
+    static void SetDelegate(SoccerDelegate *pDelegate);
+
+    static void ConfigureTestBuffers(std::uint32_t pTestBlockLength);
+
     static bool AttemptSeed_Encrypt(EncryptionStrength pStrength,
                                     std::uint8_t *pPassword,
                                     std::size_t pPasswordByteLength,

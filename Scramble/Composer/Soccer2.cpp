@@ -54,10 +54,18 @@ constexpr std::uint8_t kStageL3C = 6U;
 constexpr std::uint8_t kStageL2C = 7U;
 constexpr std::uint8_t kStageL1C = 8U;
 
+constexpr std::size_t kExpanderSeedCost = 3U;
+constexpr std::size_t kExpanderTwistCost = 1U;
+constexpr std::size_t kSeedEpilogueCost = 1U;
+
 } // namespace
 
 static_assert((SOCCER_BLOCK_SIZE % S_BLOCK) == 0U);
 static_assert(BLOCK_COUNT >= WARM_UP_BLOCKS);
+
+SoccerDelegate                              *Soccer2::mDelegate = nullptr;
+std::size_t                                 Soccer2::mSeedProgressCompleted = 0U;
+std::size_t                                 Soccer2::mSeedProgressTotal = 0U;
 
 std::uint8_t                                Soccer2::mMaterialA[SOCCER_BLOCK_SIZE];
 std::uint8_t                                Soccer2::mMaterialB[SOCCER_BLOCK_SIZE];
@@ -607,6 +615,9 @@ void Soccer2::Zero() {
     mMaterialQuarter = 0U;
     mTestBlockLength = 0U;
 
+    mSeedProgressCompleted = 0U;
+    mSeedProgressTotal = 0U;
+
     mStrength = EncryptionStrength::kNormal;
 }
 
@@ -722,7 +733,7 @@ void Soccer2::Shuffle_CROWSCIMASSORMATEX() {
     }
 }
 
-void Soccer2::Shuffle_CROSSPERMUTATIONS(std::size_t pPermutationCount) {
+void Soccer2::Shuffle_CROPER(std::size_t pPermutationCount) {
     constexpr std::size_t cSpan = 256U;
     constexpr std::size_t cBlockSpan = 4U * cSpan;
     constexpr std::size_t cCrossBlocks[3][4] = {
@@ -806,6 +817,7 @@ void Soccer2::TwistRound(std::size_t pBlockIndex,
                                            &mMaterials[aLaneIndex][aDestinationByteIndex],
                                            aStifleKey,
                                            ARX_STATE_VARS);
+        AdvanceSeedProgress(kExpanderTwistCost);
     }
 
     for (std::size_t aLaneIndex=0U; aLaneIndex<aComplexity; aLaneIndex++) {
@@ -867,6 +879,7 @@ void Soccer2::SeedPrologue_Regular_A(std::uint8_t *pPassword,
                                                    pPasswordByteLength,
                                                    &mClaimedMaterials[aClaimedIndex][aWarmUpStartIndex],
                                                    ARX_STATE_VARS);
+            AdvanceSeedProgress(kExpanderSeedCost);
         }
 
         if (aSpanIndex < 3U) {
@@ -1166,21 +1179,21 @@ bool Soccer2::SeedPrologue_Regular_C(std::uint32_t *pAckWord,
     Shuffle_CROWSCIMASSORMATEX();
 
     BuildCrossPool_WarmUp1(aComplexity, aWarmUpSeedByteIndex);
-    Shuffle_CROSSPERMUTATIONS(mCrossPoolCount[0]);
+    Shuffle_CROPER(mCrossPoolCount[0]);
     ArrangeCrossPool(aComplexity);
     TwistRound(aWarmUpSeedBlockIndex + 1U, true, ARX_STATE_VARS);
 
     BuildCrossPool_WarmUp2(aComplexity,
                            aWarmUpSeedByteIndex,
                            aWarmUp1ByteIndex);
-    Shuffle_CROSSPERMUTATIONS(mCrossPoolCount[0]);
+    Shuffle_CROPER(mCrossPoolCount[0]);
     ArrangeCrossPool(aComplexity);
     TwistRound(aWarmUpSeedBlockIndex + 2U, true, ARX_STATE_VARS);
 
     BuildCrossPool_WarmUp2(aComplexity,
                            aWarmUp1ByteIndex,
                            aWarmUp2ByteIndex);
-    Shuffle_CROSSPERMUTATIONS(mCrossPoolCount[0]);
+    Shuffle_CROPER(mCrossPoolCount[0]);
     ArrangeCrossPool(aComplexity);
     TwistRound(aWarmUpSeedBlockIndex + 3U, true, ARX_STATE_VARS);
 
@@ -1188,7 +1201,7 @@ bool Soccer2::SeedPrologue_Regular_C(std::uint32_t *pAckWord,
                            aWarmUpSeedByteIndex,
                            aWarmUp1ByteIndex,
                            aWarmUp2ByteIndex);
-    Shuffle_CROSSPERMUTATIONS(mCrossPoolCount[0]);
+    Shuffle_CROPER(mCrossPoolCount[0]);
     ArrangeCrossPool(aComplexity);
     TwistRound(aWarmUpSeedBlockIndex + 4U, true, ARX_STATE_VARS);
 
@@ -1197,7 +1210,7 @@ bool Soccer2::SeedPrologue_Regular_C(std::uint32_t *pAckWord,
                            aWarmUp1ByteIndex,
                            aWarmUp2ByteIndex,
                            aWarmUp3ByteIndex);
-    Shuffle_CROSSPERMUTATIONS(mCrossPoolCount[0]);
+    Shuffle_CROPER(mCrossPoolCount[0]);
     ArrangeCrossPool(aComplexity);
     TwistRound(aWarmUpSeedBlockIndex + 5U, true, ARX_STATE_VARS);
     
@@ -1250,67 +1263,12 @@ void Soccer2::SeedPrologue_Regular_D(MUTABLE_PARAMS) {
                                aThreeRoundsBackBlockIndex * S_BLOCK,
                                aTwoRoundsBackBlockIndex * S_BLOCK,
                                aOneRoundBackBlockIndex * S_BLOCK);
-        Shuffle_CROSSPERMUTATIONS(mCrossPoolCount[0]);
+        Shuffle_CROPER(mCrossPoolCount[0]);
         ArrangeCrossPool(aComplexity);
         TwistRound(aRoundIndex, false, ARX_STATE_VARS);
     }
     
     WRITE_OUT_MUTABLE_PARAMS;
-    
-    /*
-    mWorkSpaceN.Zero();
-    mWorkSpaceO.Zero();
-    mWorkSpaceP.Zero();
-    mWorkSpaceD.Zero();
-    mWorkSpaceE.Zero();
-    mWorkSpaceF.Zero();
-    mWorkSpaceJ.Zero();
-    mWorkSpaceI.Zero();
-    mWorkSpaceH.Zero();
-    mWorkSpaceG.Zero();
-    mWorkSpaceB.Zero();
-    mWorkSpaceK.Zero();
-    mWorkSpaceC.Zero();
-    mWorkSpaceM.Zero();
-    mWorkSpaceA.Zero();
-    mWorkSpaceL.Zero();
-
-    for (std::size_t aIndex=0U; aIndex<SOCCER_EXPANDER_COUNT; aIndex++) {
-        mExpanders[aIndex] = nullptr;
-        mClaimed[aIndex] = false;
-        mShuffleExpanders[aIndex] = nullptr;
-    }
-
-    for (std::size_t aIndex=0U; aIndex<16U; aIndex++) {
-        mWorkSpaces[aIndex] = nullptr;
-        mSources[aIndex] = nullptr;
-
-        mClaimedExpanders[aIndex] = nullptr;
-        mClaimedMaterials[aIndex] = nullptr;
-        mClaimedWorkSpaces[aIndex] = nullptr;
-
-        mShuffleMaterials[aIndex] = nullptr;
-        mShuffleWorkSpaces[aIndex] = nullptr;
-    }
-
-    for (std::size_t aCrossIndex=0U; aCrossIndex<4U; aCrossIndex++) {
-        for (std::size_t aLaneIndex=0U; aLaneIndex<16U; aLaneIndex++) {
-            mCross[aCrossIndex][aLaneIndex] = nullptr;
-        }
-    }
-
-    for (std::size_t aLaneIndex=0U; aLaneIndex<16U; aLaneIndex++) {
-        mCrossPoolCount[aLaneIndex] = 0U;
-        for (std::size_t aPoolIndex=0U; aPoolIndex<64U; aPoolIndex++) {
-            mCrossPool[aLaneIndex][aPoolIndex] = nullptr;
-            mCrossPermutations[aLaneIndex][aPoolIndex] = 0U;
-        }
-    }
-
-    mClaimedExpanderCount = 0U;
-    mClaimedMaterialCount = 0U;
-    mClaimedWorkSpaceCount = 0U;
-    */
 }
 
 void Soccer2::FoldMaterialsIntoRandomForBlock_4(std::size_t pBlockIndex) {
@@ -1393,9 +1351,11 @@ bool Soccer2::AttemptSeed_Encrypt(EncryptionStrength pStrength,
                                   std::size_t pPasswordByteLength,
                                   std::uint64_t pNonce,
                                   std::uint32_t *pAckWord) {
+
+    BeginSeedProgress(pStrength);
     
     if ((pPassword == nullptr) || (pPasswordByteLength == 0U) || (pAckWord == nullptr)) {
-        return false;
+        return FinishSeedProgress(false);
     }
 
     std::uint32_t aAckWord = 0U;
@@ -1405,14 +1365,14 @@ bool Soccer2::AttemptSeed_Encrypt(EncryptionStrength pStrength,
     
     if (pStrength == EncryptionStrength::kTest) {
         if (!SeedPrelude_Test(pPassword, pPasswordByteLength, pNonce)) {
-            return false;
+            return FinishSeedProgress(false);
         }
         aAckWord |= static_cast<std::uint32_t>(mMaterialA[S_BLOCK * 1]) <<  0U;
         aAckWord |= static_cast<std::uint32_t>(mMaterialA[S_BLOCK * 2]) <<  8U;
         aAckWord |= static_cast<std::uint32_t>(mMaterialA[S_BLOCK * 3]) << 16U;
         aAckWord |= static_cast<std::uint32_t>(mMaterialA[S_BLOCK * 4]) << 24U;
         *pAckWord = aAckWord;
-        return true;
+        return FinishSeedProgress(true);
     }
     
     std::uint64_t aIngress = 0xE025CAEA83AB99CFULL;
@@ -1438,7 +1398,7 @@ bool Soccer2::AttemptSeed_Encrypt(EncryptionStrength pStrength,
     SeedPrologue_Regular_A(pPassword, pPasswordByteLength, pNonce, ARX_STATE_VARS);
     SeedPrologue_Regular_B();
     if (!SeedPrologue_Regular_C(pAckWord, true, ARX_STATE_VARS)) {
-        return false;
+        return FinishSeedProgress(false);
     }
     SeedPrologue_Regular_D(ARX_STATE_VARS);
     
@@ -1447,10 +1407,10 @@ bool Soccer2::AttemptSeed_Encrypt(EncryptionStrength pStrength,
     SeedEpilogue_Regular_B();
     SeedEpilogue_Regular_C();
     if (!SeedEpilogue_Regular_D()) {
-        return false;
+        return FinishSeedProgress(false);
     }
     
-    return true;
+    return FinishSeedProgress(true);
 }
 
 bool Soccer2::AttemptSeed_Decrypt(EncryptionStrength pStrength,
@@ -1458,9 +1418,11 @@ bool Soccer2::AttemptSeed_Decrypt(EncryptionStrength pStrength,
                                   std::size_t pPasswordByteLength,
                                   std::uint64_t pNonce,
                                   std::uint32_t pAckWord) {
+
+    BeginSeedProgress(pStrength);
     
     if ((pPassword == nullptr) || (pPasswordByteLength == 0U)) {
-        return false;
+        return FinishSeedProgress(false);
     }
 
     mStrength = pStrength;
@@ -1469,13 +1431,13 @@ bool Soccer2::AttemptSeed_Decrypt(EncryptionStrength pStrength,
     
     if (pStrength == EncryptionStrength::kTest) {
         if (!SeedPrelude_Test(pPassword, pPasswordByteLength, pNonce)) {
-            return false;
+            return FinishSeedProgress(false);
         }
-        if (mMaterialA[S_BLOCK * 1] != static_cast<std::uint8_t>(((pAckWord >>  0) & 0xFFU))) { return false; }
-        if (mMaterialA[S_BLOCK * 2] != static_cast<std::uint8_t>(((pAckWord >>  8) & 0xFFU))) { return false; }
-        if (mMaterialA[S_BLOCK * 3] != static_cast<std::uint8_t>(((pAckWord >> 16) & 0xFFU))) { return false; }
-        if (mMaterialA[S_BLOCK * 4] != static_cast<std::uint8_t>(((pAckWord >> 24) & 0xFFU))) { return false; }
-        return true;
+        if (mMaterialA[S_BLOCK * 1] != static_cast<std::uint8_t>(((pAckWord >>  0) & 0xFFU))) { return FinishSeedProgress(false); }
+        if (mMaterialA[S_BLOCK * 2] != static_cast<std::uint8_t>(((pAckWord >>  8) & 0xFFU))) { return FinishSeedProgress(false); }
+        if (mMaterialA[S_BLOCK * 3] != static_cast<std::uint8_t>(((pAckWord >> 16) & 0xFFU))) { return FinishSeedProgress(false); }
+        if (mMaterialA[S_BLOCK * 4] != static_cast<std::uint8_t>(((pAckWord >> 24) & 0xFFU))) { return FinishSeedProgress(false); }
+        return FinishSeedProgress(true);
     }
     
     std::uint64_t aIngress = 0xE025CAEA83AB99CFULL;
@@ -1502,7 +1464,7 @@ bool Soccer2::AttemptSeed_Decrypt(EncryptionStrength pStrength,
     SeedPrologue_Regular_A(pPassword, pPasswordByteLength, pNonce, ARX_STATE_VARS);
     SeedPrologue_Regular_B();
     if (!SeedPrologue_Regular_C(&aAckWord, false, ARX_STATE_VARS)) {
-        return false;
+        return FinishSeedProgress(false);
     }
     SeedPrologue_Regular_D(ARX_STATE_VARS);
     
@@ -1511,10 +1473,64 @@ bool Soccer2::AttemptSeed_Decrypt(EncryptionStrength pStrength,
     SeedEpilogue_Regular_B();
     SeedEpilogue_Regular_C();
     if (!SeedEpilogue_Regular_D()) {
-        return false;
+        return FinishSeedProgress(false);
     }
     
-    return true;
+    return FinishSeedProgress(true);
+}
+
+void Soccer2::SetDelegate(SoccerDelegate *pDelegate) {
+    mDelegate = pDelegate;
+}
+
+void Soccer2::BeginSeedProgress(EncryptionStrength pStrength) {
+    mSeedProgressCompleted = 0U;
+    mSeedProgressTotal = 0U;
+
+    if (pStrength != EncryptionStrength::kTest) {
+        std::size_t aComplexity = COMPLEXITY_NORMAL;
+        if (pStrength == EncryptionStrength::kWeak) {
+            aComplexity = COMPLEXITY_WEAK;
+        } else if (pStrength == EncryptionStrength::kStrong) {
+            aComplexity = COMPLEXITY_STRONG;
+        }
+
+        // One starter seed, one seed per active lane, then every warm-up and
+        // main TwistBlock. Reserve the final unit for epilogue A through D.
+        const std::size_t aSeedCount = 1U + aComplexity;
+        const std::size_t aTwistCount = aComplexity * (WARM_UP_ROUNDS + BLOCK_COUNT);
+        mSeedProgressTotal = (aSeedCount * kExpanderSeedCost) +
+                             (aTwistCount * kExpanderTwistCost) +
+                             kSeedEpilogueCost;
+    }
+
+    if (mDelegate != nullptr) {
+        mDelegate->SeedProgress(0.0);
+    }
+}
+
+void Soccer2::AdvanceSeedProgress(std::size_t pCost) {
+    // These stages can also be called directly, outside an AttemptSeed call.
+    if (mSeedProgressTotal == 0U) {
+        return;
+    }
+
+    mSeedProgressCompleted += pCost;
+    if (mDelegate != nullptr) {
+        const double aPercent = 100.0 * static_cast<double>(mSeedProgressCompleted) /
+                                static_cast<double>(mSeedProgressTotal);
+        mDelegate->SeedProgress(aPercent);
+    }
+}
+
+bool Soccer2::FinishSeedProgress(bool pSuccess) {
+    mSeedProgressCompleted = 0U;
+    mSeedProgressTotal = 0U;
+
+    if (mDelegate != nullptr) {
+        mDelegate->SeedProgress(100.0);
+    }
+    return pSuccess;
 }
 
 void Soccer2::ConfigureTestBuffers(std::uint32_t pTestBlockLength) {
@@ -1652,6 +1668,7 @@ void Soccer2::SeedPrelude_Regular_B(std::uint64_t pNonce, MUTABLE_PARAMS) {
     READ_IN_MUTABLE_PARAMS_INTERNAL;
     
     mStarter.Seed(&mWorkSpaceA, pNonce, SOCCER_SCRATCH_WORKER_A, S_BLOCK, mCollapseLaneB, ARX_STATE_VARS);
+    AdvanceSeedProgress(kExpanderSeedCost);
     
     WRITE_OUT_MUTABLE_PARAMS;
 }

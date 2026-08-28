@@ -15,6 +15,7 @@
 #include "TwistFunctional.hpp"
 #include "SoccerTypes.hpp"
 #include "SoccerMaskBank.hpp"
+#include "../Public/SoccerDelegate.hpp"
 
 #include "EncryptionLayer.hpp"
 
@@ -50,6 +51,8 @@
 
 class Soccer2Internal {
 public:
+
+    static SoccerDelegate                       *mDelegate;
     
     static std::uint8_t                         mMaterialA[SOCCER_BLOCK_SIZE];
     static std::uint8_t                         mMaterialB[SOCCER_BLOCK_SIZE];
@@ -111,27 +114,6 @@ public:
     static TwistExpander_Sirius                 mSirius; // 15
     static TwistExpander_Vega                   mVega; // 16
     
-    /*
-    static TwistExpander_Aldebaran             mStarter;
-    static TwistExpander_Aldebaran              mAldebaran; // 1
-    static TwistExpander_Aldebaran                 mAltair; // 2
-    static TwistExpander_Aldebaran                mAntares; // 3
-    static TwistExpander_Aldebaran               mArcturus; // 4
-    static TwistExpander_Aldebaran              mBellatrix; // 5
-    static TwistExpander_Aldebaran                mCapella; // 6
-    static TwistExpander_Aldebaran                 mCastor; // 7
-    static TwistExpander_Aldebaran                 mMimosa; // 8
-    static TwistExpander_Aldebaran                mPolaris; // 9
-    static TwistExpander_Aldebaran                 mPollux; // 10
-    static TwistExpander_Aldebaran                mProcyon; // 11
-    static TwistExpander_Aldebaran                mRegulus; // 12
-    static TwistExpander_Aldebaran                  mRigel; // 13
-    static TwistExpander_Aldebaran                  mSaiph; // 14
-    static TwistExpander_Aldebaran                 mSirius; // 15
-    static TwistExpander_Aldebaran                   mVega; // 16
-    */
-    
-    
     static TwistExpander                        *mExpanders[SOCCER_EXPANDER_COUNT];
     static TwistExpander                        *mClaimedExpanders[16];
     static std::size_t                          mClaimedExpanderCount;
@@ -185,6 +167,8 @@ public:
     static std::size_t                          mMaterialQuarter;
     
     static void                                 Zero();
+
+    static void                                 SetDelegate(SoccerDelegate *pDelegate);
     
     static void                                 ConfigureTestBuffers(std::uint32_t pTestBlockLength); // SOCCER_BLOCK_SIZE (L3 size)
     
@@ -272,7 +256,7 @@ public:
     
     // MAT WS CI EX MAS SOR CRO1 CRO2 CRO3 CRO4
     static void                                 Shuffle_CROWSCIMASSORMATEX();
-    static void                                 Shuffle_CROSSPERMUTATIONS(std::size_t pPermutationCount);
+    static void                                 Shuffle_CROPER(std::size_t pPermutationCount);
     
     static void                                 FoldMaterialsIntoRandomForBlock_4(std::size_t pBlockIndex);
     static void                                 FoldMaterialsIntoRandomForBlock_8(std::size_t pBlockIndex);
@@ -284,9 +268,14 @@ public:
     static std::uint8_t                         *PopLaneS1();
     static std::uint8_t                         PopMask();
     static std::int32_t                         PopRotation(std::uint8_t pStage);
-    
-    
-    
+
+private:
+    static std::size_t                          mSeedProgressCompleted;
+    static std::size_t                          mSeedProgressTotal;
+
+    static void                                 BeginSeedProgress(EncryptionStrength pStrength);
+    static void                                 AdvanceSeedProgress(std::size_t pCost);
+    static bool                                 FinishSeedProgress(bool pSuccess);
     
 };
 

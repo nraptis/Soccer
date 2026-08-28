@@ -336,7 +336,7 @@ bool VerifyPreTwist(std::size_t pBlockIndex, EncryptionStrength pStrength, bool 
             Soccer2::Shuffle_CROWSCIMASSORMATEX();
             
             Soccer2::BuildCrossPool_WarmUp1(aComplexity, aWarmUpSeedByteIndex);
-            Soccer2::Shuffle_CROSSPERMUTATIONS(Soccer2::mCrossPoolCount[0]);
+            Soccer2::Shuffle_CROPER(Soccer2::mCrossPoolCount[0]);
             Soccer2::ArrangeCrossPool(aComplexity);
             
             if (!VerifyPreTwist(aWarmUpSeedBlockIndex + 1U, aStrength, true)) {
@@ -349,7 +349,7 @@ bool VerifyPreTwist(std::size_t pBlockIndex, EncryptionStrength pStrength, bool 
             Soccer2::BuildCrossPool_WarmUp2(aComplexity,
                                             aWarmUpSeedByteIndex,
                                             aWarmUp1ByteIndex);
-            Soccer2::Shuffle_CROSSPERMUTATIONS(Soccer2::mCrossPoolCount[0]);
+            Soccer2::Shuffle_CROPER(Soccer2::mCrossPoolCount[0]);
             Soccer2::ArrangeCrossPool(aComplexity);
             if (!VerifyPreTwist(aWarmUpSeedBlockIndex + 2U, aStrength, true)) {
                 XCTFail("WarmUpAndTwist: failed pre-twist validation (warm up round 2)");
@@ -360,7 +360,7 @@ bool VerifyPreTwist(std::size_t pBlockIndex, EncryptionStrength pStrength, bool 
             Soccer2::BuildCrossPool_WarmUp2(aComplexity,
                                             aWarmUp1ByteIndex,
                                             aWarmUp2ByteIndex);
-            Soccer2::Shuffle_CROSSPERMUTATIONS(Soccer2::mCrossPoolCount[0]);
+            Soccer2::Shuffle_CROPER(Soccer2::mCrossPoolCount[0]);
             Soccer2::ArrangeCrossPool(aComplexity);
             if (!VerifyPreTwist(aWarmUpSeedBlockIndex + 3U, aStrength, true)) {
                 XCTFail("WarmUpAndTwist: failed pre-twist validation (warm up round 3)");
@@ -372,7 +372,7 @@ bool VerifyPreTwist(std::size_t pBlockIndex, EncryptionStrength pStrength, bool 
                                             aWarmUpSeedByteIndex,
                                             aWarmUp1ByteIndex,
                                             aWarmUp2ByteIndex);
-            Soccer2::Shuffle_CROSSPERMUTATIONS(Soccer2::mCrossPoolCount[0]);
+            Soccer2::Shuffle_CROPER(Soccer2::mCrossPoolCount[0]);
             Soccer2::ArrangeCrossPool(aComplexity);
             if (!VerifyPreTwist(aWarmUpSeedBlockIndex + 4U, aStrength, true)) {
                 XCTFail("WarmUpAndTwist: failed pre-twist validation (warm up round 4)");
@@ -385,7 +385,7 @@ bool VerifyPreTwist(std::size_t pBlockIndex, EncryptionStrength pStrength, bool 
                                             aWarmUp1ByteIndex,
                                             aWarmUp2ByteIndex,
                                             aWarmUp3ByteIndex);
-            Soccer2::Shuffle_CROSSPERMUTATIONS(Soccer2::mCrossPoolCount[0]);
+            Soccer2::Shuffle_CROPER(Soccer2::mCrossPoolCount[0]);
             Soccer2::ArrangeCrossPool(aComplexity);
             if (!VerifyPreTwist(aWarmUpSeedBlockIndex + 5U, aStrength, true)) {
                 XCTFail("WarmUpAndTwist: failed pre-twist validation (warm up round 5)");
@@ -403,7 +403,7 @@ bool VerifyPreTwist(std::size_t pBlockIndex, EncryptionStrength pStrength, bool 
                                                 aThreeRoundsBackBlockIndex * S_BLOCK,
                                                 aTwoRoundsBackBlockIndex * S_BLOCK,
                                                 aOneRoundBackBlockIndex * S_BLOCK);
-                Soccer2::Shuffle_CROSSPERMUTATIONS(Soccer2::mCrossPoolCount[0]);
+                Soccer2::Shuffle_CROPER(Soccer2::mCrossPoolCount[0]);
                 Soccer2::ArrangeCrossPool(aComplexity);
                 if (!VerifyPreTwist(aRoundIndex, aStrength, false)) {
                     XCTFail("WarmUpAndTwist: failed pre-twist validation (warm up round 5)");

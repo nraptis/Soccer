@@ -4,6 +4,14 @@
 #define SOCCER2_DISABLE_COMPAT_ALIAS
 #include "../Composer/Soccer2.hpp"
 
+void Soccer2::SetDelegate(SoccerDelegate *pDelegate) {
+    Soccer2Internal::SetDelegate(pDelegate);
+}
+
+void Soccer2::ConfigureTestBuffers(std::uint32_t pTestBlockLength) {
+    Soccer2Internal::ConfigureTestBuffers(pTestBlockLength);
+}
+
 bool Soccer2::AttemptSeed_Encrypt(EncryptionStrength pStrength,
                                   std::uint8_t *pPassword,
                                   std::size_t pPasswordByteLength,
